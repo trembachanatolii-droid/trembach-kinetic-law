@@ -76,11 +76,11 @@ const Hero = () => {
         {/* Main Content - Left Side */}
         <div className="flex-1 flex flex-col justify-center px-8 lg:px-16">
           <div ref={headlineRef} className="space-y-2">
-            <h1 className="text-hero font-display leading-[0.8] tracking-tighter">
+            <h1 className="text-display font-display leading-[0.8] tracking-tighter">
               <span className="hero-line block">Former Insurance</span>
               <span className="hero-line block">Defense Attorney</span>
             </h1>
-            <h2 className="text-display font-display text-primary glow mt-4">
+            <h2 className="text-headline font-display text-primary glow mt-4">
               <span className="hero-line block">Now Using Their Tactics</span>
               <span className="hero-line block">To Maximize</span>
               <span className="hero-line block text-accent">YOUR Compensation</span>
@@ -94,7 +94,7 @@ const Hero = () => {
           </div>
 
           <div className="hero-line mt-8">
-            <Button size="lg" className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow">
+            <Button size="lg" className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-base font-semibold glow">
               Get Your Free Case Evaluation
             </Button>
           </div>

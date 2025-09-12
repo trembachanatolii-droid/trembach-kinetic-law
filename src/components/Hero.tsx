@@ -101,7 +101,7 @@ const Hero = () => {
         </div>
 
         {/* Intake Form - Right Side */}
-        <div ref={formRef} className="w-full max-w-sm lg:max-w-md xl:max-w-lg backdrop-blur-xl border border-border/10 rounded-2xl p-6 m-8 h-fit mt-8">
+        <div ref={formRef} className="w-full max-w-xs lg:max-w-sm xl:max-w-md backdrop-blur-xl border border-border/10 rounded-2xl p-4 m-6 h-fit mt-8">
           <div className="mb-6">
             <h3 className="text-title font-display text-foreground mb-2">Free Case Evaluation</h3>
             <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>

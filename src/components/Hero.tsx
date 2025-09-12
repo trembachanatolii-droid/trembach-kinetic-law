@@ -96,7 +96,7 @@ const Hero = () => {
         </div>
 
         {/* Intake Form - Right Side */}
-        <div ref={formRef} className="w-full max-w-xs lg:max-w-sm xl:max-w-md backdrop-blur-xl border border-border/10 rounded-2xl p-4 m-6 h-fit mt-16">
+        <div ref={formRef} className="w-full max-w-xs lg:max-w-sm xl:max-w-md bg-transparent p-4 m-6 h-fit mt-16">
           <div className="mb-4">
             <h3 className="text-title font-display text-foreground mb-1">Free Case Evaluation</h3>
             <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>
@@ -106,28 +106,28 @@ const Hero = () => {
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <label className="text-small font-medium text-foreground">First Name*</label>
-                <Input className="mt-1 bg-background/50 border-border/30" placeholder="John" />
+                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="John" />
               </div>
               <div>
                 <label className="text-small font-medium text-foreground">Last Name*</label>
-                <Input className="mt-1 bg-background/50 border-border/30" placeholder="Doe" />
+                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="Doe" />
               </div>
             </div>
 
             <div>
               <label className="text-small font-medium text-foreground">Phone*</label>
-              <Input className="mt-1 bg-background/50 border-border/30" placeholder="(555) 123-4567" type="tel" />
+              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="(555) 123-4567" type="tel" />
             </div>
 
             <div>
               <label className="text-small font-medium text-foreground">Email*</label>
-              <Input className="mt-1 bg-background/50 border-border/30" placeholder="john@example.com" type="email" />
+              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="john@example.com" type="email" />
             </div>
 
             <div>
               <label className="text-small font-medium text-foreground">Type of Case*</label>
               <Select>
-                <SelectTrigger className="mt-1 bg-background/50 border-border/30">
+                <SelectTrigger className="mt-1 bg-transparent border-foreground/20">
                   <SelectValue placeholder="Select case type" />
                 </SelectTrigger>
                 <SelectContent className="bg-surface border-border/30">
@@ -146,7 +146,7 @@ const Hero = () => {
             <div>
               <label className="text-small font-medium text-foreground">Message (Optional)</label>
               <Textarea 
-                className="mt-1 bg-background/50 border-border/30" 
+                className="mt-1 bg-transparent border-foreground/20" 
                 placeholder="Brief description of your case..."
                 rows={2}
               />

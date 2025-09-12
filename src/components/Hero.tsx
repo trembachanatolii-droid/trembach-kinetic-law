@@ -153,7 +153,7 @@ const Hero = () => {
               <Textarea 
                 className="mt-1 bg-background/50 border-border/30" 
                 placeholder="Brief description of your case..."
-                rows={3}
+                rows={2}
               />
             </div>
 

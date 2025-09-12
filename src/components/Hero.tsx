@@ -159,7 +159,7 @@ const Hero = () => {
 
             <div className="flex items-start space-x-2">
               <Checkbox id="consent" className="mt-1" />
-              <label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed">
+              <label htmlFor="consent" className="text-[10px] text-muted-foreground leading-relaxed">
                 I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the Terms & acknowledge the Privacy Policy.
               </label>
             </div>

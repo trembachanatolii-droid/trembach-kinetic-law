@@ -8,42 +8,42 @@
 
 @layer base {
   :root {
-    /* Core Colors - Dark Cinema Aesthetic */
-    --background: 220 13% 5%;
-    --foreground: 0 0% 98%;
+    /* Core Colors - Light Cinema Aesthetic */
+    --background: 0 0% 100%;
+    --foreground: 220 13% 5%;
     
-    --surface: 220 13% 8%;
-    --surface-elevated: 220 13% 12%;
+    --surface: 0 0% 98%;
+    --surface-elevated: 0 0% 95%;
     
     --primary: 260 100% 70%;
     --primary-glow: 260 100% 80%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 0 0% 100%;
     
     --accent: 200 100% 60%;
     --accent-glow: 200 100% 70%;
-    --accent-foreground: 0 0% 98%;
+    --accent-foreground: 0 0% 100%;
     
     --electric: 280 100% 65%;
     --electric-glow: 280 100% 75%;
     
-    --muted: 220 13% 25%;
-    --muted-foreground: 220 13% 65%;
+    --muted: 220 13% 85%;
+    --muted-foreground: 220 13% 35%;
     
-    --border: 220 13% 20%;
-    --input: 220 13% 15%;
+    --border: 220 13% 90%;
+    --input: 0 0% 98%;
     --ring: 260 100% 70%;
     
     --destructive: 0 85% 60%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive-foreground: 0 0% 100%;
     
-    --card: 220 13% 8%;
-    --card-foreground: 0 0% 98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 5%;
     
-    --popover: 220 13% 10%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 5%;
     
-    --secondary: 220 13% 15%;
-    --secondary-foreground: 0 0% 98%;
+    --secondary: 220 13% 95%;
+    --secondary-foreground: 220 13% 5%;
     
     /* Cinematic Effects */
     --grain-opacity: 0.03;

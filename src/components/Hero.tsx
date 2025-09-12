@@ -1,73 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-import { Canvas } from '@react-three/fiber';
-import { OrbitControls, Float, Text3D, Center } from '@react-three/drei';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-
-function ScaleOfJustice() {
-  const meshRef = useRef<any>();
-
-  useEffect(() => {
-    if (meshRef.current) {
-      gsap.to(meshRef.current.rotation, {
-        y: Math.PI * 2,
-        duration: 20,
-        repeat: -1,
-        ease: "none"
-      });
-    }
-  }, []);
-
-  return (
-    <Float speed={1} rotationIntensity={0.1} floatIntensity={0.2}>
-      <group ref={meshRef}>
-        {/* Base/Stand */}
-        <mesh position={[0, -2, 0]}>
-          <cylinderGeometry args={[0.8, 1.2, 0.3, 8]} />
-          <meshStandardMaterial color="#6366f1" emissive="#6366f1" emissiveIntensity={0.2} />
-        </mesh>
-        
-        {/* Vertical Column */}
-        <mesh position={[0, 0, 0]}>
-          <cylinderGeometry args={[0.1, 0.1, 4, 8]} />
-          <meshStandardMaterial color="#a855f7" emissive="#a855f7" emissiveIntensity={0.3} />
-        </mesh>
-        
-        {/* Horizontal Beam */}
-        <mesh position={[0, 1.8, 0]}>
-          <boxGeometry args={[4, 0.1, 0.1]} />
-          <meshStandardMaterial color="#06b6d4" emissive="#06b6d4" emissiveIntensity={0.4} />
-        </mesh>
-        
-        {/* Left Scale Pan */}
-        <mesh position={[-1.8, 1.4, 0]}>
-          <cylinderGeometry args={[0.4, 0.4, 0.05, 16]} />
-          <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={0.3} />
-        </mesh>
-        
-        {/* Right Scale Pan */}
-        <mesh position={[1.8, 1.4, 0]}>
-          <cylinderGeometry args={[0.4, 0.4, 0.05, 16]} />
-          <meshStandardMaterial color="#f59e0b" emissive="#f59e0b" emissiveIntensity={0.3} />
-        </mesh>
-        
-        {/* Chains */}
-        {[-1.8, 1.8].map((x, i) => (
-          <group key={i}>
-            <mesh position={[x, 1.7, 0]}>
-              <cylinderGeometry args={[0.02, 0.02, 0.3, 8]} />
-              <meshStandardMaterial color="#e5e7eb" />
-            </mesh>
-          </group>
-        ))}
-      </group>
-    </Float>
-  );
-}
+import heroBackground from '@/assets/hero-background.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -125,16 +63,13 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden bg-background">
-      {/* Background 3D Scene */}
-      <div className="absolute inset-0 opacity-60">
-        <Canvas camera={{ position: [0, 0, 8], fov: 45 }}>
-          <ambientLight intensity={0.3} />
-          <pointLight position={[10, 10, 10]} intensity={1} color="#6366f1" />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} color="#a855f7" />
-          <ScaleOfJustice />
-          <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-        </Canvas>
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden">
+      {/* Hero Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
       </div>
 
       <div className="relative z-10 flex w-full h-screen">

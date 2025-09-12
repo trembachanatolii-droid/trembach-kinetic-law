@@ -69,7 +69,7 @@ export default {
       },
       
       fontFamily: {
-        display: ['var(--font-display)', 'Space Grotesk', 'sans-serif'],
+        display: ['var(--font-display)', 'Instrument Sans', 'sans-serif'],
         body: ['var(--font-body)', 'Inter', 'sans-serif'],
       },
       borderRadius: {

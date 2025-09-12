@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Instrument+Sans:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -51,7 +51,7 @@
     --glass-blur: 10px;
     
     /* Typography Scale */
-    --font-display: 'Space Grotesk', sans-serif;
+    --font-display: 'Instrument Sans', sans-serif;
     --font-body: 'Inter', sans-serif;
     
     /* Motion */

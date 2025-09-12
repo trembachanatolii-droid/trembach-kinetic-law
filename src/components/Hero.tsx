@@ -76,91 +76,99 @@ const Hero = () => {
         {/* Main Content - Left Side */}
         <div className="flex-1 flex flex-col justify-center px-8 lg:px-16">
           <div ref={headlineRef} className="space-y-2">
-            <h1 className="text-hero font-display leading-[0.8] tracking-tighter text-foreground">
-              <span className="hero-line block">Making Justice</span>
-              <span className="hero-line block">Accessible</span>
+            <h1 className="text-hero font-display leading-[0.8] tracking-tighter">
+              <span className="hero-line block">Former Insurance</span>
+              <span className="hero-line block">Defense Attorney</span>
             </h1>
+            <h2 className="text-display font-display text-primary glow mt-4">
+              <span className="hero-line block">Now Using Their Tactics</span>
+              <span className="hero-line block">To Maximize</span>
+              <span className="hero-line block text-accent">YOUR Compensation</span>
+            </h2>
           </div>
-        </div>
 
-        {/* Right Side Content */}
-        <div className="flex-1 flex flex-col justify-between px-8 lg:px-16 py-16">
-          {/* Descriptive Text - Top Right */}
-          <div className="hero-line max-w-md ml-auto mt-32">
-            <p className="text-body text-foreground/90 leading-relaxed">
-              Former insurance defense attorney now fights for California injury victims, using insider knowledge to maximize your compensation and secure the justice you deserve.
+          <div className="hero-line mt-8 max-w-2xl">
+            <p className="text-body text-muted-foreground">
+              Anatolii Trembach, Esq. leverages insider knowledge to fight for California injury victims.
             </p>
           </div>
 
-          {/* CTA Button - Bottom Right */}
-          <div className="hero-line ml-auto">
-            <Button size="lg" className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow rounded-full">
-              GET FREE CONSULTATION
-              <span className="ml-2">↓</span>
+          <div className="hero-line mt-8">
+            <Button size="lg" className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow">
+              Get Your Free Case Evaluation
             </Button>
           </div>
         </div>
-      </div>
 
-      {/* Intake Form - Overlay */}
-      <div ref={formRef} className="absolute bottom-8 right-8 w-full max-w-md bg-surface-elevated/90 backdrop-blur-xl border border-border/20 rounded-2xl p-6 glass">
-        <div className="mb-4">
-          <h3 className="text-title font-display text-foreground mb-2">Free Case Evaluation</h3>
-          <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>
+        {/* Intake Form - Right Side */}
+        <div ref={formRef} className="w-full max-w-md lg:max-w-lg xl:max-w-xl bg-surface-elevated/50 backdrop-blur-xl border border-border/20 rounded-2xl p-8 m-8 h-fit mt-24 glass">
+          <div className="mb-6">
+            <h3 className="text-title font-display text-foreground mb-2">Free Case Evaluation</h3>
+            <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>
+          </div>
+
+          <form className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-small font-medium text-foreground">First Name*</label>
+                <Input className="mt-1 bg-background/50 border-border/30" placeholder="John" />
+              </div>
+              <div>
+                <label className="text-small font-medium text-foreground">Last Name*</label>
+                <Input className="mt-1 bg-background/50 border-border/30" placeholder="Doe" />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Phone*</label>
+              <Input className="mt-1 bg-background/50 border-border/30" placeholder="(555) 123-4567" type="tel" />
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Email*</label>
+              <Input className="mt-1 bg-background/50 border-border/30" placeholder="john@example.com" type="email" />
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Type of Case*</label>
+              <Select>
+                <SelectTrigger className="mt-1 bg-background/50 border-border/30">
+                  <SelectValue placeholder="Select case type" />
+                </SelectTrigger>
+                <SelectContent className="bg-surface border-border/30">
+                  <SelectItem value="car-accident">Car Accident</SelectItem>
+                  <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
+                  <SelectItem value="silicosis">Silicosis</SelectItem>
+                  <SelectItem value="talc">Talc/Talcum</SelectItem>
+                  <SelectItem value="dog-bite">Dog Bite</SelectItem>
+                  <SelectItem value="product-liability">Product Liability</SelectItem>
+                  <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Message (Optional)</label>
+              <Textarea 
+                className="mt-1 bg-background/50 border-border/30" 
+                placeholder="Brief description of your case..."
+                rows={3}
+              />
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <Checkbox id="consent" className="mt-1" />
+              <label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed">
+                I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the Terms & acknowledge the Privacy Policy.
+              </label>
+            </div>
+
+            <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-3 glow-accent">
+              Get Free Consultation
+            </Button>
+          </form>
         </div>
-
-        <form className="space-y-3">
-          <div className="grid grid-cols-2 gap-3">
-            <div>
-              <label className="text-small font-medium text-foreground">First Name*</label>
-              <Input className="mt-1 bg-background/50 border-border/30" placeholder="John" />
-            </div>
-            <div>
-              <label className="text-small font-medium text-foreground">Last Name*</label>
-              <Input className="mt-1 bg-background/50 border-border/30" placeholder="Doe" />
-            </div>
-          </div>
-
-          <div>
-            <label className="text-small font-medium text-foreground">Phone*</label>
-            <Input className="mt-1 bg-background/50 border-border/30" placeholder="(555) 123-4567" type="tel" />
-          </div>
-
-          <div>
-            <label className="text-small font-medium text-foreground">Email*</label>
-            <Input className="mt-1 bg-background/50 border-border/30" placeholder="john@example.com" type="email" />
-          </div>
-
-          <div>
-            <label className="text-small font-medium text-foreground">Type of Case*</label>
-            <Select>
-              <SelectTrigger className="mt-1 bg-background/50 border-border/30">
-                <SelectValue placeholder="Select case type" />
-              </SelectTrigger>
-              <SelectContent className="bg-surface border-border/30">
-                <SelectItem value="car-accident">Car Accident</SelectItem>
-                <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                <SelectItem value="silicosis">Silicosis</SelectItem>
-                <SelectItem value="talc">Talc/Talcum</SelectItem>
-                <SelectItem value="dog-bite">Dog Bite</SelectItem>
-                <SelectItem value="product-liability">Product Liability</SelectItem>
-                <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-                <SelectItem value="other">Other</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
-
-          <div className="flex items-start space-x-2">
-            <Checkbox id="consent" className="mt-1" />
-            <label htmlFor="consent" className="text-xs text-muted-foreground leading-relaxed">
-              I consent to receive communications and agree to the Terms & Privacy Policy.
-            </label>
-          </div>
-
-          <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-2 glow-accent">
-            Start My Case
-          </Button>
-        </form>
       </div>
     </section>
   );

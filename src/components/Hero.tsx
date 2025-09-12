@@ -93,11 +93,6 @@ const Hero = () => {
             </p>
           </div>
 
-          <div className="hero-line mt-8">
-            <Button size="lg" className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-base font-semibold glow">
-              Get Your Free Case Evaluation
-            </Button>
-          </div>
         </div>
 
         {/* Intake Form - Right Side */}

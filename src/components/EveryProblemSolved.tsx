@@ -8,6 +8,7 @@ const EveryProblemSolved = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [activeCard, setActiveCard] = useState<number | null>(null);
 
   const problems = [
     {
@@ -52,45 +53,59 @@ const EveryProblemSolved = () => {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Cards stack entrance animation
-      gsap.fromTo(
-        ".stacked-card",
-        {
-          opacity: 0,
-          scale: 0.8,
-          rotateY: -20
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          rotateY: 0,
-          duration: 0.8,
-          stagger: 0.15,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 80%",
-            toggleActions: "play none none reverse"
+      // Individual card scroll animations with pump-up effect
+      problems.forEach((_, index) => {
+        const cardElement = `[data-card="${index}"]`;
+        
+        gsap.fromTo(
+          cardElement,
+          {
+            opacity: 0,
+            y: 80,
+            scale: 0.85,
+            rotateX: 15
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1.08, // Pump up entrance effect
+            rotateX: 0,
+            duration: 0.8,
+            delay: index * 0.15,
+            ease: "back.out(1.2)",
+            scrollTrigger: {
+              trigger: cardElement,
+              start: "top 85%",
+              toggleActions: "play none none none" // Only play once
+            }
           }
-        }
-      );
+        );
+
+        // Return to normal scale after pump-up with delay
+        gsap.to(cardElement, {
+          scale: 1,
+          duration: 0.3,
+          ease: "power2.out",
+          delay: (index * 0.15) + 1 // Wait for entrance animation + extra delay
+        });
+      });
 
       // Section header animation
       gsap.fromTo(
         ".section-header",
         {
           opacity: 0,
-          y: 30
+          y: 40
         },
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
+          duration: 1,
           ease: "power3.out",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top 85%",
-            toggleActions: "play none none reverse"
+            toggleActions: "play none none none"
           }
         }
       );
@@ -99,34 +114,36 @@ const EveryProblemSolved = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleCardHover = (index: number) => {
-    setHoveredCard(index);
+  const handleCardClick = (index: number) => {
+    setActiveCard(index);
     
-    // Animate the hovered card - pump up effect
-    const hoveredCard = document.querySelector(`[data-card="${index}"]`);
-    if (hoveredCard) {
-      gsap.to(hoveredCard, {
-        scale: 1.15,
-        z: 40,
-        rotateX: -3,
-        rotateY: 2,
-        boxShadow: "0 25px 50px rgba(0,0,0,0.6)",
-        brightness: 1.1,
-        duration: 0.35,
-        ease: "power2.out"
+    // Animate clicked card - strong pop forward
+    const clickedCard = document.querySelector(`[data-card="${index}"]`);
+    if (clickedCard) {
+      gsap.to(clickedCard, {
+        scale: 1.18,
+        z: 60,
+        rotateX: -8,
+        rotateY: 3,
+        boxShadow: "0 35px 70px rgba(0,0,0,0.7)",
+        brightness: 1.15,
+        duration: 0.4,
+        ease: "back.out(1.1)"
       });
     }
 
-    // Dim other cards
+    // Animate other cards - push back and dim
     problems.forEach((_, i) => {
       if (i !== index) {
         const card = document.querySelector(`[data-card="${i}"]`);
         if (card) {
           gsap.to(card, {
-            opacity: 0.4,
-            scale: 0.92,
-            z: -25,
-            duration: 0.35,
+            opacity: 0.3,
+            scale: 0.88,
+            z: -35,
+            rotateX: 5,
+            filter: "blur(1px)",
+            duration: 0.4,
             ease: "power2.out"
           });
         }
@@ -134,26 +151,51 @@ const EveryProblemSolved = () => {
     });
   };
 
-  const handleCardLeave = () => {
-    setHoveredCard(null);
-    
-    // Return all cards to their stacked positions
-    problems.forEach((_, i) => {
-      const card = document.querySelector(`[data-card="${i}"]`);
-      if (card) {
-        gsap.to(card, {
-          scale: 1,
-          opacity: 1,
-          z: 0,
-          rotateX: 0,
-          rotateY: 0,
-          boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
-          brightness: 1,
-          duration: 0.4,
+  const handleCardHover = (index: number) => {
+    // Only hover effect if no card is actively clicked and this isn't the active card
+    if (activeCard === null && hoveredCard !== index) {
+      setHoveredCard(index);
+      
+      const hoveredCardElement = document.querySelector(`[data-card="${index}"]`);
+      if (hoveredCardElement) {
+        gsap.to(hoveredCardElement, {
+          scale: 1.12,
+          z: 25,
+          rotateX: -5,
+          boxShadow: "0 20px 40px rgba(0,0,0,0.5)",
+          brightness: 1.08,
+          duration: 0.3,
           ease: "power2.out"
         });
       }
-    });
+    }
+  };
+
+  const handleCardLeave = () => {
+    // Only reset hover if no card is actively clicked
+    if (activeCard === null) {
+      setHoveredCard(null);
+      
+      problems.forEach((_, i) => {
+        const card = document.querySelector(`[data-card="${i}"]`);
+        if (card) {
+          gsap.to(card, {
+            scale: 1,
+            opacity: 1,
+            z: 0,
+            rotateX: 0,
+            rotateY: 0,
+            boxShadow: "0 12px 30px rgba(0,0,0,0.35)",
+            brightness: 1,
+            filter: "blur(0px)",
+            duration: 0.35,
+            ease: "power2.out"
+          });
+        }
+      });
+    } else {
+      setHoveredCard(null);
+    }
   };
 
   return (
@@ -221,6 +263,7 @@ const EveryProblemSolved = () => {
                   marginTop: '-40%'
                 }}
                 onMouseEnter={() => handleCardHover(index)}
+                onClick={() => handleCardClick(index)}
               >
                 {/* Icon */}
                 <div className="mb-6">

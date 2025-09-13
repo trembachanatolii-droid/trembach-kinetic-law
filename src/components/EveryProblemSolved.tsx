@@ -65,7 +65,7 @@ const EveryProblemSolved = () => {
           scale: 1,
           rotateY: 0,
           duration: 0.8,
-          stagger: 0.1,
+          stagger: 0.15,
           ease: "power3.out",
           scrollTrigger: {
             trigger: cardsRef.current,
@@ -101,32 +101,59 @@ const EveryProblemSolved = () => {
 
   const handleCardHover = (index: number) => {
     setHoveredCard(index);
-    const card = document.querySelector(`[data-card="${index}"]`);
-    if (card) {
-      gsap.to(card, {
-        scale: 1.12,
-        z: 50,
-        rotateX: -5,
-        boxShadow: "0 30px 60px rgba(0,0,0,0.4)",
-        duration: 0.4,
+    
+    // Animate the hovered card - pump up effect
+    const hoveredCard = document.querySelector(`[data-card="${index}"]`);
+    if (hoveredCard) {
+      gsap.to(hoveredCard, {
+        scale: 1.15,
+        z: 40,
+        rotateX: -3,
+        rotateY: 2,
+        boxShadow: "0 25px 50px rgba(0,0,0,0.6)",
+        brightness: 1.1,
+        duration: 0.35,
         ease: "power2.out"
       });
     }
+
+    // Dim other cards
+    problems.forEach((_, i) => {
+      if (i !== index) {
+        const card = document.querySelector(`[data-card="${i}"]`);
+        if (card) {
+          gsap.to(card, {
+            opacity: 0.4,
+            scale: 0.92,
+            z: -25,
+            duration: 0.35,
+            ease: "power2.out"
+          });
+        }
+      }
+    });
   };
 
-  const handleCardLeave = (index: number) => {
+  const handleCardLeave = () => {
     setHoveredCard(null);
-    const card = document.querySelector(`[data-card="${index}"]`);
-    if (card) {
-      gsap.to(card, {
-        scale: 1,
-        z: 0,
-        rotateX: 0,
-        boxShadow: "0 15px 30px rgba(0,0,0,0.2)",
-        duration: 0.4,
-        ease: "power2.out"
-      });
-    }
+    
+    // Return all cards to their stacked positions
+    problems.forEach((_, i) => {
+      const card = document.querySelector(`[data-card="${i}"]`);
+      if (card) {
+        gsap.to(card, {
+          scale: 1,
+          opacity: 1,
+          z: 0,
+          rotateX: 0,
+          rotateY: 0,
+          boxShadow: "0 8px 25px rgba(0,0,0,0.3)",
+          brightness: 1,
+          duration: 0.4,
+          ease: "power2.out"
+        });
+      }
+    });
   };
 
   return (
@@ -150,45 +177,59 @@ const EveryProblemSolved = () => {
           </p>
         </div>
 
-        {/* Stacked Cards Container */}
+        {/* Stacked Cards Container - Deck Style */}
         <div 
           ref={cardsRef} 
-          className="relative max-w-md mx-auto mb-16"
-          style={{ perspective: '1000px', height: '600px' }}
+          className="relative max-w-lg mx-auto mb-16"
+          style={{ 
+            perspective: '1200px', 
+            perspectiveOrigin: 'center center',
+            height: '650px' 
+          }}
+          onMouseLeave={handleCardLeave}
         >
           {problems.map((item, index) => {
             const IconComponent = item.icon;
             const isLast = index === problems.length - 1;
             
+            // Calculate stagger positions for deck effect
+            const rotation = (index % 2 === 0 ? -1 : 1) * (2 + index * 0.8);
+            const xOffset = (index % 2 === 0 ? -1 : 1) * (index * 4);
+            const yOffset = index * 6;
+            const zOffset = -index * 8;
+            
             return (
               <div
                 key={index}
                 data-card={index}
-                className={`stacked-card absolute w-full bg-slate-800 rounded-3xl p-8 shadow-2xl border border-slate-700/50 cursor-pointer transition-all duration-400 ${
-                  hoveredCard !== null && hoveredCard !== index ? 'opacity-30 blur-sm' : ''
-                }`}
+                className="stacked-card absolute w-full bg-slate-800/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-600/30 cursor-pointer"
                 style={{
                   transform: `
-                    translateZ(${index * -10}px) 
-                    translateY(${index * 8}px) 
-                    translateX(${index % 2 === 0 ? index * -2 : index * 2}px)
-                    rotateZ(${index % 2 === 0 ? index * -1.5 : index * 1.5}deg)
+                    translateX(${xOffset}px) 
+                    translateY(${yOffset}px) 
+                    translateZ(${zOffset}px)
+                    rotateZ(${rotation}deg)
                   `,
                   transformStyle: 'preserve-3d',
                   zIndex: problems.length - index,
-                  boxShadow: '0 15px 30px rgba(0,0,0,0.2)'
+                  boxShadow: '0 8px 25px rgba(0,0,0,0.3)',
+                  transition: 'all 0.35s cubic-bezier(0.4, 0, 0.2, 1)',
+                  filter: 'brightness(1)',
+                  left: '50%',
+                  top: '50%',
+                  marginLeft: '-50%',
+                  marginTop: '-40%'
                 }}
                 onMouseEnter={() => handleCardHover(index)}
-                onMouseLeave={() => handleCardLeave(index)}
               >
                 {/* Icon */}
                 <div className="mb-6">
-                  <IconComponent className="w-8 h-8 text-accent" />
+                  <IconComponent className="w-8 h-8 text-accent drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
                 </div>
 
-                {/* Problem Number with neon effect */}
-                <div className="text-lg font-bold text-accent mb-4 tracking-wide">
-                  <span className="text-accent drop-shadow-[0_0_8px_rgba(34,197,94,0.6)]">
+                {/* Problem Number with enhanced neon effect */}
+                <div className="text-xl font-bold mb-4 tracking-wide">
+                  <span className="text-accent drop-shadow-[0_0_12px_rgba(34,197,94,0.8)] font-extrabold">
                     Problem #{item.number}
                   </span>
                 </div>
@@ -198,24 +239,27 @@ const EveryProblemSolved = () => {
                   "{item.problem}"
                 </blockquote>
 
-                {/* Divider with glow */}
-                <div className="h-px bg-gradient-to-r from-transparent via-accent to-transparent mb-6 shadow-[0_0_10px_rgba(34,197,94,0.3)]"></div>
+                {/* Enhanced Divider with stronger glow */}
+                <div className="h-px bg-gradient-to-r from-transparent via-accent to-transparent mb-6 shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
 
                 {/* Solution Heading */}
-                <div className="text-sm font-bold text-white mb-4 tracking-widest">
+                <div className="text-sm font-bold text-white mb-4 tracking-widest opacity-90">
                   WE SOLVE THIS:
                 </div>
 
                 {/* Solution Text */}
-                <p className="text-slate-300 leading-relaxed mb-6">
+                <p className="text-slate-300 leading-relaxed mb-6 text-base">
                   {item.solution}
                 </p>
 
-                {/* CTA Button on last card */}
+                {/* Enhanced CTA Button on last card */}
                 {isLast && (
                   <div className="mt-8">
                     <Button 
-                      className="w-full bg-accent hover:bg-accent/90 text-slate-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 hover:scale-105 hover:shadow-[0_0_20px_rgba(34,197,94,0.5)]"
+                      className="w-full bg-accent hover:bg-accent text-slate-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-110 hover:shadow-[0_0_25px_rgba(34,197,94,0.6)] hover:brightness-110 active:scale-105"
+                      style={{
+                        boxShadow: '0 0 20px rgba(34,197,94,0.3)'
+                      }}
                     >
                       Get My Free Case Review
                     </Button>

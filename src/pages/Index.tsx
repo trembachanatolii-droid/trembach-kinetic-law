@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import { MarqueeBand } from '../components/Marquee';
+import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreas from '../components/PracticeAreas';
@@ -56,6 +57,9 @@ const Index = () => {
           direction="right"
         />
       </div>
+
+      {/* Every Problem Solved */}
+      <EveryProblemSolved />
 
       {/* Capability Stripes */}
       <CapabilityStripes />

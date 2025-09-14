@@ -12,13 +12,9 @@ const CriticalStepsSection = () => {
   const backLayerRef = useRef<HTMLDivElement>(null);
   const midLayerRef = useRef<HTMLDivElement>(null);
   const frontLayerRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const immediateStepsRef = useRef<HTMLDivElement>(null);
-  const neverDoRef = useRef<HTMLDivElement>(null);
-  const ctaRef = useRef<HTMLDivElement>(null);
-  const immediateCardsRef = useRef<HTMLDivElement[]>([]);
-  const neverDoCardsRef = useRef<HTMLDivElement[]>([]);
+  const panelRefs = useRef<HTMLDivElement[]>([]);
 
+  // Chapter 1: Immediate Steps
   const immediateSteps = [
     {
       icon: Users,
@@ -27,7 +23,7 @@ const CriticalStepsSection = () => {
     },
     {
       icon: Phone,
-      title: "Call 911",
+      title: "Call 911", 
       description: "Get a police report"
     },
     {
@@ -42,20 +38,25 @@ const CriticalStepsSection = () => {
     }
   ];
 
+  // Chapter 2: Never Do This
   const neverDo = [
     {
+      icon: XCircle,
       title: "Don't admit fault",
       description: "Even if you think you're partially responsible"
     },
     {
-      title: "Don't give recorded statements",
+      icon: XCircle,
+      title: "Don't give recorded statements", 
       description: "To insurance companies without representation"
     },
     {
+      icon: XCircle,
       title: "Don't accept quick settlements",
-      description: "They're usually far below fair value"
+      description: "They're usually far below far value"
     },
     {
+      icon: XCircle,
       title: "Don't delay treatment",
       description: "Gaps in care can hurt your case"
     }
@@ -67,14 +68,9 @@ const CriticalStepsSection = () => {
     const backLayer = backLayerRef.current;
     const midLayer = midLayerRef.current;
     const frontLayer = frontLayerRef.current;
-    const header = headerRef.current;
-    const immediateCards = immediateCardsRef.current.filter(Boolean);
-    const neverDoCards = neverDoCardsRef.current.filter(Boolean);
-    const immediateStepsEl = immediateStepsRef.current;
-    const neverDoEl = neverDoRef.current;
-    const cta = ctaRef.current;
+    const panels = panelRefs.current.filter(Boolean);
 
-    if (!section || !header || !threeDContainer) return;
+    if (!section || !threeDContainer) return;
 
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -82,8 +78,14 @@ const CriticalStepsSection = () => {
     // Premium easing
     const premiumEase = "cubic-bezier(0.22, 1, 0.36, 1)";
 
+    // Set up 3D container
+    gsap.set(threeDContainer, {
+      transformStyle: "preserve-3d",
+      willChange: "transform"
+    });
+
     if (!prefersReducedMotion) {
-      // Floating background animations
+      // Floating background animations (idle state)
       if (backLayer) {
         gsap.to(backLayer, {
           y: 30,
@@ -122,7 +124,7 @@ const CriticalStepsSection = () => {
         });
       }
 
-      // Parallax scroll effects
+      // Parallax scroll effects for background layers
       ScrollTrigger.create({
         trigger: section,
         start: "top bottom",
@@ -143,146 +145,126 @@ const CriticalStepsSection = () => {
       });
     }
 
-    // Set initial 3D states
-    gsap.set(header, {
-      opacity: 0,
-      y: prefersReducedMotion ? 0 : 60,
-      z: prefersReducedMotion ? 0 : -200,
-      scale: prefersReducedMotion ? 1 : 0.8,
-      filter: prefersReducedMotion ? "blur(0px)" : "blur(10px)"
-    });
-
-    if (immediateStepsEl) {
-      gsap.set(immediateStepsEl, {
-        opacity: 0,
-        y: prefersReducedMotion ? 0 : 40,
-        z: prefersReducedMotion ? 0 : -150,
-        scale: prefersReducedMotion ? 1 : 0.85,
-        rotationX: prefersReducedMotion ? 0 : 15
+    // Set initial states for panels
+    panels.forEach((panel, index) => {
+      gsap.set(panel, {
+        opacity: prefersReducedMotion ? 0 : 0.2,
+        y: prefersReducedMotion ? 0 : 30,
+        z: prefersReducedMotion ? 0 : 0,
+        scale: prefersReducedMotion ? 1 : 1,
+        willChange: "transform"
       });
-    }
 
-    if (neverDoEl) {
-      gsap.set(neverDoEl, {
-        opacity: 0,
-        y: prefersReducedMotion ? 0 : 40,
-        z: prefersReducedMotion ? 0 : -150,
-        scale: prefersReducedMotion ? 1 : 0.85,
-        rotationX: prefersReducedMotion ? 0 : 15
-      });
-    }
+      // Set initial states for panel content
+      const title = panel.querySelector('h2');
+      const subtitle = panel.querySelector('.subtitle');
+      const icon = panel.querySelector('.panel-icon');
 
-    if (cta) {
-      gsap.set(cta, {
-        opacity: 0,
-        y: prefersReducedMotion ? 0 : 60,
-        z: prefersReducedMotion ? 0 : -300,
-        scale: prefersReducedMotion ? 1 : 0.7
-      });
-    }
-
-    gsap.set([...immediateCards, ...neverDoCards], {
-      opacity: 0,
-      y: prefersReducedMotion ? 0 : 40,
-      z: prefersReducedMotion ? 0 : -100,
-      scale: prefersReducedMotion ? 1 : 0.9,
-      filter: prefersReducedMotion ? "blur(0px)" : "blur(5px)"
-    });
-
-    // Header animation
-    ScrollTrigger.create({
-      trigger: header,
-      start: "top 80%",
-      onEnter: () => {
-        gsap.to(header, {
-          opacity: 1,
-          y: 0,
-          z: 0,
-          scale: 1,
-          filter: "blur(0px)",
-          duration: 0.8,
-          ease: premiumEase
+      if (title) {
+        gsap.set(title, {
+          opacity: 0,
+          y: 20,
+          willChange: "transform"
         });
       }
-    });
 
-    // Immediate Steps panel animation
-    if (immediateStepsEl) {
+      if (subtitle) {
+        gsap.set(subtitle, {
+          opacity: 0,
+          y: 20,
+          willChange: "transform"
+        });
+      }
+
+      if (icon) {
+        gsap.set(icon, {
+          opacity: 0,
+          scale: 0.8,
+          willChange: "transform"
+        });
+      }
+
+      // Create scroll trigger for each panel
       ScrollTrigger.create({
-        trigger: immediateStepsEl,
-        start: "top 75%",
+        trigger: panel,
+        start: "top 60%",
+        end: "bottom 40%",
         onEnter: () => {
-          const tl = gsap.timeline();
-          tl.to(immediateStepsEl, {
+          // Panel becomes active
+          gsap.to(panel, {
             opacity: 1,
             y: 0,
-            z: 0,
-            scale: 1,
-            rotationX: 0,
+            z: prefersReducedMotion ? 0 : 120,
+            scale: prefersReducedMotion ? 1 : 1.05,
             duration: 0.7,
             ease: premiumEase
-          })
-          .to(immediateCards, {
-            opacity: 1,
-            y: 0,
-            z: 0,
-            scale: 1,
-            filter: "blur(0px)",
-            duration: 0.6,
-            stagger: 0.15,
-            ease: premiumEase
-          }, "-=0.4");
-        }
-      });
-    }
+          });
 
-    // Never Do panel animation
-    if (neverDoEl) {
-      ScrollTrigger.create({
-        trigger: neverDoEl,
-        start: "top 75%",
-        onEnter: () => {
+          // Animate content with stagger
           const tl = gsap.timeline();
-          tl.to(neverDoEl, {
-            opacity: 1,
-            y: 0,
+          
+          if (icon) {
+            tl.to(icon, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.5,
+              ease: premiumEase
+            });
+          }
+
+          if (title) {
+            tl.to(title, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: premiumEase
+            }, "-=0.3");
+          }
+
+          if (subtitle) {
+            tl.to(subtitle, {
+              opacity: 1,
+              y: 0,
+              duration: 0.6,
+              ease: premiumEase
+            }, "-=0.4");
+          }
+        },
+        onLeave: () => {
+          // Panel becomes inactive
+          gsap.to(panel, {
+            opacity: prefersReducedMotion ? 0 : 0.2,
+            y: prefersReducedMotion ? 0 : 30,
             z: 0,
             scale: 1,
-            rotationX: 0,
+            duration: 0.5,
+            ease: premiumEase
+          });
+        },
+        onEnterBack: () => {
+          // Panel becomes active again when scrolling back
+          gsap.to(panel, {
+            opacity: 1,
+            y: 0,
+            z: prefersReducedMotion ? 0 : 120,
+            scale: prefersReducedMotion ? 1 : 1.05,
             duration: 0.7,
             ease: premiumEase
-          })
-          .to(neverDoCards, {
-            opacity: 1,
-            y: 0,
+          });
+        },
+        onLeaveBack: () => {
+          // Panel becomes inactive when scrolling back
+          gsap.to(panel, {
+            opacity: prefersReducedMotion ? 0 : 0.2,
+            y: prefersReducedMotion ? 0 : 30,
             z: 0,
             scale: 1,
-            filter: "blur(0px)",
-            duration: 0.6,
-            stagger: 0.15,
-            ease: premiumEase
-          }, "-=0.4");
-        }
-      });
-    }
-
-    // CTA animation
-    if (cta) {
-      ScrollTrigger.create({
-        trigger: cta,
-        start: "top 80%",
-        onEnter: () => {
-          gsap.to(cta, {
-            opacity: 1,
-            y: 0,
-            z: 100, // Zoom forward into focus
-            scale: 1,
-            duration: 0.8,
+            duration: 0.5,
             ease: premiumEase
           });
         }
       });
-    }
+    });
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
@@ -290,23 +272,26 @@ const CriticalStepsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative py-20 bg-surface/10 backdrop-blur-sm overflow-hidden">
+    <section ref={sectionRef} className="relative overflow-hidden bg-background">
       {/* 3D Container with Perspective */}
       <div 
         ref={threeDContainerRef}
         className="relative"
         style={{ 
-          perspective: '1200px',
+          perspective: window.innerWidth < 768 ? '900px' : '1400px',
           transformStyle: 'preserve-3d'
         }}
       >
         {/* Background Layers */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="fixed inset-0 pointer-events-none z-0">
           {/* Back Layer */}
           <div
             ref={backLayerRef}
             className="absolute inset-0 opacity-30"
-            style={{ transform: 'translateZ(-500px)' }}
+            style={{ 
+              transform: 'translateZ(-500px)',
+              willChange: 'transform'
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/30 blur-3xl" />
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-20" />
@@ -316,7 +301,10 @@ const CriticalStepsSection = () => {
           <div
             ref={midLayerRef}
             className="absolute inset-0 opacity-40"
-            style={{ transform: 'translateZ(-250px)' }}
+            style={{ 
+              transform: 'translateZ(-250px)',
+              willChange: 'transform'
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-primary/20 blur-2xl" />
             <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
@@ -326,137 +314,145 @@ const CriticalStepsSection = () => {
           <div
             ref={frontLayerRef}
             className="absolute inset-0 opacity-20"
-            style={{ transform: 'translateZ(-100px)' }}
+            style={{ 
+              transform: 'translateZ(-100px)',
+              willChange: 'transform'
+            }}
           >
             <div className="absolute inset-0 bg-gradient-to-bl from-primary/10 via-transparent to-accent/15 blur-xl" />
             <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
           </div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          {/* Section Header */}
-          <div 
-            ref={headerRef} 
-            className="text-center mb-16"
-            style={{ transformStyle: 'preserve-3d' }}
-          >
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
+        {/* Header Panel */}
+        <div 
+          ref={el => { if (el) panelRefs.current[0] = el; }}
+          className="relative z-10 min-h-screen flex items-center justify-center px-4"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="panel-icon mb-8">
+              <CheckCircle className="h-16 w-16 text-primary mx-auto" />
+            </div>
+            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 font-display">
               What to Do After a California Accident
             </h2>
-            <p className="text-xl text-muted-foreground mb-2">Critical Steps</p>
-            <div className="w-24 h-1 bg-accent mx-auto rounded-full" />
+            <p className="subtitle text-xl text-muted-foreground">Critical Steps</p>
           </div>
+        </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 mb-16">
-            {/* Immediate Steps Panel */}
-            <div 
-              ref={immediateStepsRef} 
-              className="space-y-8"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <div className="text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start space-x-3 mb-4">
-                  <CheckCircle className="h-8 w-8 text-green-500" />
-                  <h3 className="text-2xl font-bold text-foreground">Immediate Steps</h3>
-                </div>
-                <p className="text-muted-foreground">Take these actions right away to protect yourself and your case</p>
-              </div>
-
-              <div className="space-y-4">
-                {immediateSteps.map((step, index) => (
-                  <div
-                    key={index}
-                    ref={el => { if (el) immediateCardsRef.current[index] = el; }}
-                    className="group relative bg-surface/20 backdrop-blur-sm border border-border/20 rounded-xl p-6 transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-primary/20 hover:border-primary/30"
-                    style={{ transformStyle: 'preserve-3d' }}
-                  >
-                    {/* Enhanced Glow effect */}
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-accent/10 to-primary/10" />
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg shadow-primary/20" />
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0">
-                          <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <step.icon className="h-6 w-6 text-green-500" />
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{step.title}</h4>
-                          <p className="text-muted-foreground">{step.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Never Do This Panel */}
-            <div 
-              ref={neverDoRef} 
-              className="space-y-8"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <div className="text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start space-x-3 mb-4">
-                  <XCircle className="h-8 w-8 text-red-500" />
-                  <h3 className="text-2xl font-bold text-foreground">Never Do This</h3>
-                </div>
-                <p className="text-muted-foreground">Avoid these common mistakes that can hurt your case</p>
-              </div>
-
-              <div className="space-y-4">
-                {neverDo.map((item, index) => (
-                  <div
-                    key={index}
-                    ref={el => { if (el) neverDoCardsRef.current[index] = el; }}
-                    className="group relative bg-surface/20 backdrop-blur-sm border border-border/20 rounded-xl p-6 transition-all duration-500 cursor-pointer hover:scale-105 hover:shadow-2xl hover:shadow-destructive/20 hover:border-destructive/30"
-                    style={{ transformStyle: 'preserve-3d' }}
-                  >
-                    {/* Enhanced Glow effect */}
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-r from-destructive/10 to-accent/5" />
-                    <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 shadow-lg shadow-destructive/20" />
-                    
-                    <div className="relative z-10">
-                      <div className="flex items-start space-x-4">
-                        <div className="flex-shrink-0">
-                          <div className="w-12 h-12 bg-red-500/20 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                            <XCircle className="h-6 w-6 text-red-500" />
-                          </div>
-                        </div>
-                        <div className="flex-1">
-                          <h4 className="text-lg font-semibold text-foreground mb-2 group-hover:text-primary transition-colors duration-300">{item.title}</h4>
-                          <p className="text-muted-foreground">{item.description}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* CTA Section */}
+        {/* Chapter 1: Immediate Steps */}
+        <div className="relative z-10">
           <div 
-            ref={ctaRef}
-            className="text-center"
+            ref={el => { if (el) panelRefs.current[1] = el; }}
+            className="min-h-screen flex items-center justify-center px-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
-            <div className="bg-gradient-to-r from-primary/10 to-accent/10 backdrop-blur-sm border border-primary/20 rounded-2xl p-8 hover:shadow-2xl hover:shadow-primary/30 transition-all duration-700 group">
-              <h3 className="text-2xl font-bold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">
-                Ready to Get Maximum Compensation?
-              </h3>
-              <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                Don't let insurance companies take advantage of you. Our experienced team will fight for every dollar you deserve.
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="panel-icon mb-8">
+                <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
+                Immediate Steps
+              </h2>
+              <p className="subtitle text-xl text-muted-foreground">
+                Take these actions right away to protect yourself and your case
               </p>
-              <Button 
-                size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-full hover:scale-110 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
-              >
-                Get Free Consultation Now
-              </Button>
             </div>
+          </div>
+
+          {immediateSteps.map((step, index) => (
+            <div 
+              key={index}
+              ref={el => { if (el) panelRefs.current[2 + index] = el; }}
+              className="min-h-screen flex items-center justify-center px-4"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <div className="text-center max-w-4xl mx-auto">
+                <div className="panel-icon mb-8">
+                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
+                    <step.icon className="h-10 w-10 text-green-500" />
+                  </div>
+                </div>
+                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
+                  {step.title}
+                </h2>
+                <p className="subtitle text-xl text-muted-foreground">
+                  {step.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Chapter 2: Never Do This */}
+        <div className="relative z-10">
+          <div 
+            ref={el => { if (el) panelRefs.current[6] = el; }}
+            className="min-h-screen flex items-center justify-center px-4"
+            style={{ transformStyle: 'preserve-3d' }}
+          >
+            <div className="text-center max-w-4xl mx-auto">
+              <div className="panel-icon mb-8">
+                <XCircle className="h-16 w-16 text-destructive mx-auto" />
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
+                Never Do This
+              </h2>
+              <p className="subtitle text-xl text-muted-foreground">
+                Avoid these common mistakes that can hurt your case
+              </p>
+            </div>
+          </div>
+
+          {neverDo.map((item, index) => (
+            <div 
+              key={index}
+              ref={el => { if (el) panelRefs.current[7 + index] = el; }}
+              className="min-h-screen flex items-center justify-center px-4"
+              style={{ transformStyle: 'preserve-3d' }}
+            >
+              <div className="text-center max-w-4xl mx-auto">
+                <div className="panel-icon mb-8">
+                  <div className="w-20 h-20 bg-destructive/20 rounded-full flex items-center justify-center mx-auto">
+                    <item.icon className="h-10 w-10 text-destructive" />
+                  </div>
+                </div>
+                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
+                  {item.title}
+                </h2>
+                <p className="subtitle text-xl text-muted-foreground">
+                  {item.description}
+                </p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* CTA Panel */}
+        <div 
+          ref={el => { if (el) panelRefs.current[11] = el; }}
+          className="relative z-10 min-h-screen flex items-center justify-center px-4"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          <div className="text-center max-w-4xl mx-auto">
+            <div className="panel-icon mb-8">
+              <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
+                <Phone className="h-10 w-10 text-primary" />
+              </div>
+            </div>
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
+              Ready to Get Maximum Compensation?
+            </h2>
+            <p className="subtitle text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+              Don't let insurance companies take advantage of you. Our experienced team will fight for every dollar you deserve.
+            </p>
+            <Button 
+              size="lg" 
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-full hover:scale-105 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
+            >
+              Get Free Consultation Now
+            </Button>
           </div>
         </div>
       </div>

@@ -149,7 +149,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[600px] mb-12 overflow-visible">
+        <div className="relative flex justify-center items-center min-h-[600px] mb-12 overflow-visible -mt-16 lg:-mt-24">
           <div className="relative w-full flex justify-center overflow-visible">
             {problems.map((item, index) => {
               const IconComponent = item.icon;

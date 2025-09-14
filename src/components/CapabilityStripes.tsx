@@ -17,21 +17,26 @@ const CapabilityStripe: React.FC<CapabilityStripeProps> = ({ title, description,
     const stripe = stripeRef.current;
     if (!stripe) return;
 
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const premiumEase = "cubic-bezier(0.22, 1, 0.36, 1)";
+
     gsap.fromTo(
       stripe,
       {
         opacity: 0,
-        y: 100,
-        filter: "blur(10px)",
-        scale: 0.95,
+        y: prefersReducedMotion ? 0 : 100,
+        z: prefersReducedMotion ? 0 : -200,
+        filter: prefersReducedMotion ? "blur(0px)" : "blur(10px)",
+        scale: prefersReducedMotion ? 1 : 0.95,
       },
       {
         opacity: 1,
         y: 0,
+        z: 0,
         filter: "blur(0px)",
         scale: 1,
-        duration: 1.2,
-        ease: "power3.out",
+        duration: 0.8,
+        ease: premiumEase,
         scrollTrigger: {
           trigger: stripe,
           start: "top 80%",
@@ -50,13 +55,14 @@ const CapabilityStripe: React.FC<CapabilityStripeProps> = ({ title, description,
     <div 
       ref={stripeRef}
       className="relative w-full py-16 lg:py-24 border-b border-border/20 group hover:bg-surface/20 transition-all duration-700"
+      style={{ transformStyle: 'preserve-3d' }}
     >
       <div className="container mx-auto px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-8 items-start">
             {/* Stripe Number */}
             <div className="lg:col-span-1">
-              <span className="text-8xl lg:text-9xl font-display font-bold text-primary/20 group-hover:text-primary/40 transition-colors duration-700">
+              <span className="text-8xl lg:text-9xl font-display font-bold text-primary/20 group-hover:text-primary/40 transition-colors duration-700 group-hover:scale-110 transform-gpu">
                 {String(index + 1).padStart(2, '0')}
               </span>
             </div>
@@ -66,7 +72,7 @@ const CapabilityStripe: React.FC<CapabilityStripeProps> = ({ title, description,
               <h3 className="text-display font-display font-bold text-foreground group-hover:text-primary transition-colors duration-500 glow">
                 {title}
               </h3>
-              <p className="text-body text-muted-foreground leading-relaxed max-w-3xl">
+              <p className="text-body text-muted-foreground leading-relaxed max-w-3xl group-hover:text-foreground transition-colors duration-500">
                 {description}
               </p>
             </div>
@@ -74,8 +80,8 @@ const CapabilityStripe: React.FC<CapabilityStripeProps> = ({ title, description,
         </div>
       </div>
 
-      {/* Background Glow Effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+      {/* Enhanced Background Glow Effect */}
+      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none blur-xl" />
     </div>
   );
 };

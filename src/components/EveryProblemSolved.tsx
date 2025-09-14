@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Scale, Shield, Clock } from 'lucide-react';
 
 const EveryProblemSolved = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
   const problems = [
     {
       number: 1,
@@ -43,7 +45,7 @@ const EveryProblemSolved = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-surface/20 overflow-hidden">
+    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-background to-surface/20 overflow-hidden">
       <div className="container mx-auto px-8">
         {/* Section Header */}
         <div className="text-center mb-20">

@@ -175,7 +175,7 @@ const PracticeAreaCard3D: React.FC<PracticeAreaProps> = ({ title, description, i
       </p>
 
       <a 
-        href="#contact" 
+        href={`/practice-areas/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`}
         className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors text-sm"
       >
         Get Help →

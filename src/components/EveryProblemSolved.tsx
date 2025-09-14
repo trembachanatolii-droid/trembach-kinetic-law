@@ -127,8 +127,8 @@ const EveryProblemSolved = () => {
     <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-6">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+        <div className="text-center mb-2">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
                 key={index}
@@ -141,7 +141,7 @@ const EveryProblemSolved = () => {
           </h2>
           <p 
             ref={subheadingRef}
-            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium mb-2"
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>

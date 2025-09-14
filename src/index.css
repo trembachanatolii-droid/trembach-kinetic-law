@@ -189,6 +189,26 @@
   ::-webkit-scrollbar-thumb:hover {
     background: hsl(var(--primary-glow));
   }
+
+  /* 3D and VINE-style effects */
+  .parallax-container {
+    transform-style: preserve-3d;
+  }
+
+  .transform-gpu {
+    transform: translateZ(0);
+  }
+
+  .line-clamp-4 {
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .bg-gradient-radial {
+    background: radial-gradient(circle, var(--tw-gradient-stops));
+  }
 }
 
 @layer base {

@@ -125,7 +125,7 @@ const EveryProblemSolved = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-background/50 overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">

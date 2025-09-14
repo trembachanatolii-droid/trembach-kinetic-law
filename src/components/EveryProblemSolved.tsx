@@ -175,20 +175,20 @@ const EveryProblemSolved = () => {
               const isRight = index > centerIndex;
               const transformOrigin = isLeft ? 'left center' : isRight ? 'right center' : 'center';
               
-              // Dynamic classes based on card state
-              let cardClasses = "bg-card border border-border/20 rounded-2xl p-7 w-80 h-96 shadow-sm transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu";
+              // Dynamic classes based on card state with Apple-inspired smoothness
+              let cardClasses = "bg-card/95 backdrop-blur-sm border border-border/30 rounded-3xl p-7 w-80 h-96 shadow-sm transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu will-change-transform";
               
               if (isHovered) {
-                // Main active card - full pop-up
-                cardClasses += " scale-[1.08] -translate-y-16 rotate-0 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-primary/40 bg-card z-[200]";
+                // Main active card - Apple-inspired elegant pop-up
+                cardClasses += " scale-[1.08] -translate-y-16 rotate-0 shadow-[0_32px_64px_rgba(0,0,0,0.25),0_8px_24px_rgba(0,0,0,0.15)] border-primary/50 bg-card/98 backdrop-blur-md z-[200] brightness-[1.02]";
                 if (isLeft) cardClasses += " -translate-x-4 lg:-translate-x-6";
                 if (isRight) cardClasses += " translate-x-4 lg:translate-x-6";
               } else if (isNeighbor) {
-                // Neighbor card - secondary pop-up behind main card
-                cardClasses += " scale-[1.04] -translate-y-8 shadow-[0_12px_30px_rgba(0,0,0,0.2)] border-primary/20 z-[150]";
+                // Neighbor card - subtle secondary elevation
+                cardClasses += " scale-[1.03] -translate-y-6 shadow-[0_16px_32px_rgba(0,0,0,0.18),0_4px_12px_rgba(0,0,0,0.12)] border-primary/30 bg-card/96 backdrop-blur-sm z-[150] brightness-[1.01]";
               } else {
-                // Inactive card - normal state
-                cardClasses += " hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg";
+                // Inactive card - refined normal state with gentle hover
+                cardClasses += " hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-border/40 hover:bg-card/96 hover:backdrop-blur-sm";
               }
               
               return (

@@ -1,13 +1,8 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Scale, Shield, Clock } from 'lucide-react';
 
 const EveryProblemSolved = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef = useRef<HTMLDivElement>(null);
-
   const problems = [
     {
       number: 1,
@@ -47,81 +42,11 @@ const EveryProblemSolved = () => {
     }
   ];
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Cards entrance animation
-      gsap.fromTo(
-        ".problem-card",
-        {
-          opacity: 0,
-          y: 60,
-          scale: 0.9
-        },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: cardsRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-
-      // Section header animation
-      gsap.fromTo(
-        ".section-header",
-        {
-          opacity: 0,
-          y: 30
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse"
-          }
-        }
-      );
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
-  const handleCardHover = (e: React.MouseEvent) => {
-    gsap.to(e.currentTarget, {
-      scale: 1.05,
-      y: -8,
-      boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  };
-
-  const handleCardLeave = (e: React.MouseEvent) => {
-    gsap.to(e.currentTarget, {
-      scale: 1,
-      y: 0,
-      boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
-      duration: 0.3,
-      ease: "power2.out"
-    });
-  };
-
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-background to-surface/20">
+    <section className="py-20 bg-gradient-to-b from-background to-surface/20 overflow-hidden">
       <div className="container mx-auto px-8">
         {/* Section Header */}
-        <div className="section-header text-center mb-16">
+        <div className="text-center mb-20">
           <h2 className="text-display font-display font-bold text-foreground mb-4">
             Every Problem Solved
           </h2>
@@ -130,53 +55,82 @@ const EveryProblemSolved = () => {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {problems.map((item, index) => {
-            const IconComponent = item.icon;
-            return (
-              <div
-                key={index}
-                className="problem-card bg-background rounded-2xl p-6 shadow-lg border border-border/10 cursor-pointer transition-all duration-300"
-                onMouseEnter={handleCardHover}
-                onMouseLeave={handleCardLeave}
-              >
-                {/* Icon */}
-                <div className="mb-4">
-                  <IconComponent className="w-6 h-6 text-primary" />
+        {/* Semicircle Fan Layout */}
+        <div className="relative h-[600px] flex items-center justify-center">
+          <div className="relative w-full max-w-5xl">
+            {problems.map((item, index) => {
+              const IconComponent = item.icon;
+              // Calculate position for semicircle arc
+              const totalCards = problems.length;
+              const angleSpacing = 150 / (totalCards - 1); // 150 degrees total arc
+              const startAngle = -75; // Start from -75 degrees
+              const angle = startAngle + (index * angleSpacing);
+              const radius = 280; // Distance from center
+              
+              // Convert angle to radians for positioning
+              const angleRad = (angle * Math.PI) / 180;
+              const x = Math.cos(angleRad) * radius;
+              const y = Math.sin(angleRad) * radius;
+
+              return (
+                <div
+                  key={index}
+                  className="absolute w-72 h-80 group cursor-pointer"
+                  style={{
+                    left: '50%',
+                    top: '50%',
+                    transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
+                    transformOrigin: 'center',
+                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                  }}
+                >
+                  <div 
+                    className="w-full h-full bg-card border border-border/20 rounded-2xl p-6 shadow-lg 
+                               transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
+                               group-hover:scale-110 group-hover:shadow-2xl group-hover:-translate-y-4
+                               group-hover:border-primary/30 backdrop-blur-sm glass"
+                  >
+                    {/* Icon */}
+                    <div className="mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
+                      <IconComponent className="w-7 h-7 text-primary glow" />
+                    </div>
+
+                    {/* Problem Number */}
+                    <div className="text-small font-bold text-primary mb-3 tracking-wide">
+                      Problem #{item.number}
+                    </div>
+
+                    {/* Problem Statement */}
+                    <blockquote className="text-body text-foreground italic mb-4 leading-relaxed font-medium">
+                      "{item.problem}"
+                    </blockquote>
+
+                    {/* Divider */}
+                    <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4 
+                                   group-hover:via-primary/50 transition-all duration-300"></div>
+
+                    {/* Solution Heading */}
+                    <div className="text-small font-bold text-foreground mb-2 tracking-wide opacity-90">
+                      WE SOLVE THIS:
+                    </div>
+
+                    {/* Solution Text */}
+                    <p className="text-small text-muted-foreground leading-relaxed">
+                      {item.solution}
+                    </p>
+                  </div>
                 </div>
-
-                {/* Problem Number */}
-                <div className="text-small font-bold text-primary mb-2">
-                  Problem #{item.number}
-                </div>
-
-                {/* Problem Statement */}
-                <blockquote className="text-body text-foreground italic mb-4 leading-relaxed">
-                  "{item.problem}"
-                </blockquote>
-
-                {/* Divider */}
-                <div className="h-px bg-border/30 mb-4"></div>
-
-                {/* Solution Heading */}
-                <div className="text-small font-bold text-foreground mb-2 tracking-wide">
-                  WE SOLVE THIS:
-                </div>
-
-                {/* Solution Text */}
-                <p className="text-small text-muted-foreground leading-relaxed">
-                  {item.solution}
-                </p>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         {/* CTA Button */}
-        <div className="text-center">
+        <div className="text-center mt-16">
           <Button 
-            className="bg-accent hover:bg-accent-glow text-accent-foreground font-bold py-4 px-8 rounded-full text-body glow-accent transition-all duration-300 hover:scale-105"
+            className="bg-accent hover:bg-accent-glow text-accent-foreground font-bold py-4 px-8 
+                       rounded-full text-body glow-accent transition-all duration-300 hover:scale-105 
+                       magnetic"
           >
             Get My Free Case Review
           </Button>

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
+import AccidentStepsGuide from '../components/AccidentStepsGuide';
 import { MarqueeBand } from '../components/Marquee';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
@@ -28,6 +29,9 @@ const Index = () => {
     <main className="relative bg-background text-foreground">
       {/* Hero Section */}
       <Hero />
+
+      {/* Accident Steps Guide */}
+      <AccidentStepsGuide />
 
       {/* Marquee Bands */}
       <div className="relative z-10">

@@ -124,10 +124,10 @@ const EveryProblemSolved = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background overflow-visible">
+    <section ref={sectionRef} className="py-20 bg-background overflow-visible">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-12">
+        <div className="text-center mb-8">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
@@ -148,7 +148,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[500px] mb-8 overflow-visible">
+        <div className="relative flex justify-center items-center min-h-[600px] mb-12 overflow-visible">
           <div className="relative w-full flex justify-center overflow-visible">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
@@ -156,8 +156,8 @@ const EveryProblemSolved = () => {
               const totalCards = problems.length;
               const angleStep = 50 / (totalCards - 1); // 50 degrees total spread
               const rotation = -25 + (index * angleStep); // -25 to +25 degrees
-              const radiusX = 300; // Horizontal radius
-              const radiusY = 60;  // Vertical radius (creates shallow arc)
+              const radiusX = 320; // Horizontal radius (increased for larger cards)
+              const radiusY = 70;  // Vertical radius (increased for larger cards)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
               const y = radiusY * (1 - Math.cos(radian));
@@ -178,10 +178,10 @@ const EveryProblemSolved = () => {
                     zIndex: 10 + index,
                   }}
                 >
-                  <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
+                  <div className="bg-card border border-border/20 rounded-2xl p-7 w-80 h-96 shadow-sm 
                                  transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.18] focus-within:scale-[1.18] hover:-translate-y-6 focus-within:-translate-y-6 hover:rotate-0 
-                                 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)] focus-within:shadow-[0_16px_40px_rgba(0,0,0,0.25)]
+                                 hover:scale-[1.15] focus-within:scale-[1.15] hover:-translate-y-8 focus-within:-translate-y-8 hover:rotate-0 
+                                 hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.3)]
                                  hover:border-primary/40 hover:bg-card hover:z-[200]
                                  transform-gpu origin-center">
                     
@@ -222,7 +222,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-8">
+        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-16">
           <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
             Ready to Get Maximum Compensation?
           </h3>

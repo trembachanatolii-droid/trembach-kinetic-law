@@ -1,9 +1,14 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Scale, Shield, Clock } from 'lucide-react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const EveryProblemSolved = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const subheadingRef = useRef<HTMLParagraphElement>(null);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
   
   const problems = [
     {
@@ -40,102 +45,151 @@ const EveryProblemSolved = () => {
       number: 6,
       problem: "I'm overwhelmed",
       solution: "We handle 100% of everything. You focus on healing.",
-      icon: Clock
+      icon: Clock,
+      hasCTA: true
     }
   ];
 
+  useEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    const section = sectionRef.current;
+    const headline = headlineRef.current;
+    const subheading = subheadingRef.current;
+    const cards = cardsRef.current.filter(Boolean);
+
+    if (!section || !headline || !subheading || cards.length === 0) return;
+
+    // Set initial states
+    gsap.set(section, { opacity: 0 });
+    gsap.set(headline, { opacity: 0, y: 20 });
+    gsap.set(subheading, { opacity: 0, y: 20 });
+    gsap.set(cards, { opacity: 0, y: 30 });
+
+    // Create timeline
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top 80%",
+        end: "bottom 20%",
+        toggleActions: "play none none reverse"
+      }
+    });
+
+    // Section fade in
+    tl.to(section, {
+      opacity: 1,
+      duration: 0.4,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    })
+    // Headline animation
+    .to(headline, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    })
+    // Subheading animation (200ms delay)
+    .to(subheading, {
+      opacity: 1,
+      y: 0,
+      duration: 0.5,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    }, "-=0.3")
+    // Cards staggered animation
+    .to(cards, {
+      opacity: 1,
+      y: 0,
+      duration: 0.4,
+      stagger: 0.15,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    }, "-=0.2");
+
+    return () => {
+      tl.scrollTrigger?.kill();
+      tl.kill();
+    };
+  }, []);
+
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-background to-surface/20 overflow-hidden">
-      <div className="container mx-auto px-8">
+    <section ref={sectionRef} className="py-20 bg-background/50 overflow-hidden">
+      <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-display font-display font-bold text-foreground mb-4">
+        <div className="text-center mb-16">
+          <h2 
+            ref={headlineRef}
+            className="text-4xl lg:text-5xl font-bold text-foreground mb-6"
+          >
             Every Problem Solved
           </h2>
-          <p className="text-title text-muted-foreground max-w-4xl mx-auto">
+          <p 
+            ref={subheadingRef}
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
+          >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
-        {/* Semicircle Fan Layout */}
-        <div className="relative h-[600px] flex items-center justify-center">
-          <div className="relative w-full max-w-5xl">
-            {problems.map((item, index) => {
-              const IconComponent = item.icon;
-              // Calculate position for semicircle arc
-              const totalCards = problems.length;
-              const angleSpacing = 150 / (totalCards - 1); // 150 degrees total arc
-              const startAngle = -75; // Start from -75 degrees
-              const angle = startAngle + (index * angleSpacing);
-              const radius = 280; // Distance from center
-              
-              // Convert angle to radians for positioning
-              const angleRad = (angle * Math.PI) / 180;
-              const x = Math.cos(angleRad) * radius;
-              const y = Math.sin(angleRad) * radius;
-
-              return (
-                <div
-                  key={index}
-                  className="absolute w-72 h-80 group cursor-pointer"
-                  style={{
-                    left: '50%',
-                    top: '50%',
-                    transform: `translate(-50%, -50%) translate(${x}px, ${y}px)`,
-                    transformOrigin: 'center',
-                    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
-                  }}
-                >
-                  <div 
-                    className="w-full h-full bg-card border border-border/20 rounded-2xl p-6 shadow-lg 
-                               transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)]
-                               group-hover:scale-110 group-hover:shadow-2xl group-hover:-translate-y-4
-                               group-hover:border-primary/30 backdrop-blur-sm glass"
-                  >
-                    {/* Icon */}
-                    <div className="mb-4 opacity-80 group-hover:opacity-100 transition-opacity duration-300">
-                      <IconComponent className="w-7 h-7 text-primary glow" />
-                    </div>
-
-                    {/* Problem Number */}
-                    <div className="text-small font-bold text-primary mb-3 tracking-wide">
-                      Problem #{item.number}
-                    </div>
-
-                    {/* Problem Statement */}
-                    <blockquote className="text-body text-foreground italic mb-4 leading-relaxed font-medium">
-                      "{item.problem}"
-                    </blockquote>
-
-                    {/* Divider */}
-                    <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4 
-                                   group-hover:via-primary/50 transition-all duration-300"></div>
-
-                    {/* Solution Heading */}
-                    <div className="text-small font-bold text-foreground mb-2 tracking-wide opacity-90">
-                      WE SOLVE THIS:
-                    </div>
-
-                    {/* Solution Text */}
-                    <p className="text-small text-muted-foreground leading-relaxed">
-                      {item.solution}
-                    </p>
+        {/* Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          {problems.map((item, index) => {
+            const IconComponent = item.icon;
+            return (
+              <div
+                key={index}
+                ref={el => { if (el) cardsRef.current[index] = el; }}
+                className="group cursor-pointer"
+              >
+                <div className="bg-card border border-border/20 rounded-2xl p-6 h-full shadow-sm 
+                               transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
+                               hover:scale-105 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1
+                               hover:border-primary/30 hover:bg-card/80">
+                  
+                  {/* Icon */}
+                  <div className="mb-4">
+                    <IconComponent className="w-8 h-8 text-primary" />
                   </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
 
-        {/* CTA Button */}
-        <div className="text-center mt-16">
-          <Button 
-            className="bg-accent hover:bg-accent-glow text-accent-foreground font-bold py-4 px-8 
-                       rounded-full text-body glow-accent transition-all duration-300 hover:scale-105 
-                       magnetic"
-          >
-            Get My Free Case Review
-          </Button>
+                  {/* Problem Number */}
+                  <div className="text-sm font-bold text-primary mb-3 tracking-wide">
+                    Problem #{item.number}
+                  </div>
+
+                  {/* Problem Statement */}
+                  <blockquote className="text-base text-foreground italic mb-4 leading-relaxed font-medium">
+                    "{item.problem}"
+                  </blockquote>
+
+                  {/* Divider */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4 
+                                 group-hover:via-primary/50 transition-all duration-300"></div>
+
+                  {/* Solution Heading */}
+                  <div className="text-sm font-bold text-foreground mb-3 tracking-wide opacity-90">
+                    WE SOLVE THIS:
+                  </div>
+
+                  {/* Solution Text */}
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+                    {item.solution}
+                  </p>
+
+                  {/* CTA Button for last card */}
+                  {item.hasCTA && (
+                    <div className="mt-6">
+                      <Button 
+                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 
+                                   rounded-full text-sm transition-all duration-300 hover:scale-105 
+                                   shadow-lg hover:shadow-xl"
+                      >
+                        Get My Free Case Review
+                      </Button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

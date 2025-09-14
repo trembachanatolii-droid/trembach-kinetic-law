@@ -93,14 +93,8 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         </div>
         <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
         
-        {/* Overlay Buttons */}
-        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <button className="glass-button">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
-            </svg>
-            Learn More
-          </button>
+        {/* Overlay Button */}
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
           <a 
             href={`/practice-areas/${generateSlug(title)}`}
             className="hero-button"
@@ -108,7 +102,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
               <path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path>
             </svg>
-            Get Help
+            See More Information
           </a>
         </div>
       </div>
@@ -144,7 +138,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
             href={`/practice-areas/${generateSlug(title)}`}
             className="ghost-button group/btn"
           >
-            Free Consultation
+            See More Information
             <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover/btn:translate-x-1">
               <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
             </svg>

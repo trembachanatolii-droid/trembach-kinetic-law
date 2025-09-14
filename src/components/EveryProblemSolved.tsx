@@ -45,8 +45,7 @@ const EveryProblemSolved = () => {
       number: 6,
       problem: "I'm overwhelmed",
       solution: "We handle 100% of everything. You focus on healing.",
-      icon: Clock,
-      hasCTA: true
+      icon: Clock
     }
   ];
 
@@ -148,68 +147,88 @@ const EveryProblemSolved = () => {
           </p>
         </div>
 
-        {/* Cards Grid - 3x2 Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {problems.map((item, index) => {
-            const IconComponent = item.icon;
-            return (
-              <div
-                key={index}
-                ref={el => { if (el) cardsRef.current[index] = el; }}
-                className="group cursor-pointer"
-              >
-                <div className="bg-card border border-border/20 rounded-2xl p-6 h-full shadow-sm 
-                               transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-                               hover:scale-[1.05] hover:shadow-2xl hover:shadow-primary/20 
-                               hover:border-primary/40 hover:bg-card/90 active:scale-[1.02]
-                               lg:hover:-translate-y-1">
-                  
-                  {/* Icon */}
-                  <div className="mb-4">
-                    <IconComponent className="w-8 h-8 text-accent" />
-                  </div>
-
-                  {/* Problem Number */}
-                  <div className="text-sm font-bold text-accent mb-3 tracking-wide">
-                    Problem #{item.number}
-                  </div>
-
-                  {/* Problem Statement in Quotes */}
-                  <blockquote className="text-base text-foreground italic mb-4 leading-relaxed font-medium 
-                                       bg-muted/30 p-3 rounded-lg border-l-4 border-accent/50">
-                    "{item.problem}"
-                  </blockquote>
-
-                  {/* Divider Line */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4 
-                                 group-hover:via-accent/60 transition-all duration-300"></div>
-
-                  {/* Solution Heading */}
-                  <div className="text-sm font-bold text-foreground mb-3 tracking-wide uppercase opacity-90">
-                    WE SOLVE THIS:
-                  </div>
-
-                  {/* Solution Text */}
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    {item.solution}
-                  </p>
-
-                  {/* CTA Button for Card #6 Only */}
-                  {item.hasCTA && (
-                    <div className="mt-6">
-                      <Button 
-                        className="w-full bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-4 px-8 
-                                   rounded-full text-base transition-all duration-300 hover:scale-105 
-                                   shadow-lg hover:shadow-xl hover:shadow-primary/30"
-                      >
-                        Get My Free Case Review
-                      </Button>
+        {/* Cards Fan Arc Layout */}
+        <div className="relative flex justify-center items-center min-h-[600px] mb-16">
+          <div className="relative w-full max-w-6xl">
+            {problems.map((item, index) => {
+              const IconComponent = item.icon;
+              // Calculate rotation and position for semicircle fan
+              const totalCards = problems.length;
+              const angleStep = 60 / (totalCards - 1); // 60 degrees total spread
+              const rotation = -30 + (index * angleStep); // -30 to +30 degrees
+              const radiusX = 280; // Horizontal radius
+              const radiusY = 80;  // Vertical radius (creates shallow arc)
+              const radian = (rotation * Math.PI) / 180;
+              const x = radiusX * Math.sin(radian);
+              const y = radiusY * (1 - Math.cos(radian));
+              
+              return (
+                <div
+                  key={index}
+                  ref={el => { if (el) cardsRef.current[index] = el; }}
+                  className="absolute group cursor-pointer"
+                  style={{
+                    transform: `translate(${x}px, ${y}px) rotate(${rotation * 0.3}deg)`,
+                    zIndex: 10 + index,
+                  }}
+                >
+                  <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
+                                 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
+                                 hover:scale-[1.15] hover:rotate-0 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] 
+                                 hover:border-primary/40 hover:bg-card/95 hover:z-50
+                                 transform-gpu">
+                    
+                    {/* Icon */}
+                    <div className="mb-3">
+                      <IconComponent className="w-7 h-7 text-accent" />
                     </div>
-                  )}
+
+                    {/* Problem Number */}
+                    <div className="text-sm font-bold text-accent mb-3 tracking-wide">
+                      Problem #{item.number}
+                    </div>
+
+                    {/* Problem Statement in Quotes */}
+                    <blockquote className="text-sm text-foreground italic mb-3 leading-relaxed font-medium 
+                                         bg-muted/30 p-3 rounded-lg border-l-4 border-accent/50">
+                      "{item.problem}"
+                    </blockquote>
+
+                    {/* Divider Line */}
+                    <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-3 
+                                   group-hover:via-accent/60 transition-all duration-300"></div>
+
+                    {/* Solution Heading */}
+                    <div className="text-xs font-bold text-foreground mb-2 tracking-wide uppercase opacity-90">
+                      WE SOLVE THIS:
+                    </div>
+
+                    {/* Solution Text */}
+                    <p className="text-xs text-muted-foreground leading-relaxed">
+                      {item.solution}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg">
+          <h3 className="text-2xl font-bold text-foreground mb-4">
+            Ready to Get Maximum Compensation?
+          </h3>
+          <p className="text-muted-foreground mb-6 text-lg">
+            Don't let insurance companies take advantage of you. Get your free case review now.
+          </p>
+          <Button 
+            className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-4 px-12 
+                       rounded-full text-lg transition-all duration-300 hover:scale-105 
+                       shadow-lg hover:shadow-xl hover:shadow-primary/30"
+          >
+            Get My Free Case Review
+          </Button>
         </div>
       </div>
     </section>

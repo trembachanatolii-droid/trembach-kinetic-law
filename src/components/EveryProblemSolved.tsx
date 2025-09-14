@@ -154,9 +154,9 @@ const EveryProblemSolved = () => {
               const IconComponent = item.icon;
               // Calculate rotation and position for semicircle fan
               const totalCards = problems.length;
-              const angleStep = 50 / (totalCards - 1); // 50 degrees total spread
+              const angleStep = 65 / (totalCards - 1); // 65 degrees total spread
               const rotation = -25 + (index * angleStep); // -25 to +25 degrees
-              const radiusX = 320; // Horizontal radius (increased for larger cards)
+              const radiusX = 380; // Horizontal radius (wider spacing for accessibility)
               const radiusY = 70;  // Vertical radius (increased for larger cards)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
@@ -180,7 +180,7 @@ const EveryProblemSolved = () => {
                 >
                   <div className="bg-card border border-border/20 rounded-2xl p-7 w-80 h-96 shadow-sm 
                                  transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.15] focus-within:scale-[1.15] hover:-translate-y-8 focus-within:-translate-y-8 hover:rotate-0 
+                                 hover:scale-[1.10] focus-within:scale-[1.10] hover:-translate-y-12 focus-within:-translate-y-12 hover:rotate-0 
                                  hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.3)]
                                  hover:border-primary/40 hover:bg-card hover:z-[200]
                                  transform-gpu origin-center">

@@ -247,7 +247,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-16">
+        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-32">
           <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
             Ready to Get Maximum Compensation?
           </h3>

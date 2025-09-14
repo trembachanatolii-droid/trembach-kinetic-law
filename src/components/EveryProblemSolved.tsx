@@ -127,7 +127,7 @@ const EveryProblemSolved = () => {
     <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-6">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
@@ -148,7 +148,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[500px] mb-12 mt-8">
+        <div className="relative flex justify-center items-center min-h-[500px] mb-12">
           <div className="relative w-full max-w-6xl flex justify-center">
             {problems.map((item, index) => {
               const IconComponent = item.icon;

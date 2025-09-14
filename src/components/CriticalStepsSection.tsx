@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
-import { CheckCircle, XCircle, Phone, FileText, Camera, Users } from "lucide-react";
+import { CheckCircle, XCircle, Phone, FileText, Camera, Users, AlertTriangle, Shield } from "lucide-react";
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -14,51 +14,59 @@ const CriticalStepsSection = () => {
   const frontLayerRef = useRef<HTMLDivElement>(null);
   const panelRefs = useRef<HTMLDivElement[]>([]);
 
-  // Chapter 1: Immediate Steps
+  // Section 1: Immediate Steps (4 subsections)
   const immediateSteps = [
     {
       icon: Users,
       title: "Seek medical attention immediately",
-      description: "Your health is #1 priority"
+      description: "Your health is #1 priority",
+      detail: "Get immediate medical care even if injuries seem minor"
     },
     {
       icon: Phone,
       title: "Call 911", 
-      description: "Get a police report"
+      description: "Get a police report",
+      detail: "Official documentation is crucial for your case"
     },
     {
       icon: Camera,
       title: "Document everything",
-      description: "Photos, witnesses, scene details"
+      description: "Photos, witnesses, scene details",
+      detail: "Evidence disappears fast - capture it now"
     },
     {
-      icon: FileText,
+      icon: Shield,
       title: "Contact us before insurance",
-      description: "Protect your rights"
+      description: "Protect your rights",
+      detail: "Don't let insurance companies take advantage of you"
     }
   ];
 
-  // Chapter 2: Never Do This
+  // Section 2: Never Do This (4 subsections)
   const neverDo = [
     {
       icon: XCircle,
       title: "Don't admit fault",
-      description: "Even if you think you're partially responsible"
+      description: "Even if you think you're partially responsible",
+      detail: "Let the investigation determine what happened"
     },
     {
-      icon: XCircle,
+      icon: AlertTriangle,
       title: "Don't give recorded statements", 
-      description: "To insurance companies without representation"
+      description: "To insurance companies without representation",
+      detail: "Anything you say can be used against you later"
     },
     {
       icon: XCircle,
       title: "Don't accept quick settlements",
-      description: "They're usually far below far value"
+      description: "They're usually far below fair value",
+      detail: "Initial offers are designed to close cases cheaply"
     },
     {
       icon: XCircle,
       title: "Don't delay treatment",
-      description: "Gaps in care can hurt your case"
+      description: "Gaps in care can hurt your case",
+      detail: "Continuous medical care strengthens your claim"
     }
   ];
 
@@ -75,20 +83,21 @@ const CriticalStepsSection = () => {
     // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // Premium easing
-    const premiumEase = "cubic-bezier(0.22, 1, 0.36, 1)";
+    // VINE-style premium easing
+    const vineEase = "cubic-bezier(0.22, 1, 0.36, 1)";
 
-    // Set up 3D container
+    // Set up 3D container with enhanced perspective
     gsap.set(threeDContainer, {
       transformStyle: "preserve-3d",
       willChange: "transform"
     });
 
     if (!prefersReducedMotion) {
-      // Floating background animations (idle state)
+      // VINE-style floating background animations (idle state)
       if (backLayer) {
+        // Back layer: vertical drift (14s loop)
         gsap.to(backLayer, {
-          y: 30,
+          y: 50,
           duration: 14,
           ease: "sine.inOut",
           repeat: -1,
@@ -97,8 +106,9 @@ const CriticalStepsSection = () => {
       }
 
       if (midLayer) {
+        // Mid layer: horizontal drift (18s loop)
         gsap.to(midLayer, {
-          x: 40,
+          x: 60,
           duration: 18,
           ease: "sine.inOut",
           repeat: -1,
@@ -107,108 +117,105 @@ const CriticalStepsSection = () => {
       }
 
       if (frontLayer) {
+        // Front layer: combo drift Y(10s) + X(22s) + rotation
         gsap.to(frontLayer, {
-          y: 20,
-          x: 25,
+          y: 30,
           duration: 10,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true
         });
         gsap.to(frontLayer, {
-          rotation: 2,
+          x: 40,
           duration: 22,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+        gsap.to(frontLayer, {
+          rotation: 3,
+          duration: 25,
           ease: "sine.inOut",
           repeat: -1,
           yoyo: true
         });
       }
 
-      // Parallax scroll effects for background layers
+      // VINE-style parallax scroll effects (back 20%, mid 40%, front 60%)
       ScrollTrigger.create({
         trigger: section,
         start: "top bottom",
         end: "bottom top",
-        scrub: true,
+        scrub: 1,
         onUpdate: (self) => {
           const progress = self.progress;
           if (backLayer) {
-            gsap.set(backLayer, { y: progress * -100 }); // 20% speed
+            gsap.set(backLayer, { y: progress * -200 }); // 0.2x speed
           }
           if (midLayer) {
-            gsap.set(midLayer, { y: progress * -200 }); // 40% speed
+            gsap.set(midLayer, { y: progress * -400 }); // 0.4x speed  
           }
           if (frontLayer) {
-            gsap.set(frontLayer, { y: progress * -300 }); // 60% speed
+            gsap.set(frontLayer, { y: progress * -600 }); // 0.6x speed
           }
         }
       });
     }
 
-    // Set initial states for panels
+    // Set initial states for all panels (inactive/receded)
     panels.forEach((panel, index) => {
       gsap.set(panel, {
-        opacity: prefersReducedMotion ? 0 : 0.2,
-        y: prefersReducedMotion ? 0 : 30,
-        z: prefersReducedMotion ? 0 : 0,
-        scale: prefersReducedMotion ? 1 : 1,
+        opacity: prefersReducedMotion ? 0 : 0.1,
+        y: prefersReducedMotion ? 0 : 50,
+        z: prefersReducedMotion ? 0 : -200, // Start deeper in 3D space
+        scale: prefersReducedMotion ? 1 : 0.9,
         willChange: "transform"
       });
 
       // Set initial states for panel content
-      const title = panel.querySelector('h2');
-      const subtitle = panel.querySelector('.subtitle');
+      const title = panel.querySelector('h1, h2');
+      const subtitle = panel.querySelector('.subtitle, .detail');
       const icon = panel.querySelector('.panel-icon');
+      const button = panel.querySelector('button');
 
-      if (title) {
-        gsap.set(title, {
-          opacity: 0,
-          y: 20,
-          willChange: "transform"
-        });
-      }
+      // Hide all content initially
+      [title, subtitle, icon, button].forEach(el => {
+        if (el) {
+          gsap.set(el, {
+            opacity: 0,
+            y: 30,
+            scale: el === icon ? 0.7 : 1,
+            willChange: "transform"
+          });
+        }
+      });
 
-      if (subtitle) {
-        gsap.set(subtitle, {
-          opacity: 0,
-          y: 20,
-          willChange: "transform"
-        });
-      }
-
-      if (icon) {
-        gsap.set(icon, {
-          opacity: 0,
-          scale: 0.8,
-          willChange: "transform"
-        });
-      }
-
-      // Create scroll trigger for each panel
+      // VINE-style scroll trigger for each panel (~40% viewport)
       ScrollTrigger.create({
         trigger: panel,
         start: "top 60%",
         end: "bottom 40%",
         onEnter: () => {
-          // Panel becomes active
+          // Panel zooms forward into focus (VINE traveling effect)
           gsap.to(panel, {
             opacity: 1,
             y: 0,
-            z: prefersReducedMotion ? 0 : 120,
+            z: prefersReducedMotion ? 0 : 120, // Zoom forward in 3D space
             scale: prefersReducedMotion ? 1 : 1.05,
-            duration: 0.7,
-            ease: premiumEase
+            duration: 0.8,
+            ease: vineEase
           });
 
-          // Animate content with stagger
+          // Staggered content reveals (150-200ms apart)
           const tl = gsap.timeline();
           
           if (icon) {
             tl.to(icon, {
               opacity: 1,
               scale: 1,
-              duration: 0.5,
-              ease: premiumEase
+              y: 0,
+              duration: 0.6,
+              ease: vineEase
             });
           }
 
@@ -217,8 +224,8 @@ const CriticalStepsSection = () => {
               opacity: 1,
               y: 0,
               duration: 0.6,
-              ease: premiumEase
-            }, "-=0.3");
+              ease: vineEase
+            }, "-=0.4");
           }
 
           if (subtitle) {
@@ -226,41 +233,51 @@ const CriticalStepsSection = () => {
               opacity: 1,
               y: 0,
               duration: 0.6,
-              ease: premiumEase
-            }, "-=0.4");
+              ease: vineEase
+            }, "-=0.2");
+          }
+
+          if (button) {
+            tl.to(button, {
+              opacity: 1,
+              y: 0,
+              scale: 1,
+              duration: 0.6,
+              ease: vineEase
+            }, "-=0.1");
           }
         },
         onLeave: () => {
-          // Panel becomes inactive
+          // Panel recedes back into 3D space
           gsap.to(panel, {
-            opacity: prefersReducedMotion ? 0 : 0.2,
-            y: prefersReducedMotion ? 0 : 30,
-            z: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: premiumEase
+            opacity: prefersReducedMotion ? 0 : 0.1,
+            y: prefersReducedMotion ? 0 : 50,
+            z: prefersReducedMotion ? 0 : -200,
+            scale: prefersReducedMotion ? 1 : 0.9,
+            duration: 0.6,
+            ease: vineEase
           });
         },
         onEnterBack: () => {
-          // Panel becomes active again when scrolling back
+          // Panel comes forward again when scrolling back
           gsap.to(panel, {
             opacity: 1,
             y: 0,
             z: prefersReducedMotion ? 0 : 120,
             scale: prefersReducedMotion ? 1 : 1.05,
-            duration: 0.7,
-            ease: premiumEase
+            duration: 0.8,
+            ease: vineEase
           });
         },
         onLeaveBack: () => {
-          // Panel becomes inactive when scrolling back
+          // Panel recedes when scrolling back up
           gsap.to(panel, {
-            opacity: prefersReducedMotion ? 0 : 0.2,
-            y: prefersReducedMotion ? 0 : 30,
-            z: 0,
-            scale: 1,
-            duration: 0.5,
-            ease: premiumEase
+            opacity: prefersReducedMotion ? 0 : 0.1,
+            y: prefersReducedMotion ? 0 : 50,
+            z: prefersReducedMotion ? 0 : -200,
+            scale: prefersReducedMotion ? 1 : 0.9,
+            duration: 0.6,
+            ease: vineEase
           });
         }
       });
@@ -273,54 +290,57 @@ const CriticalStepsSection = () => {
 
   return (
     <section ref={sectionRef} className="relative overflow-hidden bg-background">
-      {/* 3D Container with Perspective */}
+      {/* VINE-style 3D Container with Enhanced Perspective */}
       <div 
         ref={threeDContainerRef}
         className="relative"
         style={{ 
-          perspective: window.innerWidth < 768 ? '900px' : '1400px',
+          perspective: window.innerWidth < 768 ? '1100px' : '1600px',
           transformStyle: 'preserve-3d'
         }}
       >
-        {/* Background Layers */}
+        {/* VINE-style Parallax Background Layers */}
         <div className="fixed inset-0 pointer-events-none z-0">
-          {/* Back Layer */}
+          {/* Back Layer (20% speed) */}
           <div
             ref={backLayerRef}
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-25"
             style={{ 
-              transform: 'translateZ(-500px)',
+              transform: 'translateZ(-800px)',
               willChange: 'transform'
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/30 blur-3xl" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-20" />
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/30 via-accent/15 to-primary/40 blur-3xl" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_25%_25%,hsl(var(--primary))_0%,transparent_60%)] opacity-25" />
+            <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
           </div>
 
-          {/* Mid Layer */}
+          {/* Mid Layer (40% speed) */}
           <div
             ref={midLayerRef}
-            className="absolute inset-0 opacity-40"
+            className="absolute inset-0 opacity-35"
             style={{ 
-              transform: 'translateZ(-250px)',
+              transform: 'translateZ(-400px)',
               willChange: 'transform'
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-primary/20 blur-2xl" />
-            <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
+            <div className="absolute inset-0 bg-gradient-to-tr from-accent/25 via-transparent to-primary/25 blur-2xl" />
+            <div className="absolute top-1/3 left-1/4 w-80 h-80 bg-accent/15 rounded-full blur-3xl" />
+            <div className="absolute bottom-1/4 right-1/3 w-64 h-64 bg-primary/8 rounded-full blur-2xl" />
           </div>
 
-          {/* Front Layer */}
+          {/* Front Layer (60% speed) */}
           <div
             ref={frontLayerRef}
             className="absolute inset-0 opacity-20"
             style={{ 
-              transform: 'translateZ(-100px)',
+              transform: 'translateZ(-200px)',
               willChange: 'transform'
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-bl from-primary/10 via-transparent to-accent/15 blur-xl" />
-            <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
+            <div className="absolute inset-0 bg-gradient-to-bl from-primary/15 via-transparent to-accent/20 blur-xl" />
+            <div className="absolute bottom-1/3 left-1/4 w-72 h-72 bg-primary/6 rounded-full blur-2xl" />
+            <div className="absolute top-1/2 right-1/5 w-48 h-48 bg-accent/10 rounded-full blur-xl" />
           </div>
         </div>
 
@@ -330,104 +350,114 @@ const CriticalStepsSection = () => {
           className="relative z-10 min-h-screen flex items-center justify-center px-4"
           style={{ transformStyle: 'preserve-3d' }}
         >
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-5xl mx-auto">
             <div className="panel-icon mb-8">
-              <CheckCircle className="h-16 w-16 text-primary mx-auto" />
+              <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-primary/30">
+                <CheckCircle className="h-12 w-12 text-primary" />
+              </div>
+            </div>
+            <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-6 font-display leading-tight">
+              What to Do After a California Accident
+            </h1>
+            <p className="subtitle text-2xl text-muted-foreground font-medium">Critical Steps</p>
+          </div>
+        </div>
+
+        {/* Section 1: Immediate Steps Intro */}
+        <div 
+          ref={el => { if (el) panelRefs.current[1] = el; }}
+          className="relative z-10 min-h-screen flex items-center justify-center px-4"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          <div className="text-center max-w-5xl mx-auto">
+            <div className="panel-icon mb-8">
+              <div className="w-24 h-24 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-emerald-500/30">
+                <CheckCircle className="h-12 w-12 text-emerald-500" />
+              </div>
             </div>
             <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 font-display">
-              What to Do After a California Accident
+              Immediate Steps
             </h2>
-            <p className="subtitle text-xl text-muted-foreground">Critical Steps</p>
+            <p className="subtitle text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Take these actions right away to protect yourself and your case
+            </p>
           </div>
         </div>
 
-        {/* Chapter 1: Immediate Steps */}
-        <div className="relative z-10">
+        {/* Section 1: Immediate Steps (4 subsections) */}
+        {immediateSteps.map((step, index) => (
           <div 
-            ref={el => { if (el) panelRefs.current[1] = el; }}
-            className="min-h-screen flex items-center justify-center px-4"
+            key={index}
+            ref={el => { if (el) panelRefs.current[2 + index] = el; }}
+            className="relative z-10 min-h-screen flex items-center justify-center px-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <div className="text-center max-w-4xl mx-auto">
               <div className="panel-icon mb-8">
-                <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
+                <div className="w-28 h-28 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-emerald-500/30 hover:scale-110 transition-transform duration-300">
+                  <step.icon className="h-14 w-14 text-emerald-500" />
+                </div>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
-                Immediate Steps
+              <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 font-display leading-tight">
+                {step.title}
               </h2>
-              <p className="subtitle text-xl text-muted-foreground">
-                Take these actions right away to protect yourself and your case
+              <p className="subtitle text-xl lg:text-2xl text-muted-foreground mb-4 leading-relaxed">
+                {step.description}
+              </p>
+              <p className="detail text-lg text-muted-foreground/80 max-w-2xl mx-auto">
+                {step.detail}
               </p>
             </div>
           </div>
+        ))}
 
-          {immediateSteps.map((step, index) => (
-            <div 
-              key={index}
-              ref={el => { if (el) panelRefs.current[2 + index] = el; }}
-              className="min-h-screen flex items-center justify-center px-4"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <div className="text-center max-w-4xl mx-auto">
-                <div className="panel-icon mb-8">
-                  <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
-                    <step.icon className="h-10 w-10 text-green-500" />
-                  </div>
-                </div>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
-                  {step.title}
-                </h2>
-                <p className="subtitle text-xl text-muted-foreground">
-                  {step.description}
-                </p>
+        {/* Section 2: Never Do This Intro */}
+        <div 
+          ref={el => { if (el) panelRefs.current[6] = el; }}
+          className="relative z-10 min-h-screen flex items-center justify-center px-4"
+          style={{ transformStyle: 'preserve-3d' }}
+        >
+          <div className="text-center max-w-5xl mx-auto">
+            <div className="panel-icon mb-8">
+              <div className="w-24 h-24 bg-destructive/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-destructive/30">
+                <XCircle className="h-12 w-12 text-destructive" />
               </div>
             </div>
-          ))}
+            <h2 className="text-5xl lg:text-6xl font-bold text-foreground mb-6 font-display">
+              Never Do This
+            </h2>
+            <p className="subtitle text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Avoid these common mistakes that can hurt your case
+            </p>
+          </div>
         </div>
 
-        {/* Chapter 2: Never Do This */}
-        <div className="relative z-10">
+        {/* Section 2: Never Do This (4 subsections) */}
+        {neverDo.map((item, index) => (
           <div 
-            ref={el => { if (el) panelRefs.current[6] = el; }}
-            className="min-h-screen flex items-center justify-center px-4"
+            key={index}
+            ref={el => { if (el) panelRefs.current[7 + index] = el; }}
+            className="relative z-10 min-h-screen flex items-center justify-center px-4"
             style={{ transformStyle: 'preserve-3d' }}
           >
             <div className="text-center max-w-4xl mx-auto">
               <div className="panel-icon mb-8">
-                <XCircle className="h-16 w-16 text-destructive mx-auto" />
+                <div className="w-28 h-28 bg-destructive/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-destructive/30 hover:scale-110 transition-transform duration-300">
+                  <item.icon className="h-14 w-14 text-destructive" />
+                </div>
               </div>
-              <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
-                Never Do This
+              <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 font-display leading-tight">
+                {item.title}
               </h2>
-              <p className="subtitle text-xl text-muted-foreground">
-                Avoid these common mistakes that can hurt your case
+              <p className="subtitle text-xl lg:text-2xl text-muted-foreground mb-4 leading-relaxed">
+                {item.description}
+              </p>
+              <p className="detail text-lg text-muted-foreground/80 max-w-2xl mx-auto">
+                {item.detail}
               </p>
             </div>
           </div>
-
-          {neverDo.map((item, index) => (
-            <div 
-              key={index}
-              ref={el => { if (el) panelRefs.current[7 + index] = el; }}
-              className="min-h-screen flex items-center justify-center px-4"
-              style={{ transformStyle: 'preserve-3d' }}
-            >
-              <div className="text-center max-w-4xl mx-auto">
-                <div className="panel-icon mb-8">
-                  <div className="w-20 h-20 bg-destructive/20 rounded-full flex items-center justify-center mx-auto">
-                    <item.icon className="h-10 w-10 text-destructive" />
-                  </div>
-                </div>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
-                  {item.title}
-                </h2>
-                <p className="subtitle text-xl text-muted-foreground">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
+        ))}
 
         {/* CTA Panel */}
         <div 
@@ -435,21 +465,21 @@ const CriticalStepsSection = () => {
           className="relative z-10 min-h-screen flex items-center justify-center px-4"
           style={{ transformStyle: 'preserve-3d' }}
         >
-          <div className="text-center max-w-4xl mx-auto">
+          <div className="text-center max-w-5xl mx-auto">
             <div className="panel-icon mb-8">
-              <div className="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto">
-                <Phone className="h-10 w-10 text-primary" />
+              <div className="w-28 h-28 bg-primary/20 rounded-full flex items-center justify-center mx-auto backdrop-blur-sm border border-primary/30 animate-pulse-glow">
+                <Phone className="h-14 w-14 text-primary" />
               </div>
             </div>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6 font-display">
+            <h2 className="text-4xl lg:text-6xl font-bold text-foreground mb-6 font-display leading-tight">
               Ready to Get Maximum Compensation?
             </h2>
-            <p className="subtitle text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+            <p className="subtitle text-xl lg:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto leading-relaxed">
               Don't let insurance companies take advantage of you. Our experienced team will fight for every dollar you deserve.
             </p>
             <Button 
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-full hover:scale-105 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-12 py-6 text-xl rounded-full hover:scale-110 hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 backdrop-blur-sm border border-primary/30"
             >
               Get Free Consultation Now
             </Button>

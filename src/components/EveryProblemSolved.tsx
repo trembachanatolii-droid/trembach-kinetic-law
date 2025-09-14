@@ -148,16 +148,16 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[600px] mb-16">
-          <div className="relative w-full max-w-6xl">
+        <div className="relative flex justify-center items-center min-h-[500px] mb-12 mt-8">
+          <div className="relative w-full max-w-6xl flex justify-center">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
               // Calculate rotation and position for semicircle fan
               const totalCards = problems.length;
-              const angleStep = 60 / (totalCards - 1); // 60 degrees total spread
-              const rotation = -30 + (index * angleStep); // -30 to +30 degrees
-              const radiusX = 280; // Horizontal radius
-              const radiusY = 80;  // Vertical radius (creates shallow arc)
+              const angleStep = 50 / (totalCards - 1); // 50 degrees total spread
+              const rotation = -25 + (index * angleStep); // -25 to +25 degrees
+              const radiusX = 300; // Horizontal radius
+              const radiusY = 60;  // Vertical radius (creates shallow arc)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
               const y = radiusY * (1 - Math.cos(radian));
@@ -168,13 +168,15 @@ const EveryProblemSolved = () => {
                   ref={el => { if (el) cardsRef.current[index] = el; }}
                   className="absolute group cursor-pointer"
                   style={{
-                    transform: `translate(${x}px, ${y}px) rotate(${rotation * 0.3}deg)`,
+                    transform: `translate(calc(50% + ${x}px), ${y}px) rotate(${rotation * 0.2}deg)`,
+                    left: '50%',
+                    marginLeft: '-144px', // Half of card width (288px/2)
                     zIndex: 10 + index,
                   }}
                 >
                   <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
                                  transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.15] hover:rotate-0 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] 
+                                 hover:scale-[1.2] hover:rotate-0 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] 
                                  hover:border-primary/40 hover:bg-card/95 hover:z-50
                                  transform-gpu">
                     

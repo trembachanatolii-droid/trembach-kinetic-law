@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState, Suspense } from 'react';
-import { Canvas } from '@react-three/fiber';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -12,7 +11,7 @@ interface PracticeAreaProps {
   index: number;
 }
 
-const PracticeAreaCard3D: React.FC<PracticeAreaProps> = ({ title, description, icon, index }) => {
+const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, icon, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -20,64 +19,31 @@ const PracticeAreaCard3D: React.FC<PracticeAreaProps> = ({ title, description, i
     const card = cardRef.current;
     if (!card) return;
 
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     
     if (!prefersReducedMotion) {
-      // Floating idle animation
-      gsap.to(card, {
-        y: "random(-10, 10)",
-        rotation: "random(-1, 1)",
-        duration: "random(4, 6)",
-        ease: "sine.inOut",
-        repeat: -1,
-        yoyo: true,
-        delay: index * 0.2,
-      });
-
-      // Scroll-driven animation with translateZ and scale
       gsap.fromTo(
         card,
         {
           opacity: 0,
-          y: 100,
-          scale: 0.8,
-          rotationX: 45,
-          transformPerspective: 1000,
-          transformOrigin: "center bottom",
+          y: 60,
+          filter: "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
-          scale: 1,
-          rotationX: 0,
-          duration: 1.2,
-          ease: "cubic-bezier(0.16, 1, 0.3, 1)", // Premium cubic-bezier
+          filter: "blur(0px)",
+          duration: 0.8,
+          ease: "cubic-bezier(0.16, 1, 0.3, 1)",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
-            end: "bottom 20%",
             toggleActions: "play none none reverse",
-            onEnter: () => {
-              gsap.to(card, {
-                z: 50,
-                duration: 0.6,
-                ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-              });
-            },
-            onLeave: () => {
-              gsap.to(card, {
-                z: 0,
-                duration: 0.6,
-                ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-              });
-            }
           },
-          delay: index * 0.08,
+          delay: index * 0.1,
         }
       );
     } else {
-      // Simplified animation for reduced motion
       gsap.fromTo(
         card,
         { opacity: 0 },
@@ -89,7 +55,7 @@ const PracticeAreaCard3D: React.FC<PracticeAreaProps> = ({ title, description, i
             start: "top 90%",
             toggleActions: "play none none reverse",
           },
-          delay: index * 0.1,
+          delay: index * 0.05,
         }
       );
     }
@@ -99,150 +65,99 @@ const PracticeAreaCard3D: React.FC<PracticeAreaProps> = ({ title, description, i
     };
   }, [index]);
 
-  // Enhanced hover effect
   const handleMouseEnter = () => {
     setIsHovered(true);
-    const card = cardRef.current;
-    if (!card) return;
-    
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (!prefersReducedMotion) {
-      gsap.to(card, {
-        scale: 1.05,
-        y: -15,
-        rotationY: 5,
-        rotationX: -5,
-        z: 100,
-        duration: 0.4,
-        ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-      });
-    }
   };
 
   const handleMouseLeave = () => {
     setIsHovered(false);
-    const card = cardRef.current;
-    if (!card) return;
-    
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (!prefersReducedMotion) {
-      gsap.to(card, {
-        scale: 1,
-        y: 0,
-        rotationY: 0,
-        rotationX: 0,
-        z: 50,
-        duration: 0.4,
-        ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-      });
-    }
+  };
+
+  const generateSlug = (title: string) => {
+    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
   };
 
   return (
     <div 
       ref={cardRef}
-      className="group relative bg-card/80 backdrop-blur-sm border border-border/40 rounded-xl p-8 transition-all duration-300 cursor-pointer min-h-[300px] flex flex-col transform-gpu"
-      style={{
-        transformStyle: 'preserve-3d',
-      }}
+      className="glass-card group hover-glow-primary cursor-pointer overflow-hidden"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      {/* Glow effect */}
-      <div 
-        className={`absolute inset-0 rounded-xl transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          background: `radial-gradient(circle at center, hsl(var(--primary) / 0.2), transparent 70%)`,
-          filter: 'blur(20px)',
-          transform: 'translateZ(-10px)',
-        }}
-      />
-      
-      <div className="text-4xl mb-4 block transform transition-transform duration-300 group-hover:scale-110">
-        {icon}
+      {/* Practice Area Image/Icon */}
+      <div className="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-primary/20 via-accent/10 to-electric/20">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-6xl transform transition-transform duration-700 group-hover:scale-110">
+            {icon}
+          </div>
+        </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        
+        {/* Overlay Buttons */}
+        <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <button className="glass-button">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+            </svg>
+            Learn More
+          </button>
+          <a 
+            href={`/practice-areas/${generateSlug(title)}`}
+            className="hero-button"
+          >
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0,0,1,16.2.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path>
+            </svg>
+            Get Help
+          </a>
+        </div>
       </div>
-      
-      <h3 className="text-xl font-semibold mb-3 text-foreground group-hover:text-primary transition-colors duration-300">
-        {title}
-      </h3>
-      
-      <p className="text-muted-foreground leading-relaxed text-sm flex-grow line-clamp-4">
-        {description}
-      </p>
 
-      <a 
-        href={`/practice-areas/${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`}
-        className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors text-sm"
-      >
-        Get Help →
-      </a>
-
-      {/* Premium border glow */}
-      <div 
-        className={`absolute inset-0 rounded-xl pointer-events-none transition-opacity duration-500 ${
-          isHovered ? 'opacity-100' : 'opacity-0'
-        }`}
-        style={{
-          background: `linear-gradient(135deg, hsl(var(--primary) / 0.3), hsl(var(--accent) / 0.3))`,
-          mask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
-          maskComposite: 'xor',
-          padding: '2px',
-        }}
-      />
+      {/* Practice Area Info */}
+      <div className="p-6 space-y-4">
+        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        
+        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+          {description}
+        </p>
+        
+        {/* Expertise Tags */}
+        <div className="flex flex-wrap gap-2">
+          <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+            Personal Injury
+          </span>
+          <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+            Litigation
+          </span>
+          {index % 3 === 0 && (
+            <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+              Mass Tort
+            </span>
+          )}
+        </div>
+        
+        {/* CTA */}
+        <div className="pt-2">
+          <a 
+            href={`/practice-areas/${generateSlug(title)}`}
+            className="ghost-button group/btn"
+          >
+            Free Consultation
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover/btn:translate-x-1">
+              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
     </div>
   );
 };
 
-const ParallaxLayer: React.FC<{ 
-  children: React.ReactNode; 
-  speed: number; 
-  className?: string;
-  zIndex?: number;
-}> = ({ children, speed, className = "", zIndex = 0 }) => {
-  const layerRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const layer = layerRef.current;
-    if (!layer) return;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (!prefersReducedMotion) {
-      gsap.to(layer, {
-        yPercent: -50 * speed,
-        ease: "none",
-        scrollTrigger: {
-          trigger: layer.closest('.parallax-container'),
-          start: "top bottom",
-          end: "bottom top",
-          scrub: true,
-        },
-      });
-    }
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, [speed]);
-
-  return (
-    <div 
-      ref={layerRef}
-      className={`absolute inset-0 ${className}`}
-      style={{ zIndex, transform: 'translateZ(0)' }}
-    >
-      {children}
-    </div>
-  );
-};
 
 const PracticeAreas3D = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const containerRef = useRef<HTMLDivElement>(null);
 
   const practiceAreas = [
     {
@@ -504,31 +419,22 @@ const PracticeAreas3D = () => {
 
   useEffect(() => {
     const section = sectionRef.current;
-    const container = containerRef.current;
-    if (!section || !container) return;
+    if (!section) return;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (!prefersReducedMotion) {
-      // 3D perspective container setup
-      gsap.set(container, {
-        transformPerspective: 1000,
-        transformStyle: "preserve-3d",
-      });
-
-      // Section reveal animation
       gsap.fromTo(
-        ".section-header-3d",
+        ".section-header-glass",
         {
           opacity: 0,
-          y: 80,
-          rotationX: 45,
-          transformPerspective: 1000,
+          y: 60,
+          filter: "blur(10px)",
         },
         {
           opacity: 1,
           y: 0,
-          rotationX: 0,
+          filter: "blur(0px)",
           duration: 1.2,
           ease: "cubic-bezier(0.16, 1, 0.3, 1)",
           scrollTrigger: {
@@ -538,9 +444,8 @@ const PracticeAreas3D = () => {
         }
       );
     } else {
-      // Simplified animation for reduced motion
       gsap.fromTo(
-        ".section-header-3d",
+        ".section-header-glass",
         { opacity: 0 },
         {
           opacity: 1,
@@ -561,78 +466,58 @@ const PracticeAreas3D = () => {
   return (
     <section 
       ref={sectionRef} 
-      className="relative py-20 lg:py-32 bg-background overflow-hidden parallax-container"
-      style={{ transformStyle: 'preserve-3d' }}
+      className="relative py-24 bg-background overflow-hidden"
     >
-      {/* Three Parallax Background Layers */}
-      <ParallaxLayer speed={0.5} className="opacity-30" zIndex={1}>
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-accent/10" />
-      </ParallaxLayer>
-      
-      <ParallaxLayer speed={0.3} className="opacity-20" zIndex={2}>
-        <div className="absolute inset-0">
-          <div className="absolute top-20 left-20 w-96 h-96 bg-primary/20 rounded-full blur-3xl" />
-          <div className="absolute bottom-20 right-20 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
-        </div>
-      </ParallaxLayer>
-      
-      <ParallaxLayer speed={0.1} className="opacity-10" zIndex={3}>
-        <div className="absolute inset-0 bg-gradient-radial from-transparent via-primary/5 to-transparent" />
-      </ParallaxLayer>
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/6 left-1/4 w-72 h-72 orb animate-float opacity-20"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-56 h-56 orb-secondary animate-float-delayed opacity-25"></div>
+      </div>
 
-      {/* Main Content with 3D Container */}
-      <div 
-        ref={containerRef}
-        className="relative z-10"
-        style={{ transformStyle: 'preserve-3d' }}
-      >
-        <div className="container mx-auto px-8 mb-20">
-          <div className="section-header-3d text-center max-w-4xl mx-auto">
-            <h2 className="text-display font-display font-bold text-foreground mb-6 glow">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
+        <div className="text-center mb-20">
+          <h2 className="section-header-glass text-6xl font-bold mb-6">
+            <span className="bg-gradient-primary bg-clip-text text-transparent">
               50+ Practice Areas
-            </h2>
-            <p className="text-body text-muted-foreground leading-relaxed">
-              Comprehensive legal representation across all areas of personal injury and mass tort litigation
-            </p>
-          </div>
+            </span>
+          </h2>
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Comprehensive legal representation across all areas of personal injury and mass tort litigation. 
+            Our experienced attorneys fight for maximum compensation in every case.
+          </p>
         </div>
 
-        {/* 3D Grid with Enhanced Effects */}
-        <div className="container mx-auto px-8">
-          <div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
-            style={{ transformStyle: 'preserve-3d' }}
-          >
-            {practiceAreas.map((area, index) => (
-              <PracticeAreaCard3D
-                key={index}
-                title={area.title}
-                description={area.description}
-                icon={area.icon}
-                index={index}
-              />
-            ))}
-          </div>
+        {/* Practice Areas Grid */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+          {practiceAreas.map((area, index) => (
+            <PracticeAreaCard
+              key={index}
+              title={area.title}
+              description={area.description}
+              icon={area.icon}
+              index={index}
+            />
+          ))}
         </div>
 
-        {/* CTA Section with 3D Effect */}
-        <div className="container mx-auto px-8 mt-20">
-          <div 
-            className="text-center bg-card/50 backdrop-blur-sm border border-border/40 rounded-2xl p-12"
-            style={{ transform: 'translateZ(20px)' }}
-          >
-            <h3 className="text-3xl font-bold text-foreground mb-6">
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <div className="glass-card max-w-2xl mx-auto p-8">
+            <h3 className="text-3xl font-bold text-foreground mb-4">
               Don't See Your Case Type?
             </h3>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              We handle virtually every type of personal injury and mass tort case. Contact us for a free consultation to discuss your specific situation.
+            <p className="text-muted-foreground mb-6">
+              We handle virtually every type of personal injury and mass tort case. Contact us for a free consultation.
             </p>
             <a 
               href="#contact"
-              className="inline-flex items-center gap-3 bg-primary text-primary-foreground px-8 py-4 rounded-full font-semibold hover:bg-primary-glow transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
+              className="hero-button text-lg px-8 py-4"
             >
               Get Free Case Review
-              <span className="text-lg">→</span>
+              <svg width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
+                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+              </svg>
             </a>
           </div>
         </div>

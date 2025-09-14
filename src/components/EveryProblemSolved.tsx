@@ -128,7 +128,7 @@ const EveryProblemSolved = () => {
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-2">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
                 key={index}
@@ -218,7 +218,7 @@ const EveryProblemSolved = () => {
 
         {/* CTA Section */}
         <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg">
-          <h3 className="text-2xl font-bold text-foreground mb-4">
+          <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
             Ready to Get Maximum Compensation?
           </h3>
           <p className="text-muted-foreground mb-6 text-lg">

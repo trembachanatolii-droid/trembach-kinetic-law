@@ -69,8 +69,9 @@ export default {
       },
       
       fontFamily: {
-        display: ['var(--font-display)', 'Instrument Sans', 'sans-serif'],
-        body: ['var(--font-body)', 'Inter', 'sans-serif'],
+        sans: ['Instrument Sans', 'sans-serif'],
+        display: ['Instrument Sans', 'sans-serif'],
+        body: ['Instrument Sans', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

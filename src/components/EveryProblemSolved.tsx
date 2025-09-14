@@ -128,7 +128,7 @@ const EveryProblemSolved = () => {
     <section ref={sectionRef} className="py-20 bg-background overflow-visible">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-1">
+        <div className="text-center -mb-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span

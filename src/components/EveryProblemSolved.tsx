@@ -127,7 +127,7 @@ const EveryProblemSolved = () => {
     <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-2">
+        <div className="text-center mb-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
@@ -141,22 +141,22 @@ const EveryProblemSolved = () => {
           </h2>
           <p 
             ref={subheadingRef}
-            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium mb-2"
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium mb-8"
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[500px] mb-12">
-          <div className="relative w-full max-w-6xl flex justify-center">
+        <div className="relative flex justify-center items-start min-h-[500px] mb-12">
+          <div className="relative w-full max-w-7xl flex justify-center">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
               // Calculate rotation and position for semicircle fan
               const totalCards = problems.length;
               const angleStep = 50 / (totalCards - 1); // 50 degrees total spread
               const rotation = -25 + (index * angleStep); // -25 to +25 degrees
-              const radiusX = 300; // Horizontal radius
+              const radiusX = 320; // Horizontal radius
               const radiusY = 60;  // Vertical radius (creates shallow arc)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
@@ -168,7 +168,7 @@ const EveryProblemSolved = () => {
                   ref={el => { if (el) cardsRef.current[index] = el; }}
                   className="absolute group cursor-pointer"
                   style={{
-                    transform: `translate(calc(50% + ${x}px), ${y}px) rotate(${rotation * 0.2}deg)`,
+                    transform: `translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
                     left: '50%',
                     marginLeft: '-144px', // Half of card width (288px/2)
                     zIndex: 10 + index,
@@ -176,8 +176,8 @@ const EveryProblemSolved = () => {
                 >
                   <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
                                  transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.2] hover:rotate-0 hover:shadow-[0_12px_30px_rgba(0,0,0,0.25)] 
-                                 hover:border-primary/40 hover:bg-card/95 hover:z-50
+                                 hover:scale-[1.25] hover:rotate-0 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
+                                 hover:border-primary/40 hover:bg-card/95 hover:z-[100]
                                  transform-gpu">
                     
                     {/* Icon */}

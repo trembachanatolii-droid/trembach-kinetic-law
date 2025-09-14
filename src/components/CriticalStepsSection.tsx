@@ -260,6 +260,8 @@ const CriticalStepsSection = () => {
     // Set container height to allow scrolling through all panels
     gsap.set(container, { height: sectionHeight });
 
+    let lastActivePanel = 0;
+
     ScrollTrigger.create({
       trigger: container,
       start: "top top",
@@ -276,7 +278,8 @@ const CriticalStepsSection = () => {
         // Determine active panel based on scroll progress
         const newActivePanel = Math.min(Math.floor(progress * totalPanels), totalPanels - 1);
         
-        if (newActivePanel !== currentPanel) {
+        if (newActivePanel !== lastActivePanel) {
+          lastActivePanel = newActivePanel;
           setCurrentPanel(newActivePanel);
 
           // Animate panel transitions
@@ -377,7 +380,7 @@ const CriticalStepsSection = () => {
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [currentPanel]);
+  }, []);
 
   return (
     <div ref={containerRef} className="relative overflow-hidden bg-background">

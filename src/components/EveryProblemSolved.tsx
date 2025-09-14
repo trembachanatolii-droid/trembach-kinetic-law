@@ -124,7 +124,7 @@ const EveryProblemSolved = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
+    <section ref={sectionRef} className="py-24 bg-background overflow-visible">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -148,8 +148,8 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[500px] mb-8">
-          <div className="relative w-full flex justify-center">
+        <div className="relative flex justify-center items-center min-h-[500px] mb-8 overflow-visible">
+          <div className="relative w-full flex justify-center overflow-visible">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
               // Calculate rotation and position for semicircle fan
@@ -166,7 +166,12 @@ const EveryProblemSolved = () => {
                 <div
                   key={index}
                   ref={el => { if (el) cardsRef.current[index] = el; }}
-                  className="absolute group cursor-pointer"
+                  className="absolute group cursor-pointer hover:z-[999] focus-within:z-[999]"
+                  tabIndex={0}
+                  onMouseEnter={(e) => { e.currentTarget.style.zIndex = '999'; }}
+                  onMouseLeave={(e) => { e.currentTarget.style.zIndex = String(10 + index); }}
+                  onFocus={(e) => { e.currentTarget.style.zIndex = '999'; }}
+                  onBlur={(e) => { e.currentTarget.style.zIndex = String(10 + index); }}
                   style={{
                     transform: `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
                     left: '50%',

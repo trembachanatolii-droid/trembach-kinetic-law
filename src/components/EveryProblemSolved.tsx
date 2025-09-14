@@ -127,7 +127,7 @@ const EveryProblemSolved = () => {
     <section ref={sectionRef} className="py-24 bg-background overflow-hidden">
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
-        <div className="text-center mb-4">
+        <div className="text-center mb-12">
           <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
@@ -141,26 +141,26 @@ const EveryProblemSolved = () => {
           </h2>
           <p 
             ref={subheadingRef}
-            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium mb-8"
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-start min-h-[500px] mb-12 mt-4">
-          <div className="relative w-full max-w-7xl flex justify-center">
+        <div className="relative flex justify-center items-center min-h-[500px] mb-8">
+          <div className="relative w-full flex justify-center">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
               // Calculate rotation and position for semicircle fan
               const totalCards = problems.length;
               const angleStep = 50 / (totalCards - 1); // 50 degrees total spread
               const rotation = -25 + (index * angleStep); // -25 to +25 degrees
-              const radiusX = 320; // Horizontal radius
+              const radiusX = 300; // Horizontal radius
               const radiusY = 60;  // Vertical radius (creates shallow arc)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
-              const y = radiusY * (1 - Math.cos(radian)) + 40; // Added 40px to move down
+              const y = radiusY * (1 - Math.cos(radian));
               
               return (
                 <div
@@ -168,16 +168,15 @@ const EveryProblemSolved = () => {
                   ref={el => { if (el) cardsRef.current[index] = el; }}
                   className="absolute group cursor-pointer"
                   style={{
-                    transform: `translate(${x - 20}px, ${y}px) rotate(${rotation * 0.2}deg)`,
+                    transform: `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
                     left: '50%',
-                    marginLeft: '-144px', // Half of card width (288px/2)
                     zIndex: 10 + index,
                   }}
                 >
                   <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
-                                 transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.25] hover:rotate-0 hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] 
-                                 hover:border-primary/40 hover:bg-card/95 hover:z-[100]
+                                 transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]
+                                 hover:scale-[1.15] hover:rotate-0 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)] 
+                                 hover:border-primary/40 hover:bg-card/95 hover:z-[200]
                                  transform-gpu">
                     
                     {/* Icon */}
@@ -217,7 +216,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg">
+        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-8">
           <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
             Ready to Get Maximum Compensation?
           </h3>

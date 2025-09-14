@@ -175,9 +175,9 @@ const EveryProblemSolved = () => {
                 >
                   <div className="bg-card border border-border/20 rounded-2xl p-6 w-72 h-80 shadow-sm 
                                  transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-                                 hover:scale-[1.15] hover:rotate-0 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)] 
-                                 hover:border-primary/40 hover:bg-card/95 hover:z-[200]
-                                 transform-gpu">
+                                 hover:scale-[1.3] hover:rotate-0 hover:shadow-[0_16px_40px_rgba(0,0,0,0.25)] 
+                                 hover:border-primary/40 hover:bg-card hover:z-[200] hover:-translate-y-4
+                                 transform-gpu origin-center">
                     
                     {/* Icon */}
                     <div className="mb-3">

@@ -130,8 +130,8 @@ const EveryProblemSolved = () => {
           </p>
         </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Cards Grid - 3x2 Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {problems.map((item, index) => {
             const IconComponent = item.icon;
             return (
@@ -142,30 +142,32 @@ const EveryProblemSolved = () => {
               >
                 <div className="bg-card border border-border/20 rounded-2xl p-6 h-full shadow-sm 
                                transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
-                               hover:scale-105 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-1
-                               hover:border-primary/30 hover:bg-card/80">
+                               hover:scale-[1.05] hover:shadow-2xl hover:shadow-primary/20 
+                               hover:border-primary/40 hover:bg-card/90 active:scale-[1.02]
+                               lg:hover:-translate-y-1">
                   
                   {/* Icon */}
                   <div className="mb-4">
-                    <IconComponent className="w-8 h-8 text-primary" />
+                    <IconComponent className="w-8 h-8 text-accent" />
                   </div>
 
                   {/* Problem Number */}
-                  <div className="text-sm font-bold text-primary mb-3 tracking-wide">
+                  <div className="text-sm font-bold text-accent mb-3 tracking-wide">
                     Problem #{item.number}
                   </div>
 
-                  {/* Problem Statement */}
-                  <blockquote className="text-base text-foreground italic mb-4 leading-relaxed font-medium">
+                  {/* Problem Statement in Quotes */}
+                  <blockquote className="text-base text-foreground italic mb-4 leading-relaxed font-medium 
+                                       bg-muted/30 p-3 rounded-lg border-l-4 border-accent/50">
                     "{item.problem}"
                   </blockquote>
 
-                  {/* Divider */}
+                  {/* Divider Line */}
                   <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-4 
-                                 group-hover:via-primary/50 transition-all duration-300"></div>
+                                 group-hover:via-accent/60 transition-all duration-300"></div>
 
                   {/* Solution Heading */}
-                  <div className="text-sm font-bold text-foreground mb-3 tracking-wide opacity-90">
+                  <div className="text-sm font-bold text-foreground mb-3 tracking-wide uppercase opacity-90">
                     WE SOLVE THIS:
                   </div>
 
@@ -174,13 +176,13 @@ const EveryProblemSolved = () => {
                     {item.solution}
                   </p>
 
-                  {/* CTA Button for last card */}
+                  {/* CTA Button for Card #6 Only */}
                   {item.hasCTA && (
                     <div className="mt-6">
                       <Button 
-                        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground font-bold py-3 px-6 
-                                   rounded-full text-sm transition-all duration-300 hover:scale-105 
-                                   shadow-lg hover:shadow-xl"
+                        className="w-full bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-4 px-8 
+                                   rounded-full text-base transition-all duration-300 hover:scale-105 
+                                   shadow-lg hover:shadow-xl hover:shadow-primary/30"
                       >
                         Get My Free Case Review
                       </Button>

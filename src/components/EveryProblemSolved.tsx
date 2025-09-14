@@ -9,6 +9,7 @@ const EveryProblemSolved = () => {
   const headlineWordsRef = useRef<HTMLSpanElement[]>([]);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
+  const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
   
   const problems = [
     {
@@ -159,43 +160,55 @@ const EveryProblemSolved = () => {
               const radiusX = 380; // Horizontal radius (wider spacing for accessibility)
               const radiusY = 70;  // Vertical radius (increased for larger cards)
               const radian = (rotation * Math.PI) / 180;
-               const x = radiusX * Math.sin(radian);
-               const y = radiusY * (1 - Math.cos(radian));
+              const x = radiusX * Math.sin(radian);
+              const y = radiusY * (1 - Math.cos(radian));
                
-               // Bias hover growth away from neighbors
-               const centerIndex = Math.floor((totalCards - 1) / 2);
-               const isLeft = index < centerIndex;
-               const isRight = index > centerIndex;
-               const transformOrigin = isLeft ? 'left center' : isRight ? 'right center' : 'center';
-               const hoverShiftLeft = 'hover:-translate-x-4 lg:hover:-translate-x-6 focus-within:-translate-x-4 lg:focus-within:-translate-x-6';
-               const hoverShiftRight = 'hover:translate-x-4 lg:hover:translate-x-6 focus-within:translate-x-4 lg:focus-within:translate-x-6';
-               const hoverShiftClass = isLeft ? hoverShiftLeft : isRight ? hoverShiftRight : '';
+              // Determine card states
+              const isHovered = hoveredCard === index;
+              const isLeftNeighbor = hoveredCard !== null && index === hoveredCard - 1;
+              const isRightNeighbor = hoveredCard !== null && index === hoveredCard + 1;
+              const isNeighbor = isLeftNeighbor || isRightNeighbor;
+              
+              // Bias hover growth away from neighbors
+              const centerIndex = Math.floor((totalCards - 1) / 2);
+              const isLeft = index < centerIndex;
+              const isRight = index > centerIndex;
+              const transformOrigin = isLeft ? 'left center' : isRight ? 'right center' : 'center';
+              
+              // Dynamic classes based on card state
+              let cardClasses = "bg-card border border-border/20 rounded-2xl p-7 w-80 h-96 shadow-sm transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)] transform-gpu";
+              
+              if (isHovered) {
+                // Main active card - full pop-up
+                cardClasses += " scale-[1.08] -translate-y-16 rotate-0 shadow-[0_20px_50px_rgba(0,0,0,0.3)] border-primary/40 bg-card z-[200]";
+                if (isLeft) cardClasses += " -translate-x-4 lg:-translate-x-6";
+                if (isRight) cardClasses += " translate-x-4 lg:translate-x-6";
+              } else if (isNeighbor) {
+                // Neighbor card - secondary pop-up behind main card
+                cardClasses += " scale-[1.04] -translate-y-8 shadow-[0_12px_30px_rgba(0,0,0,0.2)] border-primary/20 z-[150]";
+              } else {
+                // Inactive card - normal state
+                cardClasses += " hover:scale-[1.02] hover:-translate-y-2 hover:shadow-lg";
+              }
               
               return (
                 <div
                   key={index}
                   ref={el => { if (el) cardsRef.current[index] = el; }}
-                  className="absolute group cursor-pointer hover:z-[999] focus-within:z-[999]"
+                  className="absolute group cursor-pointer"
                   tabIndex={0}
-                  onMouseEnter={(e) => { e.currentTarget.style.zIndex = '999'; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.zIndex = String(10 + index); }}
-                  onFocus={(e) => { e.currentTarget.style.zIndex = '999'; }}
-                  onBlur={(e) => { e.currentTarget.style.zIndex = String(10 + index); }}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  onFocus={() => setHoveredCard(index)}
+                  onBlur={() => setHoveredCard(null)}
                   style={{
                     transform: `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
                     left: '50%',
-                    zIndex: 10 + index,
+                    zIndex: isHovered ? 200 : isNeighbor ? 150 : 10 + index,
+                    transformOrigin
                   }}
                 >
-                  <div
-                    className={`bg-card border border-border/20 rounded-2xl p-7 w-80 h-96 shadow-sm 
-                                   transition-all duration-[350ms] ease-[cubic-bezier(0.22,1,0.36,1)]
-                                   hover:scale-[1.08] focus-within:scale-[1.08] hover:-translate-y-16 focus-within:-translate-y-16 ${hoverShiftClass} hover:rotate-0 
-                                   hover:shadow-[0_20px_50px_rgba(0,0,0,0.3)] focus-within:shadow-[0_20px_50px_rgba(0,0,0,0.3)]
-                                   hover:border-primary/40 hover:bg-card hover:z-[200]
-                                   transform-gpu`}
-                    style={{ transformOrigin }}
-                  >
+                  <div className={cardClasses}>
                     
                     {/* Icon */}
                     <div className="mb-3">

@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const EveryProblemSolved = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const headlineWordsRef = useRef<HTMLSpanElement[]>([]);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
   
@@ -54,17 +54,29 @@ const EveryProblemSolved = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
-    const headline = headlineRef.current;
+    const headlineWords = headlineWordsRef.current.filter(Boolean);
     const subheading = subheadingRef.current;
     const cards = cardsRef.current.filter(Boolean);
 
-    if (!section || !headline || !subheading || cards.length === 0) return;
+    if (!section || headlineWords.length === 0 || !subheading || cards.length === 0) return;
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Set initial states
     gsap.set(section, { opacity: 0 });
-    gsap.set(headline, { opacity: 0, y: 20 });
-    gsap.set(subheading, { opacity: 0, y: 20 });
-    gsap.set(cards, { opacity: 0, y: 30 });
+    gsap.set(headlineWords, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 20 
+    });
+    gsap.set(subheading, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 16 
+    });
+    gsap.set(cards, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 30 
+    });
 
     // Create timeline
     const tl = gsap.timeline({
@@ -82,20 +94,21 @@ const EveryProblemSolved = () => {
       duration: 0.4,
       ease: "cubic-bezier(0.22, 1, 0.36, 1)"
     })
-    // Headline animation
-    .to(headline, {
+    // Headline words animation (word by word)
+    .to(headlineWords, {
       opacity: 1,
       y: 0,
-      duration: 0.5,
+      duration: prefersReducedMotion ? 0.3 : 0.5,
+      stagger: prefersReducedMotion ? 0.05 : 0.15,
       ease: "cubic-bezier(0.22, 1, 0.36, 1)"
     })
-    // Subheading animation (200ms delay)
+    // Subheading animation (after headline completes + 200ms delay)
     .to(subheading, {
       opacity: 1,
       y: 0,
       duration: 0.5,
       ease: "cubic-bezier(0.22, 1, 0.36, 1)"
-    }, "-=0.3")
+    }, "+=0.2")
     // Cards staggered animation
     .to(cards, {
       opacity: 1,
@@ -116,11 +129,16 @@ const EveryProblemSolved = () => {
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 
-            ref={headlineRef}
-            className="text-4xl lg:text-5xl font-bold text-foreground mb-6"
-          >
-            Every Problem Solved
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-6">
+            {['Every', 'Problem', 'Solved'].map((word, index) => (
+              <span
+                key={index}
+                ref={el => { if (el) headlineWordsRef.current[index] = el; }}
+                className="inline-block mr-3 last:mr-0"
+              >
+                {word}
+              </span>
+            ))}
           </h2>
           <p 
             ref={subheadingRef}

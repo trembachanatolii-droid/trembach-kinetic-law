@@ -148,7 +148,7 @@ const EveryProblemSolved = () => {
         </div>
 
         {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-start min-h-[500px] mb-12">
+        <div className="relative flex justify-center items-start min-h-[500px] mb-12 mt-4">
           <div className="relative w-full max-w-7xl flex justify-center">
             {problems.map((item, index) => {
               const IconComponent = item.icon;
@@ -160,7 +160,7 @@ const EveryProblemSolved = () => {
               const radiusY = 60;  // Vertical radius (creates shallow arc)
               const radian = (rotation * Math.PI) / 180;
               const x = radiusX * Math.sin(radian);
-              const y = radiusY * (1 - Math.cos(radian));
+              const y = radiusY * (1 - Math.cos(radian)) + 40; // Added 40px to move down
               
               return (
                 <div
@@ -168,7 +168,7 @@ const EveryProblemSolved = () => {
                   ref={el => { if (el) cardsRef.current[index] = el; }}
                   className="absolute group cursor-pointer"
                   style={{
-                    transform: `translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
+                    transform: `translate(${x - 20}px, ${y}px) rotate(${rotation * 0.2}deg)`,
                     left: '50%',
                     marginLeft: '-144px', // Half of card width (288px/2)
                     zIndex: 10 + index,

@@ -5,7 +5,6 @@ import Hero from '../components/Hero';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
-import IntroducingVine from '../components/IntroducingVine';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreas from '../components/PracticeAreas';
@@ -62,9 +61,6 @@ const Index = () => {
 
       {/* Critical Steps Section */}
       <CriticalStepsSection />
-
-      {/* Introducing VINE */}
-      <IntroducingVine />
 
       {/* Every Problem Solved */}
       <EveryProblemSolved />

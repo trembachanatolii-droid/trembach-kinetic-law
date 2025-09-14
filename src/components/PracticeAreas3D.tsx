@@ -155,7 +155,6 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
   );
 };
 
-
 const PracticeAreas3D = () => {
   const sectionRef = useRef<HTMLElement>(null);
 

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Scale, Shield, Clock } from 'lucide-react';
 
 const EveryProblemSolved = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [completedCards, setCompletedCards] = useState<number[]>([]);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
 
   const problems = [
     {
@@ -45,128 +47,140 @@ const EveryProblemSolved = () => {
     }
   ];
 
-  const handleCardClick = () => {
-    if (activeIndex < problems.length) {
-      setCompletedCards(prev => [...prev, activeIndex]);
-      setActiveIndex(prev => prev + 1);
-    }
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Cards entrance animation
+      gsap.fromTo(
+        ".problem-card",
+        {
+          opacity: 0,
+          y: 60,
+          scale: 0.9
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 80%",
+            end: "bottom 20%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+
+      // Section header animation
+      gsap.fromTo(
+        ".section-header",
+        {
+          opacity: 0,
+          y: 30
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 85%",
+            toggleActions: "play none none reverse"
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleCardHover = (e: React.MouseEvent) => {
+    gsap.to(e.currentTarget, {
+      scale: 1.05,
+      y: -8,
+      boxShadow: "0 20px 40px rgba(0,0,0,0.15)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
+  };
+
+  const handleCardLeave = (e: React.MouseEvent) => {
+    gsap.to(e.currentTarget, {
+      scale: 1,
+      y: 0,
+      boxShadow: "0 10px 25px rgba(0,0,0,0.1)",
+      duration: 0.3,
+      ease: "power2.out"
+    });
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 relative overflow-hidden">
-      {/* Background dots */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-accent rounded-full animate-pulse"></div>
-        <div className="absolute top-3/4 right-1/3 w-1 h-1 bg-primary rounded-full animate-ping"></div>
-        <div className="absolute bottom-1/4 left-1/2 w-1.5 h-1.5 bg-primary rounded-full animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-accent rounded-full animate-ping delay-500"></div>
-      </div>
-
-      <div className="container mx-auto px-8 relative z-10">
+    <section ref={sectionRef} className="py-20 bg-gradient-to-b from-background to-surface/20">
+      <div className="container mx-auto px-8">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-display font-display font-bold text-white mb-4">
+        <div className="section-header text-center mb-16">
+          <h2 className="text-display font-display font-bold text-foreground mb-4">
             Every Problem Solved
           </h2>
-          <p className="text-title text-slate-300 max-w-4xl mx-auto">
+          <p className="text-title text-muted-foreground max-w-4xl mx-auto">
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
-        {/* Card Pile Container */}
-        <div 
-          className="relative max-w-lg mx-auto mb-16"
-          style={{ 
-            height: '600px',
-            perspective: '1200px'
-          }}
-        >
+        {/* Cards Grid */}
+        <div ref={cardsRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
           {problems.map((item, index) => {
             const IconComponent = item.icon;
-            const isCompleted = completedCards.includes(index);
-            const isActive = index === activeIndex && !isCompleted;
-            const isLast = index === problems.length - 1;
-            
-            // Calculate position for completed cards
-            const completedIndex = completedCards.indexOf(index);
-            const slideOffset = isCompleted ? 140 + (completedIndex * 20) : 0;
-            
             return (
               <div
                 key={index}
-                className={`absolute w-full bg-slate-800/95 backdrop-blur-sm rounded-3xl p-8 shadow-xl border border-slate-600/30 transition-all duration-300 ease-out ${
-                  isActive ? 'cursor-pointer hover:scale-105' : ''
-                }`}
-                style={{
-                  transform: `
-                    translate(-50%, -50%) 
-                    translateX(${slideOffset}px)
-                    translateZ(${isCompleted ? -10 : isActive ? 0 : -index * 4}px)
-                    scale(${isCompleted ? 0.96 : isActive ? 1 : 0.98})
-                  `,
-                  transformStyle: 'preserve-3d',
-                  left: '50%',
-                  top: '50%',
-                  zIndex: isActive ? 100 : isCompleted ? 50 : 10 - index,
-                  opacity: isActive ? 1 : isCompleted ? 0.9 : 0.7,
-                  pointerEvents: isActive ? 'auto' : 'none'
-                }}
-                onClick={isActive ? handleCardClick : undefined}
+                className="problem-card bg-background rounded-2xl p-6 shadow-lg border border-border/10 cursor-pointer transition-all duration-300"
+                onMouseEnter={handleCardHover}
+                onMouseLeave={handleCardLeave}
               >
                 {/* Icon */}
-                <div className="mb-6">
-                  <IconComponent className="w-8 h-8 text-accent drop-shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
+                <div className="mb-4">
+                  <IconComponent className="w-6 h-6 text-primary" />
                 </div>
 
                 {/* Problem Number */}
-                <div className="text-xl font-bold mb-4 tracking-wide">
-                  <span className="text-accent drop-shadow-[0_0_12px_rgba(34,197,94,0.8)] font-extrabold">
-                    Problem #{item.number}
-                  </span>
+                <div className="text-small font-bold text-primary mb-2">
+                  Problem #{item.number}
                 </div>
 
                 {/* Problem Statement */}
-                <blockquote className="text-white text-lg italic mb-6 leading-relaxed font-medium">
+                <blockquote className="text-body text-foreground italic mb-4 leading-relaxed">
                   "{item.problem}"
                 </blockquote>
 
                 {/* Divider */}
-                <div className="h-px bg-gradient-to-r from-transparent via-accent to-transparent mb-6 shadow-[0_0_15px_rgba(34,197,94,0.5)]"></div>
+                <div className="h-px bg-border/30 mb-4"></div>
 
                 {/* Solution Heading */}
-                <div className="text-sm font-bold text-white mb-4 tracking-widest opacity-90">
+                <div className="text-small font-bold text-foreground mb-2 tracking-wide">
                   WE SOLVE THIS:
                 </div>
 
                 {/* Solution Text */}
-                <p className="text-slate-300 leading-relaxed mb-6 text-base">
+                <p className="text-small text-muted-foreground leading-relaxed">
                   {item.solution}
                 </p>
-
-                {/* CTA Button on last card */}
-                {isLast && (
-                  <div className="mt-8">
-                    <Button 
-                      className="w-full bg-accent hover:bg-accent text-slate-900 font-bold py-4 px-8 rounded-full text-lg transition-all duration-300 transform hover:scale-110 hover:shadow-[0_0_25px_rgba(34,197,94,0.6)] hover:brightness-110 active:scale-105"
-                      style={{
-                        boxShadow: '0 0 20px rgba(34,197,94,0.3)'
-                      }}
-                    >
-                      Get My Free Case Review
-                    </Button>
-                  </div>
-                )}
               </div>
             );
           })}
         </div>
 
-        {/* Progress indicator */}
-        {activeIndex > 0 && (
-          <div className="text-center text-slate-400 text-sm">
-            {completedCards.length} of {problems.length} problems solved
-          </div>
-        )}
+        {/* CTA Button */}
+        <div className="text-center">
+          <Button 
+            className="bg-accent hover:bg-accent-glow text-accent-foreground font-bold py-4 px-8 rounded-full text-body glow-accent transition-all duration-300 hover:scale-105"
+          >
+            Get My Free Case Review
+          </Button>
+        </div>
       </div>
     </section>
   );

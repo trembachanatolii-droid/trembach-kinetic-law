@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import { MarqueeBand } from '../components/Marquee';
+import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
@@ -57,6 +58,9 @@ const Index = () => {
           direction="right"
         />
       </div>
+
+      {/* Critical Steps Section */}
+      <CriticalStepsSection />
 
       {/* Every Problem Solved */}
       <EveryProblemSolved />

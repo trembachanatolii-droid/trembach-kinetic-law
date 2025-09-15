@@ -578,12 +578,12 @@ const PracticeAreasReference: React.FC = () => {
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                      className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
+                       className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-500 transform-gpu ${
                         state === 'active'
-                          ? 'scale-105 shadow-2xl border-red-500/50 ring-2 ring-red-500/30' 
+                          ? 'scale-110 shadow-2xl border-red-500/50 ring-4 ring-red-500/40 z-10' 
                           : state === 'hovered'
-                          ? 'scale-[1.02] shadow-xl border-red-300/30'
-                          : 'border-gray-200 hover:scale-[1.01] hover:shadow-lg'
+                          ? 'scale-105 shadow-2xl border-red-400/50 ring-2 ring-red-400/30 z-10'
+                          : 'border-gray-200 hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-red-300/20'
                       }`}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
@@ -597,7 +597,7 @@ const PracticeAreasReference: React.FC = () => {
                           decoding="async"
                           className="absolute inset-0 h-full w-full object-cover transition-transform duration-500"
                           onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
-                          style={{ transform: state === 'hovered' ? 'scale(1.06)' : 'scale(1)' }}
+                          style={{ transform: state === 'hovered' || state === 'active' ? 'scale(1.1)' : 'scale(1)' }}
                         />
                         
                         {/* Overlay */}
@@ -618,16 +618,20 @@ const PracticeAreasReference: React.FC = () => {
                             }`}>
                               {area.title}
                             </h3>
-                            <button className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
-                              state === 'hovered' || state === 'active'
-                                ? 'bg-red-600 text-white shadow-lg transform scale-105'
-                                : 'bg-white/10 text-white/80 backdrop-blur-sm'
-                            } group-hover:bg-red-600 group-hover:text-white group-hover:shadow-lg group-hover:scale-105`}>
+                            <a
+                              href={`/practice-areas/${area.slug}`}
+                              className={`inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-300 transform ${
+                                state === 'hovered' || state === 'active'
+                                  ? 'bg-red-600 text-white shadow-2xl scale-110 shadow-red-600/30'
+                                  : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-110 hover:shadow-red-600/30'
+                              }`}
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               Learn More
-                              <svg width="12" height="12" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover:translate-x-0.5">
+                              <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover:translate-x-1">
                                 <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
                               </svg>
-                            </button>
+                            </a>
                           </div>
                         </div>
                       </div>
@@ -710,30 +714,6 @@ const PracticeAreasReference: React.FC = () => {
           </div>
         </div>
 
-        {/* Active Area Details */}
-        <div className="px-6 py-8">
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="p-8">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                {activeArea.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {activeArea.description}
-              </p>
-              <div className="mt-6">
-                <a 
-                  href={`/practice-areas/${activeArea.slug}`}
-                  className="inline-flex items-center gap-2 text-red-600 font-semibold text-lg hover:text-red-700 transition-colors duration-200"
-                >
-                  Learn More About {activeArea.title}
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
-                    <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Accessibility */}

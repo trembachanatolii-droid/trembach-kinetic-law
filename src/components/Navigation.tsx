@@ -45,7 +45,7 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-8 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-display font-bold text-foreground">
+        <div className="text-2xl font-display font-bold text-white">
           <span className="text-primary">Trembach</span> Law Firm
         </div>
 

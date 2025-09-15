@@ -54,6 +54,8 @@ import railroadAccidentsImg from '@/assets/practice-areas/railroad-accidents.jpg
 import defamationImg from '@/assets/practice-areas/defamation.jpg';
 import generalPersonalInjuryImg from '@/assets/practice-areas/general-personal-injury.jpg';
 
+import heroFallback from '@/assets/hero-background.png';
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface PracticeArea {
@@ -568,7 +570,7 @@ const PracticeAreasReference: React.FC = () => {
           {/* Right Content Area - Image Grid */}
           <div className="flex-1 relative">
             <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-[9rem] sm:auto-rows-[10rem]">
                 {practiceAreas.map((area, index) => {
                   const state = getItemState(area.id);
                   
@@ -576,7 +578,7 @@ const PracticeAreasReference: React.FC = () => {
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                      className={`relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
+                      className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
                         state === 'active'
                           ? 'scale-105 shadow-2xl border-red-500/50 ring-2 ring-red-500/30' 
                           : state === 'hovered'
@@ -587,14 +589,15 @@ const PracticeAreasReference: React.FC = () => {
                       onMouseLeave={() => handleAreaHover(null)}
                       onClick={() => handleAreaClick(area.id)}
                     >
-                      <div className="relative h-32 overflow-hidden">
-                        {/* Background Image */}
-                        <div 
-                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
-                          style={{ 
-                            backgroundImage: `url(${area.image})`,
-                            transform: state === 'hovered' ? 'scale(1.1)' : 'scale(1)'
-                          }}
+                      <div className="relative h-full w-full overflow-hidden">
+                        <img
+                          src={area.image}
+                          alt={`${area.title} – practice area`}
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500"
+                          onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
+                          style={{ transform: state === 'hovered' ? 'scale(1.06)' : 'scale(1)' }}
                         />
                         
                         {/* Overlay */}
@@ -606,13 +609,16 @@ const PracticeAreasReference: React.FC = () => {
                             : 'bg-black/50'
                         }`} />
                         
-                        {/* Title */}
-                        <div className="relative z-10 p-3 h-full flex items-end">
+                        {/* Title + CTA */}
+                        <div className="relative z-10 p-3 h-full flex items-end justify-between">
                           <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
                             state === 'active' ? 'text-red-200' : ''
                           }`}>
                             {area.title}
                           </h3>
+                          <span className="ml-2 inline-flex items-center rounded-full bg-white/10 px-2 py-1 text-[11px] text-white backdrop-blur-sm group-hover:bg-white/20">
+                            View
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -665,10 +671,13 @@ const PracticeAreasReference: React.FC = () => {
                   onClick={() => handleAreaClick(area.id)}
                 >
                   <div className="relative h-32 overflow-hidden">
-                    {/* Background Image */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                      style={{ backgroundImage: `url(${area.image})` }}
+                    <img
+                      src={area.image}
+                      alt={`${area.title} – practice area`}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-0 h-full w-full object-cover"
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
                     />
                     
                     {/* Overlay */}

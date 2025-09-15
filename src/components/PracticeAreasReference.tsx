@@ -513,24 +513,25 @@ const PracticeAreasReference: React.FC = () => {
         {/* Practice Areas Layout */}
         <div className="flex">
           {/* Left Sidebar - Practice Area Links */}
-          <div className="w-80 bg-gray-900 min-h-[700px] relative">
+          <div className="w-72 bg-gray-900 min-h-[700px] relative">
             {/* Red accent line */}
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-600"></div>
             
             {/* Navigation Links */}
-            <div className="p-8 pt-12">
+            <div className="p-6 pt-12">
               <nav className="space-y-1">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area)}
                     onMouseEnter={() => handleCardHover(area.id)}
-                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white ${
+                    onMouseLeave={() => setHoveredCard(null)}
+                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-150 hover:bg-gray-800 hover:text-white rounded-md ${
                       activeArea.id === area.id 
                         ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
                         : hoveredCard === area.id
-                        ? 'text-red-400 bg-gray-800/50'
-                        : 'text-gray-300 hover:text-white'
+                        ? 'text-red-400 bg-gray-800/70 scale-[1.02] shadow-md'
+                        : 'text-gray-300 hover:text-white hover:scale-[1.01]'
                     }`}
                   >
                     {area.title}
@@ -548,15 +549,15 @@ const PracticeAreasReference: React.FC = () => {
                   const isActive = activeArea.id === area.id;
                   const isHovered = hoveredCard === area.id;
                   
-                  // Dynamic classes for card states
-                  let cardClasses = "relative bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu cursor-pointer";
+                  // Dynamic classes for card states with enhanced scale effects
+                  let cardClasses = "relative bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 transition-all duration-150 ease-out transform-gpu cursor-pointer";
                   
                   if (isActive) {
-                    cardClasses += " scale-[1.02] shadow-2xl border-red-500/30 ring-2 ring-red-500/20";
+                    cardClasses += " scale-[1.08] shadow-2xl border-red-500/40 ring-2 ring-red-500/30";
                   } else if (isHovered) {
-                    cardClasses += " scale-[1.01] shadow-xl hover:shadow-2xl";
+                    cardClasses += " scale-[1.05] shadow-xl border-red-500/20";
                   } else {
-                    cardClasses += " hover:scale-[1.005] hover:shadow-lg";
+                    cardClasses += " hover:scale-[1.02] hover:shadow-lg";
                   }
 
                   return (
@@ -571,25 +572,25 @@ const PracticeAreasReference: React.FC = () => {
                       <div className="relative h-48 overflow-hidden">
                         {/* Background Image */}
                         <div 
-                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
+                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-200 ease-out"
                           style={{ 
                             backgroundImage: `url(${area.image})`,
-                            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                            transform: (isHovered || isActive) ? 'scale(1.1)' : 'scale(1)'
                           }}
                         />
                         
                         {/* Overlay */}
-                        <div className={`absolute inset-0 transition-all duration-500 ${
+                        <div className={`absolute inset-0 transition-all duration-200 ${
                           isActive 
-                            ? 'bg-black/50' 
-                            : isHovered 
                             ? 'bg-black/40' 
+                            : isHovered 
+                            ? 'bg-black/30' 
                             : 'bg-black/60'
                         }`} />
                         
                         {/* Content */}
                         <div className="relative z-10 p-6 h-full flex flex-col justify-end">
-                          <h3 className={`font-bold text-white mb-2 transition-all duration-300 ${
+                          <h3 className={`font-bold text-white mb-2 transition-all duration-150 ${
                             isActive ? 'text-2xl' : 'text-xl'
                           }`}>
                             {area.title}
@@ -598,7 +599,7 @@ const PracticeAreasReference: React.FC = () => {
                           {/* Learn More Button */}
                           <a 
                             href={`/practice-areas/${area.slug}`}
-                            className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-200 hover:text-red-400 ${
+                            className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-150 hover:text-red-400 ${
                               isActive ? 'text-red-400' : ''
                             }`}
                           >
@@ -612,7 +613,7 @@ const PracticeAreasReference: React.FC = () => {
                       
                       {/* Description Section */}
                       <div className="p-6">
-                        <p className={`text-gray-700 leading-relaxed transition-all duration-300 ${
+                        <p className={`text-gray-700 leading-relaxed transition-all duration-150 ${
                           isActive ? 'text-base font-medium' : 'text-sm'
                         }`}>
                           {area.description}

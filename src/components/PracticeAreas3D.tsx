@@ -33,14 +33,14 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
           opacity: 1,
           y: 0,
           filter: "blur(0px)",
-          duration: 0.8,
+          duration: 0.4,
           ease: "cubic-bezier(0.16, 1, 0.3, 1)",
           scrollTrigger: {
             trigger: card,
             start: "top 85%",
             toggleActions: "play none none reverse",
           },
-          delay: index * 0.1,
+          delay: index * 0.02,
         }
       );
     } else {
@@ -49,13 +49,13 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         { opacity: 0 },
         {
           opacity: 1,
-          duration: 0.6,
+          duration: 0.3,
           scrollTrigger: {
             trigger: card,
             start: "top 90%",
             toggleActions: "play none none reverse",
           },
-          delay: index * 0.05,
+          delay: index * 0.01,
         }
       );
     }

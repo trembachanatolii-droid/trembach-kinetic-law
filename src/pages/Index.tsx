@@ -72,7 +72,7 @@ const Index = () => {
       <FeaturedResults />
 
       {/* Practice Areas */}
-      <PracticeAreasReference />
+      <PracticeAreasReference key="practice-areas-v2" />
 
       {/* Process */}
       <Process />

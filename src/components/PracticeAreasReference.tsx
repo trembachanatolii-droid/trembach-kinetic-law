@@ -418,7 +418,7 @@ const practiceAreas: PracticeArea[] = [
 ];
 
 const PracticeAreasReference: React.FC = () => {
-  // Find Mesothelioma & Asbestos as default active
+  // Find Mesothelioma & Asbestos as default active area
   const defaultArea = practiceAreas.find(area => area.id === "mesothelioma-asbestos") || practiceAreas[0];
   const [activeArea, setActiveArea] = useState<PracticeArea>(defaultArea);
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);

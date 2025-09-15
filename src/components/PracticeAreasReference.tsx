@@ -421,8 +421,7 @@ const PracticeAreasReference: React.FC = () => {
   // Find Mesothelioma & Asbestos as default active area
   const defaultArea = practiceAreas.find(area => area.id === "mesothelioma-asbestos") || practiceAreas[0];
   const [activeArea, setActiveArea] = useState<PracticeArea>(defaultArea);
-  const [hoveredArea, setHoveredArea] = useState<string | null>(null);
-  const [lockedArea, setLockedArea] = useState<string>(defaultArea.id);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
@@ -473,28 +472,16 @@ const PracticeAreasReference: React.FC = () => {
     };
   }, []);
 
-  const handleAreaHover = (areaId: string | null) => {
-    setHoveredArea(areaId);
+  const handleAreaClick = (area: PracticeArea) => {
+    setActiveArea(area);
+  };
+
+  const handleCardHover = (areaId: string | null) => {
+    setHoveredCard(areaId);
     if (areaId) {
       const area = practiceAreas.find(p => p.id === areaId);
       if (area) setActiveArea(area);
-    } else {
-      // On hover leave, revert to locked area
-      const lockedAreaData = practiceAreas.find(p => p.id === lockedArea);
-      if (lockedAreaData) setActiveArea(lockedAreaData);
     }
-  };
-
-  const handleAreaClick = (areaId: string) => {
-    setLockedArea(areaId);
-    const area = practiceAreas.find(p => p.id === areaId);
-    if (area) setActiveArea(area);
-  };
-
-  const getItemState = (areaId: string) => {
-    if (hoveredArea === areaId) return 'hovered';
-    if (lockedArea === areaId) return 'active';
-    return 'default';
   };
 
   return (
@@ -523,8 +510,8 @@ const PracticeAreasReference: React.FC = () => {
           </p>
         </div>
 
-        {/* Desktop Layout */}
-        <div className="hidden lg:flex">
+        {/* Practice Areas Layout */}
+        <div className="flex">
           {/* Left Sidebar - Practice Area Links */}
           <div className="w-80 bg-gray-900 min-h-[700px] relative">
             {/* Red accent line */}
@@ -533,79 +520,103 @@ const PracticeAreasReference: React.FC = () => {
             {/* Navigation Links */}
             <div className="p-8 pt-12">
               <nav className="space-y-1">
-                {practiceAreas.map((area) => {
-                  const state = getItemState(area.id);
-                  return (
-                    <button
-                      key={area.id}
-                      onClick={() => handleAreaClick(area.id)}
-                      onMouseEnter={() => handleAreaHover(area.id)}
-                      onMouseLeave={() => handleAreaHover(null)}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white ${
-                        state === 'active'
-                          ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
-                          : state === 'hovered'
-                          ? 'text-red-400 bg-gray-800/50'
-                          : 'text-gray-300 hover:text-white'
-                      }`}
-                    >
-                      {area.title}
-                    </button>
-                  );
-                })}
+                {practiceAreas.map((area) => (
+                  <button
+                    key={area.id}
+                    onClick={() => handleAreaClick(area)}
+                    onMouseEnter={() => handleCardHover(area.id)}
+                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white ${
+                      activeArea.id === area.id 
+                        ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
+                        : hoveredCard === area.id
+                        ? 'text-red-400 bg-gray-800/50'
+                        : 'text-gray-300 hover:text-white'
+                    }`}
+                  >
+                    {area.title}
+                  </button>
+                ))}
               </nav>
             </div>
           </div>
 
-          {/* Right Content Area - Image Grid */}
+          {/* Right Content Area - Vertical Cards Column */}
           <div className="flex-1 relative">
             <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="grid grid-cols-3 gap-4">
+              <div className="space-y-6">
                 {practiceAreas.map((area, index) => {
-                  const state = getItemState(area.id);
+                  const isActive = activeArea.id === area.id;
+                  const isHovered = hoveredCard === area.id;
                   
+                  // Dynamic classes for card states
+                  let cardClasses = "relative bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu cursor-pointer";
+                  
+                  if (isActive) {
+                    cardClasses += " scale-[1.02] shadow-2xl border-red-500/30 ring-2 ring-red-500/20";
+                  } else if (isHovered) {
+                    cardClasses += " scale-[1.01] shadow-xl hover:shadow-2xl";
+                  } else {
+                    cardClasses += " hover:scale-[1.005] hover:shadow-lg";
+                  }
+
                   return (
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                      className={`relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
-                        state === 'active'
-                          ? 'scale-105 shadow-2xl border-red-500/50 ring-2 ring-red-500/30' 
-                          : state === 'hovered'
-                          ? 'scale-[1.02] shadow-xl border-red-300/30'
-                          : 'border-gray-200 hover:scale-[1.01] hover:shadow-lg'
-                      }`}
-                      onMouseEnter={() => handleAreaHover(area.id)}
-                      onMouseLeave={() => handleAreaHover(null)}
-                      onClick={() => handleAreaClick(area.id)}
+                      className={cardClasses}
+                      onMouseEnter={() => handleCardHover(area.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                      onClick={() => handleAreaClick(area)}
                     >
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative h-48 overflow-hidden">
                         {/* Background Image */}
                         <div 
                           className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
                           style={{ 
                             backgroundImage: `url(${area.image})`,
-                            transform: state === 'hovered' ? 'scale(1.1)' : 'scale(1)'
+                            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
                           }}
                         />
                         
                         {/* Overlay */}
                         <div className={`absolute inset-0 transition-all duration-500 ${
-                          state === 'active'
+                          isActive 
+                            ? 'bg-black/50' 
+                            : isHovered 
                             ? 'bg-black/40' 
-                            : state === 'hovered'
-                            ? 'bg-black/30' 
-                            : 'bg-black/50'
+                            : 'bg-black/60'
                         }`} />
                         
-                        {/* Title */}
-                        <div className="relative z-10 p-3 h-full flex items-end">
-                          <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
-                            state === 'active' ? 'text-red-200' : ''
+                        {/* Content */}
+                        <div className="relative z-10 p-6 h-full flex flex-col justify-end">
+                          <h3 className={`font-bold text-white mb-2 transition-all duration-300 ${
+                            isActive ? 'text-2xl' : 'text-xl'
                           }`}>
                             {area.title}
                           </h3>
+                          
+                          {/* Learn More Button */}
+                          <a 
+                            href={`/practice-areas/${area.slug}`}
+                            className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-200 hover:text-red-400 ${
+                              isActive ? 'text-red-400' : ''
+                            }`}
+                          >
+                            Learn More
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                            </svg>
+                          </a>
                         </div>
+                      </div>
+                      
+                      {/* Description Section */}
+                      <div className="p-6">
+                        <p className={`text-gray-700 leading-relaxed transition-all duration-300 ${
+                          isActive ? 'text-base font-medium' : 'text-sm'
+                        }`}>
+                          {area.description}
+                        </p>
                       </div>
                     </div>
                   );
@@ -614,104 +625,11 @@ const PracticeAreasReference: React.FC = () => {
             </div>
           </div>
         </div>
-
-        {/* Mobile Layout */}
-        <div className="lg:hidden px-6">
-          {/* Practice Area List */}
-          <div className="bg-gray-900 rounded-xl mb-6">
-            <div className="p-6">
-              <nav className="space-y-2">
-                {practiceAreas.map((area) => {
-                  const state = getItemState(area.id);
-                  return (
-                    <button
-                      key={area.id}
-                      onClick={() => handleAreaClick(area.id)}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                        state === 'active'
-                          ? 'text-red-500 bg-gray-800 border border-red-500/30' 
-                          : 'text-gray-300 hover:text-white hover:bg-gray-800'
-                      }`}
-                    >
-                      {area.title}
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-          </div>
-
-          {/* Mobile Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
-            {practiceAreas.map((area, index) => {
-              const state = getItemState(area.id);
-              
-              return (
-                <div
-                  key={area.id}
-                  className={`relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 ${
-                    state === 'active'
-                      ? 'scale-105 shadow-xl border-red-500/50 ring-2 ring-red-500/30' 
-                      : 'border-gray-200'
-                  }`}
-                  onClick={() => handleAreaClick(area.id)}
-                >
-                  <div className="relative h-32 overflow-hidden">
-                    {/* Background Image */}
-                    <div 
-                      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                      style={{ backgroundImage: `url(${area.image})` }}
-                    />
-                    
-                    {/* Overlay */}
-                    <div className={`absolute inset-0 ${
-                      state === 'active' ? 'bg-black/40' : 'bg-black/50'
-                    }`} />
-                    
-                    {/* Title */}
-                    <div className="relative z-10 p-3 h-full flex items-end">
-                      <h3 className={`font-bold text-white text-sm leading-tight ${
-                        state === 'active' ? 'text-red-200' : ''
-                      }`}>
-                        {area.title}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-
-        {/* Active Area Details */}
-        <div className="px-6 py-8">
-          <div className="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
-            <div className="p-8">
-              <h3 className="text-3xl font-bold text-gray-900 mb-4">
-                {activeArea.title}
-              </h3>
-              <p className="text-gray-700 leading-relaxed text-lg">
-                {activeArea.description}
-              </p>
-              <div className="mt-6">
-                <a 
-                  href={`/practice-areas/${activeArea.slug}`}
-                  className="inline-flex items-center gap-2 text-red-600 font-semibold text-lg hover:text-red-700 transition-colors duration-200"
-                >
-                  Learn More About {activeArea.title}
-                  <svg width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
-                    <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Accessibility */}
       <div className="sr-only" aria-live="polite">
-        Currently showing {activeArea.title} practice area information. {practiceAreas.length} practice areas available.
+        Currently showing {activeArea.title} practice area information. {practiceAreas.length} practice areas available in vertical layout.
       </div>
     </section>
   );

@@ -427,53 +427,79 @@ const PracticeAreasReference: React.FC = () => {
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
   const [lockedArea, setLockedArea] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    gsap.fromTo(
-      section,
-      { opacity: 0, y: 60 },
-      {
-        opacity: 1, 
-        y: 0,
-        duration: 1,
-        ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 80%",
-          toggleActions: "play none none reverse"
-        }
-      }
-    );
-
-    // Animate cards on load
-    cardsRef.current.forEach((card, index) => {
-      if (card) {
-        gsap.fromTo(card,
-          { opacity: 0, y: 40, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.6,
-            delay: index * 0.1,
-            ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 90%",
-              toggleActions: "play none none reverse"
-            }
+    const ctx = gsap.context(() => {
+      // Header animation
+      gsap.fromTo(headerRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 60,
+          filter: 'blur(10px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          filter: 'blur(0px)',
+          duration: 1,
+          stagger: 0.2,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: 'top 80%',
           }
-        );
-      }
-    });
+        }
+      );
 
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
+      // Sidebar animation
+      gsap.fromTo(sidebarRef.current,
+        { 
+          opacity: 0, 
+          x: -100,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          x: 0,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: sidebarRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+
+      // Practice area cards staggered animation
+      gsap.fromTo(gridRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 100,
+          scale: 0.8,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   const handleAreaHover = (areaId: string | null) => {
@@ -500,22 +526,78 @@ const PracticeAreasReference: React.FC = () => {
     return 'default';
   };
 
+  // Get practice area categories for tags
+  const getPracticeAreaTags = (title: string): string[] => {
+    const tagMap: Record<string, string[]> = {
+      'Mesothelioma & Asbestos': ['Mass Tort', 'Toxic Exposure', 'Cancer'],
+      'Silicosis Injuries': ['Occupational', 'Toxic Exposure', 'Lung Disease'],
+      'Talc & Baby Powder Cancer': ['Mass Tort', 'Product Liability', 'Cancer'],
+      'Car Accidents': ['Motor Vehicle', 'Personal Injury', 'Insurance'],
+      'Truck & 18-Wheeler': ['Motor Vehicle', 'Commercial', 'Catastrophic'],
+      'Motorcycle Accidents': ['Motor Vehicle', 'Personal Injury', 'Bias Defense'],
+      'Pedestrian Accidents': ['Motor Vehicle', 'Vulnerable Road User', 'Serious Injury'],
+      'Bicycle Accidents': ['Motor Vehicle', 'Vulnerable Road User', 'California Law'],
+      'Premises Liability': ['Property Law', 'Negligence', 'Slip & Fall'],
+      'Dog Bites': ['Strict Liability', 'Animal Law', 'California Statute'],
+      'Medical Malpractice': ['Healthcare', 'Professional Negligence', 'MICRA'],
+      'Wrongful Death': ['Catastrophic', 'Family Law', 'Survival Action'],
+      'Product Liability': ['Defective Products', 'Strict Liability', 'Consumer Safety'],
+      'Construction Accidents': ['Workplace', 'OSHA', 'Catastrophic'],
+      'Brain Injuries': ['Catastrophic', 'Neurological', 'Life Care'],
+      'Spinal Cord Injuries': ['Catastrophic', 'Paralysis', 'Life Care'],
+      'Burn Injuries': ['Catastrophic', 'Plastic Surgery', 'Pain & Suffering'],
+      'Amputation': ['Catastrophic', 'Prosthetics', 'Life Alteration'],
+      'Workplace Injuries': ['Workers Comp', 'Third Party', 'Labor Law'],
+      'Medical Devices': ['FDA', 'Defective Product', 'Healthcare'],
+      'Pharmaceutical': ['FDA', 'Drug Safety', 'Side Effects'],
+      'Mass Torts': ['Class Action', 'Multiple Plaintiffs', 'Corporate Liability'],
+      'Class Actions': ['Group Litigation', 'Consumer Rights', 'Corporate Misconduct'],
+      'Environmental & Toxic': ['Toxic Exposure', 'Environmental Law', 'Public Health'],
+      'Camp Lejeune': ['Military', 'Toxic Water', 'Government Liability'],
+      'PFAS Exposure': ['Forever Chemicals', 'Environmental', 'Water Contamination'],
+      'Benzene Exposure': ['Chemical Exposure', 'Cancer', 'Occupational'],
+      'Opioid Litigation': ['Pharmaceutical', 'Addiction', 'Public Health'],
+      'Sexual Abuse': ['Civil Rights', 'Institutional Liability', 'Trauma'],
+      'Clergy Abuse': ['Institutional Liability', 'Religious Organizations', 'Civil Rights'],
+      'Elder Abuse': ['Vulnerable Adults', 'Nursing Home', 'Civil Rights'],
+      'Birth Injuries': ['Medical Malpractice', 'Pediatric', 'Life Care'],
+      'Uber & Lyft Accidents': ['Rideshare', 'Commercial Insurance', 'Gig Economy'],
+      'Bus Accidents': ['Public Transit', 'Government Liability', 'Commercial'],
+      'Aviation Accidents': ['Federal Aviation', 'Commercial Aviation', 'Catastrophic'],
+      'Maritime Accidents': ['Admiralty Law', 'Jones Act', 'Offshore'],
+      'Swimming Pool': ['Premises Liability', 'Drowning', 'Supervision'],
+      'Amusement Parks': ['Premises Liability', 'Safety Regulations', 'Entertainment'],
+      'Electrocution': ['Electrical Safety', 'Utility Companies', 'Construction'],
+      'Explosions': ['Industrial Accidents', 'Property Damage', 'Catastrophic'],
+      'Vision Loss': ['Catastrophic', 'Disability', 'Life Alteration'],
+      'Hearing Loss': ['Occupational', 'Disability', 'OSHA'],
+      'Paralysis': ['Catastrophic', 'Spinal Injury', 'Life Care'],
+      'Civil Rights': ['Constitutional Law', 'Government Liability', 'Civil Liberty'],
+      'Retail Accidents': ['Premises Liability', 'Customer Safety', 'Negligence'],
+      'Scaffolding Falls': ['Construction', 'OSHA', 'Height Safety'],
+      'Crane Accidents': ['Construction', 'Heavy Equipment', 'Workplace Safety'],
+      'Railroad Accidents': ['Federal Railroad', 'FELA', 'Transportation'],
+      'Defamation': ['Reputation', 'First Amendment', 'Media Law'],
+      'General Personal Injury': ['All Areas', 'Comprehensive', 'Expert Representation']
+    };
+    return tagMap[title] || ['Personal Injury', 'Legal Services', 'Compensation'];
+  };
+
   return (
     <section 
       ref={sectionRef}
-      className="relative bg-background overflow-hidden"
+      className="py-24 relative overflow-hidden"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/4 left-1/6 w-96 h-96 orb animate-float opacity-10"></div>
-        <div className="absolute bottom-1/3 right-1/4 w-72 h-72 orb-secondary animate-float-delayed opacity-15"></div>
+        <div className="absolute top-1/6 left-1/4 w-72 h-72 orb animate-float opacity-20"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-56 h-56 orb-secondary animate-float-delayed opacity-25"></div>
       </div>
 
-      {/* Main Container */}
-      <div className="relative z-10 min-h-[600px]">
+      <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center py-16 px-6">
-          <h2 className="text-display mb-6">
+        <div ref={headerRef} className="text-center mb-20">
+          <h2 className="text-6xl font-bold mb-6">
             <span className="bg-gradient-primary bg-clip-text text-transparent">
               Our Practice Areas
             </span>
@@ -527,18 +609,18 @@ const PracticeAreasReference: React.FC = () => {
         </div>
 
         {/* Desktop Layout */}
-        <div className="hidden lg:flex">
+        <div className="hidden lg:flex gap-8">
           {/* Left Sidebar - Practice Area Links */}
-          <div className="w-80 bg-gray-900 min-h-[700px] relative">
-            {/* Vertical white line running down the left side */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-white"></div>
+          <div ref={sidebarRef} className="w-80 glass-card min-h-[700px] relative">
+            {/* Decorative gradient line */}
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-electric"></div>
             
-            {/* Red circular marker at bottom of line */}
-            <div className="absolute left-3 bottom-8 w-2 h-2 bg-red-600 rounded-full"></div>
+            {/* Glowing marker */}
+            <div className="absolute left-3 bottom-8 w-2 h-2 bg-primary rounded-full animate-pulse-glow"></div>
             
-            {/* Header with blue background */}
-            <div className="bg-blue-600 px-8 py-6">
-              <h3 className="text-xl font-bold text-white">
+            {/* Header with gradient background */}
+            <div className="bg-gradient-primary px-8 py-6 rounded-t-2xl">
+              <h3 className="text-xl font-bold text-primary-foreground">
                 Our Practice Areas
               </h3>
             </div>
@@ -554,10 +636,10 @@ const PracticeAreasReference: React.FC = () => {
                       onClick={() => handleAreaClick(area.id)}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
-                      className={`w-full text-left py-3 px-4 text-sm font-medium transition-colors duration-200 hover:bg-gray-800 block ${
+                      className={`w-full text-left py-3 px-4 text-sm font-medium rounded-lg transition-all duration-300 glass-button border-0 magnetic ${
                         state === 'active'
-                          ? 'text-red-500'
-                          : 'text-white hover:text-red-400'
+                          ? 'bg-primary/20 text-primary border border-primary/30'
+                          : 'text-foreground hover:text-primary hover:bg-primary/10'
                       }`}
                     >
                       {area.title}
@@ -568,86 +650,107 @@ const PracticeAreasReference: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Area - Image Grid */}
+          {/* Right Content Area - Practice Cards Grid */}
           <div className="flex-1 relative">
-            <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[9rem] sm:auto-rows-[10rem]">
-                {practiceAreas.map((area, index) => {
-                  const state = getItemState(area.id);
-                  
-                  return (
-                    <div
-                      key={area.id}
-                      ref={el => { if (el) cardsRef.current[index] = el; }}
-                        className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-500 transform-gpu ${
-                         state === 'active'
-                           ? 'scale-[1.18] shadow-2xl border-red-500/50 ring-4 ring-red-500/40 z-10' 
-                           : state === 'hovered'
-                           ? 'scale-[1.12] shadow-2xl border-red-400/50 ring-2 ring-red-400/30 z-10'
-                           : 'border-gray-200 hover:scale-[1.12] hover:shadow-xl hover:ring-2 hover:ring-red-300/20'
-                       }`}
-                      onMouseEnter={() => handleAreaHover(area.id)}
-                      onMouseLeave={() => handleAreaHover(null)}
-                      onClick={() => handleAreaClick(area.id)}
-                    >
-                      <div className="relative h-full w-full overflow-hidden">
-                        <img
-                          src={area.image}
-                          alt={`${area.title} – practice area`}
-                          loading="lazy"
-                          decoding="async"
-                          className="absolute inset-0 h-full w-full object-cover transition-transform duration-500"
-                          onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
-                          style={{ transform: state === 'hovered' || state === 'active' ? 'scale(1.1)' : 'scale(1)' }}
-                        />
-                        
-                        {/* Overlay */}
-                        <div className={`absolute inset-0 transition-all duration-500 ${
-                          state === 'active'
-                            ? 'bg-black/40' 
-                            : state === 'hovered'
-                            ? 'bg-black/30' 
-                            : 'bg-black/50'
-                        }`} />
-                        
-                        {/* Title + CTA */}
-                        <div className="relative z-10 p-3 h-full flex flex-col justify-between">
-                          <div className="flex-1"></div>
-                          <div className="flex items-center justify-between">
-                            <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
-                              state === 'active' ? 'text-red-200' : ''
-                            }`}>
-                              {area.title}
-                            </h3>
-                             <Link
-                               to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
-                               className={`inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-300 transform ${
-                                 state === 'hovered' || state === 'active'
-                                   ? 'bg-red-600 text-white shadow-2xl scale-[1.18] shadow-red-600/30 opacity-100'
-                                   : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-[1.18] hover:shadow-red-600/30 opacity-0'
-                               }`}
-                               onClick={(e) => e.stopPropagation()}
-                             >
-                              Learn More
-                              <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover:translate-x-1">
-                                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-                              </svg>
-                            </Link>
-                          </div>
-                        </div>
+            <div ref={gridRef} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {practiceAreas.map((area, index) => {
+                const state = getItemState(area.id);
+                const tags = getPracticeAreaTags(area.title);
+                
+                return (
+                  <div
+                    key={area.id}
+                    ref={el => { if (el) cardsRef.current[index] = el; }}
+                    className="glass-card group hover-glow-primary cursor-pointer overflow-hidden"
+                    onMouseEnter={() => handleAreaHover(area.id)}
+                    onMouseLeave={() => handleAreaHover(null)}
+                    onClick={() => handleAreaClick(area.id)}
+                  >
+                    {/* Practice Area Image */}
+                    <div className="relative overflow-hidden aspect-video">
+                      <img 
+                        src={area.image}
+                        alt={`${area.title} legal services`}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                      
+                      {/* Overlay Buttons */}
+                      <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <Link
+                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                          className="glass-button"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M184,89.57V84c0-25.08-37.83-44-88-44S8,58.92,8,84v40c0,20.89,26.25,37.49,64,42.46V172c0,25.08,37.83,44,88,44s88-18.92,88-44V132C248,111.3,222.58,94.68,184,89.57ZM232,132c0,13.22-30.79,28-72,28-3.73,0-7.43-.13-11.08-.37C170.49,151.77,184,139,184,124V105.74C213.87,110.19,232,122.27,232,132ZM72,150.25V126.46A183.74,183.74,0,0,0,96,128a183.74,183.74,0,0,0,24-1.54v23.79A163,163,0,0,1,96,152,163,163,0,0,1,72,150.25Zm96-40.32V124c0,8.39-12.41,17.4-32,22.87V123.5C148.91,120.37,159.84,115.71,168,109.93ZM96,56c41.21,0,72,14.78,72,28s-30.79,28-72,28S24,97.22,24,84,54.79,56,96,56ZM24,124V108.11C53.29,118.77,73.32,127.48,96,127.48c22.68,0,42.71-8.71,72-19.37V124c0,13.22-30.79,28-72,28S24,137.22,24,124Zm168,48c0,13.22-30.79,28-72,28s-72-14.78-72-28V156.11C77.29,166.77,97.32,175.48,120,175.48c22.68,0,42.71-8.71,72-19.37Z"></path>
+                          </svg>
+                          Learn More
+                        </Link>
+                        <button className="hero-button">
+                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V88a8,8,0,0,1,16,0v52h24A8,8,0,0,1,168,148Z"></path>
+                          </svg>
+                          Consult
+                        </button>
                       </div>
                     </div>
-                  );
-                })}
-              </div>
+
+                    {/* Practice Info */}
+                    <div className="p-6 space-y-4">
+                      <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {area.title}
+                      </h3>
+                      
+                      <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+                        {area.description}
+                      </p>
+                      
+                      {/* Practice Area Tags */}
+                      <div className="flex flex-wrap gap-2">
+                        {tags.map((tag) => (
+                          <span 
+                            key={tag}
+                            className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      {/* CTA */}
+                      <div className="pt-2">
+                        <Link
+                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                          className="ghost-button group/btn"
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          View Details
+                          <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover/btn:translate-x-1">
+                            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                          </svg>
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
 
         {/* Mobile Layout */}
-        <div className="lg:hidden px-6">
-          {/* Practice Area List */}
-          <div className="bg-gray-900 rounded-xl mb-6">
+        <div className="lg:hidden">
+          {/* Practice Area Navigation */}
+          <div className="glass-card mb-8">
+            <div className="bg-gradient-primary px-6 py-4 rounded-t-2xl">
+              <h3 className="text-lg font-semibold text-primary-foreground">
+                Select Practice Area
+              </h3>
+            </div>
             <div className="p-6">
               <nav className="space-y-2">
                 {practiceAreas.map((area) => {
@@ -656,10 +759,10 @@ const PracticeAreasReference: React.FC = () => {
                     <button
                       key={area.id}
                       onClick={() => handleAreaClick(area.id)}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      className={`w-full text-left px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 glass-button border-0 ${
                         state === 'active'
-                          ? 'text-red-500 bg-gray-800 border border-red-500/30' 
-                          : 'text-gray-300 hover:text-white hover:bg-gray-800'
+                          ? 'bg-primary/20 text-primary border border-primary/30' 
+                          : 'text-foreground hover:text-primary hover:bg-primary/10'
                       }`}
                     >
                       {area.title}
@@ -670,44 +773,60 @@ const PracticeAreasReference: React.FC = () => {
             </div>
           </div>
 
-          {/* Mobile Image Grid */}
-          <div className="grid grid-cols-2 gap-4">
+          {/* Mobile Practice Cards Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {practiceAreas.map((area, index) => {
               const state = getItemState(area.id);
+              const tags = getPracticeAreaTags(area.title);
               
               return (
                 <div
                   key={area.id}
-                  className={`relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 ${
-                    state === 'active'
-                      ? 'scale-105 shadow-xl border-red-500/50 ring-2 ring-red-500/30' 
-                      : 'border-gray-200'
-                  }`}
+                  className="glass-card group hover-glow-primary cursor-pointer overflow-hidden"
                   onClick={() => handleAreaClick(area.id)}
                 >
-                  <div className="relative h-32 overflow-hidden">
-                    <img
+                  {/* Practice Area Image */}
+                  <div className="relative overflow-hidden aspect-video">
+                    <img 
                       src={area.image}
-                      alt={`${area.title} – practice area`}
+                      alt={`${area.title} legal services`}
                       loading="lazy"
                       decoding="async"
-                      className="absolute inset-0 h-full w-full object-cover"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"></div>
                     
-                    {/* Overlay */}
-                    <div className={`absolute inset-0 ${
-                      state === 'active' ? 'bg-black/40' : 'bg-black/50'
-                    }`} />
-                    
-                    {/* Title */}
-                    <div className="relative z-10 p-3 h-full flex items-end">
-                      <h3 className={`font-bold text-white text-sm leading-tight ${
-                        state === 'active' ? 'text-red-200' : ''
-                      }`}>
+                    {/* Title Overlay */}
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="text-lg font-semibold text-white group-hover:text-primary-glow transition-colors">
                         {area.title}
                       </h3>
                     </div>
+                  </div>
+
+                  {/* Practice Info */}
+                  <div className="p-4 space-y-3">                    
+                    {/* Practice Area Tags */}
+                    <div className="flex flex-wrap gap-1">
+                      {tags.slice(0, 2).map((tag) => (
+                        <span 
+                          key={tag}
+                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    {/* CTA */}
+                    <Link
+                      to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                      className="ghost-button w-full justify-center"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      Learn More
+                    </Link>
                   </div>
                 </div>
               );
@@ -715,6 +834,19 @@ const PracticeAreasReference: React.FC = () => {
           </div>
         </div>
 
+        
+        {/* Call to Action */}
+        <div className="text-center mt-16">
+          <button className="hero-button text-lg px-8 py-4">
+            Free Case Evaluation
+            <svg width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+            </svg>
+          </button>
+          <p className="text-sm text-muted-foreground mt-4">
+            No fees unless we win your case
+          </p>
+        </div>
       </div>
 
       {/* Accessibility */}

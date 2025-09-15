@@ -1,16 +1,71 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight } from 'lucide-react';
+import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import heroImage from '@/assets/mesothelioma-hero.jpg';
 
 const MesotheliomaAsbestos: React.FC = () => {
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+
+  const faqs = [
+    {
+      question: "What Can a California Mesothelioma Lawyer Do for Me?",
+      answer: "A lawyer can help you understand your rights after a mesothelioma diagnosis in addition to negotiating with insurance companies and asbestos companies on your behalf and providing representation if your case goes to court. Insurance companies do not want to pay you anything beyond the bare minimum and they will employ every trick that they know to protect their own interests. Experienced lawyers understand how these businesses operate and will fight to make sure that you receive the compensation you deserve."
+    },
+    {
+      question: "How Much Does It Cost to Hire a Mesothelioma Attorney?",
+      answer: "We work on a contingency fee basis. That means you pay us no money until we win your case. We only get paid when you receive your settlement check or court award."
+    },
+    {
+      question: "What Should I Do After a Mesothelioma Diagnosis?",
+      answer: "Seek immediate medical treatment from specialists experienced in mesothelioma. Document your asbestos exposure history and employment records. Contact an experienced mesothelioma attorney immediately to preserve your legal rights and begin the claims process. Time is critical due to statute of limitations and the aggressive nature of the disease."
+    },
+    {
+      question: "How Long Do I Have to File a Claim After a Mesothelioma Diagnosis in California?",
+      answer: "In California, you generally have one year from diagnosis for personal injury claims and one year from death for wrongful death actions. However, even if you have time remaining, waiting is not advisable. Evidence can disappear and witnesses may become unavailable. The best way to guarantee that you protect your rights is to call a lawyer who has experience handling California mesothelioma cases as soon as possible."
+    },
+    {
+      question: "How Long Does a California Mesothelioma Case Take?",
+      answer: "There is no set timeline for mesothelioma lawsuits, though they tend to take between several months and two years. Keep in mind that every case is different and the length of time depends on the cooperation of defendants, the presence of appeals, and whether the case goes to trial. Many cases settle out of court. Calling an experienced attorney soon after diagnosis is the best way to receive compensation as quickly as possible."
+    },
+    {
+      question: "How Much Is My Mesothelioma Case Worth?",
+      answer: "Mesothelioma settlement amounts are dictated by a variety of factors including the extent of the illness, medical expenses, pain and suffering, as well as lost wages and earning capacity. California mesothelioma settlements and verdicts have ranged from hundreds of thousands to tens of millions of dollars. Insurance companies will often offer much less than what you may be entitled to. It is essential that you speak with an attorney to ensure you are getting the maximum compensation possible."
+    }
+  ];
+
+  const relatedCases = [
+    {
+      title: "Asbestos Exposure",
+      image: "/api/placeholder/300/200"
+    },
+    {
+      title: "Lung Cancer Claims", 
+      image: "/api/placeholder/300/200"
+    },
+    {
+      title: "Occupational Disease",
+      image: "/api/placeholder/300/200"
+    },
+    {
+      title: "Wrongful Death",
+      image: "/api/placeholder/300/200"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section with Background */}
-      <section className="relative bg-gradient-to-br from-slate-900 to-slate-700 text-white py-20">
-        <div className="absolute inset-0 bg-black/30" />
+      {/* Hero Section with Background Image */}
+      <section 
+        className="relative bg-gradient-to-br from-slate-900 to-slate-700 text-white py-20"
+        style={{
+          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.8), rgba(51, 65, 85, 0.8)), url(${heroImage})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="relative z-10 max-w-7xl mx-auto px-8">
           <div className="max-w-2xl">
             <h1 className="text-6xl font-bold mb-6 leading-tight">
@@ -78,9 +133,9 @@ const MesotheliomaAsbestos: React.FC = () => {
               <div id="steps" className="mb-16">
                 <h2 className="text-3xl font-bold mb-8">What to Do After a Mesothelioma Diagnosis</h2>
                 <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="bg-white shadow-lg">
-                    <div className="relative h-48 bg-gradient-to-br from-red-500 to-red-700 rounded-t-lg flex items-center justify-center">
-                      <div className="text-white">
+                  <Card className="bg-white shadow-lg overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-red-500 to-red-700 flex items-center justify-center">
+                      <div className="text-white text-center">
                         <div className="text-lg font-bold mb-2">Step 1</div>
                         <div className="text-2xl font-bold">Contact</div>
                         <div className="text-2xl font-bold">Mesothelioma</div>
@@ -88,27 +143,27 @@ const MesotheliomaAsbestos: React.FC = () => {
                       </div>
                     </div>
                   </Card>
-                  <Card className="bg-white shadow-lg">
-                    <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 rounded-t-lg flex items-center justify-center">
-                      <div className="text-white">
+                  <Card className="bg-white shadow-lg overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                      <div className="text-white text-center">
                         <div className="text-lg font-bold mb-2">Step 2</div>
                         <div className="text-2xl font-bold">Let Us Get</div>
                         <div className="text-2xl font-bold">to Work</div>
                       </div>
                     </div>
                   </Card>
-                  <Card className="bg-white shadow-lg">
-                    <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 rounded-t-lg flex items-center justify-center">
-                      <div className="text-white">
+                  <Card className="bg-white shadow-lg overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
+                      <div className="text-white text-center">
                         <div className="text-lg font-bold mb-2">Step 3</div>
                         <div className="text-2xl font-bold">Rest, Recover,</div>
                         <div className="text-2xl font-bold">Receive Updates</div>
                       </div>
                     </div>
                   </Card>
-                  <Card className="bg-white shadow-lg">
-                    <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 rounded-t-lg flex items-center justify-center">
-                      <div className="text-white">
+                  <Card className="bg-white shadow-lg overflow-hidden">
+                    <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
+                      <div className="text-white text-center">
                         <div className="text-lg font-bold mb-2">Step 4</div>
                         <div className="text-2xl font-bold">Healing, Compensation,</div>
                         <div className="text-2xl font-bold">Peace of Mind</div>
@@ -252,6 +307,59 @@ const MesotheliomaAsbestos: React.FC = () => {
                 <div className="text-6xl font-bold text-gray-400 mb-2">over</div>
                 <div className="text-8xl font-bold text-red-600 mb-2">100,000</div>
                 <div className="text-xl text-gray-600">clients served</div>
+              </div>
+
+              {/* FAQ Section */}
+              <div id="faq" className="mb-16">
+                <h2 className="text-3xl font-bold mb-8">FAQs</h2>
+                <p className="text-gray-600 mb-8">
+                  Have questions about working with our mesothelioma attorneys? We've gathered the most common ones 
+                  to help you understand the legal process and what to expect. If you don't see your question here, 
+                  feel free to contact us. We're happy to help!
+                </p>
+                <div className="space-y-4">
+                  {faqs.map((faq, index) => (
+                    <Card key={index} className="bg-white">
+                      <CardContent className="p-0">
+                        <button
+                          className="w-full text-left p-6 flex justify-between items-center hover:bg-gray-50"
+                          onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                        >
+                          <span className="font-semibold text-gray-900 pr-4">{faq.question}</span>
+                          {expandedFaq === index ? (
+                            <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                          ) : (
+                            <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
+                          )}
+                        </button>
+                        {expandedFaq === index && (
+                          <div className="px-6 pb-6">
+                            <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </div>
+
+              {/* Related Cases Section */}
+              <div id="related" className="mb-16">
+                <h2 className="text-3xl font-bold mb-8">Similar Cases</h2>
+                <div className="grid md:grid-cols-2 gap-6">
+                  {relatedCases.map((caseItem, index) => (
+                    <Card key={index} className="bg-white overflow-hidden hover:shadow-lg transition-shadow">
+                      <div className="h-48 bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center">
+                        <span className="text-white text-xl font-bold">{caseItem.title}</span>
+                      </div>
+                      <CardContent className="p-4">
+                        <Button variant="link" className="text-red-600 p-0 font-semibold">
+                          <strong>{caseItem.title}</strong> Learn More
+                        </Button>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
               </div>
             </div>
 

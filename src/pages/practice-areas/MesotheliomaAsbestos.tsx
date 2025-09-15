@@ -1,13 +1,74 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import heroImage from '@/assets/mesothelioma-hero.jpg';
+import medicalImage from '@/assets/mesothelioma-medical.jpg';
+import exposureImage from '@/assets/mesothelioma-exposure.jpg';
+import legalImage from '@/assets/mesothelioma-legal.jpg';
+import californiaImage from '@/assets/mesothelioma-california.jpg';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MesotheliomaAsbestos: React.FC = () => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const faqsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate content cards with staggered entrance
+      gsap.fromTo(cardsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 100,
+          scale: 0.8,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+
+      // Animate FAQ cards
+      gsap.fromTo(faqsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 60,
+          scale: 0.95
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: faqsRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const faqs = [
     {
@@ -76,27 +137,14 @@ const MesotheliomaAsbestos: React.FC = () => {
     }
   ];
 
-  const relatedCases = [
-    {
-      title: "Asbestos Exposure",
-      image: "/api/placeholder/300/200"
-    },
-    {
-      title: "Lung Cancer Claims", 
-      image: "/api/placeholder/300/200"
-    },
-    {
-      title: "Occupational Disease",
-      image: "/api/placeholder/300/200"
-    },
-    {
-      title: "Wrongful Death",
-      image: "/api/placeholder/300/200"
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-background">
+    <div ref={sectionRef} className="min-h-screen bg-white">
+      {/* Background Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute top-1/6 left-1/4 w-72 h-72 orb animate-float opacity-20"></div>
+        <div className="absolute bottom-1/4 right-1/6 w-56 h-56 orb-secondary animate-float-delayed opacity-25"></div>
+      </div>
+
       {/* Hero Section with Background Image */}
       <section 
         className="relative bg-gradient-to-br from-slate-900 to-slate-700 text-white py-20"
@@ -146,166 +194,218 @@ const MesotheliomaAsbestos: React.FC = () => {
       </section>
 
       {/* Main Content Layout */}
-      <section className="py-16 px-8 bg-background">
+      <section className="py-24 px-8 relative z-10">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Main Content - 2 Columns */}
             <div className="lg:col-span-2">
-              {/* Important to Know Section */}
-              <div id="important" className="mb-16">
-                <Card className="glass-card p-8">
-                  <h2 className="text-4xl font-bold text-primary mb-8">Important to Know About Mesothelioma Claims</h2>
-                  <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                    <p>
-                      <strong>Mesothelioma is a devastating cancer caused exclusively by asbestos exposure</strong>, often developing 20-50 years after initial contact with asbestos fibers. This aggressive cancer affects the protective lining of the lungs, heart, or abdomen, with most patients facing a prognosis of 12-21 months after diagnosis. The long latency period means many victims are now being diagnosed from exposures that occurred decades ago in shipyards, construction sites, military service, refineries, power plants, and even from household products containing asbestos.
-                    </p>
-                    <p>
-                      <strong>California has some of the most favorable laws in the nation for asbestos victims</strong>, with extended statutes of limitations and strong legal precedents supporting compensation claims. Unlike many states, California allows victims to pursue claims against multiple defendants simultaneously, accessing various compensation sources including asbestos bankruptcy trust funds (over $30 billion available nationwide), personal injury lawsuits against solvent companies, workers' compensation benefits, and VA benefits for veterans.
-                    </p>
-                    <p>
-                      <strong>Time is critical in mesothelioma cases</strong> - not just legally, but practically. California law provides a one-year statute of limitations from diagnosis for personal injury claims and one year from death for wrongful death claims. However, the aggressive nature of mesothelioma means we must act swiftly to preserve testimony, gather evidence, and secure compensation while you can still benefit from it.
-                    </p>
-                    <p>
-                      <strong>As a former insurance defense attorney, Anatolii Trembach brings unique insights</strong> to fighting for mesothelioma victims. Having seen firsthand how insurance companies and corporate defendants minimize claims and deny responsibility, he now uses that knowledge to anticipate and counter their tactics. This insider perspective allows us to build stronger cases, identify hidden insurance coverage, and maximize compensation by understanding exactly how the defense will try to limit your recovery.
-                    </p>
-                    <p>
-                      <strong>Multiple exposure sources often mean multiple avenues for compensation</strong>. Many mesothelioma victims were exposed to asbestos from various sources throughout their careers - different job sites, multiple employers, various asbestos-containing products. Each exposure source represents a potential claim for compensation. We thoroughly investigate your entire work and exposure history, identifying every company that may bear responsibility.
-                    </p>
-                    <p>
-                      <strong>Your choice of legal representation can dramatically impact your compensation</strong>. While many law firms handle mesothelioma cases, not all have the resources, knowledge, and determination to maximize your recovery. You need attorneys who understand the complex medical evidence, have relationships with leading mesothelioma specialists, know how to navigate the asbestos trust fund system, and are prepared to take cases to trial when necessary.
-                    </p>
+              {/* Content Cards Grid */}
+              <div ref={cardsRef} className="space-y-8">
+                {/* Important to Know Section */}
+                <div id="important" className="glass-card group hover-glow-primary overflow-hidden">
+                  <div className="relative overflow-hidden aspect-video">
+                    <img 
+                      src={medicalImage}
+                      alt="Medical professionals examining mesothelioma cases"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                </Card>
-              </div>
-
-              {/* Steps to Take Section */}
-              <div id="steps" className="mb-16">
-                <h2 className="text-4xl font-bold text-primary mb-8">What to Do After a Mesothelioma Diagnosis</h2>
-                <div className="grid md:grid-cols-2 gap-6">
-                  <Card className="glass-card overflow-hidden">
-                    <div className="relative h-48 bg-gradient-primary flex items-center justify-center">
-                      <div className="text-primary-foreground text-center">
-                        <div className="text-lg font-bold mb-2">Step 1</div>
-                        <div className="text-2xl font-bold">Contact</div>
-                        <div className="text-2xl font-bold">Mesothelioma</div>
-                        <div className="text-2xl font-bold">Lawyers</div>
-                      </div>
+                  <div className="p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">Important to Know About Mesothelioma Claims</h2>
+                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
+                      <p>
+                        <strong>Mesothelioma is a devastating cancer caused exclusively by asbestos exposure</strong>, often developing 20-50 years after initial contact with asbestos fibers. This aggressive cancer affects the protective lining of the lungs, heart, or abdomen, with most patients facing a prognosis of 12-21 months after diagnosis. The long latency period means many victims are now being diagnosed from exposures that occurred decades ago in shipyards, construction sites, military service, refineries, power plants, and even from household products containing asbestos.
+                      </p>
+                      <p>
+                        <strong>California has some of the most favorable laws in the nation for asbestos victims</strong>, with extended statutes of limitations and strong legal precedents supporting compensation claims. Unlike many states, California allows victims to pursue claims against multiple defendants simultaneously, accessing various compensation sources including asbestos bankruptcy trust funds (over $30 billion available nationwide), personal injury lawsuits against solvent companies, workers' compensation benefits, and VA benefits for veterans.
+                      </p>
+                      <p>
+                        <strong>Time is critical in mesothelioma cases</strong> - not just legally, but practically. California law provides a one-year statute of limitations from diagnosis for personal injury claims and one year from death for wrongful death claims. However, the aggressive nature of mesothelioma means we must act swiftly to preserve testimony, gather evidence, and secure compensation while you can still benefit from it.
+                      </p>
+                      <p>
+                        <strong>As a former insurance defense attorney, Anatolii Trembach brings unique insights</strong> to fighting for mesothelioma victims. Having seen firsthand how insurance companies and corporate defendants minimize claims and deny responsibility, he now uses that knowledge to anticipate and counter their tactics. This insider perspective allows us to build stronger cases, identify hidden insurance coverage, and maximize compensation by understanding exactly how the defense will try to limit your recovery.
+                      </p>
+                      <p>
+                        <strong>Multiple exposure sources often mean multiple avenues for compensation</strong>. Many mesothelioma victims were exposed to asbestos from various sources throughout their careers - different job sites, multiple employers, various asbestos-containing products. Each exposure source represents a potential claim for compensation. We thoroughly investigate your entire work and exposure history, identifying every company that may bear responsibility.
+                      </p>
+                      <p>
+                        <strong>Your choice of legal representation can dramatically impact your compensation</strong>. While many law firms handle mesothelioma cases, not all have the resources, knowledge, and determination to maximize your recovery. You need attorneys who understand the complex medical evidence, have relationships with leading mesothelioma specialists, know how to navigate the asbestos trust fund system, and are prepared to take cases to trial when necessary.
+                      </p>
                     </div>
-                  </Card>
-                  <Card className="glass-card overflow-hidden">
-                    <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-lg font-bold mb-2">Step 2</div>
-                        <div className="text-2xl font-bold">Let Us Get</div>
-                        <div className="text-2xl font-bold">to Work</div>
-                      </div>
+                    <div className="pt-6">
+                      <Button variant="ghost" size="sm" className="group/btn">
+                        Learn More
+                        <ArrowRight 
+                          size={14} 
+                          className="transition-transform group-hover/btn:translate-x-1" 
+                        />
+                      </Button>
                     </div>
-                  </Card>
-                  <Card className="glass-card overflow-hidden">
-                    <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-lg font-bold mb-2">Step 3</div>
-                        <div className="text-2xl font-bold">Rest, Recover,</div>
-                        <div className="text-2xl font-bold">Receive Updates</div>
-                      </div>
-                    </div>
-                  </Card>
-                  <Card className="glass-card overflow-hidden">
-                    <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
-                      <div className="text-white text-center">
-                        <div className="text-lg font-bold mb-2">Step 4</div>
-                        <div className="text-2xl font-bold">Healing, Compensation,</div>
-                        <div className="text-2xl font-bold">Peace of Mind</div>
-                      </div>
-                    </div>
-                  </Card>
+                  </div>
                 </div>
-              </div>
 
-              {/* FAQ Section */}
-              <div id="faq" className="mb-16">
-                <h2 className="text-4xl font-bold text-primary mb-8">Frequently Asked Questions</h2>
-                <div className="space-y-4">
-                  {faqs.map((faq, index) => (
-                    <Card key={index} className="glass-card overflow-hidden">
-                      <button
-                        className="w-full text-left p-6 font-semibold text-lg flex justify-between items-center hover:bg-muted/30 transition-colors"
-                        onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                      >
-                        <span>{faq.question}</span>
-                        {expandedFaq === index ? (
-                          <ChevronUp className="w-6 h-6 text-primary" />
-                        ) : (
-                          <ChevronDown className="w-6 h-6 text-primary" />
-                        )}
-                      </button>
-                      {expandedFaq === index && (
-                        <div className="px-6 pb-6 text-muted-foreground leading-relaxed animate-accordion-down">
-                          {faq.answer}
+                {/* Steps to Take Section */}
+                <div id="steps">
+                  <h2 className="text-4xl font-bold text-primary mb-8">What to Do After a Mesothelioma Diagnosis</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="glass-card overflow-hidden">
+                      <div className="relative h-48 bg-gradient-primary flex items-center justify-center">
+                        <div className="text-primary-foreground text-center">
+                          <div className="text-lg font-bold mb-2">Step 1</div>
+                          <div className="text-2xl font-bold">Contact</div>
+                          <div className="text-2xl font-bold">Mesothelioma</div>
+                          <div className="text-2xl font-bold">Lawyers</div>
                         </div>
-                      )}
+                      </div>
                     </Card>
-                  ))}
+                    <Card className="glass-card overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="text-lg font-bold mb-2">Step 2</div>
+                          <div className="text-2xl font-bold">Let Us Get</div>
+                          <div className="text-2xl font-bold">to Work</div>
+                        </div>
+                      </div>
+                    </Card>
+                    <Card className="glass-card overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="text-lg font-bold mb-2">Step 3</div>
+                          <div className="text-2xl font-bold">Rest, Recover,</div>
+                          <div className="text-2xl font-bold">Receive Updates</div>
+                        </div>
+                      </div>
+                    </Card>
+                    <Card className="glass-card overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
+                        <div className="text-white text-center">
+                          <div className="text-lg font-bold mb-2">Step 4</div>
+                          <div className="text-2xl font-bold">Healing, Compensation,</div>
+                          <div className="text-2xl font-bold">Peace of Mind</div>
+                        </div>
+                      </div>
+                    </Card>
+                  </div>
                 </div>
-              </div>
 
-              {/* Damages Section */}
-              <div id="damages" className="mb-16">
-                <Card className="glass-card p-8">
-                  <h2 className="text-4xl font-bold text-primary mb-8">What Are Common Damages from Mesothelioma?</h2>
-                  <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                    <p>
-                      <strong>Extensive Medical Expenses:</strong> Mesothelioma treatment costs are staggering, often exceeding $400,000 in the first year alone. These expenses include specialized oncology consultations, surgery (including complex procedures like pleurectomy or extrapleural pneumonectomy), chemotherapy with drugs like Alimta and cisplatin, radiation therapy, immunotherapy treatments, hospital stays, home health care, hospice services, and experimental treatments or clinical trials. Many patients require multiple rounds of treatment as the disease progresses.
-                    </p>
-                    <p>
-                      <strong>Lost Income and Earning Capacity:</strong> Mesothelioma's devastating impact on physical capability means most patients cannot continue working after diagnosis. We calculate comprehensive economic losses including current lost wages, future income you would have earned until retirement, lost benefits (health insurance, retirement contributions, pension), reduced earning capacity if you can return to limited work, and loss of household services value.
-                    </p>
-                    <p>
-                      <strong>Physical Pain and Suffering:</strong> Mesothelioma causes severe physical suffering that deserves significant compensation. The cancer causes chest pain, difficulty breathing, chronic coughing, fatigue, and eventually organ failure. Treatment side effects including nausea, weakness, and surgical recovery add to physical suffering. California law recognizes that physical pain and suffering often represents the largest component of damages in mesothelioma cases.
-                    </p>
-                    <p>
-                      <strong>Emotional and Psychological Distress:</strong> Beyond physical pain, mesothelioma inflicts profound emotional suffering on victims and families. The psychological impact includes anxiety about the future, depression from lost independence, fear of leaving family behind, anger at preventable exposure, and grief over shortened life expectancy. Many patients require psychological counseling or psychiatric medication.
-                    </p>
-                    <p>
-                      <strong>Family Impact and Loss of Consortium:</strong> Mesothelioma doesn't just affect the patient - entire families suffer. Spouses lose companionship, children lose parental guidance, and grandchildren lose relationships with grandparents. California law allows spouses to recover for loss of consortium - the loss of love, companionship, comfort, care, assistance, protection, affection, society, and moral support.
-                    </p>
+                {/* FAQ Section */}
+                <div id="faq">
+                  <h2 className="text-4xl font-bold text-primary mb-8">Frequently Asked Questions</h2>
+                  <div ref={faqsRef} className="space-y-4">
+                    {faqs.map((faq, index) => (
+                      <Card key={index} className="glass-card overflow-hidden">
+                        <button
+                          className="w-full text-left p-6 font-semibold text-lg flex justify-between items-center hover:bg-muted/30 transition-colors"
+                          onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                        >
+                          <span>{faq.question}</span>
+                          {expandedFaq === index ? (
+                            <ChevronUp className="w-6 h-6 text-primary" />
+                          ) : (
+                            <ChevronDown className="w-6 h-6 text-primary" />
+                          )}
+                        </button>
+                        {expandedFaq === index && (
+                          <div className="px-6 pb-6 text-muted-foreground leading-relaxed animate-accordion-down">
+                            {faq.answer}
+                          </div>
+                        )}
+                      </Card>
+                    ))}
                   </div>
-                </Card>
-              </div>
+                </div>
 
-              {/* California Exposure Sites Section */}
-              <div id="exposure-sites" className="mb-16">
-                <Card className="glass-card p-8">
-                  <h2 className="text-4xl font-bold text-primary mb-8">California Asbestos Exposure Sites & Information</h2>
-                  <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                    <p>
-                      <strong>California's extensive industrial history has created widespread asbestos exposure risks</strong> throughout the state. Major exposure sites include:
-                    </p>
-                    <p>
-                      <strong>Shipyards and Naval Facilities:</strong> Mare Island Naval Shipyard (Vallejo), Long Beach Naval Shipyard, San Francisco Naval Shipyard at Hunters Point, San Diego Naval Base, and numerous private shipyards exposed thousands of workers to asbestos in ship construction, repair, and maintenance. Naval vessels were floating asbestos repositories with insulation, gaskets, valves, and equipment containing deadly fibers.
-                    </p>
-                    <p>
-                      <strong>Oil Refineries and Chemical Plants:</strong> California's massive petroleum industry created extensive exposure at facilities including Chevron (Richmond, El Segundo), Shell (Martinez, Wilmington), ExxonMobil (Torrance), Phillips 66 (multiple locations), and ARCO facilities. Refinery workers, pipefitters, and maintenance personnel encountered asbestos in pipe insulation, gaskets, valves, and heat-resistant equipment throughout these facilities.
-                    </p>
-                    <p>
-                      <strong>Power Plants and Utilities:</strong> Pacific Gas & Electric, Southern California Edison, and municipal power plants throughout California used asbestos extensively in boilers, turbines, generators, and insulation. Power plant workers, including those at Moss Landing, Huntington Beach, and San Onofre, faced daily exposure to asbestos dust during maintenance and operations.
-                    </p>
-                    <p>
-                      <strong>Construction and Building Trades:</strong> California's construction boom from the 1940s through 1980s meant widespread asbestos use in schools, hospitals, office buildings, and homes. Major projects like downtown Los Angeles high-rises, San Francisco's financial district, Silicon Valley tech campuses, and residential developments throughout Southern California all used asbestos-containing materials extensively.
-                    </p>
-                    <p>
-                      <strong>Aerospace and Defense Industries:</strong> Boeing, Lockheed Martin, Northrop Grumman, and other aerospace companies exposed workers at facilities throughout Southern California. Aircraft manufacturing used asbestos in brakes, heat shields, and insulation, creating exposure for thousands of aerospace workers who built California's defense industry.
-                    </p>
-                    <p>
-                      <strong>Transportation and Automotive:</strong> Railroad workers at Southern Pacific, Union Pacific, and Santa Fe facilities encountered asbestos in locomotives, brake shoes, and rail yard buildings. Automotive workers at General Motors (Fremont), Ford (Pico Rivera), and numerous repair facilities faced exposure from brake and clutch work.
-                    </p>
+                {/* Damages Section */}
+                <div id="damages" className="glass-card group hover-glow-primary overflow-hidden">
+                  <div className="relative overflow-hidden aspect-video">
+                    <img 
+                      src={legalImage}
+                      alt="Legal documents and compensation information"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   </div>
-                </Card>
-              </div>
+                  <div className="p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">What Are Common Damages from Mesothelioma?</h2>
+                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
+                      <p>
+                        <strong>Extensive Medical Expenses:</strong> Mesothelioma treatment costs are staggering, often exceeding $400,000 in the first year alone. These expenses include specialized oncology consultations, surgery (including complex procedures like pleurectomy or extrapleural pneumonectomy), chemotherapy with drugs like Alimta and cisplatin, radiation therapy, immunotherapy treatments, hospital stays, home health care, hospice services, and experimental treatments or clinical trials. Many patients require multiple rounds of treatment as the disease progresses.
+                      </p>
+                      <p>
+                        <strong>Lost Income and Earning Capacity:</strong> Mesothelioma's devastating impact on physical capability means most patients cannot continue working after diagnosis. We calculate comprehensive economic losses including current lost wages, future income you would have earned until retirement, lost benefits (health insurance, retirement contributions, pension), reduced earning capacity if you can return to limited work, and loss of household services value.
+                      </p>
+                      <p>
+                        <strong>Physical Pain and Suffering:</strong> Mesothelioma causes severe physical suffering that deserves significant compensation. The cancer causes chest pain, difficulty breathing, chronic coughing, fatigue, and eventually organ failure. Treatment side effects including nausea, weakness, and surgical recovery add to physical suffering. California law recognizes that physical pain and suffering often represents the largest component of damages in mesothelioma cases.
+                      </p>
+                      <p>
+                        <strong>Emotional and Psychological Distress:</strong> Beyond physical pain, mesothelioma inflicts profound emotional suffering on victims and families. The psychological impact includes anxiety about the future, depression from lost independence, fear of leaving family behind, anger at preventable exposure, and grief over shortened life expectancy. Many patients require psychological counseling or psychiatric medication.
+                      </p>
+                      <p>
+                        <strong>Family Impact and Loss of Consortium:</strong> Mesothelioma doesn't just affect the patient - entire families suffer. Spouses lose companionship, children lose parental guidance, and grandchildren lose relationships with grandparents. California law allows spouses to recover for loss of consortium - the loss of love, companionship, comfort, care, assistance, protection, affection, society, and moral support.
+                      </p>
+                    </div>
+                    <div className="pt-6">
+                      <Button variant="ghost" size="sm" className="group/btn">
+                        Calculate Damages
+                        <ArrowRight 
+                          size={14} 
+                          className="transition-transform group-hover/btn:translate-x-1" 
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
 
-              {/* Contact Section */}
-              <div id="contact" className="mb-16">
-                <Card className="glass-card p-8 bg-gradient-primary text-primary-foreground">
+                {/* California Exposure Sites Section */}
+                <div id="exposure-sites" className="glass-card group hover-glow-primary overflow-hidden">
+                  <div className="relative overflow-hidden aspect-video">
+                    <img 
+                      src={californiaImage}
+                      alt="California landmarks and industrial exposure sites"
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="p-8">
+                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">California Asbestos Exposure Sites & Information</h2>
+                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
+                      <p>
+                        <strong>California's extensive industrial history has created widespread asbestos exposure risks</strong> throughout the state. Major exposure sites include:
+                      </p>
+                      <p>
+                        <strong>Shipyards and Naval Facilities:</strong> Mare Island Naval Shipyard (Vallejo), Long Beach Naval Shipyard, San Francisco Naval Shipyard at Hunters Point, San Diego Naval Base, and numerous private shipyards exposed thousands of workers to asbestos in ship construction, repair, and maintenance. Naval vessels were floating asbestos repositories with insulation, gaskets, valves, and equipment containing deadly fibers.
+                      </p>
+                      <p>
+                        <strong>Oil Refineries and Chemical Plants:</strong> California's massive petroleum industry created extensive exposure at facilities including Chevron (Richmond, El Segundo), Shell (Martinez, Wilmington), ExxonMobil (Torrance), Phillips 66 (multiple locations), and ARCO facilities. Refinery workers, pipefitters, and maintenance personnel encountered asbestos in pipe insulation, gaskets, valves, and heat-resistant equipment throughout these facilities.
+                      </p>
+                      <p>
+                        <strong>Power Plants and Utilities:</strong> Pacific Gas & Electric, Southern California Edison, and municipal power plants throughout California used asbestos extensively in boilers, turbines, generators, and insulation. Power plant workers, including those at Moss Landing, Huntington Beach, and San Onofre, faced daily exposure to asbestos dust during maintenance and operations.
+                      </p>
+                      <p>
+                        <strong>Construction and Building Trades:</strong> California's construction boom from the 1940s through 1980s meant widespread asbestos use in schools, hospitals, office buildings, and homes. Major projects like downtown Los Angeles high-rises, San Francisco's financial district, Silicon Valley tech campuses, and residential developments throughout Southern California all used asbestos-containing materials extensively.
+                      </p>
+                      <p>
+                        <strong>Aerospace and Defense Industries:</strong> Boeing, Lockheed Martin, Northrop Grumman, and other aerospace companies exposed workers at facilities throughout Southern California. Aircraft manufacturing used asbestos in brakes, heat shields, and insulation, creating exposure for thousands of aerospace workers who built California's defense industry.
+                      </p>
+                      <p>
+                        <strong>Transportation and Automotive:</strong> Railroad workers at Southern Pacific, Union Pacific, and Santa Fe facilities encountered asbestos in locomotives, brake shoes, and rail yard buildings. Automotive workers at General Motors (Fremont), Ford (Pico Rivera), and numerous repair facilities faced exposure from brake and clutch work.
+                      </p>
+                    </div>
+                    <div className="pt-6">
+                      <Button variant="ghost" size="sm" className="group/btn">
+                        View Exposure Map
+                        <ArrowRight 
+                          size={14} 
+                          className="transition-transform group-hover/btn:translate-x-1" 
+                        />
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Contact Section */}
+                <div id="contact" className="glass-card p-8 bg-gradient-primary text-primary-foreground">
                   <h2 className="text-4xl font-bold mb-6">Contact California's Aggressive Mesothelioma Advocates</h2>
                   <p className="text-xl mb-4">Former defense attorney now fighting for victims' rights. We know their tactics. We know how to win.</p>
                   <div className="text-4xl font-bold mb-4">855-TREMBACH-WINS</div>
@@ -319,7 +419,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <Button size="lg" variant="secondary" className="font-bold text-lg">
                     CALL NOW FOR FREE CONSULTATION
                   </Button>
-                </Card>
+                </div>
               </div>
             </div>
 

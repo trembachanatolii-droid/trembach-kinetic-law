@@ -51,19 +51,19 @@ const Navigation = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#practice-areas" className="text-foreground hover:text-primary transition-colors font-medium">
+          <a href="#practice-areas" className="text-white hover:text-primary transition-colors font-medium">
             Practice Areas
           </a>
-          <a href="#results" className="text-foreground hover:text-primary transition-colors font-medium">
+          <a href="#results" className="text-white hover:text-primary transition-colors font-medium">
             Results
           </a>
-          <a href="#about" className="text-foreground hover:text-primary transition-colors font-medium">
+          <a href="#about" className="text-white hover:text-primary transition-colors font-medium">
             About
           </a>
-          <a href="#locations" className="text-foreground hover:text-primary transition-colors font-medium">
+          <a href="#locations" className="text-white hover:text-primary transition-colors font-medium">
             Locations
           </a>
-          <a href="#contact" className="text-foreground hover:text-primary transition-colors font-medium">
+          <a href="#contact" className="text-white hover:text-primary transition-colors font-medium">
             Contact
           </a>
         </div>

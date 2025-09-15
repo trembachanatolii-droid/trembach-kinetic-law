@@ -11,6 +11,7 @@ import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import CarAccidents from "./pages/practice-areas/CarAccidents";
 import TruckAccidents from "./pages/practice-areas/TruckAccidents";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
+import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
           <Route path="/practice-areas/car-accidents" element={<CarAccidents />} />
           <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidents />} />
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
+          <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
           <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

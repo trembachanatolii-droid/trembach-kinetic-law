@@ -1,6 +1,12 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import PracticeAreaTemplate from '@/components/PracticeAreaTemplate';
+import { Routes, Route } from 'react-router-dom';
+import CarAccidents from './CarAccidents';
+import TruckAccidents from './TruckAccidents';
+import MedicalMalpractice from './MedicalMalpractice';
+import MesotheliomaAsbestos from './MesotheliomaAsbestos';
+import ComingSoon from './ComingSoon';
 
 const PracticeAreaRouter = () => {
   const location = useLocation();

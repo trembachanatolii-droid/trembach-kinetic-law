@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -578,13 +579,13 @@ const PracticeAreasReference: React.FC = () => {
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                       className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-500 transform-gpu ${
-                        state === 'active'
-                          ? 'scale-110 shadow-2xl border-red-500/50 ring-4 ring-red-500/40 z-10' 
-                          : state === 'hovered'
-                          ? 'scale-105 shadow-2xl border-red-400/50 ring-2 ring-red-400/30 z-10'
-                          : 'border-gray-200 hover:scale-105 hover:shadow-xl hover:ring-2 hover:ring-red-300/20'
-                      }`}
+                        className={`group relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-500 transform-gpu ${
+                         state === 'active'
+                           ? 'scale-[1.18] shadow-2xl border-red-500/50 ring-4 ring-red-500/40 z-10' 
+                           : state === 'hovered'
+                           ? 'scale-[1.12] shadow-2xl border-red-400/50 ring-2 ring-red-400/30 z-10'
+                           : 'border-gray-200 hover:scale-[1.12] hover:shadow-xl hover:ring-2 hover:ring-red-300/20'
+                       }`}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
                       onClick={() => handleAreaClick(area.id)}
@@ -618,20 +619,20 @@ const PracticeAreasReference: React.FC = () => {
                             }`}>
                               {area.title}
                             </h3>
-                            <a
-                              href={`/practice-areas/${area.slug}`}
-                              className={`inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-300 transform ${
-                                state === 'hovered' || state === 'active'
-                                  ? 'bg-red-600 text-white shadow-2xl scale-110 shadow-red-600/30'
-                                  : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-110 hover:shadow-red-600/30'
-                              }`}
-                              onClick={(e) => e.stopPropagation()}
-                            >
+                             <Link
+                               to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                               className={`inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-300 transform ${
+                                 state === 'hovered' || state === 'active'
+                                   ? 'bg-red-600 text-white shadow-2xl scale-[1.18] shadow-red-600/30'
+                                   : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-[1.18] hover:shadow-red-600/30'
+                               }`}
+                               onClick={(e) => e.stopPropagation()}
+                             >
                               Learn More
                               <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover:translate-x-1">
                                 <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
                               </svg>
-                            </a>
+                            </Link>
                           </div>
                         </div>
                       </div>

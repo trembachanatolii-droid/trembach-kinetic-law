@@ -425,7 +425,7 @@ const PracticeAreasReference: React.FC = () => {
   const defaultArea = practiceAreas.find(area => area.id === "mesothelioma-asbestos") || practiceAreas[0];
   const [activeArea, setActiveArea] = useState<PracticeArea>(defaultArea);
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
-  const [lockedArea, setLockedArea] = useState<string>(defaultArea.id);
+  const [lockedArea, setLockedArea] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 

@@ -567,8 +567,8 @@ const PracticeAreasReference: React.FC = () => {
 
           {/* Right Content Area - Image Grid */}
           <div className="flex-1 relative">
-            <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="grid grid-cols-3 gap-4">
+            <div className="h-[700px] overflow-y-auto bg-gray-50 p-4">
+              <div className="grid grid-cols-2 xl:grid-cols-3 gap-3 max-h-full">
                 {practiceAreas.map((area, index) => {
                   const state = getItemState(area.id);
                   
@@ -576,43 +576,55 @@ const PracticeAreasReference: React.FC = () => {
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                      className={`relative bg-white rounded-xl overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
+                      className={`group relative bg-white rounded-lg overflow-hidden shadow-md border cursor-pointer transition-all duration-300 transform-gpu ${
                         state === 'active'
-                          ? 'scale-105 shadow-2xl border-red-500/50 ring-2 ring-red-500/30' 
+                          ? 'scale-105 shadow-2xl border-red-500/50 ring-2 ring-red-500/30 z-10' 
                           : state === 'hovered'
-                          ? 'scale-[1.02] shadow-xl border-red-300/30'
-                          : 'border-gray-200 hover:scale-[1.01] hover:shadow-lg'
+                          ? 'scale-[1.03] shadow-xl border-red-300/30 z-[5]'
+                          : 'border-gray-200 hover:scale-[1.02] hover:shadow-lg'
                       }`}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
                       onClick={() => handleAreaClick(area.id)}
                     >
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative h-40 sm:h-44 overflow-hidden">
                         {/* Background Image */}
-                        <div 
-                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
-                          style={{ 
-                            backgroundImage: `url(${area.image})`,
-                            transform: state === 'hovered' ? 'scale(1.1)' : 'scale(1)'
-                          }}
+                        <img 
+                          src={area.image}
+                          alt={area.title}
+                          className={`absolute inset-0 w-full h-full object-cover transition-all duration-500 ${
+                            state === 'hovered' ? 'scale-110' : 'scale-100'
+                          }`}
+                          loading="lazy"
                         />
                         
-                        {/* Overlay */}
-                        <div className={`absolute inset-0 transition-all duration-500 ${
+                        {/* Gradient Overlay */}
+                        <div className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-all duration-300 ${
                           state === 'active'
-                            ? 'bg-black/40' 
+                            ? 'from-red-900/80 via-black/30' 
                             : state === 'hovered'
-                            ? 'bg-black/30' 
-                            : 'bg-black/50'
+                            ? 'from-black/70 via-black/10' 
+                            : 'from-black/60 via-black/20'
                         }`} />
                         
                         {/* Title */}
-                        <div className="relative z-10 p-3 h-full flex items-end">
-                          <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
-                            state === 'active' ? 'text-red-200' : ''
+                        <div className="absolute bottom-0 left-0 right-0 p-3">
+                          <h3 className={`font-semibold text-white text-sm sm:text-base leading-tight transition-all duration-300 ${
+                            state === 'active' ? 'text-red-100 transform translate-y-0' : 'group-hover:transform group-hover:-translate-y-0.5'
                           }`}>
                             {area.title}
                           </h3>
+                        </div>
+
+                        {/* Learn More Button - appears on hover */}
+                        <div className={`absolute top-3 right-3 transition-all duration-300 ${
+                          state === 'hovered' || state === 'active' 
+                            ? 'opacity-100 transform translate-y-0' 
+                            : 'opacity-0 transform translate-y-2'
+                        }`}>
+                          <div className="bg-red-600 text-white text-xs px-2 py-1 rounded-full font-medium">
+                            View Details
+                          </div>
                         </div>
                       </div>
                     </div>

@@ -527,12 +527,22 @@ const PracticeAreasReference: React.FC = () => {
         <div className="hidden lg:flex">
           {/* Left Sidebar - Practice Area Links */}
           <div className="w-80 bg-gray-900 min-h-[700px] relative">
-            {/* Red accent line */}
-            <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-600"></div>
+            {/* Vertical white line running down the left side */}
+            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-white"></div>
+            
+            {/* Red circular marker at bottom of line */}
+            <div className="absolute left-3 bottom-8 w-2 h-2 bg-red-600 rounded-full"></div>
+            
+            {/* Header with blue background */}
+            <div className="bg-blue-600 px-8 py-6">
+              <h3 className="text-xl font-bold text-white">
+                Our Practice Areas
+              </h3>
+            </div>
             
             {/* Navigation Links */}
-            <div className="p-8 pt-12">
-              <nav className="space-y-1">
+            <div className="px-8 py-6">
+              <nav className="space-y-1 max-h-[600px] overflow-y-auto">
                 {practiceAreas.map((area) => {
                   const state = getItemState(area.id);
                   return (
@@ -541,12 +551,10 @@ const PracticeAreasReference: React.FC = () => {
                       onClick={() => handleAreaClick(area.id)}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white ${
+                      className={`w-full text-left py-3 px-4 text-sm font-medium transition-colors duration-200 hover:bg-gray-800 block ${
                         state === 'active'
-                          ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
-                          : state === 'hovered'
-                          ? 'text-red-400 bg-gray-800/50'
-                          : 'text-gray-300 hover:text-white'
+                          ? 'text-red-500'
+                          : 'text-white hover:text-red-400'
                       }`}
                     >
                       {area.title}

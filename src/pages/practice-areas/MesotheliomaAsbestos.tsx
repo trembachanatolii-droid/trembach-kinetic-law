@@ -77,7 +77,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <Star key={i} className="w-6 h-6 fill-current" />
                 ))}
               </div>
-              <span className="ml-3 text-xl">Backed by Decades of Experience</span>
+              <span className="ml-3 text-xl">Inside Knowledge of Secret Defense Strategies and Software</span>
             </div>
             <Button 
               size="lg" 

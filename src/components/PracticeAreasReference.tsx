@@ -658,9 +658,6 @@ const PracticeAreasReference: React.FC = () => {
           {/* Left Sidebar - Practice Area Links */}
           <div ref={sidebarRef} className="w-72 glass-card h-fit relative">
             
-            {/* Glowing marker */}
-            <div className="absolute left-3 bottom-8 w-2 h-2 bg-primary rounded-full animate-pulse-glow"></div>
-            
             {/* Header with gradient background */}
             <div className="bg-gradient-primary px-8 py-6 rounded-t-2xl">
               <h3 className="text-xl font-bold text-primary-foreground">

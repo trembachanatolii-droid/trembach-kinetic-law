@@ -570,7 +570,7 @@ const PracticeAreasReference: React.FC = () => {
           {/* Right Content Area - Image Grid */}
           <div className="flex-1 relative">
             <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="grid grid-cols-2 xl:grid-cols-3 gap-4 auto-rows-[9rem] sm:auto-rows-[10rem]">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-[9rem] sm:auto-rows-[10rem]">
                 {practiceAreas.map((area, index) => {
                   const state = getItemState(area.id);
                   
@@ -610,15 +610,25 @@ const PracticeAreasReference: React.FC = () => {
                         }`} />
                         
                         {/* Title + CTA */}
-                        <div className="relative z-10 p-3 h-full flex items-end justify-between">
-                          <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
-                            state === 'active' ? 'text-red-200' : ''
-                          }`}>
-                            {area.title}
-                          </h3>
-                          <span className="ml-2 inline-flex items-center rounded-full bg-white/10 px-2 py-1 text-[11px] text-white backdrop-blur-sm group-hover:bg-white/20">
-                            View
-                          </span>
+                        <div className="relative z-10 p-3 h-full flex flex-col justify-between">
+                          <div className="flex-1"></div>
+                          <div className="flex items-center justify-between">
+                            <h3 className={`font-bold text-white text-sm leading-tight transition-all duration-300 ${
+                              state === 'active' ? 'text-red-200' : ''
+                            }`}>
+                              {area.title}
+                            </h3>
+                            <button className={`inline-flex items-center gap-1 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all duration-300 ${
+                              state === 'hovered' || state === 'active'
+                                ? 'bg-red-600 text-white shadow-lg transform scale-105'
+                                : 'bg-white/10 text-white/80 backdrop-blur-sm'
+                            } group-hover:bg-red-600 group-hover:text-white group-hover:shadow-lg group-hover:scale-105`}>
+                              Learn More
+                              <svg width="12" height="12" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover:translate-x-0.5">
+                                <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                              </svg>
+                            </button>
+                          </div>
                         </div>
                       </div>
                     </div>

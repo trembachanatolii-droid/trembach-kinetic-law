@@ -507,7 +507,46 @@ const PracticeAreasReference: React.FC = () => {
     if (areaId) {
       const area = practiceAreas.find(p => p.id === areaId);
       if (area) setActiveArea(area);
+      
+      // Add visual effects to cards
+      cardsRef.current.forEach((card, index) => {
+        if (card) {
+          const cardArea = practiceAreas[index];
+          if (cardArea?.id === areaId) {
+            // Activate the hovered card with subtle glow
+            gsap.to(card, { 
+              scale: 1.02, 
+              opacity: 1,
+              filter: 'brightness(1.1) drop-shadow(0 0 20px hsl(var(--primary) / 0.3))',
+              duration: 0.3, 
+              ease: 'power2.out' 
+            });
+          } else {
+            // Fade out other cards
+            gsap.to(card, { 
+              scale: 0.95, 
+              opacity: 0.4,
+              filter: 'brightness(0.8)',
+              duration: 0.3, 
+              ease: 'power2.out' 
+            });
+          }
+        }
+      });
     } else {
+      // Reset all cards to normal state
+      cardsRef.current.forEach((card) => {
+        if (card) {
+          gsap.to(card, { 
+            scale: 1, 
+            opacity: 1,
+            filter: 'brightness(1) drop-shadow(0 0 0px transparent)',
+            duration: 0.3, 
+            ease: 'power2.out' 
+          });
+        }
+      });
+      
       // On hover leave, revert to locked area
       const lockedAreaData = practiceAreas.find(p => p.id === lockedArea);
       if (lockedAreaData) setActiveArea(lockedAreaData);
@@ -517,7 +556,13 @@ const PracticeAreasReference: React.FC = () => {
   const handleAreaClick = (areaId: string) => {
     setLockedArea(areaId);
     const area = practiceAreas.find(p => p.id === areaId);
-    if (area) setActiveArea(area);
+    if (area) {
+      setActiveArea(area);
+      // Navigate to the practice area page
+      if (area.slug) {
+        window.location.href = `/practice-areas/${area.slug}`;
+      }
+    }
   };
 
   const getItemState = (areaId: string) => {
@@ -611,7 +656,7 @@ const PracticeAreasReference: React.FC = () => {
         {/* Desktop Layout */}
         <div className="hidden lg:flex gap-8">
           {/* Left Sidebar - Practice Area Links */}
-          <div ref={sidebarRef} className="w-80 glass-card min-h-[700px] relative">
+          <div ref={sidebarRef} className="w-72 glass-card h-fit relative">
             {/* Decorative gradient line */}
             <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-electric"></div>
             
@@ -626,8 +671,8 @@ const PracticeAreasReference: React.FC = () => {
             </div>
             
             {/* Navigation Links */}
-            <div className="px-8 py-6">
-              <nav className="space-y-1 max-h-[600px] overflow-y-auto">
+            <div className="px-6 py-4">
+              <nav className="space-y-0.5 max-h-[580px]">
                 {practiceAreas.map((area) => {
                   const state = getItemState(area.id);
                   return (
@@ -636,9 +681,11 @@ const PracticeAreasReference: React.FC = () => {
                       onClick={() => handleAreaClick(area.id)}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
-                      className={`w-full text-left py-3 px-4 text-sm font-medium rounded-lg transition-all duration-300 glass-button border-0 magnetic ${
+                      className={`w-full text-left py-2 px-3 text-xs font-medium rounded-md transition-all duration-200 glass-button border-0 magnetic hover:scale-[1.02] ${
                         state === 'active'
-                          ? 'bg-primary/20 text-primary border border-primary/30'
+                          ? 'bg-primary/20 text-primary border border-primary/30 shadow-md' 
+                          : state === 'hovered'
+                          ? 'bg-primary/15 text-primary scale-[1.02] shadow-sm'
                           : 'text-foreground hover:text-primary hover:bg-primary/10'
                       }`}
                     >

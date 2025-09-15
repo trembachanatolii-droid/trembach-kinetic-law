@@ -623,8 +623,8 @@ const PracticeAreasReference: React.FC = () => {
                                to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
                                className={`inline-flex items-center gap-1 rounded-lg px-4 py-2 text-sm font-bold transition-all duration-300 transform ${
                                  state === 'hovered' || state === 'active'
-                                   ? 'bg-red-600 text-white shadow-2xl scale-[1.18] shadow-red-600/30'
-                                   : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-[1.18] hover:shadow-red-600/30'
+                                   ? 'bg-red-600 text-white shadow-2xl scale-[1.18] shadow-red-600/30 opacity-100'
+                                   : 'bg-red-500 text-white shadow-lg hover:bg-red-600 hover:shadow-2xl hover:scale-[1.18] hover:shadow-red-600/30 opacity-0'
                                }`}
                                onClick={(e) => e.stopPropagation()}
                              >

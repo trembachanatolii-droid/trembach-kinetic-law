@@ -510,28 +510,33 @@ const PracticeAreasReference: React.FC = () => {
           </p>
         </div>
 
-        {/* Practice Areas Layout */}
-        <div className="flex">
+        {/* Practice Areas Layout - Match Reference Design */}
+        <div className="flex min-h-[700px]">
           {/* Left Sidebar - Practice Area Links */}
-          <div className="w-72 bg-gray-900 min-h-[700px] relative">
+          <div className="w-80 bg-gray-900 relative flex flex-col">
             {/* Red accent line */}
             <div className="absolute left-0 top-0 bottom-0 w-1 bg-red-600"></div>
             
+            {/* Section Title */}
+            <div className="p-6 border-b border-gray-700">
+              <h3 className="text-white font-bold text-lg">Our Practice Areas</h3>
+            </div>
+            
             {/* Navigation Links */}
-            <div className="p-6 pt-12">
-              <nav className="space-y-1">
+            <div className="flex-1 p-0">
+              <nav className="space-y-0">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area)}
                     onMouseEnter={() => handleCardHover(area.id)}
                     onMouseLeave={() => setHoveredCard(null)}
-                    className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-150 hover:bg-gray-800 hover:text-white rounded-md ${
+                    className={`w-full text-left px-6 py-4 text-sm font-medium transition-all duration-150 border-l-4 ${
                       activeArea.id === area.id 
-                        ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
+                        ? 'text-white bg-gray-800 border-red-500' 
                         : hoveredCard === area.id
-                        ? 'text-red-400 bg-gray-800/70 scale-[1.02] shadow-md'
-                        : 'text-gray-300 hover:text-white hover:scale-[1.01]'
+                        ? 'text-white bg-gray-800 border-red-400'
+                        : 'text-gray-300 hover:text-white hover:bg-gray-800 border-transparent'
                     }`}
                   >
                     {area.title}
@@ -541,83 +546,62 @@ const PracticeAreasReference: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Area - Vertical Cards Column */}
-          <div className="flex-1 relative">
-            <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
-              <div className="space-y-6">
+          {/* Right Content Area - Full Width Image Cards */}
+          <div className="flex-1 relative bg-gray-100">
+            <div className="h-[700px] overflow-y-auto">
+              <div className="space-y-0">
                 {practiceAreas.map((area, index) => {
                   const isActive = activeArea.id === area.id;
                   const isHovered = hoveredCard === area.id;
                   
-                  // Dynamic classes for card states with enhanced scale effects
-                  let cardClasses = "relative bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 transition-all duration-150 ease-out transform-gpu cursor-pointer";
-                  
-                  if (isActive) {
-                    cardClasses += " scale-[1.08] shadow-2xl border-red-500/40 ring-2 ring-red-500/30";
-                  } else if (isHovered) {
-                    cardClasses += " scale-[1.05] shadow-xl border-red-500/20";
-                  } else {
-                    cardClasses += " hover:scale-[1.02] hover:shadow-lg";
-                  }
-
                   return (
                     <div
                       key={area.id}
                       ref={el => { if (el) cardsRef.current[index] = el; }}
-                      className={cardClasses}
+                      className="relative h-48 cursor-pointer group"
                       onMouseEnter={() => handleCardHover(area.id)}
                       onMouseLeave={() => setHoveredCard(null)}
                       onClick={() => handleAreaClick(area)}
                     >
-                      <div className="relative h-48 overflow-hidden">
-                        {/* Background Image */}
-                        <div 
-                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-200 ease-out"
-                          style={{ 
-                            backgroundImage: `url(${area.image})`,
-                            transform: (isHovered || isActive) ? 'scale(1.1)' : 'scale(1)'
-                          }}
-                        />
-                        
-                        {/* Overlay */}
-                        <div className={`absolute inset-0 transition-all duration-200 ${
-                          isActive 
-                            ? 'bg-black/40' 
-                            : isHovered 
-                            ? 'bg-black/30' 
-                            : 'bg-black/60'
-                        }`} />
-                        
-                        {/* Content */}
-                        <div className="relative z-10 p-6 h-full flex flex-col justify-end">
-                          <h3 className={`font-bold text-white mb-2 transition-all duration-150 ${
-                            isActive ? 'text-2xl' : 'text-xl'
-                          }`}>
-                            {area.title}
-                          </h3>
-                          
-                          {/* Learn More Button */}
-                          <a 
-                            href={`/practice-areas/${area.slug}`}
-                            className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-150 hover:text-red-400 ${
-                              isActive ? 'text-red-400' : ''
-                            }`}
-                          >
-                            Learn More
-                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-                            </svg>
-                          </a>
-                        </div>
-                      </div>
+                      {/* Background Image */}
+                      <div 
+                        className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-300 ease-out"
+                        style={{ 
+                          backgroundImage: `url(${area.image})`,
+                          transform: (isHovered || isActive) ? 'scale(1.05)' : 'scale(1)'
+                        }}
+                      />
                       
-                      {/* Description Section */}
-                      <div className="p-6">
-                        <p className={`text-gray-700 leading-relaxed transition-all duration-150 ${
-                          isActive ? 'text-base font-medium' : 'text-sm'
+                      {/* Overlay */}
+                      <div className={`absolute inset-0 transition-all duration-300 ${
+                        isActive 
+                          ? 'bg-black/30' 
+                          : isHovered 
+                          ? 'bg-black/40' 
+                          : 'bg-black/50'
+                      }`} />
+                      
+                      {/* Content Overlay */}
+                      <div className="relative z-10 p-8 h-full flex flex-col justify-end">
+                        <h3 className={`font-bold text-white mb-3 transition-all duration-300 ${
+                          isActive || isHovered ? 'text-3xl' : 'text-2xl'
                         }`}>
-                          {area.description}
-                        </p>
+                          {area.title}
+                        </h3>
+                        
+                        {/* Learn More Button */}
+                        <a 
+                          href={`/practice-areas/${area.slug}`}
+                          className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-300 ${
+                            isActive || isHovered ? 'text-red-400 scale-110' : 'hover:text-red-400'
+                          }`}
+                          onClick={(e) => e.stopPropagation()}
+                        >
+                          Learn More
+                          <svg width="18" height="18" fill="currentColor" viewBox="0 0 256 256">
+                            <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                          </svg>
+                        </a>
                       </div>
                     </div>
                   );

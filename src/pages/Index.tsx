@@ -7,7 +7,7 @@ import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
-import PracticeAreas3D from '../components/PracticeAreas3D';
+import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -72,7 +72,7 @@ const Index = () => {
       <FeaturedResults />
 
       {/* Practice Areas */}
-      <PracticeAreas3D />
+      <PracticeAreasReference />
 
       {/* Process */}
       <Process />

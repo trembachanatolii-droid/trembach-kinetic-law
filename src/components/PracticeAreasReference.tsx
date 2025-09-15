@@ -657,8 +657,6 @@ const PracticeAreasReference: React.FC = () => {
         <div className="hidden lg:flex gap-8">
           {/* Left Sidebar - Practice Area Links */}
           <div ref={sidebarRef} className="w-72 glass-card h-fit relative">
-            {/* Decorative gradient line */}
-            <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-primary via-accent to-electric"></div>
             
             {/* Glowing marker */}
             <div className="absolute left-3 bottom-8 w-2 h-2 bg-primary rounded-full animate-pulse-glow"></div>
@@ -681,7 +679,7 @@ const PracticeAreasReference: React.FC = () => {
                       onClick={() => handleAreaClick(area.id)}
                       onMouseEnter={() => handleAreaHover(area.id)}
                       onMouseLeave={() => handleAreaHover(null)}
-                      className={`w-full text-left py-2 px-3 text-xs font-medium rounded-md transition-all duration-200 glass-button border-0 magnetic hover:scale-[1.02] ${
+                      className={`w-full text-left py-2 px-3 text-sm font-medium rounded-md transition-all duration-200 glass-button border-0 magnetic hover:scale-[1.02] ${
                         state === 'active'
                           ? 'bg-primary/20 text-primary border border-primary/30 shadow-md' 
                           : state === 'hovered'

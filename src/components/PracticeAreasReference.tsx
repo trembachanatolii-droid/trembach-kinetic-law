@@ -418,10 +418,12 @@ const practiceAreas: PracticeArea[] = [
 ];
 
 const PracticeAreasReference: React.FC = () => {
-  const [activeArea, setActiveArea] = useState<PracticeArea>(practiceAreas[0]);
-  const [isTransitioning, setIsTransitioning] = useState(false);
+  // Find Mesothelioma & Asbestos as default active
+  const defaultArea = practiceAreas.find(area => area.id === "mesothelioma-asbestos") || practiceAreas[0];
+  const [activeArea, setActiveArea] = useState<PracticeArea>(defaultArea);
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -443,38 +445,42 @@ const PracticeAreasReference: React.FC = () => {
       }
     );
 
+    // Animate cards on load
+    cardsRef.current.forEach((card, index) => {
+      if (card) {
+        gsap.fromTo(card,
+          { opacity: 0, y: 40, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.6,
+            delay: index * 0.1,
+            ease: "cubic-bezier(0.16, 1, 0.3, 1)",
+            scrollTrigger: {
+              trigger: card,
+              start: "top 90%",
+              toggleActions: "play none none reverse"
+            }
+          }
+        );
+      }
+    });
+
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   const handleAreaClick = (area: PracticeArea) => {
-    if (area.id === activeArea.id || isTransitioning) return;
-    
-    setIsTransitioning(true);
-    
-    // Fade out current content
-    if (contentRef.current) {
-      gsap.to(contentRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 0.3,
-        ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-        onComplete: () => {
-          setActiveArea(area);
-          // Fade in new content
-          gsap.fromTo(contentRef.current, 
-            { opacity: 0, y: 20 },
-            {
-              opacity: 1,
-              y: 0,
-              duration: 0.4,
-              ease: "cubic-bezier(0.16, 1, 0.3, 1)",
-              onComplete: () => setIsTransitioning(false)
-            }
-          );
-        }
-      });
+    setActiveArea(area);
+  };
+
+  const handleCardHover = (areaId: string | null) => {
+    setHoveredCard(areaId);
+    if (areaId) {
+      const area = practiceAreas.find(p => p.id === areaId);
+      if (area) setActiveArea(area);
     }
   };
 
@@ -518,9 +524,12 @@ const PracticeAreasReference: React.FC = () => {
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area)}
+                    onMouseEnter={() => handleCardHover(area.id)}
                     className={`w-full text-left px-4 py-3 text-sm font-medium transition-all duration-200 hover:bg-gray-800 hover:text-white ${
                       activeArea.id === area.id 
                         ? 'text-red-500 bg-gray-800 border-l-2 border-red-500' 
+                        : hoveredCard === area.id
+                        ? 'text-red-400 bg-gray-800/50'
                         : 'text-gray-300 hover:text-white'
                     }`}
                   >
@@ -531,37 +540,87 @@ const PracticeAreasReference: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Content Area */}
+          {/* Right Content Area - Vertical Cards Column */}
           <div className="flex-1 relative">
-            <div 
-              ref={contentRef}
-              className="relative h-[700px] bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: `url(${activeArea.image})` }}
-            >
-              {/* Dark Overlay */}
-              <div className="absolute inset-0 bg-black bg-opacity-60"></div>
-              
-              {/* Content */}
-              <div className="relative z-10 flex flex-col justify-center h-full px-16">
-                <div className="max-w-2xl">
-                  <h3 className="text-5xl font-bold text-white mb-6 leading-tight">
-                    {activeArea.title}
-                  </h3>
-                  <p className="text-lg text-gray-200 mb-8 leading-relaxed">
-                    {activeArea.description}
-                  </p>
+            <div className="h-[700px] overflow-y-auto bg-gray-50 p-6">
+              <div className="space-y-6">
+                {practiceAreas.map((area, index) => {
+                  const isActive = activeArea.id === area.id;
+                  const isHovered = hoveredCard === area.id;
                   
-                  {/* Learn More Button */}
-                  <a 
-                    href={`/practice-areas/${activeArea.slug}`}
-                    className="inline-flex items-center gap-3 bg-red-600 hover:bg-red-700 text-white px-6 py-3 rounded font-semibold transition-all duration-200 hover:translate-x-1"
-                  >
-                    Learn More
-                    <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                      <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
-                    </svg>
-                  </a>
-                </div>
+                  // Dynamic classes for card states
+                  let cardClasses = "relative bg-white rounded-2xl overflow-hidden shadow-md border border-gray-200 transition-all duration-500 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu cursor-pointer";
+                  
+                  if (isActive) {
+                    cardClasses += " scale-[1.02] shadow-2xl border-red-500/30 ring-2 ring-red-500/20";
+                  } else if (isHovered) {
+                    cardClasses += " scale-[1.01] shadow-xl hover:shadow-2xl";
+                  } else {
+                    cardClasses += " hover:scale-[1.005] hover:shadow-lg";
+                  }
+
+                  return (
+                    <div
+                      key={area.id}
+                      ref={el => { if (el) cardsRef.current[index] = el; }}
+                      className={cardClasses}
+                      onMouseEnter={() => handleCardHover(area.id)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                      onClick={() => handleAreaClick(area)}
+                    >
+                      <div className="relative h-48 overflow-hidden">
+                        {/* Background Image */}
+                        <div 
+                          className="absolute inset-0 bg-cover bg-center bg-no-repeat transition-transform duration-500"
+                          style={{ 
+                            backgroundImage: `url(${area.image})`,
+                            transform: isHovered ? 'scale(1.05)' : 'scale(1)'
+                          }}
+                        />
+                        
+                        {/* Overlay */}
+                        <div className={`absolute inset-0 transition-all duration-500 ${
+                          isActive 
+                            ? 'bg-black/50' 
+                            : isHovered 
+                            ? 'bg-black/40' 
+                            : 'bg-black/60'
+                        }`} />
+                        
+                        {/* Content */}
+                        <div className="relative z-10 p-6 h-full flex flex-col justify-end">
+                          <h3 className={`font-bold text-white mb-2 transition-all duration-300 ${
+                            isActive ? 'text-2xl' : 'text-xl'
+                          }`}>
+                            {area.title}
+                          </h3>
+                          
+                          {/* Learn More Button */}
+                          <a 
+                            href={`/practice-areas/${area.slug}`}
+                            className={`inline-flex items-center gap-2 text-white font-semibold transition-all duration-200 hover:text-red-400 ${
+                              isActive ? 'text-red-400' : ''
+                            }`}
+                          >
+                            Learn More
+                            <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
+                              <path d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"></path>
+                            </svg>
+                          </a>
+                        </div>
+                      </div>
+                      
+                      {/* Description Section */}
+                      <div className="p-6">
+                        <p className={`text-gray-700 leading-relaxed transition-all duration-300 ${
+                          isActive ? 'text-base font-medium' : 'text-sm'
+                        }`}>
+                          {area.description}
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -570,7 +629,7 @@ const PracticeAreasReference: React.FC = () => {
 
       {/* Accessibility */}
       <div className="sr-only" aria-live="polite">
-        Currently showing {activeArea.title} practice area information
+        Currently showing {activeArea.title} practice area information. {practiceAreas.length} practice areas available in vertical layout.
       </div>
     </section>
   );

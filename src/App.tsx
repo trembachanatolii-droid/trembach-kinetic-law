@@ -11,6 +11,9 @@ import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import CarAccidents from "./pages/practice-areas/CarAccidents";
 import TruckAccidents from "./pages/practice-areas/TruckAccidents";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
+import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
+import TalcBabyPowder from "./pages/practice-areas/TalcBabyPowder";
+import MotorcycleAccidents from "./pages/practice-areas/MotorcycleAccidents";
 import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
 import CaseEvaluation from "./pages/CaseEvaluation";
@@ -34,6 +37,9 @@ const App = () => (
           <Route path="/practice-areas/car-accidents" element={<CarAccidents />} />
           <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidents />} />
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
+          <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
+          <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowder />} />
+          <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidents />} />
           <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
           <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
           <Route path="/case-evaluation" element={<CaseEvaluation />} />

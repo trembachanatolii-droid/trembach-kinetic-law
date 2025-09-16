@@ -9,6 +9,7 @@ import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDow
 import heroImage from '@/assets/mesothelioma-hero.jpg';
 import medicalImage from '@/assets/mesothelioma-medical-facility.jpg';
 import exposureImage from '@/assets/mesothelioma-industrial-site.jpg';
+import calculatorImage from '@/assets/mesothelioma-compensation-calculator.jpg';
 import legalImage from '@/assets/mesothelioma-legal-consultation.jpg';
 import californiaImage from '@/assets/california-legal-system.jpg';
 
@@ -145,7 +146,7 @@ const MesotheliomaAsbestos: React.FC = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/95" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/70 to-background/90" />
         
         <div className="relative z-10 container mx-auto px-6 py-20">
           <div className="hero-content glass-morphism">
@@ -170,7 +171,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   Call 855-TREMBACH-WINS
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
-                <Button variant="outline" size="lg">
+                <Button variant="outline" size="lg" onClick={() => window.location.href = '/case-evaluation'}>
                   Free Case Evaluation
                 </Button>
               </div>
@@ -202,7 +203,7 @@ const MesotheliomaAsbestos: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <Button variant="secondary" size="sm" className="w-full">
+                <Button variant="secondary" size="sm" className="w-full" onClick={() => window.location.href = '/medical-guidance'}>
                   Get Medical Guidance <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -240,7 +241,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   Most importantly, remember that while mesothelioma is a terminal diagnosis, new treatments are extending survival for many patients. Some people live years beyond initial prognoses, especially when they receive aggressive treatment at specialized centers. Simultaneously pursuing maximum compensation ensures your family's financial security regardless of treatment outcomes. Our coordinated approach addresses both immediate medical needs and long-term financial protection, allowing you to focus on fighting this disease while we fight for your rights.
                 </p>
               </div>
-              <Button variant="outline" className="w-full mt-4">
+              <Button variant="outline" className="w-full mt-4" onClick={() => window.location.href = '/schedule-consultation'}>
                 Schedule Consultation
               </Button>
             </CardContent>
@@ -256,7 +257,7 @@ const MesotheliomaAsbestos: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <Button variant="secondary" size="sm" className="w-full">
+                <Button variant="secondary" size="sm" className="w-full" onClick={() => window.location.href = '/case-evaluation'}>
                   Learn About Claims <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -290,7 +291,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <strong>The asbestos bankruptcy trust system represents a parallel compensation pathway</strong> that many victims don't fully understand. When asbestos companies faced overwhelming liability, many filed for bankruptcy protection, establishing trusts to compensate current and future victims. Today, over 60 trusts hold more than $30 billion in assets specifically earmarked for mesothelioma victims. Each trust operates independently with unique claim requirements, payment percentages, and evidence standards. Strategic sequencing of trust claims can maximize total recovery, and many victims qualify for 10-20 different trust funds based on various exposures throughout their careers.
                 </p>
               </div>
-              <Button variant="outline" className="w-full mt-4">
+              <Button variant="outline" className="w-full mt-4" onClick={() => window.location.href = '/case-evaluation'}>
                 Evaluate Your Claim
               </Button>
             </CardContent>
@@ -300,13 +301,13 @@ const MesotheliomaAsbestos: React.FC = () => {
           <Card className="glass-card group hover:scale-[1.02] transition-all duration-300">
             <div className="relative overflow-hidden rounded-t-lg">
               <img 
-                src={exposureImage} 
-                alt="Industrial exposure sources and compensation"
+                src={calculatorImage} 
+                alt="Compensation calculation and damages assessment"
                 className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <Button variant="secondary" size="sm" className="w-full">
+                <Button variant="secondary" size="sm" className="w-full" onClick={() => window.location.href = '/compensation-calculator'}>
                   Calculate Damages <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -344,7 +345,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <strong>Multiple compensation sources can provide additional recovery beyond traditional lawsuits.</strong> Asbestos bankruptcy trust funds operate independently and can pay benefits while litigation proceeds. Veterans may receive VA disability benefits and healthcare. Workers' compensation may apply for occupational exposures. Social Security disability provides income support for those unable to work. Each source has different requirements and doesn't reduce others, potentially providing substantial total compensation for mesothelioma victims and their families.
                 </p>
               </div>
-              <Button variant="outline" className="w-full mt-4">
+              <Button variant="outline" className="w-full mt-4" onClick={() => window.location.href = '/compensation-calculator'}>
                 Estimate Compensation
               </Button>
             </CardContent>
@@ -360,7 +361,7 @@ const MesotheliomaAsbestos: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
               <div className="absolute bottom-4 left-4 right-4">
-                <Button variant="secondary" size="sm" className="w-full">
+                <Button variant="secondary" size="sm" className="w-full" onClick={() => window.location.href = '/case-evaluation'}>
                   Find Exposure Sites <ArrowRight className="w-4 h-4 ml-2" />
                 </Button>
               </div>
@@ -398,7 +399,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <strong>Secondary exposure also occurred when workers brought asbestos fibers home on their clothing</strong>, exposing family members to dangerous levels of contamination. Wives who washed work clothes, children who hugged parents after work, and family members who lived in homes where work clothes were stored all faced potential exposure. These secondary exposure cases can result in substantial compensation when companies failed to provide adequate warnings or safety measures to protect workers' families from take-home contamination.
                 </p>
               </div>
-              <Button variant="outline" className="w-full mt-4">
+              <Button variant="outline" className="w-full mt-4" onClick={() => window.location.href = '/case-evaluation'}>
                 Identify Your Exposure
               </Button>
             </CardContent>
@@ -463,7 +464,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 Call 855-TREMBACH-WINS
                 <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" onClick={() => window.location.href = '/case-evaluation'}>
                 Free Case Evaluation
               </Button>
             </div>

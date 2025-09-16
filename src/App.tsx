@@ -13,6 +13,10 @@ import TruckAccidents from "./pages/practice-areas/TruckAccidents";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
+import CaseEvaluation from "./pages/CaseEvaluation";
+import MedicalGuidance from "./pages/MedicalGuidance";
+import ScheduleConsultation from "./pages/ScheduleConsultation";
+import CompensationCalculator from "./pages/CompensationCalculator";
 
 const queryClient = new QueryClient();
 
@@ -32,6 +36,10 @@ const App = () => (
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
           <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
           <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
+          <Route path="/case-evaluation" element={<CaseEvaluation />} />
+          <Route path="/medical-guidance" element={<MedicalGuidance />} />
+          <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
+          <Route path="/compensation-calculator" element={<CompensationCalculator />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

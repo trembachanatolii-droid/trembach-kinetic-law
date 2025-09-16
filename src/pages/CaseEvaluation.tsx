@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/floating-scales-justice.jpg';
+import { Phone, Mail, MapPin, Clock, ArrowRight, ArrowLeft } from 'lucide-react';
+import heroBackground from '@/assets/case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +19,7 @@ const CaseEvaluation: React.FC = () => {
     email: '',
     phone: '',
     diagnosisDate: '',
+    cancerType: '',
     exposureType: '',
     workHistory: '',
     symptoms: '',
@@ -69,6 +70,18 @@ const CaseEvaluation: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      {/* Go Back Button */}
+      <div className="container mx-auto px-6 pt-6">
+        <Button 
+          variant="ghost" 
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </Button>
+      </div>
+
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 
@@ -92,9 +105,9 @@ const CaseEvaluation: React.FC = () => {
           <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Tell Us About Your Case</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Tell Us About Your Case</CardTitle>
                   <p className="text-muted-foreground">
                     Please provide as much detail as possible to help us evaluate your potential claim.
                   </p>
@@ -156,20 +169,39 @@ const CaseEvaluation: React.FC = () => {
                         />
                       </div>
                       <div>
-                        <Label htmlFor="exposureType">Type of Exposure</Label>
-                        <Select onValueChange={(value) => handleInputChange('exposureType', value)}>
+                        <Label htmlFor="cancerType">Type of Cancer *</Label>
+                        <Select onValueChange={(value) => handleInputChange('cancerType', value)} required>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select exposure type" />
+                            <SelectValue placeholder="Select cancer type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="occupational">Occupational</SelectItem>
-                            <SelectItem value="military">Military Service</SelectItem>
-                            <SelectItem value="secondary">Secondary/Take-home</SelectItem>
-                            <SelectItem value="environmental">Environmental</SelectItem>
-                            <SelectItem value="unknown">Unknown</SelectItem>
+                            <SelectItem value="mesothelioma">Pleural Mesothelioma</SelectItem>
+                            <SelectItem value="peritoneal">Peritoneal Mesothelioma</SelectItem>
+                            <SelectItem value="pericardial">Pericardial Mesothelioma</SelectItem>
+                            <SelectItem value="testicular">Testicular Mesothelioma</SelectItem>
+                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
+                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
+                            <SelectItem value="other-cancer">Other Cancer</SelectItem>
+                            <SelectItem value="suspected">Suspected Diagnosis</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="exposureType">Type of Exposure</Label>
+                      <Select onValueChange={(value) => handleInputChange('exposureType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select exposure type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="occupational">Occupational</SelectItem>
+                          <SelectItem value="military">Military Service</SelectItem>
+                          <SelectItem value="secondary">Secondary/Take-home</SelectItem>
+                          <SelectItem value="environmental">Environmental</SelectItem>
+                          <SelectItem value="unknown">Unknown</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
@@ -216,9 +248,9 @@ const CaseEvaluation: React.FC = () => {
 
             {/* Contact Information */}
             <div className="space-y-6">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle>Contact Information</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Contact Information</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -255,9 +287,9 @@ const CaseEvaluation: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden bg-gradient-to-br from-primary/15 to-primary/5">
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2">No Fees Unless We Win</h3>
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">No Fees Unless We Win</h3>
                   <p className="text-sm text-muted-foreground">
                     We work on a contingency fee basis. You pay nothing unless we secure compensation for you.
                   </p>

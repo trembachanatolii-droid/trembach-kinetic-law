@@ -7,8 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar, Clock, Phone, Video, MapPin, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/floating-scales-justice.jpg';
+import { Calendar, Clock, Phone, Video, MapPin, ArrowRight, ArrowLeft } from 'lucide-react';
+import heroBackground from '@/assets/schedule-consultation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -21,6 +21,7 @@ const ScheduleConsultation: React.FC = () => {
     preferredDate: '',
     preferredTime: '',
     consultationType: '',
+    cancerType: '',
     urgency: '',
     caseDetails: ''
   });
@@ -73,6 +74,18 @@ const ScheduleConsultation: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      {/* Go Back Button */}
+      <div className="container mx-auto px-6 pt-6">
+        <Button 
+          variant="ghost" 
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </Button>
+      </div>
+
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 
@@ -96,9 +109,9 @@ const ScheduleConsultation: React.FC = () => {
           <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
             {/* Scheduling Form */}
             <div className="lg:col-span-2">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Schedule Your Consultation</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Schedule Your Consultation</CardTitle>
                   <p className="text-muted-foreground">
                     Choose your preferred date, time, and consultation method.
                   </p>
@@ -191,18 +204,37 @@ const ScheduleConsultation: React.FC = () => {
                         </Select>
                       </div>
                       <div>
-                        <Label htmlFor="urgency">Case Urgency</Label>
-                        <Select onValueChange={(value) => handleInputChange('urgency', value)}>
+                        <Label htmlFor="cancerType">Type of Cancer</Label>
+                        <Select onValueChange={(value) => handleInputChange('cancerType', value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select urgency" />
+                            <SelectValue placeholder="Select cancer type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="routine">Routine</SelectItem>
-                            <SelectItem value="urgent">Urgent</SelectItem>
-                            <SelectItem value="emergency">Emergency</SelectItem>
+                            <SelectItem value="mesothelioma">Pleural Mesothelioma</SelectItem>
+                            <SelectItem value="peritoneal">Peritoneal Mesothelioma</SelectItem>
+                            <SelectItem value="pericardial">Pericardial Mesothelioma</SelectItem>
+                            <SelectItem value="testicular">Testicular Mesothelioma</SelectItem>
+                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
+                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
+                            <SelectItem value="other-cancer">Other Cancer</SelectItem>
+                            <SelectItem value="suspected">Suspected Diagnosis</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="urgency">Case Urgency</Label>
+                      <Select onValueChange={(value) => handleInputChange('urgency', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select urgency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="routine">Routine</SelectItem>
+                          <SelectItem value="urgent">Urgent</SelectItem>
+                          <SelectItem value="emergency">Emergency</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
@@ -227,9 +259,9 @@ const ScheduleConsultation: React.FC = () => {
 
             {/* Consultation Options & Info */}
             <div className="space-y-6">
-              <Card className="glass-card">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle>Consultation Options</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Consultation Options</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-center gap-3">
@@ -266,9 +298,9 @@ const ScheduleConsultation: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="glass-card">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle>What to Expect</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">What to Expect</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-start gap-3">
@@ -291,9 +323,9 @@ const ScheduleConsultation: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="glass-card bg-gradient-to-br from-primary/10 to-primary/5">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2">Emergency Consultations</h3>
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">Emergency Consultations</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     For urgent matters, call us directly at 855-TREMBACH-WINS. We're available 24/7 for emergencies.
                   </p>

@@ -8,8 +8,8 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star } from 'lucide-react';
-import heroBackground from '@/assets/floating-scales-justice.jpg';
+import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star, ArrowLeft } from 'lucide-react';
+import heroBackground from '@/assets/medical-guidance-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,6 +96,18 @@ const MedicalGuidance: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      {/* Go Back Button */}
+      <div className="container mx-auto px-6 pt-6">
+        <Button 
+          variant="ghost" 
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </Button>
+      </div>
+
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 
@@ -119,9 +131,9 @@ const MedicalGuidance: React.FC = () => {
           <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
             {/* Medical Guidance Form */}
             <div className="lg:col-span-2">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="text-2xl">Get Medical Guidance</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Get Medical Guidance</CardTitle>
                   <p className="text-muted-foreground">
                     Connect with mesothelioma specialists and get personalized treatment recommendations.
                   </p>
@@ -254,9 +266,9 @@ const MedicalGuidance: React.FC = () => {
 
             {/* Treatment Centers */}
             <div className="space-y-6">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle>Leading Treatment Centers</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Leading Treatment Centers</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   {treatmentCenters.map((center, index) => (
@@ -279,9 +291,9 @@ const MedicalGuidance: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle>Treatment Options</CardTitle>
+                  <CardTitle className="group-hover:text-primary transition-colors">Treatment Options</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -318,9 +330,9 @@ const MedicalGuidance: React.FC = () => {
                 </CardContent>
               </Card>
 
-              <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden bg-gradient-to-br from-primary/15 to-primary/5">
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2">Urgent Medical Support</h3>
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">Urgent Medical Support</h3>
                   <p className="text-sm text-muted-foreground mb-3">
                     For immediate medical guidance or emergency consultations, call us directly. We're available 24/7.
                   </p>

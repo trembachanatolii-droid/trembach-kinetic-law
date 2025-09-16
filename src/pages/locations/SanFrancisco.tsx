@@ -5,6 +5,7 @@ import SchemaMarkup from '@/components/SchemaMarkup';
 import ParallaxSection from '@/components/ParallaxSection';
 import AnimatedStatistics from '@/components/AnimatedStatistics';
 import ExpandedFAQ from '@/components/ExpandedFAQ';
+import sanFranciscoSkyline from '@/assets/san-francisco-skyline.jpg';
 
 const SanFrancisco = () => {
   const locationData = {
@@ -46,7 +47,7 @@ const SanFrancisco = () => {
       
       {/* Hero Section */}
       <ParallaxSection 
-        backgroundImage="/api/placeholder/1920/800"
+        backgroundImage={sanFranciscoSkyline}
         className="min-h-[80vh] flex items-center justify-center"
       >
         <div className="absolute inset-0 bg-black/60"></div>

@@ -176,14 +176,16 @@ const Process = () => {
             </p>
             <Button 
               size="lg"
-              className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-12 py-4 text-lg font-semibold glow mr-4"
+              className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-12 py-4 text-lg font-semibold glow mr-4 group transition-all duration-300"
+              onClick={() => window.location.href = '/case-evaluation'}
             >
               Start Your Case Today
             </Button>
             <Button 
               size="lg"
               variant="outline"
-              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground px-8 py-4 text-lg font-semibold glow-accent"
+              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground px-8 py-4 text-lg font-semibold glow-accent group transition-all duration-300"
+              onClick={() => window.location.href = 'tel:800-555-0000'}
             >
               Call Now - (800) 555-0000
             </Button>

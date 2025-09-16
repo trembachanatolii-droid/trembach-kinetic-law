@@ -159,7 +159,7 @@ const Hero = () => {
               </label>
             </div>
 
-            <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-3 glow-accent">
+            <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-3 glow-accent group transition-all duration-300" onClick={() => window.location.href = '/case-evaluation'}>
               Get Free Consultation
             </Button>
           </form>

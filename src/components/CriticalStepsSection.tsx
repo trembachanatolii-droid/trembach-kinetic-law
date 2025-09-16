@@ -452,7 +452,8 @@ const CriticalStepsSection = () => {
               </p>
               <Button 
                 size="lg" 
-                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-full hover:scale-110 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground font-semibold px-8 py-4 rounded-full hover:scale-110 hover:shadow-lg hover:shadow-primary/50 transition-all duration-300 group"
+                onClick={() => window.location.href = '/case-evaluation'}
               >
                 Get Free Consultation Now
               </Button>

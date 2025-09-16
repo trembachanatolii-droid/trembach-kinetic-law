@@ -216,7 +216,7 @@ const ScheduleConsultation: React.FC = () => {
                       />
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full group">
+                    <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
                       Schedule Consultation
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
@@ -297,8 +297,8 @@ const ScheduleConsultation: React.FC = () => {
                   <p className="text-sm text-muted-foreground mb-3">
                     For urgent matters, call us directly at 855-TREMBACH-WINS. We're available 24/7 for emergencies.
                   </p>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <Phone className="w-4 h-4 mr-2" />
+                  <Button variant="outline" size="sm" className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300" onClick={() => window.location.href = 'tel:855-TREMBACH-WINS'}>
+                    <Phone className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                     Call Now
                   </Button>
                 </CardContent>

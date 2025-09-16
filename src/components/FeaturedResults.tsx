@@ -217,7 +217,8 @@ const FeaturedResults = () => {
         <div className="text-center mt-16">
           <Button 
             size="lg"
-            className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow"
+            className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow group transition-all duration-300"
+            onClick={() => window.location.href = '/case-evaluation'}
           >
             Start Your Case Today — Free Consultation
           </Button>

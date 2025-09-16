@@ -71,7 +71,8 @@ const Navigation = () => {
         {/* CTA Button */}
         <Button 
           size="sm" 
-          className="magnetic bg-accent hover:bg-accent-glow text-accent-foreground font-semibold glow-accent"
+          className="magnetic bg-accent hover:bg-accent-glow text-accent-foreground font-semibold glow-accent transition-all duration-300"
+          onClick={() => window.location.href = 'tel:855-TREMBACH-WINS'}
         >
           Call Now - 24/7
         </Button>

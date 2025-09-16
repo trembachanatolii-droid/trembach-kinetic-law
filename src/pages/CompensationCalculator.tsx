@@ -339,7 +339,7 @@ const CompensationCalculator: React.FC = () => {
                     </div>
                   )}
 
-                  <Button className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
+                  <Button className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => window.location.href = '/case-evaluation'}>
                     Get Detailed Case Evaluation
                     <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                   </Button>
@@ -393,8 +393,8 @@ const CompensationCalculator: React.FC = () => {
                   <p className="text-sm text-muted-foreground mb-3">
                     We work on a contingency fee basis. You pay nothing unless we secure compensation for you.
                   </p>
-                  <Button variant="outline" size="sm" className="w-full">
-                    <DollarSign className="w-4 h-4 mr-2" />
+                  <Button variant="outline" size="sm" className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300" onClick={() => window.location.href = '/case-evaluation'}>
+                    <DollarSign className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                     Learn More
                   </Button>
                 </CardContent>

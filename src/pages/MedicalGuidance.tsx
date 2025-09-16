@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star } from 'lucide-react';
-import heroBackground from '@/assets/mesothelioma-hero.jpg';
+import heroBackground from '@/assets/lady-justice-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

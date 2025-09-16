@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, DollarSign, TrendingUp, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/mesothelioma-hero.jpg';
+import heroBackground from '@/assets/lady-justice-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

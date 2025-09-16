@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
-import heroImage from '@/assets/lady-justice-perfect.jpg';
+import heroImage from '@/assets/floating-scales-justice.jpg';
 import medicalImage from '@/assets/mesothelioma-medical-facility.jpg';
 import exposureImage from '@/assets/mesothelioma-industrial-site.jpg';
 import calculatorImage from '@/assets/mesothelioma-compensation-calculator.jpg';

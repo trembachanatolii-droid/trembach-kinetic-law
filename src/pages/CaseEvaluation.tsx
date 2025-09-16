@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/lady-justice-perfect.jpg';
+import heroBackground from '@/assets/floating-scales-justice.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

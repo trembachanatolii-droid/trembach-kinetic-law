@@ -7,10 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
 import heroImage from '@/assets/mesothelioma-hero.jpg';
-import medicalImage from '@/assets/mesothelioma-medical.jpg';
-import exposureImage from '@/assets/mesothelioma-exposure.jpg';
-import legalImage from '@/assets/mesothelioma-legal.jpg';
-import californiaImage from '@/assets/mesothelioma-california.jpg';
+import medicalImage from '@/assets/mesothelioma-medical-facility.jpg';
+import exposureImage from '@/assets/mesothelioma-industrial-site.jpg';
+import legalImage from '@/assets/mesothelioma-legal-consultation.jpg';
+import californiaImage from '@/assets/california-legal-system.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -73,7 +73,7 @@ const MesotheliomaAsbestos: React.FC = () => {
   const faqs = [
     {
       question: "What Can a California Mesothelioma Lawyer Do for Me?",
-      answer: "A mesothelioma lawyer provides comprehensive legal representation to maximize your compensation from all available sources. This includes filing claims with asbestos bankruptcy trust funds (accessing over $30 billion set aside for victims), pursuing lawsuits against liable companies still in business, coordinating with VA benefits for veterans, and managing workers' compensation claims when applicable. We investigate your entire exposure history, identify all responsible parties, gather medical and employment records, work with medical experts to establish causation, and handle all negotiations with insurance companies and corporate defendants. Our role extends beyond legal work - we connect you with mesothelioma specialists, help navigate treatment options, and provide support throughout your journey. Having formerly defended insurance companies, Attorney Trembach understands their tactics and uses this knowledge to counter their strategies, ensuring you receive full and fair compensation rather than accepting lowball settlements."
+      answer: "A mesothelioma lawyer provides comprehensive legal representation to maximize your compensation from all available sources. This includes filing claims with asbestos bankruptcy trust funds (accessing over $30 billion set aside for victims), pursuing lawsuits against liable companies still in business, coordinating with VA benefits for veterans, and managing workers' compensation claims when applicable. We investigate your entire exposure history, identify all responsible parties, gather medical and employment records, work with medical experts to establish causation, and handle all negotiations with companies and corporate defendants. Our role extends beyond legal work - we connect you with mesothelioma specialists, help navigate treatment options, and provide support throughout your journey. Having formerly defended companies, Attorney Trembach understands their tactics and uses this knowledge to counter their strategies, ensuring you receive full and fair compensation rather than accepting lowball settlements."
     },
     {
       question: "How Much Does It Cost to Hire a Mesothelioma Attorney?",
@@ -81,7 +81,7 @@ const MesotheliomaAsbestos: React.FC = () => {
     },
     {
       question: "What Should I Do After a Mesothelioma Diagnosis?",
-      answer: "First, focus on getting the best medical treatment available - we can help connect you with mesothelioma specialists and treatment centers throughout California. Second, contact an experienced mesothelioma attorney immediately to protect your legal rights, as time limitations apply. Begin gathering any employment records, union documents, military service records, or other documentation that might help establish your asbestos exposure history. Document your symptoms, treatments, and how the disease affects your daily life. Inform family members who may have been exposed to asbestos through your work clothes (secondary exposure claims). Avoid signing any documents from insurance companies or former employers without legal review. Do not post about your diagnosis on social media, as this can be used against you. Most importantly, don't delay - mesothelioma cases require urgent action to preserve evidence, secure witness testimony, and expedite compensation while you can still benefit from it."
+      answer: "First, focus on getting the best medical treatment available - we can help connect you with mesothelioma specialists and treatment centers throughout California. Second, contact an experienced mesothelioma attorney immediately to protect your legal rights, as time limitations apply. Begin gathering any employment records, union documents, military service records, or other documentation that might help establish your asbestos exposure history. Document your symptoms, treatments, and how the disease affects your daily life. Inform family members who may have been exposed to asbestos through your work clothes (secondary exposure claims). Avoid signing any documents from companies or former employers without legal review. Do not post about your diagnosis on social media, as this can be used against you. Most importantly, don't delay - mesothelioma cases require urgent action to preserve evidence, secure witness testimony, and expedite compensation while you can still benefit from it."
     },
     {
       question: "How Long Do I Have to File a Mesothelioma Claim in California?",
@@ -93,11 +93,11 @@ const MesotheliomaAsbestos: React.FC = () => {
     },
     {
       question: "How Much Is My Mesothelioma Case Worth?",
-      answer: "Mesothelioma settlements and verdicts vary significantly based on individual circumstances, but often range from hundreds of thousands to several million dollars. Factors affecting value include: age at diagnosis (younger victims typically receive higher compensation), type and stage of mesothelioma, occupation and exposure history, number of liable defendants identified, available insurance coverage, economic losses (lost wages, medical expenses), non-economic damages (pain and suffering), whether you're a veteran (additional VA benefits available), and family situation (spouse and dependents). While we cannot guarantee specific amounts as a new firm without past verdicts to reference, we can promise aggressive representation to maximize your recovery from all available sources. Our founder's experience as a defense attorney provides unique insights into how insurance companies value these cases, helping us push for maximum compensation rather than accepting initial offers."
+      answer: "Mesothelioma settlements and verdicts vary significantly based on individual circumstances, but often range from hundreds of thousands to several million dollars. Factors affecting value include: age at diagnosis (younger victims typically receive higher compensation), type and stage of mesothelioma, occupation and exposure history, number of liable defendants identified, available coverage, economic losses (lost wages, medical expenses), non-economic damages (pain and suffering), whether you're a veteran (additional VA benefits available), and family situation (spouse and dependents). While we cannot guarantee specific amounts as a new firm without past verdicts to reference, we can promise aggressive representation to maximize your recovery from all available sources. Our founder's experience as a defense attorney provides unique insights into how companies value these cases, helping us push for maximum compensation rather than accepting initial offers."
     },
     {
       question: "Should I Accept a Settlement or Go to Trial?",
-      answer: "Most mesothelioma cases (approximately 95%) settle before trial, providing faster compensation and guaranteed recovery without the uncertainty of a jury verdict. Settlements offer several advantages: quicker resolution (critical given the aggressive nature of mesothelioma), guaranteed compensation without appeal risks, privacy (trial records are public), less stress on you and your family, and the ability to resolve multiple claims simultaneously. However, trials may be appropriate when defendants make unreasonably low offers, when we believe a jury would award significantly more, or when you want public accountability for corporate wrongdoing. As your attorneys, we provide honest assessments of settlement offers versus trial prospects, explaining the risks and benefits of each option. Our goal is maximizing your compensation while considering your health, family needs, and personal preferences. Having defended insurance companies, Attorney Trembach knows when they're holding back and when they've reached their limit, helping you make informed decisions."
+      answer: "Most mesothelioma cases (approximately 95%) settle before trial, providing faster compensation and guaranteed recovery without the uncertainty of a jury verdict. Settlements offer several advantages: quicker resolution (critical given the aggressive nature of mesothelioma), guaranteed compensation without appeal risks, privacy (trial records are public), less stress on you and your family, and the ability to resolve multiple claims simultaneously. However, trials may be appropriate when defendants make unreasonably low offers, when we believe a jury would award significantly more, or when you want public accountability for corporate wrongdoing. As your attorneys, we provide honest assessments of settlement offers versus trial prospects, explaining the risks and benefits of each option. Our goal is maximizing your compensation while considering your health, family needs, and personal preferences. Having defended companies, Attorney Trembach knows when they're holding back and when they've reached their limit, helping you make informed decisions."
     },
     {
       question: "Can Family Members File Claims for Secondary Exposure?",
@@ -129,375 +129,343 @@ const MesotheliomaAsbestos: React.FC = () => {
     },
     {
       question: "How Are Mesothelioma Cases Different From Other Injury Cases?",
-      answer: "Mesothelioma cases are unique in several critical ways. The 20-50 year latency period means exposures occurred decades ago, requiring historical investigation techniques and expertise in industrial history. Multiple defendants are typically involved, as victims often encountered various asbestos products throughout their careers. The fatal nature of mesothelioma creates urgency - courts expedite these cases and defendants know delay tactics are ineffective. Causation is clearer than most toxic tort cases since asbestos is the only known cause of mesothelioma. Bankruptcy trusts provide additional compensation sources unavailable in typical injury cases. The defendant pool includes many companies that have faced thousands of asbestos claims, creating established settlement values and procedures. Specialized medical experts are required who understand mesothelioma's unique characteristics. These differences require attorneys with specific asbestos litigation experience who understand the complex interplay of multiple defendants, trust funds, and insurance coverage."
+      answer: "Mesothelioma cases are unique in several critical ways. The 20-50 year latency period means exposures occurred decades ago, requiring historical investigation techniques and expertise in industrial history. Multiple defendants are typically involved, as victims often encountered various asbestos products throughout their careers. The fatal nature of mesothelioma creates urgency - courts expedite these cases and defendants know delay tactics are ineffective. Causation is clearer than most toxic tort cases since asbestos is the only known cause of mesothelioma. Bankruptcy trusts provide additional compensation sources unavailable in typical injury cases. The defendant pool includes many companies that have faced thousands of asbestos claims, creating established settlement values and procedures. Specialized medical experts are required who understand mesothelioma's unique characteristics. These differences require attorneys with specific asbestos litigation experience who understand the complex interplay of multiple defendants, trust funds, and coverage."
     },
     {
       question: "What Makes Trembach Law Firm Different?",
-      answer: "Attorney Anatolii Trembach's unique background as a former insurance defense attorney sets us apart. Having defended corporations and insurance companies in personal injury cases, he understands exactly how they evaluate claims, minimize payouts, and develop defense strategies. This insider knowledge becomes your advantage - we anticipate their tactics, counter their arguments, and know when they're bluffing versus making their best offer. As a new firm, we provide personalized attention that larger firms can't match. You work directly with Attorney Trembach, not passed between associates. We combine boutique firm personal service with sophisticated legal strategies learned from defending major corporations. Our commitment to California's asbestos victims is demonstrated through aggressive advocacy, 24/7 availability, and treating each client like family. We're building our reputation on your success, giving us extra motivation to achieve exceptional results. Choose experience, dedication, and a fighter who knows the enemy's playbook."
+      answer: "Despite being newly established, Trembach Law Firm offers unique advantages that set us apart from large national firms and career plaintiff attorneys. Attorney Trembach's former experience defending companies and their representatives provides insights unavailable to attorneys who've never seen how companies evaluate cases internally. While large firms handle hundreds of cases simultaneously, often delegating work to junior associates, you work directly with Attorney Trembach throughout your case. We limit our caseload to ensure personalized attention, returning calls promptly and meeting regularly to discuss developments. Our aggressive approach means filing comprehensive claims immediately rather than waiting to see what defendants offer. We prepare every case for trial, ensuring defendants know we won't accept lowball settlements. Most importantly, we understand you're facing the fight of your life, and we're honored to fight alongside you for justice and the compensation your family deserves."
     }
   ];
 
   return (
-    <div ref={sectionRef} className="min-h-screen bg-white">
-      {/* Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/6 left-1/4 w-72 h-72 orb animate-float opacity-20"></div>
-        <div className="absolute bottom-1/4 right-1/6 w-56 h-56 orb-secondary animate-float-delayed opacity-25"></div>
-      </div>
-
-      {/* Hero Section with Background Image */}
-      <section 
-        className="relative bg-gradient-to-br from-slate-900 to-slate-700 text-white py-20"
-        style={{
-          backgroundImage: `linear-gradient(rgba(15, 23, 42, 0.8), rgba(51, 65, 85, 0.8)), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="relative z-10 max-w-7xl mx-auto px-8">
-          <div className="max-w-4xl">
-            <h1 className="text-6xl font-bold mb-6 leading-tight">
-              California Mesothelioma & Asbestos Attorneys
-            </h1>
-            <p className="text-xl mb-4 leading-relaxed">
-              Aggressive representation for asbestos cancer victims throughout California. Former defense attorney now fighting for your rights. We trace exposure histories, work with medical specialists, and pursue maximum compensation from all responsible parties.
-            </p>
-            <div className="flex items-center mb-6">
-              <div className="flex text-yellow-400">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-current" />
-                ))}
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      {/* Hero Section */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/95" />
+        
+        <div className="relative z-10 container mx-auto px-6 py-20">
+          <div className="hero-content glass-morphism">
+            <div className="space-y-6">
+              <div className="space-y-4">
+                <h1 className="text-5xl font-bold text-foreground leading-tight">
+                  California Mesothelioma & Asbestos Attorneys
+                </h1>
+                <p className="text-xl text-muted-foreground max-w-4xl">
+                  No fees. No risk. You only pay when we win. Former defense attorney now fighting for your rights throughout California.
+                </p>
+                <div className="flex flex-wrap gap-3">
+                  <Badge variant="secondary" className="px-4 py-2 text-sm">No Fees Unless We Win</Badge>
+                  <Badge variant="secondary" className="px-4 py-2 text-sm">Former Defense Attorney</Badge>
+                  <Badge variant="secondary" className="px-4 py-2 text-sm">Maximum Compensation</Badge>
+                </div>
               </div>
-              <span className="ml-3 text-xl">Inside Knowledge of Secret Defense Strategies and Software</span>
+              
+              <div className="flex flex-wrap gap-4">
+                <Button size="lg" className="group">
+                  <Phone className="w-5 h-5 mr-2" />
+                  Call 855-TREMBACH-WINS
+                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                </Button>
+                <Button variant="outline" size="lg">
+                  Free Case Evaluation
+                </Button>
+              </div>
             </div>
-            <p className="text-2xl font-semibold mb-8 text-yellow-300">
-              No fees. No risk.<br />You only pay when we win
-            </p>
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white text-xl px-12 py-6 mb-8 font-bold"
-            >
-              GET YOUR FREE CONSULTATION
-            </Button>
           </div>
-
-          {/* Navigation Links */}
-          <nav className="flex flex-wrap gap-8 text-sm uppercase tracking-wider">
-            <a href="#important" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">IMPORTANT TO KNOW</a>
-            <a href="#steps" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">STEPS TO TAKE</a>
-            <a href="#faq" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">FAQ</a>
-            <a href="#damages" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">DAMAGES</a>
-            <a href="#exposure-sites" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">CA EXPOSURE SITES</a>
-            <a href="#contact" className="hover:text-red-300 transition-colors border-b border-transparent hover:border-red-300">CONTACT</a>
-          </nav>
         </div>
       </section>
 
-      {/* Main Content Layout */}
-      <section className="py-24 px-8 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-3 gap-12">
-            {/* Main Content - 2 Columns */}
-            <div className="lg:col-span-2">
-              {/* Content Cards Grid */}
-              <div ref={cardsRef} className="space-y-8">
-                {/* Important to Know Section */}
-                <div id="important" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                  <div className="relative overflow-hidden aspect-video">
-                    <img 
-                      src={medicalImage}
-                      alt="Medical professionals examining mesothelioma cases"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Overlay Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
-                        <Heart size={16} />
-                        Learn More
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">Important to Know About Mesothelioma Claims</h2>
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Devastating cancer caused exclusively by asbestos exposure. California has favorable laws for victims with extended statutes of limitations. Former defense attorney brings unique insights to maximize your compensation from all available sources.
-                    </p>
-                    
-                    {/* Key Points */}
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        1-Year Statute
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        $30B+ Available
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Multiple Sources
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Former Defense Attorney
-                      </span>
-                    </div>
-                    <div className="pt-6">
-                      <Button variant="ghost" size="sm" className="group/btn">
-                        Learn More
-                        <ArrowRight 
-                          size={14} 
-                          className="transition-transform group-hover/btn:translate-x-1" 
-                        />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
+      {/* Main Content Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Comprehensive Mesothelioma Legal Support</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Expert guidance through every aspect of your mesothelioma case, from medical support to maximum compensation recovery
+            </p>
+          </div>
 
-                {/* Steps to Take Section */}
-                <div id="steps">
-                  <h2 className="text-4xl font-bold text-primary mb-8">What to Do After a Mesothelioma Diagnosis</h2>
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                      <div className="relative h-48 bg-gradient-primary flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                        <div className="text-primary-foreground text-center">
-                          <Clock className="w-8 h-8 mx-auto mb-2" />
-                          <div className="text-lg font-bold mb-2">Step 1</div>
-                          <div className="text-xl font-bold">Contact Attorneys</div>
-                          <div className="text-xl font-bold">Immediately</div>
-                        </div>
-                      </div>
-                    </Card>
-                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                        <div className="text-white text-center">
-                          <Users className="w-8 h-8 mx-auto mb-2" />
-                          <div className="text-lg font-bold mb-2">Step 2</div>
-                          <div className="text-xl font-bold">We Investigate</div>
-                          <div className="text-xl font-bold">Your Case</div>
-                        </div>
-                      </div>
-                    </Card>
-                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                        <div className="text-white text-center">
-                          <Heart className="w-8 h-8 mx-auto mb-2" />
-                          <div className="text-lg font-bold mb-2">Step 3</div>
-                          <div className="text-xl font-bold">Focus on</div>
-                          <div className="text-xl font-bold">Your Health</div>
-                        </div>
-                      </div>
-                    </Card>
-                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
-                        <div className="text-white text-center">
-                          <Award className="w-8 h-8 mx-auto mb-2" />
-                          <div className="text-lg font-bold mb-2">Step 4</div>
-                          <div className="text-xl font-bold">Receive Maximum</div>
-                          <div className="text-xl font-bold">Compensation</div>
-                        </div>
-                      </div>
-                    </Card>
-                  </div>
-                </div>
-
-                {/* FAQ Section */}
-                <div id="faq">
-                  <h2 className="text-4xl font-bold text-primary mb-8">Frequently Asked Questions</h2>
-                  <div ref={faqsRef} className="space-y-4">
-                    {faqs.map((faq, index) => (
-                      <Card key={index} className="glass-card overflow-hidden">
-                        <button
-                          className="w-full text-left p-6 font-semibold text-lg flex justify-between items-center hover:bg-muted/30 transition-colors"
-                          onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        >
-                          <span>{faq.question}</span>
-                          {expandedFaq === index ? (
-                            <ChevronUp className="w-6 h-6 text-primary" />
-                          ) : (
-                            <ChevronDown className="w-6 h-6 text-primary" />
-                          )}
-                        </button>
-                        {expandedFaq === index && (
-                          <div className="px-6 pb-6 text-muted-foreground leading-relaxed animate-accordion-down">
-                            {faq.answer}
-                          </div>
-                        )}
-                      </Card>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Damages Section */}
-                <div id="damages" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                  <div className="relative overflow-hidden aspect-video">
-                    <img 
-                      src={legalImage}
-                      alt="Legal documents and compensation information"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Overlay Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
-                        <Shield size={16} />
-                        Calculate Damages
-                      </Button>
-                    </div>
-                  </div>
-                  <div className="p-6 space-y-4">
-                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">Common Damages from Mesothelioma</h2>
-                    
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      Mesothelioma treatment costs often exceed $400,000 in the first year. Comprehensive compensation includes medical expenses, lost income, pain and suffering, and family impact damages.
-                    </p>
-                    
-                    {/* Damage Types */}
-                    <div className="flex flex-wrap gap-2">
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Medical Expenses
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Lost Income
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Pain & Suffering
-                      </span>
-                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                        Family Impact
-                      </span>
-                    </div>
-                    <div className="pt-6">
-                      <Button variant="ghost" size="sm" className="group/btn">
-                        Calculate Damages
-                        <ArrowRight 
-                          size={14} 
-                          className="transition-transform group-hover/btn:translate-x-1" 
-                        />
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-
-                {/* California Exposure Sites Section */}
-                <div id="exposure-sites" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
-                  <div className="relative overflow-hidden aspect-video">
-                    <img 
-                      src={californiaImage}
-                      alt="California landmarks and industrial exposure sites"
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    
-                    {/* Overlay Button */}
-                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
-                        <Users size={16} />
-                        View Sites
-                      </Button>
-                    </div>
-                  </div>
-                   <div className="p-6 space-y-4">
-                     <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">California Asbestos Exposure Sites</h2>
-                     
-                     <p className="text-sm text-muted-foreground leading-relaxed">
-                       California's industrial history created widespread exposure risks. Major sites include shipyards, refineries, power plants, construction projects, and aerospace facilities throughout the state.
-                     </p>
-                     
-                     {/* Site Types */}
-                     <div className="flex flex-wrap gap-2">
-                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                         Shipyards
-                       </span>
-                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                         Refineries
-                       </span>
-                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                         Power Plants
-                       </span>
-                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                         Aerospace
-                       </span>
-                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
-                         Construction
-                       </span>
-                     </div>
-                     
-                     {/* CTA */}
-                     <div className="pt-2">
-                       <Button variant="ghost" size="sm" className="group/btn">
-                         View Exposure Map
-                         <ArrowRight 
-                           size={14} 
-                           className="transition-transform group-hover/btn:translate-x-1" 
-                         />
-                       </Button>
-                     </div>
-                   </div>
-                </div>
-
-                {/* Call to Action */}
-                <div className="text-center mt-16">
-                  <Button variant="default" size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl px-12 py-6 font-bold">
-                    Get Your Free Consultation
-                    <ArrowRight size={18} />
-                  </Button>
-                </div>
+        {/* Main Content Cards */}
+        <div ref={cardsRef} className="grid lg:grid-cols-2 gap-8">
+          
+          {/* What to Do After Diagnosis */}
+          <Card className="glass-card group hover:scale-[1.02] transition-all duration-300">
+            <div className="relative overflow-hidden rounded-t-lg">
+              <img 
+                src={medicalImage} 
+                alt="Medical consultation for mesothelioma patients"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <Button variant="secondary" size="sm" className="w-full">
+                  Get Medical Guidance <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
               </div>
             </div>
-
-            {/* Sidebar - Contact Card */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-8">
-                <Card className="glass-card p-6 text-center">
-                  <CardHeader>
-                    <CardTitle className="text-2xl font-bold text-primary mb-4">
-                      <Phone className="w-8 h-8 mx-auto mb-2 text-accent" />
-                      Free Case Review
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="space-y-3">
-                      <Button size="lg" className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold">
-                        <Phone className="w-5 h-5 mr-2" />
-                        Call (855) 873-6222
-                      </Button>
-                      
-                      <Button variant="outline" size="lg" className="w-full">
-                        <Heart className="w-5 h-5 mr-2" />
-                        Email Consultation
-                      </Button>
-                      
-                      <Button variant="outline" size="lg" className="w-full">
-                        <Award className="w-5 h-5 mr-2" />
-                        Settlement Calculator
-                      </Button>
-                    </div>
-                    
-                    <Separator className="my-4" />
-                    
-                    <div className="text-center space-y-2">
-                      <Badge variant="secondary" className="text-sm">
-                        <Shield className="w-4 h-4 mr-1" />
-                        No Fees, No Risk
-                      </Badge>
-                      <p className="text-sm text-muted-foreground">
-                        We only get paid when you win your case
-                      </p>
-                    </div>
-                    
-                    <div className="flex justify-center items-center space-x-4 pt-4">
-                      <div className="text-center">
-                        <Clock className="w-6 h-6 text-accent mx-auto mb-1" />
-                        <p className="text-xs text-muted-foreground">24/7 Available</p>
-                      </div>
-                      <div className="text-center">
-                        <Users className="w-6 h-6 text-accent mx-auto mb-1" />
-                        <p className="text-xs text-muted-foreground">Expert Team</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <Heart className="w-5 h-5 text-destructive" />
+                <Badge variant="outline">Medical Priority</Badge>
               </div>
+              <CardTitle className="text-2xl">What to Do After a Mesothelioma Diagnosis</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="prose prose-sm text-muted-foreground">
+                <p className="leading-relaxed mb-4">
+                  A mesothelioma diagnosis fundamentally changes your life trajectory and demands immediate, coordinated action across multiple fronts. Time becomes your most precious resource, as this aggressive cancer progresses rapidly and treatment options often depend on early intervention. The decisions you make in the first weeks following diagnosis can significantly impact both your survival prospects and your family's financial security. Understanding what steps to prioritize helps ensure you maximize both medical and legal opportunities while managing the emotional toll of this devastating news.
+                </p>
+                
+                <p className="leading-relaxed mb-4">
+                  <strong>Securing specialized medical treatment must be your absolute first priority.</strong> Mesothelioma is an extremely rare cancer that most oncologists see only occasionally, if ever. General cancer centers may lack the specific expertise needed to provide optimal care for this unique disease. California hosts several world-renowned mesothelioma treatment centers, including specialized programs at UCLA, UCSF, Stanford, and City of Hope. These centers offer access to cutting-edge treatments, clinical trials, and multidisciplinary teams trained specifically in mesothelioma care. We maintain relationships with these institutions and can help facilitate rapid appointments, ensuring you access the best available treatment options without delay.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Simultaneously, you must immediately contact experienced mesothelioma legal representation to protect your rights. California's statute of limitations provides only one year from diagnosis to file personal injury claims, and crucial evidence begins disappearing as soon as you delay. Employment records get destroyed, witnesses' memories fade, and companies go out of business or file bankruptcy. Early legal intervention allows us to preserve evidence, secure witness testimony while it's still available, and begin the comprehensive investigation required to identify all exposure sources and liable parties.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>Documentation becomes critical for both medical and legal purposes.</strong> Begin gathering every piece of employment documentation you can locate, including union records, Social Security earnings statements, military service records, and any photographs from job sites. Document your symptoms, treatments, and how the disease affects your daily activities. This information helps medical providers understand your disease progression and assists legal teams in quantifying damages for pain and suffering claims. Inform family members about potential secondary exposure through work clothes or household contact, as they may also have claims if they develop related diseases.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Avoid certain actions that could harm your case. Never sign documents from former employers or their attorneys without legal review. Don't provide recorded statements to investigators or adjusters. Avoid posting about your diagnosis on social media, as these posts can be discovered and used against you. Don't delay seeking both medical and legal help due to emotional overwhelm - every day matters in mesothelioma cases. Don't attempt to investigate your exposure history alone, as this complex process requires specialized knowledge and resources.
+                </p>
+
+                <p className="leading-relaxed">
+                  Most importantly, remember that while mesothelioma is a terminal diagnosis, new treatments are extending survival for many patients. Some people live years beyond initial prognoses, especially when they receive aggressive treatment at specialized centers. Simultaneously pursuing maximum compensation ensures your family's financial security regardless of treatment outcomes. Our coordinated approach addresses both immediate medical needs and long-term financial protection, allowing you to focus on fighting this disease while we fight for your rights.
+                </p>
+              </div>
+              <Button variant="outline" className="w-full mt-4">
+                Schedule Consultation
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Important to Know About Claims */}
+          <Card className="glass-card group hover:scale-[1.02] transition-all duration-300">
+            <div className="relative overflow-hidden rounded-t-lg">
+              <img 
+                src={legalImage} 
+                alt="Legal documentation and claim process"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <Button variant="secondary" size="sm" className="w-full">
+                  Learn About Claims <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <Shield className="w-5 h-5 text-primary" />
+                <Badge variant="outline">Legal Protection</Badge>
+              </div>
+              <CardTitle className="text-2xl">Important to Know About Mesothelioma Claims</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="prose prose-sm text-muted-foreground">
+                <p className="leading-relaxed mb-4">
+                  <strong>Mesothelioma is a devastating cancer caused exclusively by asbestos exposure</strong>, often developing 20-50 years after initial contact with asbestos fibers. This aggressive cancer affects the protective lining of the lungs (pleural mesothelioma, accounting for 75% of cases), abdomen (peritoneal mesothelioma, 20% of cases), heart (pericardial mesothelioma, 1% of cases), or testicles (testicular mesothelioma, less than 1% of cases). The prognosis remains grim, with most patients facing 12-21 months after diagnosis, though new treatments are extending survival for some patients.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  The long latency period—typically 20-50 years but sometimes as long as 70 years—means many victims are now being diagnosed from exposures that occurred in the 1960s, 1970s, and 1980s when asbestos use peaked in American industry. These exposures happened in shipyards where asbestos insulation covered every pipe and boiler, construction sites where workers cut asbestos cement and installed fireproofing, military service where sailors lived surrounded by asbestos aboard ships, refineries and chemical plants where asbestos protected equipment from extreme heat, power plants where turbines and generators contained asbestos components, and automotive repair shops where mechanics ground asbestos brake linings.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>California's legal framework provides exceptional advantages for mesothelioma victims</strong> compared to other states. Our state follows the doctrine of strict liability for asbestos cases, meaning victims don't need to prove negligence—only that exposure to a defendant's asbestos-containing product was a substantial factor in causing the disease. California's statute of limitations provides one year from diagnosis for personal injury claims and one year from death for wrongful death claims, with the discovery rule potentially extending these deadlines if the connection to asbestos wasn't immediately apparent.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Unlike states that have enacted tort reform limiting damages, California allows unlimited non-economic damages for pain and suffering, often the largest component of mesothelioma settlements. Our state permits joint and several liability, meaning any defendant found liable can be required to pay the entire judgment, protecting victims when some defendants are bankrupt or defunct. California courts have established favorable precedents through landmark cases that recognize alternative exposure theories, minimal exposure standards, and broad definitions of product defects.
+                </p>
+
+                <p className="leading-relaxed">
+                  <strong>The asbestos bankruptcy trust system represents a parallel compensation pathway</strong> that many victims don't fully understand. When asbestos companies faced overwhelming liability, many filed for bankruptcy protection, establishing trusts to compensate current and future victims. Today, over 60 trusts hold more than $30 billion in assets specifically earmarked for mesothelioma victims. Each trust operates independently with unique claim requirements, payment percentages, and evidence standards. Strategic sequencing of trust claims can maximize total recovery, and many victims qualify for 10-20 different trust funds based on various exposures throughout their careers.
+                </p>
+              </div>
+              <Button variant="outline" className="w-full mt-4">
+                Evaluate Your Claim
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Common Damages */}
+          <Card className="glass-card group hover:scale-[1.02] transition-all duration-300">
+            <div className="relative overflow-hidden rounded-t-lg">
+              <img 
+                src={exposureImage} 
+                alt="Industrial exposure sources and compensation"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <Button variant="secondary" size="sm" className="w-full">
+                  Calculate Damages <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <Award className="w-5 h-5 text-warning" />
+                <Badge variant="outline">Compensation</Badge>
+              </div>
+              <CardTitle className="text-2xl">Common Damages from Mesothelioma</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="prose prose-sm text-muted-foreground">
+                <p className="leading-relaxed mb-4">
+                  <strong>Mesothelioma settlements and verdicts vary significantly based on individual circumstances</strong>, but often range from hundreds of thousands to several million dollars. Understanding the factors that influence compensation helps set realistic expectations and ensures you pursue all available sources of recovery. The total amount depends on numerous variables including your age at diagnosis, occupation and exposure history, the number of liable defendants identified, available coverage, economic losses, and the strength of evidence linking your disease to specific asbestos products.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>Medical expenses form a substantial component of mesothelioma damages.</strong> Treatment costs can exceed $400,000 annually, including surgery, chemotherapy, radiation, and supportive care. Specialized procedures like extrapleural pneumonectomy or heated intraoperative chemotherapy can cost over $100,000 each. Clinical trial participation may require travel to distant treatment centers, adding accommodation and transportation expenses. Home care, medical equipment, and prescription medications create ongoing costs. Future medical expenses must be projected based on prognosis and potential treatments, often requiring expert economic testimony to properly value these claims.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Lost wages and reduced earning capacity represent another major damage category. Many mesothelioma victims are forced to retire early or reduce working hours due to symptoms and treatment demands. Calculating these losses requires analyzing your employment history, career trajectory, and remaining work-life expectancy. Benefits lost due to early retirement, including health coverage and pension contributions, add to economic damages. Spouses may also lose income when they become caregivers, creating additional family economic impact that can be recovered in some cases.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>Pain and suffering damages often represent the largest component of mesothelioma settlements.</strong> California places no caps on non-economic damages, allowing full compensation for the physical pain, emotional distress, and diminished quality of life caused by this terrible disease. These damages account for the fear and anxiety of a terminal diagnosis, the pain from aggressive treatments, the loss of life pleasures, and the emotional impact on family relationships. Evidence supporting these claims includes medical records documenting symptoms, testimony about daily life limitations, and expert psychological evaluation of emotional trauma.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Family members may recover loss of consortium damages for the impact on spousal relationships and family dynamics. Children can claim loss of parental guidance and support. These damages recognize that mesothelioma affects entire families, not just the diagnosed patient. Some cases also involve punitive damages when defendants' conduct was particularly egregious, such as concealing known asbestos dangers from workers and the public.
+                </p>
+
+                <p className="leading-relaxed">
+                  <strong>Multiple compensation sources can provide additional recovery beyond traditional lawsuits.</strong> Asbestos bankruptcy trust funds operate independently and can pay benefits while litigation proceeds. Veterans may receive VA disability benefits and healthcare. Workers' compensation may apply for occupational exposures. Social Security disability provides income support for those unable to work. Each source has different requirements and doesn't reduce others, potentially providing substantial total compensation for mesothelioma victims and their families.
+                </p>
+              </div>
+              <Button variant="outline" className="w-full mt-4">
+                Estimate Compensation
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* California Exposure Sites */}
+          <Card className="glass-card group hover:scale-[1.02] transition-all duration-300">
+            <div className="relative overflow-hidden rounded-t-lg">
+              <img 
+                src={californiaImage} 
+                alt="California asbestos exposure locations"
+                className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+              <div className="absolute bottom-4 left-4 right-4">
+                <Button variant="secondary" size="sm" className="w-full">
+                  Find Exposure Sites <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </div>
+            </div>
+            <CardHeader>
+              <div className="flex items-center gap-2 mb-2">
+                <Users className="w-5 h-5 text-accent" />
+                <Badge variant="outline">California Focus</Badge>
+              </div>
+              <CardTitle className="text-2xl">California Asbestos Exposure Sites</CardTitle>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="prose prose-sm text-muted-foreground">
+                <p className="leading-relaxed mb-4">
+                  <strong>California's industrial history created widespread asbestos exposure opportunities</strong> across diverse industries and geographic regions throughout the state. From the massive naval shipyards of World War II through the oil refineries, power plants, and construction boom of the post-war era, millions of California workers encountered dangerous asbestos products daily. Understanding these exposure sources helps identify liable parties and builds stronger compensation claims for victims now suffering from mesothelioma decades after their initial contact with asbestos.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>Naval shipyards represent some of California's most concentrated asbestos exposure sites.</strong> The Long Beach Naval Shipyard, Mare Island Naval Shipyard near San Francisco, Hunters Point Naval Shipyard, and San Pedro naval facilities employed thousands of workers who lived surrounded by asbestos insulation, gaskets, and fireproofing materials. Ships built during World War II and the Korean War contained asbestos in virtually every compartment - boiler rooms, engine rooms, pipe insulation, electrical systems, and even sleeping quarters. Workers breathed dangerous levels of asbestos fibers daily while installing, maintaining, and removing these materials.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  California's oil refining industry created another major exposure source through facilities operated by Chevron, Shell, ExxonMobil, Valero, and other petroleum companies. Refineries in Richmond, El Segundo, Carson, Torrance, and Martinez used massive amounts of asbestos insulation on pipelines, boilers, pumps, and processing equipment exposed to extreme temperatures. Maintenance workers, pipe fitters, insulators, and electricians regularly disturbed deteriorating asbestos materials during routine repairs and overhauls, releasing dangerous fibers into the workplace atmosphere.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  <strong>Power generation facilities throughout California exposed workers to asbestos in steam turbines, boilers, electrical equipment, and cooling systems.</strong> Major utilities including Pacific Gas & Electric, Southern California Edison, and San Diego Gas & Electric operated power plants containing extensive asbestos components. Workers at facilities like Diablo Canyon, San Onofre, Alamitos, and El Segundo power plants encountered asbestos during construction, maintenance, and demolition activities spanning several decades.
+                </p>
+
+                <p className="leading-relaxed mb-4">
+                  Construction and industrial sites across California used asbestos in building materials, insulation, flooring, roofing, and fireproofing products. Major construction projects including airports, hospitals, schools, and commercial buildings incorporated asbestos cement, floor tiles, ceiling materials, and spray-applied fireproofing. Automotive manufacturing and repair facilities exposed workers to asbestos brake linings, clutch facings, and gaskets. Steel mills, chemical plants, and manufacturing facilities used asbestos in high-temperature applications throughout their operations.
+                </p>
+
+                <p className="leading-relaxed">
+                  <strong>Secondary exposure also occurred when workers brought asbestos fibers home on their clothing</strong>, exposing family members to dangerous levels of contamination. Wives who washed work clothes, children who hugged parents after work, and family members who lived in homes where work clothes were stored all faced potential exposure. These secondary exposure cases can result in substantial compensation when companies failed to provide adequate warnings or safety measures to protect workers' families from take-home contamination.
+                </p>
+              </div>
+              <Button variant="outline" className="w-full mt-4">
+                Identify Your Exposure
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section className="py-20 bg-muted/30">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold mb-4">Frequently Asked Questions</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Expert answers to common questions about mesothelioma claims and legal representation
+            </p>
+          </div>
+
+          <div ref={faqsRef} className="max-w-4xl mx-auto space-y-4">
+            {faqs.map((faq, index) => (
+              <Card key={index} className="glass-card overflow-hidden">
+                <CardHeader 
+                  className="cursor-pointer hover:bg-muted/50 transition-colors duration-200"
+                  onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                >
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="text-lg text-left">{faq.question}</CardTitle>
+                    {expandedFaq === index ? (
+                      <ChevronUp className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                    ) : (
+                      <ChevronDown className="w-5 h-5 text-muted-foreground flex-shrink-0" />
+                    )}
+                  </div>
+                </CardHeader>
+                {expandedFaq === index && (
+                  <CardContent className="pt-0">
+                    <Separator className="mb-4" />
+                    <p className="text-muted-foreground leading-relaxed">
+                      {faq.answer}
+                    </p>
+                  </CardContent>
+                )}
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
+        <div className="container mx-auto px-6 text-center">
+          <div className="max-w-4xl mx-auto space-y-6">
+            <h2 className="text-4xl font-bold text-primary-foreground">
+              Don't Wait - Time Is Critical for Mesothelioma Claims
+            </h2>
+            <p className="text-xl text-primary-foreground/90">
+              California law provides only one year from diagnosis to file your claim. Contact us immediately for your free consultation.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center">
+              <Button size="lg" variant="secondary" className="group">
+                <Phone className="w-5 h-5 mr-2" />
+                Call 855-TREMBACH-WINS
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+                Free Case Evaluation
+              </Button>
             </div>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -6,8 +6,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import heroBackground from '@/assets/hero-background.png';
-import ParticleBackground from './ParticleBackground';
-import MorphingSVG from './MorphingSVG';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -66,24 +64,12 @@ const Hero = () => {
 
   return (
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden">
-      {/* Particle Background */}
-      <ParticleBackground 
-        particleCount={25} 
-        color="#dc2626"
-        className="opacity-10"
-      />
-      
       {/* Hero Background Image */}
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
-      </div>
-
-      {/* Morphing SVG Decoration */}
-      <div className="absolute top-1/4 right-1/4 opacity-20">
-        <MorphingSVG className="w-32 h-32" color="#dc2626" />
       </div>
 
       <div className="relative z-10 flex w-full h-screen">

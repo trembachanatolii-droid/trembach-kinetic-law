@@ -10,73 +10,10 @@ import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
-import SchemaMarkup from '../components/SchemaMarkup';
-import ParallaxSection from '../components/ParallaxSection';
-import AnimatedStatistics from '../components/AnimatedStatistics';
-import AnimatedTimeline from '../components/AnimatedTimeline';
-import ExpandedFAQ from '../components/ExpandedFAQ';
-import ParticleBackground from '../components/ParticleBackground';
-import { Shield, Award, Users, TrendingUp, Phone, Scale, FileText, Clock } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-  const schemaData = {
-    address: {
-      "@type": "PostalAddress",
-      "streetAddress": "27001 Agoura Road, Suite 350",
-      "addressLocality": "Calabasas",
-      "addressRegion": "CA",
-      "postalCode": "91301",
-      "addressCountry": "US"
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      "latitude": "34.1478",
-      "longitude": "-118.6618"
-    },
-    areaServed: [
-      "Los Angeles, CA",
-      "San Francisco, CA", 
-      "San Diego, CA",
-      "Sacramento, CA",
-      "Fresno, CA",
-      "Long Beach, CA",
-      "Oakland, CA"
-    ],
-    url: "https://trembach-law.com"
-  };
-
-  const statistics = [
-    { label: "Counties Served", value: 58, suffix: "", icon: <Shield /> },
-    { label: "Hours Available", value: 24, suffix: "/7", icon: <Award /> },
-    { label: "Languages Supported", value: 3, suffix: "+", icon: <Users /> },
-    { label: "Free Consultation", value: 100, suffix: "%", icon: <TrendingUp /> }
-  ];
-
-  const timelineSteps = [
-    {
-      title: "Free Consultation",
-      description: "We evaluate your case at no cost and explain your legal rights and options. Our experienced attorneys listen to your story and provide honest advice.",
-      icon: <Phone className="w-6 h-6 text-primary-foreground" />
-    },
-    {
-      title: "Investigation & Evidence",
-      description: "Our team conducts thorough investigations, gathering medical records, employment history, and expert testimony to build your strongest case.",
-      icon: <FileText className="w-6 h-6 text-primary-foreground" />
-    },
-    {
-      title: "Legal Action",
-      description: "We file your lawsuit and aggressively negotiate with defendants and insurance companies to secure maximum compensation for your injuries.",
-      icon: <Scale className="w-6 h-6 text-primary-foreground" />
-    },
-    {
-      title: "Resolution & Recovery",
-      description: "Whether through settlement or trial verdict, we work tirelessly until you receive the compensation you deserve for your suffering.",
-      icon: <Clock className="w-6 h-6 text-primary-foreground" />
-    }
-  ];
-
   useEffect(() => {
     // Initialize smooth scrolling and animations
     gsap.registerPlugin(ScrollTrigger);
@@ -91,25 +28,8 @@ const Index = () => {
 
   return (
     <main className="relative bg-background text-foreground">
-      <SchemaMarkup type="legal-service" data={schemaData} />
-      
-      {/* Particle Background for Hero */}
-      <div className="absolute inset-0 overflow-hidden">
-        <ParticleBackground 
-          particleCount={30} 
-          color="#dc2626"
-          className="opacity-20"
-        />
-      </div>
-
-      {/* Hero Section with Parallax */}
-      <ParallaxSection 
-        backgroundImage="/hero-background.png"
-        speed={0.5}
-        className="relative"
-      >
-        <Hero />
-      </ParallaxSection>
+      {/* Hero Section */}
+      <Hero />
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -140,24 +60,11 @@ const Index = () => {
         />
       </div>
 
-      {/* Statistics Section */}
-      <AnimatedStatistics 
-        statistics={statistics}
-        title="Dedicated Service for California Families"
-        className="bg-primary/5"
-      />
-
       {/* Critical Steps Section */}
       <CriticalStepsSection />
 
       {/* Every Problem Solved */}
       <EveryProblemSolved />
-
-      {/* Legal Process Timeline */}
-      <AnimatedTimeline 
-        steps={timelineSteps}
-        title="Our Proven Legal Process"
-      />
 
       {/* Capability Stripes */}
       <CapabilityStripes />
@@ -170,9 +77,6 @@ const Index = () => {
 
       {/* Process */}
       <Process />
-
-      {/* FAQ Section */}
-      <ExpandedFAQ />
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

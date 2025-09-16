@@ -10,6 +10,8 @@ import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, DollarSign, TrendingUp, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 import heroBackground from '@/assets/floating-scales-justice.jpg';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -155,6 +157,11 @@ const CompensationCalculator: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      <SEO 
+        title="Mesothelioma Compensation Calculator | Trembach Law Firm"
+        description="Estimate potential compensation based on your circumstances. For an accurate assessment, get a free consultation."
+        canonical="/compensation-calculator"
+      />
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 
@@ -171,6 +178,11 @@ const CompensationCalculator: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* Go Back (below hero to avoid overlap with logo) */}
+      <div className="container mx-auto px-6 mt-6">
+        <GoBack />
+      </div>
 
       {/* Main Content */}
       <section className="py-20">

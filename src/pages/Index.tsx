@@ -10,6 +10,7 @@ import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
+import SEO from '../components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -28,6 +29,11 @@ const Index = () => {
 
   return (
     <main className="relative bg-background text-foreground">
+      <SEO 
+        title="Trembach Law Firm | California Injury & Asbestos Attorney"
+        description="Former insurance defense attorney helping Californians. New firm, insider tactics, no fees unless we win."
+        canonical="/"
+      />
       {/* Hero Section */}
       <Hero />
 
@@ -104,7 +110,6 @@ const Index = () => {
               <div className="space-y-3">
                 {[
                   'Practice Areas',
-                  'Case Results', 
                   'About Attorney',
                   'California Law',
                   'Locations',

@@ -54,7 +54,7 @@ const Navigation = () => {
             Practice Areas
           </a>
           <a href="#results" className="text-white hover:text-primary transition-colors font-medium">
-            Results
+            Why Us
           </a>
           <a href="#about" className="text-white hover:text-primary transition-colors font-medium">
             About

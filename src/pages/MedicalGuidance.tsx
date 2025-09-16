@@ -10,6 +10,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Badge } from '@/components/ui/badge';
 import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star, ArrowLeft } from 'lucide-react';
 import heroBackground from '@/assets/medical-guidance-hero.jpg';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,18 +98,11 @@ const MedicalGuidance: React.FC = () => {
 
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
-      {/* Go Back Button */}
-      <div className="container mx-auto px-6 pt-6">
-        <Button 
-          variant="ghost" 
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 hover:bg-primary/10"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Go Back
-        </Button>
-      </div>
-
+      <SEO 
+        title="Medical Guidance & Support | Trembach Law Firm"
+        description="Connect with mesothelioma specialists and get personalized medical guidance across California."
+        canonical="/medical-guidance"
+      />
       {/* Hero Section */}
       <section className="relative py-32 overflow-hidden">
         <div 
@@ -124,6 +119,11 @@ const MedicalGuidance: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* Go Back (below hero to avoid overlap with logo) */}
+      <div className="container mx-auto px-6 mt-6">
+        <GoBack />
+      </div>
 
       {/* Main Content */}
       <section className="py-20">

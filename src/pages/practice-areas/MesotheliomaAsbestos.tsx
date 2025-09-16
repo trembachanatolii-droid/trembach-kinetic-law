@@ -115,18 +115,6 @@ const MesotheliomaAsbestos: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Go Back Button */}
-      <div className="container mx-auto px-6 pt-6">
-        <Button 
-          variant="ghost" 
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 hover:bg-primary/10"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Go Back
-        </Button>
-      </div>
-
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -134,6 +122,18 @@ const MesotheliomaAsbestos: React.FC = () => {
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
+        
+        {/* Go Back Button - positioned in hero overlay */}
+        <div className="absolute top-20 left-6 z-10">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
@@ -1245,8 +1245,7 @@ const MesotheliomaAsbestos: React.FC = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
               onClick={() => window.location.href = 'tel:8559851234'}
             >
               Call (855) 985-1234

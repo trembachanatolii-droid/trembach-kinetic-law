@@ -48,10 +48,10 @@ const Index = () => {
   };
 
   const statistics = [
-    { label: "Cases Won", value: 500, suffix: "+", icon: <Shield /> },
-    { label: "Million Recovered", value: 200, prefix: "$", suffix: "M+", icon: <Award /> },
-    { label: "Years Experience", value: 25, suffix: "+", icon: <Users /> },
-    { label: "Client Satisfaction", value: 99, suffix: "%", icon: <TrendingUp /> }
+    { label: "Counties Served", value: 58, suffix: "", icon: <Shield /> },
+    { label: "Hours Available", value: 24, suffix: "/7", icon: <Award /> },
+    { label: "Languages Supported", value: 3, suffix: "+", icon: <Users /> },
+    { label: "Free Consultation", value: 100, suffix: "%", icon: <TrendingUp /> }
   ];
 
   const timelineSteps = [
@@ -143,7 +143,7 @@ const Index = () => {
       {/* Statistics Section */}
       <AnimatedStatistics 
         statistics={statistics}
-        title="Proven Results for California Families"
+        title="Dedicated Service for California Families"
         className="bg-primary/5"
       />
 

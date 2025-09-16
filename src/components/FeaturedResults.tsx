@@ -120,40 +120,40 @@ const FeaturedResults = () => {
 
   const results = [
     {
-      title: "Construction Silicosis Settlement",
-      metric: "$2.8M",
-      description: "Secured maximum compensation for construction worker diagnosed with silicosis from decades of exposure to respirable crystalline silica.",
-      caseType: "Silicosis"
+      title: "Comprehensive Case Preparation",
+      metric: "100%",
+      description: "Every case receives thorough investigation, expert medical consultation, and detailed documentation to maximize potential outcomes.",
+      caseType: "Our Commitment"
     },
     {
-      title: "Mesothelioma Verdict",
-      metric: "$4.2M",
-      description: "Jury verdict for Navy veteran and his family after asbestos exposure during military service led to mesothelioma diagnosis.",
-      caseType: "Mesothelioma"
+      title: "No Upfront Costs",
+      metric: "$0",
+      description: "We advance all case expenses and only get paid when we win your case. No hidden fees or surprise charges.",
+      caseType: "Contingency Fee"
     },
     {
-      title: "Multi-Vehicle Collision",
-      metric: "$1.5M",
-      description: "Policy limits recovery for client with traumatic brain injury in freeway accident involving commercial vehicle.",
-      caseType: "Auto Accident"
+      title: "Rapid Response Time",
+      metric: "24hrs",
+      description: "Initial case evaluation and consultation scheduling within 24 hours. We understand time is critical in injury cases.",
+      caseType: "Quick Action"
     },
     {
-      title: "Talc Ovarian Cancer",
-      metric: "$890K",
-      description: "Settlement for woman who developed ovarian cancer after decades of talcum powder use. Case resolved before trial.",
-      caseType: "Product Liability"
+      title: "Multi-Language Support", 
+      metric: "3+",
+      description: "Legal services available in English, Spanish, and Armenian to serve California's diverse communities.",
+      caseType: "Accessibility"
     },
     {
-      title: "Wrongful Death - Industrial",
-      metric: "$3.1M",
-      description: "Wrongful death settlement for family after workplace explosion at oil refinery. Secured full compensation for loss of income and pain.",
-      caseType: "Wrongful Death"
+      title: "Statewide Coverage",
+      metric: "58",
+      description: "Serving clients in all 58 California counties with local knowledge of courts, laws, and medical providers.",
+      caseType: "Coverage Area"
     },
     {
-      title: "Dog Attack Settlement",
-      metric: "$675K",
-      description: "Maximum recovery for child attacked by neighbor's dog, covering medical expenses, scarring, and psychological trauma.",
-      caseType: "Dog Bite"
+      title: "Former Defense Experience",
+      metric: "Inside",
+      description: "Attorney Trembach's background defending insurance companies provides unique insights into their strategies.",
+      caseType: "Strategic Advantage"
     }
   ];
 
@@ -192,10 +192,10 @@ const FeaturedResults = () => {
         {/* Section Header */}
         <div className="results-header text-center max-w-4xl mx-auto mb-16">
           <h2 className="text-display font-display font-bold text-foreground mb-6 glow">
-            Real Results for Real People
+            Why Choose Trembach Law Firm
           </h2>
           <p className="text-body text-muted-foreground leading-relaxed">
-            Our insider knowledge of insurance tactics consistently delivers maximum compensation for California injury victims
+            Our insider knowledge of insurance tactics and commitment to excellence sets us apart in serving California injury victims
           </p>
         </div>
 

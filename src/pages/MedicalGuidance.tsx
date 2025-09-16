@@ -1,10 +1,72 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
-import { Heart, Phone, MapPin, Users, Award, ArrowRight } from 'lucide-react';
+import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star } from 'lucide-react';
+import heroBackground from '@/assets/mesothelioma-hero.jpg';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const MedicalGuidance: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    diagnosisType: '',
+    stage: '',
+    currentTreatment: '',
+    location: '',
+    additionalInfo: ''
+  });
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate content cards with staggered entrance
+      gsap.fromTo(cardsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 100,
+          scale: 0.8,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Medical guidance request:', formData);
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
   const treatmentCenters = [
     {
       name: "UCLA Jonsson Comprehensive Cancer Center",
@@ -32,165 +94,242 @@ const MedicalGuidance: React.FC = () => {
     }
   ];
 
-  const treatmentOptions = [
-    {
-      title: "Surgery",
-      description: "Extrapleural pneumonectomy, pleurectomy/decortication, and cytoreductive surgery for appropriate candidates.",
-      icon: Heart
-    },
-    {
-      title: "Chemotherapy",
-      description: "Combination therapies including pemetrexed, cisplatin, and newer targeted agents.",
-      icon: Award
-    },
-    {
-      title: "Radiation Therapy",
-      description: "Intensity-modulated radiation therapy (IMRT) and stereotactic body radiation therapy (SBRT).",
-      icon: Users
-    },
-    {
-      title: "Immunotherapy",
-      description: "Checkpoint inhibitors and combination immunotherapy approaches showing promising results.",
-      icon: Phone
-    }
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold text-primary-foreground mb-4">
-            Medical Guidance for Mesothelioma Patients
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
+        <div className="relative container mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
+            Medical Guidance & Support
           </h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
-            Connect with the best mesothelioma specialists and treatment centers in California
+          <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
+            Connect with mesothelioma specialists and get comprehensive medical guidance for your journey.
           </p>
         </div>
       </section>
 
-      {/* Treatment Centers */}
+      {/* Main Content */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Leading Mesothelioma Treatment Centers</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-              California is home to world-renowned cancer centers with specialized mesothelioma programs
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8 mb-16">
-            {treatmentCenters.map((center, index) => (
-              <Card key={index} className="glass-card group hover:scale-[1.02] transition-all duration-300">
+          <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
+            {/* Medical Guidance Form */}
+            <div className="lg:col-span-2">
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
                 <CardHeader>
-                  <div className="flex items-center gap-2 mb-2">
-                    <Heart className="w-5 h-5 text-destructive" />
-                    <Badge variant="outline">Specialized Center</Badge>
-                  </div>
-                  <CardTitle className="text-xl">{center.name}</CardTitle>
-                  <div className="flex items-center gap-2 text-muted-foreground">
-                    <MapPin className="w-4 h-4" />
-                    <span>{center.location}</span>
-                  </div>
+                  <CardTitle className="text-2xl">Get Medical Guidance</CardTitle>
+                  <p className="text-muted-foreground">
+                    Connect with mesothelioma specialists and get personalized treatment recommendations.
+                  </p>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="firstName">First Name *</Label>
+                        <Input
+                          id="firstName"
+                          value={formData.firstName}
+                          onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="lastName">Last Name *</Label>
+                        <Input
+                          id="lastName"
+                          value={formData.lastName}
+                          onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="email">Email Address *</Label>
+                        <Input
+                          id="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                          required
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="phone">Phone Number *</Label>
+                        <Input
+                          id="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => handleInputChange('phone', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="diagnosisType">Diagnosis Type</Label>
+                        <Select onValueChange={(value) => handleInputChange('diagnosisType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select diagnosis" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="pleural">Pleural Mesothelioma</SelectItem>
+                            <SelectItem value="peritoneal">Peritoneal Mesothelioma</SelectItem>
+                            <SelectItem value="pericardial">Pericardial Mesothelioma</SelectItem>
+                            <SelectItem value="testicular">Testicular Mesothelioma</SelectItem>
+                            <SelectItem value="suspected">Suspected Diagnosis</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="stage">Cancer Stage</Label>
+                        <Select onValueChange={(value) => handleInputChange('stage', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select stage" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="stage1">Stage I</SelectItem>
+                            <SelectItem value="stage2">Stage II</SelectItem>
+                            <SelectItem value="stage3">Stage III</SelectItem>
+                            <SelectItem value="stage4">Stage IV</SelectItem>
+                            <SelectItem value="unknown">Unknown</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="currentTreatment">Current Treatment</Label>
+                        <Input
+                          id="currentTreatment"
+                          value={formData.currentTreatment}
+                          onChange={(e) => handleInputChange('currentTreatment', e.target.value)}
+                          placeholder="Current treatment plan"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="location">Preferred Location</Label>
+                        <Select onValueChange={(value) => handleInputChange('location', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select location" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="los-angeles">Los Angeles Area</SelectItem>
+                            <SelectItem value="san-francisco">San Francisco Bay Area</SelectItem>
+                            <SelectItem value="san-diego">San Diego Area</SelectItem>
+                            <SelectItem value="sacramento">Sacramento Area</SelectItem>
+                            <SelectItem value="anywhere">Anywhere in California</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="additionalInfo">Additional Medical Information</Label>
+                      <Textarea
+                        id="additionalInfo"
+                        placeholder="Please share any additional medical information, current symptoms, or specific questions you have..."
+                        value={formData.additionalInfo}
+                        onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                        rows={4}
+                      />
+                    </div>
+
+                    <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
+                      Get Medical Guidance
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Treatment Centers */}
+            <div className="space-y-6">
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+                <CardHeader>
+                  <CardTitle>Leading Treatment Centers</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Specialties:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {center.specialties.map((specialty, idx) => (
-                        <Badge key={idx} variant="secondary">{specialty}</Badge>
-                      ))}
+                  {treatmentCenters.map((center, index) => (
+                    <div key={index} className="border-b border-border/20 last:border-0 pb-3 last:pb-0">
+                      <div className="flex items-center gap-2 mb-1">
+                        <Heart className="w-4 h-4 text-destructive" />
+                        <h4 className="font-semibold text-sm">{center.name}</h4>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                        <MapPin className="w-3 h-3" />
+                        <span>{center.location}</span>
+                      </div>
+                      <div className="flex flex-wrap gap-1">
+                        {center.specialties.slice(0, 2).map((specialty, idx) => (
+                          <Badge key={idx} variant="secondary" className="text-xs">{specialty}</Badge>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+                <CardHeader>
+                  <CardTitle>Treatment Options</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-center gap-3">
+                    <Star className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="font-semibold text-sm">Surgery</p>
+                      <p className="text-xs text-muted-foreground">Specialized surgical procedures</p>
                     </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-primary" />
-                    <span className="font-medium">{center.contact}</span>
+                  
+                  <div className="flex items-center gap-3">
+                    <Star className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="font-semibold text-sm">Chemotherapy</p>
+                      <p className="text-xs text-muted-foreground">Advanced combination therapies</p>
+                    </div>
                   </div>
-                  <Button variant="outline" className="w-full mt-4">
-                    Get Referral <ArrowRight className="w-4 h-4 ml-2" />
+                  
+                  <div className="flex items-center gap-3">
+                    <Star className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="font-semibold text-sm">Immunotherapy</p>
+                      <p className="text-xs text-muted-foreground">Cutting-edge treatments</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3">
+                    <Clock className="w-4 h-4 text-primary" />
+                    <div>
+                      <p className="font-semibold text-sm">Clinical Trials</p>
+                      <p className="text-xs text-muted-foreground">Access to experimental treatments</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 backdrop-blur-md shadow-2xl">
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold mb-2">Urgent Medical Support</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    For immediate medical guidance or emergency consultations, call us directly. We're available 24/7.
+                  </p>
+                  <Button variant="outline" size="sm" className="w-full">
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call for Immediate Help
                   </Button>
                 </CardContent>
               </Card>
-            ))}
-          </div>
-
-          {/* Treatment Options */}
-          <div className="mb-16">
-            <h2 className="text-3xl font-bold text-center mb-12">Treatment Options</h2>
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {treatmentOptions.map((option, index) => (
-                <Card key={index} className="glass-card text-center">
-                  <CardHeader>
-                    <div className="mx-auto w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                      <option.icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-lg">{option.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">{option.description}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-
-          {/* Important Information */}
-          <Card className="glass-card bg-gradient-to-br from-primary/10 to-primary/5">
-            <CardHeader>
-              <CardTitle className="text-2xl">Important Medical Information</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <h4 className="font-semibold mb-2">Time is Critical</h4>
-                <p className="text-muted-foreground">
-                  Mesothelioma is an aggressive cancer. Early intervention with specialized treatment can significantly impact outcomes. Don't delay in seeking expert care.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold mb-2">Second Opinions</h4>
-                <p className="text-muted-foreground">
-                  We strongly encourage getting a second opinion from a mesothelioma specialist. Different centers may offer different treatment approaches and clinical trials.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold mb-2">Clinical Trials</h4>
-                <p className="text-muted-foreground">
-                  Clinical trials may offer access to cutting-edge treatments not yet widely available. Ask your oncologist about trial eligibility.
-                </p>
-              </div>
-              
-              <div>
-                <h4 className="font-semibold mb-2">Support Services</h4>
-                <p className="text-muted-foreground">
-                  Most cancer centers offer support services including social workers, nutritionists, and support groups for patients and families.
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
-
-      {/* Call to Action */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
-        <div className="container mx-auto px-6 text-center">
-          <div className="max-w-4xl mx-auto space-y-6">
-            <h2 className="text-4xl font-bold text-primary-foreground">
-              We Can Help Connect You with Specialists
-            </h2>
-            <p className="text-xl text-primary-foreground/90">
-              Our team has relationships with leading mesothelioma doctors and can help facilitate appointments.
-            </p>
-            <div className="flex flex-wrap gap-4 justify-center">
-              <Button size="lg" variant="secondary" className="group">
-                <Phone className="w-5 h-5 mr-2" />
-                Call 855-TREMBACH-WINS
-                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-                Free Medical Consultation
-              </Button>
             </div>
           </div>
         </div>

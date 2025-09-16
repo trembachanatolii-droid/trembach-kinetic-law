@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -6,6 +8,9 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar, Clock, Phone, Video, MapPin, ArrowRight } from 'lucide-react';
+import heroBackground from '@/assets/mesothelioma-hero.jpg';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const ScheduleConsultation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -19,6 +24,38 @@ const ScheduleConsultation: React.FC = () => {
     urgency: '',
     caseDetails: ''
   });
+
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate content cards with staggered entrance
+      gsap.fromTo(cardsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 100,
+          scale: 0.8,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -35,14 +72,19 @@ const ScheduleConsultation: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-r from-primary to-primary/80">
-        <div className="container mx-auto px-6 text-center">
-          <h1 className="text-4xl font-bold text-primary-foreground mb-4">
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
+        <div className="relative container mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
             Schedule Your Free Consultation
           </h1>
-          <p className="text-xl text-primary-foreground/90 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
             Book your confidential consultation today. No fees unless we win your case.
           </p>
         </div>
@@ -51,10 +93,10 @@ const ScheduleConsultation: React.FC = () => {
       {/* Main Content */}
       <section className="py-20">
         <div className="container mx-auto px-6">
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
             {/* Scheduling Form */}
             <div className="lg:col-span-2">
-              <Card className="glass-card">
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
                 <CardHeader>
                   <CardTitle className="text-2xl">Schedule Your Consultation</CardTitle>
                   <p className="text-muted-foreground">

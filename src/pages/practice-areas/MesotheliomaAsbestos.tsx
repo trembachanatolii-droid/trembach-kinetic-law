@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';

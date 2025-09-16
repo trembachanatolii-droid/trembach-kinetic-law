@@ -6,6 +6,33 @@
 
 /* Trembach Law Firm - Cinematic Design System */
 
+/* Logo Styles */
+.trembach-logo {
+  transition: all 0.3s ease;
+}
+
+.trembach-logo:hover {
+  transform: scale(1.05);
+}
+
+.trembach-logo .scales {
+  transition: transform 0.3s ease;
+}
+
+.trembach-logo:hover .scales {
+  transform: rotate(5deg) scale(1.1);
+}
+
+.trembach-logo .company {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.trembach-logo .tagline {
+  font-size: 0.7rem;
+  opacity: 0.8;
+}
+
 @layer base {
   :root {
     /* Core Colors - Light Cinema Aesthetic */

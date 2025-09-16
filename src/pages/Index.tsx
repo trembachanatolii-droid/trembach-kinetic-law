@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
@@ -83,9 +84,7 @@ const Index = () => {
           <div className="grid lg:grid-cols-3 gap-12">
             {/* Firm Info */}
             <div>
-              <div className="text-2xl font-display font-bold text-foreground mb-4">
-                <span className="text-primary">Trembach</span> Law Firm, APC
-              </div>
+              <Logo size="lg" className="mb-4" />
               <p className="text-body text-muted-foreground leading-relaxed mb-6">
                 Former insurance defense attorney now fighting exclusively for California injury victims.
               </p>

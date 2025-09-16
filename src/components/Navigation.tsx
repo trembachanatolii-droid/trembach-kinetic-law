@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
+import Logo from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -45,9 +46,7 @@ const Navigation = () => {
     >
       <div className="container mx-auto px-8 py-4 flex items-center justify-between">
         {/* Logo */}
-        <div className="text-2xl font-display font-bold text-white">
-          <span className="text-primary">Trembach</span> Law Firm
-        </div>
+        <Logo size="sm" className={isScrolled ? 'text-foreground' : 'text-white'} />
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">

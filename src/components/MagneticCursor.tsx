@@ -28,8 +28,10 @@ const MagneticCursor: React.FC = () => {
     };
 
     const handleMouseEnter = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (target.classList.contains('magnetic') || target.closest('.magnetic')) {
+      const target = e.target as EventTarget | null;
+      if (!(target instanceof HTMLElement)) return;
+      const el = target as HTMLElement;
+      if (el.classList?.contains('magnetic') || el.closest?.('.magnetic')) {
         gsap.to(cursor, {
           duration: 0.3,
           scale: 1.5,

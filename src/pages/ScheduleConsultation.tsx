@@ -75,7 +75,7 @@ const ScheduleConsultation: React.FC = () => {
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       {/* Go Back Button */}
-      <div className="container mx-auto px-6 pt-6">
+      <div className="container mx-auto px-6 mt-24 md:mt-28">
         <Button 
           variant="ghost" 
           onClick={() => window.history.back()}

@@ -202,7 +202,7 @@ const MesotheliomaAsbestos: React.FC = () => {
               {/* Content Cards Grid */}
               <div ref={cardsRef} className="space-y-8">
                 {/* Important to Know Section */}
-                <div id="important" className="glass-card group hover-glow-primary overflow-hidden">
+                <div id="important" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
                   <div className="relative overflow-hidden aspect-video">
                     <img 
                       src={medicalImage}
@@ -210,28 +210,35 @@ const MesotheliomaAsbestos: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Overlay Button */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
+                        <Heart size={16} />
+                        Learn More
+                      </Button>
+                    </div>
                   </div>
-                  <div className="p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">Important to Know About Mesothelioma Claims</h2>
-                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                      <p>
-                        <strong>Mesothelioma is a devastating cancer caused exclusively by asbestos exposure</strong>, often developing 20-50 years after initial contact with asbestos fibers. This aggressive cancer affects the protective lining of the lungs, heart, or abdomen, with most patients facing a prognosis of 12-21 months after diagnosis. The long latency period means many victims are now being diagnosed from exposures that occurred decades ago in shipyards, construction sites, military service, refineries, power plants, and even from household products containing asbestos.
-                      </p>
-                      <p>
-                        <strong>California has some of the most favorable laws in the nation for asbestos victims</strong>, with extended statutes of limitations and strong legal precedents supporting compensation claims. Unlike many states, California allows victims to pursue claims against multiple defendants simultaneously, accessing various compensation sources including asbestos bankruptcy trust funds (over $30 billion available nationwide), personal injury lawsuits against solvent companies, workers' compensation benefits, and VA benefits for veterans.
-                      </p>
-                      <p>
-                        <strong>Time is critical in mesothelioma cases</strong> - not just legally, but practically. California law provides a one-year statute of limitations from diagnosis for personal injury claims and one year from death for wrongful death claims. However, the aggressive nature of mesothelioma means we must act swiftly to preserve testimony, gather evidence, and secure compensation while you can still benefit from it.
-                      </p>
-                      <p>
-                        <strong>As a former insurance defense attorney, Anatolii Trembach brings unique insights</strong> to fighting for mesothelioma victims. Having seen firsthand how insurance companies and corporate defendants minimize claims and deny responsibility, he now uses that knowledge to anticipate and counter their tactics. This insider perspective allows us to build stronger cases, identify hidden insurance coverage, and maximize compensation by understanding exactly how the defense will try to limit your recovery.
-                      </p>
-                      <p>
-                        <strong>Multiple exposure sources often mean multiple avenues for compensation</strong>. Many mesothelioma victims were exposed to asbestos from various sources throughout their careers - different job sites, multiple employers, various asbestos-containing products. Each exposure source represents a potential claim for compensation. We thoroughly investigate your entire work and exposure history, identifying every company that may bear responsibility.
-                      </p>
-                      <p>
-                        <strong>Your choice of legal representation can dramatically impact your compensation</strong>. While many law firms handle mesothelioma cases, not all have the resources, knowledge, and determination to maximize your recovery. You need attorneys who understand the complex medical evidence, have relationships with leading mesothelioma specialists, know how to navigate the asbestos trust fund system, and are prepared to take cases to trial when necessary.
-                      </p>
+                  <div className="p-6 space-y-4">
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">Important to Know About Mesothelioma Claims</h2>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Devastating cancer caused exclusively by asbestos exposure. California has favorable laws for victims with extended statutes of limitations. Former defense attorney brings unique insights to maximize your compensation from all available sources.
+                    </p>
+                    
+                    {/* Key Points */}
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        1-Year Statute
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        $30B+ Available
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Multiple Sources
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Former Defense Attorney
+                      </span>
                     </div>
                     <div className="pt-6">
                       <Button variant="ghost" size="sm" className="group/btn">
@@ -249,40 +256,43 @@ const MesotheliomaAsbestos: React.FC = () => {
                 <div id="steps">
                   <h2 className="text-4xl font-bold text-primary mb-8">What to Do After a Mesothelioma Diagnosis</h2>
                   <div className="grid md:grid-cols-2 gap-6">
-                    <Card className="glass-card overflow-hidden">
-                      <div className="relative h-48 bg-gradient-primary flex items-center justify-center">
+                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
+                      <div className="relative h-48 bg-gradient-primary flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                         <div className="text-primary-foreground text-center">
+                          <Clock className="w-8 h-8 mx-auto mb-2" />
                           <div className="text-lg font-bold mb-2">Step 1</div>
-                          <div className="text-2xl font-bold">Contact</div>
-                          <div className="text-2xl font-bold">Mesothelioma</div>
-                          <div className="text-2xl font-bold">Lawyers</div>
+                          <div className="text-xl font-bold">Contact Attorneys</div>
+                          <div className="text-xl font-bold">Immediately</div>
                         </div>
                       </div>
                     </Card>
-                    <Card className="glass-card overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center">
+                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                         <div className="text-white text-center">
+                          <Users className="w-8 h-8 mx-auto mb-2" />
                           <div className="text-lg font-bold mb-2">Step 2</div>
-                          <div className="text-2xl font-bold">Let Us Get</div>
-                          <div className="text-2xl font-bold">to Work</div>
+                          <div className="text-xl font-bold">We Investigate</div>
+                          <div className="text-xl font-bold">Your Case</div>
                         </div>
                       </div>
                     </Card>
-                    <Card className="glass-card overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center">
+                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                         <div className="text-white text-center">
+                          <Heart className="w-8 h-8 mx-auto mb-2" />
                           <div className="text-lg font-bold mb-2">Step 3</div>
-                          <div className="text-2xl font-bold">Rest, Recover,</div>
-                          <div className="text-2xl font-bold">Receive Updates</div>
+                          <div className="text-xl font-bold">Focus on</div>
+                          <div className="text-xl font-bold">Your Health</div>
                         </div>
                       </div>
                     </Card>
-                    <Card className="glass-card overflow-hidden">
-                      <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center">
+                    <Card className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
+                      <div className="relative h-48 bg-gradient-to-br from-purple-500 to-purple-700 flex items-center justify-center transition-transform duration-700 group-hover:scale-105">
                         <div className="text-white text-center">
+                          <Award className="w-8 h-8 mx-auto mb-2" />
                           <div className="text-lg font-bold mb-2">Step 4</div>
-                          <div className="text-2xl font-bold">Healing, Compensation,</div>
-                          <div className="text-2xl font-bold">Peace of Mind</div>
+                          <div className="text-xl font-bold">Receive Maximum</div>
+                          <div className="text-xl font-bold">Compensation</div>
                         </div>
                       </div>
                     </Card>
@@ -317,7 +327,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 </div>
 
                 {/* Damages Section */}
-                <div id="damages" className="glass-card group hover-glow-primary overflow-hidden">
+                <div id="damages" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
                   <div className="relative overflow-hidden aspect-video">
                     <img 
                       src={legalImage}
@@ -325,25 +335,36 @@ const MesotheliomaAsbestos: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    
+                    {/* Overlay Button */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
+                        <Shield size={16} />
+                        Calculate Damages
+                      </Button>
+                    </div>
                   </div>
-                  <div className="p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">What Are Common Damages from Mesothelioma?</h2>
-                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                      <p>
-                        <strong>Extensive Medical Expenses:</strong> Mesothelioma treatment costs are staggering, often exceeding $400,000 in the first year alone. These expenses include specialized oncology consultations, surgery (including complex procedures like pleurectomy or extrapleural pneumonectomy), chemotherapy with drugs like Alimta and cisplatin, radiation therapy, immunotherapy treatments, hospital stays, home health care, hospice services, and experimental treatments or clinical trials. Many patients require multiple rounds of treatment as the disease progresses.
-                      </p>
-                      <p>
-                        <strong>Lost Income and Earning Capacity:</strong> Mesothelioma's devastating impact on physical capability means most patients cannot continue working after diagnosis. We calculate comprehensive economic losses including current lost wages, future income you would have earned until retirement, lost benefits (health insurance, retirement contributions, pension), reduced earning capacity if you can return to limited work, and loss of household services value.
-                      </p>
-                      <p>
-                        <strong>Physical Pain and Suffering:</strong> Mesothelioma causes severe physical suffering that deserves significant compensation. The cancer causes chest pain, difficulty breathing, chronic coughing, fatigue, and eventually organ failure. Treatment side effects including nausea, weakness, and surgical recovery add to physical suffering. California law recognizes that physical pain and suffering often represents the largest component of damages in mesothelioma cases.
-                      </p>
-                      <p>
-                        <strong>Emotional and Psychological Distress:</strong> Beyond physical pain, mesothelioma inflicts profound emotional suffering on victims and families. The psychological impact includes anxiety about the future, depression from lost independence, fear of leaving family behind, anger at preventable exposure, and grief over shortened life expectancy. Many patients require psychological counseling or psychiatric medication.
-                      </p>
-                      <p>
-                        <strong>Family Impact and Loss of Consortium:</strong> Mesothelioma doesn't just affect the patient - entire families suffer. Spouses lose companionship, children lose parental guidance, and grandchildren lose relationships with grandparents. California law allows spouses to recover for loss of consortium - the loss of love, companionship, comfort, care, assistance, protection, affection, society, and moral support.
-                      </p>
+                  <div className="p-6 space-y-4">
+                    <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">Common Damages from Mesothelioma</h2>
+                    
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Mesothelioma treatment costs often exceed $400,000 in the first year. Comprehensive compensation includes medical expenses, lost income, pain and suffering, and family impact damages.
+                    </p>
+                    
+                    {/* Damage Types */}
+                    <div className="flex flex-wrap gap-2">
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Medical Expenses
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Lost Income
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Pain & Suffering
+                      </span>
+                      <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                        Family Impact
+                      </span>
                     </div>
                     <div className="pt-6">
                       <Button variant="ghost" size="sm" className="group/btn">
@@ -358,7 +379,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 </div>
 
                 {/* California Exposure Sites Section */}
-                <div id="exposure-sites" className="glass-card group hover-glow-primary overflow-hidden">
+                <div id="exposure-sites" className="glass-card group hover-glow-primary cursor-pointer overflow-hidden">
                   <div className="relative overflow-hidden aspect-video">
                     <img 
                       src={californiaImage}
@@ -366,58 +387,59 @@ const MesotheliomaAsbestos: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
-                  <div className="p-8">
-                    <h2 className="text-4xl font-bold text-primary mb-8 group-hover:text-primary transition-colors">California Asbestos Exposure Sites & Information</h2>
-                    <div className="prose prose-lg max-w-none text-foreground leading-relaxed space-y-6">
-                      <p>
-                        <strong>California's extensive industrial history has created widespread asbestos exposure risks</strong> throughout the state. Major exposure sites include:
-                      </p>
-                      <p>
-                        <strong>Shipyards and Naval Facilities:</strong> Mare Island Naval Shipyard (Vallejo), Long Beach Naval Shipyard, San Francisco Naval Shipyard at Hunters Point, San Diego Naval Base, and numerous private shipyards exposed thousands of workers to asbestos in ship construction, repair, and maintenance. Naval vessels were floating asbestos repositories with insulation, gaskets, valves, and equipment containing deadly fibers.
-                      </p>
-                      <p>
-                        <strong>Oil Refineries and Chemical Plants:</strong> California's massive petroleum industry created extensive exposure at facilities including Chevron (Richmond, El Segundo), Shell (Martinez, Wilmington), ExxonMobil (Torrance), Phillips 66 (multiple locations), and ARCO facilities. Refinery workers, pipefitters, and maintenance personnel encountered asbestos in pipe insulation, gaskets, valves, and heat-resistant equipment throughout these facilities.
-                      </p>
-                      <p>
-                        <strong>Power Plants and Utilities:</strong> Pacific Gas & Electric, Southern California Edison, and municipal power plants throughout California used asbestos extensively in boilers, turbines, generators, and insulation. Power plant workers, including those at Moss Landing, Huntington Beach, and San Onofre, faced daily exposure to asbestos dust during maintenance and operations.
-                      </p>
-                      <p>
-                        <strong>Construction and Building Trades:</strong> California's construction boom from the 1940s through 1980s meant widespread asbestos use in schools, hospitals, office buildings, and homes. Major projects like downtown Los Angeles high-rises, San Francisco's financial district, Silicon Valley tech campuses, and residential developments throughout Southern California all used asbestos-containing materials extensively.
-                      </p>
-                      <p>
-                        <strong>Aerospace and Defense Industries:</strong> Boeing, Lockheed Martin, Northrop Grumman, and other aerospace companies exposed workers at facilities throughout Southern California. Aircraft manufacturing used asbestos in brakes, heat shields, and insulation, creating exposure for thousands of aerospace workers who built California's defense industry.
-                      </p>
-                      <p>
-                        <strong>Transportation and Automotive:</strong> Railroad workers at Southern Pacific, Union Pacific, and Santa Fe facilities encountered asbestos in locomotives, brake shoes, and rail yard buildings. Automotive workers at General Motors (Fremont), Ford (Pico Rivera), and numerous repair facilities faced exposure from brake and clutch work.
-                      </p>
-                    </div>
-                    <div className="pt-6">
-                      <Button variant="ghost" size="sm" className="group/btn">
-                        View Exposure Map
-                        <ArrowRight 
-                          size={14} 
-                          className="transition-transform group-hover/btn:translate-x-1" 
-                        />
+                    
+                    {/* Overlay Button */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <Button variant="default" size="sm" className="bg-primary/90 hover:bg-primary text-primary-foreground">
+                        <Users size={16} />
+                        View Sites
                       </Button>
                     </div>
                   </div>
+                   <div className="p-6 space-y-4">
+                     <h2 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">California Asbestos Exposure Sites</h2>
+                     
+                     <p className="text-sm text-muted-foreground leading-relaxed">
+                       California's industrial history created widespread exposure risks. Major sites include shipyards, refineries, power plants, construction projects, and aerospace facilities throughout the state.
+                     </p>
+                     
+                     {/* Site Types */}
+                     <div className="flex flex-wrap gap-2">
+                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                         Shipyards
+                       </span>
+                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                         Refineries
+                       </span>
+                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                         Power Plants
+                       </span>
+                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                         Aerospace
+                       </span>
+                       <span className="px-3 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20">
+                         Construction
+                       </span>
+                     </div>
+                     
+                     {/* CTA */}
+                     <div className="pt-2">
+                       <Button variant="ghost" size="sm" className="group/btn">
+                         View Exposure Map
+                         <ArrowRight 
+                           size={14} 
+                           className="transition-transform group-hover/btn:translate-x-1" 
+                         />
+                       </Button>
+                     </div>
+                   </div>
                 </div>
 
-                {/* Contact Section */}
-                <div id="contact" className="glass-card p-8 bg-gradient-primary text-primary-foreground">
-                  <h2 className="text-4xl font-bold mb-6">Contact California's Aggressive Mesothelioma Advocates</h2>
-                  <p className="text-xl mb-4">Former defense attorney now fighting for victims' rights. We know their tactics. We know how to win.</p>
-                  <div className="text-4xl font-bold mb-4">855-TREMBACH-WINS</div>
-                  <p className="text-lg mb-6">Free Consultation • No Fees Unless We Win • Available 24/7</p>
-                  <div className="mb-6">
-                    <p>Trembach Law Firm, APC</p>
-                    <p>27001 Agoura Road, Suite 350</p>
-                    <p>Calabasas, CA 91301</p>
-                    <p>Email: info@trembachlawfirm.com</p>
-                  </div>
-                  <Button size="lg" variant="secondary" className="font-bold text-lg">
-                    CALL NOW FOR FREE CONSULTATION
+                {/* Call to Action */}
+                <div className="text-center mt-16">
+                  <Button variant="default" size="lg" className="bg-red-600 hover:bg-red-700 text-white text-xl px-12 py-6 font-bold">
+                    Get Your Free Consultation
+                    <ArrowRight size={18} />
                   </Button>
                 </div>
               </div>

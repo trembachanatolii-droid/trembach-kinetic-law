@@ -24,7 +24,8 @@ import {
   AlertTriangle,
   Stethoscope,
   Building,
-  Map
+  Map,
+  ArrowLeft
 } from 'lucide-react';
 import heroBackground from '@/assets/mesothelioma-hero-bg.jpg';
 import sidebarImage from '@/assets/mesothelioma-sidebar.jpg';
@@ -114,6 +115,18 @@ const MesotheliomaAsbestos: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Go Back Button */}
+      <div className="container mx-auto px-6 pt-6">
+        <Button 
+          variant="ghost" 
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 hover:bg-primary/10"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </Button>
+      </div>
+
       {/* Hero Section */}
       <section 
         ref={heroRef}
@@ -462,7 +475,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 <img 
                   src={diagnosisImage} 
                   alt="Mesothelioma diagnosis process in California medical facilities" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                 />
                 
                 <p className="text-lg leading-relaxed mb-4">
@@ -610,7 +623,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 <img 
                   src={legalProcessImage} 
                   alt="California legal process for mesothelioma cases" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                 />
                 
                 <p className="text-lg leading-relaxed mb-4">
@@ -836,7 +849,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                 <img 
                   src={exposureSitesImage} 
                   alt="California asbestos exposure sites and industrial facilities" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                 />
                 
                 <p className="text-lg leading-relaxed mb-4">
@@ -1180,7 +1193,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <img 
                     src={medicalImage} 
                     alt="California mesothelioma treatment facilities" 
-                    className="w-full h-32 object-cover rounded-lg mb-4"
+                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                   />
                   <p className="text-sm text-muted-foreground">
                     We can connect you with leading mesothelioma specialists throughout California.
@@ -1197,7 +1210,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                   <img 
                     src={compensationImage} 
                     alt="Mesothelioma compensation calculator" 
-                    className="w-full h-32 object-cover rounded-lg mb-4"
+                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                   />
                   <div className="space-y-2 text-sm">
                     <p>• Bankruptcy Trust Funds</p>

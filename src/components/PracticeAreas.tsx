@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Card3D from './Card3D';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,29 +48,31 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
   }, [index]);
 
   return (
-    <div 
-      ref={cardRef}
-      className="group relative bg-card border border-border rounded-xl p-10 transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-xl hover:border-primary min-h-[320px] flex flex-col"
-    >
-      <div className="text-5xl mb-5 block">
-        {icon}
-      </div>
-      
-      <h3 className="text-2xl font-semibold mb-4 text-foreground group-hover:text-primary transition-colors">
-        {title}
-      </h3>
-      
-      <p className="text-muted-foreground leading-relaxed flex-grow">
-        {description}
-      </p>
-
-      <a 
-        href="#contact" 
-        className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors"
+    <Card3D intensity={1.2} className="transform-gpu">
+      <div 
+        ref={cardRef}
+        className="group relative bg-card border border-border rounded-xl p-10 transition-all duration-300 cursor-pointer hover:border-primary min-h-[320px] flex flex-col magnetic"
       >
-        Get Help →
-      </a>
-    </div>
+        <div className="text-5xl mb-5 block transform transition-transform duration-300 group-hover:scale-110">
+          {icon}
+        </div>
+        
+        <h3 className="text-2xl font-semibold mb-4 text-foreground group-hover:text-primary transition-colors">
+          {title}
+        </h3>
+        
+        <p className="text-muted-foreground leading-relaxed flex-grow">
+          {description}
+        </p>
+
+        <a 
+          href="#contact" 
+          className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-all duration-300 group-hover:gap-3"
+        >
+          Get Help →
+        </a>
+      </div>
+    </Card3D>
   );
 };
 

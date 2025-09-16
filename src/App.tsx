@@ -21,6 +21,7 @@ import MedicalGuidance from "./pages/MedicalGuidance";
 import ScheduleConsultation from "./pages/ScheduleConsultation";
 import CompensationCalculator from "./pages/CompensationCalculator";
 import LosAngeles from "./pages/locations/LosAngeles";
+import SanFrancisco from "./pages/locations/SanFrancisco";
 import Blog from "./pages/Blog";
 import MagneticCursor from "./components/MagneticCursor";
 
@@ -51,6 +52,7 @@ const App = () => (
           <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
           <Route path="/compensation-calculator" element={<CompensationCalculator />} />
           <Route path="/locations/los-angeles" element={<LosAngeles />} />
+          <Route path="/locations/san-francisco" element={<SanFrancisco />} />
           <Route path="/blog" element={<Blog />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

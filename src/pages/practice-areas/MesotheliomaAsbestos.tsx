@@ -7,6 +7,13 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import SchemaMarkup from '@/components/SchemaMarkup';
+import ParallaxSection from '@/components/ParallaxSection';
+import AnimatedStatistics from '@/components/AnimatedStatistics';
+import AnimatedTimeline from '@/components/AnimatedTimeline';
+import ExpandedFAQ from '@/components/ExpandedFAQ';
+import Card3D from '@/components/Card3D';
+import ParticleBackground from '@/components/ParticleBackground';
 import { 
   Phone, 
   Mail, 
@@ -25,7 +32,8 @@ import {
   Stethoscope,
   Building,
   Map,
-  ArrowLeft
+  ArrowLeft,
+  CheckCircle
 } from 'lucide-react';
 import heroBackground from '@/assets/mesothelioma-hero-bg.jpg';
 import sidebarImage from '@/assets/mesothelioma-sidebar.jpg';
@@ -1253,6 +1261,9 @@ const MesotheliomaAsbestos: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* FAQ Section */}
+      <ExpandedFAQ />
     </div>
   );
 };

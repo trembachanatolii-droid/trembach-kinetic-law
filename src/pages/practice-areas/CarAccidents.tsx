@@ -201,13 +201,17 @@ const CarAccidents: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="gap-2 text-lg px-8 py-6">
-                  <Phone className="h-5 w-5" />
-                  Get Your Free Consultation
+                <Button size="lg" className="gap-2 text-lg px-8 py-6" asChild>
+                  <Link to="/schedule-consultation">
+                    <Phone className="h-5 w-5" />
+                    Get Your Free Consultation
+                  </Link>
                 </Button>
-                <Button variant="outline" size="lg" className="gap-2 text-lg px-8 py-6">
-                  <FileText className="h-5 w-5" />
-                  Case Evaluation
+                <Button variant="outline" size="lg" className="gap-2 text-lg px-8 py-6" asChild>
+                  <Link to="/case-evaluation">
+                    <FileText className="h-5 w-5" />
+                    Case Evaluation
+                  </Link>
                 </Button>
               </div>
 
@@ -442,13 +446,17 @@ const CarAccidents: React.FC = () => {
             Don't let insurance companies take advantage of you. Get experienced legal representation with insider knowledge of their tactics.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="gap-2 text-lg px-8 py-6">
-              <Phone className="h-5 w-5" />
-              Free Case Review
+            <Button size="lg" variant="secondary" className="gap-2 text-lg px-8 py-6" asChild>
+              <Link to="/case-evaluation">
+                <Phone className="h-5 w-5" />
+                Free Case Review
+              </Link>
             </Button>
-            <Button size="lg" variant="outline" className="gap-2 text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
-              <ArrowRight className="h-5 w-5" />
-              Call (555) 123-4567
+            <Button size="lg" variant="outline" className="gap-2 text-lg px-8 py-6 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary" asChild>
+              <Link to="/schedule-consultation">
+                <ArrowRight className="h-5 w-5" />
+                Call (555) 123-4567
+              </Link>
             </Button>
           </div>
         </div>

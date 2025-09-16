@@ -1,37 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React from 'react';
+import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft,
-  User,
-  Construction,
-  Wrench
-} from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/wrongful-death-hero.jpg';
-import sidebarImage from '@/assets/practice-areas/wrongful-death.jpg';
+import ComprehensivePracticeAreaTemplate from '@/components/ComprehensivePracticeAreaTemplate';
+import heroImage from '@/assets/practice-areas/wrongful-death-hero.jpg';
 
 const WrongfulDeath = () => {
   return (

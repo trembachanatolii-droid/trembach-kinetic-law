@@ -132,7 +132,7 @@ const MesotheliomaAsbestos: React.FC = () => {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
               ))}
-              <span className="ml-2 text-lg">Backed by Proven Results</span>
+              <span className="ml-2 text-lg">Backed by Proven Experience</span>
             </div>
             
             <Button 
@@ -201,29 +201,29 @@ const MesotheliomaAsbestos: React.FC = () => {
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Stethoscope className="w-5 h-5 mr-2 text-primary" />
-                          Medical Understanding
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p>Our team works closely with leading mesothelioma specialists throughout California to understand the full scope of your diagnosis, prognosis, and treatment needs.</p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card>
-                      <CardHeader>
-                        <CardTitle className="flex items-center">
-                          <Map className="w-5 h-5 mr-2 text-primary" />
-                          California Expertise
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p>We have extensive knowledge of California's industrial history, including shipyards, power plants, refineries, and construction sites where asbestos exposure occurred.</p>
-                      </CardContent>
-                    </Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                      Medical Understanding
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>Our team works closely with leading mesothelioma specialists throughout California to understand the full scope of your diagnosis, prognosis, and treatment needs.</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Map className="w-5 h-5 mr-2 text-primary" />
+                      California Expertise
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>We have extensive knowledge of California's industrial history, including shipyards, power plants, refineries, and construction sites where asbestos exposure occurred.</p>
+                  </CardContent>
+                </Card>
                   </div>
 
                   <div className="bg-muted p-6 rounded-lg">
@@ -336,9 +336,9 @@ const MesotheliomaAsbestos: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After Your Mesothelioma Diagnosis</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Heart className="w-5 h-5 mr-2 text-red-600" />
                       Immediate Medical Steps
                     </CardTitle>
@@ -351,9 +351,9 @@ const MesotheliomaAsbestos: React.FC = () => {
                   </CardContent>
                 </Card>
                 
-                <Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Scale className="w-5 h-5 mr-2 text-red-600" />
                       Immediate Legal Steps
                     </CardTitle>
@@ -924,20 +924,128 @@ const MesotheliomaAsbestos: React.FC = () => {
                   {
                     question: "How Much Is My Mesothelioma Case Worth?",
                     answer: "Mesothelioma settlements and verdicts vary significantly based on individual circumstances, but often range from hundreds of thousands to several million dollars. Factors affecting value include age at diagnosis, type and stage of mesothelioma, occupation and exposure history, number of liable defendants identified, and available coverage."
+                  },
+                  {
+                    question: "What Types of Mesothelioma Are Recognized in California?",
+                    answer: "California courts recognize four main types of mesothelioma: Pleural mesothelioma (affecting lung lining, most common at 75% of cases), Peritoneal mesothelioma (affecting abdominal lining, 20% of cases), Pericardial mesothelioma (affecting heart lining, rare), and Testicular mesothelioma (affecting testicle lining, extremely rare). Each type has different symptoms, prognosis, and treatment options affecting compensation calculations."
+                  },
+                  {
+                    question: "Can Family Members File Claims for Secondhand Asbestos Exposure?",
+                    answer: "Yes, California law allows family members exposed to asbestos through contaminated clothing and household items to file claims. This includes spouses who laundered work clothes, children who played in contaminated areas, and family members exposed during home renovations with asbestos products. These secondary exposure cases require detailed investigation of household exposure patterns."
+                  },
+                  {
+                    question: "What Happens If the Company That Caused My Exposure Is Bankrupt?",
+                    answer: "Many asbestos companies have established bankruptcy trust funds specifically to compensate victims. Over $30 billion is available through these trusts. We can file claims with multiple trusts based on your exposure history. Trust claims often process faster than traditional lawsuits and don't prevent you from pursuing claims against non-bankrupt companies."
+                  },
+                  {
+                    question: "How Do You Prove Asbestos Exposure Happened Decades Ago?",
+                    answer: "We use multiple investigative methods: employment records, military service documents, union records, product identification databases, witness testimony from coworkers, industrial hygiene reports, and our extensive database of asbestos-containing products used at specific worksites. Many companies kept detailed records of asbestos use that we can access through litigation."
+                  },
+                  {
+                    question: "Can I File a Claim If I Was Exposed in Multiple States?",
+                    answer: "Yes, multi-state exposure cases are common, especially for military personnel, construction workers, and maritime workers. California's statute of limitations and favorable laws often make it an advantageous filing location. We coordinate with attorneys in other states when necessary and determine the best jurisdiction for each claim based on exposure history and applicable laws."
+                  },
+                  {
+                    question: "What If I'm Also Getting Workers' Compensation Benefits?",
+                    answer: "Workers' compensation and personal injury claims can proceed simultaneously. Workers' comp provides immediate medical coverage and wage replacement but may have a lien on personal injury recoveries. We coordinate with workers' comp attorneys to maximize your overall recovery while protecting your ongoing benefits and resolving liens favorably."
+                  },
+                  {
+                    question: "How Long Will My Mesothelioma Case Take to Resolve?",
+                    answer: "Timeline varies based on case complexity, defendant cooperation, and your health status. Bankruptcy trust claims often resolve in 3-9 months. Traditional lawsuits may take 1-3 years, but we can pursue expedited trial schedules for seriously ill clients. Some cases settle during discovery, while others require trial. We work urgently while building the strongest possible case."
+                  },
+                  {
+                    question: "What Evidence Do I Need to Provide for My Case?",
+                    answer: "Key evidence includes: medical records and pathology reports confirming mesothelioma diagnosis, employment history with dates and job duties, military service records, Social Security earnings statements, photographs of work sites or products, witness contact information, and any documents mentioning asbestos exposure. We help gather additional evidence through investigation and discovery."
+                  },
+                  {
+                    question: "Will I Have to Testify in Court?",
+                    answer: "Most mesothelioma cases settle before trial, so court testimony isn't always necessary. If testimony is required, we thoroughly prepare you and can arrange for video depositions if travel is difficult due to your health. California courts accommodate seriously ill plaintiffs with flexible scheduling and alternative testimony methods when needed."
+                  },
+                  {
+                    question: "What Damages Can I Recover in a California Mesothelioma Case?",
+                    answer: "California allows recovery for: medical expenses (past and future treatment costs), lost wages and reduced earning capacity, pain and suffering, emotional distress, loss of enjoyment of life, spousal loss of consortium, and in cases of defendant misconduct, punitive damages. We work with medical and economic experts to fully document all losses."
+                  },
+                  {
+                    question: "Can Veterans File Both VA Claims and Personal Injury Lawsuits?",
+                    answer: "Yes, veterans can pursue VA disability benefits and personal injury claims simultaneously. VA benefits provide ongoing medical care and monthly compensation, while personal injury claims target the companies that supplied asbestos products to the military. These are separate compensation sources that don't offset each other."
+                  },
+                  {
+                    question: "What Role Does Genetics Play in Mesothelioma Cases?",
+                    answer: "While genetic factors may influence susceptibility to asbestos-related diseases, California law focuses on the causal relationship between asbestos exposure and mesothelioma development. Even with genetic predisposition, asbestos exposure remains the primary cause. We work with medical experts to explain how asbestos triggered the disease process regardless of genetic factors."
+                  },
+                  {
+                    question: "How Do You Handle Cases Where Exposure Occurred at Multiple Job Sites?",
+                    answer: "Multi-site exposure cases require comprehensive investigation of each workplace, the asbestos products used, and potentially liable parties at each location. We build detailed exposure timelines, identify all potentially responsible defendants, and pursue claims through multiple channels including bankruptcy trusts, direct lawsuits, and premises liability claims."
+                  },
+                  {
+                    question: "What If the Asbestos Exposure Happened During Home Renovations?",
+                    answer: "Home renovation exposure cases involve product liability claims against manufacturers of asbestos-containing materials like insulation, floor tiles, and joint compounds. We investigate what products were used, when they were manufactured, whether adequate warnings were provided, and if retailers or contractors should have known about asbestos dangers."
+                  },
+                  {
+                    question: "Can Smoking Affect My Mesothelioma Case?",
+                    answer: "Smoking doesn't cause mesothelioma - only asbestos exposure does. However, smoking may contribute to lung cancer development in asbestos-exposed individuals. California's comparative negligence laws allow recovery even with smoking history, though it might affect damage calculations in lung cancer cases. Mesothelioma cases aren't impacted by smoking history."
+                  },
+                  {
+                    question: "What Happens If I Die During the Legal Process?",
+                    answer: "If you pass away during litigation, your family can continue the case as a wrongful death claim. California law allows spouses, children, and dependent family members to recover for loss of financial support, loss of companionship, funeral expenses, and the decedent's pre-death pain and suffering. We work sensitively with families during these difficult times."
+                  },
+                  {
+                    question: "How Do You Determine Which Companies Are Responsible?",
+                    answer: "We conduct thorough investigations using proprietary databases, historical records, product identification guides, and expert testimony to trace asbestos exposure to specific manufacturers and suppliers. This includes researching corporate ownership changes, successor liability, and insurance coverage to identify all potentially responsible parties and maximize recovery sources."
+                  },
+                  {
+                    question: "What Medical Experts Do You Work With?",
+                    answer: "Our network includes board-certified pulmonologists, oncologists, pathologists, occupational medicine physicians, and industrial hygienists who specialize in asbestos-related diseases. These experts help establish causation, explain disease progression, project future medical needs, and provide compelling testimony about how asbestos exposure caused your mesothelioma."
+                  },
+                  {
+                    question: "Can I Still File a Claim If I Don't Remember Where I Was Exposed?",
+                    answer: "Memory gaps are common with exposures occurring decades ago. We use investigative techniques including employment record analysis, Social Security earnings statements, military records, union membership documents, and witness interviews to reconstruct exposure history. Our experience helps identify likely exposure sources even with limited initial information."
+                  },
+                  {
+                    question: "What's the Difference Between Settlement and Trial?",
+                    answer: "Settlements provide guaranteed compensation without trial uncertainty but may be lower than potential trial awards. Trials offer possibility of higher damages but involve uncertainty and longer timelines. We evaluate each case individually, considering your health status, case strength, and personal preferences to recommend the best strategy for your situation."
+                  },
+                  {
+                    question: "How Do You Handle Cases Where the Exposure Was Minimal?",
+                    answer: "California recognizes that any asbestos exposure can cause mesothelioma - there's no safe level. Even brief exposures can be legally sufficient if properly documented and linked to specific products or defendants. We've successfully handled cases involving short-term exposures by focusing on product identification and the 'any exposure' causation standard accepted in California courts."
+                  },
+                  {
+                    question: "What Information Should I Gather Before Contacting an Attorney?",
+                    answer: "Helpful information includes: complete employment history with dates and job duties, military service records, names of coworkers or supervisors, medical records and biopsy reports, photographs of work sites or equipment, any previous asbestos-related legal documents, and Social Security earnings statements. Don't worry if information is incomplete - we help gather additional documentation."
+                  },
+                  {
+                    question: "Can Spouses File Their Own Claims for Emotional Distress?",
+                    answer: "California allows spouses to file loss of consortium claims for the impact of mesothelioma on their relationship, including loss of companionship, affection, and intimacy. In some cases, spouses exposed to asbestos through contaminated clothing may also have their own exposure claims if they develop related health conditions or fear of developing cancer."
+                  },
+                  {
+                    question: "What Role Do Trust Funds Play in Mesothelioma Compensation?",
+                    answer: "Asbestos bankruptcy trusts hold over $30 billion for victim compensation. These trusts were established when major asbestos companies reorganized in bankruptcy. We file claims with all applicable trusts based on your exposure history. Trust payments are separate from lawsuit recoveries and often provide faster compensation while litigation proceeds."
+                  },
+                  {
+                    question: "How Do You Handle Cases Involving Government Contractors?",
+                    answer: "Government contractor cases involve complex federal preemption and immunity issues. We analyze whether the government contractor defense applies, examine specification requirements, and investigate whether contractors had superior knowledge of asbestos dangers. These cases require specialized knowledge of federal contracting law and military specifications for asbestos products."
+                  },
+                  {
+                    question: "What Happens If New Companies Are Identified During Investigation?",
+                    answer: "Our ongoing investigation often reveals additional liable parties not initially identified. We amend lawsuits to include new defendants when evidence supports claims against them. This comprehensive approach ensures no responsible party escapes liability and maximizes your potential recovery from all available sources."
+                  },
+                  {
+                    question: "Can Children Who Lived in Asbestos-Contaminated Homes File Claims?",
+                    answer: "Yes, children exposed to asbestos in their homes through contaminated work clothing, renovation projects, or living near asbestos sites can file claims if they develop mesothelioma. These cases require detailed investigation of household exposure patterns, family work histories, and home renovation activities involving asbestos-containing materials."
                   }
                 ].map((faq, index) => (
-                  <Card key={index} className="border-l-4 border-l-red-600">
+                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
                     <CardHeader 
-                      className="cursor-pointer"
+                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
                       onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                     >
-                      <CardTitle className="flex items-center justify-between text-lg">
+                      <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
                         {faq.question}
-                        {expandedFaq === index ? <ChevronUp /> : <ChevronDown />}
+                        {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
                       </CardTitle>
                     </CardHeader>
                     {expandedFaq === index && (
-                      <CardContent>
+                      <CardContent className="animate-fade-in">
                         <p className="text-muted-foreground">{faq.answer}</p>
                       </CardContent>
                     )}
@@ -951,12 +1059,9 @@ const MesotheliomaAsbestos: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Mesothelioma Resources</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
-                      <Building className="w-5 h-5 mr-2 text-primary" />
-                      Treatment Centers
-                    </CardTitle>
+                    <CardTitle className="group-hover:text-primary transition-colors">Treatment Centers</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-2">
                     <p>• UCLA Jonsson Comprehensive Cancer Center</p>
@@ -966,9 +1071,9 @@ const MesotheliomaAsbestos: React.FC = () => {
                   </CardContent>
                 </Card>
                 
-                <Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Users className="w-5 h-5 mr-2 text-primary" />
                       Support Organizations
                     </CardTitle>
@@ -989,9 +1094,9 @@ const MesotheliomaAsbestos: React.FC = () => {
             <div className="sticky top-8 space-y-6">
               
               {/* Contact Card */}
-              <Card className="overflow-hidden">
+              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
                 <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
-                  <div className="h-full bg-black/60 flex items-center justify-center">
+                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
                     <div className="text-center text-white">
                       <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
                       <h3 className="text-xl font-bold">Start Your Case</h3>
@@ -1035,9 +1140,9 @@ const MesotheliomaAsbestos: React.FC = () => {
               </Card>
 
               {/* Quick Facts */}
-              <Card>
+              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                 <CardHeader>
-                  <CardTitle className="text-lg">Quick Facts</CardTitle>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">Quick Facts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="flex items-start">

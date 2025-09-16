@@ -1,19 +1,21 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
-import PracticeAreaTemplate from '@/components/PracticeAreaTemplate';
 import { Routes, Route } from 'react-router-dom';
-import CarAccidents from './CarAccidents';
-import TruckAccidents from './TruckAccidents';
 import MedicalMalpractice from './MedicalMalpractice';
 import MesotheliomaAsbestos from './MesotheliomaAsbestos';
 import ComingSoon from './ComingSoon';
+import SilicosisInjuries from './SilicosisInjuries';
+import TalcBabyPowderCancer from './TalcBabyPowderCancer';
+import CarAccidentsNew from './CarAccidentsNew';
+import TruckAccidentsNew from './TruckAccidentsNew';
+import MotorcycleAccidentsNew from './MotorcycleAccidentsNew';
+import PedestrianAccidents from './PedestrianAccidents';
+import BicycleAccidents from './BicycleAccidents';
+import WrongfulDeath from './WrongfulDeath';
+import SlipFallAccidents from './SlipFallAccidents';
+import DogBitesAnimalAttacks from './DogBitesAnimalAttacks';
 
 const PracticeAreaRouter = () => {
-  const location = useLocation();
-  const slug = location.pathname.split('/').pop() || '';
-
-  // Map of practice area slugs to their content
-  const practiceAreaData: { [key: string]: any } = {
+  return (
     'mesothelioma-asbestos': {
       icon: '🏭',
       title: 'Mesothelioma & Asbestos',

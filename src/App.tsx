@@ -8,7 +8,9 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
-import CarAccidents from "./pages/practice-areas/CarAccidents";
+import CarAccidentsNew from "./pages/practice-areas/CarAccidentsNew";
+import CarCaseEvaluation from "./pages/CarCaseEvaluation";
+import CarMedicalGuidance from "./pages/CarMedicalGuidance";
 import TruckAccidentsNew from "./pages/practice-areas/TruckAccidentsNew";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
@@ -40,7 +42,9 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
-          <Route path="/practice-areas/car-accidents" element={<CarAccidents />} />
+          <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
+          <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
+          <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
           <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
           <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />

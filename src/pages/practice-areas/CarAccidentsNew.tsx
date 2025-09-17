@@ -31,6 +31,12 @@ import {
   AlertCircle
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/car-accidents-hero.jpg';
+import sceneImage from '@/assets/practice-areas/car-accident-scene.jpg';
+import legalConsultationImage from '@/assets/practice-areas/car-accident-legal-consultation.jpg';
+import medicalImage from '@/assets/practice-areas/car-accident-medical.jpg';
+import compensationImage from '@/assets/practice-areas/car-accident-compensation.jpg';
+import trafficSystemImage from '@/assets/practice-areas/california-traffic-system.jpg';
+import legalProcessImage from '@/assets/practice-areas/car-accident-legal-process.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -128,6 +134,21 @@ const CarAccidentsNew: React.FC = () => {
       answer: 'Collect: names and contact information for all drivers and passengers, driver\'s license numbers, insurance company names and policy numbers, vehicle makes, models, years, and license plates, names and contact information for witnesses, photos of vehicle damage from multiple angles, photos of the accident scene including street signs and traffic signals, notes about weather and road conditions, time and location of accident. Also note if you smell alcohol or observe erratic behavior from other drivers.'
     },
     {
+      category: 'immediate',
+      question: 'Should I move my car after an accident?',
+      answer: 'If the vehicles are drivable and blocking traffic, California law requires you to move them to the side of the road or nearby parking area to avoid additional accidents. However, first take photos of the accident scene showing vehicle positions, skid marks, and damage. If anyone is injured or vehicles can\'t be moved safely, leave them where they are and wait for police. Turn on hazard lights and set up flares or reflectors if available.'
+    },
+    {
+      category: 'immediate',
+      question: 'What if the other driver doesn\'t have insurance?',
+      answer: 'Unfortunately, about 15% of California drivers are uninsured. Your options include: filing a claim under your uninsured motorist (UM) coverage if you have it, suing the driver personally (though collecting can be difficult), checking if other insurance policies apply (employer\'s policy if driver was working, etc.). California\'s Low Cost Automobile Insurance Program and California Automobile Assigned Risk Plan exist but provide minimal coverage. This is why we recommend all clients carry UM coverage - it protects you when irresponsible drivers don\'t have insurance.'
+    },
+    {
+      category: 'immediate',
+      question: 'Should I admit fault at the accident scene?',
+      answer: 'Never admit fault at the accident scene, even if you think you might be partially responsible. Accident investigations often reveal factors not immediately apparent, such as mechanical failures, poor road design, or the other driver\'s negligence. California\'s comparative negligence laws mean fault percentages matter significantly for compensation. Let police and insurance investigators determine fault based on evidence. Apologizing or saying "I\'m sorry" can be misinterpreted as admissions of guilt.'
+    },
+    {
       category: 'legal',
       question: 'How long do I have to file a car accident lawsuit in California?',
       answer: 'California\'s statute of limitations gives you 2 years from the accident date to file a personal injury lawsuit. For property damage claims, you have 3 years. However, if a government entity is involved (city bus, county vehicle, etc.), you must file a claim within 6 months. Don\'t wait - evidence disappears, witnesses forget details, and surveillance footage gets deleted. Starting your claim early strengthens your case significantly.'
@@ -141,6 +162,21 @@ const CarAccidentsNew: React.FC = () => {
       category: 'legal',
       question: 'Do I have to go to court for my car accident case?',
       answer: 'About 95% of car accident cases settle without trial. Most resolve through negotiations with insurance companies or mediation. However, being willing and prepared to go to trial often results in better settlement offers. Cases go to trial when there\'s disputed liability, disagreement about injury severity, or insurance companies make unreasonable offers. If trial is necessary, you\'ll typically testify about the accident and your injuries. Your attorney handles all legal arguments and procedures. Trial preparation actually strengthens your negotiating position.'
+    },
+    {
+      category: 'legal',
+      question: 'Can I sue if I was a passenger in the accident?',
+      answer: 'Yes. Passengers are rarely at fault and can typically recover from one or both drivers\' insurance. You can file claims against the driver of the vehicle you were in, the other vehicle\'s driver, or both depending on fault. This includes Uber/Lyft passengers. Don\'t let friendship prevent you from filing a claim - that\'s why drivers have insurance. Your claim is against their insurance company, not them personally. Passengers often have the strongest cases because they bear no fault for the accident.'
+    },
+    {
+      category: 'legal',
+      question: 'What if the accident happened in a construction zone?',
+      answer: 'Construction zone accidents often involve multiple liable parties: the at-fault driver, construction companies, government entities, and equipment manufacturers. California has enhanced penalties for accidents in construction zones, but this doesn\'t automatically increase compensation. We investigate whether proper signage was posted, if traffic control measures were adequate, whether construction equipment or materials contributed to the accident, and if workers were following safety protocols. These cases require specialized knowledge of construction safety regulations.'
+    },
+    {
+      category: 'legal',
+      question: 'Can I sue for a hit-and-run accident?',
+      answer: 'Yes, if the hit-and-run driver is identified. California requires all drivers to stop after accidents - leaving the scene is a crime. If caught, hit-and-run drivers face criminal charges plus civil liability. If the driver isn\'t found, you can file claims under your uninsured motorist coverage and collision coverage. We work with police to locate hit-and-run drivers using surveillance footage, witness accounts, and vehicle debris analysis. Even partial license plates or vehicle descriptions can lead to identification.'
     },
     {
       category: 'insurance',
@@ -158,6 +194,26 @@ const CarAccidentsNew: React.FC = () => {
       answer: 'If you weren\'t at fault, California law (Proposition 103) prohibits insurance companies from raising your rates for filing a claim. If you were partially at fault, rates may increase depending on your fault percentage and claims history. Rate increases typically last 3-5 years. However, not filing a claim to avoid rate increases often costs more in unpaid medical bills and lost wages. Your insurance is there to protect you - use it. We help minimize fault determinations to protect your rates.'
     },
     {
+      category: 'insurance',
+      question: 'What is uninsured/underinsured motorist coverage?',
+      answer: 'UM/UIM coverage protects you when the at-fault driver has no insurance or insufficient insurance. With 15% of California drivers uninsured and many carrying only minimum coverage, this protection is essential. It covers medical bills, lost wages, and pain and suffering. The coverage follows you - protecting you as a driver, passenger, pedestrian, or cyclist. It\'s relatively inexpensive but provides crucial protection. We strongly recommend carrying UM/UIM coverage equal to your liability limits.'
+    },
+    {
+      category: 'insurance',
+      question: 'What if my insurance company denies my claim?',
+      answer: 'Insurance companies wrongfully deny valid claims regularly. Common improper denials include claiming you violated policy terms, missed deadlines, or share too much fault. California law requires insurers to act in good faith. Bad faith practices can result in punitive damages beyond your original claim. Don\'t accept denial as final. We review denials, identify improper reasons, appeal decisions, and if necessary, sue for bad faith. Many denials are reversed with proper legal pressure.'
+    },
+    {
+      category: 'insurance',
+      question: 'What is medical payments (MedPay) coverage?',
+      answer: 'MedPay is optional coverage that pays medical expenses regardless of fault. It typically covers $1,000-$10,000 in medical bills for you and your passengers. MedPay pays immediately without waiting for fault determination, helping with initial medical expenses. It doesn\'t affect other coverage and won\'t increase your rates. MedPay is especially valuable for cyclists and pedestrians since it covers them even when not in a vehicle. The coverage is inexpensive and provides immediate relief for medical costs.'
+    },
+    {
+      category: 'insurance',
+      question: 'How do rental car claims work after an accident?',
+      answer: 'Rental car coverage depends on your insurance, credit cards, and rental company policies. Your collision coverage typically covers rental cars, but liability limits may differ. Credit cards often provide collision coverage but not liability. Rental company insurance is usually expensive and duplicates existing coverage. If you\'re not at fault, the other driver\'s insurance should pay for a rental while your car is repaired. Always photograph rental car condition before and after use to avoid false damage claims.'
+    },
+    {
       category: 'compensation',
       question: 'What damages can I recover in a California car accident?',
       answer: 'Economic damages: medical bills (past and future), lost wages, reduced earning capacity, property damage, rental car costs, household services, out-of-pocket expenses. Non-economic damages: pain and suffering, emotional distress, loss of enjoyment of life, scarring/disfigurement, loss of consortium. In rare cases involving drunk driving or extreme recklessness, punitive damages may apply. Future damages require expert testimony about ongoing medical needs, vocational impact, and life care planning. California doesn\'t cap car accident damages except in medical malpractice cases.'
@@ -168,9 +224,124 @@ const CarAccidentsNew: React.FC = () => {
       answer: 'Case value depends on injury severity, medical expenses, lost income, permanent impairment, impact on daily life, and available insurance coverage. Minor soft tissue injuries might settle for $15,000-$50,000. Injuries requiring surgery often exceed $100,000. Catastrophic injuries can reach millions. Factors increasing value: objective medical findings, consistent treatment, permanent injury, scarring, high medical bills, lost wages, strong liability evidence. Every case is unique. We provide detailed valuations after reviewing medical records and understanding your specific impacts.'
     },
     {
+      category: 'compensation',
+      question: 'How are pain and suffering damages calculated?',
+      answer: 'California uses two methods: the multiplier method (multiplying economic damages by 1.5-5x based on severity) and per diem method (daily rate for suffering multiplied by recovery days). Factors include injury severity, recovery time, permanent effects, impact on daily activities, emotional trauma, and age. Insurance companies use computer programs to lowball these damages. We document pain through medical records, pain journals, witness testimony about lifestyle changes, and expert testimony. Pain and suffering often represents the largest portion of settlements.'
+    },
+    {
+      category: 'compensation',
+      question: 'Will I have to pay taxes on my settlement?',
+      answer: 'Generally, no. Under federal and California tax law, compensation for physical injuries isn\'t taxable income. This includes medical expenses, pain and suffering, and emotional distress arising from physical injuries. However, punitive damages and interest are taxable. Lost wages replacement may be taxable since regular wages would have been taxed. Properly structuring settlements can minimize tax implications. We work with tax professionals to optimize your settlement structure for maximum after-tax recovery.'
+    },
+    {
+      category: 'compensation',
+      question: 'How long does it take to get a settlement?',
+      answer: 'Timeline varies significantly. Simple cases with clear liability and minor injuries might settle in 3-6 months. Complex cases with severe injuries often take 1-2 years. Factors affecting timeline: injury severity, treatment duration, liability disputes, insurance company cooperation, court backlog if litigation is needed. We don\'t recommend settling until you\'ve reached maximum medical improvement or doctors can predict future needs. Rushing settlements often leaves money on the table. Once you sign a release, you can\'t seek additional compensation if injuries worsen.'
+    },
+    {
+      category: 'compensation',
+      question: 'What if I need money before my case settles?',
+      answer: 'Several options exist for immediate financial relief: medical providers may accept liens (payment from settlement), Social Security disability benefits if injuries prevent work, workers\' compensation if the accident was work-related, short-term disability insurance through employers, pre-settlement funding (though interest rates are high). We help connect clients with resources for immediate needs while protecting their long-term settlement. Avoid high-interest lawsuit loans when possible - they reduce your final recovery.'
+    },
+    {
+      category: 'compensation',
+      question: 'Can I recover lost wages if I\'m self-employed?',
+      answer: 'Yes, but proving lost income is more complex for self-employed individuals. We use tax returns, profit/loss statements, bank records, client contracts, and expert testimony to establish income patterns. Self-employed people often have irregular income requiring averaging over multiple years. We may need vocational experts to assess how injuries affect your ability to run your business. Keep detailed records of missed opportunities, cancelled contracts, and delegated work costs. The key is documenting your normal earning patterns and how the accident disrupted them.'
+    },
+    {
       category: 'medical',
       question: 'Should I see a doctor even if I feel fine?',
       answer: 'Yes, absolutely. Adrenaline and shock mask pain immediately after accidents. Serious injuries like traumatic brain injuries, internal bleeding, and spinal damage might not show symptoms for days or weeks. Whiplash symptoms often appear 24-72 hours later. Seeing a doctor immediately creates medical documentation linking injuries to the accident - crucial for your claim. Insurance companies argue that delays in treatment mean you weren\'t really injured. Even if you feel minor soreness, get checked. Early treatment prevents minor injuries from becoming major problems.'
+    },
+    {
+      category: 'medical',
+      question: 'What are the most common car accident injuries?',
+      answer: 'Whiplash and neck injuries (80% of rear-end collisions), concussions and traumatic brain injuries, back injuries including herniated discs, broken bones particularly ribs and extremities, internal injuries to organs, cuts and lacerations, shoulder injuries from seatbelts, knee injuries from dashboard impact, psychological trauma including PTSD, burns from airbags or fire. Even "minor" injuries can cause chronic pain and require extensive treatment. Every injury should be properly documented and treated.'
+    },
+    {
+      category: 'medical',
+      question: 'Who pays my medical bills while my case is pending?',
+      answer: 'Options include: your health insurance (they\'ll seek reimbursement from settlement), medical payments coverage (MedPay) from your auto insurance, treating on a lien basis where providers wait for payment from settlement, Medicare/Medicaid if eligible. Don\'t skip treatment due to cost concerns - we help arrange treatment even without insurance. Medical providers often accept liens, meaning they wait for payment from your settlement. The at-fault party doesn\'t pay directly until case settlement. Keep all bills and receipts for reimbursement.'
+    },
+    {
+      category: 'medical',
+      question: 'Can I choose my own doctor?',
+      answer: 'Yes. Unlike workers\' compensation, car accident victims can see any doctor. However, insurance companies give more weight to certain providers and may dispute treatment from chiropractors or alternative medicine providers. We can recommend trusted physicians who understand car accident injuries and provide thorough documentation for your claim. Avoid doctors who advertise heavily for accident victims - insurance companies view them skeptically. Consistent treatment with your regular doctor or referred specialists strengthens your case.'
+    },
+    {
+      category: 'medical',
+      question: 'What if my injuries get worse after the settlement?',
+      answer: 'Once you sign a settlement release, you typically cannot seek additional compensation for worsening injuries related to the accident. This is why we don\'t recommend settling until reaching "maximum medical improvement" - the point where your condition has stabilized. Some settlements include provisions for future complications, but these are rare. If injuries worsen due to medical malpractice during treatment, you may have a separate claim against the healthcare provider. Always consult with your doctors about potential complications before settling.'
+    },
+    {
+      category: 'medical',
+      question: 'How do I prove my injuries were caused by the accident?',
+      answer: 'Medical causation requires: immediate medical attention after the accident, consistent symptoms from accident to treatment, medical records documenting injury progression, physician statements linking injuries to accident forces, absence of pre-existing conditions or proper documentation if they exist. We work with medical experts who review accident forces, injury patterns, and treatment records. Gaps in treatment or inconsistent symptoms weaken causation arguments. Pre-existing conditions don\'t bar recovery but may reduce damages based on aggravation versus new injury.'
+    },
+    {
+      category: 'medical',
+      question: 'What is maximum medical improvement (MMI)?',
+      answer: 'MMI is when your condition has stabilized and further improvement is unlikely with additional treatment. Reaching MMI doesn\'t mean you\'re completely healed - you may have permanent limitations or ongoing pain. MMI is important for settlements because it allows accurate assessment of future medical needs and permanent impairment. We typically don\'t recommend settling before MMI unless financial pressures require it. Your doctors determine MMI timing, which can range from months to years depending on injury severity.'
+    },
+    {
+      category: 'special',
+      question: 'What about accidents involving rideshare vehicles (Uber/Lyft)?',
+      answer: 'Rideshare accidents involve complex insurance coverage. Uber and Lyft provide different coverage levels depending on driver status: offline (personal insurance only), app on but no passenger (limited company coverage), passenger in vehicle (full company coverage up to $1 million). Passengers are typically covered by company policies. Other drivers may claim against driver\'s personal insurance, company insurance, or both. We navigate these complex coverage scenarios to maximize recovery from all available sources.'
+    },
+    {
+      category: 'special',
+      question: 'How do commercial vehicle accidents differ from regular car accidents?',
+      answer: 'Commercial vehicle accidents often involve higher insurance coverage, federal safety regulations, company liability beyond the driver, more severe injuries due to vehicle size, complex investigation requirements including logbooks and maintenance records. Commercial drivers must meet higher standards and companies can be liable for negligent hiring, training, or supervision. We investigate company safety records, driver qualifications, vehicle maintenance, and federal regulation compliance. These cases often result in larger settlements due to increased coverage and liability.'
+    },
+    {
+      category: 'special',
+      question: 'What about accidents with government vehicles?',
+      answer: 'Claims against government entities have strict procedural requirements. In California, you must file a government claim within 6 months (sometimes 1 year for certain claims). Government immunity laws may limit liability in some situations. The claim must be formally denied before filing a lawsuit. We handle all procedural requirements and navigate governmental immunity defenses. Government entities often have substantial insurance coverage, but claims require specialized knowledge of applicable laws and procedures.'
+    },
+    {
+      category: 'special',
+      question: 'How do drunk driving accidents affect my case?',
+      answer: 'Drunk driving accidents may allow recovery of punitive damages in addition to compensatory damages. The drunk driver faces criminal charges separate from your civil case. Criminal conviction helps prove civil liability, but you can win your civil case even if criminal charges are dropped. Alcohol-related accidents often result in higher settlements due to clear liability and potential punitive damages. We coordinate with prosecutors when beneficial and use all available evidence including breathalyzer results, field sobriety tests, and witness observations.'
+    },
+    {
+      category: 'special',
+      question: 'What if the accident involved a defective vehicle or part?',
+      answer: 'Product liability claims may exist against vehicle manufacturers, parts manufacturers, or maintenance providers. Common defects include brake failures, tire blowouts, airbag malfunctions, steering problems, and design flaws. These cases require extensive investigation including vehicle inspection, maintenance records, recall notices, and expert testimony. Product liability claims can provide additional compensation sources beyond insurance. We work with automotive experts to identify defects and pursue all responsible parties.'
+    },
+    {
+      category: 'special',
+      question: 'How do motorcycle accident cases differ?',
+      answer: 'Motorcycle accidents often result in more severe injuries despite similar accident forces. Bias against motorcyclists can affect jury perception, requiring careful case presentation. Motorcycle riders have the same rights as other drivers, despite common misconceptions. Helmet laws affect damages in some states but not liability. We counter anti-motorcycle bias with evidence of safe riding practices, proper licensing, and other driver fault. Motorcycle cases often involve road hazards that wouldn\'t affect cars, expanding potential liability to government entities responsible for road maintenance.'
+    },
+    {
+      category: 'special',
+      question: 'What about pedestrian accident cases?',
+      answer: 'Pedestrians have right-of-way in most situations, but comparative negligence still applies. Common factors include crosswalk violations, distracted walking, impaired pedestrians, and visibility issues. Driver duties are higher in school zones, residential areas, and around children. We investigate crosswalk signals, lighting conditions, driver behavior, and pedestrian actions. Pedestrian injuries are often severe, involving traumatic brain injuries, broken bones, and internal trauma. Cases may involve multiple parties including vehicle drivers, government entities for road design, and property owners for lighting or visibility issues.'
+    },
+    {
+      category: 'special',
+      question: 'How do bicycle accident cases work?',
+      answer: 'Cyclists have the same road rights as vehicles but are more vulnerable to injury. Common issues include doorings (car doors opened into cyclist path), right-hook turns, failure to yield, and bike lane violations. Helmet use affects damages in some jurisdictions but not liability. We investigate driver compliance with three-foot passing laws, bicycle infrastructure adequacy, and cyclist visibility. Bicycle accidents often involve serious injuries despite lower speeds. Cases may include claims for specialized bicycle equipment replacement and long-term cycling ability impacts.'
+    },
+    {
+      category: 'process',
+      question: 'How much does it cost to hire a car accident attorney?',
+      answer: 'We work on contingency - you pay no attorney fees unless we win your case. Our fee is a percentage of the settlement or judgment, typically 33-40% depending on case complexity. You\'re responsible for case costs (filing fees, expert witnesses, medical records), but we advance these costs and recover them from your settlement. If we don\'t win, you owe no attorney fees. This system ensures quality representation regardless of your financial situation and motivates us to maximize your recovery.'
+    },
+    {
+      category: 'process',
+      question: 'What should I bring to my initial consultation?',
+      answer: 'Bring: police report or case number, insurance information (yours and other party\'s), photos of vehicles, scene, and injuries, medical records and bills, correspondence with insurance companies, witness contact information, your driver\'s license and vehicle registration. Don\'t worry if you don\'t have everything - we can obtain missing documents. The most important thing is seeking legal advice quickly to protect your rights and begin evidence preservation.'
+    },
+    {
+      category: 'process',
+      question: 'How often will you update me on my case?',
+      answer: 'We provide regular updates through phone calls, emails, and our client portal. You\'ll receive copies of all important documents and correspondence. We update clients when significant developments occur and provide monthly status reports for ongoing cases. You can contact us anytime with questions - communication is crucial for successful representation. We believe informed clients make better decisions and feel more confident throughout the legal process.'
+    },
+    {
+      category: 'process',
+      question: 'What if I\'m not satisfied with the settlement offer?',
+      answer: 'Settlement decisions are ultimately yours - we provide recommendations but you decide whether to accept offers. If you\'re not satisfied, we can continue negotiations, seek mediation, or file a lawsuit. We never pressure clients to settle and will go to trial if necessary to achieve fair compensation. However, we\'ll explain the risks and benefits of each option, including litigation costs and time requirements. Our goal is maximizing your recovery while considering your individual circumstances and risk tolerance.'
     }
   ];
 
@@ -417,6 +588,14 @@ const CarAccidentsNew: React.FC = () => {
             <section id="immediate-steps" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After Your Car Accident</h2>
               
+              <div className="mb-6">
+                <img 
+                  src={sceneImage} 
+                  alt="Car accident scene investigation in California" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
@@ -543,6 +722,14 @@ const CarAccidentsNew: React.FC = () => {
             {/* Legal Process Section */}
             <section id="legal-process" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Car Accident Legal Process</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={legalProcessImage} 
+                  alt="California legal process for car accident cases" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
+              </div>
               
               <div className="prose prose-lg max-w-none mb-6">
                 <p className="text-lg leading-relaxed mb-4">

@@ -670,7 +670,7 @@ const PremisesLiability: React.FC = () => {
                   <li><a href="https://www.courts.ca.gov/selfhelp-injury.htm" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Courts Self-Help: Personal Injury</a></li>
                   <li><a href="https://www.dir.ca.gov/dwc/WorkersCompensationBenefits.htm" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Division of Workers' Compensation</a></li>
                   <li><a href="https://www.osha.gov/stateplans" target="_blank" rel="noopener noreferrer" className="text-primary underline">OSHA State Plans</a></li>
-                  <li><a href="https://www.nolo.com/legal-encyclopedia/premises-liability-california.html" target="_blank" rel="noopener noreferrer" className="text-primary underline">Nolo: Premises Liability in California</a></li>
+                  
                 </ul>
               </div>
             </section>
@@ -760,6 +760,33 @@ const PremisesLiability: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Don't Wait - Time Limits Apply Section */}
+      <section className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Don't Wait - Time Limits Apply for California Premises Liability Claims
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+            California law gives you only two years from the accident date to file your claim. Government property claims require filing within six months. Contact us today for your free consultation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+            <Button 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.location.href = '/premises-liability-case-evaluation'}
+            >
+              Start Free Case Evaluation
+            </Button>
+            <Button 
+              variant="outline"
+              className="border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.open('tel:8553742906')}
+            >
+              Call (855) 374-2906
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

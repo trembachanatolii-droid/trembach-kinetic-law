@@ -37,7 +37,7 @@ import {
 import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
 import whatToDoImage from '@/assets/practice-areas/premises-liability.jpg';
 import accidentTypesImage from '@/assets/practice-areas/construction-accidents.jpg';
-import provingNegligenceImage from '@/assets/practice-areas/truck-legal-process.jpg';
+import provingNegligenceImage from '@/assets/floating-scales-justice.jpg';
 import compensationImage from '@/assets/lady-justice-perfect.jpg';
 import SEO from '@/components/SEO';
 

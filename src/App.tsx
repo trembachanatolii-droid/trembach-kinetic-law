@@ -33,6 +33,7 @@ import CompensationCalculator from "./pages/CompensationCalculator";
 import SilicosisCaseEvaluation from "./pages/SilicosisCaseEvaluation";
 import SilicosisCompensationCalculator from "./pages/SilicosisCompensationCalculator";
 import SilicosisMedicalGuidance from "./pages/SilicosisMedicalGuidance";
+import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const App = () => (
       <Sonner />
       <CustomCursor />
       <BrowserRouter>
+        <ScrollToTop />
         <Navigation />
         <Routes>
           <Route path="/" element={<Index />} />

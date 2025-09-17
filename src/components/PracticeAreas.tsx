@@ -64,7 +64,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
       </p>
 
       <a 
-        href="#contact" 
+        href="/case-evaluation" 
         className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors"
       >
         Get Help →

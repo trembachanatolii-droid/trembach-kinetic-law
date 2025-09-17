@@ -504,7 +504,7 @@ const PracticeAreas3D = () => {
               We handle virtually every type of personal injury and mass tort case. Contact us for a free consultation.
             </p>
             <a 
-              href="#contact"
+              href="/case-evaluation"
               className="hero-button text-lg px-8 py-4"
             >
               Get Free Case Review

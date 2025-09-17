@@ -780,8 +780,11 @@ const TalcBabyPowderCancer: React.FC = () => {
                   <Button asChild className="w-full bg-red-600 hover:bg-red-700">
                     <Link to="/talc-case-evaluation">Get Free Evaluation</Link>
                   </Button>
-                  <Button asChild variant="outline" className="w-full">
-                    <a href="tel:8181234567">Call (818) 123-4567</a>
+                  <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white">
+                    <a href="tel:8181234567">
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </a>
                   </Button>
                 </div>
               </Card>

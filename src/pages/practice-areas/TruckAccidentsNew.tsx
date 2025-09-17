@@ -50,7 +50,7 @@ import heroBackground from '@/assets/practice-areas/truck-accidents-hero-bright.
 import sidebarImage from '@/assets/practice-areas/truck-18-wheeler.jpg';
 import legalProcessImage from '@/assets/practice-areas/truck-legal-documentation.jpg';
 import truckingRegulationsImage from '@/assets/practice-areas/truck-safety-inspection.jpg';
-import investigationImage from '@/assets/practice-areas/truck-investigation.jpg';
+import investigationImage from '@/assets/practice-areas/truck-legal-investigation.jpg';
 import medicalTreatmentImage from '@/assets/practice-areas/truck-medical-care.jpg';
 import compensationInsuranceImage from '@/assets/practice-areas/truck-compensation-insurance.jpg';
 
@@ -1056,69 +1056,6 @@ const TruckAccidentsNew: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* Don't Wait - Time Limits Apply for California Section */}
-            <section className="content-section mb-12 bg-gradient-to-r from-red-50 to-red-100 p-8 rounded-lg border-l-4 border-red-600">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Don't Wait - Time Limits Apply for California Truck Accident Claims</h2>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-red-600">
-                      <Clock className="w-5 h-5 mr-2" />
-                      Statute of Limitations
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="font-semibold">2 Years from Date of Accident</p>
-                    <p>California Civil Code Section 335.1 requires truck accident claims to be filed within two years of the accident date.</p>
-                    <p className="text-sm text-red-600">Missing this deadline typically bars your claim forever.</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-red-600">
-                      <AlertTriangle className="w-5 h-5 mr-2" />
-                      Government Claims Exceptions
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p className="font-semibold">6 Months for Government Entities</p>
-                    <p>Claims against city, county, or state entities have much shorter deadlines - often just 6 months.</p>
-                    <p className="text-sm text-red-600">Public entity claims require special procedures and notices.</p>
-                  </CardContent>
-                </Card>
-              </div>
-
-              <div className="bg-white p-6 rounded-lg shadow-lg">
-                <h3 className="text-xl font-semibold mb-4 text-red-600">Why Acting Quickly Matters</h3>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Evidence Preservation</h4>
-                    <p className="text-sm">Truck data, surveillance footage, and witness memories fade quickly.</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Driver Records</h4>
-                    <p className="text-sm">Logbooks and driving records may be destroyed or overwritten.</p>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold mb-2">Company Policies</h4>
-                    <p className="text-sm">Trucking companies often change safety policies after accidents.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-6 text-center">
-                <Button 
-                  size="lg" 
-                  className="bg-red-600 hover:bg-red-700 text-white px-8 py-3"
-                  onClick={() => window.location.href = '/case-evaluation'}
-                >
-                  <Clock className="w-5 h-5 mr-2" />
-                  Don't Wait - Get Your Free Case Review Now
-                </Button>
-              </div>
-            </section>
 
             {/* Investigation Section */}
             <section id="investigation" className="content-section mb-12">
@@ -1375,6 +1312,36 @@ const TruckAccidentsNew: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Don't Wait - Time Limits Apply for California Section */}
+      <section className="bg-red-600 text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl font-bold mb-4">
+            Don't Wait - Time Limits Apply for California Truck Accident Claims
+          </h2>
+          <p className="text-xl mb-8">
+            California law gives you only two years from the accident date to file your claim. 
+            Contact us today for your free consultation.
+          </p>
+          <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+            <Button 
+              size="lg" 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
+              onClick={() => window.location.href = '/case-evaluation'}
+            >
+              Free Case Review
+            </Button>
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
+              Call (818) 123-4567
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

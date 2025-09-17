@@ -19,13 +19,94 @@ const SilicosisMedicalGuidance: React.FC = () => {
     questions: ''
   });
 
+  const [guidanceGenerated, setGuidanceGenerated] = useState(false);
+  const [personalizedGuidance, setPersonalizedGuidance] = useState<{
+    immediateCare: string[];
+    specialists: string[];
+    diagnosticTests: string[];
+    treatment: string[];
+    lifestyle: string[];
+    legal: string[];
+  } | null>(null);
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const generatePersonalizedGuidance = () => {
+    const symptoms = formData.symptoms.toLowerCase();
+    const hasBreathingIssues = symptoms.includes('breath') || symptoms.includes('cough') || symptoms.includes('chest');
+    const hasFatigue = symptoms.includes('fatigue') || symptoms.includes('tired') || symptoms.includes('energy');
+    const hasPain = symptoms.includes('pain') || symptoms.includes('hurt') || symptoms.includes('ache');
+
+    return {
+      immediateCare: [
+        "Schedule an appointment with a pulmonologist as soon as possible",
+        hasBreathingIssues ? "Monitor your breathing patterns and avoid physical exertion until examined" : "Keep track of any changes in your breathing",
+        "Avoid further exposure to silica dust immediately",
+        "Stop smoking if you currently smoke - this is critical for lung health",
+        hasPain ? "Document all symptoms including pain levels, frequency, and triggers" : "Keep a daily symptom diary",
+        "Consider getting a flu shot and pneumonia vaccine to prevent respiratory infections"
+      ],
+      specialists: [
+        "Pulmonologist - specializing in occupational lung diseases",
+        "Occupational Medicine Physician - for workplace exposure assessment",
+        "Respiratory Therapist - for breathing techniques and lung function support",
+        "Radiologist - experienced in reading silicosis-related imaging",
+        formData.exposureHistory ? "Industrial Hygienist - to evaluate your workplace exposure history" : "Occupational Health Specialist",
+        "Social Worker - familiar with silicosis cases and benefit programs"
+      ],
+      diagnosticTests: [
+        "High-resolution computed tomography (HRCT) scan of the chest",
+        "Pulmonary function tests (spirometry) to assess lung capacity",
+        "Chest X-rays for baseline comparison and monitoring",
+        "Complete blood count and inflammatory markers",
+        "Arterial blood gas analysis if breathing issues are severe",
+        "Occupational exposure assessment and detailed work history review"
+      ],
+      treatment: [
+        "There is no cure for silicosis, but symptoms can be managed effectively",
+        hasBreathingIssues ? "Bronchodilators may help open airways and improve breathing" : "Respiratory monitoring and supportive care",
+        "Oxygen therapy may be needed if blood oxygen levels are low",
+        "Pulmonary rehabilitation programs to maintain lung function",
+        "Treatment of any secondary infections promptly",
+        "Regular monitoring for complications like lung cancer or autoimmune diseases"
+      ],
+      lifestyle: [
+        "Quit smoking immediately - smoking significantly worsens silicosis",
+        "Exercise as tolerated, focusing on low-impact activities like walking",
+        "Practice breathing exercises and techniques taught by respiratory therapists",
+        "Maintain good nutrition to support immune system function",
+        "Stay up to date on vaccinations, especially respiratory-related vaccines",
+        "Join support groups for people with occupational lung diseases"
+      ],
+      legal: [
+        "Document all medical appointments, treatments, and expenses",
+        "Gather employment records showing dates and locations of silica exposure",
+        "Consider consulting with an attorney specializing in silicosis cases",
+        "Explore workers' compensation benefits if exposure was work-related",
+        "Look into potential lawsuits against equipment manufacturers or employers",
+        "Apply for disability benefits if your condition affects your ability to work"
+      ]
+    };
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Medical guidance request:', formData);
+    
+    if (!formData.name || !formData.email) {
+      alert('Please provide your name and email address to receive medical guidance.');
+      return;
+    }
+
+    const guidance = generatePersonalizedGuidance();
+    setPersonalizedGuidance(guidance);
+    setGuidanceGenerated(true);
+    
+    // Scroll to guidance section
+    setTimeout(() => {
+      document.getElementById('guidance-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -213,8 +294,158 @@ const SilicosisMedicalGuidance: React.FC = () => {
           </div>
         </section>
 
+        {/* Personalized Guidance Results */}
+        {guidanceGenerated && personalizedGuidance && (
+          <section className="py-20 bg-primary/5" id="guidance-section">
+            <div className="container mx-auto px-4">
+              <div className="max-w-6xl mx-auto">
+                <div className="text-center mb-12">
+                  <h2 className="text-3xl font-bold text-primary mb-4">
+                    Your Personalized Medical Guidance
+                  </h2>
+                  <p className="text-lg text-muted-foreground">
+                    Hello {formData.name}, here's your comprehensive medical guidance for silicosis
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-destructive flex items-center gap-2">
+                        <Heart className="w-5 h-5" />
+                        Immediate Care Steps
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.immediateCare.map((step, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-destructive">•</span>
+                            {step}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-primary flex items-center gap-2">
+                        <Users className="w-5 h-5" />
+                        Specialists to See
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.specialists.map((specialist, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary">•</span>
+                            {specialist}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-primary flex items-center gap-2">
+                        <FileText className="w-5 h-5" />
+                        Diagnostic Tests
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.diagnosticTests.map((test, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary">•</span>
+                            {test}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-primary flex items-center gap-2">
+                        <Stethoscope className="w-5 h-5" />
+                        Treatment Options
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.treatment.map((treatment, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary">•</span>
+                            {treatment}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-primary flex items-center gap-2">
+                        <Heart className="w-5 h-5" />
+                        Lifestyle Changes
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.lifestyle.map((lifestyle, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary">•</span>
+                            {lifestyle}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="shadow-lg border-0 bg-card/80 backdrop-blur">
+                    <CardHeader>
+                      <CardTitle className="text-xl text-primary flex items-center gap-2">
+                        <FileText className="w-5 h-5" />
+                        Legal Considerations
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <ul className="space-y-2">
+                        {personalizedGuidance.legal.map((legal, index) => (
+                          <li key={index} className="text-sm text-muted-foreground flex items-start gap-2">
+                            <span className="text-primary">•</span>
+                            {legal}
+                          </li>
+                        ))}
+                      </ul>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <div className="text-center mt-12 space-y-4">
+                  <div className="bg-card/80 backdrop-blur rounded-lg p-6 border">
+                    <h3 className="text-lg font-semibold mb-3">Next Steps</h3>
+                    <p className="text-muted-foreground mb-4">
+                      This guidance has been automatically generated based on your responses. For legal advice regarding your silicosis case, schedule a free consultation.
+                    </p>
+                    <Button 
+                      size="lg" 
+                      className="bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.location.href = '/silicosis-case-evaluation'}
+                    >
+                      Schedule Free Legal Consultation
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Emergency Information */}
-        <section className="py-16 bg-primary/5">
+        <section className="py-16 bg-destructive/5">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center">
               <div className="bg-destructive/10 border border-destructive/20 rounded-lg p-6">

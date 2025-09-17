@@ -966,42 +966,6 @@ const SilicosisInjuries: React.FC = () => {
               </div>
             </section>
 
-            {/* Time Limits Section */}
-            <section className="content-section mb-12">
-              <Card className="bg-red-50 border-red-200">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-red-800 flex items-center">
-                    <Clock className="w-6 h-6 mr-2" />
-                    Don't Wait - Time Limits Apply for California
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-red-700 text-lg leading-relaxed mb-4">
-                    California law imposes strict time limits for filing silicosis claims. Generally, you have 2 years from the date of diagnosis or discovery of the disease to file a lawsuit. However, workers' compensation claims may have different deadlines.
-                  </p>
-                  <p className="text-red-700 text-lg leading-relaxed mb-6">
-                    Because silicosis is progressive and can be fatal, immediate legal action is essential to preserve your rights and secure compensation for medical treatment. Don't let legal deadlines prevent you from getting the justice and compensation you deserve.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button 
-                       size="lg" 
-                       className="bg-red-600 hover:bg-red-700 text-white"
-                       onClick={() => window.location.href = '/silicosis-case-evaluation'}
-                     >
-                       Get Free Case Evaluation Now
-                     </Button>
-                    <Button 
-                      size="lg" 
-                      variant="outline" 
-                      className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white bg-transparent"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
-                      Call (818) 123-4567
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            </section>
           </div>
 
           {/* Sidebar */}

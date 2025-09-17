@@ -216,8 +216,8 @@
   }
   
   .hero-button {
-    background: hsl(var(--primary));
-    color: hsl(var(--primary-foreground));
+    background: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
     padding: 0.5rem 1rem;
     border-radius: 0.5rem;
     font-weight: 600;
@@ -227,6 +227,7 @@
     gap: 0.5rem;
     border: none;
     cursor: pointer;
+    text-decoration: none;
   }
   
   .hero-button:hover {

@@ -375,13 +375,13 @@ const BicycleCompensationCalculator: React.FC = () => {
                     This calculator provides estimates only. The compensation amounts shown are based on general factors and similar cases. Your actual compensation may be significantly different depending on the specific circumstances of your case.
                   </p>
                   <p className="text-sm text-orange-700">
-                    <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every bicycle accident case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
-                  </p>
-                  <p className="text-sm text-orange-700">
-                    <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified bicycle accident attorney who can review your medical records, accident details, and other relevant documentation.
-                  </p>
-                  <p className="text-sm text-orange-700">
-                    <strong>Time Limits Apply:</strong> Bicycle accident claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
+                     <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every bicycle accident case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
+                   </p>
+                   <p className="text-sm text-orange-700">
+                     <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified bicycle accident attorney who can review your medical records, accident details, and other relevant documentation.
+                   </p>
+                   <p className="text-sm text-orange-700">
+                     <strong>Time Limits Apply:</strong> Bicycle accident claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
                   </p>
                   <p className="text-sm text-orange-700">
                     For a free, confidential case evaluation, contact our experienced bicycle accident attorneys today.

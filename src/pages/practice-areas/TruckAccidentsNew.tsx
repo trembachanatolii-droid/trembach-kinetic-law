@@ -638,6 +638,621 @@ const TruckAccidentsNew: React.FC = () => {
                 </div>
               </section>
 
+              {/* Immediate Steps Section */}
+              <section id="immediate-steps" className="content-section mb-16 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-2xl p-12">
+                <div className="flex items-center mb-8">
+                  <div className="bg-orange-200 p-4 rounded-xl mr-6">
+                    <AlertTriangle className="w-8 h-8 text-orange-700" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-gray-900">Immediate Steps After a Truck Accident</h2>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="bg-white p-8 rounded-xl shadow-lg border-l-4 border-orange-500">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-4">At the Scene - Your Priority Actions</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-bold text-lg text-orange-700 mb-3">Safety First</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Move to safety if possible</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Call 911 immediately</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Check for injuries</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Turn on hazard lights</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg text-orange-700 mb-3">Evidence Protection</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Take photos from multiple angles</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Get witness contact information</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Document truck details (company, license)</li>
+                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Note road/weather conditions</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
+                    <h3 className="text-2xl font-bold text-red-700 mb-4">⚠️ Critical: What NOT to Do</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't admit fault or apologize</li>
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't accept quick settlements</li>
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't give recorded statements</li>
+                      </ul>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't sign documents without review</li>
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't delay medical treatment</li>
+                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't handle insurance alone</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-8 rounded-xl border-l-4 border-blue-500">
+                    <h3 className="text-2xl font-bold text-blue-700 mb-4">Call Trembach Law Firm Immediately</h3>
+                    <p className="text-lg text-gray-700 mb-4">
+                      Trucking companies dispatch investigators within hours of an accident. You need immediate legal protection to preserve evidence and protect your rights.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 text-lg">
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call (855) 985-1234
+                      </Button>
+                      <Button variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 px-6 text-lg">
+                        <MessageCircle className="w-5 h-5 mr-2" />
+                        Text for Quick Response
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Trucking Regulations Section */}
+              <section id="trucking-regulations" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
+                <div className="flex items-center mb-8">
+                  <div className="bg-blue-100 p-4 rounded-xl mr-6">
+                    <Truck className="w-8 h-8 text-blue-600" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-gray-900">Federal Trucking Regulations</h2>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="prose prose-xl max-w-none">
+                    <p className="text-xl leading-relaxed text-gray-700 mb-8">
+                      Commercial trucks are subject to extensive federal regulations designed to protect public safety. When trucking companies violate these rules, they can be held liable for resulting accidents and injuries.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
+                      <div className="flex items-center mb-4">
+                        <Clock className="w-8 h-8 text-blue-600 mr-3" />
+                        <h3 className="text-2xl font-bold text-gray-900">Hours of Service Rules</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Maximum 11 hours driving per day</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />14-hour work limit with mandatory breaks</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Required 10-hour rest periods</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Electronic logging device (ELD) requirements</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />70-hour weekly limits</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl">
+                      <div className="flex items-center mb-4">
+                        <Wrench className="w-8 h-8 text-green-600 mr-3" />
+                        <h3 className="text-2xl font-bold text-gray-900">Maintenance Requirements</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Daily vehicle inspection reports</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Annual DOT inspections</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Brake system maintenance</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Tire condition monitoring</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Load securement standards</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl">
+                      <div className="flex items-center mb-4">
+                        <Users className="w-8 h-8 text-orange-600 mr-3" />
+                        <h3 className="text-2xl font-bold text-gray-900">Driver Qualifications</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Commercial Driver's License (CDL)</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Medical certification requirements</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Drug and alcohol testing</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Background checks and training</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Driving record monitoring</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
+                      <div className="flex items-center mb-4">
+                        <Scale className="w-8 h-8 text-purple-600 mr-3" />
+                        <h3 className="text-2xl font-bold text-gray-900">Weight & Size Limits</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />80,000 lb gross vehicle weight limit</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Axle weight restrictions</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Length and width limitations</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Special permit requirements</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Bridge law compliance</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
+                    <h3 className="text-2xl font-bold text-red-700 mb-4">California-Specific Regulations</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-bold text-lg text-red-600 mb-3">Environmental Standards</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• CARB emission requirements</li>
+                          <li>• Diesel particulate filter mandates</li>
+                          <li>• Port drayage truck regulations</li>
+                          <li>• Idling restriction laws</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg text-red-600 mb-3">Safety Requirements</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• Chain requirements in mountain areas</li>
+                          <li>• Speed limiters on steep grades</li>
+                          <li>• Enhanced inspection requirements</li>
+                          <li>• Specialized route restrictions</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Legal Process Section */}
+              <section id="legal-process" className="content-section mb-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-2xl p-12">
+                <div className="flex items-center mb-8">
+                  <div className="bg-gray-200 p-4 rounded-xl mr-6">
+                    <Gavel className="w-8 h-8 text-gray-700" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-gray-900">The Legal Process</h2>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="prose prose-xl max-w-none mb-8">
+                    <p className="text-xl leading-relaxed text-gray-700">
+                      Truck accident cases follow a specific legal process designed to establish liability, document damages, and secure maximum compensation for victims and their families.
+                    </p>
+                  </div>
+                  
+                  <div className="relative">
+                    <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-red-500"></div>
+                    
+                    <div className="space-y-12">
+                      <div className="timeline-item relative pl-20">
+                        <div className="absolute left-4 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
+                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                          <h3 className="text-2xl font-bold text-blue-600 mb-4">Immediate Investigation</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Evidence Preservation</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Secure truck's black box data</li>
+                                <li>• Obtain driver logbooks and records</li>
+                                <li>• Collect witness statements</li>
+                                <li>• Document scene conditions</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Expert Analysis</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Accident reconstruction specialists</li>
+                                <li>• Vehicle inspection experts</li>
+                                <li>• Medical professionals</li>
+                                <li>• Economics specialists</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="timeline-item relative pl-20">
+                        <div className="absolute left-4 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
+                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                          <h3 className="text-2xl font-bold text-green-600 mb-4">Case Development</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Liability Investigation</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Driver violation analysis</li>
+                                <li>• Company policy review</li>
+                                <li>• Maintenance record examination</li>
+                                <li>• Regulatory compliance audit</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Damage Documentation</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Current medical expenses</li>
+                                <li>• Future treatment costs</li>
+                                <li>• Lost income calculations</li>
+                                <li>• Pain and suffering evaluation</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="timeline-item relative pl-20">
+                        <div className="absolute left-4 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
+                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                          <h3 className="text-2xl font-bold text-orange-600 mb-4">Negotiation & Settlement</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Insurance Negotiations</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Demand letter preparation</li>
+                                <li>• Coverage analysis</li>
+                                <li>• Settlement negotiations</li>
+                                <li>• Mediation proceedings</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Maximum Recovery</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Multiple defendant strategies</li>
+                                <li>• Policy limits analysis</li>
+                                <li>• Settlement evaluation</li>
+                                <li>• Client counseling</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="timeline-item relative pl-20">
+                        <div className="absolute left-4 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
+                        <div className="bg-white p-8 rounded-xl shadow-lg">
+                          <h3 className="text-2xl font-bold text-red-600 mb-4">Litigation (If Necessary)</h3>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Trial Preparation</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Discovery proceedings</li>
+                                <li>• Deposition scheduling</li>
+                                <li>• Expert witness preparation</li>
+                                <li>• Trial strategy development</li>
+                              </ul>
+                            </div>
+                            <div>
+                              <h4 className="font-bold text-lg text-gray-800 mb-3">Court Advocacy</h4>
+                              <ul className="space-y-2 text-gray-600">
+                                <li>• Jury selection</li>
+                                <li>• Opening statements</li>
+                                <li>• Evidence presentation</li>
+                                <li>• Closing arguments</li>
+                              </ul>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Investigation Section */}
+              <section id="investigation" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
+                <div className="flex items-center mb-8">
+                  <div className="bg-indigo-100 p-4 rounded-xl mr-6">
+                    <Eye className="w-8 h-8 text-indigo-600" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-gray-900">Comprehensive Investigation</h2>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="prose prose-xl max-w-none mb-8">
+                    <p className="text-xl leading-relaxed text-gray-700">
+                      Our investigation team works immediately to preserve critical evidence and build the strongest possible case for our clients. We understand that evidence disappears quickly, and trucking companies have teams working to limit their liability from the moment an accident occurs.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div className="space-y-6">
+                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
+                        <h3 className="text-2xl font-bold text-blue-700 mb-6">Technical Evidence</h3>
+                        <div className="space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Electronic Control Module (ECM) Data</h4>
+                              <p className="text-gray-600 text-sm">Speed, braking, engine performance in moments before crash</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Electronic Logging Device (ELD) Records</h4>
+                              <p className="text-gray-600 text-sm">Hours of service compliance and driver fatigue analysis</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">GPS and Fleet Management Data</h4>
+                              <p className="text-gray-600 text-sm">Route tracking, speed monitoring, and communication records</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Vehicle Inspection Reports</h4>
+                              <p className="text-gray-600 text-sm">Pre-trip, post-trip, and maintenance documentation</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl">
+                        <h3 className="text-2xl font-bold text-green-700 mb-6">Driver & Company Records</h3>
+                        <div className="space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Driver Qualification Files</h4>
+                              <p className="text-gray-600 text-sm">Licensing, training, medical certification, employment history</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Drug & Alcohol Testing Records</h4>
+                              <p className="text-gray-600 text-sm">Pre-employment, random, post-accident testing compliance</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Company Safety Policies</h4>
+                              <p className="text-gray-600 text-sm">Training programs, safety protocols, compliance procedures</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">DOT Safety Ratings</h4>
+                              <p className="text-gray-600 text-sm">FMCSA inspection reports, violations, and safety scores</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="space-y-6">
+                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl">
+                        <h3 className="text-2xl font-bold text-orange-700 mb-6">Scene Reconstruction</h3>
+                        <div className="space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">3D Laser Scanning</h4>
+                              <p className="text-gray-600 text-sm">Precise measurement and digital recreation of accident scene</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Photogrammetry Analysis</h4>
+                              <p className="text-gray-600 text-sm">Converting photographs into accurate measurements and models</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Physics-Based Analysis</h4>
+                              <p className="text-gray-600 text-sm">Momentum, energy, and impact force calculations</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Computer Simulations</h4>
+                              <p className="text-gray-600 text-sm">Dynamic modeling of the collision sequence</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
+                        <h3 className="text-2xl font-bold text-purple-700 mb-6">Expert Witnesses</h3>
+                        <div className="space-y-4">
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Accident Reconstruction Specialists</h4>
+                              <p className="text-gray-600 text-sm">Engineers and physicists who recreate the crash</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Trucking Industry Experts</h4>
+                              <p className="text-gray-600 text-sm">Former DOT officials and industry safety professionals</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Medical Professionals</h4>
+                              <p className="text-gray-600 text-sm">Specialists in traumatic injuries and rehabilitation</p>
+                            </div>
+                          </div>
+                          <div className="flex items-start space-x-3">
+                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
+                            <div>
+                              <h4 className="font-bold text-gray-800">Economic Analysts</h4>
+                              <p className="text-gray-600 text-sm">Economists who calculate lifetime financial losses</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
+                    <h3 className="text-2xl font-bold text-red-700 mb-4">⚠️ Time is Critical</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-bold text-lg text-red-600 mb-3">Evidence Disappears Quickly</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• ECM data can be overwritten in 30 days</li>
+                          <li>• Security camera footage is often deleted</li>
+                          <li>• Witness memories fade over time</li>
+                          <li>• Physical evidence deteriorates</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg text-red-600 mb-3">Defense Teams Act Fast</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• Trucking companies dispatch investigators immediately</li>
+                          <li>• Corporate lawyers arrive at hospitals</li>
+                          <li>• Quick settlement offers to minimize damages</li>
+                          <li>• Evidence spoliation without legal protection</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="mt-6 text-center">
+                      <Button className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 text-lg">
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call Now: (855) 985-1234
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
+              {/* Resources Section */}
+              <section id="resources" className="content-section mb-16 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-2xl p-12">
+                <div className="flex items-center mb-8">
+                  <div className="bg-green-200 p-4 rounded-xl mr-6">
+                    <Building className="w-8 h-8 text-green-700" />
+                  </div>
+                  <h2 className="text-4xl font-bold text-gray-900">Resources & Support</h2>
+                </div>
+                
+                <div className="space-y-8">
+                  <div className="prose prose-xl max-w-none mb-8">
+                    <p className="text-xl leading-relaxed text-gray-700">
+                      We provide comprehensive support beyond legal representation, connecting our clients with the resources they need for recovery and rebuilding their lives after a devastating truck accident.
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <Stethoscope className="w-8 h-8 text-blue-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Medical Support</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Specialist referrals</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Treatment coordination</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Medical funding assistance</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Hospital lien negotiations</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <Calculator className="w-8 h-8 text-green-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Financial Resources</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Case funding options</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Insurance claim assistance</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Disability benefit guidance</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Financial planning referrals</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <Heart className="w-8 h-8 text-red-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Emotional Support</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Counseling referrals</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Support group connections</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Family assistance programs</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Crisis intervention services</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <Wrench className="w-8 h-8 text-orange-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Rehabilitation Services</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Physical therapy networks</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Occupational therapy</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Adaptive equipment</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Vocational retraining</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <BookOpen className="w-8 h-8 text-purple-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Educational Resources</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Legal process guides</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Recovery timelines</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Rights and responsibilities</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Insurance explanations</li>
+                      </ul>
+                    </div>
+                    
+                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
+                      <div className="flex items-center mb-4">
+                        <Users className="w-8 h-8 text-indigo-600 mr-3" />
+                        <h3 className="text-xl font-bold text-gray-900">Family Support</h3>
+                      </div>
+                      <ul className="space-y-3 text-gray-700">
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Caregiver resources</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Children's counseling</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Family legal consultations</li>
+                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Wrongful death support</li>
+                      </ul>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-blue-50 p-8 rounded-xl border-l-4 border-blue-500">
+                    <h3 className="text-2xl font-bold text-blue-700 mb-4">California-Specific Resources</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-bold text-lg text-blue-600 mb-3">State Benefits & Programs</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• California State Disability Insurance (SDI)</li>
+                          <li>• Workers' Compensation (if work-related)</li>
+                          <li>• Medi-Cal coverage options</li>
+                          <li>• CalFresh food assistance</li>
+                          <li>• Housing assistance programs</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-bold text-lg text-blue-600 mb-3">Legal Aid & Advocacy</h4>
+                        <ul className="space-y-2 text-gray-700">
+                          <li>• Consumer advocacy organizations</li>
+                          <li>• Disability rights groups</li>
+                          <li>• Victim's rights organizations</li>
+                          <li>• Insurance regulatory assistance</li>
+                          <li>• Legal aid society referrals</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+
               {/* FAQ Section */}
               <section id="faq" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
                 <div className="flex items-center mb-8">

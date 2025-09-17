@@ -8,11 +8,11 @@ interface GoBackProps {
 
 const GoBack: React.FC<GoBackProps> = ({ className }) => {
   return (
-    <div className={className}>
+    <div className={`mt-20 ${className}`}>
       <Button
         variant="ghost"
         onClick={() => window.history.back()}
-        className="flex items-center gap-2 hover:bg-primary/10"
+        className="flex items-center gap-2 hover:bg-primary/10 bg-transparent"
         aria-label="Go back to previous page"
       >
         <ArrowLeft className="w-4 h-4" />

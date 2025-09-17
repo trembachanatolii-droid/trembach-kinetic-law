@@ -719,6 +719,23 @@ const DogBitesAnimalAttacks: React.FC = () => {
                 </ul>
               </Card>
             </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.location.href = '/dog-bite-medical-guidance'}
+              >
+                Medical Guidance & Resources
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.location.href = '/dog-bite-case-evaluation'}
+              >
+                Get Emergency Legal Help
+              </Button>
+            </div>
           </Card>
         </section>
 
@@ -770,6 +787,23 @@ const DogBitesAnimalAttacks: React.FC = () => {
                 </div>
               </div>
             </div>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
+              <Button 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.location.href = '/dog-bite-compensation-calculator'}
+              >
+                Calculate Your Compensation
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="text-lg px-8 py-6"
+                onClick={() => window.location.href = '/dog-bite-case-evaluation'}
+              >
+                Free Case Review
+              </Button>
+            </div>
           </Card>
         </section>
 
@@ -810,7 +844,11 @@ const DogBitesAnimalAttacks: React.FC = () => {
               </div>
             </div>
             <div className="mt-8 text-center">
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white mr-4">
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white mr-4"
+                onClick={() => window.location.href = '/dog-bite-case-evaluation'}
+              >
                 Free Case Review Now
               </Button>
               <Button 

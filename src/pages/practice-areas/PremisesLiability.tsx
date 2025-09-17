@@ -35,10 +35,10 @@ import {
   Home
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
-import whatToDoImage from '@/assets/practice-areas/premises-what-to-do.jpg';
-import accidentTypesImage from '@/assets/practice-areas/premises-accident-types.jpg';
-import provingNegligenceImage from '@/assets/practice-areas/premises-proving-negligence.jpg';
-import compensationImage from '@/assets/practice-areas/premises-compensation.jpg';
+import whatToDoImage from '@/assets/practice-areas/premises-liability.jpg';
+import accidentTypesImage from '@/assets/practice-areas/slip-fall-hero.jpg';
+import provingNegligenceImage from '@/assets/practice-areas/truck-legal-process.jpg';
+import compensationImage from '@/assets/practice-areas/truck-compensation-insurance.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);

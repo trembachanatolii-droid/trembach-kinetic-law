@@ -1016,6 +1016,35 @@ const CarAccidentsNew: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Don't Wait - Time Limits Apply Section */}
+      <section className="bg-red-600 text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl font-bold mb-4">
+            Don't Wait - Time Limits Apply for California Car Accident Claims
+          </h2>
+          <p className="text-xl mb-8">
+            California law gives you only two years from the accident date to file your claim. 
+            Evidence disappears quickly - contact us today for your free consultation.
+          </p>
+          <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+            <Button 
+              size="lg" 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
+              onClick={() => window.location.href = '/car-case-evaluation'}
+            >
+              Start Free Case Evaluation
+            </Button>
+            <Button 
+              size="lg" 
+              className="bg-red-600 border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
+              Call (818) 123-4567
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

@@ -20,11 +20,11 @@ const CaseEvaluation: React.FC = () => {
     lastName: '',
     email: '',
     phone: '',
-    diagnosisDate: '',
-    cancerType: '',
-    exposureType: '',
-    workHistory: '',
-    symptoms: '',
+    accidentDate: '',
+    accidentLocation: '',
+    injuryType: '',
+    vehicleType: '',
+    truckCompany: '',
     additionalInfo: ''
   });
 
@@ -73,8 +73,8 @@ const CaseEvaluation: React.FC = () => {
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       <SEO 
-        title="Free Case Evaluation | Trembach Law Firm"
-        description="Free, confidential case evaluation for California asbestos and injury claims. No fees unless we win."
+        title="Free Truck Accident Case Evaluation | Trembach Law Firm"
+        description="Free, confidential truck accident case evaluation for California victims. Expert legal representation. No fees unless we win."
         canonical="/case-evaluation"
       />
       {/* Hero Section */}
@@ -86,10 +86,10 @@ const CaseEvaluation: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
         <div className="relative container mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
-            Free Case Evaluation
+            Free Truck Accident Case Evaluation
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
-            Get your free, confidential case evaluation. No obligation. No fees unless we win.
+            Get your free, confidential truck accident case evaluation. No obligation. No fees unless we win.
           </p>
         </div>
       </section>
@@ -107,9 +107,9 @@ const CaseEvaluation: React.FC = () => {
             <div className="lg:col-span-2">
               <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Tell Us About Your Case</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Tell Us About Your Truck Accident</CardTitle>
                   <p className="text-muted-foreground">
-                    Please provide as much detail as possible to help us evaluate your potential claim.
+                    Please provide as much detail as possible to help us evaluate your truck accident claim.
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -160,69 +160,72 @@ const CaseEvaluation: React.FC = () => {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
-                        <Label htmlFor="diagnosisDate">Date of Diagnosis</Label>
+                        <Label htmlFor="accidentDate">Date of Accident *</Label>
                         <Input
-                          id="diagnosisDate"
+                          id="accidentDate"
                           type="date"
-                          value={formData.diagnosisDate}
-                          onChange={(e) => handleInputChange('diagnosisDate', e.target.value)}
+                          value={formData.accidentDate}
+                          onChange={(e) => handleInputChange('accidentDate', e.target.value)}
+                          required
                         />
                       </div>
                       <div>
-                        <Label htmlFor="cancerType">Type of Cancer *</Label>
-                        <Select onValueChange={(value) => handleInputChange('cancerType', value)} required>
+                        <Label htmlFor="accidentLocation">Accident Location *</Label>
+                        <Input
+                          id="accidentLocation"
+                          placeholder="City, State or Highway/Street"
+                          value={formData.accidentLocation}
+                          onChange={(e) => handleInputChange('accidentLocation', e.target.value)}
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="injuryType">Type of Injury</Label>
+                        <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select cancer type" />
+                            <SelectValue placeholder="Select injury type" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="mesothelioma">Pleural Mesothelioma</SelectItem>
-                            <SelectItem value="peritoneal">Peritoneal Mesothelioma</SelectItem>
-                            <SelectItem value="pericardial">Pericardial Mesothelioma</SelectItem>
-                            <SelectItem value="testicular">Testicular Mesothelioma</SelectItem>
-                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
-                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                            <SelectItem value="other-cancer">Other Cancer</SelectItem>
-                            <SelectItem value="suspected">Suspected Diagnosis</SelectItem>
+                            <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                            <SelectItem value="spinal-cord">Spinal Cord Injury</SelectItem>
+                            <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
+                            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                            <SelectItem value="burns">Burns</SelectItem>
+                            <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                            <SelectItem value="fatality">Wrongful Death</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="vehicleType">Type of Truck</Label>
+                        <Select onValueChange={(value) => handleInputChange('vehicleType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select truck type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="18-wheeler">18-Wheeler/Semi-Truck</SelectItem>
+                            <SelectItem value="delivery-truck">Delivery Truck</SelectItem>
+                            <SelectItem value="garbage-truck">Garbage Truck</SelectItem>
+                            <SelectItem value="cement-truck">Cement Truck</SelectItem>
+                            <SelectItem value="dump-truck">Dump Truck</SelectItem>
+                            <SelectItem value="tanker-truck">Tanker Truck</SelectItem>
+                            <SelectItem value="other">Other Commercial Vehicle</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="exposureType">Type of Exposure</Label>
-                      <Select onValueChange={(value) => handleInputChange('exposureType', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select exposure type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="occupational">Occupational</SelectItem>
-                          <SelectItem value="military">Military Service</SelectItem>
-                          <SelectItem value="secondary">Secondary/Take-home</SelectItem>
-                          <SelectItem value="environmental">Environmental</SelectItem>
-                          <SelectItem value="unknown">Unknown</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="workHistory">Work History & Potential Exposure Sources</Label>
-                      <Textarea
-                        id="workHistory"
-                        placeholder="Please describe your work history, including any jobs where you may have been exposed to asbestos..."
-                        value={formData.workHistory}
-                        onChange={(e) => handleInputChange('workHistory', e.target.value)}
-                        rows={4}
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="symptoms">Symptoms & Medical Information</Label>
-                      <Textarea
-                        id="symptoms"
-                        placeholder="Please describe your symptoms and any medical information you'd like to share..."
-                        value={formData.symptoms}
-                        onChange={(e) => handleInputChange('symptoms', e.target.value)}
-                        rows={3}
+                      <Label htmlFor="truckCompany">Trucking Company (if known)</Label>
+                      <Input
+                        id="truckCompany"
+                        placeholder="Name of trucking company or carrier"
+                        value={formData.truckCompany}
+                        onChange={(e) => handleInputChange('truckCompany', e.target.value)}
                       />
                     </div>
 
@@ -230,15 +233,15 @@ const CaseEvaluation: React.FC = () => {
                       <Label htmlFor="additionalInfo">Additional Information</Label>
                       <Textarea
                         id="additionalInfo"
-                        placeholder="Any additional information that might be relevant to your case..."
+                        placeholder="Please describe what happened, any medical treatment received, and other relevant details..."
                         value={formData.additionalInfo}
                         onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                        rows={3}
+                        rows={4}
                       />
                     </div>
 
                     <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-                      Submit Case Evaluation
+                      Submit Truck Accident Case Evaluation
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </form>

@@ -95,126 +95,56 @@ const PremisesLiabilityCaseEvaluation: React.FC = () => {
             
             {/* Form Section */}
             <div className="lg:col-span-2">
-              <Card className="glass-card">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-primary flex items-center">
-                    <Scale className="w-6 h-6 mr-2" />
-                    Case Evaluation Form
-                  </CardTitle>
-                  <p className="text-muted-foreground">
-                    Please provide details about your premises liability incident. All information is confidential.
+              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
+                {/* Header */}
+                <div className="text-center py-12 px-8 bg-gradient-to-b from-gray-50 to-white">
+                  <h1 className="text-4xl font-semibold text-red-600 mb-4">
+                    Free Case Evaluation
+                  </h1>
+                  <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+                    Get Your Free Consultation
                   </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Personal Information */}
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-2">First Name *</label>
-                          <Input
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Last Name *</label>
-                          <Input
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Email *</label>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Phone *</label>
-                          <Input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            required
-                          />
-                        </div>
-                      </div>
-                    </div>
+                  <p className="text-base text-gray-500 mt-3 max-w-xl mx-auto">
+                    Provide some basic information to help us understand your case better.
+                  </p>
+                </div>
 
-                    {/* Incident Details */}
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4">Incident Details</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* Form */}
+                <div className="px-8 pb-12">
+                  <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
+                    <div className="space-y-8">
+                      {/* Incident Date & Injury Type */}
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                          <label className="block text-sm font-medium mb-2">Incident Date *</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            Accident Date
+                          </label>
                           <Input
                             type="date"
                             name="incidentDate"
                             value={formData.incidentDate}
                             onChange={handleInputChange}
+                            className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                            placeholder="mm/dd/yyyy"
                             required
                           />
                         </div>
                         <div>
-                          <label className="block text-sm font-medium mb-2">Incident Type *</label>
-                          <Select value={formData.incidentType} onValueChange={(value) => handleSelectChange('incidentType', value)}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select incident type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="slip-fall">Slip and Fall</SelectItem>
-                              <SelectItem value="trip-fall">Trip and Fall</SelectItem>
-                              <SelectItem value="falling-object">Falling Object</SelectItem>
-                              <SelectItem value="inadequate-lighting">Inadequate Lighting</SelectItem>
-                              <SelectItem value="security-negligence">Security Negligence</SelectItem>
-                              <SelectItem value="swimming-pool">Swimming Pool Accident</SelectItem>
-                              <SelectItem value="dog-bite">Dog Bite/Animal Attack</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div className="md:col-span-2">
-                          <label className="block text-sm font-medium mb-2">Incident Location *</label>
-                          <Input
-                            name="incidentLocation"
-                            value={formData.incidentLocation}
-                            onChange={handleInputChange}
-                            placeholder="Store name, address, etc."
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Property Owner (if known)</label>
-                          <Input
-                            name="propertyOwner"
-                            value={formData.propertyOwner}
-                            onChange={handleInputChange}
-                            placeholder="Business name, individual, etc."
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Injury Type</label>
+                          <label className="block text-sm font-medium text-gray-700 mb-3">
+                            Injury Type
+                          </label>
                           <Select value={formData.injuryType} onValueChange={(value) => handleSelectChange('injuryType', value)}>
-                            <SelectTrigger>
+                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200">
                               <SelectValue placeholder="Select injury type" />
                             </SelectTrigger>
-                            <SelectContent>
+                            <SelectContent className="rounded-xl border-gray-200">
                               <SelectItem value="broken-bone">Broken Bone/Fracture</SelectItem>
                               <SelectItem value="back-injury">Back/Spine Injury</SelectItem>
                               <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
                               <SelectItem value="cuts-lacerations">Cuts/Lacerations</SelectItem>
                               <SelectItem value="soft-tissue">Soft Tissue Injury</SelectItem>
+                              <SelectItem value="slip-fall">Slip and Fall</SelectItem>
+                              <SelectItem value="trip-fall">Trip and Fall</SelectItem>
                               <SelectItem value="burns">Burns</SelectItem>
                               <SelectItem value="multiple">Multiple Injuries</SelectItem>
                               <SelectItem value="other">Other</SelectItem>
@@ -222,89 +152,117 @@ const PremisesLiabilityCaseEvaluation: React.FC = () => {
                           </Select>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Medical Treatment */}
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4">Medical Treatment</h3>
+                      {/* Accident Location */}
                       <div>
-                        <label className="block text-sm font-medium mb-2">Have you received medical treatment?</label>
-                        <Select value={formData.medicalTreatment} onValueChange={(value) => handleSelectChange('medicalTreatment', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select treatment status" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="emergency-room">Emergency Room</SelectItem>
-                            <SelectItem value="hospital-admitted">Hospitalized</SelectItem>
-                            <SelectItem value="doctor-visit">Doctor Visit</SelectItem>
-                            <SelectItem value="urgent-care">Urgent Care</SelectItem>
-                            <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
-                            <SelectItem value="no-treatment">No Treatment Yet</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-
-                    {/* Additional Information */}
-                    <div>
-                      <h3 className="text-lg font-semibold mb-4">Additional Information</h3>
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Describe what happened *</label>
-                          <Textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleInputChange}
-                            placeholder="Please provide a detailed description of the incident..."
-                            rows={4}
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Were there witnesses?</label>
-                          <Textarea
-                            name="witnesses"
-                            value={formData.witnesses}
-                            onChange={handleInputChange}
-                            placeholder="Names and contact information if available"
-                            rows={2}
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium mb-2">Do you have photos or documentation?</label>
-                          <Textarea
-                            name="photos"
-                            value={formData.photos}
-                            onChange={handleInputChange}
-                            placeholder="Describe what photos/documents you have"
-                            rows={2}
-                          />
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="bg-muted p-4 rounded-lg">
-                      <div className="flex items-start">
-                        <input
-                          type="checkbox"
-                          name="consent"
-                          checked={formData.consent}
+                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                          Accident Location
+                        </label>
+                        <Input
+                          name="incidentLocation"
+                          value={formData.incidentLocation}
                           onChange={handleInputChange}
-                          className="mr-3 mt-1"
+                          className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                          placeholder="Where did the accident occur?"
                           required
                         />
-                        <label className="text-sm">
-                          I consent to being contacted by Trembach Law Firm regarding my case. I understand this consultation is free and there is no obligation. *
+                      </div>
+
+                      {/* Contact Information Grid */}
+                      <div className="border-t border-gray-100 pt-8">
+                        <h3 className="text-lg font-medium text-gray-900 mb-6">Contact Information</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-3">First Name *</label>
+                            <Input
+                              name="firstName"
+                              value={formData.firstName}
+                              onChange={handleInputChange}
+                              className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-3">Last Name *</label>
+                            <Input
+                              name="lastName"
+                              value={formData.lastName}
+                              onChange={handleInputChange}
+                              className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-3">Email *</label>
+                            <Input
+                              type="email"
+                              name="email"
+                              value={formData.email}
+                              onChange={handleInputChange}
+                              className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-3">Phone *</label>
+                            <Input
+                              type="tel"
+                              name="phone"
+                              value={formData.phone}
+                              onChange={handleInputChange}
+                              className="h-14 text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200"
+                              required
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Incident Description */}
+                      <div className="border-t border-gray-100 pt-8">
+                        <label className="block text-sm font-medium text-gray-700 mb-3">
+                          Please describe what happened *
                         </label>
+                        <Textarea
+                          name="description"
+                          value={formData.description}
+                          onChange={handleInputChange}
+                          placeholder="Please provide a detailed description of the incident..."
+                          rows={5}
+                          className="text-lg border-gray-200 rounded-2xl focus:border-red-400 focus:ring-red-400/20 transition-all duration-200 resize-none"
+                          required
+                        />
+                      </div>
+
+                      {/* Consent */}
+                      <div className="bg-gray-50 rounded-2xl p-6">
+                        <div className="flex items-start">
+                          <input
+                            type="checkbox"
+                            name="consent"
+                            checked={formData.consent}
+                            onChange={handleInputChange}
+                            className="mt-1 mr-4 w-4 h-4 text-red-600 border-gray-300 rounded focus:ring-red-500 focus:ring-2"
+                            required
+                          />
+                          <label className="text-sm text-gray-600 leading-relaxed">
+                            I consent to being contacted by Trembach Law Firm regarding my case. I understand this consultation is free and there is no obligation. *
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Submit Button */}
+                      <div className="pt-4">
+                        <Button 
+                          type="submit" 
+                          className="w-full h-16 text-lg font-semibold bg-red-600 hover:bg-red-700 rounded-2xl transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                        >
+                          Start My Free Case Evaluation
+                        </Button>
                       </div>
                     </div>
-
-                    <Button type="submit" size="lg" className="w-full bg-red-600 hover:bg-red-700">
-                      Get My Free Case Evaluation
-                    </Button>
                   </form>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
             </div>
 
             {/* Sidebar */}

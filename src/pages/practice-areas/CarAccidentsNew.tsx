@@ -1,193 +1,835 @@
-import React from 'react';
-import { Card } from '@/components/ui/card';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import ComprehensivePracticeAreaTemplate from '@/components/ComprehensivePracticeAreaTemplate';
-import heroImage from '@/assets/practice-areas/car-accidents-hero.jpg';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Link } from 'react-router-dom';
+import { 
+  Phone, 
+  Mail, 
+  MessageCircle, 
+  Star, 
+  ChevronDown, 
+  ChevronUp,
+  Heart,
+  Shield,
+  Scale,
+  Clock,
+  Users,
+  Award,
+  FileText,
+  AlertTriangle,
+  Stethoscope,
+  Building,
+  Map,
+  ArrowLeft,
+  Car,
+  AlertCircle
+} from 'lucide-react';
+import heroBackground from '@/assets/practice-areas/car-accidents-hero.jpg';
+import SEO from '@/components/SEO';
 
-const CarAccidentsNew = () => {
+gsap.registerPlugin(ScrollTrigger);
+
+interface TabSection {
+  id: string;
+  label: string;
+  icon: React.ElementType;
+}
+
+const CarAccidentsNew: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    accidentDate: '',
+    injuryType: ''
+  });
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  const tabs: TabSection[] = [
+    { id: 'overview', label: 'OVERVIEW', icon: FileText },
+    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
+    { id: 'immediate-steps', label: 'WHAT TO DO AFTER ACCIDENT', icon: AlertCircle },
+    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
+    { id: 'faq', label: 'FAQ', icon: MessageCircle },
+    { id: 'resources', label: 'RESOURCES', icon: Building }
+  ];
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero animation
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
+      );
+
+      // Content sections animation
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const toggleSection = (sectionId: string) => {
+    setExpandedSections(prev => ({
+      ...prev,
+      [sectionId]: !prev[sectionId]
+    }));
+  };
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveTab(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission - redirect to case evaluation
+    window.location.href = '/car-case-evaluation';
+  };
+
+  // FAQ Data
+  const faqs = [
+    {
+      category: 'immediate',
+      question: 'What should I do immediately after a car accident in California?',
+      answer: 'First, ensure everyone\'s safety and call 911 if there are injuries. Move vehicles out of traffic if possible. Exchange information with other drivers including names, contact info, driver\'s license numbers, insurance information, and vehicle details. Take photos of vehicle damage, the accident scene, skid marks, traffic signs, and any injuries. Get contact information from witnesses. Report the accident to the DMV within 10 days if there\'s injury, death, or property damage over $1,000. Seek medical attention even if you feel fine - adrenaline can mask injuries. Contact a car accident attorney before giving statements to insurance companies.'
+    },
+    {
+      category: 'immediate',
+      question: 'Should I call the police after a minor car accident?',
+      answer: 'Yes, always call police for any accident involving injuries, significant property damage, or if you suspect the other driver is impaired. California requires police reports for accidents with injuries, deaths, or property damage over $1,000. Even for minor accidents, police reports provide official documentation that helps with insurance claims. The other driver might seem cooperative at the scene but later claim you were at fault. A police report protects you from changing stories.'
+    },
+    {
+      category: 'immediate',
+      question: 'What information should I collect at the accident scene?',
+      answer: 'Collect: names and contact information for all drivers and passengers, driver\'s license numbers, insurance company names and policy numbers, vehicle makes, models, years, and license plates, names and contact information for witnesses, photos of vehicle damage from multiple angles, photos of the accident scene including street signs and traffic signals, notes about weather and road conditions, time and location of accident. Also note if you smell alcohol or observe erratic behavior from other drivers.'
+    },
+    {
+      category: 'legal',
+      question: 'How long do I have to file a car accident lawsuit in California?',
+      answer: 'California\'s statute of limitations gives you 2 years from the accident date to file a personal injury lawsuit. For property damage claims, you have 3 years. However, if a government entity is involved (city bus, county vehicle, etc.), you must file a claim within 6 months. Don\'t wait - evidence disappears, witnesses forget details, and surveillance footage gets deleted. Starting your claim early strengthens your case significantly.'
+    },
+    {
+      category: 'legal',
+      question: 'What if I\'m partially at fault for the accident?',
+      answer: 'California follows "pure comparative negligence," meaning you can recover damages even if you\'re 99% at fault - your recovery is just reduced by your fault percentage. For example, if damages total $100,000 and you\'re 40% at fault, you can recover $60,000. This differs from other states that bar recovery if you\'re 50% or more at fault. Insurance companies often try to unfairly increase your fault percentage to reduce what they pay. That\'s why having an experienced attorney to fight these tactics is crucial.'
+    },
+    {
+      category: 'legal',
+      question: 'Do I have to go to court for my car accident case?',
+      answer: 'About 95% of car accident cases settle without trial. Most resolve through negotiations with insurance companies or mediation. However, being willing and prepared to go to trial often results in better settlement offers. Cases go to trial when there\'s disputed liability, disagreement about injury severity, or insurance companies make unreasonable offers. If trial is necessary, you\'ll typically testify about the accident and your injuries. Your attorney handles all legal arguments and procedures. Trial preparation actually strengthens your negotiating position.'
+    },
+    {
+      category: 'insurance',
+      question: 'Should I talk to the other driver\'s insurance company?',
+      answer: 'No. Never give a recorded statement to the other driver\'s insurance without an attorney. They\'re not on your side - their job is minimizing payouts. They\'ll use tactics like asking confusing questions, getting you to minimize injuries, or admitting partial fault. Anything you say can be used against you. You\'re only required to cooperate with your own insurance company, and even then, having an attorney present protects your interests. Let your attorney handle all insurance communications.'
+    },
+    {
+      category: 'insurance',
+      question: 'What are California\'s minimum insurance requirements?',
+      answer: 'California requires: $15,000 bodily injury per person, $30,000 bodily injury per accident, $5,000 property damage. These minimums are woefully inadequate for serious accidents. A single emergency room visit can exceed $15,000. We recommend carrying at least 100/300/100 coverage plus uninsured/underinsured motorist coverage. The monthly cost difference is minimal but protection increases dramatically. Many drivers only carry minimum coverage, which is why underinsured motorist (UIM) coverage is essential.'
+    },
+    {
+      category: 'insurance',
+      question: 'Will my insurance rates go up if I file a claim?',
+      answer: 'If you weren\'t at fault, California law (Proposition 103) prohibits insurance companies from raising your rates for filing a claim. If you were partially at fault, rates may increase depending on your fault percentage and claims history. Rate increases typically last 3-5 years. However, not filing a claim to avoid rate increases often costs more in unpaid medical bills and lost wages. Your insurance is there to protect you - use it. We help minimize fault determinations to protect your rates.'
+    },
+    {
+      category: 'compensation',
+      question: 'What damages can I recover in a California car accident?',
+      answer: 'Economic damages: medical bills (past and future), lost wages, reduced earning capacity, property damage, rental car costs, household services, out-of-pocket expenses. Non-economic damages: pain and suffering, emotional distress, loss of enjoyment of life, scarring/disfigurement, loss of consortium. In rare cases involving drunk driving or extreme recklessness, punitive damages may apply. Future damages require expert testimony about ongoing medical needs, vocational impact, and life care planning. California doesn\'t cap car accident damages except in medical malpractice cases.'
+    },
+    {
+      category: 'compensation',
+      question: 'How much is my car accident case worth?',
+      answer: 'Case value depends on injury severity, medical expenses, lost income, permanent impairment, impact on daily life, and available insurance coverage. Minor soft tissue injuries might settle for $15,000-$50,000. Injuries requiring surgery often exceed $100,000. Catastrophic injuries can reach millions. Factors increasing value: objective medical findings, consistent treatment, permanent injury, scarring, high medical bills, lost wages, strong liability evidence. Every case is unique. We provide detailed valuations after reviewing medical records and understanding your specific impacts.'
+    },
+    {
+      category: 'medical',
+      question: 'Should I see a doctor even if I feel fine?',
+      answer: 'Yes, absolutely. Adrenaline and shock mask pain immediately after accidents. Serious injuries like traumatic brain injuries, internal bleeding, and spinal damage might not show symptoms for days or weeks. Whiplash symptoms often appear 24-72 hours later. Seeing a doctor immediately creates medical documentation linking injuries to the accident - crucial for your claim. Insurance companies argue that delays in treatment mean you weren\'t really injured. Even if you feel minor soreness, get checked. Early treatment prevents minor injuries from becoming major problems.'
+    }
+  ];
+
+  const filteredFaqs = faqs;
+
   return (
-    <ComprehensivePracticeAreaTemplate
-      seo={{
-        title: "California Car Accident Lawyers | Maximum Compensation for Crash Victims",
-        description: "Expert car accident attorneys throughout California. Former defense lawyer now fighting for injured drivers. Free consultation for vehicle collision cases.",
-        canonical: "/practice-areas/car-accidents"
-      }}
-      hero={{
-        backgroundImage: heroImage,
-        title: "California Car Accident Lawyers",
-        subtitle: "Maximum Compensation for Crash Victims Statewide",
-        description: "Former Defense Attorney Now Fighting for Injured Drivers Throughout All 58 California Counties"
-      }}
-    >
-      {/* Comprehensive Overview */}
-      <Card className="content-card p-8 mb-8">
-        <h2 className="text-3xl font-bold mb-6">California's Car Accident Crisis</h2>
-        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-          Every three minutes, someone is injured in a car accident on California roads. With over 3,500 traffic fatalities and more than 275,000 injuries annually, vehicle collisions devastate thousands of California families each year. At Trembach Law Firm, we leverage our former defense attorney insight to expose insurance company tactics and secure maximum compensation for accident victims from San Diego to Crescent City, from the Pacific Coast to the Nevada border.
-        </p>
-        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-          California's unique traffic challenges create diverse accident scenarios requiring experienced legal representation. Dense urban traffic in Los Angeles and the Bay Area produces different collision patterns than rural highways in the Central Valley or winding mountain roads in the Sierra Nevada. Coastal fog, desert heat, mountain snow, and sudden rain after droughts each create specific hazards.
-        </p>
-        <p className="text-muted-foreground text-lg leading-relaxed">
-          The aftermath of a serious car accident extends far beyond immediate injuries and vehicle damage. Victims face mounting medical bills while unable to work, insurance companies that promise support but deliver resistance, and long-term consequences that may not fully manifest for months. Understanding your rights and options becomes crucial for protecting your future.
-        </p>
-      </Card>
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="California Car Accident Lawyers | Maximum Compensation for Crash Victims"
+        description="Expert car accident attorneys throughout California. Former defense lawyer now fighting for injured drivers. Free consultation for vehicle collision cases."
+        canonical="/practice-areas/car-accidents"
+      />
 
-      {/* Insurance Company Tactics */}
-      <Card className="content-card p-8 mb-8">
-        <h2 className="text-3xl font-bold mb-6">Insurance Company Tactics Exposed</h2>
-        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-          Insurance companies deploy sophisticated tactics to minimize payouts despite advertising suggesting they're "on your side." Adjusters receive extensive training in psychological techniques designed to elicit statements that reduce claim value. Our former defense attorney experience provides unmatched insight into these strategies.
-        </p>
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Common Tactics</h3>
-            <ul className="text-muted-foreground space-y-2">
-              <li>• Quick settlement pressure</li>
-              <li>• Recorded statement traps</li>
-              <li>• Medical record fishing expeditions</li>
-              <li>• Social media surveillance</li>
-              <li>• Delay tactics to create pressure</li>
-              <li>• Lowball initial offers</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Our Counter-Strategies</h3>
-            <ul className="text-muted-foreground space-y-2">
-              <li>• Immediate evidence preservation</li>
-              <li>• Professional documentation</li>
-              <li>• Expert witness coordination</li>
-              <li>• Comprehensive damage calculation</li>
-              <li>• Strategic negotiation timing</li>
-              <li>• Trial preparation leverage</li>
-            </ul>
-          </Card>
-        </div>
-        <p className="text-muted-foreground text-lg leading-relaxed">
-          Computer algorithms calculate settlement offers based on formulas favoring insurers, not fair compensation. Surveillance teams monitor social media and daily activities seeking any evidence to dispute injuries. Without experienced representation, accident victims face an unfair battle against corporate resources focused on protecting profits.
-        </p>
-      </Card>
-
-      {/* California's Legal Framework */}
-      <Card className="content-card p-8 mb-8">
-        <h2 className="text-3xl font-bold mb-6">California's Pure Comparative Negligence</h2>
-        <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-          California's pure comparative negligence system represents both opportunity and challenge for accident victims. Unlike contributory negligence states where any fault bars recovery, California allows compensation even when victims bear primary responsibility for accidents. However, this system also enables insurance companies to argue inflated fault percentages.
-        </p>
-        <div className="grid md:grid-cols-3 gap-6 mb-6">
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">How It Works</h3>
-            <ul className="text-muted-foreground space-y-2">
-              <li>• Fault assigned by percentage</li>
-              <li>• Compensation reduced by fault %</li>
-              <li>• Can recover even if mostly at fault</li>
-              <li>• Each party pays their percentage</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Strategic Implications</h3>
-            <ul className="text-muted-foreground space-y-2">
-              <li>• Fault allocation is crucial</li>
-              <li>• Evidence preservation vital</li>
-              <li>• Expert reconstruction important</li>
-              <li>• Every percentage point matters</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Common Scenarios</h3>
-            <ul className="text-muted-foreground space-y-2">
-              <li>• Multi-vehicle accidents</li>
-              <li>• Pedestrian/bicycle cases</li>
-              <li>• Weather-related crashes</li>
-              <li>• Intersection collisions</li>
-            </ul>
-          </Card>
-        </div>
-      </Card>
-
-      {/* Types of Car Accidents */}
-      <Card className="content-card p-8 mb-8">
-        <h2 className="text-3xl font-bold mb-6">California Car Accident Types We Handle</h2>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Intersection Accidents</h3>
-            <p className="text-muted-foreground mb-4">Red light running, failure to yield, and left-turn collisions at California's busy intersections.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• Red light violations</li>
-              <li>• Stop sign failures</li>
-              <li>• Left-turn accidents</li>
-              <li>• Blind intersection crashes</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Freeway Collisions</h3>
-            <p className="text-muted-foreground mb-4">High-speed crashes on California's extensive freeway system requiring specialized investigation.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• Rear-end collisions</li>
-              <li>• Lane change accidents</li>
-              <li>• Merge failures</li>
-              <li>• Multi-vehicle pileups</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Distracted Driving</h3>
-            <p className="text-muted-foreground mb-4">Cell phone use, texting, and other distractions causing preventable California crashes.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• Texting while driving</li>
-              <li>• Cell phone conversations</li>
-              <li>• GPS/navigation distractions</li>
-              <li>• Eating while driving</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">DUI Accidents</h3>
-            <p className="text-muted-foreground mb-4">Drunk and drugged driving collisions with enhanced liability and punitive damages.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• Alcohol impairment</li>
-              <li>• Drug impairment</li>
-              <li>• Prescription medication effects</li>
-              <li>• Commercial driver violations</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Weather-Related</h3>
-            <p className="text-muted-foreground mb-4">Rain, fog, and other California weather conditions creating hazardous driving.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• First rain hydroplaning</li>
-              <li>• Coastal fog accidents</li>
-              <li>• Mountain snow/ice</li>
-              <li>• Desert dust storms</li>
-            </ul>
-          </Card>
-          <Card className="p-6">
-            <h3 className="text-xl font-bold mb-4">Rideshare Accidents</h3>
-            <p className="text-muted-foreground mb-4">Uber, Lyft, and other rideshare collisions with complex insurance coverage issues.</p>
-            <ul className="text-muted-foreground space-y-1">
-              <li>• Driver coverage gaps</li>
-              <li>• Company liability</li>
-              <li>• Passenger injuries</li>
-              <li>• Third-party claims</li>
-            </ul>
-          </Card>
-        </div>
-      </Card>
-
-      {/* Call to Action */}
-      <Card className="content-card p-8 text-center">
-        <h2 className="text-3xl font-bold mb-6">Injured in a Car Accident?</h2>
-        <p className="text-muted-foreground text-lg mb-8 max-w-3xl mx-auto">
-          Don't let insurance companies take advantage of you. Our experienced car accident attorneys provide immediate consultation to protect your rights and pursue maximum compensation. Time is critical for evidence preservation and meeting legal deadlines.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" className="text-lg px-8 py-6">
-            Free Accident Case Review
-          </Button>
-          <Button variant="outline" size="lg" className="text-lg px-8 py-6">
-            Call (555) 123-4567
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+        
+        {/* Go Back Button - positioned in hero overlay */}
+        <div className="absolute top-20 left-6 z-10">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
           </Button>
         </div>
-      </Card>
-    </ComprehensivePracticeAreaTemplate>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="hero-content">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              California Car Accident Lawyers
+            </h1>
+            
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-2 text-lg">Backed by Proven Experience</span>
+            </div>
+            
+            <Button 
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              onClick={() => window.location.href = '/car-case-evaluation'}
+            >
+              START MY FREE CASE EVALUATION
+            </Button>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      activeTab === tab.id 
+                        ? 'bg-white text-primary' 
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4 mr-2" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Main Content Column */}
+          <div className="lg:col-span-2" ref={contentRef}>
+            
+            {/* Overview Section */}
+            <section id="overview" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">California Car Accident Attorneys</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  If you or a loved one has been injured in a car accident in California, you're facing physical pain, emotional trauma, and mounting financial pressure. Every year, over 250,000 Californians are injured in car accidents - that's one person every two minutes. At Trembach Law Firm, we leverage our former defense attorney insight to expose insurance company tactics and secure maximum compensation for accident victims throughout California.
+                </p>
+                
+                <p className="text-lg leading-relaxed">
+                  California's roads present unique challenges from dense urban traffic in Los Angeles and the Bay Area to rural highways in the Central Valley and winding mountain roads in the Sierra Nevada. Our extensive experience with California traffic laws, insurance regulations, and court procedures ensures you have the strongest possible representation.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Show More About Our California Car Accident Practice
+                    {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Car className="w-5 h-5 mr-2 text-primary" />
+                          Accident Investigation
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Our team works with accident reconstruction specialists, traffic engineers, and medical experts to build the strongest possible case for maximum compensation.</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Map className="w-5 h-5 mr-2 text-primary" />
+                          California Expertise
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>We have extensive knowledge of California traffic laws, insurance regulations, and court procedures in all 58 counties from Los Angeles to San Francisco.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-4">Why Choose Trembach Law Firm?</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-start">
+                        <Shield className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Former Defense Experience</h4>
+                          <p className="text-sm text-muted-foreground">Attorney Trembach's background defending insurance companies provides unique insights into their tactics and strategies.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <Clock className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Immediate Response</h4>
+                          <p className="text-sm text-muted-foreground">We respond to new cases within 24 hours and begin evidence preservation immediately.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <Users className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Compassionate Support</h4>
+                          <p className="text-sm text-muted-foreground">We provide emotional support and guidance throughout your recovery and legal journey.</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start">
+                        <Award className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">No Win, No Fee</h4>
+                          <p className="text-sm text-muted-foreground">We work on contingency - you pay nothing unless we win your case.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <h3>Comprehensive California Car Accident Representation</h3>
+                    <p>
+                      Car accident cases in California involve complex insurance laws, traffic regulations, and medical factors. Our firm has the resources and expertise to handle every aspect of your case, from immediate accident scene investigation to working with medical experts who can clearly explain how the collision caused your injuries.
+                    </p>
+                    
+                    <p>
+                      California's diverse geography creates unique driving hazards. We have experience with accidents caused by:
+                    </p>
+                    
+                    <ul>
+                      <li>Dense urban traffic in Los Angeles, San Diego, and Bay Area</li>
+                      <li>High-speed freeway collisions on I-5, I-10, and Highway 101</li>
+                      <li>Coastal fog accidents along Highway 1 and urban areas</li>
+                      <li>Mountain weather conditions in Sierra Nevada and coastal ranges</li>
+                      <li>Desert conditions and dust storms in Southern California</li>
+                      <li>Construction zones throughout the state's massive infrastructure projects</li>
+                    </ul>
+                    
+                    <p>
+                      We investigate every aspect of your accident to ensure maximum compensation. This comprehensive approach often results in higher settlements as we identify all contributing factors and pursue claims through various channels including your own insurance, the at-fault driver's coverage, and additional policies that may apply.
+                    </p>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Case Evaluation Section */}
+            <section id="evaluation" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
+              
+              <div className="bg-muted p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
+                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
+                
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Accident Date</label>
+                      <Input
+                        type="date"
+                        value={formData.accidentDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Type of Injury</label>
+                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
+                          <SelectItem value="back-injury">Back Injury</SelectItem>
+                          <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                          <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
+                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                          <SelectItem value="other">Other Injuries</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                    Start My Free Case Evaluation
+                  </Button>
+                </form>
+              </div>
+            </section>
+
+            {/* What to Do After Accident */}
+            <section id="immediate-steps" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After Your Car Accident</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Actions at Scene
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Ensure everyone's safety and call 911 if injured</p>
+                    <p>• Move vehicles out of traffic if possible</p>
+                    <p>• Exchange information with other drivers</p>
+                    <p>• Take photos of damage, scene, and injuries</p>
+                    <p>• Get witness contact information</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Scale className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Legal Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Contact an experienced car accident attorney</p>
+                    <p>• Don't give recorded statements to insurance</p>
+                    <p>• Seek medical attention even if you feel fine</p>
+                    <p>• Report accident to DMV within 10 days</p>
+                    <p>• Document everything related to the accident</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.immediateSteps} onOpenChange={() => toggleSection('immediateSteps')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Show More Detailed Steps
+                    {expandedSections.immediateSteps ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="prose prose-lg max-w-none">
+                    <h3>Immediate Medical Priority Actions</h3>
+                    <p>
+                      Even if you feel fine immediately after an accident, seek medical attention. Adrenaline and shock can mask serious injuries, and some conditions like whiplash, concussions, and internal bleeding may not show symptoms for hours or days.
+                    </p>
+                    
+                    <h4>1. Get Immediate Medical Care</h4>
+                    <p>
+                      If you're seriously injured, go to the emergency room. For less severe injuries, see your doctor or visit an urgent care center within 24 hours. Key reasons for immediate medical care:
+                    </p>
+                    <ul>
+                      <li>Some injuries have delayed symptoms</li>
+                      <li>Medical records link injuries to the accident</li>
+                      <li>Early treatment prevents complications</li>
+                      <li>Insurance companies use treatment delays against you</li>
+                    </ul>
+                    
+                    <h4>2. Document Everything</h4>
+                    <p>
+                      Keep detailed records from day one:
+                    </p>
+                    <ul>
+                      <li>All medical appointments and treatments</li>
+                      <li>Symptoms and pain levels daily</li>
+                      <li>How injuries affect your daily activities</li>
+                      <li>Time missed from work</li>
+                      <li>Expenses related to the accident</li>
+                    </ul>
+                    
+                    <h3>Legal Priority Actions</h3>
+                    
+                    <h4>1. Contact an Attorney Immediately</h4>
+                    <p>
+                      California has strict time limits for car accident claims. Evidence disappears quickly - skid marks fade, surveillance footage gets deleted, and witnesses' memories become less reliable. An experienced attorney can:
+                    </p>
+                    <ul>
+                      <li>Preserve crucial evidence immediately</li>
+                      <li>Handle insurance communications</li>
+                      <li>Investigate the accident thoroughly</li>
+                      <li>Protect you from insurance company tactics</li>
+                      <li>Ensure you meet all legal deadlines</li>
+                    </ul>
+                    
+                    <h4>2. Gather Important Information</h4>
+                    <p>Collect and preserve:</p>
+                    <ul>
+                      <li>Police report number and how to obtain copy</li>
+                      <li>Insurance information for all involved parties</li>
+                      <li>Photos from your phone or camera</li>
+                      <li>Witness names and contact information</li>
+                      <li>Your own insurance policy details</li>
+                    </ul>
+                    
+                    <h4>3. Avoid Common Mistakes</h4>
+                    <p>
+                      Don't hurt your case by:
+                    </p>
+                    <ul>
+                      <li>Giving recorded statements without an attorney</li>
+                      <li>Admitting fault at the scene</li>
+                      <li>Accepting quick settlement offers</li>
+                      <li>Posting about the accident on social media</li>
+                      <li>Delaying medical treatment</li>
+                      <li>Talking to the other driver's insurance company</li>
+                    </ul>
+                    
+                    <h3>California-Specific Requirements</h3>
+                    <p>
+                      California law has specific requirements after car accidents:
+                    </p>
+                    <ul>
+                      <li><strong>DMV Report:</strong> Required within 10 days for accidents involving injury, death, or property damage over $1,000</li>
+                      <li><strong>Insurance Requirements:</strong> All drivers must have minimum liability coverage</li>
+                      <li><strong>Comparative Negligence:</strong> You can recover damages even if partially at fault</li>
+                      <li><strong>Statute of Limitations:</strong> 2 years for injury claims, 3 years for property damage</li>
+                    </ul>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">California Car Accident Legal Process</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Understanding the legal process helps you know what to expect as we pursue maximum compensation for your car accident injuries. California law provides several avenues for recovery, and our experienced team will pursue all applicable options to ensure you receive every dollar you deserve.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Show Complete Legal Process Details
+                    {expandedSections.legalProcess ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="prose prose-lg max-w-none">
+                    <h3>Overview of Legal Options</h3>
+                    
+                    <h4>1. Insurance Claims</h4>
+                    <p>
+                      Most car accident cases resolve through insurance claims. California requires all drivers to carry minimum liability insurance. We handle negotiations with:
+                    </p>
+                    <ul>
+                      <li>At-fault driver's liability insurance</li>
+                      <li>Your own uninsured/underinsured motorist coverage</li>
+                      <li>Medical payments coverage</li>
+                      <li>Collision coverage for vehicle damage</li>
+                    </ul>
+                    
+                    <h4>2. Personal Injury Lawsuits</h4>
+                    <p>
+                      If insurance settlements are inadequate, we file lawsuits against at-fault parties. Lawsuits allow us to:
+                    </p>
+                    <ul>
+                      <li>Conduct formal discovery of evidence</li>
+                      <li>Take depositions of witnesses and parties</li>
+                      <li>Use expert witnesses for complex issues</li>
+                      <li>Present your case to a jury if necessary</li>
+                    </ul>
+                    
+                    <h4>3. Uninsured Motorist Claims</h4>
+                    <p>
+                      California has a high rate of uninsured drivers. UM coverage protects you when at-fault drivers have no insurance or insufficient coverage.
+                    </p>
+                    
+                    <h3>The Investigation Process</h3>
+                    
+                    <h4>Accident Scene Investigation</h4>
+                    <p>
+                      Our investigation begins immediately and includes:
+                    </p>
+                    <ul>
+                      <li>Visiting the accident scene</li>
+                      <li>Photographing road conditions and sight lines</li>
+                      <li>Measuring skid marks and vehicle positions</li>
+                      <li>Checking for surveillance cameras</li>
+                      <li>Interviewing witnesses</li>
+                      <li>Reviewing police reports for accuracy</li>
+                    </ul>
+                    
+                    <h4>Medical Investigation</h4>
+                    <p>
+                      We work with medical experts to:
+                    </p>
+                    <ul>
+                      <li>Review all medical records and imaging</li>
+                      <li>Understand the full extent of your injuries</li>
+                      <li>Determine future medical needs</li>
+                      <li>Calculate lifetime medical costs</li>
+                      <li>Assess permanent impairment and disability</li>
+                    </ul>
+                    
+                    <h4>Economic Investigation</h4>
+                    <p>
+                      We calculate all economic losses including:
+                    </p>
+                    <ul>
+                      <li>Past and future medical expenses</li>
+                      <li>Lost wages and benefits</li>
+                      <li>Reduced earning capacity</li>
+                      <li>Household services</li>
+                      <li>Property damage and replacement costs</li>
+                    </ul>
+                    
+                    <h3>Negotiation and Settlement</h3>
+                    
+                    <h4>Settlement Demand</h4>
+                    <p>
+                      After completing our investigation and understanding the full scope of your injuries, we prepare a comprehensive settlement demand that includes:
+                    </p>
+                    <ul>
+                      <li>Detailed accident reconstruction</li>
+                      <li>Complete medical documentation</li>
+                      <li>Economic loss calculations</li>
+                      <li>Pain and suffering evaluation</li>
+                      <li>Supporting expert opinions</li>
+                    </ul>
+                    
+                    <h4>Negotiation Strategy</h4>
+                    <p>
+                      Our former defense attorney experience provides unique insights into insurance company tactics. We counter their strategies with:
+                    </p>
+                    <ul>
+                      <li>Thorough case preparation</li>
+                      <li>Strong evidence presentation</li>
+                      <li>Expert witness testimony</li>
+                      <li>Trial preparation as leverage</li>
+                      <li>Strategic timing of negotiations</li>
+                    </ul>
+                    
+                    <h3>Litigation Process</h3>
+                    
+                    <p>
+                      If negotiations fail to produce fair compensation, we're prepared to take your case to trial:
+                    </p>
+                    
+                    <h4>Filing the Lawsuit</h4>
+                    <ul>
+                      <li>Complaint filed within statute of limitations</li>
+                      <li>Proper service on all defendants</li>
+                      <li>Initial case management conferences</li>
+                    </ul>
+                    
+                    <h4>Discovery Phase</h4>
+                    <ul>
+                      <li>Document production requests</li>
+                      <li>Depositions of parties and witnesses</li>
+                      <li>Expert witness designations</li>
+                      <li>Independent medical examinations</li>
+                    </ul>
+                    
+                    <h4>Trial Preparation</h4>
+                    <ul>
+                      <li>Witness preparation</li>
+                      <li>Exhibit organization</li>
+                      <li>Jury selection strategy</li>
+                      <li>Opening and closing arguments</li>
+                    </ul>
+                    
+                    <h3>Timeline Expectations</h3>
+                    
+                    <p>
+                      Case timelines vary based on several factors:
+                    </p>
+                    
+                    <h4>Simple Cases (3-6 months):</h4>
+                    <ul>
+                      <li>Clear liability</li>
+                      <li>Minor to moderate injuries</li>
+                      <li>Cooperative insurance companies</li>
+                      <li>No disputed medical treatment</li>
+                    </ul>
+                    
+                    <h4>Complex Cases (1-2+ years):</h4>
+                    <ul>
+                      <li>Disputed liability</li>
+                      <li>Severe or permanent injuries</li>
+                      <li>Multiple parties involved</li>
+                      <li>Litigation required</li>
+                    </ul>
+                  </div>
+                  
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h3 className="text-lg font-semibold mb-3 flex items-center">
+                      <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2" />
+                      Important Legal Consideration
+                    </h3>
+                    <p>
+                      While focusing on your medical recovery is the priority, it's crucial to contact a car accident attorney quickly after your accident. Evidence preservation and early investigation significantly strengthen your case, and California's statute of limitations gives you only 2 years to file a lawsuit.
+                    </p>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
+              
+              <div className="space-y-4">
+                {filteredFaqs.map((faq, index) => (
+                  <Card key={index} className="glass-card">
+                    <CardHeader 
+                      className="cursor-pointer"
+                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                    >
+                      <div className="flex items-center justify-between">
+                        <CardTitle className="text-lg">{faq.question}</CardTitle>
+                        {expandedFaq === index ? <ChevronUp /> : <ChevronDown />}
+                      </div>
+                    </CardHeader>
+                    {expandedFaq === index && (
+                      <CardContent>
+                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                      </CardContent>
+                    )}
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Additional Resources</h2>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <Card className="p-6 hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-4 flex items-center">
+                    <FileText className="w-5 h-5 mr-2 text-primary" />
+                    Case Evaluation Form
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Get a detailed evaluation of your car accident case with our comprehensive assessment form.
+                  </p>
+                  <Button asChild className="w-full">
+                    <Link to="/car-case-evaluation">Complete Evaluation</Link>
+                  </Button>
+                </Card>
+
+                <Card className="p-6 hover:shadow-lg transition-shadow">
+                  <h3 className="text-xl font-bold mb-4 flex items-center">
+                    <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                    Medical Guidance
+                  </h3>
+                  <p className="text-muted-foreground mb-4">
+                    Understand your injuries and treatment options with our comprehensive medical guide.
+                  </p>
+                  <Button asChild variant="outline" className="w-full">
+                    <Link to="/car-medical-guidance">Medical Resources</Link>
+                  </Button>
+                </Card>
+              </div>
+            </section>
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-6">
+              <Card className="p-6 mb-6">
+                <h3 className="text-xl font-bold mb-4 text-center">Get Your Free Case Evaluation</h3>
+                <p className="text-muted-foreground text-center mb-6">
+                  Former defense attorney now fighting for accident victims. Free consultation available 24/7.
+                </p>
+                <div className="space-y-4">
+                  <Button asChild className="w-full bg-red-600 hover:bg-red-700">
+                    <Link to="/car-case-evaluation">Get Free Evaluation</Link>
+                  </Button>
+                  <Button asChild className="w-full bg-red-600 hover:bg-red-700 text-white">
+                    <a href="tel:8181234567">
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </a>
+                  </Button>
+                </div>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="text-lg font-bold mb-4">Why Choose Us?</h3>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-primary mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Former Defense Attorney</h4>
+                      <p className="text-xs text-muted-foreground">Inside knowledge of insurance tactics</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-primary mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">24/7 Availability</h4>
+                      <p className="text-xs text-muted-foreground">Immediate response to new cases</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-primary mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-xs text-muted-foreground">You pay nothing unless we win</p>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

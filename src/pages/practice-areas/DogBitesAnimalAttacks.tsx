@@ -120,9 +120,8 @@ const DogBitesAnimalAttacks: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/dog-bites-case-evaluation';
+    window.location.href = '/dog-bite-case-evaluation';
   };
-
   const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };

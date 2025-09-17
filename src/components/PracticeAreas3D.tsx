@@ -74,9 +74,10 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
   };
 
   const generateSlug = (title: string) => {
-    return title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    const base = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (base === 'dog-bites') return 'dog-bites-animal-attacks';
+    return base;
   };
-
   return (
     <div 
       ref={cardRef}

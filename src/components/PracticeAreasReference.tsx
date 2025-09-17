@@ -136,7 +136,7 @@ const practiceAreas: PracticeArea[] = [
     title: 'Dog Bites',
     description: 'California\'s strict liability statute holds dog owners responsible for bite injuries regardless of the animal\'s history or owner\'s knowledge of aggression. This protection especially benefits children who comprise the majority of serious bite victims. We pursue homeowner\'s and renter\'s insurance claims for medical expenses, reconstructive surgery, scarring, nerve damage, infection treatment, and psychological counseling for trauma. Facial injuries causing disfigurement require plastic surgery and ongoing treatment affecting victims\' self-esteem and social interactions. Beyond bites, we handle injuries from dogs knocking people down, causing falls, or attacking other pets. Dangerous breeds and repeat offenders may warrant punitive damages. Post-traumatic stress, especially in children, requires therapeutic intervention covered in settlements. Our compassionate approach balances aggressive advocacy with sensitivity to both human and animal welfare concerns.',
     image: dogBitesImg,
-    slug: 'dog-bites'
+    slug: 'dog-bites-animal-attacks'
   },
   {
     id: 'medical-malpractice',

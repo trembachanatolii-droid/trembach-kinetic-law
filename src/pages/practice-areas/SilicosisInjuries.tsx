@@ -900,7 +900,10 @@ const SilicosisInjuries: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Helpful Resources</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.location.href = '/silicosis-medical-guidance'}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Stethoscope className="w-5 h-5 mr-2 text-primary" />
@@ -913,10 +916,14 @@ const SilicosisInjuries: React.FC = () => {
                     <p>• Lung Transplant Programs</p>
                     <p>• Support Groups for Patients</p>
                     <p>• Medical Equipment Resources</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access medical guidance →</p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.location.href = '/silicosis-case-evaluation'}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Scale className="w-5 h-5 mr-2 text-primary" />
@@ -929,10 +936,14 @@ const SilicosisInjuries: React.FC = () => {
                     <p>• Cal/OSHA Silica Standards</p>
                     <p>• Legal Rights for Workers</p>
                     <p>• Immigration Protection Resources</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click for free case evaluation →</p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.open('https://www.dir.ca.gov/dosh/complaint.htm', '_blank')}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Building className="w-5 h-5 mr-2 text-primary" />
@@ -945,10 +956,14 @@ const SilicosisInjuries: React.FC = () => {
                     <p>• Workers' Compensation Appeals Board</p>
                     <p>• Social Security Disability</p>
                     <p>• Medicare/Medi-Cal Information</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access government resources →</p>
                   </CardContent>
                 </Card>
 
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.open('https://www.cdc.gov/niosh/topics/silica/', '_blank')}
+                >
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Users className="w-5 h-5 mr-2 text-primary" />
@@ -961,6 +976,7 @@ const SilicosisInjuries: React.FC = () => {
                     <p>• Occupational Health Organizations</p>
                     <p>• Workplace Safety Advocacy</p>
                     <p>• Community Health Centers</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access support resources →</p>
                   </CardContent>
                 </Card>
               </div>

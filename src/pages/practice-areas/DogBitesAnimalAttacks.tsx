@@ -386,10 +386,19 @@ const DogBitesAnimalAttacks: React.FC = () => {
             Strict Liability Protection for Animal Attack Victims Throughout All 58 California Counties
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90">
+            <Button 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-primary hover:bg-primary/90"
+              onClick={() => window.location.href = '/dog-bite-case-evaluation'}
+            >
               Free Dog Bite Case Review
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-transparent text-white border-white hover:bg-white hover:text-primary">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-white/10 text-white border-white/20 hover:bg-white/20"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
               Call (818) 123-4567
             </Button>
           </div>
@@ -805,7 +814,11 @@ const DogBitesAnimalAttacks: React.FC = () => {
               <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white mr-4">
                 Free Case Review Now
               </Button>
-              <Button size="lg" className="bg-transparent text-red-600 border-red-600 hover:bg-red-600 hover:text-white">
+              <Button 
+                size="lg" 
+                className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+                onClick={() => window.location.href = 'tel:8181234567'}
+              >
                 Call (818) 123-4567
               </Button>
             </div>
@@ -902,10 +915,15 @@ const DogBitesAnimalAttacks: React.FC = () => {
             California's strict liability law protects dog bite victims regardless of the animal's history. Don't let insurance companies minimize your injuries or blame you for the attack. Our experienced dog bite attorneys understand the physical and emotional trauma these attacks cause and fight aggressively for maximum compensation under California's powerful protection laws.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6" onClick={() => window.location.href = '/dog-bites-case-evaluation'}>
+            <Button size="lg" className="text-lg px-8 py-6" onClick={() => window.location.href = '/dog-bite-case-evaluation'}>
               Free Dog Bite Case Review
             </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8 py-6 bg-primary/10 text-primary border-primary/20 hover:bg-primary/20"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
               Call (818) 123-4567
             </Button>
           </div>

@@ -37,6 +37,14 @@ import heroBackground from '@/assets/practice-areas/pedestrian-accidents-hero-ne
 import sidebarImage from '@/assets/practice-areas/pedestrian-crosswalk-safety.jpg';
 import legalConsultationImage from '@/assets/practice-areas/pedestrian-legal-consultation.jpg';
 import medicalCareImage from '@/assets/practice-areas/pedestrian-medical-care.jpg';
+import accidentSceneImage from '@/assets/practice-areas/pedestrian-accident-scene.jpg';
+import parkingLotSafetyImage from '@/assets/practice-areas/pedestrian-parking-lot-safety.jpg';
+import schoolZoneSafetyImage from '@/assets/practice-areas/pedestrian-school-zone-safety.jpg';
+import residentialSafetyImage from '@/assets/practice-areas/pedestrian-residential-safety.jpg';
+import constructionSafetyImage from '@/assets/practice-areas/pedestrian-construction-safety.jpg';
+import compensationCalculationImage from '@/assets/practice-areas/pedestrian-compensation-calculation.jpg';
+import trafficCamerasImage from '@/assets/practice-areas/pedestrian-traffic-cameras.jpg';
+import governmentLiabilityImage from '@/assets/practice-areas/pedestrian-government-liability.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -646,6 +654,13 @@ const PedestrianAccidents: React.FC = () => {
             <section id="accident-types" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Types of California Pedestrian Accidents</h2>
               
+              <div className="mb-6">
+                <img src={accidentSceneImage} alt="California pedestrian accident scene investigation" className="w-full h-64 object-cover rounded-lg mb-4" />
+                <p className="text-lg leading-relaxed mb-6">
+                  California pedestrian accidents occur in various contexts, each presenting unique liability and safety challenges. Understanding these different scenarios helps establish fault patterns and insurance company liability tactics.
+                </p>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
@@ -667,6 +682,9 @@ const PedestrianAccidents: React.FC = () => {
 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
+                    <div className="mb-3">
+                      <img src={parkingLotSafetyImage} alt="Parking lot pedestrian safety" className="w-full h-32 object-cover rounded-md" />
+                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Car className="w-5 h-5 mr-2 text-red-600" />
                       Parking Lot Incidents
@@ -685,6 +703,9 @@ const PedestrianAccidents: React.FC = () => {
 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
+                    <div className="mb-3">
+                      <img src={schoolZoneSafetyImage} alt="School zone pedestrian safety" className="w-full h-32 object-cover rounded-md" />
+                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Building className="w-5 h-5 mr-2 text-red-600" />
                       School Zone Accidents
@@ -703,6 +724,9 @@ const PedestrianAccidents: React.FC = () => {
 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
+                    <div className="mb-3">
+                      <img src={residentialSafetyImage} alt="Residential area pedestrian safety" className="w-full h-32 object-cover rounded-md" />
+                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <MapPin className="w-5 h-5 mr-2 text-red-600" />
                       Residential Areas
@@ -739,6 +763,9 @@ const PedestrianAccidents: React.FC = () => {
 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
+                    <div className="mb-3">
+                      <img src={constructionSafetyImage} alt="Construction zone pedestrian safety" className="w-full h-32 object-cover rounded-md" />
+                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <AlertTriangle className="w-5 h-5 mr-2 text-red-600" />
                       Construction Zones
@@ -882,6 +909,13 @@ const PedestrianAccidents: React.FC = () => {
             <section id="compensation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Pedestrian Accident Compensation</h2>
               
+              <div className="mb-6">
+                <img src={compensationCalculationImage} alt="Pedestrian accident compensation calculation" className="w-full h-64 object-cover rounded-lg mb-4" />
+                <p className="text-lg leading-relaxed mb-6">
+                  Pedestrian accident victims deserve full compensation for all damages, including economic losses, pain and suffering, and future care needs. California's compensation system allows recovery for all damages caused by negligent drivers.
+                </p>
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
@@ -956,6 +990,10 @@ const PedestrianAccidents: React.FC = () => {
                       Dangerous road conditions contributing to pedestrian accidents create government liability under California Government Code 835. Cities and counties must maintain reasonably safe conditions for pedestrian travel. Missing crosswalk markings, malfunctioning signals, inadequate lighting, and dangerous intersection design all create potential liability.
                     </p>
                     
+                    <div className="my-6">
+                      <img src={governmentLiabilityImage} alt="California government building and municipal liability" className="w-full h-48 object-cover rounded-lg" />
+                    </div>
+                    
                     <h3>Health Insurance Liens and Subrogation</h3>
                     <p>
                       Health insurers and medical providers often claim reimbursement from settlements through liens and subrogation. We negotiate with lienholders to reduce claims, maximizing your net recovery. California's made whole doctrine protects injured parties from excessive lien reductions.
@@ -968,6 +1006,13 @@ const PedestrianAccidents: React.FC = () => {
             {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
+              
+              <div className="mb-6">
+                <img src={trafficCamerasImage} alt="California traffic camera system for pedestrian accident evidence" className="w-full h-64 object-cover rounded-lg mb-4" />
+                <p className="text-lg leading-relaxed mb-6">
+                  Get answers to the most common questions about pedestrian accident claims in California. Our experienced attorneys address legal concerns, insurance issues, and compensation matters.
+                </p>
+              </div>
               
               <div className="space-y-4">
                 {faqData.map((faq, index) => (

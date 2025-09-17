@@ -45,8 +45,6 @@ import constructionSafetyImage from '@/assets/practice-areas/pedestrian-construc
 import compensationCalculationImage from '@/assets/practice-areas/pedestrian-compensation-calculation.jpg';
 import trafficCamerasImage from '@/assets/practice-areas/pedestrian-traffic-cameras.jpg';
 import governmentLiabilityImage from '@/assets/practice-areas/pedestrian-government-liability.jpg';
-import publicTransitAreasImage from '@/assets/practice-areas/pedestrian-public-transit-areas.jpg';
-import crosswalkAccidentsImage from '@/assets/practice-areas/pedestrian-crosswalk-accidents.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -666,9 +664,6 @@ const PedestrianAccidents: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <div className="mb-3">
-                      <img src={crosswalkAccidentsImage} alt="Crosswalk pedestrian accidents" className="w-full h-32 object-cover rounded-md" />
-                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <MapPin className="w-5 h-5 mr-2 text-red-600" />
                       Crosswalk Accidents
@@ -750,9 +745,6 @@ const PedestrianAccidents: React.FC = () => {
 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <div className="mb-3">
-                      <img src={publicTransitAreasImage} alt="Public transit areas pedestrian safety" className="w-full h-32 object-cover rounded-md" />
-                    </div>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Building className="w-5 h-5 mr-2 text-red-600" />
                       Public Transit Areas

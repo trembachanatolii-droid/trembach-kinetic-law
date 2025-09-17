@@ -778,8 +778,7 @@ const PremisesLiability: React.FC = () => {
               Start Free Case Evaluation
             </Button>
             <Button 
-              variant="outline"
-              className="border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-red-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
               onClick={() => window.open('tel:8553742906')}
             >
               Call (855) 374-2906

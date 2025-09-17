@@ -110,8 +110,8 @@ const SilicosisInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to case evaluation
-    window.location.href = '/case-evaluation';
+    // Handle form submission - redirect to silicosis case evaluation
+    window.location.href = '/silicosis-case-evaluation';
   };
 
   const faqData = [
@@ -363,7 +363,7 @@ const SilicosisInjuries: React.FC = () => {
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/case-evaluation'}
+              onClick={() => window.location.href = '/silicosis-case-evaluation'}
             >
               START MY FREE CASE EVALUATION
             </Button>
@@ -984,12 +984,12 @@ const SilicosisInjuries: React.FC = () => {
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4">
                     <Button 
-                      size="lg" 
-                      className="bg-red-600 hover:bg-red-700 text-white"
-                      onClick={() => window.location.href = '/case-evaluation'}
-                    >
-                      Get Free Case Evaluation Now
-                    </Button>
+                       size="lg" 
+                       className="bg-red-600 hover:bg-red-700 text-white"
+                       onClick={() => window.location.href = '/silicosis-case-evaluation'}
+                     >
+                       Get Free Case Evaluation Now
+                     </Button>
                     <Button 
                       size="lg" 
                       variant="outline" 
@@ -1013,10 +1013,26 @@ const SilicosisInjuries: React.FC = () => {
                 <div className="space-y-4">
                   <Button 
                     className="w-full bg-red-600 hover:bg-red-700 text-white"
-                    onClick={() => window.location.href = '/case-evaluation'}
+                    onClick={() => window.location.href = '/silicosis-case-evaluation'}
                   >
                     <Scale className="w-4 h-4 mr-2" />
                     Free Case Evaluation
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.location.href = '/silicosis-compensation-calculator'}
+                  >
+                    <FileText className="w-4 h-4 mr-2" />
+                    Compensation Calculator
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.location.href = '/silicosis-medical-guidance'}
+                  >
+                    <Stethoscope className="w-4 h-4 mr-2" />
+                    Medical Guidance
                   </Button>
                   <Button 
                     variant="outline" 

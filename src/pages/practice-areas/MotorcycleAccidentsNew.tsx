@@ -30,7 +30,7 @@ import {
   Bike,
   AlertCircle
 } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/motorcycle-accidents-hero.jpg';
+import heroBackground from '@/assets/practice-areas/motorcycle-accidents-hero-new.jpg';
 import sceneImage from '@/assets/practice-areas/motorcycle-accident-scene.jpg';
 import legalConsultationImage from '@/assets/practice-areas/motorcycle-legal-consultation.jpg';
 import medicalImage from '@/assets/practice-areas/motorcycle-medical-care.jpg';

@@ -363,19 +363,28 @@ const BicycleCompensationCalculator: React.FC = () => {
 
             {/* Information Sidebar */}
             <div className="space-y-6">
-              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+              <Card className="glass-card border-orange-200 bg-orange-50/50">
                 <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <AlertCircle className="w-5 h-5 text-primary" />
-                    Important Disclaimer
+                  <CardTitle className="flex items-center gap-2 text-orange-800">
+                    <AlertCircle className="w-5 h-5" />
+                    Important Legal Disclaimer
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <p className="text-sm text-muted-foreground">
-                    This calculator provides estimates only. Actual compensation depends on many case-specific factors and cannot be guaranteed.
+                  <p className="text-sm text-orange-700">
+                    This calculator provides estimates only. The compensation amounts shown are based on general factors and similar cases. Your actual compensation may be significantly different depending on the specific circumstances of your case.
                   </p>
-                  <p className="text-sm text-muted-foreground">
-                    For an accurate assessment, schedule a free consultation with our experienced bicycle accident attorneys.
+                  <p className="text-sm text-orange-700">
+                    <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every bicycle accident case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
+                  </p>
+                  <p className="text-sm text-orange-700">
+                    <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified bicycle accident attorney who can review your medical records, accident details, and other relevant documentation.
+                  </p>
+                  <p className="text-sm text-orange-700">
+                    <strong>Time Limits Apply:</strong> Bicycle accident claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
+                  </p>
+                  <p className="text-sm text-orange-700">
+                    For a free, confidential case evaluation, contact our experienced bicycle accident attorneys today.
                   </p>
                 </CardContent>
               </Card>

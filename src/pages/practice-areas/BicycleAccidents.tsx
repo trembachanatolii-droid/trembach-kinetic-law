@@ -285,25 +285,26 @@ const BicycleAccidents: React.FC = () => {
             <section id="evaluation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
               
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
+              <div className="bg-red-50 border-2 border-red-200 p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
+                <p className="mb-6 text-red-700">Provide some basic information to help us understand your case better.</p>
                 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
+                      <label className="block text-sm font-medium mb-2 text-red-800">Accident Date</label>
                       <Input
                         type="date"
                         value={formData.accidentDate}
                         onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
                         required
+                        className="border-red-300 focus:border-red-500"
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium mb-2">Injury Type</label>
+                      <label className="block text-sm font-medium mb-2 text-red-800">Injury Type</label>
                       <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
+                        <SelectTrigger className="border-red-300 focus:border-red-500">
                           <SelectValue placeholder="Select injury type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -322,6 +323,323 @@ const BicycleAccidents: React.FC = () => {
                     Start My Free Case Evaluation
                   </Button>
                 </form>
+              </div>
+            </section>
+
+            {/* California Law Section */}
+            <section id="california-law" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">California Bicycle Laws & Your Rights</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  California has some of the most comprehensive bicycle protection laws in the nation. Understanding your rights as a cyclist is crucial for building a strong compensation claim.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.californiaLaw} onOpenChange={() => toggleSection('californiaLaw')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Show Complete California Bicycle Law Details
+                    {expandedSections.californiaLaw ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="prose prose-lg max-w-none">
+                    <h3>California Vehicle Code Section 21200 - Equal Rights</h3>
+                    <p>
+                      This fundamental law establishes that cyclists have all the rights and responsibilities of vehicle drivers. This means:
+                    </p>
+                    <ul>
+                      <li>Right to use any road except freeways</li>
+                      <li>Right to take the full lane when necessary for safety</li>
+                      <li>Right to be treated as traffic, not an obstacle</li>
+                      <li>Protection under all traffic laws</li>
+                    </ul>
+
+                    <h3>Assembly Bill 1909 - Three-Foot Law Enhanced</h3>
+                    <p>
+                      California's "change lanes to pass" law requires drivers to change lanes entirely when passing cyclists, not just maintain three feet of distance. Key provisions:
+                    </p>
+                    <ul>
+                      <li>Complete lane change required when safe</li>
+                      <li>If lane change impossible, slow speed and ensure safety</li>
+                      <li>Base fine $233 for violations</li>
+                      <li>Fine increases to $959 if collision occurs</li>
+                    </ul>
+
+                    <h3>Dooring Laws - Vehicle Code Section 22517</h3>
+                    <p>
+                      California law prohibits opening vehicle doors into bicycle traffic:
+                    </p>
+                    <ul>
+                      <li>Driver must check for cyclists before opening doors</li>
+                      <li>Passengers also liable for door-related accidents</li>
+                      <li>Creates presumption of negligence against door-opener</li>
+                    </ul>
+
+                    <h3>Right-of-Way Protections</h3>
+                    <p>Cyclists have protected right-of-way in numerous situations:</p>
+                    <ul>
+                      <li>In bicycle lanes and paths</li>
+                      <li>When proceeding straight through intersections</li>
+                      <li>When drivers are making turns</li>
+                      <li>At crosswalks when legally present</li>
+                    </ul>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Accident Types Section */}
+            <section id="accident-types" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Common California Bicycle Accident Types</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Car className="w-5 h-5 mr-2 text-red-600" />
+                      Right Hook Collisions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm">Driver turns right across cyclist's path</p>
+                    <p className="text-sm">Often occurs at intersections</p>
+                    <p className="text-sm">Driver typically fails to check mirrors/blind spots</p>
+                    <p className="text-sm">Can cause severe head and torso injuries</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <MapPin className="w-5 h-5 mr-2 text-red-600" />
+                      Dooring Accidents
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm">Car door opened into cyclist's path</p>
+                    <p className="text-sm">Common in urban areas with street parking</p>
+                    <p className="text-sm">Often causes cyclists to swerve into traffic</p>
+                    <p className="text-sm">Can result in secondary vehicle collisions</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-red-600" />
+                      Left Cross Accidents
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm">Driver turns left across cyclist's path</p>
+                    <p className="text-sm">High-speed impacts at intersections</p>
+                    <p className="text-sm">Driver fails to yield right-of-way</p>
+                    <p className="text-sm">Often results in catastrophic injuries</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Clock className="w-5 h-5 mr-2 text-red-600" />
+                      Rear-End Collisions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p className="text-sm">Vehicle strikes cyclist from behind</p>
+                    <p className="text-sm">Often involves distracted driving</p>
+                    <p className="text-sm">Can launch cyclist forward violently</p>
+                    <p className="text-sm">Spinal and head injuries common</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Injuries Section */}
+            <section id="injuries" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Bicycle Accident Injuries</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Bicycle accidents often result in severe injuries due to the lack of protection cyclists have compared to motor vehicle occupants. Understanding injury patterns helps establish appropriate compensation demands.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.injuries} onOpenChange={() => toggleSection('injuries')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Show Complete Injury Information
+                    {expandedSections.injuries ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="glass-card">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <Heart className="w-5 h-5 mr-2" />
+                          Head and Brain Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <p>• Traumatic brain injury (TBI)</p>
+                        <p>• Concussions and post-concussion syndrome</p>
+                        <p>• Skull fractures</p>
+                        <p>• Facial fractures and lacerations</p>
+                        <p>• Loss of consciousness</p>
+                        <p>• Cognitive impairment</p>
+                        <p>• Memory and concentration problems</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <Shield className="w-5 h-5 mr-2" />
+                          Spinal Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <p>• Spinal cord injuries</p>
+                        <p>• Vertebrae fractures</p>
+                        <p>• Herniated discs</p>
+                        <p>• Paralysis (partial or complete)</p>
+                        <p>• Chronic back and neck pain</p>
+                        <p>• Loss of sensation</p>
+                        <p>• Reduced mobility</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <Users className="w-5 h-5 mr-2" />
+                          Extremity Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <p>• Broken bones (arms, legs, ribs)</p>
+                        <p>• Joint dislocations</p>
+                        <p>• Ligament and tendon tears</p>
+                        <p>• Crush injuries</p>
+                        <p>• Amputation</p>
+                        <p>• Nerve damage</p>
+                        <p>• Loss of function</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <AlertTriangle className="w-5 h-5 mr-2" />
+                          Soft Tissue Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-2 text-sm">
+                        <p>• Road rash and abrasions</p>
+                        <p>• Deep lacerations</p>
+                        <p>• Muscle strains</p>
+                        <p>• Bruising and contusions</p>
+                        <p>• Scarring and disfigurement</p>
+                        <p>• Skin grafts required</p>
+                        <p>• Permanent scarring</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-4">Long-term Impacts</h3>
+                    <div className="prose prose-lg max-w-none">
+                      <p>
+                        Bicycle accident injuries often have lasting consequences beyond the initial trauma:
+                      </p>
+                      <ul>
+                        <li><strong>Chronic Pain:</strong> Ongoing pain affecting daily activities and quality of life</li>
+                        <li><strong>Mobility Limitations:</strong> Reduced ability to walk, exercise, or perform job duties</li>
+                        <li><strong>Psychological Impact:</strong> PTSD, anxiety, depression, and fear of cycling</li>
+                        <li><strong>Career Impact:</strong> Inability to return to previous employment or reduced earning capacity</li>
+                        <li><strong>Relationship Strain:</strong> Impact on family relationships and social connections</li>
+                        <li><strong>Financial Burden:</strong> Ongoing medical expenses and lost income</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Don't Wait - Time Limits Section */}
+            <section id="time-limits" className="content-section mb-12">
+              <div className="bg-gradient-to-r from-red-600/10 to-red-500/5 border-l-4 border-red-600 p-6 rounded-lg">
+                <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
+                  <Clock className="w-8 h-8 mr-3" />
+                  Don't Wait - Time Limits Apply for California Bicycle Accidents
+                </h2>
+                
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-lg font-semibold text-red-700 mb-4">
+                    California law imposes strict deadlines for filing bicycle accident claims. Missing these deadlines can permanently bar your right to compensation.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <Card className="border-red-200 bg-red-50/50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-700">
+                          <Calendar className="w-5 h-5 mr-2" />
+                          Statute of Limitations
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm font-semibold text-red-800 mb-2">2 Years from Accident Date</p>
+                        <p className="text-sm text-red-700">This applies to personal injury claims against the at-fault driver and their insurance company.</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="border-red-200 bg-red-50/50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-700">
+                          <Building className="w-5 h-5 mr-2" />
+                          Government Claims
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm font-semibold text-red-800 mb-2">6 Months for Government Entities</p>
+                        <p className="text-sm text-red-700">Claims against cities, counties, or state for dangerous road conditions have much shorter deadlines.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                    <h4 className="font-semibold text-yellow-800 mb-2 flex items-center">
+                      <AlertTriangle className="w-4 h-4 mr-2" />
+                      Critical Evidence Disappears Quickly
+                    </h4>
+                    <ul className="text-sm text-yellow-700 space-y-1">
+                      <li>• Surveillance footage gets overwritten (often within 30-90 days)</li>
+                      <li>• Witness memories fade and contact information is lost</li>
+                      <li>• Physical evidence at accident scene gets disturbed</li>
+                      <li>• Vehicle damage gets repaired, eliminating crucial evidence</li>
+                      <li>• Road conditions change, making reconstruction difficult</li>
+                    </ul>
+                  </div>
+
+                  <h3>Why Immediate Action is Essential</h3>
+                  <ul>
+                    <li><strong>Evidence Preservation:</strong> Our team can immediately secure surveillance footage, witness statements, and physical evidence</li>
+                    <li><strong>Insurance Deadlines:</strong> Insurance companies have their own reporting requirements and deadlines</li>
+                    <li><strong>Medical Documentation:</strong> Early legal involvement ensures proper medical documentation for your claim</li>
+                    <li><strong>Investigation Time:</strong> Complex bicycle accidents require thorough investigation to identify all liable parties</li>
+                    <li><strong>Expert Analysis:</strong> Accident reconstruction experts and medical professionals need time to analyze your case</li>
+                  </ul>
+
+                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
+                    <h4 className="font-semibold text-green-800 mb-2">Free Consultation - No Risk</h4>
+                    <p className="text-sm text-green-700">
+                      Don't let time limits jeopardize your case. Contact us today for a free, no-obligation consultation. We'll review your case, explain your rights, and ensure all deadlines are met while you focus on recovery.
+                    </p>
+                  </div>
+                </div>
               </div>
             </section>
 

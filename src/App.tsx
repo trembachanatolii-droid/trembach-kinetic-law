@@ -51,62 +51,64 @@ import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <CustomCursor />
-      <BrowserRouter>
-        <ScrollToTop />
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
-          <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
-      <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
-      <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
-      <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />
-          <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
-          <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
-          <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
-          <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
-          <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />
-          <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidentsNew />} />
-          <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
-          <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
-          <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
-          <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
-          <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
-          <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
-            <Route path="/bicycle-case-evaluation" element={<BicycleCaseEvaluation />} />
-            <Route path="/bicycle-medical-guidance" element={<BicycleMedicalGuidance />} />
-            <Route path="/bicycle-compensation-calculator" element={<BicycleCompensationCalculator />} />
-            <Route path="/motorcycle-case-evaluation" element={<MotorcycleCaseEvaluation />} />
-          <Route path="/motorcycle-compensation-calculator" element={<MotorcycleCompensationCalculator />} />
-          <Route path="/motorcycle-medical-guidance" element={<MotorcycleMedicalGuidance />} />
-          <Route path="/pedestrian-case-evaluation" element={<PedestrianCaseEvaluation />} />
-          <Route path="/pedestrian-compensation-calculator" element={<PedestrianCompensationCalculator />} />
-          <Route path="/pedestrian-medical-guidance" element={<PedestrianMedicalGuidance />} />
-          <Route path="/case-evaluation" element={<CaseEvaluation />} />
-          <Route path="/medical-guidance" element={<MedicalGuidance />} />
-          <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
-          <Route path="/compensation-calculator" element={<CompensationCalculator />} />
-          <Route path="/silicosis-case-evaluation" element={<SilicosisCaseEvaluation />} />
-          <Route path="/silicosis-compensation-calculator" element={<SilicosisCompensationCalculator />} />
-          <Route path="/silicosis-medical-guidance" element={<SilicosisMedicalGuidance />} />
-          <Route path="/premises-liability-case-evaluation" element={<PremisesLiabilityCaseEvaluation />} />
-          <Route path="/premises-liability-compensation-calculator" element={<PremisesLiabilityCompensationCalculator />} />
-          <Route path="/premises-liability-medical-guidance" element={<PremisesLiabilityMedicalGuidance />} />
-          <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
-          <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
-          <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
+function App() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <CustomCursor />
+        <BrowserRouter>
+          <ScrollToTop />
+          <Navigation />
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
+        <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
+        <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
+        <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />
+            <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
+            <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
+            <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
+            <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
+            <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />
+            <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidentsNew />} />
+            <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
+            <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
+            <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
+            <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
+            <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
+            <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
+              <Route path="/bicycle-case-evaluation" element={<BicycleCaseEvaluation />} />
+              <Route path="/bicycle-medical-guidance" element={<BicycleMedicalGuidance />} />
+              <Route path="/bicycle-compensation-calculator" element={<BicycleCompensationCalculator />} />
+              <Route path="/motorcycle-case-evaluation" element={<MotorcycleCaseEvaluation />} />
+            <Route path="/motorcycle-compensation-calculator" element={<MotorcycleCompensationCalculator />} />
+            <Route path="/motorcycle-medical-guidance" element={<MotorcycleMedicalGuidance />} />
+            <Route path="/pedestrian-case-evaluation" element={<PedestrianCaseEvaluation />} />
+            <Route path="/pedestrian-compensation-calculator" element={<PedestrianCompensationCalculator />} />
+            <Route path="/pedestrian-medical-guidance" element={<PedestrianMedicalGuidance />} />
+            <Route path="/case-evaluation" element={<CaseEvaluation />} />
+            <Route path="/medical-guidance" element={<MedicalGuidance />} />
+            <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
+            <Route path="/compensation-calculator" element={<CompensationCalculator />} />
+            <Route path="/silicosis-case-evaluation" element={<SilicosisCaseEvaluation />} />
+            <Route path="/silicosis-compensation-calculator" element={<SilicosisCompensationCalculator />} />
+            <Route path="/silicosis-medical-guidance" element={<SilicosisMedicalGuidance />} />
+            <Route path="/premises-liability-case-evaluation" element={<PremisesLiabilityCaseEvaluation />} />
+            <Route path="/premises-liability-compensation-calculator" element={<PremisesLiabilityCompensationCalculator />} />
+            <Route path="/premises-liability-medical-guidance" element={<PremisesLiabilityMedicalGuidance />} />
+            <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
+            <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
+            <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
 
 export default App;

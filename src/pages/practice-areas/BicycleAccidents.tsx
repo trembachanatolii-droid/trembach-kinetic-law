@@ -68,6 +68,7 @@ const BicycleAccidents: React.FC = () => {
     { id: 'california-law', label: 'CALIFORNIA LAW', icon: BookOpen },
     { id: 'accident-types', label: 'ACCIDENT TYPES', icon: Bike },
     { id: 'injuries', label: 'INJURIES', icon: Heart },
+    { id: 'time-limits', label: 'TIME LIMITS', icon: Clock },
     { id: 'compensation', label: 'COMPENSATION', icon: DollarSign },
     { id: 'faq', label: 'FAQ', icon: HelpCircle },
     { id: 'resources', label: 'RESOURCES', icon: Building }
@@ -143,8 +144,70 @@ const BicycleAccidents: React.FC = () => {
     {
       question: "How long do I have to file a bicycle accident lawsuit in California?",
       answer: "Two years from the accident date under the statute of limitations. However, start immediately - evidence disappears, witnesses forget, and surveillance footage gets overwritten. Government claims require filing within six months. Missing these deadlines bars recovery forever."
+    },
+    {
+      question: "Do I need to call the police after a bike accident?",
+      answer: "Yes. A police report documents fault, injuries, and witness information. Politely insist on a report even if the driver wants to 'work it out'. The report number is critical for insurance claims."
+    },
+    {
+      question: "What if the driver fled the scene (hit-and-run)?",
+      answer: "Call 911 immediately. Provide any vehicle details and witness contacts. Your own uninsured motorist (UM) coverage may apply. We can help secure nearby surveillance footage quickly before it's overwritten."
+    },
+    {
+      question: "Should I see a doctor even if I feel okay?",
+      answer: "Yes. Many serious injuries (TBI, internal bleeding, spinal trauma) are delayed. Early medical documentation is vital for both your health and your claim."
+    },
+    {
+      question: "Should I speak with the insurance company?",
+      answer: "Do not give a recorded statement before speaking with a lawyer. Adjusters are trained to minimize claims. We handle communications to protect your case."
+    },
+    {
+      question: "What if I was partially at fault?",
+      answer: "California follows comparative negligence—you can still recover damages reduced by your percentage of fault. Never assume fault without legal review."
+    },
+    {
+      question: "What damages can I recover in a bicycle accident case?",
+      answer: "Medical bills, future care, lost wages, reduced earning capacity, pain and suffering, disfigurement, loss of enjoyment of life, bike/equipment replacement, and more."
+    },
+    {
+      question: "How much is my bicycle accident case worth?",
+      answer: "Case value depends on injury severity, permanence, medical costs, lost income, pain levels, and fault clarity. Use our calculator for an estimate, then get a personalized evaluation."
+    },
+    {
+      question: "How long will my case take?",
+      answer: "Most cases resolve within 6–18 months depending on treatment duration, investigation needs, insurance cooperation, and whether litigation is required."
+    },
+    {
+      question: "What evidence should I preserve?",
+      answer: "Photos/videos, damaged bike and gear, GPS/Strava data, medical records, receipts, witness contacts, repair estimates, and your cycling history."
+    },
+    {
+      question: "What if the driver has no or minimal insurance?",
+      answer: "Your UM/UIM coverage can step in. We also investigate other liable parties, including employers, commercial policies, and dangerous road conditions."
+    },
+    {
+      question: "Are e-bikes treated the same under California law?",
+      answer: "Generally yes, but Class 3 e-bikes have additional restrictions. Liability rules and compensation rights are similar—contact us for case-specific guidance."
+    },
+    {
+      question: "Do I need a lawyer? How are fees handled?",
+      answer: "Serious bicycle cases benefit greatly from legal representation. We work on contingency—no fees unless we win. Our early involvement preserves evidence and maximizes recovery."
     }
   ];
+
+  // FAQ Structured Data for SEO
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.map((q) => ({
+      "@type": "Question",
+      name: q.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: q.answer,
+      },
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -152,6 +215,7 @@ const BicycleAccidents: React.FC = () => {
         title="California Bicycle Accident Lawyers | Trembach Law Firm"
         description="Experienced bicycle accident attorneys helping injured cyclists in California. Former defense attorney now fighting for maximum compensation. Free consultation."
         canonical="/practice-areas/bicycle-accidents"
+        structuredData={faqJsonLd}
       />
       
       {/* Hero Section */}
@@ -233,12 +297,11 @@ const BicycleAccidents: React.FC = () => {
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Bicycle Accident Attorneys</h2>
-              
+              <p className="sr-only">Time limits and FAQs below provide critical guidance for California bicycle accident claims.</p>
               <div className="prose prose-lg max-w-none mb-6">
                 <p className="text-lg leading-relaxed mb-4">
                   When a 4,000-pound vehicle strikes a 20-pound bicycle, the outcome is never fair. California's roads see over 10,000 bicycle accidents annually, with cyclists facing catastrophic injuries from what should be preventable collisions.
                 </p>
-                
                 <p className="text-lg leading-relaxed">
                   At Trembach Law Firm, we understand the unique challenges cyclists face on California roads. With our background in defense work, we know exactly how insurance companies minimize bicycle accident claims - and how to beat their tactics.
                 </p>
@@ -285,7 +348,7 @@ const BicycleAccidents: React.FC = () => {
             <section id="evaluation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
               
-              <div className="bg-red-50 border-2 border-red-200 p-8 rounded-lg">
+              <div className="bg-red-50 border-2 border-red-300 p-8 rounded-lg shadow-sm">
                 <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
                 <p className="mb-6 text-red-700">Provide some basic information to help us understand your case better.</p>
                 
@@ -298,13 +361,13 @@ const BicycleAccidents: React.FC = () => {
                         value={formData.accidentDate}
                         onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
                         required
-                        className="border-red-300 focus:border-red-500"
+                        className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500"
                       />
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2 text-red-800">Injury Type</label>
                       <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger className="border-red-300 focus:border-red-500">
+                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
                           <SelectValue placeholder="Select injury type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -319,7 +382,7 @@ const BicycleAccidents: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
                     Start My Free Case Evaluation
                   </Button>
                 </form>

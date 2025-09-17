@@ -1334,7 +1334,7 @@ const TruckAccidentsNew: React.FC = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4"
+              className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 bg-transparent"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567

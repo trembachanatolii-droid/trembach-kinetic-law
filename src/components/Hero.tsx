@@ -14,11 +14,11 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero entrance animation
+      // Hero entrance animation - instant
       gsap.fromTo(
         heroRef.current,
         { opacity: 0 },
-        { opacity: 1, duration: 1, ease: "power2.out" }
+        { opacity: 1, duration: 0.1, ease: "power2.out" }
       );
 
       // Staggered headline animation

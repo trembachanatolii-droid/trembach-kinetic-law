@@ -16,7 +16,7 @@ import {
   Shield,
   Map
 } from 'lucide-react';
-import heroBackground from '@/assets/premises-medical-guidance-hero.jpg';
+import heroBackground from '@/assets/medical-guidance-hero.jpg';
 
 const PremisesLiabilityMedicalGuidance: React.FC = () => {
   return (

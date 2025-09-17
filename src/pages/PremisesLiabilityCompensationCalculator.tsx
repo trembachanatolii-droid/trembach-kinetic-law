@@ -16,7 +16,7 @@ import {
   Star,
   Shield
 } from 'lucide-react';
-import heroBackground from '@/assets/premises-compensation-calculator-hero.jpg';
+import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
 
 const PremisesLiabilityCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({

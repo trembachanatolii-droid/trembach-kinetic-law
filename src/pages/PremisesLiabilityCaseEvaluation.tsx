@@ -18,7 +18,7 @@ import {
   Star,
   CheckCircle
 } from 'lucide-react';
-import heroBackground from '@/assets/premises-case-evaluation-hero.jpg';
+import heroBackground from '@/assets/case-evaluation-hero.jpg';
 
 const PremisesLiabilityCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({

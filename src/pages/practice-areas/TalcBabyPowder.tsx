@@ -1,17 +1,41 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Separator } from '@/components/ui/separator';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { 
+  Phone, 
+  Mail, 
+  MessageCircle, 
+  Star, 
+  ChevronDown, 
+  ChevronUp,
+  Heart,
+  Shield,
+  Scale,
+  Clock,
+  Users,
+  Award,
+  FileText,
+  AlertTriangle,
+  Stethoscope,
+  Building,
+  Map,
+  ArrowLeft
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
+import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import talcHero from '@/assets/practice-areas/talc-baby-powder.jpg';
-import contaminationTestingImage from '@/assets/practice-areas/talc-contamination-testing.jpg';
-import ovariancancerDiagnosisImage from '@/assets/practice-areas/talc-ovarian-cancer-diagnosis.jpg';
-import corporateConcealmentImage from '@/assets/practice-areas/talc-corporate-concealment.jpg';
+import GoBack from '@/components/GoBack';
+import heroBackground from '@/assets/practice-areas/talc-cancer-hero.jpg';
+import contaminationImage from '@/assets/practice-areas/talc-contamination-analysis.jpg';
+import diagnosisImage from '@/assets/practice-areas/talc-ovarian-diagnosis.jpg';
+import corporateImage from '@/assets/practice-areas/talc-corporate-documents.jpg';
+import legalImage from '@/assets/practice-areas/talc-legal-consultation.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +72,7 @@ const TalcBabyPowder = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${talcHero})` }}
+          style={{ backgroundImage: `url(${heroBackground})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/90 to-background/75" />
         
@@ -87,7 +111,7 @@ const TalcBabyPowder = () => {
               <h2 className="text-3xl font-bold mb-6">The Talc Cancer Crisis</h2>
               <div className="mb-6">
                 <img 
-                  src={contaminationTestingImage} 
+                  src={contaminationImage} 
                   alt="Laboratory testing of talc powder for asbestos contamination"
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
@@ -138,7 +162,7 @@ const TalcBabyPowder = () => {
               <h2 className="text-3xl font-bold mb-6">Types of Talc Cancer Cases We Handle</h2>
               <div className="mb-6">
                 <img 
-                  src={ovariancancerDiagnosisImage} 
+                  src={diagnosisImage} 
                   alt="Medical documentation and ovarian cancer diagnosis materials"
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />
@@ -200,7 +224,7 @@ const TalcBabyPowder = () => {
               <h2 className="text-3xl font-bold mb-6">Corporate Concealment and Evidence</h2>
               <div className="mb-6">
                 <img 
-                  src={corporateConcealmentImage} 
+                  src={corporateImage} 
                   alt="Corporate boardroom with documents showing talc contamination cover-up evidence"
                   className="w-full h-64 object-cover rounded-lg mb-4"
                 />

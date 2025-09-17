@@ -23,14 +23,93 @@ const SilicosisCompensationCalculator: React.FC = () => {
     additionalInfo: ''
   });
 
+  const [results, setResults] = useState<{
+    estimatedRange: string;
+    factorsConsidered: string[];
+    nextSteps: string[];
+  } | null>(null);
+
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const calculateCompensation = () => {
+    const age = parseInt(formData.age) || 0;
+    const exposureYears = parseInt(formData.exposureYears) || 0;
+    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
+    const lostWages = parseInt(formData.lostWages) || 0;
+
+    // Base compensation calculation
+    let baseAmount = medicalExpenses + lostWages;
+    
+    // Severity multiplier
+    const severityMultiplier = {
+      'simple': 1.2,
+      'complicated': 2.0,
+      'acute': 3.0,
+      'progressive': 3.5
+    }[formData.severity] || 1.0;
+
+    // Exposure years factor
+    const exposureFactor = Math.min(exposureYears * 0.1, 2.0);
+    
+    // Age factor (younger = higher future losses)
+    const ageFactor = age < 50 ? 1.3 : age < 65 ? 1.1 : 1.0;
+
+    // Workplace type factor
+    const workplaceMultiplier = {
+      'countertop': 1.4,
+      'construction': 1.2,
+      'mining': 1.3,
+      'foundry': 1.3,
+      'sandblasting': 1.5,
+      'ceramics': 1.2,
+      'other': 1.0
+    }[formData.workplaceType] || 1.0;
+
+    // Calculate total compensation range
+    const calculated = baseAmount * severityMultiplier * (1 + exposureFactor) * ageFactor * workplaceMultiplier;
+    const minAmount = Math.max(calculated * 0.7, 50000);
+    const maxAmount = calculated * 1.3;
+
+    const formatCurrency = (amount: number) => 
+      new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+
+    return {
+      estimatedRange: `${formatCurrency(minAmount)} - ${formatCurrency(maxAmount)}`,
+      factorsConsidered: [
+        `Silicosis severity: ${formData.severity}`,
+        `Years of exposure: ${exposureYears}`,
+        `Current age: ${age}`,
+        `Workplace type: ${formData.workplaceType}`,
+        `Medical expenses: ${formatCurrency(medicalExpenses)}`,
+        `Lost wages: ${formatCurrency(lostWages)}`
+      ].filter(factor => !factor.includes('undefined') && !factor.includes('$0')),
+      nextSteps: [
+        'Schedule a free consultation with our silicosis attorneys',
+        'Gather all medical records and documentation',
+        'Document your work history and exposure details',
+        'Consider filing your claim as soon as possible'
+      ]
+    };
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Compensation calculator data:', formData);
+    
+    // Validate required fields
+    if (!formData.age || !formData.exposureYears || !formData.severity || !formData.workplaceType) {
+      alert('Please fill in all required fields to calculate compensation.');
+      return;
+    }
+
+    const calculationResults = calculateCompensation();
+    setResults(calculationResults);
+    
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
 
   return (
@@ -200,6 +279,95 @@ const SilicosisCompensationCalculator: React.FC = () => {
                       Calculate My Compensation
                     </Button>
                   </form>
+                </CardContent>
+              </Card>
+
+              {/* Results Section */}
+              {results && (
+                <Card className="mt-8 shadow-2xl border-0 bg-card/80 backdrop-blur" id="results-section">
+                  <CardHeader className="text-center pb-6">
+                    <CardTitle className="text-2xl font-bold text-primary mb-2">
+                      Your Estimated Compensation Range
+                    </CardTitle>
+                    <CardDescription className="text-lg">
+                      Based on the information you provided
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-8">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold text-primary mb-2">
+                        {results.estimatedRange}
+                      </div>
+                      <p className="text-muted-foreground">
+                        *This is an estimate based on similar cases. Actual compensation may vary.
+                      </p>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <FileText className="w-5 h-5 mr-2 text-primary" />
+                          Factors Considered
+                        </h3>
+                        <ul className="space-y-2">
+                          {results.factorsConsidered.map((factor, index) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {factor}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <Users className="w-5 h-5 mr-2 text-primary" />
+                          Next Steps
+                        </h3>
+                        <ul className="space-y-2">
+                          {results.nextSteps.map((step, index) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {step}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="text-center">
+                      <Button 
+                        size="lg" 
+                        className="bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => window.location.href = '/silicosis-case-evaluation'}
+                      >
+                        Get Free Legal Consultation
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Disclaimer Section */}
+              <Card className="mt-8 bg-muted/50 border-muted">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-center">Important Legal Disclaimer</h3>
+                  <div className="text-sm text-muted-foreground space-y-3">
+                    <p>
+                      <strong>This calculator provides estimates only.</strong> The compensation amounts shown are based on general factors and similar cases. Your actual compensation may be significantly different depending on the specific circumstances of your case.
+                    </p>
+                    <p>
+                      <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every silicosis case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
+                    </p>
+                    <p>
+                      <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified silicosis attorney who can review your medical records, work history, and other relevant documentation.
+                    </p>
+                    <p>
+                      <strong>Time Limits Apply:</strong> Silicosis claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
+                    </p>
+                    <p className="text-center font-medium">
+                      For a free, confidential case evaluation, contact our experienced silicosis attorneys today.
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             </div>

@@ -123,7 +123,7 @@ const BicycleAccidents: React.FC = () => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
-  // FAQ Data
+  // FAQ Data - 50 Questions
   const faqData = [
     {
       question: "What should I do immediately after a bicycle accident?",
@@ -192,6 +192,138 @@ const BicycleAccidents: React.FC = () => {
     {
       question: "Do I need a lawyer? How are fees handled?",
       answer: "Serious bicycle cases benefit greatly from legal representation. We work on contingency—no fees unless we win. Our early involvement preserves evidence and maximizes recovery."
+    },
+    {
+      question: "What if I was riding in a bike lane?",
+      answer: "Bike lanes provide cyclists with enhanced legal protections. Drivers who enter bike lanes illegally face additional penalties and presumptions of negligence in accident cases."
+    },
+    {
+      question: "Can I sue for a bicycle accident on a sidewalk?",
+      answer: "Sidewalk cycling legality varies by city. Even where prohibited, you may still have claims against negligent drivers. We analyze local ordinances and liability factors."
+    },
+    {
+      question: "What about accidents involving ride-share vehicles?",
+      answer: "Uber/Lyft carry substantial insurance coverage. Commercial vehicle standards and corporate liability may apply, potentially increasing available compensation."
+    },
+    {
+      question: "How do bicycle accident settlements work?",
+      answer: "Most cases settle without trial. We negotiate maximum compensation while you focus on recovery. Settlement includes all damages: medical, economic, and pain/suffering."
+    },
+    {
+      question: "What if the accident happened in a bike race or group ride?",
+      answer: "Recreational cycling accidents still allow liability claims against negligent drivers. Waivers typically don't protect against third-party vehicle negligence."
+    },
+    {
+      question: "Can weather conditions affect my bicycle accident case?",
+      answer: "Weather may be a factor but doesn't eliminate driver responsibility. Poor conditions require extra caution from motorists, not cyclists accepting unnecessary risk."
+    },
+    {
+      question: "What about bicycle accidents involving children?",
+      answer: "Children receive special legal protections. Age-appropriate behavior standards apply, and parents can typically pursue claims on behalf of injured minor cyclists."
+    },
+    {
+      question: "How are bicycle accident medical bills handled?",
+      answer: "Use health insurance initially, then seek reimbursement through your claim. We coordinate with providers and negotiate medical liens to maximize your net recovery."
+    },
+    {
+      question: "What if I was using bike-share or rental bike?",
+      answer: "Rental status doesn't affect your right to compensation from negligent drivers. The bike company's insurance may provide additional coverage for equipment damage."
+    },
+    {
+      question: "Can I claim compensation for my damaged bicycle and gear?",
+      answer: "Yes. High-end cycling equipment replacement costs are recoverable damages. We document fair market value and replacement costs for bikes, helmets, clothing, and electronics."
+    },
+    {
+      question: "What if the driver claims they didn't see me?",
+      answer: "Driver inattention is negligence, not a defense. We investigate sight lines, lighting conditions, and whether the driver was distracted (phone use, etc.)."
+    },
+    {
+      question: "How do intersection bicycle accidents work legally?",
+      answer: "Intersections have complex right-of-way rules. We analyze traffic signals, signage, and vehicle/cyclist positioning to establish liability and build your case."
+    },
+    {
+      question: "What about bicycle accidents in parking lots?",
+      answer: "Private property accidents still allow liability claims. Property owners may also be liable for dangerous conditions, inadequate lighting, or poor design."
+    },
+    {
+      question: "Can I sue if I was hit while cycling to/from work?",
+      answer: "Yes, you can pursue a personal injury claim against the at-fault driver. Workers' compensation may also apply if you were on work time or using a work bike."
+    },
+    {
+      question: "What if the bicycle accident involved a commercial truck?",
+      answer: "Commercial vehicle accidents involve higher insurance limits, federal regulations, and corporate liability. These cases often result in larger settlements due to available coverage."
+    },
+    {
+      question: "How do bicycle accident investigations work?",
+      answer: "We immediately secure evidence: surveillance footage, witness statements, police reports, vehicle damage, road conditions, and expert accident reconstruction when needed."
+    },
+    {
+      question: "What if I was cycling under the influence?",
+      answer: "California DUI laws apply to cyclists, but this doesn't automatically bar injury claims. We evaluate all factors and may still recover compensation depending on driver fault."
+    },
+    {
+      question: "Can I get compensation for lost cycling enjoyment?",
+      answer: "Yes. Loss of life's pleasures is a recoverable damage. For avid cyclists, losing the ability to ride represents significant lifestyle and recreational losses."
+    },
+    {
+      question: "What about bicycle accidents involving road construction?",
+      answer: "Construction zones require special safety measures. Contractors, government entities, and drivers may all share liability for inadequate protection or negligent operation."
+    },
+    {
+      question: "How do bicycle accident cases differ from car accident cases?",
+      answer: "Cyclists face unique vulnerabilities, insurance biases, and injury patterns. We understand cycling culture, equipment, and the specific legal challenges bicycle cases present."
+    },
+    {
+      question: "What if the accident happened on a group ride or cycling event?",
+      answer: "Event organizers typically carry insurance. Driver liability remains regardless of event participation. We review event waivers and determine all available coverage sources."
+    },
+    {
+      question: "Can I sue for bicycle accidents caused by road defects?",
+      answer: "Government entities responsible for road maintenance can be liable for dangerous conditions. These claims have strict notice requirements and shorter deadlines."
+    },
+    {
+      question: "What if I was wearing headphones during the bicycle accident?",
+      answer: "California allows one earbud while cycling. Even if both ears were covered, this doesn't automatically prevent recovery - we focus on driver negligence as the primary cause."
+    },
+    {
+      question: "How do bicycle accident cases handle future medical expenses?",
+      answer: "We work with medical experts to project ongoing treatment costs, rehabilitation needs, and potential surgeries. Future damages are included in settlement demands."
+    },
+    {
+      question: "What if the bicycle accident involved a government vehicle?",
+      answer: "Government entity claims require special procedures and shorter deadlines. Sovereign immunity exceptions apply for negligent operation of government vehicles."
+    },
+    {
+      question: "Can I recover lost income if I can't return to my previous job?",
+      answer: "Yes. Diminished earning capacity covers career changes, reduced hours, and lost advancement opportunities. Vocational experts help calculate these economic losses."
+    },
+    {
+      question: "What about bicycle accidents involving electric scooters or e-bikes?",
+      answer: "Micro-mobility devices are increasingly common. Liability depends on device type, rider behavior, and local regulations. We stay current on evolving laws."
+    },
+    {
+      question: "How do insurance companies typically defend bicycle accident claims?",
+      answer: "Common defenses include visibility arguments, right-of-way disputes, and helmet/safety equipment issues. Our defense experience helps counter these tactics effectively."
+    },
+    {
+      question: "What if I was cycling in a bike lane and a parked car door opened?",
+      answer: "Dooring is a clear violation of California Vehicle Code 22517. The door-opener faces presumed negligence. These cases often result in favorable settlements."
+    },
+    {
+      question: "Can family members recover damages if I was killed in a bicycle accident?",
+      answer: "Wrongful death claims allow family members to recover funeral expenses, lost financial support, and loss of companionship. These cases require immediate legal action."
+    },
+    {
+      question: "What if the bicycle accident happened during bad weather?",
+      answer: "Weather doesn't excuse driver negligence. Poor conditions require increased caution from motorists. We demonstrate how reasonable drivers should have responded to conditions."
+    },
+    {
+      question: "How do bicycle accident cases handle scarring and disfigurement?",
+      answer: "Permanent scarring significantly impacts case value, especially facial or visible scarring. We document disfigurement thoroughly and work with medical experts on projected treatment costs."
+    },
+    {
+      question: "What if I was cycling without lights at night?",
+      answer: "California requires bicycle lights after dark, but equipment violations don't bar recovery if driver negligence caused the accident. We evaluate all contributing factors fairly."
     }
   ];
 
@@ -632,80 +764,6 @@ const BicycleAccidents: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* Don't Wait - Time Limits Section */}
-            <section id="time-limits" className="content-section mb-12">
-              <div className="bg-gradient-to-r from-red-600/10 to-red-500/5 border-l-4 border-red-600 p-6 rounded-lg">
-                <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
-                  <Clock className="w-8 h-8 mr-3" />
-                  Don't Wait - Time Limits Apply for California Bicycle Accidents
-                </h2>
-                
-                <div className="prose prose-lg max-w-none">
-                  <p className="text-lg font-semibold text-red-700 mb-4">
-                    California law imposes strict deadlines for filing bicycle accident claims. Missing these deadlines can permanently bar your right to compensation.
-                  </p>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <Card className="border-red-200 bg-red-50/50">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-red-700">
-                          <Calendar className="w-5 h-5 mr-2" />
-                          Statute of Limitations
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm font-semibold text-red-800 mb-2">2 Years from Accident Date</p>
-                        <p className="text-sm text-red-700">This applies to personal injury claims against the at-fault driver and their insurance company.</p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border-red-200 bg-red-50/50">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-red-700">
-                          <Building className="w-5 h-5 mr-2" />
-                          Government Claims
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm font-semibold text-red-800 mb-2">6 Months for Government Entities</p>
-                        <p className="text-sm text-red-700">Claims against cities, counties, or state for dangerous road conditions have much shorter deadlines.</p>
-                      </CardContent>
-                    </Card>
-                  </div>
-
-                  <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
-                    <h4 className="font-semibold text-yellow-800 mb-2 flex items-center">
-                      <AlertTriangle className="w-4 h-4 mr-2" />
-                      Critical Evidence Disappears Quickly
-                    </h4>
-                    <ul className="text-sm text-yellow-700 space-y-1">
-                      <li>• Surveillance footage gets overwritten (often within 30-90 days)</li>
-                      <li>• Witness memories fade and contact information is lost</li>
-                      <li>• Physical evidence at accident scene gets disturbed</li>
-                      <li>• Vehicle damage gets repaired, eliminating crucial evidence</li>
-                      <li>• Road conditions change, making reconstruction difficult</li>
-                    </ul>
-                  </div>
-
-                  <h3>Why Immediate Action is Essential</h3>
-                  <ul>
-                    <li><strong>Evidence Preservation:</strong> Our team can immediately secure surveillance footage, witness statements, and physical evidence</li>
-                    <li><strong>Insurance Deadlines:</strong> Insurance companies have their own reporting requirements and deadlines</li>
-                    <li><strong>Medical Documentation:</strong> Early legal involvement ensures proper medical documentation for your claim</li>
-                    <li><strong>Investigation Time:</strong> Complex bicycle accidents require thorough investigation to identify all liable parties</li>
-                    <li><strong>Expert Analysis:</strong> Accident reconstruction experts and medical professionals need time to analyze your case</li>
-                  </ul>
-
-                  <div className="bg-green-50 border border-green-200 rounded-lg p-4 mt-4">
-                    <h4 className="font-semibold text-green-800 mb-2">Free Consultation - No Risk</h4>
-                    <p className="text-sm text-green-700">
-                      Don't let time limits jeopardize your case. Contact us today for a free, no-obligation consultation. We'll review your case, explain your rights, and ensure all deadlines are met while you focus on recovery.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-
             {/* Compensation Section */}
             <section id="compensation" className="content-section mb-16">
               <h2 className="text-3xl font-bold text-red-600 mb-8">Comprehensive Compensation for Cyclists</h2>
@@ -778,7 +836,7 @@ const BicycleAccidents: React.FC = () => {
             </section>
 
             {/* FAQ Section */}
-            <section id="faq" className="content-section mb-16">
+            <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-8">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
@@ -804,6 +862,118 @@ const BicycleAccidents: React.FC = () => {
                     )}
                   </Card>
                 ))}
+              </div>
+            </section>
+
+            {/* Don't Wait - Time Limits Section - Styled like Mesothelioma */}
+            <section id="time-limits" className="content-section mb-16">
+              <div className="bg-gradient-to-r from-red-50 to-red-100 border-2 border-red-200 rounded-xl p-8 shadow-lg">
+                <h2 className="text-3xl font-bold text-red-700 mb-6 flex items-center">
+                  <Clock className="w-8 h-8 mr-3 text-red-600" />
+                  Don't Wait - Time Limits Apply for California Bicycle Accidents
+                </h2>
+                
+                <div className="prose prose-lg max-w-none">
+                  <p className="text-lg font-semibold text-red-800 mb-6">
+                    California law imposes strict deadlines for filing bicycle accident claims. Missing these deadlines can permanently bar your right to compensation.
+                  </p>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <Card className="border-red-300 bg-red-50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-700">
+                          <Calendar className="w-5 h-5 mr-2" />
+                          Statute of Limitations
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm font-bold text-red-800 mb-2">2 Years from Accident Date</p>
+                        <p className="text-sm text-red-700">This applies to personal injury claims against the at-fault driver and their insurance company.</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="border-red-300 bg-red-50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-700">
+                          <Building className="w-5 h-5 mr-2" />
+                          Government Claims
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-sm font-bold text-red-800 mb-2">6 Months for Government Entities</p>
+                        <p className="text-sm text-red-700">Claims against cities, counties, or state for dangerous road conditions have much shorter deadlines.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-yellow-50 border-2 border-yellow-200 rounded-lg p-6 mb-6">
+                    <h4 className="font-bold text-yellow-800 mb-3 flex items-center text-lg">
+                      <AlertTriangle className="w-5 h-5 mr-2" />
+                      Critical Evidence Disappears Quickly
+                    </h4>
+                    <ul className="text-sm text-yellow-700 space-y-2">
+                      <li>• Surveillance footage gets overwritten (often within 30-90 days)</li>
+                      <li>• Witness memories fade and contact information is lost</li>
+                      <li>• Physical evidence at accident scene gets disturbed</li>
+                      <li>• Vehicle damage gets repaired, eliminating crucial evidence</li>
+                      <li>• Road conditions change, making reconstruction difficult</li>
+                      <li>• GPS and cycling computer data may be lost or overwritten</li>
+                    </ul>
+                  </div>
+
+                  <h3 className="text-xl font-bold text-red-700 mb-4">Why Immediate Action is Essential</h3>
+                  <ul className="space-y-3 text-red-800">
+                    <li className="flex items-start">
+                      <Shield className="w-5 h-5 mr-2 mt-0.5 text-red-600 flex-shrink-0" />
+                      <div>
+                        <strong>Evidence Preservation:</strong> Our team can immediately secure surveillance footage, witness statements, and physical evidence before it disappears forever.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <Clock className="w-5 h-5 mr-2 mt-0.5 text-red-600 flex-shrink-0" />
+                      <div>
+                        <strong>Insurance Deadlines:</strong> Insurance companies have their own reporting requirements and internal deadlines that can affect your claim.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <Stethoscope className="w-5 h-5 mr-2 mt-0.5 text-red-600 flex-shrink-0" />
+                      <div>
+                        <strong>Medical Documentation:</strong> Early legal involvement ensures proper medical documentation and treatment coordination for your claim.
+                      </div>
+                    </li>
+                    <li className="flex items-start">
+                      <Scale className="w-5 h-5 mr-2 mt-0.5 text-red-600 flex-shrink-0" />
+                      <div>
+                        <strong>Investigation Time:</strong> Complex bicycle accidents require thorough investigation to identify all potentially liable parties and coverage sources.
+                      </div>
+                    </li>
+                  </ul>
+
+                  <div className="bg-green-50 border-2 border-green-200 rounded-lg p-6 mt-6">
+                    <h4 className="font-bold text-green-800 mb-3 flex items-center text-lg">
+                      <Phone className="w-5 h-5 mr-2" />
+                      Free Consultation - No Risk, No Obligation
+                    </h4>
+                    <p className="text-sm text-green-700 mb-4">
+                      Don't let time limits jeopardize your case. Contact us today for a free, comprehensive consultation. We'll review your case, explain your rights, and ensure all critical deadlines are met while you focus on your recovery.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <Button 
+                        className="bg-green-600 hover:bg-green-700 text-white font-semibold"
+                        onClick={() => window.location.href = '/bicycle-case-evaluation'}
+                      >
+                        Start My Free Case Review
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        className="border-green-600 text-green-700 hover:bg-green-50"
+                        onClick={() => window.location.href = 'tel:(818)123-4567'}
+                      >
+                        Call (818) 123-4567 Now
+                      </Button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
           </div>

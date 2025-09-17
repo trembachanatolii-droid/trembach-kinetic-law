@@ -302,41 +302,45 @@ const MesotheliomaAsbestos: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
-              <div 
-                className="relative bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden"
-                style={{ backgroundImage: `url(${exposureSitesImage})` }}
-              >
-                <div className="absolute inset-0 bg-black/70"></div>
-                <div className="relative z-10 p-12 text-center">
-                  <h2 className="text-4xl font-bold text-white mb-2">3 Ways to Start Your Case</h2>
-                  <div className="w-32 h-1 bg-red-600 mx-auto mb-6"></div>
-                  <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-                  </p>
-                  
-                  <div className="space-y-4 max-w-md mx-auto">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = 'tel:+18553742906'}
-                    >
-                      CALL (855) 374-2906
-                    </Button>
-                    
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = 'mailto:info@trembachlaw.com'}
-                    >
-                      EMAIL US
-                    </Button>
-                    
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = '/case-evaluation'}
-                    >
-                      CALCULATE SETTLEMENT
-                    </Button>
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
+              
+              <div className="bg-muted p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
+                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
+                
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Diagnosis Date</label>
+                      <Input
+                        type="date"
+                        value={formData.diagnosisDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Cancer Type</label>
+                      <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select cancer type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="pleural-mesothelioma">Pleural Mesothelioma</SelectItem>
+                          <SelectItem value="peritoneal-mesothelioma">Peritoneal Mesothelioma</SelectItem>
+                          <SelectItem value="pericardial-mesothelioma">Pericardial Mesothelioma</SelectItem>
+                          <SelectItem value="testicular-mesothelioma">Testicular Mesothelioma</SelectItem>
+                          <SelectItem value="lung-cancer">Lung Cancer (Asbestos-Related)</SelectItem>
+                          <SelectItem value="other">Other Asbestos-Related Disease</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
-                </div>
+                  
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                    Start My Free Case Evaluation
+                  </Button>
+                </form>
               </div>
             </section>
 

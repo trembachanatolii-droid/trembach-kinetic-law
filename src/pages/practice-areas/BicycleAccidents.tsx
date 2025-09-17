@@ -478,41 +478,46 @@ const BicycleAccidents: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
-              <div 
-                className="relative bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden"
-                style={{ backgroundImage: `url(${accidentSceneImage})` }}
-              >
-                <div className="absolute inset-0 bg-black/70"></div>
-                <div className="relative z-10 p-12 text-center">
-                  <h2 className="text-4xl font-bold text-white mb-2">3 Ways to Start Your Case</h2>
-                  <div className="w-32 h-1 bg-red-600 mx-auto mb-6"></div>
-                  <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
-                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-                  </p>
-                  
-                  <div className="space-y-4 max-w-md mx-auto">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = 'tel:+18553742906'}
-                    >
-                      CALL (855) 374-2906
-                    </Button>
-                    
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = 'mailto:info@trembachlaw.com'}
-                    >
-                      EMAIL US
-                    </Button>
-                    
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                      onClick={() => window.location.href = '/bicycle-case-evaluation'}
-                    >
-                      CALCULATE SETTLEMENT
-                    </Button>
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
+              
+              <div className="bg-red-50 border-2 border-red-300 p-8 rounded-lg shadow-sm">
+                <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
+                <p className="mb-6 text-red-700">Provide some basic information to help us understand your case better.</p>
+                
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-red-800">Accident Date</label>
+                      <Input
+                        type="date"
+                        value={formData.accidentDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                        required
+                        className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2 text-red-800">Injury Type</label>
+                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="head-injuries">Head/Brain Injuries</SelectItem>
+                          <SelectItem value="fractures">Bone Fractures</SelectItem>
+                          <SelectItem value="road-rash">Road Rash/Abrasions</SelectItem>
+                          <SelectItem value="spinal">Spinal Cord Injuries</SelectItem>
+                          <SelectItem value="multiple">Multiple Injuries</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
-                </div>
+                  
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
+                    Start My Free Case Evaluation
+                  </Button>
+                </form>
               </div>
             </section>
 

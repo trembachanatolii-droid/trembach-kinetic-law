@@ -77,7 +77,12 @@ const TruckAccidentsNew: React.FC = () => {
     email: '',
     phone: '',
     accidentDate: '',
+    accidentLocation: '',
     injuryType: '',
+    vehicleType: '',
+    truckCompany: '',
+    policeReport: '',
+    medicalTreatment: '',
     description: ''
   });
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
@@ -335,6 +340,62 @@ const TruckAccidentsNew: React.FC = () => {
     {
       question: "Do I need to hire an attorney for a truck accident in California?",
       answer: "Yes, hiring an experienced truck accident attorney is essential. Truck accident cases are among the most complex personal injury cases, involving federal regulations, multiple defendants, aggressive defense teams, and substantial insurance policies. Trucking companies and their insurers deploy rapid response teams immediately after accidents to minimize their liability. Without experienced legal representation, you'll be at a severe disadvantage against teams of corporate attorneys and investigators working to deny or minimize your claim. An attorney will protect evidence, handle communications with insurance companies, investigate the accident thoroughly, and fight for maximum compensation while you focus on recovery."
+    },
+    {
+      question: "What types of compensation can I recover in a California truck accident case?",
+      answer: "California truck accident victims can recover both economic and non-economic damages. Economic damages include current and future medical expenses, rehabilitation costs, lost wages and earning capacity, property damage, and out-of-pocket expenses. Non-economic damages cover pain and suffering, emotional distress, loss of enjoyment of life, and loss of consortium for spouses. In cases involving gross negligence or intentional misconduct, punitive damages may also be awarded. California's pure comparative negligence system allows recovery even if you're partially at fault, though your compensation is reduced by your percentage of fault. Our attorneys maximize both current and future damages by working with life care planners and economic experts."
+    },
+    {
+      question: "How are truck accidents different from car accidents legally?",
+      answer: "Truck accidents involve a complex web of federal and state regulations that don't apply to regular passenger vehicles. Commercial trucks must comply with Federal Motor Carrier Safety Administration (FMCSA) regulations governing driver qualifications, hours of service, vehicle maintenance, cargo securement, and record-keeping. These regulations create additional standards of care and potential liability. Truck accidents also typically involve commercial insurance policies with much higher coverage limits, multiple potential defendants (driver, trucking company, cargo companies, maintenance providers), and more sophisticated defense strategies. The evidence preservation requirements are more extensive, including electronic control module (ECM) data, driver logs, maintenance records, and company safety policies."
+    },
+    {
+      question: "What should I do if the insurance company offers me a quick settlement?",
+      answer: "Never accept a quick settlement offer from the trucking company's insurance without consulting an experienced attorney first. These early offers are typically far below the true value of your claim and are designed to minimize the company's liability before the full extent of your injuries and damages is known. Trucking companies often dispatch claims adjusters to hospitals and accident scenes to secure quick releases. Once you sign a settlement agreement, you generally cannot seek additional compensation even if your injuries worsen or new complications arise. Many truck accident injuries, particularly brain and spinal injuries, have delayed symptoms and long-term consequences that aren't immediately apparent. Our attorneys can evaluate any settlement offer and determine if it adequately compensates you for both current and future damages."
+    },
+    {
+      question: "What evidence is crucial in a truck accident case?",
+      answer: "Critical evidence in truck accident cases includes: the truck's electronic control module (ECM) data showing speed, braking, and engine performance; driver logbooks and electronic logging device (ELD) records; the truck driver's personnel file, including hiring records, training documentation, and driving history; the trucking company's safety policies, procedures, and maintenance records; cargo loading documentation and weight distribution records; vehicle inspection reports and maintenance logs; cell phone records to check for distracted driving; drug and alcohol testing results; surveillance footage from nearby businesses or traffic cameras; witness statements and expert accident reconstruction. Much of this evidence can be destroyed or altered if not preserved immediately, which is why it's crucial to contact an attorney as soon as possible after the accident."
+    },
+    {
+      question: "How long does a truck accident lawsuit take in California?",
+      answer: "The duration of a truck accident lawsuit varies significantly depending on the complexity of the case, severity of injuries, number of defendants, and willingness to settle. Simple cases with clear liability and minor injuries might settle within 6-12 months. Complex cases involving catastrophic injuries, multiple parties, or disputed liability can take 2-4 years or longer to resolve. Factors affecting timeline include: the investigation period (which can take several months), medical treatment duration (you shouldn't settle until maximum medical improvement), discovery phase (exchanging evidence with all parties), expert witness preparation, mediation attempts, and potential trial proceedings. While this may seem lengthy, it's important not to rush the process, as settling too early often results in inadequate compensation for long-term consequences."
+    },
+    {
+      question: "What if I was partially at fault for the truck accident?",
+      answer: "California follows a 'pure comparative negligence' system, which means you can still recover damages even if you were partially at fault for the accident. Your compensation will be reduced by your percentage of fault. For example, if you're found to be 20% at fault and your total damages are $100,000, you would receive $80,000. This system is more favorable to plaintiffs than 'modified comparative negligence' states where you can't recover if you're 50% or 51% at fault. Trucking companies often try to shift blame to the other driver to reduce their liability, making it crucial to have an experienced attorney who can counter these tactics and minimize your assigned fault percentage through thorough investigation and expert testimony."
+    },
+    {
+      question: "Can family members file a claim if their loved one died in a truck accident?",
+      answer: "Yes, family members can file a wrongful death claim if their loved one died in a truck accident. In California, eligible parties include the surviving spouse, domestic partner, children, and if there are no surviving spouse or children, other family members who were financially dependent on the deceased. Wrongful death claims can recover: loss of financial support the deceased would have provided, loss of companionship and emotional support, funeral and burial expenses, medical expenses related to the final illness or injury, and the lost value of household services the deceased provided. Separate from wrongful death claims, the deceased's estate can also file a survival action for pain and suffering experienced before death, medical expenses, and lost earnings from the time of injury until death."
+    },
+    {
+      question: "What role does the Federal Motor Carrier Safety Administration (FMCSA) play?",
+      answer: "The FMCSA is the federal agency that regulates commercial trucking and establishes safety standards that trucking companies and drivers must follow. Key FMCSA regulations include: hours of service rules limiting driving time, commercial driver's license (CDL) requirements, drug and alcohol testing protocols, vehicle inspection and maintenance standards, cargo securement requirements, and driver qualification standards. Violations of FMCSA regulations can serve as evidence of negligence in accident cases. The FMCSA also maintains databases of trucking company safety ratings, inspection results, and crash histories that can be crucial evidence. Our attorneys use FMCSA violation records to strengthen your case and demonstrate patterns of negligent behavior by trucking companies."
+    },
+    {
+      question: "How do electronic logging devices (ELDs) affect truck accident cases?",
+      answer: "Electronic Logging Devices (ELDs) have revolutionized truck accident litigation by providing objective evidence of driver behavior. Since December 2017, most commercial trucks must use ELDs to automatically record driving time, making it harder for drivers to falsify logbooks. ELD data shows: exact driving hours and rest periods, vehicle location and speed, engine hours and miles driven, and hours of service compliance. This data is crucial for proving violations of federal driving time limits, which is a major factor in truck accidents. However, ELD data can be overwritten after a certain period, making it essential to preserve this evidence immediately after an accident. Our legal team works quickly to obtain and analyze ELD data to build the strongest possible case."
+    },
+    {
+      question: "What is the 'black box' data in trucks and how is it used?",
+      answer: "Commercial trucks are equipped with Electronic Control Modules (ECMs), often called 'black boxes,' that record critical data about the vehicle's operation before, during, and after an accident. This data typically includes: vehicle speed in the moments before impact, brake application and pressure, throttle position, engine RPM, steering input, and sometimes seat belt usage. The ECM data provides objective evidence that can't be disputed, making it extremely valuable in determining fault and the cause of the accident. However, this data can be overwritten as the truck continues to operate, sometimes in as little as 30 days. This is why it's crucial to contact an attorney immediately after a truck accident to ensure this critical evidence is preserved through legal action."
+    },
+    {
+      question: "How do truck maintenance records factor into accident cases?",
+      answer: "Truck maintenance records are critical evidence in accident cases because they can reveal whether the trucking company properly maintained their vehicle according to federal regulations. Poor maintenance can contribute to accidents through brake failures, tire blowouts, steering problems, or other mechanical issues. Key maintenance evidence includes: pre-trip and post-trip inspection reports, annual DOT inspections, brake maintenance and replacement records, tire inspection and replacement logs, engine and transmission service records, and any outstanding maintenance issues or recalls. Federal regulations require trucking companies to maintain detailed records, and failure to do so or evidence of deferred maintenance can significantly strengthen your case by showing negligence in vehicle safety."
+    },
+    {
+      question: "What if the truck driver was under the influence at the time of the accident?",
+      answer: "If a truck driver was under the influence of alcohol or drugs at the time of the accident, it significantly strengthens your case and may lead to additional damages. Commercial drivers are held to stricter standards than regular drivers - they can be charged with DUI with a blood alcohol content of 0.04% or higher (compared to 0.08% for regular drivers). Drug and alcohol testing is typically conducted after serious accidents, and the results become crucial evidence. If impairment is proven, you may be entitled to punitive damages in addition to compensatory damages. The trucking company may also face liability for negligent hiring if they failed to properly screen the driver's background or ignored previous substance abuse issues. Our attorneys work with toxicology experts to analyze testing results and maximize your compensation."
+    },
+    {
+      question: "How does weather affect liability in truck accidents?",
+      answer: "Weather conditions don't absolve truck drivers or trucking companies of liability, but they do add complexity to accident cases. Commercial drivers are held to a higher standard than regular drivers and are expected to adjust their driving for weather conditions. This includes reducing speed, increasing following distance, and even pulling over when conditions become too dangerous. If a truck driver fails to adapt to weather conditions and causes an accident, they can still be held liable for negligence. Federal regulations require drivers to stop driving when conditions make it unsafe to continue. The key is proving that a reasonable commercial driver would have acted differently under the same weather conditions. Our accident reconstruction experts can analyze weather data and driver behavior to establish liability even in adverse conditions."
+    },
+    {
+      question: "What happens if multiple vehicles were involved in the truck accident?",
+      answer: "Multi-vehicle truck accidents create complex liability scenarios where fault may be distributed among several parties. California's pure comparative negligence system allows for percentage-based fault allocation among all involved parties. Each party's insurance may contribute to the total compensation based on their degree of fault. The investigation becomes more complex, requiring analysis of: the sequence of events and chain reaction effects, each driver's actions and potential violations, vehicle positions and damage patterns, and road conditions and traffic signals. Multiple insurance companies become involved, each trying to minimize their client's liability. Having an experienced attorney is crucial in multi-vehicle accidents to ensure all liable parties are identified and held accountable, and to navigate the complex negotiations between multiple insurance companies to maximize your recovery."
     }
   ];
 
@@ -593,11 +654,23 @@ const TruckAccidentsNew: React.FC = () => {
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Accident Date</label>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Accident Date *</label>
                         <Input
                           type="date"
+                          required
                           value={formData.accidentDate}
                           onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                          className="border-2 border-gray-200 focus:border-red-500 py-3"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Accident Location *</label>
+                        <Input
+                          type="text"
+                          required
+                          placeholder="City, intersection, or highway"
+                          value={formData.accidentLocation}
+                          onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
                           className="border-2 border-gray-200 focus:border-red-500 py-3"
                         />
                       </div>
@@ -613,8 +686,69 @@ const TruckAccidentsNew: React.FC = () => {
                             <SelectItem value="fractures">Multiple Fractures</SelectItem>
                             <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
                             <SelectItem value="burns">Burn Injuries</SelectItem>
+                            <SelectItem value="cuts-bruises">Cuts and Bruises</SelectItem>
+                            <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
                             <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-                            <SelectItem value="other">Other Severe Injuries</SelectItem>
+                            <SelectItem value="other">Other Injuries</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Your Vehicle Type</label>
+                        <Select value={formData.vehicleType} onValueChange={(value) => setFormData(prev => ({ ...prev, vehicleType: value }))}>
+                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
+                            <SelectValue placeholder="Select vehicle type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="car">Car</SelectItem>
+                            <SelectItem value="suv">SUV</SelectItem>
+                            <SelectItem value="pickup-truck">Pickup Truck</SelectItem>
+                            <SelectItem value="van">Van</SelectItem>
+                            <SelectItem value="motorcycle">Motorcycle</SelectItem>
+                            <SelectItem value="bicycle">Bicycle</SelectItem>
+                            <SelectItem value="pedestrian">Pedestrian</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Trucking Company (if known)</label>
+                        <Input
+                          type="text"
+                          placeholder="Name on truck or trailer"
+                          value={formData.truckCompany}
+                          onChange={(e) => setFormData(prev => ({ ...prev, truckCompany: e.target.value }))}
+                          className="border-2 border-gray-200 focus:border-red-500 py-3"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Police Report Filed?</label>
+                        <Select value={formData.policeReport} onValueChange={(value) => setFormData(prev => ({ ...prev, policeReport: value }))}>
+                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
+                            <SelectValue placeholder="Select option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="yes">Yes</SelectItem>
+                            <SelectItem value="no">No</SelectItem>
+                            <SelectItem value="unknown">Don't Know</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-sm font-semibold mb-2 text-gray-700">Medical Treatment Received?</label>
+                        <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalTreatment: value }))}>
+                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
+                            <SelectValue placeholder="Select medical treatment" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="emergency-room">Emergency Room</SelectItem>
+                            <SelectItem value="hospital-admission">Hospital Admission</SelectItem>
+                            <SelectItem value="urgent-care">Urgent Care</SelectItem>
+                            <SelectItem value="doctor-visit">Doctor Visit</SelectItem>
+                            <SelectItem value="physical-therapy">Physical Therapy</SelectItem>
+                            <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
+                            <SelectItem value="none-yet">No Treatment Yet</SelectItem>
+                            <SelectItem value="refused-treatment">Refused Treatment</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -698,7 +832,11 @@ const TruckAccidentsNew: React.FC = () => {
                         <Phone className="w-5 h-5 mr-2" />
                         Call (855) 985-1234
                       </Button>
-                      <Button variant="outline" className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 px-6 text-lg">
+                      <Button 
+                        variant="outline" 
+                        className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 px-6 text-lg"
+                        onClick={() => window.open('sms:(855)985-1234', '_blank')}
+                      >
                         <MessageCircle className="w-5 h-5 mr-2" />
                         Text for Quick Response
                       </Button>
@@ -1302,7 +1440,11 @@ const TruckAccidentsNew: React.FC = () => {
                       <Phone className="w-5 h-5 mr-2" />
                       Call Now
                     </Button>
-                    <Button variant="outline" className="w-full border-white text-white hover:bg-white hover:text-red-600 font-bold py-4">
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-white text-white hover:bg-white hover:text-red-600 font-bold py-4"
+                      onClick={() => window.location.href = '/case-evaluation'}
+                    >
                       <Mail className="w-5 h-5 mr-2" />
                       Email Consultation
                     </Button>

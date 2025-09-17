@@ -679,47 +679,55 @@ const PremisesLiability: React.FC = () => {
           {/* Sidebar */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              {/* Contact Card */}
-              <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 backdrop-blur-md shadow-2xl">
-                <CardHeader>
-                  <CardTitle className="text-center text-primary">
-                    Free Case Evaluation
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <p className="text-sm text-muted-foreground mb-4">
-                      Get expert legal advice about your premises liability case. No obligation consultation.
-                    </p>
-                    <div className="space-y-3">
-                      <Button className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70" onClick={() => window.location.href = '/premises-liability-case-evaluation'}>
-                        <Scale className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                        Get Case Evaluation
-                      </Button>
-                      <Button variant="outline" className="w-full group hover:bg-primary hover:text-primary-foreground" onClick={() => window.location.href = '/premises-liability-medical-guidance'}>
-                        <Stethoscope className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                        Medical Guidance
-                      </Button>
-                      <Button variant="outline" className="w-full group hover:bg-primary hover:text-primary-foreground" onClick={() => window.location.href = '/premises-liability-compensation-calculator'}>
-                        <DollarSign className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
-                        Calculate Compensation
-                      </Button>
-                    </div>
-                  </div>
+              {/* Contact Card - Dark Overlay Style */}
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                {/* Background with overlay */}
+                <div className="absolute inset-0 bg-black/80 z-10"></div>
+                <div 
+                  className="absolute inset-0 bg-cover bg-center opacity-40"
+                  style={{
+                    backgroundImage: `url(${provingNegligenceImage})`
+                  }}
+                ></div>
+                
+                {/* Content */}
+                <div className="relative z-20 p-8 text-center text-white">
+                  <h3 className="text-3xl font-bold mb-2">
+                    3 Ways to
+                  </h3>
+                  <h3 className="text-3xl font-bold mb-4">
+                    Start Your Case
+                    <div className="w-24 h-1 bg-red-600 mx-auto mt-2"></div>
+                  </h3>
                   
-                  <div className="border-t pt-4">
-                    <div className="flex items-center justify-center space-x-4 text-sm text-muted-foreground">
-                      <div className="flex items-center">
-                        <Phone className="w-4 h-4 mr-1" />
-                        <span className="text-primary font-semibold">(818) 123-4567</span>
-                      </div>
-                    </div>
-                    <p className="text-xs text-center text-muted-foreground mt-2">
-                      Available 24/7 for premises liability cases
-                    </p>
+                  <p className="text-lg mb-8 text-gray-200 leading-relaxed">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"
+                      onClick={() => window.open('tel:8553742906')}
+                    >
+                      CALL (855) 374-2906
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"
+                      onClick={() => window.location.href = '/premises-liability-case-evaluation'}
+                    >
+                      EMAIL US
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"
+                      onClick={() => window.location.href = '/premises-liability-compensation-calculator'}
+                    >
+                      CALCULATE SETTLEMENT
+                    </Button>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
               {/* Quick Facts */}
               <Card className="glass-card">

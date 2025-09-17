@@ -429,7 +429,7 @@ const PedestrianCaseEvaluation = () => {
         </div>
       </section>
 
-      <GoBack />
+      <GoBack className="top-20 z-[60]" />
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

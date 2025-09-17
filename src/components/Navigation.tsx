@@ -50,19 +50,29 @@ const Navigation = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#practice-areas" className="text-white hover:text-primary transition-colors font-medium">
+          <a href="#practice-areas" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
             Practice Areas
           </a>
-          <a href="#results" className="text-white hover:text-primary transition-colors font-medium">
+          <a href="#results" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
             Why Us
           </a>
-          <a href="#about" className="text-white hover:text-primary transition-colors font-medium">
+          <a href="#about" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
             About
           </a>
-          <a href="#locations" className="text-white hover:text-primary transition-colors font-medium">
+          <a href="#locations" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
             Locations
           </a>
-          <a href="#contact" className="text-white hover:text-primary transition-colors font-medium">
+          <a href="#contact" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
             Contact
           </a>
         </div>
@@ -70,10 +80,14 @@ const Navigation = () => {
         {/* CTA Button */}
         <Button 
           size="sm" 
-          className="magnetic bg-accent hover:bg-accent-glow text-accent-foreground font-semibold glow-accent transition-all duration-300"
-          onClick={() => window.location.href = 'tel:855-TREMBACH-WINS'}
+          className={`magnetic font-semibold transition-all duration-300 ${
+            isScrolled 
+              ? 'bg-red-600 hover:bg-red-700 text-white' 
+              : 'bg-accent hover:bg-accent-glow text-accent-foreground glow-accent'
+          }`}
+          onClick={() => window.location.href = 'tel:8181234567'}
         >
-          Call Now - 24/7
+          Call (818) 123-4567
         </Button>
       </div>
     </nav>

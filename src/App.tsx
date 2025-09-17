@@ -24,6 +24,10 @@ import MotorcycleAccidentsNew from "./pages/practice-areas/MotorcycleAccidentsNe
 import MotorcycleCaseEvaluation from "./pages/MotorcycleCaseEvaluation";
 import MotorcycleCompensationCalculator from "./pages/MotorcycleCompensationCalculator";
 import MotorcycleMedicalGuidance from "./pages/MotorcycleMedicalGuidance";
+import PedestrianAccidents from "./pages/practice-areas/PedestrianAccidents";
+import PedestrianCaseEvaluation from "./pages/PedestrianCaseEvaluation";
+import PedestrianCompensationCalculator from "./pages/PedestrianCompensationCalculator";
+import PedestrianMedicalGuidance from "./pages/PedestrianMedicalGuidance";
 import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
 import CaseEvaluation from "./pages/CaseEvaluation";
@@ -58,6 +62,7 @@ const App = () => (
           <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
           <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
           <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidentsNew />} />
+          <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
           <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
           <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
           <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
@@ -66,6 +71,9 @@ const App = () => (
           <Route path="/motorcycle-case-evaluation" element={<MotorcycleCaseEvaluation />} />
           <Route path="/motorcycle-compensation-calculator" element={<MotorcycleCompensationCalculator />} />
           <Route path="/motorcycle-medical-guidance" element={<MotorcycleMedicalGuidance />} />
+          <Route path="/pedestrian-case-evaluation" element={<PedestrianCaseEvaluation />} />
+          <Route path="/pedestrian-compensation-calculator" element={<PedestrianCompensationCalculator />} />
+          <Route path="/pedestrian-medical-guidance" element={<PedestrianMedicalGuidance />} />
           <Route path="/case-evaluation" element={<CaseEvaluation />} />
           <Route path="/medical-guidance" element={<MedicalGuidance />} />
           <Route path="/schedule-consultation" element={<ScheduleConsultation />} />

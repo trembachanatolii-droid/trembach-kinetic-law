@@ -6,13 +6,16 @@ interface GoBackProps {
   className?: string;
 }
 
-const GoBack: React.FC<GoBackProps> = ({ className }) => {
+const GoBack: React.FC<GoBackProps> = ({ className = "" }) => {
+  const baseClasses = "pt-20 pb-4";
+  const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
+  
   return (
-    <div className={`pt-32 pb-4 ${className}`}>
+    <div className={combinedClasses}>
       <Button
         variant="ghost"
         onClick={() => window.history.back()}
-        className="flex items-center gap-2 hover:bg-primary/10 bg-transparent z-40 relative text-foreground"
+        className="flex items-center gap-2 hover:bg-primary/10 bg-transparent z-[60] relative text-foreground ml-6"
         aria-label="Go back to previous page"
       >
         <ArrowLeft className="w-4 h-4" />

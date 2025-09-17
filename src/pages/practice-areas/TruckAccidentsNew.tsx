@@ -603,8 +603,8 @@ const TruckAccidentsNew: React.FC = () => {
                 </div>
               </div>
             </section>
-              </div>
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
+
+            {/* Immediate Steps After a Truck Accident */}
                 <p className="mb-6">Provide information about your truck accident to help us understand your case better.</p>
                 
                 <form onSubmit={handleFormSubmit} className="space-y-4">

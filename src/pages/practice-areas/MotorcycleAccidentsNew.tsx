@@ -673,8 +673,8 @@ const MotorcycleAccidentsNew: React.FC = () => {
             </div>
           </div>
         </section>
-          </div>
-                Free Motorcycle Accident Case Evaluation
+
+        {/* Immediate Steps After Motorcycle Accident */}
               </h2>
               <p className="text-lg text-muted-foreground mb-6">
                 Motorcycle accident cases require immediate action to preserve evidence and protect your rights. Our comprehensive case evaluation examines every aspect of your accident to build the strongest possible claim against insurance company bias.

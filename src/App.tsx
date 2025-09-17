@@ -20,6 +20,9 @@ import CaseEvaluation from "./pages/CaseEvaluation";
 import MedicalGuidance from "./pages/MedicalGuidance";
 import ScheduleConsultation from "./pages/ScheduleConsultation";
 import CompensationCalculator from "./pages/CompensationCalculator";
+import SilicosisCaseEvaluation from "./pages/SilicosisCaseEvaluation";
+import SilicosisCompensationCalculator from "./pages/SilicosisCompensationCalculator";
+import SilicosisMedicalGuidance from "./pages/SilicosisMedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +49,9 @@ const App = () => (
           <Route path="/medical-guidance" element={<MedicalGuidance />} />
           <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
           <Route path="/compensation-calculator" element={<CompensationCalculator />} />
+          <Route path="/silicosis-case-evaluation" element={<SilicosisCaseEvaluation />} />
+          <Route path="/silicosis-compensation-calculator" element={<SilicosisCompensationCalculator />} />
+          <Route path="/silicosis-medical-guidance" element={<SilicosisMedicalGuidance />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

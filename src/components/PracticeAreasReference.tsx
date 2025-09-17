@@ -87,7 +87,7 @@ const practiceAreas: PracticeArea[] = [
     title: 'Talc & Baby Powder Cancer',
     description: 'Seeking justice for ovarian cancer and mesothelioma victims from contaminated talc products. For decades, manufacturers knew their talc contained asbestos but continued marketing these products for intimate use and infant care. Internal documents reveal deliberate concealment of contamination risks while aggressively promoting powder use. California courts have awarded substantial verdicts recognizing the link between talc use and cancer development. We pursue compensation for medical expenses, pain and suffering, and punitive damages against corporations that prioritized profits over consumer safety. Women who used these products for feminine hygiene and families who trusted baby powder deserve accountability. Our team works with oncologists and epidemiologists to establish causation and secure maximum recovery for this betrayal of consumer trust.',
     image: talcBabyPowderImg,
-    slug: 'talc-baby-powder'
+    slug: 'talc-baby-powder-cancer'
   },
   {
     id: 'car-accidents',

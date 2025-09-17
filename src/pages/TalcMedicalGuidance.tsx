@@ -10,7 +10,7 @@ import { CheckCircle, Heart, Phone, AlertTriangle, Stethoscope, Building2 } from
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
-import heroBackground from '@/assets/practice-areas/talc-mesothelioma-treatment.jpg';
+import heroBackground from '@/assets/talc-medical-guidance-hero.jpg';
 
 const TalcMedicalGuidance = () => {
   const [formData, setFormData] = useState({

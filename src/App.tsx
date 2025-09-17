@@ -12,7 +12,10 @@ import CarAccidents from "./pages/practice-areas/CarAccidents";
 import TruckAccidentsNew from "./pages/practice-areas/TruckAccidentsNew";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
-import TalcBabyPowder from "./pages/practice-areas/TalcBabyPowder";
+import TalcBabyPowderCancer from "./pages/practice-areas/TalcBabyPowderCancer";
+import TalcCaseEvaluation from "./pages/TalcCaseEvaluation";
+import TalcCompensationCalculator from "./pages/TalcCompensationCalculator";
+import TalcMedicalGuidance from "./pages/TalcMedicalGuidance";
 import MotorcycleAccidents from "./pages/practice-areas/MotorcycleAccidents";
 import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
@@ -41,10 +44,13 @@ const App = () => (
           <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
           <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
-          <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowder />} />
+          <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
           <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidents />} />
           <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
           <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
+          <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
+          <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
+          <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
           <Route path="/case-evaluation" element={<CaseEvaluation />} />
           <Route path="/medical-guidance" element={<MedicalGuidance />} />
           <Route path="/schedule-consultation" element={<ScheduleConsultation />} />

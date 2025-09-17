@@ -35,6 +35,10 @@ import {
   Home
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
+import whatToDoImage from '@/assets/practice-areas/premises-what-to-do.jpg';
+import accidentTypesImage from '@/assets/practice-areas/premises-accident-types.jpg';
+import provingNegligenceImage from '@/assets/practice-areas/premises-proving-negligence.jpg';
+import compensationImage from '@/assets/practice-areas/premises-compensation.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -527,6 +531,15 @@ const PremisesLiability: React.FC = () => {
             {/* What To Do Section */}
             <section id="what-to-do" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">What To Do After a Premises Liability Accident</h2>
+              
+              <div className="mb-8">
+                <img 
+                  src={whatToDoImage} 
+                  alt="What to do after a premises liability accident - immediate steps for documentation and safety" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
+              
               <div className="prose prose-lg max-w-none">
                 <ul className="list-disc list-inside space-y-2">
                   <li>Seek immediate medical attention, even if injuries seem minor.</li>
@@ -543,6 +556,15 @@ const PremisesLiability: React.FC = () => {
             {/* Types of Accidents Section */}
             <section id="types-of-accidents" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Types of Premises Liability Accidents</h2>
+              
+              <div className="mb-8">
+                <img 
+                  src={accidentTypesImage} 
+                  alt="Common types of premises liability accidents including slip and fall, trip and fall, and inadequate security incidents" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
+              
               <div className="prose prose-lg max-w-none">
                 <ul className="list-disc list-inside space-y-2">
                   <li>Slip and fall accidents due to wet floors, spills, or icy conditions.</li>
@@ -561,6 +583,15 @@ const PremisesLiability: React.FC = () => {
             {/* Proving Negligence Section */}
             <section id="proving-negligence" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Proving Negligence in Premises Liability Cases</h2>
+              
+              <div className="mb-8">
+                <img 
+                  src={provingNegligenceImage} 
+                  alt="Evidence collection and proving negligence in California premises liability cases" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
+              
               <div className="prose prose-lg max-w-none">
                 <p>
                   To prove negligence, you must show the property owner owed you a duty of care, breached that duty by failing to maintain safe conditions, and that breach caused your injuries. Evidence includes:
@@ -578,6 +609,15 @@ const PremisesLiability: React.FC = () => {
             {/* Compensation Section */}
             <section id="compensation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Compensation in Premises Liability Cases</h2>
+              
+              <div className="mb-8">
+                <img 
+                  src={compensationImage} 
+                  alt="Understanding compensation types in premises liability cases - economic and non-economic damages" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
+              
               <div className="prose prose-lg max-w-none">
                 <p>
                   Victims may recover economic damages such as medical expenses, lost wages, and property damage, as well as non-economic damages like pain and suffering, emotional distress, and loss of enjoyment of life. In some cases, punitive damages may be awarded for malicious or reckless conduct.

@@ -675,12 +675,13 @@ const MotorcycleAccidentsNew: React.FC = () => {
         </section>
 
         {/* Immediate Steps After Motorcycle Accident */}
-              </h2>
-              <p className="text-lg text-muted-foreground mb-6">
-                Motorcycle accident cases require immediate action to preserve evidence and protect your rights. Our comprehensive case evaluation examines every aspect of your accident to build the strongest possible claim against insurance company bias.
-              </p>
+        <section id="immediate-steps" className="content-section mb-12">
+          <h2 className="text-3xl font-bold text-red-600 mb-6">Immediate Steps After Motorcycle Accident</h2>
+          <p className="text-lg text-muted-foreground mb-6">
+            Motorcycle accident cases require immediate action to preserve evidence and protect your rights. Our comprehensive case evaluation examines every aspect of your accident to build the strongest possible claim against insurance company bias.
+          </p>
 
-              <div className="space-y-6">
+          <div className="space-y-6">
                 <div className="flex items-start">
                   <div className="flex-shrink-0 w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4">
                     <FileText className="w-6 h-6 text-red-600" />

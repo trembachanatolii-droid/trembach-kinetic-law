@@ -548,46 +548,8 @@ const PedestrianAccidents: React.FC = () => {
                     >
                       CALCULATE SETTLEMENT
                     </Button>
-                </div>
-              </div>
-            </section>
-              </div>
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your pedestrian accident case better. We'll review your case at no cost and explain your legal options.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Primary Injury Type</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="head-brain-injury">Head/Brain Injury</SelectItem>
-                          <SelectItem value="spinal-cord-injury">Spinal Cord Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                          <SelectItem value="cuts-bruises">Cuts and Bruises</SelectItem>
-                          <SelectItem value="other-injury">Other Injury</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Pedestrian Accident Case Evaluation
-                  </Button>
-                </form>
+                </div>
               </div>
             </section>
 

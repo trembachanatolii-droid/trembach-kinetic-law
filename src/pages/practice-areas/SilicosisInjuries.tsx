@@ -547,6 +547,7 @@ const SilicosisInjuries: React.FC = () => {
                     >
                       CALCULATE SETTLEMENT
                     </Button>
+                  </div>
                 </div>
               </div>
             </section>

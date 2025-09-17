@@ -511,47 +511,8 @@ const BicycleAccidents: React.FC = () => {
                     >
                       CALCULATE SETTLEMENT
                     </Button>
-                </div>
-              </div>
-            </section>
-              </div>
-                <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
-                <p className="mb-6 text-red-700">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                        className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Injury Type</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="head-injuries">Head/Brain Injuries</SelectItem>
-                          <SelectItem value="fractures">Bone Fractures</SelectItem>
-                          <SelectItem value="road-rash">Road Rash/Abrasions</SelectItem>
-                          <SelectItem value="spinal">Spinal Cord Injuries</SelectItem>
-                          <SelectItem value="multiple">Multiple Injuries</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
+                </div>
               </div>
             </section>
 

@@ -647,47 +647,8 @@ const TalcBabyPowderCancer: React.FC = () => {
                     >
                       CALCULATE SETTLEMENT
                     </Button>
-                </div>
-              </div>
-            </section>
-              </div>
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Diagnosis Date</label>
-                      <Input
-                        type="date"
-                        value={formData.diagnosisDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Cancer Type</label>
-                      <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select cancer type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                          <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                          <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
-                          <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
-                          <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
-                          <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
-                          <SelectItem value="other">Other Talc-Related Cancer</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
+                </div>
               </div>
             </section>
 

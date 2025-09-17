@@ -575,46 +575,8 @@ const CarAccidentsNew: React.FC = () => {
                     >
                       CALCULATE SETTLEMENT
                     </Button>
-                </div>
-              </div>
-            </section>
-              </div>
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Injury</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-                          <SelectItem value="back-injury">Back Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones</SelectItem>
-                          <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                          <SelectItem value="other">Other Injuries</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
+                </div>
               </div>
             </section>
 

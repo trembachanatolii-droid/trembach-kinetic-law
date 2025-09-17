@@ -28,9 +28,6 @@ import {
   ArrowLeft
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import SEO from '@/components/SEO';
-import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/practice-areas/talc-cancer-hero.jpg';
 import contaminationImage from '@/assets/practice-areas/talc-contamination-analysis.jpg';
 import diagnosisImage from '@/assets/practice-areas/talc-ovarian-diagnosis.jpg';
@@ -50,9 +47,7 @@ const TalcBabyPowderCancer: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
-    exposureStartDate: '',
-    productType: '',
-    exposureLocation: '',
+    diagnosisDate: '',
     cancerType: ''
   });
 
@@ -103,11 +98,20 @@ const TalcBabyPowderCancer: React.FC = () => {
     }));
   };
 
-  const seoData = {
-    title: "California Talc & Baby Powder Cancer Lawyers | Free Consultation",
-    description: "California talc cancer lawyers. Ovarian cancer and mesothelioma from contaminated baby powder. Major settlements pending. Free consultation. No fees unless we win.",
-    canonical: "/practice-areas/talc-baby-powder-cancer"
+  const scrollToSection = (sectionId: string) => {
+    setActiveTab(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
   };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission - redirect to case evaluation
+    window.location.href = '/talc-case-evaluation';
+  };
+
 
   const faqData = [
     {
@@ -310,99 +314,85 @@ const TalcBabyPowderCancer: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
-        title={seoData.title}
-        description={seoData.description}
-        canonical={seoData.canonical}
-      />
-      <Navigation />
-      <GoBack />
 
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-        style={{
-          backgroundImage: `url(${heroBackground})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
       >
-        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70" />
         
-        <div className="relative z-10 container mx-auto px-8 py-20">
-          <div className="max-w-6xl">
-            <div className="hero-content">
-              <div className="flex flex-wrap gap-4 mb-8">
-                <Badge variant="destructive" className="text-lg px-4 py-2">
-                  🚨 Thousands of Active Cases
-                </Badge>
-                <Badge variant="default" className="text-lg px-4 py-2 bg-green-600">
-                  ✓ Major Settlements Pending
-                </Badge>
-                <Badge variant="secondary" className="text-lg px-4 py-2">
-                  ⚡ Former Defense Attorney
-                </Badge>
-              </div>
-              
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold text-foreground mb-6">
-                California Talc & Baby Powder Cancer Lawyers
-              </h1>
-              <p className="text-xl md:text-2xl text-muted-foreground mb-8 max-w-4xl">
-                Fighting for Victims of Contaminated Baby Powder Throughout All 58 California Counties
-              </p>
-              <p className="text-lg text-muted-foreground mb-12 max-w-5xl">
-                Major manufacturers knew their talc contained cancer-causing asbestos for decades. Now California victims are securing justice through legal action.
-              </p>
-              
-              <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <Button asChild size="lg" className="text-lg px-8 py-6 bg-red-600 hover:bg-red-700">
-                  <Link to="/talc-case-evaluation">Free Case Review</Link>
-                </Button>
-                <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/90 text-foreground border-white hover:bg-white transition-all">
-                  <a href="tel:8181234567">📞 Call (818) 123-4567</a>
-                </Button>
-              </div>
+        {/* Go Back Button - positioned in hero overlay */}
+        <div className="absolute top-20 left-6 z-10">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="hero-content">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              California Talc & Baby Powder Cancer Lawyers
+            </h1>
+            
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-2 text-lg">Backed by Proven Experience</span>
+            </div>
+            
+            <Button 
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              onClick={() => window.location.href = '/talc-case-evaluation'}
+            >
+              START MY FREE CASE EVALUATION
+            </Button>
+          </div>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      activeTab === tab.id 
+                        ? 'bg-white text-primary' 
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4 mr-2" />
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Navigation Tabs */}
-      <div className="sticky top-20 z-40 bg-background/95 backdrop-blur-sm border-b">
-        <div className="container mx-auto px-8">
-          <div className="flex overflow-x-auto scrollbar-hide">
-            {tabs.map((tab) => {
-              const IconComponent = tab.icon;
-              return (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`flex items-center gap-2 px-4 py-4 whitespace-nowrap border-b-2 transition-colors ${
-                    activeTab === tab.id
-                      ? 'border-primary text-primary font-semibold'
-                      : 'border-transparent text-muted-foreground hover:text-foreground'
-                  }`}
-                >
-                  <IconComponent className="w-4 h-4" />
-                  {tab.label}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
       {/* Main Content */}
-      <div ref={contentRef} className="container mx-auto px-8 py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Main Content Area */}
-          <div className="lg:col-span-3 space-y-8">
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Main Content Column */}
+          <div className="lg:col-span-2" ref={contentRef}>
             
-            {/* Overview Tab */}
-            {activeTab === 'overview' && (
-              <div className="space-y-8">
+            
+            {/* Overview Section */}
+            <section id="overview" className="content-section mb-12">
                 {/* Comprehensive Overview Card */}
                 <Card className="content-section p-8">
                   <h2 className="text-3xl font-bold mb-6 text-red-600">The Talc Cancer Crisis in California</h2>
@@ -509,219 +499,274 @@ const TalcBabyPowderCancer: React.FC = () => {
                     </div>
                   </div>
                 </Card>
+            </section>
+
+            {/* What to Do After Diagnosis */}
+            <section id="diagnosis-steps" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After Your Talc Cancer Diagnosis</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Heart className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Medical Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Get a second opinion from a cancer specialist</p>
+                    <p>• Request all medical records and pathology reports</p>
+                    <p>• Explore treatment options at specialized cancer centers</p>
+                    <p>• Consider clinical trials and experimental treatments</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Scale className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Legal Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Contact an experienced talc cancer attorney</p>
+                    <p>• Gather records of talc product use</p>
+                    <p>• Document your exposure history</p>
+                    <p>• Preserve any product receipts or testimony</p>
+                  </CardContent>
+                </Card>
               </div>
-            )}
+            </section>
 
-            {/* Case Evaluation Tab */}
-            {activeTab === 'evaluation' && (
-              <Card className="content-section p-8">
-                <h2 className="text-3xl font-bold mb-6 text-red-600">Talc Cancer Case Evaluation</h2>
-                <p className="text-muted-foreground mb-8">
-                  Help us understand your talc exposure and cancer diagnosis to evaluate your potential case.
+            {/* Diagnosis Process */}
+            <section id="diagnosis-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Understanding Your Diagnosis</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={diagnosisImage} 
+                  alt="Medical diagnosis process for talc-related cancers"
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none">
+                <p className="text-lg leading-relaxed mb-4">
+                  A talc-related cancer diagnosis can be overwhelming. Understanding your diagnosis is the first step toward getting proper treatment and legal recourse.
                 </p>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                   <div>
-                    <label className="block text-sm font-medium mb-2">When did you start using talc products?</label>
-                    <Select onValueChange={(value) => setFormData({...formData, exposureStartDate: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select time period" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="1950s-1960s">1950s-1960s</SelectItem>
-                        <SelectItem value="1970s-1980s">1970s-1980s</SelectItem>
-                        <SelectItem value="1990s-2000s">1990s-2000s</SelectItem>
-                        <SelectItem value="2000s-2010s">2000s-2010s</SelectItem>
-                        <SelectItem value="2010s-present">2010s-Present</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <h3 className="text-xl font-semibold mb-3">Common Talc Cancers</h3>
+                    <ul className="space-y-2">
+                      <li>• Ovarian Cancer</li>
+                      <li>• Mesothelioma</li>
+                      <li>• Fallopian Tube Cancer</li>
+                      <li>• Primary Peritoneal Cancer</li>
+                    </ul>
                   </div>
-                  
                   <div>
-                    <label className="block text-sm font-medium mb-2">Type of talc product used</label>
-                    <Select onValueChange={(value) => setFormData({...formData, productType: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select product type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="baby-powder">Baby Powder</SelectItem>
-                        <SelectItem value="feminine-hygiene">Feminine Hygiene Powder</SelectItem>
-                        <SelectItem value="body-powder">Body Powder</SelectItem>
-                        <SelectItem value="multiple-products">Multiple Product Types</SelectItem>
-                        <SelectItem value="unknown">Unknown/Not Sure</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Primary use location</label>
-                    <Select onValueChange={(value) => setFormData({...formData, exposureLocation: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select location" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="genital-area">Genital Area</SelectItem>
-                        <SelectItem value="underwear-pads">Underwear/Sanitary Pads</SelectItem>
-                        <SelectItem value="all-over-body">All Over Body</SelectItem>
-                        <SelectItem value="baby-diaper-area">Baby Diaper Area</SelectItem>
-                        <SelectItem value="multiple-areas">Multiple Areas</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Cancer diagnosis</label>
-                    <Select onValueChange={(value) => setFormData({...formData, cancerType: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select cancer type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                        <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                        <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
-                        <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
-                        <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
-                        <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
-                        <SelectItem value="other">Other Cancer Type</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <h3 className="text-xl font-semibold mb-3">Important Tests</h3>
+                    <ul className="space-y-2">
+                      <li>• Pathology Reports</li>
+                      <li>• Imaging Studies</li>
+                      <li>• Blood Tests</li>
+                      <li>• Tissue Analysis</li>
+                    </ul>
                   </div>
                 </div>
-                
-                <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                  <h3 className="text-lg font-semibold text-red-800 mb-4">Get Your Free Case Evaluation</h3>
-                  <p className="text-red-700 mb-4">
-                    Based on your responses, you may have a valid talc cancer claim. Our experienced attorneys can provide a comprehensive case evaluation.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4">
-                    <Button asChild className="bg-red-600 hover:bg-red-700">
-                      <Link to="/talc-case-evaluation">Complete Full Evaluation</Link>
-                    </Button>
-                    <Button asChild variant="outline">
-                      <a href="tel:8181234567">Call (818) 123-4567</a>
-                    </Button>
-                  </div>
-                </div>
-              </Card>
-            )}
+              </div>
+            </section>
 
-            {/* FAQ Tab */}
-            {activeTab === 'faq' && (
-              <Card className="content-section p-8">
-                <h2 className="text-3xl font-bold mb-6 text-red-600">Frequently Asked Questions</h2>
-                <p className="text-muted-foreground mb-8">
-                  Find answers to common questions about talc cancer lawsuits in California.
+            {/* Legal Process */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">The Legal Process</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={legalImage} 
+                  alt="Legal consultation process for talc cancer cases"
+                  className="w-full h-64 object-cover rounded-lg mb-4"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none">
+                <p className="text-lg leading-relaxed mb-6">
+                  Understanding the legal process can help you make informed decisions about your talc cancer claim.
                 </p>
                 
-                <div className="space-y-4">
-                  {faqData.map((faq, index) => (
-                    <div key={index} className="border border-border rounded-lg">
-                      <button
-                        onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                        className="w-full text-left p-6 flex justify-between items-center hover:bg-muted/50 transition-colors"
-                      >
-                        <span className="font-semibold text-lg">{faq.question}</span>
-                        {expandedFaq === index ? (
-                          <ChevronUp className="w-5 h-5 text-primary" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 text-primary" />
-                        )}
-                      </button>
-                      {expandedFaq === index && (
-                        <div className="px-6 pb-6">
-                          <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                        </div>
-                      )}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <Card className="p-4">
+                    <h3 className="font-semibold mb-2">1. Case Evaluation</h3>
+                    <p className="text-sm text-muted-foreground">We review your medical records and exposure history to assess your case.</p>
+                  </Card>
+                  <Card className="p-4">
+                    <h3 className="font-semibold mb-2">2. Investigation</h3>
+                    <p className="text-sm text-muted-foreground">We gather evidence and work with experts to build your case.</p>
+                  </Card>
+                  <Card className="p-4">
+                    <h3 className="font-semibold mb-2">3. Filing</h3>
+                    <p className="text-sm text-muted-foreground">We file your lawsuit against responsible parties within legal deadlines.</p>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Case Evaluation Section */}
+            <section id="evaluation" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
+              
+              <div className="bg-muted p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
+                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
+                
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Diagnosis Date</label>
+                      <Input
+                        type="date"
+                        value={formData.diagnosisDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
+                        required
+                      />
                     </div>
-                  ))}
-                </div>
-              </Card>
-            )}
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Cancer Type</label>
+                      <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select cancer type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
+                          <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
+                          <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
+                          <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
+                          <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
+                          <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
+                          <SelectItem value="other">Other Talc-Related Cancer</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                  
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                    Start My Free Case Evaluation
+                  </Button>
+                </form>
+              </div>
+            </section>
 
-            {/* Resources Tab */}
-            {activeTab === 'resources' && (
-              <Card className="content-section p-8">
-                <h2 className="text-3xl font-bold mb-6 text-red-600">Helpful Resources</h2>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card 
-                    className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
-                    onClick={() => window.location.href = '/talc-medical-guidance'}
-                  >
-                    <CardHeader>
-                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                        <Stethoscope className="w-5 h-5 mr-2 text-primary" />
-                        Medical Resources
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p>• Cancer Treatment Centers</p>
-                      <p>• Ovarian Cancer Specialists</p>
-                      <p>• Mesothelioma Treatment Programs</p>
-                      <p>• Support Groups for Patients</p>
-                      <p className="text-sm text-primary mt-4 font-medium">Click to access medical guidance →</p>
-                    </CardContent>
-                  </Card>
+            {/* FAQ Section */}
+            <section id="faq" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
+              
+              <div className="space-y-4">
+                {faqData.map((faq, index) => (
+                  <div key={index} className="border border-border rounded-lg">
+                    <button
+                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                      className="w-full text-left p-6 flex justify-between items-center hover:bg-muted/50 transition-colors"
+                    >
+                      <span className="font-semibold text-lg">{faq.question}</span>
+                      {expandedFaq === index ? (
+                        <ChevronUp className="w-5 h-5 text-primary" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-primary" />
+                      )}
+                    </button>
+                    {expandedFaq === index && (
+                      <div className="px-6 pb-6">
+                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </section>
 
-                  <Card 
-                    className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
-                    onClick={() => window.location.href = '/talc-case-evaluation'}
-                  >
-                    <CardHeader>
-                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                        <Scale className="w-5 h-5 mr-2 text-primary" />
-                        Legal Resources
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p>• Free Case Evaluation</p>
-                      <p>• California Cancer Laws</p>
-                      <p>• Legal Rights for Victims</p>
-                      <p>• Immigration Protection Resources</p>
-                      <p className="text-sm text-primary mt-4 font-medium">Click for free case evaluation →</p>
-                    </CardContent>
-                  </Card>
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Helpful Resources</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.location.href = '/talc-medical-guidance'}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                      Medical Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>• Cancer Treatment Centers</p>
+                    <p>• Ovarian Cancer Specialists</p>
+                    <p>• Mesothelioma Treatment Programs</p>
+                    <p>• Support Groups for Patients</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access medical guidance →</p>
+                  </CardContent>
+                </Card>
 
-                  <Card 
-                    className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
-                    onClick={() => window.open('https://www.cancer.gov/', '_blank')}
-                  >
-                    <CardHeader>
-                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                        <Building className="w-5 h-5 mr-2 text-primary" />
-                        Government Resources
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p>• National Cancer Institute</p>
-                      <p>• FDA Safety Information</p>
-                      <p>• Social Security Disability</p>
-                      <p>• Medicare/Medi-Cal Information</p>
-                      <p className="text-sm text-primary mt-4 font-medium">Click to access government resources →</p>
-                    </CardContent>
-                  </Card>
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.location.href = '/talc-case-evaluation'}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Scale className="w-5 h-5 mr-2 text-primary" />
+                      Legal Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>• Free Case Evaluation</p>
+                    <p>• California Cancer Laws</p>
+                    <p>• Legal Rights for Victims</p>
+                    <p>• Immigration Protection Resources</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click for free case evaluation →</p>
+                  </CardContent>
+                </Card>
 
-                  <Card 
-                    className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
-                    onClick={() => window.open('https://www.cancer.org/', '_blank')}
-                  >
-                    <CardHeader>
-                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                        <Users className="w-5 h-5 mr-2 text-primary" />
-                        Support Resources
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <p>• American Cancer Society</p>
-                      <p>• Patient Support Networks</p>
-                      <p>• Family Counseling Services</p>
-                      <p>• Community Health Centers</p>
-                      <p className="text-sm text-primary mt-4 font-medium">Click to access support resources →</p>
-                    </CardContent>
-                  </Card>
-                </div>
-              </Card>
-            )}
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.open('https://www.cancer.gov/', '_blank')}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Building className="w-5 h-5 mr-2 text-primary" />
+                      Government Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>• National Cancer Institute</p>
+                    <p>• FDA Safety Information</p>
+                    <p>• Social Security Disability</p>
+                    <p>• Medicare/Medi-Cal Information</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access government resources →</p>
+                  </CardContent>
+                </Card>
+
+                <Card 
+                  className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                  onClick={() => window.open('https://www.cancer.org/', '_blank')}
+                >
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Users className="w-5 h-5 mr-2 text-primary" />
+                      Support Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>• American Cancer Society</p>
+                    <p>• Patient Support Networks</p>
+                    <p>• Family Counseling Services</p>
+                    <p>• Community Health Centers</p>
+                    <p className="text-sm text-primary mt-4 font-medium">Click to access support resources →</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
           </div>
 
           {/* Sidebar */}

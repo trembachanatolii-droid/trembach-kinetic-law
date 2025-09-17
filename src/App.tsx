@@ -9,7 +9,7 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import CarAccidents from "./pages/practice-areas/CarAccidents";
-import TruckAccidents from "./pages/practice-areas/TruckAccidents";
+import TruckAccidentsNew from "./pages/practice-areas/TruckAccidentsNew";
 import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
 import TalcBabyPowder from "./pages/practice-areas/TalcBabyPowder";
@@ -35,7 +35,7 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
           <Route path="/practice-areas/car-accidents" element={<CarAccidents />} />
-          <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidents />} />
+          <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
           <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
           <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
           <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowder />} />

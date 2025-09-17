@@ -35,6 +35,10 @@ import {
   Bike
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/bicycle-accidents-hero.jpg';
+import legalConsultationImage from '@/assets/practice-areas/bicycle-legal-consultation.jpg';
+import medicalCareImage from '@/assets/practice-areas/bicycle-medical-care.jpg';
+import accidentSceneImage from '@/assets/practice-areas/bicycle-accident-scene.jpg';
+import compensationCalculationImage from '@/assets/practice-areas/bicycle-compensation-calculation.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -428,6 +432,10 @@ const BicycleAccidents: React.FC = () => {
         <section id="overview" className="content-section mb-16">
           <h2 className="text-3xl font-bold text-red-600 mb-8">California Bicycle Accident Lawyers Who Actually Ride</h2>
           
+          <div className="mb-6">
+            <img src={accidentSceneImage} alt="Bicycle accident scene documentation" className="w-full h-64 object-cover rounded-lg mb-4" />
+          </div>
+          
           <div className="prose prose-lg max-w-none mb-8">
             <p className="text-lg leading-relaxed mb-6">
               When a 4,000-pound vehicle strikes a 20-pound bicycle, the outcome is never fair. California's roads see over 10,000 bicycle accidents annually, with 145 cyclists killed in 2023 alone. Behind every statistic is a person whose life changed in seconds – medical bills mounting, wages lost, and the simple joy of riding stolen by someone's carelessness.
@@ -661,6 +669,10 @@ const BicycleAccidents: React.FC = () => {
         {/* Injuries Section */}
         <section id="injuries" className="content-section mb-16">
           <h2 className="text-3xl font-bold text-red-600 mb-8">Severe Bicycle Accident Injuries</h2>
+          
+          <div className="mb-6">
+            <img src={medicalCareImage} alt="Bicycle accident medical care" className="w-full h-64 object-cover rounded-lg mb-4" />
+          </div>
           
           <div className="prose prose-lg max-w-none mb-8">
             <p className="text-lg leading-relaxed mb-6">

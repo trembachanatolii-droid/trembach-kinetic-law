@@ -142,7 +142,7 @@ const MotorcycleMedicalGuidance: React.FC = () => {
         <div className="absolute inset-0 bg-black/50"></div>
         
         {/* Go Back Button - positioned properly */}
-        <div className="absolute top-6 left-6 z-10">
+        <div className="absolute top-20 left-6 z-[60]">
           <Button 
             variant="ghost" 
             onClick={() => window.history.back()}

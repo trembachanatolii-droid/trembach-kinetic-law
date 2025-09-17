@@ -18,7 +18,7 @@ import {
   Clock,
   FileText
 } from 'lucide-react';
-import heroImage from '@/assets/practice-areas/motorcycle-compensation.jpg';
+import heroImage from '@/assets/motorcycle-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
 
 const MotorcycleCompensationCalculator: React.FC = () => {

@@ -23,7 +23,7 @@ import {
   Users,
   CheckCircle
 } from 'lucide-react';
-import heroImage from '@/assets/practice-areas/motorcycle-medical-care.jpg';
+import heroImage from '@/assets/motorcycle-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
 
 const MotorcycleMedicalGuidance: React.FC = () => {

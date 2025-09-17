@@ -20,7 +20,7 @@ import {
   Users,
   CheckCircle
 } from 'lucide-react';
-import heroImage from '@/assets/practice-areas/motorcycle-legal-consultation.jpg';
+import heroImage from '@/assets/motorcycle-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 
 const MotorcycleCaseEvaluation: React.FC = () => {

@@ -447,7 +447,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
           <div className="flex items-center gap-4">
             <Button 
               variant="ghost" 
-              className="text-white hover:bg-white/20 font-bold"
+              className="text-white hover:bg-white/20 font-bold bg-red-600 border border-white/30"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567
@@ -1200,47 +1200,44 @@ const MotorcycleAccidentsNew: React.FC = () => {
         </section>
 
         {/* Don't Wait - Time Limits Section */}
-        <section className="py-16 bg-red-50 border-t">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="flex items-center justify-center mb-6">
-              <Clock className="w-12 h-12 text-red-600 mr-4" />
-              <h2 className="text-4xl font-bold text-foreground">
-                Don't Wait - Time Limits Apply for California Motorcycle Accidents
-              </h2>
-            </div>
+        <section className="bg-red-600 text-white py-16">
+          <div className="max-w-4xl mx-auto text-center px-6">
+            <h2 className="text-4xl font-bold mb-4">
+              Don't Wait - Time Limits Apply for California Motorcycle Accidents
+            </h2>
             
-            <p className="text-lg text-muted-foreground mb-8">
+            <p className="text-lg mb-8">
               California law strictly limits the time you have to file a motorcycle accident lawsuit. Missing these deadlines can permanently bar your right to compensation, regardless of how strong your case may be.
             </p>
 
             <div className="grid md:grid-cols-3 gap-6 mb-8">
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="text-3xl font-bold text-red-600 mb-2">2 Years</div>
+              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl font-bold mb-2">2 Years</div>
                 <div className="text-sm font-semibold mb-2">Personal Injury Claims</div>
-                <div className="text-muted-foreground text-sm">From the date of the motorcycle accident</div>
+                <div className="text-sm opacity-90">From the date of the motorcycle accident</div>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="text-3xl font-bold text-red-600 mb-2">3 Years</div>
+              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl font-bold mb-2">3 Years</div>
                 <div className="text-sm font-semibold mb-2">Property Damage Claims</div>
-                <div className="text-muted-foreground text-sm">For motorcycle and gear damage</div>
+                <div className="text-sm opacity-90">For motorcycle and gear damage</div>
               </div>
-              <div className="bg-white p-6 rounded-lg shadow">
-                <div className="text-3xl font-bold text-red-600 mb-2">6 Months</div>
+              <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
+                <div className="text-3xl font-bold mb-2">6 Months</div>
                 <div className="text-sm font-semibold mb-2">Government Claims</div>
-                <div className="text-muted-foreground text-sm">Against city, county, or state entities</div>
+                <div className="text-sm opacity-90">Against city, county, or state entities</div>
               </div>
             </div>
 
-            <div className="bg-white p-8 rounded-lg shadow-lg mb-8">
+            <div className="bg-white/10 p-8 rounded-lg backdrop-blur-sm mb-8">
               <h3 className="text-2xl font-semibold mb-4">Why Evidence Disappears Quickly in Motorcycle Cases</h3>
               <div className="grid md:grid-cols-2 gap-6 text-left">
-                <ul className="space-y-2 text-muted-foreground">
+                <ul className="space-y-2">
                   <li>• Skid marks and road evidence wash away</li>
                   <li>• Surveillance footage gets automatically deleted</li>
                   <li>• Witness memories fade over time</li>
                   <li>• Vehicle evidence may be destroyed</li>
                 </ul>
-                <ul className="space-y-2 text-muted-foreground">
+                <ul className="space-y-2">
                   <li>• Insurance companies destroy claim files</li>
                   <li>• Medical records become harder to obtain</li>
                   <li>• Traffic camera data has retention limits</li>
@@ -1251,13 +1248,13 @@ const MotorcycleAccidentsNew: React.FC = () => {
 
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white text-xl px-12 py-6"
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-12 py-6 text-xl"
               onClick={() => window.location.href = '/motorcycle-case-evaluation'}
             >
               PROTECT YOUR RIGHTS - START YOUR FREE CASE EVALUATION NOW
             </Button>
 
-            <p className="text-muted-foreground mt-4">
+            <p className="mt-4">
               No fees unless we win your motorcycle accident case. Call 24/7: <span className="font-bold">(818) 123-4567</span>
             </p>
           </div>

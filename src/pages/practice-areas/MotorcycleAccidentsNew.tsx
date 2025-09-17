@@ -636,10 +636,44 @@ const MotorcycleAccidentsNew: React.FC = () => {
         </section>
 
         {/* Case Evaluation Section */}
-        <section id="evaluation" className="content-section py-16 border-t">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-4xl font-bold mb-6 text-foreground">
+        <section id="evaluation" className="content-section mb-12">
+          <div 
+            className="relative bg-cover bg-center bg-no-repeat rounded-lg overflow-hidden"
+            style={{ backgroundImage: `url(${biasDefenseImage})` }}
+          >
+            <div className="absolute inset-0 bg-black/70"></div>
+            <div className="relative z-10 p-12 text-center">
+              <h2 className="text-4xl font-bold text-white mb-2">3 Ways to Start Your Case</h2>
+              <div className="w-32 h-1 bg-red-600 mx-auto mb-6"></div>
+              <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+                You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+              </p>
+              
+              <div className="space-y-4 max-w-md mx-auto">
+                <Button 
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
+                  onClick={() => window.location.href = 'tel:+18553742906'}
+                >
+                  CALL (855) 374-2906
+                </Button>
+                
+                <Button 
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
+                  onClick={() => window.location.href = 'mailto:info@trembachlaw.com'}
+                >
+                  EMAIL US
+                </Button>
+                
+                <Button 
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
+                  onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+                >
+                  CALCULATE SETTLEMENT
+                </Button>
+            </div>
+          </div>
+        </section>
+          </div>
                 Free Motorcycle Accident Case Evaluation
               </h2>
               <p className="text-lg text-muted-foreground mb-6">

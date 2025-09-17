@@ -120,7 +120,7 @@ const DogBiteCaseEvaluation: React.FC = () => {
                     <Mail className="w-8 h-8 text-primary flex-shrink-0" />
                     <div>
                       <p className="font-semibold text-lg">Email Us</p>
-                      <p className="text-primary">info@lawfirm.com</p>
+                      <p className="text-primary">info@trembachlawfirm.com</p>
                     </div>
                   </div>
                   

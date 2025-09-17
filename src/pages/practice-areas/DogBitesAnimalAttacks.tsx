@@ -873,15 +873,15 @@ const DogBitesAnimalAttacks: React.FC = () => {
                 <h3 className="text-xl font-bold mb-4">California Legal Resources</h3>
                 <ul className="space-y-3">
                   <li>
-                    <a href="#" className="text-primary hover:underline">California Civil Code Section 3342</a>
+                    <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=CIV&sectionNum=3342" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Civil Code Section 3342</a>
                     <p className="text-sm text-muted-foreground">Complete text of California's dog bite liability statute</p>
                   </li>
                   <li>
-                    <a href="#" className="text-primary hover:underline">California Department of Public Health - Rabies Information</a>
+                    <a href="https://www.cdph.ca.gov/Programs/CID/DCDC/Pages/Rabies.aspx" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Department of Public Health - Rabies Information</a>
                     <p className="text-sm text-muted-foreground">Official guidelines for rabies exposure and treatment</p>
                   </li>
                   <li>
-                    <a href="#" className="text-primary hover:underline">Animal Control Agencies by County</a>
+                    <a href="https://www.cdfa.ca.gov/ahfss/Animal_Health/PHR.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Animal Control Agencies by County</a>
                     <p className="text-sm text-muted-foreground">Contact information for reporting dog bites statewide</p>
                   </li>
                 </ul>
@@ -890,15 +890,15 @@ const DogBitesAnimalAttacks: React.FC = () => {
                 <h3 className="text-xl font-bold mb-4">Medical & Support Resources</h3>
                 <ul className="space-y-3">
                   <li>
-                    <a href="#" className="text-primary hover:underline">Emergency Treatment Locations</a>
+                    <a href="https://www.cdc.gov/features/dog-bite-prevention/index.html" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CDC - Dog Bite Prevention</a>
                     <p className="text-sm text-muted-foreground">Find immediate medical care for dog bite injuries</p>
                   </li>
                   <li>
-                    <a href="#" className="text-primary hover:underline">Plastic Surgery & Scar Treatment</a>
+                    <a href="https://www.plasticsurgery.org/cosmetic-procedures/scar-revision" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Plastic Surgery & Scar Treatment</a>
                     <p className="text-sm text-muted-foreground">Specialists for reconstructive surgery and scar revision</p>
                   </li>
                   <li>
-                    <a href="#" className="text-primary hover:underline">Trauma Counseling Services</a>
+                    <a href="https://www.nimh.nih.gov/health/topics/post-traumatic-stress-disorder-ptsd" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Trauma Counseling Services</a>
                     <p className="text-sm text-muted-foreground">Mental health support for dog attack survivors</p>
                   </li>
                 </ul>

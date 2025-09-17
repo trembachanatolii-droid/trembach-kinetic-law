@@ -46,11 +46,13 @@ import {
   TrendingUp,
   Target
 } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/truck-accidents-hero-new.jpg';
+import heroBackground from '@/assets/practice-areas/truck-accidents-hero-final.jpg';
 import sidebarImage from '@/assets/practice-areas/truck-18-wheeler.jpg';
-import legalProcessImage from '@/assets/practice-areas/truck-legal-process.jpg';
-import truckingRegulationsImage from '@/assets/practice-areas/trucking-regulations.jpg';
+import legalProcessImage from '@/assets/practice-areas/truck-legal-investigation.jpg';
+import truckingRegulationsImage from '@/assets/practice-areas/truck-regulations-safety.jpg';
 import investigationImage from '@/assets/practice-areas/truck-investigation.jpg';
+import medicalTreatmentImage from '@/assets/practice-areas/truck-medical-treatment.jpg';
+import compensationInsuranceImage from '@/assets/practice-areas/truck-compensation-insurance.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -58,13 +60,6 @@ interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
-}
-
-interface ParticleProps {
-  x: number;
-  y: number;
-  size: number;
-  speed: number;
 }
 
 const TruckAccidentsNew: React.FC = () => {
@@ -85,217 +80,44 @@ const TruckAccidentsNew: React.FC = () => {
     medicalTreatment: '',
     description: ''
   });
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [particles, setParticles] = useState<ParticleProps[]>([]);
-  const [stats, setStats] = useState({
-    trucksDaily: 0,
-    accidents: 0,
-    fatalities: 0,
-    experience: 0
-  });
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const particlesRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
-  const cursorRef = useRef<HTMLDivElement>(null);
 
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'immediate-steps', label: 'IMMEDIATE STEPS', icon: AlertTriangle },
-    { id: 'trucking-regulations', label: 'TRUCKING REGULATIONS', icon: Truck },
+    { id: 'immediate-steps', label: 'IMMEDIATE STEPS', icon: Heart },
+    { id: 'trucking-regulations', label: 'TRUCKING REGULATIONS', icon: Shield },
     { id: 'legal-process', label: 'LEGAL PROCESS', icon: Gavel },
     { id: 'investigation', label: 'INVESTIGATION', icon: Eye },
-    { id: 'resources', label: 'RESOURCES', icon: Building },
-    { id: 'faq', label: 'FAQ', icon: HelpCircle }
+    { id: 'faq', label: 'FAQ', icon: MessageCircle },
+    { id: 'resources', label: 'RESOURCES', icon: Building }
   ];
 
-  // Initialize particles
-  useEffect(() => {
-    const newParticles: ParticleProps[] = [];
-    for (let i = 0; i < 50; i++) {
-      newParticles.push({
-        x: Math.random() * window.innerWidth,
-        y: Math.random() * window.innerHeight,
-        size: Math.random() * 3 + 1,
-        speed: Math.random() * 2 + 0.5
-      });
-    }
-    setParticles(newParticles);
-  }, []);
-
-  // Animate particles
-  useEffect(() => {
-    const animateParticles = () => {
-      setParticles(prev => prev.map(particle => ({
-        ...particle,
-        y: particle.y + particle.speed,
-        x: particle.x + Math.sin(Date.now() * 0.001 + particle.x * 0.01) * 0.5
-      })).filter(particle => particle.y < window.innerHeight)
-        .concat(Array.from({ length: Math.random() > 0.98 ? 1 : 0 }, () => ({
-          x: Math.random() * window.innerWidth,
-          y: -10,
-          size: Math.random() * 3 + 1,
-          speed: Math.random() * 2 + 0.5
-        })))
-      );
-    };
-
-    const interval = setInterval(animateParticles, 50);
-    return () => clearInterval(interval);
-  }, []);
-
-  // Mouse tracking for magnetic cursor
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-      
-      if (cursorRef.current) {
-        gsap.to(cursorRef.current, {
-          x: e.clientX,
-          y: e.clientY,
-          duration: 0.1,
-          ease: "power2.out"
-        });
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // GSAP Animations
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero parallax effect
-      gsap.fromTo(heroRef.current?.querySelector('.hero-bg'),
-        { scale: 1.2 },
-        { 
-          scale: 1,
-          duration: 2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: true
-          }
-        }
+      // Hero animation
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }
       );
 
-      // Hero content animation
-      gsap.timeline()
-        .fromTo(heroRef.current?.querySelector('.hero-title'),
-          { opacity: 0, y: 80, scale: 0.8 },
-          { opacity: 1, y: 0, scale: 1, duration: 1.2, ease: 'power3.out' }
-        )
-        .fromTo(heroRef.current?.querySelector('.hero-subtitle'),
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 1, ease: 'power2.out' }, '-=0.8'
-        )
-        .fromTo(heroRef.current?.querySelector('.hero-cta'),
-          { opacity: 0, y: 30, scale: 0.9 },
-          { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.7)' }, '-=0.6'
-        );
-
-      // Animated statistics counter
-      const animateStats = () => {
-        gsap.to(setStats, {
-          duration: 2,
-          trucksDaily: 20000,
-          accidents: 5000,
-          fatalities: 150000,
-          experience: 25,
-          ease: "power2.out",
-          onUpdate: function() {
-            setStats({
-              trucksDaily: Math.floor(this.targets()[0].trucksDaily),
-              accidents: Math.floor(this.targets()[0].accidents),
-              fatalities: Math.floor(this.targets()[0].fatalities),
-              experience: Math.floor(this.targets()[0].experience)
-            });
-          }
-        });
-      };
-
-      ScrollTrigger.create({
-        trigger: statsRef.current,
-        start: 'top 80%',
-        onEnter: animateStats,
-        once: true
-      });
-
-      // 3D card hover effects
-      const cards = contentRef.current?.querySelectorAll('.practice-card');
-      cards?.forEach(card => {
-        const cardElement = card as HTMLElement;
-        
-        cardElement.addEventListener('mouseenter', () => {
-          gsap.to(card, {
-            rotateX: -10,
-            rotateY: 10,
-            z: 50,
-            duration: 0.3,
-            ease: "power2.out",
-            transformOrigin: "center center -100px"
-          });
-        });
-
-        cardElement.addEventListener('mouseleave', () => {
-          gsap.to(card, {
-            rotateX: 0,
-            rotateY: 0,
-            z: 0,
-            duration: 0.3,
-            ease: "power2.out"
-          });
-        });
-      });
-
-      // Content sections stagger animation
+      // Content sections animation
       gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 60, rotateX: 15 },
+        { opacity: 0, y: 30 },
         {
           opacity: 1,
           y: 0,
-          rotateX: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power3.out",
+          duration: 0.6,
+          stagger: 0.1,
           scrollTrigger: {
             trigger: contentRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
+            start: 'top 80%'
           }
         }
       );
-
-      // Timeline animations
-      const timelineItems = document.querySelectorAll('.timeline-item');
-      timelineItems.forEach((item, index) => {
-        gsap.fromTo(item,
-          { 
-            opacity: 0, 
-            x: index % 2 === 0 ? -100 : 100,
-            scale: 0.8
-          },
-          {
-            opacity: 1,
-            x: 0,
-            scale: 1,
-            duration: 1,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-              trigger: item,
-              start: 'top 85%',
-              toggleActions: 'play none none reverse'
-            }
-          }
-        );
-      });
-
-    }, [heroRef, contentRef, statsRef]);
+    });
 
     return () => ctx.revert();
   }, []);
@@ -317,1199 +139,1178 @@ const TruckAccidentsNew: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Handle form submission - redirect to case evaluation
     window.location.href = '/case-evaluation';
+  };
+
+  const toggleFaq = (index: number) => {
+    setExpandedFaq(expandedFaq === index ? null : index);
   };
 
   const faqData = [
     {
-      question: "How long do I have to file a truck accident claim in California?",
-      answer: "In California, you generally have two years from the date of the accident to file a personal injury claim against the responsible parties. However, there are important exceptions that could extend or shorten this deadline. For example, if a government entity is involved, you may have only six months to file a claim. If the victim dies from their injuries, the family has two years from the date of death to file a wrongful death claim. It's crucial to consult with an experienced truck accident attorney immediately after your accident to ensure you don't miss any critical deadlines that could bar your claim entirely."
+      question: "What should I do immediately after a truck accident in California?",
+      answer: "First, ensure safety and call 911 for medical help and police response. Move to safety if possible. Document everything: take photos of vehicles, injuries, road conditions, and truck company information. Get the driver's CDL, DOT number, insurance details, and company information. Collect witness contact information. Seek immediate medical attention even if you feel fine - some injuries appear days later. Report to DMV within 10 days if damages exceed $1,000 or injuries occurred. Most importantly, don't give statements to insurance companies and contact an attorney immediately to preserve evidence."
     },
     {
-      question: "Who can be held liable in a California truck accident case?",
-      answer: "Truck accident cases often involve multiple liable parties due to the complex nature of the commercial trucking industry. Potentially liable parties include: the truck driver (for violations of traffic laws, hours of service regulations, or drug/alcohol use), the trucking company (for negligent hiring, inadequate training, poor maintenance, or pressuring drivers to violate safety regulations), cargo loading companies (for improper loading that causes accidents), truck maintenance companies (for inadequate repairs or inspections), parts manufacturers (for defective truck components), and even government entities (for poor road design or maintenance). Our investigation will identify all potentially liable parties to maximize your recovery."
+      question: "How much is my California truck accident case worth?",
+      answer: "Case values vary significantly based on injury severity, medical expenses, lost wages, and impact on life quality. Minor injuries might settle for tens of thousands, while catastrophic injuries often result in multi-million dollar settlements. Factors include: current and future medical costs, lost income and earning capacity, property damage, pain and suffering, permanent disability, and punitive damages for egregious conduct. Truck cases typically yield higher settlements than car accidents due to severe injuries and higher insurance coverage. We provide free case evaluations to estimate your specific case value."
+    },
+    {
+      question: "Who can be held liable in a California truck accident?",
+      answer: "Multiple parties may share liability: the truck driver for negligent operation, the trucking company under vicarious liability or negligent hiring/training, cargo loaders for improper loading, maintenance companies for faulty repairs, truck manufacturers for defective parts, and government entities for dangerous road conditions. California follows joint and several liability, meaning you can recover full damages from any liable party. We investigate thoroughly to identify all responsible parties and insurance coverage sources."
+    },
+    {
+      question: "What is the statute of limitations for truck accidents in California?",
+      answer: "California provides two years from the accident date to file personal injury lawsuits. For wrongful death, it's two years from the date of death. Property damage claims have three years. Government entity claims require filing within six months. These deadlines are strict - missing them forfeits your right to compensation. However, starting immediately preserves evidence, secures witness testimony, and prevents trucking companies from destroying logs (legally destroyed after six months). Contact us immediately to protect your rights."
+    },
+    {
+      question: "How long will my truck accident case take to settle?",
+      answer: "Timeline depends on injury severity, liability disputes, and insurance company cooperation. Simple cases with clear liability might settle in 3-6 months. Complex cases involving severe injuries, multiple parties, or liability disputes can take 1-2 years. Cases going to trial may take 2-3 years. We work efficiently while ensuring maximum compensation - rushing settlements often means accepting less. Our reputation for trial readiness often accelerates reasonable settlement offers."
+    },
+    {
+      question: "What if I was partially at fault for the accident?",
+      answer: "California follows pure comparative negligence, allowing recovery even if you're 99% at fault. Your compensation reduces by your fault percentage. If damages are $1 million and you're 20% at fault, you receive $800,000. Insurance companies aggressively claim victim fault to reduce payouts. Common tactics include claiming you were speeding, following too closely, or distracted. Our defense experience reveals these strategies, and we fight to minimize any fault attribution, maximizing your recovery."
+    },
+    {
+      question: "How much does hiring a truck accident lawyer cost?",
+      answer: "We work on contingency fees - you pay nothing upfront and owe nothing unless we win. Our fee is a percentage of recovery (typically 33-40%). We advance all case costs including investigations, expert witnesses, court filings, and medical records. If we don't win, you owe nothing. This structure ensures we're invested in maximizing your recovery. Initial consultations are always free, and you'll know all fee structures before signing anything."
+    },
+    {
+      question: "What evidence is crucial in truck accident cases?",
+      answer: "Critical evidence includes: Electronic Logging Device (ELD) data showing hours driven, black box data recording speed and braking, driver logs and inspection reports, maintenance records, driver qualification files, drug/alcohol test results, cargo manifests and weight tickets, surveillance footage, witness statements, and police reports. Time-sensitive evidence like skid marks and vehicle positions disappear quickly. Trucking companies can legally destroy logs after six months. We immediately send preservation letters and gather evidence before it's lost."
+    },
+    {
+      question: "What federal regulations apply to truck accidents?",
+      answer: "The Federal Motor Carrier Safety Administration (FMCSA) regulates commercial trucking. Key regulations include: Hours of Service limiting driving to 11 hours in 14-hour periods, mandatory 30-minute breaks after 8 hours, drug and alcohol testing requirements, minimum insurance coverage, vehicle inspection and maintenance standards, cargo securement rules, and CDL licensing requirements. Violations of these regulations often contribute to accidents and strengthen liability claims. Our expertise in FMCSA regulations helps prove negligence."
+    },
+    {
+      question: "Should I accept the trucking company's settlement offer?",
+      answer: "Never accept initial offers without legal consultation. First offers are typically 10-20% of case value. Insurance companies count on victims not knowing their rights or case values. They offer quick settlements before you understand injury severity or long-term impacts. Once accepted, you cannot pursue additional compensation even if injuries worsen. We evaluate offers against true case value, negotiate aggressively, and ensure settlements cover all current and future needs."
     },
     {
       question: "What if the truck driver was an independent contractor?",
-      answer: "Even when a truck driver is classified as an independent contractor rather than an employee, the trucking company may still be held liable under various legal theories. These include negligent hiring (failing to properly screen the driver's qualifications and safety record), negligent supervision (failing to monitor the driver's performance and compliance with safety regulations), apparent authority (when the company holds the driver out as their employee to the public), and control over operations (when the company exercises significant control over how, when, and where the driver operates). California law is particularly favorable to accident victims in piercing the independent contractor shield when trucking companies try to avoid responsibility for accidents caused by drivers working under their authority."
+      answer: "Trucking companies often claim drivers are independent contractors to avoid liability. However, California law looks at actual control, not labels. If the company controls routes, schedules, equipment, or methods, they may be liable regardless of contractor status. The ABC test under AB5 reclassified many truckers as employees. Federal motor carrier regulations also impose non-delegable duties on companies. We pierce through contractor shields to hold companies accountable."
     },
     {
-      question: "How much is my truck accident case worth in California?",
-      answer: "The value of a truck accident case depends on numerous factors and can range from hundreds of thousands to millions of dollars. Key factors include: severity and permanence of injuries, current and future medical expenses, lost wages and diminished earning capacity, pain and suffering, property damage, degree of fault by each party, and available insurance coverage. California's pure comparative negligence law means you can recover damages even if you were partially at fault, though your recovery will be reduced by your percentage of fault. Our attorneys work with medical experts, vocational rehabilitation specialists, and economists to accurately calculate both economic and non-economic damages to ensure you receive maximum compensation."
+      question: "What are common truck accident injuries?",
+      answer: "Truck accidents cause severe injuries including: traumatic brain injuries (TBI) affecting cognitive function, spinal cord injuries causing paralysis, multiple fractures requiring surgery, internal organ damage, severe burns from fuel fires, amputation of limbs, whiplash and neck injuries, PTSD and psychological trauma. The force involved often causes multiple simultaneous injuries requiring extensive medical treatment, rehabilitation, and lifetime care. These catastrophic injuries justify substantial compensation."
     },
     {
-      question: "Do I need to hire an attorney for a truck accident in California?",
-      answer: "Yes, hiring an experienced truck accident attorney is essential. Truck accident cases are among the most complex personal injury cases, involving federal regulations, multiple defendants, aggressive defense teams, and substantial insurance policies. Trucking companies and their insurers deploy rapid response teams immediately after accidents to minimize their liability. Without experienced legal representation, you'll be at a severe disadvantage against teams of corporate attorneys and investigators working to deny or minimize your claim. An attorney will protect evidence, handle communications with insurance companies, investigate the accident thoroughly, and fight for maximum compensation while you focus on recovery."
+      question: "Can I sue if a loved one died in a truck accident?",
+      answer: "Yes, California's wrongful death statute allows specific family members to seek compensation. Eligible parties include spouses, domestic partners, children, and if none exist, anyone entitled to property through intestate succession. Recoverable damages include funeral expenses, lost financial support, loss of companionship, and household services value. Survival actions also allow recovery for the deceased's pain and suffering before death. We handle these sensitive cases with compassion while aggressively pursuing maximum compensation."
     },
     {
-      question: "What types of compensation can I recover in a California truck accident case?",
-      answer: "California truck accident victims can recover both economic and non-economic damages. Economic damages include current and future medical expenses, rehabilitation costs, lost wages and earning capacity, property damage, and out-of-pocket expenses. Non-economic damages cover pain and suffering, emotional distress, loss of enjoyment of life, and loss of consortium for spouses. In cases involving gross negligence or intentional misconduct, punitive damages may also be awarded. California's pure comparative negligence system allows recovery even if you're partially at fault, though your compensation is reduced by your percentage of fault. Our attorneys maximize both current and future damages by working with life care planners and economic experts."
+      question: "What if the truck was carrying hazardous materials?",
+      answer: "Hazmat accidents involve additional regulations and higher insurance requirements ($5 million minimum). Exposure to dangerous chemicals causes immediate injuries and long-term health effects. Additional liable parties may include chemical manufacturers and shippers. Special cleanup costs and environmental damage create additional claims. Federal Hazardous Materials Regulations impose strict requirements often violated. These cases require specialized expertise in hazmat regulations and toxic exposure injuries."
     },
     {
-      question: "How are truck accidents different from car accidents legally?",
-      answer: "Truck accidents involve a complex web of federal and state regulations that don't apply to regular passenger vehicles. Commercial trucks must comply with Federal Motor Carrier Safety Administration (FMCSA) regulations governing driver qualifications, hours of service, vehicle maintenance, cargo securement, and record-keeping. These regulations create additional standards of care and potential liability. Truck accidents also typically involve commercial insurance policies with much higher coverage limits, multiple potential defendants (driver, trucking company, cargo companies, maintenance providers), and more sophisticated defense strategies. The evidence preservation requirements are more extensive, including electronic control module (ECM) data, driver logs, maintenance records, and company safety policies."
+      question: "How do truck accidents differ from car accidents legally?",
+      answer: "Truck accidents involve federal regulations, multiple liable parties, higher insurance coverage, and more severe injuries. Evidence includes specialized data like ELDs and maintenance records. Trucking companies deploy rapid response teams and aggressive legal defense. Discovery is more complex, requiring expertise in DOT regulations. Damages are typically much higher due to catastrophic injuries. These complexities require attorneys experienced specifically in truck accident litigation."
     },
     {
-      question: "What should I do if the insurance company offers me a quick settlement?",
-      answer: "Never accept a quick settlement offer from the trucking company's insurance without consulting an experienced attorney first. These early offers are typically far below the true value of your claim and are designed to minimize the company's liability before the full extent of your injuries and damages is known. Trucking companies often dispatch claims adjusters to hospitals and accident scenes to secure quick releases. Once you sign a settlement agreement, you generally cannot seek additional compensation even if your injuries worsen or new complications arise. Many truck accident injuries, particularly brain and spinal injuries, have delayed symptoms and long-term consequences that aren't immediately apparent. Our attorneys can evaluate any settlement offer and determine if it adequately compensates you for both current and future damages."
+      question: "What is a jackknife accident?",
+      answer: "Jackknifing occurs when a truck's trailer swings out to form a 90-degree angle with the cab, resembling a folding pocket knife. Causes include sudden braking, equipment failure, improper loading, and slippery conditions. These accidents often involve multiple vehicles as the truck blocks multiple lanes. Jackknifing indicates driver error or equipment problems, strengthening liability claims. Recovery focuses on determining why the jackknife occurred and which safety measures were violated."
     },
     {
-      question: "What evidence is crucial in a truck accident case?",
-      answer: "Critical evidence in truck accident cases includes: the truck's electronic control module (ECM) data showing speed, braking, and engine performance; driver logbooks and electronic logging device (ELD) records; the truck driver's personnel file, including hiring records, training documentation, and driving history; the trucking company's safety policies, procedures, and maintenance records; cargo loading documentation and weight distribution records; vehicle inspection reports and maintenance logs; cell phone records to check for distracted driving; drug and alcohol testing results; surveillance footage from nearby businesses or traffic cameras; witness statements and expert accident reconstruction. Much of this evidence can be destroyed or altered if not preserved immediately, which is why it's crucial to contact an attorney as soon as possible after the accident."
+      question: "What are underride accidents?",
+      answer: "Underride accidents occur when smaller vehicles slide under truck trailers, often shearing off the car's roof. These catastrophic accidents frequently cause decapitation or severe head injuries. Federal law requires rear underride guards, but many are inadequate or poorly maintained. Side underride guards aren't required despite safety advocates' efforts. These accidents often result from trucks making unsafe turns or sudden stops. Liability includes both driver negligence and equipment inadequacy."
     },
     {
-      question: "How long does a truck accident lawsuit take in California?",
-      answer: "The duration of a truck accident lawsuit varies significantly depending on the complexity of the case, severity of injuries, number of defendants, and willingness to settle. Simple cases with clear liability and minor injuries might settle within 6-12 months. Complex cases involving catastrophic injuries, multiple parties, or disputed liability can take 2-4 years or longer to resolve. Factors affecting timeline include: the investigation period (which can take several months), medical treatment duration (you shouldn't settle until maximum medical improvement), discovery phase (exchanging evidence with all parties), expert witness preparation, mediation attempts, and potential trial proceedings. While this may seem lengthy, it's important not to rush the process, as settling too early often results in inadequate compensation for long-term consequences."
+      question: "Can I recover damages if I wasn't wearing a seatbelt?",
+      answer: "Yes, but California's 'seatbelt defense' may reduce compensation for injuries that seatbelts would have prevented or lessened. The defense cannot eliminate your claim entirely, only reduce damages attributable to not wearing a seatbelt. Insurance companies aggressively pursue this defense. We counter with expert testimony showing injuries would have occurred regardless or that the truck accident's severity made seatbelts irrelevant."
     },
     {
-      question: "What if I was partially at fault for the truck accident?",
-      answer: "California follows a 'pure comparative negligence' system, which means you can still recover damages even if you were partially at fault for the accident. Your compensation will be reduced by your percentage of fault. For example, if you're found to be 20% at fault and your total damages are $100,000, you would receive $80,000. This system is more favorable to plaintiffs than 'modified comparative negligence' states where you can't recover if you're 50% or 51% at fault. Trucking companies often try to shift blame to the other driver to reduce their liability, making it crucial to have an experienced attorney who can counter these tactics and minimize your assigned fault percentage through thorough investigation and expert testimony."
+      question: "What if I was hit by a delivery truck (FedEx, UPS, Amazon)?",
+      answer: "Delivery truck accidents involve unique considerations. Major companies have substantial insurance and assets but aggressive legal teams. Amazon's DSP (Delivery Service Partner) program attempts limiting liability through contractors. However, companies maintaining control over drivers, routes, and standards remain liable. Delivery pressure causing speeding and unsafe practices strengthens negligence claims. These cases often settle favorably due to companies protecting brand reputation."
     },
     {
-      question: "Can family members file a claim if their loved one died in a truck accident?",
-      answer: "Yes, family members can file a wrongful death claim if their loved one died in a truck accident. In California, eligible parties include the surviving spouse, domestic partner, children, and if there are no surviving spouse or children, other family members who were financially dependent on the deceased. Wrongful death claims can recover: loss of financial support the deceased would have provided, loss of companionship and emotional support, funeral and burial expenses, medical expenses related to the final illness or injury, and the lost value of household services the deceased provided. Separate from wrongful death claims, the deceased's estate can also file a survival action for pain and suffering experienced before death, medical expenses, and lost earnings from the time of injury until death."
+      question: "Should I talk to the trucking company's insurance adjuster?",
+      answer: "Never speak with their insurance without an attorney. Adjusters are trained to minimize claims through tactics like recorded statements used against you, getting admissions of partial fault, quick lowball settlements, and requesting unnecessary authorizations. They seem friendly but work against your interests. Let us handle all insurance communications, protecting your rights and maximizing recovery."
     },
     {
-      question: "What role does the Federal Motor Carrier Safety Administration (FMCSA) play?",
-      answer: "The FMCSA is the federal agency that regulates commercial trucking and establishes safety standards that trucking companies and drivers must follow. Key FMCSA regulations include: hours of service rules limiting driving time, commercial driver's license (CDL) requirements, drug and alcohol testing protocols, vehicle inspection and maintenance standards, cargo securement requirements, and driver qualification standards. Violations of FMCSA regulations can serve as evidence of negligence in accident cases. The FMCSA also maintains databases of trucking company safety ratings, inspection results, and crash histories that can be crucial evidence. Our attorneys use FMCSA violation records to strengthen your case and demonstrate patterns of negligent behavior by trucking companies."
+      question: "What medical treatment should I seek after a truck accident?",
+      answer: "Seek emergency care immediately, even without obvious injuries. Get comprehensive evaluation including head CT, spine X-rays, and internal organ assessment. Follow up with specialists for ongoing symptoms. Document all treatment, medications, and therapy. Keep records of pain levels and limitations. Don't skip appointments - gaps in treatment hurt claims. We connect you with doctors providing treatment on lien basis if you lack insurance."
     },
     {
-      question: "How do electronic logging devices (ELDs) affect truck accident cases?",
-      answer: "Electronic Logging Devices (ELDs) have revolutionized truck accident litigation by providing objective evidence of driver behavior. Since December 2017, most commercial trucks must use ELDs to automatically record driving time, making it harder for drivers to falsify logbooks. ELD data shows: exact driving hours and rest periods, vehicle location and speed, engine hours and miles driven, and hours of service compliance. This data is crucial for proving violations of federal driving time limits, which is a major factor in truck accidents. However, ELD data can be overwritten after a certain period, making it essential to preserve this evidence immediately after an accident. Our legal team works quickly to obtain and analyze ELD data to build the strongest possible case."
+      question: "What if the truck driver was drunk or on drugs?",
+      answer: "Impaired driving strengthens your case significantly. FMCSA requires drug/alcohol testing after accidents. Positive tests or refusals create strong liability and justify punitive damages. Criminal charges help but aren't required for civil recovery. Trucking companies may be liable for inadequate testing, ignoring warning signs, or pressuring drivers leading to substance use. These cases often result in substantial settlements."
     },
     {
-      question: "What is the 'black box' data in trucks and how is it used?",
-      answer: "Commercial trucks are equipped with Electronic Control Modules (ECMs), often called 'black boxes,' that record critical data about the vehicle's operation before, during, and after an accident. This data typically includes: vehicle speed in the moments before impact, brake application and pressure, throttle position, engine RPM, steering input, and sometimes seat belt usage. The ECM data provides objective evidence that can't be disputed, making it extremely valuable in determining fault and the cause of the accident. However, this data can be overwritten as the truck continues to operate, sometimes in as little as 30 days. This is why it's crucial to contact an attorney immediately after a truck accident to ensure this critical evidence is preserved through legal action."
+      question: "Can I sue the government if poor road conditions contributed?",
+      answer: "Yes, government entities may be liable for dangerous road conditions they knew or should have known about. This includes poor maintenance, inadequate signage, design defects, and construction zones. However, claims against government entities require filing notice within six months and face immunity defenses. We navigate these complex requirements, having successfully sued cities, counties, and Caltrans for road-related accidents."
     },
     {
-      question: "How do truck maintenance records factor into accident cases?",
-      answer: "Truck maintenance records are critical evidence in accident cases because they can reveal whether the trucking company properly maintained their vehicle according to federal regulations. Poor maintenance can contribute to accidents through brake failures, tire blowouts, steering problems, or other mechanical issues. Key maintenance evidence includes: pre-trip and post-trip inspection reports, annual DOT inspections, brake maintenance and replacement records, tire inspection and replacement logs, engine and transmission service records, and any outstanding maintenance issues or recalls. Federal regulations require trucking companies to maintain detailed records, and failure to do so or evidence of deferred maintenance can significantly strengthen your case by showing negligence in vehicle safety."
+      question: "What are California's truck weight limits?",
+      answer: "California limits trucks to 80,000 pounds gross weight without special permits. Single axles cannot exceed 20,000 pounds, tandem axles 34,000 pounds. Overweight trucks cause brake failure, tire blowouts, and bridge damage. Weigh station avoidance and falsified weight tickets indicate violations. Overweight violations strengthen negligence claims and may trigger punitive damages for conscious safety disregard."
     },
     {
-      question: "What if the truck driver was under the influence at the time of the accident?",
-      answer: "If a truck driver was under the influence of alcohol or drugs at the time of the accident, it significantly strengthens your case and may lead to additional damages. Commercial drivers are held to stricter standards than regular drivers - they can be charged with DUI with a blood alcohol content of 0.04% or higher (compared to 0.08% for regular drivers). Drug and alcohol testing is typically conducted after serious accidents, and the results become crucial evidence. If impairment is proven, you may be entitled to punitive damages in addition to compensatory damages. The trucking company may also face liability for negligent hiring if they failed to properly screen the driver's background or ignored previous substance abuse issues. Our attorneys work with toxicology experts to analyze testing results and maximize your compensation."
+      question: "How do I know if I have a valid truck accident case?",
+      answer: "Valid cases typically involve: injuries requiring medical treatment, another party's negligence or violation, and damages exceeding insurance deductibles. Even seemingly minor accidents may have valid claims due to high insurance coverage and potential injuries appearing later. We provide free case evaluations, reviewing police reports, medical records, and circumstances to determine viability. There's no obligation, and consultations are confidential."
     },
     {
-      question: "How does weather affect liability in truck accidents?",
-      answer: "Weather conditions don't absolve truck drivers or trucking companies of liability, but they do add complexity to accident cases. Commercial drivers are held to a higher standard than regular drivers and are expected to adjust their driving for weather conditions. This includes reducing speed, increasing following distance, and even pulling over when conditions become too dangerous. If a truck driver fails to adapt to weather conditions and causes an accident, they can still be held liable for negligence. Federal regulations require drivers to stop driving when conditions make it unsafe to continue. The key is proving that a reasonable commercial driver would have acted differently under the same weather conditions. Our accident reconstruction experts can analyze weather data and driver behavior to establish liability even in adverse conditions."
+      question: "What if the truck accident happened in a construction zone?",
+      answer: "Construction zone accidents involve additional complexities and potential liable parties. Enhanced penalties apply for violations in construction zones. Construction companies may be liable for inadequate warnings, poor traffic control, or dangerous conditions. Truck drivers must exercise extra caution in work zones. These accidents often involve multiple defendants including the trucking company, construction contractor, and possibly Caltrans. Documentation of construction zone setup and safety measures becomes crucial evidence."
     },
     {
-      question: "What happens if multiple vehicles were involved in the truck accident?",
-      answer: "Multi-vehicle truck accidents create complex liability scenarios where fault may be distributed among several parties. California's pure comparative negligence system allows for percentage-based fault allocation among all involved parties. Each party's insurance may contribute to the total compensation based on their degree of fault. The investigation becomes more complex, requiring analysis of: the sequence of events and chain reaction effects, each driver's actions and potential violations, vehicle positions and damage patterns, and road conditions and traffic signals. Multiple insurance companies become involved, each trying to minimize their client's liability. Having an experienced attorney is crucial in multi-vehicle accidents to ensure all liable parties are identified and held accountable, and to navigate the complex negotiations between multiple insurance companies to maximize your recovery."
+      question: "How does driver fatigue contribute to truck accidents?",
+      answer: "Driver fatigue causes reaction times similar to alcohol impairment. Studies show being awake 18 hours equals 0.08 BAC impairment. Truckers driving 70+ hours weekly face chronic exhaustion. Warning signs include lane drifting, speed variations, and missing exits. Electronic logging devices track hours but drivers find workarounds. Trucking companies pushing unrealistic schedules share liability. Fatigue-related accidents often occur between 2-6 AM and 2-4 PM when alertness naturally drops."
+    },
+    {
+      question: "What compensation is available for permanent disability?",
+      answer: "Permanent disability compensation includes lifetime medical care, lost earning capacity through retirement age, home and vehicle modifications, assistive devices and technology, in-home care or nursing facilities, vocational rehabilitation, and pain and suffering. California uses life care planners calculating costs over life expectancy. Structured settlements provide tax-free lifetime income. These cases require extensive documentation and expert testimony to capture true lifetime costs."
+    },
+    {
+      question: "Can I recover punitive damages in a truck accident case?",
+      answer: "Punitive damages require proving malice, oppression, or conscious disregard for safety by clear and convincing evidence. Examples include knowingly allowing impaired driving, falsifying safety records, ignoring critical maintenance, or forcing drivers to violate regulations. California doesn't cap punitive damages, but they must be reasonable relative to harm caused. Wealth of defendant is considered. These damages punish wrongdoing and deter future misconduct."
+    },
+    {
+      question: "What if I have pre-existing injuries aggravated by the accident?",
+      answer: "California's 'eggshell plaintiff' rule means defendants take victims as they find them. They're liable for aggravating pre-existing conditions even if someone else wouldn't have been injured as severely. The key is distinguishing new injuries from prior conditions. Medical records before and after establish baselines. Insurance companies scrutinize medical history seeking to blame current problems on old injuries. We work with doctors documenting how the accident worsened conditions."
+    },
+    {
+      question: "How are lost wages calculated in truck accident cases?",
+      answer: "Lost wages include past and future income loss. Past wages cover time missed from work for treatment and recovery. Future losses calculate reduced earning capacity through retirement age. Factors include education, skills, age, and injury impact on work ability. Self-employed individuals use tax returns and business records. Benefits like health insurance, retirement contributions, and bonuses are included. Vocational experts assess career trajectory and limitations. Household services value is added for those unable to perform domestic tasks."
+    },
+    {
+      question: "What role does black box data play in truck accident cases?",
+      answer: "Electronic Control Modules (ECMs) or 'black boxes' record crucial data including speed, braking, throttle position, and airbag deployment. This objective evidence proves or disproves driver claims. Data shows hard braking events, hours driven, and maintenance issues. Quick preservation is essential as data can be overwritten. We immediately send preservation letters and obtain court orders if necessary. Expert analysis translates raw data into understandable evidence for settlement or trial."
+    },
+    {
+      question: "Should I hire a local attorney or a big firm for my truck accident?",
+      answer: "The ideal choice combines local knowledge with resources to battle trucking companies. Local attorneys know judges, opposing counsel, and jury tendencies. But truck cases require resources for experts, investigations, and lengthy litigation. Trembach Law provides both - California expertise with resources matching big firms. You get personal attention, not being passed between associates. I personally handle your case while deploying extensive resources. This combination maximizes recovery potential."
+    },
+    {
+      question: "What if multiple vehicles were involved in the truck accident?",
+      answer: "Multi-vehicle accidents complicate liability and insurance coverage. Each driver may share fault percentages. California's joint and several liability means you can recover full damages from any defendant able to pay. Multiple insurance policies may apply, increasing available compensation. Coordination with other victims' attorneys may strengthen cases through shared evidence and expert costs. Quick action secures your position before insurance limits are exhausted by other claims."
+    },
+    {
+      question: "Can truck drivers sue if they're injured in an accident?",
+      answer: "Truck drivers can pursue claims beyond workers' compensation in certain circumstances. Third-party claims against other motorists, equipment manufacturers for defective parts, and loading companies for improper cargo are possible. Independent contractors may sue trucking companies directly. Even employee drivers might have claims if companies' gross negligence caused injuries. These cases require navigating workers' comp exclusivity and employment status issues."
+    },
+    {
+      question: "What if the truck was from another state?",
+      answer: "Interstate trucking involves federal jurisdiction and potentially multiple state laws. The accident location typically determines applicable law. Out-of-state trucking companies can be sued in California if the accident occurred here. Service of process and jurisdiction issues require expertise. Interstate carriers must register with FMCSA and maintain process agents. Insurance minimums may differ, but federal requirements apply. These cases often involve complex jurisdiction and choice of law issues."
+    },
+    {
+      question: "How do California's new insurance minimums affect my case?",
+      answer: "California raised minimum auto insurance to 30/60/15 in 2025, but commercial trucks require much higher coverage. Federal minimums range from $750,000 to $5 million depending on cargo. Many trucking companies carry umbrella policies with millions in additional coverage. These higher limits mean better compensation potential for serious injuries. However, catastrophic injuries may still exceed available insurance, requiring asset investigation and creative recovery strategies."
+    },
+    {
+      question: "What if the trucking company declares bankruptcy?",
+      answer: "Bankruptcy doesn't necessarily eliminate recovery options. Insurance policies remain available as they're separate assets. Other liable parties like drivers, brokers, or manufacturers may have coverage. Quick action can secure claims before bankruptcy filing. Bankruptcy court may allow personal injury claims to proceed. Priority status may apply for certain claims. Asset transfers before bankruptcy might be voidable. Strategic positioning protects recovery despite bankruptcy complications."
+    },
+    {
+      question: "Can I recover emotional distress damages without physical injury?",
+      answer: "California allows emotional distress recovery in certain circumstances without physical impact. Being in the 'zone of danger' where injury was likely can suffice. Witnessing injury to close family members may create claims. Intentional infliction of emotional distress has different standards. However, emotional distress claims are stronger with accompanying physical injuries. Documentation through therapy records and psychiatric evaluation strengthens these claims."
+    },
+    {
+      question: "What is spoliation of evidence in truck accident cases?",
+      answer: "Spoliation occurs when evidence is destroyed or altered. Trucking companies may 'lose' unfavorable logs, repair vehicles before inspection, or delete electronic data. Immediate spoliation letters create legal duty to preserve evidence. Violations can result in sanctions, adverse jury instructions, or presumption that destroyed evidence was unfavorable. California courts take spoliation seriously. Quick attorney involvement prevents evidence loss and documents any destruction for use at trial."
+    },
+    {
+      question: "How do hours of service violations affect my case?",
+      answer: "Hours of Service violations strongly indicate negligence and driver fatigue. Exceeding 11-hour driving limits, skipping mandatory breaks, or falsifying logs shows conscious safety disregard. These violations may constitute negligence per se - automatic breach of duty. Pattern violations suggest company pressure or policy. Electronic logging devices make violations harder to hide but workarounds exist. Expert analysis reveals manipulation. Violations justify higher compensation and possible punitive damages."
+    },
+    {
+      question: "What if I'm an undocumented immigrant injured in a truck accident?",
+      answer: "Immigration status doesn't affect your right to compensation for injuries in California. Personal injury laws protect all accident victims regardless of documentation. You can recover medical expenses, lost wages (past and some future), and pain and suffering. Immigration status generally cannot be questioned in civil cases. We protect client privacy and ensure safe participation in legal proceedings. Don't let status fears prevent seeking deserved compensation."
+    },
+    {
+      question: "Can I still file a claim if the police report blames me?",
+      answer: "Police reports aren't final determinations of fault. Officers often lack commercial trucking expertise and may not understand complex regulations. Reports can contain errors or miss crucial evidence. We conduct independent investigations often revealing different conclusions. Black box data, witness statements, and expert analysis may contradict initial reports. California's comparative negligence allows recovery even with partial fault. Don't accept police conclusions without thorough legal review."
+    },
+    {
+      question: "How do maintenance failures contribute to truck accidents?",
+      answer: "Poor maintenance causes numerous accidents through brake failure, tire blowouts, steering problems, and lighting defects. Federal regulations require systematic inspection, repair, and maintenance (SIRM). Annual inspections, pre-trip inspections, and repair documentation are mandatory. Deferred maintenance to save money shows negligence. Third-party maintenance companies may share liability. Maintenance records reveal patterns of neglect. Expert inspection identifies overlooked problems causing accidents."
+    },
+    {
+      question: "What role do truck brokers play in liability?",
+      answer: "Freight brokers connecting shippers with carriers may share liability for negligent carrier selection. If brokers hire carriers with poor safety records, inadequate insurance, or known violations, they may be liable. The FMCSA requires brokers to verify carrier authority and insurance. Negligent hiring claims require showing the broker knew or should have known about carrier problems. Broker liability expands recovery options when carriers lack adequate insurance."
+    },
+    {
+      question: "Can I sue if road debris from a truck damaged my vehicle?",
+      answer: "Yes, if the debris fell from the truck due to improper loading, inadequate securement, or equipment failure. Truck drivers and companies must properly secure cargo per FMCSA regulations. Liability depends on whether the debris directly fell from the truck or was kicked up from the roadway. We investigate the source and circumstances of debris to determine liability. Proper cargo securement violations create strong negligence claims."
+    },
+    {
+      question: "What if weather conditions contributed to the truck accident?",
+      answer: "Weather doesn't eliminate liability - it often increases it. Truck drivers must adjust speed and driving for conditions. Following too closely in rain, driving too fast in fog, or failing to chain up in snow shows negligence. Federal regulations require adjusting for adverse conditions. 'Weather defense' rarely succeeds because professional drivers should handle expected conditions. We often prove weather made driver negligence more dangerous, not less culpable."
+    },
+    {
+      question: "How do electronic logging devices (ELDs) help my case?",
+      answer: "ELDs provide objective evidence of hours driven, locations, and compliance with regulations. They prevent drivers from falsifying paper logs and show exact driving patterns. ELD data reveals violations like driving over 11-hour limits, skipping required breaks, or exceeding 70-hour weekly limits. However, drivers sometimes find workarounds like switching ELD modes inappropriately. Expert analysis reveals manipulation attempts and exposes violations strengthening your case."
+    },
+    {
+      question: "Can I receive compensation for future medical expenses?",
+      answer: "Yes, California law allows recovery of reasonably certain future medical expenses. Life care planners work with doctors to project lifetime medical needs including surgeries, therapy, medications, equipment, and home care. Present value calculations account for inflation and interest rates. Future medical expenses often exceed past expenses in catastrophic injury cases. We ensure settlements or judgments include comprehensive future care provisions, not just current medical bills."
+    },
+    {
+      question: "What if my insurance company wants reimbursement from my settlement?",
+      answer: "Health insurance subrogation claims require careful handling to maximize your net recovery. California law provides some protection through the 'made whole' doctrine - you must be fully compensated before insurers recover. Attorney fees and costs reduce subrogation claims. Negotiating reductions often achieves significant savings. ERISA plans have different rules and stronger subrogation rights. We handle all subrogation negotiations to minimize reimbursement obligations and maximize your recovery."
     }
   ];
 
   return (
-    <>
+    <div className="min-h-screen bg-background">
+      {/* SEO Component */}
       <SEO 
-        title="California Truck Accident Lawyers | 18-Wheeler Injury Attorneys | Trembach Law Firm"
-        description="Former defense attorney fighting for California truck accident victims. Catastrophic injury experts specializing in 18-wheeler collisions. Free consultation 24/7. No fees unless we win. Call (855) 985-1234."
-        canonical="/practice-areas/truck-18-wheeler-accidents"
+        title="California Truck Accident Lawyer | 18-Wheeler Attorney | Trembach Law Firm"
+        description="Former defense attorney fighting for truck accident victims. Free 24/7 consultation. No fees unless we win. Serving all California. Call (818) 123-4567."
+        canonical="/practice-areas/truck-18-wheeler"
         structuredData={{
           "@context": "https://schema.org",
           "@type": "LegalService",
-          "name": "Trembach Law Firm - Truck Accident Division",
-          "description": "California truck accident attorneys specializing in catastrophic injuries from commercial vehicle crashes",
-          "url": "https://www.trembachlawfirm.com/practice-areas/truck-18-wheeler-accidents/",
-          "telephone": "+18559851234",
+          "name": "Trembach Law Firm - Truck Accident Attorneys",
+          "description": "California truck accident law firm specializing in 18-wheeler, semi-truck, and commercial vehicle accidents",
+          "url": "https://www.trembachlawfirm.com/truck-18-wheeler-accidents/",
+          "telephone": "+18181234567",
+          "email": "info@trembachlawfirm.com",
           "address": {
             "@type": "PostalAddress",
             "streetAddress": "27001 Agoura Road, Suite 350",
             "addressLocality": "Calabasas",
             "addressRegion": "CA",
-            "postalCode": "91301"
+            "postalCode": "91301",
+            "addressCountry": "US"
           },
           "areaServed": "California",
           "priceRange": "No fees unless we win"
         }}
       />
 
+      {/* Navigation */}
       <Navigation />
 
-      {/* Custom Cursor */}
-      <div 
-        ref={cursorRef}
-        className="fixed w-4 h-4 bg-red-500 rounded-full pointer-events-none z-50 mix-blend-difference"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      />
-
-      {/* Particle Background */}
-      <div ref={particlesRef} className="fixed inset-0 pointer-events-none z-0">
-        {particles.map((particle, index) => (
-          <div
-            key={index}
-            className="absolute bg-white/20 rounded-full"
-            style={{
-              left: particle.x,
-              top: particle.y,
-              width: particle.size,
-              height: particle.size,
-              transition: 'all 0.1s ease-out'
-            }}
-          />
-        ))}
-      </div>
-
-      <div className="min-h-screen bg-background relative z-10">
-        {/* Hero Section with Parallax */}
-        <section 
-          ref={heroRef}
-          className="relative h-screen flex items-center justify-center overflow-hidden"
-        >
-          <div 
-            className="hero-bg absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroBackground})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/60 to-black/40" />
-          
-          {/* Go Back Button - Positioned below navigation */}
-          <div className="absolute top-24 left-6 z-20">
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+        
+        {/* Go Back Button - positioned in hero overlay */}
+        <div className="absolute top-20 left-6 z-10">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="hero-content">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              California Truck & 18-Wheeler Accident Lawyers
+            </h1>
+            
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-2 text-lg">Backed by Proven Experience</span>
+            </div>
+            
             <Button 
-              variant="ghost" 
-              onClick={() => window.history.back()}
-              className="flex items-center gap-2 bg-black/20 text-white hover:bg-black/40 backdrop-blur-md border border-white/20"
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              onClick={() => window.location.href = '/case-evaluation'}
             >
-              <ArrowLeft className="w-4 h-4" />
-              Go Back
+              START MY FREE CASE EVALUATION
             </Button>
           </div>
-          
-          <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
-            <div className="hero-content space-y-8">
-              <h1 className="hero-title text-6xl md:text-8xl font-bold leading-tight">
-                California Truck Accident Lawyers
-              </h1>
-              
-              <p className="hero-subtitle text-2xl md:text-3xl font-light max-w-4xl mx-auto leading-relaxed">
-                Former Defense Attorney Fighting Big Trucking Companies • Catastrophic Injury Experts
-              </p>
-              
-              <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mt-12">
-                <div className="flex items-center space-x-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-8 h-8 fill-yellow-400 text-yellow-400" />
-                  ))}
-                  <span className="ml-3 text-xl font-semibold">Fighting for Maximum Compensation</span>
-                </div>
-              </div>
-              
-              <Button 
-                size="lg" 
-                className="hero-cta bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-12 py-6 text-xl rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
-                onClick={() => window.location.href = '/case-evaluation'}
-              >
-                START FREE CASE EVALUATION
-              </Button>
-            </div>
-          </div>
+        </div>
 
-          {/* Navigation Tabs */}
-          <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent">
-            <div className="max-w-7xl mx-auto px-6">
-              <div className="flex flex-wrap justify-center gap-2 py-6">
-                {tabs.map((tab) => {
-                  const IconComponent = tab.icon;
-                  return (
-                    <button
-                      key={tab.id}
-                      onClick={() => scrollToSection(tab.id)}
-                      className={`practice-card flex items-center px-6 py-3 text-sm font-medium transition-all duration-300 rounded-lg backdrop-blur-md border ${
-                        activeTab === tab.id 
-                          ? 'bg-white/20 text-white border-white/40 shadow-lg' 
-                          : 'bg-white/5 text-white/80 border-white/20 hover:bg-white/10 hover:border-white/30'
-                      }`}
-                    >
-                      <IconComponent className="w-5 h-5 mr-2" />
-                      {tab.label}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Animated Statistics Section */}
-        <section ref={statsRef} className="py-20 bg-gradient-to-r from-gray-900 to-black text-white">
+        {/* Navigation Tabs */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              <div className="practice-card">
-                <div className="text-4xl md:text-6xl font-bold text-red-400 mb-2">
-                  {stats.trucksDaily.toLocaleString()}+
-                </div>
-                <div className="text-lg text-gray-300">Daily Port Trucks in CA</div>
-              </div>
-              <div className="practice-card">
-                <div className="text-4xl md:text-6xl font-bold text-red-400 mb-2">
-                  {stats.accidents.toLocaleString()}+
-                </div>
-                <div className="text-lg text-gray-300">Annual Truck Deaths</div>
-              </div>
-              <div className="practice-card">
-                <div className="text-4xl md:text-6xl font-bold text-red-400 mb-2">
-                  {stats.fatalities.toLocaleString()}+
-                </div>
-                <div className="text-lg text-gray-300">Annual Truck Injuries</div>
-              </div>
-              <div className="practice-card">
-                <div className="text-4xl md:text-6xl font-bold text-red-400 mb-2">
-                  {stats.experience}+
-                </div>
-                <div className="text-lg text-gray-300">Years Defense Experience</div>
-              </div>
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      activeTab === tab.id 
+                        ? 'bg-white text-primary' 
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4 mr-2" />
+                    {tab.label}
+                  </button>
+                );
+              })}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Main Content */}
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Main Content Column */}
+          <div className="lg:col-span-2" ref={contentRef}>
             
-            {/* Main Content Column */}
-            <div className="lg:col-span-2" ref={contentRef}>
+            {/* Overview Section */}
+            <section id="overview" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">California Truck & 18-Wheeler Accident Attorneys</h2>
               
-              {/* Overview Section */}
-              <section id="overview" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12 relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-600 to-red-400" />
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  California's highways and freeways see thousands of commercial trucks daily, creating constant potential for devastating accidents. When 80,000-pound trucks collide with passenger vehicles, the results are catastrophic. Victims face life-altering injuries, overwhelming medical bills, and lost income while trucking companies deploy teams of lawyers and investigators to minimize liability.
+                </p>
                 
-                <div className="flex items-center mb-8">
-                  <div className="bg-red-100 p-4 rounded-xl mr-6">
-                    <FileText className="w-8 h-8 text-red-600" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Fighting for California Truck Accident Victims</h2>
-                </div>
-                
-                <div className="prose prose-xl max-w-none mb-8">
-                  <p className="text-xl leading-relaxed text-gray-700 mb-6">
-                    Every year, over 5,000 people die and 150,000 suffer injuries in commercial truck accidents across America, with California's massive transportation infrastructure bearing a disproportionate share of these devastating collisions. When an 80,000-pound eighteen-wheeler collides with a passenger vehicle, the results are catastrophic—traumatic brain injuries, spinal cord damage, multiple fractures, and too often, death.
-                  </p>
-                  
-                  <p className="text-xl leading-relaxed text-gray-700">
-                    At Trembach Law Firm, we leverage our former defense attorney insight to combat the immediate response teams, aggressive defense tactics, and unlimited resources trucking companies deploy to minimize their liability while you focus on recovery.
-                  </p>
-                </div>
+                <p className="text-lg leading-relaxed">
+                  At Trembach Law Firm, we level the playing field. As a former defense attorney who once protected trucking companies, I now use that insider knowledge to fight for accident victims. We understand every defense strategy, every delay tactic, and every pressure point that leads to maximum compensation.
+                </p>
+              </div>
 
-                <Button 
-                  variant="outline" 
-                  onClick={() => scrollToSection('evaluation')}
-                  className="w-full py-4 text-lg border-2 border-red-200 hover:border-red-400 hover:bg-red-50 mb-8"
-                >
-                  Get Your Free Case Evaluation Now
-                </Button>
-              </section>
-
-              {/* Case Evaluation Section */}
-              <section id="evaluation" className="content-section mb-16 bg-gradient-to-br from-red-50 to-red-100 rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-red-200 p-4 rounded-xl mr-6">
-                    <Scale className="w-8 h-8 text-red-700" />
+              <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Learn More About Our California Truck Accident Practice
+                    {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Truck className="w-5 h-5 mr-2 text-primary" />
+                          Trucking Industry Expertise
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Deep understanding of federal motor carrier regulations, hours of service rules, and industry practices that create liability when violated.</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Shield className="w-5 h-5 mr-2 text-primary" />
+                          Former Defense Experience
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Unique insight into trucking company defense strategies, settlement authority, and pressure points that maximize your recovery.</p>
+                      </CardContent>
+                    </Card>
                   </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Free Case Evaluation</h2>
-                </div>
-                
-                <div className="bg-white p-10 rounded-xl shadow-lg">
-                  <h3 className="text-2xl font-semibold mb-6 text-center">Get Your Free Consultation</h3>
-                  <p className="text-lg mb-8 text-center text-gray-600">Provide some basic information to help us understand your truck accident case better.</p>
-                  
-                  <form onSubmit={handleFormSubmit} className="space-y-6">
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">First Name *</label>
-                        <Input
-                          type="text"
-                          value={formData.firstName}
-                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                          required
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
+
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-4">Why Choose Trembach Law Firm for Your Truck Accident Case?</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex items-start">
+                        <Eye className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Immediate Investigation</h4>
+                          <p className="text-sm text-muted-foreground">We deploy accident reconstruction experts and investigators to preserve evidence before it disappears.</p>
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Last Name *</label>
-                        <Input
-                          type="text"
-                          value={formData.lastName}
-                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                          required
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
+                      <div className="flex items-start">
+                        <Clock className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Urgent Response</h4>
+                          <p className="text-sm text-muted-foreground">Time-critical evidence preservation with immediate spoliation letters to prevent destruction.</p>
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Email *</label>
-                        <Input
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                          required
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
+                      <div className="flex items-start">
+                        <Users className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">Personal Attention</h4>
+                          <p className="text-sm text-muted-foreground">Direct access to experienced attorneys, not junior associates or paralegals.</p>
+                        </div>
                       </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Phone *</label>
-                        <Input
-                          type="tel"
-                          value={formData.phone}
-                          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                          required
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Accident Date *</label>
-                        <Input
-                          type="date"
-                          required
-                          value={formData.accidentDate}
-                          onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Accident Location *</label>
-                        <Input
-                          type="text"
-                          required
-                          placeholder="City, intersection, or highway"
-                          value={formData.accidentLocation}
-                          onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Type of Injury</label>
-                        <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
-                            <SelectValue placeholder="Select injury type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="brain-injury">Traumatic Brain Injury</SelectItem>
-                            <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
-                            <SelectItem value="fractures">Multiple Fractures</SelectItem>
-                            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                            <SelectItem value="burns">Burn Injuries</SelectItem>
-                            <SelectItem value="cuts-bruises">Cuts and Bruises</SelectItem>
-                            <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-                            <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-                            <SelectItem value="other">Other Injuries</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Your Vehicle Type</label>
-                        <Select value={formData.vehicleType} onValueChange={(value) => setFormData(prev => ({ ...prev, vehicleType: value }))}>
-                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
-                            <SelectValue placeholder="Select vehicle type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="car">Car</SelectItem>
-                            <SelectItem value="suv">SUV</SelectItem>
-                            <SelectItem value="pickup-truck">Pickup Truck</SelectItem>
-                            <SelectItem value="van">Van</SelectItem>
-                            <SelectItem value="motorcycle">Motorcycle</SelectItem>
-                            <SelectItem value="bicycle">Bicycle</SelectItem>
-                            <SelectItem value="pedestrian">Pedestrian</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Trucking Company (if known)</label>
-                        <Input
-                          type="text"
-                          placeholder="Name on truck or trailer"
-                          value={formData.truckCompany}
-                          onChange={(e) => setFormData(prev => ({ ...prev, truckCompany: e.target.value }))}
-                          className="border-2 border-gray-200 focus:border-red-500 py-3"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Police Report Filed?</label>
-                        <Select value={formData.policeReport} onValueChange={(value) => setFormData(prev => ({ ...prev, policeReport: value }))}>
-                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="yes">Yes</SelectItem>
-                            <SelectItem value="no">No</SelectItem>
-                            <SelectItem value="unknown">Don't Know</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-semibold mb-2 text-gray-700">Medical Treatment Received?</label>
-                        <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalTreatment: value }))}>
-                          <SelectTrigger className="border-2 border-gray-200 focus:border-red-500 py-3">
-                            <SelectValue placeholder="Select medical treatment" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="emergency-room">Emergency Room</SelectItem>
-                            <SelectItem value="hospital-admission">Hospital Admission</SelectItem>
-                            <SelectItem value="urgent-care">Urgent Care</SelectItem>
-                            <SelectItem value="doctor-visit">Doctor Visit</SelectItem>
-                            <SelectItem value="physical-therapy">Physical Therapy</SelectItem>
-                            <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
-                            <SelectItem value="none-yet">No Treatment Yet</SelectItem>
-                            <SelectItem value="refused-treatment">Refused Treatment</SelectItem>
-                          </SelectContent>
-                        </Select>
+                      <div className="flex items-start">
+                        <Award className="w-5 h-5 text-primary mt-1 mr-3" />
+                        <div>
+                          <h4 className="font-semibold">No Win, No Fee</h4>
+                          <p className="text-sm text-muted-foreground">We advance all costs and fees - you pay nothing unless we recover compensation.</p>
+                        </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <h3>The Devastating Impact of California Truck Accidents</h3>
+                    <p>
+                      Truck accidents are fundamentally different from car crashes. The massive size and weight disparity creates physics that destroys lives. An 80,000-pound fully loaded truck has 20-25 times the momentum of a 4,000-pound passenger car. When these forces collide, the passenger vehicle occupants absorb devastating energy.
+                    </p>
                     
+                    <h4>Common Catastrophic Injuries Include:</h4>
+                    <ul>
+                      <li><strong>Traumatic Brain Injuries (TBI):</strong> Cognitive impairment, memory loss, personality changes requiring lifetime care</li>
+                      <li><strong>Spinal Cord Injuries:</strong> Paralysis, loss of sensation, requiring extensive medical intervention</li>
+                      <li><strong>Multiple Fractures:</strong> Complex breaks requiring surgeries, plates, and rehabilitation</li>
+                      <li><strong>Internal Organ Damage:</strong> Liver laceration, spleen rupture, internal bleeding</li>
+                      <li><strong>Severe Burns:</strong> From fuel fires or chemical exposure requiring skin grafts</li>
+                      <li><strong>Amputations:</strong> Loss of limbs requiring prosthetics and retraining</li>
+                      <li><strong>Wrongful Death:</strong> Immediate fatality leaving families devastated</li>
+                    </ul>
+                    
+                    <p>
+                      Beyond physical trauma, victims suffer psychological injuries including PTSD, anxiety, and depression. Many never return to previous employment, creating economic devastation alongside medical costs. California's high cost of living amplifies these damages, requiring substantial compensation to restore victims' lives.
+                    </p>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Case Evaluation Section */}
+            <section id="evaluation" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
+              
+              <div className="bg-muted p-8 rounded-lg">
+                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
+                <p className="mb-6">Provide information about your truck accident to help us understand your case better.</p>
+                
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-sm font-semibold mb-2 text-gray-700">Brief Description of Accident</label>
-                      <Textarea
-                        value={formData.description}
-                        onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                        rows={4}
-                        className="border-2 border-gray-200 focus:border-red-500"
-                        placeholder="Please describe what happened..."
+                      <label className="block text-sm font-medium mb-2">First Name *</label>
+                      <Input
+                        type="text"
+                        value={formData.firstName}
+                        onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                        required
                       />
                     </div>
-                    
-                    <Button type="submit" className="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold py-4 text-lg rounded-lg shadow-lg transform hover:scale-105 transition-all duration-300">
-                      Start My Free Case Evaluation
-                    </Button>
-                  </form>
-                </div>
-              </section>
-
-              {/* Immediate Steps Section */}
-              <section id="immediate-steps" className="content-section mb-16 bg-gradient-to-br from-orange-50 to-yellow-50 rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-orange-200 p-4 rounded-xl mr-6">
-                    <AlertTriangle className="w-8 h-8 text-orange-700" />
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Last Name *</label>
+                      <Input
+                        type="text"
+                        value={formData.lastName}
+                        onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                        required
+                      />
+                    </div>
                   </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Immediate Steps After a Truck Accident</h2>
-                </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Email *</label>
+                      <Input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Phone *</label>
+                      <Input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Accident Date</label>
+                      <Input
+                        type="date"
+                        value={formData.accidentDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Accident Location</label>
+                      <Input
+                        type="text"
+                        placeholder="City, State"
+                        value={formData.accidentLocation}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Type of Injury</label>
+                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="traumatic-brain-injury">Traumatic Brain Injury</SelectItem>
+                          <SelectItem value="spinal-cord-injury">Spinal Cord Injury</SelectItem>
+                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
+                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                          <SelectItem value="burns">Burns</SelectItem>
+                          <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                          <SelectItem value="fatality">Wrongful Death</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Type of Truck</label>
+                      <Select value={formData.vehicleType} onValueChange={(value) => setFormData(prev => ({ ...prev, vehicleType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select truck type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="18-wheeler">18-Wheeler/Semi-Truck</SelectItem>
+                          <SelectItem value="delivery-truck">Delivery Truck</SelectItem>
+                          <SelectItem value="garbage-truck">Garbage Truck</SelectItem>
+                          <SelectItem value="cement-truck">Cement Truck</SelectItem>
+                          <SelectItem value="dump-truck">Dump Truck</SelectItem>
+                          <SelectItem value="tanker-truck">Tanker Truck</SelectItem>
+                          <SelectItem value="other">Other Commercial Vehicle</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Brief Description</label>
+                    <Textarea
+                      placeholder="Please describe what happened..."
+                      value={formData.description}
+                      onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                      rows={4}
+                    />
+                  </div>
+                  
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                    Start My Free Case Evaluation
+                  </Button>
+                </form>
+              </div>
+            </section>
+
+            {/* Immediate Steps Section */}
+            <section id="immediate-steps" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Immediate Steps After a Truck Accident</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={medicalTreatmentImage} 
+                  alt="Immediate medical treatment and documentation after truck accident" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Heart className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Safety & Medical Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Call 911 immediately for police and medical response</p>
+                    <p>• Move to safety if possible without causing further injury</p>
+                    <p>• Seek medical attention even without obvious injuries</p>
+                    <p>• Document all injuries with photographs</p>
+                    <p>• Get comprehensive medical evaluation including CT scans</p>
+                  </CardContent>
+                </Card>
                 
-                <div className="space-y-8">
-                  <div className="bg-white p-8 rounded-xl shadow-lg border-l-4 border-orange-500">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-4">At the Scene - Your Priority Actions</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-lg text-orange-700 mb-3">Safety First</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Move to safety if possible</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Call 911 immediately</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Check for injuries</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Turn on hazard lights</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg text-orange-700 mb-3">Evidence Protection</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Take photos from multiple angles</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Get witness contact information</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Document truck details (company, license)</li>
-                          <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Note road/weather conditions</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
-                    <h3 className="text-2xl font-bold text-red-700 mb-4">⚠️ Critical: What NOT to Do</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't admit fault or apologize</li>
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't accept quick settlements</li>
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't give recorded statements</li>
-                      </ul>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't sign documents without review</li>
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't delay medical treatment</li>
-                        <li className="flex items-start"><span className="text-red-500 font-bold mr-2">✗</span>Don't handle insurance alone</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-blue-50 p-8 rounded-xl border-l-4 border-blue-500">
-                    <h3 className="text-2xl font-bold text-blue-700 mb-4">Call Trembach Law Firm Immediately</h3>
-                    <p className="text-lg text-gray-700 mb-4">
-                      Trucking companies dispatch investigators within hours of an accident. You need immediate legal protection to preserve evidence and protect your rights.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4">
-                      <Button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 text-lg">
-                        <Phone className="w-5 h-5 mr-2" />
-                        Call (855) 985-1234
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        className="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-bold py-3 px-6 text-lg"
-                        onClick={() => window.open('sms:(855)985-1234', '_blank')}
-                      >
-                        <MessageCircle className="w-5 h-5 mr-2" />
-                        Text for Quick Response
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Eye className="w-5 h-5 mr-2 text-red-600" />
+                      Evidence Preservation Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Photograph all vehicles, damage, and road conditions</p>
+                    <p>• Get truck driver's CDL, DOT number, and insurance info</p>
+                    <p>• Collect witness contact information immediately</p>
+                    <p>• Document truck company name and truck number</p>
+                    <p>• Take photos of cargo and loading/securement</p>
+                  </CardContent>
+                </Card>
+              </div>
 
-              {/* Trucking Regulations Section */}
-              <section id="trucking-regulations" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-blue-100 p-4 rounded-xl mr-6">
-                    <Truck className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Federal Trucking Regulations</h2>
+              <div className="bg-muted p-6 rounded-lg">
+                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                  <AlertTriangle className="w-5 h-5 text-red-600 mr-2" />
+                  Critical Don'ts After a Truck Accident
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ul className="space-y-2">
+                    <li>• Don't admit fault or apologize</li>
+                    <li>• Don't sign anything from insurance companies</li>
+                    <li>• Don't give recorded statements without an attorney</li>
+                    <li>• Don't accept quick settlement offers</li>
+                  </ul>
+                  <ul className="space-y-2">
+                    <li>• Don't delay medical treatment</li>
+                    <li>• Don't discuss the accident on social media</li>
+                    <li>• Don't let evidence disappear</li>
+                    <li>• Don't handle insurance companies alone</li>
+                  </ul>
                 </div>
+              </div>
+            </section>
+
+            {/* Trucking Regulations Section */}
+            <section id="trucking-regulations" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Federal Trucking Regulations & Violations</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={truckingRegulationsImage} 
+                  alt="Federal trucking regulations and safety compliance documentation" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
                 
-                <div className="space-y-8">
-                  <div className="prose prose-xl max-w-none">
-                    <p className="text-xl leading-relaxed text-gray-700 mb-8">
-                      Commercial trucks are subject to extensive federal regulations designed to protect public safety. When trucking companies violate these rules, they can be held liable for resulting accidents and injuries.
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
-                      <div className="flex items-center mb-4">
-                        <Clock className="w-8 h-8 text-blue-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">Hours of Service Rules</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Maximum 11 hours driving per day</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />14-hour work limit with mandatory breaks</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Required 10-hour rest periods</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />Electronic logging device (ELD) requirements</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-blue-500 mt-1 mr-2 flex-shrink-0" />70-hour weekly limits</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl">
-                      <div className="flex items-center mb-4">
-                        <Wrench className="w-8 h-8 text-green-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">Maintenance Requirements</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Daily vehicle inspection reports</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Annual DOT inspections</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Brake system maintenance</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Tire condition monitoring</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Load securement standards</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl">
-                      <div className="flex items-center mb-4">
-                        <Users className="w-8 h-8 text-orange-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">Driver Qualifications</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Commercial Driver's License (CDL)</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Medical certification requirements</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Drug and alcohol testing</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Background checks and training</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-orange-500 mt-1 mr-2 flex-shrink-0" />Driving record monitoring</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
-                      <div className="flex items-center mb-4">
-                        <Scale className="w-8 h-8 text-purple-600 mr-3" />
-                        <h3 className="text-2xl font-bold text-gray-900">Weight & Size Limits</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />80,000 lb gross vehicle weight limit</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Axle weight restrictions</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Length and width limitations</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Special permit requirements</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-purple-500 mt-1 mr-2 flex-shrink-0" />Bridge law compliance</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
-                    <h3 className="text-2xl font-bold text-red-700 mb-4">California-Specific Regulations</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-lg text-red-600 mb-3">Environmental Standards</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• CARB emission requirements</li>
-                          <li>• Diesel particulate filter mandates</li>
-                          <li>• Port drayage truck regulations</li>
-                          <li>• Idling restriction laws</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg text-red-600 mb-3">Safety Requirements</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• Chain requirements in mountain areas</li>
-                          <li>• Speed limiters on steep grades</li>
-                          <li>• Enhanced inspection requirements</li>
-                          <li>• Specialized route restrictions</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                <p className="text-lg leading-relaxed mb-4">
+                  The trucking industry is heavily regulated by the Federal Motor Carrier Safety Administration (FMCSA). These regulations exist because trucks pose unique dangers requiring special safety measures. When trucking companies or drivers violate these regulations, they create liability and strengthen your case.
+                </p>
+              </div>
 
-              {/* Legal Process Section */}
-              <section id="legal-process" className="content-section mb-16 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-gray-200 p-4 rounded-xl mr-6">
-                    <Gavel className="w-8 h-8 text-gray-700" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">The Legal Process</h2>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Clock className="w-5 h-5 mr-2 text-primary" />
+                      Hours of Service Violations
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Maximum 11 hours driving in 14-hour window</li>
+                      <li>• Mandatory 30-minute break after 8 hours</li>
+                      <li>• Maximum 70 hours in 8 consecutive days</li>
+                      <li>• 10 consecutive hours off-duty before driving</li>
+                      <li>• Electronic logging device (ELD) requirements</li>
+                    </ul>
+                  </CardContent>
+                </Card>
                 
-                <div className="space-y-8">
-                  <div className="prose prose-xl max-w-none mb-8">
-                    <p className="text-xl leading-relaxed text-gray-700">
-                      Truck accident cases follow a specific legal process designed to establish liability, document damages, and secure maximum compensation for victims and their families.
-                    </p>
-                  </div>
-                  
-                  <div className="relative">
-                    <div className="absolute left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-500 to-red-500"></div>
-                    
-                    <div className="space-y-12">
-                      <div className="timeline-item relative pl-20">
-                        <div className="absolute left-4 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold">1</div>
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
-                          <h3 className="text-2xl font-bold text-blue-600 mb-4">Immediate Investigation</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Evidence Preservation</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Secure truck's black box data</li>
-                                <li>• Obtain driver logbooks and records</li>
-                                <li>• Collect witness statements</li>
-                                <li>• Document scene conditions</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Expert Analysis</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Accident reconstruction specialists</li>
-                                <li>• Vehicle inspection experts</li>
-                                <li>• Medical professionals</li>
-                                <li>• Economics specialists</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="timeline-item relative pl-20">
-                        <div className="absolute left-4 w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold">2</div>
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
-                          <h3 className="text-2xl font-bold text-green-600 mb-4">Case Development</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Liability Investigation</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Driver violation analysis</li>
-                                <li>• Company policy review</li>
-                                <li>• Maintenance record examination</li>
-                                <li>• Regulatory compliance audit</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Damage Documentation</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Current medical expenses</li>
-                                <li>• Future treatment costs</li>
-                                <li>• Lost income calculations</li>
-                                <li>• Pain and suffering evaluation</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="timeline-item relative pl-20">
-                        <div className="absolute left-4 w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white font-bold">3</div>
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
-                          <h3 className="text-2xl font-bold text-orange-600 mb-4">Negotiation & Settlement</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Insurance Negotiations</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Demand letter preparation</li>
-                                <li>• Coverage analysis</li>
-                                <li>• Settlement negotiations</li>
-                                <li>• Mediation proceedings</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Maximum Recovery</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Multiple defendant strategies</li>
-                                <li>• Policy limits analysis</li>
-                                <li>• Settlement evaluation</li>
-                                <li>• Client counseling</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="timeline-item relative pl-20">
-                        <div className="absolute left-4 w-8 h-8 bg-red-500 rounded-full flex items-center justify-center text-white font-bold">4</div>
-                        <div className="bg-white p-8 rounded-xl shadow-lg">
-                          <h3 className="text-2xl font-bold text-red-600 mb-4">Litigation (If Necessary)</h3>
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Trial Preparation</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Discovery proceedings</li>
-                                <li>• Deposition scheduling</li>
-                                <li>• Expert witness preparation</li>
-                                <li>• Trial strategy development</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <h4 className="font-bold text-lg text-gray-800 mb-3">Court Advocacy</h4>
-                              <ul className="space-y-2 text-gray-600">
-                                <li>• Jury selection</li>
-                                <li>• Opening statements</li>
-                                <li>• Evidence presentation</li>
-                                <li>• Closing arguments</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Investigation Section */}
-              <section id="investigation" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-indigo-100 p-4 rounded-xl mr-6">
-                    <Eye className="w-8 h-8 text-indigo-600" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Comprehensive Investigation</h2>
-                </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Shield className="w-5 h-5 mr-2 text-primary" />
+                      Driver Qualification Standards
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Valid Commercial Driver's License (CDL)</li>
+                      <li>• Medical certification and fitness</li>
+                      <li>• Drug and alcohol testing programs</li>
+                      <li>• Background checks and safety records</li>
+                      <li>• Training and certification requirements</li>
+                    </ul>
+                  </CardContent>
+                </Card>
                 
-                <div className="space-y-8">
-                  <div className="prose prose-xl max-w-none mb-8">
-                    <p className="text-xl leading-relaxed text-gray-700">
-                      Our investigation team works immediately to preserve critical evidence and build the strongest possible case for our clients. We understand that evidence disappears quickly, and trucking companies have teams working to limit their liability from the moment an accident occurs.
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                    <div className="space-y-6">
-                      <div className="bg-gradient-to-br from-blue-50 to-blue-100 p-8 rounded-xl">
-                        <h3 className="text-2xl font-bold text-blue-700 mb-6">Technical Evidence</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Electronic Control Module (ECM) Data</h4>
-                              <p className="text-gray-600 text-sm">Speed, braking, engine performance in moments before crash</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Electronic Logging Device (ELD) Records</h4>
-                              <p className="text-gray-600 text-sm">Hours of service compliance and driver fatigue analysis</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">GPS and Fleet Management Data</h4>
-                              <p className="text-gray-600 text-sm">Route tracking, speed monitoring, and communication records</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Vehicle Inspection Reports</h4>
-                              <p className="text-gray-600 text-sm">Pre-trip, post-trip, and maintenance documentation</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-green-50 to-green-100 p-8 rounded-xl">
-                        <h3 className="text-2xl font-bold text-green-700 mb-6">Driver & Company Records</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Driver Qualification Files</h4>
-                              <p className="text-gray-600 text-sm">Licensing, training, medical certification, employment history</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Drug & Alcohol Testing Records</h4>
-                              <p className="text-gray-600 text-sm">Pre-employment, random, post-accident testing compliance</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Company Safety Policies</h4>
-                              <p className="text-gray-600 text-sm">Training programs, safety protocols, compliance procedures</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">DOT Safety Ratings</h4>
-                              <p className="text-gray-600 text-sm">FMCSA inspection reports, violations, and safety scores</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="space-y-6">
-                      <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-8 rounded-xl">
-                        <h3 className="text-2xl font-bold text-orange-700 mb-6">Scene Reconstruction</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">3D Laser Scanning</h4>
-                              <p className="text-gray-600 text-sm">Precise measurement and digital recreation of accident scene</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Photogrammetry Analysis</h4>
-                              <p className="text-gray-600 text-sm">Converting photographs into accurate measurements and models</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Physics-Based Analysis</h4>
-                              <p className="text-gray-600 text-sm">Momentum, energy, and impact force calculations</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Computer Simulations</h4>
-                              <p className="text-gray-600 text-sm">Dynamic modeling of the collision sequence</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      <div className="bg-gradient-to-br from-purple-50 to-purple-100 p-8 rounded-xl">
-                        <h3 className="text-2xl font-bold text-purple-700 mb-6">Expert Witnesses</h3>
-                        <div className="space-y-4">
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">1</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Accident Reconstruction Specialists</h4>
-                              <p className="text-gray-600 text-sm">Engineers and physicists who recreate the crash</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">2</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Trucking Industry Experts</h4>
-                              <p className="text-gray-600 text-sm">Former DOT officials and industry safety professionals</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">3</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Medical Professionals</h4>
-                              <p className="text-gray-600 text-sm">Specialists in traumatic injuries and rehabilitation</p>
-                            </div>
-                          </div>
-                          <div className="flex items-start space-x-3">
-                            <div className="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white text-sm font-bold mt-1">4</div>
-                            <div>
-                              <h4 className="font-bold text-gray-800">Economic Analysts</h4>
-                              <p className="text-gray-600 text-sm">Economists who calculate lifetime financial losses</p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-red-50 p-8 rounded-xl border-l-4 border-red-500">
-                    <h3 className="text-2xl font-bold text-red-700 mb-4">⚠️ Time is Critical</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-lg text-red-600 mb-3">Evidence Disappears Quickly</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• ECM data can be overwritten in 30 days</li>
-                          <li>• Security camera footage is often deleted</li>
-                          <li>• Witness memories fade over time</li>
-                          <li>• Physical evidence deteriorates</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg text-red-600 mb-3">Defense Teams Act Fast</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• Trucking companies dispatch investigators immediately</li>
-                          <li>• Corporate lawyers arrive at hospitals</li>
-                          <li>• Quick settlement offers to minimize damages</li>
-                          <li>• Evidence spoliation without legal protection</li>
-                        </ul>
-                      </div>
-                    </div>
-                    <div className="mt-6 text-center">
-                      <Button className="bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-8 text-lg">
-                        <Phone className="w-5 h-5 mr-2" />
-                        Call Now: (855) 985-1234
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </section>
-
-              {/* Resources Section */}
-              <section id="resources" className="content-section mb-16 bg-gradient-to-br from-green-50 to-green-100 rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-green-200 p-4 rounded-xl mr-6">
-                    <Building className="w-8 h-8 text-green-700" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Resources & Support</h2>
-                </div>
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Wrench className="w-5 h-5 mr-2 text-primary" />
+                      Vehicle Maintenance Standards
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Systematic inspection, repair, and maintenance</li>
+                      <li>• Pre-trip and post-trip inspections</li>
+                      <li>• Annual DOT inspections</li>
+                      <li>• Brake system requirements</li>
+                      <li>• Lighting and reflector standards</li>
+                    </ul>
+                  </CardContent>
+                </Card>
                 
-                <div className="space-y-8">
-                  <div className="prose prose-xl max-w-none mb-8">
-                    <p className="text-xl leading-relaxed text-gray-700">
-                      We provide comprehensive support beyond legal representation, connecting our clients with the resources they need for recovery and rebuilding their lives after a devastating truck accident.
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Target className="w-5 h-5 mr-2 text-primary" />
+                      Cargo Securement Rules
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Proper load distribution and securement</li>
+                      <li>• Weight limits and axle restrictions</li>
+                      <li>• Specialized rules for different cargo types</li>
+                      <li>• Tie-down and blocking requirements</li>
+                      <li>• Hazardous materials handling</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.regulations} onOpenChange={() => toggleSection('regulations')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Learn More About How Violations Strengthen Your Case
+                    {expandedSections.regulations ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="prose prose-lg max-w-none">
+                    <h3>How Regulatory Violations Create Liability</h3>
+                    <p>
+                      Violations of federal motor carrier regulations often constitute "negligence per se" under California law. This means the violation automatically establishes a breach of duty, making it easier to prove the trucking company or driver was negligent. Common violations we investigate include:
                     </p>
+                    
+                    <h4>Driver Fatigue and Hours of Service</h4>
+                    <p>
+                      Driver fatigue is a leading cause of truck accidents. Studies show that being awake for 18 hours impairs driving ability equivalent to a 0.08% blood alcohol level. Electronic Logging Devices (ELDs) are supposed to prevent hours of service violations, but drivers and companies still find ways to circumvent these systems.
+                    </p>
+                    
+                    <p>We investigate:</p>
+                    <ul>
+                      <li>ELD data for actual driving hours versus logs</li>
+                      <li>Pattern of violations showing company pressure</li>
+                      <li>Duty status manipulations and false entries</li>
+                      <li>Off-duty time spent working rather than resting</li>
+                      <li>Coercion to violate regulations</li>
+                    </ul>
+                    
+                    <h4>Inadequate Driver Screening</h4>
+                    <p>
+                      Trucking companies must thoroughly vet drivers before hiring. Negligent hiring occurs when companies fail to properly screen applicants or ignore red flags in driving records. We examine:
+                    </p>
+                    <ul>
+                      <li>Prior traffic violations and accidents</li>
+                      <li>Drug and alcohol testing history</li>
+                      <li>Previous employment verification</li>
+                      <li>Medical disqualifications</li>
+                      <li>Training adequacy and certification</li>
+                    </ul>
+                    
+                    <h4>Vehicle Maintenance Failures</h4>
+                    <p>
+                      Poor maintenance causes many truck accidents. Federal regulations require systematic programs for inspection, repair, and maintenance. Violations include:
+                    </p>
+                    <ul>
+                      <li>Skipping or falsifying inspections</li>
+                      <li>Deferring critical repairs to save money</li>
+                      <li>Using unqualified maintenance personnel</li>
+                      <li>Failing to address known defects</li>
+                      <li>Inadequate maintenance records</li>
+                    </ul>
                   </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <Stethoscope className="w-8 h-8 text-blue-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Medical Support</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Specialist referrals</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Treatment coordination</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Medical funding assistance</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Hospital lien negotiations</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <Calculator className="w-8 h-8 text-green-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Financial Resources</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Case funding options</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Insurance claim assistance</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Disability benefit guidance</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Financial planning referrals</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <Heart className="w-8 h-8 text-red-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Emotional Support</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Counseling referrals</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Support group connections</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Family assistance programs</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Crisis intervention services</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <Wrench className="w-8 h-8 text-orange-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Rehabilitation Services</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Physical therapy networks</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Occupational therapy</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Adaptive equipment</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Vocational retraining</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <BookOpen className="w-8 h-8 text-purple-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Educational Resources</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Legal process guides</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Recovery timelines</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Rights and responsibilities</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Insurance explanations</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                      <div className="flex items-center mb-4">
-                        <Users className="w-8 h-8 text-indigo-600 mr-3" />
-                        <h3 className="text-xl font-bold text-gray-900">Family Support</h3>
-                      </div>
-                      <ul className="space-y-3 text-gray-700">
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Caregiver resources</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Children's counseling</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Family legal consultations</li>
-                        <li className="flex items-start"><CheckCircle className="w-5 h-5 text-green-500 mt-1 mr-2 flex-shrink-0" />Wrongful death support</li>
-                      </ul>
-                    </div>
-                  </div>
-                  
-                  <div className="bg-blue-50 p-8 rounded-xl border-l-4 border-blue-500">
-                    <h3 className="text-2xl font-bold text-blue-700 mb-4">California-Specific Resources</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <div>
-                        <h4 className="font-bold text-lg text-blue-600 mb-3">State Benefits & Programs</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• California State Disability Insurance (SDI)</li>
-                          <li>• Workers' Compensation (if work-related)</li>
-                          <li>• Medi-Cal coverage options</li>
-                          <li>• CalFresh food assistance</li>
-                          <li>• Housing assistance programs</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-lg text-blue-600 mb-3">Legal Aid & Advocacy</h4>
-                        <ul className="space-y-2 text-gray-700">
-                          <li>• Consumer advocacy organizations</li>
-                          <li>• Disability rights groups</li>
-                          <li>• Victim's rights organizations</li>
-                          <li>• Insurance regulatory assistance</li>
-                          <li>• Legal aid society referrals</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
 
-              {/* FAQ Section */}
-              <section id="faq" className="content-section mb-16 bg-white rounded-2xl shadow-2xl p-12">
-                <div className="flex items-center mb-8">
-                  <div className="bg-blue-100 p-4 rounded-xl mr-6">
-                    <HelpCircle className="w-8 h-8 text-blue-600" />
-                  </div>
-                  <h2 className="text-4xl font-bold text-gray-900">Frequently Asked Questions</h2>
-                </div>
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">The Legal Process for Truck Accident Claims</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={legalProcessImage} 
+                  alt="Legal process and documentation for truck accident claims" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
+                
+                <p className="text-lg leading-relaxed mb-4">
+                  Truck accident cases follow a complex legal process requiring expertise in federal regulations, insurance coverage, and multi-party liability. Understanding this process helps you make informed decisions about your case.
+                </p>
+              </div>
 
-                <Accordion type="single" collapsible className="space-y-4">
+              <div className="space-y-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <FileText className="w-5 h-5 mr-2 text-primary" />
+                      Phase 1: Immediate Investigation (0-30 Days)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      <li>• Evidence preservation and spoliation letters</li>
+                      <li>• Accident scene reconstruction</li>
+                      <li>• Witness interviews and statements</li>
+                      <li>• Medical record compilation</li>
+                      <li>• Insurance notification and coverage investigation</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Eye className="w-5 h-5 mr-2 text-primary" />
+                      Phase 2: Discovery and Investigation (30-180 Days)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      <li>• Subpoena of trucking company records</li>
+                      <li>• Driver qualification file review</li>
+                      <li>• Vehicle maintenance history analysis</li>
+                      <li>• Hours of service and ELD data examination</li>
+                      <li>• Expert witness retention and analysis</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="flex items-center">
+                      <Scale className="w-5 h-5 mr-2 text-primary" />
+                      Phase 3: Formal Legal Action (If Necessary)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2">
+                      <li>• Lawsuit filing and formal discovery</li>
+                      <li>• Depositions of key witnesses</li>
+                      <li>• Expert witness preparation</li>
+                      <li>• Mediation and settlement negotiations</li>
+                      <li>• Trial preparation and presentation</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.legal} onOpenChange={() => toggleSection('legal')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4 mt-6">
+                    Learn More About Legal Strategy and Compensation
+                    {expandedSections.legal ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="prose prose-lg max-w-none">
+                    <h3>Determining Liability in Complex Cases</h3>
+                    <p>
+                      Truck accident liability often involves multiple parties, each with different insurance coverage and legal responsibilities. Our investigation identifies all potential defendants to maximize your recovery:
+                    </p>
+                    
+                    <h4>Primary Liable Parties</h4>
+                    <ul>
+                      <li><strong>Truck Driver:</strong> Direct negligence through violations, impairment, or reckless operation</li>
+                      <li><strong>Trucking Company:</strong> Vicarious liability for employee actions, negligent hiring/training, regulatory violations</li>
+                      <li><strong>Cargo Loaders:</strong> Improper loading creating dangerous weight distribution or securement failures</li>
+                      <li><strong>Maintenance Providers:</strong> Faulty repairs, missed inspections, or inadequate maintenance</li>
+                      <li><strong>Truck Manufacturers:</strong> Defective components, design flaws, or inadequate warnings</li>
+                      <li><strong>Government Entities:</strong> Dangerous road conditions, poor signage, or construction zone hazards</li>
+                    </ul>
+                    
+                    <h3>Maximizing Compensation Through Multiple Sources</h3>
+                    <p>
+                      Unlike car accidents with limited insurance coverage, truck accidents often provide access to substantial compensation through various sources:
+                    </p>
+                    
+                    <h4>Primary Insurance Coverage</h4>
+                    <ul>
+                      <li>Federal minimum requirements: $750,000 (general freight) to $5,000,000 (hazmat)</li>
+                      <li>Many companies carry higher limits due to cargo value and risk</li>
+                      <li>Umbrella policies often provide additional millions in coverage</li>
+                    </ul>
+                    
+                    <h4>Additional Recovery Sources</h4>
+                    <ul>
+                      <li>Multiple insurance policies from various liable parties</li>
+                      <li>Corporate assets when insurance is insufficient</li>
+                      <li>Your own underinsured motorist coverage</li>
+                      <li>Workers' compensation (if injured on the job)</li>
+                    </ul>
+                    
+                    <h3>Types of Damages Available</h3>
+                    
+                    <h4>Economic Damages</h4>
+                    <ul>
+                      <li>Current and future medical expenses</li>
+                      <li>Lost wages and reduced earning capacity</li>
+                      <li>Property damage and vehicle replacement</li>
+                      <li>Home modifications for disabilities</li>
+                      <li>Ongoing care and rehabilitation costs</li>
+                    </ul>
+                    
+                    <h4>Non-Economic Damages</h4>
+                    <ul>
+                      <li>Pain and suffering</li>
+                      <li>Emotional distress and PTSD</li>
+                      <li>Loss of life enjoyment</li>
+                      <li>Loss of consortium (spousal relationship)</li>
+                      <li>Permanent disability and disfigurement</li>
+                    </ul>
+                    
+                    <h4>Punitive Damages</h4>
+                    <p>
+                      California allows punitive damages when defendants show conscious disregard for safety. Examples include:
+                    </p>
+                    <ul>
+                      <li>Knowingly allowing impaired or unqualified drivers</li>
+                      <li>Falsifying safety records or inspection reports</li>
+                      <li>Pressuring drivers to violate hours of service</li>
+                      <li>Ignoring critical maintenance to save money</li>
+                    </ul>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Investigation Section */}
+            <section id="investigation" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Comprehensive Accident Investigation</h2>
+              
+              <div className="mb-6">
+                <img 
+                  src={compensationInsuranceImage} 
+                  alt="Comprehensive truck accident investigation and evidence collection" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                />
+                
+                <p className="text-lg leading-relaxed mb-4">
+                  Successful truck accident cases depend on thorough investigation and evidence preservation. Time is critical as evidence disappears quickly and trucking companies deploy their own investigators to minimize liability.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Critical Evidence We Preserve</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Electronic Control Module (ECM) "black box" data</li>
+                      <li>• Electronic Logging Device (ELD) records</li>
+                      <li>• Driver qualification files and training records</li>
+                      <li>• Vehicle maintenance and inspection reports</li>
+                      <li>• Drug and alcohol testing results</li>
+                      <li>• Cargo manifests and weight tickets</li>
+                      <li>• GPS tracking and fleet management data</li>
+                      <li>• Surveillance footage from surrounding areas</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Expert Witnesses We Deploy</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Accident reconstruction specialists</li>
+                      <li>• Trucking industry safety experts</li>
+                      <li>• Mechanical engineers for vehicle defects</li>
+                      <li>• Medical experts for injury documentation</li>
+                      <li>• Economic experts for damage calculations</li>
+                      <li>• Former DOT inspectors</li>
+                      <li>• Biomechanical experts for injury causation</li>
+                      <li>• Life care planners for future needs</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="bg-muted p-6 rounded-lg">
+                <h3 className="text-lg font-semibold mb-3 flex items-center">
+                  <Clock className="w-5 h-5 text-red-600 mr-2" />
+                  Why Immediate Action Is Critical
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <ul className="space-y-2">
+                    <li>• ELD data can be overwritten every 6 months</li>
+                    <li>• Surveillance footage often deleted within 30 days</li>
+                    <li>• Accident scene evidence disappears quickly</li>
+                    <li>• Witness memories fade over time</li>
+                  </ul>
+                  <ul className="space-y-2">
+                    <li>• Trucking companies may repair or destroy vehicles</li>
+                    <li>• Driver personnel files may be "cleaned up"</li>
+                    <li>• Maintenance records may disappear</li>
+                    <li>• GPS and telematics data may be purged</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions About Truck Accidents</h2>
+              
+              <div className="space-y-4">
+                <Accordion type="single" collapsible className="w-full">
                   {faqData.map((faq, index) => (
-                    <AccordionItem 
-                      key={index} 
-                      value={`item-${index}`}
-                      className="border border-gray-200 rounded-lg px-6 shadow-sm hover:shadow-md transition-all duration-300"
-                    >
-                      <AccordionTrigger className="text-left text-lg font-semibold text-gray-900 hover:text-blue-600 py-6">
+                    <AccordionItem key={index} value={`item-${index}`}>
+                      <AccordionTrigger className="text-left">
                         {faq.question}
                       </AccordionTrigger>
-                      <AccordionContent className="text-gray-700 pb-6 leading-relaxed">
+                      <AccordionContent className="text-muted-foreground">
                         {faq.answer}
                       </AccordionContent>
                     </AccordionItem>
                   ))}
                 </Accordion>
-              </section>
-            </div>
+              </div>
+            </section>
 
-            {/* Sidebar */}
-            <div className="lg:col-span-1">
-              <div className="sticky top-8 space-y-8">
-                {/* Quick Contact Card */}
-                <Card className="bg-gradient-to-br from-red-600 to-red-700 text-white shadow-2xl border-0 overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full -translate-y-16 translate-x-16" />
-                  <CardHeader className="relative z-10">
-                    <CardTitle className="flex items-center text-2xl">
-                      <Phone className="w-6 h-6 mr-3" />
-                      Free Consultation
-                    </CardTitle>
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Helpful Resources</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Government Resources</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-6 relative z-10">
-                    <div className="text-center">
-                      <div className="text-3xl font-bold mb-2">(855) 985-1234</div>
-                      <div className="text-red-100">Available 24/7</div>
-                    </div>
-                    <Button className="w-full bg-white text-red-600 hover:bg-red-50 font-bold py-4">
-                      <Phone className="w-5 h-5 mr-2" />
-                      Call Now
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-white text-white hover:bg-white hover:text-red-600 font-bold py-4"
-                      onClick={() => window.location.href = '/case-evaluation'}
-                    >
-                      <Mail className="w-5 h-5 mr-2" />
-                      Email Consultation
-                    </Button>
-                    <div className="text-center text-red-100 font-semibold">
-                      No Fee Unless We Win
-                    </div>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• <a href="https://www.fmcsa.dot.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Federal Motor Carrier Safety Administration</a></li>
+                      <li>• <a href="https://www.dmv.ca.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Department of Motor Vehicles</a></li>
+                      <li>• <a href="https://www.nhtsa.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">National Highway Traffic Safety Administration</a></li>
+                      <li>• <a href="https://www.osha.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Occupational Safety and Health Administration</a></li>
+                    </ul>
                   </CardContent>
                 </Card>
-
-                {/* Sidebar Image */}
-                <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                  <img 
-                    src={sidebarImage} 
-                    alt="California truck accident legal representation" 
-                    className="w-full h-64 object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <div className="absolute bottom-6 left-6 right-6 text-white">
-                    <h3 className="text-xl font-bold mb-2">Maximum Compensation</h3>
-                    <p className="text-sm opacity-90">Former defense attorney advantage</p>
-                  </div>
-                </div>
-
-                {/* Key Benefits */}
-                <Card className="shadow-2xl border-0">
+                
+                <Card>
                   <CardHeader>
-                    <CardTitle className="text-xl text-gray-900">Why Choose Trembach Law</CardTitle>
+                    <CardTitle>Support Organizations</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold text-gray-900">Former Defense Attorney</div>
-                        <div className="text-sm text-gray-600">Inside knowledge of trucking company tactics</div>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold text-gray-900">24/7 Availability</div>
-                        <div className="text-sm text-gray-600">Immediate response to protect evidence</div>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold text-gray-900">No Fees Unless We Win</div>
-                        <div className="text-sm text-gray-600">Contingency fee arrangement</div>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-3">
-                      <CheckCircle className="w-5 h-5 text-green-500 mt-1 flex-shrink-0" />
-                      <div>
-                        <div className="font-semibold text-gray-900">Catastrophic Injury Experts</div>
-                        <div className="text-sm text-gray-600">Maximum compensation specialists</div>
-                      </div>
-                    </div>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• <a href="https://www.trucksafety.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Citizens for Reliable and Safe Highways</a></li>
+                      <li>• <a href="https://www.roadwaypatternsdatabase.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Road Safety Information Database</a></li>
+                      <li>• <a href="https://www.truckinfo.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Truck Safety Coalition</a></li>
+                      <li>• <a href="https://www.iihs.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Insurance Institute for Highway Safety</a></li>
+                    </ul>
                   </CardContent>
                 </Card>
               </div>
-            </div>
+            </section>
+
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            
+            {/* Quick Contact Card */}
+            <Card className="mb-6 sticky top-6">
+              <CardHeader className="bg-red-600 text-white rounded-t-lg">
+                <CardTitle className="text-center">Get Help Now</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="text-center mb-4">
+                  <div className="text-2xl font-bold mb-2">(818) 123-4567</div>
+                  <p className="text-sm text-muted-foreground">Available 24/7 for Emergencies</p>
+                </div>
+                
+                <div className="flex flex-col gap-3">
+                  <Button 
+                    className="w-full bg-green-600 hover:bg-green-700"
+                    onClick={() => window.location.href = 'tel:+18181234567'}
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call Now
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.location.href = 'sms:+18181234567'}
+                  >
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Text for Quick Response
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email Consultation
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Case Evaluation Form */}
+            <Card className="mb-6">
+              <CardHeader>
+                <CardTitle>Quick Case Evaluation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div>
+                    <Input placeholder="Your Name" required />
+                  </div>
+                  <div>
+                    <Input type="email" placeholder="Email Address" required />
+                  </div>
+                  <div>
+                    <Input type="tel" placeholder="Phone Number" required />
+                  </div>
+                  <div>
+                    <Textarea placeholder="Brief description of your accident..." rows={3} />
+                  </div>
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
+                    Get Free Evaluation
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            {/* Sidebar Image */}
+            <Card className="mb-6">
+              <CardContent className="p-0">
+                <img 
+                  src={sidebarImage} 
+                  alt="Truck accident legal representation" 
+                  className="w-full h-48 object-cover rounded-lg"
+                />
+                <div className="p-4">
+                  <h3 className="font-semibold mb-2">Experienced Truck Accident Attorney</h3>
+                  <p className="text-sm text-muted-foreground">
+                    Former defense attorney now fighting for truck accident victims across California.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Recent Results */}
+            <Card>
+              <CardHeader>
+                <CardTitle>Why Choose Our Firm</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-green-600 mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Former Defense Experience</h4>
+                      <p className="text-xs text-muted-foreground">Unique insight into trucking company defense strategies</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-green-600 mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Immediate Response</h4>
+                      <p className="text-xs text-muted-foreground">24/7 availability for accident scene investigation</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-green-600 mt-1 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-xs text-muted-foreground">We advance all costs and fees</p>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

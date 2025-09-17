@@ -44,6 +44,9 @@ import SilicosisMedicalGuidance from "./pages/SilicosisMedicalGuidance";
 import PremisesLiabilityCaseEvaluation from "./pages/PremisesLiabilityCaseEvaluation";
 import PremisesLiabilityCompensationCalculator from "./pages/PremisesLiabilityCompensationCalculator";
 import PremisesLiabilityMedicalGuidance from "./pages/PremisesLiabilityMedicalGuidance";
+import DogBiteCaseEvaluation from "./pages/DogBiteCaseEvaluation";
+import DogBiteCompensationCalculator from "./pages/DogBiteCompensationCalculator";
+import DogBiteMedicalGuidance from "./pages/DogBiteMedicalGuidance";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -95,6 +98,9 @@ const App = () => (
           <Route path="/premises-liability-case-evaluation" element={<PremisesLiabilityCaseEvaluation />} />
           <Route path="/premises-liability-compensation-calculator" element={<PremisesLiabilityCompensationCalculator />} />
           <Route path="/premises-liability-medical-guidance" element={<PremisesLiabilityMedicalGuidance />} />
+          <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
+          <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
+          <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

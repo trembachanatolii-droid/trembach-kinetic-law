@@ -38,7 +38,11 @@ import {
 import heroBackground from '@/assets/practice-areas/dog-bites-hero-new.jpg';
 import medicalCareImage from '@/assets/practice-areas/dog-bite-medical-care.jpg';
 import lawsImage from '@/assets/practice-areas/dog-bite-laws.jpg';
-import compensationImage from '@/assets/practice-areas/courthouse-professional.jpg';
+import compensationImage from '@/assets/practice-areas/dog-bite-compensation.jpg';
+import incidentImage from '@/assets/practice-areas/dog-bite-incident-scene.jpg';
+import preventionImage from '@/assets/practice-areas/dog-bite-prevention.jpg';
+import legalConsultationImage from '@/assets/practice-areas/dog-bite-legal-consultation.jpg';
+import medicalTreatmentImage from '@/assets/practice-areas/dog-bite-medical-treatment.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);

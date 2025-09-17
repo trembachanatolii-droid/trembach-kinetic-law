@@ -7,7 +7,7 @@ interface GoBackProps {
 }
 
 const GoBack: React.FC<GoBackProps> = ({ className = "" }) => {
-  const baseClasses = "absolute top-6 left-6 z-[60]";
+  const baseClasses = "absolute top-20 left-6 z-[60]";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   
   return (

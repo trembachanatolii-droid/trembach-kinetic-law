@@ -39,7 +39,7 @@ import {
 import heroBackground from '@/assets/practice-areas/spinal-cord-injuries-hero.jpg';
 import whatToDoImage from '@/assets/practice-areas/spinal-cord-what-to-do.jpg';
 import accidentTypesImage from '@/assets/practice-areas/spinal-cord-injury-types.jpg';
-import provingNegligenceImage from '@/assets/practice-areas/spinal-cord-proving-negligence.jpg';
+import provingNegligenceImage from '@/assets/practice-areas/courthouse-professional.jpg';
 import compensationImage from '@/assets/practice-areas/spinal-cord-compensation.jpg';
 import SEO from '@/components/SEO';
 
@@ -371,7 +371,7 @@ const SpinalCordInjuries: React.FC = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative z-0 mt-16 h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative z-0 mt-24 h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 z-0 bg-black/70 pointer-events-none"></div>
@@ -390,11 +390,11 @@ const SpinalCordInjuries: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 pt-20 pb-16">
           <div className="hero-content">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
+            <h1 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
               California Spinal Cord Injury Attorneys
             </h1>
             
-            <p className="text-xl md:text-2xl mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl mb-8 leading-relaxed">
               Life changes in an instant with a spinal cord injury. Former defense attorney securing maximum compensation for paralysis victims throughout California. We fight for your future while you focus on recovery.
             </p>
             
@@ -431,7 +431,7 @@ const SpinalCordInjuries: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 bg-white/10 backdrop-blur-sm">
+        <div className="absolute bottom-0 left-0 right-0 z-30 bg-white/10 backdrop-blur-sm pointer-events-auto">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
               {tabs.map((tab) => {
@@ -1129,12 +1129,6 @@ const SpinalCordInjuries: React.FC = () => {
                       EMAIL US
                     </Button>
                     
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 visible"
-                      onClick={() => window.open('tel:8181234567')}
-                    >
-                      24/7 LIVE CHAT
-                    </Button>
                     
                     <Button 
                       className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"

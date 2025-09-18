@@ -42,8 +42,8 @@ import {
   Calculator
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/medical-malpractice-hero.jpg';
-import diagnosticErrorsImage from '@/assets/practice-areas/medical-malpractice-consultation.jpg';
-import surgicalErrorsImage from '@/assets/practice-areas/medical-negligence-evidence.jpg';
+import diagnosticErrorsImage from '@/assets/practice-areas/medical-malpractice.jpg';
+import surgicalErrorsImage from '@/assets/practice-areas/brain-injuries.jpg';
 import provingNegligenceImage from '@/assets/hero-background-scales.jpg';
 import compensationImage from '@/assets/practice-areas/courthouse-professional.jpg';
 import SEO from '@/components/SEO';

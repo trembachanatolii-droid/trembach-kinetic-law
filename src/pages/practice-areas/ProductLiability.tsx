@@ -49,7 +49,7 @@ import {
 import heroBackground from '@/assets/practice-areas/product-liability-hero-professional.jpg';
 import legalConsultationImage from '@/assets/practice-areas/product-liability-legal-new.jpg';
 import strictLiabilityImage from '@/assets/practice-areas/product-liability-strict-liability-alt.jpg';
-import courthouseImage from '@/assets/practice-areas/product-liability-courthouse-new.jpg';
+import courthouseImage from '@/assets/practice-areas/product-liability-legal-process-professional.jpg';
 import manufacturingImage from '@/assets/practice-areas/product-liability-manufacturing-new.jpg';
 import compensationImage from '@/assets/practice-areas/product-liability-compensation-new.jpg';
 import designImage from '@/assets/practice-areas/product-liability-design-new.jpg';

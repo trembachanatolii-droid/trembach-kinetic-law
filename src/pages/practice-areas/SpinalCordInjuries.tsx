@@ -371,7 +371,7 @@ const SpinalCordInjuries: React.FC = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative h-[600px] pt-20 flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 bg-black/70"></div>

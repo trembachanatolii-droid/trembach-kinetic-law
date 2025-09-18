@@ -42,6 +42,11 @@ import whatToDoImage from '@/assets/practice-areas/burn-medical-treatment.jpg';
 import burnTypesImage from '@/assets/practice-areas/burn-chemical-damage.jpg';
 import provingNegligenceImage from '@/assets/practice-areas/burn-legal-process.jpg';
 import compensationImage from '@/assets/practice-areas/burn-compensation-calculation.jpg';
+import safetyPreventionImage from '@/assets/practice-areas/burn-safety-prevention.jpg';
+import electricalHazardImage from '@/assets/practice-areas/burn-electrical-hazard.jpg';
+import investigationImage from '@/assets/practice-areas/burn-investigation.jpg';
+import caseDocumentationImage from '@/assets/practice-areas/burn-case-documentation.jpg';
+import anatoliiImage from '@/assets/three-ways-to-start-anatolii.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 
@@ -849,72 +854,56 @@ const BurnInjuries: React.FC = () => {
           {/* Sidebar - 3 Ways to Start Your Case */}
           <div className="lg:col-span-1">
             <div className="sticky top-24">
-              <Card className="shadow-2xl border-0 bg-gray-900 text-white overflow-hidden">
-                <CardContent className="p-8 space-y-6">
-                  <div className="text-center">
-                    <h3 className="text-2xl font-bold mb-2 text-white">
-                      3 Ways to
-                    </h3>
-                    <h3 className="text-2xl font-bold mb-4 text-white">
-                      Start Your Case
-                    </h3>
-                    <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
-                    <p className="text-gray-300 mb-8 text-base leading-relaxed">
-                      You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-                    </p>
-                  </div>
-
-                  {/* Call Button */}
-                  <Button 
-                    className="w-full bg-red-700 hover:bg-red-800 text-white py-4 text-lg font-semibold rounded-lg"
-                    onClick={() => window.location.href = 'tel:8554155849'}
+              <Card className="shadow-2xl border-0 overflow-hidden">
+                <CardContent className="p-0">
+                  {/* Background Image with Overlay */}
+                  <div 
+                    className="relative bg-cover bg-center bg-no-repeat"
+                    style={{ 
+                      backgroundImage: `url(${anatoliiImage})`,
+                      backgroundPosition: 'center center',
+                      backgroundSize: 'cover'
+                    }}
                   >
-                    CALL (855) 415-5849
-                  </Button>
-
-                  {/* Email Button */}
-                  <Button 
-                    className="w-full bg-red-700 hover:bg-red-800 text-white py-4 text-lg font-semibold rounded-lg"
-                    onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
-                  >
-                    EMAIL US
-                  </Button>
-
-                  {/* Calculate Settlement Button */}
-                  <Button 
-                    className="w-full bg-red-700 hover:bg-red-800 text-white py-4 text-lg font-semibold rounded-lg"
-                    onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
-                  >
-                    CALCULATE SETTLEMENT
-                  </Button>
-
-                  {/* Trust Indicators */}
-                  <div className="border-t pt-6">
-                    <div className="text-center space-y-3">
-                      <div className="flex justify-center items-center">
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
-                        <Star className="w-5 h-5 text-yellow-500 fill-current" />
+                    <div className="absolute inset-0 bg-white/95"></div>
+                    <div className="relative z-10 p-8 space-y-6">
+                      <div className="text-center">
+                        <h3 className="text-3xl font-bold mb-2 text-red-600">
+                          3 WAYS
+                        </h3>
+                        <h3 className="text-3xl font-bold mb-2 text-red-600">
+                          TO START
+                        </h3>
+                        <h3 className="text-3xl font-bold mb-6 text-red-600">
+                          YOUR CASE
+                        </h3>
+                        <div className="w-24 h-1 bg-gray-400 mx-auto mb-6"></div>
                       </div>
-                      <p className="text-sm text-gray-600">
-                        Experienced Burn Injury Attorneys
-                      </p>
-                      <div className="space-y-2 text-sm">
-                        <div className="flex items-center justify-center">
-                          <Shield className="w-4 h-4 text-green-600 mr-2" />
-                          No Win, No Fee
-                        </div>
-                        <div className="flex items-center justify-center">
-                          <Clock className="w-4 h-4 text-blue-600 mr-2" />
-                          Free Consultation
-                        </div>
-                        <div className="flex items-center justify-center">
-                          <Heart className="w-4 h-4 text-red-600 mr-2" />
-                          Personal Attention
-                        </div>
-                      </div>
+
+                      {/* Call Button */}
+                      <Button 
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-semibold rounded-full shadow-lg"
+                        onClick={() => window.location.href = 'tel:8553743202'}
+                      >
+                        CALL (855) 374-3202
+                      </Button>
+
+                      {/* Email Button */}
+                      <Button 
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-semibold rounded-full shadow-lg"
+                        onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+                      >
+                        EMAIL US
+                      </Button>
+
+                      {/* Calculate Settlement Button */}
+                      <Button 
+                        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-6 text-lg font-semibold rounded-full shadow-lg"
+                        onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
+                      >
+                        ESTIMATE YOUR COMPENSATION
+                      </Button>
+
                     </div>
                   </div>
                 </CardContent>
@@ -937,16 +926,16 @@ const BurnInjuries: React.FC = () => {
             <Button 
               size="lg" 
               variant="secondary"
-              className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full"
-              onClick={() => window.location.href = 'tel:8181234567'}
+              className="bg-white text-red-600 hover:bg-gray-100 px-8 py-4 text-lg rounded-full font-bold shadow-lg"
+              onClick={() => window.location.href = 'tel:8553743202'}
             >
               <Phone className="mr-2 h-5 w-5" />
-              Call (818) 123-4567
+              Call (855) 374-3202
             </Button>
             <Button 
               size="lg" 
               variant="outline"
-              className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg rounded-full"
+              className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg rounded-full font-bold shadow-lg"
               onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
             >
               <Scale className="mr-2 h-5 w-5" />

@@ -1056,11 +1056,11 @@ const SpinalCordInjuries: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-muted-foreground text-base">
-                      <li>• Rancho Los Amigos National Rehabilitation Center</li>
-                      <li>• Santa Clara Valley Medical Center</li>
-                      <li>• UC Davis Medical Center</li>
-                      <li>• Cedars-Sinai Medical Center</li>
-                      <li>• Casa Colina Rehabilitation Hospital</li>
+                      <li>• <a href="https://www.rancholoslamigos.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Rancho Los Amigos National Rehabilitation Center</a></li>
+                      <li>• <a href="https://www.sccgov.org/sites/hhs/Pages/home.aspx" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Santa Clara Valley Medical Center</a></li>
+                      <li>• <a href="https://health.ucdavis.edu/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">UC Davis Medical Center</a></li>
+                      <li>• <a href="https://www.cedars-sinai.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Cedars-Sinai Medical Center</a></li>
+                      <li>• <a href="https://www.casacolina.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Casa Colina Rehabilitation Hospital</a></li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -1074,11 +1074,11 @@ const SpinalCordInjuries: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-muted-foreground text-base">
-                      <li>• United Spinal Association - California</li>
-                      <li>• Christopher & Dana Reeve Foundation</li>
-                      <li>• Paralyzed Veterans of America</li>
-                      <li>• California Foundation for Independent Living</li>
-                      <li>• Triumph Foundation</li>
+                      <li>• <a href="https://www.unitedspinal.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">United Spinal Association - California</a></li>
+                      <li>• <a href="https://www.christopherreeve.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Christopher & Dana Reeve Foundation</a></li>
+                      <li>• <a href="https://www.pva.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Paralyzed Veterans of America</a></li>
+                      <li>• <a href="https://www.calil.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Foundation for Independent Living</a></li>
+                      <li>• <a href="https://www.triumphfoundation.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Triumph Foundation</a></li>
                     </ul>
                   </CardContent>
                 </Card>

@@ -346,8 +346,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
       <SEO 
         title="Product Liability Attorney California | Defective Product Lawyers"
         description="California product liability lawyers with 15+ years experience. Free case evaluation for defective product injuries. No fees unless we win. Call (818) 123-4567."
-        keywords="product liability attorney California, defective product lawyer, manufacturing defect, design defect, failure to warn"
-        canonicalUrl="/practice-areas/product-liability"
+        canonical="/practice-areas/product-liability"
       />
 
       <GoBack />

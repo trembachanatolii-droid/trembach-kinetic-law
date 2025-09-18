@@ -556,7 +556,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full border-white text-white hover:bg-white hover:text-red-600 py-4 text-lg"
+                    className="w-full border-white text-white bg-white/10 hover:bg-white hover:text-red-600 py-4 text-lg backdrop-blur-sm"
                     onClick={() => navigate('/product-liability-case-evaluation')}
                   >
                     <FileText className="w-5 h-5 mr-2" />
@@ -564,7 +564,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   </Button>
                   <Button 
                     variant="outline" 
-                    className="w-full border-white text-white hover:bg-white hover:text-red-600 py-4 text-lg"
+                    className="w-full border-white text-white bg-white/10 hover:bg-white hover:text-red-600 py-4 text-lg backdrop-blur-sm"
                     onClick={() => navigate('/product-liability-compensation-calculator')}
                   >
                     <Calculator className="w-5 h-5 mr-2" />

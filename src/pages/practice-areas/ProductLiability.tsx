@@ -381,7 +381,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg"
+              className="border-white text-white bg-white/10 hover:bg-white hover:text-black px-8 py-4 text-lg backdrop-blur-sm"
               onClick={() => navigate('/product-liability-case-evaluation')}
             >
               <FileText className="w-5 h-5 mr-2" />
@@ -838,7 +838,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
             <Button 
               variant="outline" 
               size="lg" 
-              className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 text-lg"
+              className="border-white text-white bg-white/10 hover:bg-white hover:text-red-600 px-8 py-3 text-lg backdrop-blur-sm"
               onClick={() => window.open('tel:8181234567')}
             >
               <Phone className="w-5 h-5 mr-2" />

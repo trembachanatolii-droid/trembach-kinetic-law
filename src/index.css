@@ -355,4 +355,15 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  /* Hide badge overlays in hero section */
+  .hero-badges,
+  .badge {
+    display: none !important;
+  }
+  
+  /* Hide any floating badge elements */
+  [class*="badge"]:not(.ui-badge):not(.sidebar-menu-badge) {
+    display: none !important;
+  }
 }

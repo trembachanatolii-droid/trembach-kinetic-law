@@ -213,23 +213,23 @@ const MedicalMalpractice: React.FC = () => {
 
       {/* Hero Section - Same ratio as Premises Liability */}
       <section 
-        className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat flex items-center"
+        className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat flex items-center justify-center"
         style={{ backgroundImage: `url(${heroBackground})` }}
         ref={heroRef}
       >
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="container mx-auto px-8 relative z-10">
-          <div className="max-w-4xl hero-content">
+          <div className="max-w-4xl mx-auto text-center hero-content">
             <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
               California Medical Malpractice Attorneys
             </h1>
             <p className="text-xl md:text-2xl text-white/90 mb-6">
               Fighting for victims of medical negligence across California
             </p>
-            <p className="text-lg text-white/80 mb-8 max-w-3xl leading-relaxed">
+            <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
               When healthcare providers fail to meet the standard of care, patients suffer devastating consequences. Our experienced medical malpractice attorneys have secured millions in compensation for victims of medical negligence throughout California.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="text-lg px-8 py-6">
                 Free Case Review
               </Button>

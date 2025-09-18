@@ -403,27 +403,28 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-8" ref={contentRef}>
-        <div className="flex flex-col lg:flex-row gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-8" ref={contentRef}>
+        <div className="flex flex-col xl:flex-row gap-8">
           {/* Main Content */}
-          <div className="lg:w-2/3 space-y-8">
+          <div className="xl:w-2/3 w-full space-y-8">
             {/* Navigation Tabs */}
             <div className="content-section">
-              <div className="flex flex-wrap gap-2 mb-8 p-1 bg-gray-100 rounded-lg">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mb-8 p-2 bg-gray-100 rounded-lg">
                 {tabs.map((tab) => {
                   const IconComponent = tab.icon;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => setActiveTab(tab.id)}
-                      className={`flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                      className={`flex items-center justify-center gap-1 px-2 py-3 rounded-md text-xs font-medium transition-all text-center ${
                         activeTab === tab.id
                           ? 'bg-red-600 text-white shadow-md'
                           : 'text-gray-600 hover:text-gray-900 hover:bg-white'
                       }`}
                     >
-                      <IconComponent className="w-4 h-4" />
-                      {tab.label}
+                      <IconComponent className="w-3 h-3" />
+                      <span className="hidden sm:inline">{tab.label}</span>
+                      <span className="sm:hidden">{tab.label.split(' ')[0]}</span>
                     </button>
                   );
                 })}
@@ -1057,8 +1058,8 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
           </div>
 
           {/* Sticky Sidebar - "3 Ways to Start Your Case" */}
-          <div className="lg:w-1/3">
-            <div className="sticky top-24 space-y-6">
+          <div className="xl:w-1/3 w-full">
+            <div className="xl:sticky xl:top-24 space-y-6">
               {/* Contact Card */}
               <Card className="relative overflow-hidden">
                 <div className="absolute inset-0 bg-black/80 z-10"></div>

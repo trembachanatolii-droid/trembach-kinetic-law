@@ -46,12 +46,12 @@ import {
   Wrench,
   ShoppingCart
 } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/product-liability-hero.jpg';
-import legalConsultationImage from '@/assets/practice-areas/product-liability-legal-consultation.jpg';
-import courthouseImage from '@/assets/practice-areas/product-liability-courthouse.jpg';
-import manufacturingImage from '@/assets/practice-areas/product-liability-manufacturing.jpg';
-import compensationImage from '@/assets/practice-areas/product-liability-compensation.jpg';
-import designImage from '@/assets/practice-areas/product-liability-design.jpg';
+import heroBackground from '@/assets/practice-areas/product-liability-hero-new.jpg';
+import legalConsultationImage from '@/assets/practice-areas/product-liability-legal-new.jpg';
+import courthouseImage from '@/assets/practice-areas/product-liability-courthouse-new.jpg';
+import manufacturingImage from '@/assets/practice-areas/product-liability-manufacturing-new.jpg';
+import compensationImage from '@/assets/practice-areas/product-liability-compensation-new.jpg';
+import designImage from '@/assets/practice-areas/product-liability-design-new.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import { useNavigate } from 'react-router-dom';
@@ -380,8 +380,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
             </Button>
             <Button 
               size="lg" 
-              variant="outline" 
-              className="border-white text-white bg-white/10 hover:bg-white hover:text-black px-8 py-4 text-lg backdrop-blur-sm"
+              className="bg-white/20 border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg backdrop-blur-sm font-semibold shadow-lg"
               onClick={() => navigate('/product-liability-case-evaluation')}
             >
               <FileText className="w-5 h-5 mr-2" />
@@ -836,9 +835,8 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
               Start Free Case Evaluation
             </Button>
             <Button 
-              variant="outline" 
               size="lg" 
-              className="border-white text-white bg-white/10 hover:bg-white hover:text-red-600 px-8 py-3 text-lg backdrop-blur-sm"
+              className="bg-white/20 border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-3 text-lg backdrop-blur-sm font-semibold shadow-lg"
               onClick={() => window.open('tel:8181234567')}
             >
               <Phone className="w-5 h-5 mr-2" />

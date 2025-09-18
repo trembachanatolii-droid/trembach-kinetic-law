@@ -439,7 +439,11 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   return (
                     <button
                       key={tab.id}
-                      onClick={() => setActiveTab(tab.id)}
+                      onClick={() => {
+                        setActiveTab(tab.id);
+                        const el = document.getElementById(tab.id);
+                        el?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                      }}
                       className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
                         activeTab === tab.id
                           ? 'bg-primary text-primary-foreground shadow-sm'
@@ -454,7 +458,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
               </div>
 
               {/* Tab Content */}
-              {activeTab === 'overview' && (
+              <section id="overview">
                 <div className="space-y-8">
                   <div>
                     <h2 className="text-3xl font-bold text-gray-900 mb-6">California Wrongful Death Attorney - Compassionate Legal Representation</h2>
@@ -508,9 +512,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'evaluation' && (
+              <section id="evaluation">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Free Wrongful Death Case Evaluation</h2>
                   
@@ -651,9 +655,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'what-to-do' && (
+              <section id="what-to-do">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">What to Do After a Wrongful Death</h2>
                   
@@ -751,9 +755,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'types-of-cases' && (
+              <section id="types-of-cases">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Common Types of Wrongful Death Cases</h2>
                   
@@ -882,9 +886,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </Card>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'proving-negligence' && (
+              <section id="proving-negligence">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Proving Negligence in Wrongful Death Cases</h2>
                   
@@ -985,9 +989,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'compensation' && (
+              <section id="compensation">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Wrongful Death Compensation in California</h2>
                   
@@ -1099,9 +1103,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </CollapsibleContent>
                   </Collapsible>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'time-limits' && (
+              <section id="time-limits">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">California Wrongful Death Time Limits</h2>
                   
@@ -1171,9 +1175,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
 
-              {activeTab === 'faq' && (
+              <section id="faq">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6 text-center">Frequently Asked Questions</h2>
                   
@@ -1199,14 +1203,14 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                               {faq.answer}
                             </p>
                           </CardContent>
-                        )}
+                          )}
                       </Card>
                     ))}
                   </div>
                 </div>
               )}
 
-              {activeTab === 'resources' && (
+              <section id="resources">
                 <div className="space-y-8">
                   <h2 className="text-3xl font-bold text-gray-900 mb-6">Wrongful Death Resources & Tools</h2>
                   
@@ -1297,7 +1301,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     </div>
                   </div>
                 </div>
-              )}
+              </section>
             </div>
           </div>
 

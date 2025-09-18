@@ -63,6 +63,7 @@ import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
 import BrainCaseEvaluation from "./pages/BrainCaseEvaluation";
 import BrainCompensationCalculator from "./pages/BrainCompensationCalculator";
 import BrainMedicalGuidance from "./pages/BrainMedicalGuidance";
+import SpinalCordInjuries from "./pages/practice-areas/SpinalCordInjuries";
 
 const queryClient = new QueryClient();
 
@@ -90,6 +91,7 @@ function App() {
             <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />
             <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidentsNew />} />
             <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
+            <Route path="/practice-areas/spinal-cord-injuries" element={<SpinalCordInjuries />} />
             <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
           <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />

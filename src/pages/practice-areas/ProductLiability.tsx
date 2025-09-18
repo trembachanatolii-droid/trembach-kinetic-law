@@ -354,59 +354,34 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
 
       {/* Hero Section */}
       <section 
-        className="relative h-[80vh] flex items-center justify-center text-white overflow-hidden"
+        className="relative h-[70vh] flex items-center justify-center text-white overflow-hidden"
         ref={heroRef}
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url(${heroBackground})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${heroBackground})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
       >
-        <div className="container mx-auto px-4 text-center z-10 max-w-6xl">
-          <div className="mb-6">
-            <Badge className="bg-red-600 text-white px-4 py-2 text-lg font-semibold mb-4 inline-block">
-              Product Liability Specialists
-            </Badge>
-          </div>
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-            Defective Product Legal Experts
+        <div className="container mx-auto px-4 text-center z-10">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+            California Product Liability Attorneys
           </h1>
-          <p className="text-xl md:text-2xl mb-4 max-w-4xl mx-auto leading-relaxed font-medium">
-            Experienced California product liability attorneys with a proven track record of holding manufacturers, distributors, and retailers accountable for dangerous products.
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto leading-relaxed">
+            Holding manufacturers accountable for defective products that cause serious injuries. Former defense attorney experience gives us the edge you need.
           </p>
-          <p className="text-lg md:text-xl mb-8 max-w-3xl mx-auto leading-relaxed text-gray-200">
-            Former defense attorney insights • Strict liability expertise • No fees unless we win • Over 15 years of experience
-          </p>
-          
-          {/* Key Statistics */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 max-w-4xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-3xl font-bold text-green-400 mb-2">$50M+</div>
-              <div className="text-sm text-gray-200">Recovered for Clients</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-3xl font-bold text-blue-400 mb-2">500+</div>
-              <div className="text-sm text-gray-200">Product Liability Cases</div>
-            </div>
-            <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 border border-white/20">
-              <div className="text-3xl font-bold text-yellow-400 mb-2">98%</div>
-              <div className="text-sm text-gray-200">Success Rate</div>
-            </div>
-          </div>
-
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold shadow-xl"
+              className="bg-green-600 hover:bg-green-700 text-white px-8 py-4 text-lg"
               onClick={() => window.open('tel:8181234567')}
             >
               <Phone className="w-5 h-5 mr-2" />
-              Call (818) 123-4567 Now
+              Call (818) 123-4567
             </Button>
             <Button 
               size="lg" 
-              className="bg-white/20 border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg backdrop-blur-sm font-semibold shadow-xl"
+              className="bg-white/20 border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 text-lg backdrop-blur-sm font-semibold shadow-lg"
               onClick={() => navigate('/product-liability-case-evaluation')}
             >
               <FileText className="w-5 h-5 mr-2" />

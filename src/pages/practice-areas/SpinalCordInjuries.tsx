@@ -371,10 +371,10 @@ const SpinalCordInjuries: React.FC = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative mt-16 h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        className="relative z-0 mt-16 h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
-        <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
+        <div className="absolute inset-0 z-0 bg-black/70 pointer-events-none"></div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-[60]">
@@ -431,7 +431,7 @@ const SpinalCordInjuries: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+        <div className="absolute bottom-0 left-0 right-0 z-10 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
               {tabs.map((tab) => {

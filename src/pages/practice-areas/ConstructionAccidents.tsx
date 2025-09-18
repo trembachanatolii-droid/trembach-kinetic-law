@@ -631,45 +631,36 @@ const ConstructionAccidents: React.FC = () => {
           {/* Sidebar - 3 Ways to Start */}
           <div className="lg:w-1/3">
             <div className="sticky top-32">
-              <Card className="mb-8">
-                <CardHeader className="text-center bg-red-600 text-white">
-                  <CardTitle className="text-2xl font-bold">3 WAYS<br/>TO START</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6">
-                  <div className="space-y-6">
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
-                      <h3 className="text-lg font-bold text-foreground mb-2">24/7 Live Chat</h3>
-                      <p className="text-muted-foreground text-sm mb-4">Start a conversation with our legal team anytime, day or night.</p>
-                      <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        Start Chat Now
+              <Card className="mb-8 bg-slate-900 border-slate-700">
+                <CardContent className="p-8 text-center">
+                  <h2 className="text-4xl font-bold text-white mb-2">
+                    3 Ways to
+                  </h2>
+                  <h2 className="text-4xl font-bold text-white mb-4">
+                    Start Your Case
+                  </h2>
+                  <div className="w-full h-1 bg-red-600 mb-6"></div>
+                  
+                  <p className="text-gray-300 text-lg mb-8 leading-relaxed">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <a href="tel:8554155849" className="block">
+                      <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg font-medium rounded-lg">
+                        CALL (855) 415-5849
                       </Button>
-                    </div>
-
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
-                      <h3 className="text-lg font-bold text-foreground mb-2">Free Case Evaluation</h3>
-                      <p className="text-muted-foreground text-sm mb-4">Get a comprehensive analysis of your construction accident case.</p>
-                      <Link to="/construction-case-evaluation">
-                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                          <FileText className="w-4 h-4 mr-2" />
-                          Start Construction Accident Evaluation
-                        </Button>
-                      </Link>
-                    </div>
-
-                    <div className="text-center">
-                      <div className="w-16 h-16 bg-red-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-                      <h3 className="text-lg font-bold text-foreground mb-2">Call Now</h3>
-                      <p className="text-muted-foreground text-sm mb-4">Speak directly with our construction accident attorneys.</p>
-                      <a href="tel:8181234567">
-                        <Button className="w-full bg-red-600 hover:bg-red-700 text-white">
-                          <Phone className="w-4 h-4 mr-2" />
-                          Call (818) 123-4567
-                        </Button>
-                      </a>
-                    </div>
+                    </a>
+                    
+                    <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg font-medium rounded-lg">
+                      EMAIL US
+                    </Button>
+                    
+                    <Link to="/construction-compensation-calculator" className="block">
+                      <Button className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg font-medium rounded-lg">
+                        CALCULATE SETTLEMENT
+                      </Button>
+                    </Link>
                   </div>
                 </CardContent>
               </Card>

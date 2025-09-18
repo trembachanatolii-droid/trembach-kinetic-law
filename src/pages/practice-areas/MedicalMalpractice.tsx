@@ -7,6 +7,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
   Phone, 
@@ -40,15 +41,13 @@ import {
   UserX,
   CheckCircle
 } from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/practice-areas/medical-malpractice-hero.jpg';
-import diagnosticErrorsImage from '@/assets/practice-areas/medical-diagnostic-errors.jpg';
-import surgicalErrorsImage from '@/assets/practice-areas/medical-surgical-errors.jpg';
-import medicationErrorsImage from '@/assets/practice-areas/medical-medication-errors.jpg';
-import birthInjuriesImage from '@/assets/practice-areas/medical-birth-injuries.jpg';
-import emergencyErrorsImage from '@/assets/practice-areas/medical-emergency-errors.jpg';
-import compensationImage from '@/assets/practice-areas/medical-compensation-calculation.jpg';
-import legalJusticeImage from '@/assets/practice-areas/medical-legal-justice.jpg';
-import documentationImage from '@/assets/practice-areas/medical-documentation.jpg';
+import whatToDoImage from '@/assets/practice-areas/medical-malpractice-consultation.jpg';
+import errorTypesImage from '@/assets/practice-areas/medical-negligence-evidence.jpg';
+import provingNegligenceImage from '@/assets/practice-areas/hospital-liability-investigation.jpg';
+import compensationImage from '@/assets/practice-areas/medical-expert-testimony.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -66,7 +65,13 @@ const MedicalMalpractice: React.FC = () => {
   const [formData, setFormData] = useState({
     incidentDate: '',
     typeOfError: '',
-    healthcareProvider: ''
+    healthcareProvider: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    description: '',
+    consent: false
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -124,9 +129,23 @@ const MedicalMalpractice: React.FC = () => {
     }
   };
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? (e.target as HTMLInputElement).checked : value
+    }));
+  };
+
+  const handleSelectChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Use React Router navigation instead of window.location.href
     window.location.href = '/medical-malpractice-case-evaluation';
   };
 
@@ -134,7 +153,7 @@ const MedicalMalpractice: React.FC = () => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
-  // FAQ Data - 50+ Questions from HTML
+  // FAQ Data - 50+ Questions
   const faqData = [
     {
       question: "What is the statute of limitations for medical malpractice in California?",
@@ -254,993 +273,728 @@ const MedicalMalpractice: React.FC = () => {
     },
     {
       question: "Can I sue for radiology errors?",
-      answer: "Yes, radiologists can be held liable for misreading X-rays, CT scans, MRIs, and other imaging studies. Failure to identify fractures, tumors, aneurysms, or other critical findings can delay treatment and worsen outcomes. We work with radiology experts who review imaging studies and determine if readings met professional standards."
+      answer: "Yes, radiology errors including misread X-rays, CT scans, MRIs, and mammograms can lead to delayed diagnosis, improper treatment, and patient harm. Radiologists have a duty to accurately interpret imaging studies and communicate findings promptly. We work with radiology experts to review imaging studies and prove when errors in interpretation or communication caused patient harm."
     },
     {
-      question: "What if the hospital claims they followed protocols?",
-      answer: "Following protocols doesn't automatically protect against malpractice claims. Protocols may be inadequate, improperly implemented, or the provider may have deviated from established procedures. We investigate whether protocols met professional standards, were properly followed, and whether reasonable care required going beyond minimum protocols in your specific situation."
+      question: "What if the medical facility claims sovereign immunity?",
+      answer: "Government-operated medical facilities may claim sovereign immunity, but this protection has limits. Public hospitals and facilities can be sued under the California Tort Claims Act, though special procedures and shorter deadlines apply. University medical centers and county hospitals are often subject to liability for medical malpractice. We navigate these complex rules to pursue all available remedies."
     },
     {
-      question: "Can I sue for pathology errors?",
-      answer: "Yes, pathologists can be held liable for misinterpreting biopsies, Pap smears, and other tissue samples. These errors can lead to missed cancer diagnoses, unnecessary treatments, or delayed care. Pathology mistakes often have serious consequences because other doctors rely on pathology reports to make treatment decisions. We work with pathology experts to review slide interpretations and prove negligence."
+      question: "Can I sue for cosmetic surgery gone wrong?",
+      answer: "Yes, cosmetic surgeons must meet the same standard of care as other medical specialists. While cosmetic surgery carries risks, surgeons can be liable for negligent technique, failure to obtain informed consent, performing procedures beyond their training, or post-operative care failures. Poor aesthetic results don't always constitute malpractice, but negligent care that causes harm or complications may support a valid claim."
     },
     {
-      question: "What if my injury occurred during a clinical trial?",
-      answer: "Clinical trial participants maintain the right to sue for medical malpractice if negligent care causes harm. However, these cases involve additional complexities including informed consent requirements, protocol deviations, and potential liability of pharmaceutical companies or research institutions. We have experience with clinical trial malpractice and understand the unique legal issues involved."
+      question: "What if I signed an arbitration agreement?",
+      answer: "Many medical providers require patients to sign arbitration agreements limiting the right to jury trial. While these agreements are often enforceable in California, they don't prevent you from pursuing a claim - they just change the forum from court to arbitration. We have extensive experience with medical arbitration and know how to maximize results in this setting."
+    },
+    {
+      question: "Can I sue for pharmacy errors?",
+      answer: "Yes, pharmacists have a duty to dispense medications accurately and counsel patients about proper use. Pharmacy errors include dispensing wrong medications, incorrect dosages, failing to check for drug interactions, and inadequate patient counseling. Both the individual pharmacist and pharmacy corporation may be liable for errors that cause patient harm."
+    },
+    {
+      question: "What if my dentist caused nerve damage?",
+      answer: "Dental procedures carry risks, but dentists can be liable for nerve damage caused by negligent technique, inadequate pre-procedural evaluation, or failure to obtain informed consent about risks. Common dental malpractice includes nerve damage during extractions, endodontic treatment, or implant placement. We work with dental experts to evaluate whether nerve damage resulted from negligence or was an unavoidable complication."
     },
     {
       question: "Can I sue for failure to diagnose a heart attack?",
-      answer: "Yes, failure to diagnose heart attacks is a common and serious form of emergency room malpractice. Symptoms can be subtle, especially in women, but providers must properly evaluate chest pain, order appropriate tests, and recognize cardiac events. Missed heart attacks can lead to additional heart damage, disability, or death. We work with cardiology experts to prove negligent evaluation."
+      answer: "Yes, failure to diagnose heart attacks is a common form of emergency room malpractice. Doctors must recognize heart attack symptoms, order appropriate tests like EKGs and cardiac enzymes, and provide timely treatment. Delayed diagnosis can result in additional heart damage, complications, or death. We work with cardiology experts to prove when symptoms warranted immediate cardiac evaluation and treatment."
     },
     {
-      question: "What if I was injured by a defective medical device?",
-      answer: "Medical device injuries may involve both product liability claims against manufacturers and malpractice claims against providers who improperly implanted or monitored the device. We investigate all potential claims to maximize your recovery. Device cases often involve class actions or multidistrict litigation with other injured patients."
+      question: "What if I was injured during surgery by a trainee?",
+      answer: "Teaching hospitals have special responsibilities when residents and medical students participate in patient care. Attending physicians must provide adequate supervision, and patients should be informed when trainees are involved. If a trainee's error causes harm, both the trainee and supervising physicians may be liable. Hospitals also have duties to ensure adequate supervision and training."
     },
     {
-      question: "Can I sue for psychiatric malpractice?",
-      answer: "Yes, psychiatrists and other mental health providers can be held liable for malpractice including improper medication management, failure to prevent patient suicide, inappropriate treatment, and boundary violations. Mental health malpractice cases require specialized experts who understand psychiatric standards of care and can prove how negligence caused psychological or physical harm."
+      question: "Can I sue for failure to prevent hospital-acquired infections?",
+      answer: "Yes, hospitals have a duty to maintain sanitary conditions and follow infection control protocols. Hospital-acquired infections may result from contaminated equipment, poor hand hygiene, inadequate sterilization, or failure to isolate infectious patients. These infections can be severe and sometimes fatal. We investigate whether proper infection control measures were followed and hold hospitals accountable for preventable infections."
     },
     {
-      question: "What if my child was injured due to medical negligence?",
-      answer: "Children have extended statute of limitations protections in California. Medical malpractice affecting minors can be filed until the child's 8th birthday or within 3 years of the incident, whichever provides more time. Pediatric cases often involve lifetime care costs and substantial damages. We work with pediatric specialists and life care planners to ensure full compensation for your child's needs."
+      question: "What if my doctor was under the influence during treatment?",
+      answer: "Healthcare providers impaired by drugs or alcohol pose extreme danger to patients. Even if no immediate harm occurs, treating patients while impaired constitutes serious professional negligence. If impairment contributed to medical errors or poor judgment that harmed you, both the individual provider and employing facility may face liability. These cases often involve punitive damages due to the egregious nature of the conduct."
     },
     {
-      question: "Can I sue for negligent care during cosmetic surgery?",
-      answer: "Yes, cosmetic surgeons are held to the same standards as other physicians. Poor results, infections, nerve damage, and other complications can constitute malpractice if they result from negligent care. Even elective procedures require proper surgical technique, sterile conditions, and appropriate post-operative care. We work with plastic surgery experts to evaluate cosmetic surgery complications."
+      question: "Can I sue for failure to monitor vital signs?",
+      answer: "Yes, healthcare providers have a duty to appropriately monitor patients' vital signs and respond to changes indicating distress. This is especially critical during surgery, in intensive care units, and for high-risk patients. Failure to monitor or respond to vital sign changes can lead to preventable complications, organ damage, or death. We prove when monitoring fell below the standard of care."
     },
     {
-      question: "What if my case involves multiple states or federal facilities?",
-      answer: "Medical malpractice cases involving federal facilities like VA hospitals, military bases, or cases spanning multiple states involve complex jurisdictional issues. We have experience with federal tort claims, military malpractice, and multi-state medical care. Different deadlines and procedures may apply, making immediate legal consultation crucial for protecting your rights."
+      question: "What if my medical device was defective?",
+      answer: "Medical device injuries may involve both product liability claims against manufacturers and malpractice claims against healthcare providers. Doctors have duties to select appropriate devices, properly implant or use them, and monitor for complications. If a device was recalled or had known defects, providers may be liable for continuing to use it. We pursue all liable parties to maximize recovery."
     },
     {
-      question: "How do I know if my case is strong enough to pursue?",
-      answer: "We evaluate case strength by reviewing medical records, consulting with medical experts, and assessing damages. Strong cases typically involve clear deviations from standard care that directly caused significant harm. Even if you're uncertain about your case's strength, our free consultation provides honest evaluation of your legal options and potential for recovery."
+      question: "Can I sue for wrongful discharge from the hospital?",
+      answer: "Yes, premature hospital discharge can constitute malpractice if it falls below the standard of care and causes patient harm. Factors include the patient's condition at discharge, adequacy of discharge planning, follow-up arrangements, and whether complications were foreseeable. Economic pressures don't excuse discharging patients who aren't medically stable."
     },
     {
-      question: "Can I sue for failure to refer me to a specialist?",
-      answer: "Yes, primary care doctors have a duty to refer patients to specialists when conditions require expertise beyond their training. Failure to refer when a reasonable doctor would have done so can constitute malpractice, especially if the delay in specialist care worsened your condition or reduced treatment options."
+      question: "What if I was given the wrong blood type during a transfusion?",
+      answer: "Blood transfusion errors are serious medical mistakes that can cause severe reactions, organ damage, or death. Hospitals have strict protocols for blood typing, cross-matching, and verification before transfusions. Multiple healthcare providers typically check patient identity and blood compatibility. Transfusion errors often result from systemic failures in hospital procedures and can support substantial damage claims."
     },
     {
-      question: "What if my medical malpractice case goes to trial?",
-      answer: "While many cases settle, we're fully prepared to take your case to trial if necessary to achieve fair compensation. We have extensive trial experience and work with compelling medical experts to present your case to a jury. Our willingness to go to trial often motivates better settlement offers from defendants who want to avoid the uncertainty of jury verdicts."
+      question: "Can I sue for failure to obtain adequate medical history?",
+      answer: "Yes, healthcare providers have a duty to obtain relevant medical history before treatment. Failure to ask about allergies, medications, previous surgeries, or family history can lead to inappropriate treatment, dangerous drug interactions, or missed diagnoses. Adequate history-taking is a fundamental standard of care, and failures that cause patient harm may constitute malpractice."
     },
     {
-      question: "Can I sue for failure to follow up on test results?",
-      answer: "Yes, healthcare providers have a duty to follow up on abnormal test results and communicate findings to patients. Failure to follow up can delay diagnosis and treatment, worsening outcomes. We investigate communication systems, tracking procedures, and provider responsibilities to prove negligent failure to act on critical test results."
+      question: "What if my case involves multiple hospitals or medical groups?",
+      answer: "Complex medical cases often involve multiple healthcare entities with different insurance coverage and liability exposure. We have experience coordinating cases against multiple defendants, navigating different insurance policies, and maximizing total recovery. Each entity's liability is evaluated separately, and we pursue all responsible parties to ensure full compensation for your injuries."
     },
     {
-      question: "What if language barriers contributed to my medical error?",
-      answer: "Healthcare providers must ensure effective communication with all patients, including providing qualified interpreters when needed. Miscommunication due to language barriers that leads to medical errors can constitute malpractice. Providers cannot rely on family members or inadequate translation services for critical medical communications."
+      question: "Can I sue for failure to properly sedate during procedures?",
+      answer: "Yes, proper sedation is crucial for patient safety and comfort during medical procedures. Errors include inadequate sedation causing pain and trauma, over-sedation causing respiratory depression or cardiac arrest, and failure to monitor patients during sedation. Providers administering sedation must be properly trained and equipped to handle complications. We work with anesthesiology experts to evaluate sedation-related malpractice claims."
     },
     {
-      question: "Can I sue for hospital-acquired infections?",
-      answer: "Yes, hospitals can be held liable for preventable infections like MRSA, sepsis, and surgical site infections that result from poor sanitation, inadequate sterilization, or failure to follow infection control protocols. We investigate hospital policies, staff training, and compliance with safety standards to prove institutional negligence that led to your infection."
+      question: "What if I was treated without my consent?",
+      answer: "Medical treatment without proper consent can constitute both malpractice and battery. Except in true emergencies, patients have the right to make informed decisions about their medical care. Treatment without consent may occur when patients are unconscious, mentally incapacitated, or when providers exceed the scope of consented procedures. We evaluate whether consent was properly obtained and whether treatment was justified by emergency circumstances."
     },
     {
-      question: "What compensation can I recover for permanent disability?",
-      answer: "Permanent disability cases often result in substantial compensation including unlimited economic damages for lifetime medical care, lost earning capacity, rehabilitation costs, and home modifications. Non-economic damages for pain, suffering, and loss of life enjoyment are subject to MICRA caps but can still be significant. We work with life care planners and economists to fully document your losses."
+      question: "Can I sue for failure to properly train medical staff?",
+      answer: "Yes, hospitals and medical facilities have a duty to properly train their staff and ensure competency. This includes initial training, ongoing education, and supervision of new employees. If inadequate training contributes to medical errors that harm patients, the employing institution may be liable. We investigate training records, policies, and procedures to prove when institutional failures contributed to patient harm."
     },
     {
-      question: "How do I choose the right medical malpractice attorney?",
-      answer: "Choose an attorney with specific medical malpractice experience, resources to hire top medical experts, a track record of significant recoveries, and a commitment to taking cases to trial when necessary. We offer free consultations, work on contingency fees, and provide personal attention throughout your case. Our clients receive direct attorney contact and regular case updates."
+      question: "What if my doctor had a conflict of interest?",
+      answer: "Healthcare providers must disclose financial conflicts of interest that might affect treatment decisions. This includes financial relationships with drug companies, medical device manufacturers, or investment interests in treatment facilities. While conflicts don't automatically prove malpractice, they may affect the standard of care analysis and damages if they influenced inappropriate treatment decisions. Failure to disclose material conflicts may constitute breach of fiduciary duty."
     },
     {
-      question: "Can I sue for failure to treat pain appropriately?",
-      answer: "Yes, inadequate pain management can constitute medical malpractice when it deviates from accepted standards and causes unnecessary suffering. This includes failure to assess pain properly, inadequate medication, ignoring patient reports, or improper treatment protocols. We work with pain management specialists to prove negligent care."
+      question: "Can I sue for medical malpractice if I'm from another state?",
+      answer: "Yes, if you were treated in California, you can pursue a malpractice claim here regardless of your home state. California courts have jurisdiction over medical treatment that occurred within the state. However, choice of law issues may arise regarding which state's laws apply to different aspects of your case. We handle cases for clients from all states and navigate these complex jurisdictional issues."
     },
     {
-      question: "What if my medical records have been altered?",
-      answer: "Alteration of medical records after an incident is serious misconduct that can strengthen your malpractice case. We have forensic experts who can detect alterations and prove when records were changed. Spoliation of evidence can result in sanctions against defendants and adverse jury instructions that help prove your case."
-    },
-    {
-      question: "Can I sue for telemedicine malpractice?",
-      answer: "Yes, telemedicine providers are held to the same standards as in-person care within the limitations of remote consultation. Telemedicine malpractice can include failure to recognize when in-person evaluation is needed, inadequate patient history, technical failures affecting care, or prescribing medications without proper examination. We understand evolving telemedicine standards and liability issues."
-    },
-    {
-      question: "What happens if the at-fault doctor has no insurance?",
-      answer: "Doctors in California are required to carry malpractice insurance, but some may be uninsured or underinsured. We investigate all potential sources of recovery including hospital coverage, medical group policies, and personal assets. We also explore whether the doctor's uninsured status violates licensing requirements, which can strengthen your case."
+      question: "What if the medical error was caught and corrected before I was harmed?",
+      answer: "Even if a medical error was caught and corrected, you may still have a claim if the error caused any damages such as additional medical procedures, extended hospital stays, anxiety, or other harm. The fact that an error was caught doesn't excuse the negligence that caused it. We evaluate all consequences of medical errors, including emotional distress and economic losses that resulted from the mistake and its correction."
     }
   ];
 
   return (
     <div className="min-h-screen bg-background">
-      <SEO 
-        title="California Medical Malpractice Attorneys | No Win No Fee | Trembach Law"
-        description="California medical malpractice lawyers fighting for victims of medical negligence. Free consultation. No fees unless we win. Misdiagnosis, surgical errors, birth injuries."
+      <SEO
+        title="Medical Malpractice Lawyers in California | Free Case Review"
+        description="Experienced California medical malpractice attorneys. Free case evaluation for misdiagnosis, surgical errors, birth injuries & more. No fees unless we win."
+        canonical="/practice-areas/medical-malpractice"
       />
-
-      {/* Hero Section */}
+      
+      <Navigation />
+      
+      {/* Hero Section - Matching Premises Liability ratio */}
       <section 
         ref={heroRef}
-        className="relative min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${heroBackground})` }}
+        className="relative h-[60vh] bg-cover bg-center bg-no-repeat flex items-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
       >
-        <div className="hero-content text-center text-white px-6 max-w-6xl mx-auto">
-          <Badge className="mb-6 bg-primary/90 text-white text-lg px-6 py-2">
-            Medical Malpractice Attorneys
-          </Badge>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            When Healthcare Fails, 
-            <span className="text-primary-foreground block mt-2">We Fight for Justice</span>
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-4xl mx-auto leading-relaxed">
-            Medical errors are the third leading cause of death in America. If you or a loved one has suffered due to medical negligence, misdiagnosis, surgical errors, or hospital mistakes, you deserve compensation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-6 bg-primary hover:bg-primary/90">
-              <Phone className="mr-2 h-5 w-5" />
-              Get Free Case Review
-            </Button>
-            <Button variant="outline" size="lg" className="text-lg px-8 py-6 border-2 border-white text-white hover:bg-white hover:text-primary">
-              <MessageCircle className="mr-2 h-5 w-5" />
-              24/7 Live Chat
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* Navigation Tabs */}
-      <section className="sticky top-16 z-40 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="container mx-auto px-4">
-          <div className="flex overflow-x-auto scrollbar-hide py-2 gap-1">
-            {tabs.map((tab) => (
-              <Button
-                key={tab.id}
-                variant={activeTab === tab.id ? "default" : "ghost"}
-                size="sm"
-                onClick={() => scrollToSection(tab.id)}
-                className="whitespace-nowrap flex items-center gap-2 min-w-fit text-xs font-medium"
-              >
-                <tab.icon className="h-4 w-4" />
-                {tab.label}
-              </Button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main ref={contentRef} className="container mx-auto px-6 py-16">
+        <div className="absolute inset-0 bg-black/60"></div>
         
-        {/* Overview Section */}
-        <section id="overview" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6">Understanding Medical Malpractice in California</h2>
-            <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
-              Your Rights, Our Fight - Comprehensive Legal Support for Medical Negligence Victims
-            </p>
-          </div>
-
-          <Card className="content-card mb-12 bg-primary text-primary-foreground">
-            <CardHeader>
-              <CardTitle className="text-2xl flex items-center gap-3">
-                <AlertTriangle className="h-8 w-8" />
-                Critical Information for Medical Malpractice Victims
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="text-lg leading-relaxed">
-              Medical malpractice occurs when a healthcare provider's negligence causes harm to a patient. In California, you have the right to seek compensation for injuries caused by medical errors, misdiagnosis, surgical mistakes, medication errors, and more. Time is critical - California law requires filing within specific deadlines. Contact us immediately for a free case evaluation.
-            </CardContent>
-          </Card>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-            <Card className="content-card text-center p-6">
-              <Stethoscope className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">All Medical Errors Covered</h3>
-              <p className="text-muted-foreground">From misdiagnosis and surgical mistakes to medication errors and birth injuries, we handle all types of medical malpractice cases throughout California.</p>
-            </Card>
-            <Card className="content-card text-center p-6">
-              <DollarSign className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">No Fees Unless We Win</h3>
-              <p className="text-muted-foreground">You pay nothing upfront. We only get paid when we win your case. No hidden costs, no hourly fees - just results-driven representation.</p>
-            </Card>
-            <Card className="content-card text-center p-6">
-              <Scale className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Proven Track Record</h3>
-              <p className="text-muted-foreground">Our experienced attorneys understand California's MICRA laws and have the medical expertise needed to prove negligence and maximize your compensation.</p>
-            </Card>
-            <Card className="content-card text-center p-6">
-              <Phone className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">24/7 Availability</h3>
-              <p className="text-muted-foreground">Medical emergencies don't wait. Neither do we. Call anytime for immediate assistance and a free consultation with our legal team.</p>
-            </Card>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="content-card p-6">
-              <Brain className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Misdiagnosis & Delayed Diagnosis</h3>
-              <p className="text-muted-foreground mb-4">
-                One of the most common forms of medical malpractice, misdiagnosis can lead to delayed treatment, unnecessary procedures, or complete lack of treatment for serious conditions.
+        <div className="container mx-auto px-6 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left Column - Hero Content */}
+            <div className="hero-content">
+              <Badge className="mb-4 bg-red-600 hover:bg-red-700">Medical Malpractice</Badge>
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
+                California Medical Malpractice Lawyers
+              </h1>
+              <p className="text-xl text-white/90 mb-8 leading-relaxed">
+                When healthcare providers fail to meet professional standards, patients suffer. Our experienced medical malpractice attorneys fight for victims of medical negligence across California.
               </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  Cancer misdiagnosis, stroke misidentification, and heart attack misdiagnosis are particularly devastating, often resulting in preventable death or permanent disability. Our medical experts review diagnostic procedures to prove when standard care would have led to proper diagnosis.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-
-            <Card className="content-card p-6">
-              <Activity className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Surgical Errors</h3>
-              <p className="text-muted-foreground mb-4">
-                Surgical mistakes include wrong-site surgery, leaving surgical instruments inside the body, nerve damage, unnecessary surgery, and anesthesia errors.
-              </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  These "never events" should never occur but happen more frequently than most patients realize, often causing catastrophic injuries or death. We work with surgical experts to prove these preventable errors.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-
-            <Card className="content-card p-6">
-              <Pill className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Medication Errors</h3>
-              <p className="text-muted-foreground mb-4">
-                Prescription mistakes, incorrect dosages, dangerous drug interactions, and administration errors can cause severe adverse reactions, organ damage, or death.
-              </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  Pharmacists, doctors, and nurses can all be held liable for medication-related malpractice. We investigate all parties involved in prescribing, dispensing, and administering medications.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-
-            <Card className="content-card p-6">
-              <Baby className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Birth Injuries</h3>
-              <p className="text-muted-foreground mb-4">
-                Medical negligence during pregnancy, labor, or delivery can cause lifelong disabilities. Cerebral palsy, Erb's palsy, brain damage from oxygen deprivation.
-              </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  Birth injuries often result from failure to monitor fetal distress, delayed C-sections, or improper use of delivery instruments. These cases require specialized obstetric experts.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-
-            <Card className="content-card p-6">
-              <AlertTriangle className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Emergency Room Errors</h3>
-              <p className="text-muted-foreground mb-4">
-                ER mistakes include failure to diagnose heart attacks or strokes, premature discharge, inadequate testing, and delayed treatment.
-              </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  The fast-paced emergency room environment is no excuse for negligence that causes patient harm. We understand ER standards and work with emergency medicine experts.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-
-            <Card className="content-card p-6">
-              <Shield className="h-8 w-8 text-primary mb-3" />
-              <h3 className="text-xl font-semibold mb-3">Hospital-Acquired Infections</h3>
-              <p className="text-muted-foreground mb-4">
-                Preventable infections like MRSA, sepsis, and surgical site infections often result from poor sanitation, inadequate sterilization.
-              </p>
-              <Collapsible>
-                <CollapsibleTrigger asChild>
-                  <Button variant="ghost" className="p-0 h-auto font-normal text-primary hover:text-primary/80">
-                    Learn more <ChevronDown className="ml-1 h-4 w-4" />
-                  </Button>
-                </CollapsibleTrigger>
-                <CollapsibleContent className="mt-3 text-sm text-muted-foreground">
-                  Hospitals can be held liable for systemic failures that lead to patient infections. We investigate infection control protocols and hospital policies.
-                </CollapsibleContent>
-              </Collapsible>
-            </Card>
-          </div>
-        </section>
-
-        {/* Case Evaluation Section */}
-        <section id="evaluation" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Free Medical Malpractice Case Evaluation</h2>
-            <p className="text-xl text-muted-foreground">Get Your Case Reviewed by Expert Medical Malpractice Attorneys</p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <Card className="content-card p-8">
-                <CardHeader>
-                  <CardTitle className="text-2xl mb-4">Start Your Free Case Review</CardTitle>
-                  <p className="text-muted-foreground">Tell us about your medical malpractice situation. All consultations are completely confidential.</p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleFormSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Date of Medical Error</label>
-                        <Input 
-                          type="date"
-                          value={formData.incidentDate}
-                          onChange={(e) => setFormData({...formData, incidentDate: e.target.value})}
-                          className="w-full"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Type of Medical Error</label>
-                        <Select value={formData.typeOfError} onValueChange={(value) => setFormData({...formData, typeOfError: value})}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select error type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="misdiagnosis">Misdiagnosis</SelectItem>
-                            <SelectItem value="surgical-error">Surgical Error</SelectItem>
-                            <SelectItem value="medication-error">Medication Error</SelectItem>
-                            <SelectItem value="birth-injury">Birth Injury</SelectItem>
-                            <SelectItem value="emergency-room">Emergency Room Error</SelectItem>
-                            <SelectItem value="anesthesia-error">Anesthesia Error</SelectItem>
-                            <SelectItem value="failure-to-diagnose">Failure to Diagnose</SelectItem>
-                            <SelectItem value="hospital-infection">Hospital-Acquired Infection</SelectItem>
-                            <SelectItem value="other">Other Medical Error</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Healthcare Provider/Facility</label>
-                      <Input 
-                        value={formData.healthcareProvider}
-                        onChange={(e) => setFormData({...formData, healthcareProvider: e.target.value})}
-                        placeholder="Hospital name, doctor's name, medical facility"
-                        className="w-full"
-                      />
-                    </div>
-                    <Button type="submit" size="lg" className="w-full">
-                      Get Free Case Evaluation
-                    </Button>
-                  </form>
-                </CardContent>
-              </Card>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button size="lg" className="text-lg px-8 py-6">
+                  Free Case Review
+                </Button>
+                <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20">
+                  Call (555) 123-4567
+                </Button>
+              </div>
             </div>
 
-            <div className="lg:col-span-1">
-              <Card className="content-card p-6 sticky top-24">
+            {/* Right Column - Contact Form */}
+            <Card className="bg-white/95 backdrop-blur-sm border-0 shadow-2xl">
+              <CardHeader className="text-center pb-4">
+                <CardTitle className="text-2xl font-bold text-gray-900">Get Your Free Case Evaluation</CardTitle>
+                <p className="text-gray-600">No fees unless we win your case</p>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleFormSubmit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-3">
+                    <Input
+                      placeholder="First Name"
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                    <Input
+                      placeholder="Last Name"
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleInputChange}
+                      required
+                    />
+                  </div>
+                  <Input
+                    type="email"
+                    placeholder="Email Address"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Input
+                    type="tel"
+                    placeholder="Phone Number"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    required
+                  />
+                  <Select onValueChange={(value) => handleSelectChange('typeOfError', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Type of Medical Error" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="misdiagnosis">Misdiagnosis</SelectItem>
+                      <SelectItem value="surgical-error">Surgical Error</SelectItem>
+                      <SelectItem value="medication-error">Medication Error</SelectItem>
+                      <SelectItem value="birth-injury">Birth Injury</SelectItem>
+                      <SelectItem value="emergency-error">Emergency Room Error</SelectItem>
+                      <SelectItem value="other">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <Textarea
+                    placeholder="Brief description of what happened..."
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    rows={3}
+                  />
+                  <div className="flex items-start space-x-2">
+                    <input
+                      type="checkbox"
+                      id="consent"
+                      name="consent"
+                      checked={formData.consent}
+                      onChange={handleInputChange}
+                      className="mt-1"
+                      required
+                    />
+                    <label htmlFor="consent" className="text-sm text-gray-600">
+                      I consent to being contacted by this law firm about my potential case.
+                    </label>
+                  </div>
+                  <Button type="submit" className="w-full text-lg py-6" disabled={!formData.consent}>
+                    Start Medical Malpractice Evaluation
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      <GoBack />
+
+      {/* Main Content */}
+      <div ref={contentRef} className="container mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          {/* Left Column - Main Content */}
+          <div className="lg:col-span-2 space-y-8">
+            {/* Navigation Tabs */}
+            <div className="content-section">
+              <div className="flex flex-wrap gap-2 mb-8 sticky top-4 bg-background p-4 rounded-lg shadow-sm z-10">
+                {tabs.map((tab) => (
+                  <Button
+                    key={tab.id}
+                    variant={activeTab === tab.id ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => scrollToSection(tab.id)}
+                    className="flex items-center gap-2"
+                  >
+                    <tab.icon className="w-4 h-4" />
+                    {tab.label}
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            {/* Overview Section */}
+            <section id="overview" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">California Medical Malpractice Overview</h2>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-lg text-muted-foreground mb-6">
+                  Medical malpractice occurs when healthcare providers fail to meet the accepted standard of care, 
+                  resulting in patient harm. In California, these cases are governed by specific laws and procedures 
+                  designed to ensure accountability while protecting patients' rights to compensation.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 my-8">
+                  <Card>
+                    <CardContent className="p-6">
+                      <Heart className="w-8 h-8 text-red-600 mb-4" />
+                      <h3 className="text-xl font-semibold mb-3">Patient Safety</h3>
+                      <p>Our primary concern is ensuring you receive proper medical care while pursuing justice for negligent treatment.</p>
+                    </CardContent>
+                  </Card>
+                  <Card>
+                    <CardContent className="p-6">
+                      <Scale className="w-8 h-8 text-blue-600 mb-4" />
+                      <h3 className="text-xl font-semibold mb-3">Legal Expertise</h3>
+                      <p>We have extensive experience with California's complex medical malpractice laws and MICRA regulations.</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Case Evaluation Section */}
+            <section id="evaluation" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Free Case Evaluation Process</h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-blue-600">1</span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Initial Review</h3>
+                    <p className="text-sm text-muted-foreground">We review your medical records and incident details</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-blue-600">2</span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Expert Analysis</h3>
+                    <p className="text-sm text-muted-foreground">Medical experts evaluate the standard of care</p>
+                  </CardContent>
+                </Card>
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <span className="text-xl font-bold text-blue-600">3</span>
+                    </div>
+                    <h3 className="text-lg font-semibold mb-2">Case Strategy</h3>
+                    <p className="text-sm text-muted-foreground">We develop a comprehensive legal strategy</p>
+                  </CardContent>
+                </Card>
+              </div>
+              <Link to="/medical-malpractice-case-evaluation">
+                <Button size="lg" className="w-full md:w-auto">
+                  Start Your Free Evaluation
+                </Button>
+              </Link>
+            </section>
+
+            {/* What to Do Section */}
+            <section id="what-to-do" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">What to Do After Medical Malpractice</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div>
+                  <img 
+                    src={whatToDoImage} 
+                    alt="Medical malpractice consultation" 
+                    className="rounded-lg shadow-lg w-full"
+                  />
+                </div>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Seek Immediate Medical Care</h3>
+                      <p className="text-muted-foreground">Get proper treatment from a different healthcare provider</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Document Everything</h3>
+                      <p className="text-muted-foreground">Keep detailed records of your injuries and treatment</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Obtain Medical Records</h3>
+                      <p className="text-muted-foreground">Request complete records from all healthcare providers</p>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <CheckCircle className="w-6 h-6 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <h3 className="text-lg font-semibold mb-2">Contact Our Firm</h3>
+                      <p className="text-muted-foreground">Time limits apply - don't delay seeking legal advice</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Types of Medical Errors */}
+            <section id="types-of-errors" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Types of Medical Errors We Handle</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Brain className="w-8 h-8 text-red-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Diagnostic Errors</h3>
+                    <p className="text-muted-foreground mb-4">Misdiagnosis, delayed diagnosis, or failure to diagnose serious conditions</p>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>• Cancer misdiagnosis</li>
+                      <li>• Heart attack/stroke delays</li>
+                      <li>• Infection oversight</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Activity className="w-8 h-8 text-blue-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Surgical Errors</h3>
+                    <p className="text-muted-foreground mb-4">Operating room mistakes that cause preventable harm</p>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>• Wrong-site surgery</li>
+                      <li>• Retained instruments</li>
+                      <li>• Organ damage</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Pill className="w-8 h-8 text-green-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Medication Errors</h3>
+                    <p className="text-muted-foreground mb-4">Wrong drugs, dosages, or dangerous interactions</p>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>• Prescription mistakes</li>
+                      <li>• Drug interactions</li>
+                      <li>• Administration errors</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Baby className="w-8 h-8 text-purple-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Birth Injuries</h3>
+                    <p className="text-muted-foreground mb-4">Preventable injuries during pregnancy, labor, or delivery</p>
+                    <ul className="text-sm space-y-1 text-muted-foreground">
+                      <li>• Cerebral palsy</li>
+                      <li>• Delayed C-sections</li>
+                      <li>• Forceps injuries</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Proving Negligence */}
+            <section id="proving-negligence" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Proving Medical Negligence</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Four Key Elements</h3>
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-sm font-bold text-blue-600">1</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold">Duty of Care</h4>
+                          <p className="text-sm text-muted-foreground">Provider owed you professional care</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-sm font-bold text-blue-600">2</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold">Breach of Duty</h4>
+                          <p className="text-sm text-muted-foreground">Care fell below accepted standards</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-sm font-bold text-blue-600">3</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold">Causation</h4>
+                          <p className="text-sm text-muted-foreground">Breach directly caused your harm</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
+                          <span className="text-sm font-bold text-blue-600">4</span>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold">Damages</h4>
+                          <p className="text-sm text-muted-foreground">You suffered actual harm or losses</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <img 
+                    src={provingNegligenceImage} 
+                    alt="Medical negligence investigation" 
+                    className="rounded-lg shadow-lg w-full"
+                  />
+                </div>
+              </div>
+            </section>
+
+            {/* Compensation */}
+            <section id="compensation" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Medical Malpractice Compensation</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <img 
+                    src={compensationImage} 
+                    alt="Medical malpractice compensation" 
+                    className="rounded-lg shadow-lg w-full mb-6"
+                  />
+                </div>
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Economic Damages</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>• Medical expenses (past and future)</li>
+                      <li>• Lost wages and earning capacity</li>
+                      <li>• Rehabilitation and therapy costs</li>
+                      <li>• Life care expenses</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold mb-3">Non-Economic Damages</h3>
+                    <ul className="space-y-2 text-muted-foreground">
+                      <li>• Pain and suffering</li>
+                      <li>• Emotional distress</li>
+                      <li>• Loss of enjoyment of life</li>
+                      <li>• Disfigurement or disability</li>
+                    </ul>
+                  </div>
+                  <Link to="/medical-malpractice-compensation-calculator">
+                    <Button variant="outline" className="w-full">
+                      Calculate Your Potential Compensation
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </section>
+
+            {/* Time Limits */}
+            <section id="time-limits" className="content-section">
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-8">
+                <div className="flex items-start gap-3">
+                  <Clock className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
+                  <div>
+                    <h2 className="text-2xl font-bold text-red-800 mb-3">Don't Wait - Time Limits Apply</h2>
+                    <p className="text-red-700 mb-4">
+                      California medical malpractice cases have strict deadlines. You generally have 3 years from 
+                      the date of injury OR 1 year from discovery, whichever comes first.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <Link to="/medical-malpractice-case-evaluation">
+                        <Button size="lg" className="bg-red-600 hover:bg-red-700">
+                          Get Free Case Review Now
+                        </Button>
+                      </Link>
+                      <Button variant="outline" size="lg" className="border-red-300 text-red-700 hover:bg-red-50">
+                        Call (555) 123-4567
+                      </Button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Frequently Asked Questions</h2>
+              <div className="space-y-4">
+                {faqData.map((faq, index) => (
+                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => toggleFaq(index)}>
+                    <CollapsibleTrigger className="flex justify-between items-center w-full p-4 text-left bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors">
+                      <span className="font-semibold">{faq.question}</span>
+                      {expandedFaq === index ? (
+                        <ChevronUp className="w-5 h-5 text-gray-500" />
+                      ) : (
+                        <ChevronDown className="w-5 h-5 text-gray-500" />
+                      )}
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="p-4 border border-gray-200 rounded-lg mt-1">
+                      <p className="text-muted-foreground">{faq.answer}</p>
+                    </CollapsibleContent>
+                  </Collapsible>
+                ))}
+              </div>
+            </section>
+
+            {/* Resources */}
+            <section id="resources" className="content-section">
+              <h2 className="text-4xl font-bold mb-6">Medical Malpractice Resources</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <FileText className="w-8 h-8 text-blue-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Case Evaluation</h3>
+                    <p className="text-muted-foreground mb-4">Get a professional review of your potential medical malpractice case</p>
+                    <Link to="/medical-malpractice-case-evaluation">
+                      <Button variant="outline" className="w-full">Start Evaluation</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <DollarSign className="w-8 h-8 text-green-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Compensation Calculator</h3>
+                    <p className="text-muted-foreground mb-4">Estimate potential compensation for your medical malpractice injuries</p>
+                    <Link to="/medical-malpractice-compensation-calculator">
+                      <Button variant="outline" className="w-full">Calculate Now</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Stethoscope className="w-8 h-8 text-red-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Medical Guidance</h3>
+                    <p className="text-muted-foreground mb-4">Understanding your medical condition and treatment options</p>
+                    <Link to="/medical-malpractice-medical-guidance">
+                      <Button variant="outline" className="w-full">Learn More</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+                
+                <Card className="hover:shadow-lg transition-shadow">
+                  <CardContent className="p-6">
+                    <Calendar className="w-8 h-8 text-purple-600 mb-4" />
+                    <h3 className="text-xl font-semibold mb-3">Schedule Consultation</h3>
+                    <p className="text-muted-foreground mb-4">Meet with our experienced medical malpractice attorneys</p>
+                    <Link to="/schedule-consultation">
+                      <Button variant="outline" className="w-full">Book Now</Button>
+                    </Link>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+          </div>
+
+          {/* Right Sidebar - Sticky "3 Ways to Start Your Case" */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 space-y-6">
+              <Card className="bg-gradient-to-br from-blue-50 to-indigo-100 border-blue-200">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl font-bold text-blue-900">3 Ways to Start Your Case</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex flex-col gap-3">
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+                      <MessageCircle className="w-8 h-8 text-blue-600 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-blue-900">24/7 Live Chat</h3>
+                        <p className="text-sm text-blue-700">Chat with our team anytime</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center gap-3 p-3 bg-white rounded-lg shadow-sm">
+                      <Phone className="w-8 h-8 text-green-600 flex-shrink-0" />
+                      <div>
+                        <h3 className="font-semibold text-blue-900">Call Now</h3>
+                        <p className="text-lg font-bold text-green-600">(555) 123-4567</p>
+                      </div>
+                    </div>
+                    
+                    <Link to="/medical-malpractice-case-evaluation" className="block">
+                      <div className="flex items-center gap-3 p-3 bg-blue-600 text-white rounded-lg shadow-sm hover:bg-blue-700 transition-colors">
+                        <Scale className="w-8 h-8 flex-shrink-0" />
+                        <div>
+                          <h3 className="font-semibold">Start Medical Malpractice Evaluation</h3>
+                          <p className="text-sm text-blue-100">Free case review form</p>
+                        </div>
+                      </div>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Contact Information */}
+              <Card>
                 <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Phone className="h-5 w-5 text-primary" />
-                    Call Now: (818) 123-4567
+                  <CardTitle className="flex items-center gap-2">
+                    <Phone className="w-5 h-5" />
+                    Contact Information
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <div className="bg-primary/10 p-4 rounded-lg">
-                    <h4 className="font-semibold text-primary mb-2">24/7 Emergency Line</h4>
-                    <p className="text-sm text-muted-foreground">Medical emergencies don't wait. Call anytime for immediate legal assistance.</p>
+                  <div className="text-center">
+                    <p className="text-3xl font-bold text-primary">(555) 123-4567</p>
+                    <p className="text-sm text-muted-foreground">Free Consultation</p>
                   </div>
                   
-                  <div className="space-y-3">
-                    <h4 className="font-semibold">Why Choose Our Firm?</h4>
-                    <div className="space-y-2 text-sm">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
-                        <span>No fees unless we win</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
-                        <span>Medical experts on our team</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
-                        <span>Proven MICRA expertise</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CheckCircle className="h-4 w-4 text-green-500" />
-                        <span>Maximum compensation pursuit</span>
-                      </div>
-                    </div>
+                  <div className="flex items-center gap-2 text-sm">
+                    <Mail className="w-4 h-4 text-muted-foreground" />
+                    <span>info@californialawfirm.com</span>
                   </div>
+                  
+                  <div className="flex items-center gap-2 text-sm">
+                    <MapPin className="w-4 h-4 text-muted-foreground" />
+                    <span>Serving all of California</span>
+                  </div>
+                </CardContent>
+              </Card>
 
-                  <Card className="bg-red-50 border-red-200 p-4">
-                    <div className="flex items-start gap-2">
-                      <Clock className="h-5 w-5 text-red-500 mt-0.5" />
-                      <div>
-                        <h4 className="font-semibold text-red-700 mb-1">Time-Sensitive Warning</h4>
-                        <p className="text-sm text-red-600">California medical malpractice cases have strict deadlines. Evidence disappears quickly. Contact us immediately to protect your rights.</p>
-                      </div>
-                    </div>
-                  </Card>
+              {/* Why Choose Us */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Award className="w-5 h-5" />
+                    Why Choose Our Medical Malpractice Team
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+                    <span className="text-sm">Experienced medical malpractice attorneys</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+                    <span className="text-sm">No fees unless we win your case</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+                    <span className="text-sm">Network of medical experts</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+                    <span className="text-sm">Comprehensive case investigation</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-600 mt-1 flex-shrink-0" />
+                    <span className="text-sm">Personalized attention to your case</span>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Time-Sensitive Warning */}
+              <Card className="bg-red-50 border-red-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-red-800">
+                    <AlertTriangle className="w-5 h-5" />
+                    Time-Sensitive
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-sm text-red-700 mb-4">
+                    California medical malpractice cases have strict deadlines. Evidence can disappear quickly. 
+                    Don't wait to protect your rights.
+                  </p>
+                  <Link to="/medical-malpractice-case-evaluation">
+                    <Button size="sm" className="w-full bg-red-600 hover:bg-red-700">
+                      Start Case Review Now
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
           </div>
-        </section>
-
-        {/* What To Do Section */}
-        <section id="what-to-do" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Immediate Steps After Medical Malpractice</h2>
-            <p className="text-xl text-muted-foreground">Protect Your Rights - Act Now</p>
-          </div>
-
-          <Card className="content-card bg-green-50 border-green-200 p-8 mb-8">
-            <CardHeader>
-              <CardTitle className="text-2xl text-green-700 flex items-center gap-3">
-                <Shield className="h-8 w-8" />
-                Critical Actions to Take Immediately
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ol className="space-y-4 text-lg">
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">1</Badge>
-                  <div>
-                    <strong>Seek Medical Treatment:</strong> Get proper medical care immediately from a different provider to address your injuries and prevent further harm.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">2</Badge>
-                  <div>
-                    <strong>Document Everything:</strong> Keep detailed records of symptoms, treatments, and conversations with healthcare providers.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">3</Badge>
-                  <div>
-                    <strong>Request Medical Records:</strong> Obtain complete copies before they can be altered or "lost" by the healthcare facility.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">4</Badge>
-                  <div>
-                    <strong>Photograph Injuries:</strong> Take photos of visible injuries and continue documenting the healing process.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">5</Badge>
-                  <div>
-                    <strong>Don't Sign Anything:</strong> Refuse to sign any documents from hospitals or insurers without legal counsel review.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">6</Badge>
-                  <div>
-                    <strong>Avoid Social Media:</strong> Don't post about your case on any social platforms - insurance companies monitor these.
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Badge className="bg-green-600 text-white min-w-[24px] h-6 flex items-center justify-center">7</Badge>
-                  <div>
-                    <strong>Call Us Immediately:</strong> Free consultation to protect your rights - (818) 123-4567
-                  </div>
-                </li>
-              </ol>
-            </CardContent>
-          </Card>
-
-          <Card className="content-card bg-red-50 border-red-200 p-8">
-            <CardHeader>
-              <CardTitle className="text-2xl text-red-700 flex items-center gap-3">
-                <AlertTriangle className="h-8 w-8" />
-                Warning Signs You May Have a Medical Malpractice Case
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="grid md:grid-cols-2 gap-3 text-base">
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  Your condition worsened after treatment instead of improving
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  You received a different diagnosis from a second doctor
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  Your doctor failed to order standard tests for your symptoms
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  You suffered unexpected complications after a routine procedure
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  Medical staff won't explain what went wrong
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  You discovered a surgical error (wrong site, retained instruments)
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  Your medical records are incomplete or have been altered
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  You weren't informed about treatment risks before consenting
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  Your symptoms were dismissed without proper examination
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-red-500 mt-1">•</span>
-                  You suffered a severe reaction to medication that wasn't monitored
-                </li>
-              </ul>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Medical Errors Section */}
-        <section id="types-of-errors" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Types of Medical Errors We Handle</h2>
-            <p className="text-xl text-muted-foreground">Comprehensive Legal Support for All Forms of Medical Negligence</p>
-          </div>
-
-          <div className="space-y-8">
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl mb-4">Understanding California's MICRA Laws and Damage Caps</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg mb-6">The Medical Injury Compensation Reform Act (MICRA) has governed California medical malpractice cases since 1975. Recent reforms in 2022 have significantly changed the landscape for victims:</p>
-                
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <h4 className="text-xl font-semibold text-primary mb-3">New MICRA Damage Caps (Effective January 1, 2023)</h4>
-                    <ul className="space-y-2 text-muted-foreground">
-                      <li><strong>Non-Death Cases:</strong> Starting at $350,000 in 2023, increasing by $40,000 annually until reaching $750,000 in 2033</li>
-                      <li><strong>Wrongful Death Cases:</strong> Starting at $500,000 in 2023, increasing by $50,000 annually until reaching $1,000,000 in 2033</li>
-                      <li><strong>After 2033:</strong> Both caps will increase by 2% annually for inflation</li>
-                      <li><strong>Multiple Defendants:</strong> Separate caps apply for healthcare providers, healthcare institutions, and unaffiliated providers</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-primary mb-3">What MICRA Doesn't Cap</h4>
-                    <p className="mb-2">Economic damages remain unlimited, including:</p>
-                    <ul className="space-y-2 text-muted-foreground">
-                      <li>• Past and future medical expenses</li>
-                      <li>• Lost wages and loss of earning capacity</li>
-                      <li>• Cost of rehabilitation and therapy</li>
-                      <li>• Home modifications for disabilities</li>
-                      <li>• Long-term care costs</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <Card className="bg-red-50 border-red-200 p-6 mt-6">
-                  <div className="flex items-start gap-3">
-                    <Clock className="h-6 w-6 text-red-500 mt-1" />
-                    <div>
-                      <h4 className="text-xl font-semibold text-red-700 mb-2">Important Timeline Alert</h4>
-                      <p className="text-red-600">California's statute of limitations for medical malpractice is complex: You must file within 3 years of the injury OR 1 year from discovery of the injury, whichever comes first. For minors, special rules apply. Don't delay - contact us immediately to protect your rights.</p>
-                    </div>
-                  </div>
-                </Card>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl mb-4">Types of Healthcare Providers We Sue for Malpractice</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg mb-6">Medical malpractice can be committed by any healthcare professional or facility. We hold all negligent parties accountable:</p>
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div>
-                    <h4 className="text-xl font-semibold text-primary mb-4">Medical Professionals</h4>
-                    <ul className="space-y-2 text-muted-foreground">
-                      <li><strong>Doctors & Surgeons:</strong> Primary care physicians, specialists, surgeons, emergency room doctors</li>
-                      <li><strong>Nurses & Medical Staff:</strong> Registered nurses, nurse practitioners, physician assistants, medical technicians</li>
-                      <li><strong>Specialists:</strong> Anesthesiologists, radiologists, oncologists, cardiologists, neurologists, obstetricians</li>
-                      <li><strong>Mental Health Providers:</strong> Psychiatrists, psychologists, therapists</li>
-                      <li><strong>Other Providers:</strong> Dentists, chiropractors, pharmacists, physical therapists</li>
-                    </ul>
-                  </div>
-                  <div>
-                    <h4 className="text-xl font-semibold text-primary mb-4">Healthcare Facilities</h4>
-                    <ul className="space-y-2 text-muted-foreground">
-                      <li>• Hospitals and medical centers</li>
-                      <li>• Outpatient surgery centers</li>
-                      <li>• Emergency rooms and urgent care clinics</li>
-                      <li>• Nursing homes and assisted living facilities</li>
-                      <li>• Rehabilitation centers</li>
-                      <li>• Birthing centers</li>
-                      <li>• Diagnostic imaging centers</li>
-                      <li>• Laboratories</li>
-                    </ul>
-                  </div>
-                </div>
-
-                <p className="mt-6 text-lg">California law allows victims to pursue claims against multiple parties. Hospitals can be held vicariously liable for their employees' negligence, and direct liability applies for systemic failures like inadequate staffing, poor training, or dangerous policies.</p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Proving Negligence Section */}
-        <section id="proving-negligence" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Proving Medical Malpractice: The Four Essential Elements</h2>
-            <p className="text-xl text-muted-foreground">How We Build Winning Cases for Our Clients</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <UserX className="h-8 w-8 text-primary" />
-                  1. Duty of Care (Doctor-Patient Relationship)
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed">
-                  We must establish that a formal healthcare provider-patient relationship existed. This creates a legal duty for the provider to deliver competent medical care. This is typically straightforward when you've been treated by the provider.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <Shield className="h-8 w-8 text-primary" />
-                  2. Breach of Duty (Negligence)
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed mb-4">
-                  The healthcare provider failed to meet the accepted standard of care. We prove this through expert testimony from medical professionals who testify about what a reasonably competent provider would have done differently.
-                </p>
-                <p className="text-sm text-muted-foreground">Common breaches include failure to order necessary tests, misinterpreting test results, ignoring patient symptoms, performing unnecessary procedures, and lack of informed consent.</p>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <Activity className="h-8 w-8 text-primary" />
-                  3. Causation
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed">
-                  The provider's negligence directly caused your injury. This requires showing that your harm wouldn't have occurred if the provider had met the standard of care. Medical experts help establish this causal link between the negligent act and your damages.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <Heart className="h-8 w-8 text-primary" />
-                  4. Damages
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-lg leading-relaxed">
-                  You must have suffered actual harm or damages as a result of the negligence. This includes physical injuries, emotional trauma, additional medical expenses, lost wages, pain and suffering, and reduced quality of life. We document all damages to maximize your compensation.
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* Compensation Section */}
-        <section id="compensation" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Medical Malpractice Compensation in California</h2>
-            <p className="text-xl text-muted-foreground">Understanding Your Rights to Full Recovery</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-8">
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl mb-4">Economic Damages (Unlimited)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-lg">
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Past and future medical expenses</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Lost wages and reduced earning capacity</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Rehabilitation and therapy costs</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Home modifications for disabilities</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Long-term care and assistance</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <DollarSign className="h-5 w-5 text-green-500 mt-1" />
-                    <span>Transportation for medical care</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl mb-4">Non-Economic Damages (MICRA Caps Apply)</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-lg">
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Pain and suffering</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Emotional distress and trauma</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Loss of enjoyment of life</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Disfigurement and scarring</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Loss of consortium (for spouses)</span>
-                  </li>
-                  <li className="flex items-start gap-3">
-                    <Heart className="h-5 w-5 text-primary mt-1" />
-                    <span>Permanent disability impact</span>
-                  </li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-
-          <Card className="content-card p-8 mt-8 bg-blue-50 border-blue-200">
-            <CardHeader>
-              <CardTitle className="text-2xl text-blue-700 mb-4">2024 MICRA Damage Caps</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6 text-lg">
-                <div>
-                  <h4 className="font-semibold text-blue-800 mb-2">Non-Death Cases:</h4>
-                  <p className="text-blue-700">$430,000 (increasing annually until $750,000 in 2033)</p>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-blue-800 mb-2">Wrongful Death Cases:</h4>
-                  <p className="text-blue-700">$600,000 (increasing annually until $1,000,000 in 2033)</p>
-                </div>
-              </div>
-              <p className="mt-4 text-blue-600">*Separate caps may apply for different types of defendants (healthcare providers vs. institutions)</p>
-            </CardContent>
-          </Card>
-        </section>
-
-        {/* Time Limits Section */}
-        <section id="time-limits" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">California Medical Malpractice Time Limits</h2>
-            <p className="text-xl text-muted-foreground">Understanding Critical Deadlines for Your Case</p>
-          </div>
-
-          <Card className="content-card bg-red-50 border-red-200 p-8 mb-8">
-            <CardHeader>
-              <CardTitle className="text-2xl text-red-700 flex items-center gap-3">
-                <Clock className="h-8 w-8" />
-                Statute of Limitations - Act Now!
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-6">
-                <div>
-                  <h4 className="text-xl font-semibold text-red-800 mb-3">General Rule</h4>
-                  <p className="text-lg text-red-700">
-                    You have <strong>3 years from the date of injury</strong> OR <strong>1 year from discovery</strong> of the injury, whichever comes first.
-                  </p>
-                </div>
-                
-                <div>
-                  <h4 className="text-xl font-semibold text-red-800 mb-3">Special Rules for Minors</h4>
-                  <p className="text-lg text-red-700">
-                    For children under 6: 3 years from injury or until the child's 8th birthday, whichever provides more time.
-                  </p>
-                </div>
-
-                <div>
-                  <h4 className="text-xl font-semibold text-red-800 mb-3">Foreign Objects Exception</h4>
-                  <p className="text-lg text-red-700">
-                    If surgical instruments or foreign objects are left in your body, special extended deadlines may apply.
-                  </p>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <div className="grid md:grid-cols-2 gap-8">
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <AlertTriangle className="h-8 w-8 text-orange-500" />
-                  Why Time Matters
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-lg">
-                  <li>• Evidence disappears quickly</li>
-                  <li>• Witnesses forget important details</li>
-                  <li>• Medical records can be altered or lost</li>
-                  <li>• Surveillance footage is often overwritten</li>
-                  <li>• Healthcare providers change jobs</li>
-                  <li>• Memories fade over time</li>
-                </ul>
-              </CardContent>
-            </Card>
-
-            <Card className="content-card p-8">
-              <CardHeader>
-                <CardTitle className="text-2xl flex items-center gap-3">
-                  <Shield className="h-8 w-8 text-green-500" />
-                  How We Protect You
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <ul className="space-y-3 text-lg">
-                  <li>• Immediate evidence preservation</li>
-                  <li>• Quick medical record requests</li>
-                  <li>• Expert witness retention</li>
-                  <li>• Timely lawsuit filing</li>
-                  <li>• Comprehensive investigation</li>
-                  <li>• Strategic case development</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
-
-        {/* FAQ Section */}
-        <section id="faq" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Medical Malpractice FAQs</h2>
-            <p className="text-xl text-muted-foreground">Answers to Your Most Important Questions</p>
-          </div>
-
-          <div className="space-y-4">
-            {faqData.map((faq, index) => (
-              <Card key={index} className="content-card">
-                <CardHeader 
-                  className="cursor-pointer hover:bg-muted/50 transition-colors"
-                  onClick={() => toggleFaq(index)}
-                >
-                  <CardTitle className="flex justify-between items-center text-lg">
-                    {faq.question}
-                    {expandedFaq === index ? (
-                      <ChevronUp className="h-5 w-5 text-primary" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-primary" />
-                    )}
-                  </CardTitle>
-                </CardHeader>
-                {expandedFaq === index && (
-                  <CardContent>
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </CardContent>
-                )}
-              </Card>
-            ))}
-          </div>
-        </section>
-
-        {/* Resources Section */}
-        <section id="resources" className="content-section mb-16">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-6">Medical Malpractice Resources</h2>
-            <p className="text-xl text-muted-foreground">Quick Access to Essential Tools and Information</p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <Scale className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Case Evaluation</h3>
-              <p className="text-muted-foreground mb-4">Get your medical malpractice case reviewed by expert attorneys</p>
-              <Button asChild>
-                <Link to="/medical-malpractice-case-evaluation">Start Evaluation</Link>
-              </Button>
-            </Card>
-
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <DollarSign className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Compensation Calculator</h3>
-              <p className="text-muted-foreground mb-4">Estimate potential compensation for your medical malpractice case</p>
-              <Button asChild>
-                <Link to="/medical-malpractice-compensation-calculator">Calculate Now</Link>
-              </Button>
-            </Card>
-
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <BookOpen className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Medical Guidance</h3>
-              <p className="text-muted-foreground mb-4">Essential medical information for malpractice victims</p>
-              <Button asChild>
-                <Link to="/medical-malpractice-medical-guidance">Learn More</Link>
-              </Button>
-            </Card>
-
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <Building className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">California Medical Board</h3>
-              <p className="text-muted-foreground mb-4">Official medical licensing and complaint information</p>
-              <Button variant="outline" asChild>
-                <a href="https://www.mbc.ca.gov/" target="_blank" rel="noopener noreferrer">Visit Site</a>
-              </Button>
-            </Card>
-
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <FileText className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">Patient Safety Resources</h3>
-              <p className="text-muted-foreground mb-4">Information about patient rights and safety</p>
-              <Button variant="outline" asChild>
-                <a href="https://www.psqh.com/" target="_blank" rel="noopener noreferrer">Learn More</a>
-              </Button>
-            </Card>
-
-            <Card className="content-card p-6 text-center hover:shadow-lg transition-shadow">
-              <Phone className="h-12 w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-xl font-semibold mb-2">24/7 Legal Hotline</h3>
-              <p className="text-muted-foreground mb-4">Immediate legal assistance for medical emergencies</p>
-              <Button asChild>
-                <a href="tel:8181234567">(818) 123-4567</a>
-              </Button>
-            </Card>
-          </div>
-        </section>
-
-        {/* Final CTA Section - Don't Wait Time Limits */}
-        <section className="content-section text-center bg-red-600 text-white p-12 rounded-lg">
-          <h2 className="text-4xl font-bold mb-6">Don't Wait - Time Limits Apply for California Medical Malpractice Claims</h2>
-          <p className="text-xl mb-8 max-w-4xl mx-auto">
-            California law imposes strict deadlines for filing medical malpractice lawsuits. You generally have 3 years from injury or 1 year from discovery, whichever comes first. Evidence disappears quickly, witness memories fade, and medical records can be altered. The sooner you contact us, the better we can protect your rights and build a strong case.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
-              <Phone className="mr-2 h-5 w-5" />
-              Free Case Review Now
-            </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-white text-white hover:bg-white hover:text-red-600" asChild>
-              <Link to="/medical-malpractice-case-evaluation" className="flex items-center">
-                <Scale className="mr-2 h-5 w-5" />
-                Start Medical Malpractice Evaluation
-              </Link>
-            </Button>
-          </div>
-          <p className="mt-6 text-xl font-bold opacity-100 bg-white/20 px-6 py-3 rounded-lg inline-block">
-            📞 Call (818) 123-4567 - Available 24/7 for Medical Emergencies
-          </p>
-        </section>
-      </main>
+        </div>
+      </div>
     </div>
   );
 };

@@ -54,11 +54,8 @@ const Index = () => {
         
         <MarqueeBand 
           items={[
-            'Former Defense Attorney',
-            '2026 Rising Star',
             'USC Gould',
             'No Fees Unless We Win',
-            '24/7 Available',
             'Multilingual',
             'All 58 Counties'
           ]}

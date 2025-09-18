@@ -1419,7 +1419,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-3"
+                className="border-red-600 text-red-600 hover:bg-red-600 hover:text-white px-8 py-3"
                 onClick={() => window.open('tel:8181234567')}
               >
                 <Phone className="w-5 h-5 mr-2" />

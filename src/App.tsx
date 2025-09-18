@@ -60,11 +60,6 @@ import ScrollToTop from "./components/ScrollToTop";
 import ConstructionCaseEvaluation from "./pages/ConstructionCaseEvaluation";
 import ConstructionCompensationCalculator from "./pages/ConstructionCompensationCalculator";
 import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
-import ConstructionAccidents from "./pages/practice-areas/ConstructionAccidents";
-import BrainInjuries from "./pages/practice-areas/BrainInjuries";
-import BrainCaseEvaluation from "./pages/BrainCaseEvaluation";
-import BrainCompensationCalculator from "./pages/BrainCompensationCalculator";
-import BrainMedicalGuidance from "./pages/BrainMedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -82,8 +77,6 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
-            <Route path="/practice-areas/construction-accidents" element={<ConstructionAccidents />} />
-            <Route path="/practice-areas/brain-injuries" element={<BrainInjuries />} />
         <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
         <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />
@@ -96,12 +89,9 @@ function App() {
             <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
             <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
-        <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
-        <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
-        <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
-        <Route path="/brain-case-evaluation" element={<BrainCaseEvaluation />} />
-        <Route path="/brain-compensation-calculator" element={<BrainCompensationCalculator />} />
-        <Route path="/brain-medical-guidance" element={<BrainMedicalGuidance />} />
+          <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
+          <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
+          <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
             <Route path="/wrongful-death-case-evaluation" element={<WrongfulDeathCaseEvaluation />} />
             <Route path="/wrongful-death-compensation-calculator" element={<WrongfulDeathCompensationCalculator />} />
             <Route path="/wrongful-death-medical-guidance" element={<WrongfulDeathMedicalGuidance />} />

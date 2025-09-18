@@ -376,21 +376,16 @@ const SpinalCordInjuries: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         
+        {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-[60]">
-          <div 
-            className={`transition-opacity duration-300 ${
-              isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
-            }`}
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
           >
-            <Button 
-              variant="ghost" 
-              onClick={handleGoBack}
-              className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-            >
-              <ArrowLeft className="w-4 h-4" />
-              Go Back
-            </Button>
-          </div>
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
         </div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 pt-20 pb-16">
@@ -421,7 +416,7 @@ const SpinalCordInjuries: React.FC = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20"
+                className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20 visible"
                 onClick={() => window.open('tel:8181234567')}
               >
                 Call (818) 123-4567
@@ -473,11 +468,11 @@ const SpinalCordInjuries: React.FC = () => {
               <h2 className="text-4xl font-bold text-red-600 mb-8">California Spinal Cord Injury Attorneys</h2>
               
               <div className="prose prose-lg max-w-none mb-6">
-                <p className="text-lg leading-relaxed mb-6">
+                <p className="text-xl leading-relaxed mb-8">
                   Spinal cord injuries represent one of the most catastrophic injuries a person can suffer. In an instant, your entire life changes - mobility, independence, career, relationships, and dreams for the future are all impacted. When property owners fail to maintain safe conditions, and you suffer injuries as a result, we fight for the compensation you deserve.
                 </p>
                 
-                <p className="text-lg leading-relaxed mb-6">
+                <p className="text-xl leading-relaxed mb-8">
                   California sees approximately 1,400 new spinal cord injuries annually, with motor vehicle accidents causing 38%, falls accounting for 32%, violence (primarily gunshot wounds) at 14%, and sports/recreation injuries making up 8%. At Trembach Law Firm, we understand the urgency of these catastrophic cases and the devastating impact they have on victims and families.
                 </p>
               </div>
@@ -529,7 +524,7 @@ const SpinalCordInjuries: React.FC = () => {
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-base font-medium mb-2 text-red-800">Accident Date</label>
+                      <label className="block text-lg font-medium mb-2 text-red-800">Accident Date</label>
                       <Input
                         type="date"
                         value={formData.accidentDate}
@@ -1091,91 +1086,123 @@ const SpinalCordInjuries: React.FC = () => {
             </section>
           </div>
 
-          {/* Sidebar - 3 Ways to Start Your Case */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <Card className="border-2 border-primary shadow-lg">
-                <CardHeader className="bg-primary text-primary-foreground">
-                  <CardTitle className="text-center text-xl">3 Ways to Start Your Case</CardTitle>
-                </CardHeader>
-                <CardContent className="p-6 space-y-6">
-                  <div className="text-center">
-                    <Phone className="w-12 h-12 mx-auto mb-4 text-primary" />
-                    <h3 className="font-semibold mb-2 text-lg">Call Now</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Speak directly with our team</p>
+            <div className="sticky top-24 space-y-6">
+              {/* Contact Card - Dark Overlay Style */}
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                {/* Background with overlay */}
+                <div className="absolute inset-0 bg-black/80 z-10"></div>
+                <div 
+                  className="absolute inset-0 bg-cover bg-center opacity-40"
+                  style={{
+                    backgroundImage: `url(${provingNegligenceImage})`
+                  }}
+                ></div>
+                
+                {/* Content */}
+                <div className="relative z-20 p-8 text-center text-white">
+                  <h3 className="text-3xl font-bold mb-2">
+                    3 Ways to
+                  </h3>
+                  <h3 className="text-3xl font-bold mb-4">
+                    Start Your Case
+                    <div className="w-24 h-1 bg-red-600 mx-auto mt-2"></div>
+                  </h3>
+                  
+                  <p className="text-lg mb-8 text-gray-200 leading-relaxed">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
+                  
+                  <div className="space-y-4">
                     <Button 
-                      className="w-full bg-green-600 hover:bg-green-700 text-base"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 visible"
                       onClick={() => window.open('tel:8181234567')}
                     >
-                      Call (818) 123-4567
+                      CALL (818) 123-4567
                     </Button>
-                  </div>
-                  
-                  <div className="text-center">
-                    <MessageCircle className="w-12 h-12 mx-auto mb-4 text-primary" />
-                    <h3 className="font-semibold mb-2 text-lg">24/7 Live Chat</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Chat with us anytime</p>
+                    
                     <Button 
-                      variant="outline" 
-                      className="w-full text-base"
-                      onClick={() => window.open('tel:8181234567')}
-                    >
-                      24/7 Live Chat
-                    </Button>
-                  </div>
-                  
-                  <div className="text-center">
-                    <Scale className="w-12 h-12 mx-auto mb-4 text-primary" />
-                    <h3 className="font-semibold mb-2 text-lg">Free Case Review</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Get your case evaluated</p>
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-base"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"
                       onClick={() => window.location.href = '/spinal-cord-case-evaluation'}
                     >
-                      Start Spinal Cord Injuries Evaluation
+                      EMAIL US
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105 visible"
+                      onClick={() => window.open('tel:8181234567')}
+                    >
+                      24/7 LIVE CHAT
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white text-lg font-semibold py-4 px-6 rounded-lg transition-all duration-300 hover:scale-105"
+                      onClick={() => window.location.href = '/spinal-cord-compensation-calculator'}
+                    >
+                      CALCULATE SETTLEMENT
                     </Button>
                   </div>
-                  
-                  <div className="text-center pt-4 border-t">
-                    <p className="text-sm font-medium text-primary">Available 24/7</p>
-                    <p className="text-sm text-muted-foreground">No fees unless we win</p>
-                  </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              {/* Quick Links */}
-              <Card className="mt-6 border border-border">
+              {/* Quick Facts */}
+              <Card className="glass-card">
                 <CardHeader>
-                  <CardTitle className="text-lg">Quick Links</CardTitle>
+                  <CardTitle className="flex items-center">
+                    <FileText className="w-5 h-5 mr-2 text-primary" />
+                    Quick Facts
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-3">
-                  <Link 
-                    to="/spinal-cord-compensation-calculator" 
-                    className="flex items-center text-primary hover:underline text-base"
-                  >
-                    <DollarSign className="w-4 h-4 mr-2" />
-                    Compensation Calculator
-                  </Link>
-                  <Link 
-                    to="/spinal-cord-medical-guidance" 
-                    className="flex items-center text-primary hover:underline text-base"
-                  >
-                    <Stethoscope className="w-4 h-4 mr-2" />
-                    Medical Guidance
-                  </Link>
-                  <Link 
-                    to="/schedule-consultation" 
-                    className="flex items-center text-primary hover:underline text-base"
-                  >
-                    <Calendar className="w-4 h-4 mr-2" />
-                    Schedule Consultation
-                  </Link>
+                <CardContent className="space-y-3 text-sm">
+                  <div className="flex justify-between">
+                    <span>Statute of Limitations:</span>
+                    <span className="font-semibold">2 Years</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Government Claims:</span>
+                    <span className="font-semibold">6 Months</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Comparative Negligence:</span>
+                    <span className="font-semibold">Pure</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Our Success Rate:</span>
+                    <span className="font-semibold text-green-600">95%+</span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Don't Wait - Time Limits Apply Section */}
+      <section className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Don't Wait - Time Limits Apply for California Spinal Cord Injury Claims
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+            California law gives you only two years from the accident date to file your claim. Government property claims require filing within six months. Contact us today for your free consultation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+            <Button 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.location.href = '/spinal-cord-case-evaluation'}
+            >
+              Start Free Case Evaluation
+            </Button>
+            <Button 
+              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-red-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.open('tel:8181234567')}
+            >
+              Call (818) 123-4567
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

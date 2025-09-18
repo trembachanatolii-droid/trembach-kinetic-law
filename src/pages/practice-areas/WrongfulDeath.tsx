@@ -409,7 +409,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
               </Button>
               <Button variant="outline" size="lg" className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3">
                 <Calculator className="w-5 h-5 mr-2" />
-                Free Case Evaluation
+                <a href="/wrongful-death-case-evaluation">Free Case Evaluation</a>
               </Button>
             </div>
           </div>

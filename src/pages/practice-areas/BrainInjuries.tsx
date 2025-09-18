@@ -253,7 +253,7 @@ const BrainInjuries: React.FC = () => {
             California Brain Injury Attorneys
           </h1>
           
-          <p className="text-xl md:text-2xl text-white/90 mb-8 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed">
             Your brain injury changes everything. We fight to secure the compensation and care you need for life. Former defense attorney now fighting for TBI victims throughout California.
           </p>
           

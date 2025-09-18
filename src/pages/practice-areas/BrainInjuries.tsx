@@ -41,7 +41,7 @@ import {
 import heroBackground from '@/assets/practice-areas/brain-injuries-hero.jpg';
 import whatToDoImage from '@/assets/practice-areas/brain-injury-emergency.jpg';
 import accidentTypesImage from '@/assets/practice-areas/brain-injury-testing.jpg';
-import provingNegligenceImage from '@/assets/practice-areas/brain-injury-legal-process.jpg';
+import provingNegligenceImage from '@/assets/practice-areas/brain-injury-legal-documentation.jpg';
 import compensationImage from '@/assets/practice-areas/brain-injury-rehabilitation.jpg';
 import SEO from '@/components/SEO';
 

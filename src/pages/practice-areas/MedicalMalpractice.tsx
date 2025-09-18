@@ -387,7 +387,7 @@ const MedicalMalpractice: React.FC = () => {
               Fighting for victims of medical negligence across California
             </p>
             <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
-              When healthcare providers fail to meet the standard of care, patients suffer devastating consequences. Our experienced medical malpractice attorneys have secured millions in compensation for victims of medical negligence throughout California.
+              When healthcare providers fail to meet the standard of care, patients suffer devastating consequences. Our dedicated medical malpractice attorneys leverage defense-side insights to fight for victims of medical negligence throughout California.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="text-lg px-8 py-6">
@@ -440,7 +440,7 @@ const MedicalMalpractice: React.FC = () => {
                     Medical malpractice occurs when healthcare providers fail to deliver the standard of care expected in their profession, resulting in patient harm. In California, these cases are governed by specific laws including the Medical Injury Compensation Reform Act (MICRA), which was significantly updated in 2022 to increase compensation limits for victims.
                   </p>
                   <p className="text-xl leading-relaxed">
-                    Our experienced legal team understands the complexities of California medical malpractice law and works with top medical experts to build compelling cases for our clients. We handle all aspects of your case while you focus on recovery.
+                    Our legal team understands the complexities of California medical malpractice law and works with top medical experts to build compelling cases for our clients. We handle all aspects of your case while you focus on recovery.
                   </p>
                 </CardContent>
               </Card>
@@ -455,10 +455,10 @@ const MedicalMalpractice: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-3 text-lg text-muted-foreground">
-                      <li>• 25+ years of medical malpractice experience</li>
-                      <li>• Over $500 million recovered for clients</li>
-                      <li>• Network of top medical experts</li>
+                      <li>• Former insurance defense attorney insight</li>
+                      <li>• Network of top medical experts available</li>
                       <li>• No fees unless we win your case</li>
+                      <li>• Focused on building strong cases with evidence</li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -1006,8 +1006,8 @@ const MedicalMalpractice: React.FC = () => {
                     <span className="font-semibold">Required</span>
                   </div>
                   <div className="flex justify-between">
-                    <span>Our Success Rate:</span>
-                    <span className="font-semibold text-green-600">95%+</span>
+                    <span>Our Approach:</span>
+                    <span className="font-semibold text-green-600">Client-Focused</span>
                   </div>
                 </CardContent>
               </Card>

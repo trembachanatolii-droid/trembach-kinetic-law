@@ -356,14 +356,35 @@
     @apply bg-background text-foreground;
   }
 
-  /* Hide badge overlays in hero section */
+  /* Hide all badge overlays and floating elements */
   .hero-badges,
-  .badge {
+  .badge,
+  [class*="badge"]:not(.ui-badge):not(.sidebar-menu-badge),
+  [data-badge],
+  .navigation-badge,
+  .header-badge,
+  .floating-badge {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  
+  /* Hide colored overlay elements in navigation/header area */
+  nav *[style*="background-color: rgb(220, 38, 38)"],
+  nav *[style*="background-color: rgb(59, 130, 246)"],
+  nav *[style*="background-color: rgb(34, 197, 94)"],
+  nav *[style*="background-color: rgb(249, 115, 22)"],
+  header *[style*="background-color: rgb(220, 38, 38)"],
+  header *[style*="background-color: rgb(59, 130, 246)"],
+  header *[style*="background-color: rgb(34, 197, 94)"],
+  header *[style*="background-color: rgb(249, 115, 22)"] {
     display: none !important;
   }
   
-  /* Hide any floating badge elements */
-  [class*="badge"]:not(.ui-badge):not(.sidebar-menu-badge) {
+  /* Hide any absolute/fixed positioned elements with badge-like styling */
+  *[class*="absolute"][class*="top-"]:has-text("Rising Star"),
+  *[class*="fixed"][class*="top-"]:has-text("Defense Attorney"),
+  *[class*="absolute"][class*="top-"]:has-text("Maximum Compensation"),
+  *[class*="fixed"][class*="top-"]:has-text("24/7 Available") {
     display: none !important;
   }
 }

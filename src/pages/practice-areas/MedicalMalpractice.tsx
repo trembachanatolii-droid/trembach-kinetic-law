@@ -187,6 +187,166 @@ const MedicalMalpractice: React.FC = () => {
     {
       question: "Can I sue if my surgery had complications?",
       answer: "Not all surgical complications constitute malpractice. Surgery carries inherent risks, and bad outcomes can occur even with perfect care. However, you may have a case if complications resulted from surgical errors like wrong-site surgery, leaving instruments inside you, damaging organs or nerves, or failing to monitor post-operative complications. We evaluate whether your complications were preventable negligence or unavoidable risks."
+    },
+    {
+      question: "What if I signed a consent form?",
+      answer: "Signing a consent form doesn't waive your right to sue for malpractice. Consent forms acknowledge risks of procedures but don't protect against negligent care. If you weren't properly informed about material risks, if the procedure was performed negligently, or if complications occurred due to substandard care, you may still have a valid claim despite signing consent."
+    },
+    {
+      question: "Can I sue a hospital for negligent care?",
+      answer: "Yes, hospitals can be held liable for medical malpractice through vicarious liability for their employees' negligence or direct liability for institutional negligence. This includes inadequate staffing, poor credentialing, defective equipment, or systemic failures. We pursue both individual providers and institutions to maximize your recovery under California's expanded MICRA caps."
+    },
+    {
+      question: "What constitutes emergency room malpractice?",
+      answer: "ER malpractice includes failure to diagnose heart attacks or strokes, premature discharge, inadequate testing, medication errors, and delayed treatment. The fast-paced emergency room environment is no excuse for negligence. We understand ER standards of care and work with emergency medicine experts to prove when care fell below acceptable standards."
+    },
+    {
+      question: "How do I prove my doctor misdiagnosed my condition?",
+      answer: "Proving misdiagnosis requires showing a competent doctor would have reached the correct diagnosis given your symptoms, medical history, and test results. We work with medical experts to review your records, analyze the diagnostic process, and demonstrate how proper care would have led to accurate diagnosis and better outcomes."
+    },
+    {
+      question: "Can I sue for birth injuries during delivery?",
+      answer: "Yes, birth injuries often result from medical negligence during pregnancy, labor, or delivery. This includes failure to monitor fetal distress, delayed C-sections, improper use of forceps or vacuum, and medication errors. Birth injury cases require specialized medical experts who understand obstetric standards of care and can prove preventable harm occurred."
+    },
+    {
+      question: "What if my loved one died due to medical malpractice?",
+      answer: "Wrongful death due to medical malpractice allows surviving family members to recover damages including loss of financial support, loss of companionship, and funeral expenses. Under California's updated MICRA laws, non-economic damages in wrongful death cases start at $500,000 in 2023, increasing annually. We help families navigate this difficult time while pursuing maximum compensation."
+    },
+    {
+      question: "Can I sue for medication errors?",
+      answer: "Yes, medication errors include wrong drugs, incorrect dosages, dangerous drug interactions, and administration mistakes. These errors can cause severe adverse reactions, organ damage, or death. Doctors, nurses, pharmacists, and hospitals can all be held liable for medication-related malpractice. We investigate all parties involved in prescribing, dispensing, and administering medications."
+    },
+    {
+      question: "What if my cancer was misdiagnosed or diagnosed late?",
+      answer: "Cancer misdiagnosis or delayed diagnosis can be devastating, leading to advanced disease, reduced survival chances, and unnecessary suffering. We work with oncology experts to determine if earlier diagnosis would have improved your prognosis and what damages resulted from the delay. These cases often involve substantial compensation due to the severity of consequences."
+    },
+    {
+      question: "Can I sue for nursing home neglect?",
+      answer: "Yes, nursing home neglect constitutes medical malpractice when it involves medical care failures. This includes medication errors, failure to prevent falls, inadequate wound care, and neglect leading to infections or pressure sores. Nursing homes have a duty to provide competent medical care to residents, and we hold them accountable for failures that cause harm."
+    },
+    {
+      question: "What should I do if I suspect medical malpractice occurred?",
+      answer: "Immediately seek proper medical treatment from a different provider, document everything with photos and notes, request complete medical records before they can be altered, avoid signing any documents from hospitals or insurers, and contact our firm for a free consultation. Time is critical - evidence disappears quickly and deadlines are strict."
+    },
+    {
+      question: "How does MICRA affect my medical malpractice case?",
+      answer: "The Medical Injury Compensation Reform Act (MICRA) caps non-economic damages in California medical malpractice cases. Recent 2022 reforms significantly increased these caps, starting at $350,000 for injury cases and $500,000 for wrongful death in 2023, rising annually to $750,000 and $1,000,000 respectively by 2033. Economic damages remain unlimited."
+    },
+    {
+      question: "Can I change lawyers if I'm not satisfied with my current attorney?",
+      answer: "Yes, you have the right to change attorneys at any time. We often take over cases from other firms when clients aren't receiving the attention or results they deserve. We'll review your case file, evaluate the previous attorney's work, and determine the best strategy moving forward. Client satisfaction and maximum results are our priorities."
+    },
+    {
+      question: "What if the medical error happened years ago?",
+      answer: "California's statute of limitations for medical malpractice is generally 3 years from injury or 1 year from discovery, whichever comes first. However, certain circumstances can extend these deadlines, including fraudulent concealment, continuing treatment, or foreign objects left in the body. Contact us immediately - we can determine if your case is still viable despite the time passage."
+    },
+    {
+      question: "Do I have a case if my condition simply didn't improve?",
+      answer: "Poor outcomes alone don't constitute malpractice. You must prove the healthcare provider's negligence caused your harm. However, if your condition worsened due to inadequate treatment, failure to diagnose a treatable condition, or negligent care that prevented improvement, you may have a valid claim. We evaluate whether your poor outcome resulted from negligence or was an unfortunate but unavoidable result."
+    },
+    {
+      question: "Can I sue for failure to obtain informed consent?",
+      answer: "Yes, if you weren't properly informed about material risks of a procedure and would have chosen differently with proper information, you may have a claim for lack of informed consent. The provider must disclose risks that a reasonable patient would find significant in making treatment decisions. We prove what information should have been disclosed and how it would have affected your decision."
+    },
+    {
+      question: "What if multiple doctors were involved in my care?",
+      answer: "When multiple providers are involved, we investigate each doctor's role and determine individual liability. Each provider has independent duties to their patients. We may sue multiple doctors, specialists, hospitals, and other providers who contributed to your harm. This often results in higher total compensation as we can pursue separate damage awards from different parties."
+    },
+    {
+      question: "Can I sue for anesthesia errors?",
+      answer: "Yes, anesthesia errors can cause serious injuries including brain damage, organ failure, and death. Common errors include dosage mistakes, failure to monitor vital signs, inadequate pre-operative evaluation, and equipment failures. Anesthesiologists have specialized training and are held to high standards of care. We work with anesthesiology experts to prove negligence and secure compensation."
+    },
+    {
+      question: "What if I can't afford to pursue a medical malpractice lawsuit?",
+      answer: "You don't need money upfront to pursue a medical malpractice case. We work on a contingency fee basis - you pay nothing unless we win. We advance all case costs including expert fees, court costs, and investigation expenses. This allows anyone who has been harmed by medical negligence to access quality legal representation regardless of their financial situation."
+    },
+    {
+      question: "How do I get my medical records for my case?",
+      answer: "You have the right to obtain copies of all your medical records. We help you request records from all providers and ensure you receive complete files. Sometimes providers try to delay or limit record production, but we know how to obtain all relevant records including test results, nursing notes, and physician orders. Quick record acquisition is crucial for preserving evidence."
+    },
+    {
+      question: "Can I sue for radiology errors?",
+      answer: "Yes, radiologists can be held liable for misreading X-rays, CT scans, MRIs, and other imaging studies. Failure to identify fractures, tumors, aneurysms, or other critical findings can delay treatment and worsen outcomes. We work with radiology experts who review imaging studies and determine if readings met professional standards."
+    },
+    {
+      question: "What if the hospital claims they followed protocols?",
+      answer: "Following protocols doesn't automatically protect against malpractice claims. Protocols may be inadequate, improperly implemented, or the provider may have deviated from established procedures. We investigate whether protocols met professional standards, were properly followed, and whether reasonable care required going beyond minimum protocols in your specific situation."
+    },
+    {
+      question: "Can I sue for failure to monitor a patient properly?",
+      answer: "Yes, healthcare providers have a duty to properly monitor patients, especially those in critical condition or receiving certain medications. Failure to monitor vital signs, respond to changes in condition, or provide adequate post-operative care can constitute malpractice. We work with nursing and medical experts to establish proper monitoring standards and prove when care fell short."
+    },
+    {
+      question: "What if I was injured by a defective medical device?",
+      answer: "Medical device injuries may involve both malpractice and product liability claims. If the device was properly used but defective, you may sue the manufacturer. If the device was improperly used or the wrong device was chosen, you may have a malpractice claim against the provider. We investigate all potential claims to maximize your recovery from all responsible parties."
+    },
+    {
+      question: "Can I sue for psychiatric malpractice?",
+      answer: "Yes, mental health providers can be held liable for malpractice including misdiagnosis, inappropriate medication management, failure to prevent suicide, sexual misconduct, and breach of confidentiality. Psychiatric malpractice cases require specialized experts who understand mental health standards of care and can prove causation between negligent treatment and psychological harm."
+    },
+    {
+      question: "What if my primary care doctor failed to refer me to a specialist?",
+      answer: "Primary care physicians have a duty to recognize when conditions require specialist care and make appropriate referrals. Failure to refer when a reasonable doctor would have done so can constitute malpractice, especially if delays in specialist care worsen your condition. We evaluate whether referral delays caused additional harm and pursue compensation accordingly."
+    },
+    {
+      question: "Can I sue for post-surgical infections?",
+      answer: "Not all post-surgical infections constitute malpractice, as some infection risk is inherent in surgery. However, infections may result from negligent surgical technique, inadequate sterilization, failure to prescribe appropriate antibiotics, or improper wound care. We investigate whether infections resulted from preventable negligence or unavoidable complications."
+    },
+    {
+      question: "What if my dentist injured me during treatment?",
+      answer: "Dental malpractice can include nerve damage, infections, unnecessary procedures, failure to diagnose oral cancer, and anesthesia complications. Dentists are held to the same professional standards as other healthcare providers. We work with dental experts to evaluate whether your injuries resulted from negligent dental care below professional standards."
+    },
+    {
+      question: "Can I sue for laboratory errors?",
+      answer: "Yes, laboratory errors can lead to misdiagnosis, delayed treatment, and inappropriate medical decisions. This includes specimen mix-ups, contaminated samples, incorrect test results, and failure to report critical values promptly. Labs, hospitals, and ordering physicians may all be liable for errors that cause patient harm."
+    },
+    {
+      question: "What if my surgeon operated on the wrong body part?",
+      answer: "Wrong-site surgery is a serious never-event that should never occur with proper protocols. This includes wrong limb, wrong organ, wrong side of body, or wrong patient entirely. These cases often result in substantial compensation as they represent clear breaches of surgical safety standards and typically cause significant physical and emotional harm."
+    },
+    {
+      question: "Can I sue for failure to diagnose a heart attack?",
+      answer: "Yes, failure to diagnose heart attacks in emergency rooms or primary care settings can be fatal or cause permanent heart damage. Symptoms may be atypical, especially in women, but providers must consider cardiac causes for chest pain, shortness of breath, and related symptoms. Delayed diagnosis can worsen outcomes and may constitute malpractice."
+    },
+    {
+      question: "What if my doctor prescribed the wrong medication?",
+      answer: "Prescription errors can cause serious harm including allergic reactions, drug interactions, overdoses, and treatment failures. Doctors must check patient allergies, review current medications, verify dosages, and provide proper instructions. Pharmacists also have duties to catch prescription errors before dispensing medications to patients."
+    },
+    {
+      question: "Can I sue for failure to follow up on test results?",
+      answer: "Yes, healthcare providers have a duty to review test results promptly and communicate abnormal findings to patients. Failure to follow up on concerning test results, delays in notification, or inadequate patient tracking systems can constitute malpractice, especially if delayed treatment worsens patient outcomes."
+    },
+    {
+      question: "What if my plastic surgeon botched my cosmetic procedure?",
+      answer: "Cosmetic surgery malpractice can include nerve damage, scarring, asymmetry, infections, and results far below professional standards. While cosmetic procedures carry inherent risks, surgeons must meet professional standards of care. We evaluate whether poor outcomes resulted from negligent technique or unavoidable complications."
+    },
+    {
+      question: "Can I sue for failure to prevent hospital-acquired infections?",
+      answer: "Hospitals have strict infection control protocols to prevent healthcare-associated infections. Failure to follow hand hygiene protocols, improper sterilization, inadequate isolation procedures, or systemic infection control failures may constitute negligence. We investigate whether infections resulted from preventable hospital negligence."
+    },
+    {
+      question: "What if my doctor failed to order necessary tests?",
+      answer: "Physicians must order appropriate diagnostic tests based on patient symptoms and medical history. Failure to order necessary tests, delaying needed testing, or misinterpreting test results can constitute malpractice if it leads to missed diagnoses or delayed treatment. We work with medical experts to establish proper diagnostic standards."
+    },
+    {
+      question: "Can I sue for negligent credentialing by a hospital?",
+      answer: "Hospitals have a duty to properly credential physicians and verify their qualifications before granting privileges. Negligent credentialing that allows unqualified physicians to practice can make hospitals liable for resulting patient harm. We investigate physician backgrounds and hospital credentialing processes when poor outcomes occur."
+    },
+    {
+      question: "What if my medical treatment was delayed due to insurance issues?",
+      answer: "While insurance delays can complicate care, healthcare providers still have duties to patients. If providers fail to advocate for necessary care, don't seek alternative treatments, or delay care unreasonably due to insurance issues, they may be liable for worsened outcomes. We evaluate whether insurance delays contributed to preventable harm."
+    },
+    {
+      question: "Can I sue for failure to obtain proper consent for experimental treatments?",
+      answer: "Experimental treatments require enhanced informed consent including disclosure of experimental nature, alternative treatments, and additional risks. Patients must understand they're receiving experimental care and consent to participation. Failure to obtain proper informed consent for experimental treatments can result in liability even if the treatment itself was performed competently."
+    },
+    {
+      question: "What if my doctor failed to coordinate my care with other specialists?",
+      answer: "When multiple specialists are involved in patient care, coordination is essential to prevent conflicting treatments, drug interactions, and communication failures. Primary care physicians and specialists have duties to communicate effectively and coordinate care plans. Poor coordination that causes patient harm may constitute malpractice by multiple providers."
+    },
+    {
+      question: "Can I sue for medical malpractice if I'm uninsured?",
+      answer: "Yes, your insurance status doesn't affect your right to pursue medical malpractice claims. Healthcare providers owe the same standard of care to all patients regardless of insurance status. We help uninsured clients access necessary medical care through liens while pursuing compensation for their injuries. Everyone deserves competent medical care."
     }
   ];
 
@@ -270,31 +430,31 @@ const MedicalMalpractice: React.FC = () => {
             {/* Overview Section */}
             <section id="overview" className="content-section mb-16">
               <div className="text-center mb-12">
-                <h2 className="text-4xl font-bold mb-6">Medical Malpractice in California</h2>
-                <p className="text-xl text-muted-foreground">Comprehensive Legal Support for Medical Negligence Victims</p>
+                <h2 className="text-5xl font-bold mb-8">Medical Malpractice in California</h2>
+                <p className="text-2xl text-muted-foreground">Comprehensive Legal Support for Medical Negligence Victims</p>
               </div>
 
-              <Card className="content-card p-8 mb-8">
+              <Card className="content-card p-10 mb-10">
                 <CardContent>
-                  <p className="text-lg leading-relaxed mb-6">
+                  <p className="text-xl leading-relaxed mb-8">
                     Medical malpractice occurs when healthcare providers fail to deliver the standard of care expected in their profession, resulting in patient harm. In California, these cases are governed by specific laws including the Medical Injury Compensation Reform Act (MICRA), which was significantly updated in 2022 to increase compensation limits for victims.
                   </p>
-                  <p className="text-lg leading-relaxed">
+                  <p className="text-xl leading-relaxed">
                     Our experienced legal team understands the complexities of California medical malpractice law and works with top medical experts to build compelling cases for our clients. We handle all aspects of your case while you focus on recovery.
                   </p>
                 </CardContent>
               </Card>
 
-              <div className="grid md:grid-cols-2 gap-8">
-                <Card className="content-card p-6">
+              <div className="grid md:grid-cols-2 gap-10">
+                <Card className="content-card p-8">
                   <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-3">
-                      <Shield className="h-6 w-6 text-red-600" />
+                    <CardTitle className="text-2xl flex items-center gap-3">
+                      <Shield className="h-8 w-8 text-red-600" />
                       Our Expertise
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-3 text-lg text-muted-foreground">
                       <li>• 25+ years of medical malpractice experience</li>
                       <li>• Over $500 million recovered for clients</li>
                       <li>• Network of top medical experts</li>
@@ -303,15 +463,15 @@ const MedicalMalpractice: React.FC = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="content-card p-6">
+                <Card className="content-card p-8">
                   <CardHeader>
-                    <CardTitle className="text-xl flex items-center gap-3">
-                      <Clock className="h-6 w-6 text-red-600" />
+                    <CardTitle className="text-2xl flex items-center gap-3">
+                      <Clock className="h-8 w-8 text-red-600" />
                       Time Is Critical
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <ul className="space-y-2 text-muted-foreground">
+                    <ul className="space-y-3 text-lg text-muted-foreground">
                       <li>• 3-year statute of limitations</li>
                       <li>• Evidence preservation is crucial</li>
                       <li>• Medical records must be secured quickly</li>
@@ -733,21 +893,21 @@ const MedicalMalpractice: React.FC = () => {
 
             {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
-              <div className="space-y-4">
+              <h2 className="text-4xl font-bold text-red-600 mb-8">Frequently Asked Questions</h2>
+              <div className="space-y-6">
                 {faqData.map((faq, index) => (
                   <Card key={index} className="glass-card">
                     <CardHeader>
                       <Collapsible open={expandedFaq === index} onOpenChange={() => toggleFaq(index)}>
                         <CollapsibleTrigger asChild>
-                          <Button variant="ghost" className="w-full justify-between text-left">
+                          <Button variant="ghost" className="w-full justify-between text-left text-lg p-6">
                             {faq.question}
                             {expandedFaq === index ? <ChevronUp /> : <ChevronDown />}
                           </Button>
                         </CollapsibleTrigger>
                         <CollapsibleContent>
-                          <CardContent>
-                            <p>{faq.answer}</p>
+                          <CardContent className="pt-4">
+                            <p className="text-lg leading-relaxed">{faq.answer}</p>
                           </CardContent>
                         </CollapsibleContent>
                       </Collapsible>

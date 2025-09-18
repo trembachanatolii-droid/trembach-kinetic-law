@@ -423,6 +423,10 @@ const SpinalCordInjuries: React.FC = () => {
               </Button>
             </div>
             
+            <p className="text-white/90 mt-6 text-lg">
+              <strong>No Fees. No Risk.</strong><br />
+              You only pay when we win
+            </p>
           </div>
         </div>
 

@@ -190,6 +190,14 @@ const CarAccidents: React.FC = () => {
                 <p className="text-xl text-muted-foreground leading-relaxed">
                   California's congested highways see thousands of serious crashes annually. Former defense attorney now fighting insurance companies for maximum compensation. We know their tactics, we know their limits, and we know how to win.
                 </p>
+                <div className="bg-primary/10 border border-primary/20 rounded-lg p-6">
+                  <p className="text-lg font-semibold text-foreground mb-2">
+                    No fees. No risk.
+                  </p>
+                  <p className="text-foreground">
+                    You only pay when we win
+                  </p>
+                </div>
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">

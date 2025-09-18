@@ -86,9 +86,14 @@ function App() {
           <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
           <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
           <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
-          <Route path="/wrongful-death-case-evaluation" element={<WrongfulDeathCaseEvaluation />} />
-          <Route path="/wrongful-death-compensation-calculator" element={<WrongfulDeathCompensationCalculator />} />
-          <Route path="/wrongful-death-medical-guidance" element={<WrongfulDeathMedicalGuidance />} />
+        <Route path="/wrongful-death-case-evaluation" element={<WrongfulDeathCaseEvaluation />} />
+        <Route path="/wrongful-death-compensation-calculator" element={<WrongfulDeathCompensationCalculator />} />
+        <Route path="/wrongful-death-medical-guidance" element={<WrongfulDeathMedicalGuidance />} />
+        
+        {/* Product Liability Routes */}
+        <Route path="/product-liability-case-evaluation" element={<ProductLiabilityCaseEvaluation />} />
+        <Route path="/product-liability-compensation-calculator" element={<ProductLiabilityCompensationCalculator />} />
+        <Route path="/product-liability-medical-guidance" element={<ProductLiabilityMedicalGuidance />} />
               <Route path="/bicycle-case-evaluation" element={<BicycleCaseEvaluation />} />
               <Route path="/bicycle-medical-guidance" element={<BicycleMedicalGuidance />} />
               <Route path="/bicycle-compensation-calculator" element={<BicycleCompensationCalculator />} />

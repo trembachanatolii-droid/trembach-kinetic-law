@@ -48,6 +48,12 @@ import courthouseImage from '@/assets/practice-areas/wrongful-death-courthouse.j
 import legalProcessImage from '@/assets/practice-areas/wrongful-death-legal-process.jpg';
 import compensationImage from '@/assets/practice-areas/wrongful-death-compensation.jpg';
 import medicalImage from '@/assets/practice-areas/wrongful-death-medical.jpg';
+import vehicleAccidentsImage from '@/assets/practice-areas/wrongful-death-vehicle-accidents.jpg';
+import workplaceImage from '@/assets/practice-areas/wrongful-death-workplace.jpg';
+import damagesImage from '@/assets/practice-areas/wrongful-death-damages.jpg';
+import investigationImage from '@/assets/practice-areas/wrongful-death-investigation.jpg';
+import familyImage from '@/assets/practice-areas/wrongful-death-family.jpg';
+import timeLimitsImage from '@/assets/practice-areas/wrongful-death-time-limits.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -753,6 +759,12 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
+                      <img 
+                        src={vehicleAccidentsImage} 
+                        alt="Motor vehicle accident scene representing wrongful death cases" 
+                        className="w-full h-48 object-cover rounded-lg shadow-lg mb-4"
+                      />
+                      
                       <h3 className="text-xl font-semibold text-gray-900 mb-4 flex items-center gap-2">
                         <Car className="w-6 h-6 text-red-600" />
                         Motor Vehicle Accidents
@@ -878,6 +890,12 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
+                      <img 
+                        src={investigationImage} 
+                        alt="Legal investigation evidence for wrongful death cases" 
+                        className="w-full h-64 object-cover rounded-lg shadow-lg mb-6"
+                      />
+                      
                       <h3 className="text-xl font-semibold text-gray-900 mb-4">Four Elements of Negligence</h3>
                       <div className="space-y-6">
                         <div className="flex items-start gap-4">
@@ -1089,6 +1107,12 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   
                   <div className="grid md:grid-cols-2 gap-8">
                     <div>
+                      <img 
+                        src={timeLimitsImage} 
+                        alt="Time limits and deadlines for wrongful death cases" 
+                        className="w-full h-64 object-cover rounded-lg shadow-lg mb-6"
+                      />
+                      
                       <div className="bg-red-50 border border-red-200 rounded-lg p-6 mb-6">
                         <h3 className="text-xl font-semibold text-red-900 mb-4 flex items-center gap-2">
                           <Clock className="w-6 h-6" />
@@ -1161,7 +1185,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                           onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                         >
                           <CardTitle className="flex justify-between items-center text-lg font-medium">
-                            <span className="text-left">{faq.question}</span>
+                            <span className="text-left pr-4">{faq.question}</span>
                             {expandedFaq === index ? 
                               <ChevronUp className="w-5 h-5 text-gray-500 flex-shrink-0" /> : 
                               <ChevronDown className="w-5 h-5 text-gray-500 flex-shrink-0" />
@@ -1194,7 +1218,10 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         <p className="text-gray-600 mb-4">
                           Estimate potential compensation for your wrongful death case based on California law and recent settlements.
                         </p>
-                        <Button className="w-full bg-blue-600 hover:bg-blue-700">
+                        <Button 
+                          className="w-full bg-blue-600 hover:bg-blue-700"
+                          onClick={() => window.open('/wrongful-death-compensation-calculator', '_blank')}
+                        >
                           Calculate Compensation
                         </Button>
                       </div>
@@ -1207,7 +1234,10 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         <p className="text-gray-600 mb-4">
                           Get a comprehensive evaluation of your wrongful death case strength and potential outcomes.
                         </p>
-                        <Button className="w-full bg-green-600 hover:bg-green-700">
+                        <Button 
+                          className="w-full bg-green-600 hover:bg-green-700"
+                          onClick={() => window.open('/wrongful-death-case-evaluation', '_blank')}
+                        >
                           Start Evaluation
                         </Button>
                       </div>
@@ -1216,9 +1246,9 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     <Card className="p-6 hover:shadow-lg transition-shadow">
                       <div className="text-center">
                         <BookOpen className="w-12 h-12 text-purple-600 mx-auto mb-4" />
-                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Legal Guidance</h3>
+                        <h3 className="text-lg font-semibold text-gray-900 mb-3">Medical Guidance</h3>
                         <p className="text-gray-600 mb-4">
-                          Comprehensive guide to California wrongful death law and your rights as a survivor.
+                          Comprehensive guide to California wrongful death law and medical support during your case.
                         </p>
                         <Button 
                           className="w-full bg-purple-600 hover:bg-purple-700"
@@ -1236,6 +1266,11 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     
                     <div className="grid md:grid-cols-2 gap-8">
                       <div>
+                        <img 
+                          src={familyImage} 
+                          alt="Family support during wrongful death case" 
+                          className="w-full h-48 object-cover rounded-lg shadow-lg mb-4"
+                        />
                         <h4 className="text-lg font-semibold text-gray-900 mb-4">California Legal Resources</h4>
                         <ul className="space-y-2 text-gray-700">
                           <li>• California Code of Civil Procedure Section 377.60</li>
@@ -1246,6 +1281,11 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                       </div>
                       
                       <div>
+                        <img 
+                          src={medicalImage} 
+                          alt="Medical support and healthcare resources" 
+                          className="w-full h-48 object-cover rounded-lg shadow-lg mb-4"
+                        />
                         <h4 className="text-lg font-semibold text-gray-900 mb-4">Support Organizations</h4>
                         <ul className="space-y-2 text-gray-700">
                           <li>• Mothers Against Drunk Driving (MADD)</li>

@@ -1012,24 +1012,27 @@ const MedicalMalpractice: React.FC = () => {
                 </CardContent>
               </Card>
 
-              {/* 24/7 Live Chat - Visible Inactive Status */}
-              <Card className="glass-card bg-gray-50 border-gray-200">
+              {/* 24/7 Live Chat - Working Link */}
+              <Card className="glass-card bg-blue-50 border-blue-200">
                 <CardHeader>
-                  <CardTitle className="flex items-center text-gray-500">
+                  <CardTitle className="flex items-center text-blue-600">
                     <MessageCircle className="w-5 h-5 mr-2" />
                     24/7 Live Chat
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <Button 
-                    disabled
-                    variant="outline" 
-                    className="w-full text-gray-400 border-gray-300 cursor-not-allowed"
+                    variant="default" 
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                    onClick={() => {
+                      // Open chat in new window/tab
+                      window.open('mailto:contact@trembachlaw.com?subject=Medical Malpractice Inquiry&body=I would like to start a medical malpractice evaluation.', '_blank');
+                    }}
                   >
                     Start Medical Malpractice Evaluation
                   </Button>
-                  <p className="text-xs text-gray-400 mt-2 text-center">
-                    Currently offline - Call for immediate assistance
+                  <p className="text-xs text-blue-600 mt-2 text-center">
+                    Available 24/7 - Click to start your case evaluation
                   </p>
                 </CardContent>
               </Card>

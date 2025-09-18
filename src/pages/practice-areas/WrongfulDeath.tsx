@@ -407,9 +407,14 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                 <Phone className="w-5 h-5 mr-2" />
                 Call (818) 123-4567
               </Button>
-              <Button variant="outline" size="lg" className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3"
+                onClick={() => window.open('/wrongful-death-case-evaluation', '_blank')}
+              >
                 <Calculator className="w-5 h-5 mr-2" />
-                <a href="/wrongful-death-case-evaluation">Free Case Evaluation</a>
+                Free Case Evaluation
               </Button>
             </div>
           </div>
@@ -1215,7 +1220,11 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         <p className="text-gray-600 mb-4">
                           Comprehensive guide to California wrongful death law and your rights as a survivor.
                         </p>
-                        <Button className="w-full bg-purple-600 hover:bg-purple-700">
+                        <Button 
+                          className="w-full bg-purple-600 hover:bg-purple-700"
+                          onClick={() => window.open('/wrongful-death-medical-guidance', '_blank')}
+                        >
+                          <BookOpen className="w-4 h-4 mr-2" />
                           Access Guide
                         </Button>
                       </div>
@@ -1284,17 +1293,14 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     Email Consultation
                   </Button>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-purple-600 text-purple-600 hover:bg-purple-50 py-3"
-                    onClick={() => {
-                      const calculatorUrl = '/wrongful-death-compensation-calculator';
-                      window.open(calculatorUrl, '_blank');
-                    }}
-                  >
-                    <Calculator className="w-5 h-5 mr-2" />
-                    Compensation Calculator
-                  </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full border-purple-600 text-purple-600 hover:bg-purple-50 py-3"
+                      onClick={() => window.open('/wrongful-death-compensation-calculator', '_blank')}
+                    >
+                      <Calculator className="w-5 h-5 mr-2" />
+                      Compensation Calculator
+                    </Button>
                 </CardContent>
               </Card>
 

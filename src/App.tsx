@@ -50,6 +50,9 @@ import PremisesLiabilityMedicalGuidance from "./pages/PremisesLiabilityMedicalGu
 import DogBiteCaseEvaluation from "./pages/DogBiteCaseEvaluation";
 import DogBiteCompensationCalculator from "./pages/DogBiteCompensationCalculator";
 import DogBiteMedicalGuidance from "./pages/DogBiteMedicalGuidance";
+import WrongfulDeathCaseEvaluation from "./pages/WrongfulDeathCaseEvaluation";
+import WrongfulDeathCompensationCalculator from "./pages/WrongfulDeathCompensationCalculator";
+import WrongfulDeathMedicalGuidance from "./pages/WrongfulDeathMedicalGuidance";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();

@@ -10,7 +10,7 @@ interface GoBackProps {
 
 const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) => {
   const navigate = useNavigate();
-  const baseClasses = "fixed top-20 left-6 z-[60]";
+  const baseClasses = "fixed top-20 left-6 z-[1000]";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   return (
     <div className={combinedClasses}>

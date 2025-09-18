@@ -14,27 +14,6 @@ interface PracticeAreaProps {
 const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, icon, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
-  // Function to convert title to URL slug
-  const getSlugFromTitle = (title: string): string => {
-    const titleToSlugMap: Record<string, string> = {
-      'Construction Accidents': '/practice-areas/construction-accidents',
-      'Product Liability': '/practice-areas/product-liability',
-      'Car Accidents': '/practice-areas/car-accidents',
-      'Truck & 18-Wheeler': '/practice-areas/truck-18-wheeler-accidents',
-      'Motorcycle Accidents': '/practice-areas/motorcycle-accidents',
-      'Pedestrian Accidents': '/practice-areas/pedestrian-accidents',
-      'Bicycle Accidents': '/practice-areas/bicycle-accidents',
-      'Medical Malpractice': '/practice-areas/medical-malpractice',
-      'Mesothelioma & Asbestos': '/practice-areas/mesothelioma-asbestos',
-      'Silicosis Injuries': '/practice-areas/silicosis-injuries',
-      'Talc & Baby Powder Cancer': '/practice-areas/talc-baby-powder-cancer',
-      'Premises Liability': '/practice-areas/premises-liability',
-      'Dog Bites': '/practice-areas/dog-bites-animal-attacks',
-      'Wrongful Death': '/practice-areas/wrongful-death'
-    };
-    return titleToSlugMap[title] || '/practice-areas/coming-soon';
-  };
-
   useEffect(() => {
     const card = cardRef.current;
     if (!card) return;
@@ -85,7 +64,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
       </p>
 
       <a 
-        href={getSlugFromTitle(title)} 
+        href="/case-evaluation" 
         className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors"
       >
         Get Help →

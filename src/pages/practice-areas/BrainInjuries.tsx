@@ -248,24 +248,6 @@ const BrainInjuries: React.FC = () => {
         <div className="absolute inset-0 bg-black/60"></div>
         
         <div className="hero-content relative z-10 text-center max-w-4xl mx-auto px-6">
-          <div className="flex justify-center mb-6 space-x-4 flex-wrap">
-            <Badge className="bg-red-600 text-white text-sm px-3 py-1">
-              <Star className="w-4 h-4 mr-1" />
-              2026 Rising Star
-            </Badge>
-            <Badge className="bg-blue-600 text-white text-sm px-3 py-1">
-              <Shield className="w-4 h-4 mr-1" />
-              Former Defense Attorney
-            </Badge>
-            <Badge className="bg-green-600 text-white text-sm px-3 py-1">
-              <Heart className="w-4 h-4 mr-1" />
-              Maximum Compensation
-            </Badge>
-            <Badge className="bg-orange-600 text-white text-sm px-3 py-1">
-              <Clock className="w-4 h-4 mr-1" />
-              24/7 Available
-            </Badge>
-          </div>
           
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             California Brain Injury Attorneys

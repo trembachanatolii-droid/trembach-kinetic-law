@@ -89,9 +89,12 @@ function App() {
             <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
             <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
-          <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
-          <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
-          <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
+        <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
+        <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
+        <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
+        <Route path="/brain-case-evaluation" element={<BrainCaseEvaluation />} />
+        <Route path="/brain-compensation-calculator" element={<BrainCompensationCalculator />} />
+        <Route path="/brain-medical-guidance" element={<BrainMedicalGuidance />} />
             <Route path="/wrongful-death-case-evaluation" element={<WrongfulDeathCaseEvaluation />} />
             <Route path="/wrongful-death-compensation-calculator" element={<WrongfulDeathCompensationCalculator />} />
             <Route path="/wrongful-death-medical-guidance" element={<WrongfulDeathMedicalGuidance />} />

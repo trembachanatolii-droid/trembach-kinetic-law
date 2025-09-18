@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -28,6 +30,7 @@ import heroBackground from '@/assets/wrongful-death-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
 
 const WrongfulDeathMedicalGuidance: React.FC = () => {
+  const navigate = useNavigate();
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const toggleSection = (sectionId: string) => {
@@ -467,18 +470,7 @@ const WrongfulDeathMedicalGuidance: React.FC = () => {
         canonical="/wrongful-death-medical-guidance"
       />
 
-      {/* Go Back Button */}
-      <div className="fixed top-20 left-4 z-[100]">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 bg-white/98 backdrop-blur-sm shadow-xl border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-white transition-all"
-        >
-          <ArrowLeft className="w-3 h-3" />
-          Go Back
-        </Button>
-      </div>
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section */}
       <section 

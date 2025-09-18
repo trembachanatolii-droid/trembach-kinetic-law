@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -26,6 +28,7 @@ import heroBackground from '@/assets/wrongful-death-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 
 const WrongfulDeathCaseEvaluation: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -109,18 +112,7 @@ Please provide comprehensive case evaluation and next steps.
           canonical="/wrongful-death-case-evaluation"
         />
 
-        {/* Go Back Button */}
-        <div className="fixed top-20 left-4 z-[100]">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-white/98 backdrop-blur-sm shadow-xl border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-white transition-all"
-          >
-            <ArrowLeft className="w-3 h-3" />
-            Go Back
-          </Button>
-        </div>
+        <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -170,7 +162,7 @@ Please provide comprehensive case evaluation and next steps.
               <Button 
                 variant="outline" 
                 size="lg"
-                onClick={() => window.location.href = '/practice-areas/wrongful-death'}
+                onClick={() => navigate('/practice-areas/wrongful-death')}
               >
                 Return to Wrongful Death
               </Button>
@@ -189,18 +181,7 @@ Please provide comprehensive case evaluation and next steps.
         canonical="/wrongful-death-case-evaluation"
       />
 
-      {/* Go Back Button */}
-      <div className="fixed top-20 left-4 z-[100]">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 bg-white/98 backdrop-blur-sm shadow-xl border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-white transition-all"
-        >
-          <ArrowLeft className="w-3 h-3" />
-          Go Back
-        </Button>
-      </div>
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section */}
       <section 

@@ -1214,7 +1214,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         </p>
                         <Button 
                           className="w-full bg-blue-600 hover:bg-blue-700"
-                          onClick={() => window.open('/wrongful-death-compensation-calculator', '_blank')}
+                          onClick={() => navigate('/wrongful-death-compensation-calculator')}
                         >
                           Calculate Compensation
                         </Button>
@@ -1230,7 +1230,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         </p>
                         <Button 
                           className="w-full bg-green-600 hover:bg-green-700"
-                          onClick={() => window.open('/wrongful-death-case-evaluation', '_blank')}
+                          onClick={() => navigate('/wrongful-death-case-evaluation')}
                         >
                           Start Evaluation
                         </Button>
@@ -1246,7 +1246,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                         </p>
                         <Button 
                           className="w-full bg-purple-600 hover:bg-purple-700"
-                          onClick={() => window.open('/wrongful-death-medical-guidance', '_blank')}
+                          onClick={() => navigate('/wrongful-death-medical-guidance')}
                         >
                           <BookOpen className="w-4 h-4 mr-2" />
                           Access Guide
@@ -1330,7 +1330,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     <Button 
                       variant="outline" 
                       className="w-full border-purple-600 text-purple-600 hover:bg-purple-50 py-3"
-                      onClick={() => window.open('/wrongful-death-compensation-calculator', '_blank')}
+                      onClick={() => navigate('/wrongful-death-compensation-calculator')}
                     >
                       <Calculator className="w-5 h-5 mr-2" />
                       Compensation Calculator
@@ -1411,10 +1411,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
               <Button 
                 size="lg" 
                 className="bg-white text-red-600 hover:bg-gray-100 px-8 py-3"
-                onClick={() => {
-                  const url = '/wrongful-death-case-evaluation';
-                  window.open(url, '_blank');
-                }}
+                onClick={() => navigate('/wrongful-death-case-evaluation')}
               >
                 <FileText className="w-5 h-5 mr-2" />
                 Start Free Case Evaluation

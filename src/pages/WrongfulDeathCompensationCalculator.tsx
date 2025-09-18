@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -34,6 +36,7 @@ interface CalculationResults {
 }
 
 const WrongfulDeathCompensationCalculator: React.FC = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     ageOfDeceased: '',
     annualIncome: '',
@@ -151,18 +154,7 @@ const WrongfulDeathCompensationCalculator: React.FC = () => {
         canonical="/wrongful-death-compensation-calculator"
       />
 
-      {/* Go Back Button */}
-      <div className="fixed top-20 left-4 z-[100]">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 bg-white/98 backdrop-blur-sm shadow-xl border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-white transition-all"
-        >
-          <ArrowLeft className="w-3 h-3" />
-          Go Back
-        </Button>
-      </div>
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section */}
       <section 

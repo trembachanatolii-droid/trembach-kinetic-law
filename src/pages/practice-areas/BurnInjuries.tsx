@@ -42,6 +42,10 @@ import whatToDoImage from '@/assets/practice-areas/burn-medical-treatment.jpg';
 import burnTypesImage from '@/assets/practice-areas/burn-chemical-damage.jpg';
 import provingNegligenceImage from '@/assets/practice-areas/burn-legal-process.jpg';
 import compensationImage from '@/assets/practice-areas/burn-compensation-calculation.jpg';
+import safetyPreventionImage from '@/assets/practice-areas/burn-safety-prevention.jpg';
+import electricalHazardImage from '@/assets/practice-areas/burn-electrical-hazard.jpg';
+import investigationImage from '@/assets/practice-areas/burn-investigation.jpg';
+import caseDocumentationImage from '@/assets/practice-areas/burn-case-documentation.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 
@@ -663,8 +667,16 @@ const BurnInjuries: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div className="bg-red-100 border border-red-300 p-6 rounded-lg">
-                    <h3 className="text-xl font-bold text-red-800 mb-4">Critical Deadlines</h3>
+                  <div className="grid md:grid-cols-2 gap-8 mb-6">
+                    <div>
+                      <img 
+                        src={caseDocumentationImage} 
+                        alt="Legal documentation and time limits for burn injury cases" 
+                        className="w-full h-64 object-cover rounded-lg"
+                      />
+                    </div>
+                    <div className="bg-red-100 border border-red-300 p-6 rounded-lg">
+                      <h3 className="text-xl font-bold text-red-800 mb-4">Critical Deadlines</h3>
                     <div className="grid md:grid-cols-2 gap-6">
                       <div>
                         <h4 className="font-bold text-red-700 mb-2">Personal Injury Claims</h4>
@@ -681,6 +693,7 @@ const BurnInjuries: React.FC = () => {
                       <div>
                         <h4 className="font-bold text-red-700 mb-2">Wrongful Death</h4>
                         <p className="text-red-600">2 years from death date</p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -707,6 +720,32 @@ const BurnInjuries: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-8 mb-6">
+                    <div>
+                      <img 
+                        src={investigationImage} 
+                        alt="Burn injury investigation and resources" 
+                        className="w-full h-64 object-cover rounded-lg"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold mb-4">Emergency Resources</h3>
+                      <div className="space-y-3">
+                        <div className="p-3 bg-red-50 rounded">
+                          <h4 className="font-semibold text-red-800">Immediate Medical Care</h4>
+                          <p className="text-sm text-red-600">Specialized burn centers across California</p>
+                        </div>
+                        <div className="p-3 bg-blue-50 rounded">
+                          <h4 className="font-semibold text-blue-800">Legal Support</h4>
+                          <p className="text-sm text-blue-600">24/7 consultation available</p>
+                        </div>
+                        <div className="p-3 bg-green-50 rounded">
+                          <h4 className="font-semibold text-green-800">Financial Assistance</h4>
+                          <p className="text-sm text-green-600">Insurance and settlement coordination</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <h3 className="text-xl font-bold mb-4">California Burn Centers</h3>

@@ -46,7 +46,7 @@ import {
   Wrench,
   ShoppingCart
 } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/product-liability-hero-new.jpg';
+import heroBackground from '@/assets/practice-areas/product-liability-hero-professional.jpg';
 import legalConsultationImage from '@/assets/practice-areas/product-liability-legal-new.jpg';
 import strictLiabilityImage from '@/assets/practice-areas/product-liability-strict-liability-alt.jpg';
 import courthouseImage from '@/assets/practice-areas/product-liability-courthouse-new.jpg';

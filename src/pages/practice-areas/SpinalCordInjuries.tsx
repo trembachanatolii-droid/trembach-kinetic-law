@@ -55,6 +55,7 @@ const SpinalCordInjuries: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const [formData, setFormData] = useState({
     accidentDate: '',
     injuryType: '',
@@ -98,8 +99,23 @@ const SpinalCordInjuries: React.FC = () => {
       );
     });
 
-    return () => ctx.revert();
+    const onScroll = () => setIsVisible(window.scrollY > 160);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
+
+  const handleGoBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      window.location.href = '/';
+    }
+  };
 
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
@@ -359,6 +375,23 @@ const SpinalCordInjuries: React.FC = () => {
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
+        
+        <div className="absolute top-20 left-6 z-[60]">
+          <div 
+            className={`transition-opacity duration-300 ${
+              isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'
+            }`}
+          >
+            <Button 
+              variant="ghost" 
+              onClick={handleGoBack}
+              className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+            >
+              <ArrowLeft className="w-4 h-4" />
+              Go Back
+            </Button>
+          </div>
+        </div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 pt-20 pb-16">
           <div className="hero-content">

@@ -64,6 +64,9 @@ import BrainCaseEvaluation from "./pages/BrainCaseEvaluation";
 import BrainCompensationCalculator from "./pages/BrainCompensationCalculator";
 import BrainMedicalGuidance from "./pages/BrainMedicalGuidance";
 import SpinalCordInjuries from "./pages/practice-areas/SpinalCordInjuries";
+import SpinalCordCaseEvaluation from "./pages/SpinalCordCaseEvaluation";
+import SpinalCordCompensationCalculator from "./pages/SpinalCordCompensationCalculator";
+import SpinalCordMedicalGuidance from "./pages/SpinalCordMedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -110,6 +113,11 @@ function App() {
             <Route path="/brain-case-evaluation" element={<BrainCaseEvaluation />} />
             <Route path="/brain-compensation-calculator" element={<BrainCompensationCalculator />} />
             <Route path="/brain-medical-guidance" element={<BrainMedicalGuidance />} />
+
+            {/* Spinal Cord Injury Routes */}
+            <Route path="/spinal-cord-case-evaluation" element={<SpinalCordCaseEvaluation />} />
+            <Route path="/spinal-cord-compensation-calculator" element={<SpinalCordCompensationCalculator />} />
+            <Route path="/spinal-cord-medical-guidance" element={<SpinalCordMedicalGuidance />} />
         
         {/* Product Liability Routes */}
         <Route path="/product-liability-case-evaluation" element={<ProductLiabilityCaseEvaluation />} />

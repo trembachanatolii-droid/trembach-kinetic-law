@@ -364,16 +364,15 @@ const BurnInjuries: React.FC = () => {
               <Button 
                 size="lg" 
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
-                onClick={() => scrollToSection('evaluation')}
+                onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
               >
                 <Phone className="w-6 h-6 mr-3" />
                 Free Case Evaluation
               </Button>
               <Button 
                 size="lg" 
-                variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
-                onClick={() => scrollToSection('compensation')}
+                className="bg-white text-red-600 hover:bg-gray-100 border-2 border-white px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
+                onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
               >
                 <DollarSign className="w-6 h-6 mr-3" />
                 Calculate Compensation
@@ -921,8 +920,8 @@ const BurnInjuries: React.FC = () => {
 
                   {/* Calculate Settlement Button */}
                   <Button 
-                    className="w-full bg-red-700 hover:bg-red-800 text-white py-4 text-lg font-semibold rounded-lg"
-                    onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
+                    className="w-full bg-red-700 hover:bg-red-800 text-white py-3 text-base font-semibold rounded-lg"
+                    onClick={() => window.location.href = '/burn-compensation-calculator'}
                   >
                     CALCULATE SETTLEMENT
                   </Button>
@@ -984,9 +983,8 @@ const BurnInjuries: React.FC = () => {
             </Button>
             <Button 
               size="lg" 
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg rounded-full"
-              onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+              className="bg-white text-red-600 hover:bg-gray-100 border-2 border-white px-8 py-4 text-lg rounded-full"
+              onClick={() => window.location.href = '/burn-case-evaluation'}
             >
               <Scale className="mr-2 h-5 w-5" />
               Free Case Review

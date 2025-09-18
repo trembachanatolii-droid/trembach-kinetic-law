@@ -1164,10 +1164,10 @@ const TruckAccidentsNew: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm">
-                      <li>• <a href="https://www.fmcsa.dot.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Federal Motor Carrier Safety Administration</a></li>
-                      <li>• <a href="https://www.dmv.ca.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Department of Motor Vehicles</a></li>
-                      <li>• <a href="https://www.nhtsa.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">National Highway Traffic Safety Administration</a></li>
-                      <li>• <a href="https://www.osha.gov" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Occupational Safety and Health Administration</a></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Federal Motor Carrier Safety Administration</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">California Department of Motor Vehicles</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">National Highway Traffic Safety Administration</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Occupational Safety and Health Administration</Link></li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -1178,10 +1178,10 @@ const TruckAccidentsNew: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm">
-                      <li>• <a href="https://www.trucksafety.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Citizens for Reliable and Safe Highways</a></li>
-                      <li>• <a href="https://www.roadwaypatternsdatabase.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Road Safety Information Database</a></li>
-                      <li>• <a href="https://www.truckinfo.net" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Truck Safety Coalition</a></li>
-                      <li>• <a href="https://www.iihs.org" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Insurance Institute for Highway Safety</a></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Citizens for Reliable and Safe Highways</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Road Safety Information Database</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Truck Safety Coalition</Link></li>
+                      <li>• <Link to="/schedule-consultation" className="text-primary hover:underline">Insurance Institute for Highway Safety</Link></li>
                     </ul>
                   </CardContent>
                 </Card>

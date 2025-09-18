@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -922,10 +923,10 @@ const MedicalMalpractice: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Medical Malpractice Resources</h2>
               <div className="prose prose-lg max-w-none">
                 <ul className="list-disc list-inside space-y-2">
-                  <li><a href="https://www.mbc.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Medical Board</a></li>
-                  <li><a href="https://www.courts.ca.gov/selfhelp-injury.htm" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Courts Self-Help: Personal Injury</a></li>
-                  <li><a href="https://www.jointcommission.org/resources/patient-safety-topics/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Joint Commission Patient Safety Resources</a></li>
-                  <li><a href="https://www.psqh.com/" target="_blank" rel="noopener noreferrer" className="text-primary underline">Patient Safety & Quality Healthcare</a></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">California Medical Board</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">California Courts Self-Help: Personal Injury</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">Joint Commission Patient Safety Resources</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">Patient Safety & Quality Healthcare</Link></li>
                 </ul>
               </div>
             </section>

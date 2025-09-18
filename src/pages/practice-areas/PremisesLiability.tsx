@@ -666,10 +666,10 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Resources</h2>
               <div className="prose prose-lg max-w-none">
                 <ul className="list-disc list-inside space-y-2">
-                  <li><a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?sectionNum=1714.&lawCode=CIV" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Civil Code Section 1714</a></li>
-                  <li><a href="https://www.courts.ca.gov/selfhelp-injury.htm" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Courts Self-Help: Personal Injury</a></li>
-                  <li><a href="https://www.dir.ca.gov/dwc/WorkersCompensationBenefits.htm" target="_blank" rel="noopener noreferrer" className="text-primary underline">California Division of Workers' Compensation</a></li>
-                  <li><a href="https://www.osha.gov/stateplans" target="_blank" rel="noopener noreferrer" className="text-primary underline">OSHA State Plans</a></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">California Civil Code Section 1714</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">California Courts Self-Help: Personal Injury</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">California Division of Workers' Compensation</Link></li>
+                  <li><Link to="/schedule-consultation" className="text-primary underline">OSHA State Plans</Link></li>
                   
                 </ul>
               </div>

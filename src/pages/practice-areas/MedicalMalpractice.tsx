@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -40,10 +41,14 @@ import {
   CheckCircle
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/medical-malpractice-hero.jpg';
-import diagnosticErrorsImage from '@/assets/practice-areas/medical-malpractice.jpg';
-import surgicalErrorsImage from '@/assets/practice-areas/brain-injuries.jpg';
-import provingNegligenceImage from '@/assets/hero-background-scales.jpg';
-import compensationImage from '@/assets/practice-areas/courthouse-professional.jpg';
+import diagnosticErrorsImage from '@/assets/practice-areas/medical-diagnostic-errors.jpg';
+import surgicalErrorsImage from '@/assets/practice-areas/medical-surgical-errors.jpg';
+import medicationErrorsImage from '@/assets/practice-areas/medical-medication-errors.jpg';
+import birthInjuriesImage from '@/assets/practice-areas/medical-birth-injuries.jpg';
+import emergencyErrorsImage from '@/assets/practice-areas/medical-emergency-errors.jpg';
+import compensationImage from '@/assets/practice-areas/medical-compensation-calculation.jpg';
+import legalJusticeImage from '@/assets/practice-areas/medical-legal-justice.jpg';
+import documentationImage from '@/assets/practice-areas/medical-documentation.jpg';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -121,6 +126,7 @@ const MedicalMalpractice: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Use React Router navigation instead of window.location.href
     window.location.href = '/medical-malpractice-case-evaluation';
   };
 
@@ -1161,7 +1167,7 @@ const MedicalMalpractice: React.FC = () => {
               <h3 className="text-xl font-semibold mb-2">Case Evaluation</h3>
               <p className="text-muted-foreground mb-4">Get your medical malpractice case reviewed by expert attorneys</p>
               <Button asChild>
-                <a href="/medical-malpractice-case-evaluation">Start Evaluation</a>
+                <Link to="/medical-malpractice-case-evaluation">Start Evaluation</Link>
               </Button>
             </Card>
 
@@ -1170,7 +1176,7 @@ const MedicalMalpractice: React.FC = () => {
               <h3 className="text-xl font-semibold mb-2">Compensation Calculator</h3>
               <p className="text-muted-foreground mb-4">Estimate potential compensation for your medical malpractice case</p>
               <Button asChild>
-                <a href="/medical-malpractice-compensation-calculator">Calculate Now</a>
+                <Link to="/medical-malpractice-compensation-calculator">Calculate Now</Link>
               </Button>
             </Card>
 
@@ -1179,7 +1185,7 @@ const MedicalMalpractice: React.FC = () => {
               <h3 className="text-xl font-semibold mb-2">Medical Guidance</h3>
               <p className="text-muted-foreground mb-4">Essential medical information for malpractice victims</p>
               <Button asChild>
-                <a href="/medical-malpractice-medical-guidance">Learn More</a>
+                <Link to="/medical-malpractice-medical-guidance">Learn More</Link>
               </Button>
             </Card>
 
@@ -1212,26 +1218,26 @@ const MedicalMalpractice: React.FC = () => {
           </div>
         </section>
 
-        {/* Final CTA Section */}
-        <section className="content-section text-center bg-primary text-primary-foreground p-12 rounded-lg">
+        {/* Final CTA Section - Don't Wait Time Limits */}
+        <section className="content-section text-center bg-red-600 text-white p-12 rounded-lg">
           <h2 className="text-4xl font-bold mb-6">Don't Wait - Time Limits Apply for California Medical Malpractice Claims</h2>
           <p className="text-xl mb-8 max-w-4xl mx-auto">
-            California law imposes strict deadlines for filing medical malpractice lawsuits. Evidence disappears quickly, and witness memories fade. The sooner you contact us, the better we can protect your rights and build a strong case.
+            California law imposes strict deadlines for filing medical malpractice lawsuits. You generally have 3 years from injury or 1 year from discovery, whichever comes first. Evidence disappears quickly, witness memories fade, and medical records can be altered. The sooner you contact us, the better we can protect your rights and build a strong case.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" variant="secondary" className="text-lg px-8 py-6">
               <Phone className="mr-2 h-5 w-5" />
               Free Case Review Now
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-white text-white hover:bg-white hover:text-primary">
-              <a href="/medical-malpractice-case-evaluation" className="flex items-center">
+            <Button size="lg" variant="outline" className="text-lg px-8 py-6 border-2 border-white text-white hover:bg-white hover:text-red-600" asChild>
+              <Link to="/medical-malpractice-case-evaluation" className="flex items-center">
                 <Scale className="mr-2 h-5 w-5" />
-                Start Case Evaluation
-              </a>
+                Start Medical Malpractice Evaluation
+              </Link>
             </Button>
           </div>
-          <p className="mt-6 text-lg opacity-90">
-            Call (818) 123-4567 - Available 24/7 for Medical Emergencies
+          <p className="mt-6 text-xl font-bold opacity-100 bg-white/20 px-6 py-3 rounded-lg inline-block">
+            📞 Call (818) 123-4567 - Available 24/7 for Medical Emergencies
           </p>
         </section>
       </main>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -381,10 +382,10 @@ const MedicalMalpracticeCompensationCalculator: React.FC = () => {
 
                   <div className="mt-6 text-center">
                     <Button size="lg" asChild>
-                      <a href="/medical-malpractice-case-evaluation">
+                      <Link to="/medical-malpractice-case-evaluation">
                         <Scale className="mr-2 h-5 w-5" />
                         Get Professional Case Review
-                      </a>
+                      </Link>
                     </Button>
                   </div>
                 </CardContent>
@@ -407,9 +408,9 @@ const MedicalMalpracticeCompensationCalculator: React.FC = () => {
                 <CardContent className="space-y-4">
                   <div className="text-center">
                     <Button size="lg" className="w-full text-lg" asChild>
-                      <a href="tel:8181234567">
+                      <a href="tel:8181234567" className="flex items-center justify-center text-lg font-bold">
                         <Phone className="mr-2 h-5 w-5" />
-                        Call (818) 123-4567
+                        📞 Call (818) 123-4567
                       </a>
                     </Button>
                     <p className="text-sm text-muted-foreground mt-2">Free consultation available 24/7</p>

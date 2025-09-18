@@ -15,7 +15,15 @@ const GoBack: React.FC<GoBackProps> = ({ className = "" }) => {
       <Button
         variant="default"
         size="lg"
-        onClick={() => window.history.back()}
+        onClick={() => {
+          // Navigate back to the Medical Malpractice section if coming from there
+          const referrer = document.referrer;
+          if (referrer.includes('/practice-areas/medical-malpractice') || window.location.pathname.includes('medical-malpractice')) {
+            window.location.href = '/practice-areas/medical-malpractice';
+          } else {
+            window.history.back();
+          }
+        }}
         className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 shadow-lg rounded-full px-5"
         aria-label="Go back to previous page"
       >

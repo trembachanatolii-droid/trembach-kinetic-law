@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -370,9 +371,9 @@ const MedicalMalpracticeCaseEvaluation: React.FC = () => {
                 <CardContent className="space-y-4">
                   <div className="text-center">
                     <Button size="lg" className="w-full text-lg" asChild>
-                      <a href="tel:8181234567">
+                      <a href="tel:8181234567" className="flex items-center justify-center text-lg font-bold">
                         <Phone className="mr-2 h-5 w-5" />
-                        Call (818) 123-4567
+                        📞 Call (818) 123-4567
                       </a>
                     </Button>
                     <p className="text-sm text-muted-foreground mt-2">Available 24/7 for Medical Emergencies</p>
@@ -440,22 +441,22 @@ const MedicalMalpracticeCaseEvaluation: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/medical-malpractice-compensation-calculator">
+                    <Link to="/medical-malpractice-compensation-calculator">
                       <Scale className="mr-2 h-4 w-4" />
                       Compensation Calculator
-                    </a>
+                    </Link>
                   </Button>
                   <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/medical-malpractice-medical-guidance">
+                    <Link to="/medical-malpractice-medical-guidance">
                       <Stethoscope className="mr-2 h-4 w-4" />
                       Medical Guidance
-                    </a>
+                    </Link>
                   </Button>
                   <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/practice-areas/medical-malpractice">
+                    <Link to="/practice-areas/medical-malpractice">
                       <Building className="mr-2 h-4 w-4" />
                       Medical Malpractice Info
-                    </a>
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>

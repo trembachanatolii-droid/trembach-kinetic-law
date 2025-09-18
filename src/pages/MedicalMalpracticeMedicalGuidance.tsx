@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -443,16 +444,16 @@ const MedicalMalpracticeMedicalGuidance: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <Button className="w-full justify-start" asChild>
-                    <a href="/medical-malpractice-case-evaluation">
+                    <Link to="/medical-malpractice-case-evaluation">
                       <Scale className="mr-2 h-4 w-4" />
                       Free Case Evaluation
-                    </a>
+                    </Link>
                   </Button>
                   <Button variant="outline" className="w-full justify-start" asChild>
-                    <a href="/medical-malpractice-compensation-calculator">
+                    <Link to="/medical-malpractice-compensation-calculator">
                       <Calculator className="mr-2 h-4 w-4" />
                       Compensation Calculator
-                    </a>
+                    </Link>
                   </Button>
                   <Button variant="outline" className="w-full justify-start" asChild>
                     <a href="mailto:info@trembachlawfirm.com">

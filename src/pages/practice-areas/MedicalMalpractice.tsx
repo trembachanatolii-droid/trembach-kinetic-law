@@ -199,14 +199,14 @@ const MedicalMalpractice: React.FC = () => {
       />
 
       {/* Go Back Button */}
-      <div className="absolute top-24 left-6 z-50">
+      <div className="absolute top-32 left-6 z-50">
         <Button
           variant="outline"
-          size="lg"
+          size="sm"
           onClick={() => window.history.back()}
-          className="flex items-center gap-2 bg-white/90 backdrop-blur-sm shadow-lg rounded-full px-5"
+          className="flex items-center gap-2 bg-white/95 backdrop-blur-sm shadow-lg rounded-full px-4 py-2 text-sm"
         >
-          <ArrowLeft className="w-5 h-5" />
+          <ArrowLeft className="w-4 h-4" />
           Go Back
         </Button>
       </div>

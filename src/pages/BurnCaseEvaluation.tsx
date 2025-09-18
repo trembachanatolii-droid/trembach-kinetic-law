@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Phone, Star, Shield, Clock, Award } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/burn-injuries-hero.jpg';
+import heroBackground from '@/assets/burn-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 

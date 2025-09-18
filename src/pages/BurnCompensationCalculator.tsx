@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calculator, DollarSign, Phone } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/burn-compensation-calculation.jpg';
+import heroBackground from '@/assets/burn-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 

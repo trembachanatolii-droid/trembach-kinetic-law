@@ -18,6 +18,7 @@ import ProductLiability from './ProductLiability';
 import ConstructionAccidents from './ConstructionAccidents';
 import WrongfulDeath from './WrongfulDeath';
 import BrainInjuries from './BrainInjuries';
+import BurnInjuries from './BurnInjuries';
 
 const PracticeAreaRouter = () => {
   return (
@@ -38,6 +39,7 @@ const PracticeAreaRouter = () => {
       <Route path="product-liability" element={<ProductLiability />} />
       <Route path="construction-accidents" element={<ConstructionAccidents />} />
       <Route path="brain-injuries" element={<BrainInjuries />} />
+      <Route path="burn-injuries" element={<BurnInjuries />} />
       <Route path="wrongful-death" element={<WrongfulDeath />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>

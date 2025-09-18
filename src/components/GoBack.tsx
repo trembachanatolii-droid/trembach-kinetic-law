@@ -13,7 +13,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 160);
+    const onScroll = () => setVisible(window.scrollY > 200);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);

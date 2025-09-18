@@ -56,6 +56,10 @@ import WrongfulDeathMedicalGuidance from "./pages/WrongfulDeathMedicalGuidance";
 import ProductLiabilityCaseEvaluation from "./pages/ProductLiabilityCaseEvaluation";
 import ProductLiabilityCompensationCalculator from "./pages/ProductLiabilityCompensationCalculator";
 import ProductLiabilityMedicalGuidance from "./pages/ProductLiabilityMedicalGuidance";
+import ConstructionAccidents from "./pages/practice-areas/ConstructionAccidents";
+import ConstructionCaseEvaluation from "./pages/ConstructionCaseEvaluation";
+import ConstructionCompensationCalculator from "./pages/ConstructionCompensationCalculator";
+import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
 import ScrollToTop from "./components/ScrollToTop";
 
 const queryClient = new QueryClient();
@@ -97,6 +101,12 @@ function App() {
         <Route path="/product-liability-case-evaluation" element={<ProductLiabilityCaseEvaluation />} />
         <Route path="/product-liability-compensation-calculator" element={<ProductLiabilityCompensationCalculator />} />
         <Route path="/product-liability-medical-guidance" element={<ProductLiabilityMedicalGuidance />} />
+        
+        {/* Construction Accidents Routes */}
+        <Route path="/practice-areas/construction-accidents" element={<ConstructionAccidents />} />
+        <Route path="/construction-case-evaluation" element={<ConstructionCaseEvaluation />} />
+        <Route path="/construction-compensation-calculator" element={<ConstructionCompensationCalculator />} />
+        <Route path="/construction-medical-guidance" element={<ConstructionMedicalGuidance />} />
               <Route path="/bicycle-case-evaluation" element={<BicycleCaseEvaluation />} />
               <Route path="/bicycle-medical-guidance" element={<BicycleMedicalGuidance />} />
               <Route path="/bicycle-compensation-calculator" element={<BicycleCompensationCalculator />} />

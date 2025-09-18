@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -299,16 +300,19 @@ Description: ${formData.description}`);
               <Button size="lg" className="text-lg px-8 py-6" onClick={() => document.getElementById('case-evaluation')?.scrollIntoView({ behavior: 'smooth' })}>
                 Free Case Review
               </Button>
-              <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20">
-                <Phone className="w-5 h-5 mr-2" />
-                Call (818) 123-4567
-              </Button>
+        <Button variant="outline" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20 hover:text-white">
+          <Phone className="w-5 h-5 mr-2" />
+          Call (818) 123-4567
+        </Button>
             </div>
           </div>
         </div>
       </section>
 
-      <GoBack className="fixed top-20 left-6 z-[60]" />
+      {/* Go Back Button - Positioned below hero */}
+      <div className="container mx-auto px-8 pt-8">
+        <GoBack />
+      </div>
 
       <div className="container mx-auto px-8 py-12 relative">
         <div className="max-w-6xl mx-auto">
@@ -712,21 +716,21 @@ Description: ${formData.description}`);
                   <h3 className="text-2xl font-bold mb-6 text-center">3 Ways to Start Your Case</h3>
                   <div className="space-y-4">
                     <Button 
-                      className="w-full justify-start text-left h-auto py-4 px-6" 
+                      className="w-full justify-start text-left h-auto py-4 px-6 hover:bg-accent/50" 
                       variant="outline"
                       onClick={() => document.getElementById('case-evaluation')?.scrollIntoView({ behavior: 'smooth' })}
                     >
                       <div className="flex items-center w-full">
                         <MessageCircle className="w-6 h-6 mr-4 text-primary flex-shrink-0" />
                         <div className="flex-grow text-left">
-                          <div className="font-semibold text-lg">24/7 Live Chat</div>
+                          <div className="font-semibold text-lg text-foreground">24/7 Live Chat</div>
                           <div className="text-sm text-muted-foreground">Start Construction Accident Evaluation</div>
                         </div>
                       </div>
                     </Button>
                     
                     <Button 
-                      className="w-full justify-start text-left h-auto py-4 px-6" 
+                      className="w-full justify-start text-left h-auto py-4 px-6 hover:bg-accent/50" 
                       variant="outline"
                       asChild
                     >
@@ -734,7 +738,7 @@ Description: ${formData.description}`);
                         <div className="flex items-center w-full">
                           <Phone className="w-6 h-6 mr-4 text-primary flex-shrink-0" />
                           <div className="flex-grow text-left">
-                            <div className="font-semibold text-lg">Call (818) 123-4567</div>
+                            <div className="font-semibold text-lg text-foreground">Call (818) 123-4567</div>
                             <div className="text-sm text-muted-foreground">Free Construction Consultation</div>
                           </div>
                         </div>
@@ -742,14 +746,14 @@ Description: ${formData.description}`);
                     </Button>
                     
                     <Button 
-                      className="w-full justify-start text-left h-auto py-4 px-6" 
+                      className="w-full justify-start text-left h-auto py-4 px-6 hover:bg-accent/50" 
                       variant="outline"
                       onClick={() => document.getElementById('case-evaluation')?.scrollIntoView({ behavior: 'smooth' })}
                     >
                       <div className="flex items-center w-full">
                         <Calendar className="w-6 h-6 mr-4 text-primary flex-shrink-0" />
                         <div className="flex-grow text-left">
-                          <div className="font-semibold text-lg">Schedule Consultation</div>
+                          <div className="font-semibold text-lg text-foreground">Schedule Consultation</div>
                           <div className="text-sm text-muted-foreground">Meet with Construction Attorney</div>
                         </div>
                       </div>
@@ -762,22 +766,22 @@ Description: ${formData.description}`);
                   <h3 className="text-xl font-bold mb-4">Quick Actions</h3>
                   <div className="space-y-3">
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="/construction-case-evaluation">
+                      <Link to="/construction-case-evaluation">
                         <FileText className="w-4 h-4 mr-2" />
                         Start Case Evaluation
-                      </a>
+                      </Link>
                     </Button>
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="/construction-compensation-calculator">
+                      <Link to="/construction-compensation-calculator">
                         <Calculator className="w-4 h-4 mr-2" />
                         Compensation Calculator
-                      </a>
+                      </Link>
                     </Button>
                     <Button variant="outline" className="w-full justify-start" asChild>
-                      <a href="/construction-medical-guidance">
+                      <Link to="/construction-medical-guidance">
                         <BookOpen className="w-4 h-4 mr-2" />
                         Medical Guidance
-                      </a>
+                      </Link>
                     </Button>
                   </div>
                 </Card>

@@ -78,17 +78,17 @@ const Navigation = () => {
         </div>
 
         {/* CTA Button */}
-        <Button 
-          size="sm" 
-          className={`magnetic font-semibold transition-all duration-300 relative ${
-            isScrolled 
-              ? 'bg-red-600 hover:bg-red-700 text-white' 
-              : 'bg-accent hover:bg-accent-glow text-accent-foreground glow-accent'
-          }`}
-          onClick={() => window.location.href = 'tel:8181234567'}
-        >
-          <span className="relative z-10">Call (818) 123-4567</span>
-        </Button>
+          <Button 
+            size="sm" 
+            className={`magnetic font-semibold transition-all duration-300 relative text-white ${
+              isScrolled 
+                ? 'bg-red-600 hover:bg-red-700 text-white' 
+                : 'bg-accent hover:bg-accent-glow text-accent-foreground glow-accent'
+            }`}
+            onClick={() => window.location.href = 'tel:8181234567'}
+          >
+            <span className="relative z-10">Call (818) 123-4567</span>
+          </Button>
       </div>
     </nav>
   );

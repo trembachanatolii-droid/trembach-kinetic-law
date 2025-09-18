@@ -57,6 +57,9 @@ import ProductLiabilityCaseEvaluation from "./pages/ProductLiabilityCaseEvaluati
 import ProductLiabilityCompensationCalculator from "./pages/ProductLiabilityCompensationCalculator";
 import ProductLiabilityMedicalGuidance from "./pages/ProductLiabilityMedicalGuidance";
 import ScrollToTop from "./components/ScrollToTop";
+import ConstructionCaseEvaluation from "./pages/ConstructionCaseEvaluation";
+import ConstructionCompensationCalculator from "./pages/ConstructionCompensationCalculator";
+import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
 
 const queryClient = new QueryClient();
 

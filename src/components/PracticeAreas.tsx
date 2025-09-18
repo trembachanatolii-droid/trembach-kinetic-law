@@ -11,6 +11,15 @@ interface PracticeAreaProps {
   index: number;
 }
 
+const getPracticeAreaLink = (title: string): string => {
+  switch (title) {
+    case "Construction Accidents":
+      return "/practice-areas/construction-accidents";
+    default:
+      return "/case-evaluation";
+  }
+};
+
 const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, icon, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -64,7 +73,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
       </p>
 
       <a 
-        href="/case-evaluation" 
+        href={getPracticeAreaLink(title)} 
         className="inline-flex items-center gap-2 mt-4 text-primary font-semibold hover:text-primary-glow transition-colors"
       >
         Get Help →

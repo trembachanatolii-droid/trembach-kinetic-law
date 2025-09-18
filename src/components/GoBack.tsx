@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
@@ -10,10 +10,22 @@ interface GoBackProps {
 
 const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) => {
   const navigate = useNavigate();
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 160);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const baseClasses = "fixed top-28 left-4 z-[60]";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   return (
-    <div className={combinedClasses}>
+    <div
+      className={`${combinedClasses} transition-opacity duration-200 ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      aria-hidden={!visible}
+    >
       <Button
         variant="default"
         size="lg"

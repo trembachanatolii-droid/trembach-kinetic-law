@@ -55,7 +55,7 @@ const MedicalMalpracticeMedicalGuidance: React.FC = () => {
 
       {/* Hero Section */}
       <section 
-        className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        className="relative h-[50vh] bg-cover bg-center bg-no-repeat flex items-center justify-center"
         style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${heroBackground})` }}
       >
         <div className="text-center text-white px-6 max-w-4xl mx-auto">

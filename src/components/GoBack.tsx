@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 interface GoBackProps {
   className?: string;
+  fallbackPath?: string;
 }
 
-const GoBack: React.FC<GoBackProps> = ({ className = "" }) => {
+const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) => {
   const navigate = useNavigate();
   const baseClasses = "fixed top-20 left-6 z-[1000]";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
@@ -20,7 +21,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "" }) => {
           if (window.history.length > 1) {
             navigate(-1);
           } else {
-            navigate('/');
+            navigate(fallbackPath);
           }
         }}
         className="flex items-center gap-2 bg-background/80 text-foreground hover:bg-background/90 border border-border shadow-lg rounded-full px-5 backdrop-blur supports-[backdrop-filter]:backdrop-blur"

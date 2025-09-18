@@ -55,7 +55,8 @@ import investigationImage from '@/assets/practice-areas/wrongful-death-investiga
 import familyImage from '@/assets/practice-areas/wrongful-death-family.jpg';
 import timeLimitsImage from '@/assets/practice-areas/wrongful-death-time-limits.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
+import { useNavigate } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
 interface TabSection {
@@ -82,7 +83,7 @@ const WrongfulDeath: React.FC = () => {
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
+  const navigate = useNavigate();
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
@@ -377,18 +378,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
         canonical="/practice-areas/wrongful-death"
       />
 
-      {/* Go Back Button */}
-      <div className="fixed top-20 left-4 z-[100]">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => window.history.back()}
-          className="flex items-center gap-2 bg-white/98 backdrop-blur-sm shadow-xl border border-gray-200 rounded-full px-3 py-1.5 text-xs font-medium hover:bg-white transition-all"
-        >
-          <ArrowLeft className="w-3 h-3" />
-          Go Back
-        </Button>
-      </div>
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section - Same ratio as Medical Malpractice */}
       <section 
@@ -417,7 +407,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                 variant="outline" 
                 size="lg" 
                 className="bg-white/10 backdrop-blur-sm border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3"
-                onClick={() => window.open('/wrongful-death-case-evaluation', '_blank')}
+                onClick={() => navigate('/wrongful-death-case-evaluation')}
               >
                 <Calculator className="w-5 h-5 mr-2" />
                 Free Case Evaluation

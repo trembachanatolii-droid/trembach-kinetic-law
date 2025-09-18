@@ -48,6 +48,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/product-liability-hero-new.jpg';
 import legalConsultationImage from '@/assets/practice-areas/product-liability-legal-new.jpg';
+import strictLiabilityImage from '@/assets/practice-areas/product-liability-strict-liability.jpg';
 import courthouseImage from '@/assets/practice-areas/product-liability-courthouse-new.jpg';
 import manufacturingImage from '@/assets/practice-areas/product-liability-manufacturing-new.jpg';
 import compensationImage from '@/assets/practice-areas/product-liability-compensation-new.jpg';
@@ -411,8 +412,8 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                   </div>
                   <div>
                     <img 
-                      src={legalConsultationImage} 
-                      alt="Product liability legal consultation" 
+                      src={strictLiabilityImage} 
+                      alt="Strict liability protection for consumers in product liability cases" 
                       className="w-full h-64 object-cover rounded-lg shadow-lg"
                     />
                   </div>

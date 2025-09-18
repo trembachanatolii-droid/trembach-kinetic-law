@@ -429,70 +429,275 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                 
                 <div className="space-y-8">
                   <Card className="p-8 border-l-4 border-l-red-600">
-                    <div className="flex items-start gap-6">
-                      <Settings className="w-12 h-12 text-red-600 mt-2" />
+                    <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h3 className="text-2xl font-bold mb-4">1. Manufacturing Defects</h3>
-                        <p className="text-lg mb-6">
-                          Production errors make specific units dangerous while others work properly. Examples: contaminated medication, missing brake components, faulty wiring.
-                        </p>
+                        <div className="flex items-start gap-6 mb-6">
+                          <Settings className="w-12 h-12 text-red-600 mt-2" />
+                          <div>
+                            <h3 className="text-2xl font-bold mb-4">1. Manufacturing Defects</h3>
+                            <p className="text-lg mb-6">
+                              Production errors make specific units dangerous while others work properly. These defects occur during the manufacturing process when a product deviates from its intended design specifications. Manufacturing defects are often the easiest to prove in court because the defective product can be compared directly to identical products that were manufactured correctly.
+                            </p>
+                          </div>
+                        </div>
                         <div className="bg-gray-50 p-6 rounded-lg">
                           <h4 className="font-bold mb-3">Common Examples:</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
-                            <li>Contaminated pharmaceuticals or food products</li>
-                            <li>Vehicles with missing or improperly installed parts</li>
-                            <li>Electronics with faulty wiring causing fires</li>
-                            <li>Medical devices with structural flaws</li>
-                            <li>Children's toys with sharp edges from poor molding</li>
+                            <li>Contaminated pharmaceuticals or food products causing illness</li>
+                            <li>Vehicles with missing or improperly installed brake components</li>
+                            <li>Electronics with faulty wiring causing fires or electrocution</li>
+                            <li>Medical devices with structural flaws leading to failure</li>
+                            <li>Children's toys with sharp edges from poor molding processes</li>
+                            <li>Tools with defective handles that break during normal use</li>
                           </ul>
                         </div>
+                      </div>
+                      <div>
+                        <img 
+                          src={manufacturingImage} 
+                          alt="Manufacturing defects in product liability cases" 
+                          className="w-full h-80 object-cover rounded-lg shadow-lg"
+                        />
+                        <p className="text-sm text-gray-600 mt-2 text-center">Manufacturing defects occur during production when products deviate from their intended design</p>
                       </div>
                     </div>
                   </Card>
 
                   <Card className="p-8 border-l-4 border-l-blue-600">
-                    <div className="flex items-start gap-6">
-                      <Wrench className="w-12 h-12 text-blue-600 mt-2" />
+                    <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h3 className="text-2xl font-bold mb-4">2. Design Defects</h3>
-                        <p className="text-lg mb-6">
-                          Inherent design flaws make all units dangerous. The entire product line shares the same dangerous characteristic.
-                        </p>
+                        <div className="flex items-start gap-6 mb-6">
+                          <Wrench className="w-12 h-12 text-blue-600 mt-2" />
+                          <div>
+                            <h3 className="text-2xl font-bold mb-4">2. Design Defects</h3>
+                            <p className="text-lg mb-6">
+                              Inherent design flaws make all units of a product dangerous. Design defects exist from conception and affect every product in the line. These cases require proving that the risks of the current design outweigh its benefits, and that a safer alternative design was economically feasible. Expert testimony is crucial in establishing these elements.
+                            </p>
+                          </div>
+                        </div>
                         <div className="bg-gray-50 p-6 rounded-lg">
                           <h4 className="font-bold mb-3">Common Examples:</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
-                            <li>SUVs prone to rollover due to high center of gravity</li>
-                            <li>Power tools without adequate safety guards</li>
-                            <li>Cribs with slat spacing allowing infant entrapment</li>
+                            <li>SUVs prone to rollover due to high center of gravity design</li>
+                            <li>Power tools without adequate safety guards or automatic shutoffs</li>
+                            <li>Cribs with slat spacing allowing infant head entrapment</li>
                             <li>Medications with dangerous side effects outweighing benefits</li>
-                            <li>Furniture that tips over easily</li>
+                            <li>Furniture that tips over easily due to weight distribution</li>
+                            <li>Vehicles with fuel tanks positioned in dangerous locations</li>
                           </ul>
                         </div>
+                      </div>
+                      <div>
+                        <img 
+                          src={designImage} 
+                          alt="Design defects in product liability litigation" 
+                          className="w-full h-80 object-cover rounded-lg shadow-lg"
+                        />
+                        <p className="text-sm text-gray-600 mt-2 text-center">Design defects affect entire product lines and require proving safer alternatives existed</p>
                       </div>
                     </div>
                   </Card>
 
                   <Card className="p-8 border-l-4 border-l-green-600">
-                    <div className="flex items-start gap-6">
-                      <AlertTriangle className="w-12 h-12 text-green-600 mt-2" />
+                    <div className="grid md:grid-cols-2 gap-8">
                       <div>
-                        <h3 className="text-2xl font-bold mb-4">3. Warning Defects (Failure to Warn)</h3>
-                        <p className="text-lg mb-6">
-                          Adequate product but inadequate warnings about dangers or instructions for safe use. Manufacturers must warn about risks not obvious to users.
-                        </p>
+                        <div className="flex items-start gap-6 mb-6">
+                          <AlertTriangle className="w-12 h-12 text-green-600 mt-2" />
+                          <div>
+                            <h3 className="text-2xl font-bold mb-4">3. Warning Defects (Failure to Warn)</h3>
+                            <p className="text-lg mb-6">
+                              Products that are adequately designed and manufactured but lack proper warnings about dangers or instructions for safe use. Manufacturers have a duty to warn about risks that aren't obvious to the ordinary consumer. The warning must be adequate, prominent, and comprehensible to the intended user population.
+                            </p>
+                          </div>
+                        </div>
                         <div className="bg-gray-50 p-6 rounded-lg">
                           <h4 className="font-bold mb-3">Inadequate Warnings Include:</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
-                            <li>Warnings too small or poorly placed</li>
-                            <li>Vague warnings not specifying actual risks</li>
-                            <li>Missing warnings about known dangers</li>
-                            <li>Warnings in wrong language for intended users</li>
-                            <li>Buried warnings in lengthy instruction manuals</li>
+                            <li>Warnings too small, poorly placed, or easily overlooked</li>
+                            <li>Vague warnings not specifying actual risks or severity</li>
+                            <li>Missing warnings about known dangers from product use</li>
+                            <li>Warnings in wrong language for intended user population</li>
+                            <li>Critical safety information buried in lengthy manuals</li>
+                            <li>Failure to warn about dangers from foreseeable misuse</li>
                           </ul>
                         </div>
                       </div>
+                      <div>
+                        <img 
+                          src={legalConsultationImage} 
+                          alt="Warning defects and failure to warn product liability cases" 
+                          className="w-full h-80 object-cover rounded-lg shadow-lg"
+                        />
+                        <p className="text-sm text-gray-600 mt-2 text-center">Adequate warnings must be prominent, specific, and understandable to intended users</p>
+                      </div>
                     </div>
                   </Card>
+                </div>
+              </Card>
+            </section>
+
+            {/* Compensation Types Section */}
+            <section className="content-section">
+              <Card className="p-8">
+                <h2 className="text-4xl font-bold mb-8 text-center">California Product Liability Compensation</h2>
+                <div className="grid md:grid-cols-2 gap-8 mb-8">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-6">Types of Damages Available</h3>
+                    <p className="text-lg mb-6">
+                      California product liability law allows victims to recover multiple types of compensation. Understanding what damages you may be entitled to is crucial for building a strong case and ensuring maximum recovery.
+                    </p>
+                    
+                    <div className="space-y-6">
+                      <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-l-blue-600">
+                        <h4 className="font-bold text-xl mb-3 text-blue-800">Economic Damages</h4>
+                        <ul className="list-disc list-inside space-y-2 text-lg">
+                          <li>Medical expenses (past and future treatment costs)</li>
+                          <li>Lost wages and diminished earning capacity</li>
+                          <li>Property damage and replacement costs</li>
+                          <li>Rehabilitation and therapy expenses</li>
+                          <li>Home and vehicle modifications for disabilities</li>
+                        </ul>
+                      </div>
+                      
+                      <div className="bg-red-50 p-6 rounded-lg border-l-4 border-l-red-600">
+                        <h4 className="font-bold text-xl mb-3 text-red-800">Non-Economic Damages</h4>
+                        <ul className="list-disc list-inside space-y-2 text-lg">
+                          <li>Pain and suffering (physical and emotional)</li>
+                          <li>Loss of enjoyment of life and activities</li>
+                          <li>Disfigurement and permanent disability</li>
+                          <li>Mental anguish and emotional distress</li>
+                          <li>Loss of companionship for family members</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <img 
+                      src={compensationImage} 
+                      alt="Product liability compensation calculation" 
+                      className="w-full h-96 object-cover rounded-lg shadow-lg mb-4"
+                    />
+                    <div className="bg-green-50 p-6 rounded-lg border-l-4 border-l-green-600">
+                      <h4 className="font-bold text-xl mb-3 text-green-800">Punitive Damages</h4>
+                      <p className="text-lg mb-3">
+                        Available when manufacturers show reckless disregard for consumer safety or attempt to conceal known dangers.
+                      </p>
+                      <ul className="list-disc list-inside space-y-2">
+                        <li>Designed to punish egregious conduct</li>
+                        <li>Can significantly increase total recovery</li>
+                        <li>Requires clear and convincing evidence</li>
+                        <li>Not available in all product liability cases</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Legal Process Section */}
+            <section className="content-section">
+              <Card className="p-8">
+                <h2 className="text-4xl font-bold mb-8 text-center">Our Product Liability Legal Process</h2>
+                <div className="grid md:grid-cols-2 gap-8">
+                  <div>
+                    <img 
+                      src={courthouseImage} 
+                      alt="Product liability legal process and courthouse" 
+                      className="w-full h-80 object-cover rounded-lg shadow-lg mb-4"
+                    />
+                  </div>
+                  <div>
+                    <p className="text-lg mb-6">
+                      Our systematic approach to product liability cases ensures no detail is overlooked. With former defense attorney experience, we understand manufacturer strategies and build cases designed to maximize your compensation.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <div className="flex items-start gap-4">
+                        <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">1</div>
+                        <div>
+                          <h4 className="font-bold text-lg mb-2">Case Investigation</h4>
+                          <p>Comprehensive product analysis, expert consultation, and evidence preservation</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">2</div>
+                        <div>
+                          <h4 className="font-bold text-lg mb-2">Expert Testimony</h4>
+                          <p>Industry specialists, engineers, and medical professionals to support your claim</p>
+                        </div>
+                      </div>
+                      <div className="flex items-start gap-4">
+                        <div className="bg-red-600 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold flex-shrink-0">3</div>
+                        <div>
+                          <h4 className="font-bold text-lg mb-2">Negotiation & Trial</h4>
+                          <p>Aggressive advocacy whether settling or taking your case to trial</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            </section>
+
+            {/* Common Product Categories Section */}
+            <section className="content-section">
+              <Card className="p-8">
+                <h2 className="text-4xl font-bold mb-8 text-center">Products We Handle in California</h2>
+                <p className="text-xl mb-8 text-center text-gray-600">
+                  Our experience spans across all major product categories causing injuries in California
+                </p>
+                
+                <div className="grid md:grid-cols-3 gap-6">
+                  <Card className="p-6 border-l-4 border-l-red-600">
+                    <Car className="w-12 h-12 text-red-600 mb-4" />
+                    <h4 className="font-bold text-xl mb-3">Automotive Products</h4>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• Defective airbags and restraint systems</li>
+                      <li>• Brake system failures</li>
+                      <li>• Tire defects and blowouts</li>
+                      <li>• Ignition switch problems</li>
+                      <li>• Steering and suspension defects</li>
+                    </ul>
+                  </Card>
+                  
+                  <Card className="p-6 border-l-4 border-l-blue-600">
+                    <Heart className="w-12 h-12 text-blue-600 mb-4" />
+                    <h4 className="font-bold text-xl mb-3">Medical Devices</h4>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• Hip and knee implant failures</li>
+                      <li>• Pacemaker and defibrillator defects</li>
+                      <li>• Surgical mesh complications</li>
+                      <li>• Blood clot filter problems</li>
+                      <li>• Insulin pump malfunctions</li>
+                    </ul>
+                  </Card>
+                  
+                  <Card className="p-6 border-l-4 border-l-green-600">
+                    <ShoppingCart className="w-12 h-12 text-green-600 mb-4" />
+                    <h4 className="font-bold text-xl mb-3">Consumer Products</h4>
+                    <ul className="space-y-2 text-gray-700">
+                      <li>• Dangerous children's toys</li>
+                      <li>• Defective appliances</li>
+                      <li>• Power tool accidents</li>
+                      <li>• Furniture tip-over incidents</li>
+                      <li>• Electronics fires and explosions</li>
+                    </ul>
+                  </Card>
+                </div>
+                
+                <div className="mt-8 bg-yellow-50 p-6 rounded-lg border-l-4 border-l-yellow-500">
+                  <h4 className="font-bold text-xl mb-3 text-yellow-800">⚠️ Pharmaceutical Products</h4>
+                  <p className="text-lg mb-3">
+                    Prescription and over-the-counter medications causing serious side effects, birth defects, or other health complications require specialized legal expertise.
+                  </p>
+                  <ul className="grid md:grid-cols-2 gap-x-8 gap-y-2">
+                    <li>• Dangerous side effects not disclosed</li>
+                    <li>• Birth defect medications</li>
+                    <li>• Recalled prescription drugs</li>
+                    <li>• Contaminated medications</li>
+                    <li>• Drug interaction failures</li>
+                    <li>• Inadequate FDA testing</li>
+                  </ul>
                 </div>
               </Card>
             </section>

@@ -60,6 +60,11 @@ import ScrollToTop from "./components/ScrollToTop";
 import ConstructionCaseEvaluation from "./pages/ConstructionCaseEvaluation";
 import ConstructionCompensationCalculator from "./pages/ConstructionCompensationCalculator";
 import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
+import ConstructionAccidents from "./pages/practice-areas/ConstructionAccidents";
+import BrainInjuries from "./pages/practice-areas/BrainInjuries";
+import BrainCaseEvaluation from "./pages/BrainCaseEvaluation";
+import BrainCompensationCalculator from "./pages/BrainCompensationCalculator";
+import BrainMedicalGuidance from "./pages/BrainMedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -77,6 +82,8 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
+            <Route path="/practice-areas/construction-accidents" element={<ConstructionAccidents />} />
+            <Route path="/practice-areas/brain-injuries" element={<BrainInjuries />} />
         <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
         <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />

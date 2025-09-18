@@ -247,7 +247,7 @@ const BrainInjuries: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/60"></div>
         
-        <div className="hero-content relative z-10 text-center max-w-4xl mx-auto px-6">
+        <div className="hero-content relative z-10 text-center max-w-4xl mx-auto px-6 pt-20 pb-16">
           
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
             California Brain Injury Attorneys

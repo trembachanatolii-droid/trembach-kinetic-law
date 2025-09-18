@@ -98,10 +98,11 @@ const WrongfulDeath: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      // Remove hero animation for immediate appearance
+      // gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+      //   { opacity: 0, y: 50 },
+      //   { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+      // );
 
       gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
         { opacity: 0, y: 30 },

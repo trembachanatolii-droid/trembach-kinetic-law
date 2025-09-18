@@ -14,6 +14,7 @@ import BicycleAccidents from './BicycleAccidents';
 import SlipFallAccidents from './SlipFallAccidents';
 import DogBitesAnimalAttacks from './DogBitesAnimalAttacks';
 import PremisesLiability from './PremisesLiability';
+import ProductLiability from './ProductLiability';
 import WrongfulDeath from './WrongfulDeath';
 
 const PracticeAreaRouter = () => {
@@ -32,6 +33,7 @@ const PracticeAreaRouter = () => {
       <Route path="slip-and-fall-accidents" element={<SlipFallAccidents />} />
       <Route path="dog-bites-animal-attacks" element={<DogBitesAnimalAttacks />} />
       <Route path="premises-liability" element={<PremisesLiability />} />
+      <Route path="product-liability" element={<ProductLiability />} />
       <Route path="wrongful-death" element={<WrongfulDeath />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>

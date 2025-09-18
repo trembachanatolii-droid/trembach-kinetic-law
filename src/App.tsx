@@ -36,6 +36,9 @@ import ComingSoon from "./pages/practice-areas/ComingSoon";
 import PracticeAreaRouter from "./pages/practice-areas/PracticeAreaRouter";
 import CaseEvaluation from "./pages/CaseEvaluation";
 import MedicalGuidance from "./pages/MedicalGuidance";
+import MedicalMalpracticeCaseEvaluation from "./pages/MedicalMalpracticeCaseEvaluation";
+import MedicalMalpracticeCompensationCalculator from "./pages/MedicalMalpracticeCompensationCalculator";
+import MedicalMalpracticeMedicalGuidance from "./pages/MedicalMalpracticeMedicalGuidance";
 import ScheduleConsultation from "./pages/ScheduleConsultation";
 import CompensationCalculator from "./pages/CompensationCalculator";
 import SilicosisCaseEvaluation from "./pages/SilicosisCaseEvaluation";
@@ -90,7 +93,10 @@ function App() {
             <Route path="/pedestrian-compensation-calculator" element={<PedestrianCompensationCalculator />} />
             <Route path="/pedestrian-medical-guidance" element={<PedestrianMedicalGuidance />} />
             <Route path="/case-evaluation" element={<CaseEvaluation />} />
-            <Route path="/medical-guidance" element={<MedicalGuidance />} />
+          <Route path="/medical-guidance" element={<MedicalGuidance />} />
+          <Route path="/medical-malpractice-case-evaluation" element={<MedicalMalpracticeCaseEvaluation />} />
+          <Route path="/medical-malpractice-compensation-calculator" element={<MedicalMalpracticeCompensationCalculator />} />
+          <Route path="/medical-malpractice-medical-guidance" element={<MedicalMalpracticeMedicalGuidance />} />
             <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
             <Route path="/compensation-calculator" element={<CompensationCalculator />} />
             <Route path="/silicosis-case-evaluation" element={<SilicosisCaseEvaluation />} />

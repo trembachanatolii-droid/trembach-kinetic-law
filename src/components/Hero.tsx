@@ -72,7 +72,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
       </div>
 
-      <div className="relative z-10 flex w-full h-screen">
+      <div className="relative z-10 flex w-full min-h-[calc(100vh-5rem)]">
         {/* Main Content - Left Side */}
         <div className="flex-1 flex flex-col justify-center px-8 lg:px-16">
           <div ref={headlineRef} className="space-y-2">

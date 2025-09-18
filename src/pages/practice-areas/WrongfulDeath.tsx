@@ -1208,7 +1208,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     ))}
                   </div>
                 </div>
-              )}
+              </section>
 
               <section id="resources">
                 <div className="space-y-8">

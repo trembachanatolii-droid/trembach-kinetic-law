@@ -88,25 +88,95 @@ const Pharmaceutical: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - only if element exists
+      // 3D floating background layers
+      const backLayer = document.querySelector('.bg-layer-back');
+      const midLayer = document.querySelector('.bg-layer-mid');
+      const frontLayer = document.querySelector('.bg-layer-front');
+
+      if (backLayer) {
+        gsap.to(backLayer, {
+          y: 30,
+          duration: 14,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      if (midLayer) {
+        gsap.to(midLayer, {
+          x: 40,
+          duration: 18,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      if (frontLayer) {
+        gsap.to(frontLayer, {
+          y: 20,
+          x: 25,
+          rotation: 2,
+          duration: 10,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+        gsap.to(frontLayer, {
+          rotation: -2,
+          duration: 22,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      // Enhanced hero entrance animation
       const heroContent = heroRef.current?.querySelector('.hero-content');
       if (heroContent) {
         gsap.fromTo(heroContent,
-          { opacity: 0, y: 50 },
-          { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+          { 
+            opacity: 0, 
+            y: 50, 
+            z: -100,
+            scale: 0.9,
+            filter: "blur(10px)"
+          },
+          { 
+            opacity: 1, 
+            y: 0, 
+            z: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 1.2, 
+            ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+          }
         );
       }
 
-      // Content sections animation - only if elements exist
+      // Enhanced content sections with 3D entrance
       const contentSections = contentRef.current?.querySelectorAll('.content-section');
       if (contentSections && contentSections.length > 0) {
         gsap.fromTo(contentSections,
-          { opacity: 0, y: 30 },
+          { 
+            opacity: 0, 
+            y: 60,
+            rotationX: 15,
+            z: -50,
+            scale: 0.95,
+            filter: "blur(5px)"
+          },
           {
             opacity: 1,
             y: 0,
-            duration: 0.6,
-            stagger: 0.1,
+            rotationX: 0,
+            z: 0,
+            scale: 1,
+            filter: "blur(0px)",
+            duration: 0.8,
+            stagger: 0.15,
+            ease: "cubic-bezier(0.22, 1, 0.36, 1)",
             scrollTrigger: {
               trigger: contentRef.current,
               start: 'top 80%'
@@ -114,9 +184,28 @@ const Pharmaceutical: React.FC = () => {
           }
         );
       }
+
+      // Parallax effects for cards
+      const cards = document.querySelectorAll('.parallax-card');
+      cards.forEach((card, index) => {
+        gsap.to(card, {
+          y: -20 * (index % 3 + 1),
+          scrollTrigger: {
+            trigger: card,
+            start: "top bottom",
+            end: "bottom top",
+            scrub: 1
+          }
+        });
+      });
+
     });
 
-    return () => ctx.revert();
+    // Cleanup
+    return () => {
+      ctx.revert();
+      ScrollTrigger.getAll().forEach(st => st.kill());
+    };
   }, []);
 
   const toggleSection = (sectionId: string) => {
@@ -311,23 +400,28 @@ const Pharmaceutical: React.FC = () => {
               ))}
               <span className="ml-2 text-lg">Backed by Proven Experience</span>
             </div>
-            
-            <p className="text-xl mb-6">
-              When medications meant to heal cause harm, you deserve justice. Our former defense experience reveals how pharmaceutical companies hide risks and manipulate data.
-            </p>
-            
-            <p className="text-lg mb-8 text-yellow-300">
-              Currently accepting: Ozempic, Wegovy, Mounjaro, and other GLP-1 drug injury cases
-            </p>
-            
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/pharmaceutical-case-evaluation'}
-            >
-              START MY FREE CASE EVALUATION
-            </Button>
-          </div>
+          
+          {/* Enhanced Call-to-Action with 3D Effect */}
+          <p className="text-xl md:text-2xl mb-6 leading-relaxed max-w-4xl mx-auto">
+            When medications meant to heal cause harm, you deserve justice. Our former defense experience reveals how pharmaceutical companies hide risks and manipulate data.
+          </p>
+          
+          <p className="text-lg md:text-xl mb-8 text-green-300 font-semibold animate-pulse">
+            Currently accepting: Ozempic, Wegovy, Mounjaro, and other GLP-1 drug injury cases
+          </p>
+          
+          <Button 
+            size="lg" 
+            className="premium-cta-button bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold px-12 py-6 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-300"
+            onClick={() => window.location.href = '/pharmaceutical-case-evaluation'}
+            style={{
+              boxShadow: '0 10px 30px rgba(220, 38, 38, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+              transform: 'translateZ(10px)'
+            }}
+          >
+            🚀 START MY FREE CASE EVALUATION
+          </Button>
+        </div>
         </div>
 
         {/* Navigation Tabs */}
@@ -987,7 +1081,7 @@ const Pharmaceutical: React.FC = () => {
             </div>
           </div>
         </div>
-      </div>
+      </div> {/* Close 3D container */}
     </div>
   );
 };

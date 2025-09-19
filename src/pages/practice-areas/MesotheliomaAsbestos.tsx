@@ -1226,29 +1226,19 @@ const MesotheliomaAsbestos: React.FC = () => {
       </div>
 
       {/* Bottom CTA */}
-      <section className="bg-red-600 text-white py-16">
+      <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-4">
-            Don't Wait - Time Limits Apply for California Mesothelioma Claims
-          </h2>
-          <p className="text-xl mb-8">
-            California law gives you only one year from diagnosis to file your claim. 
-            Contact us today for your free consultation.
-          </p>
-          <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
-              onClick={() => window.location.href = '/case-evaluation'}
-            >
-              Start Free Case Evaluation
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits 
+Apply for California Mesothelioma Claims  </h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+          <p className="text-xl mb-12 leading-relaxed">California law gives you only one year from diagnosis to file your claim. Contact us today for your free consultation.</p>
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8559851234'}>
+              CALL (855) 985-1234
             </Button>
-            <Button 
-              size="lg" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
-              onClick={() => window.location.href = 'tel:8559851234'}
-            >
-              Call (855) 985-1234
+            
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/case-evaluation'}>
+              START MY FREE CASE EVALUATION
             </Button>
           </div>
         </div>

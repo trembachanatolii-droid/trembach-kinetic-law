@@ -10,7 +10,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
-import heroImage from '@/assets/practice-areas/pharmaceutical-hero.jpg';
+import heroImage from '@/assets/practice-areas/pharmaceutical-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

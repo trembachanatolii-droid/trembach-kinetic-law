@@ -57,7 +57,12 @@ interface TabSection {
 const Pharmaceutical: React.FC = () => {
   const { toast } = useToast();
   const [activeTab, setActiveTab] = useState('overview');
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({
+    overview: false,
+    legalProcess: false,
+    afterInjury: false,
+    dangerousDrugs: false
+  });
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     firstName: '',
@@ -83,26 +88,32 @@ const Pharmaceutical: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      // Hero animation - only if element exists
+      const heroContent = heroRef.current?.querySelector('.hero-content');
+      if (heroContent) {
+        gsap.fromTo(heroContent,
+          { opacity: 0, y: 50 },
+          { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        );
+      }
 
-      // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
+      // Content sections animation - only if elements exist
+      const contentSections = contentRef.current?.querySelectorAll('.content-section');
+      if (contentSections && contentSections.length > 0) {
+        gsap.fromTo(contentSections,
+          { opacity: 0, y: 30 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top 80%'
+            }
           }
-        }
-      );
+        );
+      }
     });
 
     return () => ctx.revert();

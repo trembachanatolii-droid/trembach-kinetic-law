@@ -22,6 +22,7 @@ import BrainInjuries from './BrainInjuries';
 import BurnInjuries from './BurnInjuries';
 import WorkplaceInjuries from './WorkplaceInjuries';
 import ClassActions from './ClassActions';
+import EnvironmentalToxic from './EnvironmentalToxic';
 
 const PracticeAreaRouter = () => {
   return (
@@ -49,6 +50,7 @@ const PracticeAreaRouter = () => {
       <Route path="amputation" element={<AmputationInjuries />} />
       <Route path="workplace-injuries" element={<WorkplaceInjuries />} />
       <Route path="class-actions" element={<ClassActions />} />
+      <Route path="environmental-toxic" element={<EnvironmentalToxic />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>
   );

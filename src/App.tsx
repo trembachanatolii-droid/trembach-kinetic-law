@@ -204,10 +204,11 @@ function App() {
              <Route path="/mass-torts-education" element={<MassTortsEducation />} />
              <Route path="/mass-torts-resources" element={<MassTortsResources />} />
              <Route path="/class-actions" element={<ClassActions />} />
-             <Route path="/class-actions-case-evaluation" element={<ClassActionsCaseEvaluation />} />
-             <Route path="/class-actions-compensation-calculator" element={<ClassActionsCompensationCalculator />} />
-             <Route path="/class-actions-legal-guidance" element={<ClassActionsLegalGuidance />} />
-             <Route path="/class-actions-resources" element={<ClassActionsResources />} />
+        <Route path="/class-actions-case-evaluation" element={<ClassActionsCaseEvaluation />} />
+        <Route path="/class-actions-compensation-calculator" element={<ClassActionsCompensationCalculator />} />
+        <Route path="/class-actions-legal-guidance" element={<ClassActionsLegalGuidance />} />
+        <Route path="/class-actions-resources" element={<ClassActionsResources />} />
+        <Route path="/environmental-toxic-case-evaluation" element={<EnvironmentalToxicCaseEvaluation />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

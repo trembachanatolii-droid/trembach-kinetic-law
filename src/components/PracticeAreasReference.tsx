@@ -192,7 +192,7 @@ const practiceAreas: PracticeArea[] = [
     title: 'Amputation',
     description: 'Limb loss causes permanent disability requiring prosthetics, rehabilitation, and psychological support throughout life. Initial prosthetics cost tens of thousands with replacements needed every few years as technology advances and components wear. Upper extremity amputations affecting dominant hands devastate earning capacity while lower limb loss impacts mobility and independence. Phantom pain, residual limb complications, and secondary conditions like back problems from altered gait require ongoing treatment. Vocational rehabilitation helps career transitions but income often decreases substantially. Home and vehicle modifications, adaptive equipment, and personal care assistance create continuing expenses. Depression, anxiety, and body image issues require psychological support. We maximize compensation through life care plans calculating decades of prosthetic costs, medical care, therapy, and assistance needs. Multiple amputations exponentially increase challenges and compensation requirements for maintaining quality of life.',
     image: amputationImg,
-    slug: 'amputation'
+    slug: 'amputation-injuries'
   },
   {
     id: 'workplace-injuries',

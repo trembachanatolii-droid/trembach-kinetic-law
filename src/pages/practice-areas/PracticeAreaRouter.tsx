@@ -43,6 +43,7 @@ const PracticeAreaRouter = () => {
       <Route path="burn-injuries" element={<BurnInjuries />} />
       <Route path="wrongful-death" element={<WrongfulDeath />} />
       <Route path="amputation-injuries" element={<AmputationInjuries />} />
+      <Route path="amputation" element={<AmputationInjuries />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>
   );

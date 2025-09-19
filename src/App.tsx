@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import CampLejeune from "./pages/practice-areas/CampLejeune";
 import MassTorts from "./pages/practice-areas/MassTorts";
 import MassTortsCompensationCalculator from "./pages/MassTortsCompensationCalculator";
 import MassTortsCaseEvaluation from "./pages/MassTortsCaseEvaluation";
@@ -115,6 +116,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/camp-lejeune" element={<CampLejeune />} />
             <Route path="/practice-areas/mass-torts" element={<MassTorts />} />
             <Route path="/practice-areas/pharmaceutical" element={<Pharmaceutical />} />
             <Route path="/pharmaceutical-case-evaluation" element={<PharmaceuticalCaseEvaluation />} />

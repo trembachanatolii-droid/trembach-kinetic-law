@@ -90,11 +90,13 @@ const EnvironmentalToxic: React.FC = () => {
         { opacity: 1, y: 0, rotationX: 0, z: 0, duration: 1.2, ease: 'power2.out' }
       );
 
-      // Floating Background Layers
+      // Floating Background Layers + Interactive Parallax
+      let heroEl: HTMLElement | null = null;
       if (heroRef.current) {
-        const backLayer = heroRef.current.querySelector('.back-layer');
-        const midLayer = heroRef.current.querySelector('.mid-layer');
-        const frontLayer = heroRef.current.querySelector('.front-layer');
+        heroEl = heroRef.current as HTMLElement;
+        const backLayer = heroEl.querySelector('.back-layer') as HTMLElement | null;
+        const midLayer = heroEl.querySelector('.mid-layer') as HTMLElement | null;
+        const frontLayer = heroEl.querySelector('.front-layer') as HTMLElement | null;
 
         if (backLayer) {
           gsap.to(backLayer, {
@@ -127,6 +129,31 @@ const EnvironmentalToxic: React.FC = () => {
             yoyo: true
           });
         }
+
+        const onMouseMove = (e: MouseEvent) => {
+          const rect = heroEl!.getBoundingClientRect();
+          const relX = (e.clientX - rect.left) / rect.width - 0.5;
+          const relY = (e.clientY - rect.top) / rect.height - 0.5;
+
+          gsap.to(heroEl!.querySelector('.hero-content'), {
+            x: relX * 20,
+            y: relY * 20,
+            rotationY: relX * 6,
+            rotationX: -relY * 6,
+            transformPerspective: 1000,
+            transformOrigin: 'center',
+            duration: 0.5,
+            ease: 'power3.out'
+          });
+
+          backLayer && gsap.to(backLayer, { x: relX * -30, y: relY * -30, duration: 0.8, ease: 'power2.out' });
+          midLayer && gsap.to(midLayer, { x: relX * -60, y: relY * -40, duration: 0.8, ease: 'power2.out' });
+          frontLayer && gsap.to(frontLayer, { x: relX * 40, y: relY * 30, duration: 0.8, ease: 'power2.out' });
+        };
+
+        heroEl.addEventListener('mousemove', onMouseMove);
+        // store remover on element for cleanup
+        (heroEl as any)._onMouseMove = onMouseMove;
       }
 
       // Content sections animation with 3D transforms
@@ -267,16 +294,16 @@ const EnvironmentalToxic: React.FC = () => {
         
         {/* Floating Background Layers */}
         <div className="absolute inset-0 opacity-30">
-          <div className="back-layer absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-transparent"></div>
-          <div className="mid-layer absolute inset-0 bg-gradient-to-tr from-transparent to-orange-500/20"></div>
-          <div className="front-layer absolute inset-0 bg-gradient-to-bl from-red-500/10 to-transparent"></div>
+          <div className="back-layer absolute inset-0 bg-gradient-to-br from-primary/30 to-transparent"></div>
+          <div className="mid-layer absolute inset-0 bg-gradient-to-tr from-transparent to-accent/25"></div>
+          <div className="front-layer absolute inset-0 bg-gradient-to-bl from-primary-glow/20 to-transparent"></div>
         </div>
         
         <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
           <div className="hero-content">
             <h1 className="text-5xl md:text-7xl font-bold leading-tight mb-6 text-white drop-shadow-2xl">
               Environmental
-              <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent drop-shadow-none">
+              <span className="block bg-gradient-primary bg-clip-text text-transparent drop-shadow-none">
                 Toxic Exposure
               </span>
               <span className="text-white drop-shadow-2xl">Attorney</span>
@@ -289,7 +316,7 @@ const EnvironmentalToxic: React.FC = () => {
             </p>
             <Button 
               size="lg"
-              className="bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white font-bold text-lg px-12 py-6 rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 border-2 border-white/20"
+              className="bg-gradient-primary text-white font-bold text-lg px-12 py-6 rounded-full shadow-2xl hover:shadow-3xl hover:scale-105 transition-all duration-300 border-2 border-white/20"
               onClick={handleFormSubmit}
             >
               START MY FREE CASE EVALUATION
@@ -329,12 +356,12 @@ const EnvironmentalToxic: React.FC = () => {
         <div className="flex-1 space-y-16">
           
           {/* Overview Section */}
-          <section id="overview" className="content-section">
+          <section id="overview" className="content-section scroll-mt-24">
             <div className="text-center mb-12">
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground">
                 California Environmental Toxic Exposure Victims
               </h2>
-              <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-orange-500 mx-auto mb-6"></div>
+              <div className="w-24 h-1 bg-gradient-primary mx-auto mb-6"></div>
               <p className="text-xl text-muted-foreground max-w-4xl mx-auto">
                 If you've been harmed by environmental contamination in California, you have rights. 
                 We fight for maximum compensation from responsible corporations.
@@ -393,12 +420,12 @@ const EnvironmentalToxic: React.FC = () => {
                   </ul>
                 </div>
 
-                <div className="bg-orange-50 p-6 rounded-lg border border-orange-200">
-                  <h4 className="font-semibold mb-3 text-orange-800 flex items-center">
+                <div className="bg-primary/5 p-6 rounded-lg border border-primary/20">
+                  <h4 className="font-semibold mb-3 text-primary flex items-center">
                     <Heart className="w-5 h-5 mr-2" />
                     Health Effects
                   </h4>
-                  <ul className="list-disc pl-5 space-y-1 text-orange-700 text-sm">
+                  <ul className="list-disc pl-5 space-y-1 text-primary/80 text-sm">
                     <li>Various cancers and tumors</li>
                     <li>Neurological and cognitive disorders</li>
                     <li>Reproductive and birth defects</li>
@@ -413,7 +440,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* Case Evaluation Section */}
-          <section id="evaluation" className="content-section bg-gradient-to-br from-blue-50 to-indigo-50 p-12 rounded-2xl">
+          <section id="evaluation" className="content-section scroll-mt-24 bg-gradient-to-br from-blue-50 to-indigo-50 p-12 rounded-2xl">
             <h2 className="text-3xl font-bold mb-8 text-center text-foreground">Free Case Evaluation</h2>
             <div className="max-w-2xl mx-auto">
               <form onSubmit={handleFormSubmit} className="space-y-6">
@@ -447,7 +474,7 @@ const EnvironmentalToxic: React.FC = () => {
 
                 <Button 
                   type="submit"
-                  className="w-full bg-gradient-to-r from-yellow-500 to-orange-600 hover:from-yellow-600 hover:to-orange-700 text-white font-bold text-lg py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+                  className="w-full bg-gradient-primary text-white font-bold text-lg py-4 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                 >
                   Get My Free Case Evaluation
                 </Button>
@@ -456,7 +483,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* Toxic Chemicals Section */}
-          <section id="toxic-chemicals" className="content-section">
+          <section id="toxic-chemicals" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Major Toxic Chemicals We Handle</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -521,7 +548,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* Health Effects Section */}
-          <section id="health-effects" className="content-section">
+          <section id="health-effects" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Health Effects of Toxic Exposure</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
@@ -554,7 +581,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* Legal Process Section */}
-          <section id="legal-process" className="content-section">
+          <section id="legal-process" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Our Legal Process</h2>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-12">
@@ -588,7 +615,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* FAQ Section */}
-          <section id="faq" className="content-section">
+          <section id="faq" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Frequently Asked Questions</h2>
             
             <div className="space-y-4">
@@ -614,7 +641,7 @@ const EnvironmentalToxic: React.FC = () => {
           </section>
 
           {/* Resources Section */}
-          <section id="resources" className="content-section">
+          <section id="resources" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Additional Resources</h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">

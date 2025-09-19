@@ -36,6 +36,7 @@ import exposureSitesImage from '@/assets/california-contamination-sites.jpg';
 import medicalImage from '@/assets/environmental-toxic-medical-facility.jpg';
 import compensationImage from '@/assets/environmental-toxic-compensation-calculator.jpg';
 import toxicChemicalsImage from '@/assets/california-toxic-chemicals.jpg';
+import toxicHealthEffectsImage from '@/assets/toxic-exposure-health-effects.jpg';
 import SEO from '@/components/SEO';
 import { environmentalToxicFaqs } from '@/content/environmentalToxicFaqs';
 
@@ -430,6 +431,11 @@ const EnvironmentalToxic: React.FC = () => {
 
             {/* Health Effects Section */}
             <section id="health-effects" className="content-section mb-12">
+              <img 
+                src={toxicHealthEffectsImage} 
+                alt="Health effects of toxic exposure including cancer, organ damage, and respiratory problems" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
               <h2 className="text-3xl font-bold text-primary mb-6">Health Effects of Toxic Exposure</h2>
               
               <div className="space-y-6">

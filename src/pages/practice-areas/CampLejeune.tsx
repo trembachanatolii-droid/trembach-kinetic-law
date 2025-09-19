@@ -793,7 +793,8 @@ const CampLejeune: React.FC = () => {
           <div className="flex flex-row justify-center items-center gap-4">
             <Button 
               size="lg" 
-              className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 rounded-full"
+              className="bg-white !text-foreground hover:bg-gray-100 hover:!text-foreground font-bold px-8 py-4 rounded-full shadow-md"
+              aria-label="Start Free Case Evaluation"
               onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
             >
               Start Free Case Evaluation

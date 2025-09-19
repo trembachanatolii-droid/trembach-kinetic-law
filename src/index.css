@@ -32,7 +32,25 @@
 .trembach-logo .tagline {
   font-size: 0.7rem;
   opacity: 0.8;
-}
+  }
+
+  /* Phone numbers and links visibility */
+  a[href^="tel:"], 
+  .phone-link {
+    color: inherit !important;
+    text-decoration: none;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Make inactive link text visible */
+  .text-white {
+    color: white !important;
+  }
+
+  .text-red-600 {
+    color: hsl(var(--red-600)) !important;
+  }
 
 @layer base {
   :root {
@@ -387,4 +405,22 @@
   *[class*="fixed"][class*="top-"]:has-text("24/7 Available") {
     display: none !important;
   }
+}
+
+/* Phone numbers and links visibility - Workplace Injuries Enhancement */
+a[href^="tel:"], 
+.phone-link {
+  color: inherit !important;
+  text-decoration: none;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Make inactive link text visible */
+.text-white {
+  color: white !important;
+}
+
+.text-red-600 {
+  color: hsl(var(--red-600)) !important;
 }

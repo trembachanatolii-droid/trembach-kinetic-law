@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -528,12 +529,12 @@ const ConstructionCompensationCalculator: React.FC = () => {
                   </Button>
                   <Button 
                     className="w-full bg-blue-600 text-white hover:bg-blue-700"
-                    onClick={() => {
-                      document.getElementById('calculator-form')?.scrollIntoView({ behavior: 'smooth' });
-                    }}
+                    asChild
                   >
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    24/7 Live Chat
+                    <Link to="/construction-accidents-case-evaluation">
+                      <FileText className="w-4 h-4 mr-2" />
+                      Free Case Evaluation
+                    </Link>
                   </Button>
                 </CardContent>
               </Card>

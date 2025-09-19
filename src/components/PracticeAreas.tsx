@@ -19,6 +19,8 @@ const getPracticeAreaLink = (title: string): string => {
       return "/practice-areas/amputation-injuries";
     case "Burn Injuries":
       return "/practice-areas/burn-injuries";
+    case "Workplace Injuries":
+      return "/practice-areas/workplace-injuries";
     default:
       return "/case-evaluation";
   }

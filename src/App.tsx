@@ -8,6 +8,10 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import MedicalDevices from "./pages/practice-areas/MedicalDevices";
+import MedicalDevicesCaseEvaluation from "./pages/MedicalDevicesCaseEvaluation";
+import MedicalDevicesCompensationCalculator from "./pages/MedicalDevicesCompensationCalculator";
+import MedicalDevicesMedicalGuidance from "./pages/MedicalDevicesMedicalGuidance";
 import CarAccidentsNew from "./pages/practice-areas/CarAccidentsNew";
 import CarCaseEvaluation from "./pages/CarCaseEvaluation";
 import CarMedicalGuidance from "./pages/CarMedicalGuidance";
@@ -92,6 +96,10 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/medical-devices" element={<MedicalDevices />} />
+            <Route path="/medical-devices-case-evaluation" element={<MedicalDevicesCaseEvaluation />} />
+            <Route path="/medical-devices-compensation-calculator" element={<MedicalDevicesCompensationCalculator />} />
+            <Route path="/medical-devices-medical-guidance" element={<MedicalDevicesMedicalGuidance />} />
             <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
         <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />

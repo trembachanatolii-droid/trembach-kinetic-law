@@ -2,6 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import MedicalMalpractice from './MedicalMalpractice';
 import MesotheliomaAsbestos from './MesotheliomaAsbestos';
+import MedicalDevices from './MedicalDevices';
 import ComingSoon from './ComingSoon';
 import AmputationInjuries from './AmputationInjuries';
 import SilicosisInjuries from './SilicosisInjuries';
@@ -25,6 +26,7 @@ const PracticeAreaRouter = () => {
   return (
     <Routes>
       <Route path="mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+      <Route path="medical-devices" element={<MedicalDevices />} />
       <Route path="medical-malpractice" element={<MedicalMalpractice />} />
       <Route path="silicosis-injuries" element={<SilicosisInjuries />} />
       <Route path="talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />

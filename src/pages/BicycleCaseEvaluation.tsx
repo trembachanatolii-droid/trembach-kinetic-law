@@ -89,10 +89,6 @@ const BicycleCaseEvaluation = () => {
               <Phone className="w-5 h-5 mr-2" />
               Call (818) 123-4567
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg backdrop-blur-sm">
-              <MessageCircle className="w-5 h-5 mr-2" />
-              Live Chat Available
-            </Button>
           </div>
         </div>
       </section>
@@ -344,10 +340,6 @@ const BicycleCaseEvaluation = () => {
                   <Button variant="outline" className="w-full" size="lg">
                     <Mail className="w-4 h-4 mr-2" />
                     Email Us
-                  </Button>
-                  <Button variant="outline" className="w-full" size="lg">
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Live Chat
                   </Button>
                 </div>
                 <p className="text-sm text-muted-foreground mt-4">

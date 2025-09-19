@@ -695,17 +695,6 @@ const EnvironmentalToxicCaseEvaluation: React.FC = () => {
               </Button>
             </Card>
 
-            <Card className="text-center p-6 hover:shadow-lg transition-shadow">
-              <MessageCircle className="w-8 h-8 mx-auto mb-4 text-primary" />
-              <h3 className="font-semibold mb-2">Live Chat</h3>
-              <p className="text-sm text-gray-600 mb-4">Chat with our team</p>
-              <Button 
-                variant="outline"
-                className="w-full"
-              >
-                Start Chat
-              </Button>
-            </Card>
           </div>
         </div>
       </section>

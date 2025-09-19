@@ -47,18 +47,21 @@ const PFASResources: React.FC = () => {
         {
           title: "PFAS Health Effects Research",
           description: "Latest medical research on PFAS health impacts",
-          type: "internal",
+          url: "https://www.niehs.nih.gov/health/topics/agents/pfc/",
+          type: "external",
           action: "View Studies"
         },
         {
           title: "Symptoms Checklist",
           description: "Common health conditions linked to PFAS exposure",
-          type: "download"
+          url: "https://www.cdc.gov/biomonitoring/PFAS_FactSheet.html",
+          type: "external"
         },
         {
           title: "Medical Testing Guidelines", 
           description: "What tests to request from your doctor",
-          type: "download"
+          url: "https://www.atsdr.cdc.gov/pfas/health-effects/overview.html",
+          type: "external"
         }
       ]
     },
@@ -68,17 +71,20 @@ const PFASResources: React.FC = () => {
         {
           title: "Know Your Rights",
           description: "Understanding your legal rights in PFAS exposure cases",
-          type: "internal"
+          url: "https://www.epa.gov/pfas/basic-information-pfas",
+          type: "external"
         },
         {
           title: "Evidence Collection Guide",
           description: "How to document your PFAS exposure and health effects",
-          type: "download"
+          url: "https://www.atsdr.cdc.gov/pfas/health-effects/overview.html",
+          type: "external"
         },
         {
           title: "Statute of Limitations Info",
           description: "Important time limits for filing PFAS lawsuits in California",
-          type: "internal"
+          url: "https://www.courts.ca.gov/selfhelp-start.htm",
+          type: "external"
         }
       ]
     }

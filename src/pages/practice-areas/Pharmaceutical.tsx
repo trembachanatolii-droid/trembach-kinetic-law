@@ -419,7 +419,7 @@ const Pharmaceutical: React.FC = () => {
               transform: 'translateZ(10px)'
             }}
           >
-            🚀 START MY FREE CASE EVALUATION
+            START MY FREE CASE EVALUATION
           </Button>
         </div>
         </div>

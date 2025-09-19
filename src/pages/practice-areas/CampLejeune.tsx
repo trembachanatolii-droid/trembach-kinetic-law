@@ -800,7 +800,7 @@ const CampLejeune: React.FC = () => {
             </Button>
             <Button 
               size="lg" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-foreground font-bold px-8 py-4 transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold px-8 py-4 transition-all duration-300"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567

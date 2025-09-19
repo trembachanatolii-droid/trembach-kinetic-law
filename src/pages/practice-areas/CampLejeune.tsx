@@ -205,30 +205,6 @@ const CampLejeune: React.FC = () => {
         </div>
       </section>
 
-      {/* 3 Ways to Start Your Case - Moved to top */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 mx-auto max-w-md">
-          <CardHeader className="text-center">
-            <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
-            
-            <div className="space-y-4">
-              <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
-                <Phone className="w-5 h-5 mr-2" />
-                Call (818) 123-4567
-              </Button>
-              
-              <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
-                <Mail className="w-5 h-5 mr-2" />
-                Free Case Evaluation
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -674,9 +650,31 @@ const CampLejeune: React.FC = () => {
             </section>
           </div>
 
-          {/* Sidebar - Quick Facts and Settlement Info */}
+          {/* Sidebar - 3 Ways to Start Your Case */}
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-6">
+              {/* Main CTA Card */}
+              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
+                  
+                  <div className="space-y-4">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
+                      <Phone className="w-5 h-5 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                    
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
+                      <Mail className="w-5 h-5 mr-2" />
+                      Free Case Evaluation
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
               {/* Quick Facts */}
               <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                 <CardHeader>

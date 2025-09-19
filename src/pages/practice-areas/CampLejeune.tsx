@@ -705,7 +705,7 @@ const CampLejeune: React.FC = () => {
             </section>
 
             {/* FAQ Section with 50 Questions */}
-            <section id="faq" className="content-section mb-12">
+            <section id="faq" className="mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
@@ -716,7 +716,7 @@ const CampLejeune: React.FC = () => {
                         {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && <CardContent className="animate-fade-in">
+                    {expandedFaq === index && <CardContent>
                         <p className="text-muted-foreground text-base leading-relaxed">{faq.answer}</p>
                       </CardContent>}
                   </Card>)}

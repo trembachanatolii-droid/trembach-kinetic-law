@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useScrollMemory } from '@/hooks/useScrollMemory';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -58,7 +57,6 @@ const CampLejeune: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
-  const scrollMemory = useScrollMemory();
   const [formData, setFormData] = useState({
     timeAtBase: '',
     condition: ''
@@ -172,12 +170,12 @@ const CampLejeune: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         
-        {/* Go Back Button - positioned in hero overlay with scroll-based fade */}
-        <div className={`absolute top-20 left-6 z-20 transition-all duration-500 ${isScrolled ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'}`}>
+        {/* Go Back Button - positioned in hero overlay */}
+        <div className="absolute top-20 left-6 z-20">
           <Button 
             variant="ghost" 
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20 font-medium text-base px-4 py-2"
+            className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20 font-medium text-base px-4 py-2 transition-all duration-300"
           >
             <ArrowLeft className="w-4 h-4" />
             Go Back
@@ -242,14 +240,14 @@ const CampLejeune: React.FC = () => {
             
             {/* Overview Section - Enhanced Typography */}
             <section id="overview" className="content-section mb-16">
-              <h2 className="text-5xl md:text-6xl font-bold text-primary mb-12 font-display">California Camp Lejeune Water Contamination Attorneys</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8 font-display">California Camp Lejeune Water Contamination Attorneys</h2>
               
-              <div className="prose prose-2xl max-w-none mb-12">
-                <p className="text-3xl leading-relaxed mb-8 font-medium text-foreground">
+              <div className="prose prose-lg max-w-none mb-8">
+                <p className="text-lg leading-relaxed mb-6 font-medium text-foreground">
                   From 1953 to 1987, over one million Marines, their families, and civilian workers at Camp Lejeune, North Carolina, were unknowingly exposed to drinking water contaminated with dangerous industrial solvents and chemicals. This represents one of the worst water contamination disasters in United States history.
                 </p>
                 
-                <p className="text-2xl leading-relaxed text-muted-foreground">
+                <p className="text-base leading-relaxed text-muted-foreground">
                   At Trembach Law Firm, we understand that California veterans who trained at Camp Lejeune are now facing serious health conditions decades later. With our unique background as a former defense attorney, we know the government's tactics and use that insider knowledge to fight for maximum compensation for your Camp Lejeune-related illnesses.
                 </p>
               </div>
@@ -783,7 +781,7 @@ const CampLejeune: React.FC = () => {
       </div>
 
       {/* Bottom CTA */}
-      <section className="bg-primary text-white py-16">
+      <section className="bg-red-600 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
           <h2 className="text-4xl font-bold mb-4">
             Don't Wait - Time Limits Apply for Camp Lejeune Claims
@@ -795,100 +793,21 @@ const CampLejeune: React.FC = () => {
           <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
             <Button 
               size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 font-bold px-8 py-4"
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
               onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
             >
               Start Free Case Evaluation
             </Button>
             <Button 
               size="lg" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold px-8 py-4 transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567
             </Button>
           </div>
-            
-            {/* Don't Wait - Time Limits Apply Section */}
-            <section className="py-16 bg-gradient-to-r from-destructive/10 to-destructive/5 border-t border-destructive/20">
-              <div className="container mx-auto px-4">
-                <div className="max-w-4xl mx-auto text-center">
-                  <h2 className="text-4xl md:text-5xl font-bold text-destructive mb-6">
-                    Don't Wait - Time Limits Apply for California Camp Lejeune Claims
-                  </h2>
-                  <div className="bg-destructive/20 border-2 border-destructive/30 rounded-lg p-6 mb-8">
-                    <div className="flex items-center justify-center mb-4">
-                      <Clock className="w-8 h-8 text-destructive mr-3" />
-                      <span className="text-2xl font-bold text-destructive">FILING DEADLINE: August 10, 2024</span>
-                    </div>
-                    <p className="text-xl text-destructive/80 font-medium">
-                      The Camp Lejeune Justice Act requires all claims to be filed within 2 years of enactment. 
-                      This deadline cannot be extended.
-                    </p>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div className="text-left bg-background/50 p-6 rounded-lg border border-primary/20">
-                      <h3 className="text-xl font-bold text-primary mb-4">Why Time is Critical</h3>
-                      <ul className="space-y-2 text-lg">
-                        <li>• Administrative claim must be filed first (6-month response period)</li>
-                        <li>• Complex medical and service record gathering takes time</li>
-                        <li>• Court scheduling and case preparation require months</li>
-                        <li>• Missing the deadline means losing your right to compensation forever</li>
-                      </ul>
-                    </div>
-                    
-                    <div className="text-left bg-background/50 p-6 rounded-lg border border-primary/20">
-                      <h3 className="text-xl font-bold text-primary mb-4">California Veterans at Risk</h3>
-                      <ul className="space-y-2 text-lg">
-                        <li>• Thousands of California Marines trained at Camp Lejeune</li>
-                        <li>• Many served during peak contamination periods (1970s-1980s)</li>
-                        <li>• Family members also exposed while living on base</li>
-                        <li>• Compensation ranges from $200,000 to $1.5M+ for qualifying conditions</li>
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 mb-8">
-                    <h3 className="text-3xl font-bold text-primary mb-4">Act Now - Free Case Review</h3>
-                    <p className="text-xl text-muted-foreground mb-6">
-                      Don't let the filing deadline pass. Our experienced Camp Lejeune attorneys will review your case at no cost 
-                      and help you understand your legal options before time runs out.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Link to="/camp-lejeune-evaluation">
-                        <Button size="lg" className="w-full sm:w-auto bg-destructive hover:bg-destructive/90 text-white text-lg px-8 py-4">
-                          <Clock className="w-5 h-5 mr-2" />
-                          Urgent Case Evaluation
-                        </Button>
-                      </Link>
-                      <Button 
-                        variant="outline" 
-                        size="lg" 
-                        className="w-full sm:w-auto border-destructive text-destructive hover:bg-destructive hover:text-white text-lg px-8 py-4"
-                        asChild
-                      >
-                        <a href="tel:8181234567" className="text-destructive hover:text-white">
-                          <Phone className="w-5 h-5 mr-2" />
-                          Call Now: (818) 123-4567
-                        </a>
-                      </Button>
-                    </div>
-                  </div>
-
-                  <div className="text-base text-muted-foreground">
-                    <p className="font-medium">Legal Disclaimer:</p>
-                    <p>
-                      This information is for educational purposes only and does not constitute legal advice. 
-                      Consult with qualified legal counsel for advice specific to your situation. Past results 
-                      do not guarantee future outcomes.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </div>
-        </section>
+        </div>
+      </section>
     </div>
   );
 };

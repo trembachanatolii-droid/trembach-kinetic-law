@@ -723,7 +723,7 @@ const MassTorts: React.FC = () => {
 
           {/* Sticky Sidebar - 3 Ways to Start Your Case */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
+            <div className="sticky top-4">
               <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/10 to-primary/5 backdrop-blur-md">
                 <CardHeader className="text-center">
                   <div className="w-20 h-20 mx-auto mb-4 rounded-full overflow-hidden">

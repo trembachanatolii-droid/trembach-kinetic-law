@@ -646,53 +646,28 @@ const EnvironmentalToxic: React.FC = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center text-primary">
                       <Map className="w-5 h-5 mr-2" />
-                      <a 
-                        href="https://www.envirostor.dtsc.ca.gov/public/" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="hover:underline transition-colors"
-                      >
-                        Contaminated Sites Database
-                      </a>
+                      Contaminated Sites Database
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
                       <div>
-                        <h4 className="font-semibold">
-                          <a 
-                            href="https://www.envirostor.dtsc.ca.gov/public/" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline transition-colors"
-                          >
-                            EnviroStor Database
-                          </a>
-                        </h4>
-                        <p className="text-sm text-muted-foreground">California's cleanup sites and contaminated properties</p>
+                        <h4 className="font-semibold">EnviroStor Database</h4>
+                        <p className="text-sm text-muted-foreground">California's cleanup sites and contaminated properties (Search: "EnviroStor DTSC" online)</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">GeoTracker Database</h4>
+                        <p className="text-sm text-muted-foreground">Leaking underground storage tanks and cleanup sites (Search: "GeoTracker California" online)</p>
                       </div>
                       <div>
                         <h4 className="font-semibold">
                           <a 
-                            href="https://geotracker.waterboards.ca.gov/" 
+                            href="https://www.epa.gov/superfund" 
                             target="_blank" 
                             rel="noopener noreferrer"
                             className="text-primary hover:underline transition-colors"
                           >
-                            GeoTracker Database
-                          </a>
-                        </h4>
-                        <p className="text-sm text-muted-foreground">Leaking underground storage tanks and cleanup sites</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold">
-                          <a 
-                            href="https://www.epa.gov/superfund/superfund-national-priorities-list-npl" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline transition-colors"
-                          >
-                            Superfund Sites
+                            EPA Superfund Sites
                           </a>
                         </h4>
                         <p className="text-sm text-muted-foreground">EPA's National Priorities List contaminated locations</p>

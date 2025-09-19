@@ -15,7 +15,7 @@ import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MassTotsCompensationCalculator: React.FC = () => {
+const MassTortsCompensationCalculator: React.FC = () => {
   const [calculatorData, setCalculatorData] = useState({
     age: 50,
     exposureType: '',
@@ -427,4 +427,4 @@ const MassTotsCompensationCalculator: React.FC = () => {
   );
 };
 
-export default MassTotsCompensationCalculator;
+export default MassTortsCompensationCalculator;

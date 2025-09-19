@@ -9,11 +9,11 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import MassTorts from "./pages/practice-areas/MassTorts";
-import MassTotsCompensationCalculator from "./pages/MassTotsCompensationCalculator";
+import MassTortsCompensationCalculator from "./pages/MassTortsCompensationCalculator";
 import MassTortsCaseEvaluation from "./pages/MassTortsCaseEvaluation";
 import MassTortsMedicalGuidance from "./pages/MassTortsMedicalGuidance";
-import MasseTortsEducation from "./pages/MasseTortsEducation";
-import MasseTortsResources from "./pages/MasseTortsResources";
+import MassTortsEducation from "./pages/MassTortsEducation";
+import MassTortsResources from "./pages/MassTortsResources";
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";
@@ -193,12 +193,11 @@ function App() {
             <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
             <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
              <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
-             <Route path="/mass-torts-compensation-calculator" element={<MassTotsCompensationCalculator />} />
-             <Route path="/mass-torts-case-evaluation" element={<MassTortsCaseEvaluation />} />
+             <Route path="/mass-torts-compensation-calculator" element={<MassTortsCompensationCalculator />} />
              <Route path="/mass-torts-case-evaluation" element={<MassTortsCaseEvaluation />} />
              <Route path="/mass-torts-medical-guidance" element={<MassTortsMedicalGuidance />} />
-             <Route path="/mass-torts-education" element={<MasseTortsEducation />} />
-             <Route path="/mass-torts-resources" element={<MasseTortsResources />} />
+             <Route path="/mass-torts-education" element={<MassTortsEducation />} />
+             <Route path="/mass-torts-resources" element={<MassTortsResources />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

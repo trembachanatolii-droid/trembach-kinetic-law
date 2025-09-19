@@ -336,7 +336,7 @@ const Pharmaceutical: React.FC = () => {
                     }`}
                   >
                     <IconComponent className="w-4 h-4 mr-2" />
-                    <span className="text-white">{tab.label}</span>
+                    <span>{tab.label}</span>
                   </button>
                 );
               })}

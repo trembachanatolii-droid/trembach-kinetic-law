@@ -872,7 +872,7 @@ const MassTorts: React.FC = () => {
           <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
             <Button 
               size="lg" 
-              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
+              className="bg-background text-primary hover:bg-muted border-2 border-background font-bold px-8 py-4 shadow-lg transition-all duration-300"
               onClick={() => window.location.href = '/mass-torts-case-evaluation'}
             >
               Start Free Case Evaluation

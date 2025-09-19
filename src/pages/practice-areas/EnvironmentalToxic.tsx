@@ -35,6 +35,7 @@ import legalProcessImage from '@/assets/environmental-toxic-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-contamination-sites.jpg';
 import medicalImage from '@/assets/environmental-toxic-medical-facility.jpg';
 import compensationImage from '@/assets/environmental-toxic-compensation-calculator.jpg';
+import toxicChemicalsImage from '@/assets/california-toxic-chemicals.jpg';
 import SEO from '@/components/SEO';
 import { environmentalToxicFaqs } from '@/content/environmentalToxicFaqs';
 
@@ -365,6 +366,11 @@ const EnvironmentalToxic: React.FC = () => {
 
             {/* Toxic Chemicals Section */}
             <section id="toxic-chemicals" className="content-section mb-12">
+              <img 
+                src={toxicChemicalsImage} 
+                alt="Common toxic chemicals found in California including PFAS, TCE, PCE, hexavalent chromium and benzene" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
               <h2 className="text-3xl font-bold text-primary mb-6">Common Toxic Chemicals in California</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">

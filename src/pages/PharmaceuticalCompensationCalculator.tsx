@@ -292,6 +292,40 @@ const PharmaceuticalCompensationCalculator: React.FC = () => {
               </Card>
             </div>
           </div>
+
+          {/* Disclaimer Section */}
+          <div className="mt-12 max-w-4xl mx-auto">
+            <Card className="bg-yellow-50 border-yellow-200 border-l-4 border-l-yellow-500">
+              <CardHeader>
+                <CardTitle className="text-yellow-800 flex items-center">
+                  <AlertTriangle className="w-5 h-5 mr-2" />
+                  Important Disclaimer
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-yellow-800 space-y-3">
+                <p className="text-lg">
+                  <strong>This calculator provides estimates only and should not be considered legal advice.</strong> 
+                  Actual case values depend on numerous factors including specific circumstances, jurisdiction, 
+                  strength of evidence, and other variables that cannot be captured in a simple calculator.
+                </p>
+                <p>
+                  Every pharmaceutical injury case is unique. The estimates provided are based on general 
+                  settlement ranges and should not be relied upon for making legal decisions. Consultation 
+                  with an experienced pharmaceutical injury attorney is essential to understand your specific 
+                  case value and legal options.
+                </p>
+                <p>
+                  <strong>No attorney-client relationship is formed</strong> by using this calculator. 
+                  Past results do not guarantee future outcomes. Settlement values can vary significantly 
+                  based on case-specific factors, defendant's ability to pay, and other legal considerations.
+                </p>
+                <p className="text-sm border-t border-yellow-300 pt-3 mt-4">
+                  For accurate case evaluation and legal representation, contact Trembach Law Firm at 
+                  <strong> (818) 123-4567</strong> for a free consultation with no obligation.
+                </p>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>

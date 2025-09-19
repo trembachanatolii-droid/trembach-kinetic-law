@@ -21,6 +21,7 @@ import WrongfulDeath from './WrongfulDeath';
 import BrainInjuries from './BrainInjuries';
 import BurnInjuries from './BurnInjuries';
 import WorkplaceInjuries from './WorkplaceInjuries';
+import ClassActions from './ClassActions';
 
 const PracticeAreaRouter = () => {
   return (
@@ -47,6 +48,7 @@ const PracticeAreaRouter = () => {
       <Route path="amputation-injuries" element={<AmputationInjuries />} />
       <Route path="amputation" element={<AmputationInjuries />} />
       <Route path="workplace-injuries" element={<WorkplaceInjuries />} />
+      <Route path="class-actions" element={<ClassActions />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>
   );

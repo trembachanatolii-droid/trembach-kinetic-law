@@ -1343,6 +1343,32 @@ const AmputationInjuries: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Don't Wait - Time Limits Apply Section */}
+      <section className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            Don't Wait - Time Limits Apply for California Amputation Claims
+          </h2>
+          <p className="text-xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
+            California law gives you only two years from the accident date to file your claim. Government property claims require filing within six months. Contact us today for your free consultation.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
+            <Button 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.location.href = '/amputation-case-evaluation'}
+            >
+              Start Free Case Evaluation
+            </Button>
+            <Button 
+              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-red-600 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
+              onClick={() => window.open('tel:8181234567')}
+            >
+              Call (818) 123-4567
+            </Button>
+          </div>
+        </div>
+      </section>
     </>
   );
 };

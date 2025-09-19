@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import MedicalMalpractice from './MedicalMalpractice';
 import MesotheliomaAsbestos from './MesotheliomaAsbestos';
 import ComingSoon from './ComingSoon';
+import AmputationInjuries from './AmputationInjuries';
 import SilicosisInjuries from './SilicosisInjuries';
 import TalcBabyPowderCancer from './TalcBabyPowderCancer';
 import CarAccidentsNew from './CarAccidentsNew';
@@ -41,6 +42,7 @@ const PracticeAreaRouter = () => {
       <Route path="brain-injuries" element={<BrainInjuries />} />
       <Route path="burn-injuries" element={<BurnInjuries />} />
       <Route path="wrongful-death" element={<WrongfulDeath />} />
+      <Route path="amputation-injuries" element={<AmputationInjuries />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>
   );

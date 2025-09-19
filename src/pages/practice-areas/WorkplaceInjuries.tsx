@@ -823,8 +823,7 @@ const WorkplaceInjuries: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg"
-                  variant="outline"
-                  className="bg-white text-red-600 border-2 border-white hover:bg-gray-100 hover:text-red-700 font-semibold"
+                  className="bg-red-700 text-white hover:bg-red-800 font-semibold"
                   asChild
                 >
                   <Link to="/workplace-injuries-case-evaluation">Start Free Case Evaluation</Link>

@@ -653,22 +653,47 @@ const CampLejeune: React.FC = () => {
           {/* Sidebar - 3 Ways to Start Your Case */}
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-6">
-              {/* Main CTA Card */}
-              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
+              
+              {/* Contact Card */}
+              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="text-center text-white">
+                      <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                      <h3 className="text-xl font-bold">Start Your Case</h3>
+                    </div>
+                  </div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-6">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
                   
                   <div className="space-y-4">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
-                      <Phone className="w-5 h-5 mr-2" />
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
                       Call (818) 123-4567
                     </Button>
                     
-                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
-                      <Mail className="w-5 h-5 mr-2" />
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/schedule-consultation'}
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
                       Free Case Evaluation
                     </Button>
                   </div>

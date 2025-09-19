@@ -209,8 +209,82 @@ const CampLejeune: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
+          {/* Sidebar - 3 Ways to Start Your Case */}
+          <div className="lg:col-span-1 lg:order-2">
+            <div className="sticky top-8 space-y-6">
+              {/* Main CTA Card */}
+              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
+                  
+                  <div className="space-y-4">
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
+                      <Phone className="w-5 h-5 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                    
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
+                      <Mail className="w-5 h-5 mr-2" />
+                      Free Case Evaluation
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Quick Facts */}
+              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">Quick Facts</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Limited Time</h4>
+                      <p className="text-sm text-muted-foreground">Deadlines apply for Camp Lejeune claims</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-sm text-muted-foreground">We only get paid if you win</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Free Consultation</h4>
+                      <p className="text-sm text-muted-foreground">No cost to discuss your case</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Settlement Ranges */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Settlement Ranges</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <p>• Parkinson's Disease: $450,000-$1.2M</p>
+                    <p>• Cancer Cases: $200,000-$800,000</p>
+                    <p>• Birth Defects: $200,000-$600,000</p>
+                    <p>• Wrongful Death: $500,000-$1.5M+</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+          
           {/* Main Content Column */}
-          <div className="lg:col-span-2" ref={contentRef}>
+          <div className="lg:col-span-2 lg:order-1" ref={contentRef}>
             
             {/* Overview Section - Enhanced Typography */}
             <section id="overview" className="content-section mb-16">
@@ -648,80 +722,6 @@ const CampLejeune: React.FC = () => {
                   </Card>)}
               </div>
             </section>
-          </div>
-
-          {/* Sidebar - 3 Ways to Start Your Case */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-8 space-y-6">
-              {/* Main CTA Card */}
-              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
-                  
-                  <div className="space-y-4">
-                    <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
-                      <Phone className="w-5 h-5 mr-2" />
-                      Call (818) 123-4567
-                    </Button>
-                    
-                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
-                      <Mail className="w-5 h-5 mr-2" />
-                      Free Case Evaluation
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Quick Facts */}
-              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                <CardHeader>
-                  <CardTitle className="text-lg group-hover:text-primary transition-colors">Quick Facts</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="flex items-start">
-                    <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
-                    <div>
-                      <h4 className="font-semibold text-sm">Limited Time</h4>
-                      <p className="text-sm text-muted-foreground">Deadlines apply for Camp Lejeune claims</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
-                    <div>
-                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
-                      <p className="text-sm text-muted-foreground">We only get paid if you win</p>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start">
-                    <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
-                    <div>
-                      <h4 className="font-semibold text-sm">Free Consultation</h4>
-                      <p className="text-sm text-muted-foreground">No cost to discuss your case</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Settlement Ranges */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-lg">Settlement Ranges</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-2 text-sm">
-                    <p>• Parkinson's Disease: $450,000-$1.2M</p>
-                    <p>• Cancer Cases: $200,000-$800,000</p>
-                    <p>• Birth Defects: $200,000-$600,000</p>
-                    <p>• Wrongful Death: $500,000-$1.5M+</p>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
           </div>
         </div>
       </div>

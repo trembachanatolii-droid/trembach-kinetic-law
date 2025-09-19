@@ -5,8 +5,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
   Phone, 
@@ -60,13 +58,6 @@ const WorkplaceInjuries: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    accidentDate: '',
-    injuryType: '',
-    accidentLocation: '',
-    workplaceType: '',
-    employmentStatus: ''
-  });
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -121,11 +112,6 @@ const WorkplaceInjuries: React.FC = () => {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
-  };
-
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    window.location.href = '/workplace-injuries-case-evaluation';
   };
 
   const toggleFaq = (index: number) => {
@@ -376,9 +362,9 @@ const WorkplaceInjuries: React.FC = () => {
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105 hover:shadow-xl"
-              onClick={() => scrollToSection('evaluation')}
+              asChild
             >
-              Get Free Evaluation →
+              <Link to="/workplace-injuries-case-evaluation">Get Free Evaluation →</Link>
             </Button>
             <Button 
               size="lg" 
@@ -402,7 +388,13 @@ const WorkplaceInjuries: React.FC = () => {
                 return (
                   <button
                     key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
+                    onClick={() => {
+                      if (tab.id === 'evaluation') {
+                        window.location.href = '/workplace-injuries-case-evaluation';
+                      } else {
+                        scrollToSection(tab.id);
+                      }
+                    }}
                     className={`flex items-center px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all duration-300 ${
                       activeTab === tab.id
                         ? 'bg-red-600 text-white shadow-lg'
@@ -487,89 +479,6 @@ const WorkplaceInjuries: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
-              
-              <div className="bg-red-50 border-2 border-red-300 p-8 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
-                <p className="mb-6 text-red-700">Provide some basic information to help us understand your workplace injury case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                        className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500"
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Type of Workplace Injury</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="construction-accident">Construction Accident</SelectItem>
-                          <SelectItem value="equipment-malfunction">Equipment/Machinery Malfunction</SelectItem>
-                          <SelectItem value="toxic-exposure">Toxic Chemical Exposure</SelectItem>
-                          <SelectItem value="vehicle-accident">Vehicle Accident at Work</SelectItem>
-                          <SelectItem value="fall-height">Fall from Height</SelectItem>
-                          <SelectItem value="electrocution">Electrocution</SelectItem>
-                          <SelectItem value="third-party-negligence">Third-Party Negligence</SelectItem>
-                          <SelectItem value="other">Other Workplace Injury</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Workplace Type</label>
-                      <Select value={formData.workplaceType} onValueChange={(value) => setFormData(prev => ({ ...prev, workplaceType: value }))}>
-                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
-                          <SelectValue placeholder="Select workplace type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="construction-site">Construction Site</SelectItem>
-                          <SelectItem value="manufacturing">Manufacturing Plant</SelectItem>
-                          <SelectItem value="warehouse">Warehouse</SelectItem>
-                          <SelectItem value="office">Office Building</SelectItem>
-                          <SelectItem value="retail">Retail Store</SelectItem>
-                          <SelectItem value="healthcare">Healthcare Facility</SelectItem>
-                          <SelectItem value="restaurant">Restaurant/Food Service</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Employment Status</label>
-                      <Select value={formData.employmentStatus} onValueChange={(value) => setFormData(prev => ({ ...prev, employmentStatus: value }))}>
-                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
-                          <SelectValue placeholder="Select employment status" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="full-time-employee">Full-Time Employee</SelectItem>
-                          <SelectItem value="part-time-employee">Part-Time Employee</SelectItem>
-                          <SelectItem value="independent-contractor">Independent Contractor</SelectItem>
-                          <SelectItem value="temporary-worker">Temporary Worker</SelectItem>
-                          <SelectItem value="subcontractor">Subcontractor</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
-            </section>
 
             {/* Immediate Steps Section */}
             <section id="what-to-do" className="content-section mb-12">
@@ -915,9 +824,9 @@ const WorkplaceInjuries: React.FC = () => {
                 <Button 
                   size="lg" 
                   className="bg-white text-red-600 hover:bg-gray-100 font-semibold"
-                  onClick={() => scrollToSection('evaluation')}
+                  asChild
                 >
-                  Start Free Case Evaluation
+                  <Link to="/workplace-injuries-case-evaluation">Start Free Case Evaluation</Link>
                 </Button>
                 <Button 
                   size="lg" 
@@ -953,10 +862,12 @@ const WorkplaceInjuries: React.FC = () => {
                   
                   <Button 
                     className="w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2"
-                    onClick={() => scrollToSection('evaluation')}
+                    asChild
                   >
-                    <ClipboardCheck className="w-4 h-4" />
-                    Free Case Review
+                    <Link to="/workplace-injuries-case-evaluation">
+                      <ClipboardCheck className="w-4 h-4" />
+                      Free Case Review
+                    </Link>
                   </Button>
                   
                   <Button 

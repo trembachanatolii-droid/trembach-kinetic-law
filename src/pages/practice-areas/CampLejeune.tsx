@@ -793,14 +793,14 @@ const CampLejeune: React.FC = () => {
           <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
             <Button 
               size="lg" 
-              className="bg-white text-primary hover:bg-gray-100 hover:text-primary/90 font-bold px-8 py-4"
+              className="bg-white text-foreground hover:bg-gray-100 hover:text-foreground font-bold px-8 py-4"
               onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
             >
               Start Free Case Evaluation
             </Button>
             <Button 
               size="lg" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-foreground font-bold px-8 py-4 transition-all duration-300"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567

@@ -66,12 +66,219 @@ const EnvironmentalToxic: React.FC = () => {
     { id: 'resources', label: 'RESOURCES', icon: Building }
   ];
 
+  const faqs = [
+    {
+      question: "How do I know if I have a toxic exposure case?",
+      answer: "If you've been diagnosed with cancer, neurological disorders, reproductive problems, or other serious health conditions and have been exposed to contaminated water, air, or soil, you may have a case. We investigate the connection between your exposure and health problems, even if the exposure occurred years ago."
+    },
+    {
+      question: "What is the statute of limitations for toxic exposure cases in California?",
+      answer: "California generally provides two years from discovery of the injury to file a personal injury claim. For toxic exposure cases, this often means two years from when you knew or should have known that your illness was caused by toxic exposure. Discovery rules can extend these deadlines in complex cases."
+    },
+    {
+      question: "How much does it cost to hire an environmental toxic exposure lawyer?",
+      answer: "We work on a contingency fee basis, meaning you pay nothing unless we win your case. There are no upfront costs, consultation fees, or out-of-pocket expenses. We advance all case costs including expert witnesses, environmental testing, and litigation expenses."
+    },
+    {
+      question: "What compensation can I recover in a toxic exposure lawsuit?",
+      answer: "California toxic exposure victims can recover medical expenses (past and future), lost wages, pain and suffering, property damage, diminished property values, medical monitoring costs, and in cases of willful misconduct, punitive damages. Compensation varies based on exposure severity and health impacts."
+    },
+    {
+      question: "How do you prove toxic exposure caused my illness?",
+      answer: "We use medical experts, environmental testing, epidemiological studies, and exposure reconstruction to establish causation. This includes reviewing your exposure history, medical records, and working with specialists who understand how specific chemicals cause particular diseases."
+    },
+    {
+      question: "What if the company responsible has gone bankrupt?",
+      answer: "Many companies responsible for environmental contamination have established settlement funds or environmental trusts as part of bankruptcy proceedings. We can pursue claims against these funds while also identifying other potentially responsible parties including successor companies and insurance carriers."
+    },
+    {
+      question: "Can I sue if I haven't gotten sick yet but was exposed?",
+      answer: "Yes, California law allows claims for medical monitoring even before illness develops. If you've been exposed to toxic chemicals, you may be entitled to ongoing medical surveillance to detect early signs of disease. This proactive approach can be crucial for early detection and treatment."
+    },
+    {
+      question: "What's the difference between a class action and individual lawsuit?",
+      answer: "Class actions combine many similar claims into one lawsuit, which can be efficient but may result in lower individual compensation. Individual lawsuits allow for personalized damages based on your specific circumstances. We evaluate which approach best serves your interests."
+    },
+    {
+      question: "How long do toxic exposure cases take to resolve?",
+      answer: "Timeline varies significantly based on case complexity, number of defendants, and extent of contamination. Simple cases may resolve in 1-2 years, while complex multi-party litigation can take 3-5 years. We work to expedite resolution while building the strongest possible case."
+    },
+    {
+      question: "Do I need to move away from the contaminated area?",
+      answer: "This depends on the type and level of contamination. We work with environmental experts to assess ongoing exposure risks and can help recover relocation costs if moving is medically necessary. Document all exposure reduction measures you take, as these costs may be recoverable."
+    },
+    {
+      question: "What evidence do I need to save?",
+      answer: "Preserve all medical records, environmental test results, property documents, photographs of the contaminated area, and any correspondence with authorities or companies about contamination. Keep receipts for medical expenses, property damage repairs, and alternative housing or water costs."
+    },
+    {
+      question: "Can I sue the government for contamination?",
+      answer: "Yes, but government liability involves special procedures and immunity limitations. The Federal Tort Claims Act governs federal agency liability, while California law provides procedures for suing state and local governments. These cases require specialized knowledge of governmental liability laws."
+    },
+    {
+      question: "What about contamination from decades ago?",
+      answer: "California's discovery rule allows claims to be filed within two years of discovering the injury and its connection to toxic exposure, even if the exposure occurred decades earlier. Historical contamination cases are common and can be successful with proper investigation and expert testimony."
+    },
+    {
+      question: "Will my case go to trial?",
+      answer: "Most toxic exposure cases settle before trial, often after extensive discovery reveals the full extent of contamination and corporate responsibility. However, we prepare every case for trial to maximize settlement leverage and ensure you receive fair compensation."
+    },
+    {
+      question: "Can I join an existing lawsuit?",
+      answer: "In some cases, joining existing litigation can be efficient and cost-effective. We evaluate whether joining a class action, multidistrict litigation, or coordinated proceedings serves your interests, or whether an individual lawsuit would provide better results."
+    },
+    {
+      question: "What if I signed a waiver or release?",
+      answer: "Waivers and releases don't always bar toxic exposure claims, especially if they were signed before exposure effects were known or if they don't specifically cover toxic exposure claims. California law limits the enforceability of releases that violate public policy."
+    },
+    {
+      question: "How is property damage valued?",
+      answer: "Property damage includes diminished market value, cleanup costs, and stigma damages. We work with environmental consultants and real estate appraisers to document the full impact of contamination on property values, including the long-term stigma effect that persists even after cleanup."
+    },
+    {
+      question: "What about my children's exposure?",
+      answer: "Children face heightened risks from toxic exposure, and California law provides special protections. We can pursue claims for developmental delays, learning disabilities, increased cancer risk, and the need for lifetime medical monitoring. Minors' claims have extended statute of limitations periods."
+    },
+    {
+      question: "Can I recover if the contamination is 'naturally occurring'?",
+      answer: "Naturally occurring contamination doesn't automatically bar claims if human activities concentrated or mobilized the contaminants. For example, if construction or industrial activities disturbed naturally occurring arsenic or other minerals, creating exposure risks, liability may still exist."
+    },
+    {
+      question: "What's medical monitoring and am I eligible?",
+      answer: "Medical monitoring is court-ordered and funded medical surveillance for people exposed to toxic chemicals. California allows these claims when exposure creates a significantly increased risk of serious disease and monitoring can detect early signs of illness for more effective treatment."
+    },
+    {
+      question: "How do PFAS 'forever chemicals' cases work?",
+      answer: "PFAS cases involve complex multi-district litigation against manufacturers like 3M and DuPont. These cases combine individual claims with broader environmental remediation efforts. We handle both personal injury claims and property contamination issues in coordinated proceedings."
+    },
+    {
+      question: "What if I'm a veteran exposed on a military base?",
+      answer: "Military base contamination cases involve unique jurisdictional and liability issues. Veterans may be eligible for VA disability benefits while also pursuing claims against private contractors who supplied contaminated materials to the military. These parallel tracks don't offset each other."
+    },
+    {
+      question: "Can I sue if I lived near but not on contaminated property?",
+      answer: "Yes, off-site contamination claims are common when toxic chemicals migrate through groundwater, air, or soil. We investigate exposure pathways including vapor intrusion into homes, contaminated drinking water wells, and airborne chemical migration from industrial sites."
+    },
+    {
+      question: "What about contamination from fracking or oil operations?",
+      answer: "Oil and gas operations can contaminate air, water, and soil through multiple pathways. California has specific regulations governing these operations, and violations can create strict liability. We handle cases involving drilling, hydraulic fracturing, waste disposal, and pipeline leaks."
+    },
+    {
+      question: "How do pesticide drift cases work?",
+      answer: "Pesticide drift cases involve chemicals traveling from application sites to nearby properties. California's strict pesticide regulations create liability when drift occurs, especially when it affects schools, homes, or organic farms. These cases require specialized knowledge of agricultural practices and regulations."
+    },
+    {
+      question: "What if multiple companies contributed to contamination?",
+      answer: "Multi-party contamination cases require apportioning liability among responsible parties. California's joint and several liability laws allow recovery of full damages from any responsible party, who can then seek contribution from others. We identify all potentially responsible parties to maximize recovery."
+    },
+    {
+      question: "Can I recover emotional distress damages?",
+      answer: "California allows emotional distress damages in toxic exposure cases, including fear of developing cancer, anxiety about family health, and distress from property contamination. These damages recognize the significant psychological impact of learning you've been exposed to dangerous chemicals."
+    },
+    {
+      question: "What's the difference between acute and chronic exposure?",
+      answer: "Acute exposure involves high-level, short-term contact causing immediate symptoms, while chronic exposure involves lower-level, long-term contact causing gradual health effects. Both can create legal liability, but they require different approaches to proving causation and damages."
+    },
+    {
+      question: "How do you value a wrongful death claim?",
+      answer: "Wrongful death claims in toxic exposure cases include loss of financial support, loss of companionship, funeral expenses, and the decedent's pre-death pain and suffering. California law allows recovery by spouses, children, and dependent family members based on their relationship to the deceased."
+    },
+    {
+      question: "What if the contamination affected my business?",
+      answer: "Business contamination claims can include lost profits, property damage, cleanup costs, relocation expenses, and lost business value. We work with business valuation experts and environmental consultants to document the full economic impact of contamination on your business operations."
+    },
+    {
+      question: "Can I recover if I rented rather than owned property?",
+      answer: "Yes, renters can recover for personal injury, personal property damage, relocation costs, and loss of use. While you may not have property ownership damages, you still have claims for health effects, inconvenience, and additional living expenses caused by contamination."
+    },
+    {
+      question: "What about contaminated consumer products?",
+      answer: "Product contamination cases involve liability for manufacturers, distributors, and retailers who sold products containing toxic chemicals. Recent examples include PFAS in food packaging, benzene in sunscreens, and heavy metals in baby food. These cases often involve nationwide litigation."
+    },
+    {
+      question: "How does vapor intrusion work?",
+      answer: "Vapor intrusion occurs when toxic chemicals in soil or groundwater evaporate and seep into buildings through foundations, creating indoor air contamination. This invisible exposure pathway can affect homes, schools, and businesses, requiring specialized testing and expert testimony to prove."
+    },
+    {
+      question: "What if I'm experiencing symptoms but tests are 'normal'?",
+      answer: "Many toxic exposure symptoms aren't detected by standard medical tests. We work with occupational medicine specialists and toxicologists who understand how environmental chemicals cause disease and can perform specialized testing to document exposure and early health effects."
+    },
+    {
+      question: "Can I sue if a family member died years ago from exposure?",
+      answer: "California's discovery rule may allow wrongful death claims even years after death if the connection to toxic exposure wasn't previously known. These cases require careful analysis of the statute of limitations and often benefit from advances in scientific understanding of chemical toxicity."
+    },
+    {
+      question: "What about Superfund sites?",
+      answer: "Superfund sites are heavily contaminated locations requiring federal cleanup. While the government handles cleanup, private parties can still sue responsible parties for personal injury and property damage. These cases benefit from extensive environmental investigation conducted during the cleanup process."
+    },
+    {
+      question: "How do I know if my water is contaminated?",
+      answer: "Municipal water systems must provide annual quality reports, but private wells require independent testing. We can help arrange comprehensive water testing and interpret results. Even 'safe' levels under federal standards may still create legal liability under California's stricter standards."
+    },
+    {
+      question: "What if I already settled with my insurance company?",
+      answer: "Insurance settlements for property damage don't prevent personal injury claims against responsible parties. However, insurance companies may have subrogation rights to recover payments they made. We coordinate with insurance counsel to maximize your overall recovery."
+    },
+    {
+      question: "Can I remain anonymous in a lawsuit?",
+      answer: "California courts sometimes allow pseudonymous litigation in cases involving stigma or privacy concerns, particularly for plaintiffs with sensitive medical conditions. We can petition the court for protective orders and confidential proceedings when circumstances warrant anonymity."
+    },
+    {
+      question: "What role do government agencies play?",
+      answer: "Agencies like EPA, Cal EPA, and local health departments investigate contamination and order cleanup, but their actions don't prevent private lawsuits. Agency findings and enforcement actions often provide valuable evidence of contamination and corporate responsibility in civil litigation."
+    },
+    {
+      question: "What if the contamination crosses state lines?",
+      answer: "Multi-state contamination cases involve complex jurisdictional issues and may be consolidated in federal multidistrict litigation. We coordinate with attorneys in other states and determine the most favorable jurisdiction for filing based on applicable law and court precedents."
+    },
+    {
+      question: "How are settlements paid out?",
+      answer: "Settlement payments can be structured as lump sums or periodic payments over time. For seriously injured plaintiffs, structured settlements may provide tax advantages and ensure long-term financial security. We work with financial experts to optimize settlement structures for your needs."
+    },
+    {
+      question: "What's your success rate with environmental cases?",
+      answer: "As a newly established firm, we don't have historical results to report. However, Attorney Trembach's background defending corporations provides unique insights into how these cases are valued and defended, which we now use to maximize recovery for contamination victims."
+    },
+    {
+      question: "Why should I choose Trembach Law Firm?",
+      answer: "Our unique advantage comes from Attorney Trembach's background defending corporations in environmental cases. This insider knowledge of defense strategies, case valuation methods, and settlement pressures allows us to anticipate defense tactics and build stronger cases for contamination victims."
+    },
+    {
+      question: "What if I was exposed at work?",
+      answer: "Workplace toxic exposure cases may involve both personal injury lawsuits against responsible parties and coordination with California's strict workplace safety laws. These cases require specialized knowledge of occupational health regulations and liability laws."
+    },
+    {
+      question: "Can I recover if I'm not showing symptoms yet?",
+      answer: "Yes, California recognizes fear of future disease and medical monitoring claims even before symptoms appear. If you've been exposed to dangerous chemicals, you may be entitled to compensation for anxiety about future health problems and ongoing medical surveillance."
+    },
+    {
+      question: "What about exposure through contaminated food or water?",
+      answer: "Contaminated food and water exposure cases can involve multiple responsible parties including manufacturers, distributors, water utilities, and government agencies. We investigate the contamination source and pursue all liable parties to maximize recovery for health effects and property damage."
+    },
+    {
+      question: "How long after exposure can health problems appear?",
+      answer: "Toxic exposure health effects can appear immediately or take decades to manifest. Cancer from chemical exposure often has a latency period of 10-40 years. This delayed onset is why California's discovery rule allows claims to be filed years after the initial exposure occurred."
+    },
+    {
+      question: "What if I can't afford medical treatment?",
+      answer: "We can help arrange medical care through liens or referrals to specialists who work with contamination victims. Many medical monitoring programs are funded through legal settlements or court orders, ensuring you receive necessary care regardless of your financial situation."
+    },
+    {
+      question: "How do you investigate contamination sources?",
+      answer: "We use environmental consultants, historical records, regulatory databases, and expert witnesses to trace contamination sources. This includes reviewing EPA databases, state environmental records, industrial facility permits, and conducting soil and water testing to establish contamination pathways."
+    },
+    {
+      question: "What makes environmental toxic cases different from other personal injury cases?",
+      answer: "Environmental toxic cases involve complex scientific causation issues, multiple potentially responsible parties, long latency periods between exposure and illness, and specialized knowledge of environmental regulations. These cases require extensive expert testimony and environmental investigation to establish liability and damages."
+    }
+  ];
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
+      // Hero animation with 3D effects
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        { opacity: 0, y: 50, rotationX: 10, z: -100 },
+        { opacity: 1, y: 0, rotationX: 0, z: 0, duration: 1.2, ease: 'power2.out' }
       );
 
       // Content sections animation
@@ -357,33 +564,12 @@ const EnvironmentalToxic: React.FC = () => {
               </div>
             </section>
 
-            {/* FAQ Section with 50+ Questions */}
+            {/* FAQ Section with 50 Questions */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
-                {[
-                  {
-                    question: "How do I know if I have a toxic exposure case?",
-                    answer: "If you've been diagnosed with cancer, neurological disorders, reproductive problems, or other serious health conditions and have been exposed to contaminated water, air, or soil, you may have a case. We investigate the connection between your exposure and health problems, even if the exposure occurred years ago."
-                  },
-                  {
-                    question: "What is the statute of limitations for toxic exposure cases in California?",
-                    answer: "California generally provides two years from discovery of the injury to file a personal injury claim. For toxic exposure cases, this often means two years from when you knew or should have known that your illness was caused by toxic exposure. Discovery rules can extend these deadlines in complex cases."
-                  },
-                  {
-                    question: "How much does it cost to hire an environmental toxic exposure lawyer?",
-                    answer: "We work on a contingency fee basis, meaning you pay nothing unless we win your case. There are no upfront costs, consultation fees, or out-of-pocket expenses. We advance all case costs including expert witnesses, environmental testing, and litigation expenses."
-                  },
-                  {
-                    question: "What compensation can I recover in a toxic exposure lawsuit?",
-                    answer: "California toxic exposure victims can recover medical expenses (past and future), lost wages, pain and suffering, property damage, diminished property values, medical monitoring costs, and in cases of willful misconduct, punitive damages. Compensation varies based on exposure severity and health impacts."
-                  },
-                  {
-                    question: "How do you prove toxic exposure caused my illness?",
-                    answer: "We use medical experts, environmental testing, epidemiological studies, and exposure reconstruction to establish causation. This includes reviewing your exposure history, medical records, and working with specialists who understand how specific chemicals cause particular diseases."
-                  }
-                ].map((faq, index) => (
+                {faqs.map((faq, index) => (
                   <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-primary transition-all duration-300 hover:scale-105 cursor-pointer">
                     <CardHeader 
                       className="cursor-pointer transition-colors group-hover:bg-primary/5"

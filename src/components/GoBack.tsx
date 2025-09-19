@@ -13,7 +13,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 200);
+    const onScroll = () => setVisible(window.scrollY > 300);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
@@ -36,7 +36,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
             navigate(fallbackPath);
           }
         }}
-        className="flex items-center gap-2 bg-background/80 text-foreground hover:bg-background/90 border border-border shadow-lg rounded-full px-5 backdrop-blur supports-[backdrop-filter]:backdrop-blur"
+        className="flex items-center gap-2 bg-background/90 text-foreground hover:bg-background border border-border shadow-lg rounded-full px-5 backdrop-blur supports-[backdrop-filter]:backdrop-blur font-medium"
         aria-label="Go back to previous page"
       >
         <ArrowLeft className="w-5 h-5" />

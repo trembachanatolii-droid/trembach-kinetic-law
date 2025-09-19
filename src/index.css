@@ -47,7 +47,7 @@
     font-weight: 600 !important;
   }
 
-  /* Ensure button text is always visible */
+  /* Ensure button text is always visible with explicit colors */
   button {
     color: inherit !important;
   }
@@ -58,6 +58,37 @@
     color: inherit !important;
     opacity: 1 !important;
     visibility: visible !important;
+  }
+
+  /* Button text visibility fixes */
+  .bg-red-600 {
+    color: white !important;
+  }
+  
+  .bg-green-600 {
+    color: white !important;
+  }
+  
+  .bg-primary {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+  
+  /* Link visibility when inactive */
+  a, button {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+  
+  .text-white {
+    color: white !important;
+  }
+  
+  .text-primary {
+    color: hsl(var(--primary)) !important;
+  }
+  
+  .text-foreground {
+    color: hsl(var(--foreground)) !important;
   }
 
   /* Make inactive link text visible */

@@ -421,8 +421,8 @@ const practiceAreas: PracticeArea[] = [
 ];
 
 const PracticeAreasReference: React.FC = () => {
-  // Find Mesothelioma & Asbestos as default active area
-  const defaultArea = practiceAreas.find(area => area.id === "mesothelioma-asbestos") || practiceAreas[0];
+  // Find PFAS Exposure as default active area
+  const defaultArea = practiceAreas.find(area => area.id === "pfas-exposure") || practiceAreas[0];
   const [activeArea, setActiveArea] = useState<PracticeArea>(defaultArea);
   const [hoveredArea, setHoveredArea] = useState<string | null>(null);
   const [lockedArea, setLockedArea] = useState<string | null>(null);
@@ -722,15 +722,27 @@ const PracticeAreasReference: React.FC = () => {
                       
                       {/* Overlay Buttons */}
                       <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                        <Link
-                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
-                              area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
-                              '/practice-areas/coming-soon'}
-                          className="glass-button"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                            <path d="M184,89.57V84c0-25.08-37.83-44-88-44S8,58.92,8,84v40c0,20.89,26.25,37.49,64,42.46V172c0,25.08,37.83,44,88,44s88-18.92,88-44V132C248,111.3,222.58,94.68,184,89.57ZM232,132c0,13.22-30.79,28-72,28-3.73,0-7.43-.13-11.08-.37C170.49,151.77,184,139,184,124V105.74C213.87,110.19,232,122.27,232,132ZM72,150.25V126.46A183.74,183.74,0,0,0,96,128a183.74,183.74,0,0,0,24-1.54v23.79A163,163,0,0,1,96,152,163,163,0,0,1,72,150.25Zm96-40.32V124c0,8.39-12.41,17.4-32,22.87V123.5C148.91,120.37,159.84,115.71,168,109.93ZM96,56c41.21,0,72,14.78,72,28s-30.79,28-72,28S24,97.22,24,84,54.79,56,96,56ZM24,124V108.11C53.29,118.77,73.32,127.48,96,127.48c22.68,0,42.71-8.71,72-19.37V124c0,13.22-30.79,28-72,28S24,137.22,24,124Zm168,48c0,13.22-30.79,28-72,28s-72-14.78-72-28V156.11C77.29,166.77,97.32,175.48,120,175.48c22.68,0,42.71-8.71,72-19.37Z"></path>
+                    <Link 
+                      to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
+                          activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                          `/practice-areas/${activeArea.slug}`}
+                      className="flex-1"
+                    >
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
+                        Learn More
+                      </Button>
+                    </Link>
+                    
+                    <Link 
+                      to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
+                          activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
+                          '/case-evaluation'}
+                      className="flex-1"
+                    >
+                      <Button variant="outline" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
+                        Free Consultation
+                      </Button>
+                    </Link>
                           </svg>
                           Learn More
                         </Link>

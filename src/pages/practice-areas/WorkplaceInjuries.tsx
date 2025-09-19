@@ -363,17 +363,6 @@ const WorkplaceInjuries: React.FC = () => {
         ref={heroRef}
       >
         <div className="hero-content text-center px-6 max-w-5xl mx-auto">
-          <div className="flex flex-wrap justify-center gap-4 mb-6">
-            <Badge className="bg-red-600/90 hover:bg-red-700 text-white px-4 py-2 text-sm font-medium">
-              ⚖️ Former Defense Attorney
-            </Badge>
-            <Badge className="bg-red-600/90 hover:bg-red-700 text-white px-4 py-2 text-sm font-medium">
-              🏆 Rising Star 2026
-            </Badge>
-            <Badge className="bg-red-600/90 hover:bg-red-700 text-white px-4 py-2 text-sm font-medium">
-              📞 24/7 Availability
-            </Badge>
-          </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
             Injured at Work? <span className="text-red-400">Go Beyond Workers' Comp</span>

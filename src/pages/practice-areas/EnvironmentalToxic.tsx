@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion';
 import { 
   Phone, 
   Mail, 
@@ -33,7 +33,6 @@ import {
   FlaskConical
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/practice-areas/environmental-toxic-hero.jpg';
 import { ToxicHeroScene } from '@/components/three/ToxicHeroScene';
@@ -58,7 +57,6 @@ interface TabSection {
 const EnvironmentalToxic: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     exposureType: '',
     location: ''
@@ -282,7 +280,7 @@ const EnvironmentalToxic: React.FC = () => {
         canonical="/practice-areas/environmental-toxic"
       />
       
-      <Navigation />
+      
       <GoBack className="go-back-button fixed top-32 left-4 z-50 opacity-0 invisible transition-all duration-300 [&.show]:opacity-100 [&.show]:visible" />
 
       {/* Hero Section with improved visibility */}
@@ -298,7 +296,7 @@ const EnvironmentalToxic: React.FC = () => {
         </div>
 
         {/* Contrast overlay */}
-        <div className="absolute inset-0 bg-black/75"></div>
+        <div className="absolute inset-0 bg-black/60"></div>
         
         {/* Floating Background Layers */}
         <div className="absolute inset-0 opacity-30">
@@ -346,7 +344,7 @@ const EnvironmentalToxic: React.FC = () => {
                   className={`flex items-center space-x-2 whitespace-nowrap px-4 py-2 rounded-full transition-all duration-300 ${
                     activeTab === tab.id 
                       ? 'bg-primary text-white shadow-lg scale-105' 
-                      : 'text-gray-600 hover:text-primary hover:bg-primary/10'
+                      : 'text-muted-foreground hover:text-primary hover:bg-primary/10'
                   }`}
                   onClick={() => scrollToSection(tab.id)}
                 >
@@ -626,25 +624,18 @@ const EnvironmentalToxic: React.FC = () => {
           <section id="faq" className="content-section scroll-mt-24">
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Frequently Asked Questions</h2>
             
-            <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={(open) => setExpandedFaq(open ? index : null)}>
-                    <CollapsibleTrigger 
-                      className="flex w-full items-center justify-between rounded-lg bg-secondary p-6 text-left hover:bg-secondary/80 transition-colors duration-200"
-                    >
-                      <span className="font-semibold text-foreground pr-4">{faq.question}</span>
-                      {expandedFaq === index ? (
-                        <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
-                      )}
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="px-6 pb-6 pt-2">
-                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                    </CollapsibleContent>
-                  </Collapsible>
-                ))}
-            </div>
+            <Accordion type="single" collapsible className="w-full">
+              {faqs.map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="rounded-lg bg-secondary px-6 text-left hover:bg-secondary/80 transition-colors duration-200">
+                    <span className="font-semibold text-foreground pr-4">{faq.question}</span>
+                  </AccordionTrigger>
+                  <AccordionContent className="px-6">
+                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </section>
 
           {/* Resources Section */}

@@ -104,6 +104,11 @@ import BurnMedicalGuidance from "./pages/BurnMedicalGuidance";
 import AmputationCaseEvaluation from "./pages/AmputationCaseEvaluation";
 import AmputationCompensationCalculator from "./pages/AmputationCompensationCalculator";
 import AmputationMedicalGuidance from "./pages/AmputationMedicalGuidance";
+import PFASCaseEvaluation from "./pages/PFASCaseEvaluation";
+import PFASExposure from "./pages/practice-areas/PFASExposure";
+import PFASCalculator from "./pages/PFASCalculator";
+import PFASResources from "./pages/PFASResources";
+import PFASGuidance from "./pages/PFASGuidance";
 
 const queryClient = new QueryClient();
 
@@ -233,6 +238,12 @@ function App() {
         <Route path="/practice-areas/environmental-toxic/compensation-calculator" element={<EnvironmentalToxicCompensationCalculator />} />
         <Route path="/practice-areas/environmental-toxic/legal-guidance" element={<EnvironmentalToxicLegalGuidance />} />
         <Route path="/practice-areas/environmental-toxic/resources" element={<EnvironmentalToxicResources />} />
+        {/* PFAS Exposure Routes */}
+        <Route path="/practice-areas/pfas-exposure" element={<PFASExposure />} />
+        <Route path="/pfas-case-evaluation" element={<PFASCaseEvaluation />} />
+        <Route path="/pfas-calculator" element={<PFASCalculator />} />
+        <Route path="/pfas-resources" element={<PFASResources />} />
+        <Route path="/pfas-guidance" element={<PFASGuidance />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

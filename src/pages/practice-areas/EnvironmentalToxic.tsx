@@ -614,7 +614,14 @@ const EnvironmentalToxic: React.FC = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center text-primary">
                       <Building className="w-5 h-5 mr-2" />
-                      Government Agencies
+                      <a 
+                        href="https://calepa.ca.gov/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:underline transition-colors"
+                      >
+                        Government Agencies
+                      </a>
                     </CardTitle>
                   </CardHeader>
                   <CardContent>

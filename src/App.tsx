@@ -67,6 +67,9 @@ import SpinalCordInjuries from "./pages/practice-areas/SpinalCordInjuries";
 import SpinalCordCaseEvaluation from "./pages/SpinalCordCaseEvaluation";
 import SpinalCordCompensationCalculator from "./pages/SpinalCordCompensationCalculator";
 import SpinalCordMedicalGuidance from "./pages/SpinalCordMedicalGuidance";
+import BurnCaseEvaluation from "./pages/BurnCaseEvaluation";
+import BurnCompensationCalculator from "./pages/BurnCompensationCalculator";
+import BurnMedicalGuidance from "./pages/BurnMedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -118,6 +121,11 @@ function App() {
             <Route path="/spinal-cord-case-evaluation" element={<SpinalCordCaseEvaluation />} />
             <Route path="/spinal-cord-compensation-calculator" element={<SpinalCordCompensationCalculator />} />
             <Route path="/spinal-cord-medical-guidance" element={<SpinalCordMedicalGuidance />} />
+
+            {/* Burn Injury Routes */}
+            <Route path="/burn-case-evaluation" element={<BurnCaseEvaluation />} />
+            <Route path="/burn-compensation-calculator" element={<BurnCompensationCalculator />} />
+            <Route path="/burn-medical-guidance" element={<BurnMedicalGuidance />} />
         
         {/* Product Liability Routes */}
         <Route path="/product-liability-case-evaluation" element={<ProductLiabilityCaseEvaluation />} />

@@ -38,7 +38,7 @@ import compensationImage from '@/assets/environmental-toxic-compensation-calcula
 import toxicChemicalsImage from '@/assets/california-toxic-chemicals.jpg';
 import toxicHealthEffectsImage from '@/assets/toxic-exposure-health-effects.jpg';
 import environmentalLegalProcessRevisedImage from '@/assets/environmental-legal-process-revised.jpg';
-import californiaEnvironmentalResourcesImage from '@/assets/california-environmental-resources.jpg';
+import californiaEnvironmentalResourcesRevisedImage from '@/assets/california-environmental-resources-revised.jpg';
 import SEO from '@/components/SEO';
 import { environmentalToxicFaqs } from '@/content/environmentalToxicFaqs';
 
@@ -603,8 +603,8 @@ const EnvironmentalToxic: React.FC = () => {
             {/* Resources Section */}
             <section id="resources" className="content-section mb-12">
               <img 
-                src={californiaEnvironmentalResourcesImage} 
-                alt="California environmental resources including EPA, DTSC, and contamination databases" 
+                src={californiaEnvironmentalResourcesRevisedImage} 
+                alt="California environmental protection agencies and contamination monitoring resources" 
                 className="w-full h-64 object-cover rounded-lg mb-6"
               />
               <h2 className="text-3xl font-bold text-primary mb-6">California Environmental Resources</h2>

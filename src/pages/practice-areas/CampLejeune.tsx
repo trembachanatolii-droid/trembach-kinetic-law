@@ -30,6 +30,10 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/camp-lejeune-hero-bg.jpg';
 import sidebarImage from '@/assets/camp-lejeune-sidebar.jpg';
+import conditionsImage from '@/assets/camp-lejeune-conditions.jpg';
+import compensationImage from '@/assets/camp-lejeune-compensation.jpg';
+import legalProcessImage from '@/assets/camp-lejeune-legal-process.jpg';
+import resourcesImage from '@/assets/camp-lejeune-resources.jpg';
 import SEO from '@/components/SEO';
 import { campLejeuneQuestions } from '@/content/campLejeuneQuestions';
 
@@ -45,6 +49,7 @@ const CampLejeune: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
   const scrollMemory = useScrollMemory();
   const [formData, setFormData] = useState({
     timeAtBase: '',
@@ -67,24 +72,54 @@ const CampLejeune: React.FC = () => {
   const faqs = campLejeuneQuestions;
 
   useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
+      // Hero animation with 3D effects
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        { opacity: 0, y: 50, rotationX: 10, z: -100 },
+        { opacity: 1, y: 0, rotationX: 0, z: 0, duration: 1.2, ease: 'power2.out' }
       );
 
-      // Content sections animation
+      // Content sections animation with stagger
       gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 30, scale: 0.95 },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.1,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.2,
+          ease: 'power2.out',
           scrollTrigger: {
             trigger: contentRef.current,
-            start: 'top 80%'
+            start: 'top 80%',
+            toggleActions: 'play none none reverse'
+          }
+        }
+      );
+
+      // Enhanced card animations
+      gsap.fromTo('.glass-card',
+        { opacity: 0, y: 40, rotationY: 15 },
+        {
+          opacity: 1,
+          y: 0,
+          rotationY: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          ease: 'back.out(1.7)',
+          scrollTrigger: {
+            trigger: '.glass-card',
+            start: 'top 90%',
+            toggleActions: 'play none none reverse'
           }
         }
       );
@@ -129,12 +164,12 @@ const CampLejeune: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         
-        {/* Go Back Button - positioned in hero overlay */}
-        <div className="absolute top-20 left-6 z-10">
+        {/* Go Back Button - positioned in hero overlay with scroll-based fade */}
+        <div className={`absolute top-20 left-6 z-20 transition-all duration-500 ${isScrolled ? 'opacity-100 transform translate-y-0' : 'opacity-0 transform -translate-y-4'}`}>
           <Button 
             variant="ghost" 
             onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+            className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20 font-medium text-base px-4 py-2"
           >
             <ArrowLeft className="w-4 h-4" />
             Go Back
@@ -199,23 +234,23 @@ const CampLejeune: React.FC = () => {
             
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-primary mb-6">California Camp Lejeune Water Contamination Attorneys</h2>
+              <h2 className="text-4xl font-bold text-primary mb-8">California Camp Lejeune Water Contamination Attorneys</h2>
               
-              <div className="prose prose-lg max-w-none mb-6">
-                <p className="text-xl leading-relaxed mb-4">
+              <div className="prose prose-xl max-w-none mb-8">
+                <p className="text-2xl leading-relaxed mb-6 font-medium">
                   From 1953 to 1987, over one million Marines, their families, and civilian workers at Camp Lejeune, North Carolina, were unknowingly exposed to drinking water contaminated with dangerous industrial solvents and chemicals. This represents one of the worst water contamination disasters in United States history.
                 </p>
                 
-                <p className="text-lg leading-relaxed">
+                <p className="text-xl leading-relaxed">
                   At Trembach Law Firm, we understand that California veterans who trained at Camp Lejeune are now facing serious health conditions decades later. With our unique background as a former defense attorney, we know the government's tactics and use that insider knowledge to fight for maximum compensation for your Camp Lejeune-related illnesses.
                 </p>
               </div>
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-base">
+                  <Button variant="outline" className="w-full justify-between mb-6 text-lg py-4 font-semibold hover:bg-primary hover:text-white transition-all duration-300">
                     Show More About Our California Camp Lejeune Practice
-                    {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
+                    {expandedSections.overview ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -345,6 +380,283 @@ const CampLejeune: React.FC = () => {
                     Start My Free Case Evaluation
                   </Button>
                 </form>
+              </div>
+            </section>
+
+            {/* Qualifying Conditions Section */}
+            <section id="conditions" className="content-section mb-12">
+              <img 
+                src={conditionsImage} 
+                alt="Camp Lejeune qualifying health conditions and medical evaluation" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <h2 className="text-3xl font-bold text-primary mb-6">Qualifying Health Conditions</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
+                      <Heart className="w-5 h-5 mr-2 text-primary" />
+                      Presumptive Conditions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">The VA recognizes eight presumptive conditions where the link to Camp Lejeune is already established, making claims easier to prove.</p>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Adult Leukemia</li>
+                      <li>• Aplastic Anemia</li>
+                      <li>• Bladder Cancer</li>
+                      <li>• Kidney Cancer</li>
+                      <li>• Liver Cancer</li>
+                      <li>• Multiple Myeloma</li>
+                      <li>• Non-Hodgkin's Lymphoma</li>
+                      <li>• Parkinson's Disease</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
+                      <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                      Additional Conditions
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">Over 70 other conditions may qualify for compensation, even if not on the VA's presumptive list.</p>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Birth Defects</li>
+                      <li>• Breast Cancer</li>
+                      <li>• Cervical Cancer</li>
+                      <li>• Colorectal Cancer</li>
+                      <li>• Esophageal Cancer</li>
+                      <li>• Lung Cancer</li>
+                      <li>• Prostate Cancer</li>
+                      <li>• Infertility & Miscarriage</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Compensation Section */}
+            <section id="compensation" className="content-section mb-12">
+              <img 
+                src={compensationImage} 
+                alt="Camp Lejeune compensation amounts and settlement calculator" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <h2 className="text-3xl font-bold text-primary mb-6">Camp Lejeune Compensation</h2>
+              
+              <div className="space-y-6">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary text-lg">
+                      <Scale className="w-5 h-5 mr-2" />
+                      Settlement Ranges by Condition
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">High-Value Conditions</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex justify-between"><span>Parkinson's Disease:</span> <span className="font-semibold">$450,000-$1.2M</span></li>
+                          <li className="flex justify-between"><span>Wrongful Death:</span> <span className="font-semibold">$500,000-$1.5M+</span></li>
+                          <li className="flex justify-between"><span>Multiple Myeloma:</span> <span className="font-semibold">$350,000-$950,000</span></li>
+                          <li className="flex justify-between"><span>Leukemia:</span> <span className="font-semibold">$400,000-$1M</span></li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">Other Cancer Conditions</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex justify-between"><span>Bladder Cancer:</span> <span className="font-semibold">$200,000-$800,000</span></li>
+                          <li className="flex justify-between"><span>Kidney Cancer:</span> <span className="font-semibold">$300,000-$900,000</span></li>
+                          <li className="flex justify-between"><span>Liver Cancer:</span> <span className="font-semibold">$250,000-$750,000</span></li>
+                          <li className="flex justify-between"><span>Birth Defects:</span> <span className="font-semibold">$200,000-$600,000</span></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary text-lg">
+                      <AlertTriangle className="w-5 h-5 mr-2" />
+                      Elective Option vs. Litigation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">Elective Option (Fast Track)</h4>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          <li>• Settlement: $75,000-$150,000</li>
+                          <li>• Timeline: 60-180 days</li>
+                          <li>• No causation proof required</li>
+                          <li>• Lower compensation but faster</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">Traditional Litigation</h4>
+                        <ul className="space-y-2 text-sm text-muted-foreground">
+                          <li>• Settlement: $250,000-$1.5M+</li>
+                          <li>• Timeline: 12-24 months</li>
+                          <li>• Full case development</li>
+                          <li>• Maximum compensation potential</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <img 
+                src={legalProcessImage} 
+                alt="Camp Lejeune legal process and federal court litigation" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <h2 className="text-3xl font-bold text-primary mb-6">Legal Process for Camp Lejeune Claims</h2>
+              
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 1</Badge>
+                      <CardTitle className="text-lg">Case Review</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Free consultation to assess your eligibility and potential claim value</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 2</Badge>
+                      <CardTitle className="text-lg">Documentation</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Gather military records, medical documentation, and exposure evidence</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 3</Badge>
+                      <CardTitle className="text-lg">Filing Claims</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Submit administrative claim or federal lawsuit under Justice Act</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 4</Badge>
+                      <CardTitle className="text-lg">Resolution</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Negotiate settlement or proceed to trial for maximum compensation</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary text-lg">
+                      <Shield className="w-5 h-5 mr-2" />
+                      The Camp Lejeune Justice Act Advantage
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">Legal Breakthroughs</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Waives government sovereign immunity</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Allows jury trials against federal government</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Lower burden of proof than typical toxic cases</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Specific procedures to help victims</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3 text-base">Who Can File</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Veterans stationed at Camp Lejeune</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Military family members who lived on base</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Civilian employees and contractors</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Children exposed in utero</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <img 
+                src={resourcesImage} 
+                alt="Camp Lejeune government resources and federal agencies" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <h2 className="text-3xl font-bold text-primary mb-6">Camp Lejeune Resources</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary text-lg">
+                      <Building className="w-5 h-5 mr-2" />
+                      Government Agencies
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-base">Department of Veterans Affairs</h4>
+                        <p className="text-sm text-muted-foreground">Provides healthcare for 15 Camp Lejeune-related conditions</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-base">Agency for Toxic Substances (ATSDR)</h4>
+                        <p className="text-sm text-muted-foreground">Conducts health studies and exposure assessments</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-base">National Personnel Records Center</h4>
+                        <p className="text-sm text-muted-foreground">Military service records and documentation</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary text-lg">
+                      <Map className="w-5 h-5 mr-2" />
+                      Legal Resources
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold text-base">Camp Lejeune Justice Act</h4>
+                        <p className="text-sm text-muted-foreground">Federal law allowing lawsuits against the government</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-base">Eastern District of North Carolina</h4>
+                        <p className="text-sm text-muted-foreground">Federal court handling Camp Lejeune litigation</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold text-base">California Veterans Resources</h4>
+                        <p className="text-sm text-muted-foreground">State-specific support and medical facilities</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
               </div>
             </section>
 

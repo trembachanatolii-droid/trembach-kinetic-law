@@ -47,6 +47,9 @@ import SilicosisMedicalGuidance from "./pages/SilicosisMedicalGuidance";
 import PremisesLiabilityCaseEvaluation from "./pages/PremisesLiabilityCaseEvaluation";
 import PremisesLiabilityCompensationCalculator from "./pages/PremisesLiabilityCompensationCalculator";
 import PremisesLiabilityMedicalGuidance from "./pages/PremisesLiabilityMedicalGuidance";
+import WorkplaceInjuriesCaseEvaluation from "./pages/WorkplaceInjuriesCaseEvaluation";
+import WorkplaceInjuriesCompensationCalculator from "./pages/WorkplaceInjuriesCompensationCalculator";
+import WorkplaceInjuriesMedicalGuidance from "./pages/WorkplaceInjuriesMedicalGuidance";
 import DogBiteCaseEvaluation from "./pages/DogBiteCaseEvaluation";
 import DogBiteCompensationCalculator from "./pages/DogBiteCompensationCalculator";
 import DogBiteMedicalGuidance from "./pages/DogBiteMedicalGuidance";
@@ -161,6 +164,9 @@ function App() {
             <Route path="/premises-liability-case-evaluation" element={<PremisesLiabilityCaseEvaluation />} />
             <Route path="/premises-liability-compensation-calculator" element={<PremisesLiabilityCompensationCalculator />} />
             <Route path="/premises-liability-medical-guidance" element={<PremisesLiabilityMedicalGuidance />} />
+            <Route path="/workplace-injuries-case-evaluation" element={<WorkplaceInjuriesCaseEvaluation />} />
+            <Route path="/workplace-injuries-compensation-calculator" element={<WorkplaceInjuriesCompensationCalculator />} />
+            <Route path="/workplace-injuries-medical-guidance" element={<WorkplaceInjuriesMedicalGuidance />} />
             <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
             <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
             <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />

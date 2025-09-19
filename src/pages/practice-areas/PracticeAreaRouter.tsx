@@ -11,7 +11,6 @@ import TruckAccidentsNew from './TruckAccidentsNew';
 import MotorcycleAccidentsNew from './MotorcycleAccidentsNew';
 import PedestrianAccidents from './PedestrianAccidents';
 import BicycleAccidents from './BicycleAccidents';
-
 import SlipFallAccidents from './SlipFallAccidents';
 import DogBitesAnimalAttacks from './DogBitesAnimalAttacks';
 import PremisesLiability from './PremisesLiability';
@@ -20,6 +19,7 @@ import ConstructionAccidents from './ConstructionAccidents';
 import WrongfulDeath from './WrongfulDeath';
 import BrainInjuries from './BrainInjuries';
 import BurnInjuries from './BurnInjuries';
+import WorkplaceInjuries from './WorkplaceInjuries';
 
 const PracticeAreaRouter = () => {
   return (
@@ -44,6 +44,7 @@ const PracticeAreaRouter = () => {
       <Route path="wrongful-death" element={<WrongfulDeath />} />
       <Route path="amputation-injuries" element={<AmputationInjuries />} />
       <Route path="amputation" element={<AmputationInjuries />} />
+      <Route path="workplace-injuries" element={<WorkplaceInjuries />} />
       <Route path="*" element={<ComingSoon />} />
     </Routes>
   );

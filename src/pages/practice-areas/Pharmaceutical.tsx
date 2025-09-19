@@ -856,7 +856,7 @@ const Pharmaceutical: React.FC = () => {
               <div className="text-center mt-6">
                 <Button 
                   size="lg" 
-                  className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 font-bold px-8 py-4"
                   onClick={() => window.location.href = '/pharmaceutical-case-evaluation'}
                 >
                   START MY FREE CASE EVALUATION NOW

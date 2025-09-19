@@ -77,7 +77,7 @@ const BurnCaseEvaluation: React.FC = () => {
       <SEO 
         title="Free Burn Injury Case Evaluation | California Burn Attorneys"
         description="Get a free evaluation of your California burn injury case. No fees unless we win. Former defense attorney fighting for burn victims."
-        canonical="/burn-injuries-case-evaluation"
+        canonical="/burn-case-evaluation"
       />
       
       <GoBack />

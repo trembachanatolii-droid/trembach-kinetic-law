@@ -124,7 +124,7 @@ const BurnInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/burn-injuries-case-evaluation';
+    window.location.href = '/burn-case-evaluation';
   };
 
   const toggleFaq = (index: number) => {
@@ -913,7 +913,7 @@ const BurnInjuries: React.FC = () => {
                   {/* Email Button */}
                   <Button 
                     className="w-full bg-red-700 hover:bg-red-800 text-white py-4 text-lg font-semibold rounded-lg"
-                    onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+                    onClick={() => window.location.href = '/burn-case-evaluation'}
                   >
                     EMAIL US
                   </Button>

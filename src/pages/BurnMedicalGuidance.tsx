@@ -38,7 +38,7 @@ const BurnMedicalGuidance: React.FC = () => {
       <SEO 
         title="Burn Injury Medical Guidance | California Treatment Information"
         description="Comprehensive medical guidance for burn injury victims in California. Expert advice on treatment, recovery, and medical documentation for legal claims."
-        canonical="/burn-injuries-medical-guidance"
+        canonical="/burn-medical-guidance"
       />
       
       <GoBack />
@@ -59,7 +59,7 @@ const BurnMedicalGuidance: React.FC = () => {
           <Button 
             size="lg" 
             className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg"
-            onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+            onClick={() => window.location.href = '/burn-case-evaluation'}
           >
             Get Medical Case Review
           </Button>
@@ -335,7 +335,7 @@ const BurnMedicalGuidance: React.FC = () => {
                   <div className="space-y-3">
                     <Button 
                       className="w-full bg-red-600 hover:bg-red-700 text-white"
-                      onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+                      onClick={() => window.location.href = '/burn-case-evaluation'}
                     >
                       <Phone className="w-4 h-4 mr-2" />
                       Free Medical Consultation
@@ -343,7 +343,7 @@ const BurnMedicalGuidance: React.FC = () => {
                     <Button 
                       variant="outline" 
                       className="w-full"
-                      onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
+                      onClick={() => window.location.href = '/burn-compensation-calculator'}
                     >
                       <FileText className="w-4 h-4 mr-2" />
                       Calculate Compensation

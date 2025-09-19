@@ -54,7 +54,7 @@ const BurnCompensationCalculator: React.FC = () => {
       <SEO 
         title="Burn Injury Compensation Calculator | California Settlement Estimator"
         description="Calculate potential burn injury compensation in California. Free settlement estimator for thermal, chemical, electrical burns."
-        canonical="/burn-injuries-compensation-calculator"
+        canonical="/burn-compensation-calculator"
       />
       
       <GoBack />

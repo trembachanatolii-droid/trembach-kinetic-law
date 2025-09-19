@@ -723,7 +723,9 @@ const PracticeAreasReference: React.FC = () => {
                       {/* Overlay Buttons */}
                       <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                         <Link
-                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                              area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                              '/practice-areas/coming-soon'}
                           className="glass-button"
                           onClick={(e) => e.stopPropagation()}
                         >
@@ -766,7 +768,9 @@ const PracticeAreasReference: React.FC = () => {
                       {/* CTA */}
                       <div className="pt-2">
                         <Link
-                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                              area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                              '/practice-areas/coming-soon'}
                           className="ghost-button group/btn"
                           onClick={(e) => e.stopPropagation()}
                         >
@@ -863,7 +867,9 @@ const PracticeAreasReference: React.FC = () => {
                     
                     {/* CTA */}
                     <Link
-                      to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : '/practice-areas/coming-soon'}
+                      to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                          area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                          '/practice-areas/coming-soon'}
                       className="ghost-button w-full justify-center"
                       onClick={(e) => e.stopPropagation()}
                     >

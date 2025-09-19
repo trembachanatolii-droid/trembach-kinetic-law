@@ -336,7 +336,7 @@ const Pharmaceutical: React.FC = () => {
                     }`}
                   >
                     <IconComponent className="w-4 h-4 mr-2" />
-                    {tab.label}
+                    <span className="text-white">{tab.label}</span>
                   </button>
                 );
               })}
@@ -354,21 +354,21 @@ const Pharmaceutical: React.FC = () => {
             
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">California Pharmaceutical Injury Attorneys</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">California Pharmaceutical Injury Attorneys</h2>
               
               <div className="prose prose-lg max-w-none mb-6">
-                <p className="text-lg leading-relaxed mb-4">
+                <p className="text-xl leading-relaxed mb-4">
                   When medications meant to heal cause harm, you deserve justice. Pharmaceutical companies generate over $1.5 trillion annually, giving them virtually unlimited resources to fight lawsuits. They employ teams of lawyers, hired experts, and public relations firms to minimize liability and protect profits. Without experienced legal representation, victims face an uphill battle against these corporate giants.
                 </p>
                 
-                <p className="text-lg leading-relaxed">
+                <p className="text-xl leading-relaxed">
                   At Trembach Law Firm, our former defense experience reveals exactly how pharmaceutical companies hide risks, manipulate data, and deceive regulators. We're prepared to fight for maximum compensation while you focus on treatment and recovery.
                 </p>
               </div>
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-lg">
                     Show More About Our California Pharmaceutical Practice
                     {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
                   </Button>
@@ -462,11 +462,11 @@ const Pharmaceutical: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Pharmaceutical Case Evaluation</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Free Pharmaceutical Case Evaluation</h2>
               
               <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide information about your pharmaceutical injury to help us understand your case better.</p>
+                <h3 className="text-2xl font-semibold mb-4">Get Your Free Consultation</h3>
+                <p className="mb-6 text-lg">Provide information about your pharmaceutical injury to help us understand your case better.</p>
                 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -556,7 +556,7 @@ const Pharmaceutical: React.FC = () => {
                 />
               </div>
               
-              <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After a Pharmaceutical Injury</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">What to Do After a Pharmaceutical Injury</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
@@ -592,7 +592,7 @@ const Pharmaceutical: React.FC = () => {
 
               <Collapsible open={expandedSections.afterInjury} onOpenChange={() => toggleSection('afterInjury')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-lg">
                     Show More Detailed Steps
                     {expandedSections.afterInjury ? <ChevronUp /> : <ChevronDown />}
                   </Button>
@@ -643,8 +643,8 @@ const Pharmaceutical: React.FC = () => {
                 />
               </div>
               
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Current Dangerous Drugs & Active Litigation</h2>
-              <p className="text-lg mb-6">We're actively investigating and litigating cases involving these medications</p>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Current Dangerous Drugs & Active Litigation</h2>
+              <p className="text-xl mb-6">We're actively investigating and litigating cases involving these medications</p>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="p-6 border-l-4 border-red-600">
@@ -714,12 +714,12 @@ const Pharmaceutical: React.FC = () => {
                 />
               </div>
               
-              <h2 className="text-3xl font-bold text-red-600 mb-6">The Pharmaceutical Litigation Process</h2>
-              <p className="text-lg mb-6">Understanding each step from initial consultation to resolution</p>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">The Pharmaceutical Litigation Process</h2>
+              <p className="text-xl mb-6">Understanding each step from initial consultation to resolution</p>
               
               <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-lg">
                     Show Detailed Legal Process
                     {expandedSections.legalProcess ? <ChevronUp /> : <ChevronDown />}
                   </Button>
@@ -757,7 +757,7 @@ const Pharmaceutical: React.FC = () => {
 
             {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
                 {faqData.map((faq, index) => (
@@ -767,7 +767,7 @@ const Pharmaceutical: React.FC = () => {
                       onClick={() => toggleFaq(index)}
                     >
                       <div className="flex justify-between items-center">
-                        <h4 className="text-lg font-semibold">{faq.question}</h4>
+                        <h4 className="text-xl font-semibold">{faq.question}</h4>
                         {expandedFaq === index ? <ChevronUp /> : <ChevronDown />}
                       </div>
                     </CardHeader>
@@ -775,7 +775,7 @@ const Pharmaceutical: React.FC = () => {
                     <Collapsible open={expandedFaq === index}>
                       <CollapsibleContent>
                         <CardContent className="pt-0">
-                          <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                          <p className="text-muted-foreground leading-relaxed text-lg">{faq.answer}</p>
                         </CardContent>
                       </CollapsibleContent>
                     </Collapsible>
@@ -786,7 +786,7 @@ const Pharmaceutical: React.FC = () => {
 
             {/* Resources Section */}
             <section id="resources" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Pharmaceutical Injury Resources</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Pharmaceutical Injury Resources</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
@@ -797,12 +797,12 @@ const Pharmaceutical: React.FC = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="mb-4">Estimate your potential pharmaceutical injury compensation based on your specific circumstances.</p>
-                    <Button 
-                      className="w-full"
+                    <p className="mb-4 text-lg">Estimate your potential pharmaceutical injury compensation based on your specific circumstances.</p>
+                    <Button
+                      className="w-full text-foreground"
                       onClick={() => window.location.href = '/pharmaceutical-compensation-calculator'}
                     >
-                      Calculate My Case Value
+                      <span className="text-foreground">Calculate My Case Value</span>
                     </Button>
                   </CardContent>
                 </Card>
@@ -815,12 +815,12 @@ const Pharmaceutical: React.FC = () => {
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="mb-4">Essential medical information and guidance for pharmaceutical injury victims.</p>
-                    <Button 
-                      className="w-full"
+                    <p className="mb-4 text-lg">Essential medical information and guidance for pharmaceutical injury victims.</p>
+                    <Button
+                      className="w-full text-foreground"
                       onClick={() => window.location.href = '/pharmaceutical-medical-guidance'}
                     >
-                      View Medical Guide
+                      <span className="text-foreground">View Medical Guide</span>
                     </Button>
                   </CardContent>
                 </Card>
@@ -829,7 +829,7 @@ const Pharmaceutical: React.FC = () => {
 
             {/* Don't Wait Section */}
             <section className="content-section mb-12 bg-red-600 text-white p-8 rounded-lg">
-              <h2 className="text-3xl font-bold mb-4">Don't Wait - Time Limits Apply for California</h2>
+              <h2 className="text-4xl font-bold mb-4">Don't Wait - Time Limits Apply for California</h2>
               <p className="text-xl mb-4">
                 California's statute of limitations for pharmaceutical injury cases is typically two years from discovery of the injury. Acting quickly preserves crucial evidence and protects your rights.
               </p>
@@ -882,25 +882,25 @@ const Pharmaceutical: React.FC = () => {
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4" />
-                    Call (818) 123-4567
+                    <span className="text-white">Call (818) 123-4567</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full flex items-center justify-center gap-2"
+                    className="w-full flex items-center justify-center gap-2 text-foreground hover:text-foreground"
                     onClick={() => window.location.href = '/pharmaceutical-case-evaluation'}
                   >
                     <FileText className="w-4 h-4" />
-                    Free Case Evaluation
+                    <span className="text-foreground">Free Case Evaluation</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full flex items-center justify-center gap-2"
+                    className="w-full flex items-center justify-center gap-2 text-foreground hover:text-foreground"
                     onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
                   >
                     <Mail className="w-4 h-4" />
-                    Email Us
+                    <span className="text-foreground">Email Us</span>
                   </Button>
                 </CardContent>
               </Card>

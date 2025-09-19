@@ -10,6 +10,8 @@ import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
+import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";
+import PharmaceuticalMedicalGuidance from "./pages/PharmaceuticalMedicalGuidance";
 import MedicalDevices from "./pages/practice-areas/MedicalDevices";
 import MedicalDevicesCaseEvaluation from "./pages/MedicalDevicesCaseEvaluation";
 import MedicalDevicesCompensationCalculator from "./pages/MedicalDevicesCompensationCalculator";
@@ -100,6 +102,8 @@ function App() {
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/pharmaceutical" element={<Pharmaceutical />} />
             <Route path="/pharmaceutical-case-evaluation" element={<PharmaceuticalCaseEvaluation />} />
+            <Route path="/pharmaceutical-compensation-calculator" element={<PharmaceuticalCompensationCalculator />} />
+            <Route path="/pharmaceutical-medical-guidance" element={<PharmaceuticalMedicalGuidance />} />
             <Route path="/practice-areas/medical-devices" element={<MedicalDevices />} />
             <Route path="/medical-devices-case-evaluation" element={<MedicalDevicesCaseEvaluation />} />
             <Route path="/medical-devices-compensation-calculator" element={<MedicalDevicesCompensationCalculator />} />

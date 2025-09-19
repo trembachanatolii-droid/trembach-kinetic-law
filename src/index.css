@@ -34,11 +34,28 @@
   opacity: 0.8;
   }
 
-  /* Phone numbers and links visibility */
+  /* Enhanced Text Visibility for All Interactive Elements */
   a[href^="tel:"], 
-  .phone-link {
+  .phone-link,
+  button span,
+  .text-white,
+  .button-text {
     color: inherit !important;
     text-decoration: none;
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 600 !important;
+  }
+
+  /* Ensure button text is always visible */
+  button {
+    color: inherit !important;
+  }
+  
+  button span,
+  button .font-medium,
+  button .font-bold {
+    color: inherit !important;
     opacity: 1 !important;
     visibility: visible !important;
   }
@@ -48,8 +65,17 @@
     color: white !important;
   }
 
+  .text-foreground {
+    color: hsl(var(--foreground)) !important;
+  }
+
   .text-red-600 {
-    color: hsl(var(--red-600)) !important;
+    color: hsl(var(--destructive)) !important;
+  }
+
+  /* Enhanced contrast for better readability */
+  .bg-background\/90 {
+    background-color: hsl(var(--background) / 0.95) !important;
   }
 
 @layer base {
@@ -542,6 +568,109 @@ a[href^="tel:"],
 .never-do-theme:hover {
   box-shadow: 0 10px 30px rgba(239, 68, 68, 0.2);
   transform: translateY(-5px) scale(1.02);
+}
+
+/* Enhanced 3D Visual Effects & Comprehensive Animations for Camp Lejeune */
+.pharmaceutical-3d-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-layer {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.floating-layer-1 {
+  animation: floatingComplex1 18s ease-in-out infinite;
+  transform: translateZ(-500px);
+}
+
+.floating-layer-2 {
+  animation: floatingComplex2 14s ease-in-out infinite;
+  transform: translateZ(-250px);
+}
+
+.floating-layer-3 {
+  animation: floatingComplex3 20s ease-in-out infinite;
+  transform: translateZ(-100px);
+}
+
+.pharmaceutical-hero-title {
+  transform: translateZ(50px);
+  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  animation: heroTitle3D 2s ease-out forwards;
+}
+
+@keyframes floatingComplex1 {
+  0%, 100% { transform: translateZ(-500px) translateY(0px) translateX(0px) rotateY(0deg); }
+  25% { transform: translateZ(-500px) translateY(-30px) translateX(20px) rotateY(5deg); }
+  50% { transform: translateZ(-500px) translateY(0px) translateX(-15px) rotateY(-3deg); }
+  75% { transform: translateZ(-500px) translateY(25px) translateX(10px) rotateY(2deg); }
+}
+
+@keyframes floatingComplex2 {
+  0%, 100% { transform: translateZ(-250px) translateY(0px) translateX(0px) rotateX(0deg); }
+  33% { transform: translateZ(-250px) translateY(40px) translateX(-25px) rotateX(3deg); }
+  66% { transform: translateZ(-250px) translateY(-20px) translateX(35px) rotateX(-2deg); }
+}
+
+@keyframes floatingComplex3 {
+  0%, 100% { transform: translateZ(-100px) translateY(0px) translateX(0px) rotateY(0deg) rotateX(0deg); }
+  20% { transform: translateZ(-100px) translateY(-20px) translateX(25px) rotateY(2deg) rotateX(1deg); }
+  40% { transform: translateZ(-100px) translateY(15px) translateX(-20px) rotateY(-3deg) rotateX(-1deg); }
+  60% { transform: translateZ(-100px) translateY(-10px) translateX(15px) rotateY(1deg) rotateX(2deg); }
+  80% { transform: translateZ(-100px) translateY(25px) translateX(-10px) rotateY(-1deg) rotateX(-1deg); }
+}
+
+@keyframes heroTitle3D {
+  0% {
+    transform: translateZ(50px) translateY(100px) rotateX(-45deg);
+    opacity: 0;
+  }
+  100% {
+    transform: translateZ(50px) translateY(0px) rotateX(0deg);
+    opacity: 1;
+  }
+}
+
+.glass-morphism-card:hover {
+  transform: translateZ(30px) rotateX(8deg) rotateY(8deg) scale(1.05);
+  box-shadow: 
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    0 10px 30px rgba(0, 0, 0, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.premium-cta-button {
+  transform-style: preserve-3d;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.premium-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.premium-cta-button:hover::before {
+  left: 100%;
+}
+
+.premium-cta-button:hover {
+  transform: translateZ(10px) scale(1.05);
+  box-shadow: 
+    0 15px 40px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(147, 51, 234, 0.4);
 }
 
 /* Accessibility - Reduced Motion Support */

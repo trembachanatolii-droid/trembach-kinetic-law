@@ -35,6 +35,13 @@ import conditionsImage from '@/assets/camp-lejeune-conditions.jpg';
 import compensationImage from '@/assets/camp-lejeune-compensation.jpg';
 import legalProcessImage from '@/assets/camp-lejeune-legal-process.jpg';
 import resourcesImage from '@/assets/camp-lejeune-resources.jpg';
+import diagnosisImage from '@/assets/camp-lejeune-diagnosis.jpg';
+import testingImage from '@/assets/camp-lejeune-testing.jpg';
+import exposureSitesImage from '@/assets/camp-lejeune-exposure-sites.jpg';
+import waterContaminationImage from '@/assets/camp-lejeune-water-contamination.jpg';
+import medicalTestingImage from '@/assets/camp-lejeune-medical-testing.jpg';
+import timelineImage from '@/assets/camp-lejeune-timeline.jpg';
+import waterSystemsImage from '@/assets/camp-lejeune-water-systems.jpg';
 import SEO from '@/components/SEO';
 import { campLejeuneQuestions } from '@/content/campLejeuneQuestions';
 
@@ -200,24 +207,24 @@ const CampLejeune: React.FC = () => {
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+        {/* Enhanced Navigation Tabs */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20">
           <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 py-6">
               {tabs.map((tab) => {
                 const IconComponent = tab.icon;
                 return (
                   <button
                     key={tab.id}
                     onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                    className={`flex items-center px-6 py-3 text-lg font-semibold transition-all duration-300 rounded-lg transform hover:scale-105 ${
                       activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
+                        ? 'bg-white text-primary shadow-xl' 
+                        : 'text-white hover:bg-white/20 hover:text-white'
                     }`}
                   >
-                    <IconComponent className="w-4 h-4 mr-2" />
-                    {tab.label}
+                    <IconComponent className="w-5 h-5 mr-3" />
+                    <span className="font-bold">{tab.label}</span>
                   </button>
                 );
               })}
@@ -233,16 +240,16 @@ const CampLejeune: React.FC = () => {
           {/* Main Content Column */}
           <div className="lg:col-span-2" ref={contentRef}>
             
-            {/* Overview Section */}
-            <section id="overview" className="content-section mb-12">
-              <h2 className="text-4xl font-bold text-primary mb-8">California Camp Lejeune Water Contamination Attorneys</h2>
+            {/* Overview Section - Enhanced Typography */}
+            <section id="overview" className="content-section mb-16">
+              <h2 className="text-5xl md:text-6xl font-bold text-primary mb-12 font-display">California Camp Lejeune Water Contamination Attorneys</h2>
               
-              <div className="prose prose-xl max-w-none mb-8">
-                <p className="text-2xl leading-relaxed mb-6 font-medium">
+              <div className="prose prose-2xl max-w-none mb-12">
+                <p className="text-3xl leading-relaxed mb-8 font-medium text-foreground">
                   From 1953 to 1987, over one million Marines, their families, and civilian workers at Camp Lejeune, North Carolina, were unknowingly exposed to drinking water contaminated with dangerous industrial solvents and chemicals. This represents one of the worst water contamination disasters in United States history.
                 </p>
                 
-                <p className="text-xl leading-relaxed">
+                <p className="text-2xl leading-relaxed text-muted-foreground">
                   At Trembach Law Firm, we understand that California veterans who trained at Camp Lejeune are now facing serious health conditions decades later. With our unique background as a former defense attorney, we know the government's tactics and use that insider knowledge to fight for maximum compensation for your Camp Lejeune-related illnesses.
                 </p>
               </div>

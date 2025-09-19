@@ -9,6 +9,9 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import MassTorts from "./pages/practice-areas/MassTorts";
+import MassTotsCompensationCalculator from "./pages/MassTotsCompensationCalculator";
+import MassTortsCaseEvaluation from "./pages/MassTortsCaseEvaluation";
+import MassTortsMedicalGuidance from "./pages/MassTortsMedicalGuidance";
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";
@@ -187,8 +190,11 @@ function App() {
             <Route path="/workplace-injuries-medical-guidance" element={<WorkplaceInjuriesMedicalGuidance />} />
             <Route path="/dog-bite-case-evaluation" element={<DogBiteCaseEvaluation />} />
             <Route path="/dog-bite-compensation-calculator" element={<DogBiteCompensationCalculator />} />
-            <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+             <Route path="/dog-bite-medical-guidance" element={<DogBiteMedicalGuidance />} />
+             <Route path="/mass-torts-compensation-calculator" element={<MassTotsCompensationCalculator />} />
+             <Route path="/mass-torts-case-evaluation" element={<MassTortsCaseEvaluation />} />
+             <Route path="/mass-torts-medical-guidance" element={<MassTortsMedicalGuidance />} />
+             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -314,11 +314,11 @@ const PFASExposure: React.FC = () => {
 
               {/* What to Do After Exposure */}
               <section id="diagnosis-steps" className="content-section mb-12">
-                <div className="flex items-start mb-6">
+                <div className="flex flex-col lg:flex-row items-start mb-6">
                   <img 
                     src={medicalMonitoringImage} 
                     alt="PFAS medical monitoring and testing facility"
-                    className="w-32 h-24 object-cover rounded-lg mr-6 flex-shrink-0"
+                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">What to Do After PFAS Exposure</h2>
@@ -381,11 +381,11 @@ const PFASExposure: React.FC = () => {
 
               {/* Health Effects Section */}
               <section id="health-effects" className="content-section mb-12">
-                <div className="flex items-start mb-6">
+                <div className="flex flex-col lg:flex-row items-start mb-6">
                   <img 
                     src={healthEffectsImage} 
                     alt="PFAS health effects and medical research"
-                    className="w-32 h-24 object-cover rounded-lg mr-6 flex-shrink-0"
+                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">Health Effects of PFAS Exposure</h2>
@@ -462,11 +462,11 @@ const PFASExposure: React.FC = () => {
 
               {/* Contamination Sources */}
               <section id="contamination-sources" className="content-section mb-12">
-                <div className="flex items-start mb-6">
+                <div className="flex flex-col lg:flex-row items-start mb-6">
                   <img 
                     src={contaminationImage} 
                     alt="PFAS contamination sources and industrial facilities"
-                    className="w-32 h-24 object-cover rounded-lg mr-6 flex-shrink-0"
+                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">PFAS Contamination Sources in California</h2>
@@ -560,11 +560,11 @@ const PFASExposure: React.FC = () => {
 
               {/* Legal Process */}
               <section id="legal-process" className="content-section mb-12">
-                <div className="flex items-start mb-6">
+                <div className="flex flex-col lg:flex-row items-start mb-6">
                   <img 
                     src={legalProcessImage} 
                     alt="Legal process for PFAS exposure cases"
-                    className="w-32 h-24 object-cover rounded-lg mr-6 flex-shrink-0"
+                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">PFAS Legal Process</h2>

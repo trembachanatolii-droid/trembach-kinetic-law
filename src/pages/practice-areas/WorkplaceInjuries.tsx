@@ -346,7 +346,8 @@ const WorkplaceInjuries: React.FC = () => {
         title="California Workplace Injury Lawyers | Third-Party Claims Beyond Workers' Comp"
         description="Injured at work? Beyond workers' comp - pursue third-party claims for full compensation. Expert workplace injury attorneys fight for maximum recovery. Free consultation."
         canonical="/practice-areas/workplace-injuries"
-        schema={{
+        structuredData={{
+          "@context": "https://schema.org",
           "@type": "LegalService",
           "name": "Workplace Injury Legal Services",
           "description": "Expert legal representation for California workplace injury cases, specializing in third-party liability claims beyond workers' compensation"

@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Phone, Star, Shield, Clock, Award } from 'lucide-react';
+import { toast } from 'sonner';
 import heroBackground from '@/assets/burn-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
@@ -25,6 +26,7 @@ const BurnCaseEvaluation: React.FC = () => {
     medicalTreatment: '',
     consent: false
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,9 +37,39 @@ const BurnCaseEvaluation: React.FC = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
+    setIsSubmitting(true);
+    
+    try {
+      // Simulate form submission
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      toast.success("Thank you! Your case evaluation request has been submitted. We'll contact you within 24 hours.", {
+        duration: 5000,
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        incidentDate: '',
+        burnType: '',
+        burnSeverity: '',
+        location: '',
+        description: '',
+        medicalTreatment: '',
+        consent: false
+      });
+    } catch (error) {
+      toast.error("There was an error submitting your request. Please try again or call us directly.", {
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -228,9 +260,9 @@ const BurnCaseEvaluation: React.FC = () => {
                   <Button 
                     type="submit" 
                     className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
-                    disabled={!formData.consent}
+                    disabled={!formData.consent || isSubmitting}
                   >
-                    Get My Free Case Evaluation
+                    {isSubmitting ? 'Submitting...' : 'Get Your Free Case Review →'}
                   </Button>
                 </form>
               </CardContent>

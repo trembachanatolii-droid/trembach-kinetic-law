@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
+import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import MedicalDevices from "./pages/practice-areas/MedicalDevices";
 import MedicalDevicesCaseEvaluation from "./pages/MedicalDevicesCaseEvaluation";
 import MedicalDevicesCompensationCalculator from "./pages/MedicalDevicesCompensationCalculator";
@@ -96,6 +98,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/pharmaceutical" element={<Pharmaceutical />} />
+            <Route path="/pharmaceutical-case-evaluation" element={<PharmaceuticalCaseEvaluation />} />
             <Route path="/practice-areas/medical-devices" element={<MedicalDevices />} />
             <Route path="/medical-devices-case-evaluation" element={<MedicalDevicesCaseEvaluation />} />
             <Route path="/medical-devices-compensation-calculator" element={<MedicalDevicesCompensationCalculator />} />

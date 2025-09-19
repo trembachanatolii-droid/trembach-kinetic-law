@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useScrollMemory } from '@/hooks/useScrollMemory';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -34,6 +35,7 @@ import legalProcessImage from '@/assets/environmental-toxic-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-contamination-sites.jpg';
 import medicalImage from '@/assets/environmental-toxic-medical-facility.jpg';
 import compensationImage from '@/assets/environmental-toxic-compensation-calculator.jpg';
+import { ToxicHeroScene } from '@/components/three/ToxicHeroScene';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -48,6 +50,7 @@ const EnvironmentalToxic: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const scrollMemory = useScrollMemory();
   const [formData, setFormData] = useState({
     exposureDate: '',
     exposureType: ''
@@ -336,6 +339,13 @@ const EnvironmentalToxic: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         
+        {/* Enhanced 3D Scene Overlay */}
+        <div className="absolute inset-0 pointer-events-none">
+          <Suspense fallback={null}>
+            <ToxicHeroScene />
+          </Suspense>
+        </div>
+        
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-10">
           <Button 
@@ -350,20 +360,20 @@ const EnvironmentalToxic: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl">
               Environmental Toxic Exposure Attorneys
             </h1>
             
             <div className="flex items-center justify-center mb-6">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1 drop-shadow-lg" />
               ))}
-              <span className="ml-2 text-lg">Fighting for California Families Exposed to Dangerous Chemicals</span>
+              <span className="ml-2 text-lg drop-shadow-lg">Fighting for California Families Exposed to Dangerous Chemicals</span>
             </div>
             
             <Button 
               size="lg" 
-              className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg"
+              className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
               onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}
             >
               START MY FREE CASE EVALUATION

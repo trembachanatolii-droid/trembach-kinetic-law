@@ -11,6 +11,8 @@ import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import CampLejeune from "./pages/practice-areas/CampLejeune";
 import CampLejeuneEvaluation from "./pages/CampLejeuneEvaluation";
 import CampLejeuneCalculator from "./pages/CampLejeuneCalculator";
+import CampLejeuneResources from "./pages/CampLejeuneResources";
+import CampLejeuneGuidance from "./pages/CampLejeuneGuidance";
 import MassTorts from "./pages/practice-areas/MassTorts";
 import MassTortsCompensationCalculator from "./pages/MassTortsCompensationCalculator";
 import MassTortsCaseEvaluation from "./pages/MassTortsCaseEvaluation";
@@ -218,6 +220,10 @@ function App() {
         <Route path="/class-actions-compensation-calculator" element={<ClassActionsCompensationCalculator />} />
         <Route path="/class-actions-legal-guidance" element={<ClassActionsLegalGuidance />} />
         <Route path="/class-actions-resources" element={<ClassActionsResources />} />
+        <Route path="/camp-lejeune-evaluation" element={<CampLejeuneEvaluation />} />
+        <Route path="/camp-lejeune-calculator" element={<CampLejeuneCalculator />} />
+        <Route path="/camp-lejeune-resources" element={<CampLejeuneResources />} />
+        <Route path="/camp-lejeune-guidance" element={<CampLejeuneGuidance />} />
         <Route path="/environmental-toxic-case-evaluation" element={<EnvironmentalToxicCaseEvaluation />} />
         <Route path="/environmental-toxic-compensation-calculator" element={<EnvironmentalToxicCompensationCalculator />} />
         <Route path="/environmental-toxic-legal-guidance" element={<EnvironmentalToxicLegalGuidance />} />

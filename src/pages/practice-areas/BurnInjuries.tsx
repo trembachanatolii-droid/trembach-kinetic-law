@@ -364,7 +364,7 @@ const BurnInjuries: React.FC = () => {
               <Button 
                 size="lg" 
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
-                onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+                onClick={() => window.location.href = '/burn-case-evaluation'}
               >
                 <Phone className="w-6 h-6 mr-3" />
                 Free Case Evaluation
@@ -372,7 +372,7 @@ const BurnInjuries: React.FC = () => {
               <Button 
                 size="lg" 
                 className="bg-white text-red-600 hover:bg-gray-100 border-2 border-white px-8 py-6 text-lg font-semibold shadow-2xl transform hover:scale-105 transition-all duration-300"
-                onClick={() => window.location.href = '/burn-injuries-compensation-calculator'}
+                onClick={() => window.location.href = '/burn-compensation-calculator'}
               >
                 <DollarSign className="w-6 h-6 mr-3" />
                 Calculate Compensation

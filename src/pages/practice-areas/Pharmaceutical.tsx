@@ -83,20 +83,84 @@ const Pharmaceutical: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
+      // 3D Floating Background Layers
+      const backLayer = heroRef.current?.querySelector('.floating-back');
+      const midLayer = heroRef.current?.querySelector('.floating-mid');
+      const frontLayer = heroRef.current?.querySelector('.floating-front');
+
+      if (backLayer) {
+        gsap.to(backLayer, {
+          y: 30,
+          duration: 14,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      if (midLayer) {
+        gsap.to(midLayer, {
+          x: 40,
+          duration: 18,
+          ease: "sine.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      if (frontLayer) {
+        gsap.timeline({ repeat: -1 })
+          .to(frontLayer, {
+            y: 20,
+            x: 25,
+            duration: 10,
+            ease: "sine.inOut"
+          })
+          .to(frontLayer, {
+            rotation: 2,
+            duration: 22,
+            ease: "sine.inOut"
+          }, 0);
+      }
+
+      // Hero entrance animations with 3D effects
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        { 
+          opacity: 0, 
+          y: 50, 
+          z: -100,
+          scale: 0.9,
+          filter: 'blur(10px)' 
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          z: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8, 
+          ease: 'cubic-bezier(0.22, 1, 0.36, 1)' 
+        }
       );
 
-      // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
+      // Content panels with 3D rotation and staggered entrance
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-panel'),
+        { 
+          opacity: 0, 
+          rotationX: 15,
+          z: -50,
+          scale: 0.95,
+          filter: 'blur(5px)'
+        },
         {
           opacity: 1,
-          y: 0,
+          rotationX: 0,
+          z: 0,
+          scale: 1,
+          filter: 'blur(0px)',
           duration: 0.6,
-          stagger: 0.1,
+          stagger: 0.15,
+          ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
           scrollTrigger: {
             trigger: contentRef.current,
             start: 'top 80%'
@@ -269,7 +333,13 @@ const Pharmaceutical: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div 
+      className="min-h-screen bg-background"
+      style={{ 
+        perspective: '1200px',
+        transformStyle: 'preserve-3d'
+      }}
+    >
       {/* SEO Component */}
       <SEO
         title="California Pharmaceutical Injury Lawyer | Dangerous Drug Attorney | Trembach Law Firm"
@@ -277,41 +347,62 @@ const Pharmaceutical: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/practice-areas/pharmaceutical"
       />
 
-      {/* Hero Section */}
+      {/* 3D Floating Background Layers */}
+      <div className="floating-back fixed inset-0 opacity-10 pointer-events-none" 
+           style={{ transform: 'translateZ(-500px)' }}>
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-secondary/20 rounded-full blur-3xl"></div>
+      </div>
+      
+      <div className="floating-mid fixed inset-0 opacity-20 pointer-events-none" 
+           style={{ transform: 'translateZ(-250px)' }}>
+        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-gradient-to-r from-accent/30 to-primary/30 rounded-full blur-2xl"></div>
+      </div>
+      
+      <div className="floating-front fixed inset-0 opacity-30 pointer-events-none" 
+           style={{ transform: 'translateZ(-100px)' }}>
+        <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-gradient-to-tr from-secondary/40 to-accent/40 rounded-full blur-xl"></div>
+      </div>
+
+      {/* Hero Section with 3D Effects */}
       <section 
         ref={heroRef}
         className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
+        style={{ 
+          backgroundImage: `url(${heroBackground})`,
+          transformStyle: 'preserve-3d'
+        }}
       >
-        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         
         {/* Go Back Button */}
         <GoBack />
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <div className="hero-content">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+          <div className="hero-content" style={{ transformStyle: 'preserve-3d' }}>
+            <h1 className="text-5xl md:text-6xl font-display font-bold mb-4 bg-gradient-to-r from-white via-yellow-100 to-white bg-clip-text text-transparent">
               California Pharmaceutical Injury Lawyers
             </h1>
             
+            <div className="w-24 h-1 bg-gradient-to-r from-primary via-accent to-primary rounded-full mx-auto mb-6"></div>
+            
             <div className="flex items-center justify-center mb-6">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1 hover:scale-110 transition-transform" />
               ))}
               <span className="ml-2 text-lg">Backed by Proven Experience</span>
             </div>
             
-            <p className="text-xl mb-6">
+            <p className="text-xl mb-6 backdrop-blur-sm bg-white/10 rounded-lg p-4">
               When medications meant to heal cause harm, you deserve justice. Our former defense experience reveals how pharmaceutical companies hide risks and manipulate data.
             </p>
             
-            <p className="text-lg mb-8 text-yellow-300">
+            <p className="text-lg mb-8 text-yellow-300 bg-yellow-400/20 backdrop-blur-sm rounded-lg p-3">
               Currently accepting: Ozempic, Wegovy, Mounjaro, and other GLP-1 drug injury cases
             </p>
             
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              className="bg-primary hover:bg-primary/90 text-primary-foreground font-bold px-8 py-4 text-lg hover:scale-105 transition-all duration-300 shadow-2xl hover:shadow-primary/50"
               onClick={() => window.location.href = '/pharmaceutical-case-evaluation'}
             >
               START MY FREE CASE EVALUATION
@@ -319,8 +410,8 @@ const Pharmaceutical: React.FC = () => {
           </div>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+        {/* Navigation Tabs with 3D Effects */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-md border-t border-white/20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
               {tabs.map((tab) => {
@@ -329,13 +420,17 @@ const Pharmaceutical: React.FC = () => {
                   <button
                     key={tab.id}
                     onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 rounded-md hover:scale-105 backdrop-blur-sm ${
                       activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
+                        ? 'bg-white text-primary shadow-lg shadow-primary/30' 
+                        : 'text-white hover:bg-white/20 hover:shadow-lg hover:shadow-white/20'
                     }`}
+                    style={{
+                      transformStyle: 'preserve-3d',
+                      transform: activeTab === tab.id ? 'translateZ(10px)' : 'translateZ(0px)'
+                    }}
                   >
-                    <IconComponent className="w-4 h-4 mr-2" />
+                    <IconComponent className="w-4 h-4 mr-2 hover:scale-110 transition-transform" />
                     <span>{tab.label}</span>
                   </button>
                 );
@@ -345,16 +440,16 @@ const Pharmaceutical: React.FC = () => {
         </div>
       </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      {/* Main Content with 3D Container */}
+      <div className="max-w-7xl mx-auto px-6 py-12" style={{ transformStyle: 'preserve-3d' }}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Content Column */}
           <div className="lg:col-span-2" ref={contentRef}>
             
             {/* Overview Section */}
-            <section id="overview" className="content-section mb-12">
-              <h2 className="text-4xl font-bold text-red-600 mb-6">California Pharmaceutical Injury Attorneys</h2>
+            <section id="overview" className="content-panel mb-12 backdrop-blur-sm bg-gradient-to-r from-background/80 to-background/60 rounded-xl p-8 border border-border/50 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500">
+              <h2 className="text-4xl font-display font-bold bg-gradient-to-r from-primary to-destructive bg-clip-text text-transparent mb-6">California Pharmaceutical Injury Attorneys</h2>
               
               <div className="prose prose-lg max-w-none mb-6">
                 <p className="text-xl leading-relaxed mb-4">
@@ -461,11 +556,11 @@ const Pharmaceutical: React.FC = () => {
             </section>
 
             {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-4xl font-bold text-red-600 mb-6">Free Pharmaceutical Case Evaluation</h2>
+            <section id="evaluation" className="content-panel mb-12 backdrop-blur-sm bg-gradient-to-br from-primary/10 to-accent/10 rounded-xl p-8 border border-primary/20 hover:shadow-2xl hover:shadow-primary/20 transition-all duration-500 hover:scale-[1.02]">
+              <h2 className="text-4xl font-display font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent mb-6">Free Pharmaceutical Case Evaluation</h2>
               
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-2xl font-semibold mb-4">Get Your Free Consultation</h3>
+              <div className="bg-gradient-to-r from-background/90 to-background/70 backdrop-blur-md p-8 rounded-xl border border-border/50 shadow-xl">
+                <h3 className="text-2xl font-semibold mb-4 text-primary">Get Your Free Consultation</h3>
                 <p className="mb-6 text-lg">Provide information about your pharmaceutical injury to help us understand your case better.</p>
                 
                 <form onSubmit={handleFormSubmit} className="space-y-4">
@@ -547,45 +642,46 @@ const Pharmaceutical: React.FC = () => {
             </section>
 
             {/* What to Do After Pharmaceutical Injury */}
-            <section id="after-injury" className="content-section mb-12">
-              <div className="mb-6">
+            <section id="after-injury" className="content-panel mb-12 backdrop-blur-sm bg-gradient-to-br from-green-50/80 to-green-100/60 dark:from-green-950/40 dark:to-green-900/30 rounded-xl p-8 border border-green-200/50 dark:border-green-800/50 hover:shadow-2xl hover:shadow-green-500/20 transition-all duration-500 hover:scale-[1.02]">
+              <div className="mb-6 relative group overflow-hidden rounded-xl">
                 <img 
                   src={stepsAfterInjuryImage} 
                   alt="What to do after pharmaceutical injury" 
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-green-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
-              <h2 className="text-4xl font-bold text-red-600 mb-6">What to Do After a Pharmaceutical Injury</h2>
+              <h2 className="text-4xl font-display font-bold bg-gradient-to-r from-green-600 to-green-800 bg-clip-text text-transparent mb-6">What to Do After a Pharmaceutical Injury</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800 group hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                      <Heart className="w-5 h-5 mr-2 text-red-600" />
+                    <CardTitle className="flex items-center text-green-700 dark:text-green-300 group-hover:text-green-600 dark:group-hover:text-green-200 transition-colors">
+                      <Heart className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                       Immediate Medical Steps
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p>• Continue medical treatment under supervision</p>
-                    <p>• Never stop medication without doctor consultation</p>
-                    <p>• Document all symptoms and medical visits</p>
-                    <p>• Report to FDA MedWatch program</p>
+                  <CardContent className="space-y-3 text-green-800 dark:text-green-200">
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Continue medical treatment under supervision</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Never stop medication without doctor consultation</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Document all symptoms and medical visits</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Report to FDA MedWatch program</p>
                   </CardContent>
                 </Card>
                 
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <Card className="bg-gradient-to-br from-green-50 to-green-100 dark:from-green-950/50 dark:to-green-900/30 border-green-200 dark:border-green-800 group hover:shadow-xl hover:shadow-green-500/30 transition-all duration-300 hover:scale-105">
                   <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                      <Scale className="w-5 h-5 mr-2 text-red-600" />
+                    <CardTitle className="flex items-center text-green-700 dark:text-green-300 group-hover:text-green-600 dark:group-hover:text-green-200 transition-colors">
+                      <Scale className="w-5 h-5 mr-2 group-hover:scale-110 transition-transform" />
                       Immediate Legal Steps
                     </CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-3">
-                    <p>• Contact pharmaceutical injury attorney immediately</p>
-                    <p>• Preserve all medication bottles and packaging</p>
-                    <p>• Avoid speaking to insurance companies</p>
-                    <p>• Keep all medical bills and pharmacy records</p>
+                  <CardContent className="space-y-3 text-green-800 dark:text-green-200">
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Contact pharmaceutical injury attorney immediately</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Preserve all medication bottles and packaging</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Avoid speaking to insurance companies</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-green-500 rounded-full mr-2"></span>Keep all medical bills and pharmacy records</p>
                   </CardContent>
                 </Card>
               </div>
@@ -634,17 +730,38 @@ const Pharmaceutical: React.FC = () => {
             </section>
 
             {/* Dangerous Drugs Section */}
-            <section id="dangerous-drugs" className="content-section mb-12">
-              <div className="mb-6">
+            <section id="dangerous-drugs" className="content-panel mb-12 backdrop-blur-sm bg-gradient-to-br from-red-50/80 to-red-100/60 dark:from-red-950/40 dark:to-red-900/30 rounded-xl p-8 border border-red-200/50 dark:border-red-800/50 hover:shadow-2xl hover:shadow-red-500/20 transition-all duration-500 hover:scale-[1.02]">
+              <div className="mb-6 relative group overflow-hidden rounded-xl">
                 <img 
                   src={dangerousDrugsImage} 
                   alt="Current dangerous drugs and active litigation" 
-                  className="w-full h-64 object-cover rounded-lg"
+                  className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110"
                 />
+                <div className="absolute inset-0 bg-gradient-to-t from-red-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </div>
               
-              <h2 className="text-4xl font-bold text-red-600 mb-6">Current Dangerous Drugs & Active Litigation</h2>
-              <p className="text-xl mb-6">We're actively investigating and litigating cases involving these medications</p>
+              <h2 className="text-4xl font-display font-bold bg-gradient-to-r from-red-600 to-red-800 bg-clip-text text-transparent mb-6">Current Dangerous Drugs & Active Litigation</h2>
+              <p className="text-xl mb-6 text-red-700 dark:text-red-300">We're actively investigating and litigating cases involving these medications</p>
+              
+              {/* Never Do Section */}
+              <div className="mb-8 p-6 bg-gradient-to-r from-red-100 to-red-50 dark:from-red-950/70 dark:to-red-900/50 border border-red-300 dark:border-red-700 rounded-xl">
+                <h3 className="text-2xl font-bold text-red-700 dark:text-red-300 mb-4 flex items-center">
+                  <FileX className="w-6 h-6 mr-2 hover:scale-110 transition-transform" />
+                  Never Do This After a Drug Injury
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="space-y-3 text-red-800 dark:text-red-200">
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never stop medication without medical supervision</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never throw away medication bottles or packaging</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never speak to pharmaceutical company representatives</p>
+                  </div>
+                  <div className="space-y-3 text-red-800 dark:text-red-200">
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never sign releases without attorney review</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never accept early settlement offers</p>
+                    <p className="flex items-center"><span className="w-2 h-2 bg-red-500 rounded-full mr-2"></span>Never delay seeking legal consultation</p>
+                  </div>
+                </div>
+              </div>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="p-6 border-l-4 border-red-600">
@@ -662,8 +779,23 @@ const Pharmaceutical: React.FC = () => {
                   <p><strong>MDL Status:</strong> Active (MDL 3094)</p>
                 </Card>
                 
-                <Card className="p-6 border-l-4 border-red-600">
-                  <h4 className="text-xl font-bold text-red-600 mb-3">Mounjaro (Tirzepatide)</h4>
+                <Card className="p-6 border-l-4 border-red-500 bg-gradient-to-br from-red-50 to-white dark:from-red-950/30 dark:to-red-900/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                  <h4 className="text-xl font-bold text-red-600 mb-3 hover:text-red-700 transition-colors">Ozempic/Wegovy (Semaglutide)</h4>
+                  <p className="mb-2"><strong>Manufacturer:</strong> Novo Nordisk</p>
+                  <p className="mb-2"><strong>Serious Side Effects:</strong></p>
+                  <ul className="list-disc ml-6 mb-3">
+                    <li>Gastroparesis (stomach paralysis)</li>
+                    <li>Intestinal obstruction/ileus</li>
+                    <li>NAION (vision loss)</li>
+                    <li>Pancreatitis</li>
+                    <li>Gallbladder disease</li>
+                    <li>Kidney damage</li>
+                  </ul>
+                  <p><strong>MDL Status:</strong> <Badge variant="destructive" className="ml-2">Active (MDL 3094)</Badge></p>
+                </Card>
+                
+                <Card className="p-6 border-l-4 border-red-500 bg-gradient-to-br from-red-50 to-white dark:from-red-950/30 dark:to-red-900/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                  <h4 className="text-xl font-bold text-red-600 mb-3 hover:text-red-700 transition-colors">Mounjaro (Tirzepatide)</h4>
                   <p className="mb-2"><strong>Manufacturer:</strong> Eli Lilly</p>
                   <p className="mb-2"><strong>Serious Side Effects:</strong></p>
                   <ul className="list-disc ml-6 mb-3">
@@ -673,11 +805,11 @@ const Pharmaceutical: React.FC = () => {
                     <li>Severe dehydration</li>
                     <li>Kidney problems</li>
                   </ul>
-                  <p><strong>Status:</strong> Under investigation</p>
+                  <p><strong>Status:</strong> <Badge variant="secondary" className="ml-2">Under investigation</Badge></p>
                 </Card>
                 
-                <Card className="p-6 border-l-4 border-red-600">
-                  <h4 className="text-xl font-bold text-red-600 mb-3">Trulicity (Dulaglutide)</h4>
+                <Card className="p-6 border-l-4 border-red-500 bg-gradient-to-br from-red-50 to-white dark:from-red-950/30 dark:to-red-900/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                  <h4 className="text-xl font-bold text-red-600 mb-3 hover:text-red-700 transition-colors">Trulicity (Dulaglutide)</h4>
                   <p className="mb-2"><strong>Manufacturer:</strong> Eli Lilly</p>
                   <p className="mb-2"><strong>Serious Side Effects:</strong></p>
                   <ul className="list-disc ml-6 mb-3">
@@ -686,11 +818,11 @@ const Pharmaceutical: React.FC = () => {
                     <li>Severe abdominal pain</li>
                     <li>Pancreatic cancer risk</li>
                   </ul>
-                  <p><strong>MDL Status:</strong> Consolidated with GLP-1 litigation</p>
+                  <p><strong>MDL Status:</strong> <Badge variant="destructive" className="ml-2">Consolidated with GLP-1 litigation</Badge></p>
                 </Card>
                 
-                <Card className="p-6 border-l-4 border-red-600">
-                  <h4 className="text-xl font-bold text-red-600 mb-3">Elmiron (Pentosan)</h4>
+                <Card className="p-6 border-l-4 border-red-500 bg-gradient-to-br from-red-50 to-white dark:from-red-950/30 dark:to-red-900/20 hover:shadow-xl hover:shadow-red-500/30 transition-all duration-300 hover:scale-105 hover:-translate-y-2">
+                  <h4 className="text-xl font-bold text-red-600 mb-3 hover:text-red-700 transition-colors">Elmiron (Pentosan)</h4>
                   <p className="mb-2"><strong>Manufacturer:</strong> Janssen Pharmaceuticals</p>
                   <p className="mb-2"><strong>Serious Side Effects:</strong></p>
                   <ul className="list-disc ml-6 mb-3">
@@ -699,7 +831,7 @@ const Pharmaceutical: React.FC = () => {
                     <li>Retinal damage</li>
                     <li>Night blindness</li>
                   </ul>
-                  <p><strong>Status:</strong> Active litigation</p>
+                  <p><strong>Status:</strong> <Badge variant="destructive" className="ml-2">Active litigation</Badge></p>
                 </Card>
               </div>
             </section>

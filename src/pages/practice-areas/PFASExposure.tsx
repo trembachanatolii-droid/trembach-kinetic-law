@@ -850,6 +850,7 @@ Apply for California PFAS Cases</h2>
                       src={medicalMonitoringImage} 
                       alt="PFAS medical monitoring and testing" 
                       className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                      onClick={() => window.location.href = '/pfas-resources'}
                     />
                     <p className="text-sm text-muted-foreground">
                       Access PFAS testing, medical monitoring, and comprehensive resources for exposure victims.

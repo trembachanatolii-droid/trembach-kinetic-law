@@ -776,93 +776,100 @@ const PFASExposure: React.FC = () => {
 
             {/* Sticky Sidebar - 3 Ways to Start Your Case */}
             <div className="lg:col-span-1">
-              <div className="sticky top-8">
-                <Card 
-                  className="bg-cover bg-center text-white border-0"
-                  style={{ backgroundImage: `url(${sidebarImage})` }}
-                >
-                  <div className="absolute inset-0 bg-black/70 rounded-lg"></div>
-                  <CardHeader className="relative z-10">
-                    <CardTitle className="text-white text-xl">3 Ways to Start Your PFAS Case</CardTitle>
-                    <p className="text-white/90">Choose the method that works best for you</p>
-                  </CardHeader>
-                  <CardContent className="relative z-10 space-y-4">
-                    
-                    {/* Phone Consultation */}
-                    <Card className="bg-white/10 backdrop-blur border-white/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center mb-2">
-                          <Phone className="w-5 h-5 mr-2" />
-                          <span className="font-semibold">Call for Immediate Help</span>
-                        </div>
-                        <p className="text-sm mb-3 text-white/90">Speak directly with our PFAS legal team</p>
-                        <Button 
-                          className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
-                          onClick={() => window.location.href = 'tel:8181234567'}
-                        >
-                          Call (818) 123-4567
-                        </Button>
-                      </CardContent>
-                    </Card>
-
-                    {/* Case Evaluation Form */}
-                    <Card className="bg-white/10 backdrop-blur border-white/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center mb-2">
-                          <FileText className="w-5 h-5 mr-2" />
-                          <span className="font-semibold">Free Case Evaluation</span>
-                        </div>
-                        <p className="text-sm mb-3 text-white/90">Complete our detailed PFAS exposure form</p>
-                        <Button 
-                          variant="outline"
-                          className="w-full border-white text-white hover:bg-white hover:text-primary font-semibold"
-                          onClick={() => window.location.href = '/pfas-case-evaluation'}
-                        >
-                          Start Evaluation
-                        </Button>
-                      </CardContent>
-                    </Card>
-
-                    {/* Email Contact */}
-                    <Card className="bg-white/10 backdrop-blur border-white/20">
-                      <CardContent className="p-4">
-                        <div className="flex items-center mb-2">
-                          <Mail className="w-5 h-5 mr-2" />
-                          <span className="font-semibold">Email Consultation</span>
-                        </div>
-                        <p className="text-sm mb-3 text-white/90">Send us your PFAS exposure details</p>
-                        <Button 
-                          variant="outline"
-                          className="w-full border-white text-white hover:bg-white hover:text-primary font-semibold"
-                          onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com?subject=PFAS Exposure Consultation'}
-                        >
-                          Email Us
-                        </Button>
-                      </CardContent>
-                    </Card>
-
-                    {/* Firm Benefits */}
-                    <div className="bg-white/10 backdrop-blur border border-white/20 rounded-lg p-4">
-                      <h4 className="font-semibold mb-3">Why Choose Trembach Law Firm?</h4>
-                      <ul className="space-y-2 text-sm">
-                        <li className="flex items-center">
-                          <Shield className="w-4 h-4 mr-2 text-green-400" />
-                          Former Defense Attorney Advantage
-                        </li>
-                        <li className="flex items-center">
-                          <DollarSign className="w-4 h-4 mr-2 text-green-400" />
-                          No Fees Unless We Win
-                        </li>
-                        <li className="flex items-center">
-                          <Clock className="w-4 h-4 mr-2 text-green-400" />
-                          Free 24/7 Consultation
-                        </li>
-                        <li className="flex items-center">
-                          <Award className="w-4 h-4 mr-2 text-green-400" />
-                          Maximum Compensation Focus
-                        </li>
-                      </ul>
+              <div className="sticky top-8 space-y-6">
+                
+                {/* Contact Card */}
+                <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+                  <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                    <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                      <div className="text-center text-white">
+                        <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                        <h3 className="text-xl font-bold">Start Your Case</h3>
+                      </div>
                     </div>
+                  </div>
+                  
+                  <CardContent className="p-6">
+                    <p className="text-sm text-muted-foreground mb-6">
+                      You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                    </p>
+                    
+                    <div className="space-y-4">
+                      <Button 
+                        className="w-full bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => window.location.href = 'tel:8181234567'}
+                      >
+                        <Phone className="w-4 h-4 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={() => window.location.href = '/pfas-case-evaluation'}
+                      >
+                        <MessageCircle className="w-4 h-4 mr-2" />
+                        Free Case Evaluation
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        className="w-full"
+                        onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com?subject=PFAS Exposure Consultation'}
+                      >
+                        <Mail className="w-4 h-4 mr-2" />
+                        Email Consultation
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Quick Facts */}
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors">Quick Facts</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-start">
+                      <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                      <div>
+                        <h4 className="font-semibold text-sm">Time Limit</h4>
+                        <p className="text-sm text-muted-foreground">2 years from diagnosis in California</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                      <div>
+                        <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                        <p className="text-sm text-muted-foreground">We only get paid if you win</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-start">
+                      <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                      <div>
+                        <h4 className="font-semibold text-sm">Free Consultation</h4>
+                        <p className="text-sm text-muted-foreground">No cost to discuss your case</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* PFAS Resources */}
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="text-lg group-hover:text-primary transition-colors">PFAS Resources</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <img 
+                      src={medicalMonitoringImage} 
+                      alt="PFAS medical monitoring and testing" 
+                      className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                    />
+                    <p className="text-sm text-muted-foreground">
+                      Access PFAS testing, medical monitoring, and comprehensive resources for exposure victims.
+                    </p>
                   </CardContent>
                 </Card>
               </div>

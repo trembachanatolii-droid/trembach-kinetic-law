@@ -8,26 +8,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft } from 'lucide-react';
 import heroBackground from '@/assets/camp-lejeune-hero-bg.jpg';
 import sidebarImage from '@/assets/camp-lejeune-sidebar.jpg';
 import conditionsImage from '@/assets/camp-lejeune-conditions.jpg';
@@ -43,15 +24,12 @@ import timelineImage from '@/assets/camp-lejeune-timeline.jpg';
 import waterSystemsImage from '@/assets/camp-lejeune-water-systems.jpg';
 import SEO from '@/components/SEO';
 import { campLejeuneQuestions } from '@/content/campLejeuneQuestions';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const CampLejeune: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -61,122 +39,134 @@ const CampLejeune: React.FC = () => {
     timeAtBase: '',
     condition: ''
   });
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'conditions', label: 'QUALIFYING CONDITIONS', icon: Heart },
-    { id: 'compensation', label: 'COMPENSATION', icon: AlertTriangle },
-    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
-
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'conditions',
+    label: 'QUALIFYING CONDITIONS',
+    icon: Heart
+  }, {
+    id: 'compensation',
+    label: 'COMPENSATION',
+    icon: AlertTriangle
+  }, {
+    id: 'legal-process',
+    label: 'LEGAL PROCESS',
+    icon: Shield
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: MessageCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
   const faqs = campLejeuneQuestions;
-
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 200);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation with 3D effects
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50, rotationX: 10, z: -100 },
-        { opacity: 1, y: 0, rotationX: 0, z: 0, duration: 1.2, ease: 'power2.out' }
-      );
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50,
+        rotationX: 10,
+        z: -100
+      }, {
+        opacity: 1,
+        y: 0,
+        rotationX: 0,
+        z: 0,
+        duration: 1.2,
+        ease: 'power2.out'
+      });
 
       // Content sections animation with stagger
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30, scale: 0.95 },
-        {
-          opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: 'power2.out',
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
+        opacity: 0,
+        y: 30,
+        scale: 0.95
+      }, {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 0.8,
+        stagger: 0.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 80%',
+          toggleActions: 'play none none reverse'
         }
-      );
+      });
 
       // Enhanced card animations
-      gsap.fromTo('.glass-card',
-        { opacity: 0, y: 40, rotationY: 15 },
-        {
-          opacity: 1,
-          y: 0,
-          rotationY: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: 'back.out(1.7)',
-          scrollTrigger: {
-            trigger: '.glass-card',
-            start: 'top 90%',
-            toggleActions: 'play none none reverse'
-          }
+      gsap.fromTo('.glass-card', {
+        opacity: 0,
+        y: 40,
+        rotationY: 15
+      }, {
+        opacity: 1,
+        y: 0,
+        rotationY: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        ease: 'back.out(1.7)',
+        scrollTrigger: {
+          trigger: '.glass-card',
+          start: 'top 90%',
+          toggleActions: 'play none none reverse'
         }
-      );
+      });
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     window.location.href = '/camp-lejeune-case-evaluation';
   };
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Camp Lejeune Water Contamination Lawyers | California Veterans Attorney"
-        description="Former defense attorney fighting for Camp Lejeune victims in California. TCE, PCE, benzene exposure claims. Parkinson's, cancer, birth defects. No fees unless we win."
-        canonical="/camp-lejeune"
-      />
+  return <div className="min-h-screen bg-background">
+      <SEO title="Camp Lejeune Water Contamination Lawyers | California Veterans Attorney" description="Former defense attorney fighting for Camp Lejeune victims in California. TCE, PCE, benzene exposure claims. Parkinson's, cancer, birth defects. No fees unless we win." canonical="/camp-lejeune" />
 
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-20">
-          <Button 
-            variant="ghost" 
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20 font-medium text-base px-4 py-2 transition-all duration-300"
-          >
+          <Button variant="ghost" onClick={() => window.history.back()} className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20 font-medium text-base px-4 py-2 transition-all duration-300">
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </Button>
@@ -189,17 +179,11 @@ const CampLejeune: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1 drop-shadow-lg" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1 drop-shadow-lg" />)}
               <span className="ml-2 text-lg drop-shadow-lg">Fighting for Veterans Exposed to Toxic Water 1953-1987</span>
             </div>
             
-            <Button 
-              size="lg" 
-              className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105"
-              onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
-            >
+            <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg shadow-2xl hover:shadow-primary/25 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -209,23 +193,13 @@ const CampLejeune: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm border-t border-white/20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-3 py-6">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-6 py-3 text-lg font-semibold transition-all duration-300 rounded-lg transform hover:scale-105 ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary shadow-xl' 
-                        : 'text-white hover:bg-white/20 hover:text-white'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-6 py-3 text-lg font-semibold transition-all duration-300 rounded-lg transform hover:scale-105 ${activeTab === tab.id ? 'bg-white text-primary shadow-xl' : 'text-white hover:bg-white/20 hover:text-white'}`}>
                     <IconComponent className="w-5 h-5 mr-3" />
                     <span className="font-bold">{tab.label}</span>
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
@@ -347,7 +321,10 @@ const CampLejeune: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">Time at Camp Lejeune</label>
-                      <Select value={formData.timeAtBase} onValueChange={(value) => setFormData(prev => ({ ...prev, timeAtBase: value }))}>
+                      <Select value={formData.timeAtBase} onValueChange={value => setFormData(prev => ({
+                      ...prev,
+                      timeAtBase: value
+                    }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select years..." />
                         </SelectTrigger>
@@ -362,7 +339,10 @@ const CampLejeune: React.FC = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Health Condition</label>
-                      <Select value={formData.condition} onValueChange={(value) => setFormData(prev => ({ ...prev, condition: value }))}>
+                      <Select value={formData.condition} onValueChange={value => setFormData(prev => ({
+                      ...prev,
+                      condition: value
+                    }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select condition..." />
                         </SelectTrigger>
@@ -391,11 +371,7 @@ const CampLejeune: React.FC = () => {
 
             {/* Qualifying Conditions Section */}
             <section id="conditions" className="content-section mb-12">
-              <img 
-                src={conditionsImage} 
-                alt="Camp Lejeune qualifying health conditions and medical evaluation" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <img src={conditionsImage} alt="Camp Lejeune qualifying health conditions and medical evaluation" className="w-full h-64 object-cover rounded-lg mb-6" />
               <h2 className="text-3xl font-bold text-primary mb-6">Qualifying Health Conditions</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -447,11 +423,7 @@ const CampLejeune: React.FC = () => {
 
             {/* Compensation Section */}
             <section id="compensation" className="content-section mb-12">
-              <img 
-                src={compensationImage} 
-                alt="Camp Lejeune compensation amounts and settlement calculator" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <img src={compensationImage} alt="Camp Lejeune compensation amounts and settlement calculator" className="w-full h-64 object-cover rounded-lg mb-6" />
               <h2 className="text-3xl font-bold text-primary mb-6">Camp Lejeune Compensation</h2>
               
               <div className="space-y-6">
@@ -521,11 +493,7 @@ const CampLejeune: React.FC = () => {
 
             {/* Legal Process Section */}
             <section id="legal-process" className="content-section mb-12">
-              <img 
-                src={legalProcessImage} 
-                alt="Camp Lejeune legal process and federal court litigation" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <img src={legalProcessImage} alt="Camp Lejeune legal process and federal court litigation" className="w-full h-64 object-cover rounded-lg mb-6" />
               <h2 className="text-3xl font-bold text-primary mb-6">Legal Process for Camp Lejeune Claims</h2>
               
               <div className="space-y-6">
@@ -606,11 +574,7 @@ const CampLejeune: React.FC = () => {
 
             {/* Resources Section */}
             <section id="resources" className="content-section mb-12">
-              <img 
-                src={resourcesImage} 
-                alt="Camp Lejeune government resources and federal agencies" 
-                className="w-full h-64 object-cover rounded-lg mb-6"
-              />
+              <img src={resourcesImage} alt="Camp Lejeune government resources and federal agencies" className="w-full h-64 object-cover rounded-lg mb-6" />
               <h2 className="text-3xl font-bold text-primary mb-6">Camp Lejeune Resources</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -671,24 +635,17 @@ const CampLejeune: React.FC = () => {
               <h2 className="text-3xl font-bold text-primary mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-primary transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <CardHeader 
-                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
-                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                    >
+                {faqs.map((faq, index) => <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-primary transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader className="cursor-pointer transition-colors group-hover:bg-primary/5" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                       <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
                         {faq.question}
                         {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent className="animate-fade-in">
+                    {expandedFaq === index && <CardContent className="animate-fade-in">
                         <p className="text-muted-foreground text-base leading-relaxed">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
           </div>
@@ -702,26 +659,15 @@ const CampLejeune: React.FC = () => {
                   <CardTitle className="text-xl group-hover:text-primary transition-colors">3 Ways to Start Your Case</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <img 
-                    src={sidebarImage} 
-                    alt="Camp Lejeune veterans legal consultation" 
-                    className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                  />
+                  <img src={sidebarImage} alt="Camp Lejeune veterans legal consultation" className="w-full h-48 object-cover rounded-lg hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
                   
                   <div className="space-y-4">
-                    <Button 
-                      className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
+                    <Button className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = 'tel:8181234567'}>
                       <Phone className="w-5 h-5 mr-2" />
                       Call (818) 123-4567
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105"
-                      onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
-                    >
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3 transition-all duration-300 hover:scale-105" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
                       <Mail className="w-5 h-5 mr-2" />
                       Free Case Evaluation
                     </Button>
@@ -783,43 +729,21 @@ const CampLejeune: React.FC = () => {
       {/* Bottom CTA */}
       <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-2">
-            3 Ways to Start Your Case
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits 
+Apply for Camp Lejeune Claims  </h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
-          <p className="text-xl mb-12 leading-relaxed">
-            You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-          </p>
+          <p className="text-xl mb-12 leading-relaxed">The Camp Lejeune Justice Act has strict deadlines. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <Button 
-              size="lg" 
-              aria-label="Call Trembach Law Firm"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
-              onClick={() => window.location.href = 'tel:8181234567'}
-            >
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
               CALL (818) 123-4567
             </Button>
-            <Button 
-              size="lg" 
-              aria-label="Email Trembach Law Firm"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
-              onClick={() => window.location.href = 'mailto:info@trembachlaw.com'}
-            >
-              EMAIL US
-            </Button>
-            <Button 
-              size="lg" 
-              aria-label="Calculate Settlement Amount"
-              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
-              onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
-            >
+            
+            <Button size="lg" aria-label="Calculate Settlement Amount" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
               CALCULATE SETTLEMENT
             </Button>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default CampLejeune;

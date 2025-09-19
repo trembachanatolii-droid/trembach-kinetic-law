@@ -823,10 +823,10 @@ const WorkplaceInjuries: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-white text-red-600 hover:bg-gray-100 font-semibold"
+                  className="bg-white text-red-600 hover:bg-gray-100 hover:text-red-700 font-semibold"
                   asChild
                 >
-                  <Link to="/workplace-injuries-case-evaluation">Start Free Case Evaluation</Link>
+                  <Link to="/workplace-injuries-case-evaluation" className="text-red-600 hover:text-red-700">Start Free Case Evaluation</Link>
                 </Button>
                 <Button 
                   size="lg" 

@@ -216,6 +216,11 @@ function App() {
         <Route path="/environmental-toxic-compensation-calculator" element={<EnvironmentalToxicCompensationCalculator />} />
         <Route path="/environmental-toxic-legal-guidance" element={<EnvironmentalToxicLegalGuidance />} />
         <Route path="/environmental-toxic-resources" element={<EnvironmentalToxicResources />} />
+        {/* Environmental Toxic aliases under practice-areas for internal link parity */}
+        <Route path="/practice-areas/environmental-toxic/case-evaluation" element={<EnvironmentalToxicCaseEvaluation />} />
+        <Route path="/practice-areas/environmental-toxic/compensation-calculator" element={<EnvironmentalToxicCompensationCalculator />} />
+        <Route path="/practice-areas/environmental-toxic/legal-guidance" element={<EnvironmentalToxicLegalGuidance />} />
+        <Route path="/practice-areas/environmental-toxic/resources" element={<EnvironmentalToxicResources />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -36,6 +36,7 @@ import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/practice-areas/environmental-toxic-hero.jpg';
+import { ToxicHeroScene } from '@/components/three/ToxicHeroScene';
 import sidebarImage from '@/assets/practice-areas/environmental-toxic-evaluation.jpg';
 import pfasImage from '@/assets/practice-areas/environmental-toxic-pfas.jpg';
 import legalProcessImage from '@/assets/practice-areas/environmental-toxic-legal-process.jpg';
@@ -287,10 +288,17 @@ const EnvironmentalToxic: React.FC = () => {
       {/* Hero Section with improved visibility */}
       <section 
         ref={heroRef}
-        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden"
+        className="relative h-screen flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden parallax-container"
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
-        <div className="absolute inset-0 bg-black/80"></div>
+        {/* 3D Canvas Layer */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden>
+          {/* Toxic 3D Hero Scene */}
+          <ToxicHeroScene />
+        </div>
+
+        {/* Contrast overlay */}
+        <div className="absolute inset-0 bg-black/75"></div>
         
         {/* Floating Background Layers */}
         <div className="absolute inset-0 opacity-30">
@@ -326,7 +334,7 @@ const EnvironmentalToxic: React.FC = () => {
       </section>
 
       {/* Navigation Tabs */}
-      <section className="sticky top-0 z-40 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-lg">
+      <section className="sticky top-0 z-40 bg-background/95 border-b border-border shadow-lg">
         <div className="max-w-6xl mx-auto px-6">
           <div className="flex overflow-x-auto py-4 space-x-1">
             {tabs.map((tab) => {
@@ -343,7 +351,7 @@ const EnvironmentalToxic: React.FC = () => {
                   onClick={() => scrollToSection(tab.id)}
                 >
                   <IconComponent className="w-4 h-4" />
-                  <span className="text-sm font-medium">{tab.label}</span>
+                  <span className="text-sm font-medium text-foreground">{tab.label}</span>
                 </Button>
               );
             })}
@@ -619,24 +627,23 @@ const EnvironmentalToxic: React.FC = () => {
             <h2 className="text-3xl font-bold mb-12 text-center text-foreground">Frequently Asked Questions</h2>
             
             <div className="space-y-4">
-              {faqs.map((faq, index) => (
-                <Collapsible key={index}>
-                  <CollapsibleTrigger 
-                    className="flex w-full items-center justify-between rounded-lg bg-gray-50 p-6 text-left hover:bg-gray-100 transition-colors duration-200"
-                    onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                  >
-                    <span className="font-semibold text-foreground pr-4">{faq.question}</span>
-                    {expandedFaq === index ? (
-                      <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
-                    ) : (
-                      <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
-                    )}
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="px-6 pb-6 pt-2">
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                  </CollapsibleContent>
-                </Collapsible>
-              ))}
+                {faqs.map((faq, index) => (
+                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={(open) => setExpandedFaq(open ? index : null)}>
+                    <CollapsibleTrigger 
+                      className="flex w-full items-center justify-between rounded-lg bg-secondary p-6 text-left hover:bg-secondary/80 transition-colors duration-200"
+                    >
+                      <span className="font-semibold text-foreground pr-4">{faq.question}</span>
+                      {expandedFaq === index ? (
+                        <ChevronUp className="h-5 w-5 text-primary flex-shrink-0" />
+                      ) : (
+                        <ChevronDown className="h-5 w-5 text-primary flex-shrink-0" />
+                      )}
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="px-6 pb-6 pt-2">
+                      <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                    </CollapsibleContent>
+                  </Collapsible>
+                ))}
             </div>
           </section>
 

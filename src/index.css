@@ -92,7 +92,7 @@
     --secondary-foreground: 220 13% 5%;
     
     /* Cinematic Effects */
-    --grain-opacity: 0.03;
+    --grain-opacity: 0.01;
     --glow-blur: 20px;
     --glass-blur: 10px;
     

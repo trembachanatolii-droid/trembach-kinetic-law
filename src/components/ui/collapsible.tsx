@@ -2,8 +2,8 @@ import * as CollapsiblePrimitive from "@radix-ui/react-collapsible";
 
 const Collapsible = CollapsiblePrimitive.Root;
 
-const CollapsibleTrigger = CollapsiblePrimitive.CollapsibleTrigger;
-
-const CollapsibleContent = CollapsiblePrimitive.CollapsibleContent;
+// Fix: use correct Radix component names
+const CollapsibleTrigger = CollapsiblePrimitive.Trigger;
+const CollapsibleContent = CollapsiblePrimitive.Content;
 
 export { Collapsible, CollapsibleTrigger, CollapsibleContent };

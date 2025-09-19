@@ -127,7 +127,7 @@ const MedicalDevices: React.FC = () => {
       <SEO 
         title="Medical Device Injury Lawyer California | Defective Medical Device Attorney | Trembach Law Firm"
         description="Former defense attorney fighting for California medical device injury victims. Hip implants, hernia mesh, pacemakers. FDA 510(k) failures. Free consultation. No fees unless we win."
-        canonicalUrl="https://www.trembachlawfirm.com/medical-devices"
+        canonical="/medical-devices"
       />
 
       {/* Go Back Component */}

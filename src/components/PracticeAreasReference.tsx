@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -742,18 +745,9 @@ const PracticeAreasReference: React.FC = () => {
                       <Button variant="outline" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
                         Free Consultation
                       </Button>
-                    </Link>
-                          </svg>
-                          Learn More
-                        </Link>
-                        <button className="hero-button">
-                          <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
-                            <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm0,192a88,88,0,1,1,88-88A88.1,88.1,0,0,1,128,216Zm40-68a8,8,0,0,1-8,8H128a8,8,0,0,1-8-8V88a8,8,0,0,1,16,0v52h24A8,8,0,0,1,168,148Z"></path>
-                          </svg>
-                          Consult
-                        </button>
-                      </div>
-                    </div>
+                     </Link>
+                       </div>
+                     </div>
 
                     {/* Practice Info */}
                     <div className="p-6 space-y-4">

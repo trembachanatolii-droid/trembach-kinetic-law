@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, Suspense } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useScrollMemory } from '@/hooks/useScrollMemory';
@@ -28,14 +28,13 @@ import {
   Map,
   ArrowLeft
 } from 'lucide-react';
-import heroBackground from '@/assets/environmental-toxic-hero-bg.jpg';
+import heroBackground from '@/assets/environmental-toxic-hero-main.jpg';
 import sidebarImage from '@/assets/environmental-toxic-sidebar.jpg';
 import diagnosisImage from '@/assets/environmental-toxic-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/environmental-toxic-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-contamination-sites.jpg';
 import medicalImage from '@/assets/environmental-toxic-medical-facility.jpg';
 import compensationImage from '@/assets/environmental-toxic-compensation-calculator.jpg';
-import { ToxicHeroScene } from '@/components/three/ToxicHeroScene';
 import SEO from '@/components/SEO';
 import { environmentalToxicFaqs } from '@/content/environmentalToxicFaqs';
 
@@ -135,12 +134,6 @@ const EnvironmentalToxic: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         
-        {/* Enhanced 3D Scene Overlay */}
-        <div className="absolute inset-0 pointer-events-none">
-          <Suspense fallback={null}>
-            <ToxicHeroScene />
-          </Suspense>
-        </div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-10">

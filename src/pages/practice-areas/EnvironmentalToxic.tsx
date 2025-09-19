@@ -472,6 +472,43 @@ const EnvironmentalToxic: React.FC = () => {
                   </div>
                 </CardContent>
               </Card>
+
+              {/* Medical Support */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Medical Support</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <img 
+                    src={medicalImage} 
+                    alt="California environmental health specialists" 
+                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                  />
+                  <p className="text-sm text-muted-foreground">
+                    We can connect you with environmental health specialists throughout California.
+                  </p>
+                </CardContent>
+              </Card>
+
+              {/* Compensation Info */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Compensation Sources</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <img 
+                    src={compensationImage} 
+                    alt="Environmental toxic exposure compensation calculator" 
+                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                  />
+                  <div className="space-y-2 text-sm">
+                    <p>• Medical expenses and monitoring</p>
+                    <p>• Lost wages and reduced earning capacity</p>
+                    <p>• Property damage and cleanup costs</p>
+                    <p>• Pain and suffering</p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </div>

@@ -626,7 +626,7 @@ const PFASExposure: React.FC = () => {
                 <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
                 
                 <div className="space-y-4">
-                  {pfasQuestions.slice(0, 10).map((faq, index) => (
+                  {pfasQuestions.map((faq, index) => (
                     <Card key={index}>
                       <CardHeader 
                         className="cursor-pointer hover:bg-muted/50 transition-colors"

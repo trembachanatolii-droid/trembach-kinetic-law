@@ -140,6 +140,18 @@ const BurnCompensationCalculator: React.FC = () => {
                   Calculate Compensation
                 </Button>
 
+                {/* Disclaimer */}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <h4 className="font-bold text-amber-800 mb-2">Important Disclaimer</h4>
+                  <p className="text-sm text-amber-700">
+                    This calculator provides rough estimates only and should not be considered legal advice. 
+                    Actual settlement amounts depend on numerous case-specific factors including the severity 
+                    of injuries, circumstances of the incident, available insurance coverage, and California 
+                    state laws. For an accurate evaluation of your potential compensation, please consult 
+                    with a qualified burn injury attorney who can review the specific details of your case.
+                  </p>
+                </div>
+
                 {calculation && (
                   <Card className="bg-green-50 border-green-200">
                     <CardHeader>
@@ -180,7 +192,7 @@ const BurnCompensationCalculator: React.FC = () => {
                   <p className="mb-4">For accurate compensation estimates based on your specific case details</p>
                   <Button 
                     className="w-full bg-red-600 hover:bg-red-700 text-white"
-                    onClick={() => window.location.href = '/burn-injuries-case-evaluation'}
+                    onClick={() => window.location.href = '/burn-case-evaluation'}
                   >
                     Free Case Evaluation
                   </Button>

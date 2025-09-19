@@ -40,7 +40,7 @@ import {
   ClipboardCheck,
   Zap
 } from 'lucide-react';
-import heroBackground from '@/assets/practice-areas/amputation-hero.jpg';
+import heroBackground from '@/assets/practice-areas/amputation-hero-new.jpg';
 import whatToDoImage from '@/assets/practice-areas/amputation-immediate-care.jpg';
 import amputationTypesImage from '@/assets/practice-areas/amputation-types.jpg';
 import rehabilitationImage from '@/assets/practice-areas/amputation-rehabilitation.jpg';

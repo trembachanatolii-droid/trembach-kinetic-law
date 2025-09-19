@@ -790,17 +790,17 @@ const CampLejeune: React.FC = () => {
             The Camp Lejeune Justice Act has strict deadlines. 
             Contact us today for your free consultation.
           </p>
-          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 p-4 rounded-xl bg-background/20 backdrop-blur-sm" >
+          <div className="flex flex-row justify-center items-center gap-4">
             <Button 
               size="lg" 
-              className="bg-destructive text-white hover:bg-destructive/90 font-bold px-8 py-4"
+              className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 rounded-full"
               onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
             >
               Start Free Case Evaluation
             </Button>
             <Button 
               size="lg" 
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold px-8 py-4 transition-all duration-300"
+              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold px-8 py-4 rounded-full transition-all duration-300"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               Call (818) 123-4567

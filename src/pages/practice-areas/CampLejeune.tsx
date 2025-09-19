@@ -738,8 +738,8 @@ Apply for Camp Lejeune Claims  </h2>
               CALL (818) 123-4567
             </Button>
             
-            <Button size="lg" aria-label="Calculate Settlement Amount" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
-              CALCULATE SETTLEMENT
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}>
+              START MY FREE CASE EVALUATION
             </Button>
           </div>
         </div>

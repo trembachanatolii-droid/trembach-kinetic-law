@@ -1,18 +1,19 @@
 import React from 'react';
-import { ComprehensivePracticeAreaTemplate } from '@/components/ComprehensivePracticeAreaTemplate';
+import ComprehensivePracticeAreaTemplate from '@/components/ComprehensivePracticeAreaTemplate';
 import heroBackground from '@/assets/environmental-toxic-case-evaluation-hero.jpg';
 
 const EnvironmentalToxicCaseEvaluation: React.FC = () => {
   const seo = {
     title: "Environmental Toxic Exposure Case Evaluation | Free Consultation",
     description: "Get a free case evaluation for environmental toxic exposure. Expert legal assessment of PFAS, TCE, chemical contamination claims in California.",
-    ogImage: "/environmental-toxic-case-evaluation-hero.jpg"
+    canonical: "/environmental-toxic-case-evaluation"
   };
 
   const hero = {
     backgroundImage: heroBackground,
     title: "Environmental Toxic Exposure Case Evaluation",
-    subtitle: "Get Your Free Legal Assessment Today"
+    subtitle: "Get Your Free Legal Assessment Today",
+    description: "Expert evaluation of your toxic exposure case with no upfront costs"
   };
 
   return (

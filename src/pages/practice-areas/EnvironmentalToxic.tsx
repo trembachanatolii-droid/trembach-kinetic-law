@@ -376,7 +376,6 @@ const EnvironmentalToxic: React.FC = () => {
       <SEO
         title="California Environmental Toxic Exposure Lawyers | PFAS, TCE, Chemical Contamination Attorney"
         description="Former defense attorney fights for toxic exposure victims. PFAS, TCE, chromium-6, benzene contamination lawsuits. Free consultation. No fees unless we win."
-        ogImage="/environmental-toxic-hero.jpg"
       />
       
       <Navigation />

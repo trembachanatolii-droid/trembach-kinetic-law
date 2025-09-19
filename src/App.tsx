@@ -19,6 +19,7 @@ import ClassActionsCaseEvaluation from "./pages/ClassActionsCaseEvaluation";
 import ClassActionsCompensationCalculator from "./pages/ClassActionsCompensationCalculator";
 import ClassActionsLegalGuidance from "./pages/ClassActionsLegalGuidance";
 import ClassActionsResources from "./pages/ClassActionsResources";
+import EnvironmentalToxicCaseEvaluation from "./pages/EnvironmentalToxicCaseEvaluation";
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";

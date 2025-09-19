@@ -864,11 +864,11 @@ const ClassActions: React.FC = () => {
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all font-bold"
+                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all font-bold text-primary border-primary"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
                       <Phone className="w-4 h-4 mr-2" />
-                      <span className="text-primary">Call (818) 123-4567</span>
+        <span className="text-primary hover:text-primary-foreground">Call (818) 123-4567</span>
                     </Button>
                   </div>
 
@@ -879,11 +879,11 @@ const ClassActions: React.FC = () => {
                     <Button 
                       variant="outline" 
                       size="lg" 
-                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all font-bold"
+                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all font-bold text-primary border-primary"
                       onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com?subject=Class Action Case Inquiry'}
                     >
                       <Mail className="w-4 h-4 mr-2" />
-                      <span className="text-primary">Send Email</span>
+                      <span className="text-primary hover:text-primary-foreground">Send Email</span>
                     </Button>
                   </div>
 
@@ -961,7 +961,7 @@ const ClassActions: React.FC = () => {
               className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 transition-all duration-300"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
-              <span className="text-white group-hover:text-red-600">Call (818) 123-4567</span>
+              <span className="text-white hover:text-red-600 transition-colors">Call (818) 123-4567</span>
             </Button>
           </div>
         </div>

@@ -21,6 +21,12 @@ const getPracticeAreaLink = (title: string): string => {
       return "/practice-areas/burn-injuries";
     case "Workplace Injuries":
       return "/practice-areas/workplace-injuries";
+    case "Class Actions":
+      return "/class-actions";
+    case "Mesothelioma & Asbestos":
+      return "/mesothelioma-asbestos";
+    case "Mass Torts":
+      return "/mass-torts";
     default:
       return "/case-evaluation";
   }

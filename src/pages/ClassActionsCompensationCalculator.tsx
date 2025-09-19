@@ -165,16 +165,23 @@ const ClassActionsCompensationCalculator: React.FC = () => {
                   </Card>
                 )}
 
-                <Card className="bg-muted/50 border-muted">
-                  <CardContent className="pt-6">
-                    <div className="flex items-start">
-                      <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 mr-3 flex-shrink-0" />
-                      <div className="text-sm text-muted-foreground">
-                        <p><strong>Disclaimer:</strong> This calculator provides estimates only. Actual compensation depends on case specifics, settlement negotiations, court approval, and other factors. Consult with an attorney for accurate evaluation.</p>
+                    {/* Legal Disclaimer */}
+                    <div className="bg-muted/50 border border-muted rounded-lg p-4 mt-6">
+                      <div className="flex items-start">
+                        <AlertTriangle className="w-5 h-5 text-amber-500 mt-0.5 mr-3 flex-shrink-0" />
+                        <div className="text-sm text-muted-foreground leading-relaxed">
+                          <p className="mb-2">
+                            <strong>Legal Disclaimer:</strong> This calculator provides estimates only based on general case data. 
+                            Actual compensation depends on case specifics, settlement negotiations, court approval, class size, 
+                            and individual circumstances.
+                          </p>
+                          <p>
+                            Results are not guaranteed and should not be relied upon as legal advice. 
+                            Consult with a qualified attorney for accurate case evaluation. Prior results do not guarantee similar outcomes.
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </CardContent>
-                </Card>
               </CardContent>
             </Card>
           </div>

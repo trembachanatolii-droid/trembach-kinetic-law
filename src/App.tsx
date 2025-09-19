@@ -17,6 +17,8 @@ import MassTortsResources from "./pages/MassTortsResources";
 import ClassActions from "./pages/practice-areas/ClassActions";
 import ClassActionsCaseEvaluation from "./pages/ClassActionsCaseEvaluation";
 import ClassActionsCompensationCalculator from "./pages/ClassActionsCompensationCalculator";
+import ClassActionsLegalGuidance from "./pages/ClassActionsLegalGuidance";
+import ClassActionsResources from "./pages/ClassActionsResources";
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";
@@ -204,6 +206,8 @@ function App() {
              <Route path="/class-actions" element={<ClassActions />} />
              <Route path="/class-actions-case-evaluation" element={<ClassActionsCaseEvaluation />} />
              <Route path="/class-actions-compensation-calculator" element={<ClassActionsCompensationCalculator />} />
+             <Route path="/class-actions-legal-guidance" element={<ClassActionsLegalGuidance />} />
+             <Route path="/class-actions-resources" element={<ClassActionsResources />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

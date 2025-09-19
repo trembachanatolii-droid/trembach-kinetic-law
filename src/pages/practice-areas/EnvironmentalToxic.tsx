@@ -40,6 +40,11 @@ import sidebarImage from '@/assets/practice-areas/environmental-toxic-evaluation
 import pfasImage from '@/assets/practice-areas/environmental-toxic-pfas.jpg';
 import legalProcessImage from '@/assets/practice-areas/environmental-toxic-legal-process.jpg';
 import healthImage from '@/assets/practice-areas/environmental-toxic-health.jpg';
+import solventsImage from '@/assets/practice-areas/environmental-toxic-solvents.jpg';
+import chromiumImage from '@/assets/practice-areas/environmental-toxic-chromium.jpg';
+import benzeneImage from '@/assets/practice-areas/environmental-toxic-benzene.jpg';
+import heavyMetalsImage from '@/assets/practice-areas/environmental-toxic-heavy-metals.jpg';
+import vocsImage from '@/assets/practice-areas/environmental-toxic-vocs.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -157,7 +162,25 @@ const EnvironmentalToxic: React.FC = () => {
 
     }, contentRef);
 
-    return () => ctx.revert();
+    // Go Back button scroll behavior
+    const handleScroll = () => {
+      const goBackButton = document.querySelector('.go-back-button');
+      if (goBackButton) {
+        const scrollY = window.scrollY;
+        if (scrollY > 200) {
+          goBackButton.classList.add('show');
+        } else {
+          goBackButton.classList.remove('show');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const toggleSection = (sectionId: string) => {
@@ -379,7 +402,7 @@ const EnvironmentalToxic: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack />
+      <GoBack className="go-back-button fixed top-32 left-4 z-50 opacity-0 invisible transition-all duration-300 [&.show]:opacity-100 [&.show]:visible" />
 
       {/* Hero Section with 3D effects */}
       <section 
@@ -601,9 +624,9 @@ const EnvironmentalToxic: React.FC = () => {
                     <div>
                       <form onSubmit={handleFormSubmit} className="space-y-6 bg-gradient-subtle p-6 rounded-lg">
                         <div>
-                          <label className="block text-sm font-medium mb-2">Type of Exposure *</label>
+                          <label className="block text-base font-medium mb-3 text-foreground">Type of Exposure *</label>
                           <Select value={formData.exposureType} onValueChange={(value) => setFormData({...formData, exposureType: value})}>
-                            <SelectTrigger>
+                            <SelectTrigger className="text-base">
                               <SelectValue placeholder="Select exposure type" />
                             </SelectTrigger>
                             <SelectContent>
@@ -622,9 +645,9 @@ const EnvironmentalToxic: React.FC = () => {
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium mb-2">Exposure Location *</label>
+                          <label className="block text-base font-medium mb-3 text-foreground">Exposure Location *</label>
                           <Select value={formData.location} onValueChange={(value) => setFormData({...formData, location: value})}>
-                            <SelectTrigger>
+                            <SelectTrigger className="text-base">
                               <SelectValue placeholder="Where did exposure occur?" />
                             </SelectTrigger>
                             <SelectContent>
@@ -642,34 +665,34 @@ const EnvironmentalToxic: React.FC = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                           <div>
-                            <label className="block text-sm font-medium mb-2">First Name *</label>
-                            <Input placeholder="Your first name" required />
+                            <label className="block text-base font-medium mb-3 text-foreground">First Name *</label>
+                            <Input placeholder="Your first name" required className="text-base" />
                           </div>
                           <div>
-                            <label className="block text-sm font-medium mb-2">Last Name *</label>
-                            <Input placeholder="Your last name" required />
+                            <label className="block text-base font-medium mb-3 text-foreground">Last Name *</label>
+                            <Input placeholder="Your last name" required className="text-base" />
                           </div>
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium mb-2">Phone Number *</label>
-                          <Input type="tel" placeholder="(818) 123-4567" required />
+                          <label className="block text-base font-medium mb-3 text-foreground">Phone Number *</label>
+                          <Input type="tel" placeholder="(818) 123-4567" required className="text-base" />
                         </div>
 
                         <div>
-                          <label className="block text-sm font-medium mb-2">Email Address *</label>
-                          <Input type="email" placeholder="your.email@example.com" required />
+                          <label className="block text-base font-medium mb-3 text-foreground">Email Address *</label>
+                          <Input type="email" placeholder="your.email@example.com" required className="text-base" />
                         </div>
 
                         <Button 
                           type="submit" 
-                          className="w-full bg-gradient-primary text-white font-bold py-3 hover:scale-105 transition-all duration-300 shadow-glow"
+                          className="w-full bg-gradient-primary text-white font-bold py-4 text-lg hover:scale-105 transition-all duration-300 shadow-glow"
                           disabled={!formData.exposureType || !formData.location}
                         >
-                          START MY FREE EVALUATION
+                          <span className="text-white font-bold">START MY FREE EVALUATION</span>
                         </Button>
 
-                        <p className="text-xs text-muted-foreground text-center">
+                        <p className="text-sm text-muted-foreground text-center opacity-100">
                           Your information is confidential and protected by attorney-client privilege
                         </p>
                       </form>
@@ -781,6 +804,176 @@ const EnvironmentalToxic: React.FC = () => {
                             <h4 className="text-lg font-semibold text-red-700 mb-2">EPA Ban and Legal Implications</h4>
                             <p className="text-red-600">The EPA's December 2024 ban on TCE and restrictions on PCE acknowledge these chemicals' extreme danger. This strengthens legal cases by establishing regulatory recognition of unacceptable risk.</p>
                           </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Hexavalent Chromium Section */}
+                    <Collapsible open={expandedSections['chromium']} onOpenChange={() => toggleSection('chromium')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <Factory className="w-6 h-6 mr-3" />
+                            Hexavalent Chromium - The Erin Brockovich Chemical
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['chromium'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <img src={chromiumImage} alt="Hexavalent chromium contamination" className="w-full h-64 object-cover rounded-lg mb-6" />
+                          
+                          <h4 className="text-lg font-semibold mb-4">The Chromium-6 Crisis</h4>
+                          <p className="mb-4">Made famous by the Erin Brockovich case against PG&E, hexavalent chromium (Chromium-6) contamination affects hundreds of California water systems. This highly toxic metal causes cancer when ingested or inhaled, with no safe exposure level.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Sources of Chromium-6</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Industrial Operations:</strong> Chrome plating, stainless steel production, leather tanning</li>
+                            <li><strong>Natural Geology:</strong> Naturally occurring in some California groundwater</li>
+                            <li><strong>Cooling Towers:</strong> Anti-corrosion agents like in the Hinkley case</li>
+                            <li><strong>Wood Treatment:</strong> Chromated copper arsenate (CCA) preservatives</li>
+                            <li><strong>Remediation Sites:</strong> Oxidation of Chromium-3 during cleanup creating Chromium-6</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Effects</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Lung cancer (when inhaled)</li>
+                            <li>Stomach and intestinal cancer (when ingested)</li>
+                            <li>Liver and kidney damage</li>
+                            <li>Reproductive harm and birth defects</li>
+                            <li>Skin burns and ulcers</li>
+                            <li>Respiratory problems and nasal damage</li>
+                          </ul>
+
+                          <div className="bg-blue-50 p-4 rounded-lg border-l-4 border-blue-500">
+                            <h4 className="text-lg font-semibold text-blue-700 mb-2">California's Nation-Leading Standard</h4>
+                            <p className="text-blue-600">California set the nation's first drinking water standard for hexavalent chromium at 10 parts per billion in 2024, affecting 330 water sources statewide. The highest levels are in Riverside, Los Angeles, Yolo, and Ventura counties.</p>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Benzene Section */}
+                    <Collapsible open={expandedSections['benzene']} onOpenChange={() => toggleSection('benzene')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <Beaker className="w-6 h-6 mr-3" />
+                            Benzene - Widespread Carcinogen in Products and Water
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['benzene'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <img src={benzeneImage} alt="Benzene contamination" className="w-full h-64 object-cover rounded-lg mb-6" />
+                          
+                          <h4 className="text-lg font-semibold mb-4">The Benzene Threat</h4>
+                          <p className="mb-4">Benzene is a known human carcinogen causing leukemia and other blood cancers. Despite its dangers, benzene remains widespread in petroleum products, industrial operations, and consumer goods, contaminating air, water, and soil throughout California.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Exposure Sources</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Petroleum Industry:</strong> Refineries, gas stations, and oil operations</li>
+                            <li><strong>Consumer Products:</strong> Contaminated sunscreens, deodorants, hand sanitizers</li>
+                            <li><strong>Vehicle Exhaust:</strong> Major source of ambient benzene exposure</li>
+                            <li><strong>Industrial Solvents:</strong> Paints, adhesives, and chemical manufacturing</li>
+                            <li><strong>Groundwater:</strong> BTEX contamination from underground storage tanks</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Consequences</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Acute myeloid leukemia (AML)</li>
+                            <li>Acute lymphocytic leukemia (ALL)</li>
+                            <li>Chronic lymphocytic leukemia (CLL)</li>
+                            <li>Multiple myeloma</li>
+                            <li>Non-Hodgkin's lymphoma</li>
+                            <li>Aplastic anemia and other blood disorders</li>
+                            <li>Reproductive harm and birth defects</li>
+                          </ul>
+
+                          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 className="text-lg font-semibold text-red-700 mb-2">Recent Contamination Scandals</h4>
+                            <p className="text-red-600">Major recalls of sunscreens, dry shampoos, and antiperspirants containing benzene highlight ongoing exposure risks. Johnson & Johnson, Procter & Gamble, and other companies face lawsuits for benzene contamination in consumer products.</p>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* Heavy Metals Section */}
+                    <Collapsible open={expandedSections['heavy-metals']} onOpenChange={() => toggleSection('heavy-metals')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <AlertTriangle className="w-6 h-6 mr-3" />
+                            Heavy Metals - Lead, Mercury, and Arsenic Poisoning
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['heavy-metals'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <img src={heavyMetalsImage} alt="Heavy metals contamination" className="w-full h-64 object-cover rounded-lg mb-6" />
+                          
+                          <h4 className="text-lg font-semibold mb-4">Persistent Toxic Metals</h4>
+                          <p className="mb-4">Heavy metals accumulate in the body and environment, causing permanent damage to organs and developmental systems. Lead, mercury, arsenic, and cadmium contamination affects millions of Californians through drinking water, soil, and consumer products.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Common Sources</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Lead:</strong> Old paint, pipes, soil contamination, imported products</li>
+                            <li><strong>Mercury:</strong> Industrial emissions, dental amalgams, contaminated fish</li>
+                            <li><strong>Arsenic:</strong> Groundwater, pressure-treated wood, pesticides</li>
+                            <li><strong>Cadmium:</strong> Industrial operations, batteries, tobacco smoke</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Effects</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Brain development damage in children</li>
+                            <li>Cardiovascular disease and high blood pressure</li>
+                            <li>Kidney and liver damage</li>
+                            <li>Cancer (arsenic, cadmium)</li>
+                            <li>Neurological disorders and memory loss</li>
+                            <li>Reproductive harm and birth defects</li>
+                          </ul>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* VOCs Section */}
+                    <Collapsible open={expandedSections['vocs']} onOpenChange={() => toggleSection('vocs')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <Leaf className="w-6 h-6 mr-3" />
+                            VOCs - Volatile Organic Compounds in Air and Products
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['vocs'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <img src={vocsImage} alt="VOCs contamination" className="w-full h-64 object-cover rounded-lg mb-6" />
+                          
+                          <h4 className="text-lg font-semibold mb-4">Indoor and Outdoor Air Pollution</h4>
+                          <p className="mb-4">Volatile Organic Compounds (VOCs) easily evaporate into the air we breathe, creating both indoor and outdoor pollution. These chemicals come from building materials, consumer products, industrial emissions, and vehicle exhaust.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Common VOCs</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Formaldehyde:</strong> Building materials, furniture, adhesives</li>
+                            <li><strong>Toluene:</strong> Paints, nail polish, gasoline</li>
+                            <li><strong>Xylene:</strong> Printing inks, rubber, leather</li>
+                            <li><strong>Ethylbenzene:</strong> Styrene production, gasoline</li>
+                            <li><strong>Methylene Chloride:</strong> Paint strippers, aerosols</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Effects</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Headaches and dizziness</li>
+                            <li>Respiratory irritation and asthma</li>
+                            <li>Eye, nose, and throat irritation</li>
+                            <li>Liver and kidney damage</li>
+                            <li>Cancer (some VOCs are carcinogenic)</li>
+                            <li>Central nervous system effects</li>
+                          </ul>
                         </div>
                       </CollapsibleContent>
                     </Collapsible>
@@ -922,14 +1115,14 @@ const EnvironmentalToxic: React.FC = () => {
                       <div key={index} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
                         <button
                           onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                          className="w-full p-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                          className="w-full p-6 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
                         >
-                          <span className="font-medium text-lg pr-4">{faq.question}</span>
+                          <span className="font-medium text-lg pr-4 text-foreground">{faq.question}</span>
                           <ChevronDown className={`w-5 h-5 text-primary transition-transform ${expandedFaq === index ? 'rotate-180' : ''}`} />
                         </button>
                         {expandedFaq === index && (
-                          <div className="p-4 border-t border-gray-200 bg-gray-50">
-                            <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                          <div className="p-6 border-t border-gray-200 bg-gray-50">
+                            <p className="text-muted-foreground leading-relaxed text-base">{faq.answer}</p>
                           </div>
                         )}
                       </div>
@@ -1021,7 +1214,7 @@ const EnvironmentalToxic: React.FC = () => {
                     >
                       START YOUR FREE CASE EVALUATION NOW
                     </Button>
-                    <p className="text-sm opacity-90">Call (818) 123-4567 - Available 24/7 for Environmental Emergencies</p>
+                    <p className="text-red-600 text-sm opacity-100">Call (818) 123-4567 - Available 24/7 for Environmental Emergencies</p>
                   </div>
                 </CardContent>
               </Card>
@@ -1059,7 +1252,7 @@ const EnvironmentalToxic: React.FC = () => {
                       className="w-full bg-green-600 hover:bg-green-700 text-white font-bold" 
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
-                      (818) 123-4567
+                      <span className="text-white font-bold">(818) 123-4567</span>
                     </Button>
                   </div>
 
@@ -1075,7 +1268,7 @@ const EnvironmentalToxic: React.FC = () => {
                       className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold" 
                       onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}
                     >
-                      Start Evaluation
+                      <span className="text-white font-bold">Start Evaluation</span>
                     </Button>
                   </div>
 
@@ -1091,7 +1284,7 @@ const EnvironmentalToxic: React.FC = () => {
                       className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold" 
                       onClick={() => window.location.href = 'mailto:contact@lawfirm.com'}
                     >
-                      Send Email
+                      <span className="text-white font-bold">Send Email</span>
                     </Button>
                   </div>
 
@@ -1121,7 +1314,7 @@ const EnvironmentalToxic: React.FC = () => {
                     className="w-full bg-red-600 hover:bg-red-700 text-white font-bold mb-2" 
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
-                    CALL EMERGENCY LINE
+                    <span className="text-white font-bold">CALL EMERGENCY LINE</span>
                   </Button>
                   <p className="text-xs text-red-600">Available 24/7 • Immediate Response</p>
                 </CardContent>

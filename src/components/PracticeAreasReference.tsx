@@ -27,7 +27,7 @@ import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
 import pharmaceuticalImg from '@/assets/practice-areas/pharmaceutical.jpg';
 import massTortsImg from '@/assets/practice-areas/mass-torts.jpg';
 import classActionsImg from '@/assets/practice-areas/class-actions.jpg';
-import environmentalToxicImg from '@/assets/practice-areas/environmental-toxic.jpg';
+import environmentalToxicImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
 import campLejeuneImg from '@/assets/practice-areas/camp-lejeune.jpg';
 import pfasExposureImg from '@/assets/practice-areas/pfas-exposure.jpg';
 import benzeneExposureImg from '@/assets/practice-areas/benzene-exposure.jpg';
@@ -868,7 +868,9 @@ const PracticeAreasReference: React.FC = () => {
                     {/* CTA */}
                     <Link
                       to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
-                          area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                          area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
+                          area.title === 'Class Actions' ? '/practice-areas/class-actions' :
+                          area.title === 'Environmental Toxic' ? '/practice-areas/environmental-toxic' :
                           '/practice-areas/coming-soon'}
                       className="ghost-button w-full justify-center"
                       onClick={(e) => e.stopPropagation()}

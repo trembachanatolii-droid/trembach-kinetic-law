@@ -231,13 +231,13 @@ const EnvironmentalToxicCompensationCalculator: React.FC = () => {
                     </Select>
                   </div>
 
-                  <Button 
-                    onClick={calculateCompensation}
-                    className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3"
-                    disabled={!calculatorData.exposureType || !calculatorData.healthEffects}
-                  >
-                    Calculate My Potential Compensation
-                  </Button>
+                        <Button 
+                          className="w-full bg-green-600 hover:bg-green-700 font-bold py-3 text-lg hover:scale-105 transition-all duration-300" 
+                          onClick={calculateCompensation}
+                          disabled={!calculatorData.exposureType || !calculatorData.healthEffects}
+                        >
+                          <span className="text-white">Calculate My Potential Compensation</span>
+                        </Button>
                 </div>
 
                 <div className="space-y-6">
@@ -317,22 +317,21 @@ const EnvironmentalToxicCompensationCalculator: React.FC = () => {
             <p className="text-lg mb-6">
               For an accurate assessment of your environmental toxic exposure case, contact our experienced attorneys.
             </p>
-            <div className="space-x-4">
               <Button 
                 size="lg"
-                className="bg-primary hover:bg-primary/90 text-white font-bold"
+                className="bg-primary hover:bg-primary/90 font-bold text-lg px-8 py-4"
                 onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}
               >
-                Free Case Evaluation
+                <span className="text-white">Free Case Evaluation</span>
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
+                className="font-bold text-lg px-8 py-4 border-2"
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
-                Call (818) 123-4567
+                <span className="text-foreground">Call (818) 123-4567</span>
               </Button>
-            </div>
           </div>
         </div>
       </section>

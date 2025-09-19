@@ -363,6 +363,281 @@ const EnvironmentalToxic: React.FC = () => {
               </div>
             </section>
 
+            {/* Toxic Chemicals Section */}
+            <section id="toxic-chemicals" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-primary mb-6">Common Toxic Chemicals in California</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-primary" />
+                      PFAS "Forever Chemicals"
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">Per- and polyfluoroalkyl substances (PFAS) are synthetic chemicals used in non-stick cookware, waterproof clothing, and firefighting foam. They persist in the environment and human body for decades.</p>
+                    <p className="text-sm text-muted-foreground">Health Effects: Cancer, liver damage, immune system suppression, birth defects</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-primary" />
+                      TCE & PCE Solvents
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">Trichloroethylene (TCE) and Perchloroethylene (PCE) are industrial solvents used in dry cleaning and metal degreasing that commonly contaminate groundwater.</p>
+                    <p className="text-sm text-muted-foreground">Health Effects: Kidney cancer, liver cancer, neurological disorders, birth defects</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-primary" />
+                      Hexavalent Chromium
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">Also known as Chromium-6, this industrial chemical is used in chrome plating, welding, and manufacturing. It's a known carcinogen that contaminates soil and groundwater.</p>
+                    <p className="text-sm text-muted-foreground">Health Effects: Lung cancer, nasal cancer, skin ulcers, respiratory problems</p>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card group hover-glow-primary">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <AlertTriangle className="w-5 h-5 mr-2 text-primary" />
+                      Benzene
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-base mb-4">A petrochemical used in gasoline, plastics, and chemical production. Released from refineries, gas stations, and industrial facilities.</p>
+                    <p className="text-sm text-muted-foreground">Health Effects: Leukemia, blood disorders, bone marrow damage, reproductive issues</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Health Effects Section */}
+            <section id="health-effects" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-primary mb-6">Health Effects of Toxic Exposure</h2>
+              
+              <div className="space-y-6">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary">
+                      <Heart className="w-5 h-5 mr-2" />
+                      Immediate Health Effects
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h4 className="font-semibold mb-2">Respiratory Problems</h4>
+                        <p className="text-sm text-muted-foreground">Coughing, wheezing, shortness of breath, chest pain</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Skin & Eye Irritation</h4>
+                        <p className="text-sm text-muted-foreground">Rashes, burns, eye irritation, chemical burns</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Neurological Issues</h4>
+                        <p className="text-sm text-muted-foreground">Headaches, dizziness, confusion, memory problems</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Gastrointestinal</h4>
+                        <p className="text-sm text-muted-foreground">Nausea, vomiting, stomach pain, diarrhea</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary">
+                      <Stethoscope className="w-5 h-5 mr-2" />
+                      Long-Term Health Consequences
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                      <div>
+                        <h4 className="font-semibold mb-2">Cancer</h4>
+                        <ul className="text-sm text-muted-foreground space-y-1">
+                          <li>• Lung cancer</li>
+                          <li>• Liver cancer</li>
+                          <li>• Kidney cancer</li>
+                          <li>• Leukemia</li>
+                          <li>• Bladder cancer</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Organ Damage</h4>
+                        <ul className="text-sm text-muted-foreground space-y-1">
+                          <li>• Liver disease</li>
+                          <li>• Kidney failure</li>
+                          <li>• Heart problems</li>
+                          <li>• Lung scarring</li>
+                          <li>• Brain damage</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Reproductive Issues</h4>
+                        <ul className="text-sm text-muted-foreground space-y-1">
+                          <li>• Birth defects</li>
+                          <li>• Infertility</li>
+                          <li>• Miscarriage</li>
+                          <li>• Developmental delays</li>
+                          <li>• Hormone disruption</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-primary mb-6">Legal Process for Environmental Toxic Claims</h2>
+              
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 1</Badge>
+                      <CardTitle className="text-lg">Case Evaluation</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Free consultation to assess your exposure and potential claim</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 2</Badge>
+                      <CardTitle className="text-lg">Investigation</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Gather evidence, medical records, and environmental data</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 3</Badge>
+                      <CardTitle className="text-lg">Filing Claims</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">File lawsuits against responsible parties and insurance claims</p>
+                    </CardContent>
+                  </Card>
+
+                  <Card className="glass-card text-center">
+                    <CardHeader>
+                      <Badge className="mx-auto mb-2">Step 4</Badge>
+                      <CardTitle className="text-lg">Resolution</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-sm">Negotiate settlement or proceed to trial for maximum compensation</p>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary">
+                      <Scale className="w-5 h-5 mr-2" />
+                      What We Handle
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold mb-3">Environmental Liability Claims</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Groundwater contamination lawsuits</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Soil pollution claims</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Air quality violation cases</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Industrial accident claims</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-3">Personal Injury Claims</h4>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Toxic exposure cancer cases</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Birth defect litigation</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Occupational disease claims</li>
+                          <li className="flex items-start"><span className="text-primary mr-2">•</span>Property damage lawsuits</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-primary mb-6">California Environmental Resources</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary">
+                      <Building className="w-5 h-5 mr-2" />
+                      Government Agencies
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold">California EPA</h4>
+                        <p className="text-sm text-muted-foreground">Environmental protection and regulation enforcement</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Department of Toxic Substances Control</h4>
+                        <p className="text-sm text-muted-foreground">Hazardous waste site cleanup and management</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Regional Water Quality Control Boards</h4>
+                        <p className="text-sm text-muted-foreground">Water contamination monitoring and enforcement</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-primary">
+                      <Map className="w-5 h-5 mr-2" />
+                      Contaminated Sites Database
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <div>
+                        <h4 className="font-semibold">EnviroStor Database</h4>
+                        <p className="text-sm text-muted-foreground">California's cleanup sites and contaminated properties</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">GeoTracker Database</h4>
+                        <p className="text-sm text-muted-foreground">Leaking underground storage tanks and cleanup sites</p>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold">Superfund Sites</h4>
+                        <p className="text-sm text-muted-foreground">EPA's National Priorities List contaminated locations</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
             {/* FAQ Section with 50 Questions */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-primary mb-6">Frequently Asked Questions</h2>

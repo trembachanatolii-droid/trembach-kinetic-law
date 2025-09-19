@@ -965,7 +965,7 @@ const Pharmaceutical: React.FC = () => {
                       If you're experiencing a pharmaceutical emergency, call 911 first, then contact us.
                     </p>
                     <Button 
-                      className="w-full bg-white text-red-600 hover:bg-gray-100"
+                      className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
                       Call Now: (818) 123-4567

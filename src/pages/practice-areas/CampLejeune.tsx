@@ -790,7 +790,7 @@ const CampLejeune: React.FC = () => {
             The Camp Lejeune Justice Act has strict deadlines. 
             Contact us today for your free consultation.
           </p>
-          <div className="space-y-4 sm:space-y-0 sm:space-x-4 sm:flex sm:justify-center">
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 p-4 rounded-xl bg-background/20 backdrop-blur-sm" >
             <Button 
               size="lg" 
               className="bg-destructive text-white hover:bg-destructive/90 font-bold px-8 py-4"

@@ -781,32 +781,39 @@ const CampLejeune: React.FC = () => {
       </div>
 
       {/* Bottom CTA */}
-      <section className="bg-red-600 text-white py-16">
+      <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-4">
-            Don't Wait - Time Limits Apply for Camp Lejeune Claims
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">
+            3 Ways to Start Your Case
           </h2>
-          <p className="text-xl mb-8">
-            The Camp Lejeune Justice Act has strict deadlines. 
-            Contact us today for your free consultation.
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+          <p className="text-xl mb-12 leading-relaxed">
+            You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
           </p>
-          <div className="flex flex-row justify-center items-center gap-4">
-            <Button 
-              size="lg" 
-              variant="outline"
-              aria-label="Start Free Case Evaluation"
-              className="bg-white text-black hover:bg-white hover:text-black focus-visible:ring-2 focus-visible:ring-white font-bold px-8 py-4 rounded-full transition-colors duration-300"
-              onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
-            >
-              Start Free Case Evaluation
-            </Button>
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <Button 
               size="lg" 
               aria-label="Call Trembach Law Firm"
-              className="bg-transparent border-2 border-white text-white hover:bg-white hover:text-primary font-bold px-8 py-4 rounded-full transition-all duration-300"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
-              Call (818) 123-4567
+              CALL (818) 123-4567
+            </Button>
+            <Button 
+              size="lg" 
+              aria-label="Email Trembach Law Firm"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
+              onClick={() => window.location.href = 'mailto:info@trembachlaw.com'}
+            >
+              EMAIL US
+            </Button>
+            <Button 
+              size="lg" 
+              aria-label="Calculate Settlement Amount"
+              className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
+              onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
+            >
+              CALCULATE SETTLEMENT
             </Button>
           </div>
         </div>

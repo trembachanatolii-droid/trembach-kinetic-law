@@ -369,10 +369,10 @@ const WorkplaceInjuries: React.FC = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+              className="border-2 border-white text-white bg-transparent hover:bg-white hover:text-red-600 px-8 py-4 text-lg font-semibold rounded-lg transition-all duration-300 hover:scale-105"
               asChild
             >
-              <Link to="tel:8181234567">Call (818) 123-4567</Link>
+              <Link to="tel:8181234567" className="text-white hover:text-red-600">Call (818) 123-4567</Link>
             </Button>
           </div>
         </div>

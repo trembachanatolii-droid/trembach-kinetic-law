@@ -679,7 +679,353 @@ const EnvironmentalToxic: React.FC = () => {
               </Card>
             </section>
 
-            {/* Continue with the rest of sections... */}
+            {/* Toxic Chemicals Section */}
+            <section id="toxic-chemicals" className="content-section mb-12">
+              <Card className="hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-primary mb-6 flex items-center">
+                    <FlaskConical className="w-8 h-8 mr-3 text-red-500" />
+                    Dangerous Chemicals We Fight
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg mb-8">Understanding the toxins poisoning California communities</p>
+
+                  <div className="space-y-6">
+                    {/* PFAS Section */}
+                    <Collapsible open={expandedSections['pfas']} onOpenChange={() => toggleSection('pfas')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <Droplets className="w-6 h-6 mr-3" />
+                            PFAS "Forever Chemicals" - The Modern Environmental Crisis
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['pfas'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <img src={pfasImage} alt="PFAS contamination" className="w-full h-64 object-cover rounded-lg mb-6" />
+                          
+                          <h4 className="text-lg font-semibold mb-4">What Are PFAS?</h4>
+                          <p className="mb-4">Per- and polyfluoroalkyl substances (PFAS) are a group of over 9,000 synthetic chemicals used since the 1940s in firefighting foam, non-stick cookware, food packaging, and waterproof products. Called "forever chemicals" because they never break down naturally, PFAS accumulate in our bodies and environment forever.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Sources of PFAS Contamination</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Military Bases & Airports:</strong> Firefighting foam (AFFF) used for decades has contaminated groundwater at hundreds of California sites</li>
+                            <li><strong>Industrial Facilities:</strong> Manufacturing plants releasing PFAS into water and air</li>
+                            <li><strong>Landfills:</strong> Consumer products leaching PFAS into groundwater</li>
+                            <li><strong>Wastewater Treatment Plants:</strong> Concentrating PFAS from household products</li>
+                            <li><strong>Agricultural Areas:</strong> Biosolids and contaminated irrigation water spreading PFAS</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Effects of PFAS</h4>
+                          <p className="mb-2">The EPA and CDC link PFAS exposure to:</p>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Kidney and testicular cancer</li>
+                            <li>Liver damage and increased cholesterol</li>
+                            <li>Decreased fertility and pregnancy complications</li>
+                            <li>Thyroid disease and immune system damage</li>
+                            <li>Developmental delays in children</li>
+                            <li>Reduced vaccine response</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">California PFAS Regulations</h4>
+                          <p className="mb-4">California leads the nation in PFAS regulation with strict drinking water standards of 5.1 parts per trillion for PFOA and 6.5 ppt for PFOS - among the lowest in the world. The state requires testing, notification, and cleanup of contaminated water supplies.</p>
+
+                          <div className="bg-green-50 p-4 rounded-lg border-l-4 border-green-500">
+                            <h4 className="text-lg font-semibold text-green-700 mb-2">Your Legal Rights</h4>
+                            <p className="text-green-600">If you've been exposed to PFAS contamination, you may be entitled to compensation for medical monitoring, treatment costs, property damage, and quality of life impacts. Companies that manufactured, used, or released PFAS can be held strictly liable for contamination.</p>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* TCE/PCE Section */}
+                    <Collapsible open={expandedSections['tce-pce']} onOpenChange={() => toggleSection('tce-pce')}>
+                      <CollapsibleTrigger className="w-full">
+                        <div className="flex items-center justify-between p-6 bg-gradient-primary text-white rounded-lg hover:scale-105 transition-all duration-300">
+                          <h3 className="text-xl font-semibold flex items-center">
+                            <Factory className="w-6 h-6 mr-3" />
+                            TCE & PCE - Industrial Solvents Causing Cancer
+                          </h3>
+                          <ChevronDown className={`w-6 h-6 transition-transform ${expandedSections['tce-pce'] ? 'rotate-180' : ''}`} />
+                        </div>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="p-6 bg-white border border-primary/20 rounded-b-lg">
+                          <h4 className="text-lg font-semibold mb-4">Understanding TCE and PCE</h4>
+                          <p className="mb-4">Trichloroethylene (TCE) and Perchloroethylene (PCE) are chlorinated solvents widely used in degreasing, dry cleaning, and manufacturing. These carcinogenic chemicals contaminate groundwater throughout California, with the EPA recently banning most uses due to severe health risks.</p>
+
+                          <h4 className="text-lg font-semibold mb-4">Common Sources</h4>
+                          <ul className="list-disc pl-6 mb-4 space-y-2">
+                            <li><strong>Dry Cleaners:</strong> PCE used for decades has contaminated soil and groundwater beneath thousands of facilities</li>
+                            <li><strong>Manufacturing:</strong> Metal degreasing and electronics manufacturing releasing TCE</li>
+                            <li><strong>Military Sites:</strong> Aircraft maintenance and weapons cleaning using TCE</li>
+                            <li><strong>Landfills:</strong> Improper disposal creating toxic plumes</li>
+                            <li><strong>Vapor Intrusion:</strong> Contaminated groundwater releasing toxic vapors into buildings</li>
+                          </ul>
+
+                          <h4 className="text-lg font-semibold mb-4">Health Impacts</h4>
+                          <p className="mb-2">TCE and PCE cause:</p>
+                          <ul className="list-disc pl-6 mb-4 space-y-1">
+                            <li>Kidney cancer, liver cancer, and non-Hodgkin's lymphoma</li>
+                            <li>Parkinson's disease (strongly linked to TCE)</li>
+                            <li>Birth defects including cardiac malformations</li>
+                            <li>Neurological damage and cognitive impairment</li>
+                            <li>Immune system suppression</li>
+                            <li>Reproductive toxicity and miscarriage</li>
+                          </ul>
+
+                          <div className="bg-red-50 p-4 rounded-lg border-l-4 border-red-500">
+                            <h4 className="text-lg font-semibold text-red-700 mb-2">EPA Ban and Legal Implications</h4>
+                            <p className="text-red-600">The EPA's December 2024 ban on TCE and restrictions on PCE acknowledge these chemicals' extreme danger. This strengthens legal cases by establishing regulatory recognition of unacceptable risk.</p>
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
+
+                    {/* More chemical sections would continue here... */}
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Health Effects Section */}
+            <section id="health-effects" className="content-section mb-12">
+              <Card className="hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-primary mb-6 flex items-center">
+                    <Heart className="w-8 h-8 mr-3 text-red-500" />
+                    Health Effects of Toxic Exposure
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <img src={healthImage} alt="Environmental health effects" className="w-full h-64 object-cover rounded-lg mb-6" />
+                  
+                  <p className="text-lg mb-8">Environmental toxins attack every system in your body, causing immediate symptoms and long-term diseases that may not appear for decades.</p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-500">
+                      <h3 className="text-xl font-semibold text-red-700 mb-4">Cancer Risks</h3>
+                      <p className="text-red-600 mb-4">Many environmental toxins are known carcinogens causing various cancers years or decades after exposure. Children and pregnant women face the highest risks.</p>
+                      <ul className="list-disc pl-4 text-red-600 space-y-1">
+                        <li>Lung, kidney, and liver cancers</li>
+                        <li>Leukemia and lymphomas</li>
+                        <li>Brain and nervous system tumors</li>
+                        <li>Reproductive organ cancers</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-blue-50 p-6 rounded-lg border-l-4 border-blue-500">
+                      <h3 className="text-xl font-semibold text-blue-700 mb-4">Neurological Effects</h3>
+                      <p className="text-blue-600 mb-4">Toxic chemicals damage the nervous system, causing cognitive impairment, movement disorders, and behavioral changes.</p>
+                      <ul className="list-disc pl-4 text-blue-600 space-y-1">
+                        <li>Parkinson's and Alzheimer's disease</li>
+                        <li>Learning disabilities in children</li>
+                        <li>Memory loss and confusion</li>
+                        <li>Depression and anxiety</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-green-50 p-6 rounded-lg border-l-4 border-green-500">
+                      <h3 className="text-xl font-semibold text-green-700 mb-4">Reproductive Harm</h3>
+                      <p className="text-green-600 mb-4">Environmental toxins disrupt hormones and reproductive systems, affecting fertility and pregnancy outcomes.</p>
+                      <ul className="list-disc pl-4 text-green-600 space-y-1">
+                        <li>Infertility and miscarriage</li>
+                        <li>Birth defects and developmental delays</li>
+                        <li>Early puberty in children</li>
+                        <li>Pregnancy complications</li>
+                      </ul>
+                    </div>
+
+                    <div className="bg-purple-50 p-6 rounded-lg border-l-4 border-purple-500">
+                      <h3 className="text-xl font-semibold text-purple-700 mb-4">Organ Damage</h3>
+                      <p className="text-purple-600 mb-4">Toxic exposure damages vital organs, causing chronic diseases and reducing life expectancy.</p>
+                      <ul className="list-disc pl-4 text-purple-600 space-y-1">
+                        <li>Kidney and liver disease</li>
+                        <li>Heart disease and stroke</li>
+                        <li>Respiratory problems</li>
+                        <li>Immune system disorders</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <Card className="hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-primary mb-6 flex items-center">
+                    <Shield className="w-8 h-8 mr-3 text-blue-500" />
+                    The Legal Process
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <img src={legalProcessImage} alt="Environmental legal process" className="w-full h-64 object-cover rounded-lg mb-6" />
+                  
+                  <p className="text-lg mb-8">How we fight for your rights and maximum compensation</p>
+
+                  <div className="space-y-6">
+                    {/* Step 1 */}
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold mb-2">Free Consultation & Case Evaluation</h3>
+                        <p className="text-muted-foreground mb-3">We begin with a comprehensive evaluation of your exposure and damages, completely free and confidential.</p>
+                        <ul className="list-disc pl-6 space-y-1 text-sm">
+                          <li>Documenting your exposure history and timeline</li>
+                          <li>Reviewing medical records and diagnoses</li>
+                          <li>Identifying all potentially responsible parties</li>
+                          <li>Assessing property damage and economic losses</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Step 2 */}
+                    <div className="flex items-start space-x-4">
+                      <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-semibold mb-2">Investigation & Evidence Collection</h3>
+                        <p className="text-muted-foreground mb-3">We conduct thorough investigations to build your case with compelling evidence.</p>
+                        <ul className="list-disc pl-6 space-y-1 text-sm">
+                          <li>Environmental testing of soil, water, and air</li>
+                          <li>Review of regulatory records and violations</li>
+                          <li>Corporate document discovery</li>
+                          <li>Expert witness consultation</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    {/* Continue with more steps... */}
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq" className="content-section mb-12">
+              <Card className="hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-primary mb-6 flex items-center">
+                    <MessageCircle className="w-8 h-8 mr-3 text-green-500" />
+                    Frequently Asked Questions
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-lg mb-8">Get answers to common questions about environmental toxic exposure cases</p>
+                  
+                  <div className="space-y-4">
+                    {faqs.map((faq, index) => (
+                      <div key={index} className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-all duration-300">
+                        <button
+                          onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                          className="w-full p-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                        >
+                          <span className="font-medium text-lg pr-4">{faq.question}</span>
+                          <ChevronDown className={`w-5 h-5 text-primary transition-transform ${expandedFaq === index ? 'rotate-180' : ''}`} />
+                        </button>
+                        {expandedFaq === index && (
+                          <div className="p-4 border-t border-gray-200 bg-gray-50">
+                            <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <Card className="hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-primary mb-6 flex items-center">
+                    <Building className="w-8 h-8 mr-3 text-purple-500" />
+                    Resources & Support
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-semibold">Legal Resources</h3>
+                      <div className="space-y-3">
+                        <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}>
+                          <Scale className="w-4 h-4 mr-2" />
+                          Free Case Evaluation
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/environmental-toxic-compensation-calculator'}>
+                          <AlertTriangle className="w-4 h-4 mr-2" />
+                          Compensation Calculator
+                        </Button>
+                        <Button variant="outline" className="w-full justify-start" onClick={() => window.location.href = '/environmental-toxic-legal-guidance'}>
+                          <FileText className="w-4 h-4 mr-2" />
+                          Legal Guidance
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="text-xl font-semibold">Emergency Contacts</h3>
+                      <div className="space-y-3 bg-red-50 p-4 rounded-lg">
+                        <div className="flex items-center">
+                          <Phone className="w-5 h-5 mr-3 text-red-600" />
+                          <div>
+                            <p className="font-medium">24/7 Legal Hotline</p>
+                            <p className="text-red-600 font-bold">(818) 123-4567</p>
+                          </div>
+                        </div>
+                        <div className="flex items-center">
+                          <Mail className="w-5 h-5 mr-3 text-red-600" />
+                          <div>
+                            <p className="font-medium">Emergency Email</p>
+                            <p className="text-red-600">urgent@lawfirm.com</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Don't Wait - Time Limits Apply Section */}
+            <section className="content-section mb-12">
+              <Card className="bg-gradient-to-r from-red-600 to-red-700 text-white hover:scale-105 transition-all duration-300 shadow-elegant">
+                <CardContent className="p-8 text-center">
+                  <AlertTriangle className="w-16 h-16 mx-auto mb-4 text-yellow-300" />
+                  <h2 className="text-3xl font-bold mb-4">Don't Wait - Time Limits Apply for California</h2>
+                  <p className="text-xl mb-6 leading-relaxed">
+                    California has strict deadlines for environmental toxic exposure claims. Evidence disappears, witnesses scatter, and corporations destroy documents. Acting quickly preserves your rights and maximizes your compensation.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <div className="bg-white/10 p-4 rounded-lg">
+                      <Clock className="w-8 h-8 mx-auto mb-2" />
+                      <h3 className="font-semibold mb-2">Statute of Limitations</h3>
+                      <p className="text-sm">Generally 2 years from discovery, but exceptions apply for toxic exposure cases</p>
+                    </div>
+                    <div className="bg-white/10 p-4 rounded-lg">
+                      <Shield className="w-8 h-8 mx-auto mb-2" />
+                      <h3 className="font-semibold mb-2">Evidence Preservation</h3>
+                      <p className="text-sm">Critical documents and testing evidence must be secured immediately</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <Button 
+                      size="lg" 
+                      className="bg-yellow-500 hover:bg-yellow-600 text-black font-bold px-8 py-4 text-lg"
+                      onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}
+                    >
+                      START YOUR FREE CASE EVALUATION NOW
+                    </Button>
+                    <p className="text-sm opacity-90">Call (818) 123-4567 - Available 24/7 for Environmental Emergencies</p>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
             
           </div>
 
@@ -693,7 +1039,91 @@ const EnvironmentalToxic: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  {/* Continue with sidebar content... */}
+                  <div className="text-center">
+                    <img 
+                      src={sidebarImage} 
+                      alt="Environmental toxic exposure legal consultation"
+                      className="w-full h-32 object-cover rounded-lg mb-4"
+                    />
+                  </div>
+
+                  {/* Option 1 - Phone */}
+                  <div className="p-4 border-2 border-green-200 rounded-lg bg-green-50 hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center mb-3">
+                      <div className="bg-green-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3">1</div>
+                      <Phone className="w-6 h-6 text-green-600 mr-2" />
+                      <h3 className="font-semibold text-green-700">Call Now</h3>
+                    </div>
+                    <p className="text-green-600 text-sm mb-3">Speak directly with an experienced environmental attorney</p>
+                    <Button 
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-bold" 
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      (818) 123-4567
+                    </Button>
+                  </div>
+
+                  {/* Option 2 - Online Form */}
+                  <div className="p-4 border-2 border-blue-200 rounded-lg bg-blue-50 hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center mb-3">
+                      <div className="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3">2</div>
+                      <FileText className="w-6 h-6 text-blue-600 mr-2" />
+                      <h3 className="font-semibold text-blue-700">Online Form</h3>
+                    </div>
+                    <p className="text-blue-600 text-sm mb-3">Complete our confidential case evaluation form</p>
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold" 
+                      onClick={() => window.location.href = '/environmental-toxic-case-evaluation'}
+                    >
+                      Start Evaluation
+                    </Button>
+                  </div>
+
+                  {/* Option 3 - Email */}
+                  <div className="p-4 border-2 border-purple-200 rounded-lg bg-purple-50 hover:scale-105 transition-all duration-300">
+                    <div className="flex items-center mb-3">
+                      <div className="bg-purple-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm mr-3">3</div>
+                      <Mail className="w-6 h-6 text-purple-600 mr-2" />
+                      <h3 className="font-semibold text-purple-700">Email Us</h3>
+                    </div>
+                    <p className="text-purple-600 text-sm mb-3">Send us details about your toxic exposure case</p>
+                    <Button 
+                      className="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold" 
+                      onClick={() => window.location.href = 'mailto:contact@lawfirm.com'}
+                    >
+                      Send Email
+                    </Button>
+                  </div>
+
+                  <div className="bg-gradient-primary text-white p-4 rounded-lg text-center">
+                    <Star className="w-8 h-8 mx-auto mb-2 text-yellow-300" />
+                    <p className="font-semibold mb-2">No Fees Unless We Win</p>
+                    <p className="text-sm opacity-90">Free consultation • No upfront costs</p>
+                  </div>
+
+                  <div className="text-center text-sm text-muted-foreground">
+                    <p>Available 24/7 for Environmental Emergencies</p>
+                    <p className="font-semibold">Attorney-Client Privilege Protected</p>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Additional Sidebar Resources */}
+              <Card className="bg-gradient-subtle border-red-200 shadow-elegant">
+                <CardHeader>
+                  <CardTitle className="text-lg font-bold text-red-600 text-center">
+                    🚨 Environmental Emergency?
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-center">
+                  <p className="text-sm mb-4">If you're experiencing immediate health effects from toxic exposure:</p>
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold mb-2" 
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                  >
+                    CALL EMERGENCY LINE
+                  </Button>
+                  <p className="text-xs text-red-600">Available 24/7 • Immediate Response</p>
                 </CardContent>
               </Card>
             </div>

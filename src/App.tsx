@@ -19,7 +19,10 @@ import ClassActionsCaseEvaluation from "./pages/ClassActionsCaseEvaluation";
 import ClassActionsCompensationCalculator from "./pages/ClassActionsCompensationCalculator";
 import ClassActionsLegalGuidance from "./pages/ClassActionsLegalGuidance";
 import ClassActionsResources from "./pages/ClassActionsResources";
-import EnvironmentalToxicCaseEvaluation from "./pages/EnvironmentalToxicCaseEvaluation";
+import EnvironmentalToxicCaseEvaluation from './pages/EnvironmentalToxicCaseEvaluation';
+import EnvironmentalToxicCompensationCalculator from './pages/EnvironmentalToxicCompensationCalculator';
+import EnvironmentalToxicLegalGuidance from './pages/EnvironmentalToxicLegalGuidance';
+import EnvironmentalToxicResources from './pages/EnvironmentalToxicResources';
 import Pharmaceutical from "./pages/practice-areas/Pharmaceutical";
 import PharmaceuticalCaseEvaluation from "./pages/PharmaceuticalCaseEvaluation";
 import PharmaceuticalCompensationCalculator from "./pages/PharmaceuticalCompensationCalculator";
@@ -210,6 +213,9 @@ function App() {
         <Route path="/class-actions-legal-guidance" element={<ClassActionsLegalGuidance />} />
         <Route path="/class-actions-resources" element={<ClassActionsResources />} />
         <Route path="/environmental-toxic-case-evaluation" element={<EnvironmentalToxicCaseEvaluation />} />
+        <Route path="/environmental-toxic-compensation-calculator" element={<EnvironmentalToxicCompensationCalculator />} />
+        <Route path="/environmental-toxic-legal-guidance" element={<EnvironmentalToxicLegalGuidance />} />
+        <Route path="/environmental-toxic-resources" element={<EnvironmentalToxicResources />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

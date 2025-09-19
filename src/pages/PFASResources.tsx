@@ -153,20 +153,28 @@ const PFASResources: React.FC = () => {
                     <CardContent>
                       <p className="text-muted-foreground mb-4">{item.description}</p>
                       
-                      <Button 
-                        variant="outline" 
-                        className="w-full"
-                        onClick={() => {
-                          if (item.url) {
-                            window.open(item.url, '_blank');
-                          }
-                        }}
-                      >
-                        {item.type === 'external' && 'Visit Resource'}
-                        {item.type === 'internal' && 'View Information'}
-                        {item.type === 'download' && 'Download Guide'}
-                        {item.action && item.action}
-                      </Button>
+                      {item.url ? (
+                        <Button 
+                          asChild
+                          variant="outline" 
+                          className="w-full"
+                        >
+                          <a href={item.url} target="_blank" rel="noopener noreferrer">
+                            {item.type === 'external' && 'Visit Resource'}
+                            {item.type === 'internal' && 'View Information'}
+                            {item.type === 'download' && 'Download Guide'}
+                            {item.action && item.action}
+                          </a>
+                        </Button>
+                      ) : (
+                        <Button 
+                          variant="outline" 
+                          className="w-full"
+                          disabled
+                        >
+                          Coming soon
+                        </Button>
+                      )}
                     </CardContent>
                   </Card>
                 ))}

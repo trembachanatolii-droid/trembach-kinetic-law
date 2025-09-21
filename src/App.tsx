@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import SexualAbuse from "./pages/practice-areas/SexualAbuse";
 import CampLejeune from "./pages/practice-areas/CampLejeune";
 import CampLejeuneEvaluation from "./pages/CampLejeuneEvaluation";
 import CampLejeuneCalculator from "./pages/CampLejeuneCalculator";
@@ -137,6 +138,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/sexual-abuse" element={<SexualAbuse />} />
             <Route path="/practice-areas/camp-lejeune" element={<CampLejeune />} />
             <Route path="/camp-lejeune-case-evaluation" element={<CampLejeuneEvaluation />} />
             <Route path="/camp-lejeune-calculator" element={<CampLejeuneCalculator />} />

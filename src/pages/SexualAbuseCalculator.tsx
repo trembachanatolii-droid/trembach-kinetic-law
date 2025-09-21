@@ -418,17 +418,31 @@ const SexualAbuseCalculator: React.FC = () => {
                 <CardContent className="p-6 text-center">
                   <h3 className="text-xl font-bold mb-4">Get a Professional Case Evaluation</h3>
                   <p className="mb-6 opacity-90">
-                    For an accurate assessment of your case value, speak with our experienced attorneys.
+                    This calculator provides estimates only. For an accurate assessment of your case value, 
+                    speak with our experienced sexual abuse attorneys.
                   </p>
-                  <Button variant="secondary" size="lg" className="mb-4">
-                    Free Case Evaluation
-                  </Button>
-                  <p className="text-sm opacity-75">No upfront costs • Completely confidential</p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Button 
+                      size="lg" 
+                      variant="secondary"
+                      onClick={() => window.open('/sexual-abuse-case-evaluation', '_blank')}
+                    >
+                      <FileText className="w-5 h-5 mr-2" />
+                      Free Case Review
+                    </Button>
+                    <Button 
+                      size="lg" 
+                      variant="outline" 
+                      className="border-white text-white hover:bg-white hover:text-primary"
+                      onClick={() => window.open('tel:8181234567')}
+                    >
+                      Call (818) 123-4567
+                    </Button>
+                  </div>
                 </CardContent>
               </Card>
             </div>
           </div>
-
         </div>
       </div>
     </>

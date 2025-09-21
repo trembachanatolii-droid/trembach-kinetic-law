@@ -69,8 +69,13 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted');
+    // In a real application, this would submit to a secure endpoint
+    const formData = new FormData(e.target as HTMLFormElement);
+    const data = Object.fromEntries(formData.entries());
+    
+    // Simulate form submission success
+    alert('Thank you for your submission. A member of our team will contact you within 24 hours to discuss your case confidentially.');
+    console.log('Form submitted with data:', data);
   };
 
   return (
@@ -151,28 +156,28 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium mb-2 block">First Name *</label>
-                        <Input placeholder="Your first name" required />
+                        <Input name="firstName" placeholder="Your first name" required />
                       </div>
                       <div>
                         <label className="text-sm font-medium mb-2 block">Last Name *</label>
-                        <Input placeholder="Your last name" required />
+                        <Input name="lastName" placeholder="Your last name" required />
                       </div>
                     </div>
                     
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="text-sm font-medium mb-2 block">Phone Number *</label>
-                        <Input type="tel" placeholder="(555) 123-4567" required />
+                        <Input name="phone" type="tel" placeholder="(555) 123-4567" required />
                       </div>
                       <div>
                         <label className="text-sm font-medium mb-2 block">Email Address *</label>
-                        <Input type="email" placeholder="your@email.com" required />
+                        <Input name="email" type="email" placeholder="your@email.com" required />
                       </div>
                     </div>
 
                     <div>
                       <label className="text-sm font-medium mb-2 block">When did the abuse occur?</label>
-                      <Select>
+                      <Select name="timeframe">
                         <SelectTrigger>
                           <SelectValue placeholder="Select timeframe" />
                         </SelectTrigger>
@@ -189,7 +194,7 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
 
                     <div>
                       <label className="text-sm font-medium mb-2 block">Where did the abuse occur?</label>
-                      <Select>
+                      <Select name="location">
                         <SelectTrigger>
                           <SelectValue placeholder="Select location type" />
                         </SelectTrigger>
@@ -208,6 +213,7 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
                     <div>
                       <label className="text-sm font-medium mb-2 block">Please describe your situation (optional)</label>
                       <Textarea 
+                        name="description"
                         placeholder="Share only what you're comfortable with. This helps us understand how we can best help you."
                         rows={4}
                       />
@@ -215,7 +221,7 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
 
                     <div>
                       <label className="text-sm font-medium mb-2 block">Preferred contact method</label>
-                      <Select>
+                      <Select name="contactMethod">
                         <SelectTrigger>
                           <SelectValue placeholder="How would you like us to contact you?" />
                         </SelectTrigger>
@@ -228,7 +234,7 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
                     </div>
 
                     <div className="flex items-start space-x-2">
-                      <Checkbox id="consent" required />
+                      <Checkbox name="consent" id="consent" required />
                       <label htmlFor="consent" className="text-sm text-muted-foreground leading-relaxed">
                         By submitting this form, I consent to being contacted by this law firm about my potential case. 
                         I understand that this communication is confidential and protected by attorney-client privilege.

@@ -77,13 +77,6 @@ const SexualAbuse: React.FC = () => {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400);
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },

@@ -26,6 +26,7 @@ import heroImage from '@/assets/sexual-abuse-legal-guidance-hero.jpg';
 gsap.registerPlugin(ScrollTrigger);
 
 const SexualAbuseLegalGuidance: React.FC = () => {
+  const navigate = useNavigate();
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -351,11 +352,20 @@ const SexualAbuseLegalGuidance: React.FC = () => {
                   Our experienced attorneys are ready to help you understand your rights and options.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" variant="secondary">
+                  <Button 
+                    size="lg" 
+                    variant="secondary"
+                    onClick={() => window.open('tel:8181234567')}
+                  >
                     <Phone className="w-5 h-5 mr-2" />
                     <span className="text-foreground">Call (818) 123-4567</span>
                   </Button>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-white text-white hover:bg-white hover:text-primary"
+                    onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
+                  >
                     Free Case Evaluation
                   </Button>
                 </div>

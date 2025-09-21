@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,6 +25,7 @@ import heroImage from '@/assets/sexual-abuse-resources-hero.jpg';
 gsap.registerPlugin(ScrollTrigger);
 
 const SexualAbuseResources: React.FC = () => {
+  const navigate = useNavigate();
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -266,7 +268,12 @@ const SexualAbuseResources: React.FC = () => {
             </CardHeader>
             <CardContent>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <Button variant="outline" size="lg" className="h-auto p-4 flex flex-col items-start">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="h-auto p-4 flex flex-col items-start"
+                  onClick={() => navigate('/sexual-abuse-case-evaluation')}
+                >
                   <FileText className="w-6 h-6 mb-2 text-primary" />
                   <span className="text-left">
                     <div className="font-semibold">Case Evaluation</div>
@@ -274,7 +281,12 @@ const SexualAbuseResources: React.FC = () => {
                   </span>
                 </Button>
                 
-                <Button variant="outline" size="lg" className="h-auto p-4 flex flex-col items-start">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="h-auto p-4 flex flex-col items-start"
+                  onClick={() => navigate('/sexual-abuse-legal-guidance')}
+                >
                   <Users className="w-6 h-6 mb-2 text-primary" />
                   <span className="text-left">
                     <div className="font-semibold">Support Groups</div>
@@ -282,7 +294,12 @@ const SexualAbuseResources: React.FC = () => {
                   </span>
                 </Button>
                 
-                <Button variant="outline" size="lg" className="h-auto p-4 flex flex-col items-start">
+                <Button 
+                  variant="outline" 
+                  size="lg" 
+                  className="h-auto p-4 flex flex-col items-start"
+                  onClick={() => navigate('/sexual-abuse-legal-guidance')}
+                >
                   <Shield className="w-6 h-6 mb-2 text-primary" />
                   <span className="text-left">
                     <div className="font-semibold">Safety Planning</div>
@@ -306,7 +323,12 @@ const SexualAbuseResources: React.FC = () => {
                       <Phone className="w-5 h-5 mr-2" />
                       <span className="text-foreground">Call (818) 123-4567</span>
                     </Button>
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
+                  <Button 
+                    size="lg" 
+                    variant="outline" 
+                    className="border-white text-white hover:bg-white hover:text-primary"
+                    onClick={() => navigate('/sexual-abuse-case-evaluation')}
+                  >
                     Free Case Evaluation
                   </Button>
                 </div>

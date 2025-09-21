@@ -115,6 +115,7 @@ import BenzeneCalculator from "./pages/BenzeneCalculator";
 import BenzeneMedicalGuidance from "./pages/BenzeneMedicalGuidance";
 import BenzeneLegalGuidance from "./pages/BenzeneLegalGuidance";
 import BenzeneEducation from "./pages/BenzeneEducation";
+import OpioidLitigation from "./pages/practice-areas/OpioidLitigation";
 
 const queryClient = new QueryClient();
 
@@ -256,7 +257,8 @@ function App() {
         <Route path="/benzene-calculator" element={<BenzeneCalculator />} />
         <Route path="/benzene-medical-guidance" element={<BenzeneMedicalGuidance />} />
         <Route path="/benzene-legal-guidance" element={<BenzeneLegalGuidance />} />
-        <Route path="/benzene-education" element={<BenzeneEducation />} />
+            <Route path="/benzene-education" element={<BenzeneEducation />} />
+            <Route path="/practice-areas/opioid-litigation" element={<OpioidLitigation />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

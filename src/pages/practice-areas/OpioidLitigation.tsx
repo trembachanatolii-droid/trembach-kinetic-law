@@ -738,26 +738,22 @@ const OpioidLitigation: React.FC = () => {
               
               <div className="space-y-4">
                 {faqData.map((faq, index) => (
-                  <div key={index} className="border border-muted-foreground/20 rounded-lg overflow-hidden">
-                    <button
+                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader 
+                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
                       onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                      className="w-full px-6 py-4 text-left bg-muted/50 hover:bg-muted transition-colors flex justify-between items-center"
                     >
-                      <span className="font-medium text-lg pr-4">{faq.question}</span>
-                      {expandedFaq === index ? (
-                        <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
-                      ) : (
-                        <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
-                      )}
-                    </button>
+                      <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
+                        {faq.question}
+                        {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
+                      </CardTitle>
+                    </CardHeader>
                     {expandedFaq === index && (
-                      <div className="px-6 py-4 bg-background">
-                        <p className="text-muted-foreground leading-relaxed text-base">
-                          {faq.answer}
-                        </p>
-                      </div>
+                      <CardContent className="animate-fade-in">
+                        <p className="text-muted-foreground">{faq.answer}</p>
+                      </CardContent>
                     )}
-                  </div>
+                  </Card>
                 ))}
               </div>
             </section>

@@ -858,78 +858,52 @@ const OpioidLitigation: React.FC = () => {
 
           {/* Sticky Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <Card className="p-6 shadow-lg border-2 border-red-600">
-                <h3 className="text-2xl font-bold text-red-600 mb-4">3 Ways to Start Your Case</h3>
-                
-                <div className="space-y-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">
-                      1
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Free Phone Consultation</h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Speak directly with Attorney Trembach about your opioid case. Available 24/7.
-                      </p>
-                      <Button 
-                        className="w-full bg-green-600 hover:bg-green-700 text-white"
-                        onClick={() => window.location.href = 'tel:8181234567'}
-                      >
-                        <Phone className="w-4 h-4 mr-2" />
-                        Call (818) 123-4567
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">
-                      2
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Online Case Evaluation</h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Submit your information for a comprehensive case review.
-                      </p>
-                      <Button 
-                        className="w-full bg-blue-600 hover:bg-blue-700"
-                        onClick={() => window.location.href = '/opioid-case-evaluation'}
-                      >
-                        <Scale className="w-4 h-4 mr-2" />
-                        Start Evaluation
-                      </Button>
-                    </div>
-                  </div>
-                  
-                  <div className="flex items-start space-x-4">
-                    <div className="flex-shrink-0 w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">
-                      3
-                    </div>
-                    <div>
-                      <h4 className="font-semibold mb-2">Email Consultation</h4>
-                      <p className="text-sm text-muted-foreground mb-3">
-                        Send us your questions via secure email.
-                      </p>
-                      <Button 
-                        className="w-full bg-gray-600 hover:bg-gray-700"
-                        onClick={() => window.location.href = 'mailto:opioid@trembachlawfirm.com'}
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Send Email
-                      </Button>
+            <div className="sticky top-8 space-y-6">
+              
+              {/* Contact Card */}
+              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${medicalImage})` }}>
+                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="text-center text-white">
+                      <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                      <h3 className="text-xl font-bold">Start Your Case</h3>
                     </div>
                   </div>
                 </div>
                 
-                <div className="mt-6 p-4 bg-green-50 rounded-lg">
-                  <div className="flex items-center mb-2">
-                    <Shield className="w-5 h-5 text-green-600 mr-2" />
-                    <span className="font-semibold text-green-800">100% Confidential</span>
-                  </div>
-                  <p className="text-sm text-green-700">
-                    All communications are protected by attorney-client privilege. No fees unless we win your case.
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-6">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
                   </p>
-                </div>
+                  
+                  <div className="space-y-4">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/schedule-consultation'}
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/opioid-case-evaluation'}
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Free Case Evaluation
+                    </Button>
+                  </div>
+                </CardContent>
               </Card>
               
               {/* Quick Facts Card */}

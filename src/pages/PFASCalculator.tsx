@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -30,6 +31,9 @@ const PFASCalculator: React.FC = () => {
     factors: string[];
     confidence: string;
   } | null>(null);
+
+  // Add scroll restoration
+  useScrollRestoration();
 
   const calculateCompensation = () => {
     const factorsList: string[] = [];

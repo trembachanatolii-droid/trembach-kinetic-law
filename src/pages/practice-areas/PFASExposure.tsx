@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
@@ -71,6 +72,9 @@ const PFASExposure: React.FC = () => {
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  
+  // Add scroll restoration
+  useScrollRestoration();
 
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },

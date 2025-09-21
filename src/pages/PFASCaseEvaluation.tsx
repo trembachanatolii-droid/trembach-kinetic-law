@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { ArrowLeft, Phone, Mail } from 'lucide-react';
+import { Phone, Mail } from 'lucide-react';
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-hero-bg.jpg';
 
 const PFASCaseEvaluation: React.FC = () => {
@@ -17,6 +19,9 @@ const PFASCaseEvaluation: React.FC = () => {
     exposureDuration: ''
   });
 
+  // Add scroll restoration
+  useScrollRestoration();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     alert('Thank you for contacting Trembach Law Firm! We will review your PFAS exposure case and contact you within 24 hours.');
@@ -24,23 +29,14 @@ const PFASCaseEvaluation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <GoBack fallbackPath="/practice-areas/pfas-exposure" />
+      
       {/* Hero Section */}
       <section 
         className="relative h-[400px] flex items-center justify-center bg-cover bg-center" 
         style={{ backgroundImage: `url(${heroBackground})` }}
       >
         <div className="absolute inset-0 bg-black/70"></div>
-        
-        <div className="absolute top-6 left-6 z-20">
-          <Button 
-            variant="ghost" 
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/40 text-white hover:bg-black/60 backdrop-blur-sm border border-white/20"
-          >
-            <ArrowLeft className="w-4 h-4" />
-            Go Back
-          </Button>
-        </div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4">PFAS Exposure Case Evaluation</h1>

@@ -1,4 +1,5 @@
 import React from 'react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -17,6 +18,8 @@ import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-health-effects.jpg';
 
 const PFASGuidance: React.FC = () => {
+  // Add scroll restoration
+  useScrollRestoration();
   const immediateSteps = [
     {
       title: "Seek Medical Evaluation",

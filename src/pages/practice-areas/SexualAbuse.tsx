@@ -33,9 +33,13 @@ import {
   Calculator
 } from 'lucide-react';
 import heroBackground from '@/assets/sexual-abuse-hero-bg.jpg';
+import overviewImage from '@/assets/sexual-abuse-overview.jpg';
+import typesImage from '@/assets/sexual-abuse-types.jpg';
+import legalProcessImage from '@/assets/sexual-abuse-legal-process.jpg';
+import compensationImage from '@/assets/sexual-abuse-compensation.jpg';
+import faqImage from '@/assets/sexual-abuse-faq.jpg';
 import sidebarImage from '@/assets/sexual-abuse-sidebar.jpg';
 import therapyImage from '@/assets/sexual-abuse-therapy-process.jpg';
-import legalProcessImage from '@/assets/sexual-abuse-legal-process.jpg';
 import californiaLawsImage from '@/assets/california-sexual-abuse-laws.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';

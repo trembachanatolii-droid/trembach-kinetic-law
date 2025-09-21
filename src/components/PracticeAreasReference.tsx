@@ -728,6 +728,7 @@ const PracticeAreasReference: React.FC = () => {
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
                           activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                          activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                           `/practice-areas/${activeArea.slug}`}
                       className="flex-1"
                     >
@@ -739,6 +740,7 @@ const PracticeAreasReference: React.FC = () => {
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
                           activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
+                          activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
                           '/case-evaluation'}
                       className="flex-1"
                     >
@@ -775,6 +777,7 @@ const PracticeAreasReference: React.FC = () => {
                       <div className="pt-2">
                         <Link
                           to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                              area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                               area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
                               '/practice-areas/coming-soon'}
                           className="ghost-button group/btn"
@@ -874,6 +877,7 @@ const PracticeAreasReference: React.FC = () => {
                     {/* CTA */}
                     <Link
                       to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                          area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                           area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
                           area.title === 'Class Actions' ? '/practice-areas/class-actions' :
                           area.title === 'Environmental Toxic' ? '/practice-areas/environmental-toxic' :

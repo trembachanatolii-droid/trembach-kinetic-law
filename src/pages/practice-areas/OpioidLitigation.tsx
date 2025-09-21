@@ -769,29 +769,60 @@ const OpioidLitigation: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Treatment Resources</CardTitle>
+                    <CardTitle>Legal Resources</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      <li>SAMHSA National Helpline: 1-800-662-4357</li>
-                      <li>California Department of Health Care Services</li>
-                      <li>Narcotics Anonymous California</li>
-                      <li>SMART Recovery</li>
-                    </ul>
+                  <CardContent className="space-y-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-left h-auto p-4"
+                      onClick={() => window.location.href = '/opioid-calculator'}
+                    >
+                      <div>
+                        <div className="font-semibold">Compensation Calculator</div>
+                        <div className="text-sm text-muted-foreground">Estimate your potential damages</div>
+                      </div>
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-left h-auto p-4"
+                      onClick={() => window.location.href = '/opioid-legal-guidance'}
+                    >
+                      <div>
+                        <div className="font-semibold">Legal Guidance</div>
+                        <div className="text-sm text-muted-foreground">Understand your legal rights</div>
+                      </div>
+                    </Button>
                   </CardContent>
                 </Card>
                 
                 <Card>
                   <CardHeader>
-                    <CardTitle>Legal Support</CardTitle>
+                    <CardTitle>Treatment Resources</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      <li>Free case evaluation</li>
-                      <li>No fees unless we win</li>
-                      <li>Confidential consultations</li>
-                      <li>Experienced opioid litigation team</li>
-                    </ul>
+                  <CardContent className="space-y-3">
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-left h-auto p-4"
+                      onClick={() => window.location.href = '/opioid-medical-guidance'}
+                    >
+                      <div>
+                        <div className="font-semibold">Medical Guidance</div>
+                        <div className="text-sm text-muted-foreground">Treatment and recovery resources</div>
+                      </div>
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="w-full justify-start text-left h-auto p-4"
+                      onClick={() => window.location.href = '/opioid-education'}
+                    >
+                      <div>
+                        <div className="font-semibold">Crisis Education</div>
+                        <div className="text-sm text-muted-foreground">Learn about the opioid epidemic</div>
+                      </div>
+                    </Button>
+                    <div className="pt-2">
+                      <p className="text-sm text-muted-foreground">Emergency: SAMHSA Helpline 1-800-662-4357</p>
+                    </div>
                   </CardContent>
                 </Card>
               </div>
@@ -800,10 +831,10 @@ const OpioidLitigation: React.FC = () => {
             {/* Don't Wait Section */}
             <section className="content-section mb-12 bg-red-50 border-l-4 border-red-600">
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-red-600 mb-4">Don't Wait - Time Limits Apply for California</h2>
-                <p className="text-lg text-gray-700 mb-6">
-                  California law imposes strict time limits on opioid litigation claims. The statute of limitations can be as short as two years from discovery of the connection between prescription opioids and addiction. Evidence degrades over time, witnesses become unavailable, and pharmaceutical companies actively destroy documents after certain periods.
-                </p>
+          <h2 className="text-3xl font-bold text-red-600 mb-6">Don't Wait - Time Limits Apply for California</h2>
+          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
+            California law imposes strict time limits on opioid litigation claims. The statute of limitations can be as short as two years from discovery of the connection between prescription opioids and addiction. Evidence degrades over time, witnesses become unavailable, and pharmaceutical companies actively destroy documents after certain periods.
+          </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button 
                     size="lg" 
@@ -815,7 +846,7 @@ const OpioidLitigation: React.FC = () => {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="border-red-600 text-red-600 hover:bg-red-50 font-bold px-8 py-4"
+                    className="border-red-600 text-red-600 hover:bg-red-50 hover:text-red-700 font-bold px-8 py-4"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     CALL NOW (818) 123-4567
@@ -842,7 +873,7 @@ const OpioidLitigation: React.FC = () => {
                         Speak directly with Attorney Trembach about your opioid case. Available 24/7.
                       </p>
                       <Button 
-                        className="w-full bg-green-600 hover:bg-green-700"
+                        className="w-full bg-green-600 hover:bg-green-700 text-white"
                         onClick={() => window.location.href = 'tel:8181234567'}
                       >
                         <Phone className="w-4 h-4 mr-2" />

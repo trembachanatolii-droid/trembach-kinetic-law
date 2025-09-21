@@ -302,10 +302,10 @@ const SexualAbuseResources: React.FC = () => {
                   Our experienced attorneys are here to help you understand your rights and options.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" variant="secondary">
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call (818) 123-4567
-                  </Button>
+                    <Button size="lg" variant="secondary">
+                      <Phone className="w-5 h-5 mr-2" />
+                      <span className="text-foreground">Call (818) 123-4567</span>
+                    </Button>
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-primary">
                     Free Case Evaluation
                   </Button>

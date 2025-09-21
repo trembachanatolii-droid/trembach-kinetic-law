@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -61,10 +61,21 @@ const SexualAbuse: React.FC = () => {
     timeframe: '',
     relationship: ''
   });
+  const [showOverviewMore, setShowOverviewMore] = useState(false);
+  const [showTypesMore, setShowTypesMore] = useState(false);
+  const [showLegalMore, setShowLegalMore] = useState(false);
+  const [showCompensationMore, setShowCompensationMore] = useState(false);
   const [visible, setVisible] = useState(false);
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const onScroll = () => setVisible(window.scrollY > 400);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
@@ -914,7 +925,159 @@ const SexualAbuse: React.FC = () => {
               </div>
             </section>
 
-            {/* FAQ Section */}
+                {/* Time Limits Warning Section */}
+                <section id="time-limits" className="content-card mb-12">
+                  <Card className="border-red-200 bg-red-50">
+                    <CardHeader>
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="p-3 bg-red-100 rounded-lg">
+                          <Clock className="w-8 h-8 text-red-600" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-3xl text-red-700">Don't Wait - Time Limits Apply for California</CardTitle>
+                          <CardDescription className="text-lg text-red-600">Act now to protect your legal rights</CardDescription>
+                        </div>
+                      </div>
+                      <div className="relative h-64 rounded-lg overflow-hidden mb-6">
+                        <img 
+                          src={californiaLawsImage} 
+                          alt="California sexual abuse time limits and statutes" 
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-6">
+                      <div className="bg-red-100 border border-red-300 rounded-lg p-6">
+                        <div className="flex items-start gap-3">
+                          <AlertTriangle className="w-6 h-6 text-red-600 mt-1 flex-shrink-0" />
+                          <div>
+                            <h3 className="font-bold text-red-700 text-xl mb-2">Critical Deadlines</h3>
+                            <p className="text-red-700 leading-relaxed">
+                              California law sets strict time limits for filing sexual abuse lawsuits. Missing these deadlines 
+                              could forever prevent you from seeking justice and compensation. Don't let time run out on your rights.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <Card className="border-orange-200 bg-orange-50">
+                          <CardHeader>
+                            <CardTitle className="text-xl text-orange-700 flex items-center gap-2">
+                              <Users className="w-6 h-6" />
+                              Childhood Sexual Abuse
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <ul className="space-y-2 text-orange-700">
+                              <li>• Until age 40, OR</li>
+                              <li>• Within 5 years of discovering psychological injury was caused by abuse, OR</li>
+                              <li>• Within 3 years of discovering abuse caused your injury</li>
+                              <li>• <strong>Extended deadlines may apply under new California laws</strong></li>
+                            </ul>
+                          </CardContent>
+                        </Card>
+
+                        <Card className="border-blue-200 bg-blue-50">
+                          <CardHeader>
+                            <CardTitle className="text-xl text-blue-700 flex items-center gap-2">
+                              <UserCheck className="w-6 h-6" />
+                              Adult Sexual Abuse
+                            </CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <ul className="space-y-2 text-blue-700">
+                              <li>• Within 10 years of the incident, OR</li>
+                              <li>• Within 3 years of discovering the abuse caused your injury</li>
+                              <li>• <strong>Special rules may apply for delayed discovery</strong></li>
+                            </ul>
+                          </CardContent>
+                        </Card>
+                      </div>
+
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+                        <h3 className="font-bold text-green-700 text-xl mb-3 flex items-center gap-2">
+                          <Shield className="w-6 h-6" />
+                          Recent Legal Changes Expand Your Rights
+                        </h3>
+                        <p className="text-green-700 mb-4 leading-relaxed">
+                          California Assembly Bill 218 and other recent legislation have significantly extended time limits 
+                          for sexual abuse cases and created new opportunities for older cases that were previously time-barred.
+                        </p>
+                        <ul className="space-y-2 text-green-700">
+                          <li>• Revival window for previously time-barred cases</li>
+                          <li>• Extended deadlines for institutional abuse</li>
+                          <li>• New protections for delayed discovery cases</li>
+                          <li>• Enhanced remedies against institutions that covered up abuse</li>
+                        </ul>
+                      </div>
+
+                      {showLegalMore && (
+                        <div className="space-y-4 animate-fade-in">
+                          <h4 className="font-bold text-xl">Why Time Limits Exist and Why They Matter</h4>
+                          <p className="leading-relaxed">
+                            Statutes of limitations serve important legal purposes, including ensuring evidence remains fresh 
+                            and memories are clear. However, sexual abuse cases are unique because trauma can prevent 
+                            survivors from coming forward immediately. California has recognized this reality and created 
+                            more survivor-friendly time limits.
+                          </p>
+                          
+                          <h4 className="font-bold text-xl">What Happens When You Miss a Deadline?</h4>
+                          <p className="leading-relaxed">
+                            If you miss the statute of limitations, your case will likely be dismissed, and you'll lose 
+                            your right to seek compensation forever. This is why it's crucial to contact an attorney 
+                            immediately, even if you think your case might be too old. Recent legal changes may still 
+                            allow your case to proceed.
+                          </p>
+                          
+                          <h4 className="font-bold text-xl">Special Considerations</h4>
+                          <ul className="space-y-2">
+                            <li>• <strong>Multiple defendants:</strong> Different time limits may apply to different defendants</li>
+                            <li>• <strong>Government entities:</strong> Special notice requirements and shorter deadlines</li>
+                            <li>• <strong>Out-of-state abuse:</strong> Different state laws may apply</li>
+                            <li>• <strong>Repressed memories:</strong> Special rules for delayed discovery of abuse</li>
+                          </ul>
+                        </div>
+                      )}
+                      
+                      <Button 
+                        variant="link" 
+                        onClick={() => setShowLegalMore(!showLegalMore)}
+                        className="p-0 h-auto text-primary hover:text-primary/80"
+                      >
+                        {showLegalMore ? 'Show Less' : 'Learn More About Time Limits'}
+                        <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${showLegalMore ? 'rotate-180' : ''}`} />
+                      </Button>
+
+                      <div className="bg-red-600 text-white rounded-lg p-6 text-center">
+                        <h3 className="text-2xl font-bold mb-4">Don't Wait - Call Today</h3>
+                        <p className="text-lg mb-6">
+                          Every day that passes could bring you closer to losing your legal rights forever. 
+                          Get a free, confidential consultation to understand your options.
+                        </p>
+                        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                          <Button 
+                            size="lg" 
+                            variant="secondary"
+                            className="bg-white text-red-600 hover:bg-gray-100"
+                          >
+                            <Phone className="w-5 h-5 mr-2" />
+                            Call (818) 123-4567
+                          </Button>
+                          <Button 
+                            size="lg" 
+                            variant="outline" 
+                            className="border-white text-white hover:bg-white hover:text-red-600"
+                            onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
+                          >
+                            Free Case Evaluation
+                          </Button>
+                        </div>
+                        <p className="text-sm opacity-90 mt-4">Available 24/7 • No upfront costs • Completely confidential</p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </section>
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions About Sexual Abuse Cases</h2>
               

@@ -65,12 +65,12 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
     }
   };
 
-  const baseClasses = "fixed top-28 left-4 z-[60]";
+  const baseClasses = "fixed top-28 left-4 z-[60] transition-opacity duration-500";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   
   return (
     <div
-      className={`${combinedClasses} transition-opacity duration-500 ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      className={`${combinedClasses} ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
       aria-hidden={!visible}
     >
       <Button
@@ -81,7 +81,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
         aria-label="Go back to previous page"
       >
         <ArrowLeft className="w-5 h-5" />
-        Go Back
+        <span className="text-foreground">Go Back</span>
       </Button>
     </div>
   );

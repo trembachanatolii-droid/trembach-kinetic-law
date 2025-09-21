@@ -116,6 +116,11 @@ import BenzeneMedicalGuidance from "./pages/BenzeneMedicalGuidance";
 import BenzeneLegalGuidance from "./pages/BenzeneLegalGuidance";
 import BenzeneEducation from "./pages/BenzeneEducation";
 import OpioidLitigation from "./pages/practice-areas/OpioidLitigation";
+import OpioidCaseEvaluation from "./pages/OpioidCaseEvaluation";
+import OpioidCalculator from "./pages/OpioidCalculator";
+import OpioidMedicalGuidance from "./pages/OpioidMedicalGuidance";
+import OpioidLegalGuidance from "./pages/OpioidLegalGuidance";
+import OpioidEducation from "./pages/OpioidEducation";
 
 const queryClient = new QueryClient();
 
@@ -259,6 +264,11 @@ function App() {
         <Route path="/benzene-legal-guidance" element={<BenzeneLegalGuidance />} />
             <Route path="/benzene-education" element={<BenzeneEducation />} />
             <Route path="/practice-areas/opioid-litigation" element={<OpioidLitigation />} />
+            <Route path="/opioid-case-evaluation" element={<OpioidCaseEvaluation />} />
+            <Route path="/opioid-calculator" element={<OpioidCalculator />} />
+            <Route path="/opioid-medical-guidance" element={<OpioidMedicalGuidance />} />
+            <Route path="/opioid-legal-guidance" element={<OpioidLegalGuidance />} />
+            <Route path="/opioid-education" element={<OpioidEducation />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

@@ -40,15 +40,15 @@ import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/pfas-main-hero.jpg';
 import sidebarImage from '@/assets/pfas-sidebar.jpg';
-import contaminationImage from '@/assets/pfas-contamination-sources.jpg';
-import healthEffectsImage from '@/assets/pfas-health-effects.jpg';
-import legalProcessImage from '@/assets/pfas-legal-process.jpg';
-import testingImage from '@/assets/pfas-testing-equipment.jpg';
-import manufacturingImage from '@/assets/pfas-manufacturing.jpg';
-import laboratoryImage from '@/assets/pfas-laboratory.jpg';
-import industrialSiteImage from '@/assets/pfas-industrial-site.jpg';
-import medicalMonitoringImage from '@/assets/pfas-medical-monitoring.jpg';
-import cleanupImage from '@/assets/pfas-environmental-cleanup.jpg';
+import contaminationImage from '@/assets/pfas-contamination-sources-large.jpg';
+import healthEffectsImage from '@/assets/pfas-health-effects-large.jpg';
+import legalProcessImage from '@/assets/pfas-legal-process-large.jpg';
+import testingImage from '@/assets/pfas-testing-equipment-large.jpg';
+import manufacturingImage from '@/assets/pfas-manufacturing-large.jpg';
+import laboratoryImage from '@/assets/pfas-laboratory-large.jpg';
+import industrialSiteImage from '@/assets/pfas-industrial-site-large.jpg';
+import medicalMonitoringImage from '@/assets/pfas-medical-monitoring-large.jpg';
+import cleanupImage from '@/assets/pfas-environmental-cleanup-large.jpg';
 import { pfasQuestions } from '@/content/pfasQuestions';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -318,7 +318,7 @@ const PFASExposure: React.FC = () => {
                   <img 
                     src={medicalMonitoringImage} 
                     alt="PFAS medical monitoring and testing facility"
-                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
+                    className="w-full lg:w-80 h-64 lg:h-48 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">What to Do After PFAS Exposure</h2>
@@ -385,7 +385,7 @@ const PFASExposure: React.FC = () => {
                   <img 
                     src={healthEffectsImage} 
                     alt="PFAS health effects and medical research"
-                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
+                    className="w-full lg:w-80 h-64 lg:h-48 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">Health Effects of PFAS Exposure</h2>
@@ -466,7 +466,7 @@ const PFASExposure: React.FC = () => {
                   <img 
                     src={contaminationImage} 
                     alt="PFAS contamination sources and industrial facilities"
-                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
+                    className="w-full lg:w-80 h-64 lg:h-48 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">PFAS Contamination Sources in California</h2>
@@ -564,7 +564,7 @@ const PFASExposure: React.FC = () => {
                   <img 
                     src={legalProcessImage} 
                     alt="Legal process for PFAS exposure cases"
-                    className="w-full lg:w-48 h-48 lg:h-36 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
+                    className="w-full lg:w-80 h-64 lg:h-48 object-cover rounded-lg mb-4 lg:mb-0 lg:mr-6 flex-shrink-0 shadow-lg hover:scale-105 transition-transform duration-300"
                   />
                   <div>
                     <h2 className="text-3xl font-bold text-red-600 mb-4">PFAS Legal Process</h2>
@@ -849,7 +849,7 @@ Apply for California PFAS Cases</h2>
                     <img 
                       src={medicalMonitoringImage} 
                       alt="PFAS medical monitoring and testing" 
-                      className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                      className="w-full h-48 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                       onClick={() => window.location.href = '/pfas-resources'}
                     />
                     <p className="text-sm text-muted-foreground">

@@ -7,41 +7,19 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/opioid-hero-bg.jpg';
 import diagnosisImage from '@/assets/opioid-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/opioid-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-opioid-sites.jpg';
 import medicalImage from '@/assets/opioid-medical-facility.jpg';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const OpioidLitigation: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -50,235 +28,213 @@ const OpioidLitigation: React.FC = () => {
     caseType: '',
     medication: ''
   });
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'diagnosis-steps', label: 'WHAT TO DO AFTER ADDICTION', icon: Stethoscope },
-    { id: 'diagnosis-process', label: 'DIAGNOSIS PROCESS', icon: Heart },
-    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'diagnosis-steps',
+    label: 'WHAT TO DO AFTER ADDICTION',
+    icon: Stethoscope
+  }, {
+    id: 'diagnosis-process',
+    label: 'DIAGNOSIS PROCESS',
+    icon: Heart
+  }, {
+    id: 'legal-process',
+    label: 'LEGAL PROCESS',
+    icon: Shield
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: MessageCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
 
   // FAQ Data with 50+ questions from HTML
-  const faqData = [
-    {
-      question: "What is opioid litigation and how does it help victims?",
-      answer: "Opioid litigation holds pharmaceutical companies accountable for their role in creating the addiction crisis through deceptive marketing and failing to warn about addiction risks. These lawsuits seek compensation for medical expenses, rehabilitation costs, lost wages, and pain and suffering. While government settlements fund public programs, individual litigation provides personal compensation for those directly harmed by opioid addiction. The litigation process exposes internal company documents proving they knew opioids were addictive but concealed these risks from doctors and patients."
-    },
-    {
-      question: "Can I file an opioid lawsuit if I became addicted to prescription medications?",
-      answer: "Yes, if you became addicted to prescription opioids due to inadequate warnings about addiction risks, you may have valid legal claims. Pharmaceutical companies are liable when they fail to properly warn about known risks or make false claims about safety. Your addiction must be causally linked to prescription opioid use, but the fact that you had a legitimate prescription doesn't prevent a lawsuit. Many successful cases involve patients who followed doctors' orders but weren't warned about true addiction risks."
-    },
-    {
-      question: "What if my loved one died from an opioid overdose - can we sue?",
-      answer: "Wrongful death claims are available when opioid addiction leads to fatal overdoses. These cases seek compensation for funeral expenses, lost financial support, and loss of companionship. California law gives families two years from the date of death to file wrongful death claims. Even if the fatal overdose involved street drugs like heroin or illicit fentanyl, you may still have claims if the addiction began with prescription opioids that were inadequately warned about by pharmaceutical companies."
-    },
-    {
-      question: "How long do I have to file an opioid lawsuit in California?",
-      answer: "California's statute of limitations for opioid cases is generally two years from when you discovered or should have discovered the connection between your addiction and prescription opioids. For wrongful death cases, the limit is two years from the date of death. However, some circumstances may extend these deadlines, and discovery rules can be complex. Don't delay - consulting with an attorney immediately ensures you don't miss important deadlines while evidence is still available."
-    },
-    {
-      question: "What pharmaceutical companies are being sued in opioid litigation?",
-      answer: "Major defendants include Purdue Pharma (OxyContin), Johnson & Johnson, Teva Pharmaceuticals, Endo Pharmaceuticals, and Mallinckrodt. Distribution companies like McKesson, Cardinal Health, and AmerisourceBergen also face liability for failing to monitor suspicious orders. Pharmacy chains including CVS, Walgreens, and Walmart are sued for ignoring red flags when dispensing opioids. Consulting firms like McKinsey face claims for advising manufacturers on increasing sales despite knowing addiction risks."
-    },
-    {
-      question: "Do I need to prove my doctor was negligent to win an opioid case?",
-      answer: "No, opioid lawsuits typically focus on pharmaceutical company misconduct rather than doctor negligence. The theory is that drug companies deceived both doctors and patients about addiction risks through false marketing claims. Many doctors prescribed opioids believing they were safe based on pharmaceutical company representations. Your case focuses on whether companies failed to adequately warn about known addiction risks or made false safety claims, not whether your doctor made errors."
-    },
-    {
-      question: "Can I sue if I'm currently struggling with active addiction?",
-      answer: "Yes, active addiction doesn't prevent filing opioid lawsuits. Continuing addiction may actually strengthen your case by demonstrating the severity and ongoing nature of damages caused by pharmaceutical companies' deceptive practices. Many plaintiffs are in various stages of recovery when filing claims. The key is proving your addiction resulted from prescription opioids that were inadequately warned about, regardless of your current addiction status. Treatment records help establish damages and the addiction's impact on your life."
-    },
-    {
-      question: "What damages can I recover in an opioid lawsuit?",
-      answer: "Opioid lawsuit damages include medical expenses for addiction treatment, rehabilitation costs, lost wages and earning capacity, pain and suffering, and in wrongful death cases, funeral expenses and loss of companionship. Treatment costs often include detoxification, inpatient rehabilitation, outpatient counseling, medication-assisted treatment, and ongoing therapy. Lost wages cover both past lost income and reduced future earning capacity due to addiction's impact on career advancement and employment stability."
-    },
-    {
-      question: "How do lawyers prove pharmaceutical companies knew opioids were addictive?",
-      answer: "Internal company documents obtained through litigation discovery reveal that pharmaceutical companies knew about addiction risks for decades. These documents show companies received reports of addiction and abuse but continued claiming low addiction risk in marketing materials. Scientific studies known to companies proved addiction potential, but this information was concealed from doctors and patients. FDA communications, internal emails, and company presentations provide evidence of knowledge versus public representations about addiction risks."
-    },
-    {
-      question: "Will filing an opioid lawsuit affect my medical care or treatment?",
-      answer: "No, filing a lawsuit shouldn't affect your ongoing medical treatment. Healthcare providers have ethical obligations to provide care regardless of litigation status. However, you should inform your treatment team about any litigation, as they may need to provide records or testimony. Some treatment programs specifically help patients involved in litigation. Your lawsuit may actually help fund better treatment options by securing compensation for comprehensive addiction therapy and support services."
-    },
-    {
-      question: "Can family members recover for their own emotional distress from my addiction?",
-      answer: "California law allows certain family members to recover for loss of consortium and emotional distress caused by a spouse or child's opioid addiction. Spouses can claim loss of companionship, affection, and support. Parents may recover for emotional distress from a minor child's addiction. These claims recognize addiction's profound impact on entire families, not just the addicted individual. Compensation addresses the emotional and financial toll on family members who suffered alongside the addicted person."
-    },
-    {
-      question: "What if I also have underlying mental health conditions - does that hurt my case?",
-      answer: "Pre-existing mental health conditions don't automatically hurt opioid cases. Many people prescribed opioids had underlying depression, anxiety, or PTSD that made them more vulnerable to addiction. Pharmaceutical companies knew that people with mental health conditions faced higher addiction risks but failed to provide adequate warnings. Your pre-existing conditions may actually strengthen claims by showing you were part of a vulnerable population that deserved special warnings about addiction risks."
-    },
-    {
-      question: "How much compensation should I expect from an opioid lawsuit?",
-      answer: "Compensation varies significantly based on individual circumstances including addiction severity, treatment costs, lost income, and whether wrongful death occurred. Settlements range from thousands to millions of dollars. Factors include age, career impact, medical expenses, and strength of liability evidence. While we can't guarantee specific amounts, we fight for maximum compensation based on your unique damages. Free consultation provides realistic case evaluation."
-    },
-    {
-      question: "What's the difference between government opioid settlements and individual lawsuits?",
-      answer: "Government settlements compensate public costs like emergency response, law enforcement, and public treatment programs. Individual lawsuits seek compensation for personal damages including medical bills, lost wages, and pain and suffering. Government settlements don't include individual victim compensation. You maintain rights to pursue separate claims regardless of government settlements. Both types of litigation serve different purposes in addressing the opioid crisis's devastating impact."
-    },
-    {
-      question: "Can family members file lawsuits for emotional distress from a loved one's addiction?",
-      answer: "California law allows certain family members to recover for loss of consortium and emotional distress caused by a spouse or child's opioid addiction. Spouses can claim loss of companionship, affection, and support. Parents may recover for emotional distress from a minor child's addiction. These claims recognize addiction's profound impact on entire families, not just the addicted individual. Compensation addresses the emotional and financial toll on family members."
-    },
-    {
-      question: "What if I signed an arbitration agreement with my pharmacy?",
-      answer: "Arbitration agreements may not prevent opioid lawsuits depending on specific language and circumstances. Many agreements don't cover intentional misconduct or fraud claims common in opioid cases. California courts closely scrutinize arbitration agreements for unconscionability. Even if arbitration applies to pharmacy claims, manufacturers and distributors remain subject to court lawsuits. We review any agreements to determine their impact and identify ways to pursue maximum recovery."
-    },
-    {
-      question: "How do I choose the right opioid litigation attorney?",
-      answer: "Look for attorneys with specific opioid litigation experience, resources to battle major corporations, and genuine compassion for addiction victims. Our former defense attorney background provides unique advantages understanding corporate strategies. We offer contingency fees ensuring no upfront costs, have successfully handled complex pharmaceutical cases, and maintain a local California presence while accessing national litigation resources. Free consultation lets you evaluate our fit for your needs without obligation."
-    },
-    {
-      question: "What happens if the defendant pharmaceutical company goes bankrupt during my case?",
-      answer: "Bankruptcy doesn't necessarily eliminate your claim. Companies must establish trusts to compensate victims as part of bankruptcy proceedings. We file claims with bankruptcy trusts while pursuing other liable parties not in bankruptcy. Multiple defendants in opioid cases provide alternative recovery sources. Insurance policies may provide coverage despite bankruptcy. We navigate bankruptcy complexities to maximize recovery from all available sources including parent companies, subsidiaries, and insurers."
-    },
-    {
-      question: "Can veterans file opioid lawsuits for VA-prescribed medications?",
-      answer: "Veterans can pursue claims against pharmaceutical manufacturers but generally cannot sue the VA directly. The focus remains on drug companies that misrepresented opioid risks to the VA and veterans. Veterans face particularly high opioid prescription rates for service-related injuries and PTSD. Pharmaceutical companies specifically targeted veterans as a vulnerable population. Military service doesn't prevent pursuing rightful compensation from drug manufacturers who caused addiction through deceptive practices."
-    },
-    {
-      question: "What scientific evidence links prescription opioids to addiction?",
-      answer: "Extensive scientific research proves prescription opioids' addictive nature including brain imaging showing opioid-induced changes, studies demonstrating physical dependence development within days, evidence that 10-30% of chronic opioid patients develop addiction, research showing 80% of heroin users started with prescriptions, and data proving addiction occurs even with legitimate medical use. Pharmaceutical companies possessed this evidence but concealed it while claiming addiction rates below 1%. Scientific consensus now universally recognizes prescription opioids' high addiction potential."
-    },
-    {
-      question: "How did consulting firms like McKinsey contribute to the opioid crisis?",
-      answer: "McKinsey advised Purdue Pharma on 'turbocharging' OxyContin sales through strategies targeting high-prescribing doctors, countering pharmacy restrictions, and minimizing regulatory concerns. They suggested paying rebates for overdoses to maintain pharmacy relationships. Internal documents show McKinsey knew their advice would increase addiction and overdoses but prioritized profits. They helped create marketing messages downplaying addiction risks while maximizing prescriptions. Consulting firms face liability for knowingly facilitating the crisis."
-    },
-    {
-      question: "What if I relapsed after treatment - does that hurt my case?",
-      answer: "No, relapse is a recognized part of addiction recovery and doesn't weaken your claim. Medical experts understand addiction is a chronic disease often requiring multiple treatment attempts. Relapse actually demonstrates addiction's serious nature and ongoing impact, potentially increasing damages for continued treatment needs. Pharmaceutical companies can't escape liability by pointing to relapse when their products caused the addiction. We present relapse as evidence of addiction's severity, not personal failure."
-    },
-    {
-      question: "Can I file a lawsuit if I became addicted to opioids prescribed after surgery?",
-      answer: "Yes, post-surgical prescriptions are a common pathway to addiction. Pharmaceutical companies marketed opioids as safe for acute post-surgical pain knowing patients could become addicted within days. They failed to warn about addiction risks from short-term use or provide guidance on safe discontinuation. Many surgical patients received excessive quantities of opioids without proper monitoring. The fact that you had legitimate surgical pain doesn't diminish pharmaceutical companies' liability for concealing addiction risks."
-    },
-    {
-      question: "What role did pill mills play in the opioid crisis?",
-      answer: "Pill mills - clinics inappropriately prescribing massive quantities of opioids - operated with pharmaceutical companies' knowledge and sometimes support. Drug companies identified high-prescribing doctors and targeted them with marketing, speakers fees, and gifts. Distributors shipped suspicious quantities to pill mill pharmacies without required reporting. While pill mill operators face criminal charges, pharmaceutical companies that enabled them face civil liability for facilitating obvious drug diversion."
-    },
-    {
-      question: "How do California's medical marijuana laws affect opioid lawsuits?",
-      answer: "California's marijuana laws don't impact opioid lawsuit validity. Some people use cannabis as an alternative to opioids or to manage withdrawal symptoms. This harm reduction approach doesn't diminish claims against opioid manufacturers. In fact, needing alternative treatments demonstrates ongoing impacts from opioid addiction. Pharmaceutical companies can't avoid liability by pointing to marijuana use when their deceptive practices caused the original addiction requiring alternative treatment approaches."
-    },
-    {
-      question: "Can I sue if I became addicted to tramadol or other 'weaker' opioids?",
-      answer: "Yes, all opioids including tramadol, codeine, and hydrocodone can cause addiction deserving compensation. Pharmaceutical companies falsely marketed these as 'safer' alternatives while downplaying addiction risks. Many people started with supposedly weaker opioids before progressing to stronger medications or street drugs. The artificial distinction between opioid strengths was part of deceptive marketing. Any opioid addiction caused by inadequate warnings creates potential liability regardless of the specific medication's perceived strength."
-    },
-    {
-      question: "What if my insurance company paid for my opioid prescriptions?",
-      answer: "Insurance payment for prescriptions doesn't affect your right to sue pharmaceutical companies. Your insurer may have subrogation rights to recover their costs from your settlement, but this doesn't prevent your lawsuit. We negotiate with insurance companies to minimize reimbursement obligations and maximize your net recovery. Insurance coverage actually helps document your prescription history and medical costs. Don't let insurance involvement discourage you from pursuing rightful compensation."
-    },
-    {
-      question: "How do I know if my case is strong enough to pursue?",
-      answer: "The best way to evaluate case strength is through free consultation with experienced opioid litigation attorneys. Generally, strong cases involve documented opioid prescriptions, evidence of addiction or dependence, medical treatment for addiction, and damages like medical costs or lost wages. However, even cases with limited documentation may be viable. We evaluate factors including prescription history, addiction severity, treatment efforts, and available defendants. Don't self-evaluate - let experienced attorneys assess your case's potential at no cost."
-    },
-    {
-      question: "Can nursing home residents or their families sue for inappropriate opioid prescribing?",
-      answer: "Yes, elderly nursing home residents were particularly vulnerable to inappropriate opioid prescribing. Facilities often used opioids for behavior control rather than pain management. Pharmaceutical companies specifically marketed opioids for elderly patients despite higher risks of adverse effects, falls, and complications. Families can pursue claims for deceased residents who suffered from inappropriate opioid use. These cases may involve both pharmaceutical liability and nursing home negligence claims."
-    },
-    {
-      question: "What if I was prescribed opioids for chronic pain that turned out to be from an undiagnosed condition?",
-      answer: "Misdiagnosed or undiagnosed conditions leading to inappropriate opioid prescriptions strengthen liability claims. Pharmaceutical companies promoted opioids as first-line treatment for chronic pain without adequate diagnosis. They encouraged prescribing without identifying pain sources, leading to addiction without addressing underlying conditions. The fact that opioids masked symptoms while causing addiction increases damages. Both pharmaceutical companies and potentially negligent healthcare providers may face liability for prescribing addictive drugs without proper diagnosis."
-    },
-    {
-      question: "How did pharmaceutical companies influence medical education about opioids?",
-      answer: "Drug companies systematically corrupted medical education through funding biased continuing medical education (CME) programs, influencing pain management guidelines, placing marketing messages in medical textbooks, training doctors to dismiss addiction concerns as 'pseudoaddiction,' and promoting unproven concepts like 'breakthrough pain' requiring more opioids. They created an entire false narrative about pain as the 'fifth vital sign' requiring aggressive opioid treatment. This comprehensive manipulation of medical education affected an entire generation of doctors."
-    },
-    {
-      question: "Can I file a lawsuit if I became addicted to opioids as a teenager?",
-      answer: "Yes, teenage opioid addiction cases often involve enhanced liability due to minors' vulnerability. California extends statute of limitations for minors, potentially allowing claims years later. Pharmaceutical companies knew adolescent brains were particularly susceptible to addiction but failed to provide adequate warnings. Teen addiction often leads to lifelong struggles, interrupted education, and derailed career prospects, justifying substantial damages. Parents may also have claims for emotional distress and economic losses from their child's addiction."
-    },
-    {
-      question: "What if the doctor who prescribed my opioids lost their license or faced criminal charges?",
-      answer: "Doctor discipline or criminal charges strengthen claims against pharmaceutical companies who enabled and encouraged inappropriate prescribing. Drug companies identified high-prescribing doctors, including those later disciplined, and specifically targeted them with marketing and incentives. They knew or should have known about problematic prescribing but prioritized sales. Criminal prosecution of doctors doesn't absolve pharmaceutical companies who created the environment enabling pill mills and inappropriate prescribing through deceptive marketing."
-    },
-    {
-      question: "How do I handle the emotional difficulty of pursuing an opioid lawsuit?",
-      answer: "We understand opioid litigation involves painful memories and ongoing trauma. Our compassionate approach minimizes emotional burden while pursuing justice. We handle all legal complexities, allowing you to focus on recovery and healing. Many clients find pursuing accountability therapeutic, transforming victimization into empowerment. We work with clients in recovery, respecting boundaries and treatment needs. Support from family, therapists, and support groups helps manage litigation stress. Remember, seeking justice helps prevent others from suffering similar harm."
-    },
-    {
-      question: "Can I still file a lawsuit if I signed a settlement with one opioid company?",
-      answer: "Previous settlements with one defendant don't necessarily prevent claims against others. Many defendants exist in the opioid supply chain - manufacturers, distributors, pharmacies, and consultants. Settlement terms vary, and some explicitly preserve rights against other parties. We review any prior settlements to determine remaining options. Even with some defendants settled, substantial recovery may remain available from others. Multiple responsible parties mean one settlement rarely resolves all potential claims."
-    },
-    {
-      question: "What protections exist for my privacy during an opioid lawsuit?",
-      answer: "Courts recognize the sensitive nature of addiction-related litigation and provide privacy protections. Many cases proceed with pseudonyms or initials protecting identity. Protective orders limit disclosure of medical and personal information. Settlements often include confidentiality provisions. We take extensive measures protecting client privacy while pursuing claims. Addiction stigma shouldn't prevent seeking deserved compensation. Most cases resolve without public trial, and even trial proceedings can include privacy protections for sensitive information."
-    },
-    {
-      question: "How does California's legalization of recreational marijuana affect opioid cases?",
-      answer: "Marijuana legalization has no negative impact on opioid litigation. Some people use cannabis as an opioid alternative or for managing chronic pain without addiction risks. This harm reduction approach doesn't diminish opioid manufacturers' liability for causing addiction through deceptive practices. Courts recognize that seeking alternative pain management after opioid addiction demonstrates good faith efforts at recovery. Pharmaceutical companies cannot escape responsibility by pointing to legal marijuana use."
-    },
-    {
-      question: "What should I do if I'm contacted by pharmaceutical company representatives?",
-      answer: "Don't speak with pharmaceutical company representatives, investigators, or attorneys without your own lawyer present. They may seek statements undermining your claim or offer inadequate settlements. Refer all contacts to your attorney. Don't sign any documents or accept any payments without legal review. Insurance adjusters and corporate representatives protect company interests, not yours. Having experienced legal representation ensures your rights are protected and communications are handled appropriately. Contact us immediately if approached by anyone representing pharmaceutical defendants."
-    }
-  ];
-
+  const faqData = [{
+    question: "What is opioid litigation and how does it help victims?",
+    answer: "Opioid litigation holds pharmaceutical companies accountable for their role in creating the addiction crisis through deceptive marketing and failing to warn about addiction risks. These lawsuits seek compensation for medical expenses, rehabilitation costs, lost wages, and pain and suffering. While government settlements fund public programs, individual litigation provides personal compensation for those directly harmed by opioid addiction. The litigation process exposes internal company documents proving they knew opioids were addictive but concealed these risks from doctors and patients."
+  }, {
+    question: "Can I file an opioid lawsuit if I became addicted to prescription medications?",
+    answer: "Yes, if you became addicted to prescription opioids due to inadequate warnings about addiction risks, you may have valid legal claims. Pharmaceutical companies are liable when they fail to properly warn about known risks or make false claims about safety. Your addiction must be causally linked to prescription opioid use, but the fact that you had a legitimate prescription doesn't prevent a lawsuit. Many successful cases involve patients who followed doctors' orders but weren't warned about true addiction risks."
+  }, {
+    question: "What if my loved one died from an opioid overdose - can we sue?",
+    answer: "Wrongful death claims are available when opioid addiction leads to fatal overdoses. These cases seek compensation for funeral expenses, lost financial support, and loss of companionship. California law gives families two years from the date of death to file wrongful death claims. Even if the fatal overdose involved street drugs like heroin or illicit fentanyl, you may still have claims if the addiction began with prescription opioids that were inadequately warned about by pharmaceutical companies."
+  }, {
+    question: "How long do I have to file an opioid lawsuit in California?",
+    answer: "California's statute of limitations for opioid cases is generally two years from when you discovered or should have discovered the connection between your addiction and prescription opioids. For wrongful death cases, the limit is two years from the date of death. However, some circumstances may extend these deadlines, and discovery rules can be complex. Don't delay - consulting with an attorney immediately ensures you don't miss important deadlines while evidence is still available."
+  }, {
+    question: "What pharmaceutical companies are being sued in opioid litigation?",
+    answer: "Major defendants include Purdue Pharma (OxyContin), Johnson & Johnson, Teva Pharmaceuticals, Endo Pharmaceuticals, and Mallinckrodt. Distribution companies like McKesson, Cardinal Health, and AmerisourceBergen also face liability for failing to monitor suspicious orders. Pharmacy chains including CVS, Walgreens, and Walmart are sued for ignoring red flags when dispensing opioids. Consulting firms like McKinsey face claims for advising manufacturers on increasing sales despite knowing addiction risks."
+  }, {
+    question: "Do I need to prove my doctor was negligent to win an opioid case?",
+    answer: "No, opioid lawsuits typically focus on pharmaceutical company misconduct rather than doctor negligence. The theory is that drug companies deceived both doctors and patients about addiction risks through false marketing claims. Many doctors prescribed opioids believing they were safe based on pharmaceutical company representations. Your case focuses on whether companies failed to adequately warn about known addiction risks or made false safety claims, not whether your doctor made errors."
+  }, {
+    question: "Can I sue if I'm currently struggling with active addiction?",
+    answer: "Yes, active addiction doesn't prevent filing opioid lawsuits. Continuing addiction may actually strengthen your case by demonstrating the severity and ongoing nature of damages caused by pharmaceutical companies' deceptive practices. Many plaintiffs are in various stages of recovery when filing claims. The key is proving your addiction resulted from prescription opioids that were inadequately warned about, regardless of your current addiction status. Treatment records help establish damages and the addiction's impact on your life."
+  }, {
+    question: "What damages can I recover in an opioid lawsuit?",
+    answer: "Opioid lawsuit damages include medical expenses for addiction treatment, rehabilitation costs, lost wages and earning capacity, pain and suffering, and in wrongful death cases, funeral expenses and loss of companionship. Treatment costs often include detoxification, inpatient rehabilitation, outpatient counseling, medication-assisted treatment, and ongoing therapy. Lost wages cover both past lost income and reduced future earning capacity due to addiction's impact on career advancement and employment stability."
+  }, {
+    question: "How do lawyers prove pharmaceutical companies knew opioids were addictive?",
+    answer: "Internal company documents obtained through litigation discovery reveal that pharmaceutical companies knew about addiction risks for decades. These documents show companies received reports of addiction and abuse but continued claiming low addiction risk in marketing materials. Scientific studies known to companies proved addiction potential, but this information was concealed from doctors and patients. FDA communications, internal emails, and company presentations provide evidence of knowledge versus public representations about addiction risks."
+  }, {
+    question: "Will filing an opioid lawsuit affect my medical care or treatment?",
+    answer: "No, filing a lawsuit shouldn't affect your ongoing medical treatment. Healthcare providers have ethical obligations to provide care regardless of litigation status. However, you should inform your treatment team about any litigation, as they may need to provide records or testimony. Some treatment programs specifically help patients involved in litigation. Your lawsuit may actually help fund better treatment options by securing compensation for comprehensive addiction therapy and support services."
+  }, {
+    question: "Can family members recover for their own emotional distress from my addiction?",
+    answer: "California law allows certain family members to recover for loss of consortium and emotional distress caused by a spouse or child's opioid addiction. Spouses can claim loss of companionship, affection, and support. Parents may recover for emotional distress from a minor child's addiction. These claims recognize addiction's profound impact on entire families, not just the addicted individual. Compensation addresses the emotional and financial toll on family members who suffered alongside the addicted person."
+  }, {
+    question: "What if I also have underlying mental health conditions - does that hurt my case?",
+    answer: "Pre-existing mental health conditions don't automatically hurt opioid cases. Many people prescribed opioids had underlying depression, anxiety, or PTSD that made them more vulnerable to addiction. Pharmaceutical companies knew that people with mental health conditions faced higher addiction risks but failed to provide adequate warnings. Your pre-existing conditions may actually strengthen claims by showing you were part of a vulnerable population that deserved special warnings about addiction risks."
+  }, {
+    question: "How much compensation should I expect from an opioid lawsuit?",
+    answer: "Compensation varies significantly based on individual circumstances including addiction severity, treatment costs, lost income, and whether wrongful death occurred. Settlements range from thousands to millions of dollars. Factors include age, career impact, medical expenses, and strength of liability evidence. While we can't guarantee specific amounts, we fight for maximum compensation based on your unique damages. Free consultation provides realistic case evaluation."
+  }, {
+    question: "What's the difference between government opioid settlements and individual lawsuits?",
+    answer: "Government settlements compensate public costs like emergency response, law enforcement, and public treatment programs. Individual lawsuits seek compensation for personal damages including medical bills, lost wages, and pain and suffering. Government settlements don't include individual victim compensation. You maintain rights to pursue separate claims regardless of government settlements. Both types of litigation serve different purposes in addressing the opioid crisis's devastating impact."
+  }, {
+    question: "Can family members file lawsuits for emotional distress from a loved one's addiction?",
+    answer: "California law allows certain family members to recover for loss of consortium and emotional distress caused by a spouse or child's opioid addiction. Spouses can claim loss of companionship, affection, and support. Parents may recover for emotional distress from a minor child's addiction. These claims recognize addiction's profound impact on entire families, not just the addicted individual. Compensation addresses the emotional and financial toll on family members."
+  }, {
+    question: "What if I signed an arbitration agreement with my pharmacy?",
+    answer: "Arbitration agreements may not prevent opioid lawsuits depending on specific language and circumstances. Many agreements don't cover intentional misconduct or fraud claims common in opioid cases. California courts closely scrutinize arbitration agreements for unconscionability. Even if arbitration applies to pharmacy claims, manufacturers and distributors remain subject to court lawsuits. We review any agreements to determine their impact and identify ways to pursue maximum recovery."
+  }, {
+    question: "How do I choose the right opioid litigation attorney?",
+    answer: "Look for attorneys with specific opioid litigation experience, resources to battle major corporations, and genuine compassion for addiction victims. Our former defense attorney background provides unique advantages understanding corporate strategies. We offer contingency fees ensuring no upfront costs, have successfully handled complex pharmaceutical cases, and maintain a local California presence while accessing national litigation resources. Free consultation lets you evaluate our fit for your needs without obligation."
+  }, {
+    question: "What happens if the defendant pharmaceutical company goes bankrupt during my case?",
+    answer: "Bankruptcy doesn't necessarily eliminate your claim. Companies must establish trusts to compensate victims as part of bankruptcy proceedings. We file claims with bankruptcy trusts while pursuing other liable parties not in bankruptcy. Multiple defendants in opioid cases provide alternative recovery sources. Insurance policies may provide coverage despite bankruptcy. We navigate bankruptcy complexities to maximize recovery from all available sources including parent companies, subsidiaries, and insurers."
+  }, {
+    question: "Can veterans file opioid lawsuits for VA-prescribed medications?",
+    answer: "Veterans can pursue claims against pharmaceutical manufacturers but generally cannot sue the VA directly. The focus remains on drug companies that misrepresented opioid risks to the VA and veterans. Veterans face particularly high opioid prescription rates for service-related injuries and PTSD. Pharmaceutical companies specifically targeted veterans as a vulnerable population. Military service doesn't prevent pursuing rightful compensation from drug manufacturers who caused addiction through deceptive practices."
+  }, {
+    question: "What scientific evidence links prescription opioids to addiction?",
+    answer: "Extensive scientific research proves prescription opioids' addictive nature including brain imaging showing opioid-induced changes, studies demonstrating physical dependence development within days, evidence that 10-30% of chronic opioid patients develop addiction, research showing 80% of heroin users started with prescriptions, and data proving addiction occurs even with legitimate medical use. Pharmaceutical companies possessed this evidence but concealed it while claiming addiction rates below 1%. Scientific consensus now universally recognizes prescription opioids' high addiction potential."
+  }, {
+    question: "How did consulting firms like McKinsey contribute to the opioid crisis?",
+    answer: "McKinsey advised Purdue Pharma on 'turbocharging' OxyContin sales through strategies targeting high-prescribing doctors, countering pharmacy restrictions, and minimizing regulatory concerns. They suggested paying rebates for overdoses to maintain pharmacy relationships. Internal documents show McKinsey knew their advice would increase addiction and overdoses but prioritized profits. They helped create marketing messages downplaying addiction risks while maximizing prescriptions. Consulting firms face liability for knowingly facilitating the crisis."
+  }, {
+    question: "What if I relapsed after treatment - does that hurt my case?",
+    answer: "No, relapse is a recognized part of addiction recovery and doesn't weaken your claim. Medical experts understand addiction is a chronic disease often requiring multiple treatment attempts. Relapse actually demonstrates addiction's serious nature and ongoing impact, potentially increasing damages for continued treatment needs. Pharmaceutical companies can't escape liability by pointing to relapse when their products caused the addiction. We present relapse as evidence of addiction's severity, not personal failure."
+  }, {
+    question: "Can I file a lawsuit if I became addicted to opioids prescribed after surgery?",
+    answer: "Yes, post-surgical prescriptions are a common pathway to addiction. Pharmaceutical companies marketed opioids as safe for acute post-surgical pain knowing patients could become addicted within days. They failed to warn about addiction risks from short-term use or provide guidance on safe discontinuation. Many surgical patients received excessive quantities of opioids without proper monitoring. The fact that you had legitimate surgical pain doesn't diminish pharmaceutical companies' liability for concealing addiction risks."
+  }, {
+    question: "What role did pill mills play in the opioid crisis?",
+    answer: "Pill mills - clinics inappropriately prescribing massive quantities of opioids - operated with pharmaceutical companies' knowledge and sometimes support. Drug companies identified high-prescribing doctors and targeted them with marketing, speakers fees, and gifts. Distributors shipped suspicious quantities to pill mill pharmacies without required reporting. While pill mill operators face criminal charges, pharmaceutical companies that enabled them face civil liability for facilitating obvious drug diversion."
+  }, {
+    question: "How do California's medical marijuana laws affect opioid lawsuits?",
+    answer: "California's marijuana laws don't impact opioid lawsuit validity. Some people use cannabis as an alternative to opioids or to manage withdrawal symptoms. This harm reduction approach doesn't diminish claims against opioid manufacturers. In fact, needing alternative treatments demonstrates ongoing impacts from opioid addiction. Pharmaceutical companies can't avoid liability by pointing to marijuana use when their deceptive practices caused the original addiction requiring alternative treatment approaches."
+  }, {
+    question: "Can I sue if I became addicted to tramadol or other 'weaker' opioids?",
+    answer: "Yes, all opioids including tramadol, codeine, and hydrocodone can cause addiction deserving compensation. Pharmaceutical companies falsely marketed these as 'safer' alternatives while downplaying addiction risks. Many people started with supposedly weaker opioids before progressing to stronger medications or street drugs. The artificial distinction between opioid strengths was part of deceptive marketing. Any opioid addiction caused by inadequate warnings creates potential liability regardless of the specific medication's perceived strength."
+  }, {
+    question: "What if my insurance company paid for my opioid prescriptions?",
+    answer: "Insurance payment for prescriptions doesn't affect your right to sue pharmaceutical companies. Your insurer may have subrogation rights to recover their costs from your settlement, but this doesn't prevent your lawsuit. We negotiate with insurance companies to minimize reimbursement obligations and maximize your net recovery. Insurance coverage actually helps document your prescription history and medical costs. Don't let insurance involvement discourage you from pursuing rightful compensation."
+  }, {
+    question: "How do I know if my case is strong enough to pursue?",
+    answer: "The best way to evaluate case strength is through free consultation with experienced opioid litigation attorneys. Generally, strong cases involve documented opioid prescriptions, evidence of addiction or dependence, medical treatment for addiction, and damages like medical costs or lost wages. However, even cases with limited documentation may be viable. We evaluate factors including prescription history, addiction severity, treatment efforts, and available defendants. Don't self-evaluate - let experienced attorneys assess your case's potential at no cost."
+  }, {
+    question: "Can nursing home residents or their families sue for inappropriate opioid prescribing?",
+    answer: "Yes, elderly nursing home residents were particularly vulnerable to inappropriate opioid prescribing. Facilities often used opioids for behavior control rather than pain management. Pharmaceutical companies specifically marketed opioids for elderly patients despite higher risks of adverse effects, falls, and complications. Families can pursue claims for deceased residents who suffered from inappropriate opioid use. These cases may involve both pharmaceutical liability and nursing home negligence claims."
+  }, {
+    question: "What if I was prescribed opioids for chronic pain that turned out to be from an undiagnosed condition?",
+    answer: "Misdiagnosed or undiagnosed conditions leading to inappropriate opioid prescriptions strengthen liability claims. Pharmaceutical companies promoted opioids as first-line treatment for chronic pain without adequate diagnosis. They encouraged prescribing without identifying pain sources, leading to addiction without addressing underlying conditions. The fact that opioids masked symptoms while causing addiction increases damages. Both pharmaceutical companies and potentially negligent healthcare providers may face liability for prescribing addictive drugs without proper diagnosis."
+  }, {
+    question: "How did pharmaceutical companies influence medical education about opioids?",
+    answer: "Drug companies systematically corrupted medical education through funding biased continuing medical education (CME) programs, influencing pain management guidelines, placing marketing messages in medical textbooks, training doctors to dismiss addiction concerns as 'pseudoaddiction,' and promoting unproven concepts like 'breakthrough pain' requiring more opioids. They created an entire false narrative about pain as the 'fifth vital sign' requiring aggressive opioid treatment. This comprehensive manipulation of medical education affected an entire generation of doctors."
+  }, {
+    question: "Can I file a lawsuit if I became addicted to opioids as a teenager?",
+    answer: "Yes, teenage opioid addiction cases often involve enhanced liability due to minors' vulnerability. California extends statute of limitations for minors, potentially allowing claims years later. Pharmaceutical companies knew adolescent brains were particularly susceptible to addiction but failed to provide adequate warnings. Teen addiction often leads to lifelong struggles, interrupted education, and derailed career prospects, justifying substantial damages. Parents may also have claims for emotional distress and economic losses from their child's addiction."
+  }, {
+    question: "What if the doctor who prescribed my opioids lost their license or faced criminal charges?",
+    answer: "Doctor discipline or criminal charges strengthen claims against pharmaceutical companies who enabled and encouraged inappropriate prescribing. Drug companies identified high-prescribing doctors, including those later disciplined, and specifically targeted them with marketing and incentives. They knew or should have known about problematic prescribing but prioritized sales. Criminal prosecution of doctors doesn't absolve pharmaceutical companies who created the environment enabling pill mills and inappropriate prescribing through deceptive marketing."
+  }, {
+    question: "How do I handle the emotional difficulty of pursuing an opioid lawsuit?",
+    answer: "We understand opioid litigation involves painful memories and ongoing trauma. Our compassionate approach minimizes emotional burden while pursuing justice. We handle all legal complexities, allowing you to focus on recovery and healing. Many clients find pursuing accountability therapeutic, transforming victimization into empowerment. We work with clients in recovery, respecting boundaries and treatment needs. Support from family, therapists, and support groups helps manage litigation stress. Remember, seeking justice helps prevent others from suffering similar harm."
+  }, {
+    question: "Can I still file a lawsuit if I signed a settlement with one opioid company?",
+    answer: "Previous settlements with one defendant don't necessarily prevent claims against others. Many defendants exist in the opioid supply chain - manufacturers, distributors, pharmacies, and consultants. Settlement terms vary, and some explicitly preserve rights against other parties. We review any prior settlements to determine remaining options. Even with some defendants settled, substantial recovery may remain available from others. Multiple responsible parties mean one settlement rarely resolves all potential claims."
+  }, {
+    question: "What protections exist for my privacy during an opioid lawsuit?",
+    answer: "Courts recognize the sensitive nature of addiction-related litigation and provide privacy protections. Many cases proceed with pseudonyms or initials protecting identity. Protective orders limit disclosure of medical and personal information. Settlements often include confidentiality provisions. We take extensive measures protecting client privacy while pursuing claims. Addiction stigma shouldn't prevent seeking deserved compensation. Most cases resolve without public trial, and even trial proceedings can include privacy protections for sensitive information."
+  }, {
+    question: "How does California's legalization of recreational marijuana affect opioid cases?",
+    answer: "Marijuana legalization has no negative impact on opioid litigation. Some people use cannabis as an opioid alternative or for managing chronic pain without addiction risks. This harm reduction approach doesn't diminish opioid manufacturers' liability for causing addiction through deceptive practices. Courts recognize that seeking alternative pain management after opioid addiction demonstrates good faith efforts at recovery. Pharmaceutical companies cannot escape responsibility by pointing to legal marijuana use."
+  }, {
+    question: "What should I do if I'm contacted by pharmaceutical company representatives?",
+    answer: "Don't speak with pharmaceutical company representatives, investigators, or attorneys without your own lawyer present. They may seek statements undermining your claim or offer inadequate settlements. Refer all contacts to your attorney. Don't sign any documents or accept any payments without legal review. Insurance adjusters and corporate representatives protect company interests, not yours. Having experienced legal representation ensures your rights are protected and communications are handled appropriately. Contact us immediately if approached by anyone representing pharmaceutical defendants."
+  }];
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation - instant
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.1,
+        ease: 'power2.out'
+      });
 
       // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
-          }
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
+        opacity: 0,
+        y: 30
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 80%'
         }
-      );
+      });
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission - redirect to case evaluation
     window.location.href = '/opioid-case-evaluation';
   };
-
-  return (
-    <div className="min-h-screen bg-background">
+  return <div className="min-h-screen bg-background">
       {/* Go Back Component */}
       <GoBack fallbackPath="/practice-areas" />
 
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
@@ -288,17 +244,11 @@ const OpioidLitigation: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
               <span className="ml-2 text-lg">Fighting Big Pharma for Victims</span>
             </div>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/opioid-case-evaluation'}
-            >
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg" onClick={() => window.location.href = '/opioid-case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -308,23 +258,13 @@ const OpioidLitigation: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${activeTab === tab.id ? 'bg-white text-primary' : 'text-white hover:bg-white/20'}`}>
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
@@ -448,7 +388,10 @@ const OpioidLitigation: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2">Case Type</label>
-                      <Select value={formData.caseType} onValueChange={(value) => setFormData(prev => ({ ...prev, caseType: value }))}>
+                      <Select value={formData.caseType} onValueChange={value => setFormData(prev => ({
+                      ...prev,
+                      caseType: value
+                    }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select case type" />
                         </SelectTrigger>
@@ -463,12 +406,10 @@ const OpioidLitigation: React.FC = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2">Opioid Medication</label>
-                      <Input
-                        type="text"
-                        value={formData.medication}
-                        onChange={(e) => setFormData(prev => ({ ...prev, medication: e.target.value }))}
-                        placeholder="e.g., OxyContin, Percocet"
-                      />
+                      <Input type="text" value={formData.medication} onChange={e => setFormData(prev => ({
+                      ...prev,
+                      medication: e.target.value
+                    }))} placeholder="e.g., OxyContin, Percocet" />
                     </div>
                   </div>
                   
@@ -584,11 +525,7 @@ const OpioidLitigation: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Understanding Opioid Addiction Diagnosis</h2>
               
               <div className="mb-6">
-                <img 
-                  src={diagnosisImage} 
-                  alt="Opioid addiction diagnosis process in California medical facilities" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                />
+                <img src={diagnosisImage} alt="Opioid addiction diagnosis process in California medical facilities" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Opioid addiction diagnosis often involves recognizing patterns of compulsive use, tolerance development, and withdrawal symptoms. Understanding the diagnostic criteria helps ensure proper treatment and establishes the medical foundation for legal claims.
@@ -666,11 +603,7 @@ const OpioidLitigation: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Opioid Legal Process</h2>
               
               <div className="mb-6">
-                <img 
-                  src={legalProcessImage} 
-                  alt="California legal process for opioid litigation" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
-                />
+                <img src={legalProcessImage} alt="California legal process for opioid litigation" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Understanding the legal process helps you know what to expect as we pursue maximum compensation for opioid-related harm. California and federal courts provide multiple avenues for recovery against pharmaceutical companies, distributors, and retailers.
@@ -737,24 +670,17 @@ const OpioidLitigation: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
-                {faqData.map((faq, index) => (
-                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <CardHeader 
-                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
-                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                    >
+                {faqData.map((faq, index) => <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader className="cursor-pointer transition-colors group-hover:bg-primary/5" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                       <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
                         {faq.question}
                         {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent className="animate-fade-in">
+                    {expandedFaq === index && <CardContent className="animate-fade-in">
                         <p className="text-muted-foreground">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
 
@@ -768,21 +694,13 @@ const OpioidLitigation: React.FC = () => {
                     <CardTitle>Legal Resources</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start text-left h-auto p-4"
-                      onClick={() => window.location.href = '/opioid-calculator'}
-                    >
+                    <Button variant="outline" className="w-full justify-start text-left h-auto p-4" onClick={() => window.location.href = '/opioid-calculator'}>
                       <div>
                         <div className="font-semibold">Compensation Calculator</div>
                         <div className="text-sm text-muted-foreground">Estimate your potential damages</div>
                       </div>
                     </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start text-left h-auto p-4"
-                      onClick={() => window.location.href = '/opioid-legal-guidance'}
-                    >
+                    <Button variant="outline" className="w-full justify-start text-left h-auto p-4" onClick={() => window.location.href = '/opioid-legal-guidance'}>
                       <div>
                         <div className="font-semibold">Legal Guidance</div>
                         <div className="text-sm text-muted-foreground">Understand your legal rights</div>
@@ -796,21 +714,13 @@ const OpioidLitigation: React.FC = () => {
                     <CardTitle>Treatment Resources</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-3">
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start text-left h-auto p-4"
-                      onClick={() => window.location.href = '/opioid-medical-guidance'}
-                    >
+                    <Button variant="outline" className="w-full justify-start text-left h-auto p-4" onClick={() => window.location.href = '/opioid-medical-guidance'}>
                       <div>
                         <div className="font-semibold">Medical Guidance</div>
                         <div className="text-sm text-muted-foreground">Treatment and recovery resources</div>
                       </div>
                     </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full justify-start text-left h-auto p-4"
-                      onClick={() => window.location.href = '/opioid-education'}
-                    >
+                    <Button variant="outline" className="w-full justify-start text-left h-auto p-4" onClick={() => window.location.href = '/opioid-education'}>
                       <div>
                         <div className="font-semibold">Crisis Education</div>
                         <div className="text-sm text-muted-foreground">Learn about the opioid epidemic</div>
@@ -826,29 +736,7 @@ const OpioidLitigation: React.FC = () => {
 
             {/* Don't Wait Section */}
             <section className="content-section mb-12 bg-red-50 border-l-4 border-red-600">
-              <div className="p-8">
-          <h2 className="text-3xl font-bold text-red-600 mb-6">Don't Wait - Time Limits Apply for California</h2>
-          <p className="text-lg text-gray-700 mb-6 leading-relaxed">
-            California law imposes strict time limits on opioid litigation claims. The statute of limitations can be as short as two years from discovery of the connection between prescription opioids and addiction. Evidence degrades over time, witnesses become unavailable, and pharmaceutical companies actively destroy documents after certain periods.
-          </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button 
-                    size="lg" 
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4"
-                    onClick={() => window.location.href = '/opioid-case-evaluation'}
-                  >
-                    START MY FREE CASE EVALUATION
-                  </Button>
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="border-red-600 text-red-600 hover:bg-red-50 hover:text-red-700 font-bold px-8 py-4"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
-                    CALL NOW (818) 123-4567
-                  </Button>
-                </div>
-              </div>
+              
             </section>
           </div>
 
@@ -858,7 +746,9 @@ const OpioidLitigation: React.FC = () => {
               
               {/* Contact Card */}
               <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
-                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${medicalImage})` }}>
+                <div className="h-48 bg-cover bg-center" style={{
+                backgroundImage: `url(${medicalImage})`
+              }}>
                   <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
                     <div className="text-center text-white">
                       <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
@@ -873,28 +763,17 @@ const OpioidLitigation: React.FC = () => {
                   </p>
                   
                   <div className="space-y-4">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
+                    <Button className="w-full bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = 'tel:8181234567'}>
                       <Phone className="w-4 h-4 mr-2" />
                       Call (818) 123-4567
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => window.location.href = '/schedule-consultation'}
-                    >
+                    <Button variant="outline" className="w-full" onClick={() => window.location.href = '/schedule-consultation'}>
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Schedule Consultation
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => window.location.href = '/opioid-case-evaluation'}
-                    >
+                    <Button variant="outline" className="w-full" onClick={() => window.location.href = '/opioid-case-evaluation'}>
                       <Mail className="w-4 h-4 mr-2" />
                       Free Case Evaluation
                     </Button>
@@ -947,8 +826,6 @@ Apply for California Opioid Claims</h2>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default OpioidLitigation;

@@ -109,6 +109,12 @@ import PFASExposure from "./pages/practice-areas/PFASExposure";
 import PFASCalculator from "./pages/PFASCalculator";
 import PFASResources from "./pages/PFASResources";
 import PFASGuidance from "./pages/PFASGuidance";
+import BenzeneExposure from "./pages/practice-areas/BenzeneExposure";
+import BenzeneCaseEvaluation from "./pages/BenzeneCaseEvaluation";
+import BenzeneCalculator from "./pages/BenzeneCalculator";
+import BenzeneMedicalGuidance from "./pages/BenzeneMedicalGuidance";
+import BenzeneLegalGuidance from "./pages/BenzeneLegalGuidance";
+import BenzeneEducation from "./pages/BenzeneEducation";
 
 const queryClient = new QueryClient();
 
@@ -244,6 +250,13 @@ function App() {
         <Route path="/pfas-calculator" element={<PFASCalculator />} />
         <Route path="/pfas-resources" element={<PFASResources />} />
         <Route path="/pfas-guidance" element={<PFASGuidance />} />
+        {/* Benzene Exposure Routes */}
+        <Route path="/practice-areas/benzene-exposure" element={<BenzeneExposure />} />
+        <Route path="/benzene-case-evaluation" element={<BenzeneCaseEvaluation />} />
+        <Route path="/benzene-calculator" element={<BenzeneCalculator />} />
+        <Route path="/benzene-medical-guidance" element={<BenzeneMedicalGuidance />} />
+        <Route path="/benzene-legal-guidance" element={<BenzeneLegalGuidance />} />
+        <Route path="/benzene-education" element={<BenzeneEducation />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

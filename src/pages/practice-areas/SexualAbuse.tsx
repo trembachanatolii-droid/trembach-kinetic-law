@@ -1051,8 +1051,9 @@ const SexualAbuse: React.FC = () => {
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
                           <Button 
                             size="lg" 
-                            variant="secondary"
-                            className="bg-white text-red-600 hover:bg-gray-100"
+                            variant="outline"
+                            className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg"
+                            onClick={() => window.location.href = 'tel:+18181234567'}
                           >
                             <Phone className="w-5 h-5 mr-2" />
                             Call (818) 123-4567
@@ -1060,7 +1061,7 @@ const SexualAbuse: React.FC = () => {
                           <Button 
                             size="lg" 
                             variant="outline" 
-                            className="border-white text-white hover:bg-white hover:text-red-600"
+                            className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg"
                             onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
                           >
                             Free Case Evaluation

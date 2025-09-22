@@ -246,7 +246,7 @@ const ElderAbuseResources: React.FC = () => {
       description: "Understanding resident rights and how to advocate",
       provider: "Long-Term Care Ombudsman",
       format: "Handbook, training sessions",
-      website: "https://aging.ca.gov/ombudsman/"
+      website: "https://www.aging.ca.gov/"
     }
   ];
 

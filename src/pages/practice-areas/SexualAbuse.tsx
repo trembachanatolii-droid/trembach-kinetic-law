@@ -918,8 +918,8 @@ const SexualAbuse: React.FC = () => {
               </div>
             </section>
 
-                {/* Time Limits Warning Section */}
-                <section id="time-limits" className="content-card mb-12">
+                {/* Time Limits Section - Keep for content */}
+                <section id="time-limits-content" className="content-card mb-12">
                   <Card className="border-red-200 bg-red-50">
                     <CardHeader>
                       <div className="flex items-center gap-3 mb-4">
@@ -927,8 +927,8 @@ const SexualAbuse: React.FC = () => {
                           <Clock className="w-8 h-8 text-red-600" />
                         </div>
                         <div>
-                          <CardTitle className="text-3xl text-red-700">Don't Wait - Time Limits Apply for California</CardTitle>
-                          <CardDescription className="text-lg text-red-600">Act now to protect your legal rights</CardDescription>
+                          <CardTitle className="text-3xl text-red-700">California Sexual Abuse Time Limits</CardTitle>
+                          <CardDescription className="text-lg text-red-600">Understand your legal deadlines</CardDescription>
                         </div>
                       </div>
                       <div className="relative h-64 rounded-lg overflow-hidden mb-6">
@@ -1180,54 +1180,47 @@ const SexualAbuse: React.FC = () => {
           <div className="lg:col-span-1">
             <div className="sticky top-8 space-y-6">
               
-              {/* 3 Ways to Start Your Case */}
-              <Card className="glass-card shadow-xl">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-xl font-bold text-primary">3 Ways to Start Your Case</CardTitle>
-                  <div className="w-12 h-1 bg-red-500 mx-auto rounded-full"></div>
-                </CardHeader>
-                <CardContent className="space-y-6">
-                  <div 
-                    className="text-center p-4 bg-cover bg-center rounded-lg relative overflow-hidden"
-                    style={{ backgroundImage: `url(${sidebarImage})` }}
-                  >
-                    <div className="absolute inset-0 bg-black/60"></div>
-                    <div className="relative z-10">
-                      <h3 className="font-semibold text-white mb-2">Free Consultation</h3>
-                      <p className="text-sm text-white/90 mb-4">Confidential discussion of your case</p>
-                      <Button 
-                        className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold"
-                        onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
-                      >
-                        <Scale className="w-4 h-4 mr-2" />
-                        Start Online
-                      </Button>
+              {/* Contact Card */}
+              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="text-center text-white">
+                      <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                      <h3 className="text-xl font-bold">Start Your Case</h3>
                     </div>
                   </div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-6">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
                   
-                  <div className="text-center p-4 border-2 border-dashed border-primary/30 rounded-lg">
-                    <Phone className="w-8 h-8 text-primary mx-auto mb-2" />
-                    <h3 className="font-semibold text-primary mb-1">Call Now</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Speak directly with our team</p>
+                  <div className="space-y-4">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.location.href = 'tel:8559851234'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (855) 985-1234
+                    </Button>
+                    
                     <Button 
                       variant="outline" 
-                      className="w-full border-primary text-primary hover:bg-primary hover:text-white"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
-                      (818) 123-4567
-                    </Button>
-                  </div>
-                  
-                  <div className="text-center p-4 bg-muted rounded-lg">
-                    <MessageCircle className="w-8 h-8 text-primary mx-auto mb-2" />
-                    <h3 className="font-semibold text-primary mb-1">Schedule Video Call</h3>
-                    <p className="text-sm text-muted-foreground mb-3">Secure video consultation</p>
-                    <Button 
-                      variant="secondary" 
                       className="w-full"
-                      onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
+                      onClick={() => window.location.href = '/schedule-consultation'}
                     >
-                      Schedule Now
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/case-evaluation'}
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Free Case Evaluation
                     </Button>
                   </div>
                 </CardContent>
@@ -1283,6 +1276,25 @@ const SexualAbuse: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom CTA */}
+      <section className="bg-gray-900 text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits 
+Apply for California</h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+          <p className="text-xl mb-12 leading-relaxed">California law sets strict time limits for sexual abuse cases. Contact us today for your free consultation.</p>
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8559851234'}>
+              CALL (855) 985-1234
+            </Button>
+            
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/case-evaluation'}>
+              START MY FREE CASE EVALUATION
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

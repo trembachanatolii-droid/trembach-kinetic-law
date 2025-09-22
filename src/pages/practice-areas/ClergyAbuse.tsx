@@ -155,6 +155,166 @@ const ClergyAbuse: React.FC = () => {
     {
       question: "What If I Still Attend the Same Church?",
       answer: "Many survivors maintain connections to their faith communities. Filing a lawsuit doesn't require leaving your church. Some find that seeking accountability strengthens their faith by promoting institutional reform. We can structure cases to minimize community disruption while ensuring justice. Your spiritual journey is separate from holding abusers accountable."
+    },
+    {
+      question: "Can I File a Criminal Case Along with a Civil Lawsuit?",
+      answer: "Yes. Criminal and civil cases proceed independently. California has no statute of limitations for prosecuting child sexual abuse crimes. We can coordinate with prosecutors while pursuing civil compensation. Criminal conviction isn't required for civil success - the burden of proof is lower in civil cases. Many survivors find both criminal prosecution and civil litigation important for complete justice."
+    },
+    {
+      question: "What If I Was Abused by Multiple Clergy Members?",
+      answer: "Multiple perpetrator cases often indicate systemic institutional failures warranting higher compensation. Each incident of abuse strengthens claims against the institution for negligent supervision and retention. We pursue claims against all perpetrators and the institutions that enabled them. These cases often reveal patterns of cover-ups and transfers that support punitive damage awards."
+    },
+    {
+      question: "How Does Repressed Memory Affect My Case?",
+      answer: "California law recognizes that trauma can cause repressed or recovered memories. The discovery rule allows claims within 5 years of remembering abuse, even if you're over 40. Courts understand trauma's impact on memory. Expert testimony from psychologists can explain memory recovery. Documentation of when memories returned strengthens discovery rule claims."
+    },
+    {
+      question: "What If the Church Claims the Abuse Was Consensual?",
+      answer: "Minors cannot legally consent to sexual activity with adults - period. For adult victims, clergy relationships involve inherent power imbalances that negate true consent. California recognizes that spiritual authority creates coercive dynamics similar to therapist-patient relationships. We counter victim-blaming defenses with expert testimony about religious authority abuse."
+    },
+    {
+      question: "Can I Get Compensation If I Don't Remember All Details?",
+      answer: "Yes. Trauma affects memory, and courts understand this. You don't need perfect recall of dates, times, or specifics. General timeframes and circumstances are sufficient. We use investigative techniques to fill gaps, including personnel records establishing perpetrator assignments and witness testimony corroborating your presence."
+    },
+    {
+      question: "What Support Services Are Available During My Case?",
+      answer: "We connect clients with comprehensive support including trauma-specialized therapists, support groups for survivors, victim compensation programs, crisis counseling services, and spiritual counseling if desired. California's Trauma Recovery Centers provide free mental health services. SNAP offers peer support and advocacy."
+    },
+    {
+      question: "How Do I Choose the Right Clergy Abuse Attorney?",
+      answer: "Look for attorneys with specific clergy abuse experience, not just general personal injury practice. Consider their track record against religious institutions, understanding of religious trauma dynamics, and approach to client privacy. Our former defense background provides unique advantages - we know institutional tactics and insurance company strategies."
+    },
+    {
+      question: "What If My Family Doesn't Support My Decision to Sue?",
+      answer: "Family dynamics around clergy abuse can be complex, especially in religious families. Your decision to seek justice is yours alone. We maintain strict confidentiality - family members aren't informed without your permission. Many families eventually support survivors once they understand the abuse impact. Regardless of family support, you deserve justice."
+    },
+    {
+      question: "Can I Remain Anonymous Throughout the Legal Process?",
+      answer: "We prioritize protecting your identity through various legal mechanisms. Cases can be filed using pseudonyms like 'John Doe' or 'Jane Doe.' Court records can be sealed. Settlement agreements typically include strict confidentiality provisions. While complete anonymity isn't always possible, we've successfully protected countless clients' identities."
+    },
+    {
+      question: "What If I Signed Something Years Ago?",
+      answer: "Prior agreements may not prevent current claims. Many old agreements are legally defective because they were signed under duress, without legal representation, or by minors. Some explicitly allow future claims. Others may not cover all defendants or claims. California courts scrutinize releases involving child abuse. Don't assume old paperwork prevents justice."
+    },
+    {
+      question: "How Do California's New Laws Help Clergy Abuse Survivors?",
+      answer: "California leads the nation in survivor protections. AB 218 extended filing deadlines to age 40, created revival windows for old claims, and allows treble damages for cover-ups. SB 360 requires churches to train employees and volunteers in abuse prevention. Recent legislation eliminated statutes of limitations for future childhood abuse."
+    },
+    {
+      question: "What's the Difference Between Criminal and Civil Cases?",
+      answer: "Criminal cases seek imprisonment and are prosecuted by the government, requiring proof beyond reasonable doubt. Civil cases seek monetary compensation and are filed by survivors, requiring only preponderance of evidence (more likely than not). You control civil cases while prosecutors control criminal cases. Civil cases can proceed regardless of criminal outcomes."
+    },
+    {
+      question: "Can Therapy Records Be Used Against Me?",
+      answer: "California provides strong psychotherapist-patient privilege protections. While some therapy records may be relevant, we fight to limit disclosure to only necessary information. We work with therapists to protect sensitive information while supporting your case. Having sought therapy actually strengthens claims by documenting trauma impact."
+    },
+    {
+      question: "What If I Have Substance Abuse or Mental Health Issues?",
+      answer: "Many survivors develop substance abuse or mental health conditions as trauma responses. These don't diminish your claim - they often strengthen it by showing abuse impact. Courts recognize addiction and mental illness as common trauma consequences. We present these issues as damages caused by abuse, not character flaws."
+    },
+    {
+      question: "How Do I Know If My Case Is Strong?",
+      answer: "Case strength depends on multiple factors including evidence of abuse, institutional knowledge, corroborating witnesses, and documentation of harm. Even cases without perfect evidence can be strong. Our free evaluation assesses your case's potential. Factors that strengthen cases include multiple survivors, personnel files showing prior complaints, and evidence of cover-ups."
+    },
+    {
+      question: "Will I Have to Testify in Court?",
+      answer: "Most clergy abuse cases settle before trial, so court testimony isn't always necessary. If your case goes to trial, we prepare you thoroughly and request accommodations like closed courtrooms or video testimony when appropriate. You're not alone - we're with you every step, and many survivors find testifying empowering."
+    },
+    {
+      question: "What If the Perpetrator Is Dead?",
+      answer: "You can still pursue claims against religious institutions even if the individual perpetrator has died. Institutional liability continues regardless of the perpetrator's status. In fact, deceased perpetrator cases sometimes have advantages because institutions can't claim they didn't know about the abuse - the abuser isn't there to dispute institutional knowledge."
+    },
+    {
+      question: "How Long Do These Cases Typically Take?",
+      answer: "Timeline varies significantly depending on case complexity, institution cooperation, and court schedules. Simple cases may resolve in 12-18 months, while complex cases involving multiple defendants or extensive discovery can take 2-4 years. We work diligently to resolve cases as efficiently as possible while maximizing your recovery."
+    },
+    {
+      question: "What If I Already Received Money From a Victim Compensation Fund?",
+      answer: "Prior compensation fund payments don't preclude filing lawsuits. These programs often provide minimal compensation compared to litigation. Some programs allow 'clawback' provisions if you later win a lawsuit, but the net recovery is usually significantly higher. We help navigate these issues to maximize your total compensation from all sources."
+    },
+    {
+      question: "Can I Sue If the Abuse Happened in Another State?",
+      answer: "If you're now a California resident or the religious institution has California connections, you may be able to file here under California's favorable laws. We analyze the best jurisdiction for your case, considering factors like applicable law, defendant locations, and venue convenience. California's AB 218 may apply to out-of-state abuse in certain circumstances."
+    },
+    {
+      question: "What About Abuse That Happened Overseas?",
+      answer: "International clergy abuse cases present unique challenges but aren't impossible. If the religious organization has U.S. operations or assets, claims may be viable here. We work with international legal experts when necessary. Factors include where the organization is based, where they have assets, and applicable international law treaties."
+    },
+    {
+      question: "Will My Case Become Public Record?",
+      answer: "Court filings are typically public records, but we use protective measures including filing under pseudonyms, requesting sealed records, and pursuing confidential settlements. Media attention varies by case profile. We discuss publicity concerns during consultation and implement appropriate protections while not letting fear of exposure prevent justice."
+    },
+    {
+      question: "What If I Don't Want Money, Just Accountability?",
+      answer: "Many survivors primarily seek acknowledgment and accountability rather than financial compensation. Lawsuits can achieve both - monetary awards validate harm while forcing institutional acknowledgment. Many settlements include non-monetary terms like apologies, policy changes, or perpetrator name disclosure. Your priorities guide our negotiation strategy."
+    },
+    {
+      question: "How Do We Prove the Institution Knew About the Abuse?",
+      answer: "Institutional knowledge is proven through various evidence including personnel files, prior complaints, witness testimony about institutional awareness, patterns of behavior, and document analysis. Religious institutions often have extensive records. Our investigators know where to look and how to interpret institutional documents that might seem innocuous but actually show knowledge."
+    },
+    {
+      question: "What If Other Survivors Don't Want to Come Forward?",
+      answer: "Your case doesn't depend on other survivors participating. While multiple survivors strengthen institutional knowledge claims, individual cases can be very successful. We respect other survivors' choices about participation while building the strongest possible case with available evidence and witnesses."
+    },
+    {
+      question: "Can Witnesses From Decades Ago Still Testify?",
+      answer: "Yes, if they're available and have relevant testimony. Memory may not be perfect, but courts understand that older witnesses may have imperfect recall. Contemporary documents often support witness testimony. We work to locate and interview potential witnesses early in the process while memories are freshest and witnesses are available."
+    },
+    {
+      question: "What About Abuse by Lay Religious Leaders or Volunteers?",
+      answer: "Religious institutions are responsible for volunteers and lay leaders under their supervision. Youth ministers, Sunday school teachers, choir directors, and other volunteers are covered if the institution failed in hiring, supervision, or retention duties. The key is whether the institution had authority over the person and failed to exercise reasonable care."
+    },
+    {
+      question: "How Do We Handle Cases Involving Religious Schools?",
+      answer: "Religious schools have duties to protect students similar to public schools. They can be liable for employee abuse, inadequate supervision, failure to implement safety policies, and cover-ups. Many religious schools receive government funding, which may subject them to additional legal obligations and reduce religious immunity defenses."
+    },
+    {
+      question: "What If the Abuse Happened During Religious Counseling?",
+      answer: "Clergy abuse during counseling involves violations of both professional and spiritual trust. These cases often involve detailed documentation through counseling records and may include multiple victims seeking similar 'counseling.' The counseling relationship creates a fiduciary duty that strengthens legal claims when violated through abuse."
+    },
+    {
+      question: "Can We Sue Church Insurance Companies Directly?",
+      answer: "Generally, you must sue the insured institution first, then the insurance company becomes involved in defense and settlement. However, some circumstances allow direct insurance company lawsuits, particularly involving bad faith claims handling. We analyze insurance coverage early to understand all potential recovery sources."
+    },
+    {
+      question: "What About Abuse in Religious Summer Camps or Retreats?",
+      answer: "Religious camps and retreats create special duty relationships requiring heightened protection. Institutions often have greater liability for off-site activities because of increased vulnerability and decreased supervision. Camp and retreat abuse cases often involve multiple victims and detailed activity records that support liability claims."
+    },
+    {
+      question: "How Do Mandated Reporting Laws Affect My Case?",
+      answer: "California requires clergy and religious personnel to report suspected child abuse. Failure to report when required can strengthen your case by showing legal duty violations. However, clergy-penitent privilege creates reporting exceptions that complicate some cases. We analyze reporting obligations and failures as part of building institutional liability claims."
+    },
+    {
+      question: "What If I Was Abused as an Adult in a Position of Religious Authority?",
+      answer: "Adult abuse cases involving religious authority figures have strong legal foundations. Religious leaders hold positions of trust and spiritual authority that create power imbalances negating true consent. These relationships are similar to therapist-patient relationships, creating fiduciary duties that, when violated through abuse, support strong legal claims."
+    },
+    {
+      question: "Can We Recover Attorney Fees in Addition to Damages?",
+      answer: "California generally doesn't allow attorney fee recovery in personal injury cases unless specifically provided by statute or contract. However, some clergy abuse cases may qualify for fee shifting under specific circumstances. We discuss fee arrangements during consultation, typically working on contingency with fees paid from any recovery."
+    },
+    {
+      question: "What Happens If the Religious Institution Files Bankruptcy?",
+      answer: "Bankruptcy doesn't eliminate your right to compensation, but it complicates the process. Claims must be filed in bankruptcy court within specific deadlines. Many religious organization bankruptcies result in settlement trusts that provide compensation to abuse survivors. We have experience navigating bankruptcy proceedings to maximize recovery."
+    },
+    {
+      question: "How Do We Handle Cases Involving Conversion Therapy Abuse?",
+      answer: "So-called 'conversion therapy' that includes abusive practices can form the basis for clergy abuse claims. These cases often involve psychological abuse, inappropriate physical contact, and exploitation of vulnerable individuals seeking religious guidance. California has banned conversion therapy for minors, strengthening legal claims involving these abusive practices."
+    },
+    {
+      question: "What If the Abuse Involved Ritualistic or Cult-like Behavior?",
+      answer: "Ritualistic abuse within religious contexts creates particularly strong legal claims because it often involves systematic abuse, multiple victims, and clear institutional knowledge. These cases may involve complex psychological manipulation, spiritual abuse, and often physical or sexual abuse presented as religious practice. Expert testimony about cult dynamics strengthens these claims."
+    },
+    {
+      question: "Can Family Members of Survivors Also File Claims?",
+      answer: "In some circumstances, family members may have their own claims for emotional distress caused by witnessing or learning about abuse. Spouses may have loss of consortium claims. Parents may have claims for negligent supervision if they entrusted their child to the institution. Each family situation requires individual analysis."
+    },
+    {
+      question: "What Support Do You Provide Throughout the Legal Process?",
+      answer: "We provide comprehensive support including connections to trauma therapists, coordination with support groups, assistance with victim compensation programs, regular case updates, trauma-informed communication, court accompaniment when needed, and referrals to other specialists. Our goal is supporting your healing while aggressively pursuing justice."
+    },
+    {
+      question: "How Do I Get Started With My Case?",
+      answer: "Contact us for a free, completely confidential consultation. We'll listen to your story, explain your legal rights, assess your case potential, discuss the legal process, and answer all your questions. There's no pressure and no obligation. Everything you share is protected by attorney-client privilege. Call (818) 123-4567 or complete our online evaluation form."
     }
   ];
 

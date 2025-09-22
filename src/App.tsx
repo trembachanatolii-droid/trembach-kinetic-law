@@ -10,6 +10,9 @@ import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import ClergyAbuse from "./pages/practice-areas/ClergyAbuse";
 import ClergyAbuseCaseEvaluation from "./pages/ClergyAbuseCaseEvaluation";
+import ClergyAbuseCalculator from "./pages/ClergyAbuseCalculator";
+import ClergyAbuseLegalGuidance from "./pages/ClergyAbuseLegalGuidance";
+import ClergyAbuseResources from "./pages/ClergyAbuseResources";
 import SexualAbuse from "./pages/practice-areas/SexualAbuse";
 import SexualAbuseCaseEvaluation from "./pages/SexualAbuseCaseEvaluation";
 import SexualAbuseCalculator from "./pages/SexualAbuseCalculator";
@@ -146,6 +149,9 @@ function App() {
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/clergy-abuse" element={<ClergyAbuse />} />
             <Route path="/clergy-abuse-case-evaluation" element={<ClergyAbuseCaseEvaluation />} />
+            <Route path="/clergy-abuse-calculator" element={<ClergyAbuseCalculator />} />
+            <Route path="/clergy-abuse-legal-guidance" element={<ClergyAbuseLegalGuidance />} />
+            <Route path="/clergy-abuse-resources" element={<ClergyAbuseResources />} />
             <Route path="/practice-areas/sexual-abuse" element={<SexualAbuse />} />
             <Route path="/sexual-abuse-case-evaluation" element={<SexualAbuseCaseEvaluation />} />
             <Route path="/sexual-abuse-calculator" element={<SexualAbuseCalculator />} />

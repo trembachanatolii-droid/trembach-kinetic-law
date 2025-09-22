@@ -8,6 +8,8 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import ClergyAbuse from "./pages/practice-areas/ClergyAbuse";
+import ClergyAbuseCaseEvaluation from "./pages/ClergyAbuseCaseEvaluation";
 import SexualAbuse from "./pages/practice-areas/SexualAbuse";
 import SexualAbuseCaseEvaluation from "./pages/SexualAbuseCaseEvaluation";
 import SexualAbuseCalculator from "./pages/SexualAbuseCalculator";
@@ -142,6 +144,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/clergy-abuse" element={<ClergyAbuse />} />
+            <Route path="/clergy-abuse-case-evaluation" element={<ClergyAbuseCaseEvaluation />} />
             <Route path="/practice-areas/sexual-abuse" element={<SexualAbuse />} />
             <Route path="/sexual-abuse-case-evaluation" element={<SexualAbuseCaseEvaluation />} />
             <Route path="/sexual-abuse-calculator" element={<SexualAbuseCalculator />} />

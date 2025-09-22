@@ -7,31 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft,
-  Lock,
-  UserCheck,
-  Calendar,
-  BookOpen,
-  Calculator
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, Lock, UserCheck, Calendar, BookOpen, Calculator } from 'lucide-react';
 import heroBackground from '@/assets/sexual-abuse-hero-bg.jpg';
 import overviewImage from '@/assets/sexual-abuse-overview.jpg';
 import typesImage from '@/assets/sexual-abuse-types.jpg';
@@ -43,15 +19,12 @@ import therapyImage from '@/assets/sexual-abuse-therapy-process.jpg';
 import californiaLawsImage from '@/assets/california-sexual-abuse-laws.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const SexualAbuse: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -66,28 +39,49 @@ const SexualAbuse: React.FC = () => {
   const [showLegalMore, setShowLegalMore] = useState(false);
   const [showCompensationMore, setShowCompensationMore] = useState(false);
   const [visible, setVisible] = useState(false);
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
     const onScroll = () => setVisible(window.scrollY > 400);
     onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, {
+      passive: true
+    });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'types', label: 'TYPES OF ABUSE', icon: AlertTriangle },
-    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
-    { id: 'compensation', label: 'COMPENSATION', icon: Calculator },
-    { id: 'time-limits', label: 'TIME LIMITS', icon: Clock },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
-
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'types',
+    label: 'TYPES OF ABUSE',
+    icon: AlertTriangle
+  }, {
+    id: 'legal-process',
+    label: 'LEGAL PROCESS',
+    icon: Shield
+  }, {
+    id: 'compensation',
+    label: 'COMPENSATION',
+    icon: Calculator
+  }, {
+    id: 'time-limits',
+    label: 'TIME LIMITS',
+    icon: Clock
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: MessageCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
   useEffect(() => {
     const ctx = gsap.context(() => {
       // 3D Container Setup
@@ -99,9 +93,18 @@ const SexualAbuse: React.FC = () => {
       // Layered 3D Background
       const layers = heroRef.current?.querySelectorAll('.bg-layer');
       if (layers) {
-        gsap.set(layers[0], { z: -500, opacity: 0.3 });
-        gsap.set(layers[1], { z: -250, opacity: 0.5 });
-        gsap.set(layers[2], { z: -100, opacity: 0.7 });
+        gsap.set(layers[0], {
+          z: -500,
+          opacity: 0.3
+        });
+        gsap.set(layers[1], {
+          z: -250,
+          opacity: 0.5
+        });
+        gsap.set(layers[2], {
+          z: -100,
+          opacity: 0.7
+        });
       }
 
       // Floating Background Layers
@@ -113,7 +116,6 @@ const SexualAbuse: React.FC = () => {
           repeat: -1,
           yoyo: true
         });
-        
         gsap.to(layers[1], {
           x: 40,
           duration: 18,
@@ -121,7 +123,6 @@ const SexualAbuse: React.FC = () => {
           repeat: -1,
           yoyo: true
         });
-        
         gsap.to(layers[2], {
           y: 20,
           x: 25,
@@ -134,43 +135,41 @@ const SexualAbuse: React.FC = () => {
       }
 
       // Hero animation with 3D transforms
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50, z: -200 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          z: 0,
-          duration: 0.8, 
-          ease: 'cubic-bezier(0.22, 1, 0.36, 1)' 
-        }
-      );
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50,
+        z: -200
+      }, {
+        opacity: 1,
+        y: 0,
+        z: 0,
+        duration: 0.8,
+        ease: 'cubic-bezier(0.22, 1, 0.36, 1)'
+      });
 
       // Content sections with enhanced animations
       const sections = contentRef.current?.querySelectorAll('.content-section');
       if (sections) {
         sections.forEach((section, i) => {
-          gsap.fromTo(section,
-            { 
-              opacity: 0, 
-              y: 60,
-              scale: 0.95,
-              rotationX: 10
-            },
-            {
-              opacity: 1,
-              y: 0,
-              scale: 1,
-              rotationX: 0,
-              duration: 0.8,
-              ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
-              scrollTrigger: {
-                trigger: section,
-                start: 'top 80%',
-                end: 'bottom 20%',
-                toggleActions: 'play none none reverse'
-              }
+          gsap.fromTo(section, {
+            opacity: 0,
+            y: 60,
+            scale: 0.95,
+            rotationX: 10
+          }, {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotationX: 0,
+            duration: 0.8,
+            ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            scrollTrigger: {
+              trigger: section,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              toggleActions: 'play none none reverse'
             }
-          );
+          });
         });
       }
 
@@ -180,256 +179,200 @@ const SexualAbuse: React.FC = () => {
         start: 'top top',
         end: 'bottom top',
         scrub: 1,
-        onUpdate: (self) => {
+        onUpdate: self => {
           const progress = self.progress;
           if (layers) {
-            gsap.set(layers[0], { y: progress * 100 });
-            gsap.set(layers[1], { y: progress * 50 });
-            gsap.set(layers[2], { y: progress * 25 });
+            gsap.set(layers[0], {
+              y: progress * 100
+            });
+            gsap.set(layers[1], {
+              y: progress * 50
+            });
+            gsap.set(layers[2], {
+              y: progress * 25
+            });
           }
         }
       });
-
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     window.location.href = '/sexual-abuse-case-evaluation';
   };
-
-  const faqs = [
-    {
-      question: "What is the difference between sexual abuse and sexual assault?",
-      answer: "Sexual abuse is a broader term that includes any non-consensual sexual contact or behavior, while sexual assault typically refers to more specific criminal acts. Sexual abuse can include unwanted touching, exposure, voyeurism, exploitation, and psychological abuse. Both are serious violations that can result in civil lawsuits regardless of whether criminal charges were filed."
-    },
-    {
-      question: "Can I file a lawsuit if the criminal case was dropped or the perpetrator was acquitted?",
-      answer: "Yes, absolutely. Civil lawsuits have a lower burden of proof than criminal cases. Criminal cases require proof 'beyond a reasonable doubt' while civil cases only require proof by 'preponderance of the evidence' (more likely than not). Many civil cases succeed even when criminal cases do not."
-    },
-    {
-      question: "How much does it cost to hire a sexual abuse attorney?",
-      answer: "We work on a contingency fee basis, meaning you pay no attorneys' fees unless we win your case. The initial consultation is always free and confidential. We understand that financial concerns shouldn't prevent survivors from seeking justice."
-    },
-    {
-      question: "Will my case be public? Can I remain anonymous?",
-      answer: "We take every possible step to protect your privacy. Cases can often be filed under initials (Jane Doe/John Doe), and we can request that sensitive information be sealed. Many cases are resolved through confidential settlements that never become public record."
-    },
-    {
-      question: "What if the abuse happened decades ago?",
-      answer: "California has extended statute of limitations laws for sexual abuse cases. You may have until age 40, or within 5 years of discovering the connection between the abuse and psychological injury, or within 3 years of discovering the abuse caused your injury, whichever is later. Recent law changes have opened new opportunities for older cases."
-    },
-    {
-      question: "What if I don't remember all the details of the abuse?",
-      answer: "Trauma can affect memory, and this is well understood by courts. Fragmented or repressed memories don't prevent a valid case. We work with trauma specialists and use other evidence like medical records, witness testimony, and documentation to build your case."
-    },
-    {
-      question: "Can I sue if the perpetrator is deceased?",
-      answer: "Yes, you may be able to sue the perpetrator's estate or other responsible parties like institutions, employers, or organizations that enabled the abuse. Many cases involve institutional liability rather than just individual perpetrators."
-    },
-    {
-      question: "What kind of evidence do I need for a sexual abuse case?",
-      answer: "Evidence can include medical records, therapy records, witness testimony, documentation of reporting the abuse, photos of injuries, journal entries, and expert testimony. We help gather and preserve evidence while respecting your privacy and emotional wellbeing."
-    },
-    {
-      question: "How long does a sexual abuse lawsuit take?",
-      answer: "Cases vary widely, from several months to a few years depending on complexity. We work to resolve cases as efficiently as possible while ensuring maximum compensation. Many cases settle out of court, which can be faster and more private."
-    },
-    {
-      question: "What compensation can I receive for sexual abuse?",
-      answer: "Compensation may include medical expenses, therapy costs, lost wages, pain and suffering, emotional distress, and in some cases punitive damages. The amount depends on the severity of abuse, impact on your life, and the defendant's ability to pay."
-    },
-    {
-      question: "Will I have to testify in court?",
-      answer: "Not necessarily. Many cases settle without going to trial. If a trial is necessary, we prepare you thoroughly and can request accommodations like testifying via video or with privacy screens. Your comfort and safety are our priorities."
-    },
-    {
-      question: "Can I sue a school for sexual abuse by a teacher?",
-      answer: "Yes, schools, school districts, and educational institutions can be held liable for sexual abuse by employees. They have a duty to protect students and can be responsible for negligent hiring, supervision, or failing to respond appropriately to reports of abuse."
-    },
-    {
-      question: "What if I was abused by a family member?",
-      answer: "Family relationship doesn't prevent a lawsuit. You can sue family members, and in some cases their insurance may cover the claim. We understand the unique challenges of these cases and provide sensitive, confidential representation."
-    },
-    {
-      question: "Can men be victims of sexual abuse?",
-      answer: "Absolutely. Men and boys can be victims of sexual abuse, and they have the same legal rights as any other survivor. We represent all survivors regardless of gender and understand the unique challenges male survivors may face."
-    },
-    {
-      question: "What if I signed a non-disclosure agreement (NDA)?",
-      answer: "Recent California laws have limited the enforceability of NDAs in sexual abuse cases. Many NDAs related to sexual abuse may be void or unenforceable. We can review any agreements you signed and advise you on your rights."
-    },
-    {
-      question: "Can I get compensation if the abuser doesn't have money?",
-      answer: "Yes, there may be other sources of compensation including insurance policies, institutional defendants (schools, churches, employers), victim compensation funds, or assets you're unaware of. We investigate all potential sources of recovery."
-    },
-    {
-      question: "What's the difference between civil and criminal cases?",
-      answer: "Criminal cases are prosecuted by the government to punish wrongdoing, while civil cases are filed by victims to obtain compensation. You can pursue both simultaneously, and the outcomes are independent of each other."
-    },
-    {
-      question: "How do I know if I have a valid case?",
-      answer: "If you experienced non-consensual sexual contact or behavior, you likely have a valid case. The best way to know for sure is to speak with an experienced attorney. Our free consultation can help determine your legal options."
-    },
-    {
-      question: "What if I feel guilty or partially responsible?",
-      answer: "You are not responsible for the abuse you suffered. Guilt and self-blame are common reactions to trauma, but the law is clear that victims are never at fault for their abuse. Our team includes trauma-informed professionals who understand these feelings."
-    },
-    {
-      question: "Can I sue my employer for workplace sexual harassment?",
-      answer: "Yes, employers can be held liable for sexual harassment or assault by employees, supervisors, or even customers in some cases. California law provides strong protections for workers against sexual harassment and retaliation."
-    },
-    {
-      question: "What if I was abused in foster care?",
-      answer: "Foster care abuse cases can involve liability for the state, county, foster parents, and agencies. California has specific laws addressing abuse in foster care and institutional settings. These cases require specialized knowledge of government liability laws."
-    },
-    {
-      question: "Can I sue a therapist for sexual abuse?",
-      answer: "Yes, sexual contact between a therapist and patient is both criminal and grounds for a civil lawsuit. This includes violations by psychologists, psychiatrists, counselors, and other mental health professionals. Professional licensing boards and malpractice insurance may also be involved."
-    },
-    {
-      question: "What if the abuse involved multiple perpetrators?",
-      answer: "Cases involving multiple perpetrators or organized abuse can be complex but are definitely actionable. We can pursue claims against all responsible parties and investigate whether institutions knew or should have known about the abuse."
-    },
-    {
-      question: "Can I sue if I was abused at a juvenile detention facility?",
-      answer: "Yes, abuse in detention facilities, youth camps, or correctional institutions can result in lawsuits against the facility, staff, and government entities. These institutions have special duties to protect vulnerable populations."
-    },
-    {
-      question: "What if I already received a settlement years ago?",
-      answer: "Previous settlements may not prevent new claims, especially if you've discovered additional harm or if new laws have expanded your rights. We can review previous settlements to determine if additional claims are possible."
-    },
-    {
-      question: "How do I start the legal process?",
-      answer: "The first step is a free, confidential consultation where we listen to your story, explain your rights, and discuss your options. You can call us, fill out our online form, or schedule a video consultation. Everything you tell us is protected by attorney-client privilege."
-    },
-    {
-      question: "What should I bring to my first consultation?",
-      answer: "Bring any documents you have related to the abuse, such as medical records, police reports, or correspondence. However, don't worry if you don't have documents - your testimony is the most important evidence, and we can help obtain records later."
-    },
-    {
-      question: "Can I change my mind after starting a case?",
-      answer: "Yes, you always have the right to dismiss your case. While we hope to help you see your case through to a successful conclusion, the decision is always yours. We'll provide honest advice about the pros and cons of continuing versus dismissing."
-    },
-    {
-      question: "Will my family find out about the abuse?",
-      answer: "We respect your privacy and maintain strict confidentiality. You decide who knows about your case. We can take steps to keep proceedings confidential and can discuss how to handle family concerns while protecting your interests."
-    },
-    {
-      question: "What if I'm still in contact with my abuser?",
-      answer: "We understand that many survivors maintain contact with their abusers due to family relationships, work situations, or other circumstances. We can help you navigate this complex situation while protecting your safety and legal rights."
-    },
-    {
-      question: "Can therapy records be used against me?",
-      answer: "Therapy records are generally protected by privilege, but there are exceptions. We work with mental health professionals to present therapy records in a way that supports your case rather than hurts it. Your healing shouldn't be used against you."
-    },
-    {
-      question: "What if I have a criminal record?",
-      answer: "A criminal record doesn't prevent you from being a victim or from pursuing a civil case. Everyone deserves protection from sexual abuse regardless of their past. We focus on the abuse you suffered, not your history."
-    },
-    {
-      question: "Can I sue a police officer for sexual assault?",
-      answer: "Yes, police officers and other law enforcement personnel can be sued for sexual abuse. These cases may involve federal civil rights claims as well as state law claims. Government immunity laws have exceptions for criminal conduct."
-    },
-    {
-      question: "What about online sexual abuse or exploitation?",
-      answer: "Online sexual abuse, including sextortion, revenge porn, and exploitation, is actionable under California law. We can pursue claims against perpetrators and potentially against platforms that facilitate abuse."
-    },
-    {
-      question: "Can I sue Uber or Lyft for assault by a driver?",
-      answer: "Rideshare companies can be held liable for assaults by their drivers, especially if they failed to properly screen drivers or respond to complaints. Similar liability can apply to taxi companies, delivery services, and other transportation providers."
-    },
-    {
-      question: "What if the abuse happened at a party where I was drinking?",
-      answer: "Alcohol consumption doesn't make you responsible for sexual abuse. In fact, sexual contact with someone who is intoxicated is illegal because they cannot consent. We handle many cases involving alcohol or drug-facilitated sexual assault."
-    },
-    {
-      question: "Can I sue for sexual harassment that didn't involve touching?",
-      answer: "Yes, sexual harassment can include verbal abuse, unwanted sexual advances, creating a hostile environment, and other non-physical conduct. California law broadly protects against sexual harassment in workplaces, schools, and other settings."
-    },
-    {
-      question: "What if I was trafficked for sex?",
-      answer: "Sex trafficking victims have special legal protections and rights to compensation. This can include claims against traffickers, buyers, and businesses that benefited from trafficking. We work with specialized service providers to support trafficking survivors."
-    },
-    {
-      question: "Can I sue the Catholic Church for priest abuse?",
-      answer: "Yes, religious institutions including the Catholic Church can be held liable for abuse by clergy. California laws have specifically addressed institutional child sexual abuse, including special rules for claims against religious organizations."
-    },
-    {
-      question: "What if I was abused during medical treatment?",
-      answer: "Medical professionals who commit sexual abuse can be sued for malpractice, battery, and other claims. This includes doctors, nurses, therapists, and other healthcare providers. Medical institutions may also be liable for the actions of their employees."
-    },
-    {
-      question: "Can I sue if I was abused in the military?",
-      answer: "Military sexual abuse cases are complex due to federal laws, but civil remedies may be available against individual perpetrators and in some cases against the government. Recent legal changes have expanded options for military sexual abuse survivors."
-    },
-    {
-      question: "What if I was abused during a massage?",
-      answer: "Sexual abuse by massage therapists, whether licensed or unlicensed, is grounds for a lawsuit. This can include claims against the individual therapist and potentially against the business or establishment where the abuse occurred."
-    },
-    {
-      question: "Can I sue if I don't know the perpetrator's real name?",
-      answer: "Cases can be filed against unknown defendants (using 'John Doe' names) while we investigate to identify the perpetrator. We have resources to help identify abusers through various investigative methods."
-    },
-    {
-      question: "Can I get emergency financial help while my case is pending?",
-      answer: "There may be victim compensation programs, emergency funds, or other resources available while your case is pending. We can help connect you with immediate support services and explore all options for financial assistance."
-    },
-    {
-      question: "How do you protect my privacy during the case?",
-      answer: "We use confidentiality agreements, sealed filings, pseudonyms, and other protective measures. Our office maintains strict security protocols, and we're experienced in handling sensitive cases with maximum privacy protection."
-    },
-    {
-      question: "What happens to my case if I move out of California?",
-      answer: "You can still pursue a California case even if you move out of state. We can work with you remotely for many aspects of the case, and California courts have jurisdiction over cases involving California-based defendants or abuse that occurred in California."
-    },
-    {
-      question: "What if the defendant declares bankruptcy?",
-      answer: "Bankruptcy doesn't necessarily eliminate your claim. Some debts related to sexual abuse cannot be discharged in bankruptcy, and you may have priority status as a victim. We can help navigate bankruptcy proceedings to protect your interests."
-    },
-    {
-      question: "Can I still sue if the statute of limitations has passed?",
-      answer: "California has made significant changes to statute of limitations laws for sexual abuse cases. New laws have revived previously time-barred claims in certain circumstances. It's worth consulting with an attorney even if you think too much time has passed."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background relative">
-      <SEO 
-        title="California Sexual Abuse Lawyers | Confidential Legal Help | Trembach Law"
-        description="Experienced sexual abuse attorneys in California providing confidential representation for survivors. Free consultation, trauma-informed care, no fees unless we win."
-        canonical="/practice-areas/sexual-abuse"
-      />
+  const faqs = [{
+    question: "What is the difference between sexual abuse and sexual assault?",
+    answer: "Sexual abuse is a broader term that includes any non-consensual sexual contact or behavior, while sexual assault typically refers to more specific criminal acts. Sexual abuse can include unwanted touching, exposure, voyeurism, exploitation, and psychological abuse. Both are serious violations that can result in civil lawsuits regardless of whether criminal charges were filed."
+  }, {
+    question: "Can I file a lawsuit if the criminal case was dropped or the perpetrator was acquitted?",
+    answer: "Yes, absolutely. Civil lawsuits have a lower burden of proof than criminal cases. Criminal cases require proof 'beyond a reasonable doubt' while civil cases only require proof by 'preponderance of the evidence' (more likely than not). Many civil cases succeed even when criminal cases do not."
+  }, {
+    question: "How much does it cost to hire a sexual abuse attorney?",
+    answer: "We work on a contingency fee basis, meaning you pay no attorneys' fees unless we win your case. The initial consultation is always free and confidential. We understand that financial concerns shouldn't prevent survivors from seeking justice."
+  }, {
+    question: "Will my case be public? Can I remain anonymous?",
+    answer: "We take every possible step to protect your privacy. Cases can often be filed under initials (Jane Doe/John Doe), and we can request that sensitive information be sealed. Many cases are resolved through confidential settlements that never become public record."
+  }, {
+    question: "What if the abuse happened decades ago?",
+    answer: "California has extended statute of limitations laws for sexual abuse cases. You may have until age 40, or within 5 years of discovering the connection between the abuse and psychological injury, or within 3 years of discovering the abuse caused your injury, whichever is later. Recent law changes have opened new opportunities for older cases."
+  }, {
+    question: "What if I don't remember all the details of the abuse?",
+    answer: "Trauma can affect memory, and this is well understood by courts. Fragmented or repressed memories don't prevent a valid case. We work with trauma specialists and use other evidence like medical records, witness testimony, and documentation to build your case."
+  }, {
+    question: "Can I sue if the perpetrator is deceased?",
+    answer: "Yes, you may be able to sue the perpetrator's estate or other responsible parties like institutions, employers, or organizations that enabled the abuse. Many cases involve institutional liability rather than just individual perpetrators."
+  }, {
+    question: "What kind of evidence do I need for a sexual abuse case?",
+    answer: "Evidence can include medical records, therapy records, witness testimony, documentation of reporting the abuse, photos of injuries, journal entries, and expert testimony. We help gather and preserve evidence while respecting your privacy and emotional wellbeing."
+  }, {
+    question: "How long does a sexual abuse lawsuit take?",
+    answer: "Cases vary widely, from several months to a few years depending on complexity. We work to resolve cases as efficiently as possible while ensuring maximum compensation. Many cases settle out of court, which can be faster and more private."
+  }, {
+    question: "What compensation can I receive for sexual abuse?",
+    answer: "Compensation may include medical expenses, therapy costs, lost wages, pain and suffering, emotional distress, and in some cases punitive damages. The amount depends on the severity of abuse, impact on your life, and the defendant's ability to pay."
+  }, {
+    question: "Will I have to testify in court?",
+    answer: "Not necessarily. Many cases settle without going to trial. If a trial is necessary, we prepare you thoroughly and can request accommodations like testifying via video or with privacy screens. Your comfort and safety are our priorities."
+  }, {
+    question: "Can I sue a school for sexual abuse by a teacher?",
+    answer: "Yes, schools, school districts, and educational institutions can be held liable for sexual abuse by employees. They have a duty to protect students and can be responsible for negligent hiring, supervision, or failing to respond appropriately to reports of abuse."
+  }, {
+    question: "What if I was abused by a family member?",
+    answer: "Family relationship doesn't prevent a lawsuit. You can sue family members, and in some cases their insurance may cover the claim. We understand the unique challenges of these cases and provide sensitive, confidential representation."
+  }, {
+    question: "Can men be victims of sexual abuse?",
+    answer: "Absolutely. Men and boys can be victims of sexual abuse, and they have the same legal rights as any other survivor. We represent all survivors regardless of gender and understand the unique challenges male survivors may face."
+  }, {
+    question: "What if I signed a non-disclosure agreement (NDA)?",
+    answer: "Recent California laws have limited the enforceability of NDAs in sexual abuse cases. Many NDAs related to sexual abuse may be void or unenforceable. We can review any agreements you signed and advise you on your rights."
+  }, {
+    question: "Can I get compensation if the abuser doesn't have money?",
+    answer: "Yes, there may be other sources of compensation including insurance policies, institutional defendants (schools, churches, employers), victim compensation funds, or assets you're unaware of. We investigate all potential sources of recovery."
+  }, {
+    question: "What's the difference between civil and criminal cases?",
+    answer: "Criminal cases are prosecuted by the government to punish wrongdoing, while civil cases are filed by victims to obtain compensation. You can pursue both simultaneously, and the outcomes are independent of each other."
+  }, {
+    question: "How do I know if I have a valid case?",
+    answer: "If you experienced non-consensual sexual contact or behavior, you likely have a valid case. The best way to know for sure is to speak with an experienced attorney. Our free consultation can help determine your legal options."
+  }, {
+    question: "What if I feel guilty or partially responsible?",
+    answer: "You are not responsible for the abuse you suffered. Guilt and self-blame are common reactions to trauma, but the law is clear that victims are never at fault for their abuse. Our team includes trauma-informed professionals who understand these feelings."
+  }, {
+    question: "Can I sue my employer for workplace sexual harassment?",
+    answer: "Yes, employers can be held liable for sexual harassment or assault by employees, supervisors, or even customers in some cases. California law provides strong protections for workers against sexual harassment and retaliation."
+  }, {
+    question: "What if I was abused in foster care?",
+    answer: "Foster care abuse cases can involve liability for the state, county, foster parents, and agencies. California has specific laws addressing abuse in foster care and institutional settings. These cases require specialized knowledge of government liability laws."
+  }, {
+    question: "Can I sue a therapist for sexual abuse?",
+    answer: "Yes, sexual contact between a therapist and patient is both criminal and grounds for a civil lawsuit. This includes violations by psychologists, psychiatrists, counselors, and other mental health professionals. Professional licensing boards and malpractice insurance may also be involved."
+  }, {
+    question: "What if the abuse involved multiple perpetrators?",
+    answer: "Cases involving multiple perpetrators or organized abuse can be complex but are definitely actionable. We can pursue claims against all responsible parties and investigate whether institutions knew or should have known about the abuse."
+  }, {
+    question: "Can I sue if I was abused at a juvenile detention facility?",
+    answer: "Yes, abuse in detention facilities, youth camps, or correctional institutions can result in lawsuits against the facility, staff, and government entities. These institutions have special duties to protect vulnerable populations."
+  }, {
+    question: "What if I already received a settlement years ago?",
+    answer: "Previous settlements may not prevent new claims, especially if you've discovered additional harm or if new laws have expanded your rights. We can review previous settlements to determine if additional claims are possible."
+  }, {
+    question: "How do I start the legal process?",
+    answer: "The first step is a free, confidential consultation where we listen to your story, explain your rights, and discuss your options. You can call us, fill out our online form, or schedule a video consultation. Everything you tell us is protected by attorney-client privilege."
+  }, {
+    question: "What should I bring to my first consultation?",
+    answer: "Bring any documents you have related to the abuse, such as medical records, police reports, or correspondence. However, don't worry if you don't have documents - your testimony is the most important evidence, and we can help obtain records later."
+  }, {
+    question: "Can I change my mind after starting a case?",
+    answer: "Yes, you always have the right to dismiss your case. While we hope to help you see your case through to a successful conclusion, the decision is always yours. We'll provide honest advice about the pros and cons of continuing versus dismissing."
+  }, {
+    question: "Will my family find out about the abuse?",
+    answer: "We respect your privacy and maintain strict confidentiality. You decide who knows about your case. We can take steps to keep proceedings confidential and can discuss how to handle family concerns while protecting your interests."
+  }, {
+    question: "What if I'm still in contact with my abuser?",
+    answer: "We understand that many survivors maintain contact with their abusers due to family relationships, work situations, or other circumstances. We can help you navigate this complex situation while protecting your safety and legal rights."
+  }, {
+    question: "Can therapy records be used against me?",
+    answer: "Therapy records are generally protected by privilege, but there are exceptions. We work with mental health professionals to present therapy records in a way that supports your case rather than hurts it. Your healing shouldn't be used against you."
+  }, {
+    question: "What if I have a criminal record?",
+    answer: "A criminal record doesn't prevent you from being a victim or from pursuing a civil case. Everyone deserves protection from sexual abuse regardless of their past. We focus on the abuse you suffered, not your history."
+  }, {
+    question: "Can I sue a police officer for sexual assault?",
+    answer: "Yes, police officers and other law enforcement personnel can be sued for sexual abuse. These cases may involve federal civil rights claims as well as state law claims. Government immunity laws have exceptions for criminal conduct."
+  }, {
+    question: "What about online sexual abuse or exploitation?",
+    answer: "Online sexual abuse, including sextortion, revenge porn, and exploitation, is actionable under California law. We can pursue claims against perpetrators and potentially against platforms that facilitate abuse."
+  }, {
+    question: "Can I sue Uber or Lyft for assault by a driver?",
+    answer: "Rideshare companies can be held liable for assaults by their drivers, especially if they failed to properly screen drivers or respond to complaints. Similar liability can apply to taxi companies, delivery services, and other transportation providers."
+  }, {
+    question: "What if the abuse happened at a party where I was drinking?",
+    answer: "Alcohol consumption doesn't make you responsible for sexual abuse. In fact, sexual contact with someone who is intoxicated is illegal because they cannot consent. We handle many cases involving alcohol or drug-facilitated sexual assault."
+  }, {
+    question: "Can I sue for sexual harassment that didn't involve touching?",
+    answer: "Yes, sexual harassment can include verbal abuse, unwanted sexual advances, creating a hostile environment, and other non-physical conduct. California law broadly protects against sexual harassment in workplaces, schools, and other settings."
+  }, {
+    question: "What if I was trafficked for sex?",
+    answer: "Sex trafficking victims have special legal protections and rights to compensation. This can include claims against traffickers, buyers, and businesses that benefited from trafficking. We work with specialized service providers to support trafficking survivors."
+  }, {
+    question: "Can I sue the Catholic Church for priest abuse?",
+    answer: "Yes, religious institutions including the Catholic Church can be held liable for abuse by clergy. California laws have specifically addressed institutional child sexual abuse, including special rules for claims against religious organizations."
+  }, {
+    question: "What if I was abused during medical treatment?",
+    answer: "Medical professionals who commit sexual abuse can be sued for malpractice, battery, and other claims. This includes doctors, nurses, therapists, and other healthcare providers. Medical institutions may also be liable for the actions of their employees."
+  }, {
+    question: "Can I sue if I was abused in the military?",
+    answer: "Military sexual abuse cases are complex due to federal laws, but civil remedies may be available against individual perpetrators and in some cases against the government. Recent legal changes have expanded options for military sexual abuse survivors."
+  }, {
+    question: "What if I was abused during a massage?",
+    answer: "Sexual abuse by massage therapists, whether licensed or unlicensed, is grounds for a lawsuit. This can include claims against the individual therapist and potentially against the business or establishment where the abuse occurred."
+  }, {
+    question: "Can I sue if I don't know the perpetrator's real name?",
+    answer: "Cases can be filed against unknown defendants (using 'John Doe' names) while we investigate to identify the perpetrator. We have resources to help identify abusers through various investigative methods."
+  }, {
+    question: "Can I get emergency financial help while my case is pending?",
+    answer: "There may be victim compensation programs, emergency funds, or other resources available while your case is pending. We can help connect you with immediate support services and explore all options for financial assistance."
+  }, {
+    question: "How do you protect my privacy during the case?",
+    answer: "We use confidentiality agreements, sealed filings, pseudonyms, and other protective measures. Our office maintains strict security protocols, and we're experienced in handling sensitive cases with maximum privacy protection."
+  }, {
+    question: "What happens to my case if I move out of California?",
+    answer: "You can still pursue a California case even if you move out of state. We can work with you remotely for many aspects of the case, and California courts have jurisdiction over cases involving California-based defendants or abuse that occurred in California."
+  }, {
+    question: "What if the defendant declares bankruptcy?",
+    answer: "Bankruptcy doesn't necessarily eliminate your claim. Some debts related to sexual abuse cannot be discharged in bankruptcy, and you may have priority status as a victim. We can help navigate bankruptcy proceedings to protect your interests."
+  }, {
+    question: "Can I still sue if the statute of limitations has passed?",
+    answer: "California has made significant changes to statute of limitations laws for sexual abuse cases. New laws have revived previously time-barred claims in certain circumstances. It's worth consulting with an attorney even if you think too much time has passed."
+  }];
+  return <div className="min-h-screen bg-background relative">
+      <SEO title="California Sexual Abuse Lawyers | Confidential Legal Help | Trembach Law" description="Experienced sexual abuse attorneys in California providing confidential representation for survivors. Free consultation, trauma-informed care, no fees unless we win." canonical="/practice-areas/sexual-abuse" />
 
       <GoBack className={`transition-opacity duration-500 ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} />
 
       {/* Hero Section with 3D Effects */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden"
-        style={{ 
-          backgroundImage: `url(${heroBackground})`,
-          perspective: '1200px',
-          transformStyle: 'preserve-3d'
-        }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden" style={{
+      backgroundImage: `url(${heroBackground})`,
+      perspective: '1200px',
+      transformStyle: 'preserve-3d'
+    }}>
         {/* 3D Background Layers */}
         <div className="bg-layer absolute inset-0 bg-gradient-to-r from-purple-900/20 to-blue-900/20"></div>
         <div className="bg-layer absolute inset-0 bg-gradient-to-l from-red-900/10 to-orange-900/10"></div>
@@ -442,17 +385,11 @@ const SexualAbuse: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
               <span className="ml-2 text-lg text-white">Confidential • Compassionate • Effective</span>
             </div>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg hover:scale-105 transition-all duration-300"
-              onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
-            >
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg hover:scale-105 transition-all duration-300" onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}>
               START MY FREE CONFIDENTIAL CONSULTATION
             </Button>
           </div>
@@ -462,23 +399,13 @@ const SexualAbuse: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 rounded-md hover:scale-105 ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary shadow-lg' 
-                        : 'text-white hover:bg-white/20 hover:shadow-md'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-300 rounded-md hover:scale-105 ${activeTab === tab.id ? 'bg-white text-primary shadow-lg' : 'text-white hover:bg-white/20 hover:shadow-md'}`}>
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
@@ -617,7 +544,10 @@ const SexualAbuse: React.FC = () => {
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium mb-2 text-primary">Type of Abuse</label>
-                      <Select value={formData.abuseType} onValueChange={(value) => setFormData(prev => ({ ...prev, abuseType: value }))}>
+                      <Select value={formData.abuseType} onValueChange={value => setFormData(prev => ({
+                      ...prev,
+                      abuseType: value
+                    }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select type (optional)" />
                         </SelectTrigger>
@@ -636,7 +566,10 @@ const SexualAbuse: React.FC = () => {
                     </div>
                     <div>
                       <label className="block text-sm font-medium mb-2 text-primary">When Did This Occur?</label>
-                      <Select value={formData.timeframe} onValueChange={(value) => setFormData(prev => ({ ...prev, timeframe: value }))}>
+                      <Select value={formData.timeframe} onValueChange={value => setFormData(prev => ({
+                      ...prev,
+                      timeframe: value
+                    }))}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select timeframe (optional)" />
                         </SelectTrigger>
@@ -932,11 +865,7 @@ const SexualAbuse: React.FC = () => {
                         </div>
                       </div>
                       <div className="relative h-64 rounded-lg overflow-hidden mb-6">
-                        <img 
-                          src={californiaLawsImage} 
-                          alt="California sexual abuse time limits and statutes" 
-                          className="w-full h-full object-cover"
-                        />
+                        <img src={californiaLawsImage} alt="California sexual abuse time limits and statutes" className="w-full h-full object-cover" />
                       </div>
                     </CardHeader>
                     <CardContent className="space-y-6">
@@ -1005,8 +934,7 @@ const SexualAbuse: React.FC = () => {
                         </ul>
                       </div>
 
-                      {showLegalMore && (
-                        <div className="space-y-4 animate-fade-in">
+                      {showLegalMore && <div className="space-y-4 animate-fade-in">
                           <h4 className="font-bold text-xl">Why Time Limits Exist and Why They Matter</h4>
                           <p className="leading-relaxed">
                             Statutes of limitations serve important legal purposes, including ensuring evidence remains fresh 
@@ -1030,14 +958,9 @@ const SexualAbuse: React.FC = () => {
                             <li>• <strong>Out-of-state abuse:</strong> Different state laws may apply</li>
                             <li>• <strong>Repressed memories:</strong> Special rules for delayed discovery of abuse</li>
                           </ul>
-                        </div>
-                      )}
+                        </div>}
                       
-                      <Button 
-                        variant="link" 
-                        onClick={() => setShowLegalMore(!showLegalMore)}
-                        className="p-0 h-auto text-primary hover:text-primary/80"
-                      >
+                      <Button variant="link" onClick={() => setShowLegalMore(!showLegalMore)} className="p-0 h-auto text-primary hover:text-primary/80">
                         {showLegalMore ? 'Show Less' : 'Learn More About Time Limits'}
                         <ChevronDown className={`w-4 h-4 ml-1 transition-transform ${showLegalMore ? 'rotate-180' : ''}`} />
                       </Button>
@@ -1049,21 +972,11 @@ const SexualAbuse: React.FC = () => {
                           Get a free, confidential consultation to understand your options.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                          <Button 
-                            size="lg" 
-                            variant="outline"
-                            className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg"
-                            onClick={() => window.location.href = 'tel:+18181234567'}
-                          >
+                          <Button size="lg" variant="outline" className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg" onClick={() => window.location.href = 'tel:+18181234567'}>
                             <Phone className="w-5 h-5 mr-2" />
                             Call (818) 123-4567
                           </Button>
-                          <Button 
-                            size="lg" 
-                            variant="outline" 
-                            className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg"
-                            onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
-                          >
+                          <Button size="lg" variant="outline" className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg" onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}>
                             Free Case Evaluation
                           </Button>
                         </div>
@@ -1076,27 +989,17 @@ const SexualAbuse: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions About Sexual Abuse Cases</h2>
               
               <div className="space-y-4">
-                {faqs.map((faq, index) => (
-                  <Card key={index} className="glass-card hover-glow-primary transition-all duration-300">
-                    <CardHeader 
-                      className="cursor-pointer hover:bg-muted/50 transition-colors"
-                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                    >
+                {faqs.map((faq, index) => <Card key={index} className="glass-card hover-glow-primary transition-all duration-300">
+                    <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                       <CardTitle className="flex items-center justify-between text-lg">
                         <span className="text-primary">{faq.question}</span>
-                        {expandedFaq === index ? 
-                          <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" /> : 
-                          <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
-                        }
+                        {expandedFaq === index ? <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent>
+                    {expandedFaq === index && <CardContent>
                         <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
 
@@ -1140,40 +1043,7 @@ const SexualAbuse: React.FC = () => {
 
             {/* Don't Wait Section */}
             <section className="content-section">
-              <div className="bg-primary text-primary-foreground p-8 rounded-lg text-center">
-                <h2 className="text-3xl font-bold mb-4 text-white">Don't Wait - Time Limits Apply for California Sexual Abuse Claims</h2>
-                
-                <div className="w-16 h-1 bg-red-500 mx-auto mb-6 rounded-full"></div>
-                
-                <p className="text-lg mb-6 text-white">
-                  While California has extended time limits for sexual abuse cases, deadlines still apply. 
-                  The sooner you act, the better we can preserve evidence and protect your rights.
-                </p>
-                
-                <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                  <Button 
-                    size="lg" 
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
-                    <Phone className="w-5 h-5 mr-2" />
-                    Call (818) 123-4567
-                  </Button>
-                  
-                  <Button 
-                    size="lg" 
-                    variant="outline" 
-                    className="bg-white text-primary border-white hover:bg-gray-100 font-bold px-8 py-4 rounded-full"
-                    onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
-                  >
-                    Free Case Evaluation
-                  </Button>
-                </div>
-                
-                <p className="text-sm mt-4 text-white/80">
-                  Available 24/7 • Completely Confidential • No Fees Unless We Win
-                </p>
-              </div>
+              
             </section>
           </div>
 
@@ -1183,7 +1053,9 @@ const SexualAbuse: React.FC = () => {
               
               {/* Contact Card */}
               <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
-                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                <div className="h-48 bg-cover bg-center" style={{
+                backgroundImage: `url(${sidebarImage})`
+              }}>
                   <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
                     <div className="text-center text-white">
                       <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
@@ -1198,28 +1070,17 @@ const SexualAbuse: React.FC = () => {
                   </p>
                   
                   <div className="space-y-4">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
-                      onClick={() => window.location.href = 'tel:8559851234'}
-                    >
+                    <Button className="w-full bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = 'tel:8559851234'}>
                       <Phone className="w-4 h-4 mr-2" />
                       Call (855) 985-1234
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => window.location.href = '/schedule-consultation'}
-                    >
+                    <Button variant="outline" className="w-full" onClick={() => window.location.href = '/schedule-consultation'}>
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Schedule Consultation
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full"
-                      onClick={() => window.location.href = '/case-evaluation'}
-                    >
+                    <Button variant="outline" className="w-full" onClick={() => window.location.href = '/case-evaluation'}>
                       <Mail className="w-4 h-4 mr-2" />
                       Free Case Evaluation
                     </Button>
@@ -1236,27 +1097,15 @@ const SexualAbuse: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10"
-                    onClick={() => window.location.href = '/sexual-abuse-calculator'}
-                  >
+                  <Button variant="ghost" className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10" onClick={() => window.location.href = '/sexual-abuse-calculator'}>
                     <Calculator className="w-4 h-4 mr-2" />
                     Compensation Calculator
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10"
-                    onClick={() => window.location.href = '/sexual-abuse-legal-guidance'}
-                  >
+                  <Button variant="ghost" className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10" onClick={() => window.location.href = '/sexual-abuse-legal-guidance'}>
                     <BookOpen className="w-4 h-4 mr-2" />
                     Legal Guidance
                   </Button>
-                  <Button 
-                    variant="ghost" 
-                    className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10"
-                    onClick={() => window.location.href = '/sexual-abuse-resources'}
-                  >
+                  <Button variant="ghost" className="w-full justify-start text-primary hover:text-primary hover:bg-primary/10" onClick={() => window.location.href = '/sexual-abuse-resources'}>
                     <Heart className="w-4 h-4 mr-2" />
                     Support Resources
                   </Button>
@@ -1296,8 +1145,6 @@ Apply for California</h2>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default SexualAbuse;

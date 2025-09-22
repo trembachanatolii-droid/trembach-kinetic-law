@@ -232,7 +232,18 @@ const ClergyAbuseResources: React.FC = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3">
                       <Users className="w-6 h-6 text-primary" />
-                      {org.name}
+                      {org.website ? (
+                        <a 
+                          href={`https://${org.website}`} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-primary hover:underline cursor-pointer"
+                        >
+                          {org.name}
+                        </a>
+                      ) : (
+                        org.name
+                      )}
                     </CardTitle>
                     <CardDescription>{org.description}</CardDescription>
                   </CardHeader>

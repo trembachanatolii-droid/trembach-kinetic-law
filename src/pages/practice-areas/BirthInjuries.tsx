@@ -694,7 +694,163 @@ const BirthInjuries: React.FC = () => {
               </div>
             </section>
 
-            {/* ... rest of sections to be continued in next part ... */}
+            {/* What to Do After Injury */}
+            <section id="what-to-do" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">What to Do After a Birth Injury</h2>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${diagnosisImage})` }} />
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Heart className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Medical Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Get immediate evaluation by a neonatologist or pediatric neurologist</p>
+                    <p>• Request and preserve fetal monitoring strips and delivery records</p>
+                    <p>• Ask about HIE cooling protocols and NICU transfer if indicated</p>
+                    <p>• Document symptoms, seizures, and milestones with dates</p>
+                  </CardContent>
+                </Card>
+                
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Shield className="w-5 h-5 mr-2 text-red-600" />
+                      Immediate Legal Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-3">
+                    <p>• Do not sign hospital statements beyond medical consents</p>
+                    <p>• Contact a California birth injury attorney to preserve evidence</p>
+                    <p>• List all providers present during labor and delivery</p>
+                    <p>• Start a file for bills, therapy, and specialist referrals</p>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections['what-to-do']} onOpenChange={() => toggleSection('what-to-do')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="justify-between w-full text-primary border-primary hover:bg-primary hover:text-white">
+                    Learn more
+                    {expandedSections['what-to-do'] ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="prose prose-lg max-w-none mt-4">
+                  <p>
+                    Early action improves medical outcomes and strengthens your legal case. California hospitals must follow standards of care during high-risk deliveries, including timely C-sections for fetal distress, proper instrument use, and immediate neonatal support. Preserving original monitoring strips and obtaining a full set of records helps experts determine whether negligence occurred.
+                  </p>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Injury Types */}
+            <section id="injury-types" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Common Birth Injury Types</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[ 
+                  { icon: Brain, title: "HIE (Oxygen Deprivation)", items: ["Cooling therapy within 6 hours", "NICU monitoring", "MRI/EEG evaluation"] },
+                  { icon: Activity, title: "Cerebral Palsy", items: ["Motor and speech therapy", "Assistive devices", "Long-term care planning"] },
+                  { icon: Baby, title: "Erb's Palsy / Brachial Plexus", items: ["Physical therapy", "Surgical consult if no recovery", "Avoid excessive traction in delivery"] },
+                  { icon: AlertTriangle, title: "Shoulder Dystocia Injuries", items: ["Improper maneuvers cause nerve damage", "Risk factors must be managed", "Consider timely C-section"] }
+                ].map((card, idx) => (
+                  <Card key={idx} className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                    <CardHeader>
+                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                        <card.icon className="w-5 h-5 mr-2 text-primary" />
+                        {card.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-2 text-sm text-muted-foreground">
+                      {card.items.map((i, ii) => <p key={ii}>• {i}</p>)}
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+
+            {/* Proving Negligence */}
+            <section id="proving-negligence" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Proving Negligence</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${legalProcessImage})` }} />
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Scale className="w-5 h-5 mr-2 text-red-600" />
+                      Elements of Malpractice
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p>• Duty of care owed by provider</p>
+                    <p>• Breach of the standard of care</p>
+                    <p>• Causation linking breach to injury</p>
+                    <p>• Damages: medical, educational, and life-care costs</p>
+                  </CardContent>
+                </Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Stethoscope className="w-5 h-5 mr-2 text-red-600" />
+                      Critical Evidence
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2">
+                    <p>• Fetal monitoring strips and delivery notes</p>
+                    <p>• APGAR scores, NICU notes, imaging studies</p>
+                    <p>• Hospital policies and staffing records</p>
+                    <p>• Expert opinions from OB/GYN and neonatology</p>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Compensation */}
+            <section id="compensation" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Compensation</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${compensationImage})` }} />
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Award className="w-5 h-5 mr-2 text-red-600" />
+                      What You Can Recover
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm">
+                    <p>• Medical treatment and therapy costs</p>
+                    <p>• Special education and assistive technology</p>
+                    <p>• Home modifications and mobility equipment</p>
+                    <p>• Lost income for caregiving and future care plans</p>
+                  </CardContent>
+                </Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <FileText className="w-5 h-5 mr-2 text-red-600" />
+                      Plan Your Claim
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-muted-foreground mb-4">Estimate potential compensation and build a life care plan tailored to your child's needs.</p>
+                    <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/compensation-calculator'}>
+                      Open Compensation Calculator
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+            </section>
+
+            {/* Time Limits */}
+            <section id="time-limits" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Time Limits in California</h2>
+              <div className="bg-muted p-6 rounded-lg">
+                <p className="text-lg leading-relaxed mb-3">In California, birth injury claims for minors generally must be filed by the child's 8th birthday, or within 3 years of the injury if discovered later. Claims against government hospitals require a government claim within 6 months.</p>
+                <p className="text-muted-foreground">Don't wait. Evidence disappears and memories fade. Contact us to protect your child's rights.</p>
+              </div>
+            </section>
 
           </div>
 

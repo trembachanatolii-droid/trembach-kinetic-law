@@ -364,7 +364,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="border-white text-foreground hover:bg-white hover:text-primary"
+                    className="border-white text-foreground hover:bg-white hover:text-primary font-bold hover-scale"
                     onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}
                   >
                     Free Case Evaluation

@@ -546,12 +546,12 @@ const ElderAbuse: React.FC = () => {
             <section id="overview" className="content-section mb-12">
               <h2 className="text-4xl font-bold text-red-600 mb-6">California Elder Abuse Attorneys</h2>
               
-              <div className="prose prose-xl max-w-none mb-6">
-                <p className="text-xl leading-relaxed mb-4 text-foreground font-medium">
+              <div className="prose prose-xl max-w-none text-gray-900 dark:text-gray-100">
+                <p className="text-xl leading-relaxed mb-4 text-gray-900 dark:text-gray-100">
                   Elder abuse devastates California's most vulnerable residents every day. Physical violence, financial exploitation, neglect in care facilities, and emotional abuse rob seniors of dignity, security, and peace in their final years. California's Elder Abuse and Dependent Adult Civil Protection Act provides powerful legal remedies to hold abusers accountable and secure justice for victims.
                 </p>
                 
-                <p className="text-lg leading-relaxed">
+                <p className="text-xl leading-relaxed text-gray-900 dark:text-gray-100">
                   At Trembach Law Firm, we understand the unique trauma of elder abuse and the complex legal framework protecting California seniors. With deep knowledge of elder care standards, institutional liability, and the enhanced remedies available under state law, we fight aggressively for maximum compensation while treating victims and families with compassion and dignity.
                 </p>
               </div>
@@ -597,34 +597,34 @@ const ElderAbuse: React.FC = () => {
                         <Gavel className="w-5 h-5 text-primary mt-1 mr-3" />
                         <div>
                           <h4 className="font-semibold">Enhanced Damages Expertise</h4>
-                          <p className="text-sm text-muted-foreground">We know how to prove the heightened standards required for attorney fees, punitive damages, and enhanced remedies under EADACPA.</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-200">We know how to prove the heightened standards required for attorney fees, punitive damages, and enhanced remedies under EADACPA.</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <Clock className="w-5 h-5 text-primary mt-1 mr-3" />
                         <div>
                           <h4 className="font-semibold">Urgent Response</h4>
-                          <p className="text-sm text-muted-foreground">Elder abuse cases require immediate action to preserve evidence and protect victims. We respond quickly to secure critical documentation.</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-200">Elder abuse cases require immediate action to preserve evidence and protect victims. We respond quickly to secure critical documentation.</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <Users className="w-5 h-5 text-primary mt-1 mr-3" />
                         <div>
                           <h4 className="font-semibold">Expert Network</h4>
-                          <p className="text-sm text-muted-foreground">We work with geriatricians, forensic accountants, and care facility experts to build compelling cases.</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-200">We work with geriatricians, forensic accountants, and care facility experts to build compelling cases.</p>
                         </div>
                       </div>
                       <div className="flex items-start">
                         <Award className="w-5 h-5 text-primary mt-1 mr-3" />
                         <div>
                           <h4 className="font-semibold">No Win, No Fee</h4>
-                          <p className="text-sm text-muted-foreground">Contingency representation with potential attorney fee recovery under EADACPA.</p>
+                          <p className="text-sm text-gray-800 dark:text-gray-200">Contingency representation with potential attorney fee recovery under EADACPA.</p>
                         </div>
                       </div>
                     </div>
                   </div>
 
-                  <div className="prose prose-lg max-w-none">
+                  <div className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100">
                     <h3>Comprehensive Elder Abuse Representation in California</h3>
                     <p>
                       Elder abuse takes many devastating forms in California, from physical violence in nursing homes to sophisticated financial exploitation schemes. Our firm handles the full spectrum of elder abuse cases, understanding both the legal complexities and the human tragedy involved in each situation.
@@ -717,7 +717,7 @@ const ElderAbuse: React.FC = () => {
                     Get Free Consultation →
                   </Button>
                   
-                  <p className="text-center text-sm text-muted-foreground">
+                  <p className="text-center text-sm text-gray-700 dark:text-gray-300">
                     Your information is protected by attorney-client privilege
                   </p>
                 </form>
@@ -835,7 +835,7 @@ const ElderAbuse: React.FC = () => {
                           Physical Abuse
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Inflicting physical pain, injury, or impairment</p>
                         <p><strong>Examples:</strong> Hitting, kicking, restraints, sexual assault, force-feeding</p>
                         <p><strong>Evidence:</strong> Injuries, bruises, broken bones, witness testimony</p>
@@ -850,7 +850,7 @@ const ElderAbuse: React.FC = () => {
                           Neglect
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Failure to provide necessary care and services</p>
                         <p><strong>Examples:</strong> Bedsores, malnutrition, medication errors, unsafe conditions</p>
                         <p><strong>Evidence:</strong> Medical records, facility logs, expert testimony</p>
@@ -865,7 +865,7 @@ const ElderAbuse: React.FC = () => {
                           Financial Abuse
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Theft, fraud, or misuse of elder's property or assets</p>
                         <p><strong>Examples:</strong> Undue influence, forged signatures, unauthorized transactions</p>
                         <p><strong>Evidence:</strong> Bank records, will changes, isolation patterns</p>
@@ -880,7 +880,7 @@ const ElderAbuse: React.FC = () => {
                           Emotional Abuse
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Inflicting mental pain, distress, or anguish</p>
                         <p><strong>Examples:</strong> Threats, humiliation, intimidation, isolation from family</p>
                         <p><strong>Evidence:</strong> Witness statements, psychological evaluations, behavior changes</p>
@@ -895,7 +895,7 @@ const ElderAbuse: React.FC = () => {
                           Abandonment
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Desertion by caregiver under circumstances requiring continued care</p>
                         <p><strong>Examples:</strong> Facility closures, family withdrawal of support, staff departures</p>
                         <p><strong>Evidence:</strong> Facility records, emergency reports, witness testimony</p>
@@ -910,7 +910,7 @@ const ElderAbuse: React.FC = () => {
                           Isolation
                         </CardTitle>
                       </CardHeader>
-                      <CardContent className="space-y-3">
+                      <CardContent className="space-y-3 text-gray-900 dark:text-gray-100">
                         <p><strong>Definition:</strong> Preventing contact with family, friends, or outside support</p>
                         <p><strong>Examples:</strong> Restricting visitors, controlling communications, geographic isolation</p>
                         <p><strong>Evidence:</strong> Facility policies, communication records, family testimony</p>
@@ -946,7 +946,7 @@ const ElderAbuse: React.FC = () => {
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
-                  <div className="prose prose-lg max-w-none">
+                  <div className="prose prose-lg max-w-none text-gray-900 dark:text-gray-100">
                     <h3>Enhanced Remedies Under EADACPA</h3>
                     <p>
                       California's Elder Abuse and Dependent Adult Civil Protection Act provides enhanced remedies not available in typical personal injury cases. These include attorney fees, punitive damages, and pain and suffering compensation when we prove defendants acted with recklessness, fraud, malice, or oppression.
@@ -1028,7 +1028,7 @@ const ElderAbuse: React.FC = () => {
                     </CardHeader>
                     {expandedFaq === index && (
                       <CardContent className="animate-fade-in">
-                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                        <p className="text-gray-800 dark:text-gray-200 leading-relaxed">{faq.answer}</p>
                       </CardContent>
                     )}
                   </Card>
@@ -1155,7 +1155,7 @@ const ElderAbuse: React.FC = () => {
                     </Button>
                   </div>
                   
-                  <div className="text-center text-sm text-muted-foreground mt-4">
+                  <div className="text-center text-sm text-gray-700 dark:text-gray-300 mt-4">
                     <p>✓ 100% Confidential</p>
                     <p>✓ No Fees Unless We Win</p>
                     <p>✓ Available 24/7</p>

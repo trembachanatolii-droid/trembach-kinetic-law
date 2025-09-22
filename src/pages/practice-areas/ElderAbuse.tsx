@@ -969,7 +969,7 @@ const ElderAbuse: React.FC = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="sticky top-28 lg:top-32 max-h-[calc(100vh-8rem)] overflow-y-auto z-10">
               <Card className="mb-6">
                 <CardHeader>
                   <CardTitle className="text-center text-2xl text-primary">3 Ways to Start Your Case</CardTitle>

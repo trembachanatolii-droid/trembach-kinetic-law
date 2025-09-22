@@ -967,9 +967,9 @@ const ElderAbuse: React.FC = () => {
 
           </div>
 
-          {/* Sticky Sidebar */}
+          {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8">
+            <div className="sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto">
               <Card className="mb-6">
                 <CardHeader>
                   <CardTitle className="text-center text-2xl text-primary">3 Ways to Start Your Case</CardTitle>
@@ -994,9 +994,9 @@ const ElderAbuse: React.FC = () => {
                     </Button>
                   </div>
                   
-                  <div className="text-center text-sm text-gray-700 dark:text-gray-300 mt-4">
-                    <p>✓ 100% Confidential</p>
-                    <p>✓ No Fees Unless We Win</p>
+                  <div className="text-center text-sm text-gray-700 dark:text-gray-300 mt-6 pt-4 border-t border-gray-200 dark:border-gray-700">
+                    <p className="mb-2">✓ 100% Confidential</p>
+                    <p className="mb-2">✓ No Fees Unless We Win</p>
                     <p>✓ Available 24/7</p>
                   </div>
                 </CardContent>

@@ -283,7 +283,7 @@ const ElderAbuseResources: React.FC = () => {
           <div className="absolute inset-0 bg-black/60"></div>
           
           <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-6">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white">
               Elder Abuse Resources
             </h1>
             <p className="text-xl md:text-2xl text-gray-200 mb-8">

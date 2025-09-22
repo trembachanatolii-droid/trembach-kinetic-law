@@ -225,28 +225,28 @@ const ElderAbuseResources: React.FC = () => {
       description: "Learn to identify physical, emotional, and financial abuse indicators",
       provider: "National Center on Elder Abuse",
       format: "Online guide, printable materials",
-      website: "ncea.acl.gov/toolkits/recognizing-signs"
+      website: "ncea.acl.gov"
     },
     {
       title: "Understanding California Elder Abuse Law",
       description: "Comprehensive guide to EADACPA and legal remedies",
       provider: "State Bar of California",
       format: "Legal publication, online resource",
-      website: "calbar.ca.gov/senior-legal-aid"
+      website: "calbar.ca.gov"
     },
     {
       title: "Preventing Financial Exploitation",
       description: "Tools and strategies to protect elderly finances",
       provider: "AARP Foundation", 
       format: "Workshop materials, online courses",
-      website: "aarp.org/money/scams-fraud/info-2017/financial-exploitation-prevention"
+      website: "aarp.org/money/scams-fraud"
     },
     {
       title: "Nursing Home Rights and Advocacy",
       description: "Understanding resident rights and how to advocate",
       provider: "Long-Term Care Ombudsman",
       format: "Handbook, training sessions",
-      website: "aging.ca.gov/ombudsman/resources"
+      website: "aging.ca.gov/ombudsman"
     }
   ];
 

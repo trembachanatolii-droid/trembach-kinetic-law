@@ -33,8 +33,6 @@ import {
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/clergy-abuse-hero-bg.jpg';
 import sidebarImage from '@/assets/clergy-abuse-sidebar.jpg';
-import supportStepsImage from '@/assets/clergy-abuse-healing-steps.jpg';
-import legalProcessImage from '@/assets/clergy-abuse-legal-scales.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

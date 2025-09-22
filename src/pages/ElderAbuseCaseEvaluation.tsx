@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, Phone, Mail, MessageCircle, Shield, Heart, Star } from 'lucide-react';
-import { useToast } from '@/components/ui/use-toast';
+import { useToast } from '@/hooks/use-toast';
 import elderAbuseCaseEvaluationHero from '@/assets/elder-abuse-case-evaluation-hero.jpg';
 
 interface GoBackProps {

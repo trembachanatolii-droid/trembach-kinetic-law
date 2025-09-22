@@ -224,25 +224,29 @@ const ElderAbuseResources: React.FC = () => {
       title: "Recognizing Elder Abuse Warning Signs",
       description: "Learn to identify physical, emotional, and financial abuse indicators",
       provider: "National Center on Elder Abuse",
-      format: "Online guide, printable materials"
+      format: "Online guide, printable materials",
+      website: "ncea.acl.gov/toolkits/recognizing-signs"
     },
     {
       title: "Understanding California Elder Abuse Law",
       description: "Comprehensive guide to EADACPA and legal remedies",
       provider: "State Bar of California",
-      format: "Legal publication, online resource"
+      format: "Legal publication, online resource",
+      website: "calbar.ca.gov/senior-legal-aid"
     },
     {
       title: "Preventing Financial Exploitation",
       description: "Tools and strategies to protect elderly finances",
       provider: "AARP Foundation", 
-      format: "Workshop materials, online courses"
+      format: "Workshop materials, online courses",
+      website: "aarp.org/money/scams-fraud/info-2017/financial-exploitation-prevention"
     },
     {
       title: "Nursing Home Rights and Advocacy",
       description: "Understanding resident rights and how to advocate",
       provider: "Long-Term Care Ombudsman",
-      format: "Handbook, training sessions"
+      format: "Handbook, training sessions",
+      website: "aging.ca.gov/ombudsman/resources"
     }
   ];
 
@@ -558,7 +562,14 @@ const ElderAbuseResources: React.FC = () => {
                       {resource.website && (
                         <div className="flex items-center gap-2">
                           <Info className="w-4 h-4 text-primary" />
-                          <span className="text-sm">{resource.website}</span>
+                          <a 
+                            href={`https://${resource.website}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sm text-primary hover:underline"
+                          >
+                            {resource.website}
+                          </a>
                         </div>
                       )}
                       {resource.findProvider && (
@@ -605,13 +616,26 @@ const ElderAbuseResources: React.FC = () => {
                     <CardDescription>{resource.description}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-2">
+                    <div className="space-y-3">
                       <div className="flex items-center gap-2">
                         <Badge variant="secondary">{resource.provider}</Badge>
                       </div>
                       <div className="text-sm text-muted-foreground">
                         <strong>Format:</strong> {resource.format}
                       </div>
+                      {resource.website && (
+                        <div className="flex items-center gap-2">
+                          <ExternalLink className="w-4 h-4 text-primary" />
+                          <a 
+                            href={`https://${resource.website}`} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-sm text-primary hover:underline"
+                          >
+                            Visit Resource
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </CardContent>
                 </Card>

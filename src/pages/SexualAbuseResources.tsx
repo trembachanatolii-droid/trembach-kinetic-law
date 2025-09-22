@@ -326,7 +326,7 @@ const SexualAbuseResources: React.FC = () => {
                   <Button 
                     size="lg" 
                     variant="outline" 
-                    className="border-white text-white hover:bg-white hover:text-primary"
+                    className="border-white text-foreground hover:bg-white hover:text-primary"
                     onClick={() => navigate('/sexual-abuse-case-evaluation')}
                   >
                     Free Case Evaluation

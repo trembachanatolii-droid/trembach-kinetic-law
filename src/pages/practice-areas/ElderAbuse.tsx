@@ -115,6 +115,11 @@ const ElderAbuse: React.FC = () => {
   ];
 
   useEffect(() => {
+    document.body.classList.add('grain-disabled');
+    return () => document.body.classList.remove('grain-disabled');
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // 3D Visual Effects & Perspective
       const container = heroRef.current;
@@ -536,7 +541,7 @@ const ElderAbuse: React.FC = () => {
       </section>
 
       {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="max-w-7xl mx-auto px-6 py-12 ea-content">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Content Column */}

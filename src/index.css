@@ -233,6 +233,11 @@
   }
 }
 
+/* Disable grain overlay on elder abuse page for clarity */
+body.grain-disabled::before {
+  display: none !important;
+}
+
 @layer components {
   /* Typography Scale */
   .text-hero {

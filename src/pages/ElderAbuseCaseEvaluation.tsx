@@ -144,11 +144,11 @@ const ElderAbuseCaseEvaluation: React.FC = () => {
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           
           {/* Form Column */}
-          <div className="lg:col-span-3">
+          <div className="lg:col-span-4">
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl text-center">Elder Abuse Case Evaluation Form</CardTitle>
@@ -156,8 +156,8 @@ const ElderAbuseCaseEvaluation: React.FC = () => {
                   🔒 All information is confidential and protected by attorney-client privilege
                 </p>
               </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+              <CardContent className="p-8">
+                <form onSubmit={handleSubmit} className="space-y-8">
                   
                   {/* Personal Information */}
                   <div className="space-y-4">

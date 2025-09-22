@@ -225,32 +225,40 @@ const ElderAbuseResources: React.FC = () => {
       description: "Learn to identify physical, emotional, and financial abuse indicators",
       provider: "National Center on Elder Abuse",
       format: "Online guide, printable materials",
-      website: "ncea.acl.gov"
+      website: "https://ncea.acl.gov/"
     },
     {
       title: "Understanding California Elder Abuse Law",
       description: "Comprehensive guide to EADACPA and legal remedies",
       provider: "State Bar of California",
       format: "Legal publication, online resource",
-      website: "calbar.ca.gov"
+      website: "https://www.calbar.ca.gov/"
     },
     {
       title: "Preventing Financial Exploitation",
       description: "Tools and strategies to protect elderly finances",
       provider: "AARP Foundation", 
       format: "Workshop materials, online courses",
-      website: "aarp.org/money/scams-fraud"
+      website: "https://www.aarp.org/money/scams-fraud/"
     },
     {
       title: "Nursing Home Rights and Advocacy",
       description: "Understanding resident rights and how to advocate",
       provider: "Long-Term Care Ombudsman",
       format: "Handbook, training sessions",
-      website: "aging.ca.gov/ombudsman"
+      website: "https://aging.ca.gov/ombudsman/"
     }
   ];
 
-  const isValidWebsite = (v: string) => /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}(?:\/\S*)?$/i.test(v);
+  const ensureAbsoluteUrl = (v: string) => (v?.startsWith("http://") || v?.startsWith("https://")) ? v : `https://${v}`;
+  const isValidWebsite = (v: string) => {
+    try {
+      const u = new URL(ensureAbsoluteUrl(v));
+      return !!u.hostname && u.hostname.includes(".");
+    } catch {
+      return false;
+    }
+  };
 
   return (
     <>
@@ -380,9 +388,9 @@ const ElderAbuseResources: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
-                            href={`https://${agency.website}`} 
+                            href={ensureAbsoluteUrl(agency.website)} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="text-primary hover:underline"
                           >
                             {agency.website}
@@ -430,9 +438,9 @@ const ElderAbuseResources: React.FC = () => {
                       <Users className="w-6 h-6 text-primary" />
                       {org.website && isValidWebsite(org.website) ? (
                         <a 
-                          href={`https://${org.website}`} 
+                          href={ensureAbsoluteUrl(org.website)} 
                           target="_blank" 
-                          rel="noopener noreferrer"
+                          rel="noopener noreferrer nofollow"
                           className="text-primary hover:underline cursor-pointer"
                         >
                           {org.name}
@@ -449,9 +457,9 @@ const ElderAbuseResources: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
-                            href={`https://${org.website}`} 
+                            href={ensureAbsoluteUrl(org.website)} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="text-primary hover:underline"
                           >
                             {org.website}
@@ -507,9 +515,9 @@ const ElderAbuseResources: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
-                            href={`https://${resource.website}`} 
+                            href={ensureAbsoluteUrl(resource.website)} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="text-primary hover:underline"
                           >
                             {resource.website}
@@ -565,9 +573,9 @@ const ElderAbuseResources: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <Info className="w-4 h-4 text-primary" />
                           <a 
-                            href={`https://${resource.website}`} 
+                            href={ensureAbsoluteUrl(resource.website)} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="text-sm text-primary hover:underline"
                           >
                             {resource.website}
@@ -629,9 +637,9 @@ const ElderAbuseResources: React.FC = () => {
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
-                            href={`https://${resource.website}`} 
+                            href={ensureAbsoluteUrl(resource.website)} 
                             target="_blank" 
-                            rel="noopener noreferrer"
+                            rel="noopener noreferrer nofollow"
                             className="text-sm text-primary hover:underline"
                           >
                             Visit Resource

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Stars, Sparkles, Float, Cloud } from '@react-three/drei';
 import { Vector3 } from 'three';
@@ -76,9 +76,18 @@ const MedicalCross: React.FC<{ position: [number, number, number] }> = ({ positi
 
 // Enhanced medical hero scene with healing atmosphere
 export const MedicalHeroScene: React.FC = () => {
-  // Optimize performance for mobile devices
-  const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5);
-  const isMobile = window.innerWidth < 768;
+  // State for responsive settings
+  const [isMobile, setIsMobile] = useState(false);
+  const [dpr, setDpr] = useState(1);
+  
+  // Set responsive values after component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const mobile = window.innerWidth < 768;
+      setIsMobile(mobile);
+      setDpr(Math.min(window.devicePixelRatio || 1, mobile ? 1 : 1.5));
+    }
+  }, []);
   
   // Reduce particle count on mobile for better performance
   const particleCount = isMobile ? 10 : 20;

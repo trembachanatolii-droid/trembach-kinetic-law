@@ -630,8 +630,7 @@ const ElderAbuseResources: React.FC = () => {
                 <div className="flex flex-col md:flex-row items-center justify-center gap-4">
                   <Button 
                     size="lg" 
-                    variant="secondary"
-                    className="w-full md:w-auto text-black transition-colors hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                    className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white border-2 border-white rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={() => window.open('tel:8181234567')}
                   >
                     <Phone className="w-5 h-5 mr-2" />
@@ -639,8 +638,7 @@ const ElderAbuseResources: React.FC = () => {
                   </Button>
                   <Button 
                     size="lg" 
-                    variant="outline"
-                    className="w-full md:w-auto bg-transparent border-white text-white hover:bg-white hover:text-primary"
+                    className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white border-2 border-white rounded-lg transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={() => window.location.href = '/elder-abuse-case-evaluation'}
                   >
                     Get Free Case Evaluation

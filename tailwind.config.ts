@@ -69,9 +69,9 @@ export default {
       },
       
       fontFamily: {
-        sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        display: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        body: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        sans: ['Instrument Sans', 'sans-serif'],
+        display: ['Instrument Sans', 'sans-serif'],
+        body: ['Instrument Sans', 'sans-serif'],
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -32,8 +32,8 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/clergy-abuse-hero-bg.jpg';
 import sidebarImage from '@/assets/clergy-abuse-sidebar.jpg';
-import supportStepsImage from '@/assets/clergy-abuse-support-steps.jpg';
-import legalProcessImage from '@/assets/clergy-abuse-legal-process.jpg';
+import supportStepsImage from '@/assets/clergy-abuse-healing-steps.jpg';
+import legalProcessImage from '@/assets/clergy-abuse-legal-scales.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -789,24 +789,20 @@ const ClergyAbuse: React.FC = () => {
               
               <div className="space-y-4">
                 {faqData.map((faq, index) => (
-                  <Card key={index} className="overflow-hidden">
-                    <button
+                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader 
+                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
                       onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                      className="w-full text-left p-6 hover:bg-muted/50 transition-colors"
                     >
-                      <div className="flex justify-between items-center">
-                        <h3 className="text-lg font-semibold pr-4">{faq.question}</h3>
-                        {expandedFaq === index ? (
-                          <ChevronUp className="w-5 h-5 flex-shrink-0" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 flex-shrink-0" />
-                        )}
-                      </div>
-                    </button>
+                      <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
+                        {faq.question}
+                        {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
+                      </CardTitle>
+                    </CardHeader>
                     {expandedFaq === index && (
-                      <div className="px-6 pb-6">
-                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </div>
+                      <CardContent className="animate-fade-in">
+                        <p className="text-muted-foreground">{faq.answer}</p>
+                      </CardContent>
                     )}
                   </Card>
                 ))}
@@ -835,20 +831,21 @@ const ClergyAbuse: React.FC = () => {
                   </CardContent>
                 </Card>
                 
-                <Card>
+                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer" onClick={() => window.location.href = '/clergy-abuse-resources'}>
                   <CardHeader>
-                    <CardTitle className="flex items-center">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Users className="w-5 h-5 mr-2 text-primary" />
                       Support Organizations
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <ul className="space-y-2">
-                      <li>• SNAP (Survivors Network)</li>
-                      <li>• California Trauma Recovery Centers</li>
-                      <li>• Faith Trust Institute</li>
-                      <li>• Bishop Accountability</li>
-                    </ul>
+                  <CardContent className="space-y-2">
+                    <p>• SNAP (Survivors Network)</p>
+                    <p>• California Trauma Recovery Centers</p>
+                    <p>• Faith Trust Institute</p>
+                    <p>• Bishop Accountability</p>
+                    <Button variant="outline" size="sm" className="mt-4 w-full">
+                      View All Resources →
+                    </Button>
                   </CardContent>
                 </Card>
               </div>
@@ -941,6 +938,24 @@ const ClergyAbuse: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom CTA - Matching Mesothelioma Style */}
+      <section className="bg-gray-900 text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits Apply for California</h2>
+          <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+          <p className="text-xl mb-12 leading-relaxed">California's AB 218 provides extended deadlines, but time limits still apply. Contact us today for your free consultation.</p>
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
+              CALL (818) 123-4567
+            </Button>
+            
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/clergy-abuse-case-evaluation'}>
+              START MY FREE CASE EVALUATION
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

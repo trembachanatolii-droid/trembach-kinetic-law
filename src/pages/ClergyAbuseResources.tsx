@@ -20,7 +20,7 @@ import {
   Scale,
   Home
 } from 'lucide-react';
-import heroImage from '@/assets/clergy-abuse-resources.jpg';
+import heroImage from '@/assets/clergy-abuse-resources-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

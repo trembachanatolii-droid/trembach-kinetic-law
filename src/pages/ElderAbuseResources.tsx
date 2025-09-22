@@ -250,6 +250,8 @@ const ElderAbuseResources: React.FC = () => {
     }
   ];
 
+  const isValidWebsite = (v: string) => /^(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z]{2,}(?:\/\S*)?$/i.test(v);
+
   return (
     <>
       <Helmet>
@@ -374,7 +376,7 @@ const ElderAbuseResources: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {agency.website && (
+                      {agency.website && isValidWebsite(agency.website) && (
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
@@ -426,7 +428,7 @@ const ElderAbuseResources: React.FC = () => {
                   <CardHeader>
                     <CardTitle className="flex items-center gap-3">
                       <Users className="w-6 h-6 text-primary" />
-                      {org.website ? (
+                      {org.website && isValidWebsite(org.website) ? (
                         <a 
                           href={`https://${org.website}`} 
                           target="_blank" 
@@ -443,7 +445,7 @@ const ElderAbuseResources: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {org.website && (
+                      {org.website && isValidWebsite(org.website) && (
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
@@ -501,7 +503,7 @@ const ElderAbuseResources: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {resource.website && (
+                      {resource.website && isValidWebsite(resource.website) && (
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 
@@ -559,7 +561,7 @@ const ElderAbuseResources: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      {resource.website && (
+                      {resource.website && isValidWebsite(resource.website) && (
                         <div className="flex items-center gap-2">
                           <Info className="w-4 h-4 text-primary" />
                           <a 
@@ -623,7 +625,7 @@ const ElderAbuseResources: React.FC = () => {
                       <div className="text-sm text-muted-foreground">
                         <strong>Format:</strong> {resource.format}
                       </div>
-                      {resource.website && (
+                      {resource.website && isValidWebsite(resource.website) && (
                         <div className="flex items-center gap-2">
                           <ExternalLink className="w-4 h-4 text-primary" />
                           <a 

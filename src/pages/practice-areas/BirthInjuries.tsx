@@ -1145,6 +1145,7 @@ const BirthInjuries: React.FC = () => {
                     <Button 
                       className="w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2 text-base py-3"
                       onClick={() => window.location.href = 'tel:8181234567'}
+                      aria-label="Call us now at 8-1-8-1-2-3-4-5-6-7"
                     >
                       <Phone className="w-4 h-4" />
                       Call (818) 123-4567
@@ -1210,9 +1211,13 @@ const BirthInjuries: React.FC = () => {
       </div>
 
       {/* Bottom CTA Section - "Don't Wait - Time Limits Apply" */}
-      <section className="bg-red-600 text-white py-12">
+      <section 
+        className="bg-red-600 text-white py-12"
+        aria-labelledby="cta-heading"
+        role="banner"
+      >
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl font-bold mb-4">Don't Wait - Time Limits Apply for California Birth Injuries</h2>
+          <h2 id="cta-heading" className="text-4xl font-bold mb-4">Don't Wait - Time Limits Apply for California Birth Injuries</h2>
           <p className="text-xl mb-6">
             California law gives you until your child's 8th birthday to file a birth injury claim, but evidence can be lost and witnesses' memories fade. 
             Contact us today for your free consultation.
@@ -1223,6 +1228,7 @@ const BirthInjuries: React.FC = () => {
               variant="secondary"
               className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4 text-lg"
               onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
+              aria-label="Get a free case evaluation for your birth injury claim"
             >
               Get Free Case Evaluation
             </Button>
@@ -1231,6 +1237,7 @@ const BirthInjuries: React.FC = () => {
               variant="outline"
               className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 text-lg"
               onClick={() => window.location.href = 'tel:8181234567'}
+              aria-label="Call us now at 8-1-8-1-2-3-4-5-6-7 for immediate assistance"
             >
               Call (818) 123-4567 Now
             </Button>

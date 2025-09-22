@@ -4,7 +4,7 @@ import { Stars, Sparkles, Float, Cloud } from '@react-three/drei';
 import { Vector3 } from 'three';
 
 // Medical-themed animated particles for birth injury visualization
-const MedicalParticles: React.FC = () => {
+const MedicalParticles: React.FC<{ count: number }> = ({ count }) => {
   const particlesRef = useRef<any>(null);
   
   useFrame((state) => {
@@ -16,7 +16,7 @@ const MedicalParticles: React.FC = () => {
 
   return (
     <group ref={particlesRef}>
-      {Array.from({ length: 20 }, (_, i) => (
+      {Array.from({ length: count }, (_, i) => (
         <mesh key={i} position={[
           (Math.random() - 0.5) * 12,
           (Math.random() - 0.5) * 8,
@@ -76,7 +76,13 @@ const MedicalCross: React.FC<{ position: [number, number, number] }> = ({ positi
 
 // Enhanced medical hero scene with healing atmosphere
 export const MedicalHeroScene: React.FC = () => {
-  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  // Optimize performance for mobile devices
+  const dpr = Math.min(window.devicePixelRatio || 1, window.innerWidth < 768 ? 1 : 1.5);
+  const isMobile = window.innerWidth < 768;
+  
+  // Reduce particle count on mobile for better performance
+  const particleCount = isMobile ? 10 : 20;
+  const sparkleCount = isMobile ? 60 : 120;
 
   return (
     <Canvas dpr={dpr} camera={{ position: [0, 0, 9], fov: 50 }}>
@@ -89,36 +95,43 @@ export const MedicalHeroScene: React.FC = () => {
       <pointLight position={[3, 3, 2]} intensity={0.5} color="#06b6d4" />
       <pointLight position={[0, -4, 3]} intensity={0.4} color="#10b981" />
 
-      {/* Soft medical atmosphere clouds */}
-      <Cloud
-        opacity={0.08}
-        speed={0.1}
-        segments={25}
-        color="#e2e8f0"
-        position={[0, 0, -5]}
-      />
-      <Cloud
-        opacity={0.06}
-        speed={0.15}
-        segments={20}
-        color="#cbd5e1"
-        position={[2, 1, -6]}
-      />
+      {/* Soft medical atmosphere clouds - reduce on mobile */}
+      {!isMobile && (
+        <>
+          <Cloud
+            opacity={0.08}
+            speed={0.1}
+            segments={25}
+            color="#e2e8f0"
+            position={[0, 0, -5]}
+          />
+          <Cloud
+            opacity={0.06}
+            speed={0.15}
+            segments={20}
+            color="#cbd5e1"
+            position={[2, 1, -6]}
+          />
+        </>
+      )}
 
-      {/* Medical starfield with soft, healing colors */}
+      {/* Reduce star count on mobile for better performance */}
       <Stars 
         radius={150} 
         depth={100} 
-        count={6000} 
+        count={isMobile ? 3000 : 6000} 
         factor={3} 
         saturation={0.1} 
         fade 
         speed={0.2} 
       />
       
+      {/* Medical particles */}
+      <MedicalParticles count={particleCount} />
+
       {/* Healing sparkles with medical colors */}
       <Sparkles 
-        count={120} 
+        count={sparkleCount} 
         scale={120} 
         size={1.5} 
         speed={0.3} 
@@ -126,7 +139,7 @@ export const MedicalHeroScene: React.FC = () => {
         position={[1.5, 0.5, -2]}
       />
       <Sparkles 
-        count={80} 
+        count={Math.round(sparkleCount * 0.67)} 
         scale={100} 
         size={1.2} 
         speed={0.4} 
@@ -134,7 +147,7 @@ export const MedicalHeroScene: React.FC = () => {
         position={[-1.5, -0.5, -1.5]}
       />
       <Sparkles 
-        count={60} 
+        count={Math.round(sparkleCount * 0.5)} 
         scale={90} 
         size={1} 
         speed={0.5} 
@@ -142,59 +155,62 @@ export const MedicalHeroScene: React.FC = () => {
         position={[0, 1.5, -2.5]}
       />
 
-      {/* Medical particles */}
-      <MedicalParticles />
-
-      {/* Floating medical crosses */}
+      {/* Floating medical crosses - reduce on mobile */}
       <Float speed={0.8} rotationIntensity={0.3} floatIntensity={1.5}>
         <MedicalCross position={[2.5, 1.2, -2]} />
       </Float>
-      <Float speed={1.0} rotationIntensity={0.4} floatIntensity={1.8}>
-        <MedicalCross position={[-2.5, -0.8, -1.8]} />
-      </Float>
-      <Float speed={0.6} rotationIntensity={0.2} floatIntensity={1.2}>
-        <MedicalCross position={[0, 2.2, -3]} />
-      </Float>
+      {!isMobile && (
+        <>
+          <Float speed={1.0} rotationIntensity={0.4} floatIntensity={1.8}>
+            <MedicalCross position={[-2.5, -0.8, -1.8]} />
+          </Float>
+          <Float speed={0.6} rotationIntensity={0.2} floatIntensity={1.2}>
+            <MedicalCross position={[0, 2.2, -3]} />
+          </Float>
+        </>
+      )}
 
-      {/* Enhanced floating medical elements with healing colors */}
-      <Float speed={1.0} rotationIntensity={0.6} floatIntensity={1.8}>
-        <mesh position={[3.2, 0.8, -2.5]}>
-          <icosahedronGeometry args={[0.5, 2]} />
-          <meshStandardMaterial 
-            color="#3b82f6" 
-            emissive="#3b82f6" 
-            emissiveIntensity={0.4} 
-            metalness={0.2} 
-            roughness={0.4}
-            transparent
-            opacity={0.85}
-          />
-        </mesh>
-        <mesh position={[-3.2, -0.4, -2]}>
-          <octahedronGeometry args={[0.4, 1]} />
-          <meshStandardMaterial 
-            color="#06b6d4" 
-            emissive="#06b6d4" 
-            emissiveIntensity={0.3} 
-            metalness={0.15} 
-            roughness={0.5}
-            transparent
-            opacity={0.9}
-          />
-        </mesh>
-        <mesh position={[0, 2.5, -3.5]}>
-          <dodecahedronGeometry args={[0.35, 0]} />
-          <meshStandardMaterial 
-            color="#10b981" 
-            emissive="#10b981" 
-            emissiveIntensity={0.35} 
-            metalness={0.1} 
-            roughness={0.6}
-            transparent
-            opacity={0.8}
-          />
-        </mesh>
-      </Float>
+      {/* Enhanced floating medical elements with healing colors - reduce on mobile */}
+      {!isMobile && (
+        <Float speed={1.0} rotationIntensity={0.6} floatIntensity={1.8}>
+          <mesh position={[3.2, 0.8, -2.5]}>
+            <icosahedronGeometry args={[0.5, 2]} />
+            <meshStandardMaterial 
+              color="#3b82f6" 
+              emissive="#3b82f6" 
+              emissiveIntensity={0.4} 
+              metalness={0.2} 
+              roughness={0.4}
+              transparent
+              opacity={0.85}
+            />
+          </mesh>
+          <mesh position={[-3.2, -0.4, -2]}>
+            <octahedronGeometry args={[0.4, 1]} />
+            <meshStandardMaterial 
+              color="#06b6d4" 
+              emissive="#06b6d4" 
+              emissiveIntensity={0.3} 
+              metalness={0.15} 
+              roughness={0.5}
+              transparent
+              opacity={0.9}
+            />
+          </mesh>
+          <mesh position={[0, 2.5, -3.5]}>
+            <dodecahedronGeometry args={[0.35, 0]} />
+            <meshStandardMaterial 
+              color="#10b981" 
+              emissive="#10b981" 
+              emissiveIntensity={0.35} 
+              metalness={0.1} 
+              roughness={0.6}
+              transparent
+              opacity={0.8}
+            />
+          </mesh>
+        </Float>
+      )}
 
       {/* Heart-shaped healing elements */}
       <Float speed={0.7} rotationIntensity={0.5} floatIntensity={2.2}>

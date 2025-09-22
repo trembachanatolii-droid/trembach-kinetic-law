@@ -77,7 +77,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
       description: "Confidential discussion of your case with experienced attorneys",
       details: "During this private meeting, we'll listen to your story, explain your rights, and discuss potential legal options. Everything you share is protected by attorney-client privilege.",
       icon: Users,
-      color: "text-blue-500"
+      color: "text-primary"
     },
     {
       step: 2,
@@ -85,7 +85,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
       description: "Thorough investigation to build a strong legal foundation",
       details: "Our team will gather evidence, interview witnesses, review medical records, and work with experts to establish the facts of your case.",
       icon: FileText,
-      color: "text-green-500"
+      color: "text-accent"
     },
     {
       step: 3,
@@ -93,7 +93,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
       description: "Legal paperwork filed within statute of limitations",
       details: "We'll prepare and file all necessary legal documents, ensuring compliance with California's specific deadlines and procedural requirements.",
       icon: Scale,
-      color: "text-purple-500"
+      color: "text-electric"
     },
     {
       step: 4,
@@ -101,7 +101,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
       description: "Pursuing maximum compensation through negotiation or trial",
       details: "We'll aggressively negotiate with defendants and their insurers. If necessary, we're prepared to take your case to trial to secure fair compensation.",
       icon: Gavel,
-      color: "text-red-500"
+      color: "text-destructive"
     }
   ];
 

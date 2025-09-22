@@ -540,14 +540,14 @@ const ElderAbuse: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
           {/* Main Content Column */}
-          <div className="lg:col-span-2" ref={contentRef}>
+          <div className="lg:col-span-2 relative z-10" ref={contentRef}>
             
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">California Elder Abuse Lawyers</h2>
+              <h2 className="text-4xl font-bold text-red-600 mb-6">California Elder Abuse Attorneys</h2>
               
-              <div className="prose prose-lg max-w-none mb-6">
-                <p className="text-lg leading-relaxed mb-4">
+              <div className="prose prose-xl max-w-none mb-6">
+                <p className="text-xl leading-relaxed mb-4 text-foreground font-medium">
                   Elder abuse devastates California's most vulnerable residents every day. Physical violence, financial exploitation, neglect in care facilities, and emotional abuse rob seniors of dignity, security, and peace in their final years. California's Elder Abuse and Dependent Adult Civil Protection Act provides powerful legal remedies to hold abusers accountable and secure justice for victims.
                 </p>
                 

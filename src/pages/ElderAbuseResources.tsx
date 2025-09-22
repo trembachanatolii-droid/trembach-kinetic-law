@@ -631,7 +631,7 @@ const ElderAbuseResources: React.FC = () => {
                   <Button 
                     size="lg" 
                     variant="secondary"
-                    className="w-full md:w-auto"
+                    className="w-full md:w-auto text-black transition-colors hover:bg-secondary/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     onClick={() => window.open('tel:8181234567')}
                   >
                     <Phone className="w-5 h-5 mr-2" />

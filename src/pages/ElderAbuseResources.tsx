@@ -21,7 +21,7 @@ import {
   Home,
   Info
 } from 'lucide-react';
-import elderAbuseResourcesHero from '@/assets/elder-abuse-resources-hero.jpg';
+import elderAbuseResourcesHero from '@/assets/elder-abuse-resources-hero-new.jpg';
 
 interface GoBackProps {
   onGoBack?: () => void;

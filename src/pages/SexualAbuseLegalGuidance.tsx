@@ -358,7 +358,7 @@ const SexualAbuseLegalGuidance: React.FC = () => {
                     variant="secondary"
                     onClick={() => window.open('tel:8181234567')}
                   >
-                    <Phone className="w-5 h-5 mr-2" />
+                    <Phone className="w-5 h-5 mr-2 text-foreground" />
                     <span className="text-foreground">Call (818) 123-4567</span>
                   </Button>
                   <Button 

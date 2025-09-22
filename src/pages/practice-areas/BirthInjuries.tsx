@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { MedicalHeroScene } from '@/components/three/MedicalHeroScene';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -77,26 +78,207 @@ const BirthInjuries: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      // Enhanced hero animation with 3D effects
+      const heroContent = heroRef.current?.querySelector('.hero-content');
+      if (heroContent) {
+        gsap.set(heroContent, { opacity: 0, y: 100, scale: 0.8, rotationX: 15 });
+        gsap.to(heroContent, { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1, 
+          rotationX: 0,
+          duration: 1.2, 
+          ease: 'power3.out',
+          delay: 0.5
+        });
 
-      // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
-          }
+        // Animate hero elements individually
+        const title = heroContent.querySelector('h1');
+        const stars = heroContent.querySelector('.flex');
+        const button = heroContent.querySelector('button');
+
+        if (title) {
+          gsap.fromTo(title, 
+            { opacity: 0, y: 50, scale: 0.9 },
+            { opacity: 1, y: 0, scale: 1, duration: 1, ease: 'power2.out', delay: 0.7 }
+          );
         }
-      );
+
+        if (stars) {
+          gsap.fromTo(stars, 
+            { opacity: 0, x: -30 },
+            { opacity: 1, x: 0, duration: 0.8, ease: 'power2.out', delay: 0.9 }
+          );
+        }
+
+        if (button) {
+          gsap.fromTo(button, 
+            { opacity: 0, y: 30, scale: 0.8 },
+            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.1 }
+          );
+        }
+      }
+
+      // Enhanced content sections animation with stagger and 3D effects
+      const contentSections = contentRef.current?.querySelectorAll('.content-section');
+      if (contentSections) {
+        gsap.fromTo(contentSections,
+          { 
+            opacity: 0, 
+            y: 60, 
+            scale: 0.95,
+            rotationX: 10,
+            transformPerspective: 1000
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotationX: 0,
+            duration: 0.8,
+            stagger: 0.15,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top 80%',
+              end: 'bottom 20%',
+              toggleActions: 'play none none reverse'
+            }
+          }
+        );
+      }
+
+      // Animate cards with hover effects
+      const cards = document.querySelectorAll('.card, .medical-card');
+      cards.forEach((card, index) => {
+        gsap.fromTo(card,
+          { 
+            opacity: 0, 
+            y: 40,
+            scale: 0.9,
+            rotationY: 10
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            rotationY: 0,
+            duration: 0.6,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+              toggleActions: 'play none none reverse'
+            },
+            delay: index * 0.1
+          }
+        );
+
+        // Add magnetic hover effect
+        card.addEventListener('mouseenter', () => {
+          gsap.to(card, {
+            scale: 1.05,
+            y: -10,
+            rotationY: 5,
+            boxShadow: '0 20px 40px rgba(59, 130, 246, 0.3)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(card, {
+            scale: 1,
+            y: 0,
+            rotationY: 0,
+            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
+            duration: 0.3,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Animate sidebar with floating effect
+      const sidebar = document.querySelector('.sidebar-sticky');
+      if (sidebar) {
+        gsap.fromTo(sidebar,
+          { opacity: 0, x: 50, scale: 0.9 },
+          {
+            opacity: 1,
+            x: 0,
+            scale: 1,
+            duration: 0.8,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: sidebar,
+              start: 'top 70%'
+            }
+          }
+        );
+
+        // Add subtle floating animation
+        gsap.to(sidebar, {
+          y: -5,
+          duration: 2,
+          yoyo: true,
+          repeat: -1,
+          ease: 'sine.inOut'
+        });
+      }
+
+      // Animate FAQ items
+      const faqItems = document.querySelectorAll('[data-state="closed"], [data-state="open"]');
+      faqItems.forEach((item, index) => {
+        gsap.fromTo(item,
+          { opacity: 0, x: -30 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: 'power2.out',
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 95%'
+            },
+            delay: index * 0.1
+          }
+        );
+      });
+
+      // Animate buttons with pulse effect
+      const buttons = document.querySelectorAll('button');
+      buttons.forEach((button) => {
+        button.addEventListener('mouseenter', () => {
+          gsap.to(button, {
+            scale: 1.05,
+            duration: 0.2,
+            ease: 'power2.out'
+          });
+        });
+
+        button.addEventListener('mouseleave', () => {
+          gsap.to(button, {
+            scale: 1,
+            duration: 0.2,
+            ease: 'power2.out'
+          });
+        });
+      });
+
+      // Parallax effect for images
+      const images = document.querySelectorAll('img');
+      images.forEach((img) => {
+        gsap.to(img, {
+          yPercent: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: img,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: true
+          }
+        });
+      });
     });
 
     // Go Back button scroll visibility
@@ -251,7 +433,7 @@ const BirthInjuries: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background medical-hero-container medical-parallax">
       {/* Go Back Button - Fixed position with fade-in */}
       <div 
         className={`fixed top-20 left-6 z-50 transition-all duration-300 ${
@@ -261,7 +443,7 @@ const BirthInjuries: React.FC = () => {
         <Button 
           variant="ghost" 
           onClick={handleGoBack}
-          className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          className="medical-button flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
         >
           <ArrowLeft className="w-4 h-4" />
           Go Back
@@ -271,27 +453,38 @@ const BirthInjuries: React.FC = () => {
       {/* Hero Section */}
       <section 
         ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
+        className="relative h-[600px] flex items-center justify-center overflow-hidden"
       >
-        <div className="absolute inset-0 bg-black/70"></div>
+        {/* 3D Medical Scene Background */}
+        <div className="absolute inset-0 z-0">
+          <MedicalHeroScene />
+        </div>
         
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+        {/* Background Image Overlay */}
+        <div 
+          className="absolute inset-0 z-10 bg-cover bg-center bg-no-repeat opacity-30"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        ></div>
+        
+        {/* Dark Overlay for Text Readability */}
+        <div className="absolute inset-0 z-20 bg-gradient-to-r from-black/80 via-black/60 to-black/80"></div>
+        
+        <div className="relative z-30 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 drop-shadow-2xl">
               California Birth Injury Lawyers
             </h1>
             
             <div className="flex items-center justify-center mb-6">
               {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1 drop-shadow-lg" />
               ))}
-              <span className="ml-2 text-lg">Fighting for Your Baby's Future</span>
+              <span className="ml-2 text-lg drop-shadow-lg">Fighting for Your Baby's Future</span>
             </div>
             
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg shadow-2xl transform hover:scale-105 transition-all duration-300"
               onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
             >
               START MY FREE CASE EVALUATION
@@ -300,7 +493,7 @@ const BirthInjuries: React.FC = () => {
         </div>
 
         {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+        <div className="absolute bottom-0 left-0 right-0 z-30 bg-black/30 backdrop-blur-sm border-t border-white/20">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
               {tabs.map((tab) => {
@@ -492,39 +685,39 @@ const BirthInjuries: React.FC = () => {
               <h2 className="text-4xl font-bold text-red-600 mb-6">What to Do After a Birth Injury</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 immediate-steps-theme">
-                  <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
-                      <Heart className="w-5 h-5 mr-2 text-green-600" />
-                      Immediate Medical Steps
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3 text-base">
-                    <p>• Ensure your baby receives immediate medical attention</p>
-                    <p>• Request copies of all medical records and pathology reports</p>
-                    <p>• Get a second opinion from a pediatric specialist</p>
-                    <p>• Document all diagnoses, treatments, and medical opinions</p>
-                    <p>• Consider seeking treatment at specialized children's hospitals</p>
-                    <p>• Don't delay necessary therapies or treatments</p>
-                  </CardContent>
-                </Card>
-                
-                <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 never-do-theme">
-                  <CardHeader>
-                    <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
-                      <Scale className="w-5 h-5 mr-2 text-red-600" />
-                      Immediate Legal Steps
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-3 text-base">
-                    <p>• Contact a birth injury attorney immediately</p>
-                    <p>• Don't sign any hospital forms admitting fault</p>
-                    <p>• Don't give recorded statements without legal counsel</p>
-                    <p>• Preserve all documentation and medical bills</p>
-                    <p>• Don't delay - California has strict time limits</p>
-                    <p>• Document everything that happened during delivery</p>
-                  </CardContent>
-                </Card>
+                 <Card className="medical-card glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 immediate-steps-theme medical-glow">
+                   <CardHeader>
+                     <CardTitle className="medical-3d-text flex items-center group-hover:text-primary transition-colors text-lg">
+                       <Heart className="w-5 h-5 mr-2 text-green-600 medical-floating" />
+                       Immediate Medical Steps
+                     </CardTitle>
+                   </CardHeader>
+                   <CardContent className="space-y-3 text-base">
+                     <p>• Ensure your baby receives immediate medical attention</p>
+                     <p>• Request copies of all medical records and pathology reports</p>
+                     <p>• Get a second opinion from a pediatric specialist</p>
+                     <p>• Document all diagnoses, treatments, and medical opinions</p>
+                     <p>• Consider seeking treatment at specialized children's hospitals</p>
+                     <p>• Don't delay necessary therapies or treatments</p>
+                   </CardContent>
+                 </Card>
+                 
+                 <Card className="medical-card glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 never-do-theme medical-pulse">
+                   <CardHeader>
+                     <CardTitle className="medical-3d-text flex items-center group-hover:text-primary transition-colors text-lg">
+                       <Scale className="w-5 h-5 mr-2 text-red-600 medical-floating" />
+                       Immediate Legal Steps
+                     </CardTitle>
+                   </CardHeader>
+                   <CardContent className="space-y-3 text-base">
+                     <p>• Contact a birth injury attorney immediately</p>
+                     <p>• Don't sign any hospital forms admitting fault</p>
+                     <p>• Don't give recorded statements without legal counsel</p>
+                     <p>• Preserve all documentation and medical bills</p>
+                     <p>• Don't delay - California has strict time limits</p>
+                     <p>• Document everything that happened during delivery</p>
+                   </CardContent>
+                 </Card>
               </div>
 
               <img src={diagnosisImage} alt="Medical diagnosis process" className="w-full h-64 object-cover rounded-lg mb-6" />
@@ -939,9 +1132,9 @@ const BirthInjuries: React.FC = () => {
           {/* Sticky Sidebar - "3 Ways to Start Your Case" */}
           <div className="lg:col-span-1">
             <div className="sticky top-24 space-y-6">
-              <Card className="glass-card">
+              <Card className="medical-card glass-card medical-hero-container sidebar-sticky medical-floating">
                 <CardHeader>
-                  <CardTitle className="text-center text-xl text-red-600">3 Ways to Start Your Case</CardTitle>
+                  <CardTitle className="medical-hero-title text-center text-xl text-red-600">3 Ways to Start Your Case</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <div className="text-center">

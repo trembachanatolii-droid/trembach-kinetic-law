@@ -790,3 +790,150 @@ a[href^="tel:"],
     transform: translateZ(10px) scale(1.02);
   }
 }
+
+/* Medical/Birth Injury 3D Effects */
+.medical-hero-container {
+  perspective: 1200px;
+  transform-style: preserve-3d;
+}
+
+.medical-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.medical-card:hover {
+  transform: translateY(-8px) rotateY(5deg) scale(1.02);
+  box-shadow: 0 25px 50px rgba(59, 130, 246, 0.3),
+              0 0 0 1px rgba(59, 130, 246, 0.1);
+}
+
+.medical-hero-title {
+  transform: translateZ(30px);
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.medical-3d-text {
+  transform: translateZ(20px);
+  transition: transform 0.3s ease;
+}
+
+.medical-3d-text:hover {
+  transform: translateZ(35px) scale(1.05);
+}
+
+.medical-glow {
+  box-shadow: 0 0 30px rgba(59, 130, 246, 0.4),
+              0 0 60px rgba(59, 130, 246, 0.2),
+              inset 0 0 20px rgba(59, 130, 246, 0.1);
+}
+
+.medical-pulse {
+  animation: medicalPulse 2s ease-in-out infinite;
+}
+
+@keyframes medicalPulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    transform: scale(1);
+  }
+  50% { 
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.6);
+    transform: scale(1.02);
+  }
+}
+
+.medical-parallax {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.medical-floating {
+  animation: medicalFloat 3s ease-in-out infinite;
+}
+
+@keyframes medicalFloat {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(1deg); }
+  50% { transform: translateY(-5px) rotate(0deg); }
+  75% { transform: translateY(-15px) rotate(-1deg); }
+}
+
+.medical-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.medical-shimmer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(59, 130, 246, 0.2),
+    transparent
+  );
+  animation: medicalShimmer 3s infinite;
+}
+
+@keyframes medicalShimmer {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* Enhanced Button Effects for Medical Theme */
+.medical-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  transform: translateZ(0);
+}
+
+.medical-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transition: left 0.5s ease;
+}
+
+.medical-button:hover::before {
+  left: 100%;
+}
+
+.medical-button:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+}
+
+/* Responsive Adjustments for Medical Theme */
+@media (max-width: 768px) {
+  .medical-hero-container {
+    perspective: 800px;
+  }
+  
+  .medical-hero-title {
+    transform: translateZ(15px);
+  }
+  
+  .medical-card:hover {
+    transform: translateY(-4px) scale(1.01);
+  }
+  
+  .medical-3d-text:hover {
+    transform: translateZ(20px) scale(1.02);
+  }
+}

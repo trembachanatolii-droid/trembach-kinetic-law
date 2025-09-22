@@ -342,7 +342,7 @@ const ClergyAbuse: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white">
               California Clergy Abuse Attorneys
             </h1>
             

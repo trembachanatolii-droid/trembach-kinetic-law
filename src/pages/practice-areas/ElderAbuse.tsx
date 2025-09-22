@@ -193,27 +193,17 @@ const ElderAbuse: React.FC = () => {
       const sections = contentRef.current?.querySelectorAll('.content-section');
       if (sections) {
         gsap.fromTo(sections,
-          { 
-            opacity: 0, 
-            y: 60,
-            rotateY: -5,
-            z: -50,
-            scale: 0.95
-          },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            rotateY: 0,
-            z: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.15,
-            ease: 'cubic-bezier(0.22, 1, 0.36, 1)',
+            duration: 0.6,
+            stagger: 0.1,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: contentRef.current,
-              start: 'top 80%',
-              end: 'bottom 20%',
-              scrub: 1
+              start: 'top 85%',
+              toggleActions: 'play none none none'
             }
           }
         );

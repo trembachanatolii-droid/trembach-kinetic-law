@@ -730,7 +730,7 @@ const BirthInjuries: React.FC = () => {
                     <Button 
                       variant="outline" 
                       className="w-full text-primary border-primary hover:bg-primary hover:text-white"
-                      onClick={() => window.location.href = '/birth-injuries/schedule-consultation'}
+                      onClick={() => window.location.href = '/schedule-consultation'}
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Schedule Consultation

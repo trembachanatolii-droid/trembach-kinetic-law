@@ -9,6 +9,7 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import BirthInjuries from "./pages/practice-areas/BirthInjuries";
+import BirthInjuriesCaseEvaluation from "./pages/BirthInjuriesCaseEvaluation";
 import ClergyAbuse from "./pages/practice-areas/ClergyAbuse";
 import ElderAbuse from "./pages/practice-areas/ElderAbuse";
 import ElderAbuseCaseEvaluation from "./pages/ElderAbuseCaseEvaluation";
@@ -154,6 +155,7 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/birth-injuries" element={<BirthInjuries />} />
+            <Route path="/birth-injuries/case-evaluation" element={<BirthInjuriesCaseEvaluation />} />
             <Route path="/practice-areas/clergy-abuse" element={<ClergyAbuse />} />
             <Route path="/practice-areas/elder-abuse" element={<ElderAbuse />} />
             <Route path="/elder-abuse-case-evaluation" element={<ElderAbuseCaseEvaluation />} />

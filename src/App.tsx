@@ -179,6 +179,10 @@ import SwimmingPoolFAQ from "./pages/practice-areas/swimming-pool/SwimmingPoolFA
 import AmusementParkInjuries from "./pages/practice-areas/AmusementParkInjuries";
 import AmusementParkFAQ from "./pages/practice-areas/amusement-parks/AmusementParkFAQ";
 import AmusementParkResources from "./pages/practice-areas/amusement-parks/AmusementParkResources";
+import AmusementParkCaseEvaluation from "./pages/practice-areas/amusement-parks/AmusementParkCaseEvaluation";
+import AmusementParkCompensationCalculator from "./pages/practice-areas/amusement-parks/AmusementParkCompensationCalculator";
+import AmusementParkMedicalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkMedicalGuidance";
+import AmusementParkLegalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkLegalGuidance";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();
@@ -213,6 +217,10 @@ function App() {
             {/* Swimming Pool Routes */}
             <Route path="/practice-areas/swimming-pool-accidents" element={<SwimmingPoolAccidents />} />
             <Route path="/practice-areas/amusement-parks" element={<AmusementParkInjuries />} />
+            <Route path="/practice-areas/amusement-parks/case-evaluation" element={<AmusementParkCaseEvaluation />} />
+            <Route path="/practice-areas/amusement-parks/compensation-calculator" element={<AmusementParkCompensationCalculator />} />
+            <Route path="/practice-areas/amusement-parks/medical-guidance" element={<AmusementParkMedicalGuidance />} />
+            <Route path="/practice-areas/amusement-parks/legal-guidance" element={<AmusementParkLegalGuidance />} />
             <Route path="/practice-areas/amusement-parks/faq" element={<AmusementParkFAQ />} />
             <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />

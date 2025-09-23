@@ -1,401 +1,201 @@
-import { Helmet } from "react-helmet-async";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Scale, FileText, Clock, AlertTriangle, CheckCircle, XCircle, Users, Building } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import GoBack from "@/components/GoBack";
+import React from 'react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { ArrowLeft, Star, Scale, Building, AlertTriangle, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import heroBackground from '@/assets/amusement-park-legal-hero.jpg';
+import SEO from '@/components/SEO';
 
-gsap.registerPlugin(ScrollTrigger);
-
-const AmusementParkLegalGuidance = () => {
-  useEffect(() => {
-    // Hero animation
-    gsap.fromTo(".hero-content", 
-      { opacity: 0, y: 30 },
-      { opacity: 1, y: 0, duration: 1, ease: "power2.out" }
-    );
-
-    // Cards animation
-    gsap.fromTo(".legal-card", 
-      { opacity: 0, y: 50 },
-      { 
-        opacity: 1, 
-        y: 0, 
-        duration: 0.8, 
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: ".legal-grid",
-          start: "top 80%"
-        }
-      }
-    );
-
-    return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-    };
-  }, []);
-
+const AmusementParkLegalGuidance: React.FC = () => {
   const legalConcepts = [
     {
       title: "Premises Liability",
       icon: Building,
-      description: "Amusement parks have a legal duty to maintain safe conditions for visitors.",
-      details: [
-        "Regular inspection and maintenance of rides",
-        "Adequate safety warnings and instructions",
-        "Proper training of staff and operators",
-        "Safe design and construction standards"
-      ]
+      description: "Parks must maintain safe conditions for visitors",
+      points: ["Regular inspections", "Proper maintenance", "Safety warnings", "Staff training"]
     },
     {
       title: "Negligence Claims",
       icon: Scale,
-      description: "When parks fail to meet their duty of care, resulting in injury to guests.",
-      details: [
-        "Failure to inspect or maintain equipment",
-        "Inadequate safety protocols",
-        "Poor staff training or supervision",
-        "Ignoring known safety hazards"
-      ]
+      description: "When parks fail to meet their duty of care",
+      points: ["Equipment failures", "Poor maintenance", "Inadequate training", "Ignored hazards"]
     },
     {
       title: "Product Liability",
       icon: AlertTriangle,
-      description: "Manufacturers of rides and equipment can be held liable for defective products.",
-      details: [
-        "Design defects in ride equipment",
-        "Manufacturing defects or flaws",
-        "Failure to warn of known dangers",
-        "Inadequate safety instructions"
-      ]
-    },
-    {
-      title: "Assumption of Risk",
-      icon: FileText,
-      description: "Legal defense claiming visitors assumed inherent risks of amusement park activities.",
-      details: [
-        "Visitors understand some activities involve risk",
-        "Risk must be inherent to the activity",
-        "Does not excuse gross negligence",
-        "Waivers have limited enforceability"
-      ]
+      description: "Ride manufacturers can be held liable for defects",
+      points: ["Design defects", "Manufacturing flaws", "Warning failures", "Safety instructions"]
     }
   ];
 
   const evidenceTypes = [
-    {
-      type: "Physical Evidence",
-      importance: "Critical",
-      examples: ["Photos of the scene", "Medical records", "Defective equipment", "Safety inspection reports"],
-      timeframe: "Collect immediately"
-    },
-    {
-      type: "Documentary Evidence",
-      importance: "High",
-      examples: ["Incident reports", "Maintenance logs", "Training records", "Safety manuals"],
-      timeframe: "Request within days"
-    },
-    {
-      type: "Witness Testimony",
-      importance: "High",
-      examples: ["Other guests", "Park employees", "Emergency responders", "Expert witnesses"],
-      timeframe: "Contact within weeks"
-    },
-    {
-      type: "Electronic Evidence",
-      importance: "Moderate",
-      examples: ["Security camera footage", "Ride sensor data", "Communication logs", "Social media posts"],
-      timeframe: "Preserve immediately"
-    }
+    { type: "Photos & Videos", examples: ["Scene documentation", "Equipment damage", "Injury photos"] },
+    { type: "Medical Records", examples: ["Emergency treatment", "Diagnosis reports", "Treatment plans"] },
+    { type: "Witness Statements", examples: ["Other guests", "Park employees", "Emergency responders"] },
+    { type: "Park Documents", examples: ["Incident reports", "Maintenance logs", "Inspection records"] }
   ];
 
-  const commonDefenses = [
-    {
-      defense: "Assumption of Risk",
-      explanation: "Claiming the visitor voluntarily assumed the risks inherent in amusement park activities.",
-      counter: "This defense doesn't apply to risks created by negligence or defective equipment."
-    },
-    {
-      defense: "Comparative Negligence",
-      explanation: "Arguing the injured person contributed to their own injury through their actions.",
-      counter: "Even if partially at fault, you may still recover damages proportional to the park's negligence."
-    },
-    {
-      defense: "Statutory Immunity",
-      explanation: "Some states provide limited immunity to amusement park operators under specific conditions.",
-      counter: "Immunity typically doesn't cover gross negligence or intentional misconduct."
-    },
-    {
-      defense: "No Notice",
-      explanation: "Claiming the park had no knowledge of the dangerous condition that caused injury.",
-      counter: "Parks have a duty to regularly inspect for hazards and should have discovered obvious dangers."
-    }
+  const timeline = [
+    { time: "Immediately", action: "Seek medical care and document incident" },
+    { time: "24-48 Hours", action: "Contact attorney and request incident report" },
+    { time: "30 Days", action: "Complete medical evaluation and gather evidence" },
+    { time: "2-3 Years", action: "File lawsuit before statute of limitations expires" }
   ];
-
-  const timelineFacts = [
-    {
-      timeframe: "Immediately",
-      actions: ["Seek medical attention", "Report incident to park", "Document scene with photos", "Collect witness information"],
-      legal: "Preserve evidence before it's altered or destroyed"
-    },
-    {
-      timeframe: "Within 24-48 Hours",
-      actions: ["Contact an attorney", "Request incident report copy", "Begin medical documentation", "Notify insurance"],
-      legal: "Professional legal guidance protects your rights"
-    },
-    {
-      timeframe: "Within 30 Days",
-      actions: ["Complete medical evaluation", "Gather all documentation", "Identify potential witnesses", "Assess full damages"],
-      legal: "Build a comprehensive case foundation"
-    },
-    {
-      timeframe: "Statute of Limitations",
-      actions: ["File lawsuit if necessary", "Complete discovery process", "Expert witness preparation", "Settlement negotiations"],
-      legal: "Varies by state - typically 2-3 years from incident date"
-    }
-  ];
-
-  const getImportanceColor = (importance: string) => {
-    switch (importance) {
-      case "Critical": return "destructive";
-      case "High": return "secondary";
-      case "Moderate": return "default";
-      default: return "outline";
-    }
-  };
 
   return (
-    <>
-      <Helmet>
-        <title>Amusement Park Legal Guidance | Your Rights After Theme Park Injuries</title>
-        <meta name="description" content="Comprehensive legal guidance for amusement park injury cases. Understand your rights, legal concepts, evidence collection, and how to pursue compensation for theme park injuries." />
-        <meta name="keywords" content="amusement park law, theme park injury lawyer, premises liability, negligence claims, legal rights" />
-        <link rel="canonical" href="/practice-areas/amusement-parks/legal-guidance" />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Amusement Park Legal Guidance | Trembach Law Firm"
+        description="Comprehensive legal guidance for amusement park injury cases. Understand your rights and legal options after a theme park injury."
+        keywords="amusement park law, theme park injury lawyer, premises liability, negligence claims"
+      />
 
-      <div className="min-h-screen bg-gradient-to-br from-background via-background to-muted/20">
-        <GoBack />
+      {/* Hero Section */}
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
         
-        {/* Hero Section */}
-        <section className="pt-24 pb-12 px-4">
-          <div className="max-w-4xl mx-auto text-center hero-content">
-            <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-4 py-2 rounded-full mb-6">
-              <Scale className="h-4 w-4" />
-              <span className="text-sm font-medium">Legal Guidance</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-primary via-primary/80 to-secondary bg-clip-text text-transparent">
-              Amusement Park Legal Guidance
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
-              Understanding your legal rights and options after an amusement park injury. Get expert guidance on pursuing compensation and holding negligent parties accountable.
-            </p>
+        <div className="absolute top-6 left-6">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Legal Guidance
+          </h1>
+          
+          <div className="flex items-center justify-center mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
+            ))}
+            <span className="ml-2">Expert Legal Knowledge</span>
           </div>
-        </section>
+          
+          <p className="text-lg opacity-90">
+            Understanding your legal rights after an amusement park injury
+          </p>
+        </div>
+      </section>
 
+      {/* Content */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        
         {/* Legal Concepts */}
-        <section className="py-12 px-4">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Key Legal Concepts</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                Understanding these fundamental legal principles is crucial for amusement park injury cases.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6 legal-grid">
-              {legalConcepts.map((concept, index) => {
-                const IconComponent = concept.icon;
-                return (
-                  <Card key={index} className="legal-card hover:shadow-lg transition-all duration-300">
-                    <CardHeader>
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-primary/10 rounded-lg">
-                          <IconComponent className="h-6 w-6 text-primary" />
-                        </div>
-                        <CardTitle className="text-xl">{concept.title}</CardTitle>
-                      </div>
-                      <CardDescription className="text-base leading-relaxed">
-                        {concept.description}
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <h4 className="font-semibold mb-3 text-sm text-primary">Key Elements:</h4>
-                      <ul className="space-y-2">
-                        {concept.details.map((detail, idx) => (
-                          <li key={idx} className="flex items-start gap-2 text-sm">
-                            <CheckCircle className="h-4 w-4 text-green-500 mt-0.5 flex-shrink-0" />
-                            <span>{detail}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* Evidence Collection */}
-        <section className="py-12 px-4 bg-muted/30">
-          <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Critical Evidence Collection</h2>
-              <p className="text-muted-foreground">
-                The strength of your case depends on preserving the right evidence at the right time.
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-6">
-              {evidenceTypes.map((evidence, index) => (
-                <Card key={index} className="legal-card">
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center">Key Legal Concepts</h2>
+          <div className="grid md:grid-cols-3 gap-6">
+            {legalConcepts.map((concept, index) => {
+              const IconComponent = concept.icon;
+              return (
+                <Card key={index} className="hover:shadow-lg transition-shadow">
                   <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <CardTitle className="text-lg">{evidence.type}</CardTitle>
-                      <Badge variant={getImportanceColor(evidence.importance)}>
-                        {evidence.importance}
-                      </Badge>
+                    <div className="flex items-center gap-3 mb-3">
+                      <div className="p-2 bg-primary/10 rounded-lg">
+                        <IconComponent className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-lg">{concept.title}</CardTitle>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Clock className="h-4 w-4" />
-                      <span>{evidence.timeframe}</span>
-                    </div>
+                    <p className="text-sm text-muted-foreground">{concept.description}</p>
                   </CardHeader>
                   <CardContent>
-                    <h4 className="font-semibold mb-2 text-sm">Examples:</h4>
-                    <ul className="space-y-1">
-                      {evidence.examples.map((example, idx) => (
+                    <ul className="space-y-2">
+                      {concept.points.map((point, idx) => (
                         <li key={idx} className="flex items-center gap-2 text-sm">
-                          <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                          {example}
+                          <CheckCircle className="h-4 w-4 text-green-500" />
+                          {point}
                         </li>
                       ))}
                     </ul>
                   </CardContent>
                 </Card>
-              ))}
-            </div>
+              );
+            })}
           </div>
-        </section>
+        </div>
 
-        {/* Common Defenses */}
-        <section className="py-12 px-4">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Common Legal Defenses</h2>
-              <p className="text-muted-foreground">
-                Understanding these defenses helps prepare stronger cases and anticipate opposing arguments.
-              </p>
-            </div>
+        {/* Evidence Collection */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center">Important Evidence</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            {evidenceTypes.map((evidence, index) => (
+              <Card key={index}>
+                <CardHeader>
+                  <CardTitle className="text-lg text-primary">{evidence.type}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-1">
+                    {evidence.examples.map((example, idx) => (
+                      <li key={idx} className="flex items-center gap-2 text-sm">
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                        {example}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
 
-            <div className="space-y-6">
-              {commonDefenses.map((defense, index) => (
-                <Card key={index} className="legal-card">
-                  <CardContent className="p-6">
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <div>
-                        <h3 className="text-lg font-semibold mb-2 flex items-center gap-2">
-                          <XCircle className="h-5 w-5 text-destructive" />
-                          {defense.defense}
-                        </h3>
-                        <p className="text-muted-foreground text-sm">{defense.explanation}</p>
-                      </div>
-                      <div>
-                        <h4 className="font-semibold mb-2 flex items-center gap-2 text-primary">
-                          <CheckCircle className="h-4 w-4" />
-                          Our Counter-Strategy
-                        </h4>
-                        <p className="text-sm">{defense.counter}</p>
-                      </div>
+        {/* Timeline */}
+        <div className="mb-12">
+          <h2 className="text-3xl font-bold mb-8 text-center">Legal Process Timeline</h2>
+          <Card className="max-w-4xl mx-auto">
+            <CardContent className="p-8">
+              <div className="space-y-6">
+                {timeline.map((item, index) => (
+                  <div key={index} className="flex items-start gap-4">
+                    <div className="flex-shrink-0 w-10 h-10 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold text-sm">
+                      {index + 1}
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Legal Timeline */}
-        <section className="py-12 px-4 bg-muted/30">
-          <div className="max-w-4xl mx-auto">
-            <div className="text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Legal Process Timeline</h2>
-              <p className="text-muted-foreground">
-                Understanding the timeline helps you take the right actions at the right time.
-              </p>
-            </div>
-
-            <div className="space-y-8">
-              {timelineFacts.map((timeline, index) => (
-                <Card key={index} className="legal-card">
-                  <CardContent className="p-6">
-                    <div className="flex items-start gap-4">
-                      <div className="flex-shrink-0 w-12 h-12 bg-primary/10 text-primary rounded-full flex items-center justify-center font-bold text-sm">
-                        {index + 1}
-                      </div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-2">{timeline.timeframe}</h3>
-                        <div className="grid md:grid-cols-2 gap-4">
-                          <div>
-                            <h4 className="font-semibold mb-2 text-sm text-primary">Required Actions:</h4>
-                            <ul className="space-y-1">
-                              {timeline.actions.map((action, idx) => (
-                                <li key={idx} className="flex items-center gap-2 text-sm">
-                                  <div className="w-1.5 h-1.5 bg-primary rounded-full" />
-                                  {action}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          <div>
-                            <h4 className="font-semibold mb-2 text-sm text-secondary">Legal Significance:</h4>
-                            <p className="text-sm text-muted-foreground">{timeline.legal}</p>
-                          </div>
-                        </div>
-                      </div>
+                    <div>
+                      <h4 className="font-semibold text-lg">{item.time}</h4>
+                      <p className="text-muted-foreground">{item.action}</p>
                     </div>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </section>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
 
-        {/* Contact CTA */}
-        <section className="py-16 px-4">
-          <div className="max-w-4xl mx-auto text-center">
-            <Card className="bg-gradient-to-r from-primary/10 via-primary/5 to-secondary/10 border-primary/20">
-              <CardContent className="p-8">
-                <h2 className="text-3xl font-bold mb-4">Ready to Pursue Your Case?</h2>
-                <p className="text-muted-foreground mb-6 max-w-2xl mx-auto">
-                  Don't let the complexity of amusement park injury law prevent you from getting the compensation you deserve. Our experienced team is here to guide you through every step.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button size="lg" asChild>
-                    <Link to="/practice-areas/amusement-parks/case-evaluation">
-                      Free Case Evaluation
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="lg" asChild>
-                    <Link to="/practice-areas/amusement-parks/compensation-calculator">
-                      Calculate Compensation
-                    </Link>
-                  </Button>
-                </div>
-                <p className="text-sm text-muted-foreground mt-4">
-                  Call now: <span className="font-semibold text-primary">(555) 123-4567</span> - Available 24/7
-                </p>
-              </CardContent>
-            </Card>
-          </div>
-        </section>
+        {/* CTA */}
+        <div className="text-center">
+          <Card className="bg-primary/5 border-primary/20 max-w-2xl mx-auto">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold mb-4">Ready to Pursue Your Case?</h3>
+              <p className="text-muted-foreground mb-6">
+                Don't let legal complexity prevent you from getting the compensation you deserve.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Button size="lg" asChild>
+                  <Link to="/practice-areas/amusement-parks/case-evaluation">
+                    Free Case Evaluation
+                  </Link>
+                </Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/practice-areas/amusement-parks/compensation-calculator">
+                    Calculate Compensation
+                  </Link>
+                </Button>
+              </div>
+              <p className="text-sm text-muted-foreground mt-4">
+                Call now: <span className="font-semibold text-primary">(818) 123-4567</span>
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-    </>
+    </div>
   );
 };
 

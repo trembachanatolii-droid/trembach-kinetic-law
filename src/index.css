@@ -303,9 +303,19 @@ body.grain-disabled::before {
     @apply text-base md:text-lg leading-relaxed;
   }
   
-  .text-small {
-    @apply text-sm leading-relaxed;
+  /* Uber/Lyft High-Contrast Typography Scope */
+  .uberlyft-page h1, .uberlyft-page h2, .uberlyft-page h3, .uberlyft-page h4, .uberlyft-page h5, .uberlyft-page h6 {
+    color: #000000 !important;
   }
+  .uberlyft-page p, .uberlyft-page li, .uberlyft-page span, .uberlyft-page label, .uberlyft-page input::placeholder {
+    color: #111111 !important;
+  }
+  .uberlyft-page .text-muted-foreground { color: #333333 !important; }
+  .uberlyft-page .content-card p, .uberlyft-page .content-card li, .uberlyft-page .content-card span { color: #111111 !important; }
+  .uberlyft-page .content-card h1, .uberlyft-page .content-card h2, .uberlyft-page .content-card h3 { color: #000000 !important; }
+  .uberlyft-page a { color: #0a0a0a !important; }
+  .uberlyft-page a:hover { color: hsl(var(--primary)) !important; }
+
   
   /* Glow Effects */
   .glow {

@@ -323,7 +323,7 @@ const UberLyftAccidents: React.FC = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
+    <div className="uberlyft-page min-h-screen bg-background relative overflow-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
       <GoBack />
       
       {/* 3D Floating Background Layers */}

@@ -165,7 +165,7 @@ const UberLyftFAQ = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="uberlyft-page min-h-screen bg-background">
       <GoBack />
       
       {/* Hero Section */}

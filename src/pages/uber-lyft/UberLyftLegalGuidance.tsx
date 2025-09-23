@@ -3,53 +3,30 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Scale, 
-  Shield, 
-  FileText, 
-  AlertTriangle, 
-  Clock, 
-  Phone,
-  ChevronDown,
-  ChevronUp,
-  BookOpen,
-  Users,
-  DollarSign,
-  Gavel
-} from 'lucide-react';
+import { Scale, Shield, FileText, AlertTriangle, Clock, Phone, ChevronDown, ChevronUp, BookOpen, Users, DollarSign, Gavel } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-legal-hero.jpg';
-
 const UberLyftLegalGuidance = () => {
   useScrollRestoration();
-  
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
-  return (
-    <div className="uberlyft-page min-h-screen bg-background">
+  return <div className="uberlyft-page min-h-screen bg-background">
       <GoBack />
       
       {/* Hero Section */}
-      <section 
-        className="relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
+      <section className="relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white" style={{
+      backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroImage})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center'
+    }}>
         <div className="container mx-auto px-4 text-center text-white">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-white">
-            Legal Guidance for Uber/Lyft Accident Cases
-          </h1>
+          <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-white">Legal Guidance for Uber/Lyft Accident Cases</h1>
           <p className="text-xl mb-8 max-w-3xl mx-auto body-text">
             Navigate California's complex rideshare accident laws with expert legal guidance and representation.
           </p>
@@ -74,11 +51,7 @@ const UberLyftLegalGuidance = () => {
                   
                   <Collapsible>
                     <CollapsibleTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
-                        onClick={() => toggleSection('ab5-prop22')}
-                      >
+                      <Button variant="outline" className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white" onClick={() => toggleSection('ab5-prop22')}>
                         <div>
                           <h3 className="font-semibold text-lg">AB5 & Proposition 22 Impact</h3>
                           <p className="text-sm text-muted-foreground">How California's gig worker laws affect your case</p>
@@ -106,11 +79,7 @@ const UberLyftLegalGuidance = () => {
 
                   <Collapsible>
                     <CollapsibleTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
-                        onClick={() => toggleSection('insurance-periods')}
-                      >
+                      <Button variant="outline" className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white" onClick={() => toggleSection('insurance-periods')}>
                         <div>
                           <h3 className="font-semibold text-lg">Three-Period Insurance System</h3>
                           <p className="text-sm text-muted-foreground">Understanding coverage levels and disputes</p>
@@ -164,11 +133,7 @@ const UberLyftLegalGuidance = () => {
 
                   <Collapsible>
                     <CollapsibleTrigger asChild>
-                      <Button 
-                        variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
-                        onClick={() => toggleSection('liability-theories')}
-                      >
+                      <Button variant="outline" className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white" onClick={() => toggleSection('liability-theories')}>
                         <div>
                           <h3 className="font-semibold text-lg">Corporate Liability Theories</h3>
                           <p className="text-sm text-muted-foreground">How to hold Uber/Lyft directly responsible</p>
@@ -223,33 +188,27 @@ const UberLyftLegalGuidance = () => {
               </CardHeader>
               <CardContent>
                 <div className="space-y-6">
-                  {[
-                    {
-                      phase: "Immediate (0-30 days)",
-                      title: "Case Investigation",
-                      description: "Evidence preservation, witness interviews, accident reconstruction, medical record collection, insurance claim filing.",
-                      actions: ["Preserve app data", "Collect police reports", "Interview witnesses", "Document injuries"]
-                    },
-                    {
-                      phase: "Discovery (1-6 months)",
-                      title: "Building Your Case",
-                      description: "Medical treatment documentation, expert witness retention, deposition scheduling, damage calculation, settlement negotiations.",
-                      actions: ["Medical evaluations", "Expert analysis", "Damage assessment", "Initial negotiations"]
-                    },
-                    {
-                      phase: "Litigation (6-18 months)",
-                      title: "Court Proceedings",
-                      description: "Lawsuit filing, formal discovery, mediation attempts, trial preparation, jury selection, trial proceedings.",
-                      actions: ["File lawsuit", "Discovery process", "Mediation", "Trial preparation"]
-                    },
-                    {
-                      phase: "Resolution",
-                      title: "Case Settlement",
-                      description: "Final negotiations, settlement agreement, trial verdict, payment processing, case closure.",
-                      actions: ["Final settlement", "Payment collection", "Case closure", "Appeal if needed"]
-                    }
-                  ].map((phase, index) => (
-                    <Card key={index} className="border-l-4 border-l-primary">
+                  {[{
+                  phase: "Immediate (0-30 days)",
+                  title: "Case Investigation",
+                  description: "Evidence preservation, witness interviews, accident reconstruction, medical record collection, insurance claim filing.",
+                  actions: ["Preserve app data", "Collect police reports", "Interview witnesses", "Document injuries"]
+                }, {
+                  phase: "Discovery (1-6 months)",
+                  title: "Building Your Case",
+                  description: "Medical treatment documentation, expert witness retention, deposition scheduling, damage calculation, settlement negotiations.",
+                  actions: ["Medical evaluations", "Expert analysis", "Damage assessment", "Initial negotiations"]
+                }, {
+                  phase: "Litigation (6-18 months)",
+                  title: "Court Proceedings",
+                  description: "Lawsuit filing, formal discovery, mediation attempts, trial preparation, jury selection, trial proceedings.",
+                  actions: ["File lawsuit", "Discovery process", "Mediation", "Trial preparation"]
+                }, {
+                  phase: "Resolution",
+                  title: "Case Settlement",
+                  description: "Final negotiations, settlement agreement, trial verdict, payment processing, case closure.",
+                  actions: ["Final settlement", "Payment collection", "Case closure", "Appeal if needed"]
+                }].map((phase, index) => <Card key={index} className="border-l-4 border-l-primary">
                       <CardHeader className="pb-3">
                         <div className="flex items-center justify-between">
                           <Badge variant="outline">{phase.phase}</Badge>
@@ -259,16 +218,13 @@ const UberLyftLegalGuidance = () => {
                       <CardContent>
                         <p className="text-muted-foreground mb-3">{phase.description}</p>
                         <div className="grid md:grid-cols-2 gap-2">
-                          {phase.actions.map((action, actionIndex) => (
-                            <div key={actionIndex} className="flex items-center gap-2 text-sm">
+                          {phase.actions.map((action, actionIndex) => <div key={actionIndex} className="flex items-center gap-2 text-sm">
                               <div className="w-2 h-2 bg-primary rounded-full" />
                               <span>{action}</span>
-                            </div>
-                          ))}
+                            </div>)}
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </CardContent>
             </Card>
@@ -442,18 +398,11 @@ const UberLyftLegalGuidance = () => {
                   Don't navigate complex rideshare accident laws alone. Get experienced legal representation that knows how to fight insurance companies and win.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3">
-                  <Button 
-                    className="flex-1"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
+                  <Button className="flex-1" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-4 h-4 mr-2" />
                     Call (818) 123-4567
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="flex-1"
-                    onClick={() => window.location.href = '/uber-lyft-case-evaluation'}
-                  >
+                  <Button variant="outline" className="flex-1" onClick={() => window.location.href = '/uber-lyft-case-evaluation'}>
                     <FileText className="w-4 h-4 mr-2" />
                     Free Legal Consultation
                   </Button>
@@ -484,40 +433,15 @@ const UberLyftLegalGuidance = () => {
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="space-y-4">
-                  <input
-                    type="text"
-                    placeholder="First Name *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last Name *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                  <input
-                    type="tel"
-                    placeholder="Phone *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
-                  <input
-                    type="email"
-                    placeholder="Email *"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    required
-                  />
+                  <input type="text" placeholder="First Name *" className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required />
+                  <input type="text" placeholder="Last Name *" className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required />
+                  <input type="tel" placeholder="Phone *" className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required />
+                  <input type="email" placeholder="Email *" className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required />
                 </div>
                 
                 <div className="space-y-4">
                   <div className="relative">
-                    <textarea
-                      placeholder="What happened? (optional)"
-                      rows={8}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
-                      maxLength={4000}
-                    />
+                    <textarea placeholder="What happened? (optional)" rows={8} className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none" maxLength={4000} />
                     <div className="absolute bottom-3 right-3 text-sm text-gray-500">
                       4000 of 4000 Character(s) left
                     </div>
@@ -533,10 +457,7 @@ const UberLyftLegalGuidance = () => {
               </div>
 
               <div className="text-right">
-                <button
-                  type="submit"
-                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition-colors duration-200"
-                >
+                <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition-colors duration-200">
                   Submit
                 </button>
               </div>
@@ -544,8 +465,6 @@ const UberLyftLegalGuidance = () => {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default UberLyftLegalGuidance;

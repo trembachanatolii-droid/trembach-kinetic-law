@@ -153,7 +153,7 @@ const UberLyftAccidents: React.FC = () => {
             
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              className="bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 text-lg [&]:!text-white [&>*]:!text-white"
               onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
             >
               START MY FREE CASE EVALUATION
@@ -348,7 +348,7 @@ const UberLyftAccidents: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white">
                     Start My Free Case Evaluation
                   </Button>
                 </form>
@@ -732,7 +732,7 @@ const UberLyftAccidents: React.FC = () => {
                   
                   <div className="space-y-4">
                     <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -839,15 +839,15 @@ const UberLyftAccidents: React.FC = () => {
       {/* Bottom CTA - Exactly matching Mesothelioma */}
       <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-2 !text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
-          <p className="text-xl mb-12 leading-relaxed text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
+          <p className="text-xl mb-12 leading-relaxed !text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg [&]:!text-white [&>*]:!text-white" onClick={() => window.location.href = 'tel:8181234567'}>
               CALL (818) 123-4567
             </Button>
             
-            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg [&]:!text-white [&>*]:!text-white" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>

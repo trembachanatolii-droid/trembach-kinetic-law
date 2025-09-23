@@ -286,7 +286,7 @@ const UberLyftCaseEvaluation: React.FC = () => {
                       </div>
                     </div>
 
-                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg">
+                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold py-4 text-lg [&]:!text-white [&>*]:!text-white">
                       Submit Case Evaluation
                     </Button>
                     
@@ -312,7 +312,7 @@ const UberLyftCaseEvaluation: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                    className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />

@@ -795,6 +795,178 @@ const SwimmingPoolAccidents: React.FC = () => {
                   {
                     question: "Can I still file a claim if the accident was partially my fault?",
                     answer: "Yes, California follows comparative negligence law. Even if you were partially at fault, you can still recover damages reduced by your percentage of fault. For example, if you were 20% at fault, you can still recover 80% of your damages."
+                  },
+                  {
+                    question: "What evidence is important in a swimming pool accident case?",
+                    answer: "Critical evidence includes photos of the accident scene, witness statements, medical records, pool maintenance records, safety equipment inspection logs, surveillance footage, weather conditions, and expert testimony on pool safety standards."
+                  },
+                  {
+                    question: "How do I prove negligence in a swimming pool accident case?",
+                    answer: "To prove negligence, we must show the property owner had a duty of care, breached that duty, and the breach caused your injuries. This involves examining safety violations, inadequate supervision, faulty equipment, or failure to maintain safe conditions."
+                  },
+                  {
+                    question: "What are common causes of swimming pool accidents?",
+                    answer: "Common causes include inadequate supervision, faulty drain covers, slippery surfaces, inadequate fencing, chemical imbalances, electrical hazards, diving board accidents, pool equipment malfunctions, and failure to follow safety regulations."
+                  },
+                  {
+                    question: "Can children be held liable for swimming pool accidents?",
+                    answer: "Generally, children under 7 cannot be held liable. Children 7-14 are presumed incapable of negligence but this can be rebutted. The focus is usually on adult supervision and property owner responsibilities rather than child liability."
+                  },
+                  {
+                    question: "What is attractive nuisance doctrine in pool accident cases?",
+                    answer: "The attractive nuisance doctrine holds property owners liable for injuries to trespassing children if the property contains something likely to attract children who cannot appreciate the danger, like an unfenced swimming pool."
+                  },
+                  {
+                    question: "Are public pools held to different safety standards?",
+                    answer: "Yes, public pools have stricter safety requirements including certified lifeguards, specific depth markings, safety equipment, regular inspections, and compliance with health department regulations. Liability standards may also differ."
+                  },
+                  {
+                    question: "What role do lifeguards play in pool accident liability?",
+                    answer: "Lifeguards have a duty to monitor swimmers, respond to emergencies, and maintain safety. Their training, certification, attentiveness, and response time can all be factors in determining liability when accidents occur at supervised pools."
+                  },
+                  {
+                    question: "Can I sue for emotional distress from a pool accident?",
+                    answer: "Yes, you may recover for emotional distress, especially in cases involving near-drowning, witnessing accidents, or severe trauma. Both the victim and family members who witnessed the incident may have claims for emotional distress."
+                  },
+                  {
+                    question: "What is the difference between premises liability and product liability in pool cases?",
+                    answer: "Premises liability involves unsafe property conditions like slippery decks or inadequate fencing. Product liability involves defective pool equipment, faulty drains, or manufacturing defects. Cases may involve both theories of liability."
+                  },
+                  {
+                    question: "How are pool chemical injuries handled legally?",
+                    answer: "Chemical injuries can result from improper mixing, storage, or application of pool chemicals. Liability may involve pool maintenance companies, chemical manufacturers, or property owners who failed to properly handle hazardous substances."
+                  },
+                  {
+                    question: "What safety equipment is required around swimming pools?",
+                    answer: "Required safety equipment typically includes proper fencing, self-closing gates, pool alarms, safety covers, rescue equipment, first aid supplies, and proper signage. Requirements vary by location and pool type."
+                  },
+                  {
+                    question: "Can I file a claim against my homeowner's insurance for a pool accident?",
+                    answer: "Your homeowner's insurance may provide coverage, but insurers often try to deny or minimize claims. Having an experienced attorney helps ensure you receive fair treatment and maximum compensation from insurance companies."
+                  },
+                  {
+                    question: "What happens if the pool owner has no insurance?",
+                    answer: "If the pool owner lacks insurance, you may still pursue compensation through personal assets, business insurance (for commercial pools), or other liable parties like maintenance companies or equipment manufacturers."
+                  },
+                  {
+                    question: "How long does a swimming pool accident lawsuit take?",
+                    answer: "Cases typically take 1-3 years depending on complexity, severity of injuries, and willingness to settle. Simple cases may resolve in 6-12 months, while complex cases requiring trial can take 3-4 years."
+                  },
+                  {
+                    question: "What factors affect the value of my pool accident case?",
+                    answer: "Case value depends on injury severity, medical expenses, lost wages, pain and suffering, degree of negligence, age and life expectancy, future care needs, and impact on quality of life and earning capacity."
+                  },
+                  {
+                    question: "Can I settle my case without going to court?",
+                    answer: "Most cases settle out of court through negotiation. However, having an attorney prepared to go to trial often results in better settlement offers. We always prepare as if we're going to trial to maximize your recovery."
+                  },
+                  {
+                    question: "What happens during a pool accident deposition?",
+                    answer: "A deposition is sworn testimony given outside of court where you'll answer questions about the accident. Your attorney will prepare you and be present to protect your rights and object to improper questions."
+                  },
+                  {
+                    question: "How do expert witnesses help in pool accident cases?",
+                    answer: "Expert witnesses may include pool safety experts, medical professionals, accident reconstruction specialists, and engineers who can testify about safety standards, injury causation, and the extent of your damages."
+                  },
+                  {
+                    question: "What if surveillance video exists of my pool accident?",
+                    answer: "Surveillance video can be crucial evidence. We act quickly to preserve this footage before it's deleted or recorded over. Video evidence can clearly show how the accident occurred and who was at fault."
+                  },
+                  {
+                    question: "Can I be compensated for future medical expenses?",
+                    answer: "Yes, you can recover compensation for future medical expenses if your injuries require ongoing treatment, rehabilitation, or long-term care. Medical experts help establish the cost and necessity of future care."
+                  },
+                  {
+                    question: "What if the pool accident happened at a hotel or resort?",
+                    answer: "Hotels and resorts have heightened duties to ensure guest safety. They must maintain safe conditions, provide adequate supervision, comply with safety codes, and warn guests of known dangers. Liability standards are often stricter."
+                  },
+                  {
+                    question: "How do wrongful death cases work in pool accidents?",
+                    answer: "Wrongful death claims may be filed by surviving family members when a pool accident results in death. Compensation may include funeral expenses, lost financial support, loss of companionship, and other damages."
+                  },
+                  {
+                    question: "What role does alcohol play in pool accident cases?",
+                    answer: "If the victim was intoxicated, it may reduce but not eliminate recovery under comparative negligence laws. If the property owner served alcohol to minors or over-served adults, they may face additional liability."
+                  },
+                  {
+                    question: "Can I file a claim for a pool accident that happened years ago?",
+                    answer: "California's statute of limitations is generally 2 years, but exceptions exist for cases involving minors or delayed discovery of injuries. Contact an attorney immediately to determine if you still have rights to file a claim."
+                  },
+                  {
+                    question: "What if the accident happened during a pool party or private event?",
+                    answer: "The host may be liable for providing unsafe conditions, and the property owner remains responsible for maintaining safe premises. Event organizers or rental companies may also share liability depending on circumstances."
+                  },
+                  {
+                    question: "How do pool drain entrapment cases work?",
+                    answer: "Drain entrapment cases often involve defective drain covers or non-compliant equipment. The Virginia Graeme Baker Pool Safety Act sets federal standards, and violations can establish liability against pool owners and equipment manufacturers."
+                  },
+                  {
+                    question: "What safety measures should pools have to prevent accidents?",
+                    answer: "Proper safety measures include appropriate fencing, functioning drain covers, non-slip surfaces, adequate lighting, proper signage, emergency equipment, regular maintenance, chemical balance monitoring, and trained supervision when required."
+                  },
+                  {
+                    question: "Can I sue a pool maintenance company for an accident?",
+                    answer: "Yes, if the maintenance company's negligence contributed to the accident through improper chemical treatment, faulty equipment installation, or failure to identify hazards, they may be held liable alongside the property owner."
+                  },
+                  {
+                    question: "What if I signed a waiver before using the pool?",
+                    answer: "Waivers may limit but don't always eliminate liability, especially for gross negligence, willful misconduct, or violations of safety laws. The enforceability of waivers varies based on specific language and circumstances."
+                  },
+                  {
+                    question: "How do pool accidents affect children differently than adults?",
+                    answer: "Children face unique risks due to size, swimming ability, and inability to appreciate dangers. Courts often impose higher duties of care when children are involved, and damages may include lifelong impacts on development and earning capacity."
+                  },
+                  {
+                    question: "What compensation is available for permanent disabilities from pool accidents?",
+                    answer: "Permanent disability compensation may include lifetime medical care, adaptive equipment, home modifications, lost earning capacity, vocational rehabilitation, attendant care, and significant pain and suffering damages."
+                  },
+                  {
+                    question: "Can I file a claim against a government entity for a public pool accident?",
+                    answer: "Yes, but special rules apply including shorter notice periods (6 months in California) and different immunity provisions. Government claims require specific procedures and experienced legal representation."
+                  },
+                  {
+                    question: "What happens if multiple parties are responsible for my pool accident?",
+                    answer: "When multiple parties share fault, we pursue all responsible parties to maximize recovery. California's joint and several liability rules may allow full recovery from any party, who then seeks contribution from others."
+                  },
+                  {
+                    question: "How do I document my injuries and damages after a pool accident?",
+                    answer: "Keep detailed records of all medical treatment, medications, therapy, lost work time, pain levels, and how injuries affect daily activities. Photos of injuries and a journal documenting your recovery can be valuable evidence."
+                  },
+                  {
+                    question: "What if the pool accident involved a diving board or slide?",
+                    answer: "Diving boards and slides have specific safety requirements regarding placement, depth, and maintenance. Accidents may involve design defects, improper installation, inadequate warnings, or failure to maintain safe conditions."
+                  },
+                  {
+                    question: "Can I recover compensation for scarring from a pool accident?",
+                    answer: "Yes, visible scarring and disfigurement can significantly impact your life and self-esteem. Compensation may include plastic surgery costs, psychological counseling, and damages for the permanent change to your appearance."
+                  },
+                  {
+                    question: "What role does pool lighting play in accident cases?",
+                    answer: "Inadequate lighting can contribute to accidents by creating hazardous conditions. Property owners must provide sufficient illumination for safe use, and electrical hazards around pools pose serious risks requiring proper installation and maintenance."
+                  },
+                  {
+                    question: "How do weather conditions affect pool accident liability?",
+                    answer: "Property owners must monitor weather conditions and close pools during dangerous weather. Failure to warn users of weather-related hazards like lightning or high winds may increase liability for resulting accidents."
+                  },
+                  {
+                    question: "What if my pool accident involved a hot tub or spa?",
+                    answer: "Hot tubs and spas have unique safety requirements including temperature controls, proper drainage, slip-resistant surfaces, and safety covers. Accidents may involve burns, slip and falls, or entrapment injuries with specific liability issues."
+                  },
+                  {
+                    question: "Can I sue for a pool accident that happened at a friend's house?",
+                    answer: "Yes, you can file a claim against your friend's homeowner's insurance. While this may feel uncomfortable, insurance exists to protect both you and your friend from financial hardship due to accidents."
+                  },
+                  {
+                    question: "What if the pool accident happened during swimming lessons?",
+                    answer: "Swimming instructors and facilities have heightened duties to ensure student safety. Liability may involve inadequate supervision, improper teaching methods, failure to assess swimming ability, or unsafe facility conditions."
+                  },
+                  {
+                    question: "How do pool depth and design affect accident cases?",
+                    answer: "Improper depth for activities, inadequate slope warnings, or dangerous design features can contribute to accidents. Pool designers and builders may be liable for design defects that create unreasonably dangerous conditions."
+                  },
+                  {
+                    question: "What should I do if insurance companies contact me after a pool accident?",
+                    answer: "Don't give recorded statements or sign documents without consulting an attorney. Insurance companies often try to minimize claims or get admissions that hurt your case. Direct them to your attorney to protect your rights."
                   }
                 ].map((faq, index) => (
                   <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>

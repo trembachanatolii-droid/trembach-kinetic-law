@@ -23,8 +23,8 @@ const MaritimeCaseEvaluation: React.FC = () => {
         style={{ backgroundImage: `url(${heroImage})` }}
       >
         <div className="absolute inset-0 bg-black/60"></div>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center">
-          <div className="text-white max-w-3xl">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center justify-center">
+          <div className="text-white max-w-3xl text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Free Maritime Case Evaluation
             </h1>

@@ -166,6 +166,12 @@ import AviationFAQ from "./pages/practice-areas/aviation/AviationFAQ";
 import AviationLegalGuidance from "./pages/practice-areas/aviation/AviationLegalGuidance";
 import AviationMedicalGuidance from "./pages/practice-areas/aviation/AviationMedicalGuidance";
 import AviationResources from "./pages/practice-areas/aviation/AviationResources";
+import MaritimeAccidents from "./pages/practice-areas/MaritimeAccidents";
+import MaritimeCaseEvaluation from "./pages/maritime/MaritimeCaseEvaluation";
+import MaritimeCompensationCalculator from "./pages/maritime/MaritimeCompensationCalculator";
+import MaritimeLegalGuidance from "./pages/maritime/MaritimeLegalGuidance";
+import MaritimeMedicalGuidance from "./pages/maritime/MaritimeMedicalGuidance";
+import MaritimeEducation from "./pages/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();
 
@@ -190,6 +196,12 @@ function App() {
             <Route path="/aviation/legal-guidance" element={<AviationLegalGuidance />} />
             <Route path="/aviation/medical-guidance" element={<AviationMedicalGuidance />} />
             <Route path="/aviation/resources" element={<AviationResources />} />
+            <Route path="/practice-areas/maritime-accidents" element={<MaritimeAccidents />} />
+            <Route path="/maritime/case-evaluation" element={<MaritimeCaseEvaluation />} />
+            <Route path="/maritime/compensation-calculator" element={<MaritimeCompensationCalculator />} />
+            <Route path="/maritime/legal-guidance" element={<MaritimeLegalGuidance />} />
+            <Route path="/maritime/medical-guidance" element={<MaritimeMedicalGuidance />} />
+            <Route path="/maritime/education" element={<MaritimeEducation />} />
             <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
             <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />

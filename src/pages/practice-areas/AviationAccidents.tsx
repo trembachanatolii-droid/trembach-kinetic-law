@@ -47,6 +47,7 @@ import californiaCoverageImage from '@/assets/aviation-california-coverage.jpg';
 import medicalConsultationImage from '@/assets/aviation-medical-consultation.jpg';
 import resourcesImage from '@/assets/aviation-resources.jpg';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -432,6 +433,49 @@ const AviationAccidents: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background" ref={containerRef}>
+      <SEO 
+        title="California Aviation Accident Attorneys | Airplane & Helicopter Crash Lawyers"
+        description="Experienced California aviation accident attorneys specializing in airplane crashes, helicopter accidents, and aviation law. Former defense attorney. Free consultation."
+        keywords="California aviation accident attorney, airplane crash lawyer, helicopter accident attorney, aviation law firm, aircraft accident compensation"
+        canonical="https://www.trembachlawfirm.com/practice-areas/aviation-accidents"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": "Trembach Law Firm - Aviation Accident Attorneys",
+          "description": "California aviation accident law firm representing airplane and helicopter crash victims",
+          "url": "https://www.trembachlawfirm.com/practice-areas/aviation-accidents",
+          "telephone": "+18181234567",
+          "areaServed": "California",
+          "priceRange": "No fees unless we win",
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Aviation Accident Services",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Commercial Airline Accident Representation"
+                }
+              },
+              {
+                "@type": "Offer", 
+                "itemOffered": {
+                  "@type": "Service",
+                  "name": "Private Plane Crash Legal Services"
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service", 
+                  "name": "Helicopter Accident Litigation"
+                }
+              }
+            ]
+          }
+        }}
+      />
       {/* 3D Background Layers */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <div className="back-layer absolute inset-0 bg-gradient-to-br from-primary/5 to-secondary/5 transform-gpu" style={{ transform: 'translateZ(-500px)' }}></div>
@@ -953,9 +997,9 @@ const AviationAccidents: React.FC = () => {
                     <Button 
                       variant="outline" 
                       className="w-full border-primary text-primary hover:bg-primary hover:text-white"
-                      onClick={() => window.location.href = '/aviation/legal-guidance'}
+                      onClick={() => window.location.href = '/aviation/medical-guidance'}
                     >
-                      Access Legal Guide
+                      Access Medical Guide
                     </Button>
                   </CardContent>
                 </Card>
@@ -1027,7 +1071,7 @@ const AviationAccidents: React.FC = () => {
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
-                    Call (818) 123-4567
+                    <span className="text-current">Call (818) 123-4567</span>
                   </Button>
                   
                   <Button 

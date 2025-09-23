@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calculator, DollarSign, AlertTriangle } from 'lucide-react';
 import heroBackground from '@/assets/aviation-calculator-hero.jpg';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
 const AviationCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -98,6 +99,21 @@ const AviationCompensationCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Aviation Accident Compensation Calculator | Estimate Your Case Value California"
+        description="Calculate potential compensation for your aviation accident case. Free tool estimates airplane crash and helicopter accident settlement values in California."
+        keywords="aviation accident compensation calculator, airplane crash settlement, helicopter accident damages, California aviation injury compensation"
+        canonical="https://www.trembachlawfirm.com/aviation/compensation-calculator"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Aviation Accident Compensation Calculator",
+          "description": "Calculate potential compensation for aviation accidents in California",
+          "url": "https://www.trembachlawfirm.com/aviation/compensation-calculator",
+          "applicationCategory": "Legal Calculator",
+          "operatingSystem": "Any"
+        }}
+      />
       <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}

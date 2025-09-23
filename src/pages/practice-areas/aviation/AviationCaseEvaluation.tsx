@@ -7,10 +7,27 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, Plane, Scale } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
 const AviationCaseEvaluation: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Free Aviation Accident Case Evaluation | California Airplane & Helicopter Crash Attorneys"
+        description="Get a free professional evaluation of your aviation accident case. Experienced California attorneys specializing in airplane crashes, helicopter accidents, and aviation law."
+        keywords="aviation accident lawyer, airplane crash attorney, helicopter accident case evaluation, California aviation law, free consultation"
+        canonical="https://www.trembachlawfirm.com/aviation/case-evaluation"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": "Aviation Accident Case Evaluation - Trembach Law Firm",
+          "description": "Free case evaluation for aviation accidents including airplane crashes and helicopter accidents in California",
+          "url": "https://www.trembachlawfirm.com/aviation/case-evaluation",
+          "telephone": "+18181234567",
+          "areaServed": "California",
+          "priceRange": "No fees unless we win"
+        }}
+      />
       <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}

@@ -164,6 +164,8 @@ import AviationCaseEvaluation from "./pages/practice-areas/aviation/AviationCase
 import AviationCompensationCalculator from "./pages/practice-areas/aviation/AviationCompensationCalculator";
 import AviationFAQ from "./pages/practice-areas/aviation/AviationFAQ";
 import AviationLegalGuidance from "./pages/practice-areas/aviation/AviationLegalGuidance";
+import AviationMedicalGuidance from "./pages/practice-areas/aviation/AviationMedicalGuidance";
+import AviationResources from "./pages/practice-areas/aviation/AviationResources";
 
 const queryClient = new QueryClient();
 
@@ -186,6 +188,8 @@ function App() {
             <Route path="/aviation/compensation-calculator" element={<AviationCompensationCalculator />} />
             <Route path="/aviation/faq" element={<AviationFAQ />} />
             <Route path="/aviation/legal-guidance" element={<AviationLegalGuidance />} />
+            <Route path="/aviation/medical-guidance" element={<AviationMedicalGuidance />} />
+            <Route path="/aviation/resources" element={<AviationResources />} />
             <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
             <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />

@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, BookOpen, Scale, AlertTriangle, Clock } from 'lucide-react';
 import heroBackground from '@/assets/aviation-legal-guidance-hero.jpg';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
 const AviationLegalGuidance: React.FC = () => {
   const [expandedSection, setExpandedSection] = useState<string | null>(null);
@@ -14,6 +15,23 @@ const AviationLegalGuidance: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Aviation Accident Legal Guidance | California Airplane & Helicopter Crash Law"
+        description="Comprehensive guide to aviation accident law in California. Understand your rights after airplane crashes and helicopter accidents. Expert legal guidance."
+        keywords="aviation accident law guide, California aviation attorney guidance, airplane crash legal process, helicopter accident rights, aviation injury law"
+        canonical="https://www.trembachlawfirm.com/aviation/legal-guidance"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Aviation Accident Legal Guidance",
+          "description": "Comprehensive guide to aviation accident law and legal rights in California",
+          "url": "https://www.trembachlawfirm.com/aviation/legal-guidance",
+          "author": {
+            "@type": "Organization",
+            "name": "Trembach Law Firm"
+          }
+        }}
+      />
       <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}

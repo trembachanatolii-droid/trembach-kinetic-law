@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 import heroBackground from '@/assets/aviation-faq-hero.jpg';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
 const AviationFAQ: React.FC = () => {
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -97,6 +98,19 @@ const AviationFAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <SEO 
+        title="Aviation Accident FAQ | Airplane & Helicopter Crash Questions California"
+        description="Get answers to frequently asked questions about aviation accident cases, airplane crashes, and helicopter accidents in California. Expert legal guidance."
+        keywords="aviation accident FAQ, airplane crash questions, helicopter accident answers, California aviation law, aviation attorney questions"
+        canonical="https://www.trembachlawfirm.com/aviation/faq"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "name": "Aviation Accident FAQ",
+          "description": "Frequently asked questions about aviation accident cases in California",
+          "url": "https://www.trembachlawfirm.com/aviation/faq"
+        }}
+      />
       <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}

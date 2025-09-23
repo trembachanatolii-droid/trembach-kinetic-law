@@ -1046,51 +1046,99 @@ const AviationAccidents: React.FC = () => {
             </section>
           </div>
 
-          {/* Sticky Sidebar - 3 Ways to Start Your Case */}
+          {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24">
-              <Card className="aviation-card bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
-                <CardHeader className="text-center">
-                  <CardTitle className="text-2xl font-bold text-primary mb-2">
-                    3 Ways to Start Your Case
-                  </CardTitle>
-                  <p className="text-sm text-muted-foreground">Choose the option that works best for you</p>
+            <div className="sticky top-8 space-y-6">
+              
+              {/* Contact Card */}
+              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+                    <div className="text-center text-white">
+                      <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                      <h3 className="text-xl font-bold">Start Your Case</h3>
+                    </div>
+                  </div>
+                </div>
+                
+                <CardContent className="p-6">
+                  <p className="text-sm text-muted-foreground mb-6">
+                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+                  </p>
+                  
+                  <div className="space-y-4">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/schedule-consultation'}
+                    >
+                      <MessageCircle className="w-4 h-4 mr-2" />
+                      Schedule Consultation
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full"
+                      onClick={() => window.location.href = '/aviation/case-evaluation'}
+                    >
+                      <Mail className="w-4 h-4 mr-2" />
+                      Free Case Evaluation
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Quick Facts */}
+              <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <CardTitle className="text-lg group-hover:text-primary transition-colors">Quick Facts</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3"
-                    onClick={() => window.location.href = '/aviation/case-evaluation'}
-                  >
-                    <Scale className="w-4 h-4 mr-2" />
-                    Free Case Evaluation
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    <span className="text-current">Call (818) 123-4567</span>
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3"
-                    onClick={() => window.location.href = '/aviation/compensation-calculator'}
-                  >
-                    <Calculator className="w-4 h-4 mr-2" />
-                    Calculate My Case
-                  </Button>
-                  
-                  <div className="text-center pt-4 border-t border-primary/20">
-                    <p className="text-sm text-muted-foreground mb-2">Available 24/7</p>
-                    <div className="flex items-center justify-center space-x-2">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                      ))}
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Time Limit</h4>
+                      <p className="text-sm text-muted-foreground">2 years from injury in California</p>
                     </div>
-                    <p className="text-xs text-muted-foreground mt-1">No fees unless we win</p>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-sm text-muted-foreground">We only get paid if you win</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Free Consultation</h4>
+                      <p className="text-sm text-muted-foreground">No cost to discuss your case</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Aviation Coverage */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Aviation Coverage</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2 text-sm">
+                    <p>• Commercial Airlines</p>
+                    <p>• Private Aircraft</p>
+                    <p>• Helicopter Accidents</p>
+                    <p>• Charter Flights</p>
                   </div>
                 </CardContent>
               </Card>

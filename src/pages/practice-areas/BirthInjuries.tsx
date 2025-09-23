@@ -66,13 +66,12 @@ const BirthInjuries: React.FC = () => {
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'what-to-do', label: 'WHAT TO DO AFTER INJURY', icon: Stethoscope },
     { id: 'injury-types', label: 'INJURY TYPES', icon: Heart },
     { id: 'proving-negligence', label: 'PROVING NEGLIGENCE', icon: Shield },
     { id: 'compensation', label: 'COMPENSATION', icon: Award },
     { id: 'time-limits', label: 'TIME LIMITS', icon: Clock },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
+    { id: 'resources', label: 'RESOURCES', icon: Building },
+    { id: 'faq', label: 'FAQ', icon: MessageCircle }
   ];
 
   useEffect(() => {
@@ -848,7 +847,7 @@ const BirthInjuries: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <p className="text-sm text-muted-foreground mb-4">Estimate potential compensation and build a life care plan tailored to your child's needs.</p>
-                    <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/compensation-calculator'}>
+                    <Button className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/birth-injuries/compensation-calculator'}>
                       Open Compensation Calculator
                     </Button>
                   </CardContent>
@@ -896,14 +895,14 @@ const BirthInjuries: React.FC = () => {
                       Call (818) 123-4567
                     </Button>
                     
-                    <Button 
-                      variant="outline" 
-                      className="w-full text-primary border-primary hover:bg-primary hover:text-white"
-                      onClick={() => window.location.href = '/schedule-consultation'}
-                    >
-                      <MessageCircle className="w-4 h-4 mr-2" />
-                      Schedule Consultation
-                    </Button>
+                     <Button 
+                       variant="outline" 
+                       className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                       onClick={() => window.location.href = '/birth-injuries/legal-guidance'}
+                     >
+                       <MessageCircle className="w-4 h-4 mr-2" />
+                       Legal Guidance
+                     </Button>
                     
                     <Button 
                       variant="outline" 
@@ -989,6 +988,72 @@ const BirthInjuries: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Resources Section */}
+      <section id="resources" className="content-section mb-12 bg-gradient-to-br from-gray-50 to-gray-100 py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-red-600 mb-8 text-center">Birth Injury Resources & Support</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+            <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+              <CardHeader>
+                <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                  <Stethoscope className="w-5 h-5 mr-2 text-red-600" />
+                  Medical Guidance
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Comprehensive medical information and treatment options for birth injuries.</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  onClick={() => window.location.href = '/birth-injuries/medical-guidance'}
+                >
+                  View Medical Resources
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+              <CardHeader>
+                <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                  <Scale className="w-5 h-5 mr-2 text-red-600" />
+                  Legal Resources
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Understanding your legal rights and the birth injury claims process.</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  onClick={() => window.location.href = '/birth-injuries/legal-guidance'}
+                >
+                  Legal Guidance
+                </Button>
+              </CardContent>
+            </Card>
+            
+            <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+              <CardHeader>
+                <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                  <Building className="w-5 h-5 mr-2 text-red-600" />
+                  Support Resources
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground mb-4">Support organizations, therapy centers, and family assistance programs.</p>
+                <Button 
+                  variant="outline" 
+                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  onClick={() => window.location.href = '/birth-injuries/resources'}
+                >
+                  Find Support
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section - Will continue this with all 50+ questions */}
       <section id="faq" className="content-section mb-12 bg-muted py-16">

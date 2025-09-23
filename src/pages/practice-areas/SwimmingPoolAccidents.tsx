@@ -216,9 +216,9 @@ const SwimmingPoolAccidents: React.FC = () => {
                     </Button>
                     
                     <Button 
-                      variant="outline" 
+                      variant="secondary" 
                       size="lg" 
-                      className="w-full border-white text-white hover:bg-white hover:text-black"
+                      className="w-full"
                       onClick={() => window.location.href = 'tel:(818) 123-4567'}
                     >
                       <Phone className="w-4 h-4 mr-2" />
@@ -226,9 +226,9 @@ const SwimmingPoolAccidents: React.FC = () => {
                     </Button>
                     
                     <Button 
-                      variant="outline" 
+                      variant="secondary" 
                       size="lg" 
-                      className="w-full border-white text-white hover:bg-white hover:text-black"
+                      className="w-full"
                       onClick={() => window.location.href = '/practice-areas/swimming-pool/compensation-calculator'}
                     >
                       <Calculator className="w-4 h-4 mr-2" />

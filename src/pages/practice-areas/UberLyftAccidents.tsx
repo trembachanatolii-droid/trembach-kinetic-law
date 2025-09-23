@@ -395,58 +395,6 @@ const UberLyftAccidents: React.FC = () => {
                 </Button>
               </div>
             </div>
-
-            {/* Sticky Sidebar */}
-            <div className="lg:col-span-5">
-              <div className="sticky top-8">
-                <Card className="mb-6">
-                  <CardHeader>
-                    <CardTitle className="text-center text-2xl">3 Ways to Start Your Case</CardTitle>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <img 
-                      src={sidebarImage} 
-                      alt="Legal consultation for Uber and Lyft accident cases" 
-                      className="w-full h-40 object-cover rounded-lg mb-4"
-                    />
-                    
-                    <div className="space-y-4">
-                      <Button 
-                        className="w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2"
-                        onClick={() => window.open('tel:8181234567')}
-                      >
-                        <Phone className="w-4 h-4" />
-                        Call (818) 123-4567
-                      </Button>
-                      
-                      <Button 
-                        variant="outline" 
-                        className="w-full flex items-center justify-center gap-2"
-                        onClick={() => scrollToSection('evaluation')}
-                      >
-                        <MessageCircle className="w-4 h-4" />
-                        Free Case Evaluation
-                      </Button>
-                      
-                      <Button 
-                        variant="outline" 
-                        className="w-full flex items-center justify-center gap-2"
-                        onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}
-                      >
-                        <Calculator className="w-4 h-4" />
-                        Compensation Calculator
-                      </Button>
-                    </div>
-                    
-                    <div className="text-center text-sm text-muted-foreground mt-4">
-                      <p>✓ 100% Confidential</p>
-                      <p>✓ No Fees Unless We Win</p>
-                      <p>✓ Available 24/7</p>
-                    </div>
-                  </CardContent>
-                </Card>
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -1041,6 +989,54 @@ const UberLyftAccidents: React.FC = () => {
           {/* Right Sidebar - Contact Options */}
           <div className="lg:col-span-4">
             <div className="sticky top-24 space-y-6">
+              
+              {/* 3 Ways to Start Your Case */}
+              <Card className="mb-6">
+                <CardHeader>
+                  <CardTitle className="text-center text-2xl">3 Ways to Start Your Case</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <img 
+                    src={sidebarImage} 
+                    alt="Legal consultation for Uber and Lyft accident cases" 
+                    className="w-full h-40 object-cover rounded-lg mb-4"
+                  />
+                  
+                  <div className="space-y-4">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2"
+                      onClick={() => window.open('tel:8181234567')}
+                    >
+                      <Phone className="w-4 h-4" />
+                      Call (818) 123-4567
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full flex items-center justify-center gap-2"
+                      onClick={() => scrollToSection('evaluation')}
+                    >
+                      <MessageCircle className="w-4 h-4" />
+                      Free Case Evaluation
+                    </Button>
+                    
+                    <Button 
+                      variant="outline" 
+                      className="w-full flex items-center justify-center gap-2"
+                      onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}
+                    >
+                      <Calculator className="w-4 h-4" />
+                      Compensation Calculator
+                    </Button>
+                  </div>
+                  
+                  <div className="text-center text-sm text-muted-foreground mt-4">
+                    <p>✓ 100% Confidential</p>
+                    <p>✓ No Fees Unless We Win</p>
+                    <p>✓ Available 24/7</p>
+                  </div>
+                </CardContent>
+              </Card>
               {/* Contact Card */}
               <Card className="shadow-lg border-0 bg-gradient-to-br from-primary/5 to-secondary/5 hover:shadow-xl transition-all duration-300 hover:scale-[1.02]">
                 <CardHeader className="text-center">

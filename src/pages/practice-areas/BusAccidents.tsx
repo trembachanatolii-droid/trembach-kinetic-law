@@ -39,6 +39,16 @@ import medicalProcessImage from '@/assets/bus-accident-medical-process.jpg';
 import legalProcessImage from '@/assets/bus-accident-legal-process.jpg';
 import accidentZonesImage from '@/assets/california-bus-accident-zones.jpg';
 import medicalImage from '@/assets/bus-accident-medical-facility.jpg';
+import caseEvaluationImage from "@/assets/bus-accident-case-evaluation.jpg";
+import emergencyResponseImage from "@/assets/bus-accident-emergency-response.jpg";
+import governmentClaimsImage from "@/assets/bus-accident-government-claims.jpg";
+import accidentSceneImage from "@/assets/bus-accident-scene.jpg";
+import diagnosisImage from "@/assets/bus-accident-diagnosis.jpg";
+import legalRepresentationImage from "@/assets/bus-accident-legal-representation.jpg";
+import courtroomImage from "@/assets/bus-accident-courtroom.jpg";
+import californiaCoverageImage from "@/assets/bus-accident-california-coverage.jpg";
+import medicalConsultationImage from "@/assets/bus-accident-medical-consultation.jpg";
+import resourcesImage from "@/assets/bus-accident-resources.jpg";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -303,6 +313,13 @@ const BusAccidents: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
+              <div className="mb-6">
+                <img 
+                  src={caseEvaluationImage} 
+                  alt="Professional bus accident case evaluation" 
+                  className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                />
+              </div>
               <div className="bg-gradient-to-r from-red-50 to-orange-50 p-8 rounded-lg border-l-4 border-red-600">
                 <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
                   <Scale className="w-8 h-8 mr-3" />
@@ -379,6 +396,13 @@ const BusAccidents: React.FC = () => {
 
             {/* What to Do After Bus Accident Section */}
             <section id="steps-after" className="content-section mb-12">
+              <div className="mb-6">
+                <img 
+                  src={emergencyResponseImage} 
+                  alt="Bus accident emergency response procedures" 
+                  className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                />
+              </div>
               <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
                 <Stethoscope className="w-8 h-8 mr-3" />
                 What to Do After a California Bus Accident
@@ -605,6 +629,13 @@ const BusAccidents: React.FC = () => {
 
             {/* FAQ Section - All 50+ questions */}
             <section id="faq" className="content-section mb-12">
+              <div className="mb-6">
+                <img 
+                  src={legalRepresentationImage} 
+                  alt="Professional bus accident legal representation" 
+                  className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                />
+              </div>
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Bus Accident FAQs</h2>
               <p className="text-lg text-muted-foreground mb-8">Get answers to over 50 common questions about bus accident claims in California</p>
               
@@ -839,6 +870,13 @@ const BusAccidents: React.FC = () => {
 
             {/* Resources Section */}
             <section id="resources" className="content-section mb-12">
+              <div className="mb-6">
+                <img 
+                  src={resourcesImage} 
+                  alt="Bus accident legal and medical resources" 
+                  className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                />
+              </div>
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Bus Accident Resources</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

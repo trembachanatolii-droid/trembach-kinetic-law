@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, Calculator, DollarSign, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import heroBackground from '@/assets/amusement-park-compensation-hero.jpg';
 import SEO from '@/components/SEO';
 
@@ -228,8 +229,10 @@ const AmusementParkCompensationCalculator: React.FC = () => {
                 <p className="text-sm text-red-700 mb-4">
                   Get a detailed case evaluation from experienced attorneys.
                 </p>
-                <Button className="w-full bg-red-600 hover:bg-red-700">
-                  Free Case Evaluation
+                <Button className="w-full bg-red-600 hover:bg-red-700" asChild>
+                  <Link to="/practice-areas/amusement-parks/case-evaluation">
+                    Free Case Evaluation
+                  </Link>
                 </Button>
               </CardContent>
             </Card>

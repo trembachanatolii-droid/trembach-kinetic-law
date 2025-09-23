@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import BusAccidents from "./pages/practice-areas/BusAccidents";
 import BirthInjuries from "./pages/practice-areas/BirthInjuries";
 import BirthInjuriesCaseEvaluation from "./pages/BirthInjuriesCaseEvaluation";
 import BirthInjuriesCompensationCalculator from "./pages/birth-injuries/BirthInjuriesCompensationCalculator";
@@ -170,6 +171,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
             <Route path="/practice-areas/uber-lyft-accidents" element={<UberLyftAccidents />} />
             <Route path="/uber-lyft/compensation-calculator" element={<UberLyftCompensationCalculator />} />
             <Route path="/uber-lyft/legal-guidance" element={<UberLyftLegalGuidance />} />

@@ -75,7 +75,6 @@ const BusAccidents: React.FC = () => {
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
     { id: 'steps-after', label: 'WHAT TO DO AFTER ACCIDENT', icon: Stethoscope },
-    { id: 'process', label: 'COMMON INJURIES', icon: Heart },
     { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
     { id: 'faq', label: 'FAQ', icon: MessageCircle },
     { id: 'resources', label: 'RESOURCES', icon: Building }

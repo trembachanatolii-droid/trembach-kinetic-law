@@ -1,265 +1,468 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Calculator, DollarSign, AlertTriangle, Info, Phone, FileText } from 'lucide-react';
-import useScrollRestoration from '@/hooks/useScrollRestoration';
+import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Calculator, DollarSign, Heart, Clock, Shield, Award, Car, Activity, Star, Phone, Mail, MessageCircle } from 'lucide-react';
 import GoBack from '@/components/GoBack';
-import heroImage from '@/assets/uber-lyft-calculator-hero.jpg';
+import SEO from '@/components/SEO';
+import { useScrollMemory } from '@/hooks/useScrollMemory';
+import heroBackground from '@/assets/uber-lyft-calculator-hero.jpg';
 
-const UberLyftCompensationCalculator = () => {
-  useScrollRestoration();
-  
+gsap.registerPlugin(ScrollTrigger);
+
+const UberLyftCompensationCalculator: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  const [estimatedCompensation, setEstimatedCompensation] = useState<number | null>(null);
   const [formData, setFormData] = useState({
     injuryType: '',
+    injurySeverity: '',
     medicalExpenses: '',
     lostWages: '',
-    painSuffering: '',
     futureExpenses: '',
     accidentSeverity: '',
     faultPercentage: '',
-    insuranceCoverage: ''
+    treatmentNeeds: [] as string[],
+    qualityOfLifeImpact: ''
   });
 
-  const [results, setResults] = useState<{
-    estimated: number;
-    lowRange: number;
-    highRange: number;
-  } | null>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useScrollMemory();
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero animation
+      const heroContent = heroRef.current?.querySelector('.hero-content');
+      if (heroContent) {
+        gsap.set(heroContent, { opacity: 0, y: 100, scale: 0.8 });
+        gsap.to(heroContent, { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1, 
+          duration: 0.5, 
+          ease: 'power3.out' 
+        });
+      }
+
+      // Content sections animation
+      const contentSections = contentRef.current?.querySelectorAll('.content-section');
+      if (contentSections) {
+        gsap.fromTo(contentSections,
+          { opacity: 0, y: 60, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
+    });
+
+    const handleScroll = () => {
+      setVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleTreatmentNeedsChange = (treatmentType: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      treatmentNeeds: checked 
+        ? [...prev.treatmentNeeds, treatmentType]
+        : prev.treatmentNeeds.filter(item => item !== treatmentType)
+    }));
+  };
 
   const calculateCompensation = () => {
-    const medical = parseFloat(formData.medicalExpenses) || 0;
-    const wages = parseFloat(formData.lostWages) || 0;
-    const future = parseFloat(formData.futureExpenses) || 0;
+    let baseCompensation = 0;
     
-    let multiplier = 1.5; // Base multiplier
+    // Base compensation by injury type
+    const injuryMultipliers = {
+      'brain-injury': 2500000,
+      'spinal-injury': 2000000,
+      'whiplash': 150000,
+      'broken-bones': 300000,
+      'internal-injuries': 800000,
+      'psychological': 400000,
+      'soft-tissue': 100000
+    };
+
+    // Severity multipliers
+    const severityMultipliers = {
+      'minor': 0.3,
+      'moderate': 0.6,
+      'severe': 1.0,
+      'catastrophic': 1.5
+    };
+
+    const injuryBase = injuryMultipliers[formData.injuryType as keyof typeof injuryMultipliers] || 200000;
+    const severityMultiplier = severityMultipliers[formData.injurySeverity as keyof typeof severityMultipliers] || 1.0;
     
-    // Adjust multiplier based on injury type
-    switch (formData.injuryType) {
-      case 'brain-injury':
-      case 'spinal-injury':
-        multiplier = 5.0;
-        break;
-      case 'whiplash':
-        multiplier = 2.5;
-        break;
-      case 'broken-bones':
-        multiplier = 3.0;
-        break;
-      case 'internal-injuries':
-        multiplier = 4.0;
-        break;
-      case 'psychological':
-        multiplier = 2.8;
-        break;
-      default:
-        multiplier = 2.0;
+    baseCompensation = injuryBase * severityMultiplier;
+
+    // Add medical expenses
+    if (formData.medicalExpenses) {
+      baseCompensation += parseInt(formData.medicalExpenses.replace(/,/g, '')) * 3;
     }
 
-    // Adjust for accident severity
-    if (formData.accidentSeverity === 'severe') {
-      multiplier *= 1.3;
-    } else if (formData.accidentSeverity === 'catastrophic') {
-      multiplier *= 1.6;
+    // Add future expenses
+    if (formData.futureExpenses) {
+      baseCompensation += parseInt(formData.futureExpenses.replace(/,/g, ''));
     }
+
+    // Treatment needs adjustment
+    if (formData.treatmentNeeds.length > 0) {
+      baseCompensation += formData.treatmentNeeds.length * 50000;
+    }
+
+    // Lost wages
+    if (formData.lostWages) {
+      baseCompensation += parseInt(formData.lostWages.replace(/,/g, ''));
+    }
+
+    // Quality of life impact
+    const qualityMultipliers = {
+      'minimal': 1.1,
+      'moderate': 1.3,
+      'significant': 1.6,
+      'severe': 2.0
+    };
+
+    const qualityMultiplier = qualityMultipliers[formData.qualityOfLifeImpact as keyof typeof qualityMultipliers] || 1.0;
+    baseCompensation *= qualityMultiplier;
 
     // Adjust for fault percentage
     const faultReduction = (100 - (parseFloat(formData.faultPercentage) || 0)) / 100;
+    baseCompensation *= faultReduction;
 
-    const economicDamages = medical + wages + future;
-    const painAndSuffering = economicDamages * multiplier;
-    const totalDamages = economicDamages + painAndSuffering;
-    const adjustedTotal = totalDamages * faultReduction;
+    setEstimatedCompensation(Math.round(baseCompensation));
+  };
 
-    setResults({
-      estimated: Math.round(adjustedTotal),
-      lowRange: Math.round(adjustedTotal * 0.7),
-      highRange: Math.round(adjustedTotal * 1.4)
-    });
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
-    <div className="uberlyft-page min-h-screen bg-background">
-      <GoBack />
-      
-      {/* Hero Section */}
-      <section 
-        className="relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroImage})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center'
-        }}
-      >
-        <div className="container mx-auto px-4 text-center">
-          <h1 className="text-4xl lg:text-5xl font-bold mb-6">
-            Uber/Lyft Accident Compensation Calculator
-          </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
-            Get an estimate of your potential rideshare accident settlement based on California law and similar cases.
-          </p>
-        </div>
-      </section>
+    <>
+      <SEO
+        title="Uber/Lyft Accident Compensation Calculator | Calculate Your Settlement Value"
+        description="Calculate potential compensation for Uber/Lyft accident cases. Free tool estimates settlement values for rideshare accident injuries in California."
+      />
 
-      {/* Calculator Section */}
-      <section className="py-16">
-        <div className="container mx-auto px-4 max-w-6xl">
-          <div className="grid lg:grid-cols-2 gap-8">
+      <GoBack />
+
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section 
+          ref={heroRef}
+          className="relative bg-cover bg-center bg-no-repeat min-h-[60vh] flex items-center justify-center"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
+            <div className="flex items-center justify-center mb-4">
+              <Calculator className="w-12 h-12 text-primary mr-4" />
+              <h1 className="text-4xl md:text-6xl font-bold text-white">Uber/Lyft Accident Compensation Calculator</h1>
+            </div>
+            <p className="text-xl mb-8 leading-relaxed text-white">
+              Calculate potential compensation for your rideshare accident case
+            </p>
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+              ))}
+              <span className="ml-2 text-lg">Trusted by hundreds of clients</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content */}
+        <div ref={contentRef} className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
             {/* Calculator Form */}
-            <div>
-              <Card>
+            <div className="lg:col-span-2">
+              <Card className="content-section glass-card">
                 <CardHeader>
-                  <CardTitle className="text-2xl text-black flex items-center gap-2 heading-text">
-                    <Calculator className="w-6 h-6" />
-                    Compensation Calculator
+                  <CardTitle className="text-2xl flex items-center">
+                    <Calculator className="w-6 h-6 text-primary mr-2" />
+                    Rideshare Accident Settlement Calculator
                   </CardTitle>
-                  <p className="body-text">
-                    Enter your case details to get an estimated compensation range.
-                  </p>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <div>
-                    <Label>Type of Injury</Label>
-                    <Select value={formData.injuryType} onValueChange={(value) => setFormData({...formData, injuryType: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select injury type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="brain-injury">Traumatic Brain Injury</SelectItem>
-                        <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
-                        <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-                        <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-                        <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                        <SelectItem value="psychological">PTSD/Psychological Trauma</SelectItem>
-                        <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  
+                  {/* Injury Details */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Car className="w-5 h-5 text-primary mr-2" />
+                      Accident & Injury Information
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="injuryType">Type of Injury</Label>
+                      <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="brain-injury">Traumatic Brain Injury</SelectItem>
+                          <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
+                          <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
+                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
+                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                          <SelectItem value="psychological">PTSD/Psychological Trauma</SelectItem>
+                          <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="injurySeverity">Severity of Injury</Label>
+                      <Select value={formData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minor">Minor - Full recovery expected</SelectItem>
+                          <SelectItem value="moderate">Moderate - Some lasting effects</SelectItem>
+                          <SelectItem value="severe">Severe - Significant impairment</SelectItem>
+                          <SelectItem value="catastrophic">Catastrophic - Life-altering</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="faultPercentage">Your Fault Percentage (%)</Label>
+                      <Select value={formData.faultPercentage} onValueChange={(value) => handleInputChange('faultPercentage', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select fault percentage" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0">0% - Not at fault</SelectItem>
+                          <SelectItem value="10">10% - Minimal fault</SelectItem>
+                          <SelectItem value="25">25% - Some fault</SelectItem>
+                          <SelectItem value="50">50% - Shared fault</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
-                  <div>
-                    <Label>Medical Expenses to Date ($)</Label>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      value={formData.medicalExpenses}
-                      onChange={(e) => setFormData({...formData, medicalExpenses: e.target.value})}
-                    />
+                  {/* Financial Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <DollarSign className="w-5 h-5 text-primary mr-2" />
+                      Financial Information
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="medicalExpenses">Medical Expenses to Date</Label>
+                      <Input
+                        type="text"
+                        value={formData.medicalExpenses}
+                        onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                        placeholder="Enter total medical costs"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="futureExpenses">Future Medical Expenses</Label>
+                      <Input
+                        type="text"
+                        value={formData.futureExpenses}
+                        onChange={(e) => handleInputChange('futureExpenses', e.target.value)}
+                        placeholder="Enter expected future costs"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="lostWages">Lost Wages/Income</Label>
+                      <Input
+                        type="text"
+                        value={formData.lostWages}
+                        onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                        placeholder="Enter lost income amount"
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <Label>Lost Wages ($)</Label>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      value={formData.lostWages}
-                      onChange={(e) => setFormData({...formData, lostWages: e.target.value})}
-                    />
+                  {/* Treatment Needs */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Heart className="w-5 h-5 text-primary mr-2" />
+                      Treatment & Recovery Needs
+                    </h3>
+                    
+                    <div className="space-y-3">
+                      {[
+                        'Physical Therapy',
+                        'Occupational Therapy',
+                        'Pain Management',
+                        'Mental Health Counseling',
+                        'Surgery Required',
+                        'Medical Equipment',
+                        'Home Care',
+                        'Ongoing Medications'
+                      ].map((treatmentType) => (
+                        <div key={treatmentType} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={treatmentType}
+                            checked={formData.treatmentNeeds.includes(treatmentType)}
+                            onCheckedChange={(checked) => handleTreatmentNeedsChange(treatmentType, checked as boolean)}
+                          />
+                          <Label htmlFor={treatmentType}>{treatmentType}</Label>
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
-                  <div>
-                    <Label>Future Medical Expenses ($)</Label>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      value={formData.futureExpenses}
-                      onChange={(e) => setFormData({...formData, futureExpenses: e.target.value})}
-                    />
+                  {/* Quality of Life */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Activity className="w-5 h-5 text-primary mr-2" />
+                      Quality of Life Impact
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="qualityOfLifeImpact">Impact on Daily Life</Label>
+                      <Select value={formData.qualityOfLifeImpact} onValueChange={(value) => handleInputChange('qualityOfLifeImpact', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select impact level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minimal">Minimal Impact</SelectItem>
+                          <SelectItem value="moderate">Moderate Impact</SelectItem>
+                          <SelectItem value="significant">Significant Impact</SelectItem>
+                          <SelectItem value="severe">Severe Impact</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
-                  <div>
-                    <Label>Accident Severity</Label>
-                    <Select value={formData.accidentSeverity} onValueChange={(value) => setFormData({...formData, accidentSeverity: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select severity" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="minor">Minor</SelectItem>
-                        <SelectItem value="moderate">Moderate</SelectItem>
-                        <SelectItem value="severe">Severe</SelectItem>
-                        <SelectItem value="catastrophic">Catastrophic</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <Label>Your Fault Percentage (%)</Label>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      min="0"
-                      max="100"
-                      value={formData.faultPercentage}
-                      onChange={(e) => setFormData({...formData, faultPercentage: e.target.value})}
-                    />
-                  </div>
-
-                  <Button onClick={calculateCompensation} size="lg" className="w-full">
-                    <Calculator className="w-5 h-5 mr-2" />
-                    Calculate My Case Value
+                  <Button 
+                    onClick={calculateCompensation} 
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3"
+                    disabled={!formData.injuryType || !formData.injurySeverity}
+                  >
+                    Calculate Compensation Estimate
                   </Button>
+
+                  {/* Results */}
+                  {estimatedCompensation && (
+                    <Card className="mt-6 border-primary">
+                      <CardContent className="p-6">
+                        <h3 className="text-xl font-bold text-center mb-4">Estimated Compensation Range</h3>
+                        <div className="text-center">
+                          <div className="text-3xl font-bold text-primary mb-2">
+                            {formatCurrency(estimatedCompensation * 0.7)} - {formatCurrency(estimatedCompensation * 1.3)}
+                          </div>
+                          <p className="text-muted-foreground mb-4">
+                            *This is an estimate. Actual compensation may vary based on specific case details.
+                          </p>
+                          <Button 
+                            onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
+                            className="bg-primary hover:bg-primary/90 text-white"
+                          >
+                            Get Free Case Evaluation
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
                 </CardContent>
               </Card>
             </div>
 
-            {/* Results & Contact */}
+            {/* Sidebar */}
             <div className="space-y-6">
-              {results && (
-                <Card className="border-green-200 bg-green-50">
-                  <CardHeader>
-                    <CardTitle className="text-2xl text-green-800 flex items-center gap-2">
-                      <DollarSign className="w-6 h-6" />
-                      Estimated Compensation
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-4">
-                      <div className="text-center">
-                        <div className="text-4xl font-bold text-green-700 mb-2">
-                          ${results.estimated.toLocaleString()}
-                        </div>
-                        <p className="text-green-600">Estimated Settlement</p>
-                      </div>
-                      
-                      <div className="grid grid-cols-2 gap-4 text-center">
-                        <div>
-                          <div className="text-2xl font-semibold text-green-700">
-                            ${results.lowRange.toLocaleString()}
-                          </div>
-                          <p className="text-sm text-green-600">Low Range</p>
-                        </div>
-                        <div>
-                          <div className="text-2xl font-semibold text-green-700">
-                            ${results.highRange.toLocaleString()}
-                          </div>
-                          <p className="text-sm text-green-600">High Range</p>
-                        </div>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              <Alert>
-                <AlertTriangle className="h-4 w-4" />
-                <AlertDescription>
-                  <strong>Legal Disclaimer:</strong> This calculator provides estimates only and should not be considered legal advice. Actual settlement amounts depend on many factors including specific case details, insurance coverage, and legal representation quality.
-                </AlertDescription>
-              </Alert>
-
-              <Card>
+              <Card className="content-section glass-card">
                 <CardHeader>
-                  <CardTitle className="text-primary">Get Professional Case Review</CardTitle>
+                  <CardTitle className="text-lg">Important Notes</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <p className="text-sm text-muted-foreground">
-                    For an accurate case valuation by experienced rideshare accident attorneys:
-                  </p>
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Time Limits</h4>
+                      <p className="text-sm text-muted-foreground">California gives you 2 years from the accident date to file a claim</p>
+                    </div>
+                  </div>
                   
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-sm text-muted-foreground">We only get paid if you win your case</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">High Success Rate</h4>
+                      <p className="text-sm text-muted-foreground">We've recovered millions in Uber/Lyft accident cases</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="content-section glass-card">
+                <CardHeader>
+                  <CardTitle className="text-lg">Quick Facts</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-sm">
+                  <div>
+                    <strong>Uber/Lyft Insurance:</strong> Up to $1 million in coverage when app is on
+                  </div>
+                  <div>
+                    <strong>Average Settlements:</strong> $50,000 - $500,000+ depending on injuries
+                  </div>
+                  <div>
+                    <strong>Common Injuries:</strong> Whiplash, brain injuries, spinal injuries
+                  </div>
+                  <div>
+                    <strong>Case Duration:</strong> Typically 6-18 months to resolve
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="content-section glass-card">
+                <CardHeader>
+                  <CardTitle className="text-lg">Contact Us</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
                   <Button 
-                    className="w-full" 
+                    className="w-full bg-primary hover:bg-primary/90 text-white"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
@@ -269,65 +472,51 @@ const UberLyftCompensationCalculator = () => {
                   <Button 
                     variant="outline" 
                     className="w-full"
-                    onClick={() => window.location.href = '/uber-lyft-case-evaluation'}
+                    onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
                   >
-                    <FileText className="w-4 h-4 mr-2" />
-                    Free Case Evaluation
+                    <MessageCircle className="w-4 h-4 mr-2" />
+                    Free Case Review
                   </Button>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="text-primary">Factors Affecting Your Settlement</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm text-muted-foreground">
-                    <li>• Severity and permanence of injuries</li>
-                    <li>• Medical treatment costs and future care needs</li>
-                    <li>• Lost wages and earning capacity</li>
-                    <li>• Pain and suffering impact</li>
-                    <li>• Available insurance coverage ($1M+ for rideshare)</li>
-                    <li>• Fault determination and liability</li>
-                    <li>• Quality of legal representation</li>
-                    <li>• Evidence preservation and case strength</li>
-                  </ul>
+                  
+                  <div className="text-center text-sm text-muted-foreground">
+                    24/7 Free Consultation Available
+                  </div>
                 </CardContent>
               </Card>
             </div>
           </div>
         </div>
-      </section>
 
-      {/* Don't Wait Section */}
-      <section className="bg-gradient-to-r from-destructive to-destructive/80 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Don't Wait - Time Limits Apply for California Rideshare Cases</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            California's statute of limitations gives you only 2 years to file. Contact us now for maximum compensation.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white !text-destructive hover:bg-gray-100 hover:!text-destructive"
-              onClick={() => window.location.href = '/uber-lyft-case-evaluation'}
-            >
-              <FileText className="w-5 h-5 mr-2" />
-              Start Your Free Case Evaluation
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white text-white hover:bg-white/20 hover:!text-primary-foreground"
-              onClick={() => window.location.href = 'tel:8181234567'}
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Call (818) 123-4567
-            </Button>
+        {/* Don't Wait Section */}
+        <section className="bg-gradient-to-r from-destructive to-destructive/80 text-white py-16">
+          <div className="max-w-4xl mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold mb-6">Don't Wait - Time Limits Apply for California Rideshare Cases</h2>
+            <p className="text-lg mb-8 max-w-2xl mx-auto">
+              California's statute of limitations gives you only 2 years to file. Contact us now for maximum compensation.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Button 
+                size="lg" 
+                className="bg-white !text-destructive hover:bg-gray-100 hover:!text-destructive"
+                onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
+              >
+                <MessageCircle className="w-5 h-5 mr-2" />
+                Start Your Free Case Evaluation
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline" 
+                className="border-white !text-white hover:bg-white/20 hover:!text-primary-foreground"
+                onClick={() => window.location.href = 'tel:8181234567'}
+              >
+                <Phone className="w-5 h-5 mr-2" />
+                Call (818) 123-4567
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
-    </div>
+        </section>
+      </div>
+    </>
   );
 };
 

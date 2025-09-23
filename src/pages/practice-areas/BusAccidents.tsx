@@ -485,6 +485,210 @@ const BusAccidents: React.FC = () => {
               </div>
             </section>
 
+            {/* Common Injuries Section */}
+            <section id="process" className="content-section mb-12">
+              <div className="mb-6">
+                <img 
+                  src={medicalImage} 
+                  alt="Common bus accident injuries medical treatment" 
+                  className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
+                />
+              </div>
+              <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
+                <Heart className="w-8 h-8 mr-3" />
+                Common Bus Accident Injuries
+              </h2>
+
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Bus accidents often result in severe injuries due to the size differential between buses and other vehicles, lack of seatbelts, and the rigid construction of buses. Understanding common injury patterns helps ensure proper medical evaluation and fair compensation.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.commonInjuries} onOpenChange={() => toggleSection('commonInjuries')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Learn About Specific Bus Accident Injuries
+                    {expandedSections.commonInjuries ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <AlertTriangle className="w-5 h-5 mr-2 text-red-500" />
+                          Traumatic Brain Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Head impacts from sudden stops or collisions can cause:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Concussions and mild TBI</li>
+                          <li>• Severe brain trauma requiring surgery</li>
+                          <li>• Cognitive impairment and memory loss</li>
+                          <li>• Post-concussion syndrome</li>
+                          <li>• Permanent disability</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Stethoscope className="w-5 h-5 mr-2 text-red-500" />
+                          Spinal Cord Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Back and neck injuries are extremely common:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Whiplash from sudden impacts</li>
+                          <li>• Herniated or bulging discs</li>
+                          <li>• Spinal cord compression</li>
+                          <li>• Partial or complete paralysis</li>
+                          <li>• Chronic pain conditions</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Heart className="w-5 h-5 mr-2 text-red-500" />
+                          Internal Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Blunt force trauma can cause:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Internal bleeding</li>
+                          <li>• Organ damage (liver, spleen, kidneys)</li>
+                          <li>• Rib fractures and punctured lungs</li>
+                          <li>• Abdominal injuries</li>
+                          <li>• Life-threatening complications</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Shield className="w-5 h-5 mr-2 text-red-500" />
+                          Orthopedic Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Bone and joint injuries include:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Broken bones and fractures</li>
+                          <li>• Joint dislocations</li>
+                          <li>• Torn ligaments and tendons</li>
+                          <li>• Crush injuries to extremities</li>
+                          <li>• Long-term mobility issues</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <MessageCircle className="w-5 h-5 mr-2 text-red-500" />
+                          Psychological Trauma
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Mental health impacts often include:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Post-traumatic stress disorder (PTSD)</li>
+                          <li>• Anxiety and depression</li>
+                          <li>• Fear of public transportation</li>
+                          <li>• Sleep disorders and nightmares</li>
+                          <li>• Loss of enjoyment of life</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <AlertTriangle className="w-5 h-5 mr-2 text-red-500" />
+                          Facial & Dental Injuries
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="mb-4">Face and mouth trauma can cause:</p>
+                        <ul className="text-sm space-y-1">
+                          <li>• Broken teeth and jaw injuries</li>
+                          <li>• Facial fractures and scarring</li>
+                          <li>• Eye injuries and vision loss</li>
+                          <li>• Cuts requiring plastic surgery</li>
+                          <li>• Permanent disfigurement</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-red-50 p-6 rounded-lg border-l-4 border-red-600">
+                    <h3 className="text-xl font-semibold text-red-700 mb-4">Why Bus Accident Injuries Are Often Severe</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="space-y-3">
+                        <div className="flex items-start">
+                          <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3"></div>
+                          <div>
+                            <h4 className="font-semibold">No Seatbelts</h4>
+                            <p className="text-sm text-muted-foreground">Most buses don't have passenger seatbelts, leading to violent movement during crashes.</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3"></div>
+                          <div>
+                            <h4 className="font-semibold">Size Differential</h4>
+                            <p className="text-sm text-muted-foreground">When buses collide with smaller vehicles, the force differential causes devastating injuries.</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="space-y-3">
+                        <div className="flex items-start">
+                          <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3"></div>
+                          <div>
+                            <h4 className="font-semibold">High Passenger Density</h4>
+                            <p className="text-sm text-muted-foreground">Multiple passengers can be thrown into each other during sudden stops or impacts.</p>
+                          </div>
+                        </div>
+                        <div className="flex items-start">
+                          <div className="w-2 h-2 bg-red-600 rounded-full mt-2 mr-3"></div>
+                          <div>
+                            <h4 className="font-semibold">Limited Exit Options</h4>
+                            <p className="text-sm text-muted-foreground">Difficulty escaping during emergencies can lead to additional crush or fire-related injuries.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="prose prose-lg max-w-none">
+                    <h3>Getting Proper Medical Treatment</h3>
+                    <p>
+                      If you've been in a bus accident, seek immediate medical attention even if you feel fine. Many serious injuries, particularly brain injuries and internal bleeding, may not show symptoms immediately. A complete medical evaluation should include:
+                    </p>
+                    
+                    <ul>
+                      <li>CT scans or MRIs to check for brain and spinal injuries</li>
+                      <li>X-rays for potential bone fractures</li>
+                      <li>Blood tests to detect internal bleeding</li>
+                      <li>Neurological evaluation for cognitive function</li>
+                      <li>Documentation of all pain and symptoms</li>
+                    </ul>
+
+                    <p>
+                      Keep detailed records of all medical treatment, as this documentation will be crucial for your injury claim. Follow all doctor recommendations and attend follow-up appointments, as gaps in treatment can be used by insurance companies to minimize your claim.
+                    </p>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
             {/* Legal Process Section */}
             <section id="legal-process" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">

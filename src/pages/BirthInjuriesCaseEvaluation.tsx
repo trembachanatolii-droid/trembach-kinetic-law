@@ -190,7 +190,7 @@ const BirthInjuriesCaseEvaluation: React.FC = () => {
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <div className="hero-content">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
                 Free Birth Injury Case Evaluation
               </h1>
               
@@ -198,7 +198,7 @@ const BirthInjuriesCaseEvaluation: React.FC = () => {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
                 ))}
-                <span className="ml-2 text-lg">Get Expert Legal Help Today</span>
+                <span className="ml-2 text-lg text-white">Get Expert Legal Help Today</span>
               </div>
               
               <p className="text-xl">

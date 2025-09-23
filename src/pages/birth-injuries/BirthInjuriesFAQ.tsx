@@ -242,9 +242,9 @@ const BirthInjuriesFAQ: React.FC = () => {
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
             <div className="flex items-center justify-center mb-4">
               <MessageCircle className="w-12 h-12 text-primary mr-4" />
-              <h1 className="text-4xl md:text-6xl font-bold">Birth Injury FAQ</h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-white">Birth Injury FAQ</h1>
             </div>
-            <p className="text-xl mb-8 leading-relaxed">
+            <p className="text-xl mb-8 leading-relaxed text-white">
               Get answers to frequently asked questions about birth injury cases and legal rights
             </p>
           </div>

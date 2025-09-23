@@ -37,6 +37,7 @@ import legalProcessImage from '@/assets/swimming-pool-legal-process.jpg';
 import resourcesImage from '@/assets/swimming-pool-resources.jpg';
 import immediateStepsLargeImage from '@/assets/swimming-pool-immediate-steps-large.jpg';
 import immediateStepsUpdatedImage from '@/assets/swimming-pool-immediate-steps-updated.jpg';
+import poolSafetyEquipmentImage from '@/assets/swimming-pool-safety-equipment.jpg';
 import legalProcessLargeImage from '@/assets/swimming-pool-legal-process-large.jpg';
 import resourcesLargeImage from '@/assets/swimming-pool-resources-large.jpg';
 import faqLargeImage from '@/assets/swimming-pool-faq-large.jpg';
@@ -394,8 +395,8 @@ const SwimmingPoolAccidents: React.FC = () => {
 
               <div className="mb-8">
                 <img 
-                  src={immediateStepsUpdatedImage} 
-                  alt="Emergency Response After Swimming Pool Accident" 
+                  src={poolSafetyEquipmentImage} 
+                  alt="Swimming Pool Safety Equipment" 
                   className="w-full h-80 object-cover rounded-lg mb-6"
                 />
               </div>

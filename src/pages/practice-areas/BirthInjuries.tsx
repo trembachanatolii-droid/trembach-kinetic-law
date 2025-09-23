@@ -87,9 +87,9 @@ const BirthInjuries: React.FC = () => {
           y: 0, 
           scale: 1, 
           rotationX: 0,
-          duration: 1.2, 
+          duration: 0.5, 
           ease: 'power3.out',
-          delay: 0.5
+          delay: 0.1
         });
 
         // Animate hero elements with 3D effects
@@ -100,21 +100,21 @@ const BirthInjuries: React.FC = () => {
         if (title) {
           gsap.fromTo(title, 
             { opacity: 0, y: 50, scale: 0.9, rotationY: 10 },
-            { opacity: 1, y: 0, scale: 1, rotationY: 0, duration: 1, ease: 'power2.out', delay: 0.7 }
+            { opacity: 1, y: 0, scale: 1, rotationY: 0, duration: 0.4, ease: 'power2.out', delay: 0.15 }
           );
         }
 
         if (stars) {
           gsap.fromTo(stars, 
             { opacity: 0, x: -30, rotationZ: -5 },
-            { opacity: 1, x: 0, rotationZ: 0, duration: 0.8, ease: 'power2.out', delay: 0.9 }
+            { opacity: 1, x: 0, rotationZ: 0, duration: 0.35, ease: 'power2.out', delay: 0.2 }
           );
         }
 
         if (button) {
           gsap.fromTo(button, 
             { opacity: 0, y: 30, scale: 0.8 },
-            { opacity: 1, y: 0, scale: 1, duration: 0.8, ease: 'back.out(1.7)', delay: 1.1 }
+            { opacity: 1, y: 0, scale: 1, duration: 0.35, ease: 'back.out(1.7)', delay: 0.25 }
           );
         }
       }
@@ -135,14 +135,14 @@ const BirthInjuries: React.FC = () => {
             y: 0,
             scale: 1,
             rotationX: 0,
-            duration: 0.8,
-            stagger: 0.15,
+            duration: 0.4,
+            stagger: 0.05,
             ease: 'power3.out',
             scrollTrigger: {
               trigger: contentRef.current,
-              start: 'top 80%',
+              start: 'top 95%',
               end: 'bottom 20%',
-              toggleActions: 'play none none reverse'
+              toggleActions: 'play none none none'
             }
           }
         );
@@ -200,14 +200,14 @@ const BirthInjuries: React.FC = () => {
             y: 0,
             scale: 1,
             rotationY: 0,
-            duration: 0.6,
+            duration: 0.4,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: card,
-              start: 'top 90%',
-              toggleActions: 'play none none reverse'
+              start: 'top 98%',
+              toggleActions: 'play none none none'
             },
-            delay: index * 0.1
+            delay: index * 0.03
           }
         );
 
@@ -246,11 +246,11 @@ const BirthInjuries: React.FC = () => {
             opacity: 1,
             x: 0,
             scale: 1,
-            duration: 0.8,
+            duration: 0.4,
             ease: 'power2.out',
             scrollTrigger: {
               trigger: sidebar,
-              start: 'top 70%'
+              start: 'top 90%'
             }
           }
         );
@@ -700,7 +700,7 @@ const BirthInjuries: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${diagnosisImage})` }} />
+                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${diagnosisImage})` }} />
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Heart className="w-5 h-5 mr-2 text-red-600" />
@@ -776,7 +776,7 @@ const BirthInjuries: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Proving Negligence</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${legalProcessImage})` }} />
+                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${legalProcessImage})` }} />
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Scale className="w-5 h-5 mr-2 text-red-600" />
@@ -812,7 +812,7 @@ const BirthInjuries: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Compensation</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <div className="h-40 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${compensationImage})` }} />
+                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${compensationImage})` }} />
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Award className="w-5 h-5 mr-2 text-red-600" />
@@ -860,7 +860,7 @@ const BirthInjuries: React.FC = () => {
               
               {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
               <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
-                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
+                <div className="h-64 md:h-72 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
                   <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
                     <div className="text-center text-white">
                       <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
@@ -945,7 +945,7 @@ const BirthInjuries: React.FC = () => {
                   <img 
                     src={medicalImage} 
                     alt="California birth injury medical facilities" 
-                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                   />
                   <p className="text-sm text-muted-foreground">
                     We work with leading pediatric specialists and birth injury experts throughout California.
@@ -962,7 +962,7 @@ const BirthInjuries: React.FC = () => {
                   <img 
                     src={compensationImage} 
                     alt="Birth injury compensation calculator" 
-                    className="w-full h-32 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
+                    className="w-full h-48 md:h-56 lg:h-64 object-cover rounded-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                   />
                   <div className="space-y-2 text-sm">
                     <p>• Medical Malpractice Claims</p>

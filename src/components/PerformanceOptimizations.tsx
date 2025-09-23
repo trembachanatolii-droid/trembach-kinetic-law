@@ -11,8 +11,8 @@ export const useIntersectionObserver = (
     const observer = new IntersectionObserver(([entry]) => {
       callback(entry);
     }, {
-      threshold: 0.1,
-      rootMargin: '50px',
+      threshold: 0.01,
+      rootMargin: '600px',
       ...options
     });
 
@@ -52,7 +52,7 @@ export const LazyImage: React.FC<{
       <img
         ref={imgRef}
         alt={alt}
-        className="w-full h-full object-cover transition-opacity duration-500 opacity-0"
+        className="w-full h-full object-cover transition-opacity duration-200 opacity-0"
         loading="lazy"
         style={{
           backgroundImage: blurDataURL ? `url(${blurDataURL})` : 'none',

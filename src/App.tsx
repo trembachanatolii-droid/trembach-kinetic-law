@@ -176,6 +176,7 @@ import SwimmingPoolCaseEvaluation from "./pages/practice-areas/swimming-pool/Swi
 import SwimmingPoolCompensationCalculator from "./pages/practice-areas/swimming-pool/SwimmingPoolCompensationCalculator";
 import SwimmingPoolResources from "./pages/practice-areas/swimming-pool/SwimmingPoolResources";
 import SwimmingPoolFAQ from "./pages/practice-areas/swimming-pool/SwimmingPoolFAQ";
+import AmusementParkInjuries from "./pages/practice-areas/AmusementParkInjuries";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();

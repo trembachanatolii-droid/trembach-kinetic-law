@@ -190,7 +190,7 @@ function App() {
         <Toaster />
         <Sonner />
         <CustomCursor />
-        <BrowserRouter>
+        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           <ScrollToTop />
           <Navigation />
           <Routes>

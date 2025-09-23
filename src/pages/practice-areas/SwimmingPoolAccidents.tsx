@@ -201,7 +201,7 @@ const SwimmingPoolAccidents: React.FC = () => {
                 <div className="absolute inset-0 bg-black/60"></div>
                 <div className="relative z-10 p-6">
                   <div className="text-center text-white mb-6">
-                    <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                    <h3 className="text-xl font-bold mb-2 text-white">3 Ways to</h3>
                     <h3 className="text-xl font-bold text-white">Start Your Case</h3>
                   </div>
                   

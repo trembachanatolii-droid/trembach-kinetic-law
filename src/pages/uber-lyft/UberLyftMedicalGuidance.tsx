@@ -125,7 +125,7 @@ const UberLyftMedicalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('brain-injury')}
                       >
                         <div className="flex items-center gap-3">
@@ -172,7 +172,7 @@ const UberLyftMedicalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('whiplash')}
                       >
                         <div className="flex items-center gap-3">
@@ -213,7 +213,7 @@ const UberLyftMedicalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('spinal-injury')}
                       >
                         <div className="flex items-center gap-3">

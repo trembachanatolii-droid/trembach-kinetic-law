@@ -76,7 +76,7 @@ const UberLyftLegalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('ab5-prop22')}
                       >
                         <div>
@@ -108,7 +108,7 @@ const UberLyftLegalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('insurance-periods')}
                       >
                         <div>
@@ -166,7 +166,7 @@ const UberLyftLegalGuidance = () => {
                     <CollapsibleTrigger asChild>
                       <Button 
                         variant="outline" 
-                        className="w-full justify-between text-left p-4 h-auto"
+                        className="w-full justify-between text-left p-4 h-auto hover:!text-white data-[state=open]:!text-white"
                         onClick={() => toggleSection('liability-theories')}
                       >
                         <div>

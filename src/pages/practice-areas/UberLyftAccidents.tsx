@@ -153,11 +153,10 @@ const UberLyftAccidents: React.FC = () => {
             
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 font-bold px-8 py-4 text-lg"
-              style={{ color: 'white !important' }}
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
               onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
             >
-              <span style={{ color: 'white !important', fontWeight: 'bold' }}>START MY FREE CASE EVALUATION</span>
+              START MY FREE CASE EVALUATION
             </Button>
           </div>
         </div>
@@ -175,7 +174,7 @@ const UberLyftAccidents: React.FC = () => {
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
                       activeTab === tab.id 
                         ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20 hover:!text-primary-foreground'
+                        : 'text-white hover:bg-white/20'
                     }`}
                   >
                     <IconComponent className="w-4 h-4 mr-2" />
@@ -211,9 +210,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
                     Show More About Our California Rideshare Practice
-                    {expandedSections.overview ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
+                    {expandedSections.overview ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -349,12 +348,8 @@ const UberLyftAccidents: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button 
-                    type="submit" 
-                    className="w-full bg-red-600 hover:bg-red-700"
-                    style={{ color: 'white !important' }}
-                  >
-                    <span style={{ color: 'white !important', fontWeight: 'bold' }}>Start My Free Case Evaluation</span>
+                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
+                    Start My Free Case Evaluation
                   </Button>
                 </form>
               </div>
@@ -398,9 +393,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.stepsAfter} onOpenChange={() => toggleSection('stepsAfter')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
                     Show More Detailed Steps
-                    {expandedSections.stepsAfter ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
+                    {expandedSections.stepsAfter ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -459,9 +454,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.process} onOpenChange={() => toggleSection('process')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
                     Show Complete Injury Information
-                    {expandedSections.process ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
+                    {expandedSections.process ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -523,9 +518,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
                     Show Complete Legal Process Details
-                    {expandedSections.legalProcess ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
+                    {expandedSections.legalProcess ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -737,17 +732,16 @@ const UberLyftAccidents: React.FC = () => {
                   
                   <div className="space-y-4">
                     <Button 
-                      className="w-full bg-red-600 hover:bg-red-700"
-                      style={{ color: 'white !important' }}
+                      className="w-full bg-red-600 hover:bg-red-700 text-white"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
-                      <Phone className="w-4 h-4 mr-2" style={{ color: 'white !important' }} />
-                      <span style={{ color: 'white !important', fontWeight: 'bold' }}>Call (818) 123-4567</span>
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
                     </Button>
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-foreground border-gray-300 hover:bg-gray-50 hover:!text-primary-foreground"
+                      className="w-full text-black border-gray-300 hover:bg-gray-50"
                       onClick={() => window.location.href = '/uber-lyft/compensation-calculator'}
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
@@ -756,7 +750,7 @@ const UberLyftAccidents: React.FC = () => {
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-foreground border-gray-300 hover:bg-gray-50 hover:!text-primary-foreground"
+                      className="w-full text-black border-gray-300 hover:bg-gray-50"
                       onClick={() => window.location.href = '/uber-lyft/legal-guidance'}
                     >
                       <Mail className="w-4 h-4 mr-2" />
@@ -845,28 +839,16 @@ const UberLyftAccidents: React.FC = () => {
       {/* Bottom CTA - Exactly matching Mesothelioma */}
       <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-2 !text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
-          <p className="text-xl mb-12 leading-relaxed !text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
+          <p className="text-xl mb-12 leading-relaxed text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <Button 
-              size="lg" 
-              aria-label="Call Trembach Law Firm" 
-              className="w-full bg-red-600 hover:bg-red-700 font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
-              style={{ color: 'white !important' }}
-              onClick={() => window.location.href = 'tel:8181234567'}
-            >
-              <span style={{ color: 'white !important', fontWeight: 'bold' }}>CALL (818) 123-4567</span>
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
+              CALL (818) 123-4567
             </Button>
             
-            <Button 
-              size="lg" 
-              aria-label="Start Free Case Evaluation" 
-              className="w-full bg-red-600 hover:bg-red-700 font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
-              style={{ color: 'white !important' }}
-              onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
-            >
-              <span style={{ color: 'white !important', fontWeight: 'bold' }}>START MY FREE CASE EVALUATION</span>
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
+              START MY FREE CASE EVALUATION
             </Button>
           </div>
         </div>

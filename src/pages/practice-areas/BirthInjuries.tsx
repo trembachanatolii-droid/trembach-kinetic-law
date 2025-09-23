@@ -36,7 +36,7 @@ import diagnosisImage from '@/assets/birth-injuries-diagnosis-new.jpg';
 import legalProcessImage from '@/assets/birth-injuries-legal-process-new.jpg';
 import medicalImage from '@/assets/birth-injuries-medical-facility-new.jpg';
 import compensationImage from '@/assets/birth-injuries-compensation-calculator.jpg';
-import legalStepsImage from '@/assets/birth-injuries-legal-steps.jpg';
+import legalStepsImage from '@/assets/birth-injuries-legal-steps-no-people.jpg';
 import injuryTypesImage from '@/assets/birth-injuries-types.jpg';
 import provingNegligenceImage from '@/assets/birth-injuries-proving-negligence.jpg';
 import evidenceImage from '@/assets/birth-injuries-evidence.jpg';

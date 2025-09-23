@@ -21,7 +21,7 @@ import {
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
-import heroImage from '@/assets/uber-lyft-case-evaluation-hero.jpg';
+import heroImage from '@/assets/uber-lyft-case-evaluation-hero-new.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 

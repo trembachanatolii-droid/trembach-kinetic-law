@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { ChevronDown } from 'lucide-react';
 import Logo from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,11 +52,41 @@ const Navigation = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#practice-areas" className={`hover:text-primary transition-colors font-medium ${
-            isScrolled ? 'text-foreground' : 'text-white'
-          }`}>
-            Practice Areas
-          </a>
+          <DropdownMenu>
+            <DropdownMenuTrigger className={`flex items-center gap-1 hover:text-primary transition-colors font-medium ${
+              isScrolled ? 'text-foreground' : 'text-white'
+            }`}>
+              Practice Areas
+              <ChevronDown className="w-4 h-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem>
+                <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
+                  Mesothelioma & Asbestos
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/amusement-parks" className="w-full">
+                  Amusement Park Injuries
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/medical-malpractice" className="w-full">
+                  Medical Malpractice
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/personal-injury" className="w-full">
+                  Personal Injury
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="#practice-areas" className="w-full">
+                  View All Practice Areas
+                </a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <a href="#results" className={`hover:text-primary transition-colors font-medium ${
             isScrolled ? 'text-foreground' : 'text-white'
           }`}>

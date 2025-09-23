@@ -177,6 +177,8 @@ import SwimmingPoolCompensationCalculator from "./pages/practice-areas/swimming-
 import SwimmingPoolResources from "./pages/practice-areas/swimming-pool/SwimmingPoolResources";
 import SwimmingPoolFAQ from "./pages/practice-areas/swimming-pool/SwimmingPoolFAQ";
 import AmusementParkInjuries from "./pages/practice-areas/AmusementParkInjuries";
+import AmusementParkFAQ from "./pages/practice-areas/amusement-parks/AmusementParkFAQ";
+import AmusementParkResources from "./pages/practice-areas/amusement-parks/AmusementParkResources";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();
@@ -211,6 +213,8 @@ function App() {
             {/* Swimming Pool Routes */}
             <Route path="/practice-areas/swimming-pool-accidents" element={<SwimmingPoolAccidents />} />
             <Route path="/practice-areas/amusement-parks" element={<AmusementParkInjuries />} />
+            <Route path="/practice-areas/amusement-parks/faq" element={<AmusementParkFAQ />} />
+            <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />
             <Route path="/practice-areas/swimming-pool/compensation-calculator" element={<SwimmingPoolCompensationCalculator />} />
             <Route path="/practice-areas/swimming-pool/resources" element={<SwimmingPoolResources />} />

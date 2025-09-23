@@ -686,7 +686,7 @@ const UberLyftAccidents: React.FC = () => {
                   <CardContent>
                     <ul className="space-y-2 text-sm">
                       <li>• <a href="https://www.insurance.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Department of Insurance</a></li>
-                      <li>• <a href="https://www.cpuc.ca.gov/rideshare/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CPUC Rideshare Regulations</a></li>
+                      <li>• <a href="https://www.cpuc.ca.gov/regulatory-services/licensing/transportation-licensing-and-analysis-branch/transportation-network-companies" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CPUC Rideshare Regulations</a></li>
                       <li>• <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Vehicle Code</a></li>
                       <li>• <a href="https://www.calbar.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">State Bar of California</a></li>
                     </ul>

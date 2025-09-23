@@ -23,6 +23,8 @@ const getPracticeAreaLink = (title: string): string => {
       return "/practice-areas/workplace-injuries";
     case "Class Actions":
       return "/class-actions";
+    case "Aviation Accidents":
+      return "/aviation-accidents";
     case "Mesothelioma & Asbestos":
       return "/mesothelioma-asbestos";
     case "Opioid Litigation":

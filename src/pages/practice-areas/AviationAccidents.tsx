@@ -521,9 +521,9 @@ const AviationAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary/10">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-white">
                     Learn More About Our California Aviation Practice
-                    {expandedSections.overview ? <ChevronUp className="text-primary" /> : <ChevronDown className="text-primary" />}
+                    {expandedSections.overview ? <ChevronUp className="text-current" /> : <ChevronDown className="text-current" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -700,9 +700,9 @@ const AviationAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.accidentSteps} onOpenChange={() => toggleSection('accidentSteps')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary/10">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-white">
                     Learn More About Post-Accident Steps
-                    {expandedSections.accidentSteps ? <ChevronUp className="text-primary" /> : <ChevronDown className="text-primary" />}
+                    {expandedSections.accidentSteps ? <ChevronUp className="text-current" /> : <ChevronDown className="text-current" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -752,9 +752,9 @@ const AviationAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.accidentTypes} onOpenChange={() => toggleSection('accidentTypes')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary/10">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-white">
                     See All Aviation Accident Types We Handle
-                    {expandedSections.accidentTypes ? <ChevronUp className="text-primary" /> : <ChevronDown className="text-primary" />}
+                    {expandedSections.accidentTypes ? <ChevronUp className="text-current" /> : <ChevronDown className="text-current" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-8">
@@ -847,9 +847,9 @@ const AviationAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary/10">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-white">
                     Understanding the Aviation Legal Process
-                    {expandedSections.legalProcess ? <ChevronUp className="text-primary" /> : <ChevronDown className="text-primary" />}
+                    {expandedSections.legalProcess ? <ChevronUp className="text-current" /> : <ChevronDown className="text-current" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -902,9 +902,9 @@ const AviationAccidents: React.FC = () => {
                     >
                       <CardTitle className="flex items-center justify-between text-lg">
                         <span className="text-primary">{faq.question}</span>
-                        <Button variant="ghost" size="sm">
-                          {expandedFaq === index ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
-                        </Button>
+                    <Button variant="ghost" size="sm" className="text-primary hover:text-primary hover:bg-primary/10">
+                      {expandedFaq === index ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                    </Button>
                       </CardTitle>
                     </CardHeader>
                     {expandedFaq === index && (

@@ -727,7 +727,8 @@ const PracticeAreasReference: React.FC = () => {
                       <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
-                          activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                           activeArea.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                           activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
                           activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                           `/practice-areas/${activeArea.slug}`}
                       className="flex-1"
@@ -739,7 +740,8 @@ const PracticeAreasReference: React.FC = () => {
                     
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
-                          activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
+                           activeArea.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
+                           activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
                           activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
                           '/case-evaluation'}
                       className="flex-1"
@@ -776,7 +778,8 @@ const PracticeAreasReference: React.FC = () => {
                       {/* CTA */}
                       <div className="pt-2">
                         <Link
-                          to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                       to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                           area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
                               area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                               area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
                               '/practice-areas/coming-soon'}
@@ -876,7 +879,8 @@ const PracticeAreasReference: React.FC = () => {
                     
                     {/* CTA */}
                     <Link
-                      to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' : 
+                       to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                           area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
                           area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                           area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
                           area.title === 'Class Actions' ? '/practice-areas/class-actions' :

@@ -160,6 +160,10 @@ import UberLyftPassengerRights from "./pages/uber-lyft/UberLyftPassengerRights";
 import UberLyftFAQ from "./pages/uber-lyft/UberLyftFAQ";
 import UberLyftResources from "./pages/uber-lyft/UberLyftResources";
 import AviationAccidents from "./pages/practice-areas/AviationAccidents";
+import AviationCaseEvaluation from "./pages/practice-areas/aviation/AviationCaseEvaluation";
+import AviationCompensationCalculator from "./pages/practice-areas/aviation/AviationCompensationCalculator";
+import AviationFAQ from "./pages/practice-areas/aviation/AviationFAQ";
+import AviationLegalGuidance from "./pages/practice-areas/aviation/AviationLegalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -178,6 +182,10 @@ function App() {
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
             <Route path="/practice-areas/aviation-accidents" element={<AviationAccidents />} />
+            <Route path="/aviation/case-evaluation" element={<AviationCaseEvaluation />} />
+            <Route path="/aviation/compensation-calculator" element={<AviationCompensationCalculator />} />
+            <Route path="/aviation/faq" element={<AviationFAQ />} />
+            <Route path="/aviation/legal-guidance" element={<AviationLegalGuidance />} />
             <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
             <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />

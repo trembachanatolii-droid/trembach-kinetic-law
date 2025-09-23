@@ -135,6 +135,8 @@ const UberLyftAccidents: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
         
+        <GoBack />
+        
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">

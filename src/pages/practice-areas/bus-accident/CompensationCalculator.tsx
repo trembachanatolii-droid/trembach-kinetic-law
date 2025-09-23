@@ -111,10 +111,10 @@ const BusAccidentCompensationCalculator: React.FC = () => {
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             Bus Accident Compensation Calculator
           </h1>
-          <p className="text-xl md:text-2xl mb-6 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-6 leading-relaxed text-white">
             Estimate your potential California bus accident settlement
           </p>
         </div>

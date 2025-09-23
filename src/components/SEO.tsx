@@ -1,43 +1,42 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
-interface SEOProps {
+const SEO: React.FC<{
   title: string;
-  description?: string;
-  canonical?: string; // absolute or path starting with '/'
-  noIndex?: boolean;
-  structuredData?: Record<string, any> | Record<string, any>[];
-}
-
-const toAbsoluteCanonical = (canonical?: string) => {
-  if (!canonical) return undefined;
-  if (typeof window === 'undefined') return canonical;
-  if (canonical.startsWith('http')) return canonical;
-  const base = window.location.origin;
-  return canonical.startsWith('/') ? `${base}${canonical}` : `${base}/${canonical}`;
-};
-
-const SEO: React.FC<SEOProps> = ({ title, description, canonical, noIndex, structuredData }) => {
-  const canonicalUrl = toAbsoluteCanonical(canonical);
-  const jsonLd = structuredData
-    ? Array.isArray(structuredData)
-      ? structuredData
-      : [structuredData]
-    : [];
-
-  return (
-    <Helmet>
-      <title>{title}</title>
-      {description && <meta name="description" content={description} />}
-      {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
-      {noIndex && <meta name="robots" content="noindex, nofollow" />}
-      {jsonLd.map((data, i) => (
-        <script key={i} type="application/ld+json">
-          {JSON.stringify(data)}
-        </script>
-      ))}
-    </Helmet>
-  );
-};
+  description: string;
+  keywords?: string;
+  canonical?: string;
+}> = ({ title, description, keywords, canonical }) => (
+  <Helmet>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {keywords && <meta name="keywords" content={keywords} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta name="robots" content="index, follow" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    {/* Structured Data */}
+    <script type="application/ld+json">
+      {JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "LegalService",
+        "name": "Trembach Law Firm - Uber & Lyft Accident Attorneys",
+        "description": "California rideshare accident law firm specializing in Uber, Lyft, and rideshare injury cases",
+        "url": "https://www.trembachlawfirm.com/practice-areas/uber-lyft-accidents",
+        "telephone": "+18181234567",
+        "areaServed": "California",
+        "priceRange": "No fees unless we win",
+        "address": {
+          "@type": "PostalAddress",
+          "addressRegion": "CA",
+          "addressCountry": "US"
+        }
+      })}
+    </script>
+  </Helmet>
+);
 
 export default SEO;

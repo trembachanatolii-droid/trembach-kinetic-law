@@ -32,6 +32,7 @@ import {
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 import heroBackground from '@/assets/uber-lyft-hero-bg.jpg';
 import sidebarImage from '@/assets/uber-lyft-legal-process.jpg';
 import insuranceImage from '@/assets/uber-lyft-insurance-coverage.jpg';
@@ -370,14 +371,14 @@ const UberLyftAccidents: React.FC = () => {
                 <span className="block text-white">Attorneys</span>
               </h1>
               
-              <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed">
+              <p className="text-xl lg:text-2xl text-white/90 mb-8 leading-relaxed font-medium">
                 Former defense insider now fighting for rideshare accident victims. We know their tactics. We maximize your compensation.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
                 <Button 
                   size="lg" 
-                  className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl"
+                  className="bg-white text-primary hover:bg-white/90 hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-xl text-lg font-semibold"
                   onClick={() => scrollToSection('evaluation')}
                 >
                   <Scale className="w-5 h-5 mr-2" />
@@ -386,11 +387,11 @@ const UberLyftAccidents: React.FC = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300"
+                  className="border-white/30 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 text-lg font-semibold"
                   onClick={() => window.location.href = 'tel:8181234567'}
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  Call (818) 123-4567
+                  <span className="text-white">Call (818) 123-4567</span>
                 </Button>
               </div>
             </div>
@@ -402,20 +403,20 @@ const UberLyftAccidents: React.FC = () => {
                   <CardTitle className="text-2xl font-bold text-primary mb-2">
                     3 Ways to Start Your Case
                   </CardTitle>
-                  <p className="text-muted-foreground">Free consultation • Available 24/7</p>
+                  <p className="text-muted-foreground text-lg">Free consultation • Available 24/7</p>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button 
-                    className="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] font-semibold text-white"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-6 h-6 mr-3" />
-                    Call (818) 123-4567
+                    <span className="text-white">Call (818) 123-4567</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full h-14 text-lg border-2 hover:bg-secondary/10 hover:border-secondary transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full h-14 text-lg border-2 hover:bg-secondary/10 hover:border-secondary transition-all duration-300 hover:scale-[1.02] font-semibold text-primary"
                     onClick={() => scrollToSection('evaluation')}
                   >
                     <FileText className="w-6 h-6 mr-3" />
@@ -424,7 +425,7 @@ const UberLyftAccidents: React.FC = () => {
                   
                   <Button 
                     variant="outline" 
-                    className="w-full h-14 text-lg border-2 hover:bg-accent/10 hover:border-accent transition-all duration-300 hover:scale-[1.02]"
+                    className="w-full h-14 text-lg border-2 hover:bg-accent/10 hover:border-accent transition-all duration-300 hover:scale-[1.02] font-semibold text-primary"
                     onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}
                   >
                     <Calculator className="w-6 h-6 mr-3" />
@@ -459,14 +460,14 @@ const UberLyftAccidents: React.FC = () => {
             {tabs.map((tab) => {
               const Icon = tab.icon;
               return (
-                <button
-                  key={tab.id}
-                  onClick={() => scrollToSection(tab.id)}
-                  className={`flex-shrink-0 flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 mr-2 hover:scale-105 ${
-                    activeTab === tab.id
-                      ? 'bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg'
-                      : 'text-gray-600 hover:text-primary hover:bg-primary/5'
-                  }`}
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex-shrink-0 flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 mr-2 hover:scale-105 ${
+                      activeTab === tab.id
+                        ? 'bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg'
+                        : 'text-primary hover:text-primary hover:bg-primary/5 font-semibold'
+                    }`}
                 >
                   <Icon className="w-4 h-4" />
                   {tab.label}
@@ -486,31 +487,31 @@ const UberLyftAccidents: React.FC = () => {
             {/* Overview Section */}
             <section id="overview" className="content-card bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden hover:scale-[1.01]">
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-3">
+                <h2 className="text-4xl font-bold text-primary mb-6 flex items-center gap-3">
                   <FileText className="w-8 h-8" />
                   What to Do After an Uber or Lyft Accident
                 </h2>
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-xl text-muted-foreground mb-8 font-medium">
                   Critical steps to protect your rights and maximize compensation after a rideshare accident.
                 </p>
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <Card className="border-green-200 hover:border-green-300 transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg text-green-700 flex items-center gap-2">
+                      <CardTitle className="text-xl text-green-700 flex items-center gap-2">
                         <AlertTriangle className="w-5 h-5" />
                         Immediate Steps (Do This)
                       </CardTitle>
                     </CardHeader>
                     <CardContent>
-                      <ul className="space-y-3 text-sm">
+                      <ul className="space-y-3 text-base font-medium">
                         <li className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                          <span>Move to safety and call 911 if injuries exist</span>
+                          <span className="text-green-700">Move to safety and call 911 if injuries exist</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
-                          <span>Take photos of injuries, vehicles, and scene</span>
+                          <span className="text-green-700">Take photos of injuries, vehicles, and scene</span>
                         </li>
                         <li className="flex items-start gap-2">
                           <div className="w-2 h-2 bg-green-500 rounded-full mt-2 flex-shrink-0" />
@@ -534,7 +535,7 @@ const UberLyftAccidents: React.FC = () => {
 
                   <Card className="border-red-200 hover:border-red-300 transition-all duration-300 hover:shadow-lg hover:scale-105">
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-lg text-red-700 flex items-center gap-2">
+                      <CardTitle className="text-xl text-red-700 flex items-center gap-2">
                         <AlertTriangle className="w-5 h-5" />
                         Never Do This
                       </CardTitle>
@@ -893,7 +894,7 @@ const UberLyftAccidents: React.FC = () => {
                         onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                       >
                         <div className="flex items-center justify-between">
-                          <h3 className="font-semibold text-primary pr-4 text-lg leading-tight">{faq.question}</h3>
+                          <h3 className="font-semibold text-xl mb-2 text-primary">{faq.question}</h3>
                           {expandedFaq === index ? (
                             <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
                           ) : (
@@ -903,7 +904,7 @@ const UberLyftAccidents: React.FC = () => {
                       </button>
                       {expandedFaq === index && (
                         <div className="px-4 pb-4">
-                          <p className="text-muted-foreground leading-relaxed text-base">{faq.answer}</p>
+                          <p className="text-muted-foreground leading-relaxed text-lg">{faq.answer}</p>
                         </div>
                       )}
                     </Card>
@@ -925,7 +926,7 @@ const UberLyftAccidents: React.FC = () => {
                           onClick={() => setExpandedFaq(expandedFaq === index + 100 ? null : index + 100)}
                         >
                           <div className="flex items-center justify-between">
-                            <h3 className="font-semibold text-primary pr-4 text-lg leading-tight">{faq.question}</h3>
+                            <h3 className="font-semibold text-primary pr-4 text-xl leading-tight">{faq.question}</h3>
                             {expandedFaq === index + 100 ? (
                               <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
                             ) : (
@@ -935,7 +936,7 @@ const UberLyftAccidents: React.FC = () => {
                         </button>
                         {expandedFaq === index + 100 && (
                           <div className="px-4 pb-4">
-                            <p className="text-muted-foreground leading-relaxed text-base">{faq.answer}</p>
+                            <p className="text-muted-foreground leading-relaxed text-lg">{faq.answer}</p>
                           </div>
                         )}
                       </Card>
@@ -962,25 +963,25 @@ const UberLyftAccidents: React.FC = () => {
                       <CardTitle className="text-xl text-primary">Related Practice Areas</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-3">
-                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5" onClick={() => window.location.href = '/uber-lyft-medical-guidance'}>
+                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5 text-primary font-medium" onClick={() => window.location.href = '/uber-lyft-medical-guidance'}>
                         <Stethoscope className="w-4 h-4 mr-2" />
-                        Medical Guidance
+                        <span className="text-primary">Medical Guidance</span>
                       </Button>
-                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5" onClick={() => window.location.href = '/uber-lyft-legal-guidance'}>
+                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5 text-primary font-medium" onClick={() => window.location.href = '/uber-lyft-legal-guidance'}>
                         <Scale className="w-4 h-4 mr-2" />
-                        Legal Guidance
+                        <span className="text-primary">Legal Guidance</span>
                       </Button>
-                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5" onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}>
+                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5 text-primary font-medium" onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}>
                         <Calculator className="w-4 h-4 mr-2" />
-                        Compensation Calculator
+                        <span className="text-primary">Compensation Calculator</span>
                       </Button>
-                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5" onClick={() => window.location.href = '/uber-lyft-faq'}>
+                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5 text-primary font-medium" onClick={() => window.location.href = '/uber-lyft-faq'}>
                         <MessageCircle className="w-4 h-4 mr-2" />
-                        Complete FAQ
+                        <span className="text-primary">Complete FAQ</span>
                       </Button>
-                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5" onClick={() => window.location.href = '/uber-lyft-resources'}>
+                      <Button variant="ghost" className="w-full justify-start hover:bg-primary/5 text-primary font-medium" onClick={() => window.location.href = '/uber-lyft-resources'}>
                         <Building className="w-4 h-4 mr-2" />
-                        Additional Resources
+                        <span className="text-primary">Additional Resources</span>
                       </Button>
                     </CardContent>
                   </Card>

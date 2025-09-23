@@ -167,11 +167,11 @@ import AviationLegalGuidance from "./pages/practice-areas/aviation/AviationLegal
 import AviationMedicalGuidance from "./pages/practice-areas/aviation/AviationMedicalGuidance";
 import AviationResources from "./pages/practice-areas/aviation/AviationResources";
 import MaritimeAccidents from "./pages/practice-areas/MaritimeAccidents";
-import MaritimeCaseEvaluation from "./pages/maritime/MaritimeCaseEvaluation";
-import MaritimeCompensationCalculator from "./pages/maritime/MaritimeCompensationCalculator";
-import MaritimeLegalGuidance from "./pages/maritime/MaritimeLegalGuidance";
-import MaritimeMedicalGuidance from "./pages/maritime/MaritimeMedicalGuidance";
-import MaritimeEducation from "./pages/maritime/MaritimeEducation";
+import MaritimeCaseEvaluation from "./pages/practice-areas/maritime/MaritimeCaseEvaluation";
+import MaritimeCompensationCalculator from "./pages/practice-areas/maritime/MaritimeCompensationCalculator";
+import MaritimeLegalGuidance from "./pages/practice-areas/maritime/MaritimeLegalGuidance";
+import MaritimeMedicalGuidance from "./pages/practice-areas/maritime/MaritimeMedicalGuidance";
+import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();
 

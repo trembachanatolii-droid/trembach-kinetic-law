@@ -36,6 +36,9 @@ import sidebarImage from '@/assets/maritime-sidebar.jpg';
 import medicalImage from '@/assets/maritime-medical-facility.jpg';
 import legalProcessImage from '@/assets/maritime-legal-process.jpg';
 import californiaMaritimeImage from '@/assets/california-maritime-zones.jpg';
+import overviewImage from '@/assets/maritime-overview.jpg';
+import immediateStepsImage from '@/assets/maritime-immediate-steps.jpg';
+import resourcesImage from '@/assets/maritime-resources-section.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -527,6 +530,15 @@ const MaritimeAccidents: React.FC = () => {
             
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
+              <div className="relative mb-8">
+                <div 
+                  className="w-full h-64 bg-cover bg-center rounded-lg shadow-lg"
+                  style={{ backgroundImage: `url(${overviewImage})` }}
+                >
+                  <div className="absolute inset-0 bg-black/30 rounded-lg"></div>
+                </div>
+              </div>
+              
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Maritime Accident Attorneys</h2>
               
               <div className="prose prose-lg max-w-none mb-6">
@@ -661,6 +673,15 @@ const MaritimeAccidents: React.FC = () => {
 
             {/* Immediate Steps Section */}
             <section id="immediate-steps" className="content-section mb-12">
+              <div className="relative mb-8">
+                <div 
+                  className="w-full h-64 bg-cover bg-center rounded-lg shadow-lg"
+                  style={{ backgroundImage: `url(${immediateStepsImage})` }}
+                >
+                  <div className="absolute inset-0 bg-black/30 rounded-lg"></div>
+                </div>
+              </div>
+              
               <h2 className="text-3xl font-bold text-red-600 mb-6">Immediate Steps After a Maritime Accident</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -880,6 +901,15 @@ const MaritimeAccidents: React.FC = () => {
 
             {/* Resources Section */}
             <section id="resources" className="content-section mb-12">
+              <div className="relative mb-8">
+                <div 
+                  className="w-full h-64 bg-cover bg-center rounded-lg shadow-lg"
+                  style={{ backgroundImage: `url(${resourcesImage})` }}
+                >
+                  <div className="absolute inset-0 bg-black/30 rounded-lg"></div>
+                </div>
+              </div>
+              
               <h2 className="text-3xl font-bold text-red-600 mb-6">Maritime Resources & Information</h2>
               
               <div className="prose prose-lg max-w-none mb-6">

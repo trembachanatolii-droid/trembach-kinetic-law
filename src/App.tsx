@@ -183,7 +183,6 @@ import AmusementParkCaseEvaluation from "./pages/practice-areas/amusement-parks/
 import AmusementParkCompensationCalculator from "./pages/practice-areas/amusement-parks/AmusementParkCompensationCalculator";
 import AmusementParkMedicalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkMedicalGuidance";
 import AmusementParkLegalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkLegalGuidance";
-import AmusementParkResources from "./pages/practice-areas/amusement-parks/AmusementParkResources";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();

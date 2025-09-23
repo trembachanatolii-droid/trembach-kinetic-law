@@ -988,7 +988,7 @@ const UberLyftAccidents: React.FC = () => {
 
           {/* Right Sidebar - Contact Options */}
           <div className="lg:col-span-4">
-            <div className="sticky top-24 space-y-6">
+            <div className="sticky top-8 space-y-6">
               
               {/* 3 Ways to Start Your Case */}
               <Card className="mb-6">

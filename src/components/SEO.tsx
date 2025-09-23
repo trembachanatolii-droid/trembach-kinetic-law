@@ -6,7 +6,8 @@ const SEO: React.FC<{
   description: string;
   keywords?: string;
   canonical?: string;
-}> = ({ title, description, keywords, canonical }) => (
+  structuredData?: any;
+}> = ({ title, description, keywords, canonical, structuredData }) => (
   <Helmet>
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -19,23 +20,29 @@ const SEO: React.FC<{
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     
     {/* Structured Data */}
-    <script type="application/ld+json">
-      {JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "LegalService",
-        "name": "Trembach Law Firm - Uber & Lyft Accident Attorneys",
-        "description": "California rideshare accident law firm specializing in Uber, Lyft, and rideshare injury cases",
-        "url": "https://www.trembachlawfirm.com/practice-areas/uber-lyft-accidents",
-        "telephone": "+18181234567",
-        "areaServed": "California",
-        "priceRange": "No fees unless we win",
-        "address": {
-          "@type": "PostalAddress",
-          "addressRegion": "CA",
-          "addressCountry": "US"
-        }
-      })}
-    </script>
+    {structuredData ? (
+      <script type="application/ld+json">
+        {JSON.stringify(structuredData)}
+      </script>
+    ) : (
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "LegalService",
+          "name": "Trembach Law Firm - Uber & Lyft Accident Attorneys",
+          "description": "California rideshare accident law firm specializing in Uber, Lyft, and rideshare injury cases",
+          "url": "https://www.trembachlawfirm.com/practice-areas/uber-lyft-accidents",
+          "telephone": "+18181234567",
+          "areaServed": "California",
+          "priceRange": "No fees unless we win",
+          "address": {
+            "@type": "PostalAddress",
+            "addressRegion": "CA",
+            "addressCountry": "US"
+          }
+        })}
+      </script>
+    )}
   </Helmet>
 );
 

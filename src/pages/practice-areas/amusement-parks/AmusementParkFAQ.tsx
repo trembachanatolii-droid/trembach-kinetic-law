@@ -106,7 +106,7 @@ const AmusementParkFAQ: React.FC = () => {
         </div>
         
         <div className="relative z-10 text-center text-white max-w-3xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Frequently Asked Questions
           </h1>
           
@@ -114,10 +114,10 @@ const AmusementParkFAQ: React.FC = () => {
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
             ))}
-            <span className="ml-2">Expert Answers</span>
+            <span className="ml-2 text-white">Expert Answers</span>
           </div>
           
-          <p className="text-lg opacity-90">
+          <p className="text-lg text-white opacity-90">
             Get answers to common questions about amusement park injuries
           </p>
         </div>

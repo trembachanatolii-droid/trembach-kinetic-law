@@ -685,10 +685,10 @@ const UberLyftAccidents: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm">
-                      <li>• California Department of Insurance</li>
-                      <li>• CPUC Rideshare Regulations</li>
-                      <li>• California Vehicle Code</li>
-                      <li>• State Bar of California</li>
+                      <li>• <a href="https://www.insurance.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Department of Insurance</a></li>
+                      <li>• <a href="https://www.cpuc.ca.gov/rideshare/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">CPUC Rideshare Regulations</a></li>
+                      <li>• <a href="https://leginfo.legislature.ca.gov/faces/codes_displaySection.xhtml?lawCode=VEH" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Vehicle Code</a></li>
+                      <li>• <a href="https://www.calbar.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">State Bar of California</a></li>
                     </ul>
                   </CardContent>
                 </Card>
@@ -699,10 +699,10 @@ const UberLyftAccidents: React.FC = () => {
                   </CardHeader>
                   <CardContent>
                     <ul className="space-y-2 text-sm">
-                      <li>• California Hospital Association</li>
-                      <li>• Trauma Recovery Centers</li>
-                      <li>• Mental Health Services</li>
-                      <li>• Rehabilitation Specialists</li>
+                      <li>• <a href="https://www.calhospital.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Hospital Association</a></li>
+                      <li>• <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Trauma Recovery Centers</a></li>
+                      <li>• <a href="https://www.mentalhealth.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Mental Health Services</a></li>
+                      <li>• <a href="https://www.aarpdrivingresource.org/rehabilitation/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Rehabilitation Specialists</a></li>
                     </ul>
                   </CardContent>
                 </Card>

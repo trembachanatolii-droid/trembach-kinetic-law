@@ -145,6 +145,11 @@ import OpioidLegalGuidance from "./pages/OpioidLegalGuidance";
 import OpioidEducation from "./pages/OpioidEducation";
 import UberLyftAccidents from "./pages/practice-areas/UberLyftAccidents";
 import UberLyftCaseEvaluation from "./pages/UberLyftCaseEvaluation";
+import UberLyftCompensationCalculator from "./pages/uber-lyft/UberLyftCompensationCalculator";
+import UberLyftMedicalGuidance from "./pages/uber-lyft/UberLyftMedicalGuidance";
+import UberLyftLegalGuidance from "./pages/uber-lyft/UberLyftLegalGuidance";
+import UberLyftFAQ from "./pages/uber-lyft/UberLyftFAQ";
+import UberLyftResources from "./pages/uber-lyft/UberLyftResources";
 
 const queryClient = new QueryClient();
 
@@ -317,6 +322,11 @@ function App() {
             <Route path="/opioid-legal-guidance" element={<OpioidLegalGuidance />} />
             <Route path="/opioid-education" element={<OpioidEducation />} />
             <Route path="/uber-lyft-case-evaluation" element={<UberLyftCaseEvaluation />} />
+            <Route path="/uber-lyft-compensation-calculator" element={<UberLyftCompensationCalculator />} />
+            <Route path="/uber-lyft-medical-guidance" element={<UberLyftMedicalGuidance />} />
+            <Route path="/uber-lyft-legal-guidance" element={<UberLyftLegalGuidance />} />
+            <Route path="/uber-lyft-faq" element={<UberLyftFAQ />} />
+            <Route path="/uber-lyft-resources" element={<UberLyftResources />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

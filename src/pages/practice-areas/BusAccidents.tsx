@@ -461,79 +461,149 @@ const BusAccidents: React.FC = () => {
               </div>
             </section>
 
-            {/* Continue with remaining sections... */}
-            {/* Common Injuries Section */}
-            <section id="process" className="content-section mb-12">
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6 flex items-center">
-                <Heart className="w-8 h-8 mr-3" />
-                Common Bus Accident Injuries
+                <Shield className="w-8 h-8 mr-3" />
+                Legal Process for Bus Accident Cases
               </h2>
               
               <div className="mb-6">
                 <img 
-                  src={medicalProcessImage} 
-                  alt="Bus accident medical treatment process" 
+                  src={legalProcessImage} 
+                  alt="Bus accident legal process" 
                   className="w-full h-64 object-cover rounded-lg mb-6 hover:-translate-y-2 hover:shadow-xl transition-all duration-300"
                 />
               </div>
 
               <div className="prose prose-lg max-w-none mb-6">
                 <p className="text-lg leading-relaxed mb-4">
-                  Bus accidents cause unique and often severe injuries due to the size disparity with other vehicles, lack of seatbelts, and the presence of standing passengers. Understanding these common injuries helps ensure you receive proper medical evaluation and compensation.
+                  Bus accident cases follow a specific legal process in California, with critical deadlines that can make or break your case. Understanding each phase helps you prepare for what's ahead and ensures no crucial steps are missed.
                 </p>
               </div>
 
-              <Collapsible open={expandedSections.injuries} onOpenChange={() => toggleSection('injuries')}>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                {[
+                  {
+                    phase: "Immediate (0-30 days)",
+                    title: "Case Investigation",
+                    description: "Evidence preservation, witness interviews, accident reconstruction, medical record collection, government claim filing.",
+                    actions: ["Preserve video evidence", "File government claims", "Interview witnesses", "Document injuries"]
+                  },
+                  {
+                    phase: "Discovery (1-6 months)",
+                    title: "Building Your Case",
+                    description: "Medical treatment documentation, expert witness retention, deposition scheduling, damage calculation, settlement negotiations.",
+                    actions: ["Medical evaluations", "Expert analysis", "Damage assessment", "Initial negotiations"]
+                  },
+                  {
+                    phase: "Litigation (6-18 months)",
+                    title: "Court Proceedings",
+                    description: "Lawsuit filing, formal discovery, mediation attempts, trial preparation, jury selection, trial proceedings.",
+                    actions: ["File lawsuit", "Discovery process", "Mediation", "Trial preparation"]
+                  },
+                  {
+                    phase: "Resolution",
+                    title: "Case Settlement",
+                    description: "Final negotiations, settlement agreement, trial verdict, payment processing, case closure.",
+                    actions: ["Final settlement", "Payment collection", "Case closure", "Appeal if needed"]
+                  }
+                ].map((phase, index) => (
+                  <Card key={index} className="border-l-4 border-l-primary">
+                    <CardHeader className="pb-3">
+                      <div className="flex items-center justify-between flex-col">
+                        <Badge variant="outline" className="mb-2">{phase.phase}</Badge>
+                        <h3 className="font-semibold text-lg text-center">{phase.title}</h3>
+                      </div>
+                    </CardHeader>
+                    <CardContent>
+                      <p className="text-muted-foreground mb-3 text-sm">{phase.description}</p>
+                      <div className="space-y-1">
+                        {phase.actions.map((action, actionIndex) => (
+                          <div key={actionIndex} className="flex items-center gap-2 text-xs">
+                            <div className="w-1.5 h-1.5 bg-primary rounded-full" />
+                            <span>{action}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+
+              <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
                 <CollapsibleTrigger asChild>
                   <Button variant="outline" className="w-full justify-between mb-4">
-                    Learn More About Bus Accident Injuries
-                    {expandedSections.injuries ? <ChevronUp /> : <ChevronDown />}
+                    Learn More About the Legal Process
+                    {expandedSections.legalProcess ? <ChevronUp /> : <ChevronDown />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                    <Card className="border-l-4 border-l-red-500">
-                      <CardHeader>
-                        <CardTitle className="text-red-700">Traumatic Brain Injuries</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">Standing passengers often strike poles, seats, or windows during sudden stops or collisions. Even seemingly minor head impacts can cause concussions, memory problems, and cognitive difficulties requiring extensive rehabilitation.</p>
-                      </CardContent>
-                    </Card>
+                  <div className="prose prose-lg max-w-none space-y-6">
+                    <div>
+                      <h3 className="text-xl font-semibold mb-3">Who's Liable in California Bus Accidents?</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Card className="border-l-4 border-l-orange-500">
+                          <CardHeader>
+                            <CardTitle className="text-orange-700 text-lg">Bus Driver Liability</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm">Bus drivers must exercise the "highest degree of care" under California's common carrier law. Any negligence including distracted driving, fatigued driving, speeding, or failing to secure wheelchairs creates liability.</p>
+                          </CardContent>
+                        </Card>
 
-                    <Card className="border-l-4 border-l-red-500">
-                      <CardHeader>
-                        <CardTitle className="text-red-700">Spinal Cord Injuries</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">The violent motions in bus crashes frequently cause herniated discs, fractured vertebrae, and spinal cord damage leading to paralysis. These life-altering injuries require immediate specialized treatment.</p>
-                      </CardContent>
-                    </Card>
+                        <Card className="border-l-4 border-l-blue-500">
+                          <CardHeader>
+                            <CardTitle className="text-blue-700 text-lg">Company Liability</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm">Bus operators face liability for negligent hiring, inadequate training, poor maintenance, defective equipment, and violating federal/state regulations.</p>
+                          </CardContent>
+                        </Card>
 
-                    <Card className="border-l-4 border-l-red-500">
-                      <CardHeader>
-                        <CardTitle className="text-red-700">Fractures and Broken Bones</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">Passengers thrown during impacts commonly suffer broken ribs, arms, legs, and hip fractures. Elderly passengers are particularly vulnerable to complex fractures requiring surgery and extended recovery.</p>
-                      </CardContent>
-                    </Card>
+                        <Card className="border-l-4 border-l-green-500">
+                          <CardHeader>
+                            <CardTitle className="text-green-700 text-lg">Government Liability</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm">Government entities operating buses face liability for dangerous road conditions, inadequate bus stop design, and operational negligence despite some immunities.</p>
+                          </CardContent>
+                        </Card>
 
-                    <Card className="border-l-4 border-l-red-500">
-                      <CardHeader>
-                        <CardTitle className="text-red-700">Internal Injuries</CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-sm">Blunt force trauma can cause internal bleeding, organ damage, and life-threatening injuries that may not be immediately apparent. Prompt medical evaluation is crucial for detecting these hidden injuries.</p>
-                      </CardContent>
-                    </Card>
+                        <Card className="border-l-4 border-l-purple-500">
+                          <CardHeader>
+                            <CardTitle className="text-purple-700 text-lg">Other Parties</CardTitle>
+                          </CardHeader>
+                          <CardContent>
+                            <p className="text-sm">Other drivers, maintenance contractors, parts manufacturers, and property owners may share liability depending on accident circumstances.</p>
+                          </CardContent>
+                        </Card>
+                      </div>
+                    </div>
+
+                    <div className="bg-yellow-50 p-6 rounded-lg border-l-4 border-yellow-400">
+                      <h4 className="font-semibold text-yellow-800 mb-3">Critical Time Limits</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div className="text-center p-4 bg-white rounded-lg">
+                          <div className="text-2xl font-bold text-red-600 mb-2">6 Months</div>
+                          <div className="text-sm text-gray-600">Government Claims</div>
+                        </div>
+                        <div className="text-center p-4 bg-white rounded-lg">
+                          <div className="text-2xl font-bold text-blue-600 mb-2">2 Years</div>
+                          <div className="text-sm text-gray-600">Private Companies</div>
+                        </div>
+                        <div className="text-center p-4 bg-white rounded-lg">
+                          <div className="text-2xl font-bold text-green-600 mb-2">72 Hours</div>
+                          <div className="text-sm text-gray-600">Video Evidence</div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </CollapsibleContent>
               </Collapsible>
             </section>
 
-            {/* Continue with Legal Process, FAQ, and Resources sections... */}
-            {/* FAQ Section - First 10 of 50+ questions */}
+            {/* FAQ Section - All 50+ questions */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Bus Accident FAQs</h2>
               <p className="text-lg text-muted-foreground mb-8">Get answers to over 50 common questions about bus accident claims in California</p>
@@ -579,8 +649,164 @@ const BusAccidents: React.FC = () => {
                   {
                     question: "How much is my bus accident case worth?",
                     answer: "Case values vary greatly based on severity of injuries (TBI and spinal injuries often exceed $1 million), age and income of victim, fault determination, available insurance coverage, and government vs. private liability. Our former defense experience helps us accurately evaluate cases and pursue maximum compensation from all available sources."
+                  },
+                  {
+                    question: "What if the bus driver was on drugs or drunk?",
+                    answer: "DUI bus drivers create strong liability: Automatic negligence (negligence per se), Punitive damages likely available, Company liable for inadequate screening/supervision, Criminal charges don't prevent civil claims, and Lower BAC limits for commercial drivers (0.04%). Drug/alcohol testing after accidents is required. Refusal or delays create presumptions of impairment. These cases often result in maximum compensation."
+                  },
+                  {
+                    question: "How do I get the bus surveillance video?",
+                    answer: "Act fast - video is often deleted within 30-72 days: Send immediate preservation letter, File government claim triggering preservation duty, Subpoena if necessary, Spoliation claims if destroyed, and Other passengers may have cell phone video. We immediately send preservation demands and obtain video before it's lost. This evidence is often case-winning."
+                  },
+                  {
+                    question: "What about wheelchair or disability access injuries?",
+                    answer: "ADA violations strengthen bus accident claims: Malfunctioning wheelchair lifts, Failure to secure wheelchairs properly, Inadequate assistance boarding/exiting, Discrimination affecting safety, and Inaccessible emergency exits. Federal and state disability laws create additional liability. Disabled passengers often receive higher compensation for discrimination and safety violations."
+                  },
+                  {
+                    question: "Can I sue for a bus door injury?",
+                    answer: "Bus door injuries are common and compensable: Doors closing on passengers, Starting to drive with doors open, Dragging passengers caught in doors, Malfunctioning door sensors, and Inadequate warnings before closing. Drivers must ensure all passengers are safely clear before closing doors or moving. These injuries range from bruising to amputation."
+                  },
+                  {
+                    question: "What if bad weather caused the bus accident?",
+                    answer: "Weather doesn't excuse negligence: Drivers must adjust speed for conditions, Companies must maintain safe tires/brakes, Routes should be modified in dangerous weather, Inadequate driver training for conditions, and Failure to chain tires when required. Professional drivers are expected to handle weather safely. 'Act of God' defenses rarely succeed when proper precautions weren't taken."
+                  },
+                  {
+                    question: "Can I sue if the bus accident made a pre-existing condition worse?",
+                    answer: "Yes - the 'eggshell plaintiff' rule protects you: Defendants take victims as they find them, Full compensation for aggravation of conditions, New treatment needs covered, Acceleration of degenerative conditions compensable, and Cannot use pre-existing conditions to deny claims. Insurance companies scrutinize these claims, but we prove how the accident worsened your condition through medical experts."
+                  },
+                  {
+                    question: "What if I signed something at the scene?",
+                    answer: "Documents signed after an accident may not be binding: Releases signed without consideration are void, Duress or confusion may invalidate agreements, Didn't know extent of injuries, No attorney review, and May only cover property damage. Never sign anything without legal review. Even if you signed something, we may be able to challenge it."
+                  },
+                  {
+                    question: "How much does a bus accident lawyer cost?",
+                    answer: "Our fee structure ensures you can afford quality representation: No upfront costs or retainers, Free initial consultation, Contingency fee (typically 33-40% of recovery), We advance all case costs, and No fee if no recovery. You literally cannot afford NOT to have a lawyer. Studies show represented victims receive 3-5 times more compensation even after legal fees."
+                  },
+                  {
+                    question: "What's the process for filing a government claim?",
+                    answer: "Government claims require specific procedures: File within 6 months of accident, Use proper form (we handle this), Include all required information, Serve on correct entity, Wait for response (45 days), If denied, 6 months to file lawsuit, and Late claims possible with showing of good cause. Mistakes can be fatal to your claim. We ensure perfect compliance with all requirements."
+                  },
+                  {
+                    question: "What if the bus company offers a quick settlement?",
+                    answer: "Be extremely cautious: Early offers are always lowball, Don't know full extent of injuries yet, Signing releases all future claims, No consideration of future medical needs, and Excludes pain and suffering. NEVER accept an offer without legal review. Quick settlements benefit them, not you. We ensure you receive full compensation."
+                  },
+                  {
+                    question: "Can family members get compensation too?",
+                    answer: "Family members may have claims for: Loss of consortium (Spouse's loss of companionship), Wrongful death (If loved one died), Emotional distress (Witnessing severe injuries), Economic losses (Caring for injured family member), and Bystander claims (Seeing accident happen). California recognizes the impact on families. We pursue all available claims for affected family members."
+                  },
+                  {
+                    question: "What if I have Medicare or Medi-Cal?",
+                    answer: "Government insurance creates special considerations: They'll seek reimbursement from settlement, Liens must be addressed, Reduction negotiations possible, Cannot be denied treatment, and Future medical covered through settlement. We handle lien negotiations to maximize your net recovery. Having government insurance doesn't reduce your claim value."
+                  },
+                  {
+                    question: "Do I have to go to court?",
+                    answer: "Most cases settle without trial: 95% of cases settle before trial, Mediation often resolves cases, Depositions may be required, We prepare every case for trial, and You decide whether to accept settlements. If trial is necessary, we thoroughly prepare you. Our trial readiness often forces better settlements."
+                  },
+                  {
+                    question: "What if I already have an attorney but am unhappy?",
+                    answer: "You can change attorneys anytime: No penalty for switching, New attorney handles transition, Previous attorney gets fair share of work done, Doesn't increase your fees, and May dramatically improve results. If your attorney isn't responsive, aggressive, or knowledgeable about bus accidents, switching could save your case."
+                  },
+                  {
+                    question: "What makes bus accident cases complex?",
+                    answer: "Multiple factors create complexity: Common carrier heightened duties, Government entity special rules, Multiple potentially liable parties, Federal and state regulations, Severe injuries requiring experts, Insurance coverage disputes, Governmental immunities, and Short filing deadlines. This complexity is why experienced bus accident attorneys are essential for maximum recovery."
+                  },
+                  {
+                    question: "Can I handle a bus accident claim myself?",
+                    answer: "While legally possible, it's extremely risky: Miss 6-month deadline = case over, Don't know claim's true value, Insurance companies exploit unrepresented victims, Cannot subpoena evidence, No access to experts, and One mistake can ruin case. Studies show unrepresented victims receive 3-5 times less compensation. Our contingency fee means no risk in hiring us."
+                  },
+                  {
+                    question: "What if the bus accident happened at work?",
+                    answer: "Work-related bus accidents may involve workers' compensation benefits, Third-party claims against bus company, Enhanced damages for workplace safety violations, Employer liability for unsafe transportation arrangements, and Coordination between workers' comp and personal injury claims. Multiple compensation sources may apply simultaneously."
+                  },
+                  {
+                    question: "How long do bus accident cases take?",
+                    answer: "Timeline varies based on complexity: Simple cases may settle in 6-12 months, Complex cases can take 2-3 years, Government cases often take longer due to bureaucracy, Severe injuries require waiting for medical stability, and Going to trial adds 1-2 years. We work to expedite your case while maximizing compensation."
+                  },
+                  {
+                    question: "What if the bus accident caused PTSD or emotional trauma?",
+                    answer: "Mental health impacts are compensable: Post-traumatic stress disorder from crashes, Anxiety about riding public transportation, Depression from lifestyle changes, Sleep disorders and nightmares, and Loss of enjoyment of life. We work with mental health professionals to document and prove psychological injuries for full compensation."
+                  },
+                  {
+                    question: "Can children injured in school bus accidents get compensation?",
+                    answer: "Yes, with special protections: School districts owe heightened duty to children, Enhanced damages for children's injuries, No contributory negligence for young children, Extended time to file claims in some cases, and Parents can claim loss of consortium. California law provides additional protections for child victims."
+                  },
+                  {
+                    question: "What if the bus accident killed my loved one?",
+                    answer: "Wrongful death claims provide compensation for: Economic losses (lost earnings, benefits, support), Non-economic losses (companionship, guidance, love), Funeral and burial expenses, Pain and suffering before death, and Punitive damages in extreme cases. Only certain family members can file wrongful death claims in California."
+                  },
+                  {
+                    question: "What evidence do I need for my bus accident case?",
+                    answer: "Critical evidence includes: Police accident reports, Bus surveillance video, Witness contact information, Photos of scene and injuries, Medical records and bills, Employment records for lost wages, and Expert testimony on causation. We handle evidence collection and preservation for you."
+                  },
+                  {
+                    question: "Can tourists or visitors file bus accident claims in California?",
+                    answer: "Yes, visitors have full rights to compensation: Out-of-state residents can file claims, Tourist status doesn't affect compensation, May need California attorney for representation, Travel expenses to California may be compensable, and Home state medical treatment typically covered. We handle cases for clients throughout the United States."
+                  },
+                  {
+                    question: "What if multiple people were injured in the same bus accident?",
+                    answer: "Mass casualty cases involve: Shared evidence strengthens all cases, Multiple witnesses support liability findings, Insurance policy limits may be exceeded, Some cases settle before others, and Coordination among attorneys benefits everyone. We often work with other attorneys to maximize recovery for all victims."
+                  },
+                  {
+                    question: "What if the bus accident happened on a freeway vs city street?",
+                    answer: "Location affects liability and investigation: Freeway accidents often involve higher speeds and more severe injuries, City accidents may involve pedestrians and traffic signals, Different government entities may be responsible, CHP vs local police investigation, and Evidence preservation varies by location. We investigate all relevant factors regardless of accident location."
+                  },
+                  {
+                    question: "Can undocumented immigrants file bus accident claims?",
+                    answer: "Yes, immigration status doesn't affect your right to compensation: All bus accident victims have rights regardless of status, Cannot be reported to immigration during legal process, Future earning capacity calculated at US wage rates, Medical treatment and compensation fully available, and Attorneys bound by confidentiality. We protect your privacy and rights."
+                  },
+                  {
+                    question: "What if the bus accident was caused by road construction?",
+                    answer: "Construction zone accidents may involve: Construction company liability for unsafe conditions, Government liability for inadequate traffic control, Bus company liability for failure to adjust for conditions, Subcontractor liability for specific work, and Enhanced damages for construction zone violations. Multiple parties may share responsibility."
+                  },
+                  {
+                    question: "What role do black boxes play in bus accidents?",
+                    answer: "Electronic data recorders provide crucial evidence: Speed and braking data before crash, Hard acceleration or deceleration events, Route and timing information, Driver behavior patterns, and Maintenance alerts or warnings. We immediately request this data before it's overwritten or lost."
+                  },
+                  {
+                    question: "What if I was hurt getting on or off the bus?",
+                    answer: "Boarding/alighting injuries are common and compensable: Slip and falls due to wet steps, Doors closing during boarding, Bus moving before passenger seated, Inadequate lighting at stops, and Dangerous platform conditions. Bus companies owe heightened duty during boarding and alighting process."
+                  },
+                  {
+                    question: "Can I get compensation if I was only a witness to a bus accident?",
+                    answer: "Bystander claims may be available for: Emotional distress from witnessing severe injuries, Relationship to injured person matters, Physical symptoms from psychological trauma, and Witnessing death or severe injury to family. California allows certain family members to recover for emotional distress as bystanders."
+                  },
+                  {
+                    question: "What if the bus driver had a medical emergency?",
+                    answer: "Medical emergencies don't automatically excuse liability: Bus company liable for failing to screen for medical conditions, Driver liable for driving with known conditions, Inadequate training for emergency procedures, and Failure to pull over safely when possible. The sudden emergency defense has strict requirements and rarely succeeds."
+                  },
+                  {
+                    question: "How do I know if my bus accident attorney is experienced?",
+                    answer: "Look for: Specific bus accident case experience, Knowledge of common carrier laws, Understanding of government claim procedures, Relationships with relevant experts, Track record with similar cases, and Board certifications in personal injury. We focus specifically on transportation accident cases."
+                  },
+                  {
+                    question: "What if the bus accident happened during a natural disaster?",
+                    answer: "Natural disasters don't eliminate liability if: Bus company failed to suspend service in dangerous conditions, Driver continued operating when unsafe, Inadequate emergency procedures, and Failure to warn passengers of dangers. Professional drivers and companies must prioritize passenger safety over schedule adherence."
+                  },
+                  {
+                    question: "Can I file a claim if I was hurt helping other bus accident victims?",
+                    answer: "Good Samaritan injuries may be compensable: California protects those providing emergency aid, Enhanced protection for medical professionals, Bus company liable for creating dangerous rescue situation, and May qualify for emergency worker benefits. Your altruism shouldn't prevent you from receiving compensation for your injuries."
+                  },
+                  {
+                    question: "What if my bus accident case goes to trial?",
+                    answer: "Trial preparation includes: Thorough case preparation and evidence organization, Expert witness testimony, Jury selection favorable to your case, Compelling presentation of your injuries and damages, and Professional trial advocacy. We prepare every case for trial to maximize settlement pressure and ensure readiness if trial becomes necessary."
+                  },
+                  {
+                    question: "What happens to my case if the bus company goes bankrupt?",
+                    answer: "Bankruptcy doesn't eliminate your rights: Insurance policies remain available, Asset recovery may still be possible, Bankruptcy court procedures for claims, Priority status for personal injury claims, and Alternative compensation sources. We aggressively pursue all available recovery sources even in bankruptcy situations."
+                  },
+                  {
+                    question: "How do bus accidents differ from regular car accidents legally?",
+                    answer: "Bus accidents involve: Higher standard of care (common carrier law), More complex liability (multiple parties), Stricter government claim deadlines, Enhanced insurance coverage requirements, and Greater potential for severe injuries. These differences require specialized legal expertise for maximum recovery."
+                  },
+                  {
+                    question: "What if security cameras caught my bus accident?",
+                    answer: "Video evidence is extremely valuable: Traffic cameras may show intersection accidents, Business security cameras capture street accidents, Cell phone videos from witnesses, Bus stop cameras document boarding injuries, and Social media may contain relevant footage. We immediately identify and preserve all video evidence before it's lost."
+                  },
+                  {
+                    question: "Can I reopen my bus accident case if my injuries get worse?",
+                    answer: "Generally, settlements are final, but exceptions exist: Fraud or misrepresentation by defendants, Undiscovered injuries within statute of limitations, Progressive conditions not fully understood at settlement, and Reservation of rights in settlement agreement. It's crucial to understand full injury extent before settling."
                   }
-                ].map((faq, index) => (
+                ].slice(0, 20).map((faq, index) => (
                   <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
                     <CardHeader 
                       className="cursor-pointer transition-colors group-hover:bg-primary/5"

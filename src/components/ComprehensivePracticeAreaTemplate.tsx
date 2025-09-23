@@ -32,28 +32,8 @@ const ComprehensivePracticeAreaTemplate: React.FC<ComprehensivePracticeAreaTempl
   const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo('.content-card', 
-        {
-          opacity: 0,
-          y: 50
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.8,
-          stagger: 0.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: '.content-card',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse'
-          }
-        }
-      );
-    }, contentRef);
-
-    return () => ctx.revert();
+    // Removed GSAP animations for immediate text visibility
+    return () => {};
   }, []);
 
   return (

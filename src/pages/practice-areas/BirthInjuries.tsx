@@ -1056,13 +1056,13 @@ const BirthInjuries: React.FC = () => {
       </section>
 
       {/* FAQ Section - Will continue this with all 50+ questions */}
-      <section id="faq" className="content-section mb-12 bg-muted py-16">
+      <section id="faq" className="mb-12 bg-muted py-16">
         <div className="max-w-4xl mx-auto px-6">
           <h2 className="text-3xl font-bold text-red-600 mb-8 text-center">Frequently Asked Questions</h2>
           
           <div className="space-y-4">
             {faqData.slice(0, 10).map((faq, index) => (
-              <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+              <Card key={index} className="group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
                 <CardHeader 
                   className="cursor-pointer transition-colors group-hover:bg-primary/5"
                   onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
@@ -1073,7 +1073,7 @@ const BirthInjuries: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 {expandedFaq === index && (
-                  <CardContent className="animate-fade-in">
+                  <CardContent>
                     <p className="text-muted-foreground">{faq.answer}</p>
                   </CardContent>
                 )}

@@ -13,7 +13,9 @@ import {
   FileText,
   Stethoscope,
   Clock,
-  Scale
+  Scale,
+  User,
+  Bus
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
@@ -135,12 +137,22 @@ const BusAccidentCompensationCalculator: React.FC = () => {
                 </p>
               </CardHeader>
               
-              <CardContent className="p-8">
-                <div className="space-y-8">
+              <CardContent className="p-8 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30 backdrop-blur-sm border border-blue-100/20 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div className="space-y-8 relative">
+                  
+                  {/* 3D Background Layers */}
+                  <div className="absolute inset-0 -z-10 perspective-1200 transform-style-preserve-3d">
+                    <div className="floating-layer-back absolute inset-0 bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-lg transform translate-z-[-500px] animate-float-back"></div>
+                    <div className="floating-layer-mid absolute inset-0 bg-gradient-to-br from-green-400/3 to-blue-400/3 rounded-lg transform translate-z-[-250px] animate-float-mid"></div>
+                    <div className="floating-layer-front absolute inset-0 bg-gradient-to-br from-purple-400/2 to-pink-400/2 rounded-lg transform translate-z-[-100px] animate-float-front"></div>
+                  </div>
                   
                   {/* Personal Information */}
-                  <div className="border-l-4 border-l-blue-500 pl-6">
-                    <h3 className="text-lg font-semibold mb-4">Personal Information</h3>
+                  <div className="border-l-4 border-l-blue-500 pl-6 glass-card hover-glow-primary transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-white/40 backdrop-blur border border-blue-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-blue-700 flex items-center">
+                      <User className="w-5 h-5 mr-2" />
+                      Personal Information
+                    </h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
@@ -175,8 +187,11 @@ const BusAccidentCompensationCalculator: React.FC = () => {
                   </div>
 
                   {/* Accident Details */}
-                  <div className="border-l-4 border-l-red-500 pl-6">
-                    <h3 className="text-lg font-semibold mb-4">Accident Details</h3>
+                  <div className="border-l-4 border-l-red-500 pl-6 glass-card hover-glow-destructive transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-red-50/40 backdrop-blur border border-red-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-red-700 flex items-center">
+                      <Bus className="w-5 h-5 mr-2" />
+                      Accident Details
+                    </h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
                       <div>
@@ -212,8 +227,11 @@ const BusAccidentCompensationCalculator: React.FC = () => {
                   </div>
 
                   {/* Medical & Financial Impact */}
-                  <div className="border-l-4 border-l-green-500 pl-6">
-                    <h3 className="text-lg font-semibold mb-4">Medical & Financial Impact</h3>
+                  <div className="border-l-4 border-l-green-500 pl-6 glass-card hover-glow-success transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-green-50/40 backdrop-blur border border-green-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-green-700 flex items-center">
+                      <Stethoscope className="w-5 h-5 mr-2" />
+                      Medical & Financial Impact
+                    </h3>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                       <div>
@@ -267,10 +285,20 @@ const BusAccidentCompensationCalculator: React.FC = () => {
                     CALCULATE MY COMPENSATION
                   </Button>
 
-                  {/* Results */}
-                  {result && (
-                    <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 rounded-lg border-l-4 border-green-500">
-                      <h3 className="text-xl font-bold text-green-700 mb-4">Estimated Compensation Range</h3>
+                    {/* Results */}
+                    {result && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500 rounded-lg glass-card hover-glow-success transition-all duration-500 hover:scale-105 relative overflow-hidden">
+                        
+                        {/* 3D Background Animation */}
+                        <div className="absolute inset-0 -z-10 perspective-1200 transform-style-preserve-3d">
+                          <div className="floating-layer-back absolute inset-0 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-lg transform translate-z-[-300px] animate-float-back"></div>
+                          <div className="floating-layer-mid absolute inset-0 bg-gradient-to-br from-blue-400/8 to-green-400/8 rounded-lg transform translate-z-[-150px] animate-float-mid"></div>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-green-700 mb-4 flex items-center">
+                          <TrendingUp className="w-6 h-6 mr-2" />
+                          Estimated Compensation Range
+                        </h3>
                       
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
                         <div className="text-center p-4 bg-white rounded-lg">

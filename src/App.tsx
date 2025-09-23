@@ -9,6 +9,10 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import BusAccidents from "./pages/practice-areas/BusAccidents";
+import BusAccidentCaseEvaluation from "./pages/practice-areas/bus-accident/CaseEvaluation";
+import BusAccidentCompensationCalculator from "./pages/practice-areas/bus-accident/CompensationCalculator";
+import BusAccidentFAQ from "./pages/practice-areas/bus-accident/FAQ";
+import BusAccidentLegalGuidance from "./pages/practice-areas/bus-accident/LegalGuidance";
 import BirthInjuries from "./pages/practice-areas/BirthInjuries";
 import BirthInjuriesCaseEvaluation from "./pages/BirthInjuriesCaseEvaluation";
 import BirthInjuriesCompensationCalculator from "./pages/birth-injuries/BirthInjuriesCompensationCalculator";
@@ -172,6 +176,10 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
+            <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
+            <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
+            <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />
+            <Route path="/bus-accident/legal-guidance" element={<BusAccidentLegalGuidance />} />
             <Route path="/practice-areas/uber-lyft-accidents" element={<UberLyftAccidents />} />
             <Route path="/uber-lyft/compensation-calculator" element={<UberLyftCompensationCalculator />} />
             <Route path="/uber-lyft/legal-guidance" element={<UberLyftLegalGuidance />} />

@@ -860,7 +860,7 @@ const BusAccidents: React.FC = () => {
               <div className="mt-8 text-center">
                 <Button 
                   variant="outline" 
-                  className="mb-4"
+                  className="mb-4 text-foreground border-border hover:bg-accent hover:text-accent-foreground"
                   onClick={() => window.location.href = '/bus-accident/faq'}
                 >
                   View All 50+ Bus Accident FAQs
@@ -941,7 +941,7 @@ const BusAccidents: React.FC = () => {
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
+                      className="w-full text-foreground border-border hover:bg-accent hover:text-accent-foreground"
                       onClick={() => window.location.href = '/bus-accident/compensation-calculator'}
                     >
                       <Calculator className="w-4 h-4 mr-2" />
@@ -950,7 +950,7 @@ const BusAccidents: React.FC = () => {
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
+                      className="w-full text-foreground border-border hover:bg-accent hover:text-accent-foreground"
                       onClick={() => window.location.href = '/bus-accident/legal-guidance'}
                     >
                       <Mail className="w-4 h-4 mr-2" />

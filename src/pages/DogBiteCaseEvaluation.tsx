@@ -5,7 +5,6 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Phone, Mail, AlertTriangle, Clock, FileText, Stethoscope, PawPrint } from 'lucide-react';
 import heroImage from '@/assets/dog-bite-case-evaluation-hero.jpg';
@@ -256,20 +255,18 @@ const DogBiteCaseEvaluation: React.FC = () => {
                         </div>
                         <div>
                           <Label className="text-base font-semibold">Do you know the dog owner? *</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.dogOwnerKnown}
                             onValueChange={(value) => handleInputChange('dogOwnerKnown', value)}
-                            className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="owner-yes" />
-                              <Label htmlFor="owner-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="owner-no" />
-                              <Label htmlFor="owner-no">No</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         <div>
                           <Label htmlFor="dogBreed" className="text-base font-semibold">Dog Breed (if known)</Label>
@@ -297,24 +294,19 @@ const DogBiteCaseEvaluation: React.FC = () => {
                         </div>
                         <div>
                           <Label className="text-base font-semibold">Was the dog vaccinated?</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.animalVaccinated}
                             onValueChange={(value) => handleInputChange('animalVaccinated', value)}
-                            className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="vaccinated-yes" />
-                              <Label htmlFor="vaccinated-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="vaccinated-no" />
-                              <Label htmlFor="vaccinated-no">No</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="unknown" id="vaccinated-unknown" />
-                              <Label htmlFor="vaccinated-unknown">Unknown</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                              <SelectItem value="unknown">Unknown</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                       </div>
                     </div>
@@ -395,20 +387,18 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           
                           <div>
                             <Label className="text-base font-semibold">Did you receive hospital treatment?</Label>
-                            <RadioGroup
+                            <Select
                               value={formData.hospitalTreatment}
                               onValueChange={(value) => handleInputChange('hospitalTreatment', value)}
-                              className="mt-2"
                             >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yes" id="hospital-yes" />
-                                <Label htmlFor="hospital-yes">Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="no" id="hospital-no" />
-                                <Label htmlFor="hospital-no">No</Label>
-                              </div>
-                            </RadioGroup>
+                              <SelectTrigger className="mt-2 h-12 text-base">
+                                <SelectValue placeholder="Select an option" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="yes">Yes</SelectItem>
+                                <SelectItem value="no">No</SelectItem>
+                              </SelectContent>
+                            </Select>
                           </div>
                         </div>
 
@@ -433,24 +423,19 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           
                           <div>
                             <Label className="text-base font-semibold">Do you need ongoing medical care?</Label>
-                            <RadioGroup
+                            <Select
                               value={formData.ongoingMedicalNeeds}
                               onValueChange={(value) => handleInputChange('ongoingMedicalNeeds', value)}
-                              className="mt-2"
                             >
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="yes" id="ongoing-yes" />
-                                <Label htmlFor="ongoing-yes">Yes</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="no" id="ongoing-no" />
-                                <Label htmlFor="ongoing-no">No</Label>
-                              </div>
-                              <div className="flex items-center space-x-2">
-                                <RadioGroupItem value="uncertain" id="ongoing-uncertain" />
-                                <Label htmlFor="ongoing-uncertain">Uncertain</Label>
-                              </div>
-                            </RadioGroup>
+                              <SelectTrigger className="mt-2 h-12 text-base">
+                                <SelectValue placeholder="Select an option" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="yes">Yes</SelectItem>
+                                <SelectItem value="no">No</SelectItem>
+                                <SelectItem value="uncertain">Uncertain</SelectItem>
+                              </SelectContent>
+                            </Select>
                           </div>
                         </div>
                       </div>
@@ -464,20 +449,19 @@ const DogBiteCaseEvaluation: React.FC = () => {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <Label className="text-base font-semibold">Were there witnesses?</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.witnessesPresent}
                             onValueChange={(value) => handleInputChange('witnessesPresent', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="witnesses-yes" />
-                              <Label htmlFor="witnesses-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="witnesses-no" />
-                              <Label htmlFor="witnesses-no">No</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         
                         <div>
@@ -494,42 +478,37 @@ const DogBiteCaseEvaluation: React.FC = () => {
                         
                         <div>
                           <Label className="text-base font-semibold">Was a police report filed?</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.policeReportFiled}
                             onValueChange={(value) => handleInputChange('policeReportFiled', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="police-yes" />
-                              <Label htmlFor="police-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="police-no" />
-                              <Label htmlFor="police-no">No</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="unknown" id="police-unknown" />
-                              <Label htmlFor="police-unknown">Unknown</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                              <SelectItem value="unknown">Unknown</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         
                         <div>
                           <Label className="text-base font-semibold">Do you have photos of injuries/scene?</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.photosAvailable}
                             onValueChange={(value) => handleInputChange('photosAvailable', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="photos-yes" />
-                              <Label htmlFor="photos-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="photos-no" />
-                              <Label htmlFor="photos-no">No</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                       </div>
                     </div>
@@ -542,24 +521,20 @@ const DogBiteCaseEvaluation: React.FC = () => {
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
                           <Label className="text-base font-semibold">Has this dog been involved in prior incidents?</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.priorIncidents}
                             onValueChange={(value) => handleInputChange('priorIncidents', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="prior-yes" />
-                              <Label htmlFor="prior-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="prior-no" />
-                              <Label htmlFor="prior-no">No</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="unknown" id="prior-unknown" />
-                              <Label htmlFor="prior-unknown">Unknown</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                              <SelectItem value="unknown">Unknown</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         
                         <div>

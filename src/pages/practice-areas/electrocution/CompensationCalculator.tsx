@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Calculator, DollarSign, AlertTriangle, TrendingUp, Star, Info } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/electrocution-compensation-calculator.jpg';
@@ -251,28 +250,21 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
 
                     <div>
                       <Label>Injury Severity</Label>
-                      <RadioGroup 
-                        value={formData.severity} 
+                      <Select 
+                        value={formData.severity}
                         onValueChange={(value) => handleInputChange('severity', value)}
                         className="mt-2"
                       >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="minor" id="minor" />
-                          <Label htmlFor="minor">Minor (outpatient treatment)</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="moderate" id="moderate" />
-                          <Label htmlFor="moderate">Moderate (hospitalization required)</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="severe" id="severe" />
-                          <Label htmlFor="severe">Severe (extensive treatment/surgery)</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="catastrophic" id="catastrophic" />
-                          <Label htmlFor="catastrophic">Catastrophic (life-altering/disabling)</Label>
-                        </div>
-                      </RadioGroup>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minor">Minor (outpatient treatment)</SelectItem>
+                          <SelectItem value="moderate">Moderate (hospitalization required)</SelectItem>
+                          <SelectItem value="severe">Severe (extensive treatment/surgery)</SelectItem>
+                          <SelectItem value="catastrophic">Catastrophic (life-altering/disabling)</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
                 </div>
@@ -305,64 +297,55 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
 
                     <div>
                       <Label>Were you hospitalized?</Label>
-                      <RadioGroup 
-                        value={formData.hospitalization} 
+                      <Select 
+                        value={formData.hospitalization}
                         onValueChange={(value) => handleInputChange('hospitalization', value)}
                         className="mt-2"
                       >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="yes" id="hosp-yes" />
-                          <Label htmlFor="hosp-yes">Yes</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="no" id="hosp-no" />
-                          <Label htmlFor="hosp-no">No</Label>
-                        </div>
-                      </RadioGroup>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <Label>Do you have permanent disability?</Label>
-                      <RadioGroup 
-                        value={formData.permanentDisability} 
+                      <Select 
+                        value={formData.permanentDisability}
                         onValueChange={(value) => handleInputChange('permanentDisability', value)}
                         className="mt-2"
                       >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="yes" id="disability-yes" />
-                          <Label htmlFor="disability-yes">Yes</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="no" id="disability-no" />
-                          <Label htmlFor="disability-no">No</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="unknown" id="disability-unknown" />
-                          <Label htmlFor="disability-unknown">Unknown</Label>
-                        </div>
-                      </RadioGroup>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select an option" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes</SelectItem>
+                          <SelectItem value="no">No</SelectItem>
+                          <SelectItem value="unknown">Unknown</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <Label>Future Earning Capacity</Label>
-                      <RadioGroup 
-                        value={formData.futureEarnings} 
+                      <Select 
+                        value={formData.futureEarnings}
                         onValueChange={(value) => handleInputChange('futureEarnings', value)}
                         className="mt-2"
                       >
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="none" id="earnings-none" />
-                          <Label htmlFor="earnings-none">No impact on future earnings</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="reduced" id="earnings-reduced" />
-                          <Label htmlFor="earnings-reduced">Reduced earning capacity</Label>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <RadioGroupItem value="unable" id="earnings-unable" />
-                          <Label htmlFor="earnings-unable">Unable to work</Label>
-                        </div>
-                      </RadioGroup>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select impact" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="none">No impact on future earnings</SelectItem>
+                          <SelectItem value="reduced">Reduced earning capacity</SelectItem>
+                          <SelectItem value="unable">Unable to work</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
                 </div>

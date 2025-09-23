@@ -6,7 +6,6 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { 
   FileText, 
   Clock, 
@@ -417,27 +416,20 @@ const SwimmingPoolCaseEvaluation: React.FC = () => {
             
             <div>
               <Label htmlFor="injurySeverity">Injury Severity *</Label>
-              <RadioGroup 
-                value={formData.injurySeverity} 
+              <Select 
+                value={formData.injurySeverity}
                 onValueChange={(value) => handleInputChange('injurySeverity', value)}
               >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="minor" id="minor" />
-                  <Label htmlFor="minor">Minor (treated and released)</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="moderate" id="moderate" />
-                  <Label htmlFor="moderate">Moderate (hospitalization required)</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="severe" id="severe" />
-                  <Label htmlFor="severe">Severe (ongoing treatment needed)</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="catastrophic" id="catastrophic" />
-                  <Label htmlFor="catastrophic">Catastrophic (life-threatening/permanent)</Label>
-                </div>
-              </RadioGroup>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select severity" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="minor">Minor (treated and released)</SelectItem>
+                  <SelectItem value="moderate">Moderate (hospitalization required)</SelectItem>
+                  <SelectItem value="severe">Severe (ongoing treatment needed)</SelectItem>
+                  <SelectItem value="catastrophic">Catastrophic (life-threatening/permanent)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
             
             <div>
@@ -553,27 +545,20 @@ const SwimmingPoolCaseEvaluation: React.FC = () => {
             
             <div>
               <Label htmlFor="urgency">How Urgent Is Your Case?</Label>
-              <RadioGroup 
+              <Select 
                 value={formData.urgency} 
                 onValueChange={(value) => handleInputChange('urgency', value)}
               >
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="immediate" id="immediate" />
-                  <Label htmlFor="immediate">Immediate - Need Help Today</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="soon" id="soon" />
-                  <Label htmlFor="soon">Soon - Within a Few Days</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="standard" id="standard" />
-                  <Label htmlFor="standard">Standard - Within a Week</Label>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <RadioGroupItem value="exploring" id="exploring" />
-                  <Label htmlFor="exploring">Just Exploring Options</Label>
-                </div>
-              </RadioGroup>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select urgency" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="immediate">Immediate - Need Help Today</SelectItem>
+                  <SelectItem value="soon">Soon - Within a Few Days</SelectItem>
+                  <SelectItem value="standard">Standard - Within a Week</SelectItem>
+                  <SelectItem value="exploring">Just Exploring Options</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </div>
         );

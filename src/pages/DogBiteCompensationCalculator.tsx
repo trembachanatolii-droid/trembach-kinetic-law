@@ -4,7 +4,6 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calculator, DollarSign, FileText, AlertTriangle, PawPrint, Info } from 'lucide-react';
 import heroImage from '@/assets/dog-bite-compensation-calculator-hero.jpg';
@@ -321,38 +320,36 @@ const DogBiteCompensationCalculator: React.FC = () => {
                         
                         <div>
                           <Label className="text-base font-semibold">Visible Scarring</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.scarringVisible}
                             onValueChange={(value) => handleInputChange('scarringVisible', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="scar-yes" />
-                              <Label htmlFor="scar-yes">Yes, visible scarring</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="scar-no" />
-                              <Label htmlFor="scar-no">No visible scarring</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes, visible scarring</SelectItem>
+                              <SelectItem value="no">No visible scarring</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         
                         <div>
                           <Label className="text-base font-semibold">Permanent Disability</Label>
-                          <RadioGroup
+                          <Select
                             value={formData.permanentDisability}
                             onValueChange={(value) => handleInputChange('permanentDisability', value)}
                             className="mt-2"
                           >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="disability-yes" />
-                              <Label htmlFor="disability-yes">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="disability-no" />
-                              <Label htmlFor="disability-no">No</Label>
-                            </div>
-                          </RadioGroup>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
                         
                         <div>

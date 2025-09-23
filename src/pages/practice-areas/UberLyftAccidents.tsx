@@ -396,58 +396,56 @@ const UberLyftAccidents: React.FC = () => {
               </div>
             </div>
 
-            {/* Sticky Sidebar - 3 Ways to Start Your Case */}
+            {/* Sticky Sidebar */}
             <div className="lg:col-span-5">
-              <Card className="sticky top-20 shadow-2xl border-0 bg-white/95 backdrop-blur-lg hover:shadow-3xl transition-all duration-300 hover:scale-[1.02]">
-                <CardHeader className="text-center pb-4">
-                  <CardTitle className="text-2xl font-bold text-primary mb-2">
-                    3 Ways to Start Your Case
-                  </CardTitle>
-                  <p className="text-muted-foreground text-lg">Free consultation • Available 24/7</p>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <Button 
-                    className="w-full h-14 text-lg bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-[1.02] font-semibold text-white"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
-                    <Phone className="w-6 h-6 mr-3" />
-                    <span className="text-white">Call (818) 123-4567</span>
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-14 text-lg border-2 hover:bg-secondary/10 hover:border-secondary transition-all duration-300 hover:scale-[1.02] font-semibold text-primary"
-                    onClick={() => scrollToSection('evaluation')}
-                  >
-                    <FileText className="w-6 h-6 mr-3" />
-                    Free Online Evaluation
-                  </Button>
-                  
-                  <Button 
-                    variant="outline" 
-                    className="w-full h-14 text-lg border-2 hover:bg-accent/10 hover:border-accent transition-all duration-300 hover:scale-[1.02] font-semibold text-primary"
-                    onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}
-                  >
-                    <Calculator className="w-6 h-6 mr-3" />
-                    Compensation Calculator
-                  </Button>
-
-                  <div className="grid grid-cols-3 gap-2 pt-4 border-t border-gray-200">
-                    <div className="text-center">
-                      <div className="font-bold text-2xl text-primary">$1M+</div>
-                      <div className="text-xs text-muted-foreground">Coverage</div>
+              <div className="sticky top-8">
+                <Card className="mb-6">
+                  <CardHeader>
+                    <CardTitle className="text-center text-2xl">3 Ways to Start Your Case</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <img 
+                      src={sidebarImage} 
+                      alt="Legal consultation for Uber and Lyft accident cases" 
+                      className="w-full h-40 object-cover rounded-lg mb-4"
+                    />
+                    
+                    <div className="space-y-4">
+                      <Button 
+                        className="w-full bg-red-600 hover:bg-red-700 text-white flex items-center justify-center gap-2"
+                        onClick={() => window.open('tel:8181234567')}
+                      >
+                        <Phone className="w-4 h-4" />
+                        Call (818) 123-4567
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        className="w-full flex items-center justify-center gap-2"
+                        onClick={() => scrollToSection('evaluation')}
+                      >
+                        <MessageCircle className="w-4 h-4" />
+                        Free Case Evaluation
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        className="w-full flex items-center justify-center gap-2"
+                        onClick={() => window.location.href = '/uber-lyft-compensation-calculator'}
+                      >
+                        <Calculator className="w-4 h-4" />
+                        Compensation Calculator
+                      </Button>
                     </div>
-                    <div className="text-center">
-                      <div className="font-bold text-2xl text-secondary">24/7</div>
-                      <div className="text-xs text-muted-foreground">Available</div>
+                    
+                    <div className="text-center text-sm text-muted-foreground mt-4">
+                      <p>✓ 100% Confidential</p>
+                      <p>✓ No Fees Unless We Win</p>
+                      <p>✓ Available 24/7</p>
                     </div>
-                    <div className="text-center">
-                      <div className="font-bold text-2xl text-accent">Free</div>
-                      <div className="text-xs text-muted-foreground">Consultation</div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
         </div>

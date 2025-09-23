@@ -570,7 +570,7 @@ const BirthInjuries: React.FC = () => {
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-white">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-primary border-primary hover:bg-primary hover:text-primary-foreground">
                     Show More About Our California Birth Injury Practice
                     {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
                   </Button>

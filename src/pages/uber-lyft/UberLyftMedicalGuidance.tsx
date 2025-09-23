@@ -18,10 +18,13 @@ import {
   Calendar,
   Shield
 } from 'lucide-react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-medical-hero.jpg';
 
 const UberLyftMedicalGuidance = () => {
+  useScrollRestoration();
+  
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const toggleSection = (sectionId: string) => {

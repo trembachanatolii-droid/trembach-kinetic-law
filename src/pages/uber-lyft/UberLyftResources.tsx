@@ -16,10 +16,13 @@ import {
   MapPin,
   AlertTriangle
 } from 'lucide-react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-resources-hero.jpg';
 
 const UberLyftResources = () => {
+  useScrollRestoration();
+  
   const legalResources = [
     {
       title: "California Vehicle Code Section 21200-21212",

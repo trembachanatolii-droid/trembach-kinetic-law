@@ -6,10 +6,13 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calculator, DollarSign, AlertTriangle, Info, Phone, FileText } from 'lucide-react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-calculator-hero.jpg';
 
 const UberLyftCompensationCalculator = () => {
+  useScrollRestoration();
+  
   const [formData, setFormData] = useState({
     injuryType: '',
     medicalExpenses: '',

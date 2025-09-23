@@ -14,20 +14,36 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 400);
+    const onScroll = () => {
+      // Show button after scrolling past hero section (typically 300-400px)
+      setVisible(window.scrollY > 300);
+    };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Store scroll position when component mounts
+  // Enhanced scroll position tracking
   useEffect(() => {
     const storeScrollPosition = () => {
       sessionStorage.setItem(`scrollPosition_${location.pathname}`, window.scrollY.toString());
     };
 
+    // Store scroll position on scroll (throttled)
+    let scrollTimeout: NodeJS.Timeout;
+    const handleScroll = () => {
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(storeScrollPosition, 100);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('beforeunload', storeScrollPosition);
-    return () => window.removeEventListener('beforeunload', storeScrollPosition);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeunload', storeScrollPosition);
+      clearTimeout(scrollTimeout);
+    };
   }, [location.pathname]);
 
   const handleGoBack = () => {
@@ -35,12 +51,32 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
     sessionStorage.setItem(`scrollPosition_${location.pathname}`, window.scrollY.toString());
     
     if (window.history.length > 1) {
-      // Get the previous page from history or estimate it
+      // Enhanced path mapping for Uber/Lyft pages
       const currentPath = location.pathname;
       let targetPath = fallbackPath;
       
-      // Try to determine the previous page based on current path
-      if (currentPath.includes('/practice-areas/pfas-exposure')) {
+      // Map Uber/Lyft related pages
+      if (currentPath.includes('/uber-lyft/case-evaluation')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/compensation-calculator')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/faq')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/legal-guidance')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/medical-guidance')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/resources')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/app-safety')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/driver-screening')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/insurance-claims')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/uber-lyft/passenger-rights')) {
+        targetPath = '/practice-areas/uber-lyft-accidents';
+      } else if (currentPath.includes('/practice-areas/pfas-exposure')) {
         targetPath = '/practice-areas';
       } else if (currentPath.includes('/pfas-case-evaluation')) {
         targetPath = '/practice-areas/pfas-exposure';
@@ -50,27 +86,38 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
       
       navigate(-1);
       
-      // Restore scroll position after a short delay
+      // Enhanced scroll restoration with retry mechanism
       setTimeout(() => {
         const savedPosition = sessionStorage.getItem(`scrollPosition_${targetPath}`);
         if (savedPosition) {
+          const scrollTop = parseInt(savedPosition, 10);
+          
+          // Try immediate scroll first
           window.scrollTo({
-            top: parseInt(savedPosition, 10),
+            top: scrollTop,
             behavior: 'smooth'
           });
+          
+          // Backup scroll attempt after content loads
+          setTimeout(() => {
+            window.scrollTo({
+              top: scrollTop,
+              behavior: 'smooth'
+            });
+          }, 300);
         }
-      }, 100);
+      }, 150);
     } else {
       navigate(fallbackPath);
     }
   };
 
-  const baseClasses = "fixed top-28 left-4 z-[60] transition-opacity duration-500";
+  const baseClasses = "fixed top-28 left-4 z-[60] transition-all duration-500 ease-in-out";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   
   return (
     <div
-      className={`${combinedClasses} ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`}
+      className={`${combinedClasses} ${visible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-2'}`}
       aria-hidden={!visible}
     >
       <Button

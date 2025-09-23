@@ -17,10 +17,13 @@ import {
   DollarSign,
   Gavel
 } from 'lucide-react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-legal-hero.jpg';
 
 const UberLyftLegalGuidance = () => {
+  useScrollRestoration();
+  
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
 
   const toggleSection = (sectionId: string) => {

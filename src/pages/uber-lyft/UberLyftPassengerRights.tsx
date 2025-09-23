@@ -2,12 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ComprehensivePracticeAreaTemplate from '@/components/ComprehensivePracticeAreaTemplate';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-passenger-rights-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const UberLyftPassengerRights: React.FC = () => {
+  useScrollRestoration();
+  
   const pageData = {
     hero: {
       title: "Your Rights as an Uber & Lyft Passenger",

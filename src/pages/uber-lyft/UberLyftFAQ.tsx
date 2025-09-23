@@ -12,10 +12,13 @@ import {
   AlertTriangle,
   HelpCircle
 } from 'lucide-react';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-faq-hero.jpg';
 
 const UberLyftFAQ = () => {
+  useScrollRestoration();
+  
   const [searchTerm, setSearchTerm] = useState('');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [selectedCategory, setSelectedCategory] = useState('all');

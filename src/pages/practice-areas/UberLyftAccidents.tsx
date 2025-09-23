@@ -387,11 +387,11 @@ const UberLyftAccidents: React.FC = () => {
                 <Button 
                   size="lg" 
                   variant="outline" 
-                  className="border-white/30 text-white hover:bg-white/20 hover:scale-105 transition-all duration-300 text-lg font-semibold"
+                  className="border-white/30 text-primary-foreground hover:bg-white/20 hover:scale-105 transition-all duration-300 text-lg font-semibold"
                   onClick={() => window.location.href = 'tel:8181234567'}
                 >
                   <Phone className="w-5 h-5 mr-2" />
-                  <span className="text-white">Call (818) 123-4567</span>
+                  <span className="text-primary-foreground">Call (818) 123-4567</span>
                 </Button>
               </div>
             </div>
@@ -412,7 +412,7 @@ const UberLyftAccidents: React.FC = () => {
                     className={`flex-shrink-0 flex items-center gap-2 px-6 py-3 text-sm font-medium rounded-lg transition-all duration-300 mr-2 hover:scale-105 ${
                       activeTab === tab.id
                         ? 'bg-gradient-to-r from-primary to-primary/80 text-white shadow-lg'
-                        : 'text-primary hover:text-primary hover:bg-primary/5 font-semibold'
+                        : 'text-primary hover:!text-primary-foreground hover:bg-primary/5 font-semibold'
                     }`}
                 >
                   <Icon className="w-4 h-4" />
@@ -1159,7 +1159,7 @@ const UberLyftAccidents: React.FC = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white text-white hover:bg-white/20 text-lg px-8 py-4 h-auto transition-all duration-300 hover:scale-105"
+              className="border-white text-primary-foreground hover:bg-white/20 hover:!text-primary text-lg px-8 py-4 h-auto transition-all duration-300 hover:scale-105"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
               <Phone className="w-6 h-6 mr-2" />

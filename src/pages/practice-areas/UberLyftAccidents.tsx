@@ -702,7 +702,7 @@ const UberLyftAccidents: React.FC = () => {
                       <li>• <a href="https://www.calhospital.org/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">California Hospital Association</a></li>
                       <li>• <a href="https://www.samhsa.gov/find-help/national-helpline" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Trauma Recovery Centers</a></li>
                       <li>• <a href="https://www.mentalhealth.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Mental Health Services</a></li>
-                      <li>• <a href="https://www.aarpdrivingresource.org/rehabilitation/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Rehabilitation Specialists</a></li>
+                      <li>• <a href="https://www.dor.ca.gov/" target="_blank" rel="noopener noreferrer" className="text-primary hover:underline">Rehabilitation Specialists</a></li>
                     </ul>
                   </CardContent>
                 </Card>

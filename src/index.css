@@ -151,6 +151,99 @@
     color: hsl(var(--destructive)) !important;
   }
 
+        /* Force high contrast for all body text and UI elements */
+        body, 
+        .text-foreground,
+        .prose,
+        .prose p,
+        .card-content p,
+        .card-content span,
+        p,
+        span,
+        li,
+        label,
+        input,
+        textarea,
+        select {
+          color: #111111 !important;  /* Very dark text */
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
+        /* Force high contrast for headings */
+        h1, h2, h3, h4, h5, h6,
+        .text-heading,
+        .card-title,
+        .text-title {
+          color: #000000 !important;  /* Pure black */
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
+        /* Force visibility for all interactive elements */
+        button,
+        .btn,
+        [role="button"],
+        .button,
+        .text-primary {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
+        /* Ensure white text on dark backgrounds remains white */
+        .hero-content,
+        .hero-content h1,
+        .hero-content h2,
+        .hero-content h3,
+        .hero-content p,
+        .hero-content span,
+        .text-white,
+        .bg-black .text-white {
+          color: #ffffff !important;
+        }
+
+        /* Fix button text visibility */
+        .bg-primary,
+        .bg-primary button,
+        .bg-primary span {
+          color: hsl(var(--primary-foreground)) !important;
+        }
+
+        .bg-red-600,
+        .bg-red-600 button,
+        .bg-red-600 span {
+          color: #ffffff !important;
+        }
+
+        /* Fix card and content visibility */
+        .card,
+        .card-header,
+        .card-content,
+        .card-title,
+        .card-description {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
+        /* Fix form elements */
+        input,
+        textarea,
+        select,
+        .form-control {
+          background-color: hsl(var(--background)) !important;
+          color: hsl(var(--foreground)) !important;
+          border-color: hsl(var(--border)) !important;
+          opacity: 1 !important;
+        }
+
+        /* Fix collapsible content */
+        [data-state="open"],
+        [data-state="closed"],
+        .collapsible-content {
+          opacity: 1 !important;
+          visibility: visible !important;
+        }
+
   /* Enhanced contrast for better readability */
   .bg-background\/90 {
     background-color: hsl(var(--background) / 0.95) !important;

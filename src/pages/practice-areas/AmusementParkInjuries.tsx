@@ -907,7 +907,7 @@ const AmusementParkInjuries: React.FC = () => {
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
                           onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}>
                       <CardHeader>
@@ -947,7 +947,63 @@ const AmusementParkInjuries: React.FC = () => {
                       </CardContent>
                     </Card>
 
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/amusement-parks/resources'}>
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Building className="w-5 h-5 mr-2 text-primary" />
+                          Medical Guidance
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Essential medical information for amusement park injuries and emergency response guidance.</p>
+                        <Button 
+                          className="mt-3 w-full bg-primary hover:bg-primary/90 text-primary-foreground" 
+                          onClick={() => window.location.href = '/practice-areas/amusement-parks/medical-guidance'}
+                        >
+                          View Medical Guide
+                        </Button>
+                      </CardContent>
+                    </Card>
+
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Scale className="w-5 h-5 mr-2 text-primary" />
+                          Legal Guidance
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Understanding your legal rights and options after an amusement park injury in California.</p>
+                        <Button 
+                          className="mt-3 w-full bg-primary hover:bg-primary/90 text-primary-foreground" 
+                          onClick={() => window.location.href = '/practice-areas/amusement-parks/legal-guidance'}
+                        >
+                          View Legal Guide
+                        </Button>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <FileText className="w-5 h-5 mr-2 text-primary" />
+                          FAQ
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Frequently asked questions about amusement park injury cases and legal processes.</p>
+                        <Button 
+                          className="mt-3 w-full bg-primary hover:bg-primary/90 text-primary-foreground" 
+                          onClick={() => window.location.href = '/practice-areas/amusement-parks/faq'}
+                        >
+                          View FAQ
+                        </Button>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/amusement-parks/resources'}>
                       <CardHeader>
                         <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                           <Building className="w-5 h-5 mr-2 text-primary" />

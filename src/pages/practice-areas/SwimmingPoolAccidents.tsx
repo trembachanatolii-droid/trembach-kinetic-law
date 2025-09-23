@@ -30,6 +30,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/swimming-pool-hero.jpg';
 import sidebarImage from '@/assets/swimming-pool-sidebar.jpg';
+import sidebarProfessionalImage from '@/assets/swimming-pool-sidebar-professional.jpg';
 import overviewImage from '@/assets/swimming-pool-overview.jpg';
 import evaluationImage from '@/assets/swimming-pool-evaluation.jpg';
 import immediateStepsImage from '@/assets/swimming-pool-immediate-steps.jpg';
@@ -199,7 +200,7 @@ const SwimmingPoolAccidents: React.FC = () => {
             <div className="sticky top-24">
               <Card 
                 className="relative overflow-hidden bg-cover bg-center bg-no-repeat"
-                style={{ backgroundImage: `url(${sidebarImage})` }}
+                style={{ backgroundImage: `url(${sidebarProfessionalImage})` }}
               >
                 <div className="absolute inset-0 bg-black/60"></div>
                 <div className="relative z-10 p-6">

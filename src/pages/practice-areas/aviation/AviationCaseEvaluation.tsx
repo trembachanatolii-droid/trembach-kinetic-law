@@ -5,6 +5,7 @@ import { Phone, MessageCircle, Mail, Plane } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import { Link } from 'react-router-dom';
 
 const AviationCaseEvaluation: React.FC = () => {
   return (
@@ -61,28 +62,34 @@ const AviationCaseEvaluation: React.FC = () => {
             <div className="space-y-4">
               <Button 
                 className="w-full bg-red-600 hover:bg-red-700 text-white"
-                onClick={() => window.location.href = 'tel:8181234567'}
+                asChild
               >
-                <Phone className="w-4 h-4 mr-2" />
-                Call (818) 123-4567
+                <a href="tel:8181234567" aria-label="Call Trembach Law Firm">
+                  <Phone className="w-4 h-4 mr-2" />
+                  Call (818) 123-4567
+                </a>
               </Button>
               
               <Button 
                 variant="outline" 
                 className="w-full text-black border-gray-300 hover:bg-gray-50"
-                onClick={() => window.location.href = '/aviation/compensation-calculator'}
+                asChild
               >
-                <MessageCircle className="w-4 h-4 mr-2" />
-                Compensation Calculator
+                <Link to="/aviation/compensation-calculator" aria-label="Open compensation calculator">
+                  <MessageCircle className="w-4 h-4 mr-2" />
+                  Compensation Calculator
+                </Link>
               </Button>
               
               <Button 
                 variant="outline" 
                 className="w-full text-black border-gray-300 hover:bg-gray-50"
-                onClick={() => window.location.href = '/aviation/legal-guidance'}
+                asChild
               >
-                <Mail className="w-4 h-4 mr-2" />
-                Legal Guidance
+                <Link to="/aviation/legal-guidance" aria-label="Open legal guidance">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Legal Guidance
+                </Link>
               </Button>
             </div>
           </CardContent>

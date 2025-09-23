@@ -1,12 +1,67 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Phone, Mail, MessageCircle } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Phone, Mail, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/maritime-case-evaluation-hero.jpg';
 
 const MaritimeCaseEvaluation: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    incidentDate: '',
+    incidentLocation: '',
+    vesselName: '',
+    employerName: '',
+    jobTitle: '',
+    accidentType: '',
+    injuryType: '',
+    medicalTreatment: '',
+    currentStatus: '',
+    additionalInfo: ''
+  });
+
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Here you would typically send the data to your backend
+    console.log('Form submitted:', formData);
+    setIsSubmitted(true);
+    
+    // Reset form after 3 seconds
+    setTimeout(() => {
+      setIsSubmitted(false);
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        incidentDate: '',
+        incidentLocation: '',
+        vesselName: '',
+        employerName: '',
+        jobTitle: '',
+        accidentType: '',
+        injuryType: '',
+        medicalTreatment: '',
+        currentStatus: '',
+        additionalInfo: ''
+      });
+    }, 3000);
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 
@@ -46,53 +101,234 @@ const MaritimeCaseEvaluation: React.FC = () => {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <h2 className="text-3xl font-bold mb-6">Get Your Free Maritime Case Evaluation</h2>
+            <h2 className="text-3xl font-bold mb-6">Submit Your Case for Free Evaluation</h2>
             <p className="text-lg mb-6">
-              Maritime law cases have unique requirements and strict deadlines. Our specialized attorneys 
-              provide immediate evaluation to determine the strength of your case and your available legal remedies.
+              Complete the form below to receive a comprehensive evaluation of your maritime accident case. 
+              Our specialized attorneys will review your information and contact you within 24 hours.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <Card>
-                <CardHeader>
-                  <CardTitle>What We Evaluate</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Jones Act eligibility</li>
-                    <li>• LHWCA coverage</li>
-                    <li>• Vessel unseaworthiness claims</li>
-                    <li>• Maintenance and cure rights</li>
-                    <li>• Third-party liability</li>
-                    <li>• Potential compensation value</li>
-                  </ul>
-                </CardContent>
-              </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Case Evaluation Form</CardTitle>
+              </CardHeader>
+              <CardContent>
+                {isSubmitted ? (
+                  <div className="text-center py-8">
+                    <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
+                    <h3 className="text-2xl font-bold text-green-600 mb-2">Form Submitted Successfully!</h3>
+                    <p className="text-muted-foreground">
+                      Thank you for submitting your information. Our team will review your case and contact you within 24 hours.
+                    </p>
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    {/* Personal Information */}
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold">Personal Information</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="firstName">First Name *</Label>
+                          <Input
+                            id="firstName"
+                            required
+                            value={formData.firstName}
+                            onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="lastName">Last Name *</Label>
+                          <Input
+                            id="lastName"
+                            required
+                            value={formData.lastName}
+                            onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="email">Email Address *</Label>
+                          <Input
+                            id="email"
+                            type="email"
+                            required
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="phone">Phone Number *</Label>
+                          <Input
+                            id="phone"
+                            type="tel"
+                            required
+                            value={formData.phone}
+                            onChange={(e) => handleInputChange('phone', e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle>Case Evaluation Process</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Initial consultation (30 minutes)</li>
-                    <li>• Document review</li>
-                    <li>• Legal analysis</li>
-                    <li>• Compensation estimate</li>
-                    <li>• Strategy recommendations</li>
-                    <li>• Next steps guidance</li>
-                  </ul>
-                </CardContent>
-              </Card>
-            </div>
+                    {/* Incident Details */}
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold">Incident Details</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="incidentDate">Date of Incident *</Label>
+                          <Input
+                            id="incidentDate"
+                            type="date"
+                            required
+                            value={formData.incidentDate}
+                            onChange={(e) => handleInputChange('incidentDate', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="incidentLocation">Location of Incident *</Label>
+                          <Input
+                            id="incidentLocation"
+                            required
+                            placeholder="e.g., Gulf of Mexico, Port of Los Angeles"
+                            value={formData.incidentLocation}
+                            onChange={(e) => handleInputChange('incidentLocation', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="vesselName">Vessel/Platform Name</Label>
+                          <Input
+                            id="vesselName"
+                            value={formData.vesselName}
+                            onChange={(e) => handleInputChange('vesselName', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="accidentType">Type of Accident *</Label>
+                          <Select value={formData.accidentType} onValueChange={(value) => handleInputChange('accidentType', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select accident type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="slip-fall">Slip and Fall</SelectItem>
+                              <SelectItem value="equipment-failure">Equipment Failure</SelectItem>
+                              <SelectItem value="collision">Vessel Collision</SelectItem>
+                              <SelectItem value="explosion">Explosion/Fire</SelectItem>
+                              <SelectItem value="crane-accident">Crane Accident</SelectItem>
+                              <SelectItem value="crushing">Crushing Injury</SelectItem>
+                              <SelectItem value="chemical-exposure">Chemical Exposure</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Employment Information */}
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold">Employment Information</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="employerName">Employer Name *</Label>
+                          <Input
+                            id="employerName"
+                            required
+                            value={formData.employerName}
+                            onChange={(e) => handleInputChange('employerName', e.target.value)}
+                          />
+                        </div>
+                        <div>
+                          <Label htmlFor="jobTitle">Job Title *</Label>
+                          <Input
+                            id="jobTitle"
+                            required
+                            value={formData.jobTitle}
+                            onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Injury Information */}
+                    <div className="space-y-4">
+                      <h4 className="text-lg font-semibold">Injury Information</h4>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <Label htmlFor="injuryType">Type of Injury *</Label>
+                          <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select injury type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="back-spine">Back/Spine Injury</SelectItem>
+                              <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                              <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                              <SelectItem value="burns">Burns</SelectItem>
+                              <SelectItem value="amputation">Amputation</SelectItem>
+                              <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                              <SelectItem value="multiple-injuries">Multiple Injuries</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <Label htmlFor="currentStatus">Current Status *</Label>
+                          <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange('currentStatus', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select current status" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="still-treating">Still Receiving Treatment</SelectItem>
+                              <SelectItem value="returned-work">Returned to Work</SelectItem>
+                              <SelectItem value="unable-work">Unable to Work</SelectItem>
+                              <SelectItem value="light-duty">On Light Duty</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      <div>
+                        <Label htmlFor="medicalTreatment">Medical Treatment Received</Label>
+                        <Textarea
+                          id="medicalTreatment"
+                          placeholder="Describe the medical treatment you have received..."
+                          value={formData.medicalTreatment}
+                          onChange={(e) => handleInputChange('medicalTreatment', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    {/* Additional Information */}
+                    <div>
+                      <Label htmlFor="additionalInfo">Additional Information</Label>
+                      <Textarea
+                        id="additionalInfo"
+                        placeholder="Please provide any additional details about your case that you think would be helpful..."
+                        value={formData.additionalInfo}
+                        onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                      />
+                    </div>
+
+                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
+                      <Send className="w-4 h-4 mr-2" />
+                      Submit Case for Evaluation
+                    </Button>
+
+                    <p className="text-xs text-muted-foreground text-center">
+                      By submitting this form, you agree that an attorney may contact you to discuss your case. 
+                      Submitting this form does not establish an attorney-client relationship.
+                    </p>
+                  </form>
+                )}
+              </CardContent>
+            </Card>
           </div>
 
           <div className="lg:col-span-1">
-            <Card className="sticky top-6">
+            <Card className="sticky top-6 mb-6">
               <CardHeader>
-                <CardTitle>Schedule Your Free Evaluation</CardTitle>
+                <CardTitle>Need Immediate Help?</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                <p className="text-sm">
+                  Can't wait for our response? Call us directly for immediate assistance with your maritime accident case.
+                </p>
+                
                 <Button 
                   className="w-full bg-red-600 hover:bg-red-700 text-white"
                   onClick={() => window.location.href = 'tel:8181234567'}
@@ -101,20 +337,29 @@ const MaritimeCaseEvaluation: React.FC = () => {
                   Call (818) 123-4567
                 </Button>
                 
-                <Button 
-                  variant="outline" 
-                  className="w-full"
-                  onClick={() => window.location.href = '/schedule-consultation'}
-                >
-                  <MessageCircle className="w-4 h-4 mr-2" />
-                  Schedule Online
-                </Button>
-
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     Available 24/7 for Maritime Emergencies
                   </p>
                 </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>What We Evaluate</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm">
+                  <li>• Jones Act eligibility</li>
+                  <li>• LHWCA coverage</li>
+                  <li>• Vessel unseaworthiness claims</li>
+                  <li>• Maintenance and cure rights</li>
+                  <li>• Third-party liability</li>
+                  <li>• Potential compensation value</li>
+                  <li>• Case timeline and deadlines</li>
+                  <li>• Available legal remedies</li>
+                </ul>
               </CardContent>
             </Card>
           </div>

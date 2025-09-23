@@ -112,7 +112,7 @@ const UberLyftResources = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Uber/Lyft Accident Resources
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto body-text">
             Comprehensive resources for rideshare accident victims in California including legal references, medical facilities, and support organizations.
           </p>
         </div>

@@ -47,7 +47,7 @@ const UberLyftLegalGuidance = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Legal Guidance for Uber/Lyft Accident Cases
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto body-text">
             Navigate California's complex rideshare accident laws with expert legal guidance and representation.
           </p>
         </div>

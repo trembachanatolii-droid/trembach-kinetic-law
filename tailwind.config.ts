@@ -69,9 +69,16 @@ export default {
       },
       
       fontFamily: {
-        sans: ['Instrument Sans', 'sans-serif'],
-        display: ['Instrument Sans', 'sans-serif'],
-        body: ['Instrument Sans', 'sans-serif'],
+        sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        body: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+      },
+      fontSize: {
+        'body': ['16px', { lineHeight: '1.5' }],
+        'body-lg': ['18px', { lineHeight: '1.5' }], 
+        'heading': ['24px', { lineHeight: '1.3', fontWeight: '700' }],
+        'heading-lg': ['32px', { lineHeight: '1.2', fontWeight: '700' }],
+        'display': ['48px', { lineHeight: '1.1', fontWeight: '700' }],
       },
       borderRadius: {
         lg: "var(--radius)",

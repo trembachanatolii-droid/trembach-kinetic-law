@@ -181,7 +181,7 @@ const UberLyftFAQ = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Uber/Lyft Accident FAQ
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto body-text">
             Get answers to the most common questions about rideshare accident claims in California.
           </p>
         </div>

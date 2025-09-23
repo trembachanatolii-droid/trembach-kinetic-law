@@ -109,11 +109,11 @@ const UberLyftCompensationCalculator = () => {
             <div>
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-2xl text-primary flex items-center gap-2">
+                  <CardTitle className="text-2xl text-black flex items-center gap-2 heading-text">
                     <Calculator className="w-6 h-6" />
                     Compensation Calculator
                   </CardTitle>
-                  <p className="text-muted-foreground">
+                  <p className="body-text">
                     Enter your case details to get an estimated compensation range.
                   </p>
                 </CardHeader>

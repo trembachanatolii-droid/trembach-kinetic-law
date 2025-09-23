@@ -48,7 +48,7 @@ const UberLyftMedicalGuidance = () => {
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Medical Guidance for Uber/Lyft Accident Victims
           </h1>
-          <p className="text-xl mb-8 max-w-3xl mx-auto">
+          <p className="text-xl mb-8 max-w-3xl mx-auto body-text">
             Essential medical information and treatment guidance for rideshare accident injuries in California.
           </p>
         </div>

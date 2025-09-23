@@ -433,11 +433,11 @@ const UberLyftAccidents: React.FC = () => {
             {/* Overview Section */}
             <section id="overview" className="content-card bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden hover:scale-[1.01]">
               <div className="p-8">
-                <h2 className="text-4xl font-bold text-primary mb-6 flex items-center gap-3">
+                <h2 className="text-4xl font-bold text-black mb-6 flex items-center gap-3 heading-text">
                   <FileText className="w-8 h-8" />
                   What to Do After an Uber or Lyft Accident
                 </h2>
-                <p className="text-xl text-muted-foreground mb-8 font-medium">
+                <p className="text-xl text-body body-text font-medium mb-8">
                   Critical steps to protect your rights and maximize compensation after a rideshare accident.
                 </p>
 
@@ -542,11 +542,11 @@ const UberLyftAccidents: React.FC = () => {
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-card bg-gradient-to-br from-primary/5 to-secondary/5 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500 overflow-hidden hover:scale-[1.01]">
               <div className="p-8">
-                <h2 className="text-3xl font-bold text-primary mb-6 flex items-center gap-3">
+                <h2 className="text-3xl font-bold text-black mb-6 flex items-center gap-3 heading-text">
                   <Scale className="w-8 h-8" />
                   Free Case Evaluation
                 </h2>
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-lg body-text mb-8">
                   Get a professional assessment of your rideshare accident case value and legal options.
                 </p>
 
@@ -632,7 +632,7 @@ const UberLyftAccidents: React.FC = () => {
               </div>
               
               <div className="p-8">
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-lg body-text mb-8">
                   Understanding injury types helps maximize your compensation claim and ensures proper medical treatment.
                 </p>
 
@@ -693,7 +693,7 @@ const UberLyftAccidents: React.FC = () => {
               </div>
               
               <div className="p-8">
-                <p className="text-lg text-muted-foreground mb-8">
+                <p className="text-lg body-text mb-8">
                   Understanding the three-period insurance system is crucial for maximizing your compensation.
                 </p>
 

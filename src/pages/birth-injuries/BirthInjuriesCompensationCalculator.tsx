@@ -362,8 +362,10 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
                   </div>
 
                   <Button 
+                    variant="secondary"
+                    size="lg"
                     onClick={calculateCompensation} 
-                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3"
+                    className="w-full bg-coral-500 hover:bg-coral-600 text-white border border-white rounded-lg transition-colors font-bold py-3"
                     disabled={!formData.injuryType || !formData.injurySeverity}
                   >
                     Calculate Compensation Estimate
@@ -382,8 +384,10 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
                             *This is an estimate. Actual compensation may vary based on specific case details.
                           </p>
                           <Button 
+                            variant="secondary"
+                            size="lg"
                             onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
-                            className="bg-primary hover:bg-primary/90 text-white"
+                            className="bg-coral-500 hover:bg-coral-600 text-white border border-white rounded-lg transition-colors"
                           >
                             Get Free Case Evaluation
                           </Button>

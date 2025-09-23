@@ -40,6 +40,7 @@ import legalStepsImage from '@/assets/birth-injuries-legal-steps.jpg';
 import injuryTypesImage from '@/assets/birth-injuries-types.jpg';
 import provingNegligenceImage from '@/assets/birth-injuries-proving-negligence.jpg';
 import evidenceImage from '@/assets/birth-injuries-evidence.jpg';
+import provingNegligenceRevisedImage from '@/assets/birth-injuries-proving-negligence-revised.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -787,7 +788,7 @@ const BirthInjuries: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Proving Negligence</h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
-                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${provingNegligenceImage})` }} />
+                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${provingNegligenceRevisedImage})` }} />
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Scale className="w-5 h-5 mr-2 text-red-600" />

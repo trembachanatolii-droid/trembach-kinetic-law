@@ -728,6 +728,7 @@ const PracticeAreasReference: React.FC = () => {
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
                            activeArea.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                           activeArea.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
                            activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
                           activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                           `/practice-areas/${activeArea.slug}`}
@@ -741,6 +742,7 @@ const PracticeAreasReference: React.FC = () => {
                     <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
                            activeArea.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
+                           activeArea.title === 'Maritime Accidents' ? '/maritime/case-evaluation' :
                            activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
                           activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
                           '/case-evaluation'}

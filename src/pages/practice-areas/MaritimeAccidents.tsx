@@ -482,13 +482,13 @@ const MaritimeAccidents: React.FC = () => {
               passengers, and their families. No fees unless we win your case.
             </p>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-              onClick={() => window.location.href = '/maritime/case-evaluation'}
-            >
-              GET FREE MARITIME CASE EVALUATION
-            </Button>
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                onClick={() => window.location.href = '/maritime/case-evaluation'}
+              >
+                GET FREE MARITIME CASE EVALUATION
+              </Button>
           </div>
         </div>
 
@@ -760,8 +760,7 @@ const MaritimeAccidents: React.FC = () => {
                   </div>
                 </div>
                 <Button 
-                  size="lg" 
-                  className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   onClick={() => window.location.href = '/maritime/case-evaluation'}
                 >
                   Get Free Case Evaluation Now
@@ -772,54 +771,54 @@ const MaritimeAccidents: React.FC = () => {
 
           {/* Sticky Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-6">
-              
-              {/* 3 Ways to Start Your Case - Styled like Mesothelioma */}
-              <Card className="glass-card mb-6 overflow-hidden relative">
-                <div 
-                  className="absolute inset-0 bg-cover bg-center opacity-20"
-                  style={{ backgroundImage: `url(${sidebarImage})` }}
-                ></div>
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60"></div>
+              <div className="sticky top-6">
                 
-                <div className="relative z-10 p-6 text-white">
-                  <h3 className="text-2xl font-bold mb-6 text-center">3 Ways to Start Your Case</h3>
+                {/* 3 Ways to Start Your Case - Styled like Mesothelioma */}
+                <Card className="glass-card mb-6 overflow-hidden relative">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-20"
+                    style={{ backgroundImage: `url(${sidebarImage})` }}
+                  ></div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary/80 to-primary/60"></div>
                   
-                  <div className="space-y-4">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
-                      <Phone className="w-5 h-5 mr-2" />
-                      Call (818) 123-4567
-                    </Button>
+                  <div className="relative z-10 p-6 text-white">
+                    <h3 className="text-2xl font-bold mb-6 text-center">3 Ways to Start Your Case</h3>
                     
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-white text-white hover:border-primary"
-                      onClick={() => window.location.href = '/schedule-consultation'}
-                    >
-                      Schedule Consultation
-                      <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      size="sm" 
-                      className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-white text-white hover:border-primary"
-                      onClick={() => window.location.href = '/maritime/case-evaluation'}
-                    >
-                      Free Case Evaluation
-                      <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
-                    </Button>
-                  </div>
+                    <div className="space-y-4">
+                      <Button 
+                        className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                        onClick={() => window.location.href = 'tel:8181234567'}
+                      >
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-white text-white hover:border-primary"
+                        onClick={() => window.location.href = '/schedule-consultation'}
+                      >
+                        Schedule Consultation
+                        <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                      
+                      <Button 
+                        variant="outline" 
+                        size="sm" 
+                        className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300 border-white text-white hover:border-primary"
+                        onClick={() => window.location.href = '/maritime/case-evaluation'}
+                      >
+                        Free Case Evaluation
+                        <ArrowRight className="w-3 h-3 ml-2 group-hover:translate-x-1 transition-transform" />
+                      </Button>
+                    </div>
 
-                  <div className="mt-6 pt-4 border-t border-white/30 text-center">
-                    <p className="text-sm opacity-90">Available 24/7 for Maritime Emergencies</p>
+                    <div className="mt-6 pt-4 border-t border-white/30 text-center">
+                      <p className="text-sm opacity-90">Available 24/7 for Maritime Emergencies</p>
+                    </div>
                   </div>
-                </div>
-              </Card>
+                </Card>
 
               {/* Quick Links */}
               <Card className="hover-3d-card glass-card mb-6">

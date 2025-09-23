@@ -202,6 +202,7 @@ function App() {
             <Route path="/maritime/legal-guidance" element={<MaritimeLegalGuidance />} />
             <Route path="/maritime/medical-guidance" element={<MaritimeMedicalGuidance />} />
             <Route path="/maritime/education" element={<MaritimeEducation />} />
+            <Route path="/schedule-consultation" element={<ScheduleConsultation />} />
             <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
             <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />

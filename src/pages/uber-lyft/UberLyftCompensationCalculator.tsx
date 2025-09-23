@@ -12,7 +12,7 @@ import { Calculator, DollarSign, Heart, Clock, Shield, Award, Car, Activity, Sta
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import { useScrollMemory } from '@/hooks/useScrollMemory';
-import heroBackground from '@/assets/uber-lyft-calculator-hero.jpg';
+import heroBackground from '@/assets/uber-lyft-hero-professional.jpg';
 gsap.registerPlugin(ScrollTrigger);
 const UberLyftCompensationCalculator: React.FC = () => {
   const [visible, setVisible] = useState(false);

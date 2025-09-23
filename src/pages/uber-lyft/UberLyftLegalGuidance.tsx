@@ -20,12 +20,12 @@ const UberLyftLegalGuidance = () => {
       <GoBack />
       
       {/* Hero Section */}
-      <section className="relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white" style={{
+      <section className="hero relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white" style={{
       backgroundImage: `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url(${heroImage})`,
       backgroundSize: 'cover',
       backgroundPosition: 'center'
     }}>
-        <div className="container mx-auto px-4 text-center text-white">
+        <div className="hero-content container mx-auto px-4 text-center text-white">
           <h1 className="text-4xl lg:text-5xl font-bold mb-6 text-white">Legal Guidance for Uber/Lyft Accident Cases</h1>
           <p className="text-xl mb-8 max-w-3xl mx-auto uberlyft-hero-text">
             Navigate California's complex rideshare accident laws with expert legal guidance and representation.

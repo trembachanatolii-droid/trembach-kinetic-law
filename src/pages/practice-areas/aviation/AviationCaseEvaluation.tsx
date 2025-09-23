@@ -1,9 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Card, CardContent } from '@/components/ui/card';
 import { ArrowLeft, Plane, Scale } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
@@ -44,79 +41,50 @@ const AviationCaseEvaluation: React.FC = () => {
         </div>
       </section>
 
-      {/* Form Section */}
-      <div className="max-w-4xl mx-auto px-6 py-12">
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-primary flex items-center justify-center">
-              <Scale className="w-6 h-6 mr-2" />
-              Aviation Accident Case Evaluation Form
-            </CardTitle>
-            <p className="text-muted-foreground">All information is confidential and protected by attorney-client privilege</p>
-          </CardHeader>
-          <CardContent>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">First Name *</label>
-                  <Input required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Last Name *</label>
-                  <Input required />
-                </div>
+      {/* 3 Ways to Start Your Case Section */}
+      <div className="max-w-md mx-auto px-6 py-12">
+        <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
+          <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${heroBackground})` }}>
+            <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
+              <div className="text-center text-white force-white">
+                <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                <h3 className="text-xl font-bold">Start Your Case</h3>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number *</label>
-                  <Input type="tel" required />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email Address *</label>
-                  <Input type="email" required />
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Accident Date</label>
-                  <Input type="date" />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Type of Aircraft</label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select aircraft type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="commercial-airline">Commercial Airline</SelectItem>
-                      <SelectItem value="private-plane">Private Plane</SelectItem>
-                      <SelectItem value="helicopter">Helicopter</SelectItem>
-                      <SelectItem value="charter">Charter Flight</SelectItem>
-                      <SelectItem value="military">Military Aircraft</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium mb-2">Describe Your Aviation Accident</label>
-                <Textarea 
-                  placeholder="Please provide details about what happened, your injuries, and how the accident has affected you..."
-                  rows={6}
-                />
-              </div>
-
-              <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3">
-                Submit My Free Case Evaluation
+            </div>
+          </div>
+          
+          <CardContent className="p-6">
+            <p className="text-sm text-muted-foreground mb-6">
+              You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
+            </p>
+            
+            <div className="space-y-4">
+              <Button 
+                className="w-full bg-red-600 hover:bg-red-700 text-white"
+                onClick={() => window.location.href = 'tel:8181234567'}
+              >
+                <Plane className="w-4 h-4 mr-2" />
+                Call (818) 123-4567
               </Button>
               
-              <p className="text-sm text-center text-muted-foreground">
-                By submitting this form, you agree to our terms and conditions. No fees unless we win your case.
-              </p>
-            </form>
+              <Button 
+                variant="outline" 
+                className="w-full text-black border-gray-300 hover:bg-gray-50"
+                onClick={() => window.location.href = '/aviation/compensation-calculator'}
+              >
+                <Scale className="w-4 h-4 mr-2" />
+                Compensation Calculator
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                className="w-full text-black border-gray-300 hover:bg-gray-50"
+                onClick={() => window.location.href = '/aviation/legal-guidance'}
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Legal Guidance
+              </Button>
+            </div>
           </CardContent>
         </Card>
       </div>

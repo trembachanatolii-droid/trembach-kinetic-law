@@ -143,6 +143,8 @@ import OpioidCalculator from "./pages/OpioidCalculator";
 import OpioidMedicalGuidance from "./pages/OpioidMedicalGuidance";
 import OpioidLegalGuidance from "./pages/OpioidLegalGuidance";
 import OpioidEducation from "./pages/OpioidEducation";
+import UberLyftAccidents from "./pages/practice-areas/UberLyftAccidents";
+import UberLyftCaseEvaluation from "./pages/UberLyftCaseEvaluation";
 
 const queryClient = new QueryClient();
 
@@ -204,6 +206,7 @@ function App() {
             <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />
             <Route path="/practice-areas/motorcycle-accidents" element={<MotorcycleAccidentsNew />} />
             <Route path="/practice-areas/pedestrian-accidents" element={<PedestrianAccidents />} />
+            <Route path="/practice-areas/uber-lyft-accidents" element={<UberLyftAccidents />} />
             <Route path="/practice-areas/spinal-cord-injuries" element={<SpinalCordInjuries />} />
             <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
@@ -313,6 +316,7 @@ function App() {
             <Route path="/opioid-medical-guidance" element={<OpioidMedicalGuidance />} />
             <Route path="/opioid-legal-guidance" element={<OpioidLegalGuidance />} />
             <Route path="/opioid-education" element={<OpioidEducation />} />
+            <Route path="/uber-lyft-case-evaluation" element={<UberLyftCaseEvaluation />} />
              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

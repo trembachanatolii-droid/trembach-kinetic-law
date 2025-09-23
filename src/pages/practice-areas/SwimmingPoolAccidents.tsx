@@ -797,21 +797,23 @@ const SwimmingPoolAccidents: React.FC = () => {
                     answer: "Yes, California follows comparative negligence law. Even if you were partially at fault, you can still recover damages reduced by your percentage of fault. For example, if you were 20% at fault, you can still recover 80% of your damages."
                   }
                 ].map((faq, index) => (
-                  <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
-                    <CollapsibleTrigger asChild onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
-                      <CardHeader className="hover:bg-muted/50 transition-colors">
-                        <CardTitle className="flex items-center justify-between text-left">
-                          <span className="text-lg">{faq.question}</span>
-                          {expandedFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                        </CardTitle>
-                      </CardHeader>
-                    </CollapsibleTrigger>
-                    {expandedFaq === index && (
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
+                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+                    <Card className="cursor-pointer hover:shadow-md transition-shadow">
+                      <CollapsibleTrigger asChild>
+                        <CardHeader className="hover:bg-muted/50 transition-colors">
+                          <CardTitle className="flex items-center justify-between text-left">
+                            <span className="text-lg">{faq.question}</span>
+                            {expandedFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                          </CardTitle>
+                        </CardHeader>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <CardContent>
+                          <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                        </CardContent>
+                      </CollapsibleContent>
+                    </Card>
+                  </Collapsible>
                 ))}
               </div>
 

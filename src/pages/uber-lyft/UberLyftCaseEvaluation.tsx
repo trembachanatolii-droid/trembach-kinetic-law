@@ -97,7 +97,7 @@ const UberLyftCaseEvaluation: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
         
-        <GoBack className="absolute top-20 left-6 z-10 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm" />
+        <GoBack />
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">

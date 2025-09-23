@@ -36,6 +36,7 @@ import diagnosisImage from '@/assets/birth-injuries-diagnosis-new.jpg';
 import legalProcessImage from '@/assets/birth-injuries-legal-process-new.jpg';
 import medicalImage from '@/assets/birth-injuries-medical-facility-new.jpg';
 import compensationImage from '@/assets/birth-injuries-compensation-calculator.jpg';
+import legalStepsImage from '@/assets/birth-injuries-legal-steps.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -716,6 +717,7 @@ const BirthInjuries: React.FC = () => {
                 </Card>
                 
                 <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                  <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center rounded-t-lg" style={{ backgroundImage: `url(${legalStepsImage})` }} />
                   <CardHeader>
                     <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                       <Shield className="w-5 h-5 mr-2 text-red-600" />

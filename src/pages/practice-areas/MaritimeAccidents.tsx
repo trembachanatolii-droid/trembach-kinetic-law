@@ -700,6 +700,322 @@ const MaritimeAccidents: React.FC = () => {
               </div>
             </section>
 
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Maritime Legal Process</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Maritime law cases follow unique procedures governed by federal admiralty jurisdiction. Understanding this process 
+                  is crucial for protecting your rights and maximizing your compensation.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-10 rounded-lg"
+                    style={{ backgroundImage: `url(${legalProcessImage})` }}
+                  ></div>
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Scale className="w-5 h-5 mr-2 text-primary" />
+                      Maritime Court Procedures
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative z-10">
+                    <ul className="space-y-2 text-sm">
+                      <li>• Federal court admiralty jurisdiction</li>
+                      <li>• Specialized maritime rules and procedures</li>
+                      <li>• Judge-tried cases (no jury in some claims)</li>
+                      <li>• Maritime liens and vessel arrests</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Clock className="w-5 h-5 mr-2 text-primary" />
+                      Critical Deadlines
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Jones Act: 3 years from injury</li>
+                      <li>• LHWCA: 30 days to report, 1 year to file</li>
+                      <li>• Passenger claims: Often 1-2 years</li>
+                      <li>• Death claims: Varying limitations</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4 hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                    Learn More About Maritime Legal Process
+                    {expandedSections.legalProcess ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-blue-800 mb-2">Investigation Phase</h4>
+                      <ul className="text-sm text-blue-700 space-y-1">
+                        <li>• Accident scene documentation</li>
+                        <li>• Coast Guard reports</li>
+                        <li>• Witness interviews</li>
+                        <li>• Expert analysis</li>
+                      </ul>
+                    </div>
+                    <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-green-800 mb-2">Filing & Discovery</h4>
+                      <ul className="text-sm text-green-700 space-y-1">
+                        <li>• Complaint preparation</li>
+                        <li>• Document requests</li>
+                        <li>• Depositions</li>
+                        <li>• Medical examinations</li>
+                      </ul>
+                    </div>
+                    <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                      <h4 className="font-semibold text-purple-800 mb-2">Resolution</h4>
+                      <ul className="text-sm text-purple-700 space-y-1">
+                        <li>• Settlement negotiations</li>
+                        <li>• Mediation/arbitration</li>
+                        <li>• Trial preparation</li>
+                        <li>• Judgment enforcement</li>
+                      </ul>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Medical Care Section */}
+            <section id="medical-care" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Maritime Medical Care & Recovery</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Maritime workers have unique rights to medical care under federal law. Understanding maintenance and cure benefits, 
+                  as well as your right to choose doctors, is essential for proper recovery and case value.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center opacity-10 rounded-lg"
+                    style={{ backgroundImage: `url(${medicalImage})` }}
+                  ></div>
+                  <CardHeader className="relative z-10">
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                      Maintenance & Cure Rights
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="relative z-10">
+                    <ul className="space-y-2 text-sm">
+                      <li>• All reasonable medical treatment</li>
+                      <li>• Living expenses during recovery</li>
+                      <li>• Right to choose your doctors</li>
+                      <li>• Benefits until maximum medical improvement</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Heart className="w-5 h-5 mr-2 text-primary" />
+                      Specialized Maritime Medicine
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-sm">
+                      <li>• Maritime-specific injury expertise</li>
+                      <li>• Understanding of shipboard conditions</li>
+                      <li>• Remote location medical challenges</li>
+                      <li>• Vocational rehabilitation services</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.medicalCare} onOpenChange={() => toggleSection('medicalCare')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4 hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                    Learn More About Maritime Medical Rights
+                    {expandedSections.medicalCare ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="bg-gradient-to-r from-green-50 to-blue-50 border border-green-200 rounded-lg p-6">
+                    <h4 className="font-semibold text-green-800 mb-4">Your Medical Rights Under Maritime Law</h4>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <h5 className="font-medium text-green-700 mb-2">Immediate Care</h5>
+                        <ul className="text-sm text-green-600 space-y-1">
+                          <li>• Emergency medical treatment</li>
+                          <li>• Evacuation from vessel if needed</li>
+                          <li>• Shore-based hospital care</li>
+                          <li>• Specialized maritime medical facilities</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h5 className="font-medium text-blue-700 mb-2">Ongoing Treatment</h5>
+                        <ul className="text-sm text-blue-600 space-y-1">
+                          <li>• Doctor of your choice</li>
+                          <li>• Second opinion rights</li>
+                          <li>• Physical therapy and rehabilitation</li>
+                          <li>• Psychological counseling if needed</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <h2 className="text-3xl font-bold text-red-600 mb-6">Maritime Resources & Information</h2>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Access comprehensive resources for maritime workers, their families, and anyone involved in California maritime accidents. 
+                  From legal guides to compensation calculators, we provide the tools you need to understand your rights.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Building className="w-5 h-5 mr-2 text-primary" />
+                      Compensation Calculator
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-4">Estimate potential compensation for your maritime accident case based on injury type and circumstances.</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                      onClick={() => window.location.href = '/maritime/compensation-calculator'}
+                    >
+                      Calculate Now
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Shield className="w-5 h-5 mr-2 text-primary" />
+                      Legal Guidance
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-4">Step-by-step legal guidance for maritime accident victims and their families.</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                      onClick={() => window.location.href = '/maritime/legal-guidance'}
+                    >
+                      Get Guidance
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                <Card className="hover-3d-card glass-card group hover-glow-primary transition-all duration-300">
+                  <CardHeader>
+                    <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                      <Stethoscope className="w-5 h-5 mr-2 text-primary" />
+                      Medical Guidance
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm mb-4">Medical resources and guidance for maritime injury treatment and recovery.</p>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="w-full hover:bg-primary hover:text-primary-foreground transition-all duration-300"
+                      onClick={() => window.location.href = '/maritime/medical-guidance'}
+                    >
+                      Learn More
+                    </Button>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <Collapsible open={expandedSections.resources} onOpenChange={() => toggleSection('resources')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4 hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+                    View All Maritime Resources
+                    {expandedSections.resources ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                      <h4 className="font-semibold text-blue-800 mb-4 flex items-center">
+                        <Map className="w-5 h-5 mr-2" />
+                        California Maritime Zones
+                      </h4>
+                      <div 
+                        className="w-full h-48 bg-cover bg-center rounded-lg mb-4 opacity-80"
+                        style={{ backgroundImage: `url(${californiaMaritimeImage})` }}
+                      ></div>
+                      <p className="text-sm text-blue-700">
+                        Understanding California's maritime jurisdiction zones and how they affect your legal rights and remedies.
+                      </p>
+                    </div>
+                    
+                    <div className="space-y-4">
+                      <div className="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <h5 className="font-semibold text-green-800 mb-2">Educational Resources</h5>
+                        <ul className="text-sm text-green-700 space-y-1">
+                          <li>• Jones Act vs. LHWCA Guide</li>
+                          <li>• Maritime Safety Regulations</li>
+                          <li>• Worker Rights Handbook</li>
+                          <li>• Case Study Library</li>
+                        </ul>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="mt-2 text-green-600 hover:text-green-800"
+                          onClick={() => window.location.href = '/maritime/education'}
+                        >
+                          Access Resources →
+                        </Button>
+                      </div>
+                      
+                      <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                        <h5 className="font-semibold text-purple-800 mb-2">Support Services</h5>
+                        <ul className="text-sm text-purple-700 space-y-1">
+                          <li>• 24/7 Emergency Consultation</li>
+                          <li>• Family Support Services</li>
+                          <li>• Medical Provider Network</li>
+                          <li>• Vocational Rehabilitation</li>
+                        </ul>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          className="mt-2 text-purple-600 hover:text-purple-800"
+                          onClick={() => window.location.href = '/schedule-consultation'}
+                        >
+                          Get Support →
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
             {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions About Maritime Law</h2>

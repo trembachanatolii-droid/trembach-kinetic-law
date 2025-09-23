@@ -48,15 +48,6 @@
   }
 
   /* Ensure button text is always visible with explicit colors */
-  
-  /* Coral Call-to-Action Colors */
-  .bg-coral-500 {
-    background-color: hsl(16, 84%, 60%) !important; /* coral/red color */
-  }
-  
-  .hover\:bg-coral-600:hover {
-    background-color: hsl(16, 84%, 55%) !important; /* darker coral on hover */
-  }
   button {
     color: inherit !important;
   }

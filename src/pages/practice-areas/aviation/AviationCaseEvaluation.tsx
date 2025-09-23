@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { ArrowLeft, Plane, Scale } from 'lucide-react';
+import { Phone, MessageCircle, Mail, Plane } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
@@ -63,7 +63,7 @@ const AviationCaseEvaluation: React.FC = () => {
                 className="w-full bg-red-600 hover:bg-red-700 text-white"
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
-                <Plane className="w-4 h-4 mr-2" />
+                <Phone className="w-4 h-4 mr-2" />
                 Call (818) 123-4567
               </Button>
               
@@ -72,7 +72,7 @@ const AviationCaseEvaluation: React.FC = () => {
                 className="w-full text-black border-gray-300 hover:bg-gray-50"
                 onClick={() => window.location.href = '/aviation/compensation-calculator'}
               >
-                <Scale className="w-4 h-4 mr-2" />
+                <MessageCircle className="w-4 h-4 mr-2" />
                 Compensation Calculator
               </Button>
               
@@ -81,7 +81,7 @@ const AviationCaseEvaluation: React.FC = () => {
                 className="w-full text-black border-gray-300 hover:bg-gray-50"
                 onClick={() => window.location.href = '/aviation/legal-guidance'}
               >
-                <ArrowLeft className="w-4 h-4 mr-2" />
+                <Mail className="w-4 h-4 mr-2" />
                 Legal Guidance
               </Button>
             </div>

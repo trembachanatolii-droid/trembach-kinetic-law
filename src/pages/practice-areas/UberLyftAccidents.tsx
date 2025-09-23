@@ -174,7 +174,7 @@ const UberLyftAccidents: React.FC = () => {
                     className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
                       activeTab === tab.id 
                         ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
+                        : 'text-white hover:bg-white/20 hover:!text-primary-foreground'
                     }`}
                   >
                     <IconComponent className="w-4 h-4 mr-2" />
@@ -210,9 +210,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
                     Show More About Our California Rideshare Practice
-                    {expandedSections.overview ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
+                    {expandedSections.overview ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -393,9 +393,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.stepsAfter} onOpenChange={() => toggleSection('stepsAfter')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
                     Show More Detailed Steps
-                    {expandedSections.stepsAfter ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
+                    {expandedSections.stepsAfter ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -454,9 +454,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.process} onOpenChange={() => toggleSection('process')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
                     Show Complete Injury Information
-                    {expandedSections.process ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
+                    {expandedSections.process ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -518,9 +518,9 @@ const UberLyftAccidents: React.FC = () => {
 
               <Collapsible open={expandedSections.legalProcess} onOpenChange={() => toggleSection('legalProcess')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="w-full justify-between mb-4 text-black hover:bg-muted">
+                  <Button variant="outline" className="w-full justify-between mb-4 text-foreground hover:bg-muted hover:!text-primary-foreground">
                     Show Complete Legal Process Details
-                    {expandedSections.legalProcess ? <ChevronUp className="text-black" /> : <ChevronDown className="text-black" />}
+                    {expandedSections.legalProcess ? <ChevronUp className="text-foreground" /> : <ChevronDown className="text-foreground" />}
                   </Button>
                 </CollapsibleTrigger>
                 <CollapsibleContent className="space-y-6">
@@ -741,7 +741,7 @@ const UberLyftAccidents: React.FC = () => {
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
+                      className="w-full text-foreground border-gray-300 hover:bg-gray-50 hover:!text-primary-foreground"
                       onClick={() => window.location.href = '/uber-lyft/compensation-calculator'}
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
@@ -750,7 +750,7 @@ const UberLyftAccidents: React.FC = () => {
                     
                     <Button 
                       variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
+                      className="w-full text-foreground border-gray-300 hover:bg-gray-50 hover:!text-primary-foreground"
                       onClick={() => window.location.href = '/uber-lyft/legal-guidance'}
                     >
                       <Mail className="w-4 h-4 mr-2" />

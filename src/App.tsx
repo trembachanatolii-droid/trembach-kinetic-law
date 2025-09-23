@@ -209,7 +209,7 @@ function App() {
             <Route path="/maritime/education" element={<MaritimeEducation />} />
             {/* Swimming Pool Routes */}
             <Route path="/practice-areas/swimming-pool-accidents" element={<SwimmingPoolAccidents />} />
-            <Route path="/practice-areas/swimming-pool" element={<SwimmingPoolAccidents />} />
+            <Route path="/practice-areas/amusement-parks" element={<AmusementParkInjuries />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />
             <Route path="/practice-areas/swimming-pool/compensation-calculator" element={<SwimmingPoolCompensationCalculator />} />
             <Route path="/practice-areas/swimming-pool/resources" element={<SwimmingPoolResources />} />

@@ -1142,3 +1142,43 @@ a[href^="tel:"],
   animation: float-front 22s ease-in-out infinite;
 }
 
+/* Fix checkbox double border/box issues */
+[data-radix-checkbox] {
+  box-shadow: none !important;
+  outline: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+[data-radix-checkbox]:focus {
+  box-shadow: 0 0 0 2px hsl(var(--ring)) !important;
+}
+
+/* Ensure single border for checkboxes */
+.peer {
+  position: relative;
+}
+
+.peer:after {
+  content: none;
+}
+
+/* Remove any duplicate styling from forms */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+/* Ensure labels don't create duplicate elements */
+label {
+  display: block;
+  cursor: pointer;
+}
+
+label:before,
+label:after {
+  content: none;
+}
+

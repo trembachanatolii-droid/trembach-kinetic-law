@@ -16,7 +16,7 @@ const UberLyftLegalGuidance = () => {
       [sectionId]: !prev[sectionId]
     }));
   };
-  return <div className="uberlyft-page min-h-screen bg-background">
+  return <div className="uberlyft-page min-h-screen bg-background text-white">
       <GoBack />
       
       {/* Hero Section */}

@@ -323,7 +323,6 @@ const DogBiteCompensationCalculator: React.FC = () => {
                           <Select
                             value={formData.scarringVisible}
                             onValueChange={(value) => handleInputChange('scarringVisible', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />
@@ -340,7 +339,6 @@ const DogBiteCompensationCalculator: React.FC = () => {
                           <Select
                             value={formData.permanentDisability}
                             onValueChange={(value) => handleInputChange('permanentDisability', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />

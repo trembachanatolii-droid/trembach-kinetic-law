@@ -253,9 +253,8 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
                       <Select 
                         value={formData.severity}
                         onValueChange={(value) => handleInputChange('severity', value)}
-                        className="mt-2"
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="mt-2">
                           <SelectValue placeholder="Select severity" />
                         </SelectTrigger>
                         <SelectContent>
@@ -300,9 +299,8 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
                       <Select 
                         value={formData.hospitalization}
                         onValueChange={(value) => handleInputChange('hospitalization', value)}
-                        className="mt-2"
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="mt-2">
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                         <SelectContent>
@@ -317,9 +315,8 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
                       <Select 
                         value={formData.permanentDisability}
                         onValueChange={(value) => handleInputChange('permanentDisability', value)}
-                        className="mt-2"
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="mt-2">
                           <SelectValue placeholder="Select an option" />
                         </SelectTrigger>
                         <SelectContent>
@@ -335,9 +332,8 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
                       <Select 
                         value={formData.futureEarnings}
                         onValueChange={(value) => handleInputChange('futureEarnings', value)}
-                        className="mt-2"
                       >
-                        <SelectTrigger>
+                        <SelectTrigger className="mt-2">
                           <SelectValue placeholder="Select impact" />
                         </SelectTrigger>
                         <SelectContent>

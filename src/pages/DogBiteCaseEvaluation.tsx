@@ -452,7 +452,6 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           <Select
                             value={formData.witnessesPresent}
                             onValueChange={(value) => handleInputChange('witnessesPresent', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />
@@ -481,7 +480,6 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           <Select
                             value={formData.policeReportFiled}
                             onValueChange={(value) => handleInputChange('policeReportFiled', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />
@@ -499,7 +497,6 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           <Select
                             value={formData.photosAvailable}
                             onValueChange={(value) => handleInputChange('photosAvailable', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />
@@ -524,7 +521,6 @@ const DogBiteCaseEvaluation: React.FC = () => {
                           <Select
                             value={formData.priorIncidents}
                             onValueChange={(value) => handleInputChange('priorIncidents', value)}
-                            className="mt-2"
                           >
                             <SelectTrigger className="mt-2 h-12 text-base">
                               <SelectValue placeholder="Select an option" />

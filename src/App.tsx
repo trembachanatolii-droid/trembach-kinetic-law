@@ -159,6 +159,7 @@ import UberLyftAppSafety from "./pages/uber-lyft/UberLyftAppSafety";
 import UberLyftPassengerRights from "./pages/uber-lyft/UberLyftPassengerRights";
 import UberLyftFAQ from "./pages/uber-lyft/UberLyftFAQ";
 import UberLyftResources from "./pages/uber-lyft/UberLyftResources";
+import AviationAccidents from "./pages/practice-areas/AviationAccidents";
 
 const queryClient = new QueryClient();
 
@@ -176,6 +177,7 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
+            <Route path="/practice-areas/aviation-accidents" element={<AviationAccidents />} />
             <Route path="/bus-accident/case-evaluation" element={<BusAccidentCaseEvaluation />} />
             <Route path="/bus-accident/compensation-calculator" element={<BusAccidentCompensationCalculator />} />
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />

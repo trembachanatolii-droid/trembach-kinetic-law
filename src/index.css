@@ -87,8 +87,17 @@
   }
   
   .text-white {
-    color: white !important;
-  }
+     color: white !important;
+   }
+
+   /* Force hero section text to white for all Birth Injuries pages */
+   .hero-content h1,
+   .hero-content h2,
+   .hero-content h3,
+   .hero-content p,
+   .hero-content span {
+     color: hsl(var(--primary-foreground)) !important;
+   }
   
   .text-primary {
      color: hsl(var(--primary));

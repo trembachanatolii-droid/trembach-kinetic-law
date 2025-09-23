@@ -22,13 +22,13 @@ const MaritimeCaseEvaluation: React.FC = () => {
         className="relative h-96 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="absolute inset-0 bg-black/80"></div>
         <div className="relative z-10 max-w-7xl mx-auto px-6 h-full flex items-center justify-center">
-          <div className="text-white max-w-3xl text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <div className="max-w-3xl text-center">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               Free Maritime Case Evaluation
             </h1>
-            <p className="text-xl mb-6">
+            <p className="text-xl mb-6 text-white">
               Expert analysis of your maritime accident claim with immediate consultation
             </p>
             <Button 

@@ -869,19 +869,19 @@ const UberLyftAccidents: React.FC = () => {
                     <Button 
                       variant="outline" 
                       className="w-full text-black border-gray-300 hover:bg-gray-50"
-                      onClick={() => window.location.href = '/schedule-consultation'}
+                      onClick={() => window.location.href = '/uber-lyft/compensation-calculator'}
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
-                      Schedule Consultation
+                      Compensation Calculator
                     </Button>
                     
                     <Button 
                       variant="outline" 
                       className="w-full text-black border-gray-300 hover:bg-gray-50"
-                      onClick={() => window.location.href = '/case-evaluation'}
+                      onClick={() => window.location.href = '/uber-lyft/legal-guidance'}
                     >
                       <Mail className="w-4 h-4 mr-2" />
-                      Free Case Evaluation
+                      Legal Guidance
                     </Button>
                   </div>
                 </CardContent>

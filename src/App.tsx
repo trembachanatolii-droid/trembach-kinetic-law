@@ -166,6 +166,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/uber-lyft-accidents" element={<UberLyftAccidents />} />
+            <Route path="/uber-lyft/compensation-calculator" element={<UberLyftCompensationCalculator />} />
+            <Route path="/uber-lyft/legal-guidance" element={<UberLyftLegalGuidance />} />
+            <Route path="/uber-lyft/medical-guidance" element={<UberLyftMedicalGuidance />} />
+            <Route path="/uber-lyft/resources" element={<UberLyftResources />} />
             <Route path="/practice-areas/birth-injuries" element={<BirthInjuries />} />
             <Route path="/birth-injuries/case-evaluation" element={<BirthInjuriesCaseEvaluation />} />
             <Route path="/birth-injuries/compensation-calculator" element={<BirthInjuriesCompensationCalculator />} />

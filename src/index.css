@@ -304,17 +304,24 @@ body.grain-disabled::before {
   }
   
   /* Uber/Lyft High-Contrast Typography Scope */
-  .uberlyft-page h1, .uberlyft-page h2, .uberlyft-page h3, .uberlyft-page h4, .uberlyft-page h5, .uberlyft-page h6 {
+  /* Uber/Lyft page: keep dark text inside content areas; allow hero to use light text */
+  .uberlyft-page .content-section h1, .uberlyft-page .content-section h2, .uberlyft-page .content-section h3, .uberlyft-page .content-section h4, .uberlyft-page .content-section h5, .uberlyft-page .content-section h6,
+  .uberlyft-page .content-card h1, .uberlyft-page .content-card h2, .uberlyft-page .content-card h3,
+  .uberlyft-page .card h1, .uberlyft-page .card h2, .uberlyft-page .card h3 {
     color: #000000 !important;
   }
-  .uberlyft-page p, .uberlyft-page li, .uberlyft-page span, .uberlyft-page label, .uberlyft-page input::placeholder {
+  .uberlyft-page .content-section p, .uberlyft-page .content-section li, .uberlyft-page .content-section span, .uberlyft-page .content-section label, .uberlyft-page .content-section input::placeholder,
+  .uberlyft-page .content-card p, .uberlyft-page .content-card li, .uberlyft-page .content-card span,
+  .uberlyft-page .card p, .uberlyft-page .card li, .uberlyft-page .card span {
     color: #111111 !important;
   }
   .uberlyft-page .text-muted-foreground { color: #333333 !important; }
-  .uberlyft-page .content-card p, .uberlyft-page .content-card li, .uberlyft-page .content-card span { color: #111111 !important; }
-  .uberlyft-page .content-card h1, .uberlyft-page .content-card h2, .uberlyft-page .content-card h3 { color: #000000 !important; }
   .uberlyft-page a { color: #0a0a0a !important; }
   .uberlyft-page a:hover { color: hsl(var(--primary)) !important; }
+  /* Ensure hero uses light text on dark overlay */
+  .uberlyft-page .hero h1, .uberlyft-page .hero h2, .uberlyft-page .hero h3, .uberlyft-page .hero p, .uberlyft-page .hero span {
+    color: hsl(var(--primary-foreground)) !important;
+  }
 
   
   /* Glow Effects */

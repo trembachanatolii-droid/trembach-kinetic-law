@@ -144,10 +144,14 @@ import OpioidMedicalGuidance from "./pages/OpioidMedicalGuidance";
 import OpioidLegalGuidance from "./pages/OpioidLegalGuidance";
 import OpioidEducation from "./pages/OpioidEducation";
 import UberLyftAccidents from "./pages/practice-areas/UberLyftAccidents";
-import UberLyftCaseEvaluation from "./pages/UberLyftCaseEvaluation";
+import UberLyftCaseEvaluation from "./pages/uber-lyft/UberLyftCaseEvaluation";
 import UberLyftCompensationCalculator from "./pages/uber-lyft/UberLyftCompensationCalculator";
 import UberLyftMedicalGuidance from "./pages/uber-lyft/UberLyftMedicalGuidance";
 import UberLyftLegalGuidance from "./pages/uber-lyft/UberLyftLegalGuidance";
+import UberLyftInsuranceClaims from "./pages/uber-lyft/UberLyftInsuranceClaims";
+import UberLyftDriverScreening from "./pages/uber-lyft/UberLyftDriverScreening";
+import UberLyftAppSafety from "./pages/uber-lyft/UberLyftAppSafety";
+import UberLyftPassengerRights from "./pages/uber-lyft/UberLyftPassengerRights";
 import UberLyftFAQ from "./pages/uber-lyft/UberLyftFAQ";
 import UberLyftResources from "./pages/uber-lyft/UberLyftResources";
 
@@ -171,6 +175,11 @@ function App() {
             <Route path="/uber-lyft/legal-guidance" element={<UberLyftLegalGuidance />} />
             <Route path="/uber-lyft/medical-guidance" element={<UberLyftMedicalGuidance />} />
             <Route path="/uber-lyft/resources" element={<UberLyftResources />} />
+            <Route path="/uber-lyft/case-evaluation" element={<UberLyftCaseEvaluation />} />
+            <Route path="/uber-lyft/insurance-claims" element={<UberLyftInsuranceClaims />} />
+            <Route path="/uber-lyft/driver-screening" element={<UberLyftDriverScreening />} />
+            <Route path="/uber-lyft/app-safety" element={<UberLyftAppSafety />} />
+            <Route path="/uber-lyft/passenger-rights" element={<UberLyftPassengerRights />} />
             <Route path="/practice-areas/birth-injuries" element={<BirthInjuries />} />
             <Route path="/birth-injuries/case-evaluation" element={<BirthInjuriesCaseEvaluation />} />
             <Route path="/birth-injuries/compensation-calculator" element={<BirthInjuriesCompensationCalculator />} />

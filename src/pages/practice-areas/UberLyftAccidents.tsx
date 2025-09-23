@@ -116,7 +116,7 @@ const UberLyftAccidents: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/case-evaluation';
+    window.location.href = '/uber-lyft/case-evaluation';
   };
 
   return (
@@ -154,7 +154,7 @@ const UberLyftAccidents: React.FC = () => {
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/case-evaluation'}
+              onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
             >
               START MY FREE CASE EVALUATION
             </Button>
@@ -974,7 +974,7 @@ const UberLyftAccidents: React.FC = () => {
               CALL (818) 123-4567
             </Button>
             
-            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/case-evaluation'}>
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>

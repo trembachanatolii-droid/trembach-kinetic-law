@@ -184,7 +184,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
             <div className="flex items-center justify-center mb-4">
               <Calculator className="w-12 h-12 text-primary mr-4" />
-              <h1 className="text-4xl md:text-6xl font-bold">Birth Injury Compensation Calculator</h1>
+              <h1 className="text-4xl md:text-6xl font-bold text-white">Birth Injury Compensation Calculator</h1>
             </div>
             <p className="text-xl mb-8 leading-relaxed">
               Calculate potential compensation for your child's birth injury case

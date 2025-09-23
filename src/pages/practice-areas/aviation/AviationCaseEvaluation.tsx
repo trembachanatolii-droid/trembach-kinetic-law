@@ -37,7 +37,7 @@ const AviationCaseEvaluation: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Free Aviation Accident Case Evaluation
           </h1>
           <p className="text-xl">Get expert legal assessment of your airplane or helicopter crash case</p>

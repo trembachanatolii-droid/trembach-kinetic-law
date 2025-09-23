@@ -221,7 +221,6 @@ function App() {
             <Route path="/practice-areas/amusement-parks/compensation-calculator" element={<AmusementParkCompensationCalculator />} />
             <Route path="/practice-areas/amusement-parks/medical-guidance" element={<AmusementParkMedicalGuidance />} />
             <Route path="/practice-areas/amusement-parks/legal-guidance" element={<AmusementParkLegalGuidance />} />
-            <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/amusement-parks/faq" element={<AmusementParkFAQ />} />
             <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />

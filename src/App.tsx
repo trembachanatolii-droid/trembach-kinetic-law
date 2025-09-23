@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import Electrocution from "./pages/practice-areas/Electrocution";
 import BusAccidents from "./pages/practice-areas/BusAccidents";
 import BusAccidentCaseEvaluation from "./pages/practice-areas/bus-accident/CaseEvaluation";
 import BusAccidentCompensationCalculator from "./pages/practice-areas/bus-accident/CompensationCalculator";
@@ -200,6 +201,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/electrocution" element={<Electrocution />} />
             <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
             <Route path="/practice-areas/aviation-accidents" element={<AviationAccidents />} />
             <Route path="/aviation/case-evaluation" element={<AviationCaseEvaluation />} />

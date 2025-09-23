@@ -68,20 +68,20 @@ const BusAccidentCaseEvaluation: React.FC = () => {
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             Free Bus Accident Case Evaluation
           </h1>
-          <p className="text-xl md:text-2xl mb-6 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-6 leading-relaxed text-white">
             Get immediate legal assessment for your California bus accident case
           </p>
           <div className="flex items-center justify-center gap-4 text-lg">
             <div className="flex items-center">
               <Clock className="w-5 h-5 mr-2" />
-              <span>6-Month Government Deadline</span>
+              <span className="text-white">6-Month Government Deadline</span>
             </div>
             <div className="flex items-center">
               <Shield className="w-5 h-5 mr-2" />
-              <span>No Win, No Fee</span>
+              <span className="text-white">No Win, No Fee</span>
             </div>
           </div>
         </div>

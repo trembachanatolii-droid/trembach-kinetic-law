@@ -48,7 +48,6 @@ import medicalConsultationImage from '@/assets/aviation-medical-consultation.jpg
 import resourcesImage from '@/assets/aviation-resources.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
-import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -1049,54 +1048,49 @@ const AviationAccidents: React.FC = () => {
 
           {/* Sticky Sidebar - 3 Ways to Start Your Case */}
           <div className="lg:col-span-1">
-            <div className="sticky top-8 space-y-6">
-              <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
-                <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
-                  <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                    <div className="text-center text-white force-white">
-                      <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
-                      <h3 className="text-xl font-bold">Start Your Case</h3>
-                    </div>
-                  </div>
-                </div>
-                
-                <CardContent className="p-6">
-                  <p className="text-sm text-muted-foreground mb-6">
-                    You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-                  </p>
+            <div className="sticky top-24">
+              <Card className="aviation-card bg-gradient-to-br from-primary/5 to-secondary/5 border-primary/20">
+                <CardHeader className="text-center">
+                  <CardTitle className="text-2xl font-bold text-primary mb-2">
+                    3 Ways to Start Your Case
+                  </CardTitle>
+                  <p className="text-sm text-muted-foreground">Choose the option that works best for you</p>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3"
+                    onClick={() => window.location.href = '/aviation/case-evaluation'}
+                  >
+                    <Scale className="w-4 h-4 mr-2" />
+                    Free Case Evaluation
+                  </Button>
                   
-                  <div className="space-y-4">
-                    <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white"
-                      asChild
-                    >
-                      <a href="tel:8181234567" aria-label="Call Trembach Law Firm">
-                        <Phone className="w-4 h-4 mr-2" />
-                        Call (818) 123-4567
-                      </a>
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
-                      asChild
-                    >
-                      <Link to="/aviation/compensation-calculator" aria-label="Open compensation calculator">
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        Compensation Calculator
-                      </Link>
-                    </Button>
-                    
-                    <Button 
-                      variant="outline" 
-                      className="w-full text-black border-gray-300 hover:bg-gray-50"
-                      asChild
-                    >
-                      <Link to="/aviation/legal-guidance" aria-label="Open legal guidance">
-                        <Mail className="w-4 h-4 mr-2" />
-                        Legal Guidance
-                      </Link>
-                    </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3"
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    <span className="text-current">Call (818) 123-4567</span>
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-primary text-primary hover:bg-primary hover:text-white font-semibold py-3"
+                    onClick={() => window.location.href = '/aviation/compensation-calculator'}
+                  >
+                    <Calculator className="w-4 h-4 mr-2" />
+                    Calculate My Case
+                  </Button>
+                  
+                  <div className="text-center pt-4 border-t border-primary/20">
+                    <p className="text-sm text-muted-foreground mb-2">Available 24/7</p>
+                    <div className="flex items-center justify-center space-x-2">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                      ))}
+                    </div>
+                    <p className="text-xs text-muted-foreground mt-1">No fees unless we win</p>
                   </div>
                 </CardContent>
               </Card>

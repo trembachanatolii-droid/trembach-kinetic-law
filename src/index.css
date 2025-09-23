@@ -969,3 +969,9 @@ a[href^="tel:"],
     transform: translateZ(20px) scale(1.02);
   }
 }
+
+/* Uber/Lyft hero text override */
+.uberlyft-hero-text {
+  color: hsl(var(--primary-foreground)) !important;
+}
+

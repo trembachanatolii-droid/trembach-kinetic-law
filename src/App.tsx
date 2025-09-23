@@ -183,6 +183,7 @@ import AmusementParkCaseEvaluation from "./pages/practice-areas/amusement-parks/
 import AmusementParkCompensationCalculator from "./pages/practice-areas/amusement-parks/AmusementParkCompensationCalculator";
 import AmusementParkMedicalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkMedicalGuidance";
 import AmusementParkLegalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkLegalGuidance";
+import AmusementParkResources from "./pages/practice-areas/amusement-parks/AmusementParkResources";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();
@@ -221,6 +222,7 @@ function App() {
             <Route path="/practice-areas/amusement-parks/compensation-calculator" element={<AmusementParkCompensationCalculator />} />
             <Route path="/practice-areas/amusement-parks/medical-guidance" element={<AmusementParkMedicalGuidance />} />
             <Route path="/practice-areas/amusement-parks/legal-guidance" element={<AmusementParkLegalGuidance />} />
+            <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/amusement-parks/faq" element={<AmusementParkFAQ />} />
             <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />

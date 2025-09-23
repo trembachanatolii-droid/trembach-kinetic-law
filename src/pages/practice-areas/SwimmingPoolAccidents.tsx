@@ -43,6 +43,7 @@ import poolProfessionalImage from '@/assets/swimming-pool-professional.jpg';
 import legalProcessLargeImage from '@/assets/swimming-pool-legal-process-large.jpg';
 import resourcesLargeImage from '@/assets/swimming-pool-resources-large.jpg';
 import faqLargeImage from '@/assets/swimming-pool-faq-large.jpg';
+import faqProfessionalImage from '@/assets/swimming-pool-faq-professional.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -754,7 +755,7 @@ const SwimmingPoolAccidents: React.FC = () => {
 
               <div className="mb-8">
                 <img 
-                  src={faqLargeImage} 
+                  src={faqProfessionalImage} 
                   alt="Swimming Pool Accident Frequently Asked Questions" 
                   className="w-full h-80 object-cover rounded-lg mb-6"
                 />

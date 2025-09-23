@@ -1124,7 +1124,7 @@ const MaritimeAccidents: React.FC = () => {
                   <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
                     <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
                       <div className="text-center text-white">
-                        <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
+                        <h3 className="text-xl font-bold mb-2 text-white">3 Ways to</h3>
                         <h3 className="text-xl font-bold">Start Your Case</h3>
                       </div>
                     </div>

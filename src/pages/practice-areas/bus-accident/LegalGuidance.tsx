@@ -182,10 +182,10 @@ const BusAccidentLegalGuidance: React.FC = () => {
         </div>
         
         <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
             Bus Accident Legal Guidance
           </h1>
-          <p className="text-xl md:text-2xl mb-8 leading-relaxed">
+          <p className="text-xl md:text-2xl mb-8 leading-relaxed text-white">
             Step-by-step legal guidance from former defense attorneys who know how bus companies think
           </p>
           <div className="flex flex-wrap items-center justify-center gap-4 text-lg">

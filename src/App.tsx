@@ -171,6 +171,11 @@ import MaritimeCaseEvaluation from "./pages/practice-areas/maritime/MaritimeCase
 import MaritimeCompensationCalculator from "./pages/practice-areas/maritime/MaritimeCompensationCalculator";
 import MaritimeLegalGuidance from "./pages/practice-areas/maritime/MaritimeLegalGuidance";
 import MaritimeMedicalGuidance from "./pages/practice-areas/maritime/MaritimeMedicalGuidance";
+import SwimmingPoolAccidents from "./pages/practice-areas/SwimmingPoolAccidents";
+import SwimmingPoolCaseEvaluation from "./pages/practice-areas/swimming-pool/SwimmingPoolCaseEvaluation";
+import SwimmingPoolCompensationCalculator from "./pages/practice-areas/swimming-pool/SwimmingPoolCompensationCalculator";
+import SwimmingPoolResources from "./pages/practice-areas/swimming-pool/SwimmingPoolResources";
+import SwimmingPoolFAQ from "./pages/practice-areas/swimming-pool/SwimmingPoolFAQ";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
 
 const queryClient = new QueryClient();

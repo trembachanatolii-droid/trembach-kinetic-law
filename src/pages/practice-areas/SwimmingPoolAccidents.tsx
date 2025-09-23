@@ -38,6 +38,7 @@ import resourcesImage from '@/assets/swimming-pool-resources.jpg';
 import immediateStepsLargeImage from '@/assets/swimming-pool-immediate-steps-large.jpg';
 import legalProcessLargeImage from '@/assets/swimming-pool-legal-process-large.jpg';
 import resourcesLargeImage from '@/assets/swimming-pool-resources-large.jpg';
+import faqLargeImage from '@/assets/swimming-pool-faq-large.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -738,6 +739,104 @@ const SwimmingPoolAccidents: React.FC = () => {
                   </div>
                 </CollapsibleContent>
               </Collapsible>
+            </section>
+
+            {/* FAQ Section */}
+            <section id="faq" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={evaluationImage} alt="Swimming Pool FAQ" className="w-16 h-16 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">Swimming Pool Accident FAQ</h2>
+              </div>
+
+              <div className="mb-8">
+                <img 
+                  src={faqLargeImage} 
+                  alt="Swimming Pool Accident Frequently Asked Questions" 
+                  className="w-full h-80 object-cover rounded-lg mb-6"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Get answers to the most common questions about swimming pool accident cases, your legal rights, and the compensation process in California.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    question: "Who can be held liable for a swimming pool accident?",
+                    answer: "Multiple parties may be liable including property owners, pool operators, maintenance companies, equipment manufacturers, and government entities. Liability depends on factors like negligent supervision, faulty equipment, poor maintenance, or safety code violations."
+                  },
+                  {
+                    question: "What types of injuries are common in swimming pool accidents?",
+                    answer: "Common injuries include drowning/near-drowning, traumatic brain injuries, spinal cord injuries, broken bones, chemical burns from pool chemicals, cuts and lacerations, and psychological trauma. Some injuries may not be immediately apparent."
+                  },
+                  {
+                    question: "How long do I have to file a swimming pool accident claim in California?",
+                    answer: "California has a 2-year statute of limitations for personal injury claims, but shorter deadlines may apply for government claims (6 months). It's crucial to contact an attorney immediately to protect your rights and preserve evidence."
+                  },
+                  {
+                    question: "What compensation can I recover for a swimming pool accident?",
+                    answer: "You may recover medical expenses (past and future), lost wages, pain and suffering, disability accommodations, rehabilitation costs, and in severe cases, punitive damages. Wrongful death cases may include funeral expenses and loss of support."
+                  },
+                  {
+                    question: "Do I need a lawyer for my swimming pool accident case?",
+                    answer: "Yes, pool accident cases involve complex liability issues, insurance company tactics, and substantial compensation. An experienced attorney will investigate properly, handle insurance companies, and maximize your recovery while you focus on healing."
+                  },
+                  {
+                    question: "What should I do immediately after a swimming pool accident?",
+                    answer: "Seek immediate medical attention, document the scene with photos, get witness contact information, report the incident to authorities, preserve evidence, and contact an experienced pool accident attorney before speaking to insurance companies."
+                  },
+                  {
+                    question: "How much does it cost to hire a swimming pool accident lawyer?",
+                    answer: "We work on a contingency fee basis - you pay no attorney fees unless we win your case. We also advance all case expenses, so there are no upfront costs to you. Your initial consultation is always free."
+                  },
+                  {
+                    question: "Can I still file a claim if the accident was partially my fault?",
+                    answer: "Yes, California follows comparative negligence law. Even if you were partially at fault, you can still recover damages reduced by your percentage of fault. For example, if you were 20% at fault, you can still recover 80% of your damages."
+                  }
+                ].map((faq, index) => (
+                  <Card key={index} className="cursor-pointer hover:shadow-md transition-shadow">
+                    <CollapsibleTrigger asChild onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+                      <CardHeader className="hover:bg-muted/50 transition-colors">
+                        <CardTitle className="flex items-center justify-between text-left">
+                          <span className="text-lg">{faq.question}</span>
+                          {expandedFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                        </CardTitle>
+                      </CardHeader>
+                    </CollapsibleTrigger>
+                    {expandedFaq === index && (
+                      <CardContent>
+                        <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                      </CardContent>
+                    )}
+                  </Card>
+                ))}
+              </div>
+
+              <div className="mt-8 bg-primary/10 border border-primary/20 p-6 rounded-lg text-center">
+                <h3 className="text-xl font-semibold text-primary mb-2">Still Have Questions?</h3>
+                <p className="text-muted-foreground mb-4">
+                  Our experienced swimming pool accident attorneys are here to answer all your questions and provide personalized legal guidance for your specific situation.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                  <Button 
+                    size="lg" 
+                    onClick={() => window.location.href = '/practice-areas/swimming-pool/case-evaluation'}
+                  >
+                    Get Your Questions Answered - Free Consultation
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    size="lg"
+                    onClick={() => window.location.href = 'tel:(818) 123-4567'}
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call (818) 123-4567
+                  </Button>
+                </div>
+              </div>
             </section>
 
             {/* Time Limits Section */}

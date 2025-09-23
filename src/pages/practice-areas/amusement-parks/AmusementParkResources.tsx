@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { ArrowLeft, Star, BookOpen, FileText, Users, Phone, ExternalLink, Download } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import heroBackground from '@/assets/amusement-park-resources-hero.jpg';
 import SEO from '@/components/SEO';
 
@@ -264,7 +265,11 @@ Phone: (818) 123-4567
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button size="lg">Call (818) 123-4567</Button>
-                <Button variant="outline" size="lg">Free Case Review</Button>
+                <Button variant="outline" size="lg" asChild>
+                  <Link to="/practice-areas/amusement-parks/case-evaluation">
+                    Free Case Review
+                  </Link>
+                </Button>
               </div>
             </CardContent>
           </Card>

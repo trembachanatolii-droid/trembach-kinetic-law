@@ -968,7 +968,7 @@ const UberLyftAccidents: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center px-6">
           <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
-          <p className="text-xl mb-12 leading-relaxed">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
+          <p className="text-xl mb-12 leading-relaxed text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
               CALL (818) 123-4567

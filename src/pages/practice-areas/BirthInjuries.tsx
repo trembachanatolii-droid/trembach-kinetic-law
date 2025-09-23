@@ -37,6 +37,7 @@ import legalProcessImage from '@/assets/birth-injuries-legal-process-new.jpg';
 import medicalImage from '@/assets/birth-injuries-medical-facility-new.jpg';
 import compensationImage from '@/assets/birth-injuries-compensation-calculator.jpg';
 import legalStepsImage from '@/assets/birth-injuries-legal-steps.jpg';
+import injuryTypesImage from '@/assets/birth-injuries-types.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -751,6 +752,12 @@ const BirthInjuries: React.FC = () => {
             {/* Injury Types */}
             <section id="injury-types" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Common Birth Injury Types</h2>
+              
+              {/* Hero Image for Injury Types */}
+              <div className="mb-8 rounded-lg overflow-hidden">
+                <div className="h-64 md:h-72 lg:h-80 w-full bg-cover bg-center" style={{ backgroundImage: `url(${injuryTypesImage})` }} />
+              </div>
+              
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {[ 
                   { icon: Brain, title: "HIE (Oxygen Deprivation)", items: ["Cooling therapy within 6 hours", "NICU monitoring", "MRI/EEG evaluation"] },

@@ -466,7 +466,7 @@ const BirthInjuriesCaseEvaluation: React.FC = () => {
                     
                     <Button 
                       variant="outline"
-                      className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                      className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                       onClick={() => window.location.href = 'mailto:contact@trembachlawfirm.com'}
                     >
                       <Mail className="w-4 h-4 mr-2" />

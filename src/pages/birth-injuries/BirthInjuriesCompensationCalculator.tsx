@@ -435,7 +435,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
                 <CardContent className="space-y-4">
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     Call (818) 123-4567
@@ -443,7 +443,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
                   
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
                   >
                     Free Case Evaluation
@@ -451,7 +451,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
 
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = '/schedule-consultation'}
                   >
                     Schedule Consultation

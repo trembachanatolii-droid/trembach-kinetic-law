@@ -442,7 +442,7 @@ const BirthInjuriesMedicalGuidance: React.FC = () => {
                 <CardContent className="space-y-4">
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
@@ -451,7 +451,7 @@ const BirthInjuriesMedicalGuidance: React.FC = () => {
                   
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
                   >
                     <Mail className="w-4 h-4 mr-2" />
@@ -460,7 +460,7 @@ const BirthInjuriesMedicalGuidance: React.FC = () => {
 
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = '/schedule-consultation'}
                   >
                     <FileText className="w-4 h-4 mr-2" />

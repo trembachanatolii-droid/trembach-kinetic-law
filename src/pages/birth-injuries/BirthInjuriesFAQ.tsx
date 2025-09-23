@@ -342,7 +342,7 @@ const BirthInjuriesFAQ: React.FC = () => {
                   </p>
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
@@ -351,7 +351,7 @@ const BirthInjuriesFAQ: React.FC = () => {
                   
                   <Button 
                     variant="outline" 
-                    className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                     onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
                   >
                     <Mail className="w-4 h-4 mr-2" />

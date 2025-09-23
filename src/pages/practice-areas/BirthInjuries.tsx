@@ -738,7 +738,7 @@ const BirthInjuries: React.FC = () => {
 
               <Collapsible open={expandedSections['what-to-do']} onOpenChange={() => toggleSection('what-to-do')}>
                 <CollapsibleTrigger asChild>
-                  <Button variant="outline" className="justify-between w-full text-primary border-primary hover:bg-primary hover:text-white">
+                  <Button variant="outline" className="justify-between w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground data-[state=open]:bg-primary data-[state=open]:text-primary-foreground">
                     Learn more
                     {expandedSections['what-to-do'] ? <ChevronUp /> : <ChevronDown />}
                   </Button>
@@ -1006,7 +1006,7 @@ const BirthInjuries: React.FC = () => {
                 <p className="text-sm text-muted-foreground mb-4">Comprehensive medical information and treatment options for birth injuries.</p>
                 <Button 
                   variant="outline" 
-                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                   onClick={() => window.location.href = '/birth-injuries/medical-guidance'}
                 >
                   View Medical Resources
@@ -1025,7 +1025,7 @@ const BirthInjuries: React.FC = () => {
                 <p className="text-sm text-muted-foreground mb-4">Understanding your legal rights and the birth injury claims process.</p>
                 <Button 
                   variant="outline" 
-                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                   onClick={() => window.location.href = '/birth-injuries/legal-guidance'}
                 >
                   Legal Guidance
@@ -1044,7 +1044,7 @@ const BirthInjuries: React.FC = () => {
                 <p className="text-sm text-muted-foreground mb-4">Support organizations, therapy centers, and family assistance programs.</p>
                 <Button 
                   variant="outline" 
-                  className="w-full text-primary border-primary hover:bg-primary hover:text-white"
+                  className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
                   onClick={() => window.location.href = '/birth-injuries/resources'}
                 >
                   Find Support
@@ -1084,7 +1084,7 @@ const BirthInjuries: React.FC = () => {
           <div className="text-center mt-8">
             <Button 
               variant="outline" 
-              className="text-primary border-primary hover:bg-primary hover:text-white"
+              className="text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
               onClick={() => window.location.href = '/birth-injuries/faq'}
             >
               View All {faqData.length}+ Questions

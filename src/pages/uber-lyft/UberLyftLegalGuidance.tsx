@@ -466,30 +466,81 @@ const UberLyftLegalGuidance = () => {
       </section>
 
       {/* Don't Wait Section */}
-      <section className="bg-gradient-to-r from-destructive to-destructive/80 text-white py-16">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-6">Don't Wait - Time Limits Apply for California Rideshare Cases</h2>
-          <p className="text-lg mb-8 max-w-2xl mx-auto">
-            California's statute of limitations gives you only 2 years to file. Evidence disappears and cases get harder to win over time.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="bg-white !text-destructive hover:bg-gray-100 hover:!text-destructive"
-              onClick={() => window.location.href = '/uber-lyft-case-evaluation'}
-            >
-              <FileText className="w-5 h-5 mr-2" />
-              Start Your Free Legal Consultation
-            </Button>
-            <Button 
-              size="lg" 
-              variant="outline" 
-              className="border-white !text-white hover:bg-white/20 hover:!text-primary-foreground"
-              onClick={() => window.location.href = 'tel:8181234567'}
-            >
-              <Phone className="w-5 h-5 mr-2" />
-              Call (818) 123-4567 Now
-            </Button>
+      <section className="bg-red-600 py-16">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto bg-white rounded-lg p-8">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-4">
+                <span className="text-red-600">Ready to Win Your Case?</span>{" "}
+                <span className="text-gray-900">Contact us Today.</span>
+              </h2>
+              <p className="text-gray-600 text-lg">
+                Don't fight alone. Start your free case review here and we'll get back to you within 2 hours.
+              </p>
+            </div>
+
+            <form className="space-y-6">
+              <p className="text-gray-600 text-sm">Field marked with an * are required.</p>
+              
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-4">
+                  <input
+                    type="text"
+                    placeholder="First Name *"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                  <input
+                    type="text"
+                    placeholder="Last Name *"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                  <input
+                    type="tel"
+                    placeholder="Phone *"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                  <input
+                    type="email"
+                    placeholder="Email *"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    required
+                  />
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="relative">
+                    <textarea
+                      placeholder="What happened? (optional)"
+                      rows={8}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      maxLength={4000}
+                    />
+                    <div className="absolute bottom-3 right-3 text-sm text-gray-500">
+                      4000 of 4000 Character(s) left
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-sm text-gray-600 mb-6">
+                By submitting your contact information, you agree that we may contact you by telephone (including text) and email in 
+                accordance with our{" "}
+                <a href="/terms" className="text-blue-600 underline">Terms</a> &{" "}
+                <a href="/privacy" className="text-blue-600 underline">Privacy Policy</a>
+              </div>
+
+              <div className="text-right">
+                <button
+                  type="submit"
+                  className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-md transition-colors duration-200"
+                >
+                  Submit
+                </button>
+              </div>
+            </form>
           </div>
         </div>
       </section>

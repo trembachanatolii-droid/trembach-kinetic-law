@@ -73,7 +73,15 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
         aria-label="Go back to previous page"
       >
         <ArrowLeft className="w-5 h-5" />
-        <span className="text-foreground">Go Back</span>
+        <span
+          className="text-foreground underline-offset-2 hover:underline cursor-pointer"
+          role="link"
+          tabIndex={0}
+          onClick={handleGoBack}
+          onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); handleGoBack(); } }}
+        >
+          Go Back
+        </span>
       </Button>
     </div>
   );

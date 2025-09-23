@@ -23,7 +23,11 @@ const ScheduleConsultation: React.FC = () => {
     preferredDate: '',
     preferredTime: '',
     consultationType: '',
-    cancerType: '',
+    accidentType: '',
+    vesselType: '',
+    injuryType: '',
+    incidentDate: '',
+    employmentStatus: '',
     urgency: '',
     caseDetails: ''
   });
@@ -77,8 +81,8 @@ const ScheduleConsultation: React.FC = () => {
   return (
     <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
       <SEO 
-        title="Schedule Free Consultation | Trembach Law Firm"
-        description="Book your confidential consultation by phone, video, or in-person. Available 24/7 across California."
+        title="Schedule Free Maritime Consultation | Trembach Law Firm"
+        description="Book your confidential maritime accident consultation by phone, video, or in-person. Available 24/7 for maritime emergencies across California."
         canonical="/schedule-consultation"
       />
       {/* Hero Section */}
@@ -90,10 +94,10 @@ const ScheduleConsultation: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
         <div className="relative container mx-auto px-6 text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
-            Schedule Your Free Consultation
+            Schedule Your Free Maritime Consultation
           </h1>
           <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
-            Book your confidential consultation today. No fees unless we win your case.
+            Book your confidential maritime accident consultation today. No fees unless we win your case.
           </p>
         </div>
       </section>
@@ -111,9 +115,9 @@ const ScheduleConsultation: React.FC = () => {
             <div className="lg:col-span-2">
               <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
                 <CardHeader>
-                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Schedule Your Consultation</CardTitle>
+                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Schedule Your Maritime Consultation</CardTitle>
                   <p className="text-muted-foreground">
-                    Choose your preferred date, time, and consultation method.
+                    Choose your preferred date, time, and consultation method for your maritime accident case.
                   </p>
                 </CardHeader>
                 <CardContent>
@@ -190,6 +194,96 @@ const ScheduleConsultation: React.FC = () => {
 
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
+                        <Label htmlFor="accidentType">Type of Maritime Accident</Label>
+                        <Select onValueChange={(value) => handleInputChange('accidentType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select accident type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="slip-fall">Slip and Fall on Vessel</SelectItem>
+                            <SelectItem value="equipment-failure">Equipment Failure</SelectItem>
+                            <SelectItem value="collision">Vessel Collision</SelectItem>
+                            <SelectItem value="explosion-fire">Explosion/Fire</SelectItem>
+                            <SelectItem value="crane-accident">Crane/Loading Accident</SelectItem>
+                            <SelectItem value="crushing">Crushing Injury</SelectItem>
+                            <SelectItem value="chemical-exposure">Chemical Exposure</SelectItem>
+                            <SelectItem value="man-overboard">Man Overboard</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="vesselType">Vessel/Platform Type</Label>
+                        <Select onValueChange={(value) => handleInputChange('vesselType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select vessel type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="cargo-ship">Cargo Ship</SelectItem>
+                            <SelectItem value="tanker">Tanker</SelectItem>
+                            <SelectItem value="fishing-vessel">Fishing Vessel</SelectItem>
+                            <SelectItem value="passenger-ship">Passenger Ship/Cruise</SelectItem>
+                            <SelectItem value="tugboat">Tugboat</SelectItem>
+                            <SelectItem value="barge">Barge</SelectItem>
+                            <SelectItem value="oil-rig">Oil Rig/Platform</SelectItem>
+                            <SelectItem value="port-facility">Port Facility</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="injuryType">Type of Injury</Label>
+                        <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select injury type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="back-spine">Back/Spine Injury</SelectItem>
+                            <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                            <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                            <SelectItem value="burns">Burns</SelectItem>
+                            <SelectItem value="amputation">Amputation</SelectItem>
+                            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                            <SelectItem value="multiple-injuries">Multiple Injuries</SelectItem>
+                            <SelectItem value="fatality">Wrongful Death</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="incidentDate">Date of Incident</Label>
+                        <Input
+                          id="incidentDate"
+                          type="date"
+                          value={formData.incidentDate}
+                          onChange={(e) => handleInputChange('incidentDate', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="employmentStatus">Employment Status</Label>
+                      <Select onValueChange={(value) => handleInputChange('employmentStatus', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select employment status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="seaman">Seaman (Jones Act Covered)</SelectItem>
+                          <SelectItem value="longshoreman">Longshoreman (LHWCA Covered)</SelectItem>
+                          <SelectItem value="harbor-worker">Harbor Worker (LHWCA Covered)</SelectItem>
+                          <SelectItem value="passenger">Passenger</SelectItem>
+                          <SelectItem value="contractor">Independent Contractor</SelectItem>
+                          <SelectItem value="visitor">Visitor/Guest</SelectItem>
+                          <SelectItem value="unsure">Unsure</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
                         <Label htmlFor="consultationType">Consultation Type</Label>
                         <Select onValueChange={(value) => handleInputChange('consultationType', value)}>
                           <SelectTrigger>
@@ -204,44 +298,25 @@ const ScheduleConsultation: React.FC = () => {
                         </Select>
                       </div>
                       <div>
-                        <Label htmlFor="cancerType">Type of Cancer</Label>
-                        <Select onValueChange={(value) => handleInputChange('cancerType', value)}>
+                        <Label htmlFor="urgency">Case Urgency</Label>
+                        <Select onValueChange={(value) => handleInputChange('urgency', value)}>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select cancer type" />
+                            <SelectValue placeholder="Select urgency" />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="mesothelioma">Pleural Mesothelioma</SelectItem>
-                            <SelectItem value="peritoneal">Peritoneal Mesothelioma</SelectItem>
-                            <SelectItem value="pericardial">Pericardial Mesothelioma</SelectItem>
-                            <SelectItem value="testicular">Testicular Mesothelioma</SelectItem>
-                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
-                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                            <SelectItem value="other-cancer">Other Cancer</SelectItem>
-                            <SelectItem value="suspected">Suspected Diagnosis</SelectItem>
+                            <SelectItem value="routine">Routine</SelectItem>
+                            <SelectItem value="urgent">Urgent</SelectItem>
+                            <SelectItem value="emergency">Emergency</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
                     </div>
 
                     <div>
-                      <Label htmlFor="urgency">Case Urgency</Label>
-                      <Select onValueChange={(value) => handleInputChange('urgency', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select urgency" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="routine">Routine</SelectItem>
-                          <SelectItem value="urgent">Urgent</SelectItem>
-                          <SelectItem value="emergency">Emergency</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="caseDetails">Brief Case Description</Label>
+                      <Label htmlFor="caseDetails">Brief Description of Your Maritime Accident</Label>
                       <Textarea
                         id="caseDetails"
-                        placeholder="Please provide a brief description of your case or legal matter..."
+                        placeholder="Please describe your maritime accident, injuries sustained, and any other relevant details..."
                         value={formData.caseDetails}
                         onChange={(e) => handleInputChange('caseDetails', e.target.value)}
                         rows={4}
@@ -249,7 +324,7 @@ const ScheduleConsultation: React.FC = () => {
                     </div>
 
                     <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
-                      Schedule Consultation
+                      Schedule Maritime Consultation
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </form>
@@ -314,9 +389,10 @@ const ScheduleConsultation: React.FC = () => {
                   <div>
                     <p className="font-semibold mb-2">We'll Discuss:</p>
                     <ul className="text-sm text-muted-foreground space-y-1">
-                      <li>• Your legal rights and options</li>
-                      <li>• Potential case value</li>
-                      <li>• Timeline and process</li>
+                      <li>• Your maritime legal rights (Jones Act, LHWCA)</li>
+                      <li>• Maintenance and cure benefits</li>
+                      <li>• Potential case value and compensation</li>
+                      <li>• Timeline and legal process</li>
                       <li>• No-cost representation</li>
                     </ul>
                   </div>
@@ -325,11 +401,11 @@ const ScheduleConsultation: React.FC = () => {
 
               <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden bg-gradient-to-br from-primary/10 to-primary/5">
                 <CardContent className="pt-6">
-                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">Emergency Consultations</h3>
+                  <h3 className="font-semibold mb-2 group-hover:text-primary transition-colors">Maritime Emergency Consultations</h3>
                   <p className="text-sm text-muted-foreground mb-3">
-                    For urgent matters, call us directly at 855-TREMBACH-WINS. We're available 24/7 for emergencies.
+                    For maritime emergencies or urgent matters, call us directly at (818) 123-4567. We're available 24/7 for maritime accident emergencies.
                   </p>
-                  <Button variant="outline" size="sm" className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300" onClick={() => window.location.href = 'tel:855-TREMBACH-WINS'}>
+                  <Button variant="outline" size="sm" className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
                     Call Now
                   </Button>

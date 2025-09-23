@@ -46,7 +46,7 @@ const UberLyftLegalGuidance = () => {
           backgroundPosition: 'center'
         }}
       >
-        <div className="container mx-auto px-4 text-center">
+        <div className="container mx-auto px-4 text-center text-white">
           <h1 className="text-4xl lg:text-5xl font-bold mb-6">
             Legal Guidance for Uber/Lyft Accident Cases
           </h1>

@@ -559,7 +559,7 @@ const UberLyftAccidents: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* FAQ Section with all 50+ questions */}
+            {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
               
@@ -644,151 +644,24 @@ const UberLyftAccidents: React.FC = () => {
                   {
                     question: "Can I recover damages if I wasn't wearing a seatbelt?",
                     answer: "California's 'seat belt defense' may reduce but not eliminate recovery. Maximum reduction is typically 5-25% of damages. Many rideshare passengers don't wear seatbelts in backseats."
-                  },
-                  {
-                    question: "What if the driver was using multiple rideshare apps?",
-                    answer: "Many drivers use Uber and Lyft simultaneously. Coverage depends on which app had active ride. Both companies may deny coverage claiming the other was active. We investigate app data to determine coverage."
-                  },
-                  {
-                    question: "What compensation is available for scarring and disfigurement?",
-                    answer: "Permanent scarring and disfigurement warrant significant compensation beyond medical costs. Factors include visibility, size, location, age, gender, and impact on employment/relationships."
-                  },
-                  {
-                    question: "Can undocumented immigrants file rideshare accident claims?",
-                    answer: "Yes, immigration status doesn't affect personal injury rights in California. You can pursue full compensation regardless of documentation. Insurance companies cannot ask about immigration status."
-                  },
-                  {
-                    question: "What if I was injured in a rideshare during a work trip?",
-                    answer: "You may have both workers' compensation and personal injury claims. Workers' comp provides immediate benefits while personal injury claims offer fuller compensation including pain and suffering."
-                  },
-                  {
-                    question: "How do pre-existing conditions affect my claim?",
-                    answer: "Pre-existing conditions don't bar recovery for aggravation or exacerbation. The 'eggshell plaintiff' rule means defendants take victims as they find them. We use medical experts to distinguish new injuries from prior conditions."
-                  },
-                  {
-                    question: "What if the accident happened at an airport or special zone?",
-                    answer: "Airports have designated rideshare areas with specific rules. Accidents in these zones may involve airport authority liability for dangerous conditions. Violations of airport regulations strengthen negligence claims."
-                  },
-                  {
-                    question: "Can I recover if injured in a rideshare pool/shared ride?",
-                    answer: "Yes, shared rides don't reduce your compensation rights. All passengers deserve safe transportation regardless of service type. Insurance coverage remains the same during pool rides."
-                  },
-                  {
-                    question: "What if the other driver was also a rideshare driver?",
-                    answer: "Accidents between two rideshare vehicles involve multiple insurance policies and companies. We navigate these complex scenarios to maximize recovery from all available sources."
-                  },
-                  {
-                    question: "How do surge pricing and high-demand periods affect liability?",
-                    answer: "Surge pricing algorithms encourage risky driving as drivers rush to capitalize on higher fares. This corporate decision-making can increase rideshare company liability beyond individual driver negligence."
-                  },
-                  {
-                    question: "What if I was injured by a delivery driver while they had passengers?",
-                    answer: "Drivers simultaneously working for rideshare and delivery services create complex coverage issues. We investigate which app was primary, determine coverage periods, and pursue all responsible parties."
-                  },
-                  {
-                    question: "Can family members recover for emotional distress?",
-                    answer: "California allows close family members to recover for emotional distress when witnessing traumatic injuries to loved ones. Spouses, parents, and children may have separate claims for psychological trauma."
-                  },
-                  {
-                    question: "What if the rideshare vehicle had mechanical problems?",
-                    answer: "Vehicle maintenance failures can create liability for the driver, rideshare company, and vehicle manufacturer. Poor maintenance, ignored recalls, or defective parts strengthen your case."
-                  },
-                  {
-                    question: "How do weather conditions affect rideshare accident claims?",
-                    answer: "Bad weather doesn't excuse negligent driving. Rideshare drivers must adjust for conditions or stop driving. Companies pushing drivers to work in dangerous weather may face additional liability."
-                  },
-                  {
-                    question: "What if I was injured while the driver was off-duty?",
-                    answer: "Off-duty accidents involve the driver's personal insurance with limited rideshare coverage. However, we investigate whether the driver was actually available for rides, which could trigger additional coverage."
-                  },
-                  {
-                    question: "Can I sue for punitive damages in rideshare cases?",
-                    answer: "Punitive damages are available when defendants act with malice, fraud, or oppression. This includes drunk driving, deliberate safety violations, or corporate cover-ups of known dangers."
-                  },
-                  {
-                    question: "What if the accident involved an autonomous or self-driving vehicle?",
-                    answer: "Autonomous vehicle accidents raise complex liability questions involving the technology company, vehicle manufacturer, and rideshare company. California's evolving autonomous vehicle laws provide new avenues for compensation."
-                  },
-                  {
-                    question: "How does my health insurance interact with rideshare claims?",
-                    answer: "Health insurance may initially cover treatment but has subrogation rights to recover payments from settlements. We negotiate these liens to maximize your net recovery while ensuring continued coverage."
-                  },
-                  {
-                    question: "What if I was injured while waiting for my rideshare?",
-                    answer: "Accidents while waiting for pickup may involve premises liability, inadequate lighting, or dangerous pickup locations. Rideshare companies' choice of pickup locations can create additional liability."
-                  },
-                  {
-                    question: "Can I change lawyers if I'm unhappy with my current representation?",
-                    answer: "Yes, you have the right to change lawyers at any time. We can review your case and take over representation if appropriate. Your new attorney will handle the transition professionally."
-                  },
-                  {
-                    question: "What if the rideshare driver doesn't have proper licensing?",
-                    answer: "Unlicensed or improperly licensed drivers create additional liability for rideshare companies. Background check failures, expired licenses, or driving outside permitted areas strengthen your case."
-                  },
-                  {
-                    question: "How are pain and suffering damages calculated?",
-                    answer: "Pain and suffering considers injury severity, duration of recovery, impact on daily activities, and long-term effects. California allows substantial pain and suffering awards based on individual circumstances."
-                  },
-                  {
-                    question: "What if I signed a waiver or terms of service?",
-                    answer: "Rideshare terms of service cannot waive liability for negligence or intentional misconduct. These agreements are often unenforceable, especially for personal injury claims in California."
-                  },
-                  {
-                    question: "Can I recover if the accident was caused by road conditions?",
-                    answer: "Poor road conditions don't excuse driver negligence. Government entities responsible for road maintenance may also be liable. Rideshare drivers must adjust for known hazards."
-                  },
-                  {
-                    question: "What if multiple vehicles were involved in the accident?",
-                    answer: "Multi-vehicle accidents involve complex liability determinations and multiple insurance policies. We investigate all drivers' actions and pursue maximum recovery from all responsible parties."
-                  },
-                  {
-                    question: "How do traffic camera and dashcam videos help my case?",
-                    answer: "Video evidence provides objective proof of how accidents occurred and who was at fault. We immediately preserve this time-sensitive evidence before it's deleted or overwritten."
-                  },
-                  {
-                    question: "What if the rideshare company claims the driver was an independent contractor?",
-                    answer: "While drivers are generally independent contractors under Proposition 22, this doesn't eliminate all rideshare company liability. Companies remain responsible for passenger safety, adequate insurance, and proper oversight."
-                  },
-                  {
-                    question: "Can I recover for lost earning capacity, not just lost wages?",
-                    answer: "Yes, California allows recovery for reduced future earning capacity. This includes career limitations, reduced advancement opportunities, and inability to perform certain job functions."
-                  },
-                  {
-                    question: "What if I was pregnant and injured in a rideshare accident?",
-                    answer: "Pregnant victims and their unborn children deserve special protection. We pursue compensation for maternal injuries, fetal harm, pregnancy complications, and emotional distress from trauma during pregnancy."
-                  },
-                  {
-                    question: "How do social media posts affect my case?",
-                    answer: "Insurance companies monitor social media for contradicting evidence. Avoid posting about the accident, injuries, or activities. Privacy settings don't prevent discovery. Consult us before any accident-related posts."
-                  },
-                  {
-                    question: "What if I signed something at the scene?",
-                    answer: "Documents signed under duress or without understanding may be invalid. Shock and injuries impair judgment. We review any signed documents for enforceability. Don't assume signed papers end your rights."
-                  },
-                  {
-                    question: "Can I file a claim if the rideshare app was hacked or malfunctioned?",
-                    answer: "App malfunctions that contribute to accidents may create liability for the technology company. Hacking incidents that compromise safety features or create dangerous situations can lead to additional claims beyond driver negligence."
-                  },
-                  {
-                    question: "What if the accident happened during a promotional ride or discount?",
-                    answer: "Promotional rides don't reduce your compensation rights. Rideshare companies remain fully liable for passenger safety regardless of pricing promotions, discount codes, or free ride credits used."
-                  },
-                  {
-                    question: "How does insurance coverage work for electric or hybrid rideshare vehicles?",
-                    answer: "Electric and hybrid vehicles have the same insurance coverage as traditional vehicles. However, unique safety concerns like silent operation affecting pedestrian awareness or battery fire risks may create additional liability theories."
                   }
                 ].map((faq, index) => (
-                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => setExpandedFaq(expandedFaq === index ? null : index)}>
-                    <CollapsibleTrigger asChild>
-                      <Button variant="ghost" className="w-full justify-between p-4 h-auto text-left hover:bg-muted text-black">
-                        <span className="font-semibold text-lg">{faq.question}</span>
-                        {expandedFaq === index ? <ChevronUp className="w-5 h-5 text-black" /> : <ChevronDown className="w-5 h-5 text-black" />}
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="px-4 pb-4">
-                      <p className="text-muted-foreground leading-relaxed text-lg">{faq.answer}</p>
-                    </CollapsibleContent>
-                  </Collapsible>
+                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader 
+                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
+                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                    >
+                      <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
+                        {faq.question}
+                        {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
+                      </CardTitle>
+                    </CardHeader>
+                    {expandedFaq === index && (
+                      <CardContent className="animate-fade-in">
+                        <p className="text-muted-foreground">{faq.answer}</p>
+                      </CardContent>
+                    )}
+                  </Card>
                 ))}
               </div>
             </section>

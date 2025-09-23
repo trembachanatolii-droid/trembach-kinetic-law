@@ -966,7 +966,7 @@ const UberLyftAccidents: React.FC = () => {
       {/* Bottom CTA - Exactly matching Mesothelioma */}
       <section className="bg-gray-900 text-white py-16">
         <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Rideshare Claims</h2>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
           <p className="text-xl mb-12 leading-relaxed">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">

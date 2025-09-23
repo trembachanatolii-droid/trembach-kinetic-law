@@ -35,6 +35,9 @@ import evaluationImage from '@/assets/swimming-pool-evaluation.jpg';
 import immediateStepsImage from '@/assets/swimming-pool-immediate-steps.jpg';
 import legalProcessImage from '@/assets/swimming-pool-legal-process.jpg';
 import resourcesImage from '@/assets/swimming-pool-resources.jpg';
+import immediateStepsLargeImage from '@/assets/swimming-pool-immediate-steps-large.jpg';
+import legalProcessLargeImage from '@/assets/swimming-pool-legal-process-large.jpg';
+import resourcesLargeImage from '@/assets/swimming-pool-resources-large.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -378,6 +381,363 @@ const SwimmingPoolAccidents: React.FC = () => {
                   </Button>
                 </form>
               </div>
+            </section>
+
+            {/* Immediate Steps After Accident Section */}
+            <section id="immediate-steps" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={immediateStepsImage} alt="Immediate Steps After Pool Accident" className="w-16 h-16 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">Immediate Steps After a Swimming Pool Accident</h2>
+              </div>
+
+              <div className="mb-8">
+                <img 
+                  src={immediateStepsLargeImage} 
+                  alt="Emergency Response After Swimming Pool Accident" 
+                  className="w-full h-80 object-cover rounded-lg mb-6"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Taking the right steps immediately after a swimming pool accident can be critical for both the victim's health and any potential legal case. Here's what you should do right away:
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections['immediate-steps']} onOpenChange={() => toggleSection('immediate-steps')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    View Critical Steps to Take After a Pool Accident
+                    {expandedSections['immediate-steps'] ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="border-red-200">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <Heart className="w-5 h-5 mr-2" />
+                          1. Ensure Immediate Safety
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-2">
+                          <li>Get the victim out of water safely</li>
+                          <li>Call 911 immediately for serious injuries</li>
+                          <li>Perform CPR if trained and necessary</li>
+                          <li>Keep victim warm and still</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-blue-200">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-blue-600">
+                          <Stethoscope className="w-5 h-5 mr-2" />
+                          2. Seek Medical Attention
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-2">
+                          <li>Even for seemingly minor injuries</li>
+                          <li>Document all medical treatment received</li>
+                          <li>Follow all doctor's recommendations</li>
+                          <li>Keep all medical records and bills</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-yellow-200">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-yellow-600">
+                          <FileText className="w-5 h-5 mr-2" />
+                          3. Preserve Evidence
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-2">
+                          <li>Take photos of the accident scene</li>
+                          <li>Document pool conditions and safety equipment</li>
+                          <li>Get contact info from witnesses</li>
+                          <li>Don't let anyone clean up the scene</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-green-200">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-green-600">
+                          <Phone className="w-5 h-5 mr-2" />
+                          4. Contact Legal Help
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-2">
+                          <li>Contact an experienced pool accident lawyer</li>
+                          <li>Don't speak to insurance companies alone</li>
+                          <li>Avoid signing any documents</li>
+                          <li>Protect your legal rights immediately</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-red-50 border border-red-200 p-6 rounded-lg">
+                    <div className="flex items-start">
+                      <AlertTriangle className="w-6 h-6 text-red-600 mt-1 mr-3" />
+                      <div>
+                        <h3 className="text-lg font-semibold text-red-800 mb-2">Critical Warning</h3>
+                        <p className="text-red-700">
+                          Don't delay in seeking legal representation. Evidence can disappear quickly, and California has strict deadlines for filing pool accident claims. Contact us immediately for a free consultation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={legalProcessImage} alt="Swimming Pool Legal Process" className="w-16 h-16 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">Swimming Pool Accident Legal Process</h2>
+              </div>
+
+              <div className="mb-8">
+                <img 
+                  src={legalProcessLargeImage} 
+                  alt="Legal Process for Swimming Pool Accidents" 
+                  className="w-full h-80 object-cover rounded-lg mb-6"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Understanding the legal process for swimming pool accident cases helps you know what to expect. Our experienced team will guide you through every step while you focus on recovery.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections['legal-process']} onOpenChange={() => toggleSection('legal-process')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Learn About Our Legal Process
+                    {expandedSections['legal-process'] ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="space-y-6">
+                    <div className="flex items-start p-6 bg-muted rounded-lg">
+                      <div className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold">1</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2">Initial Consultation & Case Evaluation</h3>
+                        <p className="text-muted-foreground">We review your case details, assess liability, and determine the strength of your claim during a free consultation.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start p-6 bg-muted rounded-lg">
+                      <div className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold">2</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2">Investigation & Evidence Collection</h3>
+                        <p className="text-muted-foreground">Our team conducts thorough investigations, gathering evidence, interviewing witnesses, and consulting experts to build your case.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start p-6 bg-muted rounded-lg">
+                      <div className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold">3</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2">Filing Your Claim</h3>
+                        <p className="text-muted-foreground">We file all necessary legal documents and notify all responsible parties while protecting your interests throughout the process.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start p-6 bg-muted rounded-lg">
+                      <div className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold">4</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2">Negotiation & Settlement</h3>
+                        <p className="text-muted-foreground">We negotiate aggressively with insurance companies and responsible parties to secure maximum compensation for your injuries.</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start p-6 bg-muted rounded-lg">
+                      <div className="bg-primary text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 font-bold">5</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2">Trial Preparation & Litigation</h3>
+                        <p className="text-muted-foreground">If settlement isn't possible, we prepare for trial and fight for your rights in court with experienced litigation attorneys.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                    <Card className="border-blue-200 bg-blue-50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-blue-700">
+                          <Clock className="w-5 h-5 mr-2" />
+                          Timeline Expectations
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-1 text-blue-700">
+                          <li>Simple cases: 6-12 months</li>
+                          <li>Complex cases: 1-3 years</li>
+                          <li>Trial cases: 2-4 years</li>
+                          <li>We keep you updated throughout</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-green-200 bg-green-50">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-green-700">
+                          <Shield className="w-5 h-5 mr-2" />
+                          No Fee Guarantee
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="list-disc ml-6 space-y-1 text-green-700">
+                          <li>No upfront legal fees</li>
+                          <li>We pay all case expenses</li>
+                          <li>Only paid if we win your case</li>
+                          <li>Free consultation always</li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={resourcesImage} alt="Swimming Pool Accident Resources" className="w-16 h-16 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">Swimming Pool Accident Resources</h2>
+              </div>
+
+              <div className="mb-8">
+                <img 
+                  src={resourcesLargeImage} 
+                  alt="Swimming Pool Safety Resources and Documentation" 
+                  className="w-full h-80 object-cover rounded-lg mb-6"
+                />
+              </div>
+              
+              <div className="prose prose-lg max-w-none mb-6">
+                <p className="text-lg leading-relaxed mb-4">
+                  Access important resources and tools to help you understand your rights, calculate potential compensation, and take the next steps in your swimming pool accident case.
+                </p>
+              </div>
+
+              <Collapsible open={expandedSections.resources} onOpenChange={() => toggleSection('resources')}>
+                <CollapsibleTrigger asChild>
+                  <Button variant="outline" className="w-full justify-between mb-4">
+                    Access Our Swimming Pool Accident Resources
+                    {expandedSections.resources ? <ChevronUp /> : <ChevronDown />}
+                  </Button>
+                </CollapsibleTrigger>
+                <CollapsibleContent className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/swimming-pool/case-evaluation'}>
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Scale className="w-5 h-5 mr-2 text-primary" />
+                          Free Case Evaluation
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Get a comprehensive evaluation of your swimming pool accident case with no obligation or cost.</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/swimming-pool/compensation-calculator'}>
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Calculator className="w-5 h-5 mr-2 text-primary" />
+                          Compensation Calculator
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Estimate potential compensation for your swimming pool accident injuries and damages.</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/swimming-pool/faq'}>
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <MessageCircle className="w-5 h-5 mr-2 text-primary" />
+                          Frequently Asked Questions
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Find answers to common questions about swimming pool accident claims and legal rights.</p>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = 'tel:(818) 123-4567'}>
+                      <CardHeader>
+                        <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                          <Phone className="w-5 h-5 mr-2 text-primary" />
+                          24/7 Legal Hotline
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p>Speak with an experienced swimming pool accident attorney immediately - available 24/7.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-muted p-6 rounded-lg">
+                    <h3 className="text-xl font-semibold mb-4">Important Swimming Pool Safety Information</h3>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h4 className="font-semibold mb-2">California Pool Safety Laws</h4>
+                        <ul className="list-disc ml-6 space-y-1 text-sm text-muted-foreground">
+                          <li>Pool fencing requirements (4-foot minimum height)</li>
+                          <li>Self-closing and self-latching gate requirements</li>
+                          <li>Pool alarm and safety cover regulations</li>
+                          <li>Lifeguard requirements for public pools</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-semibold mb-2">Common Liability Issues</h4>
+                        <ul className="list-disc ml-6 space-y-1 text-sm text-muted-foreground">
+                          <li>Inadequate supervision or security</li>
+                          <li>Faulty or missing safety equipment</li>
+                          <li>Poor pool maintenance and chemical balance</li>
+                          <li>Dangerous pool design or construction defects</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-red-50 border border-red-200 p-6 rounded-lg text-center">
+                    <h3 className="text-lg font-semibold text-red-800 mb-2">Need Immediate Help?</h3>
+                    <p className="text-red-700 mb-4">
+                      Don't wait - swimming pool accident cases have strict deadlines and evidence can disappear quickly.
+                    </p>
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      <Button 
+                        size="lg" 
+                        className="bg-red-600 hover:bg-red-700"
+                        onClick={() => window.location.href = '/practice-areas/swimming-pool/case-evaluation'}
+                      >
+                        Start Free Case Evaluation
+                      </Button>
+                      <Button 
+                        variant="outline" 
+                        size="lg"
+                        onClick={() => window.location.href = 'tel:(818) 123-4567'}
+                      >
+                        Call (818) 123-4567 Now
+                      </Button>
+                    </div>
+                  </div>
+                </CollapsibleContent>
+              </Collapsible>
             </section>
 
             {/* Time Limits Section */}

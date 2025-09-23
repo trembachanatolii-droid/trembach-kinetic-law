@@ -623,8 +623,8 @@ const UberLyftAccidents: React.FC = () => {
                   alt="Medical care for rideshare accident injuries" 
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 flex items-center justify-center">
-                  <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                <div className="absolute inset-0 bg-white/85 flex items-center justify-center">
+                  <h2 className="text-3xl font-bold text-black flex items-center gap-3">
                     <Stethoscope className="w-8 h-8" />
                     Common Uber & Lyft Accident Injuries
                   </h2>
@@ -684,8 +684,8 @@ const UberLyftAccidents: React.FC = () => {
                   alt="Rideshare insurance coverage documentation" 
                   className="w-full h-48 object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-secondary/80 flex items-center justify-center">
-                  <h2 className="text-3xl font-bold text-white flex items-center gap-3">
+                <div className="absolute inset-0 bg-white/85 flex items-center justify-center">
+                  <h2 className="text-3xl font-bold text-black flex items-center gap-3">
                     <Shield className="w-8 h-8" />
                     Rideshare Insurance Coverage Explained
                   </h2>

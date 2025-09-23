@@ -72,6 +72,34 @@ const AmusementParkResources: React.FC = () => {
     ? resources 
     : resources.filter(resource => resource.category === selectedCategory);
 
+  const handleDownload = (resource: any) => {
+    // Create a mock PDF download - in a real app, this would link to actual files
+    const fileName = `${resource.title.replace(/\s+/g, '_').toLowerCase()}.pdf`;
+    
+    // For demonstration, create a simple text file with resource info
+    const content = `
+${resource.title}
+
+${resource.description}
+
+This is a sample document for: ${resource.title}
+
+For legal assistance with amusement park injuries, contact:
+Trembach Law Firm
+Phone: (818) 123-4567
+`;
+    
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    window.URL.revokeObjectURL(url);
+  };
+
   const getTypeColor = (type: string) => {
     switch (type) {
       case 'guide': return 'bg-blue-100 text-blue-600';
@@ -186,6 +214,7 @@ const AmusementParkResources: React.FC = () => {
                       variant="outline" 
                       size="sm"
                       className="flex items-center gap-2"
+                      onClick={() => handleDownload(resource)}
                     >
                       <Download className="w-4 h-4" />
                       Download

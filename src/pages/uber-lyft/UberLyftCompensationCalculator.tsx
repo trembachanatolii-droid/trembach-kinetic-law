@@ -13,9 +13,7 @@ import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import { useScrollMemory } from '@/hooks/useScrollMemory';
 import heroBackground from '@/assets/uber-lyft-calculator-hero.jpg';
-
 gsap.registerPlugin(ScrollTrigger);
-
 const UberLyftCompensationCalculator: React.FC = () => {
   const [visible, setVisible] = useState(false);
   const [estimatedCompensation, setEstimatedCompensation] = useState<number | null>(null);
@@ -30,7 +28,6 @@ const UberLyftCompensationCalculator: React.FC = () => {
     treatmentNeeds: [] as string[],
     qualityOfLifeImpact: ''
   });
-
   const [contactForm, setContactForm] = useState({
     firstName: '',
     lastName: '',
@@ -38,98 +35,89 @@ const UberLyftCompensationCalculator: React.FC = () => {
     email: '',
     description: ''
   });
-
   const [characterCount, setCharacterCount] = useState(0);
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   useScrollMemory();
-
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation
       const heroContent = heroRef.current?.querySelector('.hero-content');
       if (heroContent) {
-        gsap.set(heroContent, { opacity: 0, y: 100, scale: 0.8 });
-        gsap.to(heroContent, { 
-          opacity: 1, 
-          y: 0, 
-          scale: 1, 
-          duration: 0.5, 
-          ease: 'power3.out' 
+        gsap.set(heroContent, {
+          opacity: 0,
+          y: 100,
+          scale: 0.8
+        });
+        gsap.to(heroContent, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.5,
+          ease: 'power3.out'
         });
       }
 
       // Content sections animation
       const contentSections = contentRef.current?.querySelectorAll('.content-section');
       if (contentSections) {
-        gsap.fromTo(contentSections,
-          { opacity: 0, y: 60, scale: 0.95 },
-          {
-            opacity: 1,
-            y: 0,
-            scale: 1,
-            duration: 0.4,
-            stagger: 0.1,
-            ease: 'power3.out',
-            scrollTrigger: {
-              trigger: contentRef.current,
-              start: 'top 90%',
-              toggleActions: 'play none none none'
-            }
+        gsap.fromTo(contentSections, {
+          opacity: 0,
+          y: 60,
+          scale: 0.95
+        }, {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.1,
+          ease: 'power3.out',
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 90%',
+            toggleActions: 'play none none none'
           }
-        );
+        });
       }
     });
-
     const handleScroll = () => {
       setVisible(window.scrollY > 300);
     };
-
     window.addEventListener('scroll', handleScroll);
-
     return () => {
       ctx.revert();
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
     }));
   };
-
   const handleTreatmentNeedsChange = (treatmentType: string, checked: boolean) => {
     setFormData(prev => ({
       ...prev,
-      treatmentNeeds: checked 
-        ? [...prev.treatmentNeeds, treatmentType]
-        : prev.treatmentNeeds.filter(item => item !== treatmentType)
+      treatmentNeeds: checked ? [...prev.treatmentNeeds, treatmentType] : prev.treatmentNeeds.filter(item => item !== treatmentType)
     }));
   };
-
   const handleContactFormChange = (field: string, value: string) => {
     setContactForm(prev => ({
       ...prev,
       [field]: value
     }));
-    
     if (field === 'description') {
       setCharacterCount(value.length);
     }
   };
-
   const handleContactSubmit = () => {
     // Handle form submission
     console.log('Contact form submitted:', contactForm);
     // You can add actual form submission logic here
   };
-
   const calculateCompensation = () => {
     let baseCompensation = 0;
-    
+
     // Base compensation by injury type
     const injuryMultipliers = {
       'brain-injury': 2500000,
@@ -148,10 +136,8 @@ const UberLyftCompensationCalculator: React.FC = () => {
       'severe': 1.0,
       'catastrophic': 1.5
     };
-
     const injuryBase = injuryMultipliers[formData.injuryType as keyof typeof injuryMultipliers] || 200000;
     const severityMultiplier = severityMultipliers[formData.injurySeverity as keyof typeof severityMultipliers] || 1.0;
-    
     baseCompensation = injuryBase * severityMultiplier;
 
     // Add medical expenses
@@ -181,42 +167,32 @@ const UberLyftCompensationCalculator: React.FC = () => {
       'significant': 1.6,
       'severe': 2.0
     };
-
     const qualityMultiplier = qualityMultipliers[formData.qualityOfLifeImpact as keyof typeof qualityMultipliers] || 1.0;
     baseCompensation *= qualityMultiplier;
 
     // Adjust for fault percentage
     const faultReduction = (100 - (parseFloat(formData.faultPercentage) || 0)) / 100;
     baseCompensation *= faultReduction;
-
     setEstimatedCompensation(Math.round(baseCompensation));
   };
-
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
       style: 'currency',
       currency: 'USD',
       minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
+      maximumFractionDigits: 0
     }).format(amount);
   };
-
-  return (
-    <>
-      <SEO
-        title="Uber/Lyft Accident Compensation Calculator | Calculate Your Settlement Value"
-        description="Calculate potential compensation for Uber/Lyft accident cases. Free tool estimates settlement values for rideshare accident injuries in California."
-      />
+  return <>
+      <SEO title="Uber/Lyft Accident Compensation Calculator | Calculate Your Settlement Value" description="Calculate potential compensation for Uber/Lyft accident cases. Free tool estimates settlement values for rideshare accident injuries in California." />
 
       <GoBack />
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
-        <section 
-          ref={heroRef}
-          className="relative bg-cover bg-center bg-no-repeat min-h-[60vh] flex items-center justify-center"
-          style={{ backgroundImage: `url(${heroBackground})` }}
-        >
+        <section ref={heroRef} className="relative bg-cover bg-center bg-no-repeat min-h-[60vh] flex items-center justify-center" style={{
+        backgroundImage: `url(${heroBackground})`
+      }}>
           <div className="absolute inset-0 bg-black/70"></div>
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
             <div className="flex items-center justify-center mb-4">
@@ -227,9 +203,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
               Calculate potential compensation for your rideshare accident case
             </p>
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />)}
               <span className="ml-2 text-lg">Trusted by hundreds of clients</span>
             </div>
           </div>
@@ -259,7 +233,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
                     
                     <div>
                       <Label htmlFor="injuryType">Type of Injury</Label>
-                      <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                      <Select value={formData.injuryType} onValueChange={value => handleInputChange('injuryType', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select injury type" />
                         </SelectTrigger>
@@ -277,7 +251,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
 
                     <div>
                       <Label htmlFor="injurySeverity">Severity of Injury</Label>
-                      <Select value={formData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                      <Select value={formData.injurySeverity} onValueChange={value => handleInputChange('injurySeverity', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select severity" />
                         </SelectTrigger>
@@ -292,7 +266,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
 
                     <div>
                       <Label htmlFor="faultPercentage">Your Fault Percentage (%)</Label>
-                      <Select value={formData.faultPercentage} onValueChange={(value) => handleInputChange('faultPercentage', value)}>
+                      <Select value={formData.faultPercentage} onValueChange={value => handleInputChange('faultPercentage', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select fault percentage" />
                         </SelectTrigger>
@@ -315,32 +289,17 @@ const UberLyftCompensationCalculator: React.FC = () => {
                     
                     <div>
                       <Label htmlFor="medicalExpenses">Medical Expenses to Date</Label>
-                      <Input
-                        type="text"
-                        value={formData.medicalExpenses}
-                        onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
-                        placeholder="Enter total medical costs"
-                      />
+                      <Input type="text" value={formData.medicalExpenses} onChange={e => handleInputChange('medicalExpenses', e.target.value)} placeholder="Enter total medical costs" />
                     </div>
 
                     <div>
                       <Label htmlFor="futureExpenses">Future Medical Expenses</Label>
-                      <Input
-                        type="text"
-                        value={formData.futureExpenses}
-                        onChange={(e) => handleInputChange('futureExpenses', e.target.value)}
-                        placeholder="Enter expected future costs"
-                      />
+                      <Input type="text" value={formData.futureExpenses} onChange={e => handleInputChange('futureExpenses', e.target.value)} placeholder="Enter expected future costs" />
                     </div>
 
                     <div>
                       <Label htmlFor="lostWages">Lost Wages/Income</Label>
-                      <Input
-                        type="text"
-                        value={formData.lostWages}
-                        onChange={(e) => handleInputChange('lostWages', e.target.value)}
-                        placeholder="Enter lost income amount"
-                      />
+                      <Input type="text" value={formData.lostWages} onChange={e => handleInputChange('lostWages', e.target.value)} placeholder="Enter lost income amount" />
                     </div>
                   </div>
 
@@ -352,25 +311,10 @@ const UberLyftCompensationCalculator: React.FC = () => {
                     </h3>
                     
                     <div className="space-y-3">
-                      {[
-                        'Physical Therapy',
-                        'Occupational Therapy',
-                        'Pain Management',
-                        'Mental Health Counseling',
-                        'Surgery Required',
-                        'Medical Equipment',
-                        'Home Care',
-                        'Ongoing Medications'
-                      ].map((treatmentType) => (
-                        <div key={treatmentType} className="flex items-center space-x-2">
-                          <Checkbox
-                            id={treatmentType}
-                            checked={formData.treatmentNeeds.includes(treatmentType)}
-                            onCheckedChange={(checked) => handleTreatmentNeedsChange(treatmentType, checked as boolean)}
-                          />
+                      {['Physical Therapy', 'Occupational Therapy', 'Pain Management', 'Mental Health Counseling', 'Surgery Required', 'Medical Equipment', 'Home Care', 'Ongoing Medications'].map(treatmentType => <div key={treatmentType} className="flex items-center space-x-2">
+                          <Checkbox id={treatmentType} checked={formData.treatmentNeeds.includes(treatmentType)} onCheckedChange={checked => handleTreatmentNeedsChange(treatmentType, checked as boolean)} />
                           <Label htmlFor={treatmentType}>{treatmentType}</Label>
-                        </div>
-                      ))}
+                        </div>)}
                     </div>
                   </div>
 
@@ -383,7 +327,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
                     
                     <div>
                       <Label htmlFor="qualityOfLifeImpact">Impact on Daily Life</Label>
-                      <Select value={formData.qualityOfLifeImpact} onValueChange={(value) => handleInputChange('qualityOfLifeImpact', value)}>
+                      <Select value={formData.qualityOfLifeImpact} onValueChange={value => handleInputChange('qualityOfLifeImpact', value)}>
                         <SelectTrigger>
                           <SelectValue placeholder="Select impact level" />
                         </SelectTrigger>
@@ -397,17 +341,12 @@ const UberLyftCompensationCalculator: React.FC = () => {
                     </div>
                   </div>
 
-                  <Button 
-                    onClick={calculateCompensation} 
-                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3"
-                    disabled={!formData.injuryType || !formData.injurySeverity}
-                  >
+                  <Button onClick={calculateCompensation} className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3" disabled={!formData.injuryType || !formData.injurySeverity}>
                     Calculate Compensation Estimate
                   </Button>
 
                   {/* Results */}
-                  {estimatedCompensation && (
-                    <Card className="mt-6 border-primary">
+                  {estimatedCompensation && <Card className="mt-6 border-primary">
                       <CardContent className="p-6">
                         <h3 className="text-xl font-bold text-center mb-4">Estimated Compensation Range</h3>
                         <div className="text-center">
@@ -417,16 +356,12 @@ const UberLyftCompensationCalculator: React.FC = () => {
                           <p className="text-muted-foreground mb-4">
                             *This is an estimate. Actual compensation may vary based on specific case details.
                           </p>
-                          <Button 
-                            onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
-                            className="bg-primary hover:bg-primary/90 text-white"
-                          >
+                          <Button onClick={() => window.location.href = '/uber-lyft/case-evaluation'} className="bg-primary hover:bg-primary/90 text-white">
                             Get Free Case Evaluation
                           </Button>
                         </div>
                       </CardContent>
-                    </Card>
-                  )}
+                    </Card>}
                 </CardContent>
               </Card>
             </div>
@@ -489,26 +424,17 @@ const UberLyftCompensationCalculator: React.FC = () => {
                   <CardTitle className="text-lg">Contact Us</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button 
-                    className="w-full bg-primary hover:bg-primary/90 text-white"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
+                  <Button className="w-full bg-primary hover:bg-primary/90 text-white" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-4 h-4 mr-2" />
                     Call (818) 123-4567
                   </Button>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full"
-                    onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
-                  >
+                  <Button variant="outline" className="w-full" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Free Case Review
                   </Button>
                   
-                  <div className="text-center text-sm text-muted-foreground">
-                    24/7 Free Consultation Available
-                  </div>
+                  
                 </CardContent>
               </Card>
             </div>
@@ -533,55 +459,25 @@ const UberLyftCompensationCalculator: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-6">
                   <div>
-                    <Input
-                      type="text"
-                      placeholder="First Name *"
-                      value={contactForm.firstName}
-                      onChange={(e) => handleContactFormChange('firstName', e.target.value)}
-                      className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900"
-                    />
+                    <Input type="text" placeholder="First Name *" value={contactForm.firstName} onChange={e => handleContactFormChange('firstName', e.target.value)} className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900" />
                   </div>
                   
                   <div>
-                    <Input
-                      type="text"
-                      placeholder="Last Name *"
-                      value={contactForm.lastName}
-                      onChange={(e) => handleContactFormChange('lastName', e.target.value)}
-                      className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900"
-                    />
+                    <Input type="text" placeholder="Last Name *" value={contactForm.lastName} onChange={e => handleContactFormChange('lastName', e.target.value)} className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900" />
                   </div>
                   
                   <div>
-                    <Input
-                      type="tel"
-                      placeholder="Phone *"
-                      value={contactForm.phone}
-                      onChange={(e) => handleContactFormChange('phone', e.target.value)}
-                      className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900"
-                    />
+                    <Input type="tel" placeholder="Phone *" value={contactForm.phone} onChange={e => handleContactFormChange('phone', e.target.value)} className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900" />
                   </div>
                   
                   <div>
-                    <Input
-                      type="email"
-                      placeholder="Email *"
-                      value={contactForm.email}
-                      onChange={(e) => handleContactFormChange('email', e.target.value)}
-                      className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900"
-                    />
+                    <Input type="email" placeholder="Email *" value={contactForm.email} onChange={e => handleContactFormChange('email', e.target.value)} className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900" />
                   </div>
                 </div>
                 
                 <div className="space-y-4">
                   <div>
-                    <Textarea
-                      placeholder="What happened? (optional)"
-                      value={contactForm.description}
-                      onChange={(e) => handleContactFormChange('description', e.target.value)}
-                      className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900 h-48 resize-none"
-                      maxLength={4000}
-                    />
+                    <Textarea placeholder="What happened? (optional)" value={contactForm.description} onChange={e => handleContactFormChange('description', e.target.value)} className="bg-gray-200 border-gray-300 placeholder-gray-600 text-gray-900 h-48 resize-none" maxLength={4000} />
                     <p className="text-sm text-gray-600 mt-1">
                       {4000 - characterCount} of 4000 Character(s) left
                     </p>
@@ -597,11 +493,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
                 </p>
                 
                 <div className="flex justify-end">
-                  <Button
-                    onClick={handleContactSubmit}
-                    className="bg-blue-700 hover:bg-blue-800 text-white px-12 py-3 text-lg"
-                    disabled={!contactForm.firstName || !contactForm.lastName || !contactForm.phone || !contactForm.email}
-                  >
+                  <Button onClick={handleContactSubmit} className="bg-blue-700 hover:bg-blue-800 text-white px-12 py-3 text-lg" disabled={!contactForm.firstName || !contactForm.lastName || !contactForm.phone || !contactForm.email}>
                     Submit
                   </Button>
                 </div>
@@ -610,8 +502,6 @@ const UberLyftCompensationCalculator: React.FC = () => {
           </div>
         </section>
       </div>
-    </>
-  );
+    </>;
 };
-
 export default UberLyftCompensationCalculator;

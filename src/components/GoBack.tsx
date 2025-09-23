@@ -47,72 +47,17 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
   }, [location.pathname]);
 
   const handleGoBack = () => {
-    // Store current scroll position before navigating
-    sessionStorage.setItem(`scrollPosition_${location.pathname}`, window.scrollY.toString());
-    
+    // Store current scroll position for this page
+    sessionStorage.setItem(`scrollPosition_${location.pathname}`, String(window.scrollY));
+
     if (window.history.length > 1) {
-      // Enhanced path mapping for Uber/Lyft pages
-      const currentPath = location.pathname;
-      let targetPath = fallbackPath;
-      
-      // Map Uber/Lyft related pages
-      if (currentPath.includes('/uber-lyft/case-evaluation')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/compensation-calculator')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/faq')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/legal-guidance')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/medical-guidance')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/resources')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/app-safety')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/driver-screening')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/insurance-claims')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/uber-lyft/passenger-rights')) {
-        targetPath = '/practice-areas/uber-lyft-accidents';
-      } else if (currentPath.includes('/practice-areas/pfas-exposure')) {
-        targetPath = '/practice-areas';
-      } else if (currentPath.includes('/pfas-case-evaluation')) {
-        targetPath = '/practice-areas/pfas-exposure';
-      } else if (currentPath.includes('/pfas-resources')) {
-        targetPath = '/practice-areas/pfas-exposure';
-      }
-      
       navigate(-1);
-      
-      // Enhanced scroll restoration with retry mechanism
-      setTimeout(() => {
-        const savedPosition = sessionStorage.getItem(`scrollPosition_${targetPath}`);
-        if (savedPosition) {
-          const scrollTop = parseInt(savedPosition, 10);
-          
-          // Try immediate scroll first
-          window.scrollTo({
-            top: scrollTop,
-            behavior: 'smooth'
-          });
-          
-          // Backup scroll attempt after content loads
-          setTimeout(() => {
-            window.scrollTo({
-              top: scrollTop,
-              behavior: 'smooth'
-            });
-          }, 300);
-        }
-      }, 150);
     } else {
       navigate(fallbackPath);
     }
   };
 
-  const baseClasses = "fixed top-28 left-4 z-[60] transition-all duration-500 ease-in-out";
+  const baseClasses = "fixed top-28 left-4 z-[999] transition-all duration-500 ease-in-out";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
   
   return (

@@ -286,8 +286,12 @@ const UberLyftCaseEvaluation: React.FC = () => {
                       </div>
                     </div>
 
-                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold py-4 text-lg [&]:!text-white [&>*]:!text-white">
-                      Submit Case Evaluation
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-red-600 hover:bg-red-700 font-bold py-4 text-lg"
+                      style={{ color: 'white !important' }}
+                    >
+                      <span style={{ color: 'white !important', fontWeight: 'bold' }}>Submit Case Evaluation</span>
                     </Button>
                     
                     <p className="text-sm text-muted-foreground text-center">
@@ -312,11 +316,12 @@ const UberLyftCaseEvaluation: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white"
+                    className="w-full bg-red-600 hover:bg-red-700"
+                    style={{ color: 'white !important' }}
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call (818) 123-4567
+                    <Phone className="w-4 h-4 mr-2" style={{ color: 'white !important' }} />
+                    <span style={{ color: 'white !important', fontWeight: 'bold' }}>Call (818) 123-4567</span>
                   </Button>
                   
                   <p className="text-sm text-muted-foreground">

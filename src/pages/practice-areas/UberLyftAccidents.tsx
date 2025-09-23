@@ -153,10 +153,11 @@ const UberLyftAccidents: React.FC = () => {
             
             <Button 
               size="lg" 
-              className="bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 text-lg [&]:!text-white [&>*]:!text-white"
+              className="bg-red-600 hover:bg-red-700 font-bold px-8 py-4 text-lg"
+              style={{ color: 'white !important' }}
               onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
             >
-              START MY FREE CASE EVALUATION
+              <span style={{ color: 'white !important', fontWeight: 'bold' }}>START MY FREE CASE EVALUATION</span>
             </Button>
           </div>
         </div>
@@ -348,8 +349,12 @@ const UberLyftAccidents: React.FC = () => {
                     </div>
                   </div>
                   
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white">
-                    Start My Free Case Evaluation
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-red-600 hover:bg-red-700"
+                    style={{ color: 'white !important' }}
+                  >
+                    <span style={{ color: 'white !important', fontWeight: 'bold' }}>Start My Free Case Evaluation</span>
                   </Button>
                 </form>
               </div>
@@ -732,11 +737,12 @@ const UberLyftAccidents: React.FC = () => {
                   
                   <div className="space-y-4">
                     <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 !text-white [&]:!text-white [&>*]:!text-white"
+                      className="w-full bg-red-600 hover:bg-red-700"
+                      style={{ color: 'white !important' }}
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Call (818) 123-4567
+                      <Phone className="w-4 h-4 mr-2" style={{ color: 'white !important' }} />
+                      <span style={{ color: 'white !important', fontWeight: 'bold' }}>Call (818) 123-4567</span>
                     </Button>
                     
                     <Button 
@@ -843,12 +849,24 @@ const UberLyftAccidents: React.FC = () => {
           <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
           <p className="text-xl mb-12 leading-relaxed !text-white">California law gives you two years from injury to file your claim. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
-            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg [&]:!text-white [&>*]:!text-white" onClick={() => window.location.href = 'tel:8181234567'}>
-              CALL (818) 123-4567
+            <Button 
+              size="lg" 
+              aria-label="Call Trembach Law Firm" 
+              className="w-full bg-red-600 hover:bg-red-700 font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
+              style={{ color: 'white !important' }}
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
+              <span style={{ color: 'white !important', fontWeight: 'bold' }}>CALL (818) 123-4567</span>
             </Button>
             
-            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 !text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg [&]:!text-white [&>*]:!text-white" onClick={() => window.location.href = '/uber-lyft/case-evaluation'}>
-              START MY FREE CASE EVALUATION
+            <Button 
+              size="lg" 
+              aria-label="Start Free Case Evaluation" 
+              className="w-full bg-red-600 hover:bg-red-700 font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg"
+              style={{ color: 'white !important' }}
+              onClick={() => window.location.href = '/uber-lyft/case-evaluation'}
+            >
+              <span style={{ color: 'white !important', fontWeight: 'bold' }}>START MY FREE CASE EVALUATION</span>
             </Button>
           </div>
         </div>

@@ -725,13 +725,14 @@ const PracticeAreasReference: React.FC = () => {
                       
                       {/* Overlay Buttons */}
                       <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Link 
+                      <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
                            activeArea.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
                            activeArea.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
                            activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                          activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                          `/practice-areas/${activeArea.slug}`}
+                           activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
+                           activeArea.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
+                           `/practice-areas/${activeArea.slug}`}
                       className="flex-1"
                     >
                       <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
@@ -739,12 +740,13 @@ const PracticeAreasReference: React.FC = () => {
                       </Button>
                     </Link>
                     
-                    <Link 
+                      <Link 
                       to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
                            activeArea.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
                            activeArea.title === 'Maritime Accidents' ? '/maritime/case-evaluation' :
                            activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
-                          activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
+                           activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
+                           activeArea.title === 'Swimming Pool' ? '/practice-areas/swimming-pool/case-evaluation' :
                           '/case-evaluation'}
                       className="flex-1"
                     >
@@ -780,11 +782,12 @@ const PracticeAreasReference: React.FC = () => {
                       {/* CTA */}
                       <div className="pt-2">
                         <Link
-                       to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
-                           area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                              area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                              area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
-                              '/practice-areas/coming-soon'}
+                        to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                            area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                            area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
+                            area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                            area.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
+                            '/practice-areas/coming-soon'}
                           className="ghost-button group/btn"
                           onClick={(e) => e.stopPropagation()}
                         >

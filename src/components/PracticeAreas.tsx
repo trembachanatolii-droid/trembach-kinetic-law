@@ -31,6 +31,8 @@ const getPracticeAreaLink = (title: string): string => {
       return "/practice-areas/opioid-litigation";
     case "Mass Torts":
       return "/mass-torts";
+    case "Swimming Pool":
+      return "/practice-areas/swimming-pool-accidents";
     default:
       return "/case-evaluation";
   }

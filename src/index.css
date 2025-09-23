@@ -975,3 +975,8 @@ a[href^="tel:"],
   color: hsl(var(--primary-foreground)) !important;
 }
 
+/* Utility: force white text for all descendants */
+.force-white, .force-white * {
+  color: hsl(var(--primary-foreground)) !important;
+}
+

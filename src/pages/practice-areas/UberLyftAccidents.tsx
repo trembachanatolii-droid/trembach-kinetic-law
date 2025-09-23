@@ -718,7 +718,7 @@ const UberLyftAccidents: React.FC = () => {
               <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
                 <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
                   <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                    <div className="text-center text-white">
+                    <div className="text-center text-white force-white">
                       <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
                       <h3 className="text-xl font-bold">Start Your Case</h3>
                     </div>

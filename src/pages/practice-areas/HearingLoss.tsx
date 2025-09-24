@@ -1223,8 +1223,7 @@ const HearingLoss: React.FC = () => {
           </div>
         </div>
 
-        {/* Bottom CTA Section - Matching Mesothelioma */}
-        <section className="bg-red-600 text-white py-16">
+        <section className="bg-red-600 text-white py-16 min-h-[50vh] flex items-center">
           <div className="max-w-4xl mx-auto text-center px-6">
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Don't Wait - Time Limits Apply for California Hearing Loss Claims</h2>
             <p className="text-lg md:text-xl mb-10 leading-relaxed text-white">

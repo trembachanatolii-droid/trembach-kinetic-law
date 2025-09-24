@@ -64,19 +64,6 @@ const HearingLoss: React.FC = () => {
   const backgroundLayer2 = useRef<HTMLDivElement>(null);
   const backgroundLayer3 = useRef<HTMLDivElement>(null);
 
-const HearingLoss: React.FC = () => {
-  const [activeTab, setActiveTab] = useState('overview');
-  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [formData, setFormData] = useState({
-    hearingLossType: '',
-    causeOfLoss: ''
-  });
-
-  const heroRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const sidebarRef = useRef<HTMLDivElement>(null);
-
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
@@ -226,7 +213,6 @@ const HearingLoss: React.FC = () => {
           });
         });
       }); // Close forEach
-      });
 
       // Sidebar scroll-triggered animations with reduced motion support
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -248,7 +234,7 @@ const HearingLoss: React.FC = () => {
         );
       }
     }); // Close the gsap.context
-
+    
     return () => ctx.revert();
   }, []);
 

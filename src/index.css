@@ -1757,3 +1757,11 @@ label:after {
   content: none;
 }
 
+/* Bugfix: force white text inside Hearing Loss hero subtitle */
+.hearing-loss-page .hero-content .force-white,
+.hearing-loss-page .hero-content .force-white span {
+  color: #ffffff !important;
+  opacity: 1 !important;
+}
+
+

@@ -88,7 +88,7 @@ const HearingLossCaseEvaluation: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black/70"></div>
           
-          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Free Hearing Loss Case Evaluation
             </h1>

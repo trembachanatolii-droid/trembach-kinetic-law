@@ -80,6 +80,81 @@
     visibility: visible !important;
   }
 
+  /* CRITICAL: Force high contrast for all Vision Loss section text */
+  .vision-loss-page .card p,
+  .vision-loss-page .card span,
+  .vision-loss-page .card li,
+  .vision-loss-page .card div,
+  .vision-loss-page .card-content p,
+  .vision-loss-page .card-content span,
+  .vision-loss-page .card-content div,
+  .vision-loss-page .card-content li,
+  .vision-loss-page p,
+  .vision-loss-page span,
+  .vision-loss-page li,
+  .vision-loss-page .text-sm,
+  .vision-loss-page .text-base,
+  .vision-loss-page .text-lg,
+  .vision-loss-page .text-muted-foreground,
+  .vision-loss-page label {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .vision-loss-page h1,
+  .vision-loss-page h2,
+  .vision-loss-page h3,
+  .vision-loss-page h4,
+  .vision-loss-page h5,
+  .vision-loss-page h6,
+  .vision-loss-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Fix Vision Loss form elements visibility */
+  .vision-loss-page input,
+  .vision-loss-page textarea,
+  .vision-loss-page select,
+  .vision-loss-page .select-trigger,
+  .vision-loss-page .select-value {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .vision-loss-page input::placeholder,
+  .vision-loss-page textarea::placeholder {
+    color: #6b7280 !important;
+    opacity: 0.8 !important;
+  }
+
+  /* Vision Loss select dropdown styling */
+  .vision-loss-page .select-content {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .vision-loss-page .select-item {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+  }
+
+  .vision-loss-page .select-item:hover {
+    background-color: #f3f4f6 !important;
+    color: #000000 !important;
+  }
+
   /* Hero section styling - white centralized text */
   .explosions-page .hero-section h1,
   .explosions-page .hero-section h2,
@@ -89,6 +164,23 @@
   .explosions-page .hero-content h2,
   .explosions-page .hero-content p,
   .explosions-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Vision Loss hero section styling - white centralized text */
+  .vision-loss-page .hero-section h1,
+  .vision-loss-page .hero-section h2,
+  .vision-loss-page .hero-section p,
+  .vision-loss-page .hero-section span,
+  .vision-loss-page .hero-content h1,
+  .vision-loss-page .hero-content h2,
+  .vision-loss-page .hero-content p,
+  .vision-loss-page .hero-content span {
     color: #ffffff !important;
     text-align: center !important;
     text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
@@ -123,6 +215,57 @@
   .explosions-page .bg-white,
   .explosions-page .bg-white span {
     color: #111111 !important;
+  }
+
+  /* Force white text in dark sections - Vision Loss */
+  .vision-loss-page .bg-gray-900 h1,
+  .vision-loss-page .bg-gray-900 h2,
+  .vision-loss-page .bg-gray-900 h3,
+  .vision-loss-page .bg-gray-900 p,
+  .vision-loss-page .bg-gray-900 span,
+  .vision-loss-page .bg-gray-900 div {
+    color: #ffffff !important;
+  }
+
+  /* Button text visibility in Vision Loss section */
+  .vision-loss-page button,
+  .vision-loss-page .btn,
+  .vision-loss-page [role="button"],
+  .vision-loss-page button span,
+  .vision-loss-page button .font-medium,
+  .vision-loss-page button .font-bold {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .vision-loss-page .bg-red-600,
+  .vision-loss-page .bg-red-600 span,
+  .vision-loss-page .bg-red-600 button,
+  .vision-loss-page .bg-red-600 .text-white {
+    color: #ffffff !important;
+  }
+
+  .vision-loss-page .bg-white,
+  .vision-loss-page .bg-white span,
+  .vision-loss-page .bg-white button {
+    color: #111111 !important;
+  }
+
+  /* Ensure button text is always visible - Vision Loss specific */
+  .vision-loss-page button.bg-red-600 {
+    color: #ffffff !important;
+  }
+
+  .vision-loss-page button.bg-red-600 span {
+    color: #ffffff !important;
+  }
+
+  .vision-loss-page button.bg-green-600 {
+    color: #ffffff !important;
+  }
+
+  .vision-loss-page button.bg-green-600 span {
+    color: #ffffff !important;
   }
 
   /* Ensure button text is always visible with explicit colors */
@@ -293,34 +436,100 @@
           color: #ffffff !important;
         }
 
-        /* Fix card and content visibility */
-        .card,
-        .card-header,
-        .card-content,
-        .card-title,
-        .card-description {
-          opacity: 1 !important;
-          visibility: visible !important;
-        }
+  /* Fix card and content visibility */
+  .card,
+  .card-header,
+  .card-content,
+  .card-title,
+  .card-description {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
 
-        /* Fix form elements */
-        input,
-        textarea,
-        select,
-        .form-control {
-          background-color: hsl(var(--background)) !important;
-          color: hsl(var(--foreground)) !important;
-          border-color: hsl(var(--border)) !important;
-          opacity: 1 !important;
-        }
+  /* Fix form elements */
+  input,
+  textarea,
+  select,
+  .form-control {
+    background-color: hsl(var(--background)) !important;
+    color: hsl(var(--foreground)) !important;
+    border-color: hsl(var(--border)) !important;
+    opacity: 1 !important;
+  }
 
-        /* Fix collapsible content */
-        [data-state="open"],
-        [data-state="closed"],
-        .collapsible-content {
-          opacity: 1 !important;
-          visibility: visible !important;
-        }
+  /* Fix collapsible content */
+  [data-state="open"],
+  [data-state="closed"],
+  .collapsible-content {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* CRITICAL: Vision Loss Form Elements and UI Components */
+  .vision-loss-page .select-trigger,
+  .vision-loss-page .select-value,
+  .vision-loss-page .select-content,
+  .vision-loss-page .select-item {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+  }
+
+  .vision-loss-page .select-content {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    z-index: 50 !important;
+  }
+
+  .vision-loss-page .select-item:hover {
+    background-color: #f9fafb !important;
+    color: #000000 !important;
+  }
+
+  .vision-loss-page .select-item[data-highlighted] {
+    background-color: #f3f4f6 !important;
+    color: #000000 !important;
+  }
+
+  /* Fix badge and indicator visibility */
+  .vision-loss-page .badge {
+    color: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Fix Progress component */
+  .vision-loss-page .progress-indicator {
+    background-color: #e5e7eb !important;
+  }
+
+  .vision-loss-page .progress-fill {
+    background-color: #dc2626 !important;
+  }
+
+  /* Fix link hover states */
+  .vision-loss-page a:hover {
+    color: #dc2626 !important;
+    text-decoration: underline !important;
+  }
+
+  /* Ensure all text in cards is dark */
+  .vision-loss-page .card *:not(.hero-content *):not(.bg-red-600 *):not(.bg-green-600 *):not(.bg-gray-900 *) {
+    color: #111111 !important;
+  }
+
+  /* Fix button outline variants */
+  .vision-loss-page button[variant="outline"],
+  .vision-loss-page .btn-outline {
+    background-color: #ffffff !important;
+    color: #111111 !important;
+    border-color: #d1d5db !important;
+  }
+
+  .vision-loss-page button[variant="outline"]:hover,
+  .vision-loss-page .btn-outline:hover {
+    background-color: #f9fafb !important;
+    color: #000000 !important;
+  }
 
   /* Enhanced contrast for better readability */
   .bg-background\/90 {
@@ -348,9 +557,9 @@
     --electric-glow: 280 100% 75%;
     
     --muted: 220 13% 85%;
-    --muted-foreground: 0 0% 15%; /* Much darker for better contrast */
+    --muted-foreground: 0 0% 7%; /* Darker for better contrast - #111111 */
     
-    --border: 220 13% 90%;
+    --border: 220 13% 85%;
     --input: 0 0% 98%;
     --ring: 260 100% 70%;
     

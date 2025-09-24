@@ -354,14 +354,14 @@ const VisionLossCompensationCalculator: React.FC = () => {
                         className="flex-1 bg-red-600 hover:bg-red-700 text-white"
                         onClick={() => window.location.href = '/practice-areas/vision-loss/case-evaluation'}
                       >
-                        Get Free Case Review
+                        <span className="text-white">Get Free Case Review</span>
                       </Button>
                       <Button 
                         variant="outline"
-                        className="flex-1"
+                        className="flex-1 text-foreground hover:text-foreground"
                         onClick={() => window.location.href = 'tel:8181234567'}
                       >
-                        Call (818) 123-4567
+                        <span className="text-foreground">Call (818) 123-4567</span>
                       </Button>
                     </div>
                   </div>
@@ -492,7 +492,7 @@ const VisionLossCompensationCalculator: React.FC = () => {
               className="bg-red-600 hover:bg-red-700 text-white"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
-              Call (818) 123-4567
+              <span className="text-white">Call (818) 123-4567</span>
             </Button>
             <Button 
               size="lg" 
@@ -500,7 +500,7 @@ const VisionLossCompensationCalculator: React.FC = () => {
               className="border-white text-white hover:bg-white hover:text-gray-900"
               onClick={() => window.location.href = '/practice-areas/vision-loss/case-evaluation'}
             >
-              Free Case Evaluation
+              <span className="text-white hover:text-gray-900">Free Case Evaluation</span>
             </Button>
           </div>
         </div>

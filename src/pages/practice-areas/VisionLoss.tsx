@@ -385,7 +385,7 @@ const VisionLoss: React.FC = () => {
               className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
               onClick={() => window.location.href = '/practice-areas/vision-loss/case-evaluation'}
             >
-              START MY FREE CASE EVALUATION
+              <span className="text-white">START MY FREE CASE EVALUATION</span>
             </Button>
           </div>
         </div>
@@ -1058,25 +1058,25 @@ const VisionLoss: React.FC = () => {
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-5 h-5 mr-2" />
-                    Call (818) 123-4567
+                    <span className="text-white">Call (818) 123-4567</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full border-red-600 text-red-600 hover:bg-red-50 h-12 text-lg font-semibold"
+                    className="w-full border-red-600 text-red-600 hover:bg-red-50 h-12 text-lg font-semibold hover:text-red-700"
                     onClick={() => window.location.href = '/practice-areas/vision-loss/case-evaluation'}
                   >
                     <FileText className="w-5 h-5 mr-2" />
-                    Free Case Evaluation
+                    <span className="text-red-600">Free Case Evaluation</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full border-red-600 text-red-600 hover:bg-red-50 h-12 text-lg font-semibold"
+                    className="w-full border-red-600 text-red-600 hover:bg-red-50 h-12 text-lg font-semibold hover:text-red-700"
                     onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
                   >
                     <Mail className="w-5 h-5 mr-2" />
-                    Email Us
+                    <span className="text-red-600">Email Us</span>
                   </Button>
                 </CardContent>
               </Card>
@@ -1155,12 +1155,12 @@ const VisionLoss: React.FC = () => {
           <p className="text-xl mb-12 leading-relaxed text-white">California law imposes strict deadlines for filing vision loss injury claims. Evidence deteriorates quickly, and insurance companies begin building their defense immediately. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
-              CALL (818) 123-4567
+              <span className="text-white">CALL (818) 123-4567</span>
             </Button>
             
             <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" asChild>
-              <a href="/practice-areas/vision-loss/case-evaluation">
-                START MY FREE CASE EVALUATION
+              <a href="/practice-areas/vision-loss/case-evaluation" className="text-white">
+                <span className="text-white">START MY FREE CASE EVALUATION</span>
               </a>
             </Button>
           </div>

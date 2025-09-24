@@ -569,7 +569,7 @@ const VisionLossCaseEvaluation: React.FC = () => {
               className="bg-red-600 hover:bg-red-700 text-white"
               onClick={() => window.location.href = 'tel:8181234567'}
             >
-              Call (818) 123-4567
+              <span className="text-white">Call (818) 123-4567</span>
             </Button>
             <Button 
               size="lg" 
@@ -577,7 +577,7 @@ const VisionLossCaseEvaluation: React.FC = () => {
               className="border-white text-white hover:bg-white hover:text-gray-900"
               onClick={() => window.location.href = '/practice-areas/vision-loss'}
             >
-              Return to Vision Loss Info
+              <span className="text-white hover:text-gray-900">Return to Vision Loss Info</span>
             </Button>
           </div>
         </div>

@@ -195,6 +195,11 @@ import AmusementParkCompensationCalculator from "./pages/practice-areas/amusemen
 import AmusementParkMedicalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkMedicalGuidance";
 import AmusementParkLegalGuidance from "./pages/practice-areas/amusement-parks/AmusementParkLegalGuidance";
 import MaritimeEducation from "./pages/practice-areas/maritime/MaritimeEducation";
+import VisionLoss from "./pages/practice-areas/VisionLoss";
+import VisionLossCaseEvaluation from "./pages/practice-areas/vision-loss/CaseEvaluation";
+import VisionLossCompensationCalculator from "./pages/practice-areas/vision-loss/CompensationCalculator";
+import VisionLossLegalGuidance from "./pages/practice-areas/vision-loss/LegalGuidance";
+import VisionLossMedicalGuidance from "./pages/practice-areas/vision-loss/MedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -245,7 +250,13 @@ function App() {
             <Route path="/practice-areas/amusement-parks/legal-guidance" element={<AmusementParkLegalGuidance />} />
             <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
             <Route path="/practice-areas/amusement-parks/faq" element={<AmusementParkFAQ />} />
-            <Route path="/practice-areas/amusement-parks/resources" element={<AmusementParkResources />} />
+            
+            {/* Vision Loss Routes */}
+            <Route path="/practice-areas/vision-loss" element={<VisionLoss />} />
+            <Route path="/practice-areas/vision-loss/case-evaluation" element={<VisionLossCaseEvaluation />} />
+            <Route path="/practice-areas/vision-loss/compensation-calculator" element={<VisionLossCompensationCalculator />} />
+            <Route path="/practice-areas/vision-loss/legal-guidance" element={<VisionLossLegalGuidance />} />
+            <Route path="/practice-areas/vision-loss/medical-guidance" element={<VisionLossMedicalGuidance />} />
             <Route path="/practice-areas/swimming-pool/case-evaluation" element={<SwimmingPoolCaseEvaluation />} />
             <Route path="/practice-areas/swimming-pool/compensation-calculator" element={<SwimmingPoolCompensationCalculator />} />
             <Route path="/practice-areas/swimming-pool/resources" element={<SwimmingPoolResources />} />

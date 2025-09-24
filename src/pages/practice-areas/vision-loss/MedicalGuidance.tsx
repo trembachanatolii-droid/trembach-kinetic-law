@@ -147,11 +147,11 @@ const VisionLossMedicalGuidance: React.FC = () => {
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
                   <Button className="w-full bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = 'tel:911'}>
-                    Call 911 Emergency
+                    <span className="text-white">Call 911 Emergency</span>
                   </Button>
                   <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-4 h-4 mr-2" />
-                    Call Our Office
+                    <span className="text-white">Call Our Office</span>
                   </Button>
                 </CardContent>
               </Card>

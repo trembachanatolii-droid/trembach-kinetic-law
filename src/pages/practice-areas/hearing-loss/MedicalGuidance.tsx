@@ -33,7 +33,7 @@ const HearingLossMedicalGuidance: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black/70"></div>
           
-          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 force-white">
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content force-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 force-white">
               Hearing Loss Medical Guidance
             </h1>

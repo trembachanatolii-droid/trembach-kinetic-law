@@ -394,6 +394,157 @@ const LegalGuidance: React.FC = () => {
               </Card>
             </section>
 
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-2xl text-primary">
+                    <FileText className="w-6 h-6" />
+                    California Retail Accident Legal Process
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <p className="text-lg">
+                    Understanding the legal process helps you make informed decisions about your retail accident case.
+                  </p>
+
+                  <div className="space-y-4">
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+                      <div>
+                        <h4 className="font-semibold text-primary mb-2">Initial Consultation & Investigation</h4>
+                        <p className="text-sm text-muted-foreground">Free case evaluation, evidence gathering, witness interviews, and liability assessment.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+                      <div>
+                        <h4 className="font-semibold text-primary mb-2">Medical Documentation</h4>
+                        <p className="text-sm text-muted-foreground">Complete medical evaluation, treatment records compilation, and expert medical opinions.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+                      <div>
+                        <h4 className="font-semibold text-primary mb-2">Insurance Negotiations</h4>
+                        <p className="text-sm text-muted-foreground">Professional negotiation with insurance companies using former defense attorney insights.</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex gap-4">
+                      <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold flex-shrink-0">4</div>
+                      <div>
+                        <h4 className="font-semibold text-primary mb-2">Litigation (if necessary)</h4>
+                        <p className="text-sm text-muted-foreground">Filing lawsuit, discovery process, depositions, and trial preparation with experienced trial attorneys.</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="bg-blue-50 p-6 rounded-lg border border-blue-200">
+                    <h4 className="font-semibold text-blue-800 mb-2">Average Timeline</h4>
+                    <ul className="text-sm text-blue-700 space-y-1">
+                      <li><strong>Settlement cases:</strong> 3-18 months</li>
+                      <li><strong>Litigation cases:</strong> 1-3 years</li>
+                      <li><strong>Complex cases:</strong> 2-4 years</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
+            {/* Evidence Section */}
+            <section id="evidence" className="content-section">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-2xl text-primary">
+                    <FileText className="w-6 h-6" />
+                    Critical Evidence & Documentation
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <p className="text-lg">
+                    Strong evidence is crucial for a successful retail accident case. Here's what you need to preserve and document.
+                  </p>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <Card className="border-l-4 border-l-red-500">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-red-700">Immediate Evidence</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span>Photos of accident scene and hazard</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span>Photos of your injuries</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span>Witness contact information</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span>Store incident report</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <AlertTriangle className="w-4 h-4 text-red-600 mt-0.5 flex-shrink-0" />
+                            <span>Clothing you were wearing</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+
+                    <Card className="border-l-4 border-l-blue-500">
+                      <CardHeader>
+                        <CardTitle className="text-lg text-blue-700">Ongoing Documentation</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <ul className="space-y-2 text-sm">
+                          <li className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>All medical records and bills</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Employment/wage loss documentation</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Pain diary and daily impact notes</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Insurance correspondence</span>
+                          </li>
+                          <li className="flex items-start gap-2">
+                            <FileText className="w-4 h-4 text-blue-600 mt-0.5 flex-shrink-0" />
+                            <span>Receipt showing you were shopping</span>
+                          </li>
+                        </ul>
+                      </CardContent>
+                    </Card>
+                  </div>
+
+                  <div className="bg-amber-50 p-6 rounded-lg border border-amber-200">
+                    <h4 className="font-semibold text-amber-800 mb-3">Common Evidence Mistakes to Avoid</h4>
+                    <ul className="text-sm text-amber-700 space-y-2">
+                      <li>• Not taking photos immediately after the accident</li>
+                      <li>• Failing to get contact information from witnesses</li>
+                      <li>• Not reporting the incident to store management</li>
+                      <li>• Delaying medical treatment</li>
+                      <li>• Giving recorded statements to insurance companies without legal counsel</li>
+                      <li>• Cleaning or altering clothing/shoes worn during accident</li>
+                    </ul>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
             {/* Time Limits Section */}
             <section id="time-limits" className="content-section">
               <Card className="glass-card border-amber-200 bg-amber-50">

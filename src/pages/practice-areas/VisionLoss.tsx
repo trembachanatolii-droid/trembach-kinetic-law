@@ -1036,7 +1036,7 @@ const VisionLoss: React.FC = () => {
 
           {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
           <div className="lg:col-span-1" ref={sidebarRef}>
-            <div className="sticky top-8 space-y-6">
+            <div className="sticky top-24 space-y-6">
               
               {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
               <Card className="border-red-200 shadow-lg">

@@ -600,7 +600,7 @@ const CivilRights: React.FC = () => {
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
               <div className="flex items-center mb-6">
-                <img src={compensationImage} alt="Civil Rights Case Evaluation" className="w-16 h-16 rounded-lg mr-4" />
+                <img src={compensationImage} alt="Civil Rights Case Evaluation" className="w-24 h-24 rounded-lg mr-4" />
                 <h2 className="text-3xl font-bold text-red-600">Free Case Evaluation</h2>
               </div>
               
@@ -645,10 +645,104 @@ const CivilRights: React.FC = () => {
               </div>
             </section>
 
+            {/* What To Do After Violation Section */}
+            <section id="violations-steps" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={evidenceProcessImage} alt="What To Do After Civil Rights Violation" className="w-24 h-24 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">What To Do After a Civil Rights Violation</h2>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed">
+                  If you believe your civil rights have been violated, taking immediate action is crucial to preserve evidence and protect your legal rights. Time is of the essence in civil rights cases.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                    <CardHeader>
+                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                        <AlertTriangle className="w-5 h-5 mr-2 text-red-600" />
+                        Immediate Steps
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p>• Seek medical attention immediately if injured</p>
+                      <p>• Document injuries with photographs</p>
+                      <p>• Preserve clothing and physical evidence</p>
+                      <p>• Get witness contact information</p>
+                      <p>• Request officer badge numbers and names</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                    <CardHeader>
+                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                        <FileText className="w-5 h-5 mr-2 text-blue-600" />
+                        Evidence Preservation
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p>• Record everything in writing immediately</p>
+                      <p>• Save video recordings and photographs</p>
+                      <p>• Keep all medical records and bills</p>
+                      <p>• Don't wash clothes or clean wounds before photos</p>
+                      <p>• Contact attorney within 48 hours</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
+            {/* Violations Process Section */}
+            <section id="violations-process" className="content-section mb-12">
+              <div className="flex items-center mb-6">
+                <img src={courthouseImage} alt="Civil Rights Violations Process" className="w-24 h-24 rounded-lg mr-4" />
+                <h2 className="text-3xl font-bold text-red-600">Understanding the Violations Process</h2>
+              </div>
+              
+              <div className="space-y-6">
+                <p className="text-lg leading-relaxed">
+                  Civil rights violations can take many forms. Understanding the legal process and your rights under federal and California law is essential for seeking justice and compensation.
+                </p>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                    <CardHeader>
+                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                        <Scale className="w-5 h-5 mr-2 text-blue-600" />
+                        Filing Requirements
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p>• Government claim within 6 months (California)</p>
+                      <p>• Section 1983 lawsuit within 2 years (Federal)</p>
+                      <p>• Evidence preservation critical</p>
+                      <p>• Statute of limitations strictly enforced</p>
+                    </CardContent>
+                  </Card>
+                  
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
+                    <CardHeader>
+                      <CardTitle className="flex items-center group-hover:text-primary transition-colors">
+                        <Shield className="w-5 h-5 mr-2 text-green-600" />
+                        Legal Remedies
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="space-y-3">
+                      <p>• Compensatory damages for injuries</p>
+                      <p>• Punitive damages for misconduct</p>
+                      <p>• Attorney fees when you win</p>
+                      <p>• Injunctive relief for policy changes</p>
+                    </CardContent>
+                  </Card>
+                </div>
+              </div>
+            </section>
+
             {/* Civil Rights Violations Section */}
             <section id="violations" className="content-section mb-12">
               <div className="flex items-center mb-6">
-                <img src={legalProcessImage} alt="Civil Rights Violations" className="w-16 h-16 rounded-lg mr-4" />
+                <img src={legalProcessImage} alt="Civil Rights Violations" className="w-24 h-24 rounded-lg mr-4" />
                 <h2 className="text-3xl font-bold text-red-600">Common Civil Rights Violations</h2>
               </div>
               
@@ -739,7 +833,7 @@ const CivilRights: React.FC = () => {
             {/* Legal Process Section */}
             <section id="legal-process" className="content-section mb-12">
               <div className="flex items-center mb-6">
-                <img src={medicalImage} alt="Legal Process" className="w-16 h-16 rounded-lg mr-4" />
+                <img src={medicalImage} alt="Legal Process" className="w-24 h-24 rounded-lg mr-4" />
                 <h2 className="text-3xl font-bold text-red-600">Legal Process & Your Rights</h2>
               </div>
               
@@ -944,7 +1038,7 @@ const CivilRights: React.FC = () => {
                 </div>
                 
                 <div className="mt-6 p-4 bg-white/50 rounded-lg text-center">
-                  <img src={sidebarImage} alt="Civil Rights Attorney" className="w-full h-32 object-cover rounded-lg mb-3" />
+                  <img src={sidebarImage} alt="Civil Rights Attorney" className="w-full h-48 object-cover rounded-lg mb-3" />
                   <p className="text-xs text-muted-foreground">
                     <strong>No fees unless we win.</strong> Free consultation. Former defense attorney fighting for your rights.
                   </p>

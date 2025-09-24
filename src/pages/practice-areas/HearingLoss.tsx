@@ -77,6 +77,11 @@ const HearingLoss: React.FC = () => {
   ];
 
   useEffect(() => {
+    document.body.classList.add('hearing-loss-page');
+    return () => document.body.classList.remove('hearing-loss-page');
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // 3D Perspective Container
       if (contentRef.current) {
@@ -506,25 +511,25 @@ const HearingLoss: React.FC = () => {
         {/* Hero Section */}
         <section 
           ref={heroRef}
-          className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          className="relative h-[700px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBackground})` }}
         >
           <div className="absolute inset-0 bg-black/70"></div>
           
-          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-6 pb-32">
             <div className="hero-content">
-              <h1 className="text-5xl md:text-7xl font-bold mb-6">
+              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
                 California Hearing Loss Attorneys
               </h1>
               
-              <div className="flex items-center justify-center mb-8">
+              <div className="flex items-center justify-center mb-6">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-8 h-8 fill-yellow-400 text-yellow-400 mr-1" />
+                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
                 ))}
-                <span className="ml-3 text-2xl font-semibold">Fighting for Maximum Compensation</span>
+                <span className="ml-3 text-xl font-semibold">Fighting for Maximum Compensation</span>
               </div>
               
-              <p className="text-2xl mb-10 max-w-4xl leading-relaxed">
+              <p className="text-lg md:text-xl mb-8 max-w-4xl leading-relaxed mx-auto">
                 Has an accident, workplace exposure, or sudden trauma left you with hearing damage? 
                 Our experienced legal team fights for victims of hearing loss throughout California.
               </p>
@@ -532,7 +537,7 @@ const HearingLoss: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-10 py-5 text-xl"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
                   onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
                 >
                   START MY FREE CASE EVALUATION
@@ -540,10 +545,10 @@ const HearingLoss: React.FC = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black font-bold px-10 py-5 text-xl"
+                  className="border-white text-white hover:bg-white hover:text-black font-bold px-8 py-4 text-lg"
                   onClick={() => window.location.href = 'tel:8181234567'}
                 >
-                  <Phone className="w-6 h-6 mr-3" />
+                  <Phone className="w-5 h-5 mr-2" />
                   Call (818) 123-4567
                 </Button>
               </div>
@@ -551,22 +556,22 @@ const HearingLoss: React.FC = () => {
           </div>
 
           {/* Navigation Tabs */}
-          <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-t border-white/20">
             <div className="max-w-7xl mx-auto px-6">
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-3">
                 {tabs.map((tab) => {
                   const IconComponent = tab.icon;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => scrollToSection(tab.id)}
-                      className={`flex items-center px-5 py-3 text-base font-medium transition-colors rounded-md ${
+                      className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
                         activeTab === tab.id 
-                          ? 'bg-white text-primary' 
+                          ? 'bg-white text-black' 
                           : 'text-white hover:bg-white/20'
                       }`}
                     >
-                      <IconComponent className="w-5 h-5 mr-3" />
+                      <IconComponent className="w-4 h-4 mr-2" />
                       {tab.label}
                     </button>
                   );
@@ -1154,36 +1159,36 @@ const HearingLoss: React.FC = () => {
 
             {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
             <div className="lg:col-span-1" ref={sidebarRef}>
-              <div className="sticky top-24 space-y-6">
+              <div className="lg:sticky lg:top-8 space-y-6">
                 
                 {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
                 <Card className="border-red-200 shadow-lg">
                   <CardHeader className="bg-red-50">
-                    <CardTitle className="text-red-600 text-center">3 Ways to Start Your Case</CardTitle>
+                    <CardTitle className="text-red-600 text-center text-xl font-bold">3 Ways to Start Your Case</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
                     <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-3"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-4"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
                       <Phone className="w-5 h-5 mr-2" />
-                      Call (818) 123-4567
+                      <span className="text-white">Call (818) 123-4567</span>
                     </Button>
                     
                     <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg py-3"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg py-4"
                       onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
                     >
                       <FileText className="w-5 h-5 mr-2" />
-                      Free Case Evaluation
+                      <span className="text-white">Free Case Evaluation</span>
                     </Button>
                     
                     <Button 
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-lg py-3"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-lg py-4"
                       onClick={() => window.location.href = '/practice-areas/hearing-loss/compensation-calculator'}
                     >
                       <Scale className="w-5 h-5 mr-2" />
-                      Compensation Calculator
+                      <span className="text-white">Compensation Calculator</span>
                     </Button>
                   </CardContent>
                 </Card>
@@ -1258,27 +1263,27 @@ const HearingLoss: React.FC = () => {
         {/* Bottom CTA Section - Matching Mesothelioma */}
         <section className="bg-red-600 text-white py-16">
           <div className="max-w-4xl mx-auto text-center px-6">
-            <h2 className="text-4xl font-bold mb-6">Don't Wait - Time Limits Apply for California Hearing Loss Claims</h2>
-            <p className="text-2xl mb-10 leading-relaxed">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">Don't Wait - Time Limits Apply for California Hearing Loss Claims</h2>
+            <p className="text-lg md:text-xl mb-10 leading-relaxed text-white">
               California has strict deadlines for filing hearing loss claims. Evidence can be lost and witnesses' memories fade. 
               The sooner you contact us, the better we can protect your rights and secure maximum compensation.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg"
-                className="bg-white text-red-600 hover:bg-gray-100 font-bold px-10 py-5 text-xl"
+                className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg text-red-600"
                 onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
               >
-                Get Your Free Case Evaluation
+                <span className="text-red-600 font-bold">Get Your Free Case Evaluation</span>
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-10 py-5 text-xl"
+                className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 text-lg"
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
                 <Phone className="w-6 h-6 mr-3" />
-                Call (818) 123-4567
+                <span className="text-white font-bold">Call (818) 123-4567</span>
               </Button>
             </div>
           </div>

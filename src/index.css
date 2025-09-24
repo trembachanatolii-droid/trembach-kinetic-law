@@ -497,7 +497,264 @@
     visibility: visible !important;
   }
 
-  /* Fix Progress component */
+  /* CRITICAL: Force high contrast for all Hearing Loss section text */
+  .hearing-loss-page .card p,
+  .hearing-loss-page .card span,
+  .hearing-loss-page .card li,
+  .hearing-loss-page .card div,
+  .hearing-loss-page .card-content p,
+  .hearing-loss-page .card-content span,
+  .hearing-loss-page .card-content div,
+  .hearing-loss-page .card-content li,
+  .hearing-loss-page p,
+  .hearing-loss-page span,
+  .hearing-loss-page li,
+  .hearing-loss-page .text-sm,
+  .hearing-loss-page .text-base,
+  .hearing-loss-page .text-lg,
+  .hearing-loss-page .text-muted-foreground,
+  .hearing-loss-page label,
+  .hearing-loss-page .prose p {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .hearing-loss-page h1,
+  .hearing-loss-page h2,
+  .hearing-loss-page h3,
+  .hearing-loss-page h4,
+  .hearing-loss-page h5,
+  .hearing-loss-page h6,
+  .hearing-loss-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Hero section styling - white centralized text for Hearing Loss */
+  .hearing-loss-page .hero-section h1,
+  .hearing-loss-page .hero-section h2,
+  .hearing-loss-page .hero-section p,
+  .hearing-loss-page .hero-section span,
+  .hearing-loss-page .hero-content h1,
+  .hearing-loss-page .hero-content h2,
+  .hearing-loss-page .hero-content p,
+  .hearing-loss-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Force white text in dark sections - Hearing Loss */
+  .hearing-loss-page .bg-gray-900 h1,
+  .hearing-loss-page .bg-gray-900 h2,
+  .hearing-loss-page .bg-gray-900 h3,
+  .hearing-loss-page .bg-gray-900 p,
+  .hearing-loss-page .bg-gray-900 span,
+  .hearing-loss-page .bg-gray-900 div {
+    color: #ffffff !important;
+  }
+
+  /* Button text visibility in Hearing Loss section */
+  .hearing-loss-page button,
+  .hearing-loss-page .btn,
+  .hearing-loss-page [role="button"],
+  .hearing-loss-page button span,
+  .hearing-loss-page button .font-medium,
+  .hearing-loss-page button .font-bold {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .hearing-loss-page .bg-red-600,
+  .hearing-loss-page .bg-red-600 span,
+  .hearing-loss-page .bg-red-600 button,
+  .hearing-loss-page .bg-red-600 .text-white {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page .bg-white,
+  .hearing-loss-page .bg-white span,
+  .hearing-loss-page .bg-white button {
+    color: #111111 !important;
+  }
+
+  /* Ensure button text is always visible - Hearing Loss specific */
+  .hearing-loss-page button.bg-red-600 {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page button.bg-red-600 span {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page button.bg-white {
+    color: #111111 !important;
+  }
+
+  .hearing-loss-page button.bg-white span {
+    color: #111111 !important;
+  }
+
+  .hearing-loss-page button.bg-blue-600 {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page button.bg-blue-600 span {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page button.bg-green-600 {
+    color: #ffffff !important;
+  }
+
+  .hearing-loss-page button.bg-green-600 span {
+    color: #ffffff !important;
+  }
+
+  /* Fix form elements for Hearing Loss */
+  .hearing-loss-page input,
+  .hearing-loss-page textarea,
+  .hearing-loss-page select,
+  .hearing-loss-page .select-trigger,
+  .hearing-loss-page .select-value {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .hearing-loss-page input::placeholder,
+  .hearing-loss-page textarea::placeholder {
+    color: #6b7280 !important;
+    opacity: 0.8 !important;
+  }
+
+  /* Hearing Loss select dropdown styling */
+  .hearing-loss-page .select-content {
+    background-color: #ffffff !important;
+    border: 1px solid #e5e7eb !important;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
+  }
+
+  .hearing-loss-page .select-item {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+  }
+
+  .hearing-loss-page .select-item:hover {
+    background-color: #f3f4f6 !important;
+    color: #000000 !important;
+  }
+
+  /* Critical button text fixes for Hearing Loss red section */
+  .hearing-loss-page .bg-red-600 button.bg-white,
+  .hearing-loss-page .bg-red-600 button.bg-white span {
+    color: #dc2626 !important; /* Red text on white button */
+    background-color: #ffffff !important;
+  }
+
+  .hearing-loss-page .bg-red-600 button.bg-white:hover {
+    background-color: #f3f4f6 !important;
+    color: #dc2626 !important;
+  }
+
+  .hearing-loss-page .bg-red-600 button.bg-white:hover span {
+    color: #dc2626 !important;
+  }
+
+  /* Override any conflicting styles for buttons in red sections */
+  .hearing-loss-page section.bg-red-600 button span,
+  .hearing-loss-page .bg-red-600 section button span {
+    opacity: 1 !important;
+    visibility: visible !important;
+    text-shadow: none !important;
+  }
+
+  /* WCAG 2.1 AA Compliant Typography - Hearing Loss Enhanced */
+  .hearing-loss-page,
+  .hearing-loss-page * {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+  }
+
+  /* Enhanced body text for perfect readability */
+  .hearing-loss-page p,
+  .hearing-loss-page span:not(.lucide),
+  .hearing-loss-page li,
+  .hearing-loss-page label,
+  .hearing-loss-page .prose,
+  .hearing-loss-page .card-content p,
+  .hearing-loss-page .text-sm,
+  .hearing-loss-page .text-base {
+    font-size: 16px !important;
+    line-height: 1.6 !important;
+    color: #111111 !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.01em !important;
+  }
+
+  /* Enhanced headings for maximum impact */
+  .hearing-loss-page h1 {
+    font-size: 48px !important;
+    line-height: 1.1 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .hearing-loss-page h2 {
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+    color: #000000 !important;
+    font-weight: 700 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hearing-loss-page h3 {
+    font-size: 24px !important;
+    line-height: 1.3 !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hearing-loss-page h4,
+  .hearing-loss-page .card-title {
+    font-size: 20px !important;
+    line-height: 1.4 !important;
+    color: #000000 !important;
+    font-weight: 600 !important;
+  }
+
+  /* Button accessibility enhancements */
+  .hearing-loss-page button {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    line-height: 1.5 !important;
+    padding: 12px 24px !important;
+    border-radius: 8px !important;
+    transition: all 0.2s ease-in-out !important;
+  }
+
+  .hearing-loss-page button:focus {
+    outline: 3px solid #3b82f6 !important;
+    outline-offset: 2px !important;
+  }
+
+  .hearing-loss-page button:hover {
+    transform: translateY(-1px) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
+  }
   .vision-loss-page .progress-indicator {
     background-color: #e5e7eb !important;
   }

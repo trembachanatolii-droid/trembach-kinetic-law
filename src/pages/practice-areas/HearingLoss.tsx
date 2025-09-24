@@ -443,7 +443,7 @@ const HearingLoss: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/practice-areas/hearing-loss"
       />
       
-      <div className="min-h-screen bg-background relative overflow-x-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
+      <div className="bg-background relative overflow-x-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
         {/* 3D Floating Background Layers */}
         <div 
           ref={backgroundLayer1}

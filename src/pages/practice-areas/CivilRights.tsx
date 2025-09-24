@@ -35,9 +35,9 @@ import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/civil-rights-hero-bg.jpg';
 import sidebarImage from '@/assets/civil-rights-sidebar.jpg';
-import evidenceProcessImage from '@/assets/civil-rights-evidence-process.jpg';
-import violationsProcessImage from '@/assets/civil-rights-violations-process.jpg';
-import legalProcessImage from '@/assets/civil-rights-legal-process.jpg';
+import legalProcessImage from '@/assets/civil-rights-legal-process-updated.jpg';
+import evidenceProcessImage from '@/assets/civil-rights-evidence-updated.jpg';
+import courthouseImage from '@/assets/civil-rights-courthouse.jpg';
 import medicalImage from '@/assets/civil-rights-medical-facility.jpg';
 import compensationImage from '@/assets/civil-rights-compensation-calculator.jpg';
 import resourcesImage from '@/assets/civil-rights-resources.jpg';
@@ -85,12 +85,45 @@ const CivilRights: React.FC = () => {
         { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
       );
 
-      // Content sections animation
+      // 3D Background layers animation
+      if (backgroundLayer1.current && backgroundLayer2.current && backgroundLayer3.current) {
+        // Back layer - slow vertical float
+        gsap.to(backgroundLayer1.current, {
+          y: 30,
+          duration: 14,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true
+        });
+
+        // Mid layer - horizontal drift
+        gsap.to(backgroundLayer2.current, {
+          x: 40,
+          duration: 18,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true
+        });
+
+        // Front layer - complex motion + rotation
+        gsap.to(backgroundLayer3.current, {
+          y: 20,
+          x: 25,
+          rotation: 2,
+          duration: 10,
+          ease: 'sine.inOut',
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      // Content sections animation with 3D effects
       gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
+        { opacity: 0, y: 30, rotationX: 15 },
         {
           opacity: 1,
           y: 0,
+          rotationX: 0,
           duration: 0.6,
           stagger: 0.1,
           scrollTrigger: {
@@ -866,14 +899,14 @@ const CivilRights: React.FC = () => {
                     <div>
                       <h4 className="font-semibold text-sm">Free Phone Consultation</h4>
                       <p className="text-xs text-muted-foreground mb-2">Speak directly with Attorney Trembach</p>
-                      <Button 
-                        size="sm" 
-                        className="w-full bg-green-600 hover:bg-green-700"
-                        onClick={() => window.location.href = 'tel:8181234567'}
-                      >
-                        <Phone className="w-4 h-4 mr-2" />
-                        Call (818) 123-4567
-                      </Button>
+                        <Button 
+                          size="sm" 
+                          className="w-full bg-green-600 hover:bg-green-700 text-white"
+                          onClick={() => window.location.href = 'tel:8181234567'}
+                        >
+                          <Phone className="w-4 h-4 mr-2 text-white" />
+                          <span className="text-white">Call (818) 123-4567</span>
+                        </Button>
                     </div>
                   </div>
                   
@@ -882,14 +915,14 @@ const CivilRights: React.FC = () => {
                     <div>
                       <h4 className="font-semibold text-sm">Online Case Review</h4>
                       <p className="text-xs text-muted-foreground mb-2">Complete our detailed evaluation form</p>
-                      <Button 
-                        size="sm" 
-                        className="w-full bg-red-600 hover:bg-red-700"
-                        onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
-                      >
-                        <FileText className="w-4 h-4 mr-2" />
-                        Start Case Review
-                      </Button>
+                        <Button 
+                          size="sm" 
+                          className="w-full bg-red-600 hover:bg-red-700 text-white"
+                          onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                        >
+                          <FileText className="w-4 h-4 mr-2 text-white" />
+                          <span className="text-white">Start Case Review</span>
+                        </Button>
                     </div>
                   </div>
                   
@@ -898,14 +931,14 @@ const CivilRights: React.FC = () => {
                     <div>
                       <h4 className="font-semibold text-sm">Send Us a Message</h4>
                       <p className="text-xs text-muted-foreground mb-2">Brief description of your situation</p>
-                      <Button 
-                        size="sm" 
-                        className="w-full bg-blue-600 hover:bg-blue-700"
-                        onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Send Message
-                      </Button>
+                        <Button 
+                          size="sm" 
+                          className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                          onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
+                        >
+                          <Mail className="w-4 h-4 mr-2 text-white" />
+                          <span className="text-white">Send Message</span>
+                        </Button>
                     </div>
                   </div>
                 </div>
@@ -930,24 +963,22 @@ const CivilRights: React.FC = () => {
               The sooner you contact us, the better we can protect your rights and secure maximum compensation.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                size="lg"
-                className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg border-0"
-                style={{ color: '#dc2626' }}
-                onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
-              >
-                Get Your Free Case Evaluation
-              </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="border-2 border-white bg-transparent font-bold px-8 py-4 text-lg"
-                style={{ color: '#ffffff' }}
-                onClick={() => window.location.href = 'tel:8181234567'}
-              >
-                <Phone className="w-6 h-6 mr-3" />
-                Call (818) 123-4567
-              </Button>
+                <Button 
+                  size="lg"
+                  className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg border-0 text-red-600 hover:text-red-700"
+                  onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                >
+                  <span className="text-red-600">Get Your Free Case Evaluation</span>
+                </Button>
+                <Button 
+                  size="lg"
+                  variant="outline"
+                  className="border-2 border-white bg-transparent font-bold px-8 py-4 text-lg text-white hover:text-white hover:bg-white/10"
+                  onClick={() => window.location.href = 'tel:8181234567'}
+                >
+                  <Phone className="w-6 h-6 mr-3 text-white" />
+                  <span className="text-white">Call (818) 123-4567</span>
+                </Button>
             </div>
           </div>
         </section>

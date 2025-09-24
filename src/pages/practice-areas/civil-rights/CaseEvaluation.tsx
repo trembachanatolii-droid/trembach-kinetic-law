@@ -62,7 +62,7 @@ const CaseEvaluation: React.FC = () => {
 
         {/* Hero Section */}
         <section 
-          className="relative h-[400px] flex items-center justify-center bg-cover bg-center"
+          className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroImage})` }}
         >
           <div className="absolute inset-0 bg-black/70"></div>

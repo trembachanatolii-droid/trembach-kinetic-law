@@ -1,6 +1,45 @@
-/* Civil Rights page specific styles */
+/* Civil Rights page specific styles with 3D effects */
 .civil-rights-page {
+  position: relative;
+  min-height: 100vh;
+  perspective: 1200px;
+  transform-style: preserve-3d;
   overflow-x: hidden;
+}
+
+/* 3D Background Layers */
+.civil-rights-page::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -500;
+  background: linear-gradient(135deg, 
+    hsl(var(--primary) / 0.03) 0%, 
+    hsl(var(--muted) / 0.05) 50%, 
+    hsl(var(--accent) / 0.03) 100%
+  );
+  transform: translateZ(-500px);
+  animation: float-back 14s ease-in-out infinite;
+}
+
+.civil-rights-page::after {
+  content: '';
+  position: fixed;
+  top: 20%;
+  right: 10%;
+  width: 600px;
+  height: 600px;
+  z-index: -250;
+  background: radial-gradient(circle, 
+    hsl(var(--primary) / 0.08) 0%, 
+    transparent 70%
+  );
+  border-radius: 50%;
+  transform: translateZ(-250px);
+  animation: float-mid 18s ease-in-out infinite;
 }
 
 .civil-rights-page .hero-content {
@@ -8,51 +47,86 @@
   transform-style: preserve-3d;
 }
 
+/* Glass card effects with 3D transforms */
 .civil-rights-page .glass-card {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
+  transform-style: preserve-3d;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .civil-rights-page .glass-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px) scale(1.05) translateZ(10px);
+  box-shadow: 
+    0 20px 40px -10px hsl(var(--primary) / 0.3),
+    0 0 0 1px hsl(var(--primary) / 0.1);
 }
 
 .civil-rights-page .content-section {
+  position: relative;
+  z-index: 10;
+  transform-style: preserve-3d;
   opacity: 0;
   transform: translateY(30px);
 }
 
+/* Enhanced hover effects */
+.civil-rights-page .hover-glow-primary:hover {
+  box-shadow: 
+    0 0 30px hsl(var(--primary) / 0.4),
+    0 10px 30px -10px hsl(var(--primary) / 0.3);
+}
+
+.civil-rights-page .hover-glow-destructive:hover {
+  box-shadow: 
+    0 0 30px hsl(var(--destructive) / 0.4),
+    0 10px 30px -10px hsl(var(--destructive) / 0.3);
+}
+
+/* Button text visibility fixes */
+.civil-rights-page .text-white {
+  color: white !important;
+}
+
+.civil-rights-page .text-primary {
+  color: hsl(var(--primary)) !important;
+}
+
+.civil-rights-page .border-primary {
+  border-color: hsl(var(--primary)) !important;
+}
+
+/* 3D Floating animations */
+@keyframes float-back {
+  0%, 100% { transform: translateZ(-500px) translateY(0px); }
+  50% { transform: translateZ(-500px) translateY(30px); }
+}
+
+@keyframes float-mid {
+  0%, 100% { transform: translateZ(-250px) translateX(0px); }
+  50% { transform: translateZ(-250px) translateX(40px); }
+}
+
+@keyframes float-front {
+  0%, 100% { 
+    transform: translateZ(-100px) translate(0px, 0px) rotate(0deg); 
+  }
+  50% { 
+    transform: translateZ(-100px) translate(20px, 25px) rotate(2deg); 
+  }
+}
+
 .civil-rights-page .floating-bg-1 {
-  animation: float-1 14s ease-in-out infinite;
+  animation: float-back 14s ease-in-out infinite;
 }
 
 .civil-rights-page .floating-bg-2 {
-  animation: float-2 18s ease-in-out infinite;
+  animation: float-mid 18s ease-in-out infinite;
 }
 
 .civil-rights-page .floating-bg-3 {
-  animation: float-3 22s ease-in-out infinite;
-}
-
-@keyframes float-1 {
-  0%, 100% { transform: translateZ(-500px) translateY(0px) rotate(0deg); }
-  50% { transform: translateZ(-500px) translateY(-30px) rotate(180deg); }
-}
-
-@keyframes float-2 {
-  0%, 100% { transform: translateZ(-250px) translate(0px, 0px) rotate(0deg); }
-  33% { transform: translateZ(-250px) translate(40px, -20px) rotate(120deg); }
-  66% { transform: translateZ(-250px) translate(-20px, 20px) rotate(240deg); }
-}
-
-@keyframes float-3 {
-  0%, 100% { transform: translateZ(-100px) translate(0px, 0px) rotate(0deg); }
-  25% { transform: translateZ(-100px) translate(25px, -25px) rotate(90deg); }
-  50% { transform: translateZ(-100px) translate(-25px, -25px) rotate(180deg); }
-  75% { transform: translateZ(-100px) translate(-25px, 25px) rotate(270deg); }
+  animation: float-front 10s ease-in-out infinite;
 }
 
 .civil-rights-page .hover-scale:hover {
@@ -67,8 +141,22 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Premium transitions */
+.civil-rights-page .premium-transition {
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.civil-rights-page .premium-hover:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 25px -5px hsl(var(--primary) / 0.3);
+}
+
 /* Mobile hero adjustments */
 @media (max-width: 768px) {
+  .civil-rights-page {
+    perspective: 800px;
+  }
+  
   .civil-rights-page .hero-section {
     height: 500px !important;
     padding: 2rem 0;
@@ -100,6 +188,10 @@
     line-height: 1.4 !important;
     margin-bottom: 1.25rem !important;
   }
+  
+  .civil-rights-page .glass-card:hover {
+    transform: translateY(-2px) scale(1.02) translateZ(5px);
+  }
 }
 
 @media (max-width: 480px) {
@@ -112,14 +204,22 @@
   }
 }
 
+/* Accessibility: Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+  .civil-rights-page::before,
+  .civil-rights-page::after,
   .civil-rights-page .floating-bg-1,
   .civil-rights-page .floating-bg-2,
   .civil-rights-page .floating-bg-3 {
-    animation: none;
+    animation: none !important;
   }
   
-  .civil-rights-page .glass-card {
-    transition: none;
+  .civil-rights-page .glass-card,
+  .civil-rights-page .premium-transition {
+    transition: none !important;
+  }
+  
+  .civil-rights-page .content-section {
+    transform: none !important;
   }
 }

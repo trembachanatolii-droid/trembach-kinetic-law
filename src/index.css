@@ -1757,6 +1757,47 @@ label:after {
   content: none;
 }
 
+/* Accessibility Typography – Hearing Loss */
+.hearing-loss-page {
+  font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+}
+
+.hearing-loss-page :where(p, span, li, label, input, textarea, select, .text-muted-foreground) {
+  color: #111111 !important; /* 4.5:1 on white */
+  font-size: 16px !important;
+  line-height: 1.5 !important;
+  opacity: 1 !important;
+}
+
+.hearing-loss-page :where(h1, h2, h3, h4, h5, h6, .card-title) {
+  color: #000000 !important; /* 3:1+ on large headings */
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  opacity: 1 !important;
+}
+
+.hearing-loss-page h1 { font-size: clamp(32px, 5vw, 48px) !important; }
+.hearing-loss-page h2 { font-size: clamp(24px, 4vw, 36px) !important; }
+.hearing-loss-page h3 { font-size: clamp(20px, 3.5vw, 28px) !important; }
+
+/* Links */
+.hearing-loss-page a { color: #111111 !important; text-decoration: none; }
+.hearing-loss-page a:hover { color: #000000 !important; text-decoration: underline; }
+
+/* Buttons */
+.hearing-loss-page button,
+.hearing-loss-page .btn,
+.hearing-loss-page [role="button"] {
+  font-weight: 700 !important;
+}
+
+/* Ensure hero text remains white over imagery */
+.hearing-loss-page .hero-content,
+.hearing-loss-page .hero-content * {
+  color: #ffffff !important;
+}
+
+
 /* Bugfix: force white text inside Hearing Loss hero subtitle */
 .hearing-loss-page .hero-content .force-white,
 .hearing-loss-page .hero-content .force-white span {

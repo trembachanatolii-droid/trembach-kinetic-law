@@ -317,10 +317,10 @@ const Explosions: React.FC = () => {
             {/* Introduction */}
             <section className="content-section">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Expert Legal Representation for California Explosion Victims</h2>
-              <p className="text-lg leading-relaxed mb-6">
+              <p className="text-xl leading-relaxed mb-6">
                 Explosions cause devastating injuries and catastrophic property damage. Whether from gas leaks, chemical plant accidents, industrial explosions, or defective equipment, these traumatic events require immediate legal action to preserve evidence and protect your rights.
               </p>
-              <p className="text-lg leading-relaxed mb-6">
+              <p className="text-xl leading-relaxed mb-6">
                 As a former defense attorney, I understand exactly how insurance companies and corporations respond to explosion claims. This inside knowledge allows me to build stronger cases and secure maximum compensation for explosion victims throughout California.
               </p>
               
@@ -456,7 +456,7 @@ const Explosions: React.FC = () => {
                 />
               </div>
 
-              <p className="text-lg leading-relaxed mb-6">
+              <p className="text-xl leading-relaxed mb-6">
                 Explosion injuries are often severe and life-changing, requiring immediate medical attention and long-term care. Understanding the full scope of your injuries is crucial for calculating appropriate compensation.
               </p>
 
@@ -542,7 +542,7 @@ const Explosions: React.FC = () => {
                 />
               </div>
 
-              <p className="text-lg leading-relaxed mb-6">
+              <p className="text-xl leading-relaxed mb-6">
                 Explosion cases require immediate action and careful investigation. Our experienced team knows how to preserve evidence, identify all responsible parties, and build the strongest possible case for maximum compensation.
               </p>
 
@@ -627,7 +627,7 @@ const Explosions: React.FC = () => {
                   className="w-full h-64 object-cover rounded-lg shadow-lg mb-4 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 cursor-pointer group"
                 />
                 
-                <p className="text-lg leading-relaxed mb-4">
+                <p className="text-xl leading-relaxed mb-4">
                   California's industrial infrastructure and urban density create numerous explosion risks. Understanding high-risk areas helps identify potential sources of liability and compensation for explosion victims.
                 </p>
               </div>
@@ -831,7 +831,7 @@ const Explosions: React.FC = () => {
                     <Collapsible>
                       <CollapsibleTrigger asChild>
                         <CardHeader className="cursor-pointer hover:bg-gray-50 transition-colors duration-200">
-                          <CardTitle className="text-lg flex justify-between items-center">
+                          <CardTitle className="text-lg md:text-xl flex justify-between items-center">
                             <span className="text-left">{faq.question}</span>
                             <ChevronDown className="h-5 w-5 flex-shrink-0 ml-4" />
                           </CardTitle>
@@ -839,7 +839,7 @@ const Explosions: React.FC = () => {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <CardContent className="pt-0">
-                          <p className="text-gray-700 leading-relaxed">{faq.answer}</p>
+                          <p className="text-gray-700 text-base md:text-lg leading-relaxed">{faq.answer}</p>
                         </CardContent>
                       </CollapsibleContent>
                     </Collapsible>
@@ -929,21 +929,21 @@ const Explosions: React.FC = () => {
                   />
                   
                   <div className="space-y-4">
-                    <Button className="w-full text-white bg-primary hover:bg-primary/90" size="lg" asChild>
+                    <Button className="w-full text-white bg-primary hover:bg-primary/90 transform hover:scale-105 transition-all duration-200" size="lg" asChild>
                       <Link to="tel:8181234567">
                         <Phone className="w-4 h-4 mr-2" />
                         Call (818) 123-4567
                       </Link>
                     </Button>
                     
-                    <Button variant="outline" className="w-full text-foreground border-input hover:bg-accent hover:text-accent-foreground" size="lg" asChild>
+                    <Button variant="outline" className="w-full text-foreground border-input hover:bg-accent hover:text-accent-foreground transform hover:scale-105 transition-all duration-200" size="lg" asChild>
                       <Link to="/practice-areas/explosions/case-evaluation">
                         <MessageSquare className="w-4 h-4 mr-2" />
                         Free Case Evaluation
                       </Link>
                     </Button>
                     
-                    <Button variant="outline" className="w-full text-foreground border-input hover:bg-accent hover:text-accent-foreground" size="lg" asChild>
+                    <Button variant="outline" className="w-full text-foreground border-input hover:bg-accent hover:text-accent-foreground transform hover:scale-105 transition-all duration-200" size="lg" asChild>
                       <Link to="/practice-areas/explosions/compensation-calculator">
                         <Calculator className="w-4 h-4 mr-2" />
                         Compensation Calculator

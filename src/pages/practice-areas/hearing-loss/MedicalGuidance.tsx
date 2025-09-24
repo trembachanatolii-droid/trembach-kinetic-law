@@ -33,7 +33,7 @@ const HearingLossMedicalGuidance: React.FC = () => {
         >
           <div className="absolute inset-0 bg-black/70"></div>
           
-          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 force-white">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">
               Hearing Loss Medical Guidance
             </h1>
@@ -42,7 +42,7 @@ const HearingLossMedicalGuidance: React.FC = () => {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
               ))}
-              <span className="ml-2 text-lg">Expert Medical Resources</span>
+              <span className="ml-2 text-lg force-white">Expert Medical Resources</span>
             </div>
             
             <p className="text-xl mb-8">

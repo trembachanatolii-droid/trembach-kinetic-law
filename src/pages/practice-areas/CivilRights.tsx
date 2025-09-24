@@ -990,7 +990,14 @@ const CivilRights: React.FC = () => {
                 <h3 className="text-xl font-bold text-red-600 mb-6 text-center">3 Ways to Start Your Case</h3>
                 
                 <div className="space-y-4">
-                  <div className="flex items-start space-x-3">
+                  <div
+                    className="group flex items-start space-x-3 rounded-lg p-2 premium-transition hover-scale hover:bg-white/60 cursor-pointer shadow-sm hover:shadow-lg"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Free Phone Consultation"
+                    onClick={() => window.location.href = 'tel:+18181234567'}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.location.href = 'tel:+18181234567'; } }}
+                  >
                     <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
                     <div>
                       <h4 className="font-semibold text-sm">Free Phone Consultation</h4>
@@ -1006,7 +1013,14 @@ const CivilRights: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-3">
+                  <div
+                    className="group flex items-start space-x-3 rounded-lg p-2 premium-transition hover-scale hover:bg-white/60 cursor-pointer shadow-sm hover:shadow-lg"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Online Case Review"
+                    onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { navigate('/practice-areas/civil-rights/case-evaluation'); } }}
+                  >
                     <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
                     <div>
                       <h4 className="font-semibold text-sm">Online Case Review</h4>
@@ -1022,7 +1036,14 @@ const CivilRights: React.FC = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-start space-x-3">
+                  <div
+                    className="group flex items-start space-x-3 rounded-lg p-2 premium-transition hover-scale hover:bg-white/60 cursor-pointer shadow-sm hover:shadow-lg"
+                    role="button"
+                    tabIndex={0}
+                    aria-label="Send Us a Message"
+                    onClick={() => window.open('mailto:info@trembachlawfirm.com?subject=Civil Rights Case Inquiry', '_self')}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.open('mailto:info@trembachlawfirm.com?subject=Civil Rights Case Inquiry', '_self'); } }}
+                  >
                     <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
                     <div>
                       <h4 className="font-semibold text-sm">Send Us a Message</h4>

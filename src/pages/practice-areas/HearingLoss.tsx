@@ -225,6 +225,7 @@ const HearingLoss: React.FC = () => {
             ease: "power2.out"
           });
         });
+      }); // Close forEach
       });
 
       // Sidebar scroll-triggered animations with reduced motion support
@@ -246,7 +247,7 @@ const HearingLoss: React.FC = () => {
           }
         );
       }
-    });
+    }); // Close the gsap.context
 
     return () => ctx.revert();
   }, []);

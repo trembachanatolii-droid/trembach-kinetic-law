@@ -78,167 +78,121 @@ const HearingLoss: React.FC = () => {
 
   useEffect(() => {
     document.body.classList.add('hearing-loss-page');
-    return () => document.body.classList.remove('hearing-loss-page');
-  }, []);
+    
+    // Scroll tracking for active tab
+    const handleScroll = () => {
+      const sections = tabs.map(tab => document.getElementById(tab.id)).filter(Boolean);
+      const scrollPosition = window.scrollY + 150; // Offset for header
+      
+      let currentSection = 'overview';
+      
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = sections[i];
+        if (section && section.offsetTop <= scrollPosition) {
+          currentSection = section.id;
+          break;
+        }
+      }
+      
+      setActiveTab(currentSection);
+    };
+    
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    
+    return () => {
+      document.body.classList.remove('hearing-loss-page');
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [tabs]);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // 3D Perspective Container
-      if (contentRef.current) {
-        gsap.set(contentRef.current, { 
-          perspective: 1200,
-          transformStyle: "preserve-3d"
-        });
-      }
-
       // Hero animation - instant
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.3, ease: 'power2.out' }
       );
 
-      // Floating Background Layers with 3D depth
+      // Simplified background animations - reduce motion to prevent overlapping
       if (backgroundLayer1.current && backgroundLayer2.current && backgroundLayer3.current) {
-        // Back layer - slow vertical float
         gsap.to(backgroundLayer1.current, {
-          y: 30,
-          duration: 14,
+          y: 15,
+          duration: 12,
           ease: "power1.inOut",
           repeat: -1,
-          yoyo: true,
-          transformOrigin: "center center",
-          z: -500
+          yoyo: true
         });
 
-        // Mid layer - horizontal drift
         gsap.to(backgroundLayer2.current, {
-          x: 40,
-          duration: 18,
+          x: 20,
+          duration: 15,
           ease: "power1.inOut", 
           repeat: -1,
-          yoyo: true,
-          transformOrigin: "center center",
-          z: -250
+          yoyo: true
         });
 
-        // Front layer - complex motion with rotation
-        gsap.timeline({ repeat: -1 })
-          .to(backgroundLayer3.current, {
-            y: 20,
-            x: 25,
-            duration: 10,
-            ease: "power1.inOut",
-            transformOrigin: "center center",
-            z: -100
-          })
-          .to(backgroundLayer3.current, {
-            y: -20,
-            x: -25,
-            duration: 10,
-            ease: "power1.inOut"
-          });
-
         gsap.to(backgroundLayer3.current, {
-          rotation: 2,
-          duration: 22,
+          y: 10,
+          x: 15,
+          duration: 18,
           ease: "power1.inOut",
           repeat: -1,
           yoyo: true
         });
       }
 
-      // Content sections with parallax and 3D transforms
+      // Simplified content sections - immediate visibility with subtle entrance
       const sections = contentRef.current?.querySelectorAll('.content-section');
       if (sections) {
-        sections.forEach((section, index) => {
-          // Multi-speed parallax effect
-          gsap.to(section, {
-            scrollTrigger: {
-              trigger: section,
-              start: "top bottom",
-              end: "bottom top",
-              scrub: 1
-            },
-            y: (index % 2 === 0 ? -50 : 50) * 0.5, // Alternating direction
-            z: index * -10,
-            rotationX: index % 2 === 0 ? 1 : -1,
-            ease: "none"
-          });
-
-          // Fade in animation with 3D transform
+        sections.forEach((section) => {
+          // Immediate visibility with subtle fade-in
           gsap.fromTo(section,
             { 
               opacity: 0, 
-              y: 60,
-              z: -200,
-              rotationX: 15
+              y: 20
             },
             {
               opacity: 1,
               y: 0,
-              z: 0,
-              rotationX: 0,
-              duration: 0.8,
-              ease: "back.out(1.7)",
+              duration: 0.4,
+              ease: "power2.out",
               scrollTrigger: {
                 trigger: section,
-                start: 'top 85%',
-                end: 'top 60%',
-                toggleActions: "play none none reverse"
+                start: 'top 95%', // Start animation earlier
+                toggleActions: "play none none none" // Don't reverse
               }
             }
           );
         });
       }
 
-      // Enhanced card hover effects with 3D transforms
+      // Simplified card hover effects
       const cards = document.querySelectorAll('.glass-card');
       cards.forEach(card => {
         const cardElement = card as HTMLElement;
         
         card.addEventListener('mouseenter', () => {
           gsap.to(cardElement, {
-            scale: 1.05,
-            z: 50,
-            rotationX: -5,
-            rotationY: 5,
-            duration: 0.3,
-            ease: "back.out(1.7)"
+            scale: 1.02,
+            duration: 0.2,
+            ease: "power2.out"
           });
         });
 
         card.addEventListener('mouseleave', () => {
           gsap.to(cardElement, {
             scale: 1,
-            z: 0,
-            rotationX: 0,
-            rotationY: 0,
-            duration: 0.3,
+            duration: 0.2,
             ease: "power2.out"
           });
         });
-      }); // Close forEach
+      });
 
-      // Sidebar scroll-triggered animations with reduced motion support
-      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      
-      if (!prefersReducedMotion) {
-        gsap.fromTo(sidebarRef.current,
-          { opacity: 0, x: 100, z: -100 },
-          {
-            opacity: 1,
-            x: 0,
-            z: 0,
-            duration: 0.8,
-            ease: "back.out(1.7)",
-            scrollTrigger: {
-              trigger: sidebarRef.current,
-              start: 'top 80%'
-            }
-          }
-        );
+      // Sidebar - immediate visibility
+      if (sidebarRef.current) {
+        gsap.set(sidebarRef.current, { opacity: 1 });
       }
-    }); // Close the gsap.context
+    });
     
     return () => ctx.revert();
   }, []);
@@ -254,7 +208,17 @@ const HearingLoss: React.FC = () => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      // Ensure section is visible before scrolling
+      gsap.set(element, { opacity: 1, y: 0 });
+      
+      // Calculate offset to account for header and navigation
+      const headerHeight = 120;
+      const elementPosition = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -1158,7 +1122,7 @@ const HearingLoss: React.FC = () => {
             </div>
 
             {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
-            <div className="lg:col-span-1" ref={sidebarRef}>
+            <div className="lg:col-span-1">
               <div className="lg:sticky lg:top-8 space-y-6">
                 
                 {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
@@ -1271,10 +1235,10 @@ const HearingLoss: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg"
-                className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg text-red-600"
+                className="bg-white hover:bg-gray-100 text-red-600 hover:text-red-700 font-bold px-8 py-4 text-lg"
                 onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
               >
-                <span className="text-red-600 font-bold">Get Your Free Case Evaluation</span>
+                Get Your Free Case Evaluation
               </Button>
               <Button 
                 size="lg"
@@ -1283,7 +1247,7 @@ const HearingLoss: React.FC = () => {
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
                 <Phone className="w-6 h-6 mr-3" />
-                <span className="text-white font-bold">Call (818) 123-4567</span>
+                Call (818) 123-4567
               </Button>
             </div>
           </div>

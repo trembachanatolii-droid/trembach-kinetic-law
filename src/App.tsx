@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import HearingLoss from "./pages/practice-areas/HearingLoss";
 import Electrocution from "./pages/practice-areas/Electrocution";
 import Explosions from "./pages/practice-areas/Explosions";
 import ExplosionsCaseEvaluation from "./pages/practice-areas/explosions/CaseEvaluation";
@@ -216,6 +217,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/hearing-loss" element={<HearingLoss />} />
             <Route path="/practice-areas/electrocution" element={<Electrocution />} />
           <Route path="/practice-areas/explosions" element={<Explosions />} />
           <Route path="/practice-areas/explosions/case-evaluation" element={<ExplosionsCaseEvaluation />} />

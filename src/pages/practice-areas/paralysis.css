@@ -67,6 +67,34 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* Mobile hero adjustments */
+@media (max-width: 768px) {
+  .paralysis-page .hero-section {
+    height: 500px !important;
+    padding: 2rem 0;
+  }
+  
+  .paralysis-page .hero-content h1 {
+    font-size: 2.5rem !important;
+    line-height: 1.1 !important;
+    margin-bottom: 1rem !important;
+  }
+  
+  .paralysis-page .hero-content .star-rating {
+    margin-bottom: 1rem !important;
+  }
+  
+  .paralysis-page .hero-content .star-rating span {
+    font-size: 0.875rem !important;
+  }
+  
+  .paralysis-page .hero-content p {
+    font-size: 1rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 1.5rem !important;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .paralysis-page .floating-bg-1,
   .paralysis-page .floating-bg-2,

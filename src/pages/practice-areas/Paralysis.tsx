@@ -438,32 +438,34 @@ const Paralysis: React.FC = () => {
         {/* Hero Section */}
         <section 
           ref={heroRef}
-          className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          className="hero-section relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBackground})` }}
         >
           <div className="absolute inset-0 bg-black/70"></div>
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <div className="hero-content">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-3 sm:mb-4 text-white leading-tight">
                 California Paralysis Injury Attorneys
               </h1>
               
-              <div className="flex items-center justify-center mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-                ))}
-                <span className="ml-2 text-lg text-white">Former Defense Attorney Fighting for You</span>
+              <div className="star-rating flex items-center justify-center mb-4 sm:mb-6 flex-wrap">
+                <div className="flex items-center">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                  ))}
+                </div>
+                <span className="ml-2 text-sm sm:text-lg text-white">Former Defense Attorney Fighting for You</span>
               </div>
               
-              <p className="text-xl mb-8 text-white">
+              <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white leading-relaxed">
                 When paralysis changes everything, we fight for the compensation you need to rebuild. 
                 Expert legal representation for quadriplegia, paraplegia, and all spinal cord injuries throughout California.
               </p>
               
               <Button 
                 size="lg" 
-                className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+                className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
                 onClick={() => window.location.href = '/practice-areas/paralysis/case-evaluation'}
               >
                 START MY FREE CASE EVALUATION

@@ -34,17 +34,251 @@
   opacity: 0.8;
   }
 
-  /* Enhanced Text Visibility for All Interactive Elements */
-  a[href^="tel:"], 
-  .phone-link,
-  button span,
-  .text-white,
-  .button-text {
-    color: inherit !important;
-    text-decoration: none;
+  /* WCAG 2.1 COMPLIANT TYPOGRAPHY SYSTEM */
+  
+  /* Base Typography Standards */
+  body {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: #111111 !important; /* WCAG AAA contrast ratio */
+  }
+  
+  /* Heading Standards */
+  h1, h2, h3, h4, h5, h6,
+  .text-heading,
+  .heading-text,
+  .card-title {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    font-weight: 700 !important;
+    color: #000000 !important; /* Pure black for maximum contrast */
+    line-height: 1.3 !important;
+  }
+  
+  h1 { font-size: 48px !important; }
+  h2 { font-size: 32px !important; }
+  h3 { font-size: 24px !important; }
+  h4 { font-size: 20px !important; }
+  h5 { font-size: 18px !important; }
+  h6 { font-size: 16px !important; }
+  
+  /* Body Text Standards */
+  p, span, li, label, div,
+  .text-body,
+  .body-text,
+  .prose p,
+  .card-content p,
+  .card-content span {
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    color: #111111 !important; /* WCAG AA contrast 4.5:1 */
+  }
+  
+  /* Large Text (18px+) Standards */
+  .text-lg,
+  .text-xl {
+    font-size: 18px !important;
+    color: #111111 !important; /* WCAG AA contrast for large text 3:1 */
+  }
+  
+  /* Muted Text - Still Accessible */
+  .text-muted-foreground {
+    color: #374151 !important; /* Darker gray that still meets contrast */
+    font-size: 16px !important;
+  }
+
+  /* CIVIL RIGHTS PAGE SPECIFIC STYLES */
+  
+  /* Force high contrast for all Civil Rights page text */
+  .civil-rights-page .card p,
+  .civil-rights-page .card span,
+  .civil-rights-page .card li,
+  .civil-rights-page .card div,
+  .civil-rights-page p,
+  .civil-rights-page span,
+  .civil-rights-page li,
+  .civil-rights-page .text-sm,
+  .civil-rights-page .text-base,
+  .civil-rights-page .text-lg {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .civil-rights-page h1,
+  .civil-rights-page h2,
+  .civil-rights-page h3,
+  .civil-rights-page h4,
+  .civil-rights-page h5,
+  .civil-rights-page h6,
+  .civil-rights-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Civil Rights hero section styling - white centralized text */
+  .civil-rights-page .hero-section h1,
+  .civil-rights-page .hero-section h2,
+  .civil-rights-page .hero-section p,
+  .civil-rights-page .hero-section span,
+  .civil-rights-page .hero-content h1,
+  .civil-rights-page .hero-content h2,
+  .civil-rights-page .hero-content p,
+  .civil-rights-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* CRITICAL: Civil Rights Button Text Visibility */
+  .civil-rights-page button,
+  .civil-rights-page .btn,
+  .civil-rights-page [role="button"],
+  .civil-rights-page button span,
+  .civil-rights-page button .font-medium,
+  .civil-rights-page button .font-bold {
     opacity: 1 !important;
     visibility: visible !important;
     font-weight: 600 !important;
+  }
+
+  /* Red buttons - white text */
+  .civil-rights-page .bg-red-600,
+  .civil-rights-page .bg-red-600 span,
+  .civil-rights-page .bg-red-600 button,
+  .civil-rights-page .bg-red-600 .text-white,
+  .civil-rights-page button.bg-red-600,
+  .civil-rights-page button.bg-red-600 span {
+    color: #ffffff !important;
+    background-color: #dc2626 !important;
+  }
+
+  /* White buttons - dark text */
+  .civil-rights-page .bg-white,
+  .civil-rights-page .bg-white span,
+  .civil-rights-page .bg-white button,
+  .civil-rights-page button.bg-white,
+  .civil-rights-page button.bg-white span {
+    color: #000000 !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Green buttons - white text */
+  .civil-rights-page .bg-green-600,
+  .civil-rights-page .bg-green-600 span,
+  .civil-rights-page button.bg-green-600,
+  .civil-rights-page button.bg-green-600 span {
+    color: #ffffff !important;
+    background-color: #16a34a !important;
+  }
+
+  /* Blue buttons - white text */
+  .civil-rights-page .bg-blue-600,
+  .civil-rights-page .bg-blue-600 span,
+  .civil-rights-page button.bg-blue-600,
+  .civil-rights-page button.bg-blue-600 span {
+    color: #ffffff !important;
+    background-color: #2563eb !important;
+  }
+
+  /* Fix form elements visibility */
+  .civil-rights-page input,
+  .civil-rights-page textarea,
+  .civil-rights-page select,
+  .civil-rights-page .select-trigger,
+  .civil-rights-page .select-value {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* BUTTON CONTRAST SYSTEM */
+  
+  /* Primary buttons */
+  button.bg-primary,
+  .bg-primary button {
+    background-color: hsl(var(--primary)) !important;
+    color: hsl(var(--primary-foreground)) !important;
+  }
+  
+  /* Destructive/Red buttons */
+  button.bg-red-600,
+  .bg-red-600 button,
+  button.bg-destructive,
+  .bg-destructive button {
+    background-color: #dc2626 !important;
+    color: #ffffff !important;
+  }
+  
+  /* Success/Green buttons */
+  button.bg-green-600,
+  .bg-green-600 button {
+    background-color: #16a34a !important;
+    color: #ffffff !important;
+  }
+  
+  /* Info/Blue buttons */
+  button.bg-blue-600,
+  .bg-blue-600 button {
+    background-color: #2563eb !important;
+    color: #ffffff !important;
+  }
+  
+  /* White/Light buttons */
+  button.bg-white,
+  .bg-white button {
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border: 1px solid #d1d5db !important;
+  }
+  
+  /* HOVER STATES - WCAG Compliant */
+  
+  button:hover {
+    opacity: 0.9 !important;
+    transform: translateY(-1px);
+    transition: all 0.2s ease;
+  }
+  
+  a:hover {
+    text-decoration: underline !important;
+    color: #dc2626 !important; /* Red hover for better visibility */
+  }
+  
+  /* FORCED TEXT VISIBILITY */
+  
+  .text-white,
+  .hero-content .text-white,
+  .bg-red-600 .text-white,
+  .bg-primary .text-white {
+    color: #ffffff !important;
+  }
+  
+  .text-black,
+  .bg-white .text-black {
+    color: #000000 !important;
+  }
+
+  /* CRITICAL: Force button text inheritance */
+  button span,
+  button .font-medium,
+  button .font-bold,
+  [role="button"] span {
+    color: inherit !important;
+    opacity: 1 !important;
+    visibility: visible !important;
   }
 
   /* CRITICAL: Force high contrast for all Explosions section text */

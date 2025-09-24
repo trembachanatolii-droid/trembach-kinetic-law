@@ -1104,20 +1104,30 @@ const CivilRights: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button 
-                  size="lg" 
-                  className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg border-0 text-red-600 hover:text-red-700"
+                  size="lg"
+                  className="bg-white hover:bg-gray-100 text-black font-bold px-8 py-4 text-lg border-0"
+                  style={{ 
+                    backgroundColor: '#ffffff',
+                    color: '#000000',
+                    border: 'none'
+                  }}
                   onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
                 >
-                  <span className="text-red-600">Get Your Free Case Evaluation</span>
+                  <span style={{ color: '#000000', fontWeight: '700' }}>Get Your Free Case Evaluation</span>
                 </Button>
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-2 border-white bg-transparent font-bold px-8 py-4 text-lg text-white hover:text-white hover:bg-white/10"
+                  className="border-2 border-white bg-transparent text-white hover:bg-white/10 font-bold px-8 py-4 text-lg"
+                  style={{
+                    color: '#ffffff',
+                    borderColor: '#ffffff',
+                    backgroundColor: 'transparent'
+                  }}
                   onClick={() => window.location.href = 'tel:+18181234567'}
                 >
-                  <Phone className="w-6 h-6 mr-3 text-white" />
-                  <span className="text-white">Call (818) 123-4567</span>
+                  <Phone className="w-6 h-6 mr-3" style={{ color: '#ffffff' }} />
+                  <span style={{ color: '#ffffff', fontWeight: '700' }}>Call (818) 123-4567</span>
                 </Button>
             </div>
           </div>

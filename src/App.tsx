@@ -12,6 +12,7 @@ import HearingLoss from "./pages/practice-areas/HearingLoss";
 import HearingLossCaseEvaluation from "./pages/practice-areas/hearing-loss/CaseEvaluation";
 import HearingLossCompensationCalculator from "./pages/practice-areas/hearing-loss/CompensationCalculator";
 import HearingLossLegalGuidance from "./pages/practice-areas/hearing-loss/LegalGuidance";
+import HearingLossMedicalGuidance from "./pages/practice-areas/hearing-loss/MedicalGuidance";
 import Electrocution from "./pages/practice-areas/Electrocution";
 import Explosions from "./pages/practice-areas/Explosions";
 import ExplosionsCaseEvaluation from "./pages/practice-areas/explosions/CaseEvaluation";
@@ -224,6 +225,7 @@ function App() {
             <Route path="/practice-areas/hearing-loss/case-evaluation" element={<HearingLossCaseEvaluation />} />
             <Route path="/practice-areas/hearing-loss/compensation-calculator" element={<HearingLossCompensationCalculator />} />
             <Route path="/practice-areas/hearing-loss/legal-guidance" element={<HearingLossLegalGuidance />} />
+            <Route path="/practice-areas/hearing-loss/medical-guidance" element={<HearingLossMedicalGuidance />} />
             <Route path="/practice-areas/electrocution" element={<Electrocution />} />
           <Route path="/practice-areas/explosions" element={<Explosions />} />
           <Route path="/practice-areas/explosions/case-evaluation" element={<ExplosionsCaseEvaluation />} />

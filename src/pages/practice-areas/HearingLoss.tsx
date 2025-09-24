@@ -60,6 +60,22 @@ const HearingLoss: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLDivElement>(null);
+  const backgroundLayer1 = useRef<HTMLDivElement>(null);
+  const backgroundLayer2 = useRef<HTMLDivElement>(null);
+  const backgroundLayer3 = useRef<HTMLDivElement>(null);
+
+const HearingLoss: React.FC = () => {
+  const [activeTab, setActiveTab] = useState('overview');
+  const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
+  const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    hearingLossType: '',
+    causeOfLoss: ''
+  });
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
 
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
@@ -75,26 +91,161 @@ const HearingLoss: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // 3D Perspective Container
+      if (contentRef.current) {
+        gsap.set(contentRef.current, { 
+          perspective: 1200,
+          transformStyle: "preserve-3d"
+        });
+      }
+
       // Hero animation - instant
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
         { opacity: 0, y: 50 },
         { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
       );
 
-      // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
+      // Floating Background Layers with 3D depth
+      if (backgroundLayer1.current && backgroundLayer2.current && backgroundLayer3.current) {
+        // Back layer - slow vertical float
+        gsap.to(backgroundLayer1.current, {
+          y: 30,
+          duration: 14,
+          ease: "power1.inOut",
+          repeat: -1,
+          yoyo: true,
+          transformOrigin: "center center",
+          z: -500
+        });
+
+        // Mid layer - horizontal drift
+        gsap.to(backgroundLayer2.current, {
+          x: 40,
+          duration: 18,
+          ease: "power1.inOut", 
+          repeat: -1,
+          yoyo: true,
+          transformOrigin: "center center",
+          z: -250
+        });
+
+        // Front layer - complex motion with rotation
+        gsap.timeline({ repeat: -1 })
+          .to(backgroundLayer3.current, {
+            y: 20,
+            x: 25,
+            duration: 10,
+            ease: "power1.inOut",
+            transformOrigin: "center center",
+            z: -100
+          })
+          .to(backgroundLayer3.current, {
+            y: -20,
+            x: -25,
+            duration: 10,
+            ease: "power1.inOut"
+          });
+
+        gsap.to(backgroundLayer3.current, {
+          rotation: 2,
+          duration: 22,
+          ease: "power1.inOut",
+          repeat: -1,
+          yoyo: true
+        });
+      }
+
+      // Content sections with parallax and 3D transforms
+      const sections = contentRef.current?.querySelectorAll('.content-section');
+      if (sections) {
+        sections.forEach((section, index) => {
+          // Multi-speed parallax effect
+          gsap.to(section, {
+            scrollTrigger: {
+              trigger: section,
+              start: "top bottom",
+              end: "bottom top",
+              scrub: 1
+            },
+            y: (index % 2 === 0 ? -50 : 50) * 0.5, // Alternating direction
+            z: index * -10,
+            rotationX: index % 2 === 0 ? 1 : -1,
+            ease: "none"
+          });
+
+          // Fade in animation with 3D transform
+          gsap.fromTo(section,
+            { 
+              opacity: 0, 
+              y: 60,
+              z: -200,
+              rotationX: 15
+            },
+            {
+              opacity: 1,
+              y: 0,
+              z: 0,
+              rotationX: 0,
+              duration: 0.8,
+              ease: "back.out(1.7)",
+              scrollTrigger: {
+                trigger: section,
+                start: 'top 85%',
+                end: 'top 60%',
+                toggleActions: "play none none reverse"
+              }
+            }
+          );
+        });
+      }
+
+      // Enhanced card hover effects with 3D transforms
+      const cards = document.querySelectorAll('.glass-card');
+      cards.forEach(card => {
+        const cardElement = card as HTMLElement;
+        
+        card.addEventListener('mouseenter', () => {
+          gsap.to(cardElement, {
+            scale: 1.05,
+            z: 50,
+            rotationX: -5,
+            rotationY: 5,
+            duration: 0.3,
+            ease: "back.out(1.7)"
+          });
+        });
+
+        card.addEventListener('mouseleave', () => {
+          gsap.to(cardElement, {
+            scale: 1,
+            z: 0,
+            rotationX: 0,
+            rotationY: 0,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        });
+      });
+
+      // Sidebar scroll-triggered animations with reduced motion support
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion) {
+        gsap.fromTo(sidebarRef.current,
+          { opacity: 0, x: 100, z: -100 },
+          {
+            opacity: 1,
+            x: 0,
+            z: 0,
+            duration: 0.8,
+            ease: "back.out(1.7)",
+            scrollTrigger: {
+              trigger: sidebarRef.current,
+              start: 'top 80%'
+            }
           }
-        }
-      );
+        );
+      }
     });
 
     return () => ctx.revert();
@@ -336,7 +487,33 @@ const HearingLoss: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/practice-areas/hearing-loss"
       />
       
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background relative overflow-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
+        {/* 3D Floating Background Layers */}
+        <div 
+          ref={backgroundLayer1}
+          className="fixed inset-0 opacity-5 pointer-events-none"
+          style={{ 
+            background: 'radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.3) 0%, transparent 50%)',
+            transform: 'translateZ(-500px) scale(1.5)'
+          }}
+        />
+        <div 
+          ref={backgroundLayer2}
+          className="fixed inset-0 opacity-10 pointer-events-none"
+          style={{ 
+            background: 'radial-gradient(circle at 60% 40%, rgba(139, 92, 246, 0.2) 0%, transparent 50%)',
+            transform: 'translateZ(-250px) scale(1.3)'
+          }}
+        />
+        <div 
+          ref={backgroundLayer3}
+          className="fixed inset-0 opacity-15 pointer-events-none"
+          style={{ 
+            background: 'radial-gradient(circle at 40% 60%, rgba(236, 72, 153, 0.1) 0%, transparent 50%)',
+            transform: 'translateZ(-100px) scale(1.1)'
+          }}
+        />
+        
         <GoBack fallbackPath="/practice-areas" />
         
         {/* Hero Section */}
@@ -349,18 +526,18 @@ const HearingLoss: React.FC = () => {
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <div className="hero-content">
-              <h1 className="text-5xl md:text-6xl font-bold mb-4">
+              <h1 className="text-5xl md:text-7xl font-bold mb-6">
                 California Hearing Loss Attorneys
               </h1>
               
-              <div className="flex items-center justify-center mb-6">
+              <div className="flex items-center justify-center mb-8">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                  <Star key={i} className="w-8 h-8 fill-yellow-400 text-yellow-400 mr-1" />
                 ))}
-                <span className="ml-2 text-lg">Fighting for Maximum Compensation</span>
+                <span className="ml-3 text-2xl font-semibold">Fighting for Maximum Compensation</span>
               </div>
               
-              <p className="text-xl mb-8 max-w-3xl">
+              <p className="text-2xl mb-10 max-w-4xl leading-relaxed">
                 Has an accident, workplace exposure, or sudden trauma left you with hearing damage? 
                 Our experienced legal team fights for victims of hearing loss throughout California.
               </p>
@@ -368,7 +545,7 @@ const HearingLoss: React.FC = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button 
                   size="lg" 
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+                  className="bg-red-600 hover:bg-red-700 text-white font-bold px-10 py-5 text-xl"
                   onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
                 >
                   START MY FREE CASE EVALUATION
@@ -376,10 +553,10 @@ const HearingLoss: React.FC = () => {
                 <Button 
                   size="lg"
                   variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-black font-bold px-8 py-4 text-lg"
+                  className="border-white text-white hover:bg-white hover:text-black font-bold px-10 py-5 text-xl"
                   onClick={() => window.location.href = 'tel:8181234567'}
                 >
-                  <Phone className="w-5 h-5 mr-2" />
+                  <Phone className="w-6 h-6 mr-3" />
                   Call (818) 123-4567
                 </Button>
               </div>
@@ -396,13 +573,13 @@ const HearingLoss: React.FC = () => {
                     <button
                       key={tab.id}
                       onClick={() => scrollToSection(tab.id)}
-                      className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      className={`flex items-center px-5 py-3 text-base font-medium transition-colors rounded-md ${
                         activeTab === tab.id 
                           ? 'bg-white text-primary' 
                           : 'text-white hover:bg-white/20'
                       }`}
                     >
-                      <IconComponent className="w-4 h-4 mr-2" />
+                      <IconComponent className="w-5 h-5 mr-3" />
                       {tab.label}
                     </button>
                   );
@@ -421,14 +598,14 @@ const HearingLoss: React.FC = () => {
               
               {/* Overview Section */}
               <section id="overview" className="content-section mb-12">
-                <h2 className="text-3xl font-bold text-red-600 mb-6">California Hearing Loss Injury Attorneys</h2>
+                <h2 className="text-4xl font-bold text-red-600 mb-8">California Hearing Loss Injury Attorneys</h2>
                 
-                <div className="prose prose-lg max-w-none mb-6">
-                  <p className="text-lg leading-relaxed mb-4">
+                <div className="prose prose-xl max-w-none mb-8">
+                  <p className="text-xl leading-relaxed mb-6">
                     Hearing loss can be one of the most devastating yet invisible injuries. Unlike a broken bone that heals, damage to your auditory system often results in permanent impairment affecting every aspect of your life. The sudden inability to hear loved ones' voices, participate in conversations, or enjoy music transforms daily existence in profound ways most people cannot imagine until experiencing it themselves.
                   </p>
                   
-                  <p className="text-lg leading-relaxed">
+                  <p className="text-xl leading-relaxed">
                     California law recognizes hearing loss as a serious injury deserving substantial compensation, whether caused by workplace noise exposure, car accidents, explosions, or other traumatic events. However, insurance companies routinely minimize these claims, arguing that hearing loss is age-related or pre-existing. They exploit the invisible nature of auditory damage to deny rightful compensation to suffering victims.
                   </p>
                 </div>
@@ -999,26 +1176,26 @@ const HearingLoss: React.FC = () => {
                   </CardHeader>
                   <CardContent className="space-y-4 pt-6">
                     <Button 
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-3"
                       onClick={() => window.location.href = 'tel:8181234567'}
                     >
-                      <Phone className="w-4 h-4 mr-2" />
+                      <Phone className="w-5 h-5 mr-2" />
                       Call (818) 123-4567
                     </Button>
                     
                     <Button 
-                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg py-3"
                       onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
                     >
-                      <FileText className="w-4 h-4 mr-2" />
+                      <FileText className="w-5 h-5 mr-2" />
                       Free Case Evaluation
                     </Button>
                     
                     <Button 
-                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold"
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-lg py-3"
                       onClick={() => window.location.href = '/practice-areas/hearing-loss/compensation-calculator'}
                     >
-                      <Scale className="w-4 h-4 mr-2" />
+                      <Scale className="w-5 h-5 mr-2" />
                       Compensation Calculator
                     </Button>
                   </CardContent>
@@ -1094,15 +1271,15 @@ const HearingLoss: React.FC = () => {
         {/* Bottom CTA Section - Matching Mesothelioma */}
         <section className="bg-red-600 text-white py-16">
           <div className="max-w-4xl mx-auto text-center px-6">
-            <h2 className="text-3xl font-bold mb-4">Don't Wait - Time Limits Apply for California Hearing Loss Claims</h2>
-            <p className="text-xl mb-8">
+            <h2 className="text-4xl font-bold mb-6">Don't Wait - Time Limits Apply for California Hearing Loss Claims</h2>
+            <p className="text-2xl mb-10 leading-relaxed">
               California has strict deadlines for filing hearing loss claims. Evidence can be lost and witnesses' memories fade. 
-              The sooner you contact us, the better we can protect your rights.
+              The sooner you contact us, the better we can protect your rights and secure maximum compensation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg"
-                className="bg-white text-red-600 hover:bg-gray-100 font-bold px-8 py-4"
+                className="bg-white text-red-600 hover:bg-gray-100 font-bold px-10 py-5 text-xl"
                 onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
               >
                 Get Your Free Case Evaluation
@@ -1110,10 +1287,10 @@ const HearingLoss: React.FC = () => {
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4"
+                className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-10 py-5 text-xl"
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
-                <Phone className="w-5 h-5 mr-2" />
+                <Phone className="w-6 h-6 mr-3" />
                 Call (818) 123-4567
               </Button>
             </div>

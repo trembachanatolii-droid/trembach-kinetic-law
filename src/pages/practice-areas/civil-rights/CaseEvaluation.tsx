@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -22,6 +22,17 @@ const CaseEvaluation: React.FC = () => {
     consent: false
   });
 
+  const [showGoBack, setShowGoBack] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowGoBack(window.scrollY > 200);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const goBack = () => {
     const scrollPos = localStorage.getItem('scrollPosition');
     window.history.back();
@@ -41,7 +52,9 @@ const CaseEvaluation: React.FC = () => {
       <div className="min-h-screen bg-background">
         <button 
           onClick={goBack}
-          className="fixed top-24 left-6 z-50 flex items-center px-4 py-2 bg-white shadow-lg rounded-lg hover:bg-gray-50 transition-all duration-200"
+          className={`fixed top-24 left-6 z-50 flex items-center px-4 py-2 bg-white shadow-lg rounded-lg hover:bg-gray-50 transition-all duration-300 ${
+            showGoBack ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2 pointer-events-none'
+          }`}
         >
           <ArrowLeft className="w-4 h-4 mr-2" />
           Go Back

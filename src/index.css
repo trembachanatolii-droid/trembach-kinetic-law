@@ -497,6 +497,125 @@
     visibility: visible !important;
   }
 
+  /* CRITICAL: Force high contrast for all Paralysis section text */
+  .paralysis-page .card p,
+  .paralysis-page .card span,
+  .paralysis-page .card li,
+  .paralysis-page .card div,
+  .paralysis-page .card-content p,
+  .paralysis-page .card-content span,
+  .paralysis-page .card-content div,
+  .paralysis-page .card-content li,
+  .paralysis-page p,
+  .paralysis-page span,
+  .paralysis-page li,
+  .paralysis-page .text-sm,
+  .paralysis-page .text-base,
+  .paralysis-page .text-lg,
+  .paralysis-page .text-muted-foreground,
+  .paralysis-page label {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .paralysis-page h1,
+  .paralysis-page h2,
+  .paralysis-page h3,
+  .paralysis-page h4,
+  .paralysis-page h5,
+  .paralysis-page h6,
+  .paralysis-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Paralysis hero section styling - white centralized text */
+  .paralysis-page .hero-section h1,
+  .paralysis-page .hero-section h2,
+  .paralysis-page .hero-section p,
+  .paralysis-page .hero-section span,
+  .paralysis-page .hero-content h1,
+  .paralysis-page .hero-content h2,
+  .paralysis-page .hero-content p,
+  .paralysis-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Force white text in dark sections - Paralysis */
+  .paralysis-page .bg-red-600 h1,
+  .paralysis-page .bg-red-600 h2,
+  .paralysis-page .bg-red-600 h3,
+  .paralysis-page .bg-red-600 p,
+  .paralysis-page .bg-red-600 span,
+  .paralysis-page .bg-red-600 div {
+    color: #ffffff !important;
+  }
+
+  /* CRITICAL: Button text visibility in Paralysis section */
+  .paralysis-page button,
+  .paralysis-page .btn,
+  .paralysis-page [role="button"],
+  .paralysis-page button span,
+  .paralysis-page button .font-medium,
+  .paralysis-page button .font-bold {
+    opacity: 1 !important;
+    visibility: visible !important;
+    font-weight: 600 !important;
+  }
+
+  /* Specific button styling for Paralysis CTA section */
+  .paralysis-page .bg-red-600 button.bg-white {
+    color: #dc2626 !important;
+    background-color: #ffffff !important;
+  }
+
+  .paralysis-page .bg-red-600 button.bg-white:hover {
+    color: #b91c1c !important;
+    background-color: #f3f4f6 !important;
+  }
+
+  .paralysis-page .bg-red-600 button.border-white {
+    color: #ffffff !important;
+    border-color: #ffffff !important;
+    background-color: transparent !important;
+  }
+
+  .paralysis-page .bg-red-600 button.border-white:hover {
+    color: #dc2626 !important;
+    background-color: #ffffff !important;
+  }
+
+  /* Fix Paralysis form elements visibility */
+  .paralysis-page input,
+  .paralysis-page textarea,
+  .paralysis-page select,
+  .paralysis-page .select-trigger,
+  .paralysis-page .select-value {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #e5e7eb !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .paralysis-page input::placeholder,
+  .paralysis-page textarea::placeholder {
+    color: #6b7280 !important;
+    opacity: 0.8 !important;
+  }
+
   /* CRITICAL: Force high contrast for all Hearing Loss section text */
   .hearing-loss-page .card p,
   .hearing-loss-page .card span,

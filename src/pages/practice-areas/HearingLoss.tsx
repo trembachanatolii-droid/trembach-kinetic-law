@@ -443,7 +443,7 @@ const HearingLoss: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/practice-areas/hearing-loss"
       />
       
-      <div className="min-h-screen bg-background relative overflow-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
+      <div className="min-h-screen bg-background relative overflow-x-hidden" style={{ perspective: '1200px', transformStyle: 'preserve-3d' }}>
         {/* 3D Floating Background Layers */}
         <div 
           ref={backgroundLayer1}
@@ -1121,9 +1121,8 @@ const HearingLoss: React.FC = () => {
               </section>
             </div>
 
-            {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
             <div className="lg:col-span-1">
-              <div className="lg:sticky lg:top-8 space-y-6">
+              <div className="sticky top-28 lg:top-32 z-20 max-h-[calc(100vh-8rem)] space-y-6">
                 
                 {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
                 <Card className="border-red-200 shadow-lg">

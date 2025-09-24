@@ -556,23 +556,23 @@ const HearingLoss: React.FC = () => {
           </div>
 
           {/* Navigation Tabs */}
-          <div className="absolute bottom-0 left-0 right-0 bg-black/80 backdrop-blur-sm border-t border-white/20">
+          <div className="absolute bottom-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-t border-gray-200">
             <div className="max-w-7xl mx-auto px-6">
-              <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-3">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4 overflow-x-auto">
                 {tabs.map((tab) => {
                   const IconComponent = tab.icon;
                   return (
                     <button
                       key={tab.id}
                       onClick={() => scrollToSection(tab.id)}
-                      className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      className={`flex items-center px-4 py-2 text-sm font-medium transition-all duration-200 rounded-md whitespace-nowrap ${
                         activeTab === tab.id 
-                          ? 'bg-white text-black' 
-                          : 'text-white hover:bg-white/20'
+                          ? 'bg-red-600 text-white shadow-lg' 
+                          : 'text-gray-700 hover:bg-gray-100 hover:text-red-600'
                       }`}
                     >
                       <IconComponent className="w-4 h-4 mr-2" />
-                      {tab.label}
+                      <span className="font-semibold">{tab.label}</span>
                     </button>
                   );
                 })}

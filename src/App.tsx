@@ -13,6 +13,9 @@ import Explosions from "./pages/practice-areas/Explosions";
 import ExplosionsCaseEvaluation from "./pages/practice-areas/explosions/CaseEvaluation";
 import ExplosionsCompensationCalculator from "./pages/practice-areas/explosions/CompensationCalculator";
 import ExplosionsLegalGuidance from "./pages/practice-areas/explosions/LegalGuidance";
+import ExplosionsMedicalGuidance from "./pages/practice-areas/explosions/MedicalGuidance";
+import ExplosionsTreatmentCenters from "./pages/practice-areas/explosions/TreatmentCenters";
+import ExplosionsSupportGroups from "./pages/practice-areas/explosions/SupportGroups";
 import ElectrocutionCaseEvaluation from "./pages/practice-areas/electrocution/CaseEvaluation";
 import ElectrocutionCompensationCalculator from "./pages/practice-areas/electrocution/CompensationCalculator";
 import ElectrocutionLegalGuidance from "./pages/practice-areas/electrocution/LegalGuidance";
@@ -209,10 +212,13 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/electrocution" element={<Electrocution />} />
-            <Route path="/practice-areas/explosions" element={<Explosions />} />
-            <Route path="/practice-areas/explosions/case-evaluation" element={<ExplosionsCaseEvaluation />} />
-            <Route path="/practice-areas/explosions/compensation-calculator" element={<ExplosionsCompensationCalculator />} />
-            <Route path="/practice-areas/explosions/legal-guidance" element={<ExplosionsLegalGuidance />} />
+          <Route path="/practice-areas/explosions" element={<Explosions />} />
+          <Route path="/practice-areas/explosions/case-evaluation" element={<ExplosionsCaseEvaluation />} />
+          <Route path="/practice-areas/explosions/compensation-calculator" element={<ExplosionsCompensationCalculator />} />
+          <Route path="/practice-areas/explosions/legal-guidance" element={<ExplosionsLegalGuidance />} />
+          <Route path="/practice-areas/explosions/medical-guidance" element={<ExplosionsMedicalGuidance />} />
+          <Route path="/practice-areas/explosions/treatment-centers" element={<ExplosionsTreatmentCenters />} />
+          <Route path="/practice-areas/explosions/support-groups" element={<ExplosionsSupportGroups />} />
             <Route path="/practice-areas/electrocution/case-evaluation" element={<ElectrocutionCaseEvaluation />} />
             <Route path="/practice-areas/electrocution/compensation-calculator" element={<ElectrocutionCompensationCalculator />} />
             <Route path="/practice-areas/electrocution/legal-guidance" element={<ElectrocutionLegalGuidance />} />

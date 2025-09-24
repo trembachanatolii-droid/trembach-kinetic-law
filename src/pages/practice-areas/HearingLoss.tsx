@@ -1123,7 +1123,7 @@ const HearingLoss: React.FC = () => {
 
             {/* Sidebar - Exactly matching Mesothelioma sticky structure */}
             <div className="lg:col-span-1">
-              <div className="lg:sticky lg:top-8 space-y-6">
+              <div className="sticky top-28 lg:top-32 max-h-[calc(100vh-8rem)] z-10 space-y-6 overflow-y-auto">
                 
                 {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
                 <Card className="border-red-200 shadow-lg">

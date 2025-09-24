@@ -31,7 +31,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import GoBack from '@/components/GoBack';
-import '../../../styles/retail-accidents.css';
+import './retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-accidents-hero.jpg';
 import sidebarImage from '@/assets/practice-areas/retail-accidents-sidebar.jpg';
 import hazardsImage from '@/assets/practice-areas/retail-hazards.jpg';

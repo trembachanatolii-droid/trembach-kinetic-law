@@ -35,9 +35,12 @@ import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/civil-rights-hero-bg.jpg';
 import sidebarImage from '@/assets/civil-rights-sidebar.jpg';
+import evidenceProcessImage from '@/assets/civil-rights-evidence-process.jpg';
+import violationsProcessImage from '@/assets/civil-rights-violations-process.jpg';
 import legalProcessImage from '@/assets/civil-rights-legal-process.jpg';
 import medicalImage from '@/assets/civil-rights-medical-facility.jpg';
 import compensationImage from '@/assets/civil-rights-compensation-calculator.jpg';
+import resourcesImage from '@/assets/civil-rights-resources.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -65,14 +68,38 @@ const CivilRights: React.FC = () => {
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'violations', label: 'CIVIL RIGHTS VIOLATIONS', icon: AlertTriangle },
-    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Building },
-    { id: 'resources', label: 'RESOURCES', icon: Stethoscope },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle }
+    { id: 'violations-steps', label: 'WHAT TO DO AFTER VIOLATION', icon: Stethoscope },
+    { id: 'violations-process', label: 'VIOLATIONS PROCESS', icon: Heart },
+    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
+    { id: 'faq', label: 'FAQ', icon: MessageCircle },
+    { id: 'resources', label: 'RESOURCES', icon: Building }
   ];
 
   useEffect(() => {
     document.body.classList.add('civil-rights-page');
+    
+    const ctx = gsap.context(() => {
+      // Hero animation - instant
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+      );
+
+      // Content sections animation
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+    });
     
     // Scroll tracking for active tab
     const handleScroll = () => {
@@ -97,6 +124,7 @@ const CivilRights: React.FC = () => {
     return () => {
       document.body.classList.remove('civil-rights-page');
       window.removeEventListener('scroll', handleScroll);
+      ctx.revert();
     };
   }, []);
 

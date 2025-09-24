@@ -212,6 +212,8 @@ import VisionLossLegalGuidance from "./pages/practice-areas/vision-loss/LegalGui
 import VisionLossMedicalGuidance from "./pages/practice-areas/vision-loss/MedicalGuidance";
 import Paralysis from "./pages/practice-areas/Paralysis";
 import CivilRights from "./pages/practice-areas/CivilRights";
+import CaseEvaluation from "./pages/practice-areas/civil-rights/CaseEvaluation";
+import CompensationCalculator from "./pages/practice-areas/civil-rights/CompensationCalculator";
 import ParalysisCaseEvaluation from "./pages/practice-areas/paralysis/CaseEvaluation";
 import ParalysisCompensationCalculator from "./pages/practice-areas/paralysis/CompensationCalculator";
 import ParalysisLegalGuidance from "./pages/practice-areas/paralysis/LegalGuidance";
@@ -471,6 +473,8 @@ function App() {
              {/* Paralysis Routes */}
             <Route path="/practice-areas/paralysis" element={<Paralysis />} />
             <Route path="/practice-areas/civil-rights" element={<CivilRights />} />
+            <Route path="/practice-areas/civil-rights/case-evaluation" element={<CaseEvaluation />} />
+            <Route path="/practice-areas/civil-rights/compensation-calculator" element={<CompensationCalculator />} />
             <Route path="/practice-areas/paralysis/case-evaluation" element={<ParalysisCaseEvaluation />} />
             <Route path="/practice-areas/paralysis/compensation-calculator" element={<ParalysisCompensationCalculator />} />
             <Route path="/practice-areas/paralysis/legal-guidance" element={<ParalysisLegalGuidance />} />

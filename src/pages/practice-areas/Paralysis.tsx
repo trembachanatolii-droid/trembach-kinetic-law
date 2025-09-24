@@ -449,13 +449,13 @@ const Paralysis: React.FC = () => {
                 California Paralysis Injury Attorneys
               </h1>
               
-              <div className="star-rating flex items-center justify-center mb-4 sm:mb-6 flex-wrap">
+              <div className="star-rating flex items-center justify-center mb-4 sm:mb-6 flex-col sm:flex-row gap-2 sm:gap-0">
                 <div className="flex items-center">
                   {[...Array(5)].map((_, i) => (
                     <Star key={i} className="w-5 h-5 sm:w-6 sm:h-6 fill-yellow-400 text-yellow-400 mr-1" />
                   ))}
                 </div>
-                <span className="ml-2 text-sm sm:text-lg text-white">Former Defense Attorney Fighting for You</span>
+                <span className="sm:ml-2 text-sm sm:text-lg text-white text-center">Former Defense Attorney Fighting for You</span>
               </div>
               
               <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-white leading-relaxed">

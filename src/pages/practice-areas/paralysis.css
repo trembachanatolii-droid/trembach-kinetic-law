@@ -74,24 +74,47 @@
     padding: 2rem 0;
   }
   
+  .paralysis-page .hero-content {
+    padding: 0 1rem;
+  }
+  
   .paralysis-page .hero-content h1 {
-    font-size: 2.5rem !important;
+    font-size: 2rem !important;
     line-height: 1.1 !important;
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.75rem !important;
   }
   
   .paralysis-page .hero-content .star-rating {
-    margin-bottom: 1rem !important;
+    margin-bottom: 0.75rem !important;
+    flex-direction: column;
+    gap: 0.5rem;
   }
   
   .paralysis-page .hero-content .star-rating span {
     font-size: 0.875rem !important;
+    margin-left: 0 !important;
   }
   
   .paralysis-page .hero-content p {
-    font-size: 1rem !important;
-    line-height: 1.5 !important;
-    margin-bottom: 1.5rem !important;
+    font-size: 0.875rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 1.25rem !important;
+  }
+  
+  .paralysis-page .hero-section .absolute.bottom-0 {
+    position: relative !important;
+    background: white !important;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .paralysis-page .hero-content h1 {
+    font-size: 1.75rem !important;
+  }
+  
+  .paralysis-page .hero-content p {
+    font-size: 0.8rem !important;
   }
 }
 

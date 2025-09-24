@@ -1041,8 +1041,8 @@ const CivilRights: React.FC = () => {
                     role="button"
                     tabIndex={0}
                     aria-label="Send Us a Message"
-                    onClick={() => window.open('mailto:info@trembachlawfirm.com?subject=Civil Rights Case Inquiry', '_self')}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.open('mailto:info@trembachlawfirm.com?subject=Civil Rights Case Inquiry', '_self'); } }}
+                    onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com?subject=Civil%20Rights%20Case%20Inquiry'}
+                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.location.href = 'mailto:info@trembachlawfirm.com?subject=Civil%20Rights%20Case%20Inquiry'; } }}
                   >
                     <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
                     <div>

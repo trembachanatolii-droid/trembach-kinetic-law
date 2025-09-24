@@ -553,17 +553,6 @@ const CaseEvaluation: React.FC = () => {
                 </ul>
               </Card>
 
-              {/* Trust Indicators */}
-              <Card className="glass-card p-6">
-                <div className="text-center">
-                  <Badge variant="secondary" className="mb-3">
-                    California State Bar #349304
-                  </Badge>
-                  <p className="text-sm text-muted-foreground">
-                    Licensed attorney with years of experience representing retail accident victims throughout California.
-                  </p>
-                </div>
-              </Card>
             </div>
           </div>
         </div>

@@ -30,7 +30,8 @@ import {
   Zap,
   Home,
   HardHat,
-  Factory
+  Factory,
+  Calculator
 } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/electrocution-hero-bg.jpg';
@@ -62,6 +63,10 @@ const Electrocution: React.FC = () => {
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLDivElement>(null);
+  const backgroundLayer1 = useRef<HTMLDivElement>(null);
+  const backgroundLayer2 = useRef<HTMLDivElement>(null);
+  const backgroundLayer3 = useRef<HTMLDivElement>(null);
 
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
@@ -75,28 +80,142 @@ const Electrocution: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero animation - instant
+      // 3D Floating Background Layers
+      const layers = [backgroundLayer1.current, backgroundLayer2.current, backgroundLayer3.current];
+      layers.forEach((layer, index) => {
+        if (layer) {
+          gsap.set(layer, {
+            rotationX: Math.random() * 20 - 10,
+            rotationY: Math.random() * 20 - 10,
+            z: (index + 1) * -100
+          });
+          
+          gsap.to(layer, {
+            rotationX: Math.random() * 40 - 20,
+            rotationY: Math.random() * 40 - 20,
+            duration: 8 + index * 2,
+            ease: 'sine.inOut',
+            repeat: -1,
+            yoyo: true
+          });
+        }
+      });
+
+      // Enhanced Hero Animation with 3D perspective
       gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+        { 
+          opacity: 0, 
+          y: 80, 
+          rotationX: -15,
+          scale: 0.9
+        },
+        { 
+          opacity: 1, 
+          y: 0, 
+          rotationX: 0,
+          scale: 1,
+          duration: 1.2, 
+          ease: 'power3.out',
+          transformPerspective: 1000
+        }
       );
 
-      // Content sections animation
+      // 3D Card hover effects for all cards
+      const cards = document.querySelectorAll('.practice-card, .card');
+      cards.forEach((card) => {
+        const handleMouseEnter = () => {
+          gsap.to(card, {
+            y: -12,
+            rotationX: 2,
+            rotationY: 1,
+            scale: 1.02,
+            duration: 0.4,
+            ease: 'power2.out',
+            boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)',
+            transformPerspective: 1000
+          });
+        };
+
+        const handleMouseLeave = () => {
+          gsap.to(card, {
+            y: 0,
+            rotationX: 0,
+            rotationY: 0,
+            scale: 1,
+            duration: 0.4,
+            ease: 'power2.out',
+            boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
+            transformPerspective: 1000
+          });
+        };
+
+        card.addEventListener('mouseenter', handleMouseEnter);
+        card.addEventListener('mouseleave', handleMouseLeave);
+      });
+
+      // Parallax scrolling for background elements
+      gsap.utils.toArray('.parallax-element').forEach((element: any, index) => {
+        gsap.to(element, {
+          y: (index + 1) * -50,
+          scrollTrigger: {
+            trigger: element,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1
+          }
+        });
+      });
+
+      // Enhanced content sections animation with 3D effects
       gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
+        { 
+          opacity: 0, 
+          y: 60,
+          rotationX: -10,
+          scale: 0.95
+        },
         {
           opacity: 1,
           y: 0,
-          duration: 0.6,
-          stagger: 0.1,
+          rotationX: 0,
+          scale: 1,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power3.out',
+          transformPerspective: 1000,
           scrollTrigger: {
             trigger: contentRef.current,
-            start: 'top 80%'
+            start: 'top 85%'
           }
         }
       );
-    });
 
+      // Sidebar scroll-triggered animations with reduced motion support
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      
+      if (!prefersReducedMotion && sidebarRef.current) {
+        gsap.fromTo(sidebarRef.current,
+          { 
+            x: 100, 
+            opacity: 0,
+            rotationY: 15
+          },
+          {
+            x: 0,
+            opacity: 1,
+            rotationY: 0,
+            duration: 1,
+            ease: 'power3.out',
+            transformPerspective: 1000,
+            scrollTrigger: {
+              trigger: sidebarRef.current,
+              start: 'top 80%'
+            }
+          }
+        );
+      }
+    });
+    
     return () => ctx.revert();
   }, []);
 

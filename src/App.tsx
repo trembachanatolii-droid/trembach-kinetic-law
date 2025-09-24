@@ -24,6 +24,7 @@ import ExplosionsSupportGroups from "./pages/practice-areas/explosions/SupportGr
 import ElectrocutionCaseEvaluation from "./pages/practice-areas/electrocution/CaseEvaluation";
 import ElectrocutionCompensationCalculator from "./pages/practice-areas/electrocution/CompensationCalculator";
 import ElectrocutionLegalGuidance from "./pages/practice-areas/electrocution/LegalGuidance";
+import ElectrocutionMedicalGuidance from "./pages/practice-areas/electrocution/MedicalGuidance";
 import BusAccidents from "./pages/practice-areas/BusAccidents";
 import BusAccidentCaseEvaluation from "./pages/practice-areas/bus-accident/CaseEvaluation";
 import BusAccidentCompensationCalculator from "./pages/practice-areas/bus-accident/CompensationCalculator";
@@ -236,7 +237,8 @@ function App() {
           <Route path="/practice-areas/explosions/support-groups" element={<ExplosionsSupportGroups />} />
             <Route path="/practice-areas/electrocution/case-evaluation" element={<ElectrocutionCaseEvaluation />} />
             <Route path="/practice-areas/electrocution/compensation-calculator" element={<ElectrocutionCompensationCalculator />} />
-            <Route path="/practice-areas/electrocution/legal-guidance" element={<ElectrocutionLegalGuidance />} />
+        <Route path="/practice-areas/electrocution/legal-guidance" element={<ElectrocutionLegalGuidance />} />
+        <Route path="/practice-areas/electrocution/medical-guidance" element={<ElectrocutionMedicalGuidance />} />
             <Route path="/practice-areas/bus-accidents" element={<BusAccidents />} />
             <Route path="/practice-areas/aviation-accidents" element={<AviationAccidents />} />
             <Route path="/aviation/case-evaluation" element={<AviationCaseEvaluation />} />

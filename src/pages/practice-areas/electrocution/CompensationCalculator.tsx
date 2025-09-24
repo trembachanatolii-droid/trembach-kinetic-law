@@ -170,16 +170,16 @@ const ElectrocutionCompensationCalculator: React.FC = () => {
         <div className="absolute inset-0 bg-black/70"></div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Electrocution Compensation Calculator
           </h1>
           <div className="flex items-center justify-center mb-4">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
             ))}
-            <span className="ml-2">Free Case Valuation</span>
+            <span className="ml-2 text-white">Free Case Valuation</span>
           </div>
-          <p className="text-xl">
+          <p className="text-xl text-white">
             Estimate your potential electrical injury compensation in California
           </p>
         </div>

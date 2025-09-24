@@ -349,7 +349,7 @@ const Electrocution: React.FC = () => {
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
-            <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <h1 className="text-5xl md:text-6xl font-bold mb-4 text-white">
               California Electrocution Lawyers
             </h1>
             
@@ -357,10 +357,10 @@ const Electrocution: React.FC = () => {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
               ))}
-              <span className="ml-2 text-lg">Backed by Proven Experience</span>
+              <span className="ml-2 text-lg text-white">Backed by Proven Experience</span>
             </div>
             
-            <p className="text-xl mb-8 leading-relaxed">
+            <p className="text-xl mb-8 leading-relaxed text-white">
               Former defense attorney fighting for electrical injury victims. Free consultation. No fees unless we win.
             </p>
             

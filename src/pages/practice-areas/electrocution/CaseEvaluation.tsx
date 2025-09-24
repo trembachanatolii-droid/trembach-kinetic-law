@@ -94,16 +94,16 @@ const ElectrocutionCaseEvaluation: React.FC = () => {
         <div className="absolute inset-0 bg-black/70"></div>
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Free Electrocution Case Evaluation
           </h1>
           <div className="flex items-center justify-center mb-4">
             {[...Array(5)].map((_, i) => (
               <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
             ))}
-            <span className="ml-2">No Fees Unless We Win</span>
+            <span className="ml-2 text-white">No Fees Unless We Win</span>
           </div>
-          <p className="text-xl">
+          <p className="text-xl text-white">
             Complete confidential assessment of your electrical injury case
           </p>
         </div>

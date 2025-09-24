@@ -91,16 +91,9 @@ const VisionLoss: React.FC = () => {
       );
     }
 
-    // Sidebar sticky effect
-    if (sidebarRef.current && contentRef.current) {
-      ScrollTrigger.create({
-        trigger: contentRef.current,
-        start: "top center",
-        end: "bottom center",
-        pin: sidebarRef.current,
-        pinSpacing: false
-      });
-    }
+    // Sidebar sticky effect removed - using pure CSS sticky to avoid duplication and layout glitches
+    // Previously used GSAP ScrollTrigger pinning here, which could create spacer/pin artifacts
+    // and cause perceived duplicates. CSS sticky on the sidebar container is sufficient.
 
     // Content sections animation
     const sections = document.querySelectorAll('.content-section');

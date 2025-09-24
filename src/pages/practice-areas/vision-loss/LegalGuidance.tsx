@@ -449,10 +449,10 @@ const VisionLossLegalGuidance: React.FC = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="border-white text-white hover:bg-white hover:text-gray-900"
+              className="border-white/50 text-white hover:bg-white/10 hover:border-white/80 hover:text-white"
               onClick={() => window.location.href = '/practice-areas/vision-loss/case-evaluation'}
             >
-              <span className="text-white hover:text-gray-900">Free Legal Consultation</span>
+              <span className="text-white">Free Legal Consultation</span>
             </Button>
           </div>
         </div>

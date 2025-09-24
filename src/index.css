@@ -557,7 +557,7 @@
     --electric-glow: 280 100% 75%;
     
     --muted: 220 13% 85%;
-    --muted-foreground: 0 0% 7%; /* Darker for better contrast - #111111 */
+    --muted-foreground: 0 0% 45%; /* Medium gray for placeholders - #737373 */
     
     --border: 220 13% 85%;
     --input: 0 0% 98%;
@@ -630,6 +630,37 @@
     line-height: 1.5;
     font-size: 16px;
     font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+  }
+
+  /* CRITICAL: Force proper input and form element styling */
+  input, textarea, select {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+  }
+
+  input::placeholder, textarea::placeholder {
+    color: #737373 !important; /* Medium gray for good contrast but still muted */
+    opacity: 1 !important;
+  }
+
+  /* CRITICAL: Fix outline button visibility on dark backgrounds */
+  .bg-gray-900 button[class*="outline"],
+  .bg-gray-900 .button-outline,
+  button[class*="outline"].border-white {
+    background-color: transparent !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
+    color: #ffffff !important;
+  }
+
+  .bg-gray-900 button[class*="outline"]:hover,
+  .bg-gray-900 .button-outline:hover,
+  button[class*="outline"].border-white:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.8) !important;
+    color: #ffffff !important;
   }
   
   /* Film Grain Overlay */

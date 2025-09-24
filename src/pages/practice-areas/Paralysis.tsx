@@ -1153,19 +1153,21 @@ const Paralysis: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg"
-                className="bg-white hover:bg-gray-100 text-red-600 hover:text-red-700 font-bold px-8 py-4 text-lg border-0"
+                className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg border-0"
+                style={{ color: '#dc2626' }}
                 onClick={() => window.location.href = '/practice-areas/paralysis/case-evaluation'}
               >
-                <span className="text-red-600 font-bold">Get Your Free Case Evaluation</span>
+                Get Your Free Case Evaluation
               </Button>
               <Button 
                 size="lg"
                 variant="outline"
-                className="border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 text-lg bg-transparent"
+                className="border-2 border-white bg-transparent font-bold px-8 py-4 text-lg"
+                style={{ color: '#ffffff' }}
                 onClick={() => window.location.href = 'tel:8181234567'}
               >
                 <Phone className="w-6 h-6 mr-3" />
-                <span className="font-bold">Call (818) 123-4567</span>
+                Call (818) 123-4567
               </Button>
             </div>
           </div>

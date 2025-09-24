@@ -47,6 +47,57 @@
     font-weight: 600 !important;
   }
 
+  /* CRITICAL: Force high contrast for all Explosions section text */
+  .explosions-page .card p,
+  .explosions-page .card span,
+  .explosions-page .card li,
+  .explosions-page .card div,
+  .explosions-page p,
+  .explosions-page span,
+  .explosions-page li,
+  .explosions-page .text-sm,
+  .explosions-page .text-base,
+  .explosions-page .text-lg {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .explosions-page h1,
+  .explosions-page h2,
+  .explosions-page h3,
+  .explosions-page h4,
+  .explosions-page h5,
+  .explosions-page h6,
+  .explosions-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Button text visibility in explosions section */
+  .explosions-page button,
+  .explosions-page .btn,
+  .explosions-page [role="button"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .explosions-page .bg-red-600,
+  .explosions-page .bg-red-600 span {
+    color: #ffffff !important;
+  }
+
+  .explosions-page .bg-white,
+  .explosions-page .bg-white span {
+    color: #111111 !important;
+  }
+
   /* Ensure button text is always visible with explicit colors */
   button {
     color: inherit !important;

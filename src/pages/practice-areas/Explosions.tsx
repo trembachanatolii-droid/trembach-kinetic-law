@@ -38,6 +38,12 @@ const Explosions: React.FC = () => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
   const [activeTab, setActiveTab] = useState('overview');
 
+  // Add explosions-page class for high contrast CSS targeting
+  React.useEffect(() => {
+    document.body.classList.add('explosions-page');
+    return () => document.body.classList.remove('explosions-page');
+  }, []);
+
   const toggleSection = (section: string) => {
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
   };

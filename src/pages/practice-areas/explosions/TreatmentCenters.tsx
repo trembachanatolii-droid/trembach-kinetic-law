@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -20,6 +20,12 @@ import SEO from '@/components/SEO';
 import heroImage from '@/assets/explosions-treatment-centers-hero.jpg';
 
 const TreatmentCenters: React.FC = () => {
+  // Add explosions-page class for high contrast CSS targeting
+  useEffect(() => {
+    document.body.classList.add('explosions-page');
+    return () => document.body.classList.remove('explosions-page');
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <SEO 

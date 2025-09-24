@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
-import heroBackground from '@/assets/practice-areas/retail-accidents-hero.jpg';
+import heroBackground from '@/assets/practice-areas/retail-legal-guidance-hero.jpg';
 
 const LegalGuidance: React.FC = () => {
   return (

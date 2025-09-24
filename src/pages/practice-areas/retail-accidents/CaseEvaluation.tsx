@@ -25,7 +25,7 @@ import { Link } from 'react-router-dom';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import '../../../styles/retail-accidents.css';
-import heroBackground from '@/assets/practice-areas/retail-accidents-hero.jpg';
+import heroBackground from '@/assets/practice-areas/retail-case-evaluation-hero.jpg';
 
 interface FormData {
   // Personal Information
@@ -409,7 +409,11 @@ const CaseEvaluation: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background retail-accidents-page">
+        <div className="retail-accidents-page">
+          {/* 3D Background Layers */}
+          <div className="floating-layer-back"></div>
+          <div className="floating-layer-mid"></div>
+          <div className="floating-layer-front"></div>
       <SEO
         title="Free Retail Store Accident Case Evaluation | Trembach Law Firm"
         description="Get a free case evaluation for your California retail store accident. Former defense attorney fights for maximum compensation. No fees unless we win."

@@ -118,7 +118,11 @@ const RetailAccidents: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+        <div className="retail-accidents-page">
+          {/* 3D Background Layers */}
+          <div className="floating-layer-back"></div>
+          <div className="floating-layer-mid"></div>
+          <div className="floating-layer-front"></div>
       {/* Go Back Component */}
       <GoBack fallbackPath="/practice-areas" />
 
@@ -664,7 +668,7 @@ const RetailAccidents: React.FC = () => {
               <Card className="glass-card bg-gradient-to-r from-primary/5 to-primary/10 border border-primary/20">
                 <CardContent className="p-8 text-center">
                   <h3 className="text-2xl font-bold text-primary mb-4">
-                    Don't Wait - Time Limits Apply for California Civil Rights Claims
+                    Don't Wait - Time Limits Apply for California Retail Accident Claims
                   </h3>
                   <p className="text-lg mb-6">
                     California law imposes strict deadlines for filing retail accident claims. Don't let your opportunity for justice expire.
@@ -675,7 +679,7 @@ const RetailAccidents: React.FC = () => {
                       className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg w-full sm:w-auto"
                       onClick={() => window.location.href = '/practice-areas/retail-accidents/case-evaluation'}
                     >
-                      Get Your Free Case Evaluation
+                      <span className="text-white">Get Your Free Case Evaluation</span>
                     </Button>
                     <p className="text-sm text-muted-foreground">
                       No fees unless we win • Available 24/7 • Free consultation
@@ -691,7 +695,7 @@ const RetailAccidents: React.FC = () => {
   );
 };
 
-// FAQ Data
+// Expanded FAQ Data - 50+ Questions
 const faqData = [
   {
     question: "What should I do immediately after a retail store accident?",
@@ -712,6 +716,194 @@ const faqData = [
   {
     question: "What types of compensation can I recover in a retail store accident case?",
     answer: "You may be entitled to compensation for medical expenses, lost wages, pain and suffering, permanent disability, future medical costs, and in some cases, punitive damages. The specific amount depends on the severity of your injuries and the circumstances of your accident."
+  },
+  {
+    question: "What is premises liability law in California?",
+    answer: "Premises liability law requires property owners to maintain safe conditions for visitors. In California, retail stores owe customers the highest duty of care as business invitees, meaning they must regularly inspect for hazards, promptly fix dangers, and warn of unavoidable risks."
+  },
+  {
+    question: "Do I need to hire an attorney for my retail accident case?",
+    answer: "While not required, hiring an experienced premises liability attorney significantly improves your chances of fair compensation. Retail stores have teams of lawyers and insurance adjusters working to minimize payouts. An attorney levels the playing field and protects your interests."
+  },
+  {
+    question: "How much does it cost to hire a retail accident lawyer?",
+    answer: "Most retail accident attorneys work on a contingency fee basis, meaning you pay nothing upfront and only pay if we win your case. The fee is typically a percentage of your settlement or judgment, so there's no financial risk to you."
+  },
+  {
+    question: "What if the store claims I should have seen the hazard?",
+    answer: "Stores often try to blame customers for accidents, but they have a legal duty to maintain safe premises regardless. Even if a hazard was visible, the store may still be liable if they created the condition, knew about it, or failed to provide adequate warnings."
+  },
+  {
+    question: "Can I sue if I was injured in a store parking lot?",
+    answer: "Yes, store parking lots are part of the premises, and retailers are responsible for maintaining safe conditions including proper lighting, clear markings, pothole repairs, snow/ice removal, and adequate security measures."
+  },
+  {
+    question: "What evidence should I collect after a retail store accident?",
+    answer: "Take photos of the hazard, your injuries, and the surrounding area. Get names and contact information of witnesses. Request a copy of the incident report. Keep all medical records, receipts, and documentation related to your accident and treatment."
+  },
+  {
+    question: "How long does a retail accident case typically take?",
+    answer: "Case duration varies based on complexity, but most settle within 6-18 months. Factors affecting timeline include injury severity, medical treatment completion, investigation complexity, and the store's willingness to negotiate fairly."
+  },
+  {
+    question: "What if the store offers me a quick settlement?",
+    answer: "Never accept initial settlement offers without consulting an attorney. Early offers are typically far below fair value and may not account for future medical costs, lost earning capacity, or the full extent of your injuries."
+  },
+  {
+    question: "Can I still file a claim if I didn't report the accident immediately?",
+    answer: "While immediate reporting is best, you may still have a case even if you didn't report right away. However, delayed reporting can make your case more challenging, so contact an attorney as soon as possible to protect your rights."
+  },
+  {
+    question: "What types of injuries are common in retail store accidents?",
+    answer: "Common injuries include broken bones, sprains, cuts, head injuries, back injuries, and soft tissue damage. Slip and falls can cause serious injuries including fractures, traumatic brain injuries, and spinal cord damage."
+  },
+  {
+    question: "Do I have a case if I fell on a wet floor with no warning sign?",
+    answer: "Potentially yes. Stores must either immediately clean up spills or place warning signs. If a wet floor lacked proper warning and caused your fall, the store may be liable for negligence in maintaining safe premises."
+  },
+  {
+    question: "What if merchandise fell on me from a high shelf?",
+    answer: "Falling merchandise cases often result in significant liability for stores. Retailers must properly stock shelves, secure displays, and ensure heavy items are safely positioned. Poor stacking practices that cause merchandise to fall can result in substantial compensation."
+  },
+  {
+    question: "Can I recover damages for emotional distress from a retail accident?",
+    answer: "Yes, in addition to physical injuries, you may recover compensation for emotional distress, anxiety, depression, and mental anguish caused by your accident and its aftermath."
+  },
+  {
+    question: "What role does surveillance footage play in my case?",
+    answer: "Security camera footage is crucial evidence that can prove how your accident occurred and establish the store's negligence. It's important to request preservation of footage immediately, as stores often recycle recordings within days or weeks."
+  },
+  {
+    question: "Am I covered if I'm injured while working in a retail store?",
+    answer: "Employee injuries are typically covered by workers' compensation, which is different from premises liability claims. However, if a third party caused your injury or if there are special circumstances, you may have additional legal options."
+  },
+  {
+    question: "What if the accident happened because of another customer's actions?",
+    answer: "You may have claims against both the customer who caused the hazard and the store if they failed to address the dangerous condition promptly. Stores have a duty to monitor premises and respond quickly to hazards."
+  },
+  {
+    question: "How do I prove my medical expenses are related to the accident?",
+    answer: "Medical records linking your treatment to the accident are essential. Seek immediate medical attention and inform healthcare providers that your injuries resulted from a retail store accident. Keep all medical bills, records, and documentation."
+  },
+  {
+    question: "Can I claim lost wages if I missed work due to my injuries?",
+    answer: "Yes, lost wages are recoverable damages in retail accident cases. This includes both past lost income and future earning capacity if your injuries affect your ability to work. Documentation from your employer is important evidence."
+  },
+  {
+    question: "What if my pre-existing condition was worsened by the accident?",
+    answer: "You can still recover damages even if you had pre-existing conditions. Under the 'eggshell skull' rule, defendants must take plaintiffs as they find them. If the accident aggravated your condition, the store may be liable for the worsening."
+  },
+  {
+    question: "How is pain and suffering calculated in retail accident cases?",
+    answer: "Pain and suffering damages are calculated using various methods including multipliers of economic damages, per diem amounts, or case-by-case evaluation based on injury severity, treatment duration, impact on daily life, and long-term effects."
+  },
+  {
+    question: "What defenses might the store use against my claim?",
+    answer: "Common defenses include claiming the hazard was open and obvious, that you were distracted or negligent, that your injuries were pre-existing, or that they had no notice of the dangerous condition. An experienced attorney can counter these defenses effectively."
+  },
+  {
+    question: "Can I sue for punitive damages in a retail accident case?",
+    answer: "Punitive damages are rare in premises liability cases but may be awarded if the store's conduct was particularly egregious, such as knowingly maintaining dangerous conditions or deliberately ignoring safety violations."
+  },
+  {
+    question: "What if the accident was caused by a wet floor from a roof leak?",
+    answer: "Stores are responsible for maintaining their buildings and addressing leaks promptly. If a roof leak created a dangerous condition and the store failed to repair it or warn customers, they may be liable for resulting injuries."
+  },
+  {
+    question: "How do slip and fall cases differ from trip and fall cases?",
+    answer: "Slip and fall typically involves loss of traction (wet floors, ice), while trip and fall involves catching your foot on something (torn carpet, uneven surfaces). Both can result in serious injuries and store liability."
+  },
+  {
+    question: "What compensation is available for permanent disabilities?",
+    answer: "Permanent disabilities can result in substantial compensation including future medical costs, lost earning capacity, life care planning expenses, home modifications, assistive devices, and compensation for permanent pain and suffering."
+  },
+  {
+    question: "Can family members recover damages if I was killed in a retail accident?",
+    answer: "Yes, family members may file wrongful death claims to recover damages including funeral expenses, loss of financial support, loss of companionship, and other losses resulting from their loved one's death."
+  },
+  {
+    question: "What if the store claims the accident was an 'act of God'?",
+    answer: "Natural disasters may excuse some liability, but stores still have duties to address known hazards. For example, while they can't prevent earthquakes, they must secure merchandise and maintain safe conditions during and after such events."
+  },
+  {
+    question: "How do insurance companies evaluate retail accident claims?",
+    answer: "Insurance adjusters consider medical expenses, lost wages, injury severity, liability evidence, plaintiff credibility, and potential jury awards. They often use software programs that may undervalue claims, which is why legal representation is important."
+  },
+  {
+    question: "Can I recover damages for scarring or disfigurement?",
+    answer: "Yes, scarring and disfigurement are compensable damages. The amount depends on the severity, location, and permanence of scarring, as well as its impact on your appearance, self-esteem, and daily life."
+  },
+  {
+    question: "What if multiple people were injured in the same retail accident?",
+    answer: "Multiple injury cases can be handled individually or sometimes as class actions. Each person's damages are evaluated separately, though similar accident circumstances may strengthen all claims through shared evidence and resources."
+  },
+  {
+    question: "How do economic damages differ from non-economic damages?",
+    answer: "Economic damages are calculable financial losses like medical bills and lost wages. Non-economic damages compensate for intangible losses like pain, suffering, emotional distress, and loss of life enjoyment. Both are recoverable in retail accident cases."
+  },
+  {
+    question: "What role does expert testimony play in retail accident cases?",
+    answer: "Experts may testify about premises safety standards, accident reconstruction, medical causation, economic losses, or industry practices. Expert testimony can be crucial in proving negligence and establishing damages in complex cases."
+  },
+  {
+    question: "Can I sue if I was injured using a defective shopping cart?",
+    answer: "Yes, defective shopping cart cases may involve both premises liability (store's duty to maintain equipment) and product liability (manufacturer defects). You may have claims against the store, manufacturer, or both."
+  },
+  {
+    question: "What if the store was under construction when my accident occurred?",
+    answer: "Construction creates additional hazards and heightened duties for stores. They must adequately warn customers of dangers, provide safe passage, and may need to restrict access to dangerous areas. Construction is not an excuse for customer injuries."
+  },
+  {
+    question: "How do I handle medical bills while my case is pending?",
+    answer: "Options include using health insurance, medical payment coverage, treatment liens with providers, or special arrangements. An attorney can help you manage medical costs and ensure all expenses are included in your claim."
+  },
+  {
+    question: "What if I was injured while using store facilities like restrooms?",
+    answer: "Store restrooms, elevators, and other facilities are part of the premises covered by liability law. Stores must maintain these areas safely, including proper cleaning, maintenance, lighting, and accessibility compliance."
+  },
+  {
+    question: "Can weather conditions affect my retail accident case?",
+    answer: "Weather can impact liability but doesn't automatically excuse stores. Retailers must take reasonable precautions for foreseeable weather hazards like placing mats during rain, clearing ice, and ensuring adequate drainage."
+  },
+  {
+    question: "What if the dangerous condition was created by a vendor or contractor?",
+    answer: "Stores may still be liable for injuries caused by vendors or contractors on their premises. Multiple parties may share responsibility, and you may have claims against the store, contractor, or both depending on the circumstances."
+  },
+  {
+    question: "How do age and health affect retail accident case value?",
+    answer: "Age and health can significantly impact case value. Younger plaintiffs typically receive higher awards for life-long impacts. Pre-existing conditions don't bar recovery but may affect damage calculations and require careful medical documentation."
+  },
+  {
+    question: "What if store employees were rude or unhelpful after my accident?",
+    answer: "While poor customer service after an accident isn't directly compensable, it may indicate the store's attitude toward safety and can be relevant to your overall experience. Focus on documenting the accident circumstances and your injuries."
+  },
+  {
+    question: "Can I recover damages if my accident was minor but caused ongoing problems?",
+    answer: "Yes, even seemingly minor accidents can cause significant long-term problems. Some injuries don't manifest immediately or worsen over time. It's important to seek medical attention and monitor your condition even after 'minor' accidents."
+  },
+  {
+    question: "What happens if the store goes out of business during my case?",
+    answer: "Business closure doesn't eliminate liability. Claims may proceed against insurance carriers, parent companies, or successor entities. An experienced attorney can navigate these complications and protect your interests."
+  },
+  {
+    question: "How do I maximize my retail accident case value?",
+    answer: "Follow all medical advice, attend appointments, document everything, avoid social media posts about your case, be honest with your attorney, and don't accept early settlement offers without legal review. Proper case development is crucial for maximum value."
+  },
+  {
+    question: "What if I signed something at the store after my accident?",
+    answer: "Signed documents may affect your case but don't automatically bar recovery. Waivers or releases signed under duress, without full understanding, or that are overly broad may be challengeable. Have any documents reviewed by an attorney immediately."
+  },
+  {
+    question: "Can I still pursue a case if I received workers' compensation?",
+    answer: "Workers' compensation is different from premises liability. If you were injured as a customer rather than employee, you would pursue a premises liability claim. Employees injured on the job typically receive workers' compensation but may have third-party claims in some situations."
+  },
+  {
+    question: "What makes Trembach Law Firm different in retail accident cases?",
+    answer: "Our firm combines former defense attorney insight with aggressive plaintiff representation. We understand how stores and insurers think, allowing us to anticipate their strategies and build stronger cases for maximum compensation. We also work on contingency with no upfront costs."
+  },
+  {
+    question: "How quickly should I contact an attorney after a retail accident?",
+    answer: "Contact an attorney immediately after seeking medical care. Early legal involvement preserves evidence, ensures proper documentation, prevents harmful mistakes, and allows your attorney to guide you through the process from the beginning for the best possible outcome."
   }
 ];
 

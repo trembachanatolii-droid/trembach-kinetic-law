@@ -162,7 +162,11 @@ const CompensationCalculator: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background retail-accidents-page">
+        <div className="retail-accidents-page">
+          {/* 3D Background Layers */}
+          <div className="floating-layer-back"></div>
+          <div className="floating-layer-mid"></div>
+          <div className="floating-layer-front"></div>
       <SEO
         title="Retail Store Accident Compensation Calculator | California | Trembach Law Firm"
         description="Calculate your potential compensation for retail store accidents in California. Free tool from experienced slip and fall attorneys. Get estimated settlement amounts."
@@ -469,7 +473,6 @@ const CompensationCalculator: React.FC = () => {
                 </ul>
               </Card>
 
-              {/* Why Choose Us */}
               <Card className="glass-card p-6">
                 <h4 className="font-bold text-lg mb-4 text-primary">Why Choose Trembach Law?</h4>
                 <ul className="space-y-2 text-sm">

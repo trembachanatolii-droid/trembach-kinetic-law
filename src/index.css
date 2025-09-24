@@ -97,6 +97,16 @@
     visibility: visible !important;
   }
 
+  /* Force white text in dark sections */
+  .explosions-page .bg-gray-900 h1,
+  .explosions-page .bg-gray-900 h2,
+  .explosions-page .bg-gray-900 h3,
+  .explosions-page .bg-gray-900 p,
+  .explosions-page .bg-gray-900 span,
+  .explosions-page .bg-gray-900 div {
+    color: #ffffff !important;
+  }
+
   /* Button text visibility in explosions section */
   .explosions-page button,
   .explosions-page .btn,

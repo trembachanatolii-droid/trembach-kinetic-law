@@ -490,7 +490,7 @@ const HearingLoss: React.FC = () => {
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
                 ))}
-                <span className="ml-3 text-xl font-semibold">Fighting for Maximum Compensation</span>
+                <span className="ml-3 text-xl font-semibold text-white">Fighting for Maximum Compensation</span>
               </div>
               
               <p className="text-lg md:text-xl mb-8 max-w-4xl leading-relaxed mx-auto">

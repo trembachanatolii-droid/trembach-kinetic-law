@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { useScrollMemory } from '@/hooks/useScrollMemory';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -54,7 +54,7 @@ const EnvironmentalToxic: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const scrollMemory = useScrollMemory();
+  useScrollRestoration();
   const [formData, setFormData] = useState({
     exposureDate: '',
     exposureType: ''

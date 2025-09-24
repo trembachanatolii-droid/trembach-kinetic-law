@@ -118,7 +118,7 @@ import WrongfulDeathMedicalGuidance from "./pages/WrongfulDeathMedicalGuidance";
 import ProductLiabilityCaseEvaluation from "./pages/ProductLiabilityCaseEvaluation";
 import ProductLiabilityCompensationCalculator from "./pages/ProductLiabilityCompensationCalculator";
 import ProductLiabilityMedicalGuidance from "./pages/ProductLiabilityMedicalGuidance";
-import ScrollToTop from "./components/ScrollToTop";
+
 import ConstructionCaseEvaluation from "./pages/ConstructionCaseEvaluation";
 import ConstructionCompensationCalculator from "./pages/ConstructionCompensationCalculator";
 import ConstructionMedicalGuidance from "./pages/ConstructionMedicalGuidance";
@@ -199,7 +199,7 @@ function App() {
         <Sonner />
         <CustomCursor />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <ScrollToTop />
+          
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />

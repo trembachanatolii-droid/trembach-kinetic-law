@@ -22,7 +22,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import heroBackground from '@/assets/birth-injuries-hero-bg.jpg';
-import { useScrollMemory } from '@/hooks/useScrollMemory';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,7 +46,7 @@ const BirthInjuriesCaseEvaluation: React.FC = () => {
 
   const heroRef = useRef<HTMLDivElement>(null);
   const formRef = useRef<HTMLDivElement>(null);
-  useScrollMemory();
+  useScrollRestoration();
 
   useEffect(() => {
     const ctx = gsap.context(() => {

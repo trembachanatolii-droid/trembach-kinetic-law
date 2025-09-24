@@ -11,7 +11,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Calculator, DollarSign, Heart, Clock, Shield, Award, Car, Activity, Star, Phone, Mail, MessageCircle } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
-import { useScrollMemory } from '@/hooks/useScrollMemory';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/uber-lyft-hero-professional.jpg';
 gsap.registerPlugin(ScrollTrigger);
 const UberLyftCompensationCalculator: React.FC = () => {
@@ -38,7 +38,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
   const [characterCount, setCharacterCount] = useState(0);
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useScrollMemory();
+  useScrollRestoration();
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation

@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
-import { useScrollMemory } from '@/hooks/useScrollMemory';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-medical-facility-new.jpg';
 import diagnosisImage from '@/assets/birth-injuries-diagnosis-new.jpg';
 
@@ -33,7 +33,7 @@ const BirthInjuriesMedicalGuidance: React.FC = () => {
   
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  useScrollMemory();
+  useScrollRestoration();
 
   useEffect(() => {
     const ctx = gsap.context(() => {

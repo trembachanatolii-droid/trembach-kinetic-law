@@ -45,7 +45,7 @@ const HearingLossMedicalGuidance: React.FC = () => {
               <span className="ml-2 text-lg force-white !text-white">Expert Medical Resources</span>
             </div>
             
-            <p className="text-xl mb-8">
+            <p className="text-xl mb-8 !text-white force-white">
               Essential medical guidance and resources for individuals experiencing hearing loss. Get the care you need.
             </p>
             

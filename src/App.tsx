@@ -9,6 +9,10 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Electrocution from "./pages/practice-areas/Electrocution";
+import Explosions from "./pages/practice-areas/Explosions";
+import ExplosionsCaseEvaluation from "./pages/practice-areas/explosions/CaseEvaluation";
+import ExplosionsCompensationCalculator from "./pages/practice-areas/explosions/CompensationCalculator";
+import ExplosionsLegalGuidance from "./pages/practice-areas/explosions/LegalGuidance";
 import ElectrocutionCaseEvaluation from "./pages/practice-areas/electrocution/CaseEvaluation";
 import ElectrocutionCompensationCalculator from "./pages/practice-areas/electrocution/CompensationCalculator";
 import ElectrocutionLegalGuidance from "./pages/practice-areas/electrocution/LegalGuidance";
@@ -205,6 +209,10 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/electrocution" element={<Electrocution />} />
+            <Route path="/practice-areas/explosions" element={<Explosions />} />
+            <Route path="/practice-areas/explosions/case-evaluation" element={<ExplosionsCaseEvaluation />} />
+            <Route path="/practice-areas/explosions/compensation-calculator" element={<ExplosionsCompensationCalculator />} />
+            <Route path="/practice-areas/explosions/legal-guidance" element={<ExplosionsLegalGuidance />} />
             <Route path="/practice-areas/electrocution/case-evaluation" element={<ElectrocutionCaseEvaluation />} />
             <Route path="/practice-areas/electrocution/compensation-calculator" element={<ElectrocutionCompensationCalculator />} />
             <Route path="/practice-areas/electrocution/legal-guidance" element={<ElectrocutionLegalGuidance />} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './civil-rights.css';
@@ -51,6 +52,7 @@ interface TabSection {
 }
 
 const CivilRights: React.FC = () => {
+  const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
@@ -1012,7 +1014,7 @@ const CivilRights: React.FC = () => {
                         <Button 
                           size="sm" 
                           className="w-full bg-red-600 hover:bg-red-700 text-white"
-                          onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                          onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
                         >
                           <FileText className="w-4 h-4 mr-2 text-white" />
                           <span className="text-white">Start Case Review</span>

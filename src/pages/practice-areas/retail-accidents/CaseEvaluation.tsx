@@ -447,10 +447,10 @@ const CaseEvaluation: React.FC = () => {
       </section>
 
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           
           {/* Main Form Column */}
-          <div className="lg:col-span-3">
+          <div className="xl:col-span-2">
             <Card className="glass-card p-8">
               {/* Progress Bar */}
               <div className="mb-8">
@@ -504,51 +504,66 @@ const CaseEvaluation: React.FC = () => {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-32 space-y-6">
+          <div className="xl:col-span-1">
+            <div className="sticky top-32 space-y-8">
               
               {/* Contact Card */}
-              <Card className="glass-card p-6 bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
-                <h3 className="text-xl font-bold text-center mb-4 text-primary">Need Help Now?</h3>
+              <Card className="glass-card p-8 bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20">
+                <h3 className="text-2xl font-bold text-center mb-6 text-primary">Need Help Now?</h3>
                 
-                <div className="space-y-3">
+                <div className="space-y-6">
                   <Button 
                     asChild
-                    className="w-full bg-green-600 hover:bg-green-700 text-white"
+                    className="w-full h-14 text-lg bg-green-600 hover:bg-green-700 text-white"
                   >
-                    <a href="tel:(818) 123-4567" className="flex items-center justify-center gap-2">
-                      <Phone className="w-4 h-4" />
+                    <a href="tel:(818) 123-4567" className="flex items-center justify-center gap-3">
+                      <Phone className="w-5 h-5" />
                       Call (818) 123-4567
                     </a>
                   </Button>
                   
-                  <div className="text-center text-sm text-muted-foreground">
-                    <Badge variant="secondary" className="bg-green-100 text-green-800">
+                  <div className="text-center">
+                    <Badge variant="secondary" className="bg-green-100 text-green-800 text-sm px-4 py-2">
                       Available 24/7
                     </Badge>
+                    <p className="text-sm text-muted-foreground mt-3">
+                      Speak directly with an experienced attorney about your case
+                    </p>
                   </div>
                 </div>
               </Card>
 
               {/* Benefits Card */}
-              <Card className="glass-card p-6">
-                <h4 className="font-bold text-lg mb-4 text-primary">What to Expect:</h4>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Free case review within 24 hours</span>
+              <Card className="glass-card p-8">
+                <h4 className="font-bold text-2xl mb-6 text-primary">What to Expect:</h4>
+                <ul className="space-y-4">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold">Free case review within 24 hours</span>
+                      <p className="text-sm text-muted-foreground mt-1">Professional evaluation of your claim's strength</p>
+                    </div>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>No fees unless we win your case</span>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold">No fees unless we win your case</span>
+                      <p className="text-sm text-muted-foreground mt-1">You pay nothing upfront - we only get paid when you do</p>
+                    </div>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Former defense attorney advantage</span>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold">Former defense attorney advantage</span>
+                      <p className="text-sm text-muted-foreground mt-1">Inside knowledge of insurance company tactics</p>
+                    </div>
                   </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-green-600 mt-0.5 flex-shrink-0" />
-                    <span>Confidential consultation</span>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-1 flex-shrink-0" />
+                    <div>
+                      <span className="font-semibold">Confidential consultation</span>
+                      <p className="text-sm text-muted-foreground mt-1">Your information is protected by attorney-client privilege</p>
+                    </div>
                   </li>
                 </ul>
               </Card>

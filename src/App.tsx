@@ -210,6 +210,11 @@ import VisionLossCaseEvaluation from "./pages/practice-areas/vision-loss/CaseEva
 import VisionLossCompensationCalculator from "./pages/practice-areas/vision-loss/CompensationCalculator";
 import VisionLossLegalGuidance from "./pages/practice-areas/vision-loss/LegalGuidance";
 import VisionLossMedicalGuidance from "./pages/practice-areas/vision-loss/MedicalGuidance";
+import Paralysis from "./pages/practice-areas/Paralysis";
+import ParalysisCaseEvaluation from "./pages/practice-areas/paralysis/CaseEvaluation";
+import ParalysisCompensationCalculator from "./pages/practice-areas/paralysis/CompensationCalculator";
+import ParalysisLegalGuidance from "./pages/practice-areas/paralysis/LegalGuidance";
+import ParalysisMedicalGuidance from "./pages/practice-areas/paralysis/MedicalGuidance";
 
 const queryClient = new QueryClient();
 

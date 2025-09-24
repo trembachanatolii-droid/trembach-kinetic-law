@@ -279,6 +279,10 @@ function App() {
             <Route path="/bus-accident/faq" element={<BusAccidentFAQ />} />
             <Route path="/bus-accident/legal-guidance" element={<BusAccidentLegalGuidance />} />
             <Route path="/practice-areas/uber-lyft-accidents" element={<UberLyftAccidents />} />
+            <Route path="/practice-areas/uber-lyft-accidents/case-evaluation" element={<UberLyftCaseEvaluation />} />
+            <Route path="/practice-areas/uber-lyft-accidents/compensation-calculator" element={<UberLyftCompensationCalculator />} />
+            <Route path="/practice-areas/uber-lyft-accidents/legal-guidance" element={<UberLyftLegalGuidance />} />
+            <Route path="/practice-areas/uber-lyft-accidents/medical-guidance" element={<UberLyftMedicalGuidance />} />
             <Route path="/uber-lyft/compensation-calculator" element={<UberLyftCompensationCalculator />} />
             <Route path="/uber-lyft/legal-guidance" element={<UberLyftLegalGuidance />} />
             <Route path="/uber-lyft/medical-guidance" element={<UberLyftMedicalGuidance />} />
@@ -323,6 +327,10 @@ function App() {
             <Route path="/medical-devices-compensation-calculator" element={<MedicalDevicesCompensationCalculator />} />
             <Route path="/medical-devices-medical-guidance" element={<MedicalDevicesMedicalGuidance />} />
             <Route path="/practice-areas/car-accidents" element={<CarAccidentsNew />} />
+            <Route path="/practice-areas/car-accidents/case-evaluation" element={<CarAccidentCaseEvaluation />} />
+            <Route path="/practice-areas/car-accidents/compensation-calculator" element={<CarAccidentCompensationCalculator />} />
+            <Route path="/practice-areas/car-accidents/legal-guidance" element={<CarAccidentLegalGuidance />} />
+            <Route path="/practice-areas/car-accidents/medical-guidance" element={<CarAccidentMedicalGuidance />} />
         <Route path="/car-case-evaluation" element={<CarCaseEvaluation />} />
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
         <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />

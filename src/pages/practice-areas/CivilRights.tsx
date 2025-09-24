@@ -1041,8 +1041,31 @@ const CivilRights: React.FC = () => {
                     role="button"
                     tabIndex={0}
                     aria-label="Send Us a Message"
-                    onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com?subject=Civil%20Rights%20Case%20Inquiry'}
-                    onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { window.location.href = 'mailto:info@trembachlawfirm.com?subject=Civil%20Rights%20Case%20Inquiry'; } }}
+                    onClick={() => {
+                      const email = 'info@trembachlawfirm.com';
+                      const subject = 'Civil Rights Case Inquiry';
+                      const body = 'Hello, I need help with a civil rights case. Please contact me.';
+                      
+                      // Try different methods to open email
+                      try {
+                        const mailtoLink = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                        const newWindow = window.open(mailtoLink);
+                        
+                        // Fallback if blocked
+                        setTimeout(() => {
+                          if (!newWindow || newWindow.closed) {
+                            alert(`Please email us at: ${email}\n\nSubject: ${subject}\n\nOr call (818) 123-4567 for immediate assistance.`);
+                          }
+                        }, 1000);
+                      } catch (error) {
+                        alert(`Please email us at: ${email}\n\nSubject: ${subject}\n\nOr call (818) 123-4567 for immediate assistance.`);
+                      }
+                    }}
+                    onKeyDown={(e) => { 
+                      if (e.key === 'Enter' || e.key === ' ') { 
+                        e.currentTarget.click();
+                      } 
+                    }}
                   >
                     <div className="w-8 h-8 bg-red-600 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
                     <div>

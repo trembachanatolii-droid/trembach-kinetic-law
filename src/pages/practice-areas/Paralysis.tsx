@@ -1168,7 +1168,89 @@ const Paralysis: React.FC = () => {
           </div>
         </section>
       </div>
-    </>
+      
+      <style jsx global>{`
+        .paralysis-page {
+          overflow-x: hidden;
+        }
+        
+        .paralysis-page .hero-content {
+          perspective: 1200px;
+          transform-style: preserve-3d;
+        }
+        
+        .paralysis-page .glass-card {
+          background: rgba(255, 255, 255, 0.1);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+          transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        
+        .paralysis-page .glass-card:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .paralysis-page .content-section {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        
+        .paralysis-page .floating-bg-1 {
+          animation: float-1 14s ease-in-out infinite;
+        }
+        
+        .paralysis-page .floating-bg-2 {
+          animation: float-2 18s ease-in-out infinite;
+        }
+        
+        .paralysis-page .floating-bg-3 {
+          animation: float-3 22s ease-in-out infinite;
+        }
+        
+        @keyframes float-1 {
+          0%, 100% { transform: translateZ(-500px) translateY(0px) rotate(0deg); }
+          50% { transform: translateZ(-500px) translateY(-30px) rotate(180deg); }
+        }
+        
+        @keyframes float-2 {
+          0%, 100% { transform: translateZ(-250px) translate(0px, 0px) rotate(0deg); }
+          33% { transform: translateZ(-250px) translate(40px, -20px) rotate(120deg); }
+          66% { transform: translateZ(-250px) translate(-20px, 20px) rotate(240deg); }
+        }
+        
+        @keyframes float-3 {
+          0%, 100% { transform: translateZ(-100px) translate(0px, 0px) rotate(0deg); }
+          25% { transform: translateZ(-100px) translate(25px, -25px) rotate(90deg); }
+          50% { transform: translateZ(-100px) translate(-25px, -25px) rotate(180deg); }
+          75% { transform: translateZ(-100px) translate(-25px, 25px) rotate(270deg); }
+        }
+        
+        .paralysis-page .hover-scale:hover {
+          transform: scale(1.05);
+        }
+        
+        .paralysis-page .hover-glow:hover {
+          box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+        }
+        
+        .paralysis-page .text-shadow {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        @media (prefers-reduced-motion: reduce) {
+          .paralysis-page .floating-bg-1,
+          .paralysis-page .floating-bg-2,
+          .paralysis-page .floating-bg-3 {
+            animation: none;
+          }
+          
+          .paralysis-page .glass-card {
+            transition: none;
+          }
+        }
+      `}</style>
+    </div>
   );
 };
 

@@ -464,9 +464,20 @@ function App() {
             <Route path="/uber-lyft-compensation-calculator" element={<UberLyftCompensationCalculator />} />
             <Route path="/uber-lyft-medical-guidance" element={<UberLyftMedicalGuidance />} />
             <Route path="/uber-lyft-legal-guidance" element={<UberLyftLegalGuidance />} />
-            <Route path="/uber-lyft-faq" element={<UberLyftFAQ />} />
-            <Route path="/uber-lyft-resources" element={<UberLyftResources />} />
-             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+             <Route path="/uber-lyft-faq" element={<UberLyftFAQ />} />
+             <Route path="/uber-lyft-resources" element={<UberLyftResources />} />
+             
+             {/* Paralysis Routes */}
+            <Route path="/practice-areas/paralysis" element={<Paralysis />} />
+            <Route path="/practice-areas/paralysis/case-evaluation" element={<ParalysisCaseEvaluation />} />
+            <Route path="/practice-areas/paralysis/compensation-calculator" element={<ParalysisCompensationCalculator />} />
+            <Route path="/practice-areas/paralysis/legal-guidance" element={<ParalysisLegalGuidance />} />
+            <Route path="/practice-areas/paralysis/medical-guidance" element={<ParalysisMedicalGuidance />} />
+            
+            {/* Paralysis Routes also need to be in PracticeAreaRouter */}
+            <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
+            
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

@@ -23,6 +23,11 @@ import BurnInjuries from './BurnInjuries';
 import WorkplaceInjuries from './WorkplaceInjuries';
 import ClassActions from './ClassActions';
 import EnvironmentalToxic from './EnvironmentalToxic';
+import Paralysis from './Paralysis';
+import ParalysisCaseEvaluation from './paralysis/CaseEvaluation';
+import ParalysisCompensationCalculator from './paralysis/CompensationCalculator';
+import ParalysisLegalGuidance from './paralysis/LegalGuidance';
+import ParalysisMedicalGuidance from './paralysis/MedicalGuidance';
 
 const PracticeAreaRouter = () => {
   return (
@@ -51,7 +56,12 @@ const PracticeAreaRouter = () => {
       <Route path="workplace-injuries" element={<WorkplaceInjuries />} />
       <Route path="class-actions" element={<ClassActions />} />
       <Route path="environmental-toxic" element={<EnvironmentalToxic />} />
-      <Route path="*" element={<ComingSoon />} />
+            <Route path="paralysis" element={<Paralysis />} />
+            <Route path="paralysis/case-evaluation" element={<ParalysisCaseEvaluation />} />
+            <Route path="paralysis/compensation-calculator" element={<ParalysisCompensationCalculator />} />
+            <Route path="paralysis/legal-guidance" element={<ParalysisLegalGuidance />} />
+            <Route path="paralysis/medical-guidance" element={<ParalysisMedicalGuidance />} />
+            <Route path="*" element={<ComingSoon />} />
     </Routes>
   );
 };

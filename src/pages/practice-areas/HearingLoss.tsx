@@ -34,7 +34,6 @@ import {
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/hearing-loss-hero.jpg';
-import sidebarImage from '@/assets/hearing-loss-hero.jpg'; // Using hero image for sidebar background
 import diagnosisImage from '@/assets/hearing-loss-diagnosis.jpg';
 import treatmentImage from '@/assets/hearing-loss-treatment.jpg';
 import workplaceImage from '@/assets/hearing-loss-workplace.jpg';
@@ -1126,49 +1125,35 @@ const HearingLoss: React.FC = () => {
             <div className="lg:col-span-1">
               <div className="sticky top-28 lg:top-32 max-h-[calc(100vh-8rem)] z-10 space-y-6 overflow-y-auto">
                 
-                {/* 3 Ways to Start Your Case - Exactly matching Mesothelioma */}
-                <Card className="glass-card group hover-glow-primary overflow-hidden transition-all duration-300 hover:scale-105">
-                  <div className="h-48 bg-cover bg-center" style={{ backgroundImage: `url(${sidebarImage})` }}>
-                    <div className="h-full bg-black/60 flex items-center justify-center group-hover:bg-black/50 transition-colors">
-                      <div className="text-center text-white">
-                        <h3 className="text-xl font-bold mb-2">3 Ways to</h3>
-                        <h3 className="text-xl font-bold">Start Your Case</h3>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <CardContent className="p-6">
-                    <p className="text-sm text-muted-foreground mb-6">
-                      You pay nothing until we win your case. Contact us today to schedule your FREE consultation.
-                    </p>
+                {/* 3 Ways to Start Your Case - Matches Mesothelioma */}
+                <Card className="border-red-200 shadow-lg">
+                  <CardHeader className="bg-red-50">
+                    <CardTitle className="text-red-600 text-center text-xl font-bold">3 Ways to Start Your Case</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pt-6">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold text-lg py-4"
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      <Phone className="w-5 h-5 mr-2" />
+                      <span className="text-white">Call (818) 123-4567</span>
+                    </Button>
                     
-                    <div className="space-y-4">
-                      <Button 
-                        className="w-full bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => window.location.href = 'tel:8559851234'}
-                      >
-                        <Phone className="w-4 h-4 mr-2" />
-                        Call (855) 985-1234
-                      </Button>
-                      
-                      <Button 
-                        variant="outline" 
-                        className="w-full"
-                        onClick={() => window.location.href = '/schedule-consultation'}
-                      >
-                        <MessageCircle className="w-4 h-4 mr-2" />
-                        Schedule Consultation
-                      </Button>
-                      
-                      <Button 
-                        variant="outline" 
-                        className="w-full"
-                        onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
-                      >
-                        <Mail className="w-4 h-4 mr-2" />
-                        Free Case Evaluation
-                      </Button>
-                    </div>
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold text-lg py-4"
+                      onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
+                    >
+                      <FileText className="w-5 h-5 mr-2" />
+                      <span className="text-white">Free Case Evaluation</span>
+                    </Button>
+                    
+                    <Button 
+                      className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold text-lg py-4"
+                      onClick={() => window.location.href = '/practice-areas/hearing-loss/compensation-calculator'}
+                    >
+                      <Scale className="w-5 h-5 mr-2" />
+                      <span className="text-white">Compensation Calculator</span>
+                    </Button>
                   </CardContent>
                 </Card>
 

@@ -253,14 +253,14 @@ const HearingLossCompensationCalculator: React.FC = () => {
                 Get an estimate of your potential hearing loss compensation based on your specific circumstances.
               </p>
               
-               <Button 
-                 size="lg"
-                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-                 onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
-               >
-                 <Calculator className="w-5 h-5 mr-2" />
-                 Start Calculator
-               </Button>
+              <Button 
+                size="lg"
+                className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 text-lg"
+                onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Calculator className="w-5 h-5 mr-2" />
+                Start Calculator
+              </Button>
             </div>
           </div>
         </section>

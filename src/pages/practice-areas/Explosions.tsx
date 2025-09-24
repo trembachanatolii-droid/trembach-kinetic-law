@@ -32,7 +32,7 @@ import medicalProcessImage from '@/assets/explosions-medical-process.jpg';
 import legalProcessImage from '@/assets/explosions-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-explosion-sites.jpg';
 import medicalFacilityImage from '@/assets/explosions-medical-facility.jpg';
-import compensationCalculatorImage from '@/assets/explosions-compensation-bright.jpg';
+import compensationCalculatorImage from '@/assets/explosions-compensation-clean.jpg';
 
 const Explosions: React.FC = () => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});

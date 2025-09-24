@@ -17,7 +17,7 @@ import {
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
-import heroImage from '@/assets/explosions-treatment-centers-hero.jpg';
+import heroImage from '@/assets/explosions-treatment-centers-hero-bright.jpg';
 
 const TreatmentCenters: React.FC = () => {
   // Add explosions-page class for high contrast CSS targeting
@@ -39,22 +39,22 @@ const TreatmentCenters: React.FC = () => {
 
       {/* Hero Section */}
       <section 
-        className="relative py-24 lg:py-32 text-white overflow-hidden"
+        className="relative py-24 lg:py-32 text-white overflow-hidden hero-section"
         style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url(${heroImage})`,
+          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(${heroImage})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundAttachment: 'fixed'
         }}
       >
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center hero-content">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight text-white text-center">
             Explosion Injury
             <br />
             <span className="text-red-400">Treatment Centers</span>
           </h1>
           <div className="w-24 h-1 bg-red-600 mx-auto mb-8"></div>
-          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl md:text-2xl mb-12 max-w-3xl mx-auto leading-relaxed text-white text-center">
             Find specialized medical facilities and treatment centers for explosion injury victims in California.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center max-w-2xl mx-auto">

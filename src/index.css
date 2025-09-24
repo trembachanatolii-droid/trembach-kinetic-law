@@ -80,6 +80,23 @@
     visibility: visible !important;
   }
 
+  /* Hero section styling - white centralized text */
+  .explosions-page .hero-section h1,
+  .explosions-page .hero-section h2,
+  .explosions-page .hero-section p,
+  .explosions-page .hero-section span,
+  .explosions-page .hero-content h1,
+  .explosions-page .hero-content h2,
+  .explosions-page .hero-content p,
+  .explosions-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
   /* Button text visibility in explosions section */
   .explosions-page button,
   .explosions-page .btn,

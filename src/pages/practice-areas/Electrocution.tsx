@@ -369,7 +369,7 @@ const Electrocution: React.FC = () => {
                 <Phone className="w-5 h-5 mr-2" />
                 Call (818) 123-4567
               </Button>
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white hover:text-black" asChild>
+              <Button size="lg" variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-colors" asChild>
                 <Link to="/practice-areas/electrocution/case-evaluation">
                   Free Case Review
                 </Link>

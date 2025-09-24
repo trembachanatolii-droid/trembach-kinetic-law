@@ -414,7 +414,7 @@ const WorkplaceInjuriesCompensationCalculator: React.FC = () => {
                         <Button asChild className="bg-white text-red-600 hover:bg-gray-100">
                           <Link to="/workplace-injuries-case-evaluation">Free Case Evaluation</Link>
                         </Button>
-                        <Button asChild variant="outline" className="border-white text-white hover:bg-white hover:text-red-600">
+                        <Button asChild variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-colors">
                           <Link to="tel:8181234567">Call (818) 123-4567</Link>
                         </Button>
                       </div>

@@ -340,19 +340,19 @@ const MedicalDevicesMedicalGuidance: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-3">
                   <div className="space-y-2">
-                    <Badge variant="secondary" className="w-full justify-start p-2 h-auto">
+                    <Badge className="w-full justify-start p-2 h-auto bg-primary/10 text-primary border border-primary/20">
                       <Clock className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-xs">Act quickly if symptoms develop</span>
                     </Badge>
-                    <Badge variant="secondary" className="w-full justify-start p-2 h-auto">
+                    <Badge className="w-full justify-start p-2 h-auto bg-primary/10 text-primary border border-primary/20">
                       <FileText className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-xs">Document everything thoroughly</span>
                     </Badge>
-                    <Badge variant="secondary" className="w-full justify-start p-2 h-auto">
+                    <Badge className="w-full justify-start p-2 h-auto bg-primary/10 text-primary border border-primary/20">
                       <Stethoscope className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-xs">Get second medical opinions</span>
                     </Badge>
-                    <Badge variant="secondary" className="w-full justify-start p-2 h-auto">
+                    <Badge className="w-full justify-start p-2 h-auto bg-primary/10 text-primary border border-primary/20">
                       <Shield className="w-4 h-4 mr-2 flex-shrink-0" />
                       <span className="text-xs">Know your legal rights</span>
                     </Badge>

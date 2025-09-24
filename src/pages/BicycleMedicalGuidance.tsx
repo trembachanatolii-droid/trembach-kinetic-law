@@ -60,7 +60,7 @@ const BicycleMedicalGuidance = () => {
               <Phone className="w-5 h-5 mr-2" />
               Emergency: (818) 123-4567
             </Button>
-            <Button size="lg" variant="outline" className="bg-white/10 border-white text-white hover:bg-white hover:text-gray-900 px-8 py-4 text-lg backdrop-blur-sm">
+            <Button size="lg" variant="secondary" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-colors px-8 py-4 text-lg">
               <Stethoscope className="w-5 h-5 mr-2" />
               Medical Referrals
             </Button>

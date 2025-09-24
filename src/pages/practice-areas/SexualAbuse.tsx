@@ -972,11 +972,11 @@ const SexualAbuse: React.FC = () => {
                           Get a free, confidential consultation to understand your options.
                         </p>
                         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                          <Button size="lg" variant="outline" className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg" onClick={() => window.location.href = 'tel:+18181234567'}>
+                          <Button size="lg" variant="secondary" className="bg-red-600/90 backdrop-blur-sm text-white hover:bg-red-700 transition-colors rounded-lg" onClick={() => window.location.href = 'tel:+18181234567'}>
                             <Phone className="w-5 h-5 mr-2" />
                             Call (818) 123-4567
                           </Button>
-                          <Button size="lg" variant="outline" className="bg-red-600 border-white text-white hover:bg-red-700 hover:border-gray-200 rounded-lg" onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}>
+                          <Button size="lg" variant="secondary" className="bg-red-600/90 backdrop-blur-sm text-white hover:bg-red-700 transition-colors rounded-lg" onClick={() => window.location.href = '/sexual-abuse-case-evaluation'}>
                             Free Case Evaluation
                           </Button>
                         </div>

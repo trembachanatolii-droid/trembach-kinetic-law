@@ -839,7 +839,7 @@ const TalcBabyPowderCancer: React.FC = () => {
             <Button asChild size="lg" className="bg-white text-red-600 hover:bg-gray-100">
               <Link to="/talc-case-evaluation">Get Free Case Evaluation Now</Link>
             </Button>
-            <Button asChild variant="outline" size="lg" className="border-white text-white hover:bg-white hover:text-red-600">
+            <Button asChild variant="secondary" size="lg" className="bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-colors">
               <a href="tel:8181234567">Call (818) 123-4567</a>
             </Button>
           </div>

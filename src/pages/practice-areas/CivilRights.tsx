@@ -460,7 +460,7 @@ const CivilRights: React.FC = () => {
                 size="lg" 
                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg"
                 style={{ color: '#ffffff' }}
-                onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
               >
                 START MY FREE CASE EVALUATION
               </Button>
@@ -911,7 +911,7 @@ const CivilRights: React.FC = () => {
                     <CardTitle className="text-center">
                       <Button 
                         className="w-full bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                        onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
                       >
                         Case Evaluation
                       </Button>
@@ -927,7 +927,7 @@ const CivilRights: React.FC = () => {
                     <CardTitle className="text-center">
                       <Button 
                         className="w-full bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => window.location.href = '/practice-areas/civil-rights/compensation-calculator'}
+                        onClick={() => navigate('/practice-areas/civil-rights/compensation-calculator')}
                       >
                         Compensation Calculator
                       </Button>
@@ -943,7 +943,7 @@ const CivilRights: React.FC = () => {
                     <CardTitle className="text-center">
                       <Button 
                         className="w-full bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => window.location.href = '/practice-areas/civil-rights/legal-guidance'}
+                        onClick={() => navigate('/practice-areas/civil-rights/legal-guidance')}
                       >
                         Legal Guidance
                       </Button>
@@ -998,7 +998,7 @@ const CivilRights: React.FC = () => {
                         <Button 
                           size="sm" 
                           className="w-full bg-green-600 hover:bg-green-700 text-white"
-                          onClick={() => window.location.href = 'tel:8181234567'}
+                          onClick={() => window.location.href = 'tel:+18181234567'}
                         >
                           <Phone className="w-4 h-4 mr-2 text-white" />
                           <span className="text-white">Call (818) 123-4567</span>
@@ -1030,7 +1030,7 @@ const CivilRights: React.FC = () => {
                         <Button 
                           size="sm" 
                           className="w-full bg-blue-600 hover:bg-blue-700 text-white"
-                          onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
+                          onClick={() => window.open('mailto:info@trembachlawfirm.com?subject=Civil Rights Case Inquiry', '_self')}
                         >
                           <Mail className="w-4 h-4 mr-2 text-white" />
                           <span className="text-white">Send Message</span>
@@ -1060,9 +1060,9 @@ const CivilRights: React.FC = () => {
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Button 
-                  size="lg"
+                  size="lg" 
                   className="bg-white hover:bg-gray-100 font-bold px-8 py-4 text-lg border-0 text-red-600 hover:text-red-700"
-                  onClick={() => window.location.href = '/practice-areas/civil-rights/case-evaluation'}
+                  onClick={() => navigate('/practice-areas/civil-rights/case-evaluation')}
                 >
                   <span className="text-red-600">Get Your Free Case Evaluation</span>
                 </Button>
@@ -1070,7 +1070,7 @@ const CivilRights: React.FC = () => {
                   size="lg"
                   variant="outline"
                   className="border-2 border-white bg-transparent font-bold px-8 py-4 text-lg text-white hover:text-white hover:bg-white/10"
-                  onClick={() => window.location.href = 'tel:8181234567'}
+                  onClick={() => window.location.href = 'tel:+18181234567'}
                 >
                   <Phone className="w-6 h-6 mr-3 text-white" />
                   <span className="text-white">Call (818) 123-4567</span>

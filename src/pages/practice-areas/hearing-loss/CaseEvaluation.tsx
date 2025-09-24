@@ -104,13 +104,13 @@ const HearingLossCaseEvaluation: React.FC = () => {
               Get a comprehensive evaluation of your hearing loss case. No fees unless we win your case.
             </p>
             
-            <Button 
-              size="lg"
-              className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 text-lg"
-              onClick={() => document.getElementById('evaluation-form')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Start Your Free Evaluation
-            </Button>
+               <Button 
+                 size="lg"
+                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+                 onClick={() => document.getElementById('evaluation-form')?.scrollIntoView({ behavior: 'smooth' })}
+               >
+                 Start Your Free Evaluation
+               </Button>
           </div>
         </section>
 

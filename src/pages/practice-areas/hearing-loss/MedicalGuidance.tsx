@@ -50,20 +50,20 @@ const HearingLossMedicalGuidance: React.FC = () => {
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button 
-                size="lg"
-                className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 text-lg"
-                onClick={() => window.location.href = 'tel:911'}
-              >
-                <Phone className="w-5 h-5 mr-2" />
-                Emergency: 911
-              </Button>
-              <Button 
-                size="lg"
-                variant="outline"
-                className="border-white text-white hover:bg-white hover:text-black font-bold px-8 py-4 text-lg"
-                onClick={() => window.location.href = 'tel:8181234567'}
-              >
+               <Button 
+                 size="lg"
+                 className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+                 onClick={() => window.location.href = 'tel:911'}
+               >
+                 <Phone className="w-5 h-5 mr-2" />
+                 Emergency: 911
+               </Button>
+               <Button 
+                 size="lg"
+                 variant="outline"
+                 className="border-white text-white hover:bg-white hover:text-red-600 font-bold px-8 py-4 text-lg"
+                 onClick={() => window.location.href = 'tel:8181234567'}
+               >
                 <Phone className="w-5 h-5 mr-2" />
                 Call Our Office
               </Button>

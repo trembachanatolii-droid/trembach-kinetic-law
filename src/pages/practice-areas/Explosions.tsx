@@ -36,10 +36,29 @@ import compensationCalculatorImage from '@/assets/explosions-compensation-calcul
 
 const Explosions: React.FC = () => {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
+  const [activeTab, setActiveTab] = useState('overview');
 
   const toggleSection = (section: string) => {
     setOpenSections(prev => ({ ...prev, [section]: !prev[section] }));
   };
+
+  const scrollToSection = (sectionId: string) => {
+    setActiveTab(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  const tabs = [
+    { id: 'overview', label: 'Overview', icon: FileText },
+    { id: 'explosion-types', label: 'Explosion Types', icon: AlertTriangle },
+    { id: 'injuries', label: 'Common Injuries', icon: Heart },
+    { id: 'legal-process', label: 'Legal Process', icon: Scale },
+    { id: 'compensation', label: 'Compensation', icon: DollarSign },
+    { id: 'california-sites', label: 'CA Risk Areas', icon: MapPin },
+    { id: 'faq', label: 'FAQ', icon: MessageSquare }
+  ];
 
   const faqs = [
     {
@@ -307,6 +326,31 @@ const Explosions: React.FC = () => {
             </Button>
           </div>
         </div>
+
+        {/* Navigation Tabs */}
+        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
+          <div className="max-w-7xl mx-auto px-6">
+            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      activeTab === tab.id 
+                        ? 'bg-white text-primary' 
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                  >
+                    <IconComponent className="w-4 h-4 mr-2" />
+                    {tab.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Main Content */}
@@ -315,7 +359,7 @@ const Explosions: React.FC = () => {
           {/* Main Content Column */}
           <div className="lg:col-span-2 space-y-12">
             {/* Introduction */}
-            <section className="content-section">
+            <section id="overview" className="content-section">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Expert Legal Representation for California Explosion Victims</h2>
               <p className="text-xl leading-relaxed mb-6">
                 Explosions cause devastating injuries and catastrophic property damage. Whether from gas leaks, chemical plant accidents, industrial explosions, or defective equipment, these traumatic events require immediate legal action to preserve evidence and protect your rights.
@@ -338,7 +382,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* Types of Explosion Cases */}
-            <section className="content-section mb-12">
+            <section id="explosion-types" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Types of Explosion Cases We Handle</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -445,7 +489,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* Common Injuries */}
-            <section className="content-section mb-12">
+            <section id="injuries" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Common Explosion Injuries</h2>
               
               <div className="mb-6">
@@ -531,7 +575,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* Legal Process */}
-            <section className="content-section mb-12">
+            <section id="legal-process" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">The Legal Process for Explosion Cases</h2>
               
               <div className="mb-6">
@@ -617,7 +661,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* California Explosion Sites */}
-            <section className="content-section mb-12">
+            <section id="california-sites" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">California High-Risk Explosion Areas</h2>
               
               <div className="mb-6">
@@ -724,7 +768,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* Compensation */}
-            <section className="content-section mb-12">
+            <section id="compensation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Compensation for Explosion Victims</h2>
               
               <div className="mb-6">
@@ -822,7 +866,7 @@ const Explosions: React.FC = () => {
             </section>
 
             {/* FAQ Section */}
-            <section className="content-section mb-12">
+            <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">

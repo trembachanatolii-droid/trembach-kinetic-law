@@ -70,7 +70,7 @@ const RailroadAccidentsCompensationCalculator: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Railroad Accident Compensation Calculator
           </h1>
-          <p className="text-xl text-white/90">
+          <p className="text-xl text-white">
             Get an estimate of your potential FELA or railroad accident compensation
           </p>
         </div>

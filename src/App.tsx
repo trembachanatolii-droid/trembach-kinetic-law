@@ -494,6 +494,12 @@ function App() {
             <Route path="/practice-areas/paralysis/legal-guidance" element={<ParalysisLegalGuidance />} />
             <Route path="/practice-areas/paralysis/medical-guidance" element={<ParalysisMedicalGuidance />} />
             
+            {/* Scaffolding Falls Routes */}
+            <Route path="/practice-areas/scaffolding-falls" element={<ScaffoldingFalls />} />
+            <Route path="/practice-areas/scaffolding-falls/case-evaluation" element={<ScaffoldingFallsCaseEvaluation />} />
+            <Route path="/practice-areas/scaffolding-falls/compensation-calculator" element={<ScaffoldingFallsCompensationCalculator />} />
+            <Route path="/practice-areas/scaffolding-falls/legal-guidance" element={<ScaffoldingFallsLegalGuidance />} />
+            
             {/* Paralysis Routes also need to be in PracticeAreaRouter */}
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
             

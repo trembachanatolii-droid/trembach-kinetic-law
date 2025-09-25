@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Scale, Clock, Phone, FileText, AlertTriangle, Users, Award } from 'lucide-react';
-import heroBackground from '@/assets/railroad-hero-bg.jpg';
+import heroBackground from '@/assets/railroad-guidance-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 

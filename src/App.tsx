@@ -237,6 +237,7 @@ import RailroadAccidentsCaseEvaluation from "./pages/practice-areas/railroad-acc
 import RailroadAccidentsCompensationCalculator from "./pages/practice-areas/railroad-accidents/CompensationCalculator";
 import RailroadAccidentsLegalGuidance from "./pages/practice-areas/railroad-accidents/LegalGuidance";
 import RailroadAccidentsResources from "./pages/practice-areas/railroad-accidents/Resources";
+import RailroadAccidentsMedicalGuidance from "./pages/practice-areas/railroad-accidents/MedicalGuidance";
 
 const queryClient = new QueryClient();
 
@@ -521,6 +522,7 @@ function App() {
             <Route path="/practice-areas/railroad-accidents/compensation-calculator" element={<RailroadAccidentsCompensationCalculator />} />
             <Route path="/practice-areas/railroad-accidents/legal-guidance" element={<RailroadAccidentsLegalGuidance />} />
             <Route path="/practice-areas/railroad-accidents/resources" element={<RailroadAccidentsResources />} />
+            <Route path="/practice-areas/railroad-accidents/medical-guidance" element={<RailroadAccidentsMedicalGuidance />} />
             
             {/* Paralysis Routes also need to be in PracticeAreaRouter */}
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />

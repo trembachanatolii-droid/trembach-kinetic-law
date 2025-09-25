@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calculator, ArrowLeft, Phone, Clock, Shield } from 'lucide-react';
-import heroBackground from '@/assets/railroad-hero-bg.jpg';
+import heroBackground from '@/assets/railroad-calculator-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 

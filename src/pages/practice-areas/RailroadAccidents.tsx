@@ -355,79 +355,79 @@ const RailroadAccidents: React.FC = () => {
                   <CardTitle className="text-3xl font-bold text-red-600 mb-6">California Railroad Accident Attorneys</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="prose prose-lg max-w-none mb-6">
-                    <p className="text-lg leading-relaxed mb-4">
+                  <div className="prose prose-xl max-w-none mb-6">
+                    <p className="text-xl leading-relaxed mb-4">
                       California's extensive railroad network carries millions of passengers and tons of freight daily, but with this vital transportation comes significant risks. From devastating Metrolink collisions to freight train derailments, railroad accidents can cause catastrophic injuries, permanent disabilities, and wrongful death.
                     </p>
                     
-                    <p className="text-lg leading-relaxed">
+                    <p className="text-xl leading-relaxed">`
                       At Trembach Law Firm, our former defense attorney brings insider knowledge to fighting for railroad accident victims throughout California. We understand the complex federal regulations governing railroads, the tactics insurance companies use to minimize claims, and the specialized medical and economic evidence needed to prove your case's full value.
                     </p>
                   </div>
 
                   <Collapsible open={expandedSections.overview} onOpenChange={() => toggleSection('overview')}>
                     <CollapsibleTrigger asChild>
-                      <Button variant="outline" className="w-full justify-between mb-4 hover:scale-105 transition-all duration-300">
+                      <Button variant="outline" className="w-full justify-between mb-4 hover:scale-105 transition-all duration-300 text-lg py-6">
                         Learn More About Our California Railroad Practice
-                        {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
+                        {expandedSections.overview ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                       </Button>
                     </CollapsibleTrigger>
                     <CollapsibleContent className="space-y-6">
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                           <CardHeader>
-                            <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                              <Train className="w-5 h-5 mr-2 text-primary" />
+                            <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
+                              <Train className="w-6 h-6 mr-3 text-primary" />
                               FELA Expertise
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <p>Deep understanding of Federal Employers Liability Act providing railroad workers superior protection compared to workers' compensation, with unlimited recovery potential.</p>
+                            <p className="text-base leading-relaxed">Deep understanding of Federal Employers Liability Act providing railroad workers superior protection compared to workers' compensation, with unlimited recovery potential.</p>
                           </CardContent>
                         </Card>
                         
                         <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                           <CardHeader>
-                            <CardTitle className="flex items-center group-hover:text-primary transition-colors">
-                              <Map className="w-5 h-5 mr-2 text-primary" />
+                            <CardTitle className="flex items-center group-hover:text-primary transition-colors text-lg">
+                              <Map className="w-6 h-6 mr-3 text-primary" />
                               California Railroad Knowledge
                             </CardTitle>
                           </CardHeader>
                           <CardContent>
-                            <p>Extensive knowledge of California's rail systems including Metrolink, Caltrain, Amtrak, and freight operations, plus historical exposure sites and accident patterns.</p>
+                            <p className="text-base leading-relaxed">Extensive knowledge of California's rail systems including Metrolink, Caltrain, Amtrak, and freight operations, plus historical exposure sites and accident patterns.</p>
                           </CardContent>
                         </Card>
                       </div>
 
-                      <div className="bg-muted p-6 rounded-lg">
-                        <h3 className="text-xl font-semibold mb-4">Why Choose Trembach Law Firm for Railroad Cases?</h3>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="bg-muted p-8 rounded-lg">
+                        <h3 className="text-2xl font-semibold mb-6">Why Choose Trembach Law Firm for Railroad Cases?</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="flex items-start hover:scale-105 transition-transform duration-300">
-                            <Shield className="w-5 h-5 text-primary mt-1 mr-3" />
+                            <Shield className="w-6 h-6 text-primary mt-1 mr-4" />
                             <div>
-                              <h4 className="font-semibold">Former Defense Experience</h4>
-                              <p className="text-sm text-muted-foreground">Attorney Trembach's background defending railroad companies provides unique insights into corporate defense strategies.</p>
+                              <h4 className="font-semibold text-lg mb-2">Former Defense Experience</h4>
+                              <p className="text-base text-muted-foreground leading-relaxed">Attorney Trembach's background defending railroad companies provides unique insights into corporate defense strategies.</p>
                             </div>
                           </div>
                           <div className="flex items-start hover:scale-105 transition-transform duration-300">
-                            <Clock className="w-5 h-5 text-primary mt-1 mr-3" />
+                            <Clock className="w-6 h-6 text-primary mt-1 mr-4" />
                             <div>
-                              <h4 className="font-semibold">Expedited Process</h4>
-                              <p className="text-sm text-muted-foreground">Understanding the urgency of railroad cases and working to secure compensation as quickly as possible.</p>
+                              <h4 className="font-semibold text-lg mb-2">Expedited Process</h4>
+                              <p className="text-base text-muted-foreground leading-relaxed">Understanding the urgency of railroad cases and working to secure compensation as quickly as possible.</p>
                             </div>
                           </div>
                           <div className="flex items-start hover:scale-105 transition-transform duration-300">
-                            <Users className="w-5 h-5 text-primary mt-1 mr-3" />
+                            <Users className="w-6 h-6 text-primary mt-1 mr-4" />
                             <div>
-                              <h4 className="font-semibold">Comprehensive Support</h4>
-                              <p className="text-sm text-muted-foreground">Complete legal, medical, and emotional support throughout your railroad accident case.</p>
+                              <h4 className="font-semibold text-lg mb-2">Comprehensive Support</h4>
+                              <p className="text-base text-muted-foreground leading-relaxed">Complete legal, medical, and emotional support throughout your railroad accident case.</p>
                             </div>
                           </div>
                           <div className="flex items-start hover:scale-105 transition-transform duration-300">
-                            <Award className="w-5 h-5 text-primary mt-1 mr-3" />
+                            <Award className="w-6 h-6 text-primary mt-1 mr-4" />
                             <div>
-                              <h4 className="font-semibold">No Win, No Fee</h4>
-                              <p className="text-sm text-muted-foreground">Contingency fee arrangement - you pay nothing unless we win your case.</p>
+                              <h4 className="font-semibold text-lg mb-2">No Win, No Fee</h4>
+                              <p className="text-base text-muted-foreground leading-relaxed">Contingency fee arrangement - you pay nothing unless we win your case.</p>
                             </div>
                           </div>
                         </div>
@@ -784,25 +784,25 @@ const RailroadAccidents: React.FC = () => {
                             onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                             className="w-full text-left flex items-center justify-between hover:text-primary transition-colors"
                           >
-                            <h4 className="font-semibold">{faq.question}</h4>
-                            {expandedFaq === index ? <ChevronUp /> : <ChevronDown />}
+                            <h4 className="font-semibold text-lg">{faq.question}</h4>
+                            {expandedFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
                           </button>
                         </CardHeader>
                         {expandedFaq === index && (
                           <CardContent>
-                            <p className="text-muted-foreground">{faq.answer}</p>
+                            <p className="text-muted-foreground text-base leading-relaxed">{faq.answer}</p>
                           </CardContent>
                         )}
                       </Card>
                     ))}
                     
-                    <div className="text-center mt-6">
+                    <div className="text-center mt-8">
                       <Button 
                         variant="outline" 
                         onClick={() => window.location.href = '/practice-areas/railroad-accidents/resources'}
-                        className="hover:scale-105 transition-all duration-300"
+                        className="hover:scale-105 transition-all duration-300 text-lg px-8 py-4"
                       >
-                        View All 50+ FAQ Questions
+                        View All 50+ FAQ Questions & Complete Resources
                       </Button>
                     </div>
                   </div>
@@ -821,7 +821,7 @@ const RailroadAccidents: React.FC = () => {
                     <img src={resourcesImage} alt="Railroad Legal Resources" className="w-full h-64 object-cover rounded-lg mb-4" />
                   </div>
                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                     <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer" 
                           onClick={() => window.location.href = '/practice-areas/railroad-accidents/case-evaluation'}>
                       <CardContent className="pt-6 text-center">
@@ -846,6 +846,15 @@ const RailroadAccidents: React.FC = () => {
                         <Shield className="w-8 h-8 text-primary mx-auto mb-4" />
                         <h4 className="font-semibold mb-2">Legal Guidance</h4>
                         <p className="text-sm text-muted-foreground">Comprehensive legal guidance for railroad accident victims</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/railroad-accidents/medical-guidance'}>
+                      <CardContent className="pt-6 text-center">
+                        <Stethoscope className="w-8 h-8 text-primary mx-auto mb-4" />
+                        <h4 className="font-semibold mb-2">Medical Guidance</h4>
+                        <p className="text-sm text-muted-foreground">Medical care coordination for railroad accident victims</p>
                       </CardContent>
                     </Card>
                     

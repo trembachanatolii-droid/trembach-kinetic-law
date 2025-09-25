@@ -217,7 +217,7 @@ Insurance Claim: ${formData.insuranceClaim}
           <p className="text-xl md:text-2xl text-white mb-6">
             Get Expert Legal Assessment for Your Construction Accident
           </p>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
             Our experienced attorneys will review your scaffolding falls case at no cost. 
             Complete this confidential evaluation to understand your legal rights and potential compensation.
           </p>

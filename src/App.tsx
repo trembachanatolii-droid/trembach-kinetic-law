@@ -8,6 +8,7 @@ import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
+import Defamation from "./pages/practice-areas/Defamation";
 import CraneAccidents from "./pages/practice-areas/CraneAccidents";
 import CraneAccidentsCaseEvaluation from "./pages/practice-areas/crane-accidents/CaseEvaluation";
 import CraneAccidentsCompensationCalculator from "./pages/practice-areas/crane-accidents/CompensationCalculator";
@@ -254,6 +255,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
+            <Route path="/practice-areas/defamation" element={<Defamation />} />
             <Route path="/practice-areas/crane-accidents" element={<CraneAccidents />} />
             <Route path="/practice-areas/crane-accidents/case-evaluation" element={<CraneAccidentsCaseEvaluation />} />
             <Route path="/practice-areas/crane-accidents/compensation-calculator" element={<CraneAccidentsCompensationCalculator />} />

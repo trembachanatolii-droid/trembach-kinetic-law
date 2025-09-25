@@ -551,14 +551,14 @@ const MesotheliomaAsbestos: React.FC = () => {
                     {/* Step 3: Exposure Information */}
                     {currentStep === 3 && (
                       <div className="space-y-6 animate-fade-in">
-                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Asbestos Exposure Information</h4>
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Asbestos Exposure Information</h4>
                         
                         <div className="space-y-4">
-                          <Label className="text-white text-base font-medium">Primary exposure type *</Label>
+                          <Label className="text-slate-900 text-base font-medium">Primary exposure type *</Label>
                           <Select value={formData.exposureType} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureType: value }))}>
-                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
-                              <SelectValue placeholder="Select primary exposure type" className="text-white" />
-                            </SelectTrigger>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select primary exposure type" className="text-slate-500" />
+                             </SelectTrigger>
                             <SelectContent className="bg-white border border-blue-200">
                               <SelectItem value="occupational" className="text-gray-900 hover:bg-blue-50">Occupational (workplace exposure)</SelectItem>
                               <SelectItem value="military" className="text-gray-900 hover:bg-blue-50">Military service</SelectItem>
@@ -569,11 +569,11 @@ const MesotheliomaAsbestos: React.FC = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label className="text-white text-base font-medium">Where did exposure occur? *</Label>
-                          <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
-                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
-                              <SelectValue placeholder="Select exposure location" className="text-white" />
-                            </SelectTrigger>
+                          <Label className="text-slate-900 text-base font-medium">Where did exposure occur? *</Label>
+                           <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select exposure location" className="text-slate-500" />
+                             </SelectTrigger>
                             <SelectContent className="bg-white border border-blue-200">
                               <SelectItem value="california-shipyard" className="text-gray-900 hover:bg-blue-50">California Shipyard</SelectItem>
                               <SelectItem value="construction-site" className="text-gray-900 hover:bg-blue-50">Construction Site</SelectItem>
@@ -589,10 +589,10 @@ const MesotheliomaAsbestos: React.FC = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label className="text-white text-base font-medium">Primary job/occupation during exposure</Label>
-                          <Select value={formData.workHistory} onValueChange={(value) => setFormData(prev => ({ ...prev, workHistory: value }))}>
-                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
-                              <SelectValue placeholder="Select your primary occupation" className="text-white" />
+                          <Label className="text-slate-900 text-base font-medium">Primary job/occupation during exposure</Label>
+                           <Select value={formData.workHistory} onValueChange={(value) => setFormData(prev => ({ ...prev, workHistory: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select your primary occupation" className="text-slate-500" />
                             </SelectTrigger>
                             <SelectContent className="bg-white border border-blue-200">
                               <SelectItem value="construction-worker" className="text-gray-900 hover:bg-blue-50">Construction Worker</SelectItem>
@@ -612,10 +612,10 @@ const MesotheliomaAsbestos: React.FC = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label className="text-white text-base font-medium">Duration of exposure</Label>
-                          <Select value={formData.exposureDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureDuration: value }))}>
-                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
-                              <SelectValue placeholder="Select exposure duration" className="text-white" />
+                          <Label className="text-slate-900 text-base font-medium">Duration of exposure</Label>
+                           <Select value={formData.exposureDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureDuration: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select exposure duration" className="text-slate-500" />
                             </SelectTrigger>
                             <SelectContent className="bg-white border border-blue-200">
                               <SelectItem value="less-than-1-year" className="text-gray-900 hover:bg-blue-50">Less than 1 year</SelectItem>

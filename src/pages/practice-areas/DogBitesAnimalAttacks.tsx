@@ -8,6 +8,9 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import { 
   Phone, 
   Mail, 
@@ -59,10 +62,26 @@ const DogBitesAnimalAttacks: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
     accidentDate: '',
+    accidentType: '',
     injuryType: '',
-    accidentLocation: ''
+    medicalTreatment: '',
+    insuranceClaim: '',
+    description: ''
   });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Dog Bite Form Data:', formData);
+    alert('Thank you for your submission. We will contact you within 24 hours to discuss your dog bite case.');
+  };
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -464,61 +483,179 @@ const DogBitesAnimalAttacks: React.FC = () => {
           </Card>
         </section>
 
-        {/* Case Evaluation Section */}
-        <section id="evaluation" className="content-section mb-16">
-          <Card className="p-8">
-            <h2 className="text-3xl font-bold mb-6 flex items-center gap-3">
-              <Scale className="w-8 h-8 text-primary" />
-              Free Dog Bite Case Evaluation
-            </h2>
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-bold mb-4">Get Your Free Case Review</h3>
-                <p className="text-muted-foreground mb-6">
-                  California's strict liability laws protect dog bite victims regardless of the animal's history. Get immediate help understanding your rights and potential compensation.
-                </p>
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">When did the attack occur?</label>
-                    <Input
-                      type="date"
-                      value={formData.accidentDate}
-                      onChange={(e) => setFormData({...formData, accidentDate: e.target.value})}
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Type of injury</label>
-                    <Select value={formData.injuryType} onValueChange={(value) => setFormData({...formData, injuryType: value})}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select injury type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="minor">Minor wounds/scratches</SelectItem>
-                        <SelectItem value="puncture">Deep puncture wounds</SelectItem>
-                        <SelectItem value="facial">Facial injuries</SelectItem>
-                        <SelectItem value="surgery">Required surgery</SelectItem>
-                        <SelectItem value="scarring">Permanent scarring</SelectItem>
-                        <SelectItem value="multiple">Multiple injuries</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Where did it happen?</label>
-                    <Input
-                      type="text"
-                      placeholder="e.g., Public sidewalk, friend's house, park"
-                      value={formData.accidentLocation}
-                      onChange={(e) => setFormData({...formData, accidentLocation: e.target.value})}
-                      required
-                    />
-                  </div>
-                  <Button type="submit" size="lg" className="w-full">
-                    Get Free Consultation
-                  </Button>
-                </form>
+        {/* Free Case Evaluation Form */}
+        <div className="content-section relative">
+          <ThreeDVisualEffects>
+            <div></div>
+          </ThreeDVisualEffects>
+          <Card className="relative z-10 p-8 bg-gradient-to-br from-blue-900/95 via-blue-800/90 to-indigo-900/95 backdrop-blur-xl border-blue-400/30 shadow-2xl shadow-blue-500/20">
+            <div className="text-center mb-8">
+              <h2 className="text-4xl font-bold text-white mb-4">Free Case Evaluation</h2>
+              <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-4"></div>
+              <p className="text-blue-100 text-lg">Get expert legal advice for your dog bite case</p>
+            </div>
+            
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-white text-base font-medium">Full Name *</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                    placeholder="Enter your full name"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-white text-base font-medium">Email Address *</Label>
+                  <Input
+                    id="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={(e) => handleInputChange('email', e.target.value)}
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                    placeholder="Enter your email"
+                  />
+                </div>
               </div>
-              <div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label htmlFor="phone" className="text-white text-base font-medium">Phone Number *</Label>
+                  <Input
+                    id="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => handleInputChange('phone', e.target.value)}
+                    required
+                    className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                    placeholder="(555) 123-4567"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="accidentDate" className="text-white text-base font-medium">Date of Attack</Label>
+                  <Input
+                    id="accidentDate"
+                    type="date"
+                    value={formData.accidentDate}
+                    onChange={(e) => handleInputChange('accidentDate', e.target.value)}
+                    className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                  />
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label className="text-white text-base font-medium">Type of Incident</Label>
+                  <Select onValueChange={(value) => handleInputChange('accidentType', value)}>
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                      <SelectValue placeholder="Select incident type" className="text-white/60" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                      <SelectItem value="dog-bite" className="text-white hover:bg-slate-800">Dog Bite</SelectItem>
+                      <SelectItem value="dog-attack" className="text-white hover:bg-slate-800">Dog Attack (No Bite)</SelectItem>
+                      <SelectItem value="knock-down" className="text-white hover:bg-slate-800">Knocked Down by Dog</SelectItem>
+                      <SelectItem value="multiple-dogs" className="text-white hover:bg-slate-800">Multiple Dogs</SelectItem>
+                      <SelectItem value="police-dog" className="text-white hover:bg-slate-800">Police/Military Dog</SelectItem>
+                      <SelectItem value="service-dog" className="text-white hover:bg-slate-800">Service Dog</SelectItem>
+                      <SelectItem value="stray-dog" className="text-white hover:bg-slate-800">Stray Dog</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-slate-800">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label className="text-white text-base font-medium">Type of Injury</Label>
+                  <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                      <SelectValue placeholder="Select injury type" className="text-white/60" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                      <SelectItem value="puncture-wounds" className="text-white hover:bg-slate-800">Puncture Wounds</SelectItem>
+                      <SelectItem value="facial-injuries" className="text-white hover:bg-slate-800">Facial Injuries</SelectItem>
+                      <SelectItem value="hand-arm-injuries" className="text-white hover:bg-slate-800">Hand/Arm Injuries</SelectItem>
+                      <SelectItem value="leg-injuries" className="text-white hover:bg-slate-800">Leg Injuries</SelectItem>
+                      <SelectItem value="scarring-disfigurement" className="text-white hover:bg-slate-800">Scarring/Disfigurement</SelectItem>
+                      <SelectItem value="nerve-damage" className="text-white hover:bg-slate-800">Nerve Damage</SelectItem>
+                      <SelectItem value="infection" className="text-white hover:bg-slate-800">Infection</SelectItem>
+                      <SelectItem value="emotional-trauma" className="text-white hover:bg-slate-800">Emotional Trauma/PTSD</SelectItem>
+                      <SelectItem value="multiple-injuries" className="text-white hover:bg-slate-800">Multiple Injuries</SelectItem>
+                      <SelectItem value="other" className="text-white hover:bg-slate-800">Other</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <Label className="text-white text-base font-medium">Medical Treatment Received</Label>
+                  <Select onValueChange={(value) => handleInputChange('medicalTreatment', value)}>
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                      <SelectValue placeholder="Select treatment level" className="text-white/60" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                      <SelectItem value="emergency-room" className="text-white hover:bg-slate-800">Emergency Room Only</SelectItem>
+                      <SelectItem value="hospitalized" className="text-white hover:bg-slate-800">Hospitalized</SelectItem>
+                      <SelectItem value="surgery" className="text-white hover:bg-slate-800">Surgery Required</SelectItem>
+                      <SelectItem value="plastic-surgery" className="text-white hover:bg-slate-800">Plastic Surgery</SelectItem>
+                      <SelectItem value="rabies-shots" className="text-white hover:bg-slate-800">Rabies Prevention</SelectItem>
+                      <SelectItem value="ongoing-treatment" className="text-white hover:bg-slate-800">Ongoing Treatment</SelectItem>
+                      <SelectItem value="physical-therapy" className="text-white hover:bg-slate-800">Physical Therapy</SelectItem>
+                      <SelectItem value="psychological-counseling" className="text-white hover:bg-slate-800">Psychological Counseling</SelectItem>
+                      <SelectItem value="no-treatment" className="text-white hover:bg-slate-800">No Treatment Yet</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+                
+                <div className="space-y-2">
+                  <Label className="text-white text-base font-medium">Insurance Claim Status</Label>
+                  <Select onValueChange={(value) => handleInputChange('insuranceClaim', value)}>
+                    <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                      <SelectValue placeholder="Select claim status" className="text-white/60" />
+                    </SelectTrigger>
+                    <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                      <SelectItem value="not-filed" className="text-white hover:bg-slate-800">Not Filed Yet</SelectItem>
+                      <SelectItem value="filed-pending" className="text-white hover:bg-slate-800">Filed - Pending</SelectItem>
+                      <SelectItem value="under-investigation" className="text-white hover:bg-slate-800">Under Investigation</SelectItem>
+                      <SelectItem value="offer-received" className="text-white hover:bg-slate-800">Settlement Offer Received</SelectItem>
+                      <SelectItem value="denied" className="text-white hover:bg-slate-800">Claim Denied</SelectItem>
+                      <SelectItem value="disputed-liability" className="text-white hover:bg-slate-800">Liability Being Disputed</SelectItem>
+                      <SelectItem value="low-offer" className="text-white hover:bg-slate-800">Unreasonably Low Offer</SelectItem>
+                      <SelectItem value="no-insurance" className="text-white hover:bg-slate-800">No Insurance Coverage</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="description" className="text-white text-base font-medium">Brief Description of Incident</Label>
+                <Textarea
+                  id="description"
+                  value={formData.description}
+                  onChange={(e) => handleInputChange('description', e.target.value)}
+                  rows={4}
+                  className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base resize-none"
+                  placeholder="Please describe what happened during the dog bite incident..."
+                />
+              </div>
+
+              <div className="pt-6">
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg h-14"
+                >
+                  Get My Free Case Evaluation
+                </Button>
+              </div>
+            </form>
+          </Card>
+        </div>
                 <img 
                   src={medicalCareImage} 
                   alt="Medical treatment for dog bite injuries" 

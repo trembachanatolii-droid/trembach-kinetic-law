@@ -7,6 +7,9 @@ import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import { 
   Phone, 
   Mail, 
@@ -54,10 +57,26 @@ const BicycleAccidents: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
     accidentDate: '',
+    accidentType: '',
     injuryType: '',
-    accidentType: ''
+    medicalTreatment: '',
+    insuranceClaim: '',
+    description: ''
   });
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log('Bicycle Accidents Form Data:', formData);
+    alert('Thank you for your submission. We will contact you within 24 hours to discuss your bicycle accident case.');
+  };
 
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -476,50 +495,180 @@ const BicycleAccidents: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
-              
-              <div className="bg-red-50 border-2 border-red-300 p-8 rounded-lg shadow-sm">
-                <h3 className="text-xl font-semibold mb-4 text-red-800">Get Your Free Consultation</h3>
-                <p className="mb-6 text-red-700">Provide some basic information to help us understand your case better.</p>
+            {/* Free Case Evaluation Form */}
+            <div className="content-section relative">
+              <ThreeDVisualEffects>
+                <div></div>
+              </ThreeDVisualEffects>
+              <Card className="relative z-10 p-8 bg-gradient-to-br from-blue-900/95 via-blue-800/90 to-indigo-900/95 backdrop-blur-xl border-blue-400/30 shadow-2xl shadow-blue-500/20">
+                <div className="text-center mb-8">
+                  <h2 className="text-4xl font-bold text-white mb-4">Free Case Evaluation</h2>
+                  <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-cyan-400 mx-auto rounded-full mb-4"></div>
+                  <p className="text-blue-100 text-lg">Get expert legal advice for your bicycle accident case</p>
+                </div>
                 
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Accident Date</label>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="name" className="text-white text-base font-medium">Full Name *</Label>
                       <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                        id="name"
+                        value={formData.name}
+                        onChange={(e) => handleInputChange('name', e.target.value)}
                         required
-                        className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500"
+                        className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                        placeholder="Enter your full name"
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-red-800">Injury Type</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger className="border-red-300 focus-visible:ring-red-500 focus-visible:border-red-500">
-                          <SelectValue placeholder="Select injury type" />
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="email" className="text-white text-base font-medium">Email Address *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => handleInputChange('email', e.target.value)}
+                        required
+                        className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                        placeholder="Enter your email"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="phone" className="text-white text-base font-medium">Phone Number *</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange('phone', e.target.value)}
+                        required
+                        className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                        placeholder="(555) 123-4567"
+                      />
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label htmlFor="accidentDate" className="text-white text-base font-medium">Accident Date</Label>
+                      <Input
+                        id="accidentDate"
+                        type="date"
+                        value={formData.accidentDate}
+                        onChange={(e) => handleInputChange('accidentDate', e.target.value)}
+                        className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label className="text-white text-base font-medium">Type of Accident</Label>
+                      <Select onValueChange={(value) => handleInputChange('accidentType', value)}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                          <SelectValue placeholder="Select accident type" className="text-white/60" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="head-injuries">Head/Brain Injuries</SelectItem>
-                          <SelectItem value="fractures">Bone Fractures</SelectItem>
-                          <SelectItem value="road-rash">Road Rash/Abrasions</SelectItem>
-                          <SelectItem value="spinal">Spinal Cord Injuries</SelectItem>
-                          <SelectItem value="multiple">Multiple Injuries</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                        <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                          <SelectItem value="car-vs-bike" className="text-white hover:bg-slate-800">Car vs. Bicycle</SelectItem>
+                          <SelectItem value="dooring-accident" className="text-white hover:bg-slate-800">Dooring Accident</SelectItem>
+                          <SelectItem value="intersection-collision" className="text-white hover:bg-slate-800">Intersection Collision</SelectItem>
+                          <SelectItem value="bike-lane-accident" className="text-white hover:bg-slate-800">Bike Lane Accident</SelectItem>
+                          <SelectItem value="right-hook" className="text-white hover:bg-slate-800">Right Hook</SelectItem>
+                          <SelectItem value="left-cross" className="text-white hover:bg-slate-800">Left Cross</SelectItem>
+                          <SelectItem value="rear-end" className="text-white hover:bg-slate-800">Rear End</SelectItem>
+                          <SelectItem value="commercial-vehicle" className="text-white hover:bg-slate-800">Commercial Vehicle</SelectItem>
+                          <SelectItem value="hit-and-run" className="text-white hover:bg-slate-800">Hit and Run</SelectItem>
+                          <SelectItem value="other" className="text-white hover:bg-slate-800">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label className="text-white text-base font-medium">Type of Injury</Label>
+                      <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                          <SelectValue placeholder="Select injury type" className="text-white/60" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                          <SelectItem value="head-brain-injury" className="text-white hover:bg-slate-800">Head/Brain Injury</SelectItem>
+                          <SelectItem value="spinal-injuries" className="text-white hover:bg-slate-800">Spinal Injuries</SelectItem>
+                          <SelectItem value="broken-bones" className="text-white hover:bg-slate-800">Broken Bones</SelectItem>
+                          <SelectItem value="road-rash" className="text-white hover:bg-slate-800">Road Rash</SelectItem>
+                          <SelectItem value="internal-injuries" className="text-white hover:bg-slate-800">Internal Injuries</SelectItem>
+                          <SelectItem value="soft-tissue" className="text-white hover:bg-slate-800">Soft Tissue Injuries</SelectItem>
+                          <SelectItem value="shoulder-collarbone" className="text-white hover:bg-slate-800">Shoulder/Collarbone</SelectItem>
+                          <SelectItem value="wrist-hand" className="text-white hover:bg-slate-800">Wrist/Hand Injuries</SelectItem>
+                          <SelectItem value="multiple-injuries" className="text-white hover:bg-slate-800">Multiple Injuries</SelectItem>
+                          <SelectItem value="other" className="text-white hover:bg-slate-800">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Start My Free Case Evaluation
-                  </Button>
+
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label className="text-white text-base font-medium">Medical Treatment Received</Label>
+                      <Select onValueChange={(value) => handleInputChange('medicalTreatment', value)}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                          <SelectValue placeholder="Select treatment level" className="text-white/60" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                          <SelectItem value="emergency-room" className="text-white hover:bg-slate-800">Emergency Room Only</SelectItem>
+                          <SelectItem value="hospitalized" className="text-white hover:bg-slate-800">Hospitalized</SelectItem>
+                          <SelectItem value="surgery" className="text-white hover:bg-slate-800">Surgery Required</SelectItem>
+                          <SelectItem value="ongoing-treatment" className="text-white hover:bg-slate-800">Ongoing Treatment</SelectItem>
+                          <SelectItem value="physical-therapy" className="text-white hover:bg-slate-800">Physical Therapy</SelectItem>
+                          <SelectItem value="rehabilitation" className="text-white hover:bg-slate-800">Rehabilitation</SelectItem>
+                          <SelectItem value="no-treatment" className="text-white hover:bg-slate-800">No Treatment Yet</SelectItem>
+                          <SelectItem value="declined-treatment" className="text-white hover:bg-slate-800">Declined Treatment</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div className="space-y-2">
+                      <Label className="text-white text-base font-medium">Insurance Claim Status</Label>
+                      <Select onValueChange={(value) => handleInputChange('insuranceClaim', value)}>
+                        <SelectTrigger className="bg-white/10 border-white/20 text-white focus:border-blue-400 focus:ring-blue-400 text-base h-12">
+                          <SelectValue placeholder="Select claim status" className="text-white/60" />
+                        </SelectTrigger>
+                        <SelectContent className="bg-slate-900 border-slate-700 z-50">
+                          <SelectItem value="not-filed" className="text-white hover:bg-slate-800">Not Filed Yet</SelectItem>
+                          <SelectItem value="filed-pending" className="text-white hover:bg-slate-800">Filed - Pending</SelectItem>
+                          <SelectItem value="under-investigation" className="text-white hover:bg-slate-800">Under Investigation</SelectItem>
+                          <SelectItem value="offer-received" className="text-white hover:bg-slate-800">Settlement Offer Received</SelectItem>
+                          <SelectItem value="denied" className="text-white hover:bg-slate-800">Claim Denied</SelectItem>
+                          <SelectItem value="disputed-fault" className="text-white hover:bg-slate-800">Fault Being Disputed</SelectItem>
+                          <SelectItem value="low-offer" className="text-white hover:bg-slate-800">Unreasonably Low Offer</SelectItem>
+                          <SelectItem value="no-insurance" className="text-white hover:bg-slate-800">Other Party Uninsured</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="description" className="text-white text-base font-medium">Brief Description of Accident</Label>
+                    <Textarea
+                      id="description"
+                      value={formData.description}
+                      onChange={(e) => handleInputChange('description', e.target.value)}
+                      rows={4}
+                      className="bg-white/10 border-white/20 text-white placeholder:text-white/60 focus:border-blue-400 focus:ring-blue-400 text-base resize-none"
+                      placeholder="Please describe what happened during your bicycle accident..."
+                    />
+                  </div>
+
+                  <div className="pt-6">
+                    <Button 
+                      type="submit" 
+                      size="lg" 
+                      className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white font-semibold py-4 px-8 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 text-lg h-14"
+                    >
+                      Get My Free Case Evaluation
+                    </Button>
+                  </div>
                 </form>
-              </div>
-            </section>
+              </Card>
+            </div>
 
             {/* California Law Section */}
             <section id="california-law" className="content-section mb-12">

@@ -48,7 +48,7 @@ const RailroadAccidentsCaseEvaluation: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Free Railroad Accident Case Evaluation
           </h1>
-          <p className="text-xl text-white/90">
+          <p className="text-xl text-white">
             Get expert legal analysis of your FELA or railroad accident claim
           </p>
         </div>

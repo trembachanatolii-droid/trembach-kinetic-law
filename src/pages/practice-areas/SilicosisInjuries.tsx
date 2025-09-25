@@ -33,6 +33,8 @@ import diagnosisImage from '@/assets/practice-areas/silicosis-lung-damage.jpg';
 import legalProcessImage from '@/assets/practice-areas/silicosis-legal-process.jpg';
 import exposureSitesImage from '@/assets/practice-areas/california-silicosis-sites.jpg';
 import medicalImage from '@/assets/practice-areas/silicosis-medical-facility.jpg';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,10 +49,16 @@ const SilicosisInjuries: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     exposureStartDate: '',
     stoneType: '',
     exposureLocation: '',
-    symptomsSeverity: ''
+    symptomsSeverity: '',
+    workDuration: '',
+    medicalDiagnosis: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -110,8 +118,8 @@ const SilicosisInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to silicosis case evaluation
-    window.location.href = '/silicosis-case-evaluation';
+    console.log('Form submitted:', formData);
+    alert('Thank you! We will contact you within 24 hours for your free silicosis case evaluation.');
   };
 
   const faqData = [
@@ -513,74 +521,161 @@ const SilicosisInjuries: React.FC = () => {
             </section>
 
             {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Silicosis Case Evaluation</h2>
-              
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your silicosis case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Exposure Start Date</label>
-                      <Input
-                        type="date"
-                        value={formData.exposureStartDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, exposureStartDate: e.target.value }))}
-                        required
-                      />
+            <section id="evaluation" className="content-section mb-16">
+              <ThreeDVisualEffects className="premium-3d-container">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Silicosis Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Confidential evaluation by former defense attorneys now fighting for you</p>
+                  </div>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">First Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your first name"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Last Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your last name"
+                          required
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Stone Work</label>
-                      <Select value={formData.stoneType} onValueChange={(value) => setFormData(prev => ({ ...prev, stoneType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select stone type" />
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Phone Number *</label>
+                        <Input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Email Address *</label>
+                        <Input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Type of Stone Work *</label>
+                        <Select value={formData.stoneType} onValueChange={(value) => setFormData(prev => ({ ...prev, stoneType: value }))}>
+                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
+                            <SelectValue placeholder="Select stone type" className="text-blue-200/70" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="engineered-stone">Engineered Stone/Quartz</SelectItem>
+                            <SelectItem value="granite">Granite</SelectItem>
+                            <SelectItem value="marble">Marble</SelectItem>
+                            <SelectItem value="concrete">Concrete</SelectItem>
+                            <SelectItem value="sandstone">Sandstone</SelectItem>
+                            <SelectItem value="multiple">Multiple Types</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Work Duration *</label>
+                        <Select value={formData.workDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, workDuration: value }))}>
+                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
+                            <SelectValue placeholder="Select duration" className="text-blue-200/70" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="less-than-1">Less than 1 year</SelectItem>
+                            <SelectItem value="1-5">1-5 years</SelectItem>
+                            <SelectItem value="5-10">5-10 years</SelectItem>
+                            <SelectItem value="10-20">10-20 years</SelectItem>
+                            <SelectItem value="more-than-20">More than 20 years</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Primary Work Location *</label>
+                        <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
+                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
+                            <SelectValue placeholder="Select location" className="text-blue-200/70" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="los-angeles">Los Angeles County</SelectItem>
+                            <SelectItem value="orange">Orange County</SelectItem>
+                            <SelectItem value="san-diego">San Diego County</SelectItem>
+                            <SelectItem value="riverside">Riverside County</SelectItem>
+                            <SelectItem value="san-bernardino">San Bernardino County</SelectItem>
+                            <SelectItem value="ventura">Ventura County</SelectItem>
+                            <SelectItem value="bay-area">Bay Area</SelectItem>
+                            <SelectItem value="central-valley">Central Valley</SelectItem>
+                            <SelectItem value="other-california">Other California Location</SelectItem>
+                            <SelectItem value="out-of-state">Out of State</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Current Health Status *</label>
+                        <Select value={formData.symptomsSeverity} onValueChange={(value) => setFormData(prev => ({ ...prev, symptomsSeverity: value }))}>
+                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
+                            <SelectValue placeholder="Select status" className="text-blue-200/70" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="no-symptoms">No symptoms yet</SelectItem>
+                            <SelectItem value="mild">Mild symptoms (occasional cough)</SelectItem>
+                            <SelectItem value="moderate">Moderate symptoms (daily issues)</SelectItem>
+                            <SelectItem value="severe">Severe symptoms (oxygen needed)</SelectItem>
+                            <SelectItem value="diagnosed">Diagnosed with Silicosis</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <label className="text-white text-base font-medium">Medical Diagnosis Status *</label>
+                      <Select value={formData.medicalDiagnosis} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalDiagnosis: value }))}>
+                        <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
+                          <SelectValue placeholder="Select diagnosis status" className="text-blue-200/70" />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="engineered-stone">Engineered Stone/Quartz</SelectItem>
-                          <SelectItem value="granite">Granite</SelectItem>
-                          <SelectItem value="marble">Marble</SelectItem>
-                          <SelectItem value="concrete">Concrete</SelectItem>
-                          <SelectItem value="sandstone">Sandstone</SelectItem>
-                          <SelectItem value="multiple">Multiple Types</SelectItem>
+                          <SelectItem value="no-testing">Haven't been tested</SelectItem>
+                          <SelectItem value="testing-scheduled">Testing scheduled</SelectItem>
+                          <SelectItem value="awaiting-results">Awaiting test results</SelectItem>
+                          <SelectItem value="silicosis-confirmed">Silicosis confirmed</SelectItem>
+                          <SelectItem value="lung-abnormalities">Lung abnormalities found</SelectItem>
+                          <SelectItem value="other-lung-disease">Other lung disease diagnosed</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Primary Work Location</label>
-                      <Input
-                        type="text"
-                        placeholder="City, County"
-                        value={formData.exposureLocation}
-                        onChange={(e) => setFormData(prev => ({ ...prev, exposureLocation: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Current Symptoms</label>
-                      <Select value={formData.symptomsSeverity} onValueChange={(value) => setFormData(prev => ({ ...prev, symptomsSeverity: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select severity" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="mild">Mild (Occasional cough, slight breathlessness)</SelectItem>
-                          <SelectItem value="moderate">Moderate (Daily symptoms, limited activity)</SelectItem>
-                          <SelectItem value="severe">Severe (Constant symptoms, oxygen needed)</SelectItem>
-                          <SelectItem value="diagnosed">Diagnosed with Silicosis</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
+
+                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-base py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+                      Get My Free Silicosis Case Evaluation
+                    </Button>
+                  </form>
+                </div>
+              </ThreeDVisualEffects>
             </section>
 
             {/* What to Do After Diagnosis */}

@@ -8,6 +8,8 @@ import { ArrowLeft, Phone, Shield, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const ClergyAbuseCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -48,32 +50,35 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Shield className="w-6 h-6 text-primary" />
-                    Confidential Case Evaluation
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+              <ThreeDVisualEffects>
+                <Card className="premium-form-container interactive-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center gap-2 font-display text-blue-600">
+                      <Shield className="w-6 h-6 text-primary" />
+                      Confidential Case Evaluation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">First Name *</label>
-                        <Input
+                         <Input
                           type="text"
                           value={formData.firstName}
                           onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Last Name *</label>
-                        <Input
+                         <Input
                           type="text"
                           value={formData.lastName}
                           onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -81,28 +86,30 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium mb-2">Phone *</label>
-                        <Input
+                         <Input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium mb-2">Email *</label>
-                        <Input
+                         <Input
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium mb-2">Type of Religious Institution *</label>
-                      <Select value={formData.religiousInstitution} onValueChange={(value) => setFormData(prev => ({ ...prev, religiousInstitution: value }))}>
-                        <SelectTrigger>
+                       <Select value={formData.religiousInstitution} onValueChange={(value) => setFormData(prev => ({ ...prev, religiousInstitution: value }))}>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select institution type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -121,8 +128,8 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
 
                     <div>
                       <label className="block text-sm font-medium mb-2">When did the abuse occur? *</label>
-                      <Select value={formData.timeframe} onValueChange={(value) => setFormData(prev => ({ ...prev, timeframe: value }))}>
-                        <SelectTrigger>
+                       <Select value={formData.timeframe} onValueChange={(value) => setFormData(prev => ({ ...prev, timeframe: value }))}>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select timeframe" />
                         </SelectTrigger>
                         <SelectContent>
@@ -136,15 +143,15 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
 
                     <div>
                       <label className="block text-sm font-medium mb-2">Additional Information (Optional)</label>
-                      <Textarea
-                        value={formData.additionalInfo}
-                        onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
-                        placeholder="Any additional details you'd like to share..."
-                        className="min-h-[100px]"
-                      />
+                       <Textarea
+                          value={formData.additionalInfo}
+                          onChange={(e) => setFormData(prev => ({ ...prev, additionalInfo: e.target.value }))}
+                          placeholder="Any additional details you'd like to share..."
+                          className="min-h-[100px] interactive-card"
+                        />
                     </div>
 
-                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white text-lg py-3">
+                     <Button type="submit" className="w-full btn-enhanced">
                       Submit Confidential Evaluation
                     </Button>
 
@@ -154,6 +161,7 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
                   </form>
                 </CardContent>
               </Card>
+              </ThreeDVisualEffects>
             </div>
 
             <div className="lg:col-span-1">

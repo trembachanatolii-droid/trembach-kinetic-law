@@ -11,6 +11,8 @@ import { Phone, Mail, MapPin, Clock, ArrowRight, ArrowLeft } from 'lucide-react'
 import heroBackground from '@/assets/case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -105,15 +107,16 @@ const CaseEvaluation: React.FC = () => {
           <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <Card className="glass-card group hover-glow-primary shadow-2xl overflow-hidden">
-                <CardHeader>
-                  <CardTitle className="text-2xl group-hover:text-primary transition-colors">Tell Us About Your Truck Accident</CardTitle>
-                  <p className="text-muted-foreground">
-                    Please provide as much detail as possible to help us evaluate your truck accident claim.
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleSubmit} className="space-y-6">
+              <ThreeDVisualEffects>
+                <Card className="premium-form-container interactive-card shadow-2xl overflow-hidden">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-blue-600 font-display transition-colors">Tell Us About Your Truck Accident</CardTitle>
+                    <p className="text-muted-foreground">
+                      Please provide as much detail as possible to help us evaluate your truck accident claim.
+                    </p>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="firstName">First Name *</Label>
@@ -122,6 +125,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -131,6 +135,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -144,6 +149,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -154,6 +160,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -167,6 +174,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.accidentDate}
                           onChange={(e) => handleInputChange('accidentDate', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -177,6 +185,7 @@ const CaseEvaluation: React.FC = () => {
                           value={formData.accidentLocation}
                           onChange={(e) => handleInputChange('accidentLocation', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -184,10 +193,10 @@ const CaseEvaluation: React.FC = () => {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <Label htmlFor="injuryType">Type of Injury</Label>
-                        <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select injury type" />
-                          </SelectTrigger>
+                      <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                        <SelectTrigger className="interactive-card">
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
                             <SelectItem value="spinal-cord">Spinal Cord Injury</SelectItem>
@@ -202,10 +211,10 @@ const CaseEvaluation: React.FC = () => {
                       </div>
                       <div>
                         <Label htmlFor="vehicleType">Type of Truck</Label>
-                        <Select onValueChange={(value) => handleInputChange('vehicleType', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select truck type" />
-                          </SelectTrigger>
+                      <Select onValueChange={(value) => handleInputChange('vehicleType', value)}>
+                        <SelectTrigger className="interactive-card">
+                          <SelectValue placeholder="Select truck type" />
+                        </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="18-wheeler">18-Wheeler/Semi-Truck</SelectItem>
                             <SelectItem value="delivery-truck">Delivery Truck</SelectItem>
@@ -226,6 +235,7 @@ const CaseEvaluation: React.FC = () => {
                         placeholder="Name of trucking company or carrier"
                         value={formData.truckCompany}
                         onChange={(e) => handleInputChange('truckCompany', e.target.value)}
+                        className="interactive-card"
                       />
                     </div>
 
@@ -237,16 +247,18 @@ const CaseEvaluation: React.FC = () => {
                         value={formData.additionalInfo}
                         onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
                         rows={4}
+                        className="interactive-card"
                       />
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300">
+                    <Button type="submit" size="lg" className="w-full btn-enhanced group">
                       Submit Truck Accident Case Evaluation
                       <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                   </form>
                 </CardContent>
               </Card>
+              </ThreeDVisualEffects>
             </div>
 
             {/* Contact Information */}

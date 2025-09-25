@@ -11,6 +11,8 @@ import { toast } from 'sonner';
 import heroBackground from '@/assets/burn-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const BurnCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -45,9 +47,8 @@ const BurnCaseEvaluation: React.FC = () => {
       // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
       
-      toast.success("Thank you! Your case evaluation request has been submitted. We'll contact you within 24 hours.", {
-        duration: 5000,
-      });
+      console.log('Form submitted:', formData);
+      alert("Thank you! Your case evaluation request has been submitted. We'll contact you within 24 hours.");
       
       // Reset form
       setFormData({
@@ -64,9 +65,7 @@ const BurnCaseEvaluation: React.FC = () => {
         consent: false
       });
     } catch (error) {
-      toast.error("There was an error submitting your request. Please try again or call us directly.", {
-        duration: 5000,
-      });
+      alert("There was an error submitting your request. Please try again or call us directly.");
     } finally {
       setIsSubmitting(false);
     }
@@ -103,76 +102,82 @@ const BurnCaseEvaluation: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Form Section */}
           <div className="lg:col-span-2">
-            <Card className="shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl text-red-600">Tell Us About Your Burn Injury</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <ThreeDVisualEffects>
+              <Card className="shadow-xl premium-form-container interactive-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-blue-600 font-display">Tell Us About Your Burn Injury</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="firstName">First Name *</Label>
-                      <Input
-                        id="firstName"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        <Input
+                          id="firstName"
+                          name="firstName"
+                          value={formData.firstName}
+                          onChange={handleInputChange}
+                          required
+                          className="interactive-card"
+                        />
                     </div>
                     <div>
                       <Label htmlFor="lastName">Last Name *</Label>
-                      <Input
-                        id="lastName"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        <Input
+                          id="lastName"
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          required
+                          className="interactive-card"
+                        />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="email">Email *</Label>
-                      <Input
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="interactive-card"
+                        />
                     </div>
                     <div>
                       <Label htmlFor="phone">Phone *</Label>
-                      <Input
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formData.phone}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        <Input
+                          id="phone"
+                          name="phone"
+                          type="tel"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          required
+                          className="interactive-card"
+                        />
                     </div>
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="incidentDate">When did the burn occur? *</Label>
-                      <Input
-                        id="incidentDate"
-                        name="incidentDate"
-                        type="date"
-                        value={formData.incidentDate}
-                        onChange={handleInputChange}
-                        required
-                      />
+                        <Input
+                          id="incidentDate"
+                          name="incidentDate"
+                          type="date"
+                          value={formData.incidentDate}
+                          onChange={handleInputChange}
+                          required
+                          className="interactive-card"
+                        />
                     </div>
                     <div>
                       <Label htmlFor="burnType">Type of burn *</Label>
-                      <Select value={formData.burnType} onValueChange={(value) => handleSelectChange('burnType', value)}>
-                        <SelectTrigger>
+                       <Select value={formData.burnType} onValueChange={(value) => handleSelectChange('burnType', value)}>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select burn type" />
                         </SelectTrigger>
                         <SelectContent>
@@ -190,8 +195,8 @@ const BurnCaseEvaluation: React.FC = () => {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <Label htmlFor="burnSeverity">Burn severity *</Label>
-                      <Select value={formData.burnSeverity} onValueChange={(value) => handleSelectChange('burnSeverity', value)}>
-                        <SelectTrigger>
+                       <Select value={formData.burnSeverity} onValueChange={(value) => handleSelectChange('burnSeverity', value)}>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select severity" />
                         </SelectTrigger>
                         <SelectContent>
@@ -204,8 +209,8 @@ const BurnCaseEvaluation: React.FC = () => {
                     </div>
                     <div>
                       <Label htmlFor="location">Where did it happen? *</Label>
-                      <Select value={formData.location} onValueChange={(value) => handleSelectChange('location', value)}>
-                        <SelectTrigger>
+                       <Select value={formData.location} onValueChange={(value) => handleSelectChange('location', value)}>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select location" />
                         </SelectTrigger>
                         <SelectContent>
@@ -231,6 +236,7 @@ const BurnCaseEvaluation: React.FC = () => {
                       rows={4}
                       placeholder="Please provide details about how the burn injury occurred..."
                       required
+                      className="interactive-card"
                     />
                   </div>
 
@@ -243,6 +249,7 @@ const BurnCaseEvaluation: React.FC = () => {
                       onChange={handleInputChange}
                       rows={3}
                       placeholder="Please describe any medical treatment, hospital visits, ongoing care..."
+                      className="interactive-card"
                     />
                   </div>
 
@@ -259,7 +266,7 @@ const BurnCaseEvaluation: React.FC = () => {
 
                   <Button 
                     type="submit" 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
+                    className="w-full btn-enhanced font-bold py-4 text-lg"
                     disabled={!formData.consent || isSubmitting}
                   >
                     {isSubmitting ? 'Submitting...' : 'Get Your Free Case Review →'}
@@ -267,6 +274,7 @@ const BurnCaseEvaluation: React.FC = () => {
                 </form>
               </CardContent>
             </Card>
+            </ThreeDVisualEffects>
           </div>
 
           {/* Sidebar */}

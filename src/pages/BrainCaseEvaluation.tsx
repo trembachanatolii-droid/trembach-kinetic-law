@@ -9,6 +9,8 @@ import { CheckCircle, Phone, Mail, Shield, Clock, Award } from 'lucide-react';
 import heroBackground from '@/assets/brain-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const BrainCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -75,80 +77,81 @@ const BrainCaseEvaluation: React.FC = () => {
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Main Form */}
           <div className="lg:col-span-2">
-            <Card className="p-8">
-              <h2 className="text-3xl font-bold mb-6 text-foreground">
-                Tell Us About Your Brain Injury
-              </h2>
-              
-              <form onSubmit={handleSubmit} className="space-y-6">
+            <ThreeDVisualEffects>
+              <Card className="p-8 premium-form-container interactive-card">
+                <h2 className="text-3xl font-bold mb-6 text-blue-600 font-display">
+                  Tell Us About Your Brain Injury
+                </h2>
+                
+                <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="firstName">First Name *</Label>
-                    <Input
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                      className="mt-1"
-                    />
+                      <Input
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 interactive-card"
+                      />
                   </div>
                   <div>
                     <Label htmlFor="lastName">Last Name *</Label>
-                    <Input
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      required
-                      className="mt-1"
-                    />
+                      <Input
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 interactive-card"
+                      />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="email">Email *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="mt-1"
-                    />
+                      <Input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 interactive-card"
+                      />
                   </div>
                   <div>
                     <Label htmlFor="phone">Phone *</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="mt-1"
-                    />
+                      <Input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        value={formData.phone}
+                        onChange={handleInputChange}
+                        required
+                        className="mt-1 interactive-card"
+                      />
                   </div>
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-4">
                   <div>
                     <Label htmlFor="incidentDate">Date of Accident</Label>
-                    <Input
-                      id="incidentDate"
-                      name="incidentDate"
-                      type="date"
-                      value={formData.incidentDate}
-                      onChange={handleInputChange}
-                      className="mt-1"
-                    />
+                      <Input
+                        id="incidentDate"
+                        name="incidentDate"
+                        type="date"
+                        value={formData.incidentDate}
+                        onChange={handleInputChange}
+                        className="mt-1 interactive-card"
+                      />
                   </div>
                   <div>
                     <Label htmlFor="injuryType">Type of Brain Injury</Label>
                     <Select onValueChange={(value) => handleSelectChange('injuryType', value)}>
-                      <SelectTrigger className="mt-1">
+                      <SelectTrigger className="mt-1 interactive-card">
                         <SelectValue placeholder="Select injury type" />
                       </SelectTrigger>
                       <SelectContent>
@@ -174,7 +177,7 @@ const BrainCaseEvaluation: React.FC = () => {
                     onChange={handleInputChange}
                     required
                     rows={5}
-                    className="mt-1"
+                    className="mt-1 interactive-card"
                     placeholder="Please describe how your brain injury occurred, current symptoms, and how it has affected your daily life..."
                   />
                 </div>
@@ -182,7 +185,7 @@ const BrainCaseEvaluation: React.FC = () => {
                 <div>
                   <Label htmlFor="previousAttorney">Have you consulted with another attorney?</Label>
                   <Select onValueChange={(value) => handleSelectChange('previousAttorney', value)}>
-                    <SelectTrigger className="mt-1">
+                    <SelectTrigger className="mt-1 interactive-card">
                       <SelectValue placeholder="Select one" />
                     </SelectTrigger>
                     <SelectContent>
@@ -209,11 +212,12 @@ const BrainCaseEvaluation: React.FC = () => {
                   </Label>
                 </div>
 
-                <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg">
+                <Button type="submit" className="w-full btn-enhanced py-4 text-lg">
                   Get My Free Case Evaluation
                 </Button>
               </form>
             </Card>
+            </ThreeDVisualEffects>
           </div>
 
           {/* Sidebar */}

@@ -10,6 +10,8 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 import heroImage from '@/assets/practice-areas/pharmaceutical-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -41,10 +43,8 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    toast({
-      title: "Case Evaluation Submitted",
-      description: "Thank you for contacting Trembach Law Firm! We will review your pharmaceutical injury case and contact you within 24 hours.",
-    });
+    console.log('Form submitted:', formData);
+    alert('Thank you for contacting Trembach Law Firm! We will review your pharmaceutical injury case and contact you within 24 hours.');
   };
 
   const handleGoBack = () => {
@@ -90,12 +90,13 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
       <div className="max-w-4xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-2xl text-red-600">Pharmaceutical Injury Case Evaluation</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <ThreeDVisualEffects>
+              <Card className="premium-form-container interactive-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-blue-600 font-display">Pharmaceutical Injury Case Evaluation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <Label>First Name *</Label>
@@ -104,6 +105,7 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                         value={formData.firstName}
                         onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
                         required
+                        className="interactive-card"
                       />
                     </div>
                     <div>
@@ -113,6 +115,7 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                         value={formData.lastName}
                         onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
                         required
+                        className="interactive-card"
                       />
                     </div>
                   </div>
@@ -125,6 +128,7 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                         value={formData.phone}
                         onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
                         required
+                        className="interactive-card"
                       />
                     </div>
                     <div>
@@ -134,6 +138,7 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                         value={formData.email}
                         onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
                         required
+                        className="interactive-card"
                       />
                     </div>
                   </div>
@@ -141,7 +146,7 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                   <div>
                     <Label>Drug/Medication Involved *</Label>
                     <Select value={formData.drugInvolved} onValueChange={(value) => setFormData(prev => ({ ...prev, drugInvolved: value }))}>
-                      <SelectTrigger>
+                      <SelectTrigger className="interactive-card">
                         <SelectValue placeholder="Select medication..." />
                       </SelectTrigger>
                       <SelectContent>
@@ -162,15 +167,17 @@ const PharmaceuticalCaseEvaluation: React.FC = () => {
                       onChange={(e) => setFormData(prev => ({ ...prev, injuryDescription: e.target.value }))}
                       rows={4}
                       required
+                      className="interactive-card"
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
+                  <Button type="submit" className="w-full btn-enhanced">
                     Submit Case Evaluation
                   </Button>
                 </form>
               </CardContent>
             </Card>
+            </ThreeDVisualEffects>
           </div>
 
           <div className="lg:col-span-1">

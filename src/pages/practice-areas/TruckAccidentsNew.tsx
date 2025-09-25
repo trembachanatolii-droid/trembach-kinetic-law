@@ -12,6 +12,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import Navigation from '@/components/Navigation';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import { 
   Phone, 
   Mail, 
@@ -79,7 +80,10 @@ const TruckAccidentsNew: React.FC = () => {
     truckCompany: '',
     policeReport: '',
     medicalTreatment: '',
-    description: ''
+    description: '',
+    truckType: '',
+    accidentType: '',
+    insuranceClaim: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -568,7 +572,7 @@ const TruckAccidentsNew: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-16">
-              <ThreeDVisualEffects className="premium-3d-container">
+              <ThreeDVisualEffects>
                 <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                   <div className="text-center mb-8">
                     <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Truck Accident Consultation</h3>
@@ -755,122 +759,6 @@ const TruckAccidentsNew: React.FC = () => {
                   </form>
                 </div>
               </ThreeDVisualEffects>
-            </section>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">First Name *</label>
-                      <Input
-                        type="text"
-                        value={formData.firstName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Last Name *</label>
-                      <Input
-                        type="text"
-                        value={formData.lastName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                        required
-                      />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Email *</label>
-                      <Input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Phone *</label>
-                      <Input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Location</label>
-                      <Input
-                        type="text"
-                        placeholder="City, State"
-                        value={formData.accidentLocation}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Injury</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="traumatic-brain-injury">Traumatic Brain Injury</SelectItem>
-                          <SelectItem value="spinal-cord-injury">Spinal Cord Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                          <SelectItem value="burns">Burns</SelectItem>
-                          <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
-                          <SelectItem value="fatality">Wrongful Death</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Truck</label>
-                      <Select value={formData.vehicleType} onValueChange={(value) => setFormData(prev => ({ ...prev, vehicleType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select truck type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="18-wheeler">18-Wheeler/Semi-Truck</SelectItem>
-                          <SelectItem value="delivery-truck">Delivery Truck</SelectItem>
-                          <SelectItem value="garbage-truck">Garbage Truck</SelectItem>
-                          <SelectItem value="cement-truck">Cement Truck</SelectItem>
-                          <SelectItem value="dump-truck">Dump Truck</SelectItem>
-                          <SelectItem value="tanker-truck">Tanker Truck</SelectItem>
-                          <SelectItem value="other">Other Commercial Vehicle</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Brief Description</label>
-                    <Textarea
-                      placeholder="Please describe what happened..."
-                      value={formData.description}
-                      onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
-                      rows={4}
-                    />
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
             </section>
 
             {/* Immediate Steps Section */}

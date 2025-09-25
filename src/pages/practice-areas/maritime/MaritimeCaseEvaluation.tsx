@@ -9,6 +9,8 @@ import { Phone, Mail, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/maritime-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const MaritimeCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -107,216 +109,228 @@ const MaritimeCaseEvaluation: React.FC = () => {
               Our specialized attorneys will review your information and contact you within 24 hours.
             </p>
 
-            <Card>
-              <CardHeader>
-                <CardTitle>Case Evaluation Form</CardTitle>
-              </CardHeader>
-              <CardContent>
-                {isSubmitted ? (
-                  <div className="text-center py-8">
-                    <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
-                    <h3 className="text-2xl font-bold text-green-600 mb-2">Form Submitted Successfully!</h3>
-                    <p className="text-muted-foreground">
-                      Thank you for submitting your information. Our team will review your case and contact you within 24 hours.
-                    </p>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    {/* Personal Information */}
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-semibold">Personal Information</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="firstName">First Name *</Label>
-                          <Input
-                            id="firstName"
-                            required
-                            value={formData.firstName}
-                            onChange={(e) => handleInputChange('firstName', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="lastName">Last Name *</Label>
-                          <Input
-                            id="lastName"
-                            required
-                            value={formData.lastName}
-                            onChange={(e) => handleInputChange('lastName', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="email">Email Address *</Label>
-                          <Input
-                            id="email"
-                            type="email"
-                            required
-                            value={formData.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="phone">Phone Number *</Label>
-                          <Input
-                            id="phone"
-                            type="tel"
-                            required
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
-                          />
-                        </div>
-                      </div>
+            <ThreeDVisualEffects>
+              <Card className="premium-form-container interactive-card">
+                <CardHeader>
+                  <CardTitle className="text-blue-600 font-display">Case Evaluation Form</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {isSubmitted ? (
+                    <div className="text-center py-8">
+                      <CheckCircle className="w-16 h-16 text-green-600 mx-auto mb-4" />
+                      <h3 className="text-2xl font-bold text-green-600 mb-2">Form Submitted Successfully!</h3>
+                      <p className="text-muted-foreground">
+                        Thank you for submitting your information. Our team will review your case and contact you within 24 hours.
+                      </p>
                     </div>
-
-                    {/* Incident Details */}
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-semibold">Incident Details</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="incidentDate">Date of Incident *</Label>
-                          <Input
-                            id="incidentDate"
-                            type="date"
-                            required
-                            value={formData.incidentDate}
-                            onChange={(e) => handleInputChange('incidentDate', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="incidentLocation">Location of Incident *</Label>
-                          <Input
-                            id="incidentLocation"
-                            required
-                            placeholder="e.g., Gulf of Mexico, Port of Los Angeles"
-                            value={formData.incidentLocation}
-                            onChange={(e) => handleInputChange('incidentLocation', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="vesselName">Vessel/Platform Name</Label>
-                          <Input
-                            id="vesselName"
-                            value={formData.vesselName}
-                            onChange={(e) => handleInputChange('vesselName', e.target.value)}
-                          />
-                        </div>
-                        <div>
-                          <Label htmlFor="accidentType">Type of Accident *</Label>
-                          <Select value={formData.accidentType} onValueChange={(value) => handleInputChange('accidentType', value)}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select accident type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="slip-fall">Slip and Fall</SelectItem>
-                              <SelectItem value="equipment-failure">Equipment Failure</SelectItem>
-                              <SelectItem value="collision">Vessel Collision</SelectItem>
-                              <SelectItem value="explosion">Explosion/Fire</SelectItem>
-                              <SelectItem value="crane-accident">Crane Accident</SelectItem>
-                              <SelectItem value="crushing">Crushing Injury</SelectItem>
-                              <SelectItem value="chemical-exposure">Chemical Exposure</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
+                  ) : (
+                    <form onSubmit={(e) => { e.preventDefault(); console.log('Form submitted:', formData); alert('Thank you! Your case evaluation has been submitted. We will contact you within 24 hours.'); setIsSubmitted(true); setTimeout(() => { setIsSubmitted(false); setFormData({ firstName: '', lastName: '', email: '', phone: '', incidentDate: '', incidentLocation: '', vesselName: '', employerName: '', jobTitle: '', accidentType: '', injuryType: '', medicalTreatment: '', currentStatus: '', additionalInfo: '' }); }, 3000); }} className="space-y-6">
+                      {/* Personal Information */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold">Personal Information</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="firstName">First Name *</Label>
+                            <Input
+                              id="firstName"
+                              required
+                              value={formData.firstName}
+                              onChange={(e) => handleInputChange('firstName', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="lastName">Last Name *</Label>
+                            <Input
+                              id="lastName"
+                              required
+                              value={formData.lastName}
+                              onChange={(e) => handleInputChange('lastName', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="email">Email Address *</Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              required
+                              value={formData.email}
+                              onChange={(e) => handleInputChange('email', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="phone">Phone Number *</Label>
+                            <Input
+                              id="phone"
+                              type="tel"
+                              required
+                              value={formData.phone}
+                              onChange={(e) => handleInputChange('phone', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
                         </div>
                       </div>
-                    </div>
 
-                    {/* Employment Information */}
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-semibold">Employment Information</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="employerName">Employer Name *</Label>
-                          <Input
-                            id="employerName"
-                            required
-                            value={formData.employerName}
-                            onChange={(e) => handleInputChange('employerName', e.target.value)}
-                          />
+                      {/* Incident Details */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold">Incident Details</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="incidentDate">Date of Incident *</Label>
+                            <Input
+                              id="incidentDate"
+                              type="date"
+                              required
+                              value={formData.incidentDate}
+                              onChange={(e) => handleInputChange('incidentDate', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="incidentLocation">Location of Incident *</Label>
+                            <Input
+                              id="incidentLocation"
+                              required
+                              placeholder="e.g., Gulf of Mexico, Port of Los Angeles"
+                              value={formData.incidentLocation}
+                              onChange={(e) => handleInputChange('incidentLocation', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="vesselName">Vessel/Platform Name</Label>
+                            <Input
+                              id="vesselName"
+                              value={formData.vesselName}
+                              onChange={(e) => handleInputChange('vesselName', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="accidentType">Type of Accident *</Label>
+                            <Select value={formData.accidentType} onValueChange={(value) => handleInputChange('accidentType', value)}>
+                              <SelectTrigger className="interactive-card">
+                                <SelectValue placeholder="Select accident type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="slip-fall">Slip and Fall</SelectItem>
+                                <SelectItem value="equipment-failure">Equipment Failure</SelectItem>
+                                <SelectItem value="collision">Vessel Collision</SelectItem>
+                                <SelectItem value="explosion">Explosion/Fire</SelectItem>
+                                <SelectItem value="crane-accident">Crane Accident</SelectItem>
+                                <SelectItem value="crushing">Crushing Injury</SelectItem>
+                                <SelectItem value="chemical-exposure">Chemical Exposure</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Employment Information */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold">Employment Information</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="employerName">Employer Name *</Label>
+                            <Input
+                              id="employerName"
+                              required
+                              value={formData.employerName}
+                              onChange={(e) => handleInputChange('employerName', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor="jobTitle">Job Title *</Label>
+                            <Input
+                              id="jobTitle"
+                              required
+                              value={formData.jobTitle}
+                              onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                              className="interactive-card"
+                            />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Injury Information */}
+                      <div className="space-y-4">
+                        <h4 className="text-lg font-semibold">Injury Information</h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <Label htmlFor="injuryType">Type of Injury *</Label>
+                            <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                              <SelectTrigger className="interactive-card">
+                                <SelectValue placeholder="Select injury type" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="back-spine">Back/Spine Injury</SelectItem>
+                                <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                                <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                                <SelectItem value="burns">Burns</SelectItem>
+                                <SelectItem value="amputation">Amputation</SelectItem>
+                                <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                                <SelectItem value="multiple-injuries">Multiple Injuries</SelectItem>
+                                <SelectItem value="other">Other</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div>
+                            <Label htmlFor="currentStatus">Current Status *</Label>
+                            <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange('currentStatus', value)}>
+                              <SelectTrigger className="interactive-card">
+                                <SelectValue placeholder="Select current status" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectItem value="still-treating">Still Receiving Treatment</SelectItem>
+                                <SelectItem value="returned-work">Returned to Work</SelectItem>
+                                <SelectItem value="unable-work">Unable to Work</SelectItem>
+                                <SelectItem value="light-duty">On Light Duty</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
                         </div>
                         <div>
-                          <Label htmlFor="jobTitle">Job Title *</Label>
-                          <Input
-                            id="jobTitle"
-                            required
-                            value={formData.jobTitle}
-                            onChange={(e) => handleInputChange('jobTitle', e.target.value)}
+                          <Label htmlFor="medicalTreatment">Medical Treatment Received</Label>
+                          <Textarea
+                            id="medicalTreatment"
+                            placeholder="Describe the medical treatment you have received..."
+                            value={formData.medicalTreatment}
+                            onChange={(e) => handleInputChange('medicalTreatment', e.target.value)}
+                            className="interactive-card"
                           />
                         </div>
                       </div>
-                    </div>
 
-                    {/* Injury Information */}
-                    <div className="space-y-4">
-                      <h4 className="text-lg font-semibold">Injury Information</h4>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="injuryType">Type of Injury *</Label>
-                          <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select injury type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="back-spine">Back/Spine Injury</SelectItem>
-                              <SelectItem value="broken-bones">Broken Bones</SelectItem>
-                              <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
-                              <SelectItem value="burns">Burns</SelectItem>
-                              <SelectItem value="amputation">Amputation</SelectItem>
-                              <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                              <SelectItem value="multiple-injuries">Multiple Injuries</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div>
-                          <Label htmlFor="currentStatus">Current Status *</Label>
-                          <Select value={formData.currentStatus} onValueChange={(value) => handleInputChange('currentStatus', value)}>
-                            <SelectTrigger>
-                              <SelectValue placeholder="Select current status" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="still-treating">Still Receiving Treatment</SelectItem>
-                              <SelectItem value="returned-work">Returned to Work</SelectItem>
-                              <SelectItem value="unable-work">Unable to Work</SelectItem>
-                              <SelectItem value="light-duty">On Light Duty</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
+                      {/* Additional Information */}
                       <div>
-                        <Label htmlFor="medicalTreatment">Medical Treatment Received</Label>
+                        <Label htmlFor="additionalInfo">Additional Information</Label>
                         <Textarea
-                          id="medicalTreatment"
-                          placeholder="Describe the medical treatment you have received..."
-                          value={formData.medicalTreatment}
-                          onChange={(e) => handleInputChange('medicalTreatment', e.target.value)}
+                          id="additionalInfo"
+                          placeholder="Please provide any additional details about your case that you think would be helpful..."
+                          value={formData.additionalInfo}
+                          onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                          className="interactive-card"
                         />
                       </div>
-                    </div>
 
-                    {/* Additional Information */}
-                    <div>
-                      <Label htmlFor="additionalInfo">Additional Information</Label>
-                      <Textarea
-                        id="additionalInfo"
-                        placeholder="Please provide any additional details about your case that you think would be helpful..."
-                        value={formData.additionalInfo}
-                        onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
-                      />
-                    </div>
+                      <Button type="submit" className="w-full btn-enhanced py-4 text-lg">
+                        Submit Case for Evaluation
+                      </Button>
 
-                    <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                      <Send className="w-4 h-4 mr-2" />
-                      Submit Case for Evaluation
-                    </Button>
-
-                    <p className="text-xs text-muted-foreground text-center">
-                      By submitting this form, you agree that an attorney may contact you to discuss your case. 
-                      Submitting this form does not establish an attorney-client relationship.
-                    </p>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
+                      <p className="text-xs text-muted-foreground text-center">
+                        By submitting this form, you agree that an attorney may contact you to discuss your case. 
+                        Submitting this form does not establish an attorney-client relationship.
+                      </p>
+                    </form>
+                  )}
+                </CardContent>
+              </Card>
+            </ThreeDVisualEffects>
           </div>
 
           <div className="lg:col-span-1">

@@ -8,6 +8,8 @@ import { ArrowLeft, Plane, Scale } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const AviationCaseEvaluation: React.FC = () => {
   return (
@@ -46,79 +48,82 @@ const AviationCaseEvaluation: React.FC = () => {
 
       {/* Form Section */}
       <div className="max-w-4xl mx-auto px-6 py-12">
-        <Card>
-          <CardHeader className="text-center">
-            <CardTitle className="text-2xl text-primary flex items-center justify-center">
-              <Scale className="w-6 h-6 mr-2" />
-              Aviation Accident Case Evaluation Form
-            </CardTitle>
-            <p className="text-muted-foreground">All information is confidential and protected by attorney-client privilege</p>
-          </CardHeader>
-          <CardContent>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">First Name *</label>
-                  <Input required />
+        <ThreeDVisualEffects>
+          <Card className="premium-form-container interactive-card">
+            <CardHeader className="text-center">
+              <CardTitle className="text-2xl text-blue-600 font-display flex items-center justify-center">
+                <Scale className="w-6 h-6 mr-2" />
+                Aviation Accident Case Evaluation Form
+              </CardTitle>
+              <p className="text-muted-foreground">All information is confidential and protected by attorney-client privilege</p>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={(e) => { e.preventDefault(); console.log('Aviation form submitted'); alert('Thank you for your submission. We will contact you within 24 hours.'); }} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">First Name *</label>
+                    <Input required className="interactive-card" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Last Name *</label>
+                    <Input required className="interactive-card" />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Last Name *</label>
-                  <Input required />
-                </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Phone Number *</label>
-                  <Input type="tel" required />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Phone Number *</label>
+                    <Input type="tel" required className="interactive-card" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Email Address *</label>
+                    <Input type="email" required className="interactive-card" />
+                  </div>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium mb-2">Email Address *</label>
-                  <Input type="email" required />
-                </div>
-              </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium mb-2">Accident Date</label>
-                  <Input type="date" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Accident Date</label>
+                    <Input type="date" className="interactive-card" />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Type of Aircraft</label>
+                    <Select>
+                      <SelectTrigger className="interactive-card">
+                        <SelectValue placeholder="Select aircraft type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="commercial-airline">Commercial Airline</SelectItem>
+                        <SelectItem value="private-plane">Private Plane</SelectItem>
+                        <SelectItem value="helicopter">Helicopter</SelectItem>
+                        <SelectItem value="charter">Charter Flight</SelectItem>
+                        <SelectItem value="military">Military Aircraft</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
+
                 <div>
-                  <label className="block text-sm font-medium mb-2">Type of Aircraft</label>
-                  <Select>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select aircraft type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="commercial-airline">Commercial Airline</SelectItem>
-                      <SelectItem value="private-plane">Private Plane</SelectItem>
-                      <SelectItem value="helicopter">Helicopter</SelectItem>
-                      <SelectItem value="charter">Charter Flight</SelectItem>
-                      <SelectItem value="military">Military Aircraft</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <label className="block text-sm font-medium mb-2">Describe Your Aviation Accident</label>
+                  <Textarea 
+                    placeholder="Please provide details about what happened, your injuries, and how the accident has affected you..."
+                    rows={6}
+                    className="interactive-card"
+                  />
                 </div>
-              </div>
 
-              <div>
-                <label className="block text-sm font-medium mb-2">Describe Your Aviation Accident</label>
-                <Textarea 
-                  placeholder="Please provide details about what happened, your injuries, and how the accident has affected you..."
-                  rows={6}
-                />
-              </div>
-
-              <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3">
-                Submit My Free Case Evaluation
-              </Button>
-              
-              <p className="text-sm text-center text-muted-foreground">
-                By submitting this form, you agree to our terms and conditions. No fees unless we win your case.
-              </p>
-            </form>
-          </CardContent>
-        </Card>
+                <Button type="submit" className="w-full btn-enhanced font-bold py-4 text-lg">
+                  Submit My Free Case Evaluation
+                </Button>
+                
+                <p className="text-sm text-center text-muted-foreground">
+                  By submitting this form, you agree to our terms and conditions. No fees unless we win your case.
+                </p>
+              </form>
+            </CardContent>
+          </Card>
+        </ThreeDVisualEffects>
       </div>
     </div>
   );

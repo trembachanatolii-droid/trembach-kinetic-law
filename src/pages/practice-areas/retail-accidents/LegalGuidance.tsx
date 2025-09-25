@@ -69,7 +69,7 @@ const LegalGuidance: React.FC = () => {
             Complete Legal Guidance from Former Defense Attorney
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button asChild className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 text-lg">
+            <Button asChild className="bg-primary hover:bg-primary/90 text-primary-foreground hover:!text-primary-foreground font-bold px-8 py-4 text-lg">
               <Link to="/practice-areas/retail-accidents/case-evaluation">
                 Get Free Legal Consultation
               </Link>

@@ -451,33 +451,135 @@ const AmputationInjuries: React.FC = () => {
 
               {/* Case Evaluation Section */}
               <section id="evaluation" className="content-section mb-16">
-                <Card className="glass-card">
-                  <CardHeader>
-                    <CardTitle className="text-2xl text-primary flex items-center">
-                      <Scale className="w-6 h-6 mr-2" />
-                      Free Amputation Case Evaluation
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-lg mb-6">
-                      Every amputation case is unique and requires careful evaluation to determine the full extent of damages and liability. Our comprehensive case evaluation examines all aspects of your injury and its impact on your life.
+                <div className="premium-form-container interactive-card rounded-3xl shadow-xl border border-blue-200/30 overflow-hidden backdrop-blur-md">
+                  <div className="text-center py-12 px-8 bg-gradient-to-b from-blue-50/80 to-white/90 backdrop-blur-sm">
+                    <h2 className="text-4xl font-display font-bold text-slate-900 mb-4">
+                      Free Case Evaluation
+                    </h2>
+                    <p className="text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
+                      Get Your Free Consultation for Amputation Injuries
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <Link to="/amputation-case-evaluation">
-                        <Button className="w-full h-16 text-lg bg-blue-600 hover:bg-blue-700">
-                          <ClipboardCheck className="w-5 h-5 mr-2" />
-                          Start Case Evaluation
-                        </Button>
-                      </Link>
-                      <Link to="/amputation-compensation-calculator">
-                        <Button variant="outline" className="w-full h-16 text-lg border-blue-600 text-blue-600 hover:bg-blue-50">
-                          <Calculator className="w-5 h-5 mr-2" />
-                          Calculate Compensation
-                        </Button>
-                      </Link>
-                    </div>
-                  </CardContent>
-                </Card>
+                  </div>
+
+                  <div className="px-8 pb-12 bg-white/95 backdrop-blur-sm">
+                    <form onSubmit={(e) => { e.preventDefault(); window.location.href = '/amputation-case-evaluation'; }} className="max-w-3xl mx-auto">
+                      <div className="space-y-8">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-sm font-medium text-slate-900 mb-3">
+                              Accident Date
+                            </label>
+                            <Input
+                              type="date"
+                              name="accidentDate"
+                              value={formData.accidentDate}
+                              onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                              className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
+                              required
+                            />
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-900 mb-3">
+                              Type of Amputation
+                            </label>
+                            <Select value={formData.amputationType} onValueChange={(value) => setFormData(prev => ({ ...prev, amputationType: value }))}>
+                              <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                                <SelectValue placeholder="Select amputation type" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                                <SelectItem value="finger">Finger/Thumb</SelectItem>
+                                <SelectItem value="hand">Hand</SelectItem>
+                                <SelectItem value="arm-below">Below-Elbow Arm</SelectItem>
+                                <SelectItem value="arm-above">Above-Elbow Arm</SelectItem>
+                                <SelectItem value="toe">Toe</SelectItem>
+                                <SelectItem value="foot">Foot</SelectItem>
+                                <SelectItem value="leg-below">Below-Knee Leg</SelectItem>
+                                <SelectItem value="leg-above">Above-Knee Leg</SelectItem>
+                                <SelectItem value="multiple">Multiple Limbs</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div>
+                            <label className="block text-sm font-medium text-slate-900 mb-3">
+                              Accident Location
+                            </label>
+                            <Select value={formData.accidentLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, accidentLocation: value }))}>
+                              <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                                <SelectValue placeholder="Where did the accident occur?" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                                <SelectItem value="workplace">Workplace</SelectItem>
+                                <SelectItem value="construction-site">Construction Site</SelectItem>
+                                <SelectItem value="factory">Factory/Manufacturing</SelectItem>
+                                <SelectItem value="hospital">Hospital/Medical Facility</SelectItem>
+                                <SelectItem value="road">Road/Highway</SelectItem>
+                                <SelectItem value="home">Home/Residence</SelectItem>
+                                <SelectItem value="store">Store/Business</SelectItem>
+                                <SelectItem value="other">Other Location</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div>
+                            <label className="block text-sm font-medium text-slate-900 mb-3">
+                              Cause of Accident
+                            </label>
+                            <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                              <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                                <SelectValue placeholder="What caused the accident?" />
+                              </SelectTrigger>
+                              <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                                <SelectItem value="machinery">Defective Machinery</SelectItem>
+                                <SelectItem value="workplace-accident">Workplace Accident</SelectItem>
+                                <SelectItem value="car-accident">Car Accident</SelectItem>
+                                <SelectItem value="medical-malpractice">Medical Malpractice</SelectItem>
+                                <SelectItem value="product-defect">Defective Product</SelectItem>
+                                <SelectItem value="construction">Construction Accident</SelectItem>
+                                <SelectItem value="industrial-accident">Industrial Accident</SelectItem>
+                                <SelectItem value="other">Other Cause</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-slate-900 mb-3">
+                            Medical Treatment Received
+                          </label>
+                          <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalTreatment: value }))}>
+                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                              <SelectValue placeholder="What medical treatment have you received?" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                              <SelectItem value="emergency-surgery">Emergency Surgery</SelectItem>
+                              <SelectItem value="reattachment-attempt">Reattachment Attempt</SelectItem>
+                              <SelectItem value="amputation-surgery">Amputation Surgery</SelectItem>
+                              <SelectItem value="multiple-surgeries">Multiple Surgeries</SelectItem>
+                              <SelectItem value="prosthetic-fitting">Prosthetic Fitting</SelectItem>
+                              <SelectItem value="rehabilitation">Rehabilitation Therapy</SelectItem>
+                              <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
+                              <SelectItem value="none-yet">No Treatment Yet</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="text-center">
+                          <Button
+                            type="submit"
+                            className="w-full h-16 text-xl font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                          >
+                            Start My Free Case Evaluation
+                          </Button>
+                          <p className="mt-4 text-sm text-slate-600">
+                            100% Free • No Upfront Costs • Former Defense Attorney Advantage
+                          </p>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
               </section>
 
               {/* Immediate Steps Section */}

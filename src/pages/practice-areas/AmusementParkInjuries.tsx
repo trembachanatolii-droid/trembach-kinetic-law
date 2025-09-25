@@ -276,86 +276,106 @@ const AmusementParkInjuries: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Amusement Park Injury Case Evaluation</h2>
-              
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation Today</h3>
-                <p className="mb-6">Tell us about your amusement park accident to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                      />
+              <div className="premium-form-container interactive-card rounded-3xl shadow-xl border border-blue-200/30 overflow-hidden backdrop-blur-md">
+                <div className="text-center py-12 px-8 bg-gradient-to-b from-blue-50/80 to-white/90 backdrop-blur-sm">
+                  <h2 className="text-4xl font-display font-bold text-slate-900 mb-4">
+                    Free Case Evaluation
+                  </h2>
+                  <p className="text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
+                    Get Your Free Consultation for Amusement Park Injuries
+                  </p>
+                </div>
+
+                <div className="px-8 pb-12 bg-white/95 backdrop-blur-sm">
+                  <form onSubmit={handleFormSubmit} className="max-w-3xl mx-auto">
+                    <div className="space-y-8">
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-slate-900 mb-3">Accident Date</label>
+                          <Input
+                            type="date"
+                            value={formData.accidentDate}
+                            onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
+                            required
+                          />
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-slate-900 mb-3">Park Name</label>
+                          <Select value={formData.parkName} onValueChange={(value) => setFormData(prev => ({ ...prev, parkName: value }))}>
+                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                              <SelectValue placeholder="Select park" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                              <SelectItem value="disneyland">Disneyland Resort</SelectItem>
+                              <SelectItem value="california-adventure">Disney California Adventure</SelectItem>
+                              <SelectItem value="six-flags">Six Flags Magic Mountain</SelectItem>
+                              <SelectItem value="knotts">Knott's Berry Farm</SelectItem>
+                              <SelectItem value="universal">Universal Studios Hollywood</SelectItem>
+                              <SelectItem value="seaworld">SeaWorld San Diego</SelectItem>
+                              <SelectItem value="great-america">California's Great America</SelectItem>
+                              <SelectItem value="water-park">Water Park</SelectItem>
+                              <SelectItem value="other">Other Amusement Park</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <label className="block text-sm font-medium text-slate-900 mb-3">Type of Ride/Attraction</label>
+                          <Select value={formData.rideType} onValueChange={(value) => setFormData(prev => ({ ...prev, rideType: value }))}>
+                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                              <SelectValue placeholder="Select ride type" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                              <SelectItem value="roller-coaster">Roller Coaster</SelectItem>
+                              <SelectItem value="water-ride">Water Ride/Slide</SelectItem>
+                              <SelectItem value="spinning-ride">Spinning Ride</SelectItem>
+                              <SelectItem value="ferris-wheel">Ferris Wheel</SelectItem>
+                              <SelectItem value="bumper-cars">Bumper Cars</SelectItem>
+                              <SelectItem value="kiddie-ride">Children's Ride</SelectItem>
+                              <SelectItem value="walkway">Walkway/Pathway</SelectItem>
+                              <SelectItem value="restaurant">Restaurant/Food Area</SelectItem>
+                              <SelectItem value="other">Other Area</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium text-slate-900 mb-3">Primary Injury Type</label>
+                          <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
+                              <SelectValue placeholder="Select injury type" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
+                              <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
+                              <SelectItem value="spinal-injury">Spinal/Neck Injury</SelectItem>
+                              <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                              <SelectItem value="cuts-lacerations">Cuts/Lacerations</SelectItem>
+                              <SelectItem value="bruising">Bruising</SelectItem>
+                              <SelectItem value="concussion">Concussion</SelectItem>
+                              <SelectItem value="whiplash">Whiplash</SelectItem>
+                              <SelectItem value="emotional-trauma">Emotional Trauma</SelectItem>
+                              <SelectItem value="multiple">Multiple Injuries</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="text-center">
+                        <Button
+                          type="submit"
+                          className="w-full h-16 text-xl font-semibold bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
+                        >
+                          Start My Free Case Evaluation
+                        </Button>
+                        <p className="mt-4 text-sm text-slate-600">
+                          100% Free • No Upfront Costs • Former Defense Attorney Advantage
+                        </p>
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Park Name</label>
-                      <Select value={formData.parkName} onValueChange={(value) => setFormData(prev => ({ ...prev, parkName: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select park" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="disneyland">Disneyland Resort</SelectItem>
-                          <SelectItem value="six-flags">Six Flags Magic Mountain</SelectItem>
-                          <SelectItem value="knotts">Knott's Berry Farm</SelectItem>
-                          <SelectItem value="universal">Universal Studios</SelectItem>
-                          <SelectItem value="seaworld">SeaWorld San Diego</SelectItem>
-                          <SelectItem value="great-america">California's Great America</SelectItem>
-                          <SelectItem value="other-permanent">Other Permanent Park</SelectItem>
-                          <SelectItem value="traveling-carnival">Traveling Carnival/Fair</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Ride/Attraction</label>
-                      <Select value={formData.rideType} onValueChange={(value) => setFormData(prev => ({ ...prev, rideType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select ride type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="roller-coaster">Roller Coaster</SelectItem>
-                          <SelectItem value="water-ride">Water Ride/Slide</SelectItem>
-                          <SelectItem value="spinning-ride">Spinning Ride</SelectItem>
-                          <SelectItem value="drop-tower">Drop Tower</SelectItem>
-                          <SelectItem value="kiddie-ride">Children's Ride</SelectItem>
-                          <SelectItem value="dark-ride">Dark Ride/Indoor</SelectItem>
-                          <SelectItem value="walkway">Walkway/Queue Area</SelectItem>
-                          <SelectItem value="other">Other Attraction</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Primary Injury Type</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-                          <SelectItem value="spinal-injury">Spinal/Neck Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-                          <SelectItem value="drowning">Drowning/Near-Drowning</SelectItem>
-                          <SelectItem value="cuts-lacerations">Cuts/Lacerations</SelectItem>
-                          <SelectItem value="psychological">Psychological Trauma</SelectItem>
-                          <SelectItem value="multiple">Multiple Injuries</SelectItem>
-                          <SelectItem value="other">Other Injury</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
+                  </form>
+                </div>
               </div>
             </section>
 

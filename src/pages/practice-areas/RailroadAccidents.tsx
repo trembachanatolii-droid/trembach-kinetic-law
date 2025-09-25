@@ -34,7 +34,7 @@ import {
 import heroBackground from '@/assets/railroad-hero-bg.jpg';
 import sidebarImage from '@/assets/railroad-sidebar.jpg';
 import diagnosisProcessImage from '@/assets/railroad-diagnosis-process.jpg';
-import legalProcessImage from '@/assets/legal-process-professional.jpg';
+import legalProcessImage from '@/assets/legal-process-clean.jpg';
 import felaClaimsImage from '@/assets/fela-claims-professional.jpg';
 import exposureSitesImage from '@/assets/california-railroad-sites.jpg';
 import medicalImage from '@/assets/railroad-medical-facility.jpg';

@@ -33,10 +33,14 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/railroad-hero-bg.jpg';
 import sidebarImage from '@/assets/railroad-sidebar.jpg';
+import diagnosisProcessImage from '@/assets/railroad-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/railroad-legal-process.jpg';
 import felaClaimsImage from '@/assets/railroad-fela-claims.jpg';
-import gradeCrossingImage from '@/assets/railroad-grade-crossing.jpg';
+import exposureSitesImage from '@/assets/california-railroad-sites.jpg';
+import medicalImage from '@/assets/railroad-medical-facility.jpg';
 import compensationImage from '@/assets/railroad-compensation-calculator.jpg';
+import resourcesImage from '@/assets/railroad-resources.jpg';
+import gradeCrossingImage from '@/assets/railroad-grade-crossing.jpg';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 
@@ -66,10 +70,10 @@ const RailroadAccidents: React.FC = () => {
   const tabs: TabSection[] = [
     { id: 'overview', label: 'OVERVIEW', icon: FileText },
     { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
+    { id: 'diagnosis-steps', label: 'WHAT TO DO AFTER ACCIDENT', icon: Stethoscope },
     { id: 'fela-claims', label: 'FELA CLAIMS', icon: Gavel },
     { id: 'types-accidents', label: 'TYPES OF ACCIDENTS', icon: Train },
     { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
-    { id: 'compensation', label: 'COMPENSATION', icon: Calculator },
     { id: 'faq', label: 'FAQ', icon: HelpCircle },
     { id: 'resources', label: 'RESOURCES', icon: Building }
   ];
@@ -434,6 +438,56 @@ const RailroadAccidents: React.FC = () => {
               </Card>
             </section>
 
+            {/* What to Do After Railroad Accident */}
+            <section id="diagnosis-steps" className="content-section mb-12">
+              <Card className="glass-card border-primary/20 hover-glow-primary transition-all duration-500">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-red-600 mb-6">What to Do After Your Railroad Accident</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="mb-6">
+                    <img src={diagnosisProcessImage} alt="Railroad Accident Response Process" className="w-full h-64 object-cover rounded-lg mb-4" />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <Card className="glass-card group hover-glow-green transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-green-600">
+                          <Heart className="w-5 h-5 mr-2" />
+                          Immediate Steps
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <p>• Ensure safety and call 911 immediately</p>
+                        <p>• Get medical attention even for minor injuries</p>
+                        <p>• Document the scene with photos and videos</p>
+                        <p>• Collect witness contact information</p>
+                        <p>• Report to Federal Railroad Administration if applicable</p>
+                        <p>• Contact a railroad accident attorney immediately</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card group hover-glow-destructive transition-all duration-300 hover:scale-105">
+                      <CardHeader>
+                        <CardTitle className="flex items-center text-red-600">
+                          <AlertTriangle className="w-5 h-5 mr-2" />
+                          Legal Protection Steps
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent className="space-y-3">
+                        <p>• Avoid giving statements to railroad representatives</p>
+                        <p>• Don't accept quick settlement offers</p>
+                        <p>• Preserve all evidence and documentation</p>
+                        <p>• Keep detailed records of injuries and treatment</p>
+                        <p>• Understand FELA vs personal injury rights</p>
+                        <p>• Act quickly - time limits apply to claims</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </CardContent>
+              </Card>
+            </section>
+
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
               <Card className="glass-card border-primary/20 hover-glow-primary transition-all duration-500">
@@ -763,6 +817,10 @@ const RailroadAccidents: React.FC = () => {
                   <CardTitle className="text-3xl font-bold text-red-600 mb-6">Railroad Accident Resources</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  <div className="mb-6">
+                    <img src={resourcesImage} alt="Railroad Legal Resources" className="w-full h-64 object-cover rounded-lg mb-4" />
+                  </div>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer" 
                           onClick={() => window.location.href = '/practice-areas/railroad-accidents/case-evaluation'}>
@@ -788,6 +846,15 @@ const RailroadAccidents: React.FC = () => {
                         <Shield className="w-8 h-8 text-primary mx-auto mb-4" />
                         <h4 className="font-semibold mb-2">Legal Guidance</h4>
                         <p className="text-sm text-muted-foreground">Comprehensive legal guidance for railroad accident victims</p>
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105 cursor-pointer"
+                          onClick={() => window.location.href = '/practice-areas/railroad-accidents/resources'}>
+                      <CardContent className="pt-6 text-center">
+                        <Building className="w-8 h-8 text-primary mx-auto mb-4" />
+                        <h4 className="font-semibold mb-2">Complete Resources</h4>
+                        <p className="text-sm text-muted-foreground">All 50+ FAQ questions and comprehensive resources</p>
                       </CardContent>
                     </Card>
                   </div>
@@ -843,25 +910,25 @@ const RailroadAccidents: React.FC = () => {
                     onClick={() => window.location.href = 'tel:8181234567'}
                   >
                     <Phone className="w-4 h-4 mr-2" />
-                    Call (818) 123-4567
+                    <span className="text-white font-medium">Call (818) 123-4567</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full hover:scale-105 transition-all duration-300"
+                    className="w-full hover:scale-105 transition-all duration-300 text-primary border-primary hover:bg-primary hover:text-white"
                     onClick={() => window.location.href = '/practice-areas/railroad-accidents/case-evaluation'}
                   >
                     <FileText className="w-4 h-4 mr-2" />
-                    Free Case Evaluation
+                    <span className="font-medium">Free Case Evaluation</span>
                   </Button>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full hover:scale-105 transition-all duration-300"
+                    className="w-full hover:scale-105 transition-all duration-300 text-primary border-primary hover:bg-primary hover:text-white"
                     onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
                   >
                     <Mail className="w-4 h-4 mr-2" />
-                    Email Consultation
+                    <span className="font-medium">Email Consultation</span>
                   </Button>
                   
                   <div className="text-center text-sm text-muted-foreground mt-4">

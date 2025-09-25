@@ -34,7 +34,7 @@ import {
 import heroBackground from '@/assets/railroad-hero-bg.jpg';
 import sidebarImage from '@/assets/railroad-sidebar.jpg';
 import diagnosisProcessImage from '@/assets/railroad-diagnosis-process.jpg';
-import legalProcessImage from '@/assets/railroad-legal-process.jpg';
+import legalProcessImage from '@/assets/legal-process-professional.jpg';
 import felaClaimsImage from '@/assets/fela-claims-professional.jpg';
 import exposureSitesImage from '@/assets/california-railroad-sites.jpg';
 import medicalImage from '@/assets/railroad-medical-facility.jpg';
@@ -680,7 +680,7 @@ const RailroadAccidents: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-6">
-                    <img src={legalProcessImage} alt="Railroad Legal Process" className="w-full h-64 object-cover rounded-lg mb-4" />
+                    <img src={legalProcessImage} alt="Professional courthouse architecture and legal building exterior" className="w-full h-64 object-cover rounded-lg mb-4" />
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

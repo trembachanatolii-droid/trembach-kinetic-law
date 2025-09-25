@@ -373,22 +373,22 @@ const MesotheliomaAsbestos: React.FC = () => {
               </div>
 
               <ThreeDVisualEffects className="premium-3d-container">
-                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated bg-gradient-to-br from-blue-900/90 to-blue-800/90">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl md:text-3xl font-display text-white mb-2 font-bold">Get Your Free Mesothelioma Consultation</h3>
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Mesothelioma Consultation</h3>
                     <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
-                    <p className="text-blue-100 text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
+                    <p className="text-slate-700 text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
                   </div>
 
                   {/* Progress Bar */}
                   <div className="mb-8">
-                    <div className="flex justify-between text-sm text-blue-100 mb-2 font-medium">
+                    <div className="flex justify-between text-sm text-slate-700 mb-2 font-medium">
                       <span>Step {currentStep} of 4</span>
                       <span>{Math.round((currentStep / 4) * 100)}% Complete</span>
                     </div>
-                    <Progress value={(currentStep / 4) * 100} className="h-3 bg-blue-900/40">
+                    <Progress value={(currentStep / 4) * 100} className="h-3 bg-blue-100">
                       <div 
-                        className="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-500 ease-out"
+                        className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out"
                         style={{ width: `${(currentStep / 4) * 100}%` }}
                       />
                     </Progress>
@@ -458,27 +458,27 @@ const MesotheliomaAsbestos: React.FC = () => {
                     {/* Step 2: Medical Information */}
                     {currentStep === 2 && (
                       <div className="space-y-6 animate-fade-in">
-                        <h4 className="text-xl font-semibold text-white mb-4">Medical Information</h4>
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Medical Information</h4>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-2">
-                            <Label htmlFor="diagnosisDate" className="text-blue-100">Diagnosis Date *</Label>
+                            <Label htmlFor="diagnosisDate" className="text-slate-800">Diagnosis Date *</Label>
                             <Input
                               id="diagnosisDate"
                               type="date"
                               value={formData.diagnosisDate}
                               onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
-                              className="bg-white/10 border-blue-300/30 text-white focus:border-blue-400 focus:ring-blue-400/20"
+                              className="bg-white border-blue-200 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12"
                               required
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="cancerType" className="text-blue-100">Cancer Type *</Label>
+                            <Label htmlFor="cancerType" className="text-slate-800">Cancer Type *</Label>
                             <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
-                              <SelectTrigger className="bg-white/10 border-blue-300/30 text-white focus:border-blue-400 focus:ring-blue-400/20">
+                              <SelectTrigger className="bg-white border-blue-200 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12">
                                 <SelectValue placeholder="Select cancer type" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="z-50 bg-white text-slate-900 shadow-xl border border-blue-200">
                                 <SelectItem value="pleural-mesothelioma">Pleural Mesothelioma</SelectItem>
                                 <SelectItem value="peritoneal-mesothelioma">Peritoneal Mesothelioma</SelectItem>
                                 <SelectItem value="pericardial-mesothelioma">Pericardial Mesothelioma</SelectItem>
@@ -492,47 +492,58 @@ const MesotheliomaAsbestos: React.FC = () => {
                         </div>
 
                         <div className="space-y-2">
-                          <Label htmlFor="diagnosingPhysician" className="text-blue-100">Diagnosing Physician/Hospital</Label>
+                          <Label htmlFor="diagnosingPhysician" className="text-slate-800">Diagnosing Physician/Hospital</Label>
                           <Input
                             id="diagnosingPhysician"
                             type="text"
                             value={formData.diagnosingPhysician}
                             onChange={(e) => setFormData(prev => ({ ...prev, diagnosingPhysician: e.target.value }))}
-                            className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
+                            className="bg-white border-blue-200 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12"
                             placeholder="Doctor or hospital name"
                           />
                         </div>
 
                         <div className="space-y-2">
-                          <Label className="text-blue-100">Current Symptoms (Check all that apply)</Label>
-                          <div className="grid grid-cols-2 gap-4 p-4 bg-white/5 rounded-lg">
-                            {[
-                              'Chest pain',
-                              'Shortness of breath',
-                              'Persistent cough',
-                              'Weight loss',
-                              'Fatigue',
-                              'Abdominal pain',
-                              'Nausea',
-                              'Fluid buildup'
-                            ].map((symptom) => (
-                              <div key={symptom} className="flex items-center space-x-2">
-                                <Checkbox
-                                  id={symptom}
-                                  checked={formData.symptoms.includes(symptom)}
-                                  onCheckedChange={(checked) => {
-                                    if (checked) {
-                                      setFormData(prev => ({ ...prev, symptoms: [...prev.symptoms, symptom] }));
-                                    } else {
-                                      setFormData(prev => ({ ...prev, symptoms: prev.symptoms.filter(s => s !== symptom) }));
-                                    }
-                                  }}
-                                  className="border-blue-300/50 text-blue-400"
-                                />
-                                <Label htmlFor={symptom} className="text-blue-100 text-sm">{symptom}</Label>
+                          <Label className="text-slate-800">Current Symptoms</Label>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <button type="button" className="w-full h-12 px-3 inline-flex items-center justify-between rounded-md bg-white border border-blue-200 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30">
+                                <span className="truncate text-left">
+                                  {formData.symptoms.length ? `${formData.symptoms.length} selected` : 'Select symptoms'}
+                                </span>
+                                <ChevronDown className="w-4 h-4 text-slate-700" />
+                              </button>
+                            </PopoverTrigger>
+                            <PopoverContent className="z-50 w-[320px] p-2 bg-white border border-blue-200 shadow-xl rounded-md">
+                              <div className="grid gap-2 max-h-64 overflow-auto">
+                                {[
+                                  'Chest pain',
+                                  'Shortness of breath',
+                                  'Persistent cough',
+                                  'Weight loss',
+                                  'Fatigue',
+                                  'Abdominal pain',
+                                  'Nausea',
+                                  'Fluid buildup'
+                                ].map((symptom) => (
+                                  <label key={symptom} className="flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 text-slate-900">
+                                    <Checkbox
+                                      checked={formData.symptoms.includes(symptom)}
+                                      onCheckedChange={(checked) => {
+                                        if (checked) {
+                                          setFormData(prev => ({ ...prev, symptoms: [...prev.symptoms, symptom] }));
+                                        } else {
+                                          setFormData(prev => ({ ...prev, symptoms: prev.symptoms.filter(s => s !== symptom) }));
+                                        }
+                                      }}
+                                      className="border-blue-300 text-blue-600"
+                                    />
+                                    <span className="text-sm">{symptom}</span>
+                                  </label>
+                                ))}
                               </div>
-                            ))}
-                          </div>
+                            </PopoverContent>
+                          </Popover>
                         </div>
                       </div>
                     )}

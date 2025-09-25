@@ -27,7 +27,7 @@ const RailroadAccidentsLegalGuidance: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Railroad Accident Legal Guidance
           </h1>
-          <p className="text-xl text-white/90">
+          <p className="text-xl text-white">
             Expert legal guidance for FELA claims and railroad accident cases
           </p>
         </div>

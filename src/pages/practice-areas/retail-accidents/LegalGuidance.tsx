@@ -28,6 +28,7 @@ import '../retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-legal-guidance-hero.jpg';
 import legalConsultationImage from '@/assets/practice-areas/legal-consultation-retail.jpg';
 import californiaLawImage from '@/assets/practice-areas/california-premises-law.jpg';
+import retailStoreHazardsImage from '@/assets/practice-areas/retail-store-hazards.jpg';
 
 const LegalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -297,8 +298,8 @@ const LegalGuidance: React.FC = () => {
                 </CardHeader>
                 <CardContent className="space-y-6">
                   <img 
-                    src={legalConsultationImage} 
-                    alt="Legal consultation with retail accident documents and case materials" 
+                    src={retailStoreHazardsImage} 
+                    alt="Retail store interior showing potential safety hazards and premises liability concerns" 
                     className="w-full h-64 object-cover rounded-lg shadow-lg"
                   />
                   

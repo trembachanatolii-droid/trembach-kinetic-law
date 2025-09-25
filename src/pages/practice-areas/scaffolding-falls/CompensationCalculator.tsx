@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -22,6 +23,7 @@ interface CalculatorData {
 }
 
 const ScaffoldingFallsCompensationCalculator: React.FC = () => {
+  const navigate = useNavigate();
   const [calculatorData, setCalculatorData] = useState<CalculatorData>({
     age: 35,
     injurySeverity: '',
@@ -346,7 +348,11 @@ const ScaffoldingFallsCompensationCalculator: React.FC = () => {
                     </div>
                     
                     <div className="mt-6 text-center">
-                      <Button size="lg" className="text-lg px-8 py-4">
+                      <Button 
+                        size="lg" 
+                        className="text-lg px-8 py-4"
+                        onClick={() => navigate('/practice-areas/scaffolding-falls/case-evaluation')}
+                      >
                         Get Free Case Review
                       </Button>
                     </div>

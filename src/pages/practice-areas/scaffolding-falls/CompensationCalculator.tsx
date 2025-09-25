@@ -179,7 +179,7 @@ const ScaffoldingFallsCompensationCalculator: React.FC = () => {
           <p className="text-xl md:text-2xl text-white mb-6">
             Estimate Your Potential Settlement Amount
           </p>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
             Get an immediate estimate of potential compensation for your scaffolding falls accident. 
             This tool considers injury severity, medical costs, and other factors affecting your case value.
           </p>

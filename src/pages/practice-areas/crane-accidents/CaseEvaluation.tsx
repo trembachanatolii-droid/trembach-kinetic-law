@@ -1,0 +1,213 @@
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Phone, Mail, MessageCircle } from 'lucide-react';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+
+const CraneAccidentsCaseEvaluation: React.FC = () => {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    accidentDate: '',
+    craneType: '',
+    injuryType: '',
+    description: ''
+  });
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const subject = 'Crane Accident Case Evaluation Request';
+    const body = `
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Accident Date: ${formData.accidentDate}
+Crane Type: ${formData.craneType}
+Injury Type: ${formData.injuryType}
+Description: ${formData.description}
+    `;
+    window.location.href = `mailto:info@trembachlawfirm.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="Free Crane Accident Case Evaluation | Trembach Law Firm"
+        description="Get a free case evaluation for your crane accident. Our experienced attorneys will review your case and determine your legal options."
+        keywords="crane accident case evaluation, free consultation, crane accident lawyer"
+        canonical="/practice-areas/crane-accidents/case-evaluation"
+      />
+
+      <GoBack />
+
+      {/* Hero Section */}
+      <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-r from-gray-900 to-gray-700">
+        <div className="absolute inset-0 bg-black/50"></div>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Free Crane Accident Case Evaluation
+          </h1>
+          <p className="text-xl md:text-2xl text-white mb-6">
+            Get Expert Legal Assessment for Your Construction Accident
+          </p>
+          <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
+            Our experienced attorneys will review your crane accident case at no cost. 
+            Complete this confidential evaluation to understand your legal rights and potential compensation.
+          </p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <Card className="p-8">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">First Name *</label>
+                <Input
+                  value={formData.firstName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Last Name *</label>
+                <Input
+                  value={formData.lastName}
+                  onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">Email *</label>
+                <Input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Phone *</label>
+                <Input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                  required
+                />
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label className="block text-sm font-medium mb-2">Accident Date</label>
+                <Input
+                  type="date"
+                  value={formData.accidentDate}
+                  onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-2">Type of Crane</label>
+                <Select value={formData.craneType} onValueChange={(value) => setFormData(prev => ({ ...prev, craneType: value }))}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select crane type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="mobile-crane">Mobile Crane</SelectItem>
+                    <SelectItem value="tower-crane">Tower Crane</SelectItem>
+                    <SelectItem value="overhead-crane">Overhead Crane</SelectItem>
+                    <SelectItem value="crawler-crane">Crawler Crane</SelectItem>
+                    <SelectItem value="truck-mounted-crane">Truck-Mounted Crane</SelectItem>
+                    <SelectItem value="unknown">Unknown/Other</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Type of Injury</label>
+              <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Select injury type" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="crush-injury">Crush Injury</SelectItem>
+                  <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
+                  <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
+                  <SelectItem value="fractures">Broken Bones/Fractures</SelectItem>
+                  <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
+                  <SelectItem value="burns">Burns/Electrical Injuries</SelectItem>
+                  <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium mb-2">Describe Your Accident</label>
+              <textarea
+                className="w-full p-3 border border-gray-300 rounded-lg h-32"
+                value={formData.description}
+                onChange={(e) => setFormData(prev => ({ ...prev, description: e.target.value }))}
+                placeholder="Please describe how your crane accident occurred..."
+              />
+            </div>
+
+            <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white py-4 text-lg">
+              <span className="text-white">Submit Case Evaluation</span>
+            </Button>
+          </form>
+        </Card>
+
+        {/* Contact Methods */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+          <Card className="p-6 text-center">
+            <Phone className="w-12 h-12 text-green-600 mx-auto mb-4" />
+            <h3 className="text-lg font-bold mb-2">Call Now</h3>
+            <Button 
+              className="w-full bg-green-600 hover:bg-green-700 text-white"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
+              <span className="text-white">(818) 123-4567</span>
+            </Button>
+          </Card>
+
+          <Card className="p-6 text-center">
+            <MessageCircle className="w-12 h-12 text-blue-600 mx-auto mb-4" />
+            <h3 className="text-lg font-bold mb-2">Free Calculator</h3>
+            <Button 
+              variant="outline"
+              className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+              onClick={() => window.location.href = '/practice-areas/crane-accidents/compensation-calculator'}
+            >
+              Calculate Compensation
+            </Button>
+          </Card>
+
+          <Card className="p-6 text-center">
+            <Mail className="w-12 h-12 text-purple-600 mx-auto mb-4" />
+            <h3 className="text-lg font-bold mb-2">Email Us</h3>
+            <Button 
+              variant="outline"
+              className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white"
+              onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
+            >
+              Send Email
+            </Button>
+          </Card>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default CraneAccidentsCaseEvaluation;

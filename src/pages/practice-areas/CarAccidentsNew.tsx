@@ -38,6 +38,8 @@ import compensationImage from '@/assets/practice-areas/car-accident-compensation
 import trafficSystemImage from '@/assets/practice-areas/california-traffic-system.jpg';
 import legalProcessImage from '@/assets/practice-areas/car-accident-legal-process.jpg';
 import SEO from '@/components/SEO';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -52,8 +54,16 @@ const CarAccidentsNew: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     accidentDate: '',
-    injuryType: ''
+    injuryType: '',
+    accidentType: '',
+    atFault: '',
+    medicalTreatment: '',
+    insuranceClaim: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -112,8 +122,8 @@ const CarAccidentsNew: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to case evaluation
-    window.location.href = '/car-case-evaluation';
+    console.log('Form submitted:', formData);
+    alert('Thank you! We will contact you within 24 hours for your free car accident case evaluation.');
   };
 
   // FAQ Data
@@ -541,47 +551,189 @@ const CarAccidentsNew: React.FC = () => {
             </section>
 
             {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
-              
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Injury</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-                          <SelectItem value="back-injury">Back Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones</SelectItem>
-                          <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-                          <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                          <SelectItem value="other">Other Injuries</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+            <section id="evaluation" className="content-section mb-16">
+              <ThreeDVisualEffects className="premium-3d-container">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Car Accident Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Confidential evaluation by former defense attorneys now fighting for you</p>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">First Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="Enter your first name"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Last Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="Enter your last name"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Phone Number *</label>
+                        <Input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Email Address *</label>
+                        <Input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Accident Date *</label>
+                        <Select value={formData.accidentDate} onValueChange={(value) => setFormData(prev => ({ ...prev, accidentDate: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select when accident occurred" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="today">Today</SelectItem>
+                            <SelectItem value="yesterday">Yesterday</SelectItem>
+                            <SelectItem value="this-week">This week</SelectItem>
+                            <SelectItem value="last-week">Last week</SelectItem>
+                            <SelectItem value="this-month">This month</SelectItem>
+                            <SelectItem value="1-3-months">1-3 months ago</SelectItem>
+                            <SelectItem value="3-6-months">3-6 months ago</SelectItem>
+                            <SelectItem value="6-12-months">6-12 months ago</SelectItem>
+                            <SelectItem value="over-1-year">Over 1 year ago</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Type of Accident *</label>
+                        <Select value={formData.accidentType} onValueChange={(value) => setFormData(prev => ({ ...prev, accidentType: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select accident type" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="rear-end">Rear-end collision</SelectItem>
+                            <SelectItem value="head-on">Head-on collision</SelectItem>
+                            <SelectItem value="side-impact">Side-impact (T-bone)</SelectItem>
+                            <SelectItem value="rollover">Rollover accident</SelectItem>
+                            <SelectItem value="multi-vehicle">Multi-vehicle crash</SelectItem>
+                            <SelectItem value="hit-and-run">Hit and run</SelectItem>
+                            <SelectItem value="intersection">Intersection accident</SelectItem>
+                            <SelectItem value="parking-lot">Parking lot accident</SelectItem>
+                            <SelectItem value="freeway">Freeway accident</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Primary Injury Type *</label>
+                        <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select injury type" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="whiplash">Whiplash/Neck injury</SelectItem>
+                            <SelectItem value="back-injury">Back/Spinal injury</SelectItem>
+                            <SelectItem value="broken-bones">Broken bones/Fractures</SelectItem>
+                            <SelectItem value="head-injury">Head/Brain injury</SelectItem>
+                            <SelectItem value="internal-injuries">Internal injuries</SelectItem>
+                            <SelectItem value="cuts-bruises">Cuts and bruises</SelectItem>
+                            <SelectItem value="soft-tissue">Soft tissue injuries</SelectItem>
+                            <SelectItem value="multiple-injuries">Multiple injuries</SelectItem>
+                            <SelectItem value="no-injuries">No apparent injuries</SelectItem>
+                            <SelectItem value="other">Other injuries</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Medical Treatment *</label>
+                        <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalTreatment: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select treatment received" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="emergency-room">Emergency room visit</SelectItem>
+                            <SelectItem value="hospitalized">Hospitalized</SelectItem>
+                            <SelectItem value="doctor-visit">Doctor visit</SelectItem>
+                            <SelectItem value="urgent-care">Urgent care center</SelectItem>
+                            <SelectItem value="physical-therapy">Physical therapy</SelectItem>
+                            <SelectItem value="ongoing-treatment">Ongoing treatment</SelectItem>
+                            <SelectItem value="no-treatment">No treatment yet</SelectItem>
+                            <SelectItem value="refused-treatment">Refused treatment at scene</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Were You At Fault? *</label>
+                        <Select value={formData.atFault} onValueChange={(value) => setFormData(prev => ({ ...prev, atFault: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select fault status" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="not-at-fault">Not at fault</SelectItem>
+                            <SelectItem value="other-driver-fault">Other driver at fault</SelectItem>
+                            <SelectItem value="partially-at-fault">Partially at fault</SelectItem>
+                            <SelectItem value="unsure">Unsure/Disputed</SelectItem>
+                            <SelectItem value="no-police-report">No police report filed</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Insurance Claim Status *</label>
+                        <Select value={formData.insuranceClaim} onValueChange={(value) => setFormData(prev => ({ ...prev, insuranceClaim: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select claim status" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="not-filed">Haven't filed a claim</SelectItem>
+                            <SelectItem value="filed-pending">Filed - claim pending</SelectItem>
+                            <SelectItem value="claim-denied">Claim denied</SelectItem>
+                            <SelectItem value="low-settlement">Received low settlement offer</SelectItem>
+                            <SelectItem value="dealing-with-adjuster">Dealing with insurance adjuster</SelectItem>
+                            <SelectItem value="other-insurance">Other driver's insurance contacted me</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-lg py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-300 focus:outline-none">
+                      Get My Free Car Accident Case Evaluation
+                    </Button>
+                  </form>
+                </div>
+              </ThreeDVisualEffects>
             </section>
 
             {/* What to Do After Accident */}

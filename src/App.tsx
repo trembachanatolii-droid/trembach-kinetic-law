@@ -223,6 +223,10 @@ import ParalysisCaseEvaluation from "./pages/practice-areas/paralysis/CaseEvalua
 import ParalysisCompensationCalculator from "./pages/practice-areas/paralysis/CompensationCalculator";
 import ParalysisLegalGuidance from "./pages/practice-areas/paralysis/LegalGuidance";
 import ParalysisMedicalGuidance from "./pages/practice-areas/paralysis/MedicalGuidance";
+import ScaffoldingFalls from "./pages/practice-areas/ScaffoldingFalls";
+import ScaffoldingFallsCaseEvaluation from "./pages/practice-areas/scaffolding-falls/CaseEvaluation";
+import ScaffoldingFallsCompensationCalculator from "./pages/practice-areas/scaffolding-falls/CompensationCalculator";
+import ScaffoldingFallsLegalGuidance from "./pages/practice-areas/scaffolding-falls/LegalGuidance";
 
 const queryClient = new QueryClient();
 

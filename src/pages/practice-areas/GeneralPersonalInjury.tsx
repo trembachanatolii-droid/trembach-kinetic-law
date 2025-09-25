@@ -37,6 +37,8 @@ import diagnosisImage from '@/assets/personal-injury-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/personal-injury-legal-process.jpg';
 import injurySitesImage from '@/assets/california-injury-sites.jpg';
 import medicalFacilityImage from '@/assets/personal-injury-medical-facility.jpg';
+import overviewImage from '@/assets/personal-injury-overview.jpg';
+import processImage from '@/assets/personal-injury-process.jpg';
 
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
@@ -207,8 +209,14 @@ const GeneralPersonalInjury: React.FC = () => {
                       {expandedSections.overview ? <ChevronUp /> : <ChevronDown />}
                     </Button>
                   </CollapsibleTrigger>
-                  <CollapsibleContent className="space-y-6">
-                    <ThreeDVisualEffects>
+                   <CollapsibleContent className="space-y-6">
+                     <div className="mb-8">
+                       <img src={overviewImage} alt="Personal injury legal services overview" className="w-full h-64 object-cover rounded-lg shadow-lg mb-6" />
+                       <p className="text-lg mb-6 leading-relaxed">
+                         Personal injury law encompasses a broad spectrum of accidents and incidents where another party's negligence, recklessness, or intentional actions cause harm. From motor vehicle accidents to slip and falls, from defective products to medical malpractice, personal injury cases require thorough investigation, expert analysis, and aggressive advocacy to ensure maximum compensation.
+                       </p>
+                     </div>
+                     <ThreeDVisualEffects>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                         <Card className="glass-card hover-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                           <CardHeader>
@@ -584,27 +592,27 @@ const GeneralPersonalInjury: React.FC = () => {
               <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-16 px-8 rounded-lg shadow-2xl mb-12">
                 <ThreeDVisualEffects>
                   <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-bold mb-6 text-white text-2xl">Don't Wait - Time Limits Apply for California Personal Injury Claims</h2>
-                    <p className="text-xl mb-8 leading-relaxed text-white text-base">
+                    <h2 className="text-4xl font-bold mb-6 text-white">Don't Wait - Time Limits Apply for California Personal Injury Claims</h2>
+                    <p className="text-xl mb-8 leading-relaxed text-white">
                       California's statute of limitations gives you limited time to file your personal injury claim. In most cases, you have just 2 years from the date of injury to take legal action.
                     </p>
                     
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
                       <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 className="text-2xl font-bold mb-3 text-white text-base">Personal Injury Cases</h3>
-                        <p className="text-lg text-white text-base">2 years from date of injury</p>
+                        <h3 className="text-2xl font-bold mb-3 text-white">Personal Injury Cases</h3>
+                        <p className="text-lg text-white">2 years from date of injury</p>
                       </div>
                       <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 className="text-2xl font-bold mb-3 text-white text-base">Government Claims</h3>
-                        <p className="text-lg text-white text-base">6 months to file claim</p>
+                        <h3 className="text-2xl font-bold mb-3 text-white">Government Claims</h3>
+                        <p className="text-lg text-white">6 months to file claim</p>
                       </div>
                       <div className="bg-white/10 p-6 rounded-lg backdrop-blur-sm">
-                        <h3 className="text-2xl font-bold mb-3 text-white text-base">Wrongful Death</h3>
-                        <p className="text-lg text-white text-base">2 years from date of death</p>
+                        <h3 className="text-2xl font-bold mb-3 text-white">Wrongful Death</h3>
+                        <p className="text-lg text-white">2 years from date of death</p>
                       </div>
                     </div>
                     
-                    <p className="text-lg mb-8 text-white text-base">
+                    <p className="text-lg mb-8 text-white">
                       Missing these deadlines means losing your right to compensation forever. Evidence disappears, witnesses forget details, and medical records become harder to obtain. The sooner you act, the stronger your case becomes.
                     </p>
                     
@@ -624,7 +632,7 @@ const GeneralPersonalInjury: React.FC = () => {
                         className="border-2 border-white text-white hover:bg-white hover:text-red-600 font-bold text-lg px-8 py-4"
                         asChild
                       >
-                        <a href="tel:+18181234567" className="text-white hover:text-red-600">Call (818) 123-4567</a>
+                        <a href="tel:+18181234567" className="text-white hover:text-red-600 flex items-center justify-center">Call (818) 123-4567</a>
                       </Button>
                     </div>
                   </div>
@@ -664,10 +672,10 @@ const GeneralPersonalInjury: React.FC = () => {
                         className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-4 text-base shadow-lg hover-scale"
                         asChild
                       >
-                        <a href="tel:+18181234567">
-                          <Phone className="w-5 h-5 mr-2" />
-                          <span className="text-white">Call (818) 123-4567</span>
-                        </a>
+                         <a href="tel:+18181234567" className="flex items-center justify-center text-white hover:text-white">
+                           <Phone className="w-5 h-5 mr-2" />
+                           Call (818) 123-4567
+                         </a>
                       </Button>
                       
                       <Button 

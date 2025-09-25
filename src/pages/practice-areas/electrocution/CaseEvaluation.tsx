@@ -10,6 +10,8 @@ import { CalendarDays, Clock, Phone, Mail, AlertTriangle, Star, Zap } from 'luci
 import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/electrocution-hero-bg.jpg';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const ElectrocutionCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -128,15 +130,16 @@ const ElectrocutionCaseEvaluation: React.FC = () => {
         </Card>
 
         {/* Form */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Zap className="w-6 h-6" />
-              Electrocution Case Evaluation Form
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-8">
+        <ThreeDVisualEffects>
+          <Card className="premium-form-container interactive-card">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2 text-blue-600 font-display">
+                <Zap className="w-6 h-6" />
+                Electrocution Case Evaluation Form
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-8">
               
               {/* Personal Information */}
               <div>
@@ -619,10 +622,10 @@ const ElectrocutionCaseEvaluation: React.FC = () => {
 
               {/* Submit Button */}
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Button type="submit" size="lg" className="px-8">
+                <Button type="submit" size="lg" className="px-8 btn-enhanced">
                   Submit Case Evaluation
                 </Button>
-                <Button type="button" variant="outline" size="lg" className="px-8">
+                <Button type="button" variant="outline" size="lg" className="px-8 interactive-card">
                   <Phone className="w-4 h-4 mr-2" />
                   Call (818) 123-4567
                 </Button>
@@ -630,6 +633,7 @@ const ElectrocutionCaseEvaluation: React.FC = () => {
             </form>
           </CardContent>
         </Card>
+        </ThreeDVisualEffects>
 
         {/* Contact Information */}
         <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-6">

@@ -12,6 +12,8 @@ import { z } from 'zod';
 import heroBackground from '@/assets/defamation-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const formSchema = z.object({
   firstName: z.string().trim().min(1, "First name is required").max(50, "First name must be less than 50 characters"),

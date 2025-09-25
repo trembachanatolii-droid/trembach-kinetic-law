@@ -5,6 +5,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 import { 
   Phone, 
   Mail, 
@@ -93,16 +95,17 @@ const BusAccidentCaseEvaluation: React.FC = () => {
           
           {/* Form Section */}
           <div className="lg:col-span-2">
-            <Card className="shadow-lg">
-              <CardHeader className="bg-red-50 border-b">
-                <CardTitle className="text-2xl text-red-600 flex items-center">
-                  <FileText className="w-6 h-6 mr-3" />
-                  Bus Accident Case Details
-                </CardTitle>
-                <p className="text-muted-foreground">
-                  Please provide detailed information about your bus accident. This helps us evaluate your case immediately.
-                </p>
-              </CardHeader>
+            <ThreeDVisualEffects>
+              <Card className="shadow-lg premium-form-container interactive-card">
+                <CardHeader className="bg-red-50 border-b">
+                  <CardTitle className="text-2xl text-blue-600 flex items-center font-display">
+                    <FileText className="w-6 h-6 mr-3" />
+                    Bus Accident Case Details
+                  </CardTitle>
+                  <p className="text-white">
+                    Please provide detailed information about your bus accident. This helps us evaluate your case immediately.
+                  </p>
+                </CardHeader>
               
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -278,13 +281,14 @@ const BusAccidentCaseEvaluation: React.FC = () => {
 
                   <Button 
                     type="submit"
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4 text-lg"
+                    className="w-full btn-enhanced font-bold py-4 text-lg"
                   >
                     SUBMIT MY CASE FOR EVALUATION
                   </Button>
                 </form>
               </CardContent>
             </Card>
+            </ThreeDVisualEffects>
           </div>
 
           {/* Sidebar */}

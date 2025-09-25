@@ -7,6 +7,8 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 import { 
   Phone, 
   Mail, 
@@ -244,18 +246,19 @@ Please provide comprehensive case evaluation and next steps.
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Form */}
             <div className="lg:col-span-2">
-              <Card className="shadow-xl">
-                <CardHeader>
-                  <CardTitle className="text-2xl font-bold text-gray-900">
-                    {currentStep === 1 && "Personal & Contact Information"}
-                    {currentStep === 2 && "Incident Details"}
-                    {currentStep === 3 && "Financial & Legal Information"}
-                    {currentStep === 4 && "Case Description & Priority"}
-                  </CardTitle>
-                  <p className="text-gray-600">
-                    Step {currentStep} of 4 - All information is confidential and protected by attorney-client privilege.
-                  </p>
-                </CardHeader>
+              <ThreeDVisualEffects>
+                <Card className="shadow-xl premium-form-container interactive-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-bold text-blue-600 font-display">
+                      {currentStep === 1 && "Personal & Contact Information"}
+                      {currentStep === 2 && "Incident Details"}
+                      {currentStep === 3 && "Financial & Legal Information"}
+                      {currentStep === 4 && "Case Description & Priority"}
+                    </CardTitle>
+                    <p className="text-white">
+                      Step {currentStep} of 4 - All information is confidential and protected by attorney-client privilege.
+                    </p>
+                  </CardHeader>
                 
                 <CardContent>
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -558,6 +561,7 @@ Please provide comprehensive case evaluation and next steps.
                   </form>
                 </CardContent>
               </Card>
+              </ThreeDVisualEffects>
             </div>
 
             {/* Sidebar */}

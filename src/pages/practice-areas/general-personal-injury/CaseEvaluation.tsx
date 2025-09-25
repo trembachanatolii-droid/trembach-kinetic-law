@@ -10,6 +10,8 @@ import { Phone, Mail, Clock, Shield, Users, Award } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/personal-injury-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const CaseEvaluation: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -150,17 +152,18 @@ const CaseEvaluation: React.FC = () => {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>
-                {currentStep === 1 && "Basic Information"}
-                {currentStep === 2 && "Accident Details"}
-                {currentStep === 3 && "Injury & Medical Information"}
-                {currentStep === 4 && "Other Parties & Insurance"}
-                {currentStep === 5 && "Additional Information & Consent"}
-              </CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <ThreeDVisualEffects>
+            <Card className="premium-form-container interactive-card">
+              <CardHeader>
+                <CardTitle className="text-blue-600 font-display">
+                  {currentStep === 1 && "Basic Information"}
+                  {currentStep === 2 && "Accident Details"}
+                  {currentStep === 3 && "Injury & Medical Information"}
+                  {currentStep === 4 && "Other Parties & Insurance"}
+                  {currentStep === 5 && "Additional Information & Consent"}
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
               
               {/* Step 1: Basic Information */}
               {currentStep === 1 && (
@@ -472,10 +475,11 @@ const CaseEvaluation: React.FC = () => {
                   </div>
                 </>
               )}
-            </CardContent>
-          </Card>
+             </CardContent>
+           </Card>
+           </ThreeDVisualEffects>
 
-          {/* Navigation Buttons */}
+           {/* Navigation Buttons */}
           <div className="flex justify-between">
             <Button 
               type="button" 
@@ -504,8 +508,8 @@ const CaseEvaluation: React.FC = () => {
                 Submit Case Evaluation
               </Button>
             )}
-          </div>
-        </form>
+           </div>
+         </form>
 
         {/* Contact Information */}
         <div className="mt-12 bg-muted p-8 rounded-lg text-center">

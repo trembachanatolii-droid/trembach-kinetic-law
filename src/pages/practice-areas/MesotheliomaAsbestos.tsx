@@ -6,10 +6,9 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Progress } from '@/components/ui/progress';
 import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
@@ -374,9 +373,9 @@ const MesotheliomaAsbestos: React.FC = () => {
               <ThreeDVisualEffects className="premium-3d-container">
                 <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl font-display text-white mb-2">Get Your Free Mesothelioma Consultation</h3>
-                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
-                    <p className="text-blue-100 text-lg">Specialized evaluation for asbestos-related cases throughout California</p>
+                    <h3 className="text-2xl md:text-3xl font-display text-foreground mb-2">Get Your Free Mesothelioma Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full mx-auto mb-4"></div>
+                    <p className="text-foreground text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
                   </div>
 
                   {/* Progress Bar */}

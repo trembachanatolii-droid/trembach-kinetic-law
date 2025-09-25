@@ -64,6 +64,10 @@ const AmputationInjuries: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     accidentDate: '',
     injuryType: '',
     accidentLocation: '',
@@ -129,7 +133,8 @@ const AmputationInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/amputation-case-evaluation';
+    console.log('Form submitted:', formData);
+    alert('Thank you! We will contact you within 24 hours for your free case evaluation.');
   };
 
   const toggleFaq = (index: number) => {
@@ -462,20 +467,119 @@ const AmputationInjuries: React.FC = () => {
                     <p className="text-lg mb-6">
                       Every amputation case is unique and requires careful evaluation to determine the full extent of damages and liability. Our comprehensive case evaluation examines all aspects of your injury and its impact on your life.
                     </p>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      <Link to="/amputation-case-evaluation">
-                        <Button className="w-full h-16 text-lg bg-blue-600 hover:bg-blue-700">
-                          <ClipboardCheck className="w-5 h-5 mr-2" />
-                          Start Case Evaluation
-                        </Button>
-                      </Link>
-                      <Link to="/amputation-compensation-calculator">
-                        <Button variant="outline" className="w-full h-16 text-lg border-blue-600 text-blue-600 hover:bg-blue-50">
-                          <Calculator className="w-5 h-5 mr-2" />
-                          Calculate Compensation
-                        </Button>
-                      </Link>
+                <form onSubmit={handleFormSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">First Name *</label>
+                      <Input
+                        value={formData.firstName}
+                        onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                        placeholder="Your first name"
+                        required
+                      />
                     </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Last Name *</label>
+                      <Input
+                        value={formData.lastName}
+                        onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                        placeholder="Your last name"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Email *</label>
+                      <Input
+                        type="email"
+                        value={formData.email}
+                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                        placeholder="your.email@example.com"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Phone *</label>
+                      <Input
+                        type="tel"
+                        value={formData.phone}
+                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                        placeholder="(555) 123-4567"
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Accident Date</label>
+                      <Input
+                        type="date"
+                        value={formData.accidentDate}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Injury Type</label>
+                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="finger">Finger/Thumb</SelectItem>
+                          <SelectItem value="hand">Hand</SelectItem>
+                          <SelectItem value="arm-below">Below-Elbow Arm</SelectItem>
+                          <SelectItem value="arm-above">Above-Elbow Arm</SelectItem>
+                          <SelectItem value="toe">Toe</SelectItem>
+                          <SelectItem value="foot">Foot</SelectItem>
+                          <SelectItem value="leg-below">Below-Knee Leg</SelectItem>
+                          <SelectItem value="leg-above">Above-Knee Leg</SelectItem>
+                          <SelectItem value="multiple">Multiple Limbs</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Accident Location</label>
+                      <Input
+                        value={formData.accidentLocation}
+                        onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
+                        placeholder="Where did the accident occur?"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Amputation Type</label>
+                      <Select value={formData.amputationType} onValueChange={(value) => setFormData(prev => ({ ...prev, amputationType: value }))}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select amputation type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="traumatic">Traumatic</SelectItem>
+                          <SelectItem value="surgical">Surgical</SelectItem>
+                          <SelectItem value="congenital">Congenital</SelectItem>
+                          <SelectItem value="disease">Disease-related</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Medical Treatment Received</label>
+                    <Input
+                      value={formData.medicalTreatment}
+                      onChange={(e) => setFormData(prev => ({ ...prev, medicalTreatment: e.target.value }))}
+                      placeholder="Describe treatment received"
+                    />
+                  </div>
+
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-lg py-3">
+                    Get My Free Case Evaluation
+                  </Button>
+                </form>
                   </CardContent>
                 </Card>
               </section>

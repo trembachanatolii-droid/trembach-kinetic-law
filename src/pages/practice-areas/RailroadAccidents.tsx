@@ -35,7 +35,7 @@ import heroBackground from '@/assets/railroad-hero-bg.jpg';
 import sidebarImage from '@/assets/railroad-sidebar.jpg';
 import diagnosisProcessImage from '@/assets/railroad-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/railroad-legal-process.jpg';
-import felaClaimsImage from '@/assets/railroad-fela-claims.jpg';
+import felaClaimsImage from '@/assets/fela-claims-professional.jpg';
 import exposureSitesImage from '@/assets/california-railroad-sites.jpg';
 import medicalImage from '@/assets/railroad-medical-facility.jpg';
 import compensationImage from '@/assets/railroad-compensation-calculator.jpg';
@@ -546,7 +546,7 @@ const RailroadAccidents: React.FC = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="mb-6">
-                    <img src={felaClaimsImage} alt="FELA Claims Documentation" className="w-full h-64 object-cover rounded-lg mb-4" />
+                    <img src={felaClaimsImage} alt="Professional railroad tracks and railway infrastructure" className="w-full h-64 object-cover rounded-lg mb-4" />
                   </div>
                   
                   <div className="prose prose-lg max-w-none mb-6">

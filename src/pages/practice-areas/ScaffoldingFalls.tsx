@@ -33,10 +33,10 @@ import {
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/scaffolding-falls-hero-bg.jpg';
 import sidebarImage from '@/assets/scaffolding-sidebar.jpg';
-import diagnosisImage from '@/assets/scaffolding-diagnosis-process.jpg';
-import legalProcessImage from '@/assets/scaffolding-legal-process.jpg';
-import safetyEquipmentImage from '@/assets/scaffolding-safety-equipment.jpg';
-import compensationImage from '@/assets/scaffolding-compensation-calculator.jpg';
+import diagnosisImage from '@/assets/scaffolding-medical.jpg';
+import legalProcessImage from '@/assets/scaffolding-legal-rights.jpg';
+import equipmentImage from '@/assets/scaffolding-equipment.jpg';
+import compensationImage from '@/assets/scaffolding-compensation.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -690,7 +690,7 @@ const ScaffoldingFalls: React.FC = () => {
             <section id="diagnosis-process" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Scaffolding Accident Investigation Process</h2>
               
-              <img src={safetyEquipmentImage} alt="Scaffolding safety equipment and investigation" className="w-full h-64 object-cover rounded-lg mb-6" />
+              <img src={equipmentImage} alt="Scaffolding safety equipment and investigation" className="w-full h-64 object-cover rounded-lg mb-6" />
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                 <Card>
@@ -1017,21 +1017,21 @@ const ScaffoldingFalls: React.FC = () => {
                 <CardContent className="space-y-2">
                   <Button 
                     variant="link" 
-                    className="p-0 h-auto text-left justify-start w-full"
+                    className="p-0 h-auto text-left justify-start w-full text-primary hover:!text-primary"
                     onClick={() => window.location.href = '/practice-areas/scaffolding-falls/compensation-calculator'}
                   >
                     Compensation Calculator
                   </Button>
                   <Button 
                     variant="link" 
-                    className="p-0 h-auto text-left justify-start w-full"
+                    className="p-0 h-auto text-left justify-start w-full text-primary hover:!text-primary"
                     onClick={() => window.location.href = '/practice-areas/scaffolding-falls/legal-guidance'}
                   >
                     Legal Guidance
                   </Button>
                   <Button 
                     variant="link" 
-                    className="p-0 h-auto text-left justify-start w-full"
+                    className="p-0 h-auto text-left justify-start w-full text-primary hover:!text-primary"
                     onClick={() => window.location.href = '/practice-areas/scaffolding-falls/case-evaluation'}
                   >
                     Case Evaluation
@@ -1042,6 +1042,24 @@ const ScaffoldingFalls: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Bottom CTA - Phase 8: Time Limits Apply Section */}
+      <section className="bg-gray-900 text-white py-16">
+        <div className="max-w-4xl mx-auto text-center px-6">
+          <h2 className="text-4xl md:text-5xl font-bold mb-2">Don't Wait - Time Limits Apply for California Scaffolding Falls Claims</h2>
+          <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
+          <p className="text-xl mb-12 leading-relaxed">California law has strict deadlines for filing scaffolding accident claims. Contact us today for your free consultation.</p>
+          <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
+            <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
+              <span className="text-primary-foreground hover:!text-primary-foreground">CALL (818) 123-4567</span>
+            </Button>
+            
+            <Button size="lg" aria-label="Start Free Case Evaluation" className="w-full bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = '/practice-areas/scaffolding-falls/case-evaluation'}>
+              <span className="text-primary-foreground hover:!text-primary-foreground">START MY FREE CASE EVALUATION</span>
+            </Button>
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

@@ -9,6 +9,9 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Defamation from "./pages/practice-areas/Defamation";
+import DefamationCaseEvaluation from "./pages/practice-areas/defamation/CaseEvaluation";
+import DefamationCompensationCalculator from "./pages/practice-areas/defamation/CompensationCalculator";
+import DefamationLegalGuidance from "./pages/practice-areas/defamation/LegalGuidance";
 import CraneAccidents from "./pages/practice-areas/CraneAccidents";
 import CraneAccidentsCaseEvaluation from "./pages/practice-areas/crane-accidents/CaseEvaluation";
 import CraneAccidentsCompensationCalculator from "./pages/practice-areas/crane-accidents/CompensationCalculator";
@@ -256,6 +259,9 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/defamation" element={<Defamation />} />
+            <Route path="/practice-areas/defamation/case-evaluation" element={<DefamationCaseEvaluation />} />
+            <Route path="/practice-areas/defamation/compensation-calculator" element={<DefamationCompensationCalculator />} />
+            <Route path="/practice-areas/defamation/legal-guidance" element={<DefamationLegalGuidance />} />
             <Route path="/practice-areas/crane-accidents" element={<CraneAccidents />} />
             <Route path="/practice-areas/crane-accidents/case-evaluation" element={<CraneAccidentsCaseEvaluation />} />
             <Route path="/practice-areas/crane-accidents/compensation-calculator" element={<CraneAccidentsCompensationCalculator />} />

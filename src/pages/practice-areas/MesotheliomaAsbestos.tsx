@@ -5,8 +5,15 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
+import { Progress } from '@/components/ui/progress';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
 import { 
   Phone, 
   Mail, 
@@ -25,8 +32,12 @@ import {
   Stethoscope,
   Building,
   Map,
-  ArrowLeft
+  ArrowLeft,
+  ChevronLeft,
+  ChevronRight,
+  CheckCircle
 } from 'lucide-react';
+import '@/styles/premium-3d-effects.css';
 import heroBackground from '@/assets/mesothelioma-hero-bg.jpg';
 import sidebarImage from '@/assets/mesothelioma-sidebar.jpg';
 import diagnosisImage from '@/assets/mesothelioma-diagnosis-process.jpg';
@@ -47,9 +58,32 @@ const MesotheliomaAsbestos: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
+  const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({
+    // Personal Information
+    firstName: '',
+    lastName: '',
+    phone: '',
+    email: '',
+    
+    // Medical Information
     diagnosisDate: '',
-    cancerType: ''
+    cancerType: '',
+    diagnosingPhysician: '',
+    currentTreatment: '',
+    symptoms: [] as string[],
+    
+    // Exposure Information
+    exposureType: '',
+    workHistory: '',
+    exposureLocation: '',
+    exposureDuration: '',
+    militaryService: '',
+    
+    // Legal Information
+    previousClaim: '',
+    statute: '',
+    urgency: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -109,8 +143,34 @@ const MesotheliomaAsbestos: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to case evaluation
-    window.location.href = '/case-evaluation';
+    
+    // Log form data (in real app, this would be sent to server)
+    console.log('Mesothelioma Case Evaluation Submitted:', formData);
+    
+    // Show success message and potentially redirect
+    alert('Your case evaluation has been submitted. We will contact you within 24 hours.');
+    
+    // Reset form
+    setCurrentStep(1);
+    setFormData({
+      firstName: '',
+      lastName: '',
+      phone: '',
+      email: '',
+      diagnosisDate: '',
+      cancerType: '',
+      diagnosingPhysician: '',
+      currentTreatment: '',
+      symptoms: [],
+      exposureType: '',
+      workHistory: '',
+      exposureLocation: '',
+      exposureDuration: '',
+      militaryService: '',
+      previousClaim: '',
+      statute: '',
+      urgency: ''
+    });
   };
 
   return (
@@ -302,46 +362,381 @@ const MesotheliomaAsbestos: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
-              
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Diagnosis Date</label>
-                      <Input
-                        type="date"
-                        value={formData.diagnosisDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
-                        required
-                      />
+              <div className="flex items-center gap-4 mb-8">
+                <h2 className="text-3xl font-bold text-red-600">Free Case Evaluation</h2>
+                <Badge variant="secondary" className="px-3 py-1 text-sm font-medium">
+                  100% Confidential
+                </Badge>
+                <Badge variant="outline" className="px-3 py-1 text-sm font-medium">
+                  No Cost • No Obligation
+                </Badge>
+              </div>
+
+              <ThreeDVisualEffects className="premium-3d-container">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Mesothelioma Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
+                  </div>
+
+                  {/* Progress Bar */}
+                  <div className="mb-8">
+                    <div className="flex justify-between text-sm text-slate-700 mb-2 font-medium">
+                      <span>Step {currentStep} of 4</span>
+                      <span>{Math.round((currentStep / 4) * 100)}% Complete</span>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Cancer Type</label>
-                      <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select cancer type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="pleural-mesothelioma">Pleural Mesothelioma</SelectItem>
-                          <SelectItem value="peritoneal-mesothelioma">Peritoneal Mesothelioma</SelectItem>
-                          <SelectItem value="pericardial-mesothelioma">Pericardial Mesothelioma</SelectItem>
-                          <SelectItem value="testicular-mesothelioma">Testicular Mesothelioma</SelectItem>
-                          <SelectItem value="lung-cancer">Lung Cancer (Asbestos-Related)</SelectItem>
-                          <SelectItem value="other">Other Asbestos-Related Disease</SelectItem>
-                        </SelectContent>
-                      </Select>
+                    <Progress value={(currentStep / 4) * 100} className="h-3 bg-blue-100">
+                      <div 
+                        className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out"
+                        style={{ width: `${(currentStep / 4) * 100}%` }}
+                      />
+                    </Progress>
+                  </div>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    {/* Step 1: Personal Information */}
+                    {currentStep === 1 && (
+                      <div className="space-y-6 animate-fade-in">
+                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Personal Information</h4>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="firstName" className="text-white text-base font-medium">First Name *</Label>
+                            <Input
+                              id="firstName"
+                              type="text"
+                              value={formData.firstName}
+                              onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                              placeholder="Enter your first name"
+                              required
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="lastName" className="text-white text-base font-medium">Last Name *</Label>
+                            <Input
+                              id="lastName"
+                              type="text"
+                              value={formData.lastName}
+                              onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                              placeholder="Enter your last name"
+                              required
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="phone" className="text-white text-base font-medium">Phone Number *</Label>
+                            <Input
+                              id="phone"
+                              type="tel"
+                              value={formData.phone}
+                              onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                              placeholder="(555) 123-4567"
+                              required
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="email" className="text-white text-base font-medium">Email Address</Label>
+                            <Input
+                              id="email"
+                              type="email"
+                              value={formData.email}
+                              onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                              placeholder="your.email@example.com"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 2: Medical Information */}
+                    {currentStep === 2 && (
+                      <div className="space-y-6 animate-fade-in">
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Medical Information</h4>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="space-y-2">
+                            <Label htmlFor="diagnosisDate" className="text-slate-800">Diagnosis Date *</Label>
+                            <Input
+                              id="diagnosisDate"
+                              type="date"
+                              value={formData.diagnosisDate}
+                              onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
+                              className="bg-white border-blue-200 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12"
+                              required
+                            />
+                          </div>
+                          <div className="space-y-2">
+                            <Label htmlFor="cancerType" className="text-slate-800">Cancer Type *</Label>
+                            <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
+                              <SelectTrigger className="bg-white border-blue-200 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12">
+                                <SelectValue placeholder="Select cancer type" />
+                              </SelectTrigger>
+                              <SelectContent className="z-50 bg-white text-slate-900 shadow-xl border border-blue-200">
+                                <SelectItem value="pleural-mesothelioma">Pleural Mesothelioma</SelectItem>
+                                <SelectItem value="peritoneal-mesothelioma">Peritoneal Mesothelioma</SelectItem>
+                                <SelectItem value="pericardial-mesothelioma">Pericardial Mesothelioma</SelectItem>
+                                <SelectItem value="testicular-mesothelioma">Testicular Mesothelioma</SelectItem>
+                                <SelectItem value="lung-cancer">Lung Cancer (Asbestos-Related)</SelectItem>
+                                <SelectItem value="asbestosis">Asbestosis</SelectItem>
+                                <SelectItem value="other">Other Asbestos-Related Disease</SelectItem>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label htmlFor="diagnosingPhysician" className="text-slate-800">Diagnosing Physician/Hospital</Label>
+                          <Input
+                            id="diagnosingPhysician"
+                            type="text"
+                            value={formData.diagnosingPhysician}
+                            onChange={(e) => setFormData(prev => ({ ...prev, diagnosingPhysician: e.target.value }))}
+                            className="bg-white border-blue-200 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12"
+                            placeholder="Doctor or hospital name"
+                          />
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-slate-800">Current Symptoms</Label>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <button type="button" className="w-full h-12 px-3 inline-flex items-center justify-between rounded-md bg-white border border-blue-200 text-slate-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500/30">
+                                <span className="truncate text-left">
+                                  {formData.symptoms.length ? `${formData.symptoms.length} selected` : 'Select symptoms'}
+                                </span>
+                                <ChevronDown className="w-4 h-4 text-slate-700" />
+                              </button>
+                            </PopoverTrigger>
+                            <PopoverContent className="z-50 w-[320px] p-2 bg-white border border-blue-200 shadow-xl rounded-md">
+                              <div className="grid gap-2 max-h-64 overflow-auto">
+                                {[
+                                  'Chest pain',
+                                  'Shortness of breath',
+                                  'Persistent cough',
+                                  'Weight loss',
+                                  'Fatigue',
+                                  'Abdominal pain',
+                                  'Nausea',
+                                  'Fluid buildup'
+                                ].map((symptom) => (
+                                  <label key={symptom} className="flex items-center gap-3 px-2 py-2 rounded hover:bg-blue-50 text-slate-900">
+                                    <Checkbox
+                                      checked={formData.symptoms.includes(symptom)}
+                                      onCheckedChange={(checked) => {
+                                        if (checked) {
+                                          setFormData(prev => ({ ...prev, symptoms: [...prev.symptoms, symptom] }));
+                                        } else {
+                                          setFormData(prev => ({ ...prev, symptoms: prev.symptoms.filter(s => s !== symptom) }));
+                                        }
+                                      }}
+                                      className="border-blue-300 text-blue-600"
+                                    />
+                                    <span className="text-sm">{symptom}</span>
+                                  </label>
+                                ))}
+                              </div>
+                            </PopoverContent>
+                          </Popover>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3: Exposure Information */}
+                    {currentStep === 3 && (
+                      <div className="space-y-6 animate-fade-in">
+                        <h4 className="text-xl md:text-2xl font-bold text-slate-900 mb-6">Asbestos Exposure Information</h4>
+                        
+                        <div className="space-y-4">
+                          <Label className="text-slate-900 text-base font-medium">Primary exposure type *</Label>
+                          <Select value={formData.exposureType} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureType: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select primary exposure type" className="text-slate-500" />
+                             </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="occupational" className="text-gray-900 hover:bg-blue-50">Occupational (workplace exposure)</SelectItem>
+                              <SelectItem value="military" className="text-gray-900 hover:bg-blue-50">Military service</SelectItem>
+                              <SelectItem value="secondary" className="text-gray-900 hover:bg-blue-50">Secondary (family member exposure)</SelectItem>
+                              <SelectItem value="product" className="text-gray-900 hover:bg-blue-50">Consumer products (talc, insulation, etc.)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-slate-900 text-base font-medium">Where did exposure occur? *</Label>
+                           <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select exposure location" className="text-slate-500" />
+                             </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="california-shipyard" className="text-gray-900 hover:bg-blue-50">California Shipyard</SelectItem>
+                              <SelectItem value="construction-site" className="text-gray-900 hover:bg-blue-50">Construction Site</SelectItem>
+                              <SelectItem value="power-plant" className="text-gray-900 hover:bg-blue-50">Power Plant</SelectItem>
+                              <SelectItem value="refinery" className="text-gray-900 hover:bg-blue-50">Oil Refinery</SelectItem>
+                              <SelectItem value="aerospace" className="text-gray-900 hover:bg-blue-50">Aerospace Facility</SelectItem>
+                              <SelectItem value="naval-base" className="text-gray-900 hover:bg-blue-50">Naval Base</SelectItem>
+                              <SelectItem value="manufacturing" className="text-gray-900 hover:bg-blue-50">Manufacturing Plant</SelectItem>
+                              <SelectItem value="home" className="text-gray-900 hover:bg-blue-50">Home/Residence</SelectItem>
+                              <SelectItem value="other" className="text-gray-900 hover:bg-blue-50">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-slate-900 text-base font-medium">Primary job/occupation during exposure</Label>
+                           <Select value={formData.workHistory} onValueChange={(value) => setFormData(prev => ({ ...prev, workHistory: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select your primary occupation" className="text-slate-500" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="construction-worker" className="text-gray-900 hover:bg-blue-50">Construction Worker</SelectItem>
+                              <SelectItem value="shipyard-worker" className="text-gray-900 hover:bg-blue-50">Shipyard Worker</SelectItem>
+                              <SelectItem value="navy-personnel" className="text-gray-900 hover:bg-blue-50">Navy Personnel</SelectItem>
+                              <SelectItem value="electrician" className="text-gray-900 hover:bg-blue-50">Electrician</SelectItem>
+                              <SelectItem value="plumber" className="text-gray-900 hover:bg-blue-50">Plumber</SelectItem>
+                              <SelectItem value="mechanic" className="text-gray-900 hover:bg-blue-50">Mechanic</SelectItem>
+                              <SelectItem value="insulation-worker" className="text-gray-900 hover:bg-blue-50">Insulation Worker</SelectItem>
+                              <SelectItem value="boilermaker" className="text-gray-900 hover:bg-blue-50">Boilermaker</SelectItem>
+                              <SelectItem value="firefighter" className="text-gray-900 hover:bg-blue-50">Firefighter</SelectItem>
+                              <SelectItem value="teacher" className="text-gray-900 hover:bg-blue-50">Teacher</SelectItem>
+                              <SelectItem value="family-member" className="text-gray-900 hover:bg-blue-50">Family Member (Secondary Exposure)</SelectItem>
+                              <SelectItem value="other" className="text-gray-900 hover:bg-blue-50">Other Occupation</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-slate-900 text-base font-medium">Duration of exposure</Label>
+                           <Select value={formData.exposureDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureDuration: value }))}>
+                             <SelectTrigger className="bg-white border border-blue-300 text-slate-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base">
+                               <SelectValue placeholder="Select exposure duration" className="text-slate-500" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="less-than-1-year" className="text-gray-900 hover:bg-blue-50">Less than 1 year</SelectItem>
+                              <SelectItem value="1-5-years" className="text-gray-900 hover:bg-blue-50">1-5 years</SelectItem>
+                              <SelectItem value="5-10-years" className="text-gray-900 hover:bg-blue-50">5-10 years</SelectItem>
+                              <SelectItem value="10-20-years" className="text-gray-900 hover:bg-blue-50">10-20 years</SelectItem>
+                              <SelectItem value="more-than-20-years" className="text-gray-900 hover:bg-blue-50">More than 20 years</SelectItem>
+                              <SelectItem value="unknown" className="text-gray-900 hover:bg-blue-50">Unknown</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 4: Legal Information */}
+                    {currentStep === 4 && (
+                      <div className="space-y-6 animate-fade-in">
+                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Legal Information</h4>
+                        
+                        <div className="space-y-4">
+                          <Label className="text-white text-base font-medium">Have you previously filed an asbestos-related claim?</Label>
+                          <Select value={formData.previousClaim} onValueChange={(value) => setFormData(prev => ({ ...prev, previousClaim: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select previous claim status" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="no" className="text-gray-900 hover:bg-blue-50">No</SelectItem>
+                              <SelectItem value="yes" className="text-gray-900 hover:bg-blue-50">Yes</SelectItem>
+                              <SelectItem value="unsure" className="text-gray-900 hover:bg-blue-50">Unsure</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-4">
+                          <Label className="text-white text-base font-medium">How urgent is your situation?</Label>
+                          <Select value={formData.urgency} onValueChange={(value) => setFormData(prev => ({ ...prev, urgency: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select urgency level" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="very-urgent" className="text-red-700 hover:bg-red-50 font-semibold">Very urgent - need immediate assistance</SelectItem>
+                              <SelectItem value="urgent" className="text-orange-700 hover:bg-orange-50 font-medium">Urgent - within the next few weeks</SelectItem>
+                              <SelectItem value="normal" className="text-gray-900 hover:bg-blue-50">Normal - gathering information</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="bg-blue-900/40 p-6 rounded-lg border border-blue-400/30">
+                          <div className="flex items-start space-x-3">
+                            <CheckCircle className="w-6 h-6 text-green-400 mt-1 flex-shrink-0" />
+                            <div>
+                              <h5 className="font-bold text-white mb-2 text-lg">Your information is protected</h5>
+                              <p className="text-blue-100 text-base leading-relaxed">
+                                All information you provide is confidential and protected by attorney-client privilege. 
+                                We will never share your information with third parties.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Navigation Buttons */}
+                    <div className="flex justify-between pt-6 border-t border-blue-400/20">
+                      {currentStep > 1 && (
+                        <Button 
+                          type="button"
+                          variant="outline"
+                          onClick={() => setCurrentStep(prev => prev - 1)}
+                          className="btn-enhanced bg-white/10 border-blue-300/30 text-white hover:bg-white/20"
+                        >
+                          <ChevronLeft className="w-4 h-4 mr-2" />
+                          Previous
+                        </Button>
+                      )}
+                      
+                      {currentStep < 4 ? (
+                        <Button 
+                          type="button"
+                          onClick={() => setCurrentStep(prev => prev + 1)}
+                          className="btn-enhanced ml-auto bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white font-semibold"
+                        >
+                          Continue
+                          <ChevronRight className="w-4 h-4 ml-2" />
+                        </Button>
+                      ) : (
+                        <Button 
+                          type="submit"
+                          className="btn-enhanced ml-auto bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white font-semibold"
+                        >
+                          Submit Case Evaluation
+                          <CheckCircle className="w-4 h-4 ml-2" />
+                        </Button>
+                      )}
+                    </div>
+                  </form>
+
+                  {/* Contact Information */}
+                  <div className="mt-8 pt-8 border-t border-blue-400/20">
+                    <div className="text-center">
+                      <p className="text-blue-100 mb-4">Need immediate assistance? Call us now:</p>
+                      <div className="flex justify-center gap-6 text-sm">
+                        <a 
+                          href="tel:+1234567890" 
+                          className="flex items-center gap-2 text-blue-300 hover:text-white transition-colors"
+                        >
+                          <Phone className="w-4 h-4" />
+                          (123) 456-7890
+                        </a>
+                        <a 
+                          href="mailto:info@trembachlaw.com" 
+                          className="flex items-center gap-2 text-blue-300 hover:text-white transition-colors"
+                        >
+                          <Mail className="w-4 h-4" />
+                          Email Us
+                        </a>
+                      </div>
                     </div>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
+                </div>
+              </ThreeDVisualEffects>
             </section>
 
             {/* What to Do After Diagnosis */}

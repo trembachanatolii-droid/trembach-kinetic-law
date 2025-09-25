@@ -10,6 +10,8 @@ import { FileText, Shield, Clock, CheckCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import caseEvaluationHero from '@/assets/case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const SilicosisCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({

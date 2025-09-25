@@ -25,6 +25,8 @@ import { useToast } from '@/hooks/use-toast';
 import heroBackground from '@/assets/practice-areas/workplace-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const WorkplaceInjuriesCaseEvaluation: React.FC = () => {
   const { toast } = useToast();

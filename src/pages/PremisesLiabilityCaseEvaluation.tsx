@@ -19,6 +19,8 @@ import {
   CheckCircle
 } from 'lucide-react';
 import heroBackground from '@/assets/case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const PremisesLiabilityCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({

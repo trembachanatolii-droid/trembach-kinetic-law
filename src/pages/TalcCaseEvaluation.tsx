@@ -11,6 +11,8 @@ import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/talc-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const TalcCaseEvaluation = () => {
   const [formData, setFormData] = useState({

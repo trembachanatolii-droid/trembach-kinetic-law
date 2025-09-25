@@ -22,6 +22,8 @@ import {
   CheckCircle
 } from 'lucide-react';
 import heroImage from '@/assets/sexual-abuse-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

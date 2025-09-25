@@ -23,6 +23,8 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/birth-injuries-hero-bg.jpg';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

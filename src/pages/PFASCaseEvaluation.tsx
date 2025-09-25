@@ -7,6 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Phone, Mail } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-hero-bg.jpg';
+import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const PFASCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +27,7 @@ const PFASCaseEvaluation: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('PFAS Case Evaluation Submitted:', formData);
     alert('Thank you for contacting Trembach Law Firm! We will review your PFAS exposure case and contact you within 24 hours.');
   };
 

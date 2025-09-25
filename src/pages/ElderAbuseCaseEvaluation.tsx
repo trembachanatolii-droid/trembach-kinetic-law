@@ -8,6 +8,9 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { ArrowLeft, Phone, Mail, MessageCircle, Shield, Heart, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import elderAbuseCaseEvaluationHero from '@/assets/elder-abuse-case-evaluation-hero.jpg';
+import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 interface GoBackProps {
   onGoBack?: () => void;

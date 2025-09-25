@@ -514,6 +514,12 @@ function App() {
             <Route path="/practice-areas/scaffolding-falls/compensation-calculator" element={<ScaffoldingFallsCompensationCalculator />} />
             <Route path="/practice-areas/scaffolding-falls/legal-guidance" element={<ScaffoldingFallsLegalGuidance />} />
             
+            {/* Railroad Accidents Routes */}
+            <Route path="/practice-areas/railroad-accidents" element={<RailroadAccidents />} />
+            <Route path="/practice-areas/railroad-accidents/case-evaluation" element={<RailroadAccidentsCaseEvaluation />} />
+            <Route path="/practice-areas/railroad-accidents/compensation-calculator" element={<RailroadAccidentsCompensationCalculator />} />
+            <Route path="/practice-areas/railroad-accidents/legal-guidance" element={<RailroadAccidentsLegalGuidance />} />
+            
             {/* Paralysis Routes also need to be in PracticeAreaRouter */}
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
             

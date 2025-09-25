@@ -3,24 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
-import { 
-  Scale, 
-  Shield, 
-  FileText, 
-  AlertTriangle, 
-  Clock, 
-  DollarSign, 
-  CheckCircle, 
-  Users, 
-  Building,
-  ChevronDown,
-  ChevronUp,
-  Phone,
-  Gavel,
-  BookOpen,
-  Award,
-  Target
-} from 'lucide-react';
+import { Scale, Shield, FileText, AlertTriangle, Clock, DollarSign, CheckCircle, Users, Building, ChevronDown, ChevronUp, Phone, Gavel, BookOpen, Award, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
@@ -29,37 +12,28 @@ import heroBackground from '@/assets/practice-areas/retail-legal-guidance-hero.j
 import legalConsultationImage from '@/assets/practice-areas/legal-consultation-retail.jpg';
 import californiaLawImage from '@/assets/practice-areas/california-premises-law.jpg';
 import retailStoreHazardsImage from '@/assets/practice-areas/retail-store-hazards.jpg';
-
 const LegalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
-  return (
-    <div className="retail-accidents-page">
+  return <div className="retail-accidents-page">
       {/* 3D Background Layers */}
       <div className="floating-layer-back"></div>
       <div className="floating-layer-mid"></div>
       <div className="floating-layer-front"></div>
       
-      <SEO
-        title="Retail Store Accident Legal Guidance | California Law | Trembach Law Firm"
-        description="Complete guide to California retail store accident law, your rights, and legal options. Expert guidance from former defense attorney."
-        keywords="California retail accident law, premises liability guide, shopping injury rights, store accident legal help"
-      />
+      <SEO title="Retail Store Accident Legal Guidance | California Law | Trembach Law Firm" description="Complete guide to California retail store accident law, your rights, and legal options. Expert guidance from former defense attorney." keywords="California retail accident law, premises liability guide, shopping injury rights, store accident legal help" />
 
       <GoBack fallbackPath="/practice-areas/retail-accidents" />
 
       {/* Hero Section */}
-      <section 
-        className="relative h-[500px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section className="relative h-[500px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative z-10 text-center text-white max-w-5xl mx-auto px-6">
           <h1 className="text-4xl md:text-6xl font-bold mb-6 text-white">
@@ -75,9 +49,7 @@ const LegalGuidance: React.FC = () => {
               </Link>
             </Button>
             <Button asChild variant="outline" className="bg-white/10 text-white border-white hover:bg-white hover:!text-primary font-bold px-8 py-4 text-lg backdrop-blur-sm">
-              <a href="tel:(818) 123-4567">
-                Call (818) 123-4567
-              </a>
+              
             </Button>
           </div>
         </div>
@@ -140,11 +112,7 @@ const LegalGuidance: React.FC = () => {
                       ordinary care in managing their property to avoid exposing others to unreasonable risk of harm.
                     </p>
                     
-                    <img 
-                      src={californiaLawImage} 
-                      alt="California courthouse and legal scales representing premises liability law" 
-                      className="w-full h-64 object-cover rounded-lg shadow-lg my-6"
-                    />
+                    <img src={californiaLawImage} alt="California courthouse and legal scales representing premises liability law" className="w-full h-64 object-cover rounded-lg shadow-lg my-6" />
                     
                     <p className="text-lg leading-relaxed">
                       For retail establishments, this duty extends beyond basic maintenance to include regular inspections, 
@@ -297,11 +265,7 @@ const LegalGuidance: React.FC = () => {
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-6">
-                  <img 
-                    src={retailStoreHazardsImage} 
-                    alt="Retail store interior showing potential safety hazards and premises liability concerns" 
-                    className="w-full h-64 object-cover rounded-lg shadow-lg"
-                  />
+                  <img src={retailStoreHazardsImage} alt="Retail store interior showing potential safety hazards and premises liability concerns" className="w-full h-64 object-cover rounded-lg shadow-lg" />
                   
                   <div className="space-y-4">
                     <div className="p-4 border-l-4 border-l-primary bg-primary/5">
@@ -613,8 +577,6 @@ const LegalGuidance: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default LegalGuidance;

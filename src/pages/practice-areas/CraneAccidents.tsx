@@ -634,6 +634,190 @@ const CraneAccidents: React.FC = () => {
               </Collapsible>
             </section>
 
+            {/* Accident Investigation Section */}
+            <section id="accident-process" className="content-section mb-12">
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Crane Accident Investigation Process</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+                <Card className="glass-card hover-glow-primary transition-all duration-500 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-foreground">
+                      <HardHat className="w-5 h-5 mr-2 text-primary" />
+                      Immediate Investigation Steps
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-foreground">
+                      <li>• Secure the accident scene and preserve evidence</li>
+                      <li>• Photograph all equipment, conditions, and injuries</li>
+                      <li>• Identify and interview all witnesses</li>
+                      <li>• Collect crane maintenance and inspection records</li>
+                      <li>• Document weather and site conditions</li>
+                      <li>• Preserve operator certification records</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card hover-glow-primary transition-all duration-500 hover:scale-105">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-foreground">
+                      <Wrench className="w-5 h-5 mr-2 text-primary" />
+                      Technical Analysis
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-foreground">
+                      <li>• Crane mechanical inspection and failure analysis</li>
+                      <li>• Load calculation verification and capacity analysis</li>
+                      <li>• Operator competency and certification review</li>
+                      <li>• Safety protocol compliance evaluation</li>
+                      <li>• OSHA regulation adherence assessment</li>
+                      <li>• Expert witness consultation and testimony</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="bg-gradient-to-r from-yellow-50 to-orange-50 p-6 rounded-lg border border-yellow-200 mb-6">
+                <h3 className="text-xl font-bold text-orange-800 mb-3 flex items-center">
+                  <AlertTriangle className="w-5 h-5 mr-2" />
+                  Critical Time-Sensitive Evidence
+                </h3>
+                <p className="text-orange-700 mb-4">
+                  Crane accident evidence can be lost, destroyed, or altered quickly. Immediate action is essential to preserve:
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold text-orange-800 mb-2">Physical Evidence</h4>
+                    <ul className="text-orange-700 space-y-1">
+                      <li>• Crane components and failed parts</li>
+                      <li>• Load and rigging equipment</li>
+                      <li>• Ground conditions and soil samples</li>
+                      <li>• Site layout and obstructions</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-orange-800 mb-2">Documentation</h4>
+                    <ul className="text-orange-700 space-y-1">
+                      <li>• Maintenance and inspection logs</li>
+                      <li>• Operator training and certification</li>
+                      <li>• Safety meeting records</li>
+                      <li>• Weather and site condition reports</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <h2 className="text-4xl font-bold text-red-600 mb-6">Legal Process for Crane Accident Cases</h2>
+              
+              <div className="space-y-6">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-foreground">
+                      <Clock className="w-5 h-5 mr-2 text-primary" />
+                      Phase 1: Immediate Response (First 30 Days)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="prose max-w-none">
+                      <p className="text-foreground mb-4">
+                        Time is critical in crane accident cases. We immediately begin preserving evidence and protecting your rights:
+                      </p>
+                      <ul className="space-y-2 text-foreground">
+                        <li>• Send spoliation letters to preserve evidence</li>
+                        <li>• Conduct independent accident investigation</li>
+                        <li>• Identify all potentially liable parties</li>
+                        <li>• Secure expert witness consultations</li>
+                        <li>• File necessary insurance claims and notices</li>
+                        <li>• Coordinate with medical providers for treatment</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-foreground">
+                      <FileText className="w-5 h-5 mr-2 text-primary" />
+                      Phase 2: Case Development (Months 2-6)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="prose max-w-none">
+                      <p className="text-foreground mb-4">
+                        We build a comprehensive case by gathering evidence and expert analysis:
+                      </p>
+                      <ul className="space-y-2 text-foreground">
+                        <li>• Complete medical evaluation and damage assessment</li>
+                        <li>• File formal lawsuit against all responsible parties</li>
+                        <li>• Conduct depositions of witnesses and defendants</li>
+                        <li>• Expert witness analysis and report preparation</li>
+                        <li>• Discovery of internal company documents</li>
+                        <li>• OSHA investigation review and citation analysis</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-foreground">
+                      <Scale className="w-5 h-5 mr-2 text-primary" />
+                      Phase 3: Resolution (Months 6+)
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="prose max-w-none">
+                      <p className="text-foreground mb-4">
+                        We pursue maximum compensation through settlement negotiations or trial:
+                      </p>
+                      <ul className="space-y-2 text-foreground">
+                        <li>• Mediation and settlement negotiations</li>
+                        <li>• Trial preparation and jury selection</li>
+                        <li>• Expert witness testimony coordination</li>
+                        <li>• Final settlement approval and distribution</li>
+                        <li>• Post-settlement medical lien resolution</li>
+                        <li>• Structured settlement planning if appropriate</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+
+              <div className="bg-gradient-to-r from-red-50 to-orange-50 p-6 rounded-lg border border-red-200 mt-8">
+                <h3 className="text-xl font-bold text-red-800 mb-3 flex items-center">
+                  <Shield className="w-5 h-5 mr-2" />
+                  Why Legal Representation Matters
+                </h3>
+                <p className="text-red-700 mb-4">
+                  Crane accident cases involve complex legal and technical issues that require experienced representation:
+                </p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <h4 className="font-semibold text-red-800 mb-2">Legal Complexity</h4>
+                    <ul className="text-red-700 space-y-1">
+                      <li>• Multiple potentially liable parties</li>
+                      <li>• Complex insurance coverage issues</li>
+                      <li>• Federal and state safety regulations</li>
+                      <li>• Comparative fault considerations</li>
+                    </ul>
+                  </div>
+                  <div>
+                    <h4 className="font-semibold text-red-800 mb-2">Defense Tactics</h4>
+                    <ul className="text-red-700 space-y-1">
+                      <li>• Aggressive insurance company strategies</li>
+                      <li>• Attempts to blame the victim</li>
+                      <li>• Quick settlement offers below true value</li>
+                      <li>• Evidence destruction or alteration</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+
             {/* FAQ Section with 50+ Questions - Improved font sizes */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-4xl font-bold text-red-600 mb-8">Crane Accident FAQ</h2>

@@ -65,7 +65,7 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Railroad Accident Medical Guidance
           </h1>
-          <p className="text-xl text-white/90">Expert medical care comake text whiteordination for railroad accident victims</p>
+          <p className="text-xl text-white">Expert medical care coordination for railroad accident victims</p>
         </div>
       </section>
 

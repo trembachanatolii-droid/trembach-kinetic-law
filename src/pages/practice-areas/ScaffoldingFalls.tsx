@@ -904,7 +904,7 @@ const ScaffoldingFalls: React.FC = () => {
         <div className="max-w-4xl mx-auto text-center px-6">
           <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Scaffolding Falls Claims</h2>
           <div className="w-24 h-1 bg-primary mx-auto mb-6"></div>
-          <p className="text-xl mb-12 leading-relaxed">California law has strict deadlines for filing scaffolding accident claims. Contact us today for your free consultation.</p>
+          <p className="text-xl mb-12 leading-relaxed text-white">California law has strict deadlines for filing scaffolding accident claims. Contact us today for your free consultation.</p>
           <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
             <Button size="lg" aria-label="Call Trembach Law Firm" className="w-full bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
               <span className="text-primary-foreground hover:!text-primary-foreground">CALL (818) 123-4567</span>

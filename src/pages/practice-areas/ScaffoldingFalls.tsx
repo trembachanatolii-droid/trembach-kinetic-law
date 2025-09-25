@@ -35,7 +35,7 @@ import heroBackground from '@/assets/scaffolding-falls-hero-bg.jpg';
 import sidebarImage from '@/assets/scaffolding-sidebar.jpg';
 import diagnosisImage from '@/assets/scaffolding-medical.jpg';
 import legalProcessImage from '@/assets/scaffolding-legal-rights.jpg';
-import equipmentImage from '@/assets/scaffolding-equipment.jpg';
+import equipmentImage from '@/assets/scaffolding-equipment-updated.jpg';
 import compensationImage from '@/assets/scaffolding-compensation.jpg';
 
 gsap.registerPlugin(ScrollTrigger);

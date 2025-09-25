@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Progress } from '@/components/ui/progress';
 import { ArrowLeft, ArrowRight, CheckCircle, Scale, FileText, Clock } from 'lucide-react';
 import { z } from 'zod';
-import heroBackground from '@/assets/defamation-hero-bg.jpg';
+import heroBackground from '@/assets/defamation-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 
@@ -148,7 +148,7 @@ const DefamationCaseEvaluation: React.FC = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="firstName">First Name *</Label>
+                <Label htmlFor="firstName" className="text-base font-medium">First Name *</Label>
                 <Input
                   id="firstName"
                   value={formData.firstName || ''}
@@ -160,7 +160,7 @@ const DefamationCaseEvaluation: React.FC = () => {
               </div>
               
               <div>
-                <Label htmlFor="lastName">Last Name *</Label>
+                <Label htmlFor="lastName" className="text-base font-medium">Last Name *</Label>
                 <Input
                   id="lastName"
                   value={formData.lastName || ''}

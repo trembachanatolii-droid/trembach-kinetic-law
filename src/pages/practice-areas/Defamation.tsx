@@ -513,11 +513,11 @@ const Defamation: React.FC = () => {
                 <h2 className="text-3xl font-bold text-red-600 mb-6">California Defamation Attorneys</h2>
                 
                 <div className="prose prose-lg max-w-none mb-6">
-                  <p className="text-lg leading-relaxed mb-4">
+                  <p className="text-xl leading-relaxed mb-4">
                     Don't let lies destroy what you've built. Our former defense attorney knows how to fight defamation cases and protect your reputation throughout California. For many of us, our reputation is our most valuable asset. In today's digital age, false statements can spread instantly and cause devastating damage to your personal and professional life.
                   </p>
                   
-                  <p className="text-lg leading-relaxed">
+                  <p className="text-xl leading-relaxed">
                     Defamation cases in California can be particularly complex, involving intricate legal standards, strict timelines, and sophisticated defense strategies employed by defendants and their insurance companies. California law defines defamation as the publication of a false statement to a third party that causes harm to another party's reputation.
                   </p>
                 </div>
@@ -582,7 +582,7 @@ const Defamation: React.FC = () => {
                 
                 <div className="bg-muted p-8 rounded-lg">
                   <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                  <p className="mb-6">Provide information about your defamation case to help us understand your situation better.</p>
+                  <p className="mb-6 text-lg">Provide information about your defamation case to help us understand your situation better.</p>
                   
                   <form onSubmit={handleFormSubmit} className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -816,24 +816,20 @@ const Defamation: React.FC = () => {
                 
                 <div className="space-y-4">
                   {faqs.map((faq, index) => (
-                    <Card key={index} className="overflow-hidden">
-                      <button
-                        className="w-full text-left p-6 hover:bg-muted/50 transition-colors"
+                    <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                      <CardHeader 
+                        className="cursor-pointer transition-colors group-hover:bg-primary/5"
                         onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
                       >
-                        <div className="flex justify-between items-center">
-                          <h3 className="font-semibold pr-4">{faq.question}</h3>
-                          {expandedFaq === index ? (
-                            <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
-                          ) : (
-                            <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
-                          )}
-                        </div>
-                      </button>
+                        <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
+                          <span className="text-lg">{faq.question}</span>
+                          {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
+                        </CardTitle>
+                      </CardHeader>
                       {expandedFaq === index && (
-                        <div className="px-6 pb-6">
-                          <p className="text-muted-foreground">{faq.answer}</p>
-                        </div>
+                        <CardContent className="animate-fade-in">
+                          <p className="text-muted-foreground text-base leading-relaxed">{faq.answer}</p>
+                        </CardContent>
                       )}
                     </Card>
                   ))}
@@ -842,10 +838,10 @@ const Defamation: React.FC = () => {
 
               {/* Resources Section */}
               <section id="resources" className="content-section mb-12">
-                <h2 className="text-3xl font-bold text-red-600 mb-6">Additional Resources</h2>
+                <h2 className="text-3xl font-bold text-red-600 mb-6">California Defamation Resources</h2>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card className="group hover:shadow-lg transition-all duration-300">
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={compensationImage} 
@@ -854,20 +850,20 @@ const Defamation: React.FC = () => {
                       />
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">Compensation Calculator</h3>
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">Compensation Calculator</h3>
                       <p className="text-muted-foreground mb-4">
                         Get an estimate of potential damages for your defamation case based on California law and similar cases.
                       </p>
                       <Button 
-                        className="w-full"
+                        className="w-full bg-red-600 hover:bg-red-700 text-white"
                         onClick={() => window.location.href = '/practice-areas/defamation/compensation-calculator'}
                       >
-                        Calculate Damages
+                        <span className="text-white">Calculate Damages</span>
                       </Button>
                     </CardContent>
                   </Card>
 
-                  <Card className="group hover:shadow-lg transition-all duration-300">
+                  <Card className="glass-card group hover-glow-primary transition-all duration-300 hover:scale-105">
                     <div className="aspect-video overflow-hidden">
                       <img 
                         src={medicalImage} 
@@ -876,49 +872,20 @@ const Defamation: React.FC = () => {
                       />
                     </div>
                     <CardContent className="p-6">
-                      <h3 className="text-xl font-semibold mb-2">Legal Guidance</h3>
+                      <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">Legal Guidance</h3>
                       <p className="text-muted-foreground mb-4">
                         Comprehensive guide to California defamation law, your rights, and the legal process.
                       </p>
                       <Button 
                         variant="outline" 
-                        className="w-full"
+                        className="w-full text-primary hover:text-white hover:bg-primary"
                         onClick={() => window.location.href = '/practice-areas/defamation/legal-guidance'}
                       >
-                        Learn Your Rights
+                        <span>Learn Your Rights</span>
                       </Button>
                     </CardContent>
                   </Card>
                 </div>
-              </section>
-
-              {/* Don't Wait Section */}
-              <section className="content-section mb-12">
-                <Card className="bg-red-50 border-red-200">
-                  <CardContent className="p-8 text-center">
-                    <h2 className="text-3xl font-bold text-red-600 mb-4">Don't Wait - Time Limits Apply for California</h2>
-                    <p className="text-lg text-muted-foreground mb-6">
-                      California has a strict one-year statute of limitations for defamation claims. Don't let time run out on your case. Contact us immediately for a free consultation.
-                    </p>
-                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                      <Button 
-                        size="lg" 
-                        className="bg-red-600 hover:bg-red-700"
-                        onClick={() => window.location.href = '/practice-areas/defamation/case-evaluation'}
-                      >
-                        Start My Case Evaluation
-                      </Button>
-                      <Button 
-                        size="lg" 
-                        variant="outline"
-                        className="border-red-300 text-red-600 hover:bg-red-50"
-                        onClick={() => window.location.href = 'tel:8181234567'}
-                      >
-                        Call (818) 123-4567
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
               </section>
             </div>
             
@@ -994,6 +961,34 @@ const Defamation: React.FC = () => {
             </div>
           </div>
         </div>
+
+        {/* Bottom CTA - Don't Wait Section */}
+        <section className="bg-gray-900 text-white py-16">
+          <div className="max-w-4xl mx-auto text-center px-6">
+            <h2 className="text-4xl md:text-5xl font-bold mb-2 text-white">Don't Wait - Time Limits Apply for California Defamation Claims</h2>
+            <div className="w-24 h-1 bg-red-600 mx-auto mb-6"></div>
+            <p className="text-xl mb-12 leading-relaxed text-white">California law gives you only one year from publication to file your defamation claim. Contact us today for your free consultation.</p>
+            <div className="flex flex-col items-center gap-4 max-w-md mx-auto">
+              <Button 
+                size="lg" 
+                aria-label="Call Trembach Law Firm" 
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" 
+                onClick={() => window.location.href = 'tel:8181234567'}
+              >
+                <span className="text-white">CALL (818) 123-4567</span>
+              </Button>
+              
+              <Button 
+                size="lg" 
+                aria-label="Start Free Defamation Case Evaluation" 
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full transition-all duration-300 text-lg" 
+                onClick={() => window.location.href = '/practice-areas/defamation/case-evaluation'}
+              >
+                <span className="text-white">START MY FREE CASE EVALUATION</span>
+              </Button>
+            </div>
+          </div>
+        </section>
       </div>
     </>
   );

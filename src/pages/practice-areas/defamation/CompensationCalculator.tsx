@@ -530,10 +530,10 @@ const DefamationCompensationCalculator: React.FC = () => {
                         </Button>
                         <Button 
                           variant="outline" 
-                          className="w-full border-blue-300 text-blue-600 hover:bg-blue-50"
+                          className="w-full border-blue-300 text-blue-600 hover:bg-blue-50 hover:text-blue-700"
                           onClick={() => window.location.href = 'tel:8181234567'}
                         >
-                          Call (818) 123-4567
+                          <span className="text-blue-600">Call (818) 123-4567</span>
                         </Button>
                       </div>
                     </CardContent>

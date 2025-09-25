@@ -18,7 +18,7 @@ import {
   Eye,
   Users
 } from 'lucide-react';
-import heroBackground from '@/assets/defamation-legal-process.jpg';
+import heroBackground from '@/assets/defamation-legal-guidance-hero.jpg';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 
@@ -753,10 +753,10 @@ Remember: The strength of your evidence often determines the success of your def
                 <Button 
                   size="lg" 
                   variant="outline"
-                  className="border-red-300 text-red-600 hover:bg-red-50 flex-1"
+                  className="border-red-300 text-red-600 hover:bg-red-50 hover:text-red-700 flex-1"
                   onClick={() => window.location.href = 'tel:8181234567'}
                 >
-                  Call (818) 123-4567
+                  <span className="text-red-600">Call (818) 123-4567</span>
                 </Button>
               </div>
 

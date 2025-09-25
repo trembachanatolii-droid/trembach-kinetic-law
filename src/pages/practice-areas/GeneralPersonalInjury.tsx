@@ -29,6 +29,7 @@ import ThreeDVisualEffects from '@/components/3DVisualEffects';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import '@/styles/premium-3d-effects.css';
 
 // Images
 import heroImage from '@/assets/personal-injury-hero-bg.jpg';
@@ -290,112 +291,147 @@ const GeneralPersonalInjury: React.FC = () => {
 
               {/* Case Evaluation Section */}
               <section id="evaluation" className="content-section mb-12">
-                <h2 className="text-3xl font-bold text-red-600 mb-6 text-2xl">Free Case Evaluation</h2>
+                <h2 className="text-3xl font-bold text-blue-600 mb-6 text-2xl">Free Case Evaluation</h2>
                 
-                <ThreeDVisualEffects>
-                  <div className="bg-muted p-8 rounded-lg">
-                    <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                    <p className="mb-6 text-base">Provide some basic information to help us understand your case better.</p>
+                <ThreeDVisualEffects className="premium-3d-container">
+                  <div 
+                    className="glass-card premium-form-container bg-gradient-to-br from-blue-50/90 to-blue-100/70 backdrop-blur-xl p-8 rounded-lg shadow-2xl border border-blue-200/30 hover:shadow-blue-500/20 transition-all duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.02] hover:border-blue-300/50"
+                    style={{
+                      perspective: '1200px',
+                      transformStyle: 'preserve-3d'
+                    }}
+                  >
+                    {/* Floating Background Layers */}
+                    <div 
+                      className="absolute inset-0 opacity-20 pointer-events-none rounded-lg overflow-hidden"
+                      style={{ transform: 'translateZ(-500px)' }}
+                    >
+                      <div className="w-full h-full bg-gradient-to-br from-blue-400/30 to-blue-600/10 rounded-full blur-3xl animate-float-back" />
+                    </div>
                     
-                    <form onSubmit={handleSubmit} className="space-y-4">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                          <Label htmlFor="name" className="text-base">Full Name *</Label>
+                    <div 
+                      className="absolute inset-0 opacity-30 pointer-events-none rounded-lg overflow-hidden"
+                      style={{ transform: 'translateZ(-250px)' }}
+                    >
+                      <div className="w-3/4 h-3/4 bg-gradient-to-tl from-blue-500/40 to-blue-300/15 rounded-full blur-2xl mx-auto mt-10 animate-float-mid" />
+                    </div>
+                    
+                    <div 
+                      className="absolute inset-0 opacity-40 pointer-events-none rounded-lg overflow-hidden"
+                      style={{ transform: 'translateZ(-100px)' }}
+                    >
+                      <div className="w-1/2 h-1/2 bg-gradient-to-r from-blue-600/50 to-blue-400/20 rounded-full blur-xl mx-auto mt-20 animate-float-front" />
+                    </div>
+
+                    <div className="relative z-10">
+                      <h3 className="text-xl font-display font-semibold mb-4 text-blue-900">Get Your Free Consultation</h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-600 rounded mb-6"></div>
+                      <p className="mb-6 text-base text-blue-800">Provide some basic information to help us understand your case better.</p>
+                      
+                      <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                          <div className="interactive-card group">
+                            <Label htmlFor="name" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Full Name *</Label>
+                            <Input
+                              id="name"
+                              value={formData.name}
+                              onChange={(e) => handleInputChange('name', e.target.value)}
+                              className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 focus:shadow-xl focus:shadow-blue-500/20"
+                              required
+                            />
+                          </div>
+                          <div className="interactive-card group">
+                            <Label htmlFor="phone" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Phone Number *</Label>
+                            <Input
+                              id="phone"
+                              type="tel"
+                              value={formData.phone}
+                              onChange={(e) => handleInputChange('phone', e.target.value)}
+                              className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 focus:shadow-xl focus:shadow-blue-500/20"
+                              required
+                            />
+                          </div>
+                        </div>
+                        
+                        <div className="interactive-card group">
+                          <Label htmlFor="email" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Email Address *</Label>
                           <Input
-                            id="name"
-                            value={formData.name}
-                            onChange={(e) => handleInputChange('name', e.target.value)}
-                            className="text-base"
+                            id="email"
+                            type="email"
+                            value={formData.email}
+                            onChange={(e) => handleInputChange('email', e.target.value)}
+                            className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 focus:shadow-xl focus:shadow-blue-500/20"
                             required
                           />
                         </div>
-                        <div>
-                          <Label htmlFor="phone" className="text-base">Phone Number *</Label>
+                        
+                        <div className="interactive-card group">
+                          <Label htmlFor="incidentType" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Type of Incident *</Label>
+                          <Select value={formData.incidentType} onValueChange={(value) => handleInputChange('incidentType', value)}>
+                            <SelectTrigger className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
+                              <SelectValue placeholder="Select incident type" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white/95 backdrop-blur-sm border-blue-200">
+                              <SelectItem value="auto-accident">Motor Vehicle Accident</SelectItem>
+                              <SelectItem value="slip-fall">Slip and Fall</SelectItem>
+                              <SelectItem value="medical-malpractice">Medical Malpractice</SelectItem>
+                              <SelectItem value="product-liability">Product Defect</SelectItem>
+                              <SelectItem value="dog-bite">Dog Bite</SelectItem>
+                              <SelectItem value="workplace-accident">Workplace Accident</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="interactive-card group">
+                          <Label htmlFor="incidentDate" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Date of Incident</Label>
                           <Input
-                            id="phone"
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) => handleInputChange('phone', e.target.value)}
-                            className="text-base"
-                            required
+                            id="incidentDate"
+                            type="date"
+                            value={formData.incidentDate}
+                            onChange={(e) => handleInputChange('incidentDate', e.target.value)}
+                            className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 focus:shadow-xl focus:shadow-blue-500/20"
                           />
                         </div>
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="email" className="text-base">Email Address *</Label>
-                        <Input
-                          id="email"
-                          type="email"
-                          value={formData.email}
-                          onChange={(e) => handleInputChange('email', e.target.value)}
-                          className="text-base"
-                          required
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="incidentType" className="text-base">Type of Incident *</Label>
-                        <Select value={formData.incidentType} onValueChange={(value) => handleInputChange('incidentType', value)}>
-                          <SelectTrigger className="text-base">
-                            <SelectValue placeholder="Select incident type" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="auto-accident">Motor Vehicle Accident</SelectItem>
-                            <SelectItem value="slip-fall">Slip and Fall</SelectItem>
-                            <SelectItem value="medical-malpractice">Medical Malpractice</SelectItem>
-                            <SelectItem value="product-liability">Product Defect</SelectItem>
-                            <SelectItem value="dog-bite">Dog Bite</SelectItem>
-                            <SelectItem value="workplace-accident">Workplace Accident</SelectItem>
-                            <SelectItem value="other">Other</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="incidentDate" className="text-base">Date of Incident</Label>
-                        <Input
-                          id="incidentDate"
-                          type="date"
-                          value={formData.incidentDate}
-                          onChange={(e) => handleInputChange('incidentDate', e.target.value)}
-                          className="text-base"
-                        />
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="medicalAttention" className="text-base">Did you seek medical attention?</Label>
-                        <Select value={formData.medicalAttention} onValueChange={(value) => handleInputChange('medicalAttention', value)}>
-                          <SelectTrigger className="text-base">
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="emergency-room">Emergency Room</SelectItem>
-                            <SelectItem value="hospital-admission">Hospital Admission</SelectItem>
-                            <SelectItem value="doctor-visit">Doctor Visit</SelectItem>
-                            <SelectItem value="urgent-care">Urgent Care</SelectItem>
-                            <SelectItem value="no-medical">No Medical Treatment</SelectItem>
-                            <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      
-                      <div>
-                        <Label htmlFor="details" className="text-base">Brief Description of What Happened</Label>
-                        <Textarea
-                          id="details"
-                          value={formData.details}
-                          onChange={(e) => handleInputChange('details', e.target.value)}
-                          rows={4}
-                          className="text-base"
-                          placeholder="Please describe the incident and your injuries..."
-                        />
-                      </div>
-                      
-                      <Button type="submit" className="w-full bg-primary hover:bg-primary/90 text-white font-bold text-base py-3">
-                        Submit Case Information
-                      </Button>
-                    </form>
+                        
+                        <div className="interactive-card group">
+                          <Label htmlFor="medicalAttention" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Did you seek medical attention?</Label>
+                          <Select value={formData.medicalAttention} onValueChange={(value) => handleInputChange('medicalAttention', value)}>
+                            <SelectTrigger className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10">
+                              <SelectValue placeholder="Select option" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white/95 backdrop-blur-sm border-blue-200">
+                              <SelectItem value="emergency-room">Emergency Room</SelectItem>
+                              <SelectItem value="hospital-admission">Hospital Admission</SelectItem>
+                              <SelectItem value="doctor-visit">Doctor Visit</SelectItem>
+                              <SelectItem value="urgent-care">Urgent Care</SelectItem>
+                              <SelectItem value="no-medical">No Medical Treatment</SelectItem>
+                              <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div className="interactive-card group">
+                          <Label htmlFor="details" className="text-base font-medium text-blue-900 mb-2 block transition-colors group-hover:text-blue-700">Brief Description of What Happened</Label>
+                          <Textarea
+                            id="details"
+                            value={formData.details}
+                            onChange={(e) => handleInputChange('details', e.target.value)}
+                            rows={4}
+                            className="text-base border-blue-200 bg-white/80 backdrop-blur-sm focus:border-blue-500 focus:ring-blue-500/20 transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/10 focus:shadow-xl focus:shadow-blue-500/20 resize-none"
+                            placeholder="Please describe the incident and your injuries..."
+                          />
+                        </div>
+                        
+                        <Button 
+                          type="submit" 
+                          className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-base py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 relative overflow-hidden group"
+                        >
+                          <span className="relative z-10">Submit Case Information</span>
+                          <div className="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-blue-300/30 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000 ease-out"></div>
+                        </Button>
+                      </form>
+                    </div>
                   </div>
                 </ThreeDVisualEffects>
               </section>

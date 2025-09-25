@@ -153,7 +153,7 @@ const GeneralPersonalInjury: React.FC = () => {
               </p>
               
               <div className="prose prose-lg max-w-none text-white mb-8">
-            <p className="text-lg leading-relaxed text-white/90">
+            <p className="text-lg leading-relaxed text-white">
               If you've been injured due to someone else's negligence, you may be entitled to significant compensation for medical expenses, lost wages, pain and suffering, and other damages. Personal injury law in California provides strong protections for injury victims, but navigating the legal system can be complex and overwhelming.
             </p>
                 

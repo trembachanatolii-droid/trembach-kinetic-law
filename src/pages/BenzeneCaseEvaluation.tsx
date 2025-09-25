@@ -9,10 +9,13 @@ import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/benzene-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const BenzeneCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
-    fullName: '',
+    firstName: '',
+    lastName: '',
     phone: '',
     email: '',
     exposureLocation: '',
@@ -28,6 +31,7 @@ const BenzeneCaseEvaluation: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    console.log('Form submitted:', formData);
     alert('Thank you for contacting Trembach Law Firm! We will review your benzene exposure case and contact you within 24 hours.');
   };
 
@@ -120,47 +124,60 @@ const BenzeneCaseEvaluation: React.FC = () => {
           </div>
 
           {/* Case Evaluation Form */}
-          <Card className="shadow-xl">
-            <CardHeader className="bg-red-600 text-white">
-              <CardTitle className="text-center text-2xl">Free Benzene Exposure Case Evaluation</CardTitle>
-              <p className="text-center text-red-100">No fees unless we win your case</p>
-            </CardHeader>
-            <CardContent className="p-8">
+          <ThreeDVisualEffects>
+            <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Benzene Case Evaluation</h3>
+                <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                <p className="text-slate-700 text-lg leading-relaxed">Specialized evaluation for benzene exposure cases throughout California</p>
+              </div>
+              
               <form onSubmit={handleSubmit} className="space-y-6">
-                
-                {/* Personal Information */}
-                <div className="bg-muted p-6 rounded-lg">
-                  <h3 className="text-xl font-semibold mb-4 text-foreground">Personal Information</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-foreground">Full Name *</label>
-                      <Input
-                        placeholder="Your full name"
-                        value={formData.fullName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, fullName: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2 text-foreground">Phone Number *</label>
-                      <Input
-                        type="tel"
-                        placeholder="(xxx) xxx-xxxx"
-                        value={formData.phone}
-                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div className="md:col-span-2">
-                      <label className="block text-sm font-medium mb-2 text-foreground">Email Address *</label>
-                      <Input
-                        type="email"
-                        placeholder="your.email@example.com"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        required
-                      />
-                    </div>
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-white text-base font-medium">First Name *</label>
+                    <Input
+                      value={formData.firstName || ''}
+                      onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                      required
+                      className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                      placeholder="Enter your first name"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-white text-base font-medium">Last Name *</label>
+                    <Input
+                      value={formData.lastName || ''}
+                      onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                      required
+                      className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                      placeholder="Enter your last name"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="text-white text-base font-medium">Email *</label>
+                    <Input
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                      required
+                      className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                      placeholder="your.email@example.com"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="text-white text-base font-medium">Phone *</label>
+                    <Input
+                      type="tel"
+                      value={formData.phone}
+                      onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                      required
+                      className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                      placeholder="(555) 123-4567"
+                    />
                   </div>
                 </div>
 
@@ -267,18 +284,14 @@ const BenzeneCaseEvaluation: React.FC = () => {
                 <div className="text-center">
                   <Button 
                     type="submit" 
-                    size="lg"
-                    className="bg-red-600 hover:bg-red-700 text-white font-bold px-12 py-4 text-lg"
+                    className="w-full btn-enhanced py-4 text-lg"
                   >
-                    Submit Free Case Evaluation
+                    Get My Free Case Evaluation
                   </Button>
-                  <p className="text-sm text-muted-foreground mt-2">
-                    Confidential • No obligation • Free consultation
-                  </p>
                 </div>
               </form>
-            </CardContent>
-          </Card>
+            </div>
+          </ThreeDVisualEffects>
 
           {/* Benefits Section */}
           <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">

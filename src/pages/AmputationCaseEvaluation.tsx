@@ -13,6 +13,8 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import heroBackground from '@/assets/amputation-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const AmputationCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -81,144 +83,105 @@ const AmputationCaseEvaluation: React.FC = () => {
         <div className="max-w-6xl mx-auto px-6 py-12">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <div className="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="text-center py-12 px-8 bg-gradient-to-b from-gray-50 to-white">
-                  <h1 className="text-4xl font-semibold text-red-600 mb-4">
-                    Free Case Evaluation
-                  </h1>
-                  <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
-                    Get Your Free Consultation for Amputation Injuries
-                  </p>
-                </div>
+              <ThreeDVisualEffects>
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Amputation Case Evaluation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Specialized evaluation for amputation injury cases throughout California</p>
+                  </div>
 
-                <div className="px-8 pb-12">
-                  <form onSubmit={handleSubmit} className="max-w-3xl mx-auto">
-                    <div className="space-y-8">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">
-                            Accident Date
-                          </label>
-                          <Input
-                            type="date"
-                            name="incidentDate"
-                            value={formData.incidentDate}
-                            onChange={handleInputChange}
-                            className="h-14 text-lg border-gray-200 rounded-2xl"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">
-                            Amputation Type
-                          </label>
-                          <Select value={formData.amputationType} onValueChange={(value) => handleSelectChange('amputationType', value)}>
-                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl">
-                              <SelectValue placeholder="Select amputation type" />
-                            </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="finger">Finger/Thumb</SelectItem>
-                              <SelectItem value="hand">Hand</SelectItem>
-                              <SelectItem value="arm-below">Below-Elbow Arm</SelectItem>
-                              <SelectItem value="arm-above">Above-Elbow Arm</SelectItem>
-                              <SelectItem value="toe">Toe</SelectItem>
-                              <SelectItem value="foot">Foot</SelectItem>
-                              <SelectItem value="leg-below">Below-Knee Leg</SelectItem>
-                              <SelectItem value="leg-above">Above-Knee Leg</SelectItem>
-                              <SelectItem value="multiple">Multiple Limbs</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">First Name *</label>
-                          <Input
-                            name="firstName"
-                            value={formData.firstName}
-                            onChange={handleInputChange}
-                            className="h-14 text-lg border-gray-200 rounded-2xl"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">Last Name *</label>
-                          <Input
-                            name="lastName"
-                            value={formData.lastName}
-                            onChange={handleInputChange}
-                            className="h-14 text-lg border-gray-200 rounded-2xl"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">Email *</label>
-                          <Input
-                            type="email"
-                            name="email"
-                            value={formData.email}
-                            onChange={handleInputChange}
-                            className="h-14 text-lg border-gray-200 rounded-2xl"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-3">Phone *</label>
-                          <Input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
-                            onChange={handleInputChange}
-                            className="h-14 text-lg border-gray-200 rounded-2xl"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-3">
-                          Please describe your amputation injury *
-                        </label>
-                        <Textarea
-                          name="description"
-                          value={formData.description}
+                  <form onSubmit={handleSubmit} className="space-y-6">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">First Name *</label>
+                        <Input
+                          name="firstName"
+                          value={formData.firstName}
                           onChange={handleInputChange}
-                          placeholder="Please provide details about how the amputation occurred..."
-                          rows={5}
-                          className="text-lg border-gray-200 rounded-2xl"
                           required
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your first name"
                         />
                       </div>
-
-                      <div className="bg-gray-50 rounded-2xl p-6">
-                        <div className="flex items-start">
-                          <input
-                            type="checkbox"
-                            name="consent"
-                            checked={formData.consent}
-                            onChange={handleInputChange}
-                            className="mt-1 mr-4 w-4 h-4 text-red-600 border-gray-300 rounded"
-                            required
-                          />
-                          <label className="text-sm text-gray-600 leading-relaxed">
-                            I consent to being contacted by Trembach Law Firm regarding my amputation case. I understand this consultation is free and there is no obligation. *
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="pt-4">
-                        <Button 
-                          type="submit" 
-                          className="w-full h-16 text-lg font-semibold bg-red-600 hover:bg-red-700 rounded-2xl"
-                        >
-                          Start My Free Case Evaluation
-                        </Button>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Last Name *</label>
+                        <Input
+                          name="lastName"
+                          value={formData.lastName}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your last name"
+                        />
                       </div>
                     </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Email *</label>
+                        <Input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="your.email@example.com"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Phone *</label>
+                        <Input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleInputChange}
+                          required
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="(555) 123-4567"
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-4">
+                      <label className="text-white text-base font-medium">
+                        Please describe your amputation injury *
+                      </label>
+                      <Textarea
+                        name="description"
+                        value={formData.description}
+                        onChange={handleInputChange}
+                        placeholder="Please provide details about how the amputation occurred..."
+                        rows={5}
+                        className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
+                        required
+                      />
+                    </div>
+
+                    <div className="flex items-start space-x-2">
+                      <input
+                        type="checkbox"
+                        name="consent"
+                        checked={formData.consent}
+                        onChange={handleInputChange}
+                        className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
+                        required
+                      />
+                      <label className="text-white text-sm leading-relaxed">
+                        I consent to being contacted by Trembach Law Firm regarding my amputation case. I understand this consultation is free and there is no obligation. *
+                      </label>
+                    </div>
+
+                    <Button 
+                      type="submit" 
+                      className="w-full btn-enhanced py-4 text-lg"
+                    >
+                      Get My Free Case Evaluation
+                    </Button>
                   </form>
                 </div>
-              </div>
+              </ThreeDVisualEffects>
             </div>
 
             <div className="lg:col-span-1">

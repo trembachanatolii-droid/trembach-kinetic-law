@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calculator, ArrowLeft, Phone, Clock, Shield } from 'lucide-react';
+import { Calculator, ArrowLeft, Phone, Clock, Shield, FileText } from 'lucide-react';
 import heroBackground from '@/assets/railroad-calculator-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
@@ -195,9 +196,15 @@ const RailroadAccidentsCompensationCalculator: React.FC = () => {
                         Estimated Compensation Range
                       </h3>
                       <p className="text-3xl font-bold text-green-800 mb-4">{estimatedRange}</p>
-                      <p className="text-sm text-green-600">
+                      <p className="text-sm text-green-600 mb-4">
                         This is an estimate only. Actual compensation depends on many factors including the specific circumstances of your case, the extent of your injuries, and other variables.
                       </p>
+                      <Link to="/practice-areas/railroad-accidents/case-evaluation">
+                        <Button variant="outline" className="bg-white hover:bg-gray-50">
+                          <FileText className="w-4 h-4 mr-2" />
+                          Get Professional Case Evaluation
+                        </Button>
+                      </Link>
                     </div>
                   </CardContent>
                 </Card>

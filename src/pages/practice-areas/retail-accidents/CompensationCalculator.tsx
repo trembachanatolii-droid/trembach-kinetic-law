@@ -353,7 +353,7 @@ const CompensationCalculator: React.FC = () => {
                   <Button 
                     onClick={calculateCompensation}
                     disabled={!isFormComplete()}
-                    className="w-full bg-primary hover:bg-primary/90 text-white py-6 text-lg"
+                    className="w-full bg-primary hover:bg-primary/90 hover:!text-primary-foreground py-6 text-lg"
                   >
                     <Calculator className="w-5 h-5 mr-2" />
                     Calculate My Compensation
@@ -430,7 +430,7 @@ const CompensationCalculator: React.FC = () => {
                 <div className="space-y-3">
                   <Button 
                     asChild
-                    className="w-full bg-green-600 hover:bg-green-700 text-white text-lg py-3"
+                    className="w-full bg-green-600 hover:bg-green-700 hover:!text-primary-foreground text-lg py-3"
                   >
                     <a href="tel:(818) 123-4567" className="flex items-center justify-center gap-2">
                       <Phone className="w-4 h-4" />
@@ -440,7 +440,7 @@ const CompensationCalculator: React.FC = () => {
                   
                   <Button 
                     asChild
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white text-lg py-3"
+                    className="w-full bg-blue-600 hover:bg-blue-700 hover:!text-primary-foreground text-lg py-3"
                   >
                     <Link to="/practice-areas/retail-accidents/case-evaluation" className="flex items-center justify-center gap-2">
                       <FileText className="w-4 h-4" />

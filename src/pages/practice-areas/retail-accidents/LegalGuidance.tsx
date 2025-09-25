@@ -74,7 +74,7 @@ const LegalGuidance: React.FC = () => {
                 Get Free Legal Consultation
               </Link>
             </Button>
-            <Button asChild variant="outline" className="bg-white/10 text-white border-white hover:bg-white hover:text-black font-bold px-8 py-4 text-lg backdrop-blur-sm">
+            <Button asChild variant="outline" className="bg-white/10 text-white border-white hover:bg-white hover:!text-primary-foreground font-bold px-8 py-4 text-lg backdrop-blur-sm">
               <a href="tel:(818) 123-4567">
                 Call (818) 123-4567
               </a>
@@ -598,7 +598,7 @@ const LegalGuidance: React.FC = () => {
                         Start Free Case Evaluation
                       </Link>
                     </Button>
-                    <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:text-white font-bold px-8 py-4 text-lg">
+                    <Button asChild variant="outline" className="border-primary text-primary hover:bg-primary hover:!text-primary-foreground font-bold px-8 py-4 text-lg">
                       <a href="tel:(818) 123-4567">
                         Call (818) 123-4567
                       </a>

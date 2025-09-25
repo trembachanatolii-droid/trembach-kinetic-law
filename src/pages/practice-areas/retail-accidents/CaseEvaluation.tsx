@@ -514,7 +514,7 @@ const CaseEvaluation: React.FC = () => {
                 <div className="space-y-6">
                   <Button 
                     asChild
-                    className="w-full h-14 text-lg bg-green-600 hover:bg-green-700 text-white"
+                    className="w-full h-14 text-lg bg-green-600 hover:bg-green-700 hover:!text-primary-foreground"
                   >
                     <a href="tel:(818) 123-4567" className="flex items-center justify-center gap-3">
                       <Phone className="w-5 h-5" />

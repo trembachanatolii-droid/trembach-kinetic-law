@@ -221,7 +221,7 @@ const RetailAccidents: React.FC = () => {
                   
                   <Button 
                     asChild
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-black hover:text-black text-lg py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-black hover:text-red-500 text-lg py-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     <Link to="/practice-areas/retail-accidents/case-evaluation" className="flex items-center justify-center gap-3">
                       <FileText className="w-5 h-5" />

@@ -232,6 +232,10 @@ import ScaffoldingFalls from "./pages/practice-areas/ScaffoldingFalls";
 import ScaffoldingFallsCaseEvaluation from "./pages/practice-areas/scaffolding-falls/CaseEvaluation";
 import ScaffoldingFallsCompensationCalculator from "./pages/practice-areas/scaffolding-falls/CompensationCalculator";
 import ScaffoldingFallsLegalGuidance from "./pages/practice-areas/scaffolding-falls/LegalGuidance";
+import RailroadAccidents from "./pages/practice-areas/RailroadAccidents";
+import RailroadAccidentsCaseEvaluation from "./pages/practice-areas/railroad-accidents/CaseEvaluation";
+import RailroadAccidentsCompensationCalculator from "./pages/practice-areas/railroad-accidents/CompensationCalculator";
+import RailroadAccidentsLegalGuidance from "./pages/practice-areas/railroad-accidents/LegalGuidance";
 
 const queryClient = new QueryClient();
 

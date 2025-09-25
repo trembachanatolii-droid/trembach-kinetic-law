@@ -40,6 +40,13 @@ import legalProcessImage from '@/assets/crane-legal-process.jpg';
 import exposureSitesImage from '@/assets/california-crane-sites.jpg';
 import medicalImage from '@/assets/crane-medical-facility.jpg';
 import compensationImage from '@/assets/crane-compensation-calculator.jpg';
+import overviewImage from '@/assets/crane-accidents-overview.jpg';
+import caseEvaluationImage from '@/assets/crane-case-evaluation.jpg';
+import immediateStepsImage from '@/assets/crane-immediate-steps.jpg';
+import investigationImage from '@/assets/crane-investigation.jpg';
+import legalProcessSectionImage from '@/assets/crane-legal-process.jpg';
+import faqImage from '@/assets/crane-faq.jpg';
+import resourcesImage from '@/assets/crane-resources.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -373,6 +380,13 @@ const CraneAccidents: React.FC = () => {
             
             {/* Overview Section */}
             <section id="overview" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={overviewImage} 
+                  alt="Construction site with tower cranes and safety equipment" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl md:text-5xl font-bold text-red-600 mb-6">California Crane Accident Attorneys</h2>
               
               <div className="prose prose-lg max-w-none mb-6">
@@ -482,6 +496,13 @@ const CraneAccidents: React.FC = () => {
 
             {/* Case Evaluation Section */}
             <section id="evaluation" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={caseEvaluationImage} 
+                  alt="Legal documents with scales of justice and law books for case evaluation" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl font-bold text-red-600 mb-6">Free Crane Accident Case Evaluation</h2>
               
               <div className="bg-gradient-to-r from-muted/50 to-accent/5 p-8 rounded-lg border border-primary/20">
@@ -546,6 +567,13 @@ const CraneAccidents: React.FC = () => {
 
             {/* Immediate Steps Section */}
             <section id="immediate-steps" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={immediateStepsImage} 
+                  alt="First aid medical kit with emergency supplies and safety equipment" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl font-bold text-red-600 mb-6">What to Do After Your Crane Accident</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -636,6 +664,13 @@ const CraneAccidents: React.FC = () => {
 
             {/* Accident Investigation Section */}
             <section id="accident-process" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={investigationImage} 
+                  alt="Investigation equipment and tools for accident scene analysis" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl font-bold text-red-600 mb-6">Crane Accident Investigation Process</h2>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
@@ -711,6 +746,13 @@ const CraneAccidents: React.FC = () => {
 
             {/* Legal Process Section */}
             <section id="legal-process" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={legalProcessSectionImage} 
+                  alt="Courtroom with gavel, legal documents, and scales of justice" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl font-bold text-red-600 mb-6">Legal Process for Crane Accident Cases</h2>
               
               <div className="space-y-6">
@@ -820,6 +862,13 @@ const CraneAccidents: React.FC = () => {
 
             {/* FAQ Section with 50+ Questions - Improved font sizes */}
             <section id="faq" className="content-section mb-12">
+              <div className="mb-8">
+                <img 
+                  src={faqImage} 
+                  alt="Question marks floating above law books and legal documents" 
+                  className="w-full h-64 object-cover rounded-lg shadow-lg"
+                />
+              </div>
               <h2 className="text-4xl font-bold text-red-600 mb-8">Crane Accident FAQ</h2>
               <p className="text-xl text-muted-foreground mb-8">Get answers to the most common questions about crane accident claims in California</p>
               

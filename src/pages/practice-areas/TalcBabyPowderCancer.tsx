@@ -33,6 +33,8 @@ import contaminationImage from '@/assets/practice-areas/talc-contamination-analy
 import diagnosisImage from '@/assets/practice-areas/talc-ovarian-diagnosis.jpg';
 import corporateImage from '@/assets/practice-areas/talc-corporate-documents.jpg';
 import legalImage from '@/assets/practice-areas/talc-legal-consultation.jpg';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,8 +49,16 @@ const TalcBabyPowderCancer: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     diagnosisDate: '',
-    cancerType: ''
+    cancerType: '',
+    talcProducts: '',
+    usageDuration: '',
+    usageFrequency: '',
+    ageAtFirstUse: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -108,8 +118,8 @@ const TalcBabyPowderCancer: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to case evaluation
-    window.location.href = '/talc-case-evaluation';
+    console.log('Form submitted:', formData);
+    alert('Thank you! We will contact you within 24 hours for your free talc cancer case evaluation.');
   };
 
 
@@ -613,48 +623,185 @@ const TalcBabyPowderCancer: React.FC = () => {
             </section>
 
             {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Free Case Evaluation</h2>
-              
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation</h3>
-                <p className="mb-6">Provide some basic information to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Diagnosis Date</label>
-                      <Input
-                        type="date"
-                        value={formData.diagnosisDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, diagnosisDate: e.target.value }))}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Cancer Type</label>
-                      <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select cancer type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                          <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                          <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
-                          <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
-                          <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
-                          <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
-                          <SelectItem value="other">Other Talc-Related Cancer</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
+            <section id="evaluation" className="content-section mb-16">
+              <ThreeDVisualEffects className="premium-3d-container">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Talc Cancer Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Confidential evaluation by former defense attorneys now fighting for you</p>
                   </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
+
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">First Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="Enter your first name"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Last Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="Enter your last name"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Phone Number *</label>
+                        <Input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Email Address *</label>
+                        <Input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Cancer Type *</label>
+                        <Select value={formData.cancerType} onValueChange={(value) => setFormData(prev => ({ ...prev, cancerType: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select cancer type" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
+                            <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
+                            <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
+                            <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
+                            <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
+                            <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
+                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
+                            <SelectItem value="other">Other Talc-Related Cancer</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Diagnosis Date *</label>
+                        <Select value={formData.diagnosisDate} onValueChange={(value) => setFormData(prev => ({ ...prev, diagnosisDate: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select diagnosis timeframe" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="within-6-months">Within past 6 months</SelectItem>
+                            <SelectItem value="6-months-to-1-year">6 months to 1 year ago</SelectItem>
+                            <SelectItem value="1-2-years">1-2 years ago</SelectItem>
+                            <SelectItem value="2-5-years">2-5 years ago</SelectItem>
+                            <SelectItem value="over-5-years">Over 5 years ago</SelectItem>
+                            <SelectItem value="not-diagnosed">Not yet diagnosed (symptoms)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Talc Products Used *</label>
+                        <Select value={formData.talcProducts} onValueChange={(value) => setFormData(prev => ({ ...prev, talcProducts: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select products used" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="johnson-baby-powder">Johnson's Baby Powder</SelectItem>
+                            <SelectItem value="shower-to-shower">Shower to Shower</SelectItem>
+                            <SelectItem value="cashmere-bouquet">Cashmere Bouquet</SelectItem>
+                            <SelectItem value="multiple-brands">Multiple brands</SelectItem>
+                            <SelectItem value="unknown-brand">Unknown/Don't remember brand</SelectItem>
+                            <SelectItem value="generic-talc">Generic talc powder</SelectItem>
+                            <SelectItem value="cosmetic-talc">Cosmetic products with talc</SelectItem>
+                            <SelectItem value="other">Other talc products</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Duration of Use *</label>
+                        <Select value={formData.usageDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, usageDuration: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select duration" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="less-than-1-year">Less than 1 year</SelectItem>
+                            <SelectItem value="1-5-years">1-5 years</SelectItem>
+                            <SelectItem value="5-10-years">5-10 years</SelectItem>
+                            <SelectItem value="10-20-years">10-20 years</SelectItem>
+                            <SelectItem value="20-30-years">20-30 years</SelectItem>
+                            <SelectItem value="over-30-years">Over 30 years</SelectItem>
+                            <SelectItem value="lifetime-use">Lifetime use</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Frequency of Use *</label>
+                        <Select value={formData.usageFrequency} onValueChange={(value) => setFormData(prev => ({ ...prev, usageFrequency: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select frequency" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="daily">Daily use</SelectItem>
+                            <SelectItem value="several-times-week">Several times per week</SelectItem>
+                            <SelectItem value="weekly">Weekly</SelectItem>
+                            <SelectItem value="monthly">Monthly</SelectItem>
+                            <SelectItem value="occasionally">Occasionally</SelectItem>
+                            <SelectItem value="after-bathing">Only after bathing/showering</SelectItem>
+                            <SelectItem value="feminine-hygiene">For feminine hygiene</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-slate-900 text-base font-semibold">Age When Started Using *</label>
+                        <Select value={formData.ageAtFirstUse} onValueChange={(value) => setFormData(prev => ({ ...prev, ageAtFirstUse: value }))}>
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select age range" className="text-slate-500" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="infant">As an infant/baby</SelectItem>
+                            <SelectItem value="child">As a child (5-12 years)</SelectItem>
+                            <SelectItem value="teenager">As a teenager (13-17 years)</SelectItem>
+                            <SelectItem value="young-adult">Young adult (18-25 years)</SelectItem>
+                            <SelectItem value="adult">Adult (26-40 years)</SelectItem>
+                            <SelectItem value="middle-aged">Middle-aged (41-55 years)</SelectItem>
+                            <SelectItem value="older-adult">Older adult (55+ years)</SelectItem>
+                            <SelectItem value="dont-remember">Don't remember</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-lg py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-300 focus:outline-none">
+                      Get My Free Talc Cancer Case Evaluation
+                    </Button>
+                  </form>
+                </div>
+              </ThreeDVisualEffects>
             </section>
 
             {/* FAQ Section */}

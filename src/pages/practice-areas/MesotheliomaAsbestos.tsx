@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
@@ -371,20 +373,20 @@ const MesotheliomaAsbestos: React.FC = () => {
               </div>
 
               <ThreeDVisualEffects className="premium-3d-container">
-                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated bg-gradient-to-br from-blue-900/90 to-blue-800/90">
                   <div className="text-center mb-8">
-                    <h3 className="text-2xl md:text-3xl font-display text-foreground mb-2">Get Your Free Mesothelioma Consultation</h3>
-                    <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-blue-700 rounded-full mx-auto mb-4"></div>
-                    <p className="text-foreground text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
+                    <h3 className="text-2xl md:text-3xl font-display text-white mb-2 font-bold">Get Your Free Mesothelioma Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-blue-100 text-lg leading-relaxed">Specialized evaluation for asbestos-related cases throughout California</p>
                   </div>
 
                   {/* Progress Bar */}
                   <div className="mb-8">
-                    <div className="flex justify-between text-sm text-blue-100 mb-2">
+                    <div className="flex justify-between text-sm text-blue-100 mb-2 font-medium">
                       <span>Step {currentStep} of 4</span>
                       <span>{Math.round((currentStep / 4) * 100)}% Complete</span>
                     </div>
-                    <Progress value={(currentStep / 4) * 100} className="h-2 bg-blue-900/30">
+                    <Progress value={(currentStep / 4) * 100} className="h-3 bg-blue-900/40">
                       <div 
                         className="h-full bg-gradient-to-r from-blue-400 to-blue-600 rounded-full transition-all duration-500 ease-out"
                         style={{ width: `${(currentStep / 4) * 100}%` }}
@@ -396,29 +398,29 @@ const MesotheliomaAsbestos: React.FC = () => {
                     {/* Step 1: Personal Information */}
                     {currentStep === 1 && (
                       <div className="space-y-6 animate-fade-in">
-                        <h4 className="text-xl font-semibold text-white mb-4">Personal Information</h4>
+                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Personal Information</h4>
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-2">
-                            <Label htmlFor="firstName" className="text-blue-100">First Name *</Label>
+                            <Label htmlFor="firstName" className="text-white text-base font-medium">First Name *</Label>
                             <Input
                               id="firstName"
                               type="text"
                               value={formData.firstName}
                               onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                              className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
                               placeholder="Enter your first name"
                               required
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="lastName" className="text-blue-100">Last Name *</Label>
+                            <Label htmlFor="lastName" className="text-white text-base font-medium">Last Name *</Label>
                             <Input
                               id="lastName"
                               type="text"
                               value={formData.lastName}
                               onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                              className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
                               placeholder="Enter your last name"
                               required
                             />
@@ -427,25 +429,25 @@ const MesotheliomaAsbestos: React.FC = () => {
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div className="space-y-2">
-                            <Label htmlFor="phone" className="text-blue-100">Phone Number *</Label>
+                            <Label htmlFor="phone" className="text-white text-base font-medium">Phone Number *</Label>
                             <Input
                               id="phone"
                               type="tel"
                               value={formData.phone}
                               onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                              className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
                               placeholder="(555) 123-4567"
                               required
                             />
                           </div>
                           <div className="space-y-2">
-                            <Label htmlFor="email" className="text-blue-100">Email Address</Label>
+                            <Label htmlFor="email" className="text-white text-base font-medium">Email Address</Label>
                             <Input
                               id="email"
                               type="email"
                               value={formData.email}
                               onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                              className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
+                              className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
                               placeholder="your.email@example.com"
                             />
                           </div>
@@ -538,71 +540,79 @@ const MesotheliomaAsbestos: React.FC = () => {
                     {/* Step 3: Exposure Information */}
                     {currentStep === 3 && (
                       <div className="space-y-6 animate-fade-in">
-                        <h4 className="text-xl font-semibold text-white mb-4">Asbestos Exposure Information</h4>
+                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Asbestos Exposure Information</h4>
                         
                         <div className="space-y-4">
-                          <Label className="text-blue-100">Primary exposure type *</Label>
-                          <RadioGroup 
-                            value={formData.exposureType} 
-                            onValueChange={(value) => setFormData(prev => ({ ...prev, exposureType: value }))}
-                            className="space-y-3"
-                          >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="occupational" id="occupational" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="occupational" className="text-blue-100">Occupational (workplace exposure)</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="military" id="military" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="military" className="text-blue-100">Military service</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="secondary" id="secondary" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="secondary" className="text-blue-100">Secondary (family member exposure)</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="product" id="product" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="product" className="text-blue-100">Consumer products (talc, insulation, etc.)</Label>
-                            </div>
-                          </RadioGroup>
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="exposureLocation" className="text-blue-100">Where did exposure occur? *</Label>
-                          <Input
-                            id="exposureLocation"
-                            type="text"
-                            value={formData.exposureLocation}
-                            onChange={(e) => setFormData(prev => ({ ...prev, exposureLocation: e.target.value }))}
-                            className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20"
-                            placeholder="City, state or specific location"
-                            required
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="workHistory" className="text-blue-100">Work history/Job details</Label>
-                          <Textarea
-                            id="workHistory"
-                            value={formData.workHistory}
-                            onChange={(e) => setFormData(prev => ({ ...prev, workHistory: e.target.value }))}
-                            className="bg-white/10 border-blue-300/30 text-white placeholder:text-blue-200/60 focus:border-blue-400 focus:ring-blue-400/20 min-h-[100px]"
-                            placeholder="Describe your work history, especially jobs involving potential asbestos exposure..."
-                          />
-                        </div>
-
-                        <div className="space-y-2">
-                          <Label htmlFor="exposureDuration" className="text-blue-100">Duration of exposure</Label>
-                          <Select value={formData.exposureDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureDuration: value }))}>
-                            <SelectTrigger className="bg-white/10 border-blue-300/30 text-white focus:border-blue-400 focus:ring-blue-400/20">
-                              <SelectValue placeholder="Select duration" />
+                          <Label className="text-white text-base font-medium">Primary exposure type *</Label>
+                          <Select value={formData.exposureType} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureType: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select primary exposure type" className="text-white" />
                             </SelectTrigger>
-                            <SelectContent>
-                              <SelectItem value="less-than-1-year">Less than 1 year</SelectItem>
-                              <SelectItem value="1-5-years">1-5 years</SelectItem>
-                              <SelectItem value="5-10-years">5-10 years</SelectItem>
-                              <SelectItem value="10-20-years">10-20 years</SelectItem>
-                              <SelectItem value="more-than-20-years">More than 20 years</SelectItem>
-                              <SelectItem value="unknown">Unknown</SelectItem>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="occupational" className="text-gray-900 hover:bg-blue-50">Occupational (workplace exposure)</SelectItem>
+                              <SelectItem value="military" className="text-gray-900 hover:bg-blue-50">Military service</SelectItem>
+                              <SelectItem value="secondary" className="text-gray-900 hover:bg-blue-50">Secondary (family member exposure)</SelectItem>
+                              <SelectItem value="product" className="text-gray-900 hover:bg-blue-50">Consumer products (talc, insulation, etc.)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-white text-base font-medium">Where did exposure occur? *</Label>
+                          <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select exposure location" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="california-shipyard" className="text-gray-900 hover:bg-blue-50">California Shipyard</SelectItem>
+                              <SelectItem value="construction-site" className="text-gray-900 hover:bg-blue-50">Construction Site</SelectItem>
+                              <SelectItem value="power-plant" className="text-gray-900 hover:bg-blue-50">Power Plant</SelectItem>
+                              <SelectItem value="refinery" className="text-gray-900 hover:bg-blue-50">Oil Refinery</SelectItem>
+                              <SelectItem value="aerospace" className="text-gray-900 hover:bg-blue-50">Aerospace Facility</SelectItem>
+                              <SelectItem value="naval-base" className="text-gray-900 hover:bg-blue-50">Naval Base</SelectItem>
+                              <SelectItem value="manufacturing" className="text-gray-900 hover:bg-blue-50">Manufacturing Plant</SelectItem>
+                              <SelectItem value="home" className="text-gray-900 hover:bg-blue-50">Home/Residence</SelectItem>
+                              <SelectItem value="other" className="text-gray-900 hover:bg-blue-50">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-white text-base font-medium">Primary job/occupation during exposure</Label>
+                          <Select value={formData.workHistory} onValueChange={(value) => setFormData(prev => ({ ...prev, workHistory: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select your primary occupation" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="construction-worker" className="text-gray-900 hover:bg-blue-50">Construction Worker</SelectItem>
+                              <SelectItem value="shipyard-worker" className="text-gray-900 hover:bg-blue-50">Shipyard Worker</SelectItem>
+                              <SelectItem value="navy-personnel" className="text-gray-900 hover:bg-blue-50">Navy Personnel</SelectItem>
+                              <SelectItem value="electrician" className="text-gray-900 hover:bg-blue-50">Electrician</SelectItem>
+                              <SelectItem value="plumber" className="text-gray-900 hover:bg-blue-50">Plumber</SelectItem>
+                              <SelectItem value="mechanic" className="text-gray-900 hover:bg-blue-50">Mechanic</SelectItem>
+                              <SelectItem value="insulation-worker" className="text-gray-900 hover:bg-blue-50">Insulation Worker</SelectItem>
+                              <SelectItem value="boilermaker" className="text-gray-900 hover:bg-blue-50">Boilermaker</SelectItem>
+                              <SelectItem value="firefighter" className="text-gray-900 hover:bg-blue-50">Firefighter</SelectItem>
+                              <SelectItem value="teacher" className="text-gray-900 hover:bg-blue-50">Teacher</SelectItem>
+                              <SelectItem value="family-member" className="text-gray-900 hover:bg-blue-50">Family Member (Secondary Exposure)</SelectItem>
+                              <SelectItem value="other" className="text-gray-900 hover:bg-blue-50">Other Occupation</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+
+                        <div className="space-y-2">
+                          <Label className="text-white text-base font-medium">Duration of exposure</Label>
+                          <Select value={formData.exposureDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureDuration: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select exposure duration" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="less-than-1-year" className="text-gray-900 hover:bg-blue-50">Less than 1 year</SelectItem>
+                              <SelectItem value="1-5-years" className="text-gray-900 hover:bg-blue-50">1-5 years</SelectItem>
+                              <SelectItem value="5-10-years" className="text-gray-900 hover:bg-blue-50">5-10 years</SelectItem>
+                              <SelectItem value="10-20-years" className="text-gray-900 hover:bg-blue-50">10-20 years</SelectItem>
+                              <SelectItem value="more-than-20-years" className="text-gray-900 hover:bg-blue-50">More than 20 years</SelectItem>
+                              <SelectItem value="unknown" className="text-gray-900 hover:bg-blue-50">Unknown</SelectItem>
                             </SelectContent>
                           </Select>
                         </div>
@@ -612,64 +622,42 @@ const MesotheliomaAsbestos: React.FC = () => {
                     {/* Step 4: Legal Information */}
                     {currentStep === 4 && (
                       <div className="space-y-6 animate-fade-in">
-                        <h4 className="text-xl font-semibold text-white mb-4">Legal Information</h4>
+                        <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Legal Information</h4>
                         
                         <div className="space-y-4">
-                          <Label className="text-blue-100">Have you previously filed an asbestos-related claim?</Label>
-                          <RadioGroup 
-                            value={formData.previousClaim} 
-                            onValueChange={(value) => setFormData(prev => ({ ...prev, previousClaim: value }))}
-                            className="space-y-3"
-                          >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="no" id="no-claim" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="no-claim" className="text-blue-100">No</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="yes" id="yes-claim" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="yes-claim" className="text-blue-100">Yes</Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="unsure" id="unsure-claim" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="unsure-claim" className="text-blue-100">Unsure</Label>
-                            </div>
-                          </RadioGroup>
+                          <Label className="text-white text-base font-medium">Have you previously filed an asbestos-related claim?</Label>
+                          <Select value={formData.previousClaim} onValueChange={(value) => setFormData(prev => ({ ...prev, previousClaim: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select previous claim status" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="no" className="text-gray-900 hover:bg-blue-50">No</SelectItem>
+                              <SelectItem value="yes" className="text-gray-900 hover:bg-blue-50">Yes</SelectItem>
+                              <SelectItem value="unsure" className="text-gray-900 hover:bg-blue-50">Unsure</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
 
                         <div className="space-y-4">
-                          <Label className="text-blue-100">How urgent is your situation?</Label>
-                          <RadioGroup 
-                            value={formData.urgency} 
-                            onValueChange={(value) => setFormData(prev => ({ ...prev, urgency: value }))}
-                            className="space-y-3"
-                          >
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="very-urgent" id="very-urgent" className="border-red-400/50 text-red-400" />
-                              <Label htmlFor="very-urgent" className="text-blue-100">
-                                Very urgent - need immediate assistance
-                              </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="urgent" id="urgent" className="border-orange-400/50 text-orange-400" />
-                              <Label htmlFor="urgent" className="text-blue-100">
-                                Urgent - within the next few weeks  
-                              </Label>
-                            </div>
-                            <div className="flex items-center space-x-2">
-                              <RadioGroupItem value="normal" id="normal" className="border-blue-300/50 text-blue-400" />
-                              <Label htmlFor="normal" className="text-blue-100">
-                                Normal - gathering information
-                              </Label>
-                            </div>
-                          </RadioGroup>
+                          <Label className="text-white text-base font-medium">How urgent is your situation?</Label>
+                          <Select value={formData.urgency} onValueChange={(value) => setFormData(prev => ({ ...prev, urgency: value }))}>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select urgency level" className="text-white" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white border border-blue-200">
+                              <SelectItem value="very-urgent" className="text-red-700 hover:bg-red-50 font-semibold">Very urgent - need immediate assistance</SelectItem>
+                              <SelectItem value="urgent" className="text-orange-700 hover:bg-orange-50 font-medium">Urgent - within the next few weeks</SelectItem>
+                              <SelectItem value="normal" className="text-gray-900 hover:bg-blue-50">Normal - gathering information</SelectItem>
+                            </SelectContent>
+                          </Select>
                         </div>
 
-                        <div className="bg-blue-900/30 p-6 rounded-lg border border-blue-400/20">
+                        <div className="bg-blue-900/40 p-6 rounded-lg border border-blue-400/30">
                           <div className="flex items-start space-x-3">
-                            <CheckCircle className="w-5 h-5 text-green-400 mt-1 flex-shrink-0" />
+                            <CheckCircle className="w-6 h-6 text-green-400 mt-1 flex-shrink-0" />
                             <div>
-                              <h5 className="font-semibold text-white mb-2">Your information is protected</h5>
-                              <p className="text-blue-100 text-sm">
+                              <h5 className="font-bold text-white mb-2 text-lg">Your information is protected</h5>
+                              <p className="text-blue-100 text-base leading-relaxed">
                                 All information you provide is confidential and protected by attorney-client privilege. 
                                 We will never share your information with third parties.
                               </p>

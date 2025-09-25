@@ -398,6 +398,155 @@ const AmusementParkInjuries: React.FC = () => {
               </div>
             </section>
 
+            {/* Immediate Steps Section */}
+            <section id="immediate-steps" className="content-section mb-12">
+              <div className="flex items-start gap-8">
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-red-600 mb-6">What To Do After An Amusement Park Accident</h2>
+                  <div className="space-y-6">
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center font-semibold">1</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">Get Immediate Medical Care</h3>
+                        <p className="text-muted-foreground">Report to first aid and ask for transport to a hospital if needed. Some injuries (head/neck, internal) appear hours later—get evaluated and follow all medical advice.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-blue-600 text-white flex items-center justify-center font-semibold">2</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">Document Everything</h3>
+                        <p className="text-muted-foreground">Take photos/videos of the ride, seat restraints, warning signs, wet floors, broken parts, your injuries, and keep your ticket and wristband. Get witness names and phone numbers.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-green-600 text-white flex items-center justify-center font-semibold">3</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">File a Report, But Say As Little As Necessary</h3>
+                        <p className="text-muted-foreground">Report to park management, request a copy, and do not sign statements drafted by insurers without legal advice.</p>
+                      </div>
+                    </div>
+                    <div className="flex gap-4">
+                      <div className="w-10 h-10 rounded-full bg-purple-600 text-white flex items-center justify-center font-semibold">4</div>
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 text-foreground">Preserve Evidence Quickly</h3>
+                        <p className="text-muted-foreground">Keep damaged clothing, shoes, and any ride photos. Ask that surveillance footage be preserved. Contact us so we can send a preservation letter immediately.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="hidden lg:block">
+                  <img src={immediateStepsImage} alt="Immediate steps after an amusement park injury" loading="lazy" className="w-96 h-72 object-cover rounded-lg shadow-lg" />
+                </div>
+              </div>
+            </section>
+
+            {/* Common Injuries Section */}
+            <section id="injuries" className="content-section mb-12">
+              <div className="flex items-start gap-8">
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-red-600 mb-6">Common Amusement Park Injuries</h2>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Head, Neck, and Spine Injuries</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">Whiplash, concussions, herniated discs, and traumatic brain injury from high G-forces, sudden stops, or restraint failures.</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Fractures and Lacerations</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">Broken bones, deep cuts, and contusions from falls, defective seats, sharp edges, or malfunctioning ride doors.</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Internal and Orthopedic Injuries</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">Internal bleeding, organ damage, shoulder dislocations, and knee/ankle injuries, especially on water rides and spinning attractions.</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Emotional Trauma</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">PTSD, anxiety, and sleep disturbances—particularly in children—following ride entrapments or severe accidents.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+                <div className="hidden lg:block">
+                  <img src={evaluationImage} alt="Common injuries at amusement parks" loading="lazy" className="w-96 h-72 object-cover rounded-lg shadow-lg" />
+                </div>
+              </div>
+            </section>
+
+            {/* Legal Process Section */}
+            <section id="legal-process" className="content-section mb-12">
+              <div className="flex items-start gap-8">
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-red-600 mb-6">Our Legal Process for Park Injury Cases</h2>
+                  <div className="space-y-6">
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Rapid Investigation & Evidence Preservation</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">We send preservation letters within 24 hours to secure surveillance footage, ride maintenance logs, operator training records, and incident reports.</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Expert Analysis</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">We work with biomechanical engineers, ride safety experts, and medical specialists to build a compelling liability and damages case.</p>
+                      </CardContent>
+                    </Card>
+                    <Card className="border border-border">
+                      <CardHeader>
+                        <CardTitle>Negotiation and Litigation</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <p className="text-muted-foreground">Former defense insight helps us anticipate insurer tactics, maximize settlement value, and, when necessary, take cases to trial.</p>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+                <div className="hidden lg:block">
+                  <img src={legalProcessImage} alt="Legal process for amusement park injury claims" loading="lazy" className="w-96 h-72 object-cover rounded-lg shadow-lg" />
+                </div>
+              </div>
+            </section>
+
+            {/* Resources Section */}
+            <section id="resources" className="content-section mb-12">
+              <div className="flex items-start gap-8">
+                <div className="flex-1">
+                  <h2 className="text-3xl font-bold text-red-600 mb-6">Safety Resources and Reporting</h2>
+                  <ul className="list-disc pl-6 space-y-2 text-muted-foreground">
+                    <li>
+                      <a href="https://www.cpsc.gov/Safety-Education/Safety-Guides/Amusement-Rides" className="story-link text-primary" target="_blank" rel="noreferrer noopener">U.S. Consumer Product Safety Commission: Amusement Rides</a>
+                    </li>
+                    <li>
+                      <a href="https://www.dir.ca.gov/DOSH/Amusement_Rides.htm" className="story-link text-primary" target="_blank" rel="noreferrer noopener">Cal/OSHA Amusement Ride Safety</a>
+                    </li>
+                    <li>
+                      <a href="https://saferparks.org/incident-report" className="story-link text-primary" target="_blank" rel="noreferrer noopener">Report an Amusement Park Incident (SaferParks)</a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="hidden lg:block">
+                  <img src={sidebarImage} alt="Safety resources for amusement park injuries" loading="lazy" className="w-96 h-60 object-cover rounded-lg shadow-lg" />
+                </div>
+              </div>
+            </section>
+
             {/* FAQ Section */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>

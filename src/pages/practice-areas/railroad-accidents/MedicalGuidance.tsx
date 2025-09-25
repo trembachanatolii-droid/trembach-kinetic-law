@@ -2,123 +2,70 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { 
-  Phone, 
-  Mail, 
-  Stethoscope, 
-  Heart, 
-  Brain, 
-  Activity, 
-  AlertTriangle, 
-  Clock, 
-  Shield,
-  Users,
-  FileText,
-  MapPin
-} from 'lucide-react';
+import { Phone, Mail, Stethoscope, Heart, Brain, Activity, AlertTriangle, Clock, Shield, Users, FileText, MapPin } from 'lucide-react';
 import heroBackground from '@/assets/railroad-guidance-hero.jpg';
 import medicalImage from '@/assets/railroad-medical-facility.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
-
 const RailroadAccidentsMedicalGuidance: React.FC = () => {
-  const specialists = [
-    {
-      specialty: "Traumatic Brain Injury",
-      description: "Neurologists and neurosurgeons specializing in railroad accident head trauma",
-      icon: Brain,
-      urgency: "Emergency",
-      specialties: ["Concussion Treatment", "TBI Rehabilitation", "Cognitive Recovery"],
-      locations: ["UCLA Medical Center", "Cedars-Sinai", "UCSF Medical Center"]
-    },
-    {
-      specialty: "Spinal Cord Injuries", 
-      description: "Orthopedic surgeons and neurologists for spinal trauma from train accidents",
-      icon: Activity,
-      urgency: "Critical",
-      specialties: ["Spinal Surgery", "Paralysis Treatment", "Rehabilitation Medicine"],
-      locations: ["Stanford Medicine", "USC Keck Medicine", "Kaiser Permanente"]
-    },
-    {
-      specialty: "Orthopedic Trauma",
-      description: "Specialists in complex fractures and musculoskeletal injuries",
-      icon: Heart,
-      urgency: "Urgent",
-      specialties: ["Complex Fractures", "Joint Reconstruction", "Amputation Care"],
-      locations: ["Scripps Health", "Sharp Healthcare", "Sutter Health"]
-    }
-  ];
-
-  const medicalSteps = [
-    {
-      step: 1,
-      title: "Immediate Emergency Care",
-      description: "Life-saving treatment at the accident scene and emergency transport",
-      actions: [
-        "Call 911 immediately",
-        "Accept ambulance transport if recommended", 
-        "Provide complete medical history to EMTs",
-        "Allow emergency stabilization procedures"
-      ]
-    },
-    {
-      step: 2,
-      title: "Emergency Room Evaluation",
-      description: "Comprehensive trauma assessment and initial treatment",
-      actions: [
-        "Full body trauma scan (CT, MRI)",
-        "Blood work and vital signs monitoring",
-        "Pain management and stabilization",
-        "Documentation of all injuries"
-      ]
-    },
-    {
-      step: 3,
-      title: "Specialist Consultations",
-      description: "Expert evaluation by railroad injury specialists",
-      actions: [
-        "Neurological evaluation for head trauma",
-        "Orthopedic assessment for fractures",
-        "Psychological evaluation for trauma",
-        "Occupational therapy assessment"
-      ]
-    },
-    {
-      step: 4,
-      title: "Long-term Treatment Planning",
-      description: "Comprehensive care plan for recovery and rehabilitation",
-      actions: [
-        "Physical therapy and rehabilitation",
-        "Follow-up specialist appointments",
-        "Pain management protocols",
-        "Return-to-work evaluation"
-      ]
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Railroad Accident Medical Guidance | FELA Injury Treatment | California Train Accident Doctors"
-        description="Medical guidance for California railroad accident victims. FELA injury specialists, treatment options, and medical care coordination for train accident injuries."
-        keywords="railroad accident medical guidance, FELA injury treatment, train accident doctors, California railroad injury specialists"
-      />
+  const specialists = [{
+    specialty: "Traumatic Brain Injury",
+    description: "Neurologists and neurosurgeons specializing in railroad accident head trauma",
+    icon: Brain,
+    urgency: "Emergency",
+    specialties: ["Concussion Treatment", "TBI Rehabilitation", "Cognitive Recovery"],
+    locations: ["UCLA Medical Center", "Cedars-Sinai", "UCSF Medical Center"]
+  }, {
+    specialty: "Spinal Cord Injuries",
+    description: "Orthopedic surgeons and neurologists for spinal trauma from train accidents",
+    icon: Activity,
+    urgency: "Critical",
+    specialties: ["Spinal Surgery", "Paralysis Treatment", "Rehabilitation Medicine"],
+    locations: ["Stanford Medicine", "USC Keck Medicine", "Kaiser Permanente"]
+  }, {
+    specialty: "Orthopedic Trauma",
+    description: "Specialists in complex fractures and musculoskeletal injuries",
+    icon: Heart,
+    urgency: "Urgent",
+    specialties: ["Complex Fractures", "Joint Reconstruction", "Amputation Care"],
+    locations: ["Scripps Health", "Sharp Healthcare", "Sutter Health"]
+  }];
+  const medicalSteps = [{
+    step: 1,
+    title: "Immediate Emergency Care",
+    description: "Life-saving treatment at the accident scene and emergency transport",
+    actions: ["Call 911 immediately", "Accept ambulance transport if recommended", "Provide complete medical history to EMTs", "Allow emergency stabilization procedures"]
+  }, {
+    step: 2,
+    title: "Emergency Room Evaluation",
+    description: "Comprehensive trauma assessment and initial treatment",
+    actions: ["Full body trauma scan (CT, MRI)", "Blood work and vital signs monitoring", "Pain management and stabilization", "Documentation of all injuries"]
+  }, {
+    step: 3,
+    title: "Specialist Consultations",
+    description: "Expert evaluation by railroad injury specialists",
+    actions: ["Neurological evaluation for head trauma", "Orthopedic assessment for fractures", "Psychological evaluation for trauma", "Occupational therapy assessment"]
+  }, {
+    step: 4,
+    title: "Long-term Treatment Planning",
+    description: "Comprehensive care plan for recovery and rehabilitation",
+    actions: ["Physical therapy and rehabilitation", "Follow-up specialist appointments", "Pain management protocols", "Return-to-work evaluation"]
+  }];
+  return <div className="min-h-screen bg-background">
+      <SEO title="Railroad Accident Medical Guidance | FELA Injury Treatment | California Train Accident Doctors" description="Medical guidance for California railroad accident victims. FELA injury specialists, treatment options, and medical care coordination for train accident injuries." keywords="railroad accident medical guidance, FELA injury treatment, train accident doctors, California railroad injury specialists" />
 
       <GoBack fallbackPath="/practice-areas/railroad-accidents" />
 
       {/* Hero Section */}
-      <section 
-        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Railroad Accident Medical Guidance
           </h1>
-          <p className="text-xl text-white/90">
-            Expert medical care coordination for railroad accident victims
-          </p>
+          <p className="text-xl text-white/90">Expert medical care comake text whiteordination for railroad accident victims</p>
         </div>
       </section>
 
@@ -140,8 +87,7 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
               </div>
               
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {medicalSteps.map((step) => (
-                  <Card key={step.step} className="border-primary/20 hover:shadow-lg transition-all duration-300">
+                {medicalSteps.map(step => <Card key={step.step} className="border-primary/20 hover:shadow-lg transition-all duration-300">
                     <CardHeader>
                       <CardTitle className="flex items-center text-primary">
                         <div className="bg-primary text-white rounded-full w-8 h-8 flex items-center justify-center mr-3">
@@ -153,16 +99,13 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
                     </CardHeader>
                     <CardContent>
                       <ul className="space-y-2">
-                        {step.actions.map((action, index) => (
-                          <li key={index} className="flex items-start">
+                        {step.actions.map((action, index) => <li key={index} className="flex items-start">
                             <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
                             <span className="text-sm">{action}</span>
-                          </li>
-                        ))}
+                          </li>)}
                       </ul>
                     </CardContent>
-                  </Card>
-                ))}
+                  </Card>)}
               </div>
             </CardContent>
           </Card>
@@ -178,9 +121,8 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
             <CardContent>
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {specialists.map((specialist, index) => {
-                  const IconComponent = specialist.icon;
-                  return (
-                    <Card key={index} className="border-primary/20 hover:shadow-lg transition-all duration-300">
+                const IconComponent = specialist.icon;
+                return <Card key={index} className="border-primary/20 hover:shadow-lg transition-all duration-300">
                       <CardHeader>
                         <div className="flex items-center justify-between mb-2">
                           <IconComponent className="w-8 h-8 text-primary" />
@@ -196,9 +138,7 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
                           <div>
                             <h5 className="font-semibold text-sm mb-2">Specialties:</h5>
                             <ul className="space-y-1">
-                              {specialist.specialties.map((spec, idx) => (
-                                <li key={idx} className="text-sm text-muted-foreground">• {spec}</li>
-                              ))}
+                              {specialist.specialties.map((spec, idx) => <li key={idx} className="text-sm text-muted-foreground">• {spec}</li>)}
                             </ul>
                           </div>
                           
@@ -208,16 +148,13 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
                               Locations:
                             </h5>
                             <ul className="space-y-1">
-                              {specialist.locations.map((location, idx) => (
-                                <li key={idx} className="text-sm text-muted-foreground">• {location}</li>
-                              ))}
+                              {specialist.locations.map((location, idx) => <li key={idx} className="text-sm text-muted-foreground">• {location}</li>)}
                             </ul>
                           </div>
                         </div>
                       </CardContent>
-                    </Card>
-                  );
-                })}
+                    </Card>;
+              })}
               </div>
             </CardContent>
           </Card>
@@ -342,11 +279,7 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
                   Immediate medical attention is crucial. We can help coordinate care while protecting your legal rights.
                 </p>
                 <div className="space-y-4">
-                  <Button 
-                    size="lg"
-                    className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg mr-4"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
+                  <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg mr-4" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-5 h-5 mr-2" />
                     Emergency Legal Support: (818) 123-4567
                   </Button>
@@ -362,8 +295,6 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
           </Card>
         </section>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default RailroadAccidentsMedicalGuidance;

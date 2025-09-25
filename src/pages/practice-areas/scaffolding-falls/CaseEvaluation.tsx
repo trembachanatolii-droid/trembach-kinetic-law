@@ -214,7 +214,7 @@ Insurance Claim: ${formData.insuranceClaim}
           <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
             Free Scaffolding Falls Case Evaluation
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-6">
+          <p className="text-xl md:text-2xl text-white mb-6">
             Get Expert Legal Assessment for Your Construction Accident
           </p>
           <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">

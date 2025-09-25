@@ -9,6 +9,8 @@ import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
 import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pedestrian-case-evaluation-hero.jpg';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const PedestrianCaseEvaluation = () => {
   const [step, setStep] = useState(1);

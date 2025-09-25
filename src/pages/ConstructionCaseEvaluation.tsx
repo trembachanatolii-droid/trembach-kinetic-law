@@ -28,6 +28,8 @@ import {
 import heroBackground from '@/assets/construction-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const ConstructionCaseEvaluation: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);

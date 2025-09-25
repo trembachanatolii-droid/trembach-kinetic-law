@@ -9,6 +9,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Phone, Mail, Shield, Star, FileText, Clock } from 'lucide-react';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 

@@ -10,6 +10,8 @@ import { Phone, Mail, AlertTriangle, Clock, FileText, Stethoscope, PawPrint } fr
 import heroImage from '@/assets/dog-bite-case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const DogBiteCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({

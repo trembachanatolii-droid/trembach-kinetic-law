@@ -7,6 +7,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, FileText, Calendar, MapPin, AlertTriangle } from 'lucide-react';
 import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const UberLyftCaseEvaluation = () => {
   const [formData, setFormData] = useState({

@@ -10,6 +10,8 @@ import { Shield, Clock, Star, Phone } from 'lucide-react';
 import heroImage from '@/assets/case-evaluation-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const CarCaseEvaluation = () => {
   const [formData, setFormData] = useState({
@@ -117,8 +119,8 @@ const CarCaseEvaluation = () => {
       {/* Form Section */}
       <section className="py-16 px-6">
         <div className="max-w-4xl mx-auto">
-          <Card className="p-8">
-            <h2 className="text-2xl font-bold mb-6 text-center">Car Accident Case Evaluation Form</h2>
+          <Card className="p-8 premium-form-container interactive-card">
+            <h2 className="text-2xl font-bold mb-6 text-center text-blue-600 font-display">Car Accident Case Evaluation Form</h2>
             <p className="text-muted-foreground mb-8 text-center">
               Please provide as much detail as possible to help us evaluate your case accurately.
             </p>

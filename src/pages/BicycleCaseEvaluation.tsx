@@ -19,6 +19,10 @@ import {
   CheckCircle
 } from 'lucide-react';
 import heroBackground from '@/assets/bicycle-case-evaluation-hero.jpg';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
+import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 const BicycleCaseEvaluation = () => {
   const [formData, setFormData] = useState({
@@ -45,22 +49,19 @@ const BicycleCaseEvaluation = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
     console.log('Form submitted:', formData);
+    alert('Thank you for your submission. We will contact you within 24 hours.');
   };
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Go Back Button */}
-      <Button
-        variant="ghost"
-        size="sm"
-        className="fixed top-20 left-4 z-[60] bg-white/90 backdrop-blur-sm shadow-lg hover:bg-white/95"
-        onClick={() => window.history.back()}
-      >
-        <ArrowLeft className="w-4 h-4 mr-2" />
-        Go Back
-      </Button>
+      <SEO
+        title="Free Bicycle Accident Case Evaluation | California Bike Injury Lawyers"
+        description="Get a free evaluation of your bicycle accident case from experienced California attorneys. No fees unless we win your bike injury claim."
+        canonical="/bicycle-case-evaluation"
+      />
+
+      <GoBack />
 
       {/* Hero Section */}
       <section
@@ -99,19 +100,20 @@ const BicycleCaseEvaluation = () => {
           
           {/* Main Form */}
           <div className="lg:col-span-2">
-            <Card className="p-8">
-              <CardHeader className="px-0 pt-0">
-                <CardTitle className="text-3xl font-bold text-red-600 mb-2">
-                  Bicycle Accident Case Evaluation Form
-                </CardTitle>
-                <p className="text-muted-foreground text-lg">
-                  Complete this form to receive a comprehensive analysis of your bicycle accident case. 
-                  All information is strictly confidential and protected by attorney-client privilege.
-                </p>
-              </CardHeader>
-              
-              <CardContent className="px-0">
-                <form onSubmit={handleSubmit} className="space-y-6">
+            <ThreeDVisualEffects>
+              <Card className="p-8 premium-form-container interactive-card">
+                <CardHeader className="px-0 pt-0">
+                  <CardTitle className="text-3xl font-bold text-blue-600 font-display mb-2">
+                    Bicycle Accident Case Evaluation Form
+                  </CardTitle>
+                  <p className="text-muted-foreground text-lg">
+                    Complete this form to receive a comprehensive analysis of your bicycle accident case. 
+                    All information is strictly confidential and protected by attorney-client privilege.
+                  </p>
+                </CardHeader>
+                
+                <CardContent className="px-0">
+                  <form onSubmit={handleSubmit} className="space-y-6">
                   
                   {/* Personal Information */}
                   <div className="space-y-4">
@@ -127,6 +129,7 @@ const BicycleCaseEvaluation = () => {
                           value={formData.firstName}
                           onChange={(e) => handleInputChange('firstName', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -136,6 +139,7 @@ const BicycleCaseEvaluation = () => {
                           value={formData.lastName}
                           onChange={(e) => handleInputChange('lastName', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -148,6 +152,7 @@ const BicycleCaseEvaluation = () => {
                           value={formData.phone}
                           onChange={(e) => handleInputChange('phone', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -158,6 +163,7 @@ const BicycleCaseEvaluation = () => {
                           value={formData.email}
                           onChange={(e) => handleInputChange('email', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
@@ -178,6 +184,7 @@ const BicycleCaseEvaluation = () => {
                           value={formData.accidentDate}
                           onChange={(e) => handleInputChange('accidentDate', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                       <div>
@@ -188,13 +195,14 @@ const BicycleCaseEvaluation = () => {
                           value={formData.accidentLocation}
                           onChange={(e) => handleInputChange('accidentLocation', e.target.value)}
                           required
+                          className="interactive-card"
                         />
                       </div>
                     </div>
                     <div>
                       <Label htmlFor="accidentType">Type of Bicycle Accident *</Label>
                       <Select value={formData.accidentType} onValueChange={(value) => handleInputChange('accidentType', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select accident type..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -223,7 +231,7 @@ const BicycleCaseEvaluation = () => {
                     <div>
                       <Label htmlFor="injuryType">Primary Injuries Sustained *</Label>
                       <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select primary injuries..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -243,7 +251,7 @@ const BicycleCaseEvaluation = () => {
                     <div>
                       <Label htmlFor="medicalTreatment">Medical Treatment Received *</Label>
                       <Select value={formData.medicalTreatment} onValueChange={(value) => handleInputChange('medicalTreatment', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select treatment received..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -268,7 +276,7 @@ const BicycleCaseEvaluation = () => {
                     <div>
                       <Label htmlFor="policeReport">Was a Police Report Filed? *</Label>
                       <Select value={formData.policeReport} onValueChange={(value) => handleInputChange('policeReport', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select option..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -282,7 +290,7 @@ const BicycleCaseEvaluation = () => {
                     <div>
                       <Label htmlFor="insuranceContact">Have you been contacted by insurance? *</Label>
                       <Select value={formData.insuranceContact} onValueChange={(value) => handleInputChange('insuranceContact', value)}>
-                        <SelectTrigger>
+                        <SelectTrigger className="interactive-card">
                           <SelectValue placeholder="Select option..." />
                         </SelectTrigger>
                         <SelectContent>
@@ -307,11 +315,12 @@ const BicycleCaseEvaluation = () => {
                         value={formData.description}
                         onChange={(e) => handleInputChange('description', e.target.value)}
                         rows={4}
+                        className="interactive-card"
                       />
                     </div>
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full text-lg py-6">
+                  <Button type="submit" size="lg" className="w-full text-lg py-6 btn-enhanced">
                     Get My Free Case Evaluation
                   </Button>
 
@@ -321,6 +330,7 @@ const BicycleCaseEvaluation = () => {
                 </form>
               </CardContent>
             </Card>
+            </ThreeDVisualEffects>
           </div>
 
           {/* Sidebar */}

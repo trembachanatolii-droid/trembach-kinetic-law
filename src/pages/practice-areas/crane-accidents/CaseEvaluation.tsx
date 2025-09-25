@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Phone, Mail, MessageCircle } from 'lucide-react';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import caseEvaluationImage from '@/assets/crane-case-evaluation-hero.jpg';
 
 const CraneAccidentsCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -46,8 +47,11 @@ Description: ${formData.description}
       <GoBack />
 
       {/* Hero Section */}
-      <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-r from-gray-900 to-gray-700">
-        <div className="absolute inset-0 bg-black/50"></div>
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${caseEvaluationImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
             Free Crane Accident Case Evaluation

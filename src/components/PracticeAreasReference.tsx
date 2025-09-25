@@ -729,8 +729,9 @@ const PracticeAreasReference: React.FC = () => {
                       to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
                            activeArea.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
                            activeArea.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
-                           activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                           activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
+                            activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                            activeArea.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
+                            activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
                            activeArea.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
                            `/practice-areas/${activeArea.slug}`}
                       className="flex-1"
@@ -885,11 +886,12 @@ const PracticeAreasReference: React.FC = () => {
                     {/* CTA */}
                     <Link
                        to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
-                           area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                          area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                          area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
-                          area.title === 'Class Actions' ? '/practice-areas/class-actions' :
-                          area.title === 'Environmental Toxic' ? '/practice-areas/environmental-toxic' :
+                            area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                            area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
+                           area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
+                           area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
+                           area.title === 'Class Actions' ? '/practice-areas/class-actions' :
+                           area.title === 'Environmental Toxic' ? '/practice-areas/environmental-toxic' :
                           '/practice-areas/coming-soon'}
                       className="ghost-button w-full justify-center"
                       onClick={(e) => e.stopPropagation()}

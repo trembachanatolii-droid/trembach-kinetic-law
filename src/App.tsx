@@ -9,6 +9,9 @@ import Navigation from "./components/Navigation";
 import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import CraneAccidents from "./pages/practice-areas/CraneAccidents";
+import CraneAccidentsCaseEvaluation from "./pages/practice-areas/crane-accidents/CaseEvaluation";
+import CraneAccidentsCompensationCalculator from "./pages/practice-areas/crane-accidents/CompensationCalculator";
+import CraneAccidentsLegalGuidance from "./pages/practice-areas/crane-accidents/LegalGuidance";
 import HearingLoss from "./pages/practice-areas/HearingLoss";
 import HearingLossCaseEvaluation from "./pages/practice-areas/hearing-loss/CaseEvaluation";
 import HearingLossCompensationCalculator from "./pages/practice-areas/hearing-loss/CompensationCalculator";
@@ -245,6 +248,9 @@ function App() {
             <Route path="/" element={<Index />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/crane-accidents" element={<CraneAccidents />} />
+            <Route path="/practice-areas/crane-accidents/case-evaluation" element={<CraneAccidentsCaseEvaluation />} />
+            <Route path="/practice-areas/crane-accidents/compensation-calculator" element={<CraneAccidentsCompensationCalculator />} />
+            <Route path="/practice-areas/crane-accidents/legal-guidance" element={<CraneAccidentsLegalGuidance />} />
             <Route path="/practice-areas/hearing-loss" element={<HearingLoss />} />
             <Route path="/practice-areas/hearing-loss/case-evaluation" element={<HearingLossCaseEvaluation />} />
             <Route path="/practice-areas/hearing-loss/compensation-calculator" element={<HearingLossCompensationCalculator />} />

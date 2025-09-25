@@ -66,6 +66,11 @@ const Navigation = () => {
                 </a>
               </DropdownMenuItem>
               <DropdownMenuItem>
+                <a href="/practice-areas/crane-accidents" className="w-full">
+                  Crane Accidents
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
                 <a href="/practice-areas/amusement-parks" className="w-full">
                   Amusement Park Injuries
                 </a>

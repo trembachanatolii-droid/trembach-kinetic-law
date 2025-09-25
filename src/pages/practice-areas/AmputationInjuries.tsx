@@ -2,13 +2,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { 
   Phone, 
@@ -66,16 +64,11 @@ const AmputationInjuries: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    phone: '',
-    email: '',
     accidentDate: '',
     injuryType: '',
     accidentLocation: '',
     amputationType: '',
-    medicalTreatment: '',
-    injuryDescription: ''
+    medicalTreatment: ''
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -136,70 +129,226 @@ const AmputationInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Amputation Case Evaluation:', formData);
-    toast.success('Thanks! We\'ll contact you shortly.');
+    window.location.href = '/amputation-case-evaluation';
   };
 
   const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
-  // FAQ Data
+  // FAQ Data - 50 Questions about Amputation Injuries
   const faqData = [
     {
       question: "What is the average settlement for an amputation injury in California?",
-      answer: "Amputation settlements in California typically range from $750,000 to $5 million or more, depending on factors like the type and level of amputation, age and occupation of the victim, degree of negligence involved, available insurance coverage, and long-term care needs."
+      answer: "Amputation settlements in California typically range from $750,000 to $5 million or more, depending on factors like the type and level of amputation, age and occupation of the victim, degree of negligence involved, available insurance coverage, and long-term care needs. Upper extremity amputations affecting dominant hands often result in higher settlements due to greater functional impact, while lower extremity amputations may require expensive prosthetics and mobility aids for life."
     },
     {
       question: "How much does lifetime care cost for an amputation victim?",
-      answer: "The lifetime medical costs for amputation victims average $509,275 but can exceed $1 million for complex cases. Costs include immediate emergency care and surgeries, multiple prosthetic fittings and replacements, ongoing physical and occupational therapy, phantom limb pain treatment, psychological counseling, home modifications for accessibility, and potential revision surgeries."
+      answer: "The lifetime medical costs for amputation victims average $509,275 but can exceed $1 million for complex cases. Costs include immediate emergency care and surgeries, multiple prosthetic fittings and replacements, ongoing physical and occupational therapy, phantom limb pain treatment, psychological counseling, home modifications for accessibility, and potential revision surgeries. Prosthetic limbs require replacement every 3-5 years and can cost $15,000-$50,000 each."
     },
     {
       question: "What causes most amputation injuries?",
-      answer: "Motor vehicle accidents account for approximately 45% of traumatic amputations, particularly involving motorcycles, trucks, and pedestrian accidents. Workplace accidents represent 25% of cases, especially in construction, manufacturing, and industrial settings. Medical malpractice causes 15% of amputations through surgical errors, misdiagnosis of infections, or medication mistakes."
+      answer: "Motor vehicle accidents account for approximately 45% of traumatic amputations, particularly involving motorcycles, trucks, and pedestrian accidents. Workplace accidents represent 25% of cases, especially in construction, manufacturing, and industrial settings. Medical malpractice causes 15% of amputations through surgical errors, misdiagnosis of infections, or medication mistakes. Other causes include defective products, premises liability accidents, and dog attacks resulting in severe limb damage."
     },
     {
       question: "What should I do immediately after an amputation injury?",
-      answer: "Seek immediate emergency medical care - time is critical for potential reattachment. If possible, preserve the amputated part by wrapping it in clean cloth, placing in a sealed plastic bag, and keeping on ice (not direct contact). Document everything with photos of the accident scene, equipment involved, and safety violations."
+      answer: "Seek immediate emergency medical care - time is critical for potential reattachment. If possible, preserve the amputated part by wrapping it in clean cloth, placing in a sealed plastic bag, and keeping on ice (not direct contact). Document everything with photos of the accident scene, equipment involved, and safety violations. Gather witness contact information and report the incident to appropriate authorities. Contact an experienced amputation attorney immediately to preserve evidence and protect your rights."
     },
     {
       question: "Can amputated limbs be reattached?",
-      answer: "Successful reattachment depends on several factors: time elapsed (best within 6-8 hours), type of amputation (clean cuts better than crushing injuries), level of amputation (distal limbs more successful), patient's age and health, and quality of emergency care. Upper extremity reattachments have higher success rates than lower extremity."
+      answer: "Successful reattachment depends on several factors: time elapsed (best within 6-8 hours), type of amputation (clean cuts better than crushing injuries), level of amputation (distal limbs more successful), patient's age and health, and quality of emergency care. Upper extremity reattachments have higher success rates than lower extremity. Even successful reattachment often results in permanent disability, chronic pain, and reduced function, warranting significant compensation for ongoing impairment."
+    },
+    {
+      question: "What types of amputation injuries do you handle?",
+      answer: "We handle all types of traumatic and surgical amputations including finger and thumb amputations affecting grip and dexterity, hand and wrist amputations requiring complex prosthetics, arm amputations (below and above elbow), toe amputations affecting balance and mobility, foot and ankle amputations requiring specialized prosthetics, leg amputations (below and above knee), and partial amputations requiring multiple reconstructive surgeries. Each type presents unique challenges and compensation considerations."
+    },
+    {
+      question: "How do amputation injuries affect earning capacity?",
+      answer: "Amputation significantly impacts earning capacity depending on the individual's occupation, age, education level, and type of amputation. Manual laborers may lose 60-100% of earning capacity, while office workers might maintain more income potential. Factors considered include pre-injury income and career trajectory, physical demands of the occupation, availability of reasonable accommodations, costs of vocational retraining, and reduced competitiveness in the job market. We work with vocational experts to calculate accurate lifetime earning losses."
+    },
+    {
+      question: "What is phantom limb pain and how does it affect compensation?",
+      answer: "Phantom limb pain affects 60-80% of amputees, causing sensation that the missing limb is still present and painful. This chronic condition can be debilitating, affecting sleep, mood, and daily functioning. Treatment includes medications, nerve blocks, spinal cord stimulation, and psychological therapy. Phantom pain significantly impacts quality of life and is a major component of pain and suffering damages in amputation cases, often justifying substantial non-economic damage awards."
+    },
+    {
+      question: "How long does amputation rehabilitation take?",
+      answer: "Rehabilitation duration varies but typically requires 6-18 months for initial adjustment, with ongoing therapy for years. The process includes wound healing and surgical recovery (2-6 months), prosthetic fitting and training (3-12 months), physical therapy to regain strength and mobility, occupational therapy for daily living skills, and psychological counseling for emotional adjustment. Upper extremity amputations often require longer rehabilitation due to the complexity of hand and arm function."
+    },
+    {
+      question: "What factors determine amputation compensation amounts?",
+      answer: "Compensation depends on multiple factors: severity and level of amputation, age and life expectancy of the victim, pre-injury income and career prospects, degree of defendant's negligence, available insurance coverage, medical expenses (past and future), loss of earning capacity, pain and suffering damages, loss of enjoyment of life, spousal consortium claims, and punitive damages in cases of gross negligence. Our experienced attorneys maximize compensation by thoroughly documenting all these factors."
+    },
+    {
+      question: "Can I sue for a workplace amputation injury?",
+      answer: "If you're covered by workers' compensation, you can receive benefits but generally cannot sue your employer directly. However, you may sue third parties whose negligence contributed to your injury, such as equipment manufacturers, contractors, or property owners. Third-party claims often provide significantly higher compensation than workers' compensation alone. If you're not covered by workers' comp (independent contractor, etc.), you may sue your employer directly for negligence."
+    },
+    {
+      question: "What if my amputation was caused by medical malpractice?",
+      answer: "Medical malpractice amputations result from surgical errors, misdiagnosis of infections leading to sepsis, medication errors causing tissue death, delayed treatment of compartment syndrome, improper wound care, or unnecessary amputations. These cases require extensive medical record review and expert testimony. California has specific procedures for medical malpractice cases, including mandatory expert witness requirements and damage caps on non-economic damages (currently $350,000, but exceptions apply for catastrophic injuries)."
+    },
+    {
+      question: "How much do prosthetic limbs cost?",
+      answer: "Prosthetic costs vary dramatically: basic prosthetic arms cost $3,000-$30,000, advanced myoelectric arms cost $25,000-$70,000, basic prosthetic legs cost $5,000-$50,000, computerized knee units add $35,000-$50,000, and hands with individual finger control cost $25,000-$50,000. Most prosthetics require replacement every 3-5 years. Active individuals may need multiple prosthetics for different activities. Insurance often doesn't cover the most advanced prosthetics, making full compensation crucial."
+    },
+    {
+      question: "What home modifications are needed after amputation?",
+      answer: "Home modifications for amputees include wheelchair ramps and accessible entrances, bathroom modifications (grab bars, roll-in showers), kitchen adaptations for one-handed use, stair lifts or residential elevators, widened doorways and hallways, accessible parking areas, and specialized equipment storage. Costs range from $15,000-$150,000 depending on the extent of modifications needed. These modifications are recoverable damages in amputation cases."
+    },
+    {
+      question: "How do amputation injuries affect family members?",
+      answer: "Amputation injuries profoundly impact family members who often become caregivers, face financial stress from lost income and medical expenses, experience emotional trauma and grief, and lose consortium (companionship, affection, sexual relations) with their spouse. Spouses may be entitled to separate loss of consortium damages. Children may suffer psychological trauma requiring counseling. Family members' damages are legitimate components of amputation injury claims."
+    },
+    {
+      question: "What is the statute of limitations for amputation injury cases in California?",
+      answer: "Generally two years from the injury date, but exceptions include discovery rule (when you discover the injury was caused by negligence), medical malpractice cases (one year from discovery or three years from injury, whichever is first), government liability cases (six months notice requirement), and cases involving minors (extended deadlines). Evidence disappears quickly in amputation cases, so immediate legal action is crucial to preserve surveillance footage, witness statements, and physical evidence."
+    },
+    {
+      question: "Can I recover damages for emotional trauma from amputation?",
+      answer: "Yes, emotional trauma is a significant component of amputation damages. Recoverable psychological damages include depression and anxiety disorders, post-traumatic stress disorder (PTSD), grief over loss of body image, social isolation and withdrawal, loss of self-esteem and confidence, fear of public appearances, and relationship difficulties. Professional psychological evaluation and treatment records support these claims. Emotional trauma damages often exceed $100,000-$500,000 in severe amputation cases."
+    },
+    {
+      question: "What evidence is needed to prove an amputation case?",
+      answer: "Critical evidence includes medical records documenting the amputation and treatment, photos of the accident scene and your injuries, witness statements and contact information, expert testimony on liability and damages, surveillance footage if available, maintenance and inspection records, safety violation reports, employment records showing lost earning capacity, and prosthetic and rehabilitation cost estimates. We work with accident reconstruction experts, medical professionals, and life care planners to build compelling cases."
+    },
+    {
+      question: "How do insurance companies handle amputation claims?",
+      answer: "Insurance companies recognize amputation claims as high-value cases but employ various tactics to minimize payouts: questioning the necessity of expensive prosthetics, disputing future care needs, challenging lost earning capacity calculations, rushing settlement offers before full damages are known, using their own medical examiners to downplay injuries, and exploiting any pre-existing conditions. Our experience with insurance company tactics helps maximize your compensation."
+    },
+    {
+      question: "Can children with amputations recover different damages?",
+      answer: "Children's amputation cases present unique damage considerations: longer life expectancy increases lifetime costs, ongoing prosthetic replacements throughout growth, educational accommodations and support services, psychological counseling for adjustment issues, future earning capacity impacts requiring expert analysis, potential for bullying and social difficulties, and family disruption damages. California courts recognize that childhood amputations have devastating lifelong consequences warranting substantial compensation."
+    },
+    {
+      question: "What role do life care planners play in amputation cases?",
+      answer: "Life care planners are medical professionals who assess future care needs and costs for amputation victims. They evaluate ongoing medical care requirements, prosthetic replacement schedules and costs, rehabilitation and therapy needs, home care assistance requirements, equipment and supply needs, and life expectancy considerations. Their detailed reports provide foundation for future damage calculations, often supporting claims of $1 million or more in lifetime care costs."
+    },
+    {
+      question: "How do below-knee and above-knee amputations differ legally?",
+      answer: "Above-knee amputations typically result in higher compensation due to greater functional impairment, higher prosthetic costs (computerized knees cost $35,000-$50,000), increased energy expenditure (60-100% more energy for walking), greater mobility limitations, and higher likelihood of phantom pain. Below-knee amputees retain natural knee function, have better prosthetic options, and maintain more normal gait patterns. Compensation reflects these significant functional differences."
+    },
+    {
+      question: "Can I sue the manufacturer of defective equipment that caused my amputation?",
+      answer: "Yes, product liability claims are common in amputation cases involving defective machinery, power tools, medical devices, or safety equipment. Manufacturers can be liable for design defects making products unreasonably dangerous, manufacturing defects creating dangerous conditions, and failure to warn about known risks. These cases often involve multiple defendants including manufacturers, distributors, and retailers. Product liability claims can provide substantial compensation even when workplace injuries are involved."
+    },
+    {
+      question: "What is the difference between traumatic and surgical amputation?",
+      answer: "Traumatic amputations occur suddenly due to accidents, crushing injuries, or severe trauma, while surgical amputations are planned medical procedures to remove diseased or severely injured tissue. Traumatic amputations often involve more psychological trauma and may have better potential for legal recovery if caused by someone else's negligence. Surgical amputations may be necessary due to medical malpractice, delayed treatment, or misdiagnosis. Both types can result in significant compensation depending on the circumstances and responsible parties."
+    },
+    {
+      question: "How do partial amputations differ from complete amputations?",
+      answer: "Partial amputations involve loss of fingers, toes, or parts of limbs, while complete amputations remove entire limbs. Both significantly impact function and quality of life. Partial amputations may require multiple reconstructive surgeries, specialized prosthetics for fine motor control, and ongoing therapy. Complete amputations typically involve higher prosthetic costs but may have clearer functional limitations. Compensation depends on the specific impact on the individual's life, work capacity, and long-term care needs."
+    },
+    {
+      question: "What are the most common complications after amputation?",
+      answer: "Common complications include phantom limb pain (60-80% of amputees), infection at the amputation site, poor wound healing requiring revision surgery, stump pain and discomfort, skin breakdown from prosthetic use, decreased mobility and balance, psychological issues including depression and PTSD, and joint problems from altered gait patterns. These complications can increase medical costs, extend recovery time, and significantly impact quality of life, all factors considered in compensation calculations."
+    },
+    {
+      question: "How does age affect amputation injury compensation?",
+      answer: "Age significantly impacts compensation calculations. Younger victims typically receive higher awards due to longer life expectancy (more years of lost income and higher lifetime medical costs), greater potential for adaptation and prosthetic use, higher likelihood of career advancement losses, and more years of pain and suffering. However, older victims may have established higher incomes and specialized skills that are difficult to replace. Each case requires individual analysis of age-related factors affecting damages."
+    },
+    {
+      question: "What vocational rehabilitation is available for amputees?",
+      answer: "Vocational rehabilitation helps amputees return to work or find new careers. Services include job skills assessment and retraining, adaptive equipment and workplace modifications, education about Americans with Disabilities Act accommodations, career counseling and job placement assistance, and coordination with prosthetic specialists. Costs of vocational rehabilitation are recoverable damages in amputation cases. Some amputees successfully return to previous careers with accommodations, while others may need complete retraining."
+    },
+    {
+      question: "Can I still drive after an amputation?",
+      answer: "Many amputees can drive with appropriate vehicle modifications. Options include hand controls for acceleration and braking (leg amputees), steering knobs for one-handed operation (arm amputees), left foot accelerator pedals, and specialized seating and entry systems. Vehicle modifications cost $500-$5,000 and are recoverable damages. Some states require driver testing with adaptive equipment. Driving ability significantly affects independence and employability, factors considered in compensation calculations."
+    },
+    {
+      question: "What psychological support is needed after amputation?",
+      answer: "Amputation causes significant psychological trauma requiring professional support. Common issues include grief over body image loss, depression and anxiety, post-traumatic stress disorder, social withdrawal and isolation, relationship difficulties, and adjustment disorders. Treatment includes individual and group therapy, medication management, peer support groups, and family counseling. Psychological treatment costs are substantial and recoverable in amputation cases. Mental health treatment often continues for years and significantly impacts quality of life."
+    },
+    {
+      question: "How do insurance companies evaluate amputation claims?",
+      answer: "Insurance companies use specific criteria to evaluate amputation claims: level and type of amputation, functional impairment and disability ratings, medical costs and future care needs, lost earning capacity calculations, age and life expectancy factors, degree of negligence and liability, and available policy limits. They often hire medical experts, vocational specialists, and economists to minimize claim values. Having experienced legal representation is crucial to counter insurance company tactics and ensure fair compensation."
+    },
+    {
+      question: "What is the difference between workers' compensation and personal injury claims for amputation?",
+      answer: "Workers' compensation provides limited benefits: medical expenses, partial wage replacement (typically 2/3 of wages), and disability ratings. Personal injury claims can provide full compensation including complete wage loss, pain and suffering, loss of enjoyment of life, and punitive damages. Workers' comp is no-fault but limits recovery. Personal injury requires proving negligence but allows full damages. You may have both claims if third parties contributed to your workplace amputation injury."
+    },
+    {
+      question: "How do pre-existing conditions affect amputation cases?",
+      answer: "Pre-existing conditions don't bar recovery but may affect compensation amounts. California follows the 'eggshell skull' rule - defendants must take victims as they find them. If negligence aggravates a pre-existing condition or makes amputation necessary when it wouldn't have been otherwise, full damages may be recoverable. However, pre-existing conditions may reduce future earning capacity calculations or affect prosthetic options. Thorough medical record review is essential to distinguish pre-existing issues from injury-related impairments."
+    },
+    {
+      question: "What role do expert witnesses play in amputation cases?",
+      answer: "Expert witnesses are crucial in amputation cases. Medical experts explain the nature of injuries, treatment needs, and prognosis. Life care planners detail future care costs and needs. Vocational experts calculate lost earning capacity and job market impacts. Accident reconstruction experts determine how the amputation occurred. Prosthetic specialists explain costs and limitations of artificial limbs. Economic experts calculate lifetime financial losses. These experts provide the foundation for proving damages and countering insurance company arguments."
+    },
+    {
+      question: "Can family members sue for loss of consortium in amputation cases?",
+      answer: "Yes, spouses can sue for loss of consortium, which includes loss of companionship, affection, sexual relations, and household services. Amputation injuries often severely impact marital relationships due to physical limitations, emotional trauma, and role changes within the family. Parents may also claim loss of consortium for children's amputation injuries. These damages are separate from the victim's claims and can be substantial, often reaching $100,000-$500,000 depending on the relationship's impact and duration."
+    },
+    {
+      question: "How do amputation settlements get paid out?",
+      answer: "Amputation settlements may be paid as lump sums or structured settlements. Lump sum payments provide immediate access to funds for medical expenses, home modifications, and prosthetics. Structured settlements provide guaranteed income over time, often with tax advantages. Factors affecting payout structure include victim's age, medical needs, financial planning requirements, and tax implications. Large settlements often combine both approaches - immediate lump sum for current needs and structured payments for long-term security."
+    },
+    {
+      question: "What is the appeals process if I disagree with a settlement offer?",
+      answer: "If settlement negotiations fail, your case proceeds to trial where a jury determines damages. Before trial, mediation or arbitration may be attempted. At trial, evidence is presented about liability, damages, and future needs. Jury verdicts can be higher or lower than settlement offers. Either party can appeal trial verdicts on legal grounds. The appeals process can take years and add significant costs. Experienced attorneys help evaluate whether settlement offers are fair or if trial might yield better results."
+    },
+    {
+      question: "How do multiple party liability cases work in amputation injuries?",
+      answer: "Multiple parties may be liable for amputation injuries: vehicle manufacturers and drivers in car accidents, employers and equipment manufacturers in workplace injuries, property owners and contractors in construction accidents, and medical providers and device manufacturers in medical cases. Each defendant's insurance coverage is potentially available. California's joint and several liability rules allow recovery from any defendant able to pay, regardless of their percentage of fault. Multiple defendants often increase total compensation available."
+    },
+    {
+      question: "What documentation should I keep for my amputation case?",
+      answer: "Essential documentation includes all medical records and bills from emergency treatment through rehabilitation, photos of the accident scene and your injuries, witness statements and contact information, employment records showing income and benefits, insurance policies and correspondence, prosthetic costs and replacement schedules, home modification receipts, therapy and counseling records, and daily journals documenting pain, limitations, and emotional impact. Thorough documentation strengthens your case and maximizes compensation."
+    },
+    {
+      question: "How long do amputation injury cases typically take to resolve?",
+      answer: "Amputation cases typically take 1-3 years to resolve, depending on factors like injury severity and treatment duration, number of defendants and insurance companies involved, complexity of liability issues, extent of damages and future care needs, and court scheduling. Cases shouldn't be rushed to settlement before maximum medical improvement is reached and future needs are understood. Complex cases involving multiple surgeries, extensive rehabilitation, or disputed liability may take longer. Experienced attorneys balance thorough preparation with timely resolution."
+    },
+    {
+      question: "What happens if the at-fault party has insufficient insurance coverage?",
+      answer: "If defendants lack adequate insurance, several options exist: pursue personal assets of wealthy defendants, seek coverage from additional insurance policies (umbrella policies, professional liability), file claims against multiple responsible parties, use your own underinsured motorist coverage (in vehicle accidents), and consider asset protection violations that might pierce corporate veils. Catastrophic injuries like amputations may exceed standard insurance limits, making thorough investigation of all available coverage crucial for adequate compensation."
+    },
+    {
+      question: "How do I choose the right attorney for my amputation case?",
+      answer: "Choose an attorney with specific experience in amputation cases, proven track record with catastrophic injury settlements, access to medical and financial experts, adequate resources to handle complex litigation, trial experience in personal injury cases, and clear communication about fees and expectations. Amputation cases require specialized knowledge of prosthetics, rehabilitation, and life care planning. Initial consultations are typically free, allowing you to evaluate multiple attorneys before making this crucial decision."
+    },
+    {
+      question: "What makes amputation cases different from other personal injury cases?",
+      answer: "Amputation cases involve unique factors: permanent, life-altering disabilities requiring lifetime care, extremely high medical costs for prosthetics and replacements, complex psychological trauma and adjustment issues, significant impact on family members and relationships, specialized medical experts and life care planners, and potential for million-dollar-plus damages. These cases require attorneys with specific experience in catastrophic injuries who understand the medical, psychological, and financial complexities of amputation injuries."
+    },
+    {
+      question: "Are there support groups available for amputation victims?",
+      answer: "Yes, numerous support groups exist for amputees and their families: Amputee Coalition provides resources and local chapter connections, limb loss support groups in most major cities, online communities and forums for peer support, specialized groups for children with amputations, activity-specific groups (sports, hobbies), and counseling groups for spouses and family members. Participation in support groups aids psychological recovery and provides practical advice about living with amputation. Support group involvement demonstrates ongoing emotional impact in legal cases."
+    },
+    {
+      question: "How do amputation cases affect Social Security Disability claims?",
+      answer: "Amputations often qualify for Social Security Disability benefits, particularly for lower extremity amputations or bilateral upper extremity amputations. The Social Security Administration has specific listings for amputation disabilities. Benefits include monthly payments and Medicare eligibility after 24 months. However, large personal injury settlements may affect SSI eligibility due to asset limits. Coordination between personal injury and disability claims requires careful planning to maximize total benefits while preserving eligibility for ongoing government assistance."
+    },
+    {
+      question: "What new technologies are available for amputees?",
+      answer: "Advanced prosthetic technologies include myoelectric limbs controlled by muscle signals, computer-controlled knees that adjust to walking patterns, individual finger control in prosthetic hands, sensory feedback systems that provide touch sensation, osseointegration (direct bone attachment), and 3D-printed custom prosthetics. These technologies significantly improve function but cost substantially more than basic prosthetics. Legal cases should account for current and future technological advances to ensure adequate compensation for the best available prosthetic options throughout the victim's lifetime."
+    },
+    {
+      question: "How do I maximize my amputation injury compensation?",
+      answer: "Maximize compensation by seeking immediate medical attention and following all treatment recommendations, hiring an experienced amputation injury attorney early in the process, thoroughly documenting all aspects of your injury and its impact, working with medical experts to establish future care needs, obtaining life care plans and vocational assessments, preserving all evidence related to how the injury occurred, being patient with the legal process to ensure full damages are understood, and avoiding early settlement offers before maximum medical improvement is reached. Each amputation case is unique and requires personalized legal strategy."
     }
   ];
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEO
-        title="California Amputation Injury Lawyers | Former Defense Attorneys"
-        description="California amputation injury attorneys fighting for maximum compensation. Former defense lawyers with insider knowledge. Free consultation. Call (818) 123-4567."
-        keywords="amputation injury lawyer California, limb loss attorney, traumatic amputation compensation, prosthetic costs legal claim"
-        canonical="https://www.trembachlawfirm.com/practice-areas/amputation-injuries"
-        structuredData={{
-          "@context": "https://schema.org",
-          "@type": "LegalService",
-          "name": "Trembach Law Firm - Amputation Injury Attorneys",
-          "description": "California amputation injury law firm specializing in traumatic limb loss and medical malpractice cases",
-          "url": "https://www.trembachlawfirm.com/practice-areas/amputation-injuries",
-          "telephone": "+18181234567",
-          "areaServed": "California",
-          "priceRange": "No fees unless we win"
-        }}
+    <>
+      <SEO 
+        title="California Amputation Injury Attorneys | Maximum Compensation for Limb Loss"
+        description="California amputation injury lawyers fighting for maximum compensation. Experienced in catastrophic limb loss cases. Free consultation for traumatic amputation injuries."
+        canonical="https://trembachlaw.com/practice-areas/amputation-injuries"
       />
-
-      {/* Hero Section */}
-      <section
-        ref={heroRef}
-        className="relative min-h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80"></div>
-        
+      
+      <div className="min-h-screen bg-background">
         <GoBack />
         
-        <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-6">
-          <div className="hero-content">
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+        {/* Hero Section - Exact ratio match to Premises Liability */}
+        <section 
+          ref={heroRef}
+          className="relative h-[80vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          
+          <div className="hero-content relative z-10 text-center text-white max-w-5xl mx-auto px-6">
+            <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               California Amputation Injury Attorneys
             </h1>
             <p className="text-xl md:text-2xl mb-8 leading-relaxed max-w-4xl mx-auto">
@@ -208,7 +357,7 @@ const AmputationInjuries: React.FC = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
               <Button 
                 size="lg" 
-                onClick={() => window.open('tel:8181234567')}
+                onClick={() => window.location.href = 'tel:8181234567'}
                 className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg font-semibold rounded-full transition-all duration-300 hover:scale-105"
               >
                 <Phone className="w-5 h-5 mr-2" />
@@ -217,876 +366,988 @@ const AmputationInjuries: React.FC = () => {
               <div className="flex items-center text-lg">
                 <span className="mr-2">Former Defense Attorney</span>
                 <span className="mx-2">•</span>
-                <span className="flex items-center">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </span>
+                <span className="mr-2">$509,000+ Average Lifetime Costs</span>
+                <span className="mx-2">•</span>
+                <span>No Fees Unless We Win</span>
               </div>
             </div>
-          </div>
-        </div>
-
-        {/* Navigation Tabs */}
-        <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
-                  >
-                    <IconComponent className="w-4 h-4 mr-2" />
-                    {tab.label}
-                  </button>
-                );
-              })}
+            <div className="flex items-center justify-center">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-3 text-lg">Trusted by Amputation Victims</span>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Main Content Column */}
-          <div className="lg:col-span-2" ref={contentRef}>
+        <div className="max-w-7xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
             
-            {/* Key Statistics */}
-            <Card className="mb-12 bg-gradient-to-r from-red-50 to-red-100 border-red-200">
-              <CardContent className="p-8">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-3xl font-bold text-red-600">30,000+</div>
-                    <div className="text-sm text-red-600 font-medium">Annual amputations in the US</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-green-600">$509K</div>
-                    <div className="text-sm text-green-600 font-medium">Average lifetime medical costs</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl font-bold text-green-600">$750K-$5M</div>
-                    <div className="text-sm text-green-600 font-medium">Typical settlement range</div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Overview Section */}
-            <section id="overview" className="content-section mb-16">
-              <div className="max-w-4xl">
-                <h2 className="text-4xl font-bold mb-8 text-foreground">
-                  Understanding Amputation Injuries in California
-                </h2>
-                
-                <div className="prose prose-lg max-w-none text-muted-foreground">
-                  <p className="text-lg leading-relaxed mb-6">
-                    Amputation injuries are among the most devastating consequences of accidents, fundamentally altering a victim's life forever. The loss of a limb affects not just physical function, but emotional well-being, career prospects, and relationships. In California, approximately 45% of traumatic amputations result from motor vehicle accidents, while workplace incidents account for another 25%.
-                  </p>
-                  
-                  <p className="text-lg leading-relaxed mb-6">
-                    The psychological impact of amputation often exceeds the physical trauma. Phantom limb pain, depression, PTSD, and adjustment disorders are common. Many victims require years of counseling, multiple prosthetic fittings, extensive rehabilitation, and home modifications. The lifetime cost of care averages $509,275 but can exceed $1 million for complex cases.
-                  </p>
-                  
-                  <Collapsible>
-                    <CollapsibleTrigger asChild>
-                      <Button variant="link" className="text-primary text-lg p-0 h-auto font-medium">
-                        Learn more about amputation injury impact...
-                        <ChevronDown className="ml-2 h-4 w-4" />
-                      </Button>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent className="mt-4">
-                      <div className="space-y-4 text-base leading-relaxed">
-                        <p>
-                          Insurance companies routinely undervalue amputation claims, focusing only on immediate medical costs while ignoring lifetime needs. They hire doctors to minimize disability ratings and vocational experts to claim victims can work despite profound limitations.
-                        </p>
-                        <p>
-                          Our firm's former defense attorney experience reveals exactly how insurance companies minimize amputation claims. We know their tactics because we used them. This insider knowledge allows us to build overwhelming cases that force fair settlements or trial victories.
-                        </p>
-                        <p>
-                          Amputation cases require specialized expertise in prosthetics, rehabilitation, life care planning, and vocational assessment. The difference between adequate and exceptional legal representation can mean millions in additional compensation for lifetime care needs.
-                        </p>
-                      </div>
-                    </CollapsibleContent>
-                  </Collapsible>
+            {/* Main Content - 3 columns */}
+            <div className="lg:col-span-3" ref={contentRef}>
+              
+              {/* Navigation Tabs */}
+              <div className="content-section mb-8">
+                <div className="flex flex-wrap gap-2 p-2 bg-muted rounded-lg">
+                  {tabs.map((tab) => {
+                    const IconComponent = tab.icon;
+                    return (
+                      <button
+                        key={tab.id}
+                        onClick={() => scrollToSection(tab.id)}
+                        className={`flex items-center px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 ${
+                          activeTab === tab.id
+                            ? 'bg-primary text-primary-foreground shadow-sm'
+                            : 'text-muted-foreground hover:text-primary hover:bg-background'
+                        }`}
+                      >
+                        <IconComponent className="w-4 h-4 mr-2" />
+                        {tab.label}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
-            </section>
 
-            {/* Case Evaluation Section */}
-            <section id="evaluation" className="content-section mb-16">
-              <div className="premium-form-container interactive-card rounded-3xl shadow-xl border border-blue-200/30 overflow-hidden backdrop-blur-md">
-                <div className="text-center py-12 px-8 bg-gradient-to-b from-blue-50/80 to-white/90 backdrop-blur-sm">
-                  <h2 className="text-4xl font-display font-bold text-slate-900 mb-4">
-                    Free Case Evaluation
-                  </h2>
-                  <p className="text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
-                    Get Your Free Consultation for Amputation Injuries
-                  </p>
-                </div>
+              {/* Overview Section */}
+              <section id="overview" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-3xl text-primary flex items-center">
+                      <FileText className="w-8 h-8 mr-3" />
+                      Catastrophic Amputation Injuries Demand Exceptional Legal Representation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="prose prose-lg max-w-none">
+                    <p className="text-lg leading-relaxed mb-6">
+                      The loss of a limb represents one of the most catastrophic injuries a person can endure. Whether resulting from a traumatic accident, medical malpractice, or workplace incident, amputation fundamentally alters every aspect of life. At Trembach Law Firm, we understand that behind every amputation case is a person facing profound physical, emotional, and financial challenges that will persist for a lifetime.
+                    </p>
+                    
+                    <p className="text-lg leading-relaxed mb-8">
+                      As a former defense attorney who previously represented insurance companies, I've seen firsthand how they minimize amputation claims and exploit victims during their most vulnerable moments. This inside knowledge gives our clients a significant advantage in securing maximum compensation for their life-altering injuries.
+                    </p>
 
-                <div className="px-8 pb-12 bg-white/95 backdrop-blur-sm">
-                  <form onSubmit={handleFormSubmit} className="max-w-3xl mx-auto">
-                    <div className="space-y-8">
-                      {/* Contact Information */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">First Name *</label>
-                          <Input
-                            type="text"
-                            value={formData.firstName}
-                            onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Last Name *</label>
-                          <Input
-                            type="text"
-                            value={formData.lastName}
-                            onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
-                            required
-                          />
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6 my-8">
+                      <div className="text-center p-6 bg-blue-50 rounded-lg">
+                        <div className="text-3xl font-bold text-blue-600">185,000</div>
+                        <div className="text-sm text-blue-600 font-medium">New amputations annually in the US</div>
+                      </div>
+                      <div className="text-center p-6 bg-red-50 rounded-lg">
+                        <div className="text-3xl font-bold text-red-600">$509,275</div>
+                        <div className="text-sm text-red-600 font-medium">Average lifetime medical costs</div>
+                      </div>
+                      <div className="text-center p-6 bg-yellow-50 rounded-lg">
+                        <div className="text-3xl font-bold text-yellow-600">60-80%</div>
+                        <div className="text-sm text-yellow-600 font-medium">Experience phantom limb pain</div>
+                      </div>
+                      <div className="text-center p-6 bg-green-50 rounded-lg">
+                        <div className="text-3xl font-bold text-green-600">$750K-$5M</div>
+                        <div className="text-sm text-green-600 font-medium">Typical settlement range</div>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Case Evaluation Section */}
+              <section id="evaluation" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <Scale className="w-6 h-6 mr-2" />
+                      Free Amputation Case Evaluation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-lg mb-6">
+                      Every amputation case is unique and requires careful evaluation to determine the full extent of damages and liability. Our comprehensive case evaluation examines all aspects of your injury and its impact on your life.
+                    </p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Link to="/amputation-case-evaluation">
+                        <Button className="w-full h-16 text-lg bg-blue-600 hover:bg-blue-700">
+                          <ClipboardCheck className="w-5 h-5 mr-2" />
+                          Start Case Evaluation
+                        </Button>
+                      </Link>
+                      <Link to="/amputation-compensation-calculator">
+                        <Button variant="outline" className="w-full h-16 text-lg border-blue-600 text-blue-600 hover:bg-blue-50">
+                          <Calculator className="w-5 h-5 mr-2" />
+                          Calculate Compensation
+                        </Button>
+                      </Link>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Immediate Steps Section */}
+              <section id="what-to-do" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <AlertTriangle className="w-6 h-6 mr-2" />
+                      Immediate Steps After an Amputation Injury
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <div className="space-y-6">
+                          <div className="p-6 border-l-4 border-red-500 bg-red-50">
+                            <h3 className="text-xl font-semibold text-red-700 mb-3">1. Prioritize Medical Treatment</h3>
+                            <p className="text-red-600">
+                              Your health comes first. Ensure you receive immediate and ongoing medical care from specialists experienced in amputation injuries. Document all treatments, surgeries, and rehabilitation efforts.
+                            </p>
+                          </div>
+                          
+                          <div className="p-6 border-l-4 border-orange-500 bg-orange-50">
+                            <h3 className="text-xl font-semibold text-orange-700 mb-3">2. Preserve All Evidence</h3>
+                            <p className="text-orange-600">
+                              Document the accident scene, keep all medical records, preserve the amputated limb if possible for examination, and maintain records of all expenses related to your injury.
+                            </p>
+                          </div>
+                          
+                          <Collapsible>
+                            <CollapsibleTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                              >
+                                <span className="text-primary font-medium">Show More Critical Steps</span>
+                                <ChevronDown className="w-5 h-5 text-primary" />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="space-y-6 mt-6">
+                              <div className="p-6 border-l-4 border-yellow-500 bg-yellow-50">
+                                <h3 className="text-xl font-semibold text-yellow-700 mb-3">3. Avoid Insurance Company Tactics</h3>
+                                <p className="text-yellow-600">
+                                  Do not give recorded statements or sign any documents from insurance companies without legal representation. They will use your words against you to minimize compensation.
+                                </p>
+                              </div>
+                              
+                              <div className="p-6 border-l-4 border-blue-500 bg-blue-50">
+                                <h3 className="text-xl font-semibold text-blue-700 mb-3">4. Contact Experienced Counsel</h3>
+                                <p className="text-blue-600">
+                                  Amputation cases are complex and require immediate legal action. California's statute of limitations is generally two years, but evidence disappears quickly.
+                                </p>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
                         </div>
                       </div>
-                      
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Phone Number *</label>
-                          <Input
-                            type="tel"
-                            value={formData.phone}
-                            onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
-                            required
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Email Address *</label>
-                          <Input
-                            type="email"
-                            value={formData.email}
-                            onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
-                            required
-                          />
-                        </div>
-                      </div>
-
-                      {/* Accident & Injury Details */}
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Accident Date</label>
-                          <Input
-                            type="date"
-                            value={formData.accidentDate}
-                            onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                            className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900"
-                          />
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Type of Amputation</label>
-                          <Select value={formData.amputationType} onValueChange={(value) => setFormData(prev => ({ ...prev, amputationType: value }))}>
-                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
-                              <SelectValue placeholder="Select amputation type" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
-                              <SelectItem value="finger">Finger/Thumb</SelectItem>
-                              <SelectItem value="hand">Hand</SelectItem>
-                              <SelectItem value="arm-below">Below-Elbow Arm</SelectItem>
-                              <SelectItem value="arm-above">Above-Elbow Arm</SelectItem>
-                              <SelectItem value="toe">Toe</SelectItem>
-                              <SelectItem value="foot">Foot</SelectItem>
-                              <SelectItem value="leg-below">Below-Knee Leg</SelectItem>
-                              <SelectItem value="leg-above">Above-Knee Leg</SelectItem>
-                              <SelectItem value="multiple">Multiple Limbs</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Accident Location</label>
-                          <Select value={formData.accidentLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, accidentLocation: value }))}>
-                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
-                              <SelectValue placeholder="Where did the accident occur?" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
-                              <SelectItem value="workplace">Workplace</SelectItem>
-                              <SelectItem value="car-accident">Car Accident</SelectItem>
-                              <SelectItem value="motorcycle-accident">Motorcycle Accident</SelectItem>
-                              <SelectItem value="construction-site">Construction Site</SelectItem>
-                              <SelectItem value="factory">Factory/Industrial</SelectItem>
-                              <SelectItem value="hospital">Hospital/Medical</SelectItem>
-                              <SelectItem value="home">Home</SelectItem>
-                              <SelectItem value="public-place">Public Place</SelectItem>
-                              <SelectItem value="other">Other</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-slate-900 mb-3">Medical Treatment</label>
-                          <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalTreatment: value }))}>
-                            <SelectTrigger className="h-14 text-lg border-gray-200 rounded-2xl bg-white text-slate-900">
-                              <SelectValue placeholder="Current treatment status" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white border border-gray-200 shadow-lg z-50">
-                              <SelectItem value="emergency-room">Emergency Room Only</SelectItem>
-                              <SelectItem value="hospital-stay">Hospital Stay</SelectItem>
-                              <SelectItem value="surgery-complete">Surgery Completed</SelectItem>
-                              <SelectItem value="ongoing-treatment">Ongoing Treatment</SelectItem>
-                              <SelectItem value="rehabilitation">In Rehabilitation</SelectItem>
-                              <SelectItem value="prosthetic-fitting">Prosthetic Fitting</SelectItem>
-                              <SelectItem value="no-treatment">No Treatment Yet</SelectItem>
-                            </SelectContent>
-                          </Select>
-                        </div>
-                      </div>
-
-                      {/* Injury Description */}
-                      <div>
-                        <label className="block text-sm font-medium text-slate-900 mb-3">Brief Description of Injury</label>
-                        <Textarea
-                          value={formData.injuryDescription}
-                          onChange={(e) => setFormData(prev => ({ ...prev, injuryDescription: e.target.value }))}
-                          className="min-h-[100px] text-lg border-gray-200 rounded-2xl bg-white text-slate-900 resize-none"
-                          placeholder="Please describe what happened and how the amputation occurred..."
+                      <div className="md:w-1/3">
+                        <img 
+                          src={whatToDoImage} 
+                          alt="Emergency medical care for amputation injuries" 
+                          className="w-full rounded-lg shadow-lg"
                         />
                       </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
 
-                      {/* Submit Button */}
-                      <div className="text-center pt-4">
-                        <Button 
-                          type="submit" 
-                          className="w-full md:w-auto bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-12 py-4 text-lg rounded-2xl transition-all duration-300 hover:scale-105 shadow-lg"
+              {/* Types of Amputations Section */}
+              <section id="types-of-amputations" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <Scissors className="w-6 h-6 mr-2" />
+                      Types of Amputation Injuries We Handle
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <p className="text-lg mb-6">
+                          Amputation injuries vary significantly in their severity and impact on victims' lives. Upper extremity amputations, including finger, hand, and arm amputations, account for approximately 70% of all amputation injuries and profoundly affect a person's ability to work, perform daily tasks, and maintain independence. The loss of even a single finger can end careers for musicians, surgeons, or skilled craftspeople, while arm amputations require complete life restructuring.
+                        </p>
+                        
+                        <p className="text-lg mb-6">
+                          Lower extremity amputations – including toe, foot, below-knee (BKA), and above-knee (AKA) amputations – present unique challenges for mobility and independence. Above-knee amputations are particularly devastating, requiring more complex prosthetics and extensive rehabilitation. The energy expenditure for walking with an above-knee prosthesis increases by 60-100%, fundamentally altering a person's activity level and quality of life.
+                        </p>
+                        
+                        <Collapsible>
+                          <CollapsibleTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                            >
+                              <span className="text-primary font-medium">Learn More About Amputation Types</span>
+                              <ChevronDown className="w-5 h-5 text-primary" />
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="mt-6">
+                            <div className="space-y-6">
+                              <div>
+                                <h4 className="text-xl font-semibold mb-3">Upper Extremity Amputations</h4>
+                                <ul className="space-y-2 text-muted-foreground">
+                                  <li>• Finger and thumb amputations affecting grip and fine motor skills</li>
+                                  <li>• Hand amputations requiring advanced prosthetic technology</li>
+                                  <li>• Below-elbow amputations preserving elbow function</li>
+                                  <li>• Above-elbow amputations requiring more complex prosthetics</li>
+                                  <li>• Shoulder disarticulation amputations</li>
+                                </ul>
+                              </div>
+                              
+                              <div>
+                                <h4 className="text-xl font-semibold mb-3">Lower Extremity Amputations</h4>
+                                <ul className="space-y-2 text-muted-foreground">
+                                  <li>• Toe amputations affecting balance and gait</li>
+                                  <li>• Partial foot amputations requiring specialized footwear</li>
+                                  <li>• Below-knee amputations with preserved knee function</li>
+                                  <li>• Above-knee amputations requiring computerized prosthetics</li>
+                                  <li>• Hip disarticulation amputations</li>
+                                  <li>• Bilateral amputations requiring extensive rehabilitation</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={amputationTypesImage} 
+                          alt="Different types of amputation injuries" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Rehabilitation Section */}
+              <section id="rehabilitation" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <Activity className="w-6 h-6 mr-2" />
+                      Comprehensive Rehabilitation Process
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <p className="text-lg mb-6">
+                          Amputation rehabilitation is a complex, multi-phase process that extends far beyond initial medical treatment. The rehabilitation journey typically spans 6-18 months for initial adjustment, with ongoing therapy and support continuing for years. This comprehensive process requires a coordinated team approach involving multiple medical specialists, therapists, and support professionals.
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          <div className="p-4 bg-blue-50 rounded-lg">
+                            <h4 className="font-semibold text-blue-700 mb-2">Phase 1: Acute Care (0-3 months)</h4>
+                            <ul className="text-sm text-blue-600">
+                              <li>• Wound healing and infection prevention</li>
+                              <li>• Pain management and phantom limb treatment</li>
+                              <li>• Early mobility training</li>
+                              <li>• Psychological support initiation</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="p-4 bg-green-50 rounded-lg">
+                            <h4 className="font-semibold text-green-700 mb-2">Phase 2: Prosthetic Training (3-12 months)</h4>
+                            <ul className="text-sm text-green-600">
+                              <li>• Prosthetic fitting and adjustment</li>
+                              <li>• Gait training and balance work</li>
+                              <li>• Functional activity training</li>
+                              <li>• Strength and endurance building</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <Collapsible>
+                          <CollapsibleTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                            >
+                              <span className="text-primary font-medium">View Complete Rehabilitation Timeline</span>
+                              <ChevronDown className="w-5 h-5 text-primary" />
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="mt-6">
+                            <div className="space-y-6">
+                              <div className="p-4 bg-yellow-50 rounded-lg">
+                                <h4 className="font-semibold text-yellow-700 mb-2">Phase 3: Advanced Training (6-18 months)</h4>
+                                <ul className="text-sm text-yellow-600">
+                                  <li>• Advanced prosthetic control techniques</li>
+                                  <li>• Return to work preparation</li>
+                                  <li>• Sports and recreational activities</li>
+                                  <li>• Driving assessment and training</li>
+                                </ul>
+                              </div>
+                              
+                              <div className="p-4 bg-purple-50 rounded-lg">
+                                <h4 className="font-semibold text-purple-700 mb-2">Ongoing Support (Lifetime)</h4>
+                                <ul className="text-sm text-purple-600">
+                                  <li>• Regular prosthetic maintenance and replacement</li>
+                                  <li>• Continued psychological support</li>
+                                  <li>• Peer support group participation</li>
+                                  <li>• Technology upgrades and training</li>
+                                </ul>
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={rehabilitationImage} 
+                          alt="Amputation rehabilitation therapy session" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Compensation Section */}
+              <section id="compensation" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <DollarSign className="w-6 h-6 mr-2" />
+                      Understanding Amputation Compensation
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <p className="text-lg mb-6">
+                          Amputation injury compensation must account for the profound, lifelong impact of limb loss. Unlike other injuries that may heal over time, amputation creates permanent disabilities requiring ongoing medical care, prosthetic replacements, and lifestyle adaptations. California law recognizes both economic and non-economic damages, with amputation cases typically resulting in some of the highest settlement amounts in personal injury law.
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          <div className="p-6 bg-blue-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-blue-700 mb-3">Economic Damages</h4>
+                            <ul className="space-y-2 text-blue-600">
+                              <li>• Emergency medical treatment and surgeries</li>
+                              <li>• Prosthetic limbs and replacements</li>
+                              <li>• Rehabilitation and physical therapy</li>
+                              <li>• Lost wages and reduced earning capacity</li>
+                              <li>• Home modifications and accessibility</li>
+                              <li>• Transportation and equipment costs</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="p-6 bg-green-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-green-700 mb-3">Non-Economic Damages</h4>
+                            <ul className="space-y-2 text-green-600">
+                              <li>• Pain and suffering (physical and emotional)</li>
+                              <li>• Loss of enjoyment of life</li>
+                              <li>• Permanent disability and disfigurement</li>
+                              <li>• Mental anguish and depression</li>
+                              <li>• Loss of consortium for spouses</li>
+                              <li>• Impact on family relationships</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <Collapsible>
+                          <CollapsibleTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                            >
+                              <span className="text-primary font-medium">Learn More About Compensation Factors</span>
+                              <ChevronDown className="w-5 h-5 text-primary" />
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="mt-6">
+                            <div className="space-y-6">
+                              <div>
+                                <h4 className="text-xl font-semibold mb-3">Factors Affecting Compensation Amount</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div className="p-4 bg-red-50 rounded-lg">
+                                    <h5 className="font-semibold text-red-700 mb-2">Injury-Specific Factors</h5>
+                                    <ul className="text-sm text-red-600">
+                                      <li>• Level and type of amputation</li>
+                                      <li>• Dominant vs. non-dominant limb</li>
+                                      <li>• Single vs. multiple amputations</li>
+                                      <li>• Associated injuries and complications</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-orange-50 rounded-lg">
+                                    <h5 className="font-semibold text-orange-700 mb-2">Personal Factors</h5>
+                                    <ul className="text-sm text-orange-600">
+                                      <li>• Age and life expectancy</li>
+                                      <li>• Occupation and career prospects</li>
+                                      <li>• Pre-injury income level</li>
+                                      <li>• Education and skills</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                                <h4 className="text-xl font-semibold text-yellow-700 mb-3">Typical Settlement Ranges</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                                  <div>
+                                    <div className="text-2xl font-bold text-yellow-600">$750K - $1.5M</div>
+                                    <div className="text-sm text-yellow-600">Single finger/toe</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-2xl font-bold text-yellow-600">$1.5M - $3M</div>
+                                    <div className="text-sm text-yellow-600">Hand/foot amputation</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-2xl font-bold text-yellow-600">$3M+</div>
+                                    <div className="text-sm text-yellow-600">Major limb amputation</div>
+                                  </div>
+                                </div>
+                                <p className="text-xs text-yellow-600 mt-4 text-center">
+                                  *Actual settlements depend on specific case factors and degree of negligence
+                                </p>
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={compensationImage} 
+                          alt="Legal compensation for amputation injuries" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Prosthetics Section */}
+              <section id="prosthetics" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <Heart className="w-6 h-6 mr-2" />
+                      Advanced Prosthetic Technology and Costs
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <p className="text-lg mb-6">
+                          Modern prosthetic technology has revolutionized life for amputees, offering advanced functionality that can restore significant independence and quality of life. However, these life-changing devices come with substantial costs that must be factored into compensation calculations. Prosthetic limbs require replacement every 3-5 years, with active individuals often needing multiple prosthetics for different activities.
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          <div className="p-6 bg-blue-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-blue-700 mb-3">Upper Extremity Prosthetics</h4>
+                            <ul className="space-y-2 text-blue-600">
+                              <li>• Basic prosthetic arms: $3,000-$30,000</li>
+                              <li>• Myoelectric arms: $25,000-$70,000</li>
+                              <li>• Individual finger control: $25,000-$50,000</li>
+                              <li>• Sensory feedback systems: $75,000+</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="p-6 bg-green-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-green-700 mb-3">Lower Extremity Prosthetics</h4>
+                            <ul className="space-y-2 text-green-600">
+                              <li>• Basic prosthetic legs: $5,000-$50,000</li>
+                              <li>• Computerized knee units: $35,000-$50,000</li>
+                              <li>• Microprocessor ankles: $15,000-$35,000</li>
+                              <li>• Running/sports prosthetics: $20,000-$40,000</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <Collapsible>
+                          <CollapsibleTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                            >
+                              <span className="text-primary font-medium">Explore Advanced Prosthetic Options</span>
+                              <ChevronDown className="w-5 h-5 text-primary" />
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="mt-6">
+                            <div className="space-y-6">
+                              <div>
+                                <h4 className="text-xl font-semibold mb-3">Cutting-Edge Technologies</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div className="p-4 bg-purple-50 rounded-lg">
+                                    <h5 className="font-semibold text-purple-700 mb-2">Emerging Technologies</h5>
+                                    <ul className="text-sm text-purple-600">
+                                      <li>• Osseointegration (direct bone attachment)</li>
+                                      <li>• Neural control interfaces</li>
+                                      <li>• 3D-printed custom prosthetics</li>
+                                      <li>• Bionic limbs with sensory feedback</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-indigo-50 rounded-lg">
+                                    <h5 className="font-semibold text-indigo-700 mb-2">Specialized Prosthetics</h5>
+                                    <ul className="text-sm text-indigo-600">
+                                      <li>• Waterproof prosthetics for swimming</li>
+                                      <li>• Shock-absorbing legs for running</li>
+                                      <li>• Multi-grip hands for various tools</li>
+                                      <li>• Prosthetics for specific occupations</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="p-6 bg-red-50 rounded-lg border-l-4 border-red-400">
+                                <h4 className="text-xl font-semibold text-red-700 mb-3">Lifetime Prosthetic Costs</h4>
+                                <p className="text-red-600 mb-4">
+                                  For a 30-year-old amputee with a life expectancy of 50 years, prosthetic costs alone can exceed $500,000-$1,000,000, not including fitting, training, repairs, and maintenance.
+                                </p>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                                  <div>
+                                    <div className="text-2xl font-bold text-red-600">$50K-$150K</div>
+                                    <div className="text-sm text-red-600">Per prosthetic replacement</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-2xl font-bold text-red-600">3-5 years</div>
+                                    <div className="text-sm text-red-600">Replacement frequency</div>
+                                  </div>
+                                  <div>
+                                    <div className="text-2xl font-bold text-red-600">$1M+</div>
+                                    <div className="text-sm text-red-600">Lifetime costs</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={prostheticImage} 
+                          alt="Advanced prosthetic technology" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Lifetime Care Section */}
+              <section id="lifetime-care" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <Stethoscope className="w-6 h-6 mr-2" />
+                      Comprehensive Lifetime Care Planning
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <p className="text-lg mb-6">
+                          Amputation creates lifelong medical and care needs that extend far beyond the initial injury and recovery period. Proper compensation must account for decades of ongoing medical care, prosthetic maintenance, and support services. Life care planners work with medical experts to project these needs and calculate accurate lifetime costs, which often exceed $1 million for major amputations.
+                        </p>
+                        
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                          <div className="p-6 bg-blue-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-blue-700 mb-3">Ongoing Medical Care</h4>
+                            <ul className="space-y-2 text-blue-600">
+                              <li>• Regular physician monitoring</li>
+                              <li>• Phantom limb pain treatment</li>
+                              <li>• Stump care and maintenance</li>
+                              <li>• Revision surgeries</li>
+                              <li>• Infection prevention and treatment</li>
+                              <li>• Secondary condition management</li>
+                            </ul>
+                          </div>
+                          
+                          <div className="p-6 bg-green-50 rounded-lg">
+                            <h4 className="text-xl font-semibold text-green-700 mb-3">Support Services</h4>
+                            <ul className="space-y-2 text-green-600">
+                              <li>• Ongoing physical therapy</li>
+                              <li>• Occupational therapy</li>
+                              <li>• Psychological counseling</li>
+                              <li>• Vocational rehabilitation</li>
+                              <li>• Home care assistance</li>
+                              <li>• Transportation services</li>
+                            </ul>
+                          </div>
+                        </div>
+                        
+                        <Collapsible>
+                          <CollapsibleTrigger asChild>
+                            <Button 
+                              variant="ghost" 
+                              className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                            >
+                              <span className="text-primary font-medium">View Detailed Lifetime Care Breakdown</span>
+                              <ChevronDown className="w-5 h-5 text-primary" />
+                            </Button>
+                          </CollapsibleTrigger>
+                          <CollapsibleContent className="mt-6">
+                            <div className="space-y-6">
+                              <div>
+                                <h4 className="text-xl font-semibold mb-3">Age-Specific Care Considerations</h4>
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                  <div className="p-4 bg-purple-50 rounded-lg">
+                                    <h5 className="font-semibold text-purple-700 mb-2">Young Adults (18-35)</h5>
+                                    <ul className="text-sm text-purple-600">
+                                      <li>• Career development support</li>
+                                      <li>• Family planning considerations</li>
+                                      <li>• Sports and recreation adaptation</li>
+                                      <li>• Technology upgrade training</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-indigo-50 rounded-lg">
+                                    <h5 className="font-semibold text-indigo-700 mb-2">Middle Age (35-55)</h5>
+                                    <ul className="text-sm text-indigo-600">
+                                      <li>• Joint preservation therapy</li>
+                                      <li>• Ergonomic workplace modifications</li>
+                                      <li>• Preventive arthritis treatment</li>
+                                      <li>• Family caregiver support</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-cyan-50 rounded-lg">
+                                    <h5 className="font-semibold text-cyan-700 mb-2">Older Adults (55+)</h5>
+                                    <ul className="text-sm text-cyan-600">
+                                      <li>• Fall prevention programs</li>
+                                      <li>• Mobility aid modifications</li>
+                                      <li>• Home safety adaptations</li>
+                                      <li>• Age-related health monitoring</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="p-6 bg-yellow-50 rounded-lg border-l-4 border-yellow-400">
+                                <h4 className="text-xl font-semibold text-yellow-700 mb-3">Lifetime Cost Projections</h4>
+                                <div className="space-y-4">
+                                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="text-center">
+                                      <div className="text-3xl font-bold text-yellow-600">$509,275</div>
+                                      <div className="text-sm text-yellow-600">Average lifetime medical costs</div>
+                                    </div>
+                                    <div className="text-center">
+                                      <div className="text-3xl font-bold text-yellow-600">$1M+</div>
+                                      <div className="text-sm text-yellow-600">Complex cases with complications</div>
+                                    </div>
+                                  </div>
+                                  <p className="text-sm text-yellow-600">
+                                    These projections include medical care, prosthetics, therapy, medications, home modifications, and support services over a lifetime.
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </CollapsibleContent>
+                        </Collapsible>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={lifetimeCareImage} 
+                          alt="Lifetime care planning for amputation patients" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* Time Limits Section */}
+              <section id="time-limits" className="content-section mb-16">
+                <Card className="glass-card border-red-200 bg-red-50">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-red-700 flex items-center">
+                      <Clock className="w-6 h-6 mr-2" />
+                      Don't Wait - Time Limits Apply for California Amputation Cases
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-col md:flex-row gap-8">
+                      <div className="md:w-2/3">
+                        <div className="p-6 bg-red-100 rounded-lg border-l-4 border-red-500 mb-6">
+                          <h3 className="text-xl font-semibold text-red-700 mb-3">Critical Time Deadlines</h3>
+                          <p className="text-red-600 mb-4">
+                            California law imposes strict deadlines for filing amputation injury claims. Missing these deadlines can permanently bar your right to compensation, regardless of how strong your case may be.
+                          </p>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="bg-white p-4 rounded">
+                              <div className="text-2xl font-bold text-red-600">2 Years</div>
+                              <div className="text-sm text-red-500">General personal injury statute of limitations</div>
+                            </div>
+                            <div className="bg-white p-4 rounded">
+                              <div className="text-2xl font-bold text-red-600">6 Months</div>
+                              <div className="text-sm text-red-500">Government entity claims notice requirement</div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-6">
+                          <div>
+                            <h4 className="text-lg font-semibold text-red-700 mb-3">Why Immediate Action is Critical</h4>
+                            <ul className="space-y-2 text-red-600">
+                              <li>• Evidence disappears quickly (surveillance footage typically deleted within 30-90 days)</li>
+                              <li>• Witness memories fade over time</li>
+                              <li>• Medical records become harder to obtain</li>
+                              <li>• Insurance companies begin building defenses immediately</li>
+                              <li>• Physical evidence at accident scenes gets disturbed or removed</li>
+                            </ul>
+                          </div>
+                          
+                          <Collapsible>
+                            <CollapsibleTrigger asChild>
+                              <Button 
+                                variant="ghost" 
+                                className="flex items-center justify-between w-full p-0 h-auto text-left hover:bg-transparent"
+                              >
+                                <span className="text-red-600 font-medium">Learn More About Specific Time Limits</span>
+                                <ChevronDown className="w-5 h-5 text-red-600" />
+                              </Button>
+                            </CollapsibleTrigger>
+                            <CollapsibleContent className="mt-6">
+                              <div className="space-y-4">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <div className="p-4 bg-white rounded-lg border border-red-200">
+                                    <h5 className="font-semibold text-red-700 mb-2">Motor Vehicle Accidents</h5>
+                                    <ul className="text-sm text-red-600">
+                                      <li>• 2 years from accident date</li>
+                                      <li>• Property damage: 3 years</li>
+                                      <li>• Uninsured motorist claims: special rules apply</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-white rounded-lg border border-red-200">
+                                    <h5 className="font-semibold text-red-700 mb-2">Workplace Injuries</h5>
+                                    <ul className="text-sm text-red-600">
+                                      <li>• Workers' comp: report within 30 days</li>
+                                      <li>• Third-party claims: 2 years</li>
+                                      <li>• Government employers: 6 months notice</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-white rounded-lg border border-red-200">
+                                    <h5 className="font-semibold text-red-700 mb-2">Medical Malpractice</h5>
+                                    <ul className="text-sm text-red-600">
+                                      <li>• 1 year from discovery of malpractice</li>
+                                      <li>• 3 years maximum from date of injury</li>
+                                      <li>• 90-day notice requirement to provider</li>
+                                    </ul>
+                                  </div>
+                                  
+                                  <div className="p-4 bg-white rounded-lg border border-red-200">
+                                    <h5 className="font-semibold text-red-700 mb-2">Product Liability</h5>
+                                    <ul className="text-sm text-red-600">
+                                      <li>• 2 years from injury discovery</li>
+                                      <li>• Defective medical devices: special rules</li>
+                                      <li>• Manufacturer notice requirements</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </CollapsibleContent>
+                          </Collapsible>
+                        </div>
+                        
+                        <div className="mt-8 text-center">
+                          <Link to="/amputation-case-evaluation">
+                            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 text-lg">
+                              <Zap className="w-5 h-5 mr-2" />
+                              Get Free Case Evaluation Now
+                            </Button>
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="md:w-1/3">
+                        <img 
+                          src={timeLimitsImage} 
+                          alt="Legal timeline for amputation cases" 
+                          className="w-full rounded-lg shadow-lg"
+                        />
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+              {/* FAQ Section */}
+              <section id="faq" className="content-section mb-16">
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-2xl text-primary flex items-center">
+                      <HelpCircle className="w-6 h-6 mr-2" />
+                      Frequently Asked Questions About Amputation Injuries
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      {faqData.map((faq, index) => (
+                        <div key={index} className="border border-gray-200 rounded-lg">
+                          <button
+                            onClick={() => toggleFaq(index)}
+                            className="w-full px-6 py-4 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+                          >
+                            <h3 className="text-lg font-medium text-gray-900 pr-4">
+                              {faq.question}
+                            </h3>
+                            {expandedFaq === index ? (
+                              <ChevronUp className="w-5 h-5 text-primary flex-shrink-0" />
+                            ) : (
+                              <ChevronDown className="w-5 h-5 text-primary flex-shrink-0" />
+                            )}
+                          </button>
+                          {expandedFaq === index && (
+                            <div className="px-6 pb-4">
+                              <p className="text-gray-600 leading-relaxed text-lg">
+                                {faq.answer}
+                              </p>
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </section>
+
+            </div>
+
+            {/* Sticky Sidebar - 1 column */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                
+                {/* 3 Ways to Start Your Case - Always Visible */}
+                <Card className="glass-card border-primary/20 bg-gradient-to-br from-red-50 to-orange-50">
+                  <CardHeader>
+                    <CardTitle className="text-xl text-primary text-center">
+                      3 Ways to Start Your Case
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <form onSubmit={handleFormSubmit} className="space-y-4">
+                      <div>
+                        <Input
+                          type="date"
+                          name="accidentDate"
+                          value={formData.accidentDate}
+                          onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
+                          placeholder="Accident Date"
+                          className="text-lg"
+                        />
+                      </div>
+                      <div>
+                        <Select 
+                          value={formData.amputationType} 
+                          onValueChange={(value) => setFormData(prev => ({ ...prev, amputationType: value }))}
                         >
-                          Get My Free Case Evaluation
-                        </Button>
-                        <p className="text-sm text-slate-600 mt-3">
-                          * Required fields. We respect your privacy and will never share your information.
-                        </p>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </section>
-
-            {/* Immediate Steps Section */}
-            <section id="what-to-do" className="content-section mb-16">
-              <div className="flex items-center gap-8">
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Immediate Steps After an Amputation Injury
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-red-600 text-white rounded-full flex items-center justify-center font-bold">
-                          1
-                        </div>
+                          <SelectTrigger className="text-lg">
+                            <SelectValue placeholder="Amputation Type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="finger">Finger/Thumb</SelectItem>
+                            <SelectItem value="hand">Hand</SelectItem>
+                            <SelectItem value="arm">Arm</SelectItem>
+                            <SelectItem value="toe">Toe</SelectItem>
+                            <SelectItem value="foot">Foot</SelectItem>
+                            <SelectItem value="leg">Leg</SelectItem>
+                            <SelectItem value="multiple">Multiple Limbs</SelectItem>
+                          </SelectContent>
+                        </Select>
                       </div>
                       <div>
-                        <h3 className="text-xl font-semibold mb-2 text-foreground">Emergency Medical Care</h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Call 911 immediately. Control bleeding with direct pressure above the amputation site. If possible, preserve the amputated part by wrapping in clean cloth, placing in sealed plastic bag, and keeping on ice (not direct contact). Time is critical for potential reattachment.
-                        </p>
+                        <Input
+                          name="accidentLocation"
+                          value={formData.accidentLocation}
+                          onChange={(e) => setFormData(prev => ({ ...prev, accidentLocation: e.target.value }))}
+                          placeholder="Accident Location"
+                          className="text-lg"
+                        />
                       </div>
-                    </div>
-                    
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold">
-                          2
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2 text-foreground">Document the Scene</h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Take photos of the accident scene, equipment involved, safety violations, and your injuries. Get witness contact information. Report the incident to authorities and obtain report numbers. This evidence is crucial for proving liability.
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-green-600 text-white rounded-full flex items-center justify-center font-bold">
-                          3
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2 text-foreground">Contact Legal Representation</h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Insurance companies immediately begin building cases against amputation victims. Our former defense experience reveals their tactics. Contact us before giving any statements or signing documents. We protect your rights while you focus on recovery.
-                        </p>
-                      </div>
-                    </div>
-                    
-                    <div className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold">
-                          4
-                        </div>
-                      </div>
-                      <div>
-                        <h3 className="text-xl font-semibold mb-2 text-foreground">Begin Case Documentation</h3>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Start a detailed journal of pain levels, daily challenges, missed activities, and emotional impact. Keep all medical records, bills, and correspondence. This contemporaneous documentation strengthens your claim significantly.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="hidden lg:block">
-                  <img 
-                    src={whatToDoImage} 
-                    alt="Emergency medical care for amputation injury"
-                    className="w-96 h-64 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Amputation Types Section */}
-            <section id="types-of-amputations" className="content-section mb-16">
-              <div className="flex items-start gap-8">
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Types of Amputation Injuries We Handle
-                  </h2>
-                  
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-lg">
-                          <Scissors className="w-5 h-5 mr-2 text-primary" />
-                          Upper Extremity Amputations
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed mb-3">
-                          Finger, thumb, hand, below-elbow, and above-elbow amputations. Upper limb losses severely impact fine motor skills, work capacity, and daily activities. Prosthetic technology offers some restoration but function remains limited.
-                        </p>
-                        <ul className="text-sm text-muted-foreground space-y-1">
-                          <li>• Finger/thumb amputations</li>
-                          <li>• Partial hand amputations</li>
-                          <li>• Below-elbow amputations</li>
-                          <li>• Above-elbow amputations</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-lg">
-                          <Activity className="w-5 h-5 mr-2 text-primary" />
-                          Lower Extremity Amputations  
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed mb-3">
-                          Toe, foot, below-knee, and above-knee amputations. Lower limb losses affect mobility, balance, and independence. Higher-level amputations require more energy for walking and increase fall risk.
-                        </p>
-                        <ul className="text-sm text-muted-foreground space-y-1">
-                          <li>• Toe amputations</li>
-                          <li>• Partial foot amputations</li>
-                          <li>• Below-knee amputations</li>
-                          <li>• Above-knee amputations</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-lg">
-                          <Heart className="w-5 h-5 mr-2 text-primary" />
-                          Multiple Limb Amputations
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Loss of two or more limbs from catastrophic accidents. These devastating injuries require extensive rehabilitation, specialized equipment, home modifications, and lifetime attendant care. Compensation often reaches millions.
-                        </p>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-lg">
-                          <AlertTriangle className="w-5 h-5 mr-2 text-primary" />
-                          Traumatic vs. Surgical Amputations
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <p className="text-muted-foreground leading-relaxed">
-                          Traumatic amputations occur at accident scenes from crushing or severing forces. Surgical amputations follow failed limb salvage attempts or infection. Both types qualify for maximum compensation when caused by negligence.
-                        </p>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-                
-                <div className="hidden lg:block">
-                  <img 
-                    src={amputationTypesImage} 
-                    alt="Different types of amputation injuries"
-                    className="w-96 h-80 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Rehabilitation Section */}
-            <section id="rehabilitation" className="content-section mb-16">
-              <div className="flex items-start gap-8">
-                <div className="hidden lg:block">
-                  <img 
-                    src={rehabilitationImage} 
-                    alt="Amputation rehabilitation and physical therapy"
-                    className="w-96 h-80 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-                
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Rehabilitation and Recovery Process
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Immediate Post-Surgical Care</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Wound healing, pain management, phantom limb pain treatment, and psychological support. This critical phase typically lasts 6-12 weeks and sets the foundation for successful prosthetic fitting.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Physical Therapy</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Strength building, range of motion, balance training, and gait instruction. Physical therapy continues throughout the recovery process, often requiring 2-3 sessions weekly for months or years.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Occupational Therapy</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Learning adaptive techniques for daily activities, job skills training, and prosthetic use instruction. Occupational therapy helps maximize independence and work capacity.
-                      </p>
-                    </div>
-                    
-                    <Collapsible>
-                      <CollapsibleTrigger asChild>
-                        <Button variant="link" className="text-primary text-lg p-0 h-auto font-medium">
-                          Learn more about rehabilitation services...
-                          <ChevronDown className="ml-2 h-4 w-4" />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-4">
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className="font-semibold mb-2">Psychological Counseling</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Depression, PTSD, and adjustment disorders are common after amputation. Professional counseling addresses grief, phantom limb pain, and adaptation challenges.
-                            </p>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-semibold mb-2">Vocational Rehabilitation</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Job retraining, workplace modifications, and career counseling to help amputees return to productive employment when possible.
-                            </p>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-semibold mb-2">Peer Support Programs</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Connecting with other amputees provides emotional support, practical advice, and motivation during the challenging adaptation process.
-                            </p>
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Compensation Section */}
-            <section id="compensation" className="content-section mb-16">
-              <div className="flex items-start gap-8">
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Amputation Injury Compensation
-                  </h2>
-                  
-                  <div className="space-y-8">
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-xl">
-                          <DollarSign className="w-6 h-6 mr-2 text-green-600" />
-                          Economic Damages
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-2 text-muted-foreground">
-                          <li>• Medical expenses (emergency care, surgeries, rehabilitation)</li>
-                          <li>• Prosthetic devices and replacements (every 3-5 years)</li>
-                          <li>• Ongoing physical and occupational therapy</li>
-                          <li>• Lost wages and diminished earning capacity</li>
-                          <li>• Home and vehicle modifications</li>
-                          <li>• Attendant care and assistance</li>
-                          <li>• Lifetime medical monitoring and treatment</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <Card className="border border-border">
-                      <CardHeader>
-                        <CardTitle className="flex items-center text-xl">
-                          <Heart className="w-6 h-6 mr-2 text-red-600" />
-                          Non-Economic Damages
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <ul className="space-y-2 text-muted-foreground">
-                          <li>• Physical pain and suffering</li>
-                          <li>• Emotional distress and mental anguish</li>
-                          <li>• Loss of enjoyment of life</li>
-                          <li>• Disfigurement and disability</li>
-                          <li>• Loss of consortium (impact on relationships)</li>
-                          <li>• Phantom limb pain and chronic discomfort</li>
-                        </ul>
-                      </CardContent>
-                    </Card>
-                    
-                    <div className="bg-green-50 border border-green-200 rounded-lg p-6">
-                      <h3 className="text-xl font-semibold mb-4 text-green-800">Typical Settlement Ranges</h3>
-                      <div className="grid md:grid-cols-2 gap-4 text-sm">
-                        <div>
-                          <h4 className="font-semibold text-green-700 mb-2">Finger/Thumb Amputations</h4>
-                          <p className="text-green-600">$150,000 - $400,000+</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-green-700 mb-2">Hand Amputations</h4>
-                          <p className="text-green-600">$400,000 - $1,200,000+</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-green-700 mb-2">Arm Amputations</h4>
-                          <p className="text-green-600">$750,000 - $2,500,000+</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-green-700 mb-2">Leg Amputations</h4>
-                          <p className="text-green-600">$500,000 - $2,000,000+</p>
-                        </div>
-                        <div>
-                          <h4 className="font-semibold text-green-700 mb-2">Multiple Limbs</h4>
-                          <p className="text-green-600">$2,000,000 - $10,000,000+</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="hidden lg:block">
-                  <img 
-                    src={compensationImage} 
-                    alt="Amputation injury compensation calculation"
-                    className="w-96 h-64 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Prosthetics Section */}
-            <section id="prosthetics" className="content-section mb-16">
-              <div className="flex items-center gap-8">
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Prosthetic Devices and Technology
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Initial Prosthetic Fitting</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        The first prosthetic is typically fitted 6-12 weeks after amputation. This temporary device allows early mobility while the residual limb continues healing and shaping. Multiple adjustments are necessary during this period.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Advanced Prosthetic Technology</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Modern prosthetics include microprocessor-controlled knees, myoelectric hands, and computer-controlled feet. These advanced devices dramatically improve function but cost $50,000-$150,000 per limb.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Replacement Schedule</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Prosthetics require replacement every 3-5 years due to wear, technology advances, and body changes. Active users may need replacements more frequently. Lifetime prosthetic costs often exceed $500,000.
-                      </p>
-                    </div>
-                    
-                    <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
-                      <h4 className="font-semibold text-blue-800 mb-3">Common Prosthetic Costs</h4>
-                      <ul className="space-y-2 text-sm text-blue-700">
-                        <li>• Basic below-knee prosthetic: $15,000 - $30,000</li>
-                        <li>• Advanced microprocessor knee: $50,000 - $100,000</li>
-                        <li>• Myoelectric hand prosthetic: $40,000 - $80,000</li>
-                        <li>• Sports/activity-specific prosthetics: $10,000 - $25,000</li>
-                        <li>• Annual maintenance and repairs: $3,000 - $8,000</li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                
-                <div className="hidden lg:block">
-                  <img 
-                    src={prostheticImage} 
-                    alt="Advanced prosthetic devices and technology"
-                    className="w-96 h-64 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-              </div>
-            </section>
-
-            {/* Lifetime Care Section */}
-            <section id="lifetime-care" className="content-section mb-16">
-              <div className="flex items-start gap-8">
-                <div className="hidden lg:block">
-                  <img 
-                    src={lifetimeCareImage} 
-                    alt="Lifetime care planning for amputation victims"
-                    className="w-96 h-80 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
-                
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Lifetime Care Planning
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Medical Care Needs</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Amputees require lifetime medical monitoring including residual limb care, phantom pain management, prosthetic adjustments, and treatment of secondary conditions like arthritis, back pain, and circulation problems.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Home Modifications</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Wheelchair accessibility, ramps, modified bathrooms, lowered counters, and specialized equipment. Initial modifications average $25,000-$75,000 with ongoing maintenance and updates.
-                      </p>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Transportation Needs</h3>
-                      <p className="text-muted-foreground leading-relaxed mb-4">
-                        Vehicle modifications including hand controls, wheelchair lifts, or specialized seating. Many amputees require adaptive equipment costing $15,000-$50,000 per vehicle.
-                      </p>
-                    </div>
-                    
-                    <Collapsible>
-                      <CollapsibleTrigger asChild>
-                        <Button variant="link" className="text-primary text-lg p-0 h-auto font-medium">
-                          See detailed lifetime care costs...
-                          <ChevronDown className="ml-2 h-4 w-4" />
-                        </Button>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="mt-4">
-                        <div className="space-y-4">
-                          <div>
-                            <h4 className="font-semibold mb-2">Personal Care Assistance</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Many amputees need help with daily activities, especially multiple limb amputees. Personal care assistance ranges from 2-24 hours daily at $25-40 per hour.
-                            </p>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-semibold mb-2">Psychological Support</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Ongoing counseling for depression, PTSD, adjustment disorders, and relationship challenges. Mental health treatment continues throughout life.
-                            </p>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-semibold mb-2">Secondary Health Conditions</h4>
-                            <p className="text-muted-foreground leading-relaxed">
-                              Increased arthritis, back problems, cardiovascular issues, and overuse injuries in remaining limbs require additional medical care and treatment.
-                            </p>
-                          </div>
-                        </div>
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            {/* Time Limits Section */}
-            <section id="time-limits" className="content-section mb-16">
-              <div className="flex items-center gap-8">
-                <div className="flex-1">
-                  <h2 className="text-4xl font-bold mb-8 text-foreground">
-                    Time Limits for Amputation Claims
-                  </h2>
-                  
-                  <div className="space-y-6">
-                    <div className="bg-red-50 border border-red-200 rounded-lg p-6">
-                      <h3 className="text-xl font-semibold mb-3 text-red-800">California Statute of Limitations</h3>
-                      <p className="text-red-700 leading-relaxed mb-4">
-                        You have only TWO YEARS from the accident date to file your amputation injury lawsuit. This deadline is strictly enforced - missing it means losing your right to compensation forever.
-                      </p>
-                    </div>
-                    
-                    <div className="grid md:grid-cols-2 gap-6">
-                      <Card className="border border-border">
-                        <CardHeader>
-                          <CardTitle className="flex items-center text-lg">
-                            <Building className="w-5 h-5 mr-2 text-primary" />
-                            Government Claims
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-muted-foreground leading-relaxed mb-3">
-                            Claims against government entities (city, county, state) must be filed within SIX MONTHS of the accident. This includes accidents on public property, government vehicles, or involving government employees.
-                          </p>
-                        </CardContent>
-                      </Card>
                       
-                      <Card className="border border-border">
-                        <CardHeader>
-                          <CardTitle className="flex items-center text-lg">
-                            <Stethoscope className="w-5 h-5 mr-2 text-primary" />
-                            Medical Malpractice
-                          </CardTitle>
-                        </CardHeader>
-                        <CardContent>
-                          <p className="text-muted-foreground leading-relaxed mb-3">
-                            Medical malpractice resulting in amputation has a ONE YEAR deadline from discovery of the malpractice or THREE YEARS from the procedure, whichever comes first.
-                          </p>
-                        </CardContent>
-                      </Card>
+                      <div className="space-y-3">
+                        <Link to="/amputation-case-evaluation">
+                          <Button className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                            <ClipboardCheck className="w-4 h-4 mr-2" />
+                            FREE CASE EVALUATION
+                          </Button>
+                        </Link>
+                        
+                        <Link to="/amputation-compensation-calculator">
+                          <Button className="w-full bg-green-600 hover:bg-green-700 text-white">
+                            <Calculator className="w-4 h-4 mr-2" />
+                            CALCULATE SETTLEMENT
+                          </Button>
+                        </Link>
+                        
+                        <Link to="/amputation-medical-guidance">
+                          <Button className="w-full bg-purple-600 hover:bg-purple-700 text-white">
+                            <Stethoscope className="w-4 h-4 mr-2" />
+                            MEDICAL GUIDANCE
+                          </Button>
+                        </Link>
+                      </div>
+                    </form>
+                  </CardContent>
+                </Card>
+
+                {/* Emergency Contact */}
+                <Card className="glass-card border-red-200 bg-red-50">
+                  <CardHeader>
+                    <CardTitle className="text-red-700 flex items-center">
+                      <Phone className="w-5 h-5 mr-2" />
+                      Need Immediate Help?
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3">
+                      <Button 
+                        className="w-full bg-red-600 hover:bg-red-700 text-white" 
+                        onClick={() => window.location.href = 'tel:8181234567'}
+                      >
+                        <Phone className="w-4 h-4 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                      <p className="text-sm text-red-600 text-center">
+                        24/7 availability for amputation emergencies
+                      </p>
                     </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold mb-3 text-foreground">Why Early Action is Critical</h3>
-                      <ul className="space-y-2 text-muted-foreground">
-                        <li>• Evidence disappears quickly (surveillance footage deleted within 30 days)</li>
-                        <li>• Witness memories fade over time</li>
-                        <li>• Medical records become harder to obtain</li>
-                        <li>• Insurance companies destroy claim files after several years</li>
-                        <li>• Physical evidence deteriorates or gets discarded</li>
-                        <li>• Expert witnesses may become unavailable</li>
-                      </ul>
+                  </CardContent>
+                </Card>
+
+                {/* Quick Tips */}
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle className="text-primary">Important for Amputation Patients</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3 text-sm">
+                      <div className="flex items-start">
+                        <AlertTriangle className="w-4 h-4 text-yellow-500 mr-2 mt-1 flex-shrink-0" />
+                        <span>Preserve amputated limb on ice if possible</span>
+                      </div>
+                      <div className="flex items-start">
+                        <Shield className="w-4 h-4 text-green-500 mr-2 mt-1 flex-shrink-0" />
+                        <span>Document everything immediately</span>
+                      </div>
+                      <div className="flex items-start">
+                        <Clock className="w-4 h-4 text-red-500 mr-2 mt-1 flex-shrink-0" />
+                        <span>Seek immediate medical attention</span>
+                      </div>
+                      <div className="flex items-start">
+                        <FileText className="w-4 h-4 text-blue-500 mr-2 mt-1 flex-shrink-0" />
+                        <span>Don't sign anything from insurance</span>
+                      </div>
                     </div>
-                  </div>
-                </div>
-                
-                <div className="hidden lg:block">
-                  <img 
-                    src={timeLimitsImage} 
-                    alt="Legal timeline and statute of limitations"
-                    className="w-96 h-64 object-cover rounded-lg shadow-lg"
-                  />
-                </div>
+                  </CardContent>
+                </Card>
+
               </div>
-            </section>
-
-            {/* FAQ Section */}
-            <section id="faq" className="content-section mb-12">
-              <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
-              
-              <div className="space-y-4">
-                {faqData.map((faq, index) => (
-                  <Collapsible key={index} open={expandedFaq === index} onOpenChange={() => toggleFaq(index)}>
-                    <Card className="group hover:shadow-lg transition-all duration-300">
-                      <CollapsibleTrigger asChild>
-                        <CardHeader className="cursor-pointer">
-                          <CardTitle className="flex items-center justify-between group-hover:text-primary transition-colors">
-                            <span>{faq.question}</span>
-                            {expandedFaq === index ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                          </CardTitle>
-                        </CardHeader>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent>
-                        <CardContent className="pt-0">
-                          <p className="text-muted-foreground">{faq.answer}</p>
-                        </CardContent>
-                      </CollapsibleContent>
-                    </Card>
-                  </Collapsible>
-                ))}
-              </div>
-            </section>
-          </div>
-
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            {/* Contact Card */}
-            <Card className="sticky top-6 mb-6">
-              <CardHeader className="text-center">
-                <CardTitle className="flex items-center justify-center text-red-600">
-                  <Phone className="w-5 h-5 mr-2" />
-                  Need Immediate Help?
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white" 
-                    onClick={() => window.open('tel:8181234567')}
-                  >
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call (818) 123-4567
-                  </Button>
-                  <p className="text-sm text-red-600 text-center">
-                    24/7 availability for amputation emergencies
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Statute of Limitations Warning */}
-            <Card className="bg-red-50 border-red-200 mb-6">
-              <CardHeader>
-                <CardTitle className="text-red-700 flex items-center">
-                  <AlertTriangle className="w-5 h-5 mr-2" />
-                  Time Limits Apply
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div>
-                  <h4 className="font-semibold text-red-700 mb-3">Act Now to Protect Your Rights</h4>
-                  <p className="text-sm text-red-600 mb-4">
-                    California law gives you only two years from the accident date to file your claim. Government property claims require filing within six months. Contact us today for your free consultation.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            </div>
           </div>
         </div>
       </div>
 
-      {/* Call to Action Section */}
-      <section className="bg-gradient-to-r from-red-600 to-red-700 text-white py-16">
-        <div className="max-w-4xl mx-auto text-center px-6">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+      {/* Don't Wait - Time Limits Apply Section */}
+      <section className="bg-gradient-to-r from-red-600 via-red-700 to-red-800 py-16 px-4">
+        <div className="max-w-6xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             Don't Wait - Time Limits Apply for California Amputation Claims
           </h2>
           <p className="text-xl text-white/90 mb-8 max-w-4xl mx-auto leading-relaxed">
@@ -1095,7 +1356,7 @@ const AmputationInjuries: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <Button 
               className="bg-white text-red-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
-              onClick={() => scrollToSection('evaluation')}
+              onClick={() => window.location.href = '/amputation-case-evaluation'}
             >
               Start Free Case Evaluation
             </Button>
@@ -1108,7 +1369,7 @@ const AmputationInjuries: React.FC = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

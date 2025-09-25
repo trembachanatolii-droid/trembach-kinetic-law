@@ -176,7 +176,7 @@ const ScaffoldingFallsCompensationCalculator: React.FC = () => {
           <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
             Scaffolding Falls Compensation Calculator
           </h1>
-          <p className="text-xl md:text-2xl text-white/90 mb-6">
+          <p className="text-xl md:text-2xl text-white mb-6">
             Estimate Your Potential Settlement Amount
           </p>
           <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">

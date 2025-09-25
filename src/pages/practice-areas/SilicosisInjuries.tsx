@@ -533,23 +533,23 @@ const SilicosisInjuries: React.FC = () => {
                   <form onSubmit={handleFormSubmit} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">First Name *</label>
+                        <label className="text-slate-900 text-base font-semibold">First Name *</label>
                         <Input
                           type="text"
                           value={formData.firstName}
                           onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
                           placeholder="Enter your first name"
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Last Name *</label>
+                        <label className="text-slate-900 text-base font-semibold">Last Name *</label>
                         <Input
                           type="text"
                           value={formData.lastName}
                           onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
                           placeholder="Enter your last name"
                           required
                         />
@@ -558,23 +558,23 @@ const SilicosisInjuries: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Phone Number *</label>
+                        <label className="text-slate-900 text-base font-semibold">Phone Number *</label>
                         <Input
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
                           placeholder="(555) 123-4567"
                           required
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Email Address *</label>
+                        <label className="text-slate-900 text-base font-semibold">Email Address *</label>
                         <Input
                           type="email"
                           value={formData.email}
                           onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="bg-white/90 border-slate-300 text-slate-900 placeholder:text-slate-500 focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30 h-12 text-base font-medium"
                           placeholder="your.email@example.com"
                           required
                         />
@@ -583,10 +583,10 @@ const SilicosisInjuries: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Type of Stone Work *</label>
+                        <label className="text-slate-900 text-base font-semibold">Type of Stone Work *</label>
                         <Select value={formData.stoneType} onValueChange={(value) => setFormData(prev => ({ ...prev, stoneType: value }))}>
-                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
-                            <SelectValue placeholder="Select stone type" className="text-blue-200/70" />
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select stone type" className="text-slate-500" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="engineered-stone">Engineered Stone/Quartz</SelectItem>
@@ -599,10 +599,10 @@ const SilicosisInjuries: React.FC = () => {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Work Duration *</label>
+                        <label className="text-slate-900 text-base font-semibold">Work Duration *</label>
                         <Select value={formData.workDuration} onValueChange={(value) => setFormData(prev => ({ ...prev, workDuration: value }))}>
-                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
-                            <SelectValue placeholder="Select duration" className="text-blue-200/70" />
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select duration" className="text-slate-500" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="less-than-1">Less than 1 year</SelectItem>
@@ -617,10 +617,10 @@ const SilicosisInjuries: React.FC = () => {
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Primary Work Location *</label>
+                        <label className="text-slate-900 text-base font-semibold">Primary Work Location *</label>
                         <Select value={formData.exposureLocation} onValueChange={(value) => setFormData(prev => ({ ...prev, exposureLocation: value }))}>
-                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
-                            <SelectValue placeholder="Select location" className="text-blue-200/70" />
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select location" className="text-slate-500" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="los-angeles">Los Angeles County</SelectItem>
@@ -637,10 +637,10 @@ const SilicosisInjuries: React.FC = () => {
                         </Select>
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Current Health Status *</label>
+                        <label className="text-slate-900 text-base font-semibold">Current Health Status *</label>
                         <Select value={formData.symptomsSeverity} onValueChange={(value) => setFormData(prev => ({ ...prev, symptomsSeverity: value }))}>
-                          <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
-                            <SelectValue placeholder="Select status" className="text-blue-200/70" />
+                          <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                            <SelectValue placeholder="Select status" className="text-slate-500" />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="no-symptoms">No symptoms yet</SelectItem>
@@ -654,10 +654,10 @@ const SilicosisInjuries: React.FC = () => {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-white text-base font-medium">Medical Diagnosis Status *</label>
+                      <label className="text-slate-900 text-base font-semibold">Medical Diagnosis Status *</label>
                       <Select value={formData.medicalDiagnosis} onValueChange={(value) => setFormData(prev => ({ ...prev, medicalDiagnosis: value }))}>
-                        <SelectTrigger className="bg-white/10 border-blue-300/40 text-white h-12 text-base">
-                          <SelectValue placeholder="Select diagnosis status" className="text-blue-200/70" />
+                        <SelectTrigger className="bg-white/90 border-slate-300 text-slate-900 h-12 text-base font-medium focus:border-blue-500 focus:ring-2 focus:ring-blue-500/30">
+                          <SelectValue placeholder="Select diagnosis status" className="text-slate-500" />
                         </SelectTrigger>
                         <SelectContent>
                           <SelectItem value="no-testing">Haven't been tested</SelectItem>
@@ -670,7 +670,7 @@ const SilicosisInjuries: React.FC = () => {
                       </Select>
                     </div>
 
-                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-base py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-lg py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-300 focus:outline-none">
                       Get My Free Silicosis Case Evaluation
                     </Button>
                   </form>

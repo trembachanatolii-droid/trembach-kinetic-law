@@ -262,6 +262,11 @@ function App() {
             <Route path="/practice-areas/defamation/case-evaluation" element={<DefamationCaseEvaluation />} />
             <Route path="/practice-areas/defamation/compensation-calculator" element={<DefamationCompensationCalculator />} />
             <Route path="/practice-areas/defamation/legal-guidance" element={<DefamationLegalGuidance />} />
+            
+            <Route path="/practice-areas/general-personal-injury" element={<GeneralPersonalInjury />} />
+            <Route path="/practice-areas/general-personal-injury/case-evaluation" element={<PersonalInjuryCaseEvaluation />} />
+            <Route path="/practice-areas/general-personal-injury/compensation-calculator" element={<PersonalInjuryCompensationCalculator />} />
+            <Route path="/practice-areas/general-personal-injury/legal-guidance" element={<PersonalInjuryLegalGuidance />} />
             <Route path="/practice-areas/crane-accidents" element={<CraneAccidents />} />
             <Route path="/practice-areas/crane-accidents/case-evaluation" element={<CraneAccidentsCaseEvaluation />} />
             <Route path="/practice-areas/crane-accidents/compensation-calculator" element={<CraneAccidentsCompensationCalculator />} />

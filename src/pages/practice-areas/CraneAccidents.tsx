@@ -286,7 +286,7 @@ const CraneAccidents: React.FC = () => {
                         className="w-full border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white transition-all duration-300 hover:scale-105"
                         onClick={() => window.location.href = '/practice-areas/crane-accidents/case-evaluation'}
                       >
-                        Start Evaluation
+                        <span className="text-blue-600 hover:text-white">Start Evaluation</span>
                       </Button>
                     </div>
                   </div>
@@ -303,7 +303,7 @@ const CraneAccidents: React.FC = () => {
                         className="w-full border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white transition-all duration-300 hover:scale-105"
                         onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
                       >
-                        Send Email
+                        <span className="text-purple-600 hover:text-white">Send Email</span>
                       </Button>
                     </div>
                   </div>
@@ -348,6 +348,22 @@ const CraneAccidents: React.FC = () => {
                 <p className="text-sm text-muted-foreground">
                   Crane accident evidence can be lost quickly. Contact us immediately to preserve your rights and secure critical evidence.
                 </p>
+                <div className="mt-4 space-y-2">
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-sm border-primary text-primary hover:bg-primary hover:text-white"
+                    onClick={() => window.location.href = '/practice-areas/crane-accidents/legal-guidance'}
+                  >
+                    <span className="text-primary hover:text-white">Legal Guidance</span>
+                  </Button>
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-sm border-primary text-primary hover:bg-primary hover:text-white"
+                    onClick={() => window.location.href = '/practice-areas/crane-accidents/medical-guidance'}
+                  >
+                    <span className="text-primary hover:text-white">Medical Guidance</span>
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
@@ -618,7 +634,7 @@ const CraneAccidents: React.FC = () => {
               </Collapsible>
             </section>
 
-            {/* FAQ Section with 50+ Questions */}
+            {/* FAQ Section with 50+ Questions - Improved font sizes */}
             <section id="faq" className="content-section mb-12">
               <h2 className="text-4xl font-bold text-red-600 mb-8">Crane Accident FAQ</h2>
               <p className="text-xl text-muted-foreground mb-8">Get answers to the most common questions about crane accident claims in California</p>
@@ -630,7 +646,7 @@ const CraneAccidents: React.FC = () => {
                       <CollapsibleTrigger asChild>
                         <div className="p-6 cursor-pointer hover:bg-primary/5 transition-colors">
                           <div className="flex justify-between items-center">
-                            <h3 className="text-lg font-semibold text-foreground">{faq.question}</h3>
+                            <h3 className="text-xl font-semibold text-foreground">{faq.question}</h3>
                             {expandedFaq === index ? (
                               <ChevronUp className="w-5 h-5 text-primary flex-shrink-0 ml-4" />
                             ) : (
@@ -641,7 +657,7 @@ const CraneAccidents: React.FC = () => {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <div className="px-6 pb-6">
-                          <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                          <p className="text-lg text-muted-foreground leading-relaxed">{faq.answer}</p>
                         </div>
                       </CollapsibleContent>
                     </Collapsible>
@@ -674,7 +690,7 @@ const CraneAccidents: React.FC = () => {
                     className="w-full border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105"
                     onClick={() => window.location.href = '/practice-areas/crane-accidents/case-evaluation'}
                   >
-                    Free Online Case Evaluation
+                    <span className="text-white hover:text-gray-900">Free Online Case Evaluation</span>
                   </Button>
                 </div>
               </div>

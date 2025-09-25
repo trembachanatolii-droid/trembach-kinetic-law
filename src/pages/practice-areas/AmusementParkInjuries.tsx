@@ -35,6 +35,8 @@ import sidebarImage from '@/assets/amusement-park-sidebar.jpg';
 import evaluationImage from '@/assets/amusement-park-evaluation.jpg';
 import immediateStepsImage from '@/assets/amusement-park-immediate-steps.jpg';
 import legalProcessImage from '@/assets/amusement-park-legal-process.jpg';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
+import '@/styles/premium-3d-effects.css';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -283,129 +285,71 @@ const AmusementParkInjuries: React.FC = () => {
             <section id="evaluation" className="content-section mb-12">
               <h2 className="text-3xl font-bold text-red-600 mb-6">Free Amusement Park Injury Case Evaluation</h2>
               
-              <div className="bg-muted p-8 rounded-lg">
-                <h3 className="text-xl font-semibold mb-4">Get Your Free Consultation Today</h3>
-                <p className="mb-6">Tell us about your amusement park accident to help us understand your case better.</p>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">First Name *</label>
-                      <Input
-                        value={formData.firstName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
-                        placeholder="Your first name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Last Name *</label>
-                      <Input
-                        value={formData.lastName}
-                        onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
-                        placeholder="Your last name"
-                        required
-                      />
-                    </div>
+              <ThreeDVisualEffects className="premium-3d-container">
+                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Amusement Park Consultation</h3>
+                    <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
+                    <p className="text-slate-700 text-lg leading-relaxed">Expert evaluation by former defense attorneys now fighting for victims</p>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Email *</label>
-                      <Input
-                        type="email"
-                        value={formData.email}
-                        onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                        placeholder="your.email@example.com"
-                        required
-                      />
+                  <form onSubmit={handleFormSubmit} className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">First Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.firstName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, firstName: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your first name"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Last Name *</label>
+                        <Input
+                          type="text"
+                          value={formData.lastName}
+                          onChange={(e) => setFormData(prev => ({ ...prev, lastName: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="Enter your last name"
+                          required
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Phone *</label>
-                      <Input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                        placeholder="(555) 123-4567"
-                        required
-                      />
-                    </div>
-                  </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Accident Date</label>
-                      <Input
-                        type="date"
-                        value={formData.accidentDate}
-                        onChange={(e) => setFormData(prev => ({ ...prev, accidentDate: e.target.value }))}
-                        required
-                      />
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Phone Number *</label>
+                        <Input
+                          type="tel"
+                          value={formData.phone}
+                          onChange={(e) => setFormData(prev => ({ ...prev, phone: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="(555) 123-4567"
+                          required
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Email Address *</label>
+                        <Input
+                          type="email"
+                          value={formData.email}
+                          onChange={(e) => setFormData(prev => ({ ...prev, email: e.target.value }))}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          placeholder="your.email@example.com"
+                          required
+                        />
+                      </div>
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Park Name</label>
-                      <Select value={formData.parkName} onValueChange={(value) => setFormData(prev => ({ ...prev, parkName: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select park" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="disneyland">Disneyland Resort</SelectItem>
-                          <SelectItem value="six-flags">Six Flags Magic Mountain</SelectItem>
-                          <SelectItem value="knotts">Knott's Berry Farm</SelectItem>
-                          <SelectItem value="universal">Universal Studios</SelectItem>
-                          <SelectItem value="seaworld">SeaWorld San Diego</SelectItem>
-                          <SelectItem value="great-america">California's Great America</SelectItem>
-                          <SelectItem value="other-permanent">Other Permanent Park</SelectItem>
-                          <SelectItem value="traveling-carnival">Traveling Carnival/Fair</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                   
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Type of Ride/Attraction</label>
-                      <Select value={formData.rideType} onValueChange={(value) => setFormData(prev => ({ ...prev, rideType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select ride type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="roller-coaster">Roller Coaster</SelectItem>
-                          <SelectItem value="water-ride">Water Ride/Slide</SelectItem>
-                          <SelectItem value="spinning-ride">Spinning Ride</SelectItem>
-                          <SelectItem value="drop-tower">Drop Tower</SelectItem>
-                          <SelectItem value="kiddie-ride">Children's Ride</SelectItem>
-                          <SelectItem value="dark-ride">Dark Ride/Indoor</SelectItem>
-                          <SelectItem value="walkway">Walkway/Queue Area</SelectItem>
-                          <SelectItem value="other">Other Attraction</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium mb-2">Primary Injury Type</label>
-                      <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-                          <SelectItem value="spinal-injury">Spinal/Neck Injury</SelectItem>
-                          <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-                          <SelectItem value="drowning">Drowning/Near-Drowning</SelectItem>
-                          <SelectItem value="cuts-lacerations">Cuts/Lacerations</SelectItem>
-                          <SelectItem value="psychological">Psychological Trauma</SelectItem>
-                          <SelectItem value="multiple">Multiple Injuries</SelectItem>
-                          <SelectItem value="other">Other Injury</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                  
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700">
-                    Start My Free Case Evaluation
-                  </Button>
-                </form>
-              </div>
+
+                    <Button type="submit" className="btn-enhanced w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-bold text-base py-4 px-8 rounded-lg shadow-lg hover:shadow-xl hover:shadow-blue-500/30 transform transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1">
+                      Start My Free Case Evaluation
+                    </Button>
+                  </form>
+                </div>
+              </ThreeDVisualEffects>
             </section>
 
             {/* What to Do After Accident Section */}

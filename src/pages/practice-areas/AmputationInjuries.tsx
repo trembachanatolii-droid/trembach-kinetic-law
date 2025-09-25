@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -129,7 +130,8 @@ const AmputationInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/amputation-case-evaluation';
+    console.log('Amputation Case Evaluation:', formData);
+    toast.success('Thanks! We\'ll contact you shortly.');
   };
 
   const toggleFaq = (index: number) => {
@@ -462,7 +464,7 @@ const AmputationInjuries: React.FC = () => {
                   </div>
 
                   <div className="px-8 pb-12 bg-white/95 backdrop-blur-sm">
-                    <form onSubmit={(e) => { e.preventDefault(); window.location.href = '/amputation-case-evaluation'; }} className="max-w-3xl mx-auto">
+                    <form onSubmit={handleFormSubmit} className="max-w-3xl mx-auto">
                       <div className="space-y-8">
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                           <div>
@@ -1458,7 +1460,7 @@ const AmputationInjuries: React.FC = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-2xl mx-auto">
             <Button 
               className="bg-white text-red-600 hover:bg-gray-100 font-bold py-4 px-8 rounded-lg text-lg transition-all duration-300 hover:scale-105"
-              onClick={() => window.location.href = '/amputation-case-evaluation'}
+              onClick={() => scrollToSection('evaluation')}
             >
               Start Free Case Evaluation
             </Button>

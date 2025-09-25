@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -112,7 +113,8 @@ const AmusementParkInjuries: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    window.location.href = '/practice-areas/amusement-parks/case-evaluation';
+    console.log('Amusement Park Case Evaluation:', formData);
+    toast.success('Thanks! We\'ll contact you shortly.');
   };
 
   return (
@@ -153,7 +155,7 @@ const AmusementParkInjuries: React.FC = () => {
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}
+              onClick={() => scrollToSection('evaluation')}
             >
               START MY FREE CASE EVALUATION
             </Button>
@@ -892,7 +894,7 @@ const AmusementParkInjuries: React.FC = () => {
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button 
                     size="lg" 
-                    onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}
+                    onClick={() => scrollToSection('evaluation')}
                   >
                     Get Your Questions Answered - Free Consultation
                   </Button>
@@ -929,7 +931,7 @@ const AmusementParkInjuries: React.FC = () => {
                 <CollapsibleContent className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     <Card className="group hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer"
-                          onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}>
+                          onClick={() => scrollToSection('evaluation')}>
                       <CardHeader>
                         <CardTitle className="flex items-center group-hover:text-primary transition-colors">
                           <Scale className="w-5 h-5 mr-2 text-primary" />
@@ -1094,7 +1096,7 @@ const AmusementParkInjuries: React.FC = () => {
                       <Button 
                         size="sm" 
                         className="bg-red-600 hover:bg-red-700 text-white"
-                        onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}
+                          onClick={() => scrollToSection('evaluation')}
                       >
                         Get Free Consultation Now
                       </Button>
@@ -1149,7 +1151,7 @@ const AmusementParkInjuries: React.FC = () => {
                     <Button 
                       size="lg" 
                       className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
-                      onClick={() => window.location.href = '/practice-areas/amusement-parks/case-evaluation'}
+                        onClick={() => scrollToSection('evaluation')}
                     >
                       <Phone className="w-4 h-4 mr-2" />
                       FREE CASE REVIEW

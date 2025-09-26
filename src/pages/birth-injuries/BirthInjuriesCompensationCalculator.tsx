@@ -171,7 +171,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
         description="Calculate potential compensation for birth injury cases. Free tool estimates settlement values for cerebral palsy, HIE, Erb's palsy and other birth injuries in California."
       />
 
-      <GoBack />
+      
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

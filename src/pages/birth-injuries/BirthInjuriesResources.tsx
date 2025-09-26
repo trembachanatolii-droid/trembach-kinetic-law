@@ -263,7 +263,7 @@ const BirthInjuriesResources: React.FC = () => {
         description="Comprehensive resource directory for birth injury families in California. Find support organizations, medical centers, educational programs, and financial assistance."
       />
 
-      <GoBack />
+      
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

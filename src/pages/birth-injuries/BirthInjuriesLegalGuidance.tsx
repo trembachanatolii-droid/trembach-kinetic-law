@@ -322,7 +322,7 @@ const BirthInjuriesLegalGuidance: React.FC = () => {
         description="Comprehensive legal guidance for birth injury claims. Learn about your rights, statute of limitations, proving negligence, and choosing the right attorney in California."
       />
 
-      <GoBack />
+      
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

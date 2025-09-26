@@ -323,7 +323,7 @@ const BirthInjuriesMedicalGuidance: React.FC = () => {
         description="Comprehensive medical guidance for birth injury treatment, diagnosis, and long-term care. Expert advice on therapies, warning signs, and choosing healthcare providers."
       />
 
-      <GoBack />
+      
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

@@ -8,7 +8,6 @@ import { Badge } from '@/components/ui/badge';
 import { Calculator, DollarSign, AlertTriangle, Info } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/clergy-abuse-calculator-hero.jpg';
 
 const ClergyAbuseCalculator: React.FC = () => {
@@ -74,7 +73,6 @@ const ClergyAbuseCalculator: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack fallbackPath="/practice-areas/clergy-abuse" />
       
       {/* Hero Section */}
       <section 

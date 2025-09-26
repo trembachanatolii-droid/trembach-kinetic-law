@@ -14,7 +14,6 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { Phone, Mail, AlertTriangle, Clock, FileText, Stethoscope, PawPrint, Star, ChevronLeft, ChevronRight } from 'lucide-react';
 import { cn } from "@/lib/utils"
 import heroBackground from '@/assets/dog-bite-case-evaluation-hero.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -1166,7 +1165,6 @@ ${formData.firstName} ${formData.lastName}
           style={{ backgroundImage: `url(${heroBackground})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/80 to-blue-900/80"></div>
-          <GoBack />
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">

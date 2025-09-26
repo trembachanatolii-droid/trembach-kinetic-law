@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calculator, DollarSign, FileText, AlertTriangle, PawPrint, Info } from 'lucide-react';
 import heroImage from '@/assets/dog-bite-compensation-calculator-hero.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import DogBiteQuestionnaire from '@/components/DogBiteQuestionnaire';
 
@@ -104,7 +103,6 @@ const DogBiteCompensationCalculator: React.FC = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
-        <GoBack className="top-20 z-[60]" />
         
         {/* Hero Section */}
         <div 

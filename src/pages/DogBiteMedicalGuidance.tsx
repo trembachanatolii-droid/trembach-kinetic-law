@@ -23,7 +23,6 @@ import {
   Brain
 } from 'lucide-react';
 import heroImage from '@/assets/dog-bite-medical-guidance-hero.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const DogBiteMedicalGuidance: React.FC = () => {
@@ -157,7 +156,6 @@ const DogBiteMedicalGuidance: React.FC = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
-        <GoBack className="top-20 z-[60]" />
         
         {/* Hero Section */}
         <div 

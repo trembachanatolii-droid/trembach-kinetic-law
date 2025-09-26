@@ -24,7 +24,6 @@ import {
 import heroBackground from '@/assets/medical-malpractice-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 
 interface FormData {
   typeOfError: string;
@@ -137,7 +136,6 @@ const MedicalMalpracticeCompensationCalculator: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack />
 
       {/* Hero Section */}
       <section 

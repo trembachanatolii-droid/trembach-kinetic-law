@@ -3,14 +3,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Star, Heart, Shield, Phone, FileText, Stethoscope, AlertCircle, CheckCircle } from 'lucide-react';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/opioid-medical-guidance-hero.jpg';
 
 const OpioidMedicalGuidance: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
-      <GoBack fallbackPath="/practice-areas/opioid-litigation" />
-
+      
       {/* Hero Section */}
       <section 
         className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"

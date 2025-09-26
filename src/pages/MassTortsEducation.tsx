@@ -18,7 +18,6 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/mass-torts-education-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -124,8 +123,6 @@ const MasseTortsEducation: React.FC = () => {
           </p>
         </div>
       </section>
-
-      <GoBack />
 
       {/* Quick Navigation */}
       <section className="py-12 bg-gradient-to-r from-primary/5 to-primary/10">

@@ -86,16 +86,16 @@ const DogBiteCaseEvaluation: React.FC = () => {
           <GoBack />
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               Free Dog Bite Case Evaluation
             </h1>
             <div className="flex items-center justify-center mb-6">
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
               ))}
-              <span className="ml-2 text-lg">Trusted by Dog Bite Victims</span>
+              <span className="ml-2 text-lg text-white">Trusted by Dog Bite Victims</span>
             </div>
-            <p className="text-xl">
+            <p className="text-xl text-white">
               Get expert legal advice about your dog bite case - completely free
             </p>
           </div>

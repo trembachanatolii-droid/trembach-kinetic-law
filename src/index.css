@@ -314,6 +314,79 @@
     visibility: visible !important;
   }
 
+  /* MEDICAL MALPRACTICE PAGE SPECIFIC STYLES */
+  
+  /* Force high contrast for all Medical Malpractice page text */
+  .medical-malpractice-page .card p,
+  .medical-malpractice-page .card span,
+  .medical-malpractice-page .card li,
+  .medical-malpractice-page .card div,
+  .medical-malpractice-page p,
+  .medical-malpractice-page span,
+  .medical-malpractice-page li,
+  .medical-malpractice-page .text-sm,
+  .medical-malpractice-page .text-base,
+  .medical-malpractice-page .text-lg {
+    color: #111111 !important;
+    font-size: 16px !important;
+    line-height: 1.5 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  .medical-malpractice-page h1,
+  .medical-malpractice-page h2,
+  .medical-malpractice-page h3,
+  .medical-malpractice-page h4,
+  .medical-malpractice-page h5,
+  .medical-malpractice-page h6,
+  .medical-malpractice-page .card-title {
+    color: #000000 !important;
+    font-weight: 700 !important;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
+  /* Medical Malpractice hero section styling - extremely white text */
+  .medical-malpractice-page .hero-section h1,
+  .medical-malpractice-page .hero-section h2,
+  .medical-malpractice-page .hero-section p,
+  .medical-malpractice-page .hero-section span,
+  .medical-malpractice-page .hero-content h1,
+  .medical-malpractice-page .hero-content h2,
+  .medical-malpractice-page .hero-content p,
+  .medical-malpractice-page .hero-content span {
+    color: #ffffff !important;
+    text-align: center !important;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.9) !important;
+    font-weight: 700 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: brightness(1.2) !important;
+  }
+
+  /* Fix Medical Malpractice button hover text visibility */
+  .medical-malpractice-page button:hover,
+  .medical-malpractice-page .btn:hover,
+  .medical-malpractice-page [role="button"]:hover {
+    color: hsl(var(--primary-foreground)) !important;
+  }
+
+  /* Fix Medical Malpractice form elements visibility */
+  .medical-malpractice-page input,
+  .medical-malpractice-page textarea,
+  .medical-malpractice-page select,
+  .medical-malpractice-page .select-trigger,
+  .medical-malpractice-page .select-value {
+    color: #111111 !important;
+    background-color: #ffffff !important;
+    border-color: #d1d5db !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+
   /* CRITICAL: Force high contrast for all Vision Loss section text */
   .vision-loss-page .card p,
   .vision-loss-page .card span,

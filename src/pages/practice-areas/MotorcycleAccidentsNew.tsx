@@ -580,7 +580,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
                 />
 
                 <ThreeDVisualEffects>
-                  <div className="premium-form-container interactive-card glass-card rounded-2xl p-6 gpu-accelerated">
+                  <div className="premium-form-container premium-form-container--dark interactive-card glass-card rounded-2xl p-6 gpu-accelerated">
                     <div className="text-center mb-6">
                       <h3 className="text-2xl md:text-3xl font-display text-white font-bold mb-2">Get Your Free Motorcycle Accident Case Evaluation</h3>
                       <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto"></div>

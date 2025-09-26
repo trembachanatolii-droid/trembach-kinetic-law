@@ -124,8 +124,8 @@ const DogBiteCaseEvaluation: React.FC = () => {
   return (
     <>
       <SEO 
-        title="Free Dog Bite Case Evaluation | California Animal Attack Lawyers"
-        description="Get a free case evaluation for your California dog bite injury claim. Experienced lawyers handling dog attacks and animal bite cases throughout California."
+        title="Schedule Your Free Dog Bite Consultation | California Animal Attack Lawyers"
+        description="Schedule your confidential dog bite consultation today. No fees unless we win your case. Experienced California attorneys specializing in dog attacks and animal bite cases."
         canonical="https://trembachlaw.com/dog-bite-case-evaluation"
       />
       
@@ -139,7 +139,7 @@ const DogBiteCaseEvaluation: React.FC = () => {
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-              Free Dog Bite Case Evaluation
+              Schedule Your Free Dog Bite Consultation
             </h1>
             <div className="flex items-center justify-center mb-6">
               {[...Array(5)].map((_, i) => (
@@ -147,6 +147,9 @@ const DogBiteCaseEvaluation: React.FC = () => {
               ))}
               <span className="ml-2 text-lg text-white">Trusted by Dog Bite Victims</span>
             </div>
+            <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+              Book your confidential dog bite consultation today. No fees unless we win your case.
+            </p>
             <p className="text-xl text-white">
               Get expert legal advice about your dog bite case - completely free
             </p>

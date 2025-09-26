@@ -33,7 +33,7 @@ import {
   Factory,
   Calculator
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/electrocution-hero-bg.jpg';
 import sidebarImage from '@/assets/electrocution-sidebar.jpg';
 import medicalProcessImage from '@/assets/electrocution-medical-process.jpg';
@@ -456,7 +456,7 @@ const Electrocution: React.FC = () => {
         canonical="/practice-areas/electrocution"
       />
 
-      <GoBack fallbackPath="/" />
+      
 
       {/* Hero Section */}
       <section 

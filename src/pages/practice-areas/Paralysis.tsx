@@ -32,7 +32,7 @@ import {
   User
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/paralysis-hero-bg.jpg';
 import sidebarImage from '@/assets/paralysis-sidebar.jpg';
 import diagnosisImage from '@/assets/paralysis-diagnosis-process.jpg';
@@ -433,7 +433,7 @@ const Paralysis: React.FC = () => {
           }}
         />
         
-        <GoBack fallbackPath="/practice-areas" />
+        
         
         {/* Hero Section */}
         <section 

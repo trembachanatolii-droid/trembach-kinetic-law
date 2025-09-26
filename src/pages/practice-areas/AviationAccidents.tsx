@@ -46,7 +46,7 @@ import courtroomImage from '@/assets/aviation-courtroom.jpg';
 import californiaCoverageImage from '@/assets/aviation-california-coverage.jpg';
 import medicalConsultationImage from '@/assets/aviation-medical-consultation.jpg';
 import resourcesImage from '@/assets/aviation-resources.jpg';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -483,7 +483,7 @@ const AviationAccidents: React.FC = () => {
         <div className="front-layer absolute inset-0 bg-gradient-to-bl from-secondary/5 to-accent/5 transform-gpu" style={{ transform: 'translateZ(-100px)' }}></div>
       </div>
 
-      <GoBack fallbackPath="/" />
+      
       
       {/* Hero Section */}
       <section 

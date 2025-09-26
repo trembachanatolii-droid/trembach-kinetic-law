@@ -47,7 +47,7 @@ import electricalHazardImage from '@/assets/practice-areas/burn-electrical-hazar
 import investigationImage from '@/assets/practice-areas/burn-investigation.jpg';
 import caseDocumentationImage from '@/assets/practice-areas/burn-case-documentation.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -337,7 +337,7 @@ const BurnInjuries: React.FC = () => {
 
   return (
     <div className="min-h-screen">
-      <GoBack />
+      
       <SEO 
         title="California Burn Injury Lawyers | #1 Burn Accident Attorneys | Free Consultation"
         description="Experienced California burn injury lawyers fighting for maximum compensation. Former defense attorney now advocating for burn victims. Free 24/7 consultation. No fees unless we win."

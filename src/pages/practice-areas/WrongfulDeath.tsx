@@ -55,7 +55,7 @@ import investigationImage from '@/assets/practice-areas/wrongful-death-investiga
 import familyImage from '@/assets/practice-areas/wrongful-death-family.jpg';
 import timeLimitsImage from '@/assets/practice-areas/wrongful-death-time-limits.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import { useNavigate } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -379,7 +379,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
         canonical="/practice-areas/wrongful-death"
       />
 
-      <GoBack fallbackPath="/practice-areas/wrongful-death" />
+      
 
       {/* Hero Section - Same ratio as Medical Malpractice */}
       <section 

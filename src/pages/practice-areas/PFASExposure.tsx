@@ -37,7 +37,7 @@ import {
   FlaskConical,
   ExternalLink
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/pfas-main-hero.jpg';
 import sidebarImage from '@/assets/pfas-sidebar.jpg';
@@ -143,7 +143,7 @@ const PFASExposure: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        <GoBack fallbackPath="/practice-areas" />
+        
         
         {/* Hero Section */}
         <section 

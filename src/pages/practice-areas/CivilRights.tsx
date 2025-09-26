@@ -33,7 +33,7 @@ import {
   User
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/civil-rights-hero-bg.jpg';
 import sidebarImage from '@/assets/civil-rights-sidebar.jpg';
 import legalProcessImage from '@/assets/civil-rights-legal-process-updated.jpg';
@@ -407,7 +407,7 @@ const CivilRights: React.FC = () => {
       />
       
       <div className="civil-rights-page min-h-screen bg-background">
-        <GoBack />
+        
         
         {/* Floating 3D Background Elements */}
         <div className="fixed inset-0 pointer-events-none overflow-hidden">

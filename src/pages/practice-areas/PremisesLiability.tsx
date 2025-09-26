@@ -91,7 +91,7 @@ const PremisesLiability: React.FC = () => {
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
             California Premises Liability Lawyers
           </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto text-white">
             Property owners must maintain safe conditions. Free consultation for all accident cases.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">

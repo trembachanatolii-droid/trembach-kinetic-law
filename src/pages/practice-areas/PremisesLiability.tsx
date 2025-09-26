@@ -153,26 +153,32 @@ const PremisesLiability: React.FC = () => {
         {/* Free Case Evaluation Section */}
         <section id="case-evaluation" className="content-section mb-16">
           <ThreeDVisualEffects>
-            <div className="relative rounded-2xl p-12 glass-card bg-gradient-to-br from-blue-50/90 to-indigo-100/80 border border-blue-200/50 shadow-2xl overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 pointer-events-none"></div>
+            <div className="premium-form-container--blue-solid relative rounded-3xl p-8 md:p-12 glass-card interactive-card hover-glow-blue gpu-accelerated">
+              {/* Floating background layers */}
+              <div className="absolute inset-0 pointer-events-none overflow-hidden rounded-3xl">
+                <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-r from-blue-400/20 to-purple-400/20 rounded-full blur-xl animate-float-back"></div>
+                <div className="absolute top-20 right-20 w-24 h-24 bg-gradient-to-r from-purple-400/20 to-blue-400/20 rounded-full blur-lg animate-float-mid"></div>
+                <div className="absolute bottom-20 left-1/3 w-20 h-20 bg-gradient-to-r from-blue-300/20 to-indigo-300/20 rounded-full blur-md animate-float-front"></div>
+              </div>
               
               <div className="relative z-10">
-                <div className="text-center mb-12">
-                  <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent mb-6">
+                <div className="text-center mb-8 md:mb-12">
+                  <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4 md:mb-6">
                     Free Premises Liability Case Evaluation
                   </h2>
-                  <p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                  <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mx-auto mb-4 md:mb-6"></div>
+                  <p className="text-lg md:text-xl text-white/90 max-w-3xl mx-auto leading-relaxed">
                     Property owners have a duty to keep visitors safe. Get your free case evaluation to learn about your rights to compensation.
                   </p>
                 </div>
 
-                <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-8" role="form" aria-label="Premises Liability Case Evaluation Form">
-                  <div className="grid md:grid-cols-2 gap-6">
+                <form onSubmit={handleSubmit} className="max-w-4xl mx-auto space-y-6 md:space-y-8" role="form" aria-label="Premises Liability Case Evaluation Form">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="firstName" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="firstName" className="text-base md:text-lg font-semibold text-slate-900">
                         First Name *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="text"
                         id="firstName"
                         name="firstName"
@@ -180,16 +186,16 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                         placeholder="Enter your first name"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="lastName" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="lastName" className="text-base md:text-lg font-semibold text-slate-900">
                         Last Name *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="text"
                         id="lastName"
                         name="lastName"
@@ -197,18 +203,18 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                         placeholder="Enter your last name"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="phone" className="text-base md:text-lg font-semibold text-slate-900">
                         Phone Number *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="tel"
                         id="phone"
                         name="phone"
@@ -216,16 +222,16 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                         placeholder="(555) 123-4567"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="email" className="text-base md:text-lg font-semibold text-slate-900">
                         Email Address *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="email"
                         id="email"
                         name="email"
@@ -233,18 +239,18 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                         placeholder="your.email@example.com"
                       />
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="accidentDate" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="accidentDate" className="text-base md:text-lg font-semibold text-slate-900">
                         Date of Incident *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="date"
                         id="accidentDate"
                         name="accidentDate"
@@ -252,57 +258,57 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                       />
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="propertyType" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="propertyType" className="text-base md:text-lg font-semibold text-slate-900">
                         Type of Property *
-                      </label>
+                      </Label>
                       <Select value={formData.propertyType} onValueChange={(value) => handleSelectChange('propertyType', value)} required>
-                        <SelectTrigger className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
-                          <SelectValue placeholder="Select property type" />
+                        <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
+                          <SelectValue placeholder="Select property type" className="text-slate-500" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="store">Store/Retail</SelectItem>
-                          <SelectItem value="restaurant">Restaurant</SelectItem>
-                          <SelectItem value="parking-lot">Parking Lot</SelectItem>
-                          <SelectItem value="apartment">Apartment Complex</SelectItem>
-                          <SelectItem value="office">Office Building</SelectItem>
-                          <SelectItem value="sidewalk">Sidewalk/Public</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                        <SelectContent className="bg-white border-2 border-blue-200 shadow-xl rounded-lg z-50">
+                          <SelectItem value="store" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Store/Retail</SelectItem>
+                          <SelectItem value="restaurant" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Restaurant</SelectItem>
+                          <SelectItem value="parking-lot" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Parking Lot</SelectItem>
+                          <SelectItem value="apartment" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Apartment Complex</SelectItem>
+                          <SelectItem value="office" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Office Building</SelectItem>
+                          <SelectItem value="sidewalk" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Sidewalk/Public</SelectItem>
+                          <SelectItem value="other" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                   </div>
 
-                  <div className="grid md:grid-cols-2 gap-6">
+                  <div className="grid md:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2">
-                      <label htmlFor="injuryType" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="injuryType" className="text-base md:text-lg font-semibold text-slate-900">
                         Type of Injury *
-                      </label>
+                      </Label>
                       <Select value={formData.injuryType} onValueChange={(value) => handleSelectChange('injuryType', value)} required>
-                        <SelectTrigger className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200">
-                          <SelectValue placeholder="Select injury type" />
+                        <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
+                          <SelectValue placeholder="Select injury type" className="text-slate-500" />
                         </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="slip-fall">Slip and Fall</SelectItem>
-                          <SelectItem value="trip-fall">Trip and Fall</SelectItem>
-                          <SelectItem value="inadequate-security">Inadequate Security</SelectItem>
-                          <SelectItem value="falling-object">Falling Object</SelectItem>
-                          <SelectItem value="defective-stairs">Defective Stairs</SelectItem>
-                          <SelectItem value="poor-lighting">Poor Lighting</SelectItem>
-                          <SelectItem value="other">Other</SelectItem>
+                        <SelectContent className="bg-white border-2 border-blue-200 shadow-xl rounded-lg z-50">
+                          <SelectItem value="slip-fall" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Slip and Fall</SelectItem>
+                          <SelectItem value="trip-fall" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Trip and Fall</SelectItem>
+                          <SelectItem value="inadequate-security" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Inadequate Security</SelectItem>
+                          <SelectItem value="falling-object" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Falling Object</SelectItem>
+                          <SelectItem value="defective-stairs" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Defective Stairs</SelectItem>
+                          <SelectItem value="poor-lighting" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Poor Lighting</SelectItem>
+                          <SelectItem value="other" className="text-slate-900 hover:bg-blue-50 focus:bg-blue-50">Other</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
                     
                     <div className="space-y-2">
-                      <label htmlFor="accidentLocation" className="text-sm font-semibold text-foreground">
+                      <Label htmlFor="accidentLocation" className="text-base md:text-lg font-semibold text-slate-900">
                         Accident Location *
-                      </label>
-                      <input
+                      </Label>
+                      <Input
                         type="text"
                         id="accidentLocation"
                         name="accidentLocation"
@@ -310,30 +316,47 @@ const PremisesLiability: React.FC = () => {
                         onChange={handleInputChange}
                         required
                         aria-required="true"
-                        className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200"
+                        className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300"
                         placeholder="Enter location of accident"
                       />
                     </div>
                   </div>
 
                   <div className="space-y-2">
-                    <label htmlFor="incidentDescription" className="text-sm font-semibold text-foreground">
+                    <Label htmlFor="incidentDescription" className="text-base md:text-lg font-semibold text-slate-900">
                       Describe the Incident *
-                    </label>
+                    </Label>
                     <Textarea
                       id="incidentDescription"
                       name="incidentDescription"
                       rows={4}
                       required
                       aria-required="true"
-                      className="w-full px-4 py-3 rounded-lg border border-input bg-background/50 backdrop-blur focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all duration-200 resize-none"
+                      className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 resize-none"
                       placeholder="Please provide details about the incident, including the conditions that caused your injury and any witnesses present..."
                     />
                   </div>
                   
-                  <Button type="submit" className="w-full py-4 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02]">
+                  <Button 
+                    type="submit" 
+                    className="btn-enhanced w-full py-4 md:py-6 text-lg md:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/50 focus:outline-none"
+                  >
                     Get My Free Premises Liability Case Evaluation
                   </Button>
+
+                  <div className="mt-6 p-4 bg-white/10 backdrop-blur rounded-lg border border-white/20">
+                    <div className="flex items-center space-x-2 text-white/90">
+                      <input 
+                        type="checkbox" 
+                        id="consent" 
+                        required 
+                        className="w-4 h-4 rounded border-white/20 bg-white/10 text-blue-600 focus:ring-blue-500 focus:ring-2" 
+                      />
+                      <label htmlFor="consent" className="text-sm md:text-base">
+                        I agree to be contacted by Trembach Law Firm regarding my potential case. *
+                      </label>
+                    </div>
+                  </div>
                 </form>
               </div>
             </div>

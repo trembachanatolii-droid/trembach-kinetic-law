@@ -1529,7 +1529,7 @@ const MesotheliomaAsbestos: React.FC = () => {
                     <Button 
                       variant="outline" 
                       className="w-full"
-                      onClick={() => window.location.href = '/schedule-consultation'}
+                      onClick={() => window.location.href = '/case-evaluation'}
                     >
                       <MessageCircle className="w-4 h-4 mr-2" />
                       Schedule Consultation

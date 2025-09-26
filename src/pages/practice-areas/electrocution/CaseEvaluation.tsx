@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { CalendarDays, Clock, Phone, Mail, AlertTriangle, Star, Zap } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/electrocution-hero-bg.jpg';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -86,7 +86,7 @@ const ElectrocutionCaseEvaluation: React.FC = () => {
         canonical="/practice-areas/electrocution/case-evaluation"
       />
 
-      <GoBack fallbackPath="/practice-areas/electrocution" />
+      
 
       {/* Hero Section */}
       <section 

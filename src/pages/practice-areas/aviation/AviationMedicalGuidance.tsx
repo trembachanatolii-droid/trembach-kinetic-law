@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, Stethoscope, Heart, AlertCircle } from 'lucide-react';
 import heroBackground from '@/assets/aviation-medical-consultation.jpg';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 const AviationMedicalGuidance: React.FC = () => {
@@ -28,7 +28,7 @@ const AviationMedicalGuidance: React.FC = () => {
           "url": "https://www.trembachlawfirm.com/aviation/medical-guidance"
         }}
       />
-      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
+      
       
       {/* Hero Section */}
       <section 

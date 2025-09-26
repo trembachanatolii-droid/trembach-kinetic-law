@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Phone, Mail, MessageCircle, Users, Award, HardHat, Clock } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 const CraneAccidentsMedicalGuidance: React.FC = () => {
@@ -15,7 +15,7 @@ const CraneAccidentsMedicalGuidance: React.FC = () => {
         canonical="/practice-areas/crane-accidents/medical-guidance"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center bg-gradient-to-r from-blue-900 to-blue-700">

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, MessageCircle } from 'lucide-react';
 import heroBackground from '@/assets/aviation-faq-hero.jpg';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 const AviationFAQ: React.FC = () => {
@@ -111,7 +111,7 @@ const AviationFAQ: React.FC = () => {
           "url": "https://www.trembachlawfirm.com/aviation/faq"
         }}
       />
-      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
+      
       
       {/* Hero Section */}
       <section 

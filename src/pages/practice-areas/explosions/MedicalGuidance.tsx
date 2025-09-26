@@ -14,7 +14,7 @@ import {
   FileText,
   MapPin
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 import heroImage from '@/assets/explosions-medical-guidance-hero-bright.jpg';
@@ -35,7 +35,7 @@ const MedicalGuidance: React.FC = () => {
         canonical="/practice-areas/explosions/medical-guidance"
       />
 
-      <GoBack fallbackPath="/practice-areas/explosions" />
+      
 
       {/* Hero Section */}
       <section 

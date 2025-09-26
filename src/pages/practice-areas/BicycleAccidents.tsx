@@ -10,48 +10,19 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft,
-  Car,
-  MapPin,
-  Calendar,
-  DollarSign,
-  BookOpen,
-  HelpCircle,
-  Bike
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, Car, MapPin, Calendar, DollarSign, BookOpen, HelpCircle, Bike } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/bicycle-accidents-hero.jpg';
 import legalConsultationImage from '@/assets/practice-areas/bicycle-legal-consultation.jpg';
 import medicalCareImage from '@/assets/practice-areas/bicycle-medical-care.jpg';
 import accidentSceneImage from '@/assets/practice-areas/bicycle-accident-scene.jpg';
 import compensationCalculationImage from '@/assets/practice-areas/bicycle-compensation-calculation.jpg';
 import SEO from '@/components/SEO';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const BicycleAccidents: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -68,323 +39,285 @@ const BicycleAccidents: React.FC = () => {
     insuranceClaim: '',
     description: ''
   });
-
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Bicycle Accidents Form Data:', formData);
     alert('Thank you for your submission. We will contact you within 24 hours to discuss your bicycle accident case.');
   };
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'california-law', label: 'CALIFORNIA LAW', icon: BookOpen },
-    { id: 'accident-types', label: 'ACCIDENT TYPES', icon: Bike },
-    { id: 'injuries', label: 'INJURIES', icon: Heart },
-    { id: 'time-limits', label: 'TIME LIMITS', icon: Clock },
-    { id: 'compensation', label: 'COMPENSATION', icon: DollarSign },
-    { id: 'faq', label: 'FAQ', icon: HelpCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
-
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'california-law',
+    label: 'CALIFORNIA LAW',
+    icon: BookOpen
+  }, {
+    id: 'accident-types',
+    label: 'ACCIDENT TYPES',
+    icon: Bike
+  }, {
+    id: 'injuries',
+    label: 'INJURIES',
+    icon: Heart
+  }, {
+    id: 'time-limits',
+    label: 'TIME LIMITS',
+    icon: Clock
+  }, {
+    id: 'compensation',
+    label: 'COMPENSATION',
+    icon: DollarSign
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: HelpCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
-
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
-          }
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.1,
+        ease: 'power2.out'
+      });
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
+        opacity: 0,
+        y: 30
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 80%'
         }
-      );
+      });
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     window.location.href = '/bicycle-case-evaluation';
   };
-
   const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
   // FAQ Data - 50 Questions
-  const faqData = [
-    {
-      question: "What should I do immediately after a bicycle accident?",
-      answer: "First priority is safety - get out of traffic if possible. Call 911 for medical attention and police documentation. Never leave the scene. Take photos of your injuries, bike damage, and accident scene. Get driver's license, insurance info, and witness contacts. Seek medical evaluation even if you feel fine - adrenaline masks serious injuries like concussions or internal damage."
-    },
-    {
-      question: "Do cyclists have the same rights as car drivers in California?",
-      answer: "Yes, California Vehicle Code Section 21200 establishes that cyclists have all the rights and responsibilities of vehicle drivers. You have the legal right to use any road except freeways, take the full lane when necessary for safety, and expect drivers to treat you as traffic, not an obstacle."
-    },
-    {
-      question: "What is California's Three-Foot Law?",
-      answer: "Assembly Bill 1909 requires drivers to change lanes entirely when passing cyclists, not just maintain three feet of distance. This 'change lanes to pass' law recognizes that three feet at high speeds creates dangerous wind turbulence. Violations result in base fines of $233, increasing to $959 if a collision occurs."
-    },
-    {
-      question: "Can I still recover compensation if I wasn't wearing a helmet?",
-      answer: "Yes, California only mandates helmets for cyclists under 18. While insurance companies may argue comparative negligence for not wearing a helmet, this doesn't eliminate your right to compensation. The driver's negligence is the primary factor in determining liability and damages."
-    },
-    {
-      question: "How long do I have to file a bicycle accident lawsuit in California?",
-      answer: "Two years from the accident date under the statute of limitations. However, start immediately - evidence disappears, witnesses forget, and surveillance footage gets overwritten. Government claims require filing within six months. Missing these deadlines bars recovery forever."
-    },
-    {
-      question: "Do I need to call the police after a bike accident?",
-      answer: "Yes. A police report documents fault, injuries, and witness information. Politely insist on a report even if the driver wants to 'work it out'. The report number is critical for insurance claims."
-    },
-    {
-      question: "What if the driver fled the scene (hit-and-run)?",
-      answer: "Call 911 immediately. Provide any vehicle details and witness contacts. Your own uninsured motorist (UM) coverage may apply. We can help secure nearby surveillance footage quickly before it's overwritten."
-    },
-    {
-      question: "Should I see a doctor even if I feel okay?",
-      answer: "Yes. Many serious injuries (TBI, internal bleeding, spinal trauma) are delayed. Early medical documentation is vital for both your health and your claim."
-    },
-    {
-      question: "Should I speak with the insurance company?",
-      answer: "Do not give a recorded statement before speaking with a lawyer. Adjusters are trained to minimize claims. We handle communications to protect your case."
-    },
-    {
-      question: "What if I was partially at fault?",
-      answer: "California follows comparative negligence—you can still recover damages reduced by your percentage of fault. Never assume fault without legal review."
-    },
-    {
-      question: "What damages can I recover in a bicycle accident case?",
-      answer: "Medical bills, future care, lost wages, reduced earning capacity, pain and suffering, disfigurement, loss of enjoyment of life, bike/equipment replacement, and more."
-    },
-    {
-      question: "How much is my bicycle accident case worth?",
-      answer: "Case value depends on injury severity, permanence, medical costs, lost income, pain levels, and fault clarity. Use our calculator for an estimate, then get a personalized evaluation."
-    },
-    {
-      question: "How long will my case take?",
-      answer: "Most cases resolve within 6–18 months depending on treatment duration, investigation needs, insurance cooperation, and whether litigation is required."
-    },
-    {
-      question: "What evidence should I preserve?",
-      answer: "Photos/videos, damaged bike and gear, GPS/Strava data, medical records, receipts, witness contacts, repair estimates, and your cycling history."
-    },
-    {
-      question: "What if the driver has no or minimal insurance?",
-      answer: "Your UM/UIM coverage can step in. We also investigate other liable parties, including employers, commercial policies, and dangerous road conditions."
-    },
-    {
-      question: "Are e-bikes treated the same under California law?",
-      answer: "Generally yes, but Class 3 e-bikes have additional restrictions. Liability rules and compensation rights are similar—contact us for case-specific guidance."
-    },
-    {
-      question: "Do I need a lawyer? How are fees handled?",
-      answer: "Serious bicycle cases benefit greatly from legal representation. We work on contingency—no fees unless we win. Our early involvement preserves evidence and maximizes recovery."
-    },
-    {
-      question: "What if I was riding in a bike lane?",
-      answer: "Bike lanes provide cyclists with enhanced legal protections. Drivers who enter bike lanes illegally face additional penalties and presumptions of negligence in accident cases."
-    },
-    {
-      question: "Can I sue for a bicycle accident on a sidewalk?",
-      answer: "Sidewalk cycling legality varies by city. Even where prohibited, you may still have claims against negligent drivers. We analyze local ordinances and liability factors."
-    },
-    {
-      question: "What about accidents involving ride-share vehicles?",
-      answer: "Uber/Lyft carry substantial insurance coverage. Commercial vehicle standards and corporate liability may apply, potentially increasing available compensation."
-    },
-    {
-      question: "How do bicycle accident settlements work?",
-      answer: "Most cases settle without trial. We negotiate maximum compensation while you focus on recovery. Settlement includes all damages: medical, economic, and pain/suffering."
-    },
-    {
-      question: "What if the accident happened in a bike race or group ride?",
-      answer: "Recreational cycling accidents still allow liability claims against negligent drivers. Waivers typically don't protect against third-party vehicle negligence."
-    },
-    {
-      question: "Can weather conditions affect my bicycle accident case?",
-      answer: "Weather may be a factor but doesn't eliminate driver responsibility. Poor conditions require extra caution from motorists, not cyclists accepting unnecessary risk."
-    },
-    {
-      question: "What about bicycle accidents involving children?",
-      answer: "Children receive special legal protections. Age-appropriate behavior standards apply, and parents can typically pursue claims on behalf of injured minor cyclists."
-    },
-    {
-      question: "How are bicycle accident medical bills handled?",
-      answer: "Use health insurance initially, then seek reimbursement through your claim. We coordinate with providers and negotiate medical liens to maximize your net recovery."
-    },
-    {
-      question: "What if I was using bike-share or rental bike?",
-      answer: "Rental status doesn't affect your right to compensation from negligent drivers. The bike company's insurance may provide additional coverage for equipment damage."
-    },
-    {
-      question: "Can I claim compensation for my damaged bicycle and gear?",
-      answer: "Yes. High-end cycling equipment replacement costs are recoverable damages. We document fair market value and replacement costs for bikes, helmets, clothing, and electronics."
-    },
-    {
-      question: "What if the driver claims they didn't see me?",
-      answer: "Driver inattention is negligence, not a defense. We investigate sight lines, lighting conditions, and whether the driver was distracted (phone use, etc.)."
-    },
-    {
-      question: "How do intersection bicycle accidents work legally?",
-      answer: "Intersections have complex right-of-way rules. We analyze traffic signals, signage, and vehicle/cyclist positioning to establish liability and build your case."
-    },
-    {
-      question: "What about bicycle accidents in parking lots?",
-      answer: "Private property accidents still allow liability claims. Property owners may also be liable for dangerous conditions, inadequate lighting, or poor design."
-    },
-    {
-      question: "Can I sue if I was hit while cycling to/from work?",
-      answer: "Yes, you can pursue a personal injury claim against the at-fault driver. Workers' compensation may also apply if you were on work time or using a work bike."
-    },
-    {
-      question: "What if the bicycle accident involved a commercial truck?",
-      answer: "Commercial vehicle accidents involve higher insurance limits, federal regulations, and corporate liability. These cases often result in larger settlements due to available coverage."
-    },
-    {
-      question: "How do bicycle accident investigations work?",
-      answer: "We immediately secure evidence: surveillance footage, witness statements, police reports, vehicle damage, road conditions, and expert accident reconstruction when needed."
-    },
-    {
-      question: "What if I was cycling under the influence?",
-      answer: "California DUI laws apply to cyclists, but this doesn't automatically bar injury claims. We evaluate all factors and may still recover compensation depending on driver fault."
-    },
-    {
-      question: "Can I get compensation for lost cycling enjoyment?",
-      answer: "Yes. Loss of life's pleasures is a recoverable damage. For avid cyclists, losing the ability to ride represents significant lifestyle and recreational losses."
-    },
-    {
-      question: "What about bicycle accidents involving road construction?",
-      answer: "Construction zones require special safety measures. Contractors, government entities, and drivers may all share liability for inadequate protection or negligent operation."
-    },
-    {
-      question: "How do bicycle accident cases differ from car accident cases?",
-      answer: "Cyclists face unique vulnerabilities, insurance biases, and injury patterns. We understand cycling culture, equipment, and the specific legal challenges bicycle cases present."
-    },
-    {
-      question: "What if the accident happened on a group ride or cycling event?",
-      answer: "Event organizers typically carry insurance. Driver liability remains regardless of event participation. We review event waivers and determine all available coverage sources."
-    },
-    {
-      question: "Can I sue for bicycle accidents caused by road defects?",
-      answer: "Government entities responsible for road maintenance can be liable for dangerous conditions. These claims have strict notice requirements and shorter deadlines."
-    },
-    {
-      question: "What if I was wearing headphones during the bicycle accident?",
-      answer: "California allows one earbud while cycling. Even if both ears were covered, this doesn't automatically prevent recovery - we focus on driver negligence as the primary cause."
-    },
-    {
-      question: "How do bicycle accident cases handle future medical expenses?",
-      answer: "We work with medical experts to project ongoing treatment costs, rehabilitation needs, and potential surgeries. Future damages are included in settlement demands."
-    },
-    {
-      question: "What if the bicycle accident involved a government vehicle?",
-      answer: "Government entity claims require special procedures and shorter deadlines. Sovereign immunity exceptions apply for negligent operation of government vehicles."
-    },
-    {
-      question: "Can I recover lost income if I can't return to my previous job?",
-      answer: "Yes. Diminished earning capacity covers career changes, reduced hours, and lost advancement opportunities. Vocational experts help calculate these economic losses."
-    },
-    {
-      question: "What about bicycle accidents involving electric scooters or e-bikes?",
-      answer: "Micro-mobility devices are increasingly common. Liability depends on device type, rider behavior, and local regulations. We stay current on evolving laws."
-    },
-    {
-      question: "How do insurance companies typically defend bicycle accident claims?",
-      answer: "Common defenses include visibility arguments, right-of-way disputes, and helmet/safety equipment issues. Our defense experience helps counter these tactics effectively."
-    },
-    {
-      question: "What if I was cycling in a bike lane and a parked car door opened?",
-      answer: "Dooring is a clear violation of California Vehicle Code 22517. The door-opener faces presumed negligence. These cases often result in favorable settlements."
-    },
-    {
-      question: "Can family members recover damages if I was killed in a bicycle accident?",
-      answer: "Wrongful death claims allow family members to recover funeral expenses, lost financial support, and loss of companionship. These cases require immediate legal action."
-    },
-    {
-      question: "What if the bicycle accident happened during bad weather?",
-      answer: "Weather doesn't excuse driver negligence. Poor conditions require increased caution from motorists. We demonstrate how reasonable drivers should have responded to conditions."
-    },
-    {
-      question: "How do bicycle accident cases handle scarring and disfigurement?",
-      answer: "Permanent scarring significantly impacts case value, especially facial or visible scarring. We document disfigurement thoroughly and work with medical experts on projected treatment costs."
-    },
-    {
-      question: "What if I was cycling without lights at night?",
-      answer: "California requires bicycle lights after dark, but equipment violations don't bar recovery if driver negligence caused the accident. We evaluate all contributing factors fairly."
-    }
-  ];
+  const faqData = [{
+    question: "What should I do immediately after a bicycle accident?",
+    answer: "First priority is safety - get out of traffic if possible. Call 911 for medical attention and police documentation. Never leave the scene. Take photos of your injuries, bike damage, and accident scene. Get driver's license, insurance info, and witness contacts. Seek medical evaluation even if you feel fine - adrenaline masks serious injuries like concussions or internal damage."
+  }, {
+    question: "Do cyclists have the same rights as car drivers in California?",
+    answer: "Yes, California Vehicle Code Section 21200 establishes that cyclists have all the rights and responsibilities of vehicle drivers. You have the legal right to use any road except freeways, take the full lane when necessary for safety, and expect drivers to treat you as traffic, not an obstacle."
+  }, {
+    question: "What is California's Three-Foot Law?",
+    answer: "Assembly Bill 1909 requires drivers to change lanes entirely when passing cyclists, not just maintain three feet of distance. This 'change lanes to pass' law recognizes that three feet at high speeds creates dangerous wind turbulence. Violations result in base fines of $233, increasing to $959 if a collision occurs."
+  }, {
+    question: "Can I still recover compensation if I wasn't wearing a helmet?",
+    answer: "Yes, California only mandates helmets for cyclists under 18. While insurance companies may argue comparative negligence for not wearing a helmet, this doesn't eliminate your right to compensation. The driver's negligence is the primary factor in determining liability and damages."
+  }, {
+    question: "How long do I have to file a bicycle accident lawsuit in California?",
+    answer: "Two years from the accident date under the statute of limitations. However, start immediately - evidence disappears, witnesses forget, and surveillance footage gets overwritten. Government claims require filing within six months. Missing these deadlines bars recovery forever."
+  }, {
+    question: "Do I need to call the police after a bike accident?",
+    answer: "Yes. A police report documents fault, injuries, and witness information. Politely insist on a report even if the driver wants to 'work it out'. The report number is critical for insurance claims."
+  }, {
+    question: "What if the driver fled the scene (hit-and-run)?",
+    answer: "Call 911 immediately. Provide any vehicle details and witness contacts. Your own uninsured motorist (UM) coverage may apply. We can help secure nearby surveillance footage quickly before it's overwritten."
+  }, {
+    question: "Should I see a doctor even if I feel okay?",
+    answer: "Yes. Many serious injuries (TBI, internal bleeding, spinal trauma) are delayed. Early medical documentation is vital for both your health and your claim."
+  }, {
+    question: "Should I speak with the insurance company?",
+    answer: "Do not give a recorded statement before speaking with a lawyer. Adjusters are trained to minimize claims. We handle communications to protect your case."
+  }, {
+    question: "What if I was partially at fault?",
+    answer: "California follows comparative negligence—you can still recover damages reduced by your percentage of fault. Never assume fault without legal review."
+  }, {
+    question: "What damages can I recover in a bicycle accident case?",
+    answer: "Medical bills, future care, lost wages, reduced earning capacity, pain and suffering, disfigurement, loss of enjoyment of life, bike/equipment replacement, and more."
+  }, {
+    question: "How much is my bicycle accident case worth?",
+    answer: "Case value depends on injury severity, permanence, medical costs, lost income, pain levels, and fault clarity. Use our calculator for an estimate, then get a personalized evaluation."
+  }, {
+    question: "How long will my case take?",
+    answer: "Most cases resolve within 6–18 months depending on treatment duration, investigation needs, insurance cooperation, and whether litigation is required."
+  }, {
+    question: "What evidence should I preserve?",
+    answer: "Photos/videos, damaged bike and gear, GPS/Strava data, medical records, receipts, witness contacts, repair estimates, and your cycling history."
+  }, {
+    question: "What if the driver has no or minimal insurance?",
+    answer: "Your UM/UIM coverage can step in. We also investigate other liable parties, including employers, commercial policies, and dangerous road conditions."
+  }, {
+    question: "Are e-bikes treated the same under California law?",
+    answer: "Generally yes, but Class 3 e-bikes have additional restrictions. Liability rules and compensation rights are similar—contact us for case-specific guidance."
+  }, {
+    question: "Do I need a lawyer? How are fees handled?",
+    answer: "Serious bicycle cases benefit greatly from legal representation. We work on contingency—no fees unless we win. Our early involvement preserves evidence and maximizes recovery."
+  }, {
+    question: "What if I was riding in a bike lane?",
+    answer: "Bike lanes provide cyclists with enhanced legal protections. Drivers who enter bike lanes illegally face additional penalties and presumptions of negligence in accident cases."
+  }, {
+    question: "Can I sue for a bicycle accident on a sidewalk?",
+    answer: "Sidewalk cycling legality varies by city. Even where prohibited, you may still have claims against negligent drivers. We analyze local ordinances and liability factors."
+  }, {
+    question: "What about accidents involving ride-share vehicles?",
+    answer: "Uber/Lyft carry substantial insurance coverage. Commercial vehicle standards and corporate liability may apply, potentially increasing available compensation."
+  }, {
+    question: "How do bicycle accident settlements work?",
+    answer: "Most cases settle without trial. We negotiate maximum compensation while you focus on recovery. Settlement includes all damages: medical, economic, and pain/suffering."
+  }, {
+    question: "What if the accident happened in a bike race or group ride?",
+    answer: "Recreational cycling accidents still allow liability claims against negligent drivers. Waivers typically don't protect against third-party vehicle negligence."
+  }, {
+    question: "Can weather conditions affect my bicycle accident case?",
+    answer: "Weather may be a factor but doesn't eliminate driver responsibility. Poor conditions require extra caution from motorists, not cyclists accepting unnecessary risk."
+  }, {
+    question: "What about bicycle accidents involving children?",
+    answer: "Children receive special legal protections. Age-appropriate behavior standards apply, and parents can typically pursue claims on behalf of injured minor cyclists."
+  }, {
+    question: "How are bicycle accident medical bills handled?",
+    answer: "Use health insurance initially, then seek reimbursement through your claim. We coordinate with providers and negotiate medical liens to maximize your net recovery."
+  }, {
+    question: "What if I was using bike-share or rental bike?",
+    answer: "Rental status doesn't affect your right to compensation from negligent drivers. The bike company's insurance may provide additional coverage for equipment damage."
+  }, {
+    question: "Can I claim compensation for my damaged bicycle and gear?",
+    answer: "Yes. High-end cycling equipment replacement costs are recoverable damages. We document fair market value and replacement costs for bikes, helmets, clothing, and electronics."
+  }, {
+    question: "What if the driver claims they didn't see me?",
+    answer: "Driver inattention is negligence, not a defense. We investigate sight lines, lighting conditions, and whether the driver was distracted (phone use, etc.)."
+  }, {
+    question: "How do intersection bicycle accidents work legally?",
+    answer: "Intersections have complex right-of-way rules. We analyze traffic signals, signage, and vehicle/cyclist positioning to establish liability and build your case."
+  }, {
+    question: "What about bicycle accidents in parking lots?",
+    answer: "Private property accidents still allow liability claims. Property owners may also be liable for dangerous conditions, inadequate lighting, or poor design."
+  }, {
+    question: "Can I sue if I was hit while cycling to/from work?",
+    answer: "Yes, you can pursue a personal injury claim against the at-fault driver. Workers' compensation may also apply if you were on work time or using a work bike."
+  }, {
+    question: "What if the bicycle accident involved a commercial truck?",
+    answer: "Commercial vehicle accidents involve higher insurance limits, federal regulations, and corporate liability. These cases often result in larger settlements due to available coverage."
+  }, {
+    question: "How do bicycle accident investigations work?",
+    answer: "We immediately secure evidence: surveillance footage, witness statements, police reports, vehicle damage, road conditions, and expert accident reconstruction when needed."
+  }, {
+    question: "What if I was cycling under the influence?",
+    answer: "California DUI laws apply to cyclists, but this doesn't automatically bar injury claims. We evaluate all factors and may still recover compensation depending on driver fault."
+  }, {
+    question: "Can I get compensation for lost cycling enjoyment?",
+    answer: "Yes. Loss of life's pleasures is a recoverable damage. For avid cyclists, losing the ability to ride represents significant lifestyle and recreational losses."
+  }, {
+    question: "What about bicycle accidents involving road construction?",
+    answer: "Construction zones require special safety measures. Contractors, government entities, and drivers may all share liability for inadequate protection or negligent operation."
+  }, {
+    question: "How do bicycle accident cases differ from car accident cases?",
+    answer: "Cyclists face unique vulnerabilities, insurance biases, and injury patterns. We understand cycling culture, equipment, and the specific legal challenges bicycle cases present."
+  }, {
+    question: "What if the accident happened on a group ride or cycling event?",
+    answer: "Event organizers typically carry insurance. Driver liability remains regardless of event participation. We review event waivers and determine all available coverage sources."
+  }, {
+    question: "Can I sue for bicycle accidents caused by road defects?",
+    answer: "Government entities responsible for road maintenance can be liable for dangerous conditions. These claims have strict notice requirements and shorter deadlines."
+  }, {
+    question: "What if I was wearing headphones during the bicycle accident?",
+    answer: "California allows one earbud while cycling. Even if both ears were covered, this doesn't automatically prevent recovery - we focus on driver negligence as the primary cause."
+  }, {
+    question: "How do bicycle accident cases handle future medical expenses?",
+    answer: "We work with medical experts to project ongoing treatment costs, rehabilitation needs, and potential surgeries. Future damages are included in settlement demands."
+  }, {
+    question: "What if the bicycle accident involved a government vehicle?",
+    answer: "Government entity claims require special procedures and shorter deadlines. Sovereign immunity exceptions apply for negligent operation of government vehicles."
+  }, {
+    question: "Can I recover lost income if I can't return to my previous job?",
+    answer: "Yes. Diminished earning capacity covers career changes, reduced hours, and lost advancement opportunities. Vocational experts help calculate these economic losses."
+  }, {
+    question: "What about bicycle accidents involving electric scooters or e-bikes?",
+    answer: "Micro-mobility devices are increasingly common. Liability depends on device type, rider behavior, and local regulations. We stay current on evolving laws."
+  }, {
+    question: "How do insurance companies typically defend bicycle accident claims?",
+    answer: "Common defenses include visibility arguments, right-of-way disputes, and helmet/safety equipment issues. Our defense experience helps counter these tactics effectively."
+  }, {
+    question: "What if I was cycling in a bike lane and a parked car door opened?",
+    answer: "Dooring is a clear violation of California Vehicle Code 22517. The door-opener faces presumed negligence. These cases often result in favorable settlements."
+  }, {
+    question: "Can family members recover damages if I was killed in a bicycle accident?",
+    answer: "Wrongful death claims allow family members to recover funeral expenses, lost financial support, and loss of companionship. These cases require immediate legal action."
+  }, {
+    question: "What if the bicycle accident happened during bad weather?",
+    answer: "Weather doesn't excuse driver negligence. Poor conditions require increased caution from motorists. We demonstrate how reasonable drivers should have responded to conditions."
+  }, {
+    question: "How do bicycle accident cases handle scarring and disfigurement?",
+    answer: "Permanent scarring significantly impacts case value, especially facial or visible scarring. We document disfigurement thoroughly and work with medical experts on projected treatment costs."
+  }, {
+    question: "What if I was cycling without lights at night?",
+    answer: "California requires bicycle lights after dark, but equipment violations don't bar recovery if driver negligence caused the accident. We evaluate all contributing factors fairly."
+  }];
 
   // FAQ Structured Data for SEO
   const faqJsonLd = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: faqData.map((q) => ({
+    mainEntity: faqData.map(q => ({
       "@type": "Question",
       name: q.question,
       acceptedAnswer: {
         "@type": "Answer",
-        text: q.answer,
-      },
-    })),
+        text: q.answer
+      }
+    }))
   };
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="California Bicycle Accident Lawyers | Trembach Law Firm"
-        description="Experienced bicycle accident attorneys helping injured cyclists in California. Former defense attorney now fighting for maximum compensation. Free consultation."
-        canonical="/practice-areas/bicycle-accidents"
-        structuredData={faqJsonLd}
-      />
+  return <div className="min-h-screen bg-background">
+      <SEO title="California Bicycle Accident Lawyers | Trembach Law Firm" description="Experienced bicycle accident attorneys helping injured cyclists in California. Former defense attorney now fighting for maximum compensation. Free consultation." canonical="/practice-areas/bicycle-accidents" structuredData={faqJsonLd} />
       
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-10">
-          <Button 
-            variant="ghost" 
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-          >
+          <Button variant="ghost" onClick={() => window.history.back()} className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm">
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </Button>
@@ -397,17 +330,11 @@ const BicycleAccidents: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
               <span className="ml-2 text-lg">Backed by Proven Experience</span>
             </div>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/bicycle-case-evaluation'}
-            >
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg" onClick={() => window.location.href = '/bicycle-case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -417,23 +344,13 @@ const BicycleAccidents: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${activeTab === tab.id ? 'bg-white text-primary' : 'text-white hover:bg-white/20'}`}>
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
@@ -513,81 +430,39 @@ const BicycleAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">First Name *</label>
-                              <Input
-                                name="firstName"
-                                value={formData.name.split(' ')[0] || ''}
-                                onChange={(e) => {
-                                  const lastName = formData.name.split(' ').slice(1).join(' ');
-                                  handleInputChange('name', `${e.target.value} ${lastName}`.trim());
-                                }}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="Enter your first name"
-                              />
+                              <Input name="firstName" value={formData.name.split(' ')[0] || ''} onChange={e => {
+                              const lastName = formData.name.split(' ').slice(1).join(' ');
+                              handleInputChange('name', `${e.target.value} ${lastName}`.trim());
+                            }} required aria-required="true" className="h-12 text-base" placeholder="Enter your first name" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Last Name *</label>
-                              <Input
-                                name="lastName"
-                                value={formData.name.split(' ').slice(1).join(' ') || ''}
-                                onChange={(e) => {
-                                  const firstName = formData.name.split(' ')[0] || '';
-                                  handleInputChange('name', `${firstName} ${e.target.value}`.trim());
-                                }}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="Enter your last name"
-                              />
+                              <Input name="lastName" value={formData.name.split(' ').slice(1).join(' ') || ''} onChange={e => {
+                              const firstName = formData.name.split(' ')[0] || '';
+                              handleInputChange('name', `${firstName} ${e.target.value}`.trim());
+                            }} required aria-required="true" className="h-12 text-base" placeholder="Enter your last name" />
                             </div>
                           </div>
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Email *</label>
-                              <Input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={(e) => handleInputChange('email', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="your.email@example.com"
-                              />
+                              <Input type="email" name="email" value={formData.email} onChange={e => handleInputChange('email', e.target.value)} required aria-required="true" className="h-12 text-base" placeholder="your.email@example.com" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Phone *</label>
-                              <Input
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={(e) => handleInputChange('phone', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="(555) 123-4567"
-                              />
+                              <Input type="tel" name="phone" value={formData.phone} onChange={e => handleInputChange('phone', e.target.value)} required aria-required="true" className="h-12 text-base" placeholder="(555) 123-4567" />
                             </div>
                           </div>
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Date of Accident *</label>
-                              <Input
-                                type="date"
-                                name="accidentDate"
-                                value={formData.accidentDate}
-                                onChange={(e) => handleInputChange('accidentDate', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                              />
+                              <Input type="date" name="accidentDate" value={formData.accidentDate} onChange={e => handleInputChange('accidentDate', e.target.value)} required aria-required="true" className="h-12 text-base" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Type of Bicycle *</label>
-                              <Select value={formData.bicycleType || ''} onValueChange={(value) => handleInputChange('bicycleType', value)} required>
+                              <Select value={formData.bicycleType || ''} onValueChange={value => handleInputChange('bicycleType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select bicycle type" className="text-slate-600" />
                                 </SelectTrigger>
@@ -609,7 +484,7 @@ const BicycleAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Type of Accident *</label>
-                              <Select value={formData.accidentType || ''} onValueChange={(value) => handleInputChange('accidentType', value)} required>
+                              <Select value={formData.accidentType || ''} onValueChange={value => handleInputChange('accidentType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select accident type" className="text-slate-600" />
                                 </SelectTrigger>
@@ -629,7 +504,7 @@ const BicycleAccidents: React.FC = () => {
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Primary Injury Type *</label>
-                              <Select value={formData.injuryType || ''} onValueChange={(value) => handleInputChange('injuryType', value)} required>
+                              <Select value={formData.injuryType || ''} onValueChange={value => handleInputChange('injuryType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select injury type" className="text-slate-600" />
                                 </SelectTrigger>
@@ -652,7 +527,7 @@ const BicycleAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Medical Treatment *</label>
-                              <Select value={formData.medicalTreatment || ''} onValueChange={(value) => handleInputChange('medicalTreatment', value)} required>
+                              <Select value={formData.medicalTreatment || ''} onValueChange={value => handleInputChange('medicalTreatment', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select treatment level" className="text-slate-600" />
                                 </SelectTrigger>
@@ -669,7 +544,7 @@ const BicycleAccidents: React.FC = () => {
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Insurance Status *</label>
-                              <Select value={formData.insuranceClaim || ''} onValueChange={(value) => handleInputChange('insuranceClaim', value)} required>
+                              <Select value={formData.insuranceClaim || ''} onValueChange={value => handleInputChange('insuranceClaim', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select claim status" className="text-slate-600" />
                                 </SelectTrigger>
@@ -691,35 +566,12 @@ const BicycleAccidents: React.FC = () => {
                             <label className="text-slate-800 text-base font-medium">
                               Please describe your bicycle accident *
                             </label>
-                            <Textarea
-                              name="description"
-                              value={formData.description}
-                              onChange={(e) => handleInputChange('description', e.target.value)}
-                              placeholder="Please provide details about how the bicycle accident occurred..."
-                              rows={5}
-                              className=""
-                              required
-                              aria-required="true"
-                            />
+                            <Textarea name="description" value={formData.description} onChange={e => handleInputChange('description', e.target.value)} placeholder="Please provide details about how the bicycle accident occurred..." rows={5} className="" required aria-required="true" />
                           </div>
 
-                          <div className="flex items-start space-x-2">
-                            <input
-                              type="checkbox"
-                              name="consent"
-                              className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
-                              required
-                              aria-required="true"
-                            />
-                            <label className="text-slate-700 text-sm leading-relaxed">
-                              I consent to being contacted by Trembach Law Firm regarding my bicycle accident case. I understand this consultation is free and there is no obligation. *
-                            </label>
-                          </div>
+                          
 
-                          <Button 
-                            type="submit" 
-                            className="w-full btn-enhanced py-4 text-lg"
-                          >
+                          <Button type="submit" className="w-full btn-enhanced py-4 text-lg">
                             Get My Free Case Evaluation
                           </Button>
                         </form>
@@ -1078,28 +930,17 @@ const BicycleAccidents: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-8">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
-                {faqData.map((faq, index) => (
-                  <Card key={index} className="glass-card">
-                    <CardHeader 
-                      className="cursor-pointer hover:bg-muted/50 transition-colors"
-                      onClick={() => toggleFaq(index)}
-                    >
+                {faqData.map((faq, index) => <Card key={index} className="glass-card">
+                    <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => toggleFaq(index)}>
                       <CardTitle className="flex items-center justify-between text-lg">
                         <span>{faq.question}</span>
-                        {expandedFaq === index ? (
-                          <ChevronUp className="w-5 h-5 text-red-600" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 text-red-600" />
-                        )}
+                        {expandedFaq === index ? <ChevronUp className="w-5 h-5 text-red-600" /> : <ChevronDown className="w-5 h-5 text-red-600" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent>
+                    {expandedFaq === index && <CardContent>
                         <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
 
@@ -1196,17 +1037,10 @@ const BicycleAccidents: React.FC = () => {
                       Don't let time limits jeopardize your case. Contact us today for a free, comprehensive consultation. We'll review your case, explain your rights, and ensure all critical deadlines are met while you focus on your recovery.
                     </p>
                     <div className="flex flex-col sm:flex-row gap-4">
-                      <Button 
-                        className="bg-green-600 hover:bg-green-700 text-white font-semibold"
-                        onClick={() => window.location.href = '/bicycle-case-evaluation'}
-                      >
+                      <Button className="bg-green-600 hover:bg-green-700 text-white font-semibold" onClick={() => window.location.href = '/bicycle-case-evaluation'}>
                         Start My Free Case Review
                       </Button>
-                      <Button 
-                        variant="outline" 
-                        className="border-green-600 text-green-700 hover:bg-green-50"
-                        onClick={() => window.location.href = 'tel:(818)123-4567'}
-                      >
+                      <Button variant="outline" className="border-green-600 text-green-700 hover:bg-green-50" onClick={() => window.location.href = 'tel:(818)123-4567'}>
                         Call (818) 123-4567 Now
                       </Button>
                     </div>
@@ -1292,8 +1126,6 @@ const BicycleAccidents: React.FC = () => {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default BicycleAccidents;

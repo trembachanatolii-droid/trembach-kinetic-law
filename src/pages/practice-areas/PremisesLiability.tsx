@@ -174,7 +174,7 @@ const PremisesLiability: React.FC = () => {
               
               <div className="relative z-10">
                 <div className="text-center mb-8 md:mb-12">
-                  <h2 className="text-3xl md:text-5xl font-display font-bold text-white mb-4 md:mb-6">
+                  <h2 className="text-3xl md:text-5xl font-display font-bold text-black mb-4 md:mb-6">
                     Free Premises Liability Case Evaluation
                   </h2>
                   <div className="w-24 h-1 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full mx-auto mb-4 md:mb-6"></div>

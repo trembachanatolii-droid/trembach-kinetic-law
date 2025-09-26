@@ -14,36 +14,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Progress } from '@/components/ui/progress';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft,
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle,
-  Camera,
-  MapPin,
-  Calendar,
-  DollarSign,
-  BookOpen,
-  HelpCircle,
-  Home
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, ChevronLeft, ChevronRight, CheckCircle, Camera, MapPin, Calendar, DollarSign, BookOpen, HelpCircle, Home } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
 import whatToDoImage from '@/assets/practice-areas/premises-liability.jpg';
 import accidentTypesImage from '@/assets/practice-areas/construction-accidents.jpg';
@@ -51,15 +22,12 @@ import provingNegligenceImage from '@/assets/hero-background-scales.jpg';
 import compensationImage from '@/assets/practice-areas/courthouse-professional.jpg';
 import legalProcessImage from '@/assets/practice-areas/premises-liability.jpg';
 import SEO from '@/components/SEO';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const PremisesLiability: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -71,7 +39,6 @@ const PremisesLiability: React.FC = () => {
     lastName: '',
     phone: '',
     email: '',
-    
     // Incident Information
     accidentDate: '',
     accidentLocation: '',
@@ -79,90 +46,112 @@ const PremisesLiability: React.FC = () => {
     incidentType: '',
     injuryType: '',
     witnesses: '',
-    
     // Property Condition
     propertyCondition: '',
     weatherConditions: '',
     lightingConditions: '',
     hazardVisibility: '',
     warningSignsPresent: '',
-    
     // Medical Information
     medicalTreatment: '',
     hospitalName: '',
     doctorName: '',
     currentTreatment: '',
-    
     // Legal Information
     policeReport: '',
     incidentReport: '',
     photographsTaken: '',
     urgency: ''
   });
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'what-to-do', label: 'WHAT TO DO AFTER ACCIDENT', icon: Stethoscope },
-    { id: 'types-of-accidents', label: 'TYPES OF ACCIDENTS', icon: Heart },
-    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Shield },
-    { id: 'proving-negligence', label: 'PROVING NEGLIGENCE', icon: CheckCircle },
-    { id: 'compensation', label: 'COMPENSATION', icon: DollarSign },
-    { id: 'faq', label: 'FAQ', icon: MessageCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
-
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'what-to-do',
+    label: 'WHAT TO DO AFTER ACCIDENT',
+    icon: Stethoscope
+  }, {
+    id: 'types-of-accidents',
+    label: 'TYPES OF ACCIDENTS',
+    icon: Heart
+  }, {
+    id: 'legal-process',
+    label: 'LEGAL PROCESS',
+    icon: Shield
+  }, {
+    id: 'proving-negligence',
+    label: 'PROVING NEGLIGENCE',
+    icon: CheckCircle
+  }, {
+    id: 'compensation',
+    label: 'COMPENSATION',
+    icon: DollarSign
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: MessageCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.1,
+        ease: 'power2.out'
+      });
 
       // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
-          }
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
+        opacity: 0,
+        y: 30
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 80%'
         }
-      );
+      });
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    
     console.log('Premises Liability Case Evaluation Submitted:', formData);
     alert('Your case evaluation has been submitted. We will contact you within 24 hours.');
-    
     setCurrentStep(1);
     setFormData({
       firstName: '',
@@ -190,31 +179,18 @@ const PremisesLiability: React.FC = () => {
       urgency: ''
     });
   };
-
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="California Premises Liability Lawyer | Property Accident Attorney | Free Consultation" 
-        description="Experienced California premises liability attorneys. Free consultation for slip and fall, inadequate security, and property accidents. No fees unless we win." 
-        keywords="premises liability lawyer California, slip and fall attorney, property accident law, negligent security" 
-        canonical="https://yourlaw.com/practice-areas/premises-liability" 
-      />
+  return <div className="min-h-screen bg-background">
+      <SEO title="California Premises Liability Lawyer | Property Accident Attorney | Free Consultation" description="Experienced California premises liability attorneys. Free consultation for slip and fall, inadequate security, and property accidents. No fees unless we win." keywords="premises liability lawyer California, slip and fall attorney, property accident law, negligent security" canonical="https://yourlaw.com/practice-areas/premises-liability" />
 
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Go Back Button */}
         <div className="absolute top-20 left-6 z-10">
-          <Button 
-            variant="ghost" 
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-          >
+          <Button variant="ghost" onClick={() => window.history.back()} className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm">
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </Button>
@@ -227,9 +203,7 @@ const PremisesLiability: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
               <span className="ml-2 text-lg">Proven Results for Property Accident Victims</span>
             </div>
             
@@ -237,11 +211,7 @@ const PremisesLiability: React.FC = () => {
               Property owners must maintain safe conditions. Free consultation for all accident cases.
             </p>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => scrollToSection('evaluation')}
-            >
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg" onClick={() => scrollToSection('evaluation')}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -251,67 +221,20 @@ const PremisesLiability: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${activeTab === tab.id ? 'bg-white text-primary' : 'text-white hover:bg-white/20'}`}>
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
       </section>
 
       {/* Bar Tools Section */}
-      <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-8 border-y border-slate-700">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <Button 
-              variant="outline" 
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
-              onClick={() => scrollToSection('evaluation')}
-            >
-              <FileText className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium">Free Evaluation</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
-              onClick={() => window.location.href = 'tel:8553742906'}
-            >
-              <Phone className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium">Call Now</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
-              onClick={() => scrollToSection('faq')}
-            >
-              <HelpCircle className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium">Get Answers</span>
-            </Button>
-            <Button 
-              variant="outline" 
-              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
-              onClick={() => scrollToSection('types-of-accidents')}
-            >
-              <Shield className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
-              <span className="text-sm font-medium">Learn More</span>
-            </Button>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-6 py-12">
@@ -438,11 +361,7 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">What To Do After a Premises Liability Accident</h2>
               
               <div className="mb-6">
-                <img 
-                  src={whatToDoImage} 
-                  alt="What to do after a premises liability accident - immediate steps for documentation and safety" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
-                />
+                <img src={whatToDoImage} alt="What to do after a premises liability accident - immediate steps for documentation and safety" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Taking the right steps immediately after a premises liability accident can significantly impact your ability to recover compensation. Property owners and their insurance companies often try to minimize liability, so protecting your legal rights from the start is crucial.
@@ -604,20 +523,18 @@ const PremisesLiability: React.FC = () => {
                     <div className="mb-8">
                       <div className="flex justify-between text-sm text-white mb-2 font-medium">
                         <span>Step {currentStep} of 4</span>
-                        <span>{Math.round((currentStep / 4) * 100)}% Complete</span>
+                        <span>{Math.round(currentStep / 4 * 100)}% Complete</span>
                       </div>
-                      <Progress value={(currentStep / 4) * 100} className="h-3 bg-blue-100">
-                        <div 
-                          className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out"
-                          style={{ width: `${(currentStep / 4) * 100}%` }}
-                        />
+                      <Progress value={currentStep / 4 * 100} className="h-3 bg-blue-100">
+                        <div className="h-full bg-gradient-to-r from-blue-500 to-blue-600 rounded-full transition-all duration-500 ease-out" style={{
+                        width: `${currentStep / 4 * 100}%`
+                      }} />
                       </Progress>
                     </div>
 
                     <form onSubmit={handleFormSubmit} className="space-y-6">
                       {/* Step 1: Personal Information */}
-                      {currentStep === 1 && (
-                        <div className="space-y-6 animate-fade-in">
+                      {currentStep === 1 && <div className="space-y-6 animate-fade-in">
                           <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Personal Information</h4>
                           
                           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
@@ -625,32 +542,20 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="firstName" className="text-base md:text-lg font-semibold text-slate-900">
                                 First Name *
                               </Label>
-                              <Input 
-                                type="text" 
-                                id="firstName" 
-                                name="firstName" 
-                                value={formData.firstName} 
-                                onChange={(e) => setFormData(prev => ({...prev, firstName: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                                placeholder="Enter your first name" 
-                              />
+                              <Input type="text" id="firstName" name="firstName" value={formData.firstName} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            firstName: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="Enter your first name" />
                             </div>
                             
                             <div className="space-y-2">
                               <Label htmlFor="lastName" className="text-base md:text-lg font-semibold text-slate-900">
                                 Last Name *
                               </Label>
-                              <Input 
-                                type="text" 
-                                id="lastName" 
-                                name="lastName" 
-                                value={formData.lastName} 
-                                onChange={(e) => setFormData(prev => ({...prev, lastName: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                                placeholder="Enter your last name" 
-                              />
+                              <Input type="text" id="lastName" name="lastName" value={formData.lastName} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            lastName: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="Enter your last name" />
                             </div>
                           </div>
 
@@ -659,51 +564,33 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="phone" className="text-base md:text-lg font-semibold text-slate-900">
                                 Phone Number *
                               </Label>
-                              <Input 
-                                type="tel" 
-                                id="phone" 
-                                name="phone" 
-                                value={formData.phone} 
-                                onChange={(e) => setFormData(prev => ({...prev, phone: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                                placeholder="(555) 123-4567" 
-                              />
+                              <Input type="tel" id="phone" name="phone" value={formData.phone} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            phone: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="(555) 123-4567" />
                             </div>
                             
                             <div className="space-y-2">
                               <Label htmlFor="email" className="text-base md:text-lg font-semibold text-slate-900">
                                 Email Address *
                               </Label>
-                              <Input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                value={formData.email} 
-                                onChange={(e) => setFormData(prev => ({...prev, email: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                                placeholder="your.email@example.com" 
-                              />
+                              <Input type="email" id="email" name="email" value={formData.email} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            email: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="your.email@example.com" />
                             </div>
                           </div>
 
                           <div className="flex justify-end">
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(2)}
-                              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(2)} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
                               Next Step
                               <ChevronRight className="w-4 h-4 ml-2" />
                             </Button>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       {/* Step 2: Incident Details */}
-                      {currentStep === 2 && (
-                        <div className="space-y-6 animate-fade-in">
+                      {currentStep === 2 && <div className="space-y-6 animate-fade-in">
                           <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Incident Details</h4>
                           
                           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
@@ -711,22 +598,20 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="accidentDate" className="text-base md:text-lg font-semibold text-slate-900">
                                 Date of Incident *
                               </Label>
-                              <Input 
-                                type="date" 
-                                id="accidentDate" 
-                                name="accidentDate" 
-                                value={formData.accidentDate} 
-                                onChange={(e) => setFormData(prev => ({...prev, accidentDate: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                              />
+                              <Input type="date" id="accidentDate" name="accidentDate" value={formData.accidentDate} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            accidentDate: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" />
                             </div>
                             
                             <div className="space-y-2">
                               <Label htmlFor="propertyType" className="text-base md:text-lg font-semibold text-slate-900">
                                 Type of Property *
                               </Label>
-                              <Select value={formData.propertyType} onValueChange={(value) => setFormData(prev => ({...prev, propertyType: value}))} required>
+                              <Select value={formData.propertyType} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            propertyType: value
+                          }))} required>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select property type" className="text-slate-500" />
                                 </SelectTrigger>
@@ -751,7 +636,10 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="incidentType" className="text-base md:text-lg font-semibold text-slate-900">
                                 Type of Incident *
                               </Label>
-                              <Select value={formData.incidentType} onValueChange={(value) => setFormData(prev => ({...prev, incidentType: value}))} required>
+                              <Select value={formData.incidentType} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            incidentType: value
+                          }))} required>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select incident type" className="text-slate-500" />
                                 </SelectTrigger>
@@ -774,44 +662,27 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="accidentLocation" className="text-base md:text-lg font-semibold text-slate-900">
                                 Accident Location *
                               </Label>
-                              <Input 
-                                type="text" 
-                                id="accidentLocation" 
-                                name="accidentLocation" 
-                                value={formData.accidentLocation} 
-                                onChange={(e) => setFormData(prev => ({...prev, accidentLocation: e.target.value}))}
-                                required 
-                                className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                                placeholder="Enter location of accident" 
-                              />
+                              <Input type="text" id="accidentLocation" name="accidentLocation" value={formData.accidentLocation} onChange={e => setFormData(prev => ({
+                            ...prev,
+                            accidentLocation: e.target.value
+                          }))} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="Enter location of accident" />
                             </div>
                           </div>
 
                           <div className="flex justify-between">
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(1)}
-                              variant="outline"
-                              className="px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(1)} variant="outline" className="px-8 py-3">
                               <ChevronLeft className="w-4 h-4 mr-2" />
                               Previous
                             </Button>
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(3)}
-                              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(3)} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
                               Next Step
                               <ChevronRight className="w-4 h-4 ml-2" />
                             </Button>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       {/* Step 3: Injury & Medical Information */}
-                      {currentStep === 3 && (
-                        <div className="space-y-6 animate-fade-in">
+                      {currentStep === 3 && <div className="space-y-6 animate-fade-in">
                           <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Injury & Medical Information</h4>
                           
                           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
@@ -819,7 +690,10 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="injuryType" className="text-base md:text-lg font-semibold text-slate-900">
                                 Type of Injury *
                               </Label>
-                              <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({...prev, injuryType: value}))} required>
+                              <Select value={formData.injuryType} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            injuryType: value
+                          }))} required>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select injury type" className="text-slate-500" />
                                 </SelectTrigger>
@@ -841,7 +715,10 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="medicalTreatment" className="text-base md:text-lg font-semibold text-slate-900">
                                 Medical Treatment Received *
                               </Label>
-                              <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData(prev => ({...prev, medicalTreatment: value}))} required>
+                              <Select value={formData.medicalTreatment} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            medicalTreatment: value
+                          }))} required>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select treatment received" className="text-slate-500" />
                                 </SelectTrigger>
@@ -863,56 +740,33 @@ const PremisesLiability: React.FC = () => {
                             <Label htmlFor="hospitalName" className="text-base md:text-lg font-semibold text-slate-900">
                               Hospital/Medical Facility Name
                             </Label>
-                            <Input 
-                              type="text" 
-                              id="hospitalName" 
-                              name="hospitalName" 
-                              value={formData.hospitalName} 
-                              onChange={(e) => setFormData(prev => ({...prev, hospitalName: e.target.value}))}
-                              className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" 
-                              placeholder="Enter hospital/medical facility name" 
-                            />
+                            <Input type="text" id="hospitalName" name="hospitalName" value={formData.hospitalName} onChange={e => setFormData(prev => ({
+                          ...prev,
+                          hospitalName: e.target.value
+                        }))} className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300" placeholder="Enter hospital/medical facility name" />
                           </div>
 
                           <div className="flex justify-between">
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(2)}
-                              variant="outline"
-                              className="px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(2)} variant="outline" className="px-8 py-3">
                               <ChevronLeft className="w-4 h-4 mr-2" />
                               Previous
                             </Button>
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(4)}
-                              className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(4)} className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-3">
                               Next Step
                               <ChevronRight className="w-4 h-4 ml-2" />
                             </Button>
                           </div>
-                        </div>
-                      )}
+                        </div>}
 
                       {/* Step 4: Additional Details */}
-                      {currentStep === 4 && (
-                        <div className="space-y-6 animate-fade-in">
+                      {currentStep === 4 && <div className="space-y-6 animate-fade-in">
                           <h4 className="text-xl md:text-2xl font-bold text-white mb-6">Additional Case Details</h4>
                           
                           <div className="space-y-2">
                             <Label htmlFor="incidentDescription" className="text-base md:text-lg font-semibold text-slate-900">
                               Describe the Incident *
                             </Label>
-                            <Textarea 
-                              id="incidentDescription" 
-                              name="incidentDescription" 
-                              rows={4} 
-                              required 
-                              className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 resize-none" 
-                              placeholder="Please provide details about the incident, including the conditions that caused your injury and any witnesses present..." 
-                            />
+                            <Textarea id="incidentDescription" name="incidentDescription" rows={4} required className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 placeholder:text-slate-500 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300 resize-none" placeholder="Please provide details about the incident, including the conditions that caused your injury and any witnesses present..." />
                           </div>
 
                           <div className="grid md:grid-cols-2 gap-4 md:gap-6">
@@ -920,7 +774,10 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="witnesses" className="text-base md:text-lg font-semibold text-slate-900">
                                 Were there witnesses?
                               </Label>
-                              <Select value={formData.witnesses} onValueChange={(value) => setFormData(prev => ({...prev, witnesses: value}))}>
+                              <Select value={formData.witnesses} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            witnesses: value
+                          }))}>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select witness status" className="text-slate-500" />
                                 </SelectTrigger>
@@ -937,7 +794,10 @@ const PremisesLiability: React.FC = () => {
                               <Label htmlFor="photographsTaken" className="text-base md:text-lg font-semibold text-slate-900">
                                 Did you take photos?
                               </Label>
-                              <Select value={formData.photographsTaken} onValueChange={(value) => setFormData(prev => ({...prev, photographsTaken: value}))}>
+                              <Select value={formData.photographsTaken} onValueChange={value => setFormData(prev => ({
+                            ...prev,
+                            photographsTaken: value
+                          }))}>
                                 <SelectTrigger className="w-full px-4 py-3 md:py-4 text-base md:text-lg rounded-lg border-2 border-white/20 bg-white/95 text-slate-900 focus:border-blue-400 focus:ring-4 focus:ring-blue-400/20 focus:outline-none transition-all duration-300">
                                   <SelectValue placeholder="Select photo status" className="text-slate-500" />
                                 </SelectTrigger>
@@ -952,24 +812,15 @@ const PremisesLiability: React.FC = () => {
                           </div>
 
                           <div className="flex justify-between">
-                            <Button 
-                              type="button" 
-                              onClick={() => setCurrentStep(3)}
-                              variant="outline"
-                              className="px-8 py-3"
-                            >
+                            <Button type="button" onClick={() => setCurrentStep(3)} variant="outline" className="px-8 py-3">
                               <ChevronLeft className="w-4 h-4 mr-2" />
                               Previous
                             </Button>
-                            <Button 
-                              type="submit" 
-                              className="btn-enhanced py-4 md:py-6 text-lg md:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/50 focus:outline-none px-8"
-                            >
+                            <Button type="submit" className="btn-enhanced py-4 md:py-6 text-lg md:text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-xl shadow-2xl hover:shadow-blue-500/25 transition-all duration-500 transform hover:scale-[1.02] hover:-translate-y-1 focus:ring-4 focus:ring-blue-400/50 focus:outline-none px-8">
                               Get My Free Case Evaluation
                             </Button>
                           </div>
-                        </div>
-                      )}
+                        </div>}
                     </form>
                   </div>
                 </div>
@@ -981,11 +832,7 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Types of Premises Liability Accidents</h2>
               
               <div className="mb-6">
-                <img 
-                  src={accidentTypesImage} 
-                  alt="Common types of premises liability accidents including slip and fall, trip and fall, and inadequate security incidents" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" 
-                />
+                <img src={accidentTypesImage} alt="Common types of premises liability accidents including slip and fall, trip and fall, and inadequate security incidents" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Premises liability encompasses a wide range of accidents that occur on someone else's property due to dangerous conditions or negligent maintenance. Understanding the different types of premises liability cases helps identify when property owners may be held responsible for injuries.
@@ -1150,11 +997,7 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">California Premises Liability Legal Process</h2>
               
               <div className="mb-6">
-                <img 
-                  src={legalProcessImage} 
-                  alt="California legal process for premises liability cases" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
-                />
+                <img src={legalProcessImage} alt="California legal process for premises liability cases" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Understanding the legal process for premises liability cases in California helps you know what to expect as we pursue compensation for your injuries. California premises liability law is complex and requires experienced legal representation to navigate successfully.
@@ -1379,11 +1222,7 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Proving Negligence in Premises Liability Cases</h2>
               
               <div className="mb-6">
-                <img 
-                  src={provingNegligenceImage} 
-                  alt="Proving negligence in premises liability cases - key evidence and legal requirements" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
-                />
+                <img src={provingNegligenceImage} alt="Proving negligence in premises liability cases - key evidence and legal requirements" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Successfully proving negligence in a premises liability case requires demonstrating that the property owner failed to meet their duty of care, resulting in your injuries. This involves establishing key legal elements through compelling evidence and expert testimony.
@@ -1412,11 +1251,7 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Compensation in Premises Liability Cases</h2>
               
               <div className="mb-6">
-                <img 
-                  src={compensationImage} 
-                  alt="Understanding compensation types in premises liability cases - economic and non-economic damages" 
-                  className="w-full h-64 object-cover rounded-lg shadow-lg mb-4"
-                />
+                <img src={compensationImage} alt="Understanding compensation types in premises liability cases - economic and non-economic damages" className="w-full h-64 object-cover rounded-lg shadow-lg mb-4" />
                 
                 <p className="text-lg leading-relaxed mb-4">
                   Premises liability victims in California may recover various types of compensation depending on the severity of their injuries and the circumstances of their case. Understanding the different categories of damages helps ensure you pursue all available compensation.
@@ -1457,217 +1292,161 @@ const PremisesLiability: React.FC = () => {
               <h2 className="text-3xl font-bold text-red-600 mb-6">Frequently Asked Questions</h2>
               
               <div className="space-y-4">
-                {[
-                  {
-                    question: "What is premises liability law in California?",
-                    answer: "Premises liability law holds property owners and occupiers responsible for maintaining reasonably safe conditions for visitors. Under California Civil Code Section 1714, property owners have a duty to exercise ordinary care in managing their property to avoid unreasonable risk of harm to others. This includes regular inspection for hazards, prompt repair of dangerous conditions, and warning visitors of known dangers that cannot be immediately fixed."
-                  },
-                  {
-                    question: "How long do I have to file a premises liability claim in California?",
-                    answer: "California's statute of limitations for premises liability claims is generally two years from the date of injury under Code of Civil Procedure Section 335.1. However, claims against government entities have much shorter deadlines - typically six months to file an initial government claim under the California Tort Claims Act. Discovery rules may extend deadlines in some cases where the dangerous condition wasn't immediately apparent."
-                  },
-                  {
-                    question: "What do I need to prove to win a premises liability case?",
-                    answer: "To succeed in a California premises liability case, you must prove four key elements: (1) the defendant owned, leased, occupied, or controlled the property; (2) the defendant was negligent in the use or maintenance of the property; (3) you were harmed; and (4) the defendant's negligence was a substantial factor in causing your harm. This typically requires showing the property owner knew or should have known about the dangerous condition and failed to correct it or warn visitors."
-                  },
-                  {
-                    question: "Can I sue if I was trespassing when I got injured?",
-                    answer: "Property owners generally owe limited duty to trespassers under California law. However, there are important exceptions: property owners cannot willfully or deliberately injure trespassers, must warn of known artificial conditions that pose substantial risk of death or serious injury, and owe heightened duties to child trespassers under the 'attractive nuisance' doctrine. Additionally, if you became a trespasser due to an emergency or were a frequent trespasser known to the owner, different rules may apply."
-                  },
-                  {
-                    question: "What types of properties are covered under premises liability law?",
-                    answer: "Premises liability law applies to virtually all types of properties including private residences, retail stores, restaurants, shopping centers, office buildings, hotels, hospitals, schools, parking lots, apartment complexes, government buildings, construction sites, and recreational facilities. The specific duty of care owed varies based on your status as an invitee, licensee, or trespasser, and the type of property involved."
-                  },
-                  {
-                    question: "How much is my premises liability case worth?",
-                    answer: "Case values vary significantly based on factors including injury severity, medical expenses, lost wages, degree of property owner negligence, your age and occupation, and long-term disability. Minor slip and fall cases may settle for thousands of dollars, while catastrophic injuries can result in settlements or verdicts worth hundreds of thousands or millions. We analyze medical records, employment history, expert opinions, and comparable cases to determine fair compensation for your specific situation."
-                  },
-                  {
-                    question: "What should I do immediately after a premises liability accident?",
-                    answer: "Take these crucial steps: seek immediate medical attention even for seemingly minor injuries; report the incident to the property owner or manager and request a written incident report; photograph the accident scene, dangerous condition, and your injuries; gather witness contact information; preserve your clothing and shoes as worn during the accident; avoid giving recorded statements to insurance companies; and contact an experienced premises liability attorney as soon as possible to preserve evidence and protect your rights."
-                  },
-                  {
-                    question: "How do you prove the property owner knew about the dangerous condition?",
-                    answer: "We establish knowledge through various methods: actual notice (direct evidence the owner knew about the hazard), constructive notice (the condition existed long enough that reasonable inspection would have discovered it), previous incident reports involving the same hazard, maintenance records showing awareness of problems, employee witness testimony, surveillance footage, building code violations, and expert testimony about reasonable inspection standards for the property type."
-                  },
-                  {
-                    question: "Can I file a claim for inadequate security at an apartment complex or business?",
-                    answer: "Yes, California law recognizes inadequate security claims when property owners fail to provide reasonable security measures in areas with foreseeable criminal activity. We must prove the crime was foreseeable based on prior incidents, the security measures were inadequate for the known risks, and better security would have prevented or deterred the criminal act. These cases often involve apartments, parking lots, hotels, bars, and retail establishments with histories of criminal activity."
-                  },
-                  {
-                    question: "What if multiple parties are responsible for my accident?",
-                    answer: "California follows joint and several liability rules in many premises liability cases, meaning each liable party can be held responsible for the full amount of damages. We identify all potentially responsible parties including property owners, management companies, maintenance contractors, security firms, and tenants. This approach maximizes your chances of full recovery even if some defendants lack sufficient assets or insurance coverage."
-                  },
-                  {
-                    question: "Does homeowner's or renter's insurance cover premises liability claims?",
-                    answer: "Most homeowner's and renter's insurance policies include liability coverage for accidents on the property, though coverage limits and exclusions vary. Commercial properties typically carry general liability insurance. We investigate all available insurance coverage, including umbrella policies, to ensure maximum recovery. Property owners cannot avoid liability simply because they lack insurance - they remain personally responsible for damages exceeding their coverage limits."
-                  },
-                  {
-                    question: "What role do building codes play in premises liability cases?",
-                    answer: "Building code violations can provide strong evidence of negligence in premises liability cases. California courts often recognize that violations of safety codes constitute negligence per se, meaning the violation itself proves negligence without additional evidence. We thoroughly investigate applicable building codes, fire codes, ADA requirements, and local ordinances to identify violations that contributed to your accident, working with expert witnesses to explain how code compliance would have prevented your injuries."
-                  },
-                  {
-                    question: "Can I sue for a slip and fall in a government building?",
-                    answer: "Yes, but claims against government entities in California have special requirements under the California Tort Claims Act. You must file a government claim within six months of your accident (or one year if you were unaware the entity was government-owned). The government has 45 days to respond. If denied or ignored, you then have six months to file a lawsuit. Government entities can only be sued for conditions they created or knew about, and dangerous conditions of public property must pose substantial risk of injury when used with due care."
-                  },
-                  {
-                    question: "What if I was partially at fault for my accident?",
-                    answer: "California follows pure comparative negligence rules under Civil Code Section 1714. Your compensation is reduced by your percentage of fault, but you can still recover even if you were 99% at fault. For example, if damages total $100,000 and you're found 30% at fault, you recover $70,000. We work aggressively to minimize any fault attributed to you while maximizing the property owner's responsibility through thorough investigation and expert testimony about the dangerous condition."
-                  },
-                  {
-                    question: "How long does it take to resolve a premises liability case?",
-                    answer: "Timeline varies significantly based on case complexity, injury severity, and defendant cooperation. Simple cases with clear liability may settle in 3-6 months, while complex cases involving severe injuries, multiple defendants, or disputed liability can take 1-3 years or longer. Factors affecting timeline include completion of medical treatment, discovery process length, expert witness preparation, and willingness of parties to negotiate reasonable settlements."
-                  },
-                  {
-                    question: "What evidence do you need to preserve immediately after an accident?",
-                    answer: "Critical evidence requiring immediate preservation includes: surveillance footage (often deleted within 30-90 days), photographs of the dangerous condition and accident scene, witness contact information and statements, your clothing and shoes as worn during the accident, incident reports and maintenance records, weather conditions if applicable, and medical documentation linking injuries to the accident. We send immediate preservation letters to property owners to prevent evidence destruction."
-                  },
-                  {
-                    question: "Can family members file claims for emotional distress from witnessing my accident?",
-                    answer: "California allows bystander claims for negligent infliction of emotional distress under specific circumstances. The family member must: (1) be closely related to the victim, (2) be present at the scene and contemporaneously aware of the injury-producing event, and (3) suffer serious emotional distress beyond what a disinterested witness would experience. Spouses, children, and parents are most likely to qualify, though other close family members may have claims depending on the specific circumstances."
-                  },
-                  {
-                    question: "What if the dangerous condition has been repaired since my accident?",
-                    answer: "Property owners often repair dangerous conditions after accidents to prevent future incidents. Under California Evidence Code Section 1151, evidence of subsequent remedial measures is generally not admissible to prove negligence, as this rule encourages property owners to make safety improvements. However, such evidence may be admissible for other purposes like proving ownership, control, or feasibility of safety measures. The key is preserving evidence of the condition as it existed at the time of your accident."
-                  },
-                  {
-                    question: "Do I need expert witnesses for my premises liability case?",
-                    answer: "Expert witnesses are often crucial in premises liability cases to establish standard of care, explain technical issues, and demonstrate how the property owner's negligence caused your accident. Common experts include safety engineers, architects, building code experts, medical professionals, accident reconstruction specialists, and economic experts for damages calculation. We maintain relationships with qualified experts throughout California and select those best suited for your specific case circumstances."
-                  },
-                  {
-                    question: "What compensation can I recover for permanent disabilities from my accident?",
-                    answer: "Permanent disabilities from premises liability accidents can result in substantial compensation including future medical care costs, lost earning capacity based on reduced work abilities, home and vehicle modifications for accessibility, ongoing rehabilitation and therapy expenses, pain and suffering for lifetime limitations, loss of enjoyment of life activities, and spousal loss of consortium claims. We work with life care planners and economic experts to fully quantify lifelong impacts of your disability."
-                  },
-                  {
-                    question: "Can I file a claim if I was injured while working on someone else's property?",
-                    answer: "Work-related premises liability involves complex interactions between workers' compensation and third-party liability claims. While workers' compensation may cover medical expenses and partial wage replacement, you may also have premises liability claims against property owners for dangerous conditions they created or failed to correct. These third-party claims can provide additional compensation not available through workers' compensation, including full wage loss, pain and suffering, and other damages."
-                  },
-                  {
-                    question: "What if the property owner claims they didn't know about the dangerous condition?",
-                    answer: "Property owners can be liable even without actual knowledge if they should have known about the condition through reasonable inspection and maintenance. We establish constructive notice by showing: the condition existed for sufficient time that proper inspection would have discovered it, similar incidents occurred previously, the hazard was obvious to reasonable inspection, or the owner failed to follow industry standards for property maintenance and inspection."
-                  },
-                  {
-                    question: "How do weather conditions affect premises liability claims?",
-                    answer: "Weather can significantly impact premises liability cases. Property owners aren't responsible for natural accumulations of rain, snow, or ice, but they may be liable for creating dangerous conditions through inadequate drainage, failing to clear walkways within reasonable time, or not providing proper warnings. California's mild climate means weather-related cases often involve storm damage, pooled water from poor drainage, or slippery conditions created by sprinkler systems or cleaning activities."
-                  },
-                  {
-                    question: "Can I sue for food poisoning or illness contracted at a restaurant or event?",
-                    answer: "Food poisoning claims fall under premises liability when they result from unsanitary conditions, improper food handling, or failure to follow health department regulations. We must prove the illness was caused by food consumed at the defendant's establishment, often requiring medical testing, health department records, and evidence of improper food safety practices. These cases may involve multiple victims and require expert testimony from food safety specialists and medical professionals."
-                  },
-                  {
-                    question: "What if my accident happened at a construction site I was visiting?",
-                    answer: "Construction sites present unique premises liability issues due to inherently dangerous conditions and multiple potentially liable parties. Property owners and general contractors have heightened duties to protect lawful visitors through proper barriers, warning signs, and safety protocols. However, obvious dangers may not create liability, and your reason for being on the site affects the duty owed. We investigate all contractors, subcontractors, and property owners to identify responsible parties."
-                  },
-                  {
-                    question: "Do I have a case if I was injured by a defective automatic door or gate?",
-                    answer: "Defective automatic doors and gates can create premises liability when property owners fail to properly maintain, inspect, or repair them. These cases often involve sensor malfunctions, excessive force settings, or mechanical failures causing doors to strike pedestrians. We investigate maintenance records, manufacturer specifications, and industry safety standards while also considering potential product liability claims against the door manufacturer or installer."
-                  },
-                  {
-                    question: "Can I recover compensation for scarring and disfigurement from my accident?",
-                    answer: "California allows substantial compensation for scarring and disfigurement as part of non-economic damages. Factors affecting compensation include visibility and size of scars, location on body, your age and gender, impact on self-esteem and social functioning, and whether scars can be improved through plastic surgery. We often work with plastic surgeons and psychologists to document the full impact of disfigurement on your life and present compelling evidence for fair compensation."
-                  },
-                  {
-                    question: "What happens if the property owner files for bankruptcy during my case?",
-                    answer: "Property owner bankruptcy can complicate but doesn't necessarily end your premises liability case. We may be able to continue against insurance companies, other liable parties, or pursue the case within the bankruptcy proceedings. Sometimes liability insurance remains available regardless of the property owner's financial situation. We monitor bankruptcy proceedings and take appropriate action to protect your interests and maximize recovery from all available sources."
-                  },
-                  {
-                    question: "How do you handle premises liability cases involving children?",
-                    answer: "Children receive special protection under California premises liability law. Property owners owe heightened duties to child trespassers under the 'attractive nuisance' doctrine when they maintain conditions likely to attract children who cannot appreciate the danger. Swimming pools, construction sites, and playground equipment require special safety measures. We also analyze whether adult supervision was adequate and whether the property owner took reasonable steps to prevent child access to dangerous areas."
-                  },
-                  {
-                    question: "Can I file a claim for accidents in parking lots or parking garages?",
-                    answer: "Parking lot and garage owners have duties to maintain reasonably safe conditions including adequate lighting, security measures, proper drainage, pothole repair, and snow/ice removal. These cases often involve slip and falls, criminal attacks due to inadequate security, vehicle accidents from poor design or maintenance, and falling objects from deteriorating structures. We investigate lighting levels, security patrol schedules, maintenance records, and any prior criminal incidents in the area."
-                  },
-                  {
-                    question: "What if my accident was caused by a drunk patron at a bar or restaurant?",
-                    answer: "California's Dram Shop laws (Business and Professions Code Section 25602) create limited liability for businesses that serve alcohol to obviously intoxicated persons who then cause injuries to others. We investigate the establishment's alcohol service practices, staff training, security measures, and compliance with ABC regulations. These cases often combine premises liability for inadequate security with dram shop liability for over-serving alcohol to dangerous patrons."
-                  },
-                  {
-                    question: "How do elevator and escalator accidents differ from other premises liability cases?",
-                    answer: "Elevator and escalator cases involve specialized regulations, inspection requirements, and maintenance standards. These mechanical systems require regular inspections by certified technicians, and property owners must promptly address safety violations. We review inspection records, maintenance logs, manufacturer specifications, and compliance with ASME safety codes. These cases often involve serious injuries due to the mechanical forces involved and may include product liability claims against manufacturers."
-                  },
-                  {
-                    question: "Can I sue for injuries caused by poor lighting conditions?",
-                    answer: "Inadequate lighting can create premises liability when it contributes to slip and falls, criminal attacks, or other accidents. Property owners must provide reasonable lighting for safe navigation, especially in areas regularly used by visitors. We evaluate lighting levels against industry standards, investigate whether lights were functioning properly, and determine if better lighting would have prevented your accident. These cases often require expert testimony from lighting engineers or safety specialists."
-                  },
-                  {
-                    question: "What compensation is available for traumatic brain injuries from premises liability accidents?",
-                    answer: "Traumatic brain injuries from premises liability accidents can result in substantial compensation including lifetime medical care, cognitive rehabilitation, lost earning capacity, home and vehicle modifications, attendant care costs, pain and suffering, and family impact damages. We work with neurologists, neuropsychologists, life care planners, and economic experts to document the full scope of brain injury impacts and ensure compensation covers all future needs."
-                  },
-                  {
-                    question: "How do you prove that a property owner should have known about a dangerous condition?",
-                    answer: "We establish constructive notice through multiple methods: showing the condition existed long enough that reasonable inspection would have discovered it, demonstrating the hazard was created by the property owner's activities, proving similar incidents occurred previously, establishing patterns of complaints or maintenance requests, analyzing industry standards for inspection frequency, and using expert testimony about reasonable property management practices for similar properties."
-                  },
-                  {
-                    question: "Can I file a premises liability claim for accidents at outdoor events or festivals?",
-                    answer: "Event organizers and property owners can be liable for unsafe conditions at outdoor events including inadequate crowd control, defective temporary structures, poor lighting, insufficient security, dangerous walkways, and failure to protect against weather hazards. These cases often involve multiple potentially liable parties including event organizers, venue owners, vendors, and security companies. We investigate permits, safety plans, insurance coverage, and compliance with applicable regulations."
-                  },
-                  {
-                    question: "What if my accident involved a slip and fall in a bathroom?",
-                    answer: "Bathroom slip and falls often involve water on floors, defective fixtures, inadequate handrails, poor lighting, or cleaning chemical residue. Property owners must provide reasonable maintenance, proper drainage, and safety features especially in areas frequently exposed to water. We investigate cleaning schedules, maintenance procedures, building code compliance, and whether proper warnings were provided about wet or slippery conditions."
-                  },
-                  {
-                    question: "How do premises liability laws apply to vacation rental properties?",
-                    answer: "Vacation rental owners have duties to maintain safe conditions and warn guests of known hazards. These cases often involve swimming pools, hot tubs, balconies, stairs, and recreational equipment. We investigate whether properties comply with local vacation rental regulations, safety requirements, and building codes. Property management companies may also share liability for maintenance failures or inadequate safety inspections."
-                  },
-                  {
-                    question: "Can I recover damages for lost wages if I'm self-employed?",
-                    answer: "Self-employed individuals can recover lost income in premises liability cases, though documentation requirements are more complex. We use tax returns, business records, client contracts, and expert economic testimony to establish pre-accident earning patterns and calculate lost income. For new businesses with limited history, we may use industry standards, comparable businesses, and projected earnings based on business plans and market analysis."
-                  },
-                  {
-                    question: "What happens if the dangerous condition was obvious?",
-                    answer: "While obvious dangers may reduce property owner liability under the 'open and obvious' doctrine, California law doesn't automatically bar recovery. Property owners may still be liable if they should have anticipated that people would encounter the danger despite its obvious nature, or if the danger was created by their own conduct. We analyze whether reasonable alternatives existed, if warnings were adequate, and whether the owner had superior knowledge of risks."
-                  },
-                  {
-                    question: "How do you calculate pain and suffering damages in premises liability cases?",
-                    answer: "Pain and suffering calculation considers injury severity, duration of recovery, permanent limitations, impact on daily activities, age and life expectancy, and psychological effects. California doesn't cap pain and suffering in most premises liability cases. We present evidence through medical testimony, day-in-the-life videos, family testimony about lifestyle changes, and expert psychological evaluations to help juries understand the full impact of your injuries on your quality of life."
-                  },
-                  {
-                    question: "Can I file a claim if my accident happened while I was intoxicated?",
-                    answer: "Intoxication doesn't automatically bar premises liability claims in California, though it may affect the comparative negligence analysis and reduce your compensation percentage. We analyze whether your intoxication contributed to the accident or whether the dangerous condition would have caused injury regardless of sobriety. The key is whether the property owner's negligence was a substantial factor in causing your injuries despite your condition."
-                  },
-                  {
-                    question: "What evidence do insurance companies look for to deny premises liability claims?",
-                    answer: "Insurance companies often focus on: lack of notice to the property owner about the dangerous condition, evidence suggesting you were at fault or not paying attention, pre-existing medical conditions that could explain your injuries, inconsistencies in your statements about how the accident happened, social media posts that contradict your injury claims, and any evidence suggesting you were engaged in risky behavior. We prepare cases anticipating these defenses and gather evidence to counter them."
-                  },
-                  {
-                    question: "How do slip and fall cases differ from trip and fall cases legally?",
-                    answer: "While both involve falls, slip and fall cases typically involve smooth surfaces made dangerous by substances like water, oil, or cleaning products, while trip and fall cases involve obstacles, uneven surfaces, or elevation changes. The legal analysis differs in terms of what the property owner should have known, how long the condition existed, and what reasonable maintenance would have prevented the accident. We tailor our investigation and expert testimony to the specific mechanism of your fall."
-                  },
-                  {
-                    question: "Can I sue for injuries from defective handrails or guardrails?",
-                    answer: "Defective handrails and guardrails can create significant premises liability when they fail to meet building code requirements or are improperly maintained. These cases often involve stairway accidents, balcony falls, or ramp incidents. We investigate compliance with building codes, ADA requirements, and industry standards while examining maintenance records and any prior complaints about rail defects. Expert testimony from engineers or architects is often crucial in these cases."
-                  },
-                  {
-                    question: "What should I know about premises liability at shopping malls?",
-                    answer: "Shopping malls involve complex ownership structures with multiple potentially liable parties including mall owners, individual store owners, cleaning contractors, and security companies. Common accidents include slip and falls, escalator injuries, inadequate security incidents, and falling merchandise. We investigate lease agreements to determine responsibility for maintenance and security, analyze foot traffic patterns, and review security incident logs to establish notice of dangerous conditions."
-                  },
-                  {
-                    question: "How do premises liability cases work when the accident involves a child on a playground?",
-                    answer: "Playground accidents involve specific safety standards under CPSC guidelines and state regulations. Property owners must provide age-appropriate equipment, proper surfacing, adequate supervision sight lines, and regular safety inspections. We investigate equipment installation, maintenance records, surface materials, and compliance with safety standards while considering the child's age and developmental abilities. These cases often require playground safety experts and child development specialists."
-                  },
-                  {
-                    question: "Can I recover compensation for my spouse's loss of consortium in a premises liability case?",
-                    answer: "California allows spouses to recover for loss of consortium when serious injuries impact the marital relationship. This includes loss of companionship, affection, intimacy, and household services. The compensation depends on the duration and strength of the marriage, severity of injuries, and impact on the relationship. We present evidence through spouse testimony, family witnesses, and expert testimony about the relationship changes caused by your injuries."
-                  }
-                ].map((faq, index) => (
-                  <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
-                    <CardHeader 
-                      className="cursor-pointer transition-colors group-hover:bg-primary/5"
-                      onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
-                    >
+                {[{
+                question: "What is premises liability law in California?",
+                answer: "Premises liability law holds property owners and occupiers responsible for maintaining reasonably safe conditions for visitors. Under California Civil Code Section 1714, property owners have a duty to exercise ordinary care in managing their property to avoid unreasonable risk of harm to others. This includes regular inspection for hazards, prompt repair of dangerous conditions, and warning visitors of known dangers that cannot be immediately fixed."
+              }, {
+                question: "How long do I have to file a premises liability claim in California?",
+                answer: "California's statute of limitations for premises liability claims is generally two years from the date of injury under Code of Civil Procedure Section 335.1. However, claims against government entities have much shorter deadlines - typically six months to file an initial government claim under the California Tort Claims Act. Discovery rules may extend deadlines in some cases where the dangerous condition wasn't immediately apparent."
+              }, {
+                question: "What do I need to prove to win a premises liability case?",
+                answer: "To succeed in a California premises liability case, you must prove four key elements: (1) the defendant owned, leased, occupied, or controlled the property; (2) the defendant was negligent in the use or maintenance of the property; (3) you were harmed; and (4) the defendant's negligence was a substantial factor in causing your harm. This typically requires showing the property owner knew or should have known about the dangerous condition and failed to correct it or warn visitors."
+              }, {
+                question: "Can I sue if I was trespassing when I got injured?",
+                answer: "Property owners generally owe limited duty to trespassers under California law. However, there are important exceptions: property owners cannot willfully or deliberately injure trespassers, must warn of known artificial conditions that pose substantial risk of death or serious injury, and owe heightened duties to child trespassers under the 'attractive nuisance' doctrine. Additionally, if you became a trespasser due to an emergency or were a frequent trespasser known to the owner, different rules may apply."
+              }, {
+                question: "What types of properties are covered under premises liability law?",
+                answer: "Premises liability law applies to virtually all types of properties including private residences, retail stores, restaurants, shopping centers, office buildings, hotels, hospitals, schools, parking lots, apartment complexes, government buildings, construction sites, and recreational facilities. The specific duty of care owed varies based on your status as an invitee, licensee, or trespasser, and the type of property involved."
+              }, {
+                question: "How much is my premises liability case worth?",
+                answer: "Case values vary significantly based on factors including injury severity, medical expenses, lost wages, degree of property owner negligence, your age and occupation, and long-term disability. Minor slip and fall cases may settle for thousands of dollars, while catastrophic injuries can result in settlements or verdicts worth hundreds of thousands or millions. We analyze medical records, employment history, expert opinions, and comparable cases to determine fair compensation for your specific situation."
+              }, {
+                question: "What should I do immediately after a premises liability accident?",
+                answer: "Take these crucial steps: seek immediate medical attention even for seemingly minor injuries; report the incident to the property owner or manager and request a written incident report; photograph the accident scene, dangerous condition, and your injuries; gather witness contact information; preserve your clothing and shoes as worn during the accident; avoid giving recorded statements to insurance companies; and contact an experienced premises liability attorney as soon as possible to preserve evidence and protect your rights."
+              }, {
+                question: "How do you prove the property owner knew about the dangerous condition?",
+                answer: "We establish knowledge through various methods: actual notice (direct evidence the owner knew about the hazard), constructive notice (the condition existed long enough that reasonable inspection would have discovered it), previous incident reports involving the same hazard, maintenance records showing awareness of problems, employee witness testimony, surveillance footage, building code violations, and expert testimony about reasonable inspection standards for the property type."
+              }, {
+                question: "Can I file a claim for inadequate security at an apartment complex or business?",
+                answer: "Yes, California law recognizes inadequate security claims when property owners fail to provide reasonable security measures in areas with foreseeable criminal activity. We must prove the crime was foreseeable based on prior incidents, the security measures were inadequate for the known risks, and better security would have prevented or deterred the criminal act. These cases often involve apartments, parking lots, hotels, bars, and retail establishments with histories of criminal activity."
+              }, {
+                question: "What if multiple parties are responsible for my accident?",
+                answer: "California follows joint and several liability rules in many premises liability cases, meaning each liable party can be held responsible for the full amount of damages. We identify all potentially responsible parties including property owners, management companies, maintenance contractors, security firms, and tenants. This approach maximizes your chances of full recovery even if some defendants lack sufficient assets or insurance coverage."
+              }, {
+                question: "Does homeowner's or renter's insurance cover premises liability claims?",
+                answer: "Most homeowner's and renter's insurance policies include liability coverage for accidents on the property, though coverage limits and exclusions vary. Commercial properties typically carry general liability insurance. We investigate all available insurance coverage, including umbrella policies, to ensure maximum recovery. Property owners cannot avoid liability simply because they lack insurance - they remain personally responsible for damages exceeding their coverage limits."
+              }, {
+                question: "What role do building codes play in premises liability cases?",
+                answer: "Building code violations can provide strong evidence of negligence in premises liability cases. California courts often recognize that violations of safety codes constitute negligence per se, meaning the violation itself proves negligence without additional evidence. We thoroughly investigate applicable building codes, fire codes, ADA requirements, and local ordinances to identify violations that contributed to your accident, working with expert witnesses to explain how code compliance would have prevented your injuries."
+              }, {
+                question: "Can I sue for a slip and fall in a government building?",
+                answer: "Yes, but claims against government entities in California have special requirements under the California Tort Claims Act. You must file a government claim within six months of your accident (or one year if you were unaware the entity was government-owned). The government has 45 days to respond. If denied or ignored, you then have six months to file a lawsuit. Government entities can only be sued for conditions they created or knew about, and dangerous conditions of public property must pose substantial risk of injury when used with due care."
+              }, {
+                question: "What if I was partially at fault for my accident?",
+                answer: "California follows pure comparative negligence rules under Civil Code Section 1714. Your compensation is reduced by your percentage of fault, but you can still recover even if you were 99% at fault. For example, if damages total $100,000 and you're found 30% at fault, you recover $70,000. We work aggressively to minimize any fault attributed to you while maximizing the property owner's responsibility through thorough investigation and expert testimony about the dangerous condition."
+              }, {
+                question: "How long does it take to resolve a premises liability case?",
+                answer: "Timeline varies significantly based on case complexity, injury severity, and defendant cooperation. Simple cases with clear liability may settle in 3-6 months, while complex cases involving severe injuries, multiple defendants, or disputed liability can take 1-3 years or longer. Factors affecting timeline include completion of medical treatment, discovery process length, expert witness preparation, and willingness of parties to negotiate reasonable settlements."
+              }, {
+                question: "What evidence do you need to preserve immediately after an accident?",
+                answer: "Critical evidence requiring immediate preservation includes: surveillance footage (often deleted within 30-90 days), photographs of the dangerous condition and accident scene, witness contact information and statements, your clothing and shoes as worn during the accident, incident reports and maintenance records, weather conditions if applicable, and medical documentation linking injuries to the accident. We send immediate preservation letters to property owners to prevent evidence destruction."
+              }, {
+                question: "Can family members file claims for emotional distress from witnessing my accident?",
+                answer: "California allows bystander claims for negligent infliction of emotional distress under specific circumstances. The family member must: (1) be closely related to the victim, (2) be present at the scene and contemporaneously aware of the injury-producing event, and (3) suffer serious emotional distress beyond what a disinterested witness would experience. Spouses, children, and parents are most likely to qualify, though other close family members may have claims depending on the specific circumstances."
+              }, {
+                question: "What if the dangerous condition has been repaired since my accident?",
+                answer: "Property owners often repair dangerous conditions after accidents to prevent future incidents. Under California Evidence Code Section 1151, evidence of subsequent remedial measures is generally not admissible to prove negligence, as this rule encourages property owners to make safety improvements. However, such evidence may be admissible for other purposes like proving ownership, control, or feasibility of safety measures. The key is preserving evidence of the condition as it existed at the time of your accident."
+              }, {
+                question: "Do I need expert witnesses for my premises liability case?",
+                answer: "Expert witnesses are often crucial in premises liability cases to establish standard of care, explain technical issues, and demonstrate how the property owner's negligence caused your accident. Common experts include safety engineers, architects, building code experts, medical professionals, accident reconstruction specialists, and economic experts for damages calculation. We maintain relationships with qualified experts throughout California and select those best suited for your specific case circumstances."
+              }, {
+                question: "What compensation can I recover for permanent disabilities from my accident?",
+                answer: "Permanent disabilities from premises liability accidents can result in substantial compensation including future medical care costs, lost earning capacity based on reduced work abilities, home and vehicle modifications for accessibility, ongoing rehabilitation and therapy expenses, pain and suffering for lifetime limitations, loss of enjoyment of life activities, and spousal loss of consortium claims. We work with life care planners and economic experts to fully quantify lifelong impacts of your disability."
+              }, {
+                question: "Can I file a claim if I was injured while working on someone else's property?",
+                answer: "Work-related premises liability involves complex interactions between workers' compensation and third-party liability claims. While workers' compensation may cover medical expenses and partial wage replacement, you may also have premises liability claims against property owners for dangerous conditions they created or failed to correct. These third-party claims can provide additional compensation not available through workers' compensation, including full wage loss, pain and suffering, and other damages."
+              }, {
+                question: "What if the property owner claims they didn't know about the dangerous condition?",
+                answer: "Property owners can be liable even without actual knowledge if they should have known about the condition through reasonable inspection and maintenance. We establish constructive notice by showing: the condition existed for sufficient time that proper inspection would have discovered it, similar incidents occurred previously, the hazard was obvious to reasonable inspection, or the owner failed to follow industry standards for property maintenance and inspection."
+              }, {
+                question: "How do weather conditions affect premises liability claims?",
+                answer: "Weather can significantly impact premises liability cases. Property owners aren't responsible for natural accumulations of rain, snow, or ice, but they may be liable for creating dangerous conditions through inadequate drainage, failing to clear walkways within reasonable time, or not providing proper warnings. California's mild climate means weather-related cases often involve storm damage, pooled water from poor drainage, or slippery conditions created by sprinkler systems or cleaning activities."
+              }, {
+                question: "Can I sue for food poisoning or illness contracted at a restaurant or event?",
+                answer: "Food poisoning claims fall under premises liability when they result from unsanitary conditions, improper food handling, or failure to follow health department regulations. We must prove the illness was caused by food consumed at the defendant's establishment, often requiring medical testing, health department records, and evidence of improper food safety practices. These cases may involve multiple victims and require expert testimony from food safety specialists and medical professionals."
+              }, {
+                question: "What if my accident happened at a construction site I was visiting?",
+                answer: "Construction sites present unique premises liability issues due to inherently dangerous conditions and multiple potentially liable parties. Property owners and general contractors have heightened duties to protect lawful visitors through proper barriers, warning signs, and safety protocols. However, obvious dangers may not create liability, and your reason for being on the site affects the duty owed. We investigate all contractors, subcontractors, and property owners to identify responsible parties."
+              }, {
+                question: "Do I have a case if I was injured by a defective automatic door or gate?",
+                answer: "Defective automatic doors and gates can create premises liability when property owners fail to properly maintain, inspect, or repair them. These cases often involve sensor malfunctions, excessive force settings, or mechanical failures causing doors to strike pedestrians. We investigate maintenance records, manufacturer specifications, and industry safety standards while also considering potential product liability claims against the door manufacturer or installer."
+              }, {
+                question: "Can I recover compensation for scarring and disfigurement from my accident?",
+                answer: "California allows substantial compensation for scarring and disfigurement as part of non-economic damages. Factors affecting compensation include visibility and size of scars, location on body, your age and gender, impact on self-esteem and social functioning, and whether scars can be improved through plastic surgery. We often work with plastic surgeons and psychologists to document the full impact of disfigurement on your life and present compelling evidence for fair compensation."
+              }, {
+                question: "What happens if the property owner files for bankruptcy during my case?",
+                answer: "Property owner bankruptcy can complicate but doesn't necessarily end your premises liability case. We may be able to continue against insurance companies, other liable parties, or pursue the case within the bankruptcy proceedings. Sometimes liability insurance remains available regardless of the property owner's financial situation. We monitor bankruptcy proceedings and take appropriate action to protect your interests and maximize recovery from all available sources."
+              }, {
+                question: "How do you handle premises liability cases involving children?",
+                answer: "Children receive special protection under California premises liability law. Property owners owe heightened duties to child trespassers under the 'attractive nuisance' doctrine when they maintain conditions likely to attract children who cannot appreciate the danger. Swimming pools, construction sites, and playground equipment require special safety measures. We also analyze whether adult supervision was adequate and whether the property owner took reasonable steps to prevent child access to dangerous areas."
+              }, {
+                question: "Can I file a claim for accidents in parking lots or parking garages?",
+                answer: "Parking lot and garage owners have duties to maintain reasonably safe conditions including adequate lighting, security measures, proper drainage, pothole repair, and snow/ice removal. These cases often involve slip and falls, criminal attacks due to inadequate security, vehicle accidents from poor design or maintenance, and falling objects from deteriorating structures. We investigate lighting levels, security patrol schedules, maintenance records, and any prior criminal incidents in the area."
+              }, {
+                question: "What if my accident was caused by a drunk patron at a bar or restaurant?",
+                answer: "California's Dram Shop laws (Business and Professions Code Section 25602) create limited liability for businesses that serve alcohol to obviously intoxicated persons who then cause injuries to others. We investigate the establishment's alcohol service practices, staff training, security measures, and compliance with ABC regulations. These cases often combine premises liability for inadequate security with dram shop liability for over-serving alcohol to dangerous patrons."
+              }, {
+                question: "How do elevator and escalator accidents differ from other premises liability cases?",
+                answer: "Elevator and escalator cases involve specialized regulations, inspection requirements, and maintenance standards. These mechanical systems require regular inspections by certified technicians, and property owners must promptly address safety violations. We review inspection records, maintenance logs, manufacturer specifications, and compliance with ASME safety codes. These cases often involve serious injuries due to the mechanical forces involved and may include product liability claims against manufacturers."
+              }, {
+                question: "Can I sue for injuries caused by poor lighting conditions?",
+                answer: "Inadequate lighting can create premises liability when it contributes to slip and falls, criminal attacks, or other accidents. Property owners must provide reasonable lighting for safe navigation, especially in areas regularly used by visitors. We evaluate lighting levels against industry standards, investigate whether lights were functioning properly, and determine if better lighting would have prevented your accident. These cases often require expert testimony from lighting engineers or safety specialists."
+              }, {
+                question: "What compensation is available for traumatic brain injuries from premises liability accidents?",
+                answer: "Traumatic brain injuries from premises liability accidents can result in substantial compensation including lifetime medical care, cognitive rehabilitation, lost earning capacity, home and vehicle modifications, attendant care costs, pain and suffering, and family impact damages. We work with neurologists, neuropsychologists, life care planners, and economic experts to document the full scope of brain injury impacts and ensure compensation covers all future needs."
+              }, {
+                question: "How do you prove that a property owner should have known about a dangerous condition?",
+                answer: "We establish constructive notice through multiple methods: showing the condition existed long enough that reasonable inspection would have discovered it, demonstrating the hazard was created by the property owner's activities, proving similar incidents occurred previously, establishing patterns of complaints or maintenance requests, analyzing industry standards for inspection frequency, and using expert testimony about reasonable property management practices for similar properties."
+              }, {
+                question: "Can I file a premises liability claim for accidents at outdoor events or festivals?",
+                answer: "Event organizers and property owners can be liable for unsafe conditions at outdoor events including inadequate crowd control, defective temporary structures, poor lighting, insufficient security, dangerous walkways, and failure to protect against weather hazards. These cases often involve multiple potentially liable parties including event organizers, venue owners, vendors, and security companies. We investigate permits, safety plans, insurance coverage, and compliance with applicable regulations."
+              }, {
+                question: "What if my accident involved a slip and fall in a bathroom?",
+                answer: "Bathroom slip and falls often involve water on floors, defective fixtures, inadequate handrails, poor lighting, or cleaning chemical residue. Property owners must provide reasonable maintenance, proper drainage, and safety features especially in areas frequently exposed to water. We investigate cleaning schedules, maintenance procedures, building code compliance, and whether proper warnings were provided about wet or slippery conditions."
+              }, {
+                question: "How do premises liability laws apply to vacation rental properties?",
+                answer: "Vacation rental owners have duties to maintain safe conditions and warn guests of known hazards. These cases often involve swimming pools, hot tubs, balconies, stairs, and recreational equipment. We investigate whether properties comply with local vacation rental regulations, safety requirements, and building codes. Property management companies may also share liability for maintenance failures or inadequate safety inspections."
+              }, {
+                question: "Can I recover damages for lost wages if I'm self-employed?",
+                answer: "Self-employed individuals can recover lost income in premises liability cases, though documentation requirements are more complex. We use tax returns, business records, client contracts, and expert economic testimony to establish pre-accident earning patterns and calculate lost income. For new businesses with limited history, we may use industry standards, comparable businesses, and projected earnings based on business plans and market analysis."
+              }, {
+                question: "What happens if the dangerous condition was obvious?",
+                answer: "While obvious dangers may reduce property owner liability under the 'open and obvious' doctrine, California law doesn't automatically bar recovery. Property owners may still be liable if they should have anticipated that people would encounter the danger despite its obvious nature, or if the danger was created by their own conduct. We analyze whether reasonable alternatives existed, if warnings were adequate, and whether the owner had superior knowledge of risks."
+              }, {
+                question: "How do you calculate pain and suffering damages in premises liability cases?",
+                answer: "Pain and suffering calculation considers injury severity, duration of recovery, permanent limitations, impact on daily activities, age and life expectancy, and psychological effects. California doesn't cap pain and suffering in most premises liability cases. We present evidence through medical testimony, day-in-the-life videos, family testimony about lifestyle changes, and expert psychological evaluations to help juries understand the full impact of your injuries on your quality of life."
+              }, {
+                question: "Can I file a claim if my accident happened while I was intoxicated?",
+                answer: "Intoxication doesn't automatically bar premises liability claims in California, though it may affect the comparative negligence analysis and reduce your compensation percentage. We analyze whether your intoxication contributed to the accident or whether the dangerous condition would have caused injury regardless of sobriety. The key is whether the property owner's negligence was a substantial factor in causing your injuries despite your condition."
+              }, {
+                question: "What evidence do insurance companies look for to deny premises liability claims?",
+                answer: "Insurance companies often focus on: lack of notice to the property owner about the dangerous condition, evidence suggesting you were at fault or not paying attention, pre-existing medical conditions that could explain your injuries, inconsistencies in your statements about how the accident happened, social media posts that contradict your injury claims, and any evidence suggesting you were engaged in risky behavior. We prepare cases anticipating these defenses and gather evidence to counter them."
+              }, {
+                question: "How do slip and fall cases differ from trip and fall cases legally?",
+                answer: "While both involve falls, slip and fall cases typically involve smooth surfaces made dangerous by substances like water, oil, or cleaning products, while trip and fall cases involve obstacles, uneven surfaces, or elevation changes. The legal analysis differs in terms of what the property owner should have known, how long the condition existed, and what reasonable maintenance would have prevented the accident. We tailor our investigation and expert testimony to the specific mechanism of your fall."
+              }, {
+                question: "Can I sue for injuries from defective handrails or guardrails?",
+                answer: "Defective handrails and guardrails can create significant premises liability when they fail to meet building code requirements or are improperly maintained. These cases often involve stairway accidents, balcony falls, or ramp incidents. We investigate compliance with building codes, ADA requirements, and industry standards while examining maintenance records and any prior complaints about rail defects. Expert testimony from engineers or architects is often crucial in these cases."
+              }, {
+                question: "What should I know about premises liability at shopping malls?",
+                answer: "Shopping malls involve complex ownership structures with multiple potentially liable parties including mall owners, individual store owners, cleaning contractors, and security companies. Common accidents include slip and falls, escalator injuries, inadequate security incidents, and falling merchandise. We investigate lease agreements to determine responsibility for maintenance and security, analyze foot traffic patterns, and review security incident logs to establish notice of dangerous conditions."
+              }, {
+                question: "How do premises liability cases work when the accident involves a child on a playground?",
+                answer: "Playground accidents involve specific safety standards under CPSC guidelines and state regulations. Property owners must provide age-appropriate equipment, proper surfacing, adequate supervision sight lines, and regular safety inspections. We investigate equipment installation, maintenance records, surface materials, and compliance with safety standards while considering the child's age and developmental abilities. These cases often require playground safety experts and child development specialists."
+              }, {
+                question: "Can I recover compensation for my spouse's loss of consortium in a premises liability case?",
+                answer: "California allows spouses to recover for loss of consortium when serious injuries impact the marital relationship. This includes loss of companionship, affection, intimacy, and household services. The compensation depends on the duration and strength of the marriage, severity of injuries, and impact on the relationship. We present evidence through spouse testimony, family witnesses, and expert testimony about the relationship changes caused by your injuries."
+              }].map((faq, index) => <Card key={index} className="glass-card group hover-glow-primary border-l-4 border-l-red-600 transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader className="cursor-pointer transition-colors group-hover:bg-primary/5" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
                       <CardTitle className="flex items-center justify-between text-lg group-hover:text-primary transition-colors">
                         {faq.question}
                         {expandedFaq === index ? <ChevronUp className="transition-transform duration-200" /> : <ChevronDown className="transition-transform duration-200" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent className="animate-fade-in">
+                    {expandedFaq === index && <CardContent className="animate-fade-in">
                         <p className="text-muted-foreground">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
 
@@ -1716,18 +1495,11 @@ const PremisesLiability: React.FC = () => {
                   <CardTitle className="text-center text-xl font-bold">Get Your Free Consultation</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
-                    onClick={() => window.location.href = 'tel:8553742906'}
-                  >
+                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white font-bold" onClick={() => window.location.href = 'tel:8553742906'}>
                     <Phone className="w-4 h-4 mr-2" />
                     Call (855) 374-2906
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full"
-                    onClick={() => scrollToSection('evaluation')}
-                  >
+                  <Button variant="outline" className="w-full" onClick={() => scrollToSection('evaluation')}>
                     <FileText className="w-4 h-4 mr-2" />
                     Free Case Evaluation
                   </Button>
@@ -1740,27 +1512,15 @@ const PremisesLiability: React.FC = () => {
                   <CardTitle className="text-xl">Quick Actions</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
-                    onClick={() => scrollToSection('what-to-do')}
-                  >
+                  <Button variant="outline" className="w-full justify-start" onClick={() => scrollToSection('what-to-do')}>
                     <AlertTriangle className="w-4 h-4 mr-2" />
                     What to Do After Accident
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
-                    onClick={() => scrollToSection('types-of-accidents')}
-                  >
+                  <Button variant="outline" className="w-full justify-start" onClick={() => scrollToSection('types-of-accidents')}>
                     <Shield className="w-4 h-4 mr-2" />
                     Types of Accidents
                   </Button>
-                  <Button 
-                    variant="outline" 
-                    className="w-full justify-start"
-                    onClick={() => scrollToSection('compensation')}
-                  >
+                  <Button variant="outline" className="w-full justify-start" onClick={() => scrollToSection('compensation')}>
                     <DollarSign className="w-4 h-4 mr-2" />
                     Compensation Info
                   </Button>
@@ -1809,26 +1569,15 @@ const PremisesLiability: React.FC = () => {
             Property owners must maintain safe conditions for visitors. If you've been injured due to negligent property maintenance, inadequate security, or dangerous conditions, you may be entitled to significant compensation. Our experienced premises liability attorneys fight for maximum recovery under California law.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              className="text-lg px-8 py-6 bg-white text-red-600 hover:bg-red-50" 
-              onClick={() => scrollToSection('evaluation')}
-            >
+            <Button size="lg" className="text-lg px-8 py-6 bg-white text-red-600 hover:bg-red-50" onClick={() => scrollToSection('evaluation')}>
               Free Case Evaluation
             </Button>
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="text-lg px-8 py-6 text-white border-white hover:bg-white/10" 
-              onClick={() => window.location.href = 'tel:8553742906'}
-            >
+            <Button variant="outline" size="lg" className="text-lg px-8 py-6 text-white border-white hover:bg-white/10" onClick={() => window.location.href = 'tel:8553742906'}>
               Call (855) 374-2906
             </Button>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default PremisesLiability;

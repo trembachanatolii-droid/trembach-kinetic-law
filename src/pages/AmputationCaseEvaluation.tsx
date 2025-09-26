@@ -84,7 +84,7 @@ const AmputationCaseEvaluation: React.FC = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <ThreeDVisualEffects>
-                <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                <div className="premium-form-container premium-form-container--blue-solid interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                   <div className="text-center mb-8">
                     <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Amputation Case Evaluation</h3>
                     <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
@@ -94,24 +94,24 @@ const AmputationCaseEvaluation: React.FC = () => {
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">First Name *</label>
+                        <label className="text-slate-800 text-base font-medium">First Name *</label>
                         <Input
                           name="firstName"
                           value={formData.firstName}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="h-12 text-base"
                           placeholder="Enter your first name"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Last Name *</label>
+                        <label className="text-slate-800 text-base font-medium">Last Name *</label>
                         <Input
                           name="lastName"
                           value={formData.lastName}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="h-12 text-base"
                           placeholder="Enter your last name"
                         />
                       </div>
@@ -119,33 +119,33 @@ const AmputationCaseEvaluation: React.FC = () => {
 
                     <div className="grid md:grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Email *</label>
+                        <label className="text-slate-800 text-base font-medium">Email *</label>
                         <Input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="h-12 text-base"
                           placeholder="your.email@example.com"
                         />
                       </div>
                       <div className="space-y-2">
-                        <label className="text-white text-base font-medium">Phone *</label>
+                        <label className="text-slate-800 text-base font-medium">Phone *</label>
                         <Input
                           type="tel"
                           name="phone"
                           value={formData.phone}
                           onChange={handleInputChange}
                           required
-                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          className="h-12 text-base"
                           placeholder="(555) 123-4567"
                         />
                       </div>
                     </div>
 
                     <div className="space-y-4">
-                      <label className="text-white text-base font-medium">
+                      <label className="text-slate-800 text-base font-medium">
                         Please describe your amputation injury *
                       </label>
                       <Textarea
@@ -154,7 +154,7 @@ const AmputationCaseEvaluation: React.FC = () => {
                         onChange={handleInputChange}
                         placeholder="Please provide details about how the amputation occurred..."
                         rows={5}
-                        className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
+                        className=""
                         required
                       />
                     </div>
@@ -168,7 +168,7 @@ const AmputationCaseEvaluation: React.FC = () => {
                         className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
                         required
                       />
-                      <label className="text-white text-sm leading-relaxed">
+                      <label className="text-slate-700 text-sm leading-relaxed">
                         I consent to being contacted by Trembach Law Firm regarding my amputation case. I understand this consultation is free and there is no obligation. *
                       </label>
                     </div>

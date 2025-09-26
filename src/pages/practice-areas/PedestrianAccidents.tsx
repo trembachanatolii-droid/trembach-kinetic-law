@@ -10,32 +10,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/component
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
-import { 
-  Phone, 
-  Mail, 
-  MessageCircle, 
-  Star, 
-  ChevronDown, 
-  ChevronUp,
-  Heart,
-  Shield,
-  Scale,
-  Clock,
-  Users,
-  Award,
-  FileText,
-  AlertTriangle,
-  Stethoscope,
-  Building,
-  Map,
-  ArrowLeft,
-  Car,
-  MapPin,
-  Calendar,
-  DollarSign,
-  BookOpen,
-  HelpCircle
-} from 'lucide-react';
+import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, Car, MapPin, Calendar, DollarSign, BookOpen, HelpCircle } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/pedestrian-accidents-hero-new.jpg';
 import sidebarImage from '@/assets/practice-areas/pedestrian-crosswalk-safety.jpg';
 import legalConsultationImage from '@/assets/practice-areas/pedestrian-legal-consultation.jpg';
@@ -50,15 +25,12 @@ import trafficCamerasImage from '@/assets/practice-areas/pedestrian-traffic-came
 import governmentLiabilityImage from '@/assets/practice-areas/pedestrian-government-liability.jpg';
 import crosswalkAccidentsImage from '@/assets/practice-areas/pedestrian-crosswalk-accidents.jpg';
 import publicTransitAreasImage from '@/assets/practice-areas/pedestrian-public-transit-areas.jpg';
-
 gsap.registerPlugin(ScrollTrigger);
-
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
-
 const PedestrianAccidents: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -75,308 +47,272 @@ const PedestrianAccidents: React.FC = () => {
     walkingActivity: '',
     description: ''
   });
-
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Pedestrian Accidents Form Data:', formData);
     alert('Thank you for your submission. We will contact you within 24 hours to discuss your pedestrian accident case.');
   };
-
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-
-  const tabs: TabSection[] = [
-    { id: 'overview', label: 'OVERVIEW', icon: FileText },
-    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
-    { id: 'california-law', label: 'CALIFORNIA LAW', icon: BookOpen },
-    { id: 'accident-types', label: 'ACCIDENT TYPES', icon: Car },
-    { id: 'injuries', label: 'INJURIES', icon: Heart },
-    { id: 'compensation', label: 'COMPENSATION', icon: DollarSign },
-    { id: 'faq', label: 'FAQ', icon: HelpCircle },
-    { id: 'resources', label: 'RESOURCES', icon: Building }
-  ];
-
+  const tabs: TabSection[] = [{
+    id: 'overview',
+    label: 'OVERVIEW',
+    icon: FileText
+  }, {
+    id: 'evaluation',
+    label: 'CASE EVALUATION',
+    icon: Scale
+  }, {
+    id: 'california-law',
+    label: 'CALIFORNIA LAW',
+    icon: BookOpen
+  }, {
+    id: 'accident-types',
+    label: 'ACCIDENT TYPES',
+    icon: Car
+  }, {
+    id: 'injuries',
+    label: 'INJURIES',
+    icon: Heart
+  }, {
+    id: 'compensation',
+    label: 'COMPENSATION',
+    icon: DollarSign
+  }, {
+    id: 'faq',
+    label: 'FAQ',
+    icon: HelpCircle
+  }, {
+    id: 'resources',
+    label: 'RESOURCES',
+    icon: Building
+  }];
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation - instant
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
-      );
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
+        opacity: 0,
+        y: 50
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.1,
+        ease: 'power2.out'
+      });
 
       // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
-        { opacity: 0, y: 30 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 0.6,
-          stagger: 0.1,
-          scrollTrigger: {
-            trigger: contentRef.current,
-            start: 'top 80%'
-          }
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
+        opacity: 0,
+        y: 30
+      }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.6,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: contentRef.current,
+          start: 'top 80%'
         }
-      );
+      });
     });
-
     return () => ctx.revert();
   }, []);
-
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
-
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission - redirect to case evaluation
     window.location.href = '/pedestrian-case-evaluation';
   };
-
   const toggleFaq = (index: number) => {
     setExpandedFaq(expandedFaq === index ? null : index);
   };
 
   // FAQ Data with 50+ questions from HTML content
-  const faqData = [
-    {
-      question: "What should I do immediately after being hit by a car as a pedestrian?",
-      answer: "First, get to safety if possible and call 911 for medical attention and police documentation. Never leave the scene. Take photos of injuries, vehicle damage, and the accident scene. Get the driver's information and witness contacts. Seek medical evaluation even if you feel fine – adrenaline can mask serious injuries like head trauma or internal damage."
-    },
-    {
-      question: "Can I still recover compensation if I was jaywalking when hit?",
-      answer: "Yes, California's comparative negligence law allows recovery even if you were partially at fault. Under the Freedom to Walk Act (effective 2023), jaywalking is only illegal if it creates immediate danger. Your compensation is reduced by your fault percentage, but you can still recover. For example, if found 30% at fault, you recover 70% of damages."
-    },
-    {
-      question: "What is the Freedom to Walk Act and how does it affect my case?",
-      answer: "Assembly Bill 2147, effective January 1, 2023, prevents police from citing pedestrians for jaywalking unless their actions create immediate collision danger. This doesn't eliminate driver responsibility to exercise due care. Drivers cannot claim immunity for striking pedestrians based on jaywalking alone – they must still avoid collisions when possible."
-    },
-    {
-      question: "Do unmarked crosswalks provide the same legal protection as marked ones?",
-      answer: "Yes, unmarked crosswalks exist at every intersection where sidewalks meet, even without painted lines. Vehicle Code 21950 requires drivers to yield to pedestrians in both marked and unmarked crosswalks equally. Insurance companies often exploit confusion about unmarked crosswalks, but you have identical rights regardless of paint presence."
-    },
-    {
-      question: "How long do I have to file a pedestrian accident lawsuit in California?",
-      answer: "Two years from the accident date under Code of Civil Procedure 335.1. However, start immediately – evidence disappears, witnesses forget, and surveillance footage gets overwritten. Government claims require filing within six months. Missing these deadlines bars recovery forever, so don't delay seeking legal help."
-    },
-    {
-      question: "What compensation can I recover in a pedestrian accident case?",
-      answer: "Economic damages include medical expenses, future medical care, lost wages, reduced earning capacity, and property damage. Non-economic damages cover pain and suffering, emotional distress, loss of enjoyment of life, and disfigurement. California doesn't cap these damages. Punitive damages are possible for egregious conduct like drunk driving or road rage."
-    },
-    {
-      question: "Will my health insurance cover my medical bills after a pedestrian accident?",
-      answer: "Yes, but they'll seek reimbursement from your settlement. We negotiate with health insurers to reduce liens, maximizing your net recovery. Use your insurance for immediate treatment while building your case. Medical payments coverage from your auto insurance also applies to pedestrian accidents, providing additional coverage without affecting rates."
-    },
-    {
-      question: "What if the driver who hit me doesn't have insurance?",
-      answer: "Your own auto insurance's uninsured motorist (UM) coverage applies even when you're a pedestrian. This coverage is often your best source of compensation. We also investigate other insurance sources like employer liability for working drivers, premises liability for property owners, and umbrella policies providing additional coverage layers."
-    },
-    {
-      question: "How do I prove the driver was at fault in my pedestrian accident?",
-      answer: "We gather police reports, witness statements, surveillance footage, phone records proving distraction, accident reconstruction, medical records, and photos. Traffic camera footage is invaluable but must be requested quickly before deletion. Skid marks show driver reaction time. Cell phone records reveal whether drivers were distracted at impact."
-    },
-    {
-      question: "Can I sue if a bicycle or electric scooter hit me instead of a car?",
-      answer: "Yes, bicyclists and scooter riders owe duties of care to pedestrians. Homeowner's or renter's insurance often covers these accidents. Delivery riders create particular hazards while rushing. Lime, Bird, and other scooter companies may share liability for equipment defects or inadequate safety warnings. While coverage might be lower, valid claims exist."
-    },
-    {
-      question: "What if I was hit in a parking lot instead of on the street?",
-      answer: "Parking lot accidents follow the same liability principles. Property owners might share liability for dangerous conditions like poor lighting, inadequate signage, or blocked sightlines. Drivers backing up have heightened duty to check for pedestrians. Shopping centers, restaurants, and businesses owe duties to maintain reasonably safe premises for customers."
-    },
-    {
-      question: "Do I need a police report for my pedestrian accident claim?",
-      answer: "Police reports significantly strengthen claims but aren't absolutely required. Officers document the scene, interview witnesses, note violations, and sometimes determine fault. Reports provide official documentation insurance companies can't easily dismiss. If unavailable, we build cases using witness statements, photos, medical records, and accident reconstruction."
-    },
-    {
-      question: "What if I was hit by a commercial vehicle or delivery truck?",
-      answer: "Commercial vehicle accidents often mean higher compensation due to larger insurance policies and corporate liability. Employers are vicariously liable for employees' negligence during work duties. Commercial policies typically provide $1 million or more versus $15,000 minimums for personal vehicles. Delivery pressure causing rushed driving creates additional liability."
-    },
-    {
-      question: "Can elderly pedestrians get additional compensation?",
-      answer: "Elderly pedestrians often suffer more severe injuries requiring extended recovery. Slower walking speeds, reduced mobility, and fragile bones increase injury severity. California recognizes elderly victims need longer crossing times and may have impairments. Medicare complications require careful navigation, but age often enhances rather than diminishes claim value."
-    },
-    {
-      question: "What if poor road conditions contributed to my accident?",
-      answer: "Government entities can be liable under Government Code 835 for dangerous conditions. Missing crosswalk markings, broken signals, inadequate lighting, dangerous intersection design, and absent sidewalks create liability. You must file a government claim within six months. Combined driver and government negligence increases total recovery potential."
-    },
-    {
-      question: "How much does hiring a pedestrian accident lawyer cost?",
-      answer: "We work on contingency fee basis – you pay nothing unless we win. Typically 33.33% for settlements and 40% if trial is necessary. We advance all case costs including medical records, expert witnesses, and investigations. Free consultations let us evaluate your case without obligation. This ensures everyone can afford quality representation."
-    },
-    {
-      question: "Should I accept the insurance company's first settlement offer?",
-      answer: "Never accept first offers without legal review. Initial offers are deliberately low, often 10-20% of case value. Companies know unrepresented victims don't understand values and accept inadequate settlements from financial pressure. Our involvement typically increases offers 3-5 times original amounts."
-    },
-    {
-      question: "What if the driver claims I 'came out of nowhere'?",
-      answer: "This common defense doesn't eliminate driver liability. Drivers must maintain proper lookout and drive at safe speeds. 'Came out of nowhere' often means inattention. We investigate sight lines, lighting, and distractions. Accident reconstruction proves visibility and reaction time. Even unexpected pedestrian entry doesn't excuse preventable impacts."
-    },
-    {
-      question: "Can I still recover if I wasn't in a crosswalk?",
-      answer: "Yes, being outside crosswalks doesn't eliminate recovery rights. While pedestrians must yield under Vehicle Code 21954, drivers still must exercise due care. Your compensation gets reduced by fault percentage, but recovery remains possible. Absent or distant crosswalks strengthen your position – pedestrians aren't required to walk unreasonable distances."
-    },
-    {
-      question: "What evidence is most important in pedestrian accident cases?",
-      answer: "Photos of scene, injuries, and vehicles provide crucial visual evidence. Surveillance footage shows exactly what happened. Witness information supports your version. Police reports document official findings. Medical records prove injury extent. Phone records reveal distraction. Vehicle damage indicates impact speed and angle."
-    },
-    {
-      question: "What if I had headphones on when hit?",
-      answer: "Wearing headphones doesn't eliminate compensation rights, though it might increase fault percentage slightly. California doesn't prohibit pedestrian headphone use. Drivers can't assume pedestrians will hear them and must watch for all pedestrians. Many accidents wouldn't be prevented by hearing anyway – like cars turning into crosswalks."
-    },
-    {
-      question: "What if the driver was having a medical emergency?",
-      answer: "Sudden medical emergencies may provide defense if truly unforeseeable, but most cases still result in liability. Drivers with known conditions like epilepsy or diabetes must manage conditions safely. Previous symptoms or doctor warnings eliminate the defense. Driver insurance still covers damages even with medical emergencies."
-    },
-    {
-      question: "How do red light/crosswalk cameras help my case?",
-      answer: "Traffic cameras provide invaluable objective evidence. They capture signal timing, vehicle speed, and pedestrian location. This contradicts driver lies about signals or actions. Footage must be requested quickly before automatic deletion – usually within 30-60 days. We immediately send preservation letters securing footage."
-    },
-    {
-      question: "Can I recover lost wages if I'm self-employed?",
-      answer: "Yes, though proving losses requires more documentation. Tax returns, profit/loss statements, bank records, and contracts demonstrate earnings. We show how injuries prevented work – canceled contracts, lost clients, inability to fulfill orders. Forensic accountants help establish complex business losses."
-    },
-    {
-      question: "What if I'm an undocumented immigrant hit by a car?",
-      answer: "Immigration status doesn't affect your compensation rights in California. You have identical rights as any victim. Insurance companies cannot ask about status. California law protects undocumented immigrants' access to civil justice. You can recover medical expenses, lost wages, and pain and suffering. We protect client confidentiality."
-    },
-    {
-      question: "How do I pay medical bills while waiting for settlement?",
-      answer: "Several options exist: health insurance (with reimbursement from settlement), medical payments coverage from your auto insurance, hospital payment plans, medical liens allowing deferred payment until settlement, and letters of protection guaranteeing payment from recovery. Don't delay treatment due to payment concerns."
-    },
-    {
-      question: "What if the accident happened at night or in poor weather?",
-      answer: "Nighttime accounts for 75% of pedestrian fatalities due to reduced visibility, but drivers must adjust speed for conditions. Poor lighting doesn't excuse drivers – they must drive within headlight range. Weather conditions require extra caution. Dark clothing doesn't eliminate driver responsibility. We investigate street lighting adequacy and municipal liability."
-    },
-    {
-      question: "Can children or teenagers recover differently in pedestrian accidents?",
-      answer: "Children receive special protections under California law. They're held to different behavioral standards than adults. School zones have enhanced penalties for striking children. The statute of limitations extends to two years from their 18th birthday. Child injury cases often result in higher compensation due to lifetime impact and earning capacity losses."
-    },
-    {
-      question: "What if multiple vehicles were involved in my pedestrian accident?",
-      answer: "Multi-vehicle accidents create complex liability scenarios with multiple insurance sources. Each driver's negligence is evaluated separately. Joint and several liability allows collecting full damages from any defendant able to pay. This often increases total available coverage and improves recovery prospects through multiple insurance policies."
-    },
-    {
-      question: "How do construction zones affect pedestrian accident liability?",
-      answer: "Construction zones require enhanced safety measures for pedestrians. Contractors must maintain safe pedestrian pathways or provide protected alternatives. When pedestrians are forced into traffic without adequate protection, liability extends to construction companies and property owners. We pursue all responsible parties maximizing coverage."
-    },
-    {
-      question: "What types of expert witnesses help pedestrian accident cases?",
-      answer: "Accident reconstruction experts analyze impact dynamics and fault. Medical experts explain injuries and future care needs. Economic experts calculate lost earnings and life care costs. Traffic engineers evaluate road design and signal timing. Biomechanical experts explain injury mechanisms. Surveillance experts authenticate and interpret video evidence."
-    },
-    {
-      question: "Can I sue if hit while walking my dog?",
-      answer: "Yes, walking dogs is normal pedestrian activity deserving protection. Leash laws don't eliminate driver responsibility. If your dog contributed to the accident by running into traffic, your fault percentage might increase, but you can still recover. Pet injury claims are separate and recoverable as property damage."
-    },
-    {
-      question: "What if I was intoxicated when hit as a pedestrian?",
-      answer: "Intoxication doesn't bar recovery but increases fault percentage. California's comparative negligence allows recovery at any fault level below 100%. Drivers still must exercise due care for impaired pedestrians. Intoxication level, visibility, and driver opportunity to avoid impact all factor into fault allocation. Valid claims exist even with significant impairment."
-    },
-    {
-      question: "Do ride-share accidents (Uber/Lyft) have different rules?",
-      answer: "Ride-share vehicles carry additional insurance coverage when active on platforms. Uber and Lyft provide $1 million liability coverage during rides and while waiting for passengers. Driver's personal insurance might deny coverage during commercial use. We determine platform status at accident time and pursue appropriate coverage sources."
-    },
-    {
-      question: "Can family members recover for watching a pedestrian accident?",
-      answer: "California allows bystander emotional distress claims under limited circumstances. Family members witnessing accidents involving close relatives may recover for their own emotional trauma. The witness must be closely related, present at the scene, and suffer severe emotional distress. These claims supplement the victim's direct injury recovery."
-    },
-    {
-      question: "What if surveillance video contradicts the police report?",
-      answer: "Video evidence trumps police reports when conflicts exist. Officers don't always witness accidents and rely on sometimes inaccurate driver statements. We analyze all footage frame by frame, often revealing details missed initially. Videos can completely change fault determinations and dramatically increase case values."
-    },
-    {
-      question: "How do school zone accidents affect liability and damages?",
-      answer: "School zones require enhanced driver vigilance with reduced speed limits when children are present. Despite crossing guards and safety measures, children remain vulnerable. Education Code 21373 mandates strict speed enforcement. Violations causing pedestrian injuries face enhanced penalties and strengthen civil liability claims significantly."
-    },
-    {
-      question: "Can I recover for psychological trauma after a pedestrian accident?",
-      answer: "Yes, psychological injuries including PTSD, anxiety, depression, and phobias are compensable damages. Many pedestrian accident survivors develop fear of crossing streets or being near traffic. Mental health treatment costs are recoverable, and pain and suffering awards often include psychological impact alongside physical injuries."
-    },
-    {
-      question: "What role do traffic signal timing and crosswalk design play?",
-      answer: "Inadequate crossing times, poorly timed signals, and dangerous intersection design create government liability. Pedestrians deserve sufficient time to cross safely. Signal timing studies determine if adequate crossing time was provided. Intersection design defects forcing unsafe pedestrian movements create municipal liability under Government Code 835."
-    },
-    {
-      question: "How do hit-and-run pedestrian accidents work legally?",
-      answer: "Hit-and-run adds criminal charges but doesn't eliminate civil recovery options. Your uninsured motorist coverage applies to unknown drivers. We work with police to identify fleeing drivers through vehicle debris, witness descriptions, and surveillance footage. Reward programs sometimes help locate hit-and-run drivers. Even unidentified driver cases can proceed under UM coverage."
-    },
-    {
-      question: "Can pedestrian accidents result in wrongful death claims?",
-      answer: "Yes, family members can file wrongful death claims when pedestrian accidents prove fatal. Surviving spouses, children, and parents may recover for lost financial support, companionship, and funeral expenses. Wrongful death claims have two-year statute of limitations from death date. These cases often result in significant compensation reflecting lifetime earnings loss."
-    },
-    {
-      question: "What if the pedestrian accident happened on private property?",
-      answer: "Private property accidents follow similar liability rules with additional premises liability considerations. Property owners must maintain reasonably safe conditions for visitors. Parking lots, shopping centers, and apartment complexes owe duties to pedestrians. Poor lighting, inadequate signage, and dangerous vehicle/pedestrian interactions create property owner liability alongside driver negligence."
-    },
-    {
-      question: "How do medical liens and health insurance subrogation affect my recovery?",
-      answer: "Health insurers and medical providers often claim reimbursement from settlements through liens and subrogation. We negotiate with lienholders to reduce claims, maximizing your net recovery. California's made whole doctrine protects injured parties from excessive lien reductions. ERISA plans have different rules requiring careful navigation to optimize results."
-    },
-    {
-      question: "What makes pedestrian accident cases different from other personal injury claims?",
-      answer: "Pedestrian cases involve unique vulnerability factors – complete lack of protection against vehicle impact creates catastrophic injury patterns. Insurance companies show systematic anti-pedestrian bias, automatically investigating jaywalking and questioning visibility. Physics of vehicle-pedestrian impacts creates devastating injury patterns requiring specialized medical and legal expertise."
-    },
-    {
-      question: "Can I change lawyers if unhappy with my current representation?",
-      answer: "Yes, you have the right to change attorneys at any time. New counsel can take over your case even if already filed. You might owe some fees to the prior attorney for work performed, but this shouldn't prevent changing representation. We handle transitions smoothly, obtaining files and continuing aggressive advocacy without delay."
-    },
-    {
-      question: "What if the driver claims they had a green light?",
-      answer: "Green lights don't give drivers right to strike pedestrians in crosswalks. Even with green lights, drivers must yield to pedestrians already in crosswalks. Signal timing analysis often reveals pedestrians had walk signals. Traffic cameras capture signal status at impact time. Witness testimony and intersection timing studies help establish actual signal conditions."
-    },
-    {
-      question: "How do electric vehicle accidents differ for pedestrian cases?",
-      answer: "Electric vehicles' silent operation creates unique hazards for pedestrians who rely on sound cues. Manufacturers have added warning sounds, but gaps remain. Driver responsibility to watch for pedestrians doesn't change with vehicle type. If silent operation contributed to your accident, vehicle manufacturer liability might exist alongside driver negligence."
-    },
-    {
-      question: "What if I was using my phone when hit as a pedestrian?",
-      answer: "Cell phone use doesn't eliminate compensation rights but might increase fault percentage. Unlike drivers, pedestrians aren't prohibited from phone use while walking. Distraction arguments work both ways – drivers using phones face greater liability. Your phone use might be 10-20% fault in crosswalk accidents, still allowing substantial recovery."
-    },
-    {
-      question: "Can tourists or visitors to California file pedestrian accident claims?",
-      answer: "Yes, California courts have jurisdiction over accidents occurring within the state regardless of residence. Out-of-state victims have identical rights to compensation. Your home state insurance might provide coverage. We handle all California legal requirements while accommodating your location needs for depositions and meetings."
-    },
-    {
-      question: "What if the pedestrian accident was caused by a vehicle malfunction?",
-      answer: "Vehicle defects create product liability claims against manufacturers alongside driver negligence claims. Brake failures, steering problems, acceleration issues, and other defects can cause pedestrian accidents. We investigate vehicle maintenance records and recall histories. Manufacturer liability often provides additional insurance coverage beyond driver policies."
-    },
-    {
-      question: "How do crosswalk countdown timers affect pedestrian accident liability?",
-      answer: "Countdown timers help pedestrians judge crossing time but don't eliminate driver duties. Drivers must yield to pedestrians in crosswalks regardless of timer status. Timers often provide insufficient time for elderly or disabled pedestrians. If inadequate timing contributed to your accident, municipal liability might exist for dangerous signal timing."
-    }
-  ];
-
-  return (
-    <div className="min-h-screen bg-background">
+  const faqData = [{
+    question: "What should I do immediately after being hit by a car as a pedestrian?",
+    answer: "First, get to safety if possible and call 911 for medical attention and police documentation. Never leave the scene. Take photos of injuries, vehicle damage, and the accident scene. Get the driver's information and witness contacts. Seek medical evaluation even if you feel fine – adrenaline can mask serious injuries like head trauma or internal damage."
+  }, {
+    question: "Can I still recover compensation if I was jaywalking when hit?",
+    answer: "Yes, California's comparative negligence law allows recovery even if you were partially at fault. Under the Freedom to Walk Act (effective 2023), jaywalking is only illegal if it creates immediate danger. Your compensation is reduced by your fault percentage, but you can still recover. For example, if found 30% at fault, you recover 70% of damages."
+  }, {
+    question: "What is the Freedom to Walk Act and how does it affect my case?",
+    answer: "Assembly Bill 2147, effective January 1, 2023, prevents police from citing pedestrians for jaywalking unless their actions create immediate collision danger. This doesn't eliminate driver responsibility to exercise due care. Drivers cannot claim immunity for striking pedestrians based on jaywalking alone – they must still avoid collisions when possible."
+  }, {
+    question: "Do unmarked crosswalks provide the same legal protection as marked ones?",
+    answer: "Yes, unmarked crosswalks exist at every intersection where sidewalks meet, even without painted lines. Vehicle Code 21950 requires drivers to yield to pedestrians in both marked and unmarked crosswalks equally. Insurance companies often exploit confusion about unmarked crosswalks, but you have identical rights regardless of paint presence."
+  }, {
+    question: "How long do I have to file a pedestrian accident lawsuit in California?",
+    answer: "Two years from the accident date under Code of Civil Procedure 335.1. However, start immediately – evidence disappears, witnesses forget, and surveillance footage gets overwritten. Government claims require filing within six months. Missing these deadlines bars recovery forever, so don't delay seeking legal help."
+  }, {
+    question: "What compensation can I recover in a pedestrian accident case?",
+    answer: "Economic damages include medical expenses, future medical care, lost wages, reduced earning capacity, and property damage. Non-economic damages cover pain and suffering, emotional distress, loss of enjoyment of life, and disfigurement. California doesn't cap these damages. Punitive damages are possible for egregious conduct like drunk driving or road rage."
+  }, {
+    question: "Will my health insurance cover my medical bills after a pedestrian accident?",
+    answer: "Yes, but they'll seek reimbursement from your settlement. We negotiate with health insurers to reduce liens, maximizing your net recovery. Use your insurance for immediate treatment while building your case. Medical payments coverage from your auto insurance also applies to pedestrian accidents, providing additional coverage without affecting rates."
+  }, {
+    question: "What if the driver who hit me doesn't have insurance?",
+    answer: "Your own auto insurance's uninsured motorist (UM) coverage applies even when you're a pedestrian. This coverage is often your best source of compensation. We also investigate other insurance sources like employer liability for working drivers, premises liability for property owners, and umbrella policies providing additional coverage layers."
+  }, {
+    question: "How do I prove the driver was at fault in my pedestrian accident?",
+    answer: "We gather police reports, witness statements, surveillance footage, phone records proving distraction, accident reconstruction, medical records, and photos. Traffic camera footage is invaluable but must be requested quickly before deletion. Skid marks show driver reaction time. Cell phone records reveal whether drivers were distracted at impact."
+  }, {
+    question: "Can I sue if a bicycle or electric scooter hit me instead of a car?",
+    answer: "Yes, bicyclists and scooter riders owe duties of care to pedestrians. Homeowner's or renter's insurance often covers these accidents. Delivery riders create particular hazards while rushing. Lime, Bird, and other scooter companies may share liability for equipment defects or inadequate safety warnings. While coverage might be lower, valid claims exist."
+  }, {
+    question: "What if I was hit in a parking lot instead of on the street?",
+    answer: "Parking lot accidents follow the same liability principles. Property owners might share liability for dangerous conditions like poor lighting, inadequate signage, or blocked sightlines. Drivers backing up have heightened duty to check for pedestrians. Shopping centers, restaurants, and businesses owe duties to maintain reasonably safe premises for customers."
+  }, {
+    question: "Do I need a police report for my pedestrian accident claim?",
+    answer: "Police reports significantly strengthen claims but aren't absolutely required. Officers document the scene, interview witnesses, note violations, and sometimes determine fault. Reports provide official documentation insurance companies can't easily dismiss. If unavailable, we build cases using witness statements, photos, medical records, and accident reconstruction."
+  }, {
+    question: "What if I was hit by a commercial vehicle or delivery truck?",
+    answer: "Commercial vehicle accidents often mean higher compensation due to larger insurance policies and corporate liability. Employers are vicariously liable for employees' negligence during work duties. Commercial policies typically provide $1 million or more versus $15,000 minimums for personal vehicles. Delivery pressure causing rushed driving creates additional liability."
+  }, {
+    question: "Can elderly pedestrians get additional compensation?",
+    answer: "Elderly pedestrians often suffer more severe injuries requiring extended recovery. Slower walking speeds, reduced mobility, and fragile bones increase injury severity. California recognizes elderly victims need longer crossing times and may have impairments. Medicare complications require careful navigation, but age often enhances rather than diminishes claim value."
+  }, {
+    question: "What if poor road conditions contributed to my accident?",
+    answer: "Government entities can be liable under Government Code 835 for dangerous conditions. Missing crosswalk markings, broken signals, inadequate lighting, dangerous intersection design, and absent sidewalks create liability. You must file a government claim within six months. Combined driver and government negligence increases total recovery potential."
+  }, {
+    question: "How much does hiring a pedestrian accident lawyer cost?",
+    answer: "We work on contingency fee basis – you pay nothing unless we win. Typically 33.33% for settlements and 40% if trial is necessary. We advance all case costs including medical records, expert witnesses, and investigations. Free consultations let us evaluate your case without obligation. This ensures everyone can afford quality representation."
+  }, {
+    question: "Should I accept the insurance company's first settlement offer?",
+    answer: "Never accept first offers without legal review. Initial offers are deliberately low, often 10-20% of case value. Companies know unrepresented victims don't understand values and accept inadequate settlements from financial pressure. Our involvement typically increases offers 3-5 times original amounts."
+  }, {
+    question: "What if the driver claims I 'came out of nowhere'?",
+    answer: "This common defense doesn't eliminate driver liability. Drivers must maintain proper lookout and drive at safe speeds. 'Came out of nowhere' often means inattention. We investigate sight lines, lighting, and distractions. Accident reconstruction proves visibility and reaction time. Even unexpected pedestrian entry doesn't excuse preventable impacts."
+  }, {
+    question: "Can I still recover if I wasn't in a crosswalk?",
+    answer: "Yes, being outside crosswalks doesn't eliminate recovery rights. While pedestrians must yield under Vehicle Code 21954, drivers still must exercise due care. Your compensation gets reduced by fault percentage, but recovery remains possible. Absent or distant crosswalks strengthen your position – pedestrians aren't required to walk unreasonable distances."
+  }, {
+    question: "What evidence is most important in pedestrian accident cases?",
+    answer: "Photos of scene, injuries, and vehicles provide crucial visual evidence. Surveillance footage shows exactly what happened. Witness information supports your version. Police reports document official findings. Medical records prove injury extent. Phone records reveal distraction. Vehicle damage indicates impact speed and angle."
+  }, {
+    question: "What if I had headphones on when hit?",
+    answer: "Wearing headphones doesn't eliminate compensation rights, though it might increase fault percentage slightly. California doesn't prohibit pedestrian headphone use. Drivers can't assume pedestrians will hear them and must watch for all pedestrians. Many accidents wouldn't be prevented by hearing anyway – like cars turning into crosswalks."
+  }, {
+    question: "What if the driver was having a medical emergency?",
+    answer: "Sudden medical emergencies may provide defense if truly unforeseeable, but most cases still result in liability. Drivers with known conditions like epilepsy or diabetes must manage conditions safely. Previous symptoms or doctor warnings eliminate the defense. Driver insurance still covers damages even with medical emergencies."
+  }, {
+    question: "How do red light/crosswalk cameras help my case?",
+    answer: "Traffic cameras provide invaluable objective evidence. They capture signal timing, vehicle speed, and pedestrian location. This contradicts driver lies about signals or actions. Footage must be requested quickly before automatic deletion – usually within 30-60 days. We immediately send preservation letters securing footage."
+  }, {
+    question: "Can I recover lost wages if I'm self-employed?",
+    answer: "Yes, though proving losses requires more documentation. Tax returns, profit/loss statements, bank records, and contracts demonstrate earnings. We show how injuries prevented work – canceled contracts, lost clients, inability to fulfill orders. Forensic accountants help establish complex business losses."
+  }, {
+    question: "What if I'm an undocumented immigrant hit by a car?",
+    answer: "Immigration status doesn't affect your compensation rights in California. You have identical rights as any victim. Insurance companies cannot ask about status. California law protects undocumented immigrants' access to civil justice. You can recover medical expenses, lost wages, and pain and suffering. We protect client confidentiality."
+  }, {
+    question: "How do I pay medical bills while waiting for settlement?",
+    answer: "Several options exist: health insurance (with reimbursement from settlement), medical payments coverage from your auto insurance, hospital payment plans, medical liens allowing deferred payment until settlement, and letters of protection guaranteeing payment from recovery. Don't delay treatment due to payment concerns."
+  }, {
+    question: "What if the accident happened at night or in poor weather?",
+    answer: "Nighttime accounts for 75% of pedestrian fatalities due to reduced visibility, but drivers must adjust speed for conditions. Poor lighting doesn't excuse drivers – they must drive within headlight range. Weather conditions require extra caution. Dark clothing doesn't eliminate driver responsibility. We investigate street lighting adequacy and municipal liability."
+  }, {
+    question: "Can children or teenagers recover differently in pedestrian accidents?",
+    answer: "Children receive special protections under California law. They're held to different behavioral standards than adults. School zones have enhanced penalties for striking children. The statute of limitations extends to two years from their 18th birthday. Child injury cases often result in higher compensation due to lifetime impact and earning capacity losses."
+  }, {
+    question: "What if multiple vehicles were involved in my pedestrian accident?",
+    answer: "Multi-vehicle accidents create complex liability scenarios with multiple insurance sources. Each driver's negligence is evaluated separately. Joint and several liability allows collecting full damages from any defendant able to pay. This often increases total available coverage and improves recovery prospects through multiple insurance policies."
+  }, {
+    question: "How do construction zones affect pedestrian accident liability?",
+    answer: "Construction zones require enhanced safety measures for pedestrians. Contractors must maintain safe pedestrian pathways or provide protected alternatives. When pedestrians are forced into traffic without adequate protection, liability extends to construction companies and property owners. We pursue all responsible parties maximizing coverage."
+  }, {
+    question: "What types of expert witnesses help pedestrian accident cases?",
+    answer: "Accident reconstruction experts analyze impact dynamics and fault. Medical experts explain injuries and future care needs. Economic experts calculate lost earnings and life care costs. Traffic engineers evaluate road design and signal timing. Biomechanical experts explain injury mechanisms. Surveillance experts authenticate and interpret video evidence."
+  }, {
+    question: "Can I sue if hit while walking my dog?",
+    answer: "Yes, walking dogs is normal pedestrian activity deserving protection. Leash laws don't eliminate driver responsibility. If your dog contributed to the accident by running into traffic, your fault percentage might increase, but you can still recover. Pet injury claims are separate and recoverable as property damage."
+  }, {
+    question: "What if I was intoxicated when hit as a pedestrian?",
+    answer: "Intoxication doesn't bar recovery but increases fault percentage. California's comparative negligence allows recovery at any fault level below 100%. Drivers still must exercise due care for impaired pedestrians. Intoxication level, visibility, and driver opportunity to avoid impact all factor into fault allocation. Valid claims exist even with significant impairment."
+  }, {
+    question: "Do ride-share accidents (Uber/Lyft) have different rules?",
+    answer: "Ride-share vehicles carry additional insurance coverage when active on platforms. Uber and Lyft provide $1 million liability coverage during rides and while waiting for passengers. Driver's personal insurance might deny coverage during commercial use. We determine platform status at accident time and pursue appropriate coverage sources."
+  }, {
+    question: "Can family members recover for watching a pedestrian accident?",
+    answer: "California allows bystander emotional distress claims under limited circumstances. Family members witnessing accidents involving close relatives may recover for their own emotional trauma. The witness must be closely related, present at the scene, and suffer severe emotional distress. These claims supplement the victim's direct injury recovery."
+  }, {
+    question: "What if surveillance video contradicts the police report?",
+    answer: "Video evidence trumps police reports when conflicts exist. Officers don't always witness accidents and rely on sometimes inaccurate driver statements. We analyze all footage frame by frame, often revealing details missed initially. Videos can completely change fault determinations and dramatically increase case values."
+  }, {
+    question: "How do school zone accidents affect liability and damages?",
+    answer: "School zones require enhanced driver vigilance with reduced speed limits when children are present. Despite crossing guards and safety measures, children remain vulnerable. Education Code 21373 mandates strict speed enforcement. Violations causing pedestrian injuries face enhanced penalties and strengthen civil liability claims significantly."
+  }, {
+    question: "Can I recover for psychological trauma after a pedestrian accident?",
+    answer: "Yes, psychological injuries including PTSD, anxiety, depression, and phobias are compensable damages. Many pedestrian accident survivors develop fear of crossing streets or being near traffic. Mental health treatment costs are recoverable, and pain and suffering awards often include psychological impact alongside physical injuries."
+  }, {
+    question: "What role do traffic signal timing and crosswalk design play?",
+    answer: "Inadequate crossing times, poorly timed signals, and dangerous intersection design create government liability. Pedestrians deserve sufficient time to cross safely. Signal timing studies determine if adequate crossing time was provided. Intersection design defects forcing unsafe pedestrian movements create municipal liability under Government Code 835."
+  }, {
+    question: "How do hit-and-run pedestrian accidents work legally?",
+    answer: "Hit-and-run adds criminal charges but doesn't eliminate civil recovery options. Your uninsured motorist coverage applies to unknown drivers. We work with police to identify fleeing drivers through vehicle debris, witness descriptions, and surveillance footage. Reward programs sometimes help locate hit-and-run drivers. Even unidentified driver cases can proceed under UM coverage."
+  }, {
+    question: "Can pedestrian accidents result in wrongful death claims?",
+    answer: "Yes, family members can file wrongful death claims when pedestrian accidents prove fatal. Surviving spouses, children, and parents may recover for lost financial support, companionship, and funeral expenses. Wrongful death claims have two-year statute of limitations from death date. These cases often result in significant compensation reflecting lifetime earnings loss."
+  }, {
+    question: "What if the pedestrian accident happened on private property?",
+    answer: "Private property accidents follow similar liability rules with additional premises liability considerations. Property owners must maintain reasonably safe conditions for visitors. Parking lots, shopping centers, and apartment complexes owe duties to pedestrians. Poor lighting, inadequate signage, and dangerous vehicle/pedestrian interactions create property owner liability alongside driver negligence."
+  }, {
+    question: "How do medical liens and health insurance subrogation affect my recovery?",
+    answer: "Health insurers and medical providers often claim reimbursement from settlements through liens and subrogation. We negotiate with lienholders to reduce claims, maximizing your net recovery. California's made whole doctrine protects injured parties from excessive lien reductions. ERISA plans have different rules requiring careful navigation to optimize results."
+  }, {
+    question: "What makes pedestrian accident cases different from other personal injury claims?",
+    answer: "Pedestrian cases involve unique vulnerability factors – complete lack of protection against vehicle impact creates catastrophic injury patterns. Insurance companies show systematic anti-pedestrian bias, automatically investigating jaywalking and questioning visibility. Physics of vehicle-pedestrian impacts creates devastating injury patterns requiring specialized medical and legal expertise."
+  }, {
+    question: "Can I change lawyers if unhappy with my current representation?",
+    answer: "Yes, you have the right to change attorneys at any time. New counsel can take over your case even if already filed. You might owe some fees to the prior attorney for work performed, but this shouldn't prevent changing representation. We handle transitions smoothly, obtaining files and continuing aggressive advocacy without delay."
+  }, {
+    question: "What if the driver claims they had a green light?",
+    answer: "Green lights don't give drivers right to strike pedestrians in crosswalks. Even with green lights, drivers must yield to pedestrians already in crosswalks. Signal timing analysis often reveals pedestrians had walk signals. Traffic cameras capture signal status at impact time. Witness testimony and intersection timing studies help establish actual signal conditions."
+  }, {
+    question: "How do electric vehicle accidents differ for pedestrian cases?",
+    answer: "Electric vehicles' silent operation creates unique hazards for pedestrians who rely on sound cues. Manufacturers have added warning sounds, but gaps remain. Driver responsibility to watch for pedestrians doesn't change with vehicle type. If silent operation contributed to your accident, vehicle manufacturer liability might exist alongside driver negligence."
+  }, {
+    question: "What if I was using my phone when hit as a pedestrian?",
+    answer: "Cell phone use doesn't eliminate compensation rights but might increase fault percentage. Unlike drivers, pedestrians aren't prohibited from phone use while walking. Distraction arguments work both ways – drivers using phones face greater liability. Your phone use might be 10-20% fault in crosswalk accidents, still allowing substantial recovery."
+  }, {
+    question: "Can tourists or visitors to California file pedestrian accident claims?",
+    answer: "Yes, California courts have jurisdiction over accidents occurring within the state regardless of residence. Out-of-state victims have identical rights to compensation. Your home state insurance might provide coverage. We handle all California legal requirements while accommodating your location needs for depositions and meetings."
+  }, {
+    question: "What if the pedestrian accident was caused by a vehicle malfunction?",
+    answer: "Vehicle defects create product liability claims against manufacturers alongside driver negligence claims. Brake failures, steering problems, acceleration issues, and other defects can cause pedestrian accidents. We investigate vehicle maintenance records and recall histories. Manufacturer liability often provides additional insurance coverage beyond driver policies."
+  }, {
+    question: "How do crosswalk countdown timers affect pedestrian accident liability?",
+    answer: "Countdown timers help pedestrians judge crossing time but don't eliminate driver duties. Drivers must yield to pedestrians in crosswalks regardless of timer status. Timers often provide insufficient time for elderly or disabled pedestrians. If inadequate timing contributed to your accident, municipal liability might exist for dangerous signal timing."
+  }];
+  return <div className="min-h-screen bg-background">
       {/* Hero Section */}
-      <section 
-        ref={heroRef}
-        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
+      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
+      backgroundImage: `url(${heroBackground})`
+    }}>
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-10">
-          <Button 
-            variant="ghost" 
-            onClick={() => window.history.back()}
-            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-          >
+          <Button variant="ghost" onClick={() => window.history.back()} className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm">
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </Button>
@@ -389,17 +325,11 @@ const PedestrianAccidents: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
+              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
               <span className="ml-2 text-lg">Former Defense Attorney Fighting for You</span>
             </div>
             
-            <Button 
-              size="lg" 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/pedestrian-case-evaluation'}
-            >
+            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg" onClick={() => window.location.href = '/pedestrian-case-evaluation'}>
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -409,23 +339,13 @@ const PedestrianAccidents: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map((tab) => {
-                const IconComponent = tab.icon;
-                return (
-                  <button
-                    key={tab.id}
-                    onClick={() => scrollToSection(tab.id)}
-                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
-                      activeTab === tab.id 
-                        ? 'bg-white text-primary' 
-                        : 'text-white hover:bg-white/20'
-                    }`}
-                  >
+              {tabs.map(tab => {
+              const IconComponent = tab.icon;
+              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${activeTab === tab.id ? 'bg-white text-primary' : 'text-white hover:bg-white/20'}`}>
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>
-                );
-              })}
+                  </button>;
+            })}
             </div>
           </div>
         </div>
@@ -551,81 +471,39 @@ const PedestrianAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">First Name *</label>
-                              <Input
-                                name="firstName"
-                                value={formData.name.split(' ')[0] || ''}
-                                onChange={(e) => {
-                                  const lastName = formData.name.split(' ').slice(1).join(' ');
-                                  handleInputChange('name', `${e.target.value} ${lastName}`.trim());
-                                }}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="Enter your first name"
-                              />
+                              <Input name="firstName" value={formData.name.split(' ')[0] || ''} onChange={e => {
+                              const lastName = formData.name.split(' ').slice(1).join(' ');
+                              handleInputChange('name', `${e.target.value} ${lastName}`.trim());
+                            }} required aria-required="true" className="h-12 text-base" placeholder="Enter your first name" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Last Name *</label>
-                              <Input
-                                name="lastName"
-                                value={formData.name.split(' ').slice(1).join(' ') || ''}
-                                onChange={(e) => {
-                                  const firstName = formData.name.split(' ')[0] || '';
-                                  handleInputChange('name', `${firstName} ${e.target.value}`.trim());
-                                }}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="Enter your last name"
-                              />
+                              <Input name="lastName" value={formData.name.split(' ').slice(1).join(' ') || ''} onChange={e => {
+                              const firstName = formData.name.split(' ')[0] || '';
+                              handleInputChange('name', `${firstName} ${e.target.value}`.trim());
+                            }} required aria-required="true" className="h-12 text-base" placeholder="Enter your last name" />
                             </div>
                           </div>
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Email *</label>
-                              <Input
-                                type="email"
-                                name="email"
-                                value={formData.email}
-                                onChange={(e) => handleInputChange('email', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="your.email@example.com"
-                              />
+                              <Input type="email" name="email" value={formData.email} onChange={e => handleInputChange('email', e.target.value)} required aria-required="true" className="h-12 text-base" placeholder="your.email@example.com" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Phone *</label>
-                              <Input
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={(e) => handleInputChange('phone', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                                placeholder="(555) 123-4567"
-                              />
+                              <Input type="tel" name="phone" value={formData.phone} onChange={e => handleInputChange('phone', e.target.value)} required aria-required="true" className="h-12 text-base" placeholder="(555) 123-4567" />
                             </div>
                           </div>
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Date of Accident *</label>
-                              <Input
-                                type="date"
-                                name="accidentDate"
-                                value={formData.accidentDate}
-                                onChange={(e) => handleInputChange('accidentDate', e.target.value)}
-                                required
-                                aria-required="true"
-                                className="h-12 text-base"
-                              />
+                              <Input type="date" name="accidentDate" value={formData.accidentDate} onChange={e => handleInputChange('accidentDate', e.target.value)} required aria-required="true" className="h-12 text-base" />
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Type of Accident *</label>
-                              <Select value={formData.accidentType || ''} onValueChange={(value) => handleInputChange('accidentType', value)} required>
+                              <Select value={formData.accidentType || ''} onValueChange={value => handleInputChange('accidentType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select accident type" className="text-slate-600" />
                                 </SelectTrigger>
@@ -647,7 +525,7 @@ const PedestrianAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Primary Injury Type *</label>
-                              <Select value={formData.injuryType || ''} onValueChange={(value) => handleInputChange('injuryType', value)} required>
+                              <Select value={formData.injuryType || ''} onValueChange={value => handleInputChange('injuryType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select injury type" className="text-slate-600" />
                                 </SelectTrigger>
@@ -666,7 +544,7 @@ const PedestrianAccidents: React.FC = () => {
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Medical Treatment *</label>
-                              <Select value={formData.medicalTreatment || ''} onValueChange={(value) => handleInputChange('medicalTreatment', value)} required>
+                              <Select value={formData.medicalTreatment || ''} onValueChange={value => handleInputChange('medicalTreatment', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select treatment level" className="text-slate-600" />
                                 </SelectTrigger>
@@ -686,7 +564,7 @@ const PedestrianAccidents: React.FC = () => {
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Insurance Status *</label>
-                              <Select value={formData.insuranceClaim || ''} onValueChange={(value) => handleInputChange('insuranceClaim', value)} required>
+                              <Select value={formData.insuranceClaim || ''} onValueChange={value => handleInputChange('insuranceClaim', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select claim status" className="text-slate-600" />
                                 </SelectTrigger>
@@ -704,7 +582,7 @@ const PedestrianAccidents: React.FC = () => {
                             </div>
                             <div className="space-y-2">
                               <label className="text-slate-800 text-base font-medium">Walking Activity *</label>
-                              <Select value={formData.walkingActivity || ''} onValueChange={(value) => handleInputChange('walkingActivity', value)} required>
+                              <Select value={formData.walkingActivity || ''} onValueChange={value => handleInputChange('walkingActivity', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select walking activity" className="text-slate-600" />
                                 </SelectTrigger>
@@ -725,35 +603,12 @@ const PedestrianAccidents: React.FC = () => {
                             <label className="text-slate-800 text-base font-medium">
                               Please describe your pedestrian accident *
                             </label>
-                            <Textarea
-                              name="description"
-                              value={formData.description}
-                              onChange={(e) => handleInputChange('description', e.target.value)}
-                              placeholder="Please provide details about how the pedestrian accident occurred..."
-                              rows={5}
-                              className=""
-                              required
-                              aria-required="true"
-                            />
+                            <Textarea name="description" value={formData.description} onChange={e => handleInputChange('description', e.target.value)} placeholder="Please provide details about how the pedestrian accident occurred..." rows={5} className="" required aria-required="true" />
                           </div>
 
-                          <div className="flex items-start space-x-2">
-                            <input
-                              type="checkbox"
-                              name="consent"
-                              className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
-                              required
-                              aria-required="true"
-                            />
-                            <label className="text-slate-700 text-sm leading-relaxed">
-                              I consent to being contacted by Trembach Law Firm regarding my pedestrian accident case. I understand this consultation is free and there is no obligation. *
-                            </label>
-                          </div>
+                          
 
-                          <Button 
-                            type="submit" 
-                            className="w-full btn-enhanced py-4 text-lg"
-                          >
+                          <Button type="submit" className="w-full btn-enhanced py-4 text-lg">
                             Get My Free Case Evaluation
                           </Button>
                         </form>
@@ -1259,28 +1114,17 @@ const PedestrianAccidents: React.FC = () => {
               </div>
               
               <div className="space-y-4">
-                {faqData.map((faq, index) => (
-                  <Card key={index} className="glass-card">
-                    <CardHeader 
-                      className="cursor-pointer hover:bg-muted/50 transition-colors"
-                      onClick={() => toggleFaq(index)}
-                    >
+                {faqData.map((faq, index) => <Card key={index} className="glass-card">
+                    <CardHeader className="cursor-pointer hover:bg-muted/50 transition-colors" onClick={() => toggleFaq(index)}>
                       <CardTitle className="flex items-center justify-between text-lg">
                         <span>{faq.question}</span>
-                        {expandedFaq === index ? (
-                          <ChevronUp className="w-5 h-5 text-red-600" />
-                        ) : (
-                          <ChevronDown className="w-5 h-5 text-red-600" />
-                        )}
+                        {expandedFaq === index ? <ChevronUp className="w-5 h-5 text-red-600" /> : <ChevronDown className="w-5 h-5 text-red-600" />}
                       </CardTitle>
                     </CardHeader>
-                    {expandedFaq === index && (
-                      <CardContent>
+                    {expandedFaq === index && <CardContent>
                         <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
-                      </CardContent>
-                    )}
-                  </Card>
-                ))}
+                      </CardContent>}
+                  </Card>)}
               </div>
             </section>
 
@@ -1391,10 +1235,7 @@ const PedestrianAccidents: React.FC = () => {
                       Insurance companies know that delayed cases are weaker cases – don't give them that advantage.
                     </p>
                     
-                    <Button 
-                      className="w-full md:w-auto bg-red-600 hover:bg-red-700"
-                      onClick={() => window.location.href = '/pedestrian-case-evaluation'}
-                    >
+                    <Button className="w-full md:w-auto bg-red-600 hover:bg-red-700" onClick={() => window.location.href = '/pedestrian-case-evaluation'}>
                       Start My Free Case Evaluation Now
                     </Button>
                   </div>
@@ -1412,28 +1253,17 @@ const PedestrianAccidents: React.FC = () => {
                   <CardTitle className="text-red-600">Need Help Now?</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
-                  <Button 
-                    className="w-full bg-red-600 hover:bg-red-700 text-white"
-                    onClick={() => window.location.href = 'tel:8181234567'}
-                  >
+                  <Button className="w-full bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = 'tel:8181234567'}>
                     <Phone className="w-4 h-4 mr-2" />
                     Call (818) 123-4567
                   </Button>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-red-200 text-red-600 hover:bg-red-50"
-                    onClick={() => window.location.href = '/pedestrian-case-evaluation'}
-                  >
+                  <Button variant="outline" className="w-full border-red-200 text-red-600 hover:bg-red-50" onClick={() => window.location.href = '/pedestrian-case-evaluation'}>
                     <MessageCircle className="w-4 h-4 mr-2" />
                     Free Case Review
                   </Button>
                   
-                  <Button 
-                    variant="outline" 
-                    className="w-full border-red-200 text-red-600 hover:bg-red-50"
-                    onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
-                  >
+                  <Button variant="outline" className="w-full border-red-200 text-red-600 hover:bg-red-50" onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}>
                     <Mail className="w-4 h-4 mr-2" />
                     Email Us
                   </Button>
@@ -1488,11 +1318,7 @@ const PedestrianAccidents: React.FC = () => {
 
               {/* Sidebar Image */}
               <div className="hidden lg:block">
-                <img 
-                  src={sidebarImage} 
-                  alt="California crosswalk safety" 
-                  className="w-full h-48 object-cover rounded-lg shadow-lg"
-                />
+                <img src={sidebarImage} alt="California crosswalk safety" className="w-full h-48 object-cover rounded-lg shadow-lg" />
                 <div className="mt-4 p-4 bg-muted rounded-lg">
                   <h4 className="font-semibold text-sm mb-2">Crosswalk Safety</h4>
                   <p className="text-xs text-muted-foreground">
@@ -1517,28 +1343,16 @@ const PedestrianAccidents: React.FC = () => {
             You have the right to safe passage, and we defend that right vigorously.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="bg-white text-red-600 hover:bg-red-50 border-white text-lg px-8 py-4"
-              onClick={() => window.location.href = '/pedestrian-case-evaluation'}
-            >
+            <Button size="lg" variant="outline" className="bg-white text-red-600 hover:bg-red-50 border-white text-lg px-8 py-4" onClick={() => window.location.href = '/pedestrian-case-evaluation'}>
               Get Free Case Review
             </Button>
-            <Button 
-              size="lg" 
-              variant="outline"
-              className="bg-transparent text-white border-white hover:bg-white/10 text-lg px-8 py-4"
-              onClick={() => window.location.href = 'tel:8181234567'}
-            >
+            <Button size="lg" variant="outline" className="bg-transparent text-white border-white hover:bg-white/10 text-lg px-8 py-4" onClick={() => window.location.href = 'tel:8181234567'}>
               <Phone className="w-5 h-5 mr-2" />
               Call (818) 123-4567
             </Button>
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 };
-
 export default PedestrianAccidents;

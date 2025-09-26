@@ -9,6 +9,7 @@ import { Calculator, DollarSign, FileText, AlertTriangle, PawPrint, Info } from 
 import heroImage from '@/assets/dog-bite-compensation-calculator-hero.jpg';
 import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
+import DogBiteQuestionnaire from '@/components/DogBiteQuestionnaire';
 
 const DogBiteCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -401,6 +402,9 @@ const DogBiteCompensationCalculator: React.FC = () => {
                   </form>
                 </CardContent>
               </Card>
+
+              {/* Comprehensive Questionnaire (50+ Questions) */}
+              <DogBiteQuestionnaire />
             </div>
           </div>
         </div>

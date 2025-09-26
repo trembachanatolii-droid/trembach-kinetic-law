@@ -77,7 +77,7 @@ const PremisesLiabilityCaseEvaluation: React.FC = () => {
           <GoBack />
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
               Free Premises Liability Case Evaluation
             </h1>
             <div className="flex items-center justify-center mb-6">

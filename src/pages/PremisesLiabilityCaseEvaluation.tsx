@@ -84,7 +84,7 @@ const PremisesLiabilityCaseEvaluation: React.FC = () => {
               {[...Array(5)].map((_, i) => (
                 <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
               ))}
-              <span className="ml-2 text-lg">Trusted by Injury Victims</span>
+              <span className="ml-2 text-lg text-white">Trusted by Injury Victims</span>
             </div>
             <p className="text-xl">
               Get expert legal advice about your property injury case - completely free

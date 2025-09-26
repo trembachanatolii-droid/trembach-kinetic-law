@@ -282,7 +282,7 @@ const DogBitesAnimalAttacks: React.FC = () => {
             <Button 
               size="lg" 
               className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
-              onClick={() => window.location.href = '/case-evaluation'}
+              onClick={() => window.location.href = '/dog-bite-case-evaluation'}
             >
               START MY FREE CASE EVALUATION
             </Button>

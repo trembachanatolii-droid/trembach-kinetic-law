@@ -86,7 +86,7 @@ const PremisesLiabilityCaseEvaluation: React.FC = () => {
               ))}
               <span className="ml-2 text-lg text-white">Trusted by Injury Victims</span>
             </div>
-            <p className="text-xl">
+            <p className="text-xl text-white">
               Get expert legal advice about your property injury case - completely free
             </p>
           </div>

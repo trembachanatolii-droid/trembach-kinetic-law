@@ -110,18 +110,18 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Solid, high-contrast blue glass variant for readability */
+/* Solid, high-contrast white background variant for readability */
 .premium-form-container--blue-solid {
   background: linear-gradient(135deg,
-    hsl(var(--primary) / 0.92) 0%,
-    hsl(var(--primary) / 0.96) 50%,
-    hsl(var(--primary) / 1) 100%
-  );
-  border: 1px solid hsl(var(--primary) / 0.6);
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(248, 250, 252, 0.95) 50%,
+    rgba(241, 245, 249, 0.92) 100%
+  ) !important;
+  border: 1px solid rgba(59, 130, 246, 0.4) !important;
   box-shadow:
-    0 30px 60px hsl(var(--primary) / 0.25),
-    0 0 0 1px hsl(var(--primary) / 0.3),
-    inset 0 1px 0 hsl(var(--primary-foreground) / 0.2);
+    0 30px 60px rgba(59, 130, 246, 0.15),
+    0 0 0 1px rgba(59, 130, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
 
 .premium-form-container::before {

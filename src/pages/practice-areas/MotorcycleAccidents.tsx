@@ -252,15 +252,15 @@ const MotorcycleAccidents = () => {
                     <AdvancedThreeDVisualEffects>
                       <div className="premium-form-container premium-form-container--blue-solid interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                         <div className="text-center mb-8">
-                          <h3 className="text-2xl md:text-3xl font-display text-foreground mb-2 font-bold">Get Your Free Motorcycle Accident Case Evaluation</h3>
+                          <h3 className="text-2xl md:text-3xl font-display text-slate-900 mb-2 font-bold">Get Your Free Motorcycle Accident Case Evaluation</h3>
                           <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
-                          <p className="text-foreground text-lg leading-relaxed">Specialized evaluation for motorcycle accident cases throughout California</p>
+                          <p className="text-slate-700 text-lg leading-relaxed">Specialized evaluation for motorcycle accident cases throughout California</p>
                         </div>
 
                         <form onSubmit={handleSubmit} className="space-y-6" role="form" aria-label="Motorcycle Accident Case Evaluation Form">
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-foreground text-base font-medium">First Name *</label>
+                              <label className="text-slate-800 text-base font-medium">First Name *</label>
                               <Input
                                 name="firstName"
                                 value={formData.name.split(' ')[0] || ''}
@@ -275,7 +275,7 @@ const MotorcycleAccidents = () => {
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="text-foreground text-base font-medium">Last Name *</label>
+                              <label className="text-slate-800 text-base font-medium">Last Name *</label>
                               <Input
                                 name="lastName"
                                 value={formData.name.split(' ').slice(1).join(' ') || ''}
@@ -293,7 +293,7 @@ const MotorcycleAccidents = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-foreground text-base font-medium">Email *</label>
+                              <label className="text-slate-800 text-base font-medium">Email *</label>
                               <Input
                                 type="email"
                                 name="email"
@@ -306,7 +306,7 @@ const MotorcycleAccidents = () => {
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="text-foreground text-base font-medium">Phone *</label>
+                              <label className="text-slate-800 text-base font-medium">Phone *</label>
                               <Input
                                 type="tel"
                                 name="phone"
@@ -322,7 +322,7 @@ const MotorcycleAccidents = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-foreground text-base font-medium">Date of Accident *</label>
+                              <label className="text-slate-800 text-base font-medium">Date of Accident *</label>
                               <Input
                                 type="date"
                                 name="accidentDate"
@@ -334,7 +334,7 @@ const MotorcycleAccidents = () => {
                               />
                             </div>
                             <div className="space-y-2">
-                              <label className="text-white text-base font-medium">Type of Motorcycle *</label>
+                              <label className="text-slate-800 text-base font-medium">Type of Motorcycle *</label>
                               <Select value={formData.motorcycleType || ''} onValueChange={(value) => handleInputChange('motorcycleType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select motorcycle type" className="text-blue-200/70" />
@@ -356,7 +356,7 @@ const MotorcycleAccidents = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-white text-base font-medium">Type of Accident *</label>
+                              <label className="text-slate-800 text-base font-medium">Type of Accident *</label>
                               <Select value={formData.accidentType || ''} onValueChange={(value) => handleInputChange('accidentType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select accident type" className="text-blue-200/70" />
@@ -374,7 +374,7 @@ const MotorcycleAccidents = () => {
                               </Select>
                             </div>
                             <div className="space-y-2">
-                              <label className="text-white text-base font-medium">Primary Injury Type *</label>
+                              <label className="text-slate-800 text-base font-medium">Primary Injury Type *</label>
                               <Select value={formData.injuryType || ''} onValueChange={(value) => handleInputChange('injuryType', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select injury type" className="text-blue-200/70" />
@@ -397,7 +397,7 @@ const MotorcycleAccidents = () => {
 
                           <div className="grid md:grid-cols-2 gap-6">
                             <div className="space-y-2">
-                              <label className="text-white text-base font-medium">Medical Treatment *</label>
+                              <label className="text-slate-800 text-base font-medium">Medical Treatment *</label>
                               <Select value={formData.medicalTreatment || ''} onValueChange={(value) => handleInputChange('medicalTreatment', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select treatment level" className="text-blue-200/70" />
@@ -414,7 +414,7 @@ const MotorcycleAccidents = () => {
                               </Select>
                             </div>
                             <div className="space-y-2">
-                              <label className="text-white text-base font-medium">Insurance Status *</label>
+                              <label className="text-slate-800 text-base font-medium">Insurance Status *</label>
                               <Select value={formData.insuranceClaim || ''} onValueChange={(value) => handleInputChange('insuranceClaim', value)} required>
                                 <SelectTrigger className="h-12 text-base">
                                   <SelectValue placeholder="Select claim status" className="text-blue-200/70" />
@@ -434,7 +434,7 @@ const MotorcycleAccidents = () => {
                           </div>
 
                           <div className="space-y-4">
-                            <label className="text-foreground text-base font-medium">
+                            <label className="text-slate-800 text-base font-medium">
                               Please describe your motorcycle accident *
                             </label>
                             <Textarea
@@ -457,7 +457,7 @@ const MotorcycleAccidents = () => {
                               required
                               aria-required="true"
                             />
-                            <label className="text-foreground text-sm leading-relaxed">
+                            <label className="text-slate-700 text-sm leading-relaxed">
                               I consent to being contacted by Trembach Law Firm regarding my motorcycle accident case. I understand this consultation is free and there is no obligation. *
                             </label>
                           </div>

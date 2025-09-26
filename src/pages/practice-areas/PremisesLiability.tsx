@@ -88,7 +88,7 @@ const PremisesLiability: React.FC = () => {
     }}>
         <div className="absolute inset-0 bg-black/60"></div>
         <div className="relative z-10 text-center text-white max-w-6xl mx-auto px-4">
-          <h1 className="text-5xl md:text-7xl font-bold mb-6">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white">
             California Premises Liability Lawyers
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">

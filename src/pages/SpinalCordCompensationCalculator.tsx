@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/spinal-cord-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 
 const SpinalCordCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -104,7 +104,7 @@ const SpinalCordCompensationCalculator: React.FC = () => {
         canonical="/spinal-cord-compensation-calculator"
       />
       
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

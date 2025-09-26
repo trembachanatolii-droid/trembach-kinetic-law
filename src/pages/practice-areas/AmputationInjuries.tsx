@@ -49,7 +49,7 @@ import prostheticImage from '@/assets/practice-areas/amputation-prosthetics.jpg'
 import lifetimeCareImage from '@/assets/practice-areas/amputation-lifetime-care.jpg';
 import timeLimitsImage from '@/assets/practice-areas/amputation-legal-timeline.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -344,7 +344,7 @@ const AmputationInjuries: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        
+        <GoBack />
         
         {/* Hero Section - Exact ratio match to Premises Liability */}
         <section 

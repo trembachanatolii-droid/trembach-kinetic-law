@@ -31,6 +31,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/construction-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 const ConstructionMedicalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -636,6 +637,8 @@ const ConstructionMedicalGuidance: React.FC = () => {
         description="Comprehensive medical guidance for construction accident injuries. Learn about treatment options, recovery processes, and medical documentation for legal claims in California."
       />
       
+      <GoBack fallbackPath="/practice-areas/construction-accidents" className="top-20 z-[60]" />
+
       {/* Hero Section */}
       <section 
         className="relative pt-20 pb-16 bg-gradient-to-r from-primary/95 to-primary/85 text-white"

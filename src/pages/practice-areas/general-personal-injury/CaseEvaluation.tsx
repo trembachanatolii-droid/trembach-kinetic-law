@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import { Badge } from '@/components/ui/badge';
 import { Phone, Mail, Clock, Shield, Users, Award } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/personal-injury-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -101,7 +101,7 @@ const CaseEvaluation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

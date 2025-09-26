@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import craneCalculatorImage from '@/assets/crane-calculator-hero.jpg';
 
@@ -79,7 +79,7 @@ const CraneAccidentsCompensationCalculator: React.FC = () => {
         canonical="/practice-areas/crane-accidents/compensation-calculator"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

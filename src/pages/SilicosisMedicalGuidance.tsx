@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Heart, Stethoscope, FileText, Users } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import medicalGuidanceHero from '@/assets/silicosis-medical-guidance-hero.jpg';
 
 const SilicosisMedicalGuidance: React.FC = () => {
@@ -117,7 +117,7 @@ const SilicosisMedicalGuidance: React.FC = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
-        
+        <GoBack className="container mx-auto px-4" />
         
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">

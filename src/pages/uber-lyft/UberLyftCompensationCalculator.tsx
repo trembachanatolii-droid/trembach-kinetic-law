@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Textarea } from '@/components/ui/textarea';
 import { Calculator, DollarSign, Heart, Clock, Shield, Award, Car, Activity, Star, Phone, Mail, MessageCircle } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/uber-lyft-hero-professional.jpg';
@@ -186,7 +186,7 @@ const UberLyftCompensationCalculator: React.FC = () => {
   return <>
       <SEO title="Uber/Lyft Accident Compensation Calculator | Calculate Your Settlement Value" description="Calculate potential compensation for Uber/Lyft accident cases. Free tool estimates settlement values for rideshare accident injuries in California." />
 
-      
+      <GoBack />
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

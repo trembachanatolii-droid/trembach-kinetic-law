@@ -21,7 +21,7 @@ import {
 import heroBackground from '@/assets/railroad-hero-bg.jpg';
 import resourcesImage from '@/assets/railroad-resources.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import { useState } from 'react';
 
 const RailroadAccidentsResources: React.FC = () => {
@@ -106,7 +106,7 @@ const RailroadAccidentsResources: React.FC = () => {
         keywords="railroad accident resources, FELA information, train safety resources, California railroad law, railroad accident help"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/railroad-accidents" />
 
       {/* Hero Section */}
       <section 

@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calculator, DollarSign, AlertTriangle } from 'lucide-react';
 import heroBackground from '@/assets/aviation-calculator-hero.jpg';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const AviationCompensationCalculator: React.FC = () => {
@@ -114,7 +114,7 @@ const AviationCompensationCalculator: React.FC = () => {
           "operatingSystem": "Any"
         }}
       />
-      
+      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}
       <section 

@@ -44,7 +44,7 @@ import stepsAfterInjuryImage from '@/assets/practice-areas/pharmaceutical-steps.
 import legalProcessImage from '@/assets/practice-areas/pharmaceutical-legal-process.jpg';
 import compensationImage from '@/assets/practice-areas/pharmaceutical-compensation.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -386,7 +386,7 @@ const Pharmaceutical: React.FC = () => {
         <div className="absolute inset-0 bg-black/70"></div>
         
         {/* Go Back Button */}
-        
+        <GoBack />
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">

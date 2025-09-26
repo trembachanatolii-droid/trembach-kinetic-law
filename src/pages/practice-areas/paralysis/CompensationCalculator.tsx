@@ -20,7 +20,7 @@ import {
   Clock
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/paralysis-compensation-calculator.jpg';
 
 const ParalysisCompensationCalculator: React.FC = () => {
@@ -142,7 +142,7 @@ const ParalysisCompensationCalculator: React.FC = () => {
         keywords="paralysis compensation calculator, spinal cord injury settlement, California paralysis damages, quadriplegia compensation, paraplegia settlement"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

@@ -17,7 +17,7 @@ import {
   Star
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import '../retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-compensation-calculator.jpg';
@@ -173,7 +173,7 @@ const CompensationCalculator: React.FC = () => {
         keywords="retail accident compensation calculator, slip fall settlement calculator, California premises liability damages, shopping injury compensation"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/retail-accidents" />
 
       {/* Hero Section */}
       <section 

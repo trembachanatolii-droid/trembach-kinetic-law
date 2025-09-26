@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Calculator, Scale, Phone, FileText, Users, Award, Building } from 'lucide-react';
 import heroBackground from '@/assets/aviation-resources.jpg';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const AviationResources: React.FC = () => {
@@ -22,7 +22,7 @@ const AviationResources: React.FC = () => {
           "url": "https://www.trembachlawfirm.com/aviation/resources"
         }}
       />
-      
+      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}
       <section 

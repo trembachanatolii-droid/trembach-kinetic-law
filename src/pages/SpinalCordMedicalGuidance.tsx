@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/spinal-cord-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 
 const SpinalCordMedicalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -295,7 +295,7 @@ const SpinalCordMedicalGuidance: React.FC = () => {
         canonical="/spinal-cord-medical-guidance"
       />
       
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

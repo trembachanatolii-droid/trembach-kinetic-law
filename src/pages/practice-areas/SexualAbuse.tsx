@@ -18,7 +18,7 @@ import sidebarImage from '@/assets/sexual-abuse-sidebar.jpg';
 import therapyImage from '@/assets/sexual-abuse-therapy-process.jpg';
 import californiaLawsImage from '@/assets/california-sexual-abuse-laws.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 gsap.registerPlugin(ScrollTrigger);
 interface TabSection {
   id: string;
@@ -365,7 +365,7 @@ const SexualAbuse: React.FC = () => {
   return <div className="min-h-screen bg-background relative">
       <SEO title="California Sexual Abuse Lawyers | Confidential Legal Help | Trembach Law" description="Experienced sexual abuse attorneys in California providing confidential representation for survivors. Free consultation, trauma-informed care, no fees unless we win." canonical="/practice-areas/sexual-abuse" />
 
-      
+      <GoBack className={`transition-opacity duration-500 ${visible ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'}`} />
 
       {/* Hero Section with 3D Effects */}
       <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat overflow-hidden" style={{

@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, Star } from 'lucide-react';
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/benzene-case-evaluation-hero.jpg';
@@ -43,6 +44,7 @@ const BenzeneCaseEvaluation: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
+        <GoBack fallbackPath="/practice-areas/benzene-exposure" />
         
         {/* Hero Section */}
         <section 

@@ -24,6 +24,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/construction-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 interface CalculationResults {
   medicalExpenses: number;
@@ -160,6 +161,8 @@ const ConstructionCompensationCalculator: React.FC = () => {
         description="Calculate potential compensation for your construction accident case. Free calculator estimates medical expenses, lost wages, pain and suffering for California construction injuries."
       />
       
+      <GoBack fallbackPath="/practice-areas/construction-accidents" className="top-20 z-[60]" />
+
       {/* Hero Section */}
       <section 
         className="relative pt-20 pb-16 bg-gradient-to-r from-primary/95 to-primary/85 text-white"

@@ -26,7 +26,7 @@ import {
   Calendar
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/maritime-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -150,7 +150,7 @@ const MaritimeCaseEvaluation: React.FC = () => {
         canonical="/maritime/case-evaluation"
       />
       
-      
+      <GoBack fallbackPath="/practice-areas/maritime-accidents" />
       
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

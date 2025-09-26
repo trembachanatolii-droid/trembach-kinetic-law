@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import GoBack from '@/components/GoBack';
 import faqHero from '@/assets/swimming-pool-faq-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -197,7 +197,7 @@ const SwimmingPoolFAQ: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      
+      <GoBack fallbackPath="/practice-areas/swimming-pool-accidents" />
       
       {/* Hero Section */}
       <section 

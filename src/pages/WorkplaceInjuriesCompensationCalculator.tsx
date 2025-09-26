@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/workplace-calculator-hero.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 
 const WorkplaceInjuriesCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -123,7 +123,7 @@ const WorkplaceInjuriesCompensationCalculator: React.FC = () => {
         canonical="/workplace-injuries-compensation-calculator"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

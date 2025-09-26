@@ -14,6 +14,7 @@ import {
   Shield,
   Star
 } from 'lucide-react';
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/benzene-medical-guidance-hero.jpg';
@@ -81,6 +82,7 @@ const BenzeneMedicalGuidance: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
+        <GoBack fallbackPath="/practice-areas/benzene-exposure" />
         
         {/* Hero Section */}
         <section 

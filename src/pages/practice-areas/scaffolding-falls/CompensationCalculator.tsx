@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import scaffoldingCalculatorImage from '@/assets/scaffolding-calculator-hero.jpg';
 
@@ -188,7 +188,7 @@ const ScaffoldingFallsCompensationCalculator: React.FC = () => {
         </div>
       </section>
 
-      
+      <GoBack className="container mx-auto px-8 pt-8" />
 
       <div className="container mx-auto px-8 py-12">
         <div className="max-w-6xl mx-auto">

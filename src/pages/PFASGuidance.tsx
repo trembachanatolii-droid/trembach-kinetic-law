@@ -14,7 +14,7 @@ import {
   Heart,
   Shield
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-health-effects.jpg';
 
 const PFASGuidance: React.FC = () => {
@@ -100,7 +100,7 @@ const PFASGuidance: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

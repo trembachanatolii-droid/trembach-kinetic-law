@@ -20,7 +20,7 @@ import {
   Building
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/electrocution-legal-process.jpg';
 import SEO from '@/components/SEO';
 
@@ -111,7 +111,7 @@ const ElectrocutionLegalGuidance: React.FC = () => {
         canonical="/practice-areas/electrocution/legal-guidance"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/electrocution" />
 
       {/* Hero Section */}
       <section 

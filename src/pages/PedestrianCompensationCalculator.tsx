@@ -18,7 +18,7 @@ import {
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pedestrian-compensation-calculator-hero.jpg';
 
 interface FormData {
@@ -185,7 +185,7 @@ const PedestrianCompensationCalculator = () => {
         </div>
       </section>
 
-      
+      <GoBack className="top-20 z-[60]" />
 
       {/* Disclaimer */}
       <div className="bg-yellow-50 border-y border-yellow-200 py-4">

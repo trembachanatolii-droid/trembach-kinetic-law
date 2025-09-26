@@ -8,7 +8,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { FileText, Shield, Clock, CheckCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import caseEvaluationHero from '@/assets/case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -51,7 +51,7 @@ const SilicosisCaseEvaluation: React.FC = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
-        
+        <GoBack className="container mx-auto px-4" />
         
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">

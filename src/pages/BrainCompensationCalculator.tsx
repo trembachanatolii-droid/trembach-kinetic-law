@@ -6,6 +6,7 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { AlertTriangle, DollarSign, Calculator, Brain, TrendingUp, CheckCircle, Clock, Phone } from 'lucide-react';
 import heroBackground from '@/assets/brain-compensation-calculator-hero.jpg';
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const BrainCompensationCalculator: React.FC = () => {
@@ -95,6 +96,8 @@ const BrainCompensationCalculator: React.FC = () => {
         description="Calculate potential compensation for your brain injury case. Free TBI settlement estimator from experienced California attorneys."
         canonical="/brain-compensation-calculator"
       />
+
+      <GoBack />
 
       {/* Hero Section */}
       <section

@@ -23,7 +23,7 @@ import {
   Info
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/paralysis-case-evaluation-hero.jpg';
 
 const ParalysisCaseEvaluation: React.FC = () => {
@@ -600,7 +600,7 @@ const ParalysisCaseEvaluation: React.FC = () => {
         keywords="paralysis case evaluation, spinal cord injury lawyer, California paralysis attorney, quadriplegia lawyer, paraplegia attorney"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Phone, Mail, MessageCircle } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import caseEvaluationImage from '@/assets/crane-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -47,7 +47,7 @@ Description: ${formData.description}
         canonical="/practice-areas/crane-accidents/case-evaluation"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

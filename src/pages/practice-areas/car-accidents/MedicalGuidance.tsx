@@ -26,7 +26,7 @@ import {
   Users
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -127,7 +127,7 @@ const CarAccidentMedicalGuidance: React.FC = () => {
       />
 
       <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-accent/5">
-        
+        <GoBack />
         
         {/* Hero Section */}
         <section ref={heroRef} className="relative py-20 overflow-hidden">

@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Alert, AlertDescription } from '@/components/ui/alert';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-
+import GoBack from '@/components/GoBack';
 import { 
   Calculator, 
   DollarSign, 
@@ -150,7 +150,7 @@ const SexualAbuseCalculator: React.FC = () => {
       />
       
       <Navigation />
-      
+      <GoBack fallbackPath="/practice-areas/sexual-abuse" />
       
       {/* Hero Section */}
       <section 

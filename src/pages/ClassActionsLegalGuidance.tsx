@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/class-actions-legal-guidance-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -103,6 +104,8 @@ const ClassActionsLegalGuidance: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <GoBack />
 
       {/* Quick Access Tools */}
       <section className="py-12 bg-gradient-to-r from-primary/5 to-primary/10">

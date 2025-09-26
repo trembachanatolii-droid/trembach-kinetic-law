@@ -27,7 +27,7 @@ import {
   Zap
 } from 'lucide-react';
 import Navigation from '@/components/Navigation';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/explosions-case-evaluation-hero.jpg';
 
@@ -433,7 +433,7 @@ const ExplosionsCaseEvaluation: React.FC = () => {
       </section>
 
       {/* Go Back Button */}
-      
+      <GoBack className="container mx-auto px-8 pt-8" fallbackPath="/practice-areas/explosions" />
 
       {/* Main Content */}
       <div className="container mx-auto px-8 py-12">

@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Calculator, DollarSign, Heart, Clock, Shield, Award, Brain, Baby, Activity, Star } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-compensation-calculator.jpg';
@@ -171,7 +171,7 @@ const BirthInjuriesCompensationCalculator: React.FC = () => {
         description="Calculate potential compensation for birth injury cases. Free tool estimates settlement values for cerebral palsy, HIE, Erb's palsy and other birth injuries in California."
       />
 
-      
+      <GoBack />
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

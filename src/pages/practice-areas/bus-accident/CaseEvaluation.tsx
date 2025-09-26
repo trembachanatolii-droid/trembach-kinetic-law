@@ -20,7 +20,7 @@ import {
   User
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/bus-case-evaluation-hero.jpg';
 
 const BusAccidentCaseEvaluation: React.FC = () => {
@@ -58,7 +58,7 @@ const BusAccidentCaseEvaluation: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/bus-accident/case-evaluation"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section className="relative h-[40vh] flex items-center justify-center">

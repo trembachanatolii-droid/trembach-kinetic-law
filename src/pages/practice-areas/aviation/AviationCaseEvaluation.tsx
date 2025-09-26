@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, Plane, Scale } from 'lucide-react';
 import heroBackground from '@/assets/aviation-case-evaluation-hero.jpg';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -30,7 +30,7 @@ const AviationCaseEvaluation: React.FC = () => {
           "priceRange": "No fees unless we win"
         }}
       />
-      
+      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}
       <section 

@@ -7,6 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calculator, DollarSign, Phone } from 'lucide-react';
 import heroBackground from '@/assets/burn-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 const BurnCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -55,6 +56,8 @@ const BurnCompensationCalculator: React.FC = () => {
         description="Calculate potential burn injury compensation in California. Free settlement estimator for thermal, chemical, electrical burns."
         canonical="/burn-compensation-calculator"
       />
+      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

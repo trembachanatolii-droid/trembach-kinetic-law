@@ -14,7 +14,7 @@ import {
   Download,
   AlertCircle
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-water-treatment.jpg';
 
 const PFASResources: React.FC = () => {
@@ -116,7 +116,7 @@ const PFASResources: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

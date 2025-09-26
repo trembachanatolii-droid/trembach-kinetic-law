@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calculator, DollarSign, AlertTriangle } from 'lucide-react';
 import heroBackground from '@/assets/class-actions-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -98,6 +99,8 @@ const ClassActionsCompensationCalculator: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <GoBack />
 
       <section className="py-20">
         <div className="container mx-auto px-6">

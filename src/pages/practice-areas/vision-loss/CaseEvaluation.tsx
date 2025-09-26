@@ -17,7 +17,7 @@ import {
   Shield,
   Scale
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 // Import hero image
@@ -377,7 +377,7 @@ const VisionLossCaseEvaluation: React.FC = () => {
         canonical="/practice-areas/vision-loss/case-evaluation"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/vision-loss" />
 
       {/* Hero Section */}
       <section 

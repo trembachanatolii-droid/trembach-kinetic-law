@@ -19,7 +19,7 @@ import {
   Users,
   Building
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-legal-steps.jpg';
@@ -322,7 +322,7 @@ const BirthInjuriesLegalGuidance: React.FC = () => {
         description="Comprehensive legal guidance for birth injury claims. Learn about your rights, statute of limitations, proving negligence, and choosing the right attorney in California."
       />
 
-      
+      <GoBack />
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

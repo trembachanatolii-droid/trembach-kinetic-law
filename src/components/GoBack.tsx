@@ -6,14 +6,19 @@ import { useNavigate, useLocation } from 'react-router-dom';
 interface GoBackProps {
   className?: string;
   fallbackPath?: string;
+  forceVisible?: boolean;
 }
 
-const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) => {
+const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/", forceVisible = false }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
+    if (forceVisible) {
+      setVisible(true);
+      return;
+    }
     const onScroll = () => {
       // Show button after scrolling past hero section (typically 300-400px)
       setVisible(window.scrollY > 300);
@@ -21,7 +26,7 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
-  }, []);
+  }, [forceVisible]);
 
   // Enhanced scroll position tracking
   useEffect(() => {
@@ -59,11 +64,12 @@ const GoBack: React.FC<GoBackProps> = ({ className = "", fallbackPath = "/" }) =
 
   const baseClasses = "fixed top-28 left-4 z-[999] transition-all duration-500 ease-in-out";
   const combinedClasses = className ? `${baseClasses} ${className}` : baseClasses;
+  const isVisible = forceVisible || visible;
   
   return (
     <div
-      className={`${combinedClasses} ${visible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-2'}`}
-      aria-hidden={!visible}
+      className={`${combinedClasses} ${isVisible ? 'opacity-100 pointer-events-auto transform translate-y-0' : 'opacity-0 pointer-events-none transform -translate-y-2'}`}
+      aria-hidden={!isVisible}
     >
       <Button
         variant="default"

@@ -10,7 +10,28 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Link } from 'react-router-dom';
 import ThreeDVisualEffects from '@/components/3DVisualEffects';
-import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, Bike, AlertCircle } from 'lucide-react';
+import { 
+  Phone, 
+  Mail, 
+  MessageCircle, 
+  Star, 
+  ChevronDown, 
+  ChevronUp,
+  Heart,
+  Shield,
+  Scale,
+  Clock,
+  Users,
+  Award,
+  FileText,
+  AlertTriangle,
+  Stethoscope,
+  Building,
+  Map,
+  ArrowLeft,
+  Bike,
+  AlertCircle
+} from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/motorcycle-accidents-hero-new.jpg';
 import sceneImage from '@/assets/practice-areas/motorcycle-accident-scene.jpg';
 import legalConsultationImage from '@/assets/practice-areas/motorcycle-legal-consultation.jpg';
@@ -19,12 +40,15 @@ import compensationImage from '@/assets/practice-areas/motorcycle-compensation.j
 import biasDefenseImage from '@/assets/practice-areas/motorcycle-bias-defense.jpg';
 import legalProcessImage from '@/assets/practice-areas/motorcycle-legal-process.jpg';
 import SEO from '@/components/SEO';
+
 gsap.registerPlugin(ScrollTrigger);
+
 interface TabSection {
   id: string;
   label: string;
   icon: React.ElementType;
 }
+
 const MotorcycleAccidentsNew: React.FC = () => {
   const [activeTab, setActiveTab] = useState('overview');
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -43,83 +67,62 @@ const MotorcycleAccidentsNew: React.FC = () => {
     description: '',
     consent: false
   });
+
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
-  const tabs: TabSection[] = [{
-    id: 'overview',
-    label: 'OVERVIEW',
-    icon: FileText
-  }, {
-    id: 'evaluation',
-    label: 'CASE EVALUATION',
-    icon: Scale
-  }, {
-    id: 'immediate-steps',
-    label: 'WHAT TO DO AFTER ACCIDENT',
-    icon: AlertCircle
-  }, {
-    id: 'bias-defense',
-    label: 'FIGHTING BIAS',
-    icon: Shield
-  }, {
-    id: 'legal-process',
-    label: 'LEGAL PROCESS',
-    icon: Heart
-  }, {
-    id: 'faq',
-    label: 'FAQ',
-    icon: MessageCircle
-  }, {
-    id: 'resources',
-    label: 'RESOURCES',
-    icon: Building
-  }];
+
+  const tabs: TabSection[] = [
+    { id: 'overview', label: 'OVERVIEW', icon: FileText },
+    { id: 'evaluation', label: 'CASE EVALUATION', icon: Scale },
+    { id: 'immediate-steps', label: 'WHAT TO DO AFTER ACCIDENT', icon: AlertCircle },
+    { id: 'bias-defense', label: 'FIGHTING BIAS', icon: Shield },
+    { id: 'legal-process', label: 'LEGAL PROCESS', icon: Heart },
+    { id: 'faq', label: 'FAQ', icon: MessageCircle },
+    { id: 'resources', label: 'RESOURCES', icon: Building }
+  ];
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Hero animation - instant
-      gsap.fromTo(heroRef.current?.querySelector('.hero-content'), {
-        opacity: 0,
-        y: 50
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.1,
-        ease: 'power2.out'
-      });
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.1, ease: 'power2.out' }
+      );
 
       // Content sections animation
-      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'), {
-        opacity: 0,
-        y: 30
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.6,
-        stagger: 0.1,
-        scrollTrigger: {
-          trigger: contentRef.current,
-          start: 'top 80%'
+      gsap.fromTo(contentRef.current?.querySelectorAll('.content-section'),
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: contentRef.current,
+            start: 'top 80%'
+          }
         }
-      });
+      );
     });
+
     return () => ctx.revert();
   }, []);
+
   const toggleSection = (sectionId: string) => {
     setExpandedSections(prev => ({
       ...prev,
       [sectionId]: !prev[sectionId]
     }));
   };
+
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({
-        behavior: 'smooth',
-        block: 'start'
-      });
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   };
+
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Motorcycle Accidents Free Case Evaluation:', formData);
@@ -127,204 +130,264 @@ const MotorcycleAccidentsNew: React.FC = () => {
   };
 
   // FAQ Data - 50+ questions
-  const faqs = [{
-    category: 'immediate',
-    question: 'What should I do immediately after a motorcycle accident in California?',
-    answer: 'Safety first - get yourself and your bike out of traffic if possible. Call 911 immediately for any injuries. Take photos of your bike, the other vehicle, road conditions, and injuries before anything is moved. Get witness information and the other driver\'s insurance details. Do not discuss fault or apologize. Seek medical attention even if you feel fine - adrenaline masks injuries. Contact a motorcycle accident attorney before giving statements to insurance companies who often use bias against riders.'
-  }, {
-    category: 'immediate',
-    question: 'Should I move my motorcycle after an accident?',
-    answer: 'Only if it\'s safe and necessary to prevent further accidents. California law requires moving vehicles from traffic lanes when possible, but first take extensive photos showing: bike position, damage, skid marks, road conditions, and traffic controls. If you\'re injured or the bike can\'t be moved safely, leave everything where it is. Turn on hazard lights if possible and set up road flares if available.'
-  }, {
-    category: 'immediate',
-    question: 'What information should I collect at a motorcycle accident scene?',
-    answer: 'Collect: other driver\'s license, insurance, and vehicle information; witness names and contacts; photos of both vehicles from multiple angles; photos of the accident scene including traffic signals, road conditions, and your injuries; weather and lighting conditions; time and exact location; any statements made by the other driver about fault. Also note if you smell alcohol or observe erratic behavior.'
-  }, {
-    category: 'immediate',
-    question: 'Should I call police after a minor motorcycle accident?',
-    answer: 'Always call police for motorcycle accidents, even minor ones. Riders are often blamed unfairly, and police reports provide crucial official documentation. California requires reports for accidents with injuries, deaths, or property damage over $1,000. Even if damage seems minor, motorcycle accident injuries often don\'t appear immediately, and police reports protect against changing stories from other drivers.'
-  }, {
-    category: 'immediate',
-    question: 'What if I\'m not wearing a helmet in California?',
-    answer: 'California requires all motorcyclists and passengers to wear DOT-approved helmets. Not wearing a helmet can affect your case through comparative negligence but won\'t bar recovery. Insurance companies will argue your injuries would have been less severe with a helmet, potentially reducing compensation. However, many serious motorcycle injuries occur to other body parts. An experienced attorney can minimize helmet-related fault arguments and focus on the other driver\'s negligence.'
-  }, {
-    category: 'bias',
-    question: 'How does anti-motorcycle bias affect my case?',
-    answer: 'Anti-motorcycle bias is real and pervasive. Studies show many people wrongly view motorcyclists as reckless risk-takers responsible for their own accidents. Insurance companies exploit this bias by immediately investigating rider behavior, demanding helmet cam footage, and scrutinizing riding experience. Police officers may unfairly blame riders in accident reports. Potential jurors often harbor unconscious bias. Experienced motorcycle attorneys counter these prejudices with factual evidence, expert testimony, and jury education about rider rights and safety.'
-  }, {
-    category: 'bias',
-    question: 'What motorcycle stereotypes do insurance companies use against me?',
-    answer: 'Insurance companies commonly claim motorcyclists are: speed demons who always exceed limits, show-offs performing dangerous stunts, weekend warriors lacking experience, risk-takers who don\'t follow traffic laws, or riders who split lanes recklessly. They\'ll examine your social media for any photos suggesting aggressive riding. They may argue your bike\'s power capabilities suggest reckless use. Expert attorneys counter these stereotypes with riding records, training certificates, witness testimony, and accident reconstruction showing the other driver\'s fault.'
-  }, {
-    category: 'bias',
-    question: 'How do I prove the other driver\'s fault in a motorcycle accident?',
-    answer: 'Evidence is crucial because bias works against motorcyclists. Gather: traffic camera footage, surveillance video from nearby businesses, witness statements emphasizing the other driver\'s actions, cell phone records showing distracted driving, police citations issued, accident reconstruction analysis, and expert testimony about vehicle dynamics. Your attorney may hire accident reconstruction specialists and motorcycle safety experts to demonstrate how the other driver\'s negligence caused the collision.'
-  }, {
-    category: 'bias',
-    question: 'What if the police report blames me unfairly?',
-    answer: 'Police reports aren\'t final determinations of fault and can be challenged. Officers often lack motorcycle accident training and may make assumptions based on bias. Your attorney can investigate further, interview witnesses the police missed, obtain additional evidence like surveillance footage, and hire accident reconstruction experts. Independent investigations frequently reveal evidence of the other driver\'s fault not included in initial police reports.'
-  }, {
-    category: 'bias',
-    question: 'How does lane splitting affect my motorcycle accident case?',
-    answer: 'Lane splitting is legal in California when done safely, but insurance companies often blame riders regardless. They\'ll argue you were going too fast between cars or that the other driver couldn\'t see you. However, lane splitting is specifically allowed by Vehicle Code 21658.1 when done in a safe manner. Expert attorneys use traffic engineering studies, helmet cam footage, and witness testimony to prove lane splitting was conducted safely and legally, placing fault on the negligent driver.'
-  }, {
-    category: 'legal',
-    question: 'How long do I have to file a motorcycle accident lawsuit in California?',
-    answer: 'California\'s statute of limitations gives you 2 years from the accident date to file a personal injury lawsuit, and 3 years for property damage claims. However, if a government entity is involved (city bus, county vehicle, etc.), you must file a claim within 6 months. Don\'t wait - motorcycle accident evidence like skid marks disappears quickly, and witnesses forget crucial details. Early investigation strengthens your case significantly.'
-  }, {
-    category: 'legal',
-    question: 'What if I\'m partially at fault for my motorcycle accident?',
-    answer: 'California\'s pure comparative negligence law allows recovery even if you\'re 99% at fault - your damages are just reduced by your fault percentage. For example, if damages total $200,000 and you\'re 20% at fault, you recover $160,000. This is more favorable than other states that bar recovery if you\'re 50% or more at fault. Insurance companies often try to inflate rider fault percentages, making experienced legal representation crucial.'
-  }, {
-    category: 'legal',
-    question: 'What damages can I recover in a California motorcycle accident?',
-    answer: 'California allows recovery for: medical expenses (past and future), lost wages and diminished earning capacity, property damage to your bike and gear, pain and suffering, emotional distress, disability and disfigurement, and loss of life enjoyment. Motorcycle accidents often cause severe injuries requiring extensive medical treatment, making future damages substantial. Punitive damages may be available if the other driver was intoxicated or extremely reckless.'
-  }, {
-    category: 'legal',
-    question: 'Should I handle my motorcycle accident case without an attorney?',
-    answer: 'Absolutely not. Motorcycle cases involve unique challenges including bias, complex injury patterns, and specialized equipment knowledge. Insurance companies have teams of lawyers and experts working against you from day one. They know most people don\'t understand motorcycle accident dynamics and will use this to minimize your claim. Studies show represented clients recover significantly more compensation than those who handle cases themselves.'
-  }, {
-    category: 'legal',
-    question: 'How is motorcycle accident compensation calculated?',
-    answer: 'Compensation includes economic damages (medical bills, lost wages, property damage) and non-economic damages (pain, suffering, disability). Motorcycle accidents often result in severe injuries making future medical care expensive. Calculation considers: injury severity and permanence, impact on earning capacity, need for ongoing medical treatment, degree of pain and suffering, and effect on quality of life. Experienced attorneys use medical economists and life care planners to accurately calculate future needs.'
-  }, {
-    category: 'medical',
-    question: 'What are the most common motorcycle accident injuries?',
-    answer: 'Motorcycle accidents cause severe injuries due to lack of protection: traumatic brain injuries (even with helmets), spinal cord injuries and paralysis, broken bones and fractures, road rash and skin grafts, internal organ damage, amputations, soft tissue injuries, and psychological trauma. These injuries often require multiple surgeries, extensive rehabilitation, and permanent lifestyle changes. The severity of motorcycle injuries makes immediate and ongoing medical documentation crucial for your case.'
-  }, {
-    category: 'medical',
-    question: 'Why should I seek medical attention after a motorcycle accident?',
-    answer: 'Seek immediate medical attention even if you feel fine. Adrenaline and shock mask serious injuries that appear hours or days later. Internal injuries, brain trauma, and spinal damage may not cause immediate pain. Delaying medical treatment gives insurance companies ammunition to argue your injuries aren\'t accident-related. Early medical documentation creates a clear link between the accident and your injuries, strengthening your legal case.'
-  }, {
-    category: 'medical',
-    question: 'What if I can\'t afford medical treatment after my motorcycle accident?',
-    answer: 'Don\'t let financial concerns prevent necessary medical treatment. Options include: your health insurance, medical payments coverage on your motorcycle policy, the other driver\'s insurance (if they accept fault), medical liens where doctors wait for settlement payment, and letters of protection from your attorney guaranteeing payment. Many medical providers work with accident victims, and attorneys can arrange treatment networks that wait for case resolution.'
-  }, {
-    category: 'medical',
-    question: 'How do I document my motorcycle accident injuries properly?',
-    answer: 'Proper documentation is crucial: take photos of all visible injuries immediately after the accident and throughout healing, keep detailed records of pain levels and limitations, attend all medical appointments and follow treatment recommendations, save all medical bills and records, document how injuries affect daily activities, and never minimize pain to medical providers. This documentation becomes crucial evidence for your compensation claim.'
-  }, {
-    category: 'medical',
-    question: 'What if insurance companies question my motorcycle accident injuries?',
-    answer: 'Insurance companies routinely question motorcycle accident injuries, claiming they\'re pre-existing, exaggerated, or unrelated to the accident. They may demand independent medical exams by their doctors or surveillance to "catch" you doing activities they claim you can\'t do. Your attorney will counter with comprehensive medical records, expert medical testimony, functional capacity evaluations, and day-in-the-life videos showing your true limitations.'
-  }, {
-    category: 'insurance',
-    question: 'What motorcycle insurance do I need in California?',
-    answer: 'California requires minimum liability coverage: $15,000 per person/$30,000 per accident for bodily injury, and $5,000 for property damage. However, these minimums are inadequate for serious motorcycle accidents. We recommend: higher liability limits, comprehensive and collision coverage, uninsured/underinsured motorist coverage (crucial since many drivers lack adequate insurance), and medical payments coverage for immediate medical expenses regardless of fault.'
-  }, {
-    category: 'insurance',
-    question: 'What if the other driver doesn\'t have insurance?',
-    answer: 'Uninsured drivers are unfortunately common in California. Your options include: filing a claim under your uninsured motorist coverage (if you have it), suing the driver personally (though collection can be difficult), checking if other insurance applies (employer policies if they were working), and exploring other liable parties (vehicle owners, bars that overserved drunk drivers). This highlights why uninsured motorist coverage is essential for all riders.'
-  }, {
-    category: 'insurance',
-    question: 'Should I give a recorded statement to insurance companies?',
-    answer: 'Never give recorded statements to the other driver\'s insurance company without attorney representation. These statements are designed to get you to say something that damages your case. Insurance adjusters are trained interrogators who will ask leading questions to minimize your injuries or shift blame. You\'re only required to cooperate with your own insurance company, and even then, it\'s best to have attorney guidance.'
-  }, {
-    category: 'insurance',
-    question: 'How do insurance companies investigate motorcycle accidents?',
-    answer: 'Insurance companies conduct aggressive investigations to deny or minimize motorcycle accident claims: they interview all parties and witnesses, examine the accident scene, review police reports and traffic citations, analyze medical records for pre-existing conditions, conduct surveillance of injured riders, examine social media for contradictory evidence, hire accident reconstruction experts, and may demand bike inspections. Having your own attorney levels the playing field with independent investigations and expert witnesses.'
-  }, {
-    category: 'insurance',
-    question: 'What insurance tactics are used against motorcycle accident victims?',
-    answer: 'Common insurance tactics include: delaying claim processing hoping you\'ll accept quick lowball offers, demanding unnecessary medical records to find pre-existing conditions, using surveillance to "catch" normal activities they claim prove you\'re not injured, scheduling independent medical exams with doctors known for minimizing injuries, arguing that safety gear would have prevented injuries, and exploiting motorcycle stereotypes to shift blame to the rider.'
-  }, {
-    category: 'settlement',
-    question: 'How long does a motorcycle accident case take to settle?',
-    answer: 'Motorcycle accident cases typically take 6 months to 2 years, depending on injury severity and insurance cooperation. Complex cases with severe injuries, disputed liability, or uncooperative insurers take longer. Factors affecting timeline include: reaching maximum medical improvement, completing injury treatment, gathering all evidence, and negotiating with insurance companies. Your attorney will advise when you\'ve reached the best time to settle versus continuing treatment or filing a lawsuit.'
-  }, {
-    category: 'settlement',
-    question: 'Should I accept the first settlement offer for my motorcycle accident?',
-    answer: 'Almost never accept the first offer. Initial offers are typically far below fair compensation and are made before the full extent of injuries is known. Insurance companies hope you\'ll accept quickly before consulting an attorney. Motorcycle accident injuries often require long-term treatment, and settling too early prevents recovering additional compensation for ongoing medical needs, permanent disabilities, or lost earning capacity.'
-  }, {
-    category: 'settlement',
-    question: 'What factors determine my motorcycle accident settlement amount?',
-    answer: 'Settlement amounts depend on: severity and permanence of injuries, total medical expenses (past and future), lost wages and diminished earning capacity, degree of pain and suffering, impact on quality of life, degree of other driver\'s fault, insurance policy limits available, strength of evidence supporting your case, and your attorney\'s negotiation skills. Motorcycle accidents often result in higher settlements due to injury severity, but bias can work against riders without proper representation.'
-  }, {
-    category: 'settlement',
-    question: 'Can I reopen my motorcycle accident case after settling?',
-    answer: 'Generally no - settlements include releases that prevent future claims related to the accident. This is why it\'s crucial not to settle until you understand the full extent of your injuries and future medical needs. Exceptions may exist for fraud or if new injuries develop that couldn\'t reasonably have been discovered, but these are rare. Always ensure you\'ve reached maximum medical improvement before settling.'
-  }, {
-    category: 'settlement',
-    question: 'What if the insurance company denies my motorcycle accident claim?',
-    answer: 'Claim denials can often be overturned with proper legal representation. Common denial reasons include: disputed liability, coverage exclusions, late reporting, or insufficient evidence. Your attorney can appeal the denial with additional evidence, expert opinions, and legal arguments. If the denial is unreasonable, you may have bad faith insurance claims against your own insurer or the option to file a lawsuit against the at-fault driver.'
-  }, {
-    category: 'process',
-    question: 'What happens during a motorcycle accident lawsuit?',
-    answer: 'If settlement negotiations fail, filing a lawsuit begins the formal legal process: complaint filing and service, discovery (document exchange, depositions, expert witnesses), mediation attempts, and potentially trial. Most cases settle before trial, but having an attorney prepared for court strengthens your negotiating position. Motorcycle cases often require accident reconstruction experts, medical experts, and economic experts to prove damages.'
-  }, {
-    category: 'process',
-    question: 'Do motorcycle accident cases go to trial?',
-    answer: 'Most motorcycle accident cases settle out of court, but your attorney must be prepared for trial. Going to trial may be necessary if: insurance companies make unreasonable offers, liability is strongly disputed, or damages are substantial enough to justify trial risks. Having trial-experienced attorneys often leads to better settlement offers because insurance companies know they\'ll face competent courtroom representation.'
-  }, {
-    category: 'process',
-    question: 'How much does a motorcycle accident attorney cost?',
-    answer: 'Most motorcycle accident attorneys work on contingency fees, meaning no upfront costs and fees are only paid if you recover compensation. Typical contingency fees range from 33% to 40% of the recovery amount. This arrangement allows anyone to afford quality legal representation regardless of financial situation. Given the complexity and bias issues in motorcycle cases, attorney representation typically results in significantly higher net recovery even after fees.'
-  }, {
-    category: 'process',
-    question: 'What should I look for in a motorcycle accident attorney?',
-    answer: 'Choose an attorney with: specific experience handling motorcycle accident cases, understanding of motorcycle dynamics and rider bias, proven track record of motorcycle accident recoveries, resources to hire necessary experts, willingness to take cases to trial if needed, and genuine understanding of motorcycle culture. Many general personal injury attorneys lack the specialized knowledge needed to effectively represent motorcycle accident victims against bias and insurance company tactics.'
-  }, {
-    category: 'process',
-    question: 'How do I prepare for meeting with a motorcycle accident attorney?',
-    answer: 'Bring: police report, insurance information for all parties, photos of the accident scene and injuries, medical records and bills, witness contact information, your motorcycle registration and insurance policy, and any correspondence with insurance companies. Write down a detailed account of how the accident happened while it\'s fresh in your memory. Don\'t sign anything or give recorded statements before consulting with an attorney.'
-  }, {
-    category: 'prevention',
-    question: 'What are the most common causes of motorcycle accidents in California?',
-    answer: 'Leading causes include: left-turning vehicles failing to yield to motorcycles, distracted driving (cell phones, texting), drunk/impaired driving, speeding and aggressive driving, following too closely, improper lane changes without checking blind spots, road hazards and poor maintenance, and weather conditions. Many accidents occur because other drivers simply don\'t see motorcycles or fail to judge their speed and distance properly.'
-  }, {
-    category: 'prevention',
-    question: 'What can motorcyclists do to prevent accidents?',
-    answer: 'Safety measures include: wearing proper protective gear (helmet, jacket, gloves, boots), taking motorcycle safety courses, practicing defensive driving techniques, maintaining proper bike maintenance, avoiding riding in bad weather when possible, staying visible with proper lighting and bright colors, never riding under the influence, and being extra cautious at intersections where many accidents occur. However, even the safest riders can\'t prevent negligent driver actions.'
-  }, {
-    category: 'prevention',
-    question: 'Where do most motorcycle accidents happen in California?',
-    answer: 'Common accident locations include: urban intersections where cars turn left across motorcycle paths, freeway merges where cars change lanes without checking blind spots, construction zones with changing traffic patterns, mountain roads popular with weekend riders, beach communities with tourist traffic unfamiliar with local roads, and parking lots where visibility is limited. Los Angeles, San Francisco, and San Diego counties see the highest accident numbers due to traffic volume.'
-  }, {
-    category: 'prevention',
-    question: 'How does weather affect motorcycle accident risk?',
-    answer: 'Weather significantly impacts motorcycle safety: rain reduces tire traction and visibility, wind affects bike stability especially for lighter riders, fog creates dangerous visibility conditions, extreme heat can cause rider fatigue and tire blowouts, and cold weather reduces rider dexterity and reaction time. California\'s year-round riding weather means many riders encounter conditions they\'re unprepared for. Other drivers are also less aware of motorcycles in poor weather.'
-  }, {
-    category: 'special',
-    question: 'What if my motorcycle accident involved a commercial vehicle?',
-    answer: 'Commercial vehicle accidents often involve additional liability and insurance coverage: trucking companies may be liable for inadequate training, hours of service violations, or maintenance failures; commercial insurance policies typically have higher limits; federal regulations may apply creating additional evidence sources; and multiple parties may be liable (driver, trucking company, maintenance contractors). These cases require attorneys experienced with commercial vehicle regulations and corporate liability.'
-  }, {
-    category: 'special',
-    question: 'What about motorcycle accidents with government vehicles?',
-    answer: 'Government liability cases have special requirements: claims must be filed within 6 months against government entities, sovereign immunity may limit liability, special notice procedures must be followed, and damage caps may apply. However, government drivers must still follow traffic laws, and agencies can be liable for negligent training, supervision, or vehicle maintenance. These cases require attorneys experienced with government claim procedures and deadlines.'
-  }, {
-    category: 'special',
-    question: 'How do hit-and-run motorcycle accidents work legally?',
-    answer: 'Hit-and-run cases create unique challenges: police investigation is crucial for finding the fleeing driver, uninsured motorist coverage may apply even if your own insurer, reward programs may help locate witnesses, surveillance footage from nearby businesses is time-sensitive, and phantom vehicle claims require specific evidence standards. Your attorney can help coordinate with police, hire private investigators, and ensure all potential insurance coverage is explored.'
-  }, {
-    category: 'special',
-    question: 'What if my motorcycle accident involved a drunk driver?',
-    answer: 'Drunk driving accidents may allow additional compensation: punitive damages to punish extreme recklessness, claims against bars or restaurants that overserved the driver (dram shop liability), enhanced insurance coverage requirements, and criminal restitution orders. These cases often settle for higher amounts due to clear liability and the drunk driver\'s obvious negligence. Your attorney can coordinate with criminal prosecutors and explore all liability sources.'
-  }, {
-    category: 'special',
-    question: 'How do motorcycle defect cases work?',
-    answer: 'Motorcycle or parts defects can cause accidents: manufacturing defects in brakes, tires, or steering components, design defects that create inherent dangers, inadequate warnings about known risks, and recall failures. Product liability cases require proving the defect existed and caused the accident. These cases often involve multiple defendants (manufacturer, distributor, dealer) and require expert engineering testimony about design standards and manufacturing processes.'
-  }, {
-    category: 'road',
-    question: 'What if dangerous road conditions caused my motorcycle accident?',
-    answer: 'Government entities responsible for road maintenance can be liable for: potholes and road surface defects, inadequate signage or traffic controls, construction zone hazards, debris removal failures, and improper road design. These cases require proving the government knew or should have known about the dangerous condition. Claims against government entities have strict deadlines (6 months) and special procedures that must be followed precisely.'
-  }, {
-    category: 'road',
-    question: 'How do construction zone motorcycle accidents work?',
-    answer: 'Construction zones create special hazards for motorcycles: changing traffic patterns, uneven surfaces, debris, and reduced visibility. Liability may fall on: the construction company for inadequate safety measures, government agencies for poor planning or signage, or other drivers for failing to exercise extra caution. These cases often involve multiple parties and require investigation of construction contracts, safety protocols, and compliance with traffic control standards.'
-  }];
+  const faqs = [
+    {
+      category: 'immediate',
+      question: 'What should I do immediately after a motorcycle accident in California?',
+      answer: 'Safety first - get yourself and your bike out of traffic if possible. Call 911 immediately for any injuries. Take photos of your bike, the other vehicle, road conditions, and injuries before anything is moved. Get witness information and the other driver\'s insurance details. Do not discuss fault or apologize. Seek medical attention even if you feel fine - adrenaline masks injuries. Contact a motorcycle accident attorney before giving statements to insurance companies who often use bias against riders.'
+    },
+    {
+      category: 'immediate',
+      question: 'Should I move my motorcycle after an accident?',
+      answer: 'Only if it\'s safe and necessary to prevent further accidents. California law requires moving vehicles from traffic lanes when possible, but first take extensive photos showing: bike position, damage, skid marks, road conditions, and traffic controls. If you\'re injured or the bike can\'t be moved safely, leave everything where it is. Turn on hazard lights if possible and set up road flares if available.'
+    },
+    {
+      category: 'immediate',
+      question: 'What information should I collect at a motorcycle accident scene?',
+      answer: 'Collect: other driver\'s license, insurance, and vehicle information; witness names and contacts; photos of both vehicles from multiple angles; photos of the accident scene including traffic signals, road conditions, and your injuries; weather and lighting conditions; time and exact location; any statements made by the other driver about fault. Also note if you smell alcohol or observe erratic behavior.'
+    },
+    {
+      category: 'immediate',
+      question: 'Should I call police after a minor motorcycle accident?',
+      answer: 'Always call police for motorcycle accidents, even minor ones. Riders are often blamed unfairly, and police reports provide crucial official documentation. California requires reports for accidents with injuries, deaths, or property damage over $1,000. Even if damage seems minor, motorcycle accident injuries often don\'t appear immediately, and police reports protect against changing stories from other drivers.'
+    },
+    {
+      category: 'immediate',
+      question: 'What if I\'m not wearing a helmet in California?',
+      answer: 'California requires all motorcyclists and passengers to wear DOT-approved helmets. Not wearing a helmet can affect your case through comparative negligence but won\'t bar recovery. Insurance companies will argue your injuries would have been less severe with a helmet, potentially reducing compensation. However, many serious motorcycle injuries occur to other body parts. An experienced attorney can minimize helmet-related fault arguments and focus on the other driver\'s negligence.'
+    },
+    {
+      category: 'bias',
+      question: 'How does anti-motorcycle bias affect my case?',
+      answer: 'Anti-motorcycle bias is real and pervasive. Studies show many people wrongly view motorcyclists as reckless risk-takers responsible for their own accidents. Insurance companies exploit this bias by immediately investigating rider behavior, demanding helmet cam footage, and scrutinizing riding experience. Police officers may unfairly blame riders in accident reports. Potential jurors often harbor unconscious bias. Experienced motorcycle attorneys counter these prejudices with factual evidence, expert testimony, and jury education about rider rights and safety.'
+    },
+    {
+      category: 'bias',
+      question: 'What motorcycle stereotypes do insurance companies use against me?',
+      answer: 'Insurance companies commonly claim motorcyclists are: speed demons who always exceed limits, show-offs performing dangerous stunts, weekend warriors lacking experience, risk-takers who don\'t follow traffic laws, or riders who split lanes recklessly. They\'ll examine your social media for any photos suggesting aggressive riding. They may argue your bike\'s power capabilities suggest reckless use. Expert attorneys counter these stereotypes with riding records, training certificates, witness testimony, and accident reconstruction showing the other driver\'s fault.'
+    },
+    {
+      category: 'bias',
+      question: 'How do I prove the other driver\'s fault in a motorcycle accident?',
+      answer: 'Evidence is crucial because bias works against motorcyclists. Gather: traffic camera footage, surveillance video from nearby businesses, witness statements emphasizing the other driver\'s actions, cell phone records showing distracted driving, police citations issued, accident reconstruction analysis, and expert testimony about vehicle dynamics. Your attorney may hire accident reconstruction specialists and motorcycle safety experts to demonstrate how the other driver\'s negligence caused the collision.'
+    },
+    {
+      category: 'bias',
+      question: 'What if the police report blames me unfairly?',
+      answer: 'Police reports aren\'t final determinations of fault and can be challenged. Officers often lack motorcycle accident training and may make assumptions based on bias. Your attorney can investigate further, interview witnesses the police missed, obtain additional evidence like surveillance footage, and hire accident reconstruction experts. Independent investigations frequently reveal evidence of the other driver\'s fault not included in initial police reports.'
+    },
+    {
+      category: 'bias',
+      question: 'How does lane splitting affect my motorcycle accident case?',
+      answer: 'Lane splitting is legal in California when done safely, but insurance companies often blame riders regardless. They\'ll argue you were going too fast between cars or that the other driver couldn\'t see you. However, lane splitting is specifically allowed by Vehicle Code 21658.1 when done in a safe manner. Expert attorneys use traffic engineering studies, helmet cam footage, and witness testimony to prove lane splitting was conducted safely and legally, placing fault on the negligent driver.'
+    },
+    {
+      category: 'legal',
+      question: 'How long do I have to file a motorcycle accident lawsuit in California?',
+      answer: 'California\'s statute of limitations gives you 2 years from the accident date to file a personal injury lawsuit, and 3 years for property damage claims. However, if a government entity is involved (city bus, county vehicle, etc.), you must file a claim within 6 months. Don\'t wait - motorcycle accident evidence like skid marks disappears quickly, and witnesses forget crucial details. Early investigation strengthens your case significantly.'
+    },
+    {
+      category: 'legal',
+      question: 'What if I\'m partially at fault for my motorcycle accident?',
+      answer: 'California\'s pure comparative negligence law allows recovery even if you\'re 99% at fault - your damages are just reduced by your fault percentage. For example, if damages total $200,000 and you\'re 20% at fault, you recover $160,000. This is more favorable than other states that bar recovery if you\'re 50% or more at fault. Insurance companies often try to inflate rider fault percentages, making experienced legal representation crucial.'
+    },
+    {
+      category: 'legal',
+      question: 'What damages can I recover in a California motorcycle accident?',
+      answer: 'California allows recovery for: medical expenses (past and future), lost wages and diminished earning capacity, property damage to your bike and gear, pain and suffering, emotional distress, disability and disfigurement, and loss of life enjoyment. Motorcycle accidents often cause severe injuries requiring extensive medical treatment, making future damages substantial. Punitive damages may be available if the other driver was intoxicated or extremely reckless.'
+    },
+    {
+      category: 'legal',
+      question: 'Should I handle my motorcycle accident case without an attorney?',
+      answer: 'Absolutely not. Motorcycle cases involve unique challenges including bias, complex injury patterns, and specialized equipment knowledge. Insurance companies have teams of lawyers and experts working against you from day one. They know most people don\'t understand motorcycle accident dynamics and will use this to minimize your claim. Studies show represented clients recover significantly more compensation than those who handle cases themselves.'
+    },
+    {
+      category: 'legal',
+      question: 'How is motorcycle accident compensation calculated?',
+      answer: 'Compensation includes economic damages (medical bills, lost wages, property damage) and non-economic damages (pain, suffering, disability). Motorcycle accidents often result in severe injuries making future medical care expensive. Calculation considers: injury severity and permanence, impact on earning capacity, need for ongoing medical treatment, degree of pain and suffering, and effect on quality of life. Experienced attorneys use medical economists and life care planners to accurately calculate future needs.'
+    },
+    {
+      category: 'medical',
+      question: 'What are the most common motorcycle accident injuries?',
+      answer: 'Motorcycle accidents cause severe injuries due to lack of protection: traumatic brain injuries (even with helmets), spinal cord injuries and paralysis, broken bones and fractures, road rash and skin grafts, internal organ damage, amputations, soft tissue injuries, and psychological trauma. These injuries often require multiple surgeries, extensive rehabilitation, and permanent lifestyle changes. The severity of motorcycle injuries makes immediate and ongoing medical documentation crucial for your case.'
+    },
+    {
+      category: 'medical',
+      question: 'Why should I seek medical attention after a motorcycle accident?',
+      answer: 'Seek immediate medical attention even if you feel fine. Adrenaline and shock mask serious injuries that appear hours or days later. Internal injuries, brain trauma, and spinal damage may not cause immediate pain. Delaying medical treatment gives insurance companies ammunition to argue your injuries aren\'t accident-related. Early medical documentation creates a clear link between the accident and your injuries, strengthening your legal case.'
+    },
+    {
+      category: 'medical',
+      question: 'What if I can\'t afford medical treatment after my motorcycle accident?',
+      answer: 'Don\'t let financial concerns prevent necessary medical treatment. Options include: your health insurance, medical payments coverage on your motorcycle policy, the other driver\'s insurance (if they accept fault), medical liens where doctors wait for settlement payment, and letters of protection from your attorney guaranteeing payment. Many medical providers work with accident victims, and attorneys can arrange treatment networks that wait for case resolution.'
+    },
+    {
+      category: 'medical',
+      question: 'How do I document my motorcycle accident injuries properly?',
+      answer: 'Proper documentation is crucial: take photos of all visible injuries immediately after the accident and throughout healing, keep detailed records of pain levels and limitations, attend all medical appointments and follow treatment recommendations, save all medical bills and records, document how injuries affect daily activities, and never minimize pain to medical providers. This documentation becomes crucial evidence for your compensation claim.'
+    },
+    {
+      category: 'medical',
+      question: 'What if insurance companies question my motorcycle accident injuries?',
+      answer: 'Insurance companies routinely question motorcycle accident injuries, claiming they\'re pre-existing, exaggerated, or unrelated to the accident. They may demand independent medical exams by their doctors or surveillance to "catch" you doing activities they claim you can\'t do. Your attorney will counter with comprehensive medical records, expert medical testimony, functional capacity evaluations, and day-in-the-life videos showing your true limitations.'
+    },
+    {
+      category: 'insurance',
+      question: 'What motorcycle insurance do I need in California?',
+      answer: 'California requires minimum liability coverage: $15,000 per person/$30,000 per accident for bodily injury, and $5,000 for property damage. However, these minimums are inadequate for serious motorcycle accidents. We recommend: higher liability limits, comprehensive and collision coverage, uninsured/underinsured motorist coverage (crucial since many drivers lack adequate insurance), and medical payments coverage for immediate medical expenses regardless of fault.'
+    },
+    {
+      category: 'insurance',
+      question: 'What if the other driver doesn\'t have insurance?',
+      answer: 'Uninsured drivers are unfortunately common in California. Your options include: filing a claim under your uninsured motorist coverage (if you have it), suing the driver personally (though collection can be difficult), checking if other insurance applies (employer policies if they were working), and exploring other liable parties (vehicle owners, bars that overserved drunk drivers). This highlights why uninsured motorist coverage is essential for all riders.'
+    },
+    {
+      category: 'insurance',
+      question: 'Should I give a recorded statement to insurance companies?',
+      answer: 'Never give recorded statements to the other driver\'s insurance company without attorney representation. These statements are designed to get you to say something that damages your case. Insurance adjusters are trained interrogators who will ask leading questions to minimize your injuries or shift blame. You\'re only required to cooperate with your own insurance company, and even then, it\'s best to have attorney guidance.'
+    },
+    {
+      category: 'insurance',
+      question: 'How do insurance companies investigate motorcycle accidents?',
+      answer: 'Insurance companies conduct aggressive investigations to deny or minimize motorcycle accident claims: they interview all parties and witnesses, examine the accident scene, review police reports and traffic citations, analyze medical records for pre-existing conditions, conduct surveillance of injured riders, examine social media for contradictory evidence, hire accident reconstruction experts, and may demand bike inspections. Having your own attorney levels the playing field with independent investigations and expert witnesses.'
+    },
+    {
+      category: 'insurance',
+      question: 'What insurance tactics are used against motorcycle accident victims?',
+      answer: 'Common insurance tactics include: delaying claim processing hoping you\'ll accept quick lowball offers, demanding unnecessary medical records to find pre-existing conditions, using surveillance to "catch" normal activities they claim prove you\'re not injured, scheduling independent medical exams with doctors known for minimizing injuries, arguing that safety gear would have prevented injuries, and exploiting motorcycle stereotypes to shift blame to the rider.'
+    },
+    {
+      category: 'settlement',
+      question: 'How long does a motorcycle accident case take to settle?',
+      answer: 'Motorcycle accident cases typically take 6 months to 2 years, depending on injury severity and insurance cooperation. Complex cases with severe injuries, disputed liability, or uncooperative insurers take longer. Factors affecting timeline include: reaching maximum medical improvement, completing injury treatment, gathering all evidence, and negotiating with insurance companies. Your attorney will advise when you\'ve reached the best time to settle versus continuing treatment or filing a lawsuit.'
+    },
+    {
+      category: 'settlement',
+      question: 'Should I accept the first settlement offer for my motorcycle accident?',
+      answer: 'Almost never accept the first offer. Initial offers are typically far below fair compensation and are made before the full extent of injuries is known. Insurance companies hope you\'ll accept quickly before consulting an attorney. Motorcycle accident injuries often require long-term treatment, and settling too early prevents recovering additional compensation for ongoing medical needs, permanent disabilities, or lost earning capacity.'
+    },
+    {
+      category: 'settlement',
+      question: 'What factors determine my motorcycle accident settlement amount?',
+      answer: 'Settlement amounts depend on: severity and permanence of injuries, total medical expenses (past and future), lost wages and diminished earning capacity, degree of pain and suffering, impact on quality of life, degree of other driver\'s fault, insurance policy limits available, strength of evidence supporting your case, and your attorney\'s negotiation skills. Motorcycle accidents often result in higher settlements due to injury severity, but bias can work against riders without proper representation.'
+    },
+    {
+      category: 'settlement',
+      question: 'Can I reopen my motorcycle accident case after settling?',
+      answer: 'Generally no - settlements include releases that prevent future claims related to the accident. This is why it\'s crucial not to settle until you understand the full extent of your injuries and future medical needs. Exceptions may exist for fraud or if new injuries develop that couldn\'t reasonably have been discovered, but these are rare. Always ensure you\'ve reached maximum medical improvement before settling.'
+    },
+    {
+      category: 'settlement',
+      question: 'What if the insurance company denies my motorcycle accident claim?',
+      answer: 'Claim denials can often be overturned with proper legal representation. Common denial reasons include: disputed liability, coverage exclusions, late reporting, or insufficient evidence. Your attorney can appeal the denial with additional evidence, expert opinions, and legal arguments. If the denial is unreasonable, you may have bad faith insurance claims against your own insurer or the option to file a lawsuit against the at-fault driver.'
+    },
+    {
+      category: 'process',
+      question: 'What happens during a motorcycle accident lawsuit?',
+      answer: 'If settlement negotiations fail, filing a lawsuit begins the formal legal process: complaint filing and service, discovery (document exchange, depositions, expert witnesses), mediation attempts, and potentially trial. Most cases settle before trial, but having an attorney prepared for court strengthens your negotiating position. Motorcycle cases often require accident reconstruction experts, medical experts, and economic experts to prove damages.'
+    },
+    {
+      category: 'process',
+      question: 'Do motorcycle accident cases go to trial?',
+      answer: 'Most motorcycle accident cases settle out of court, but your attorney must be prepared for trial. Going to trial may be necessary if: insurance companies make unreasonable offers, liability is strongly disputed, or damages are substantial enough to justify trial risks. Having trial-experienced attorneys often leads to better settlement offers because insurance companies know they\'ll face competent courtroom representation.'
+    },
+    {
+      category: 'process',
+      question: 'How much does a motorcycle accident attorney cost?',
+      answer: 'Most motorcycle accident attorneys work on contingency fees, meaning no upfront costs and fees are only paid if you recover compensation. Typical contingency fees range from 33% to 40% of the recovery amount. This arrangement allows anyone to afford quality legal representation regardless of financial situation. Given the complexity and bias issues in motorcycle cases, attorney representation typically results in significantly higher net recovery even after fees.'
+    },
+    {
+      category: 'process',
+      question: 'What should I look for in a motorcycle accident attorney?',
+      answer: 'Choose an attorney with: specific experience handling motorcycle accident cases, understanding of motorcycle dynamics and rider bias, proven track record of motorcycle accident recoveries, resources to hire necessary experts, willingness to take cases to trial if needed, and genuine understanding of motorcycle culture. Many general personal injury attorneys lack the specialized knowledge needed to effectively represent motorcycle accident victims against bias and insurance company tactics.'
+    },
+    {
+      category: 'process',
+      question: 'How do I prepare for meeting with a motorcycle accident attorney?',
+      answer: 'Bring: police report, insurance information for all parties, photos of the accident scene and injuries, medical records and bills, witness contact information, your motorcycle registration and insurance policy, and any correspondence with insurance companies. Write down a detailed account of how the accident happened while it\'s fresh in your memory. Don\'t sign anything or give recorded statements before consulting with an attorney.'
+    },
+    {
+      category: 'prevention',
+      question: 'What are the most common causes of motorcycle accidents in California?',
+      answer: 'Leading causes include: left-turning vehicles failing to yield to motorcycles, distracted driving (cell phones, texting), drunk/impaired driving, speeding and aggressive driving, following too closely, improper lane changes without checking blind spots, road hazards and poor maintenance, and weather conditions. Many accidents occur because other drivers simply don\'t see motorcycles or fail to judge their speed and distance properly.'
+    },
+    {
+      category: 'prevention',
+      question: 'What can motorcyclists do to prevent accidents?',
+      answer: 'Safety measures include: wearing proper protective gear (helmet, jacket, gloves, boots), taking motorcycle safety courses, practicing defensive driving techniques, maintaining proper bike maintenance, avoiding riding in bad weather when possible, staying visible with proper lighting and bright colors, never riding under the influence, and being extra cautious at intersections where many accidents occur. However, even the safest riders can\'t prevent negligent driver actions.'
+    },
+    {
+      category: 'prevention',
+      question: 'Where do most motorcycle accidents happen in California?',
+      answer: 'Common accident locations include: urban intersections where cars turn left across motorcycle paths, freeway merges where cars change lanes without checking blind spots, construction zones with changing traffic patterns, mountain roads popular with weekend riders, beach communities with tourist traffic unfamiliar with local roads, and parking lots where visibility is limited. Los Angeles, San Francisco, and San Diego counties see the highest accident numbers due to traffic volume.'
+    },
+    {
+      category: 'prevention',
+      question: 'How does weather affect motorcycle accident risk?',
+      answer: 'Weather significantly impacts motorcycle safety: rain reduces tire traction and visibility, wind affects bike stability especially for lighter riders, fog creates dangerous visibility conditions, extreme heat can cause rider fatigue and tire blowouts, and cold weather reduces rider dexterity and reaction time. California\'s year-round riding weather means many riders encounter conditions they\'re unprepared for. Other drivers are also less aware of motorcycles in poor weather.'
+    },
+    {
+      category: 'special',
+      question: 'What if my motorcycle accident involved a commercial vehicle?',
+      answer: 'Commercial vehicle accidents often involve additional liability and insurance coverage: trucking companies may be liable for inadequate training, hours of service violations, or maintenance failures; commercial insurance policies typically have higher limits; federal regulations may apply creating additional evidence sources; and multiple parties may be liable (driver, trucking company, maintenance contractors). These cases require attorneys experienced with commercial vehicle regulations and corporate liability.'
+    },
+    {
+      category: 'special',
+      question: 'What about motorcycle accidents with government vehicles?',
+      answer: 'Government liability cases have special requirements: claims must be filed within 6 months against government entities, sovereign immunity may limit liability, special notice procedures must be followed, and damage caps may apply. However, government drivers must still follow traffic laws, and agencies can be liable for negligent training, supervision, or vehicle maintenance. These cases require attorneys experienced with government claim procedures and deadlines.'
+    },
+    {
+      category: 'special',
+      question: 'How do hit-and-run motorcycle accidents work legally?',
+      answer: 'Hit-and-run cases create unique challenges: police investigation is crucial for finding the fleeing driver, uninsured motorist coverage may apply even if your own insurer, reward programs may help locate witnesses, surveillance footage from nearby businesses is time-sensitive, and phantom vehicle claims require specific evidence standards. Your attorney can help coordinate with police, hire private investigators, and ensure all potential insurance coverage is explored.'
+    },
+    {
+      category: 'special',
+      question: 'What if my motorcycle accident involved a drunk driver?',
+      answer: 'Drunk driving accidents may allow additional compensation: punitive damages to punish extreme recklessness, claims against bars or restaurants that overserved the driver (dram shop liability), enhanced insurance coverage requirements, and criminal restitution orders. These cases often settle for higher amounts due to clear liability and the drunk driver\'s obvious negligence. Your attorney can coordinate with criminal prosecutors and explore all liability sources.'
+    },
+    {
+      category: 'special',
+      question: 'How do motorcycle defect cases work?',
+      answer: 'Motorcycle or parts defects can cause accidents: manufacturing defects in brakes, tires, or steering components, design defects that create inherent dangers, inadequate warnings about known risks, and recall failures. Product liability cases require proving the defect existed and caused the accident. These cases often involve multiple defendants (manufacturer, distributor, dealer) and require expert engineering testimony about design standards and manufacturing processes.'
+    },
+    {
+      category: 'road',
+      question: 'What if dangerous road conditions caused my motorcycle accident?',
+      answer: 'Government entities responsible for road maintenance can be liable for: potholes and road surface defects, inadequate signage or traffic controls, construction zone hazards, debris removal failures, and improper road design. These cases require proving the government knew or should have known about the dangerous condition. Claims against government entities have strict deadlines (6 months) and special procedures that must be followed precisely.'
+    },
+    {
+      category: 'road',
+      question: 'How do construction zone motorcycle accidents work?',
+      answer: 'Construction zones create special hazards for motorcycles: changing traffic patterns, uneven surfaces, debris, and reduced visibility. Liability may fall on: the construction company for inadequate safety measures, government agencies for poor planning or signage, or other drivers for failing to exercise extra caution. These cases often involve multiple parties and require investigation of construction contracts, safety protocols, and compliance with traffic control standards.'
+    }
+  ];
+
   const filteredFaqs = faqs;
-  return <div className="min-h-screen bg-background">
-      <SEO title="California Motorcycle Accident Lawyers | Fighting Bias for Injured Riders" description="Expert motorcycle accident attorneys throughout California. Former defense lawyer now fighting anti-rider bias. Free consultation for motorcycle crash cases." canonical="/practice-areas/motorcycle-accidents" />
+
+  return (
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="California Motorcycle Accident Lawyers | Fighting Bias for Injured Riders"
+        description="Expert motorcycle accident attorneys throughout California. Former defense lawyer now fighting anti-rider bias. Free consultation for motorcycle crash cases."
+        canonical="/practice-areas/motorcycle-accidents"
+      />
 
       {/* Hero Section */}
-      <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{
-      backgroundImage: `url(${heroBackground})`
-    }}>
+      <section 
+        ref={heroRef}
+        className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
         <div className="absolute inset-0 bg-black/25"></div>
         
         {/* Go Back Button - positioned in hero overlay */}
         <div className="absolute top-20 left-6 z-10">
-          <Button variant="ghost" onClick={() => window.history.back()} className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
             <ArrowLeft className="w-4 h-4" />
             Go Back
           </Button>
@@ -337,11 +400,17 @@ const MotorcycleAccidentsNew: React.FC = () => {
             </h1>
             
             <div className="flex items-center justify-center mb-6">
-              {[...Array(5)].map((_, i) => <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />)}
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
               <span className="ml-2 text-lg">Fighting Anti-Rider Bias</span>
             </div>
             
-            <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+            <Button 
+              size="lg" 
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg"
+              onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+            >
               START MY FREE CASE EVALUATION
             </Button>
           </div>
@@ -351,13 +420,23 @@ const MotorcycleAccidentsNew: React.FC = () => {
         <div className="absolute bottom-0 left-0 right-0 bg-white/10 backdrop-blur-sm">
           <div className="max-w-7xl mx-auto px-6">
             <div className="flex flex-wrap justify-center lg:justify-start gap-2 py-4">
-              {tabs.map(tab => {
-              const IconComponent = tab.icon;
-              return <button key={tab.id} onClick={() => scrollToSection(tab.id)} className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${activeTab === tab.id ? 'bg-white text-primary' : 'text-white hover:bg-white/20'}`}>
+              {tabs.map((tab) => {
+                const IconComponent = tab.icon;
+                return (
+                  <button
+                    key={tab.id}
+                    onClick={() => scrollToSection(tab.id)}
+                    className={`flex items-center px-4 py-2 text-sm font-medium transition-colors rounded-md ${
+                      activeTab === tab.id 
+                        ? 'bg-white text-primary' 
+                        : 'text-white hover:bg-white/20'
+                    }`}
+                  >
                     <IconComponent className="w-4 h-4 mr-2" />
                     {tab.label}
-                  </button>;
-            })}
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
@@ -377,10 +456,18 @@ const MotorcycleAccidentsNew: React.FC = () => {
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <Button variant="ghost" className="text-white hover:bg-white/20 font-bold bg-red-600 border border-white/30" onClick={() => window.location.href = 'tel:8181234567'}>
+            <Button 
+              variant="ghost" 
+              className="text-white hover:bg-white/20 font-bold bg-red-600 border border-white/30"
+              onClick={() => window.location.href = 'tel:8181234567'}
+            >
               Call (818) 123-4567
             </Button>
-            <Button variant="outline" className="border-white text-white hover:bg-white hover:text-red-600" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+            <Button 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-red-600"
+              onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+            >
               Free Case Review
             </Button>
           </div>
@@ -486,10 +573,14 @@ const MotorcycleAccidentsNew: React.FC = () => {
             {/* Sidebar */}
             <div className="lg:col-span-1">
               <Card className="p-6 sticky top-6">
-                <img src={sceneImage} alt="Motorcycle accident scene investigation" className="w-full h-48 object-cover rounded-lg mb-6" />
+                <img 
+                  src={sceneImage} 
+                  alt="Motorcycle accident scene investigation" 
+                  className="w-full h-48 object-cover rounded-lg mb-6"
+                />
 
                 <ThreeDVisualEffects>
-                  <div className="premium-form-container premium-form-container--dark interactive-card glass-card rounded-2xl p-6 gpu-accelerated">
+                  <div className="premium-form-container interactive-card glass-card rounded-2xl p-6 gpu-accelerated">
                     <div className="text-center mb-6">
                       <h3 className="text-2xl md:text-3xl font-display text-white font-bold mb-2">Get Your Free Motorcycle Accident Case Evaluation</h3>
                       <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto"></div>
@@ -499,51 +590,75 @@ const MotorcycleAccidentsNew: React.FC = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">First Name *</label>
-                          <Input name="firstName" value={formData.firstName} onChange={e => setFormData({
-                          ...formData,
-                          firstName: e.target.value
-                        })} required aria-required="true" className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base" placeholder="Enter your first name" />
+                          <Input
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="Enter your first name"
+                          />
                         </div>
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Last Name *</label>
-                          <Input name="lastName" value={formData.lastName} onChange={e => setFormData({
-                          ...formData,
-                          lastName: e.target.value
-                        })} required aria-required="true" className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base" placeholder="Enter your last name" />
+                          <Input
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="Enter your last name"
+                          />
                         </div>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Email *</label>
-                          <Input type="email" name="email" value={formData.email} onChange={e => setFormData({
-                          ...formData,
-                          email: e.target.value
-                        })} required aria-required="true" className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base" placeholder="your.email@example.com" />
+                          <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="your.email@example.com"
+                          />
                         </div>
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Phone *</label>
-                          <Input type="tel" name="phone" value={formData.phone} onChange={e => setFormData({
-                          ...formData,
-                          phone: e.target.value
-                        })} required aria-required="true" className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base" placeholder="(555) 123-4567" />
+                          <Input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="(555) 123-4567"
+                          />
                         </div>
                       </div>
 
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Date of Accident *</label>
-                          <Input type="date" name="accidentDate" value={formData.accidentDate} onChange={e => setFormData({
-                          ...formData,
-                          accidentDate: e.target.value
-                        })} required aria-required="true" className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base" />
+                          <Input
+                            type="date"
+                            name="accidentDate"
+                            value={formData.accidentDate}
+                            onChange={(e) => setFormData({ ...formData, accidentDate: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          />
                         </div>
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Type of Motorcycle *</label>
-                          <Select value={formData.motorcycleType} onValueChange={value => setFormData({
-                          ...formData,
-                          motorcycleType: value
-                        })} required>
+                          <Select value={formData.motorcycleType} onValueChange={(value) => setFormData({ ...formData, motorcycleType: value })} required>
                             <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
                               <SelectValue placeholder="Select motorcycle type" className="text-blue-200/70" />
                             </SelectTrigger>
@@ -564,10 +679,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Type of Accident *</label>
-                          <Select value={formData.accidentType} onValueChange={value => setFormData({
-                          ...formData,
-                          accidentType: value
-                        })} required>
+                          <Select value={formData.accidentType} onValueChange={(value) => setFormData({ ...formData, accidentType: value })} required>
                             <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
                               <SelectValue placeholder="Select accident type" className="text-blue-200/70" />
                             </SelectTrigger>
@@ -585,10 +697,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
                         </div>
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Primary Injury Type *</label>
-                          <Select value={formData.injuryType} onValueChange={value => setFormData({
-                          ...formData,
-                          injuryType: value
-                        })} required>
+                          <Select value={formData.injuryType} onValueChange={(value) => setFormData({ ...formData, injuryType: value })} required>
                             <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
                               <SelectValue placeholder="Select injury type" className="text-blue-200/70" />
                             </SelectTrigger>
@@ -608,10 +717,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Medical Treatment *</label>
-                          <Select value={formData.medicalTreatment} onValueChange={value => setFormData({
-                          ...formData,
-                          medicalTreatment: value
-                        })} required>
+                          <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData({ ...formData, medicalTreatment: value })} required>
                             <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
                               <SelectValue placeholder="Select treatment level" className="text-blue-200/70" />
                             </SelectTrigger>
@@ -628,10 +734,7 @@ const MotorcycleAccidentsNew: React.FC = () => {
                         </div>
                         <div className="space-y-2">
                           <label className="text-white text-base font-medium">Insurance Status *</label>
-                          <Select value={formData.insuranceClaim} onValueChange={value => setFormData({
-                          ...formData,
-                          insuranceClaim: value
-                        })} required>
+                          <Select value={formData.insuranceClaim} onValueChange={(value) => setFormData({ ...formData, insuranceClaim: value })} required>
                             <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
                               <SelectValue placeholder="Select claim status" className="text-blue-200/70" />
                             </SelectTrigger>
@@ -651,14 +754,28 @@ const MotorcycleAccidentsNew: React.FC = () => {
 
                       <div className="space-y-2">
                         <label className="text-white text-base font-medium">Please describe your motorcycle accident *</label>
-                        <Textarea name="description" value={formData.description} onChange={e => setFormData({
-                        ...formData,
-                        description: e.target.value
-                      })} placeholder="Provide details about how the accident occurred..." rows={5} className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30" required aria-required="true" />
+                        <Textarea
+                          name="description"
+                          value={formData.description}
+                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                          placeholder="Provide details about how the accident occurred..."
+                          rows={5}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
+                          required
+                          aria-required="true"
+                        />
                       </div>
 
                       <div className="flex items-start space-x-2">
-                        
+                        <input
+                          type="checkbox"
+                          name="consent"
+                          checked={formData.consent}
+                          onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                          className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
+                          required
+                          aria-required="true"
+                        />
                         <label className="text-white text-sm leading-relaxed">
                           I consent to being contacted by Trembach Law Firm regarding my motorcycle accident case. I understand this consultation is free and there is no obligation. *
                         </label>
@@ -723,14 +840,22 @@ const MotorcycleAccidentsNew: React.FC = () => {
               </div>
 
               <div className="mt-8">
-                <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+                <Button 
+                  size="lg" 
+                  className="bg-red-600 hover:bg-red-700 text-white"
+                  onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+                >
                   Start Your Free Case Evaluation
                 </Button>
               </div>
             </div>
 
             <div className="relative">
-              <img src={legalConsultationImage} alt="Motorcycle accident legal consultation" className="w-full h-96 object-cover rounded-lg shadow-xl" />
+              <img 
+                src={legalConsultationImage} 
+                alt="Motorcycle accident legal consultation" 
+                className="w-full h-96 object-cover rounded-lg shadow-xl"
+              />
               <div className="absolute -bottom-6 -right-6 bg-white p-6 rounded-lg shadow-lg">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-red-600">100%</div>
@@ -864,7 +989,11 @@ const MotorcycleAccidentsNew: React.FC = () => {
         <section id="bias-defense" className="content-section py-16 border-t">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
-              <img src={biasDefenseImage} alt="Fighting motorcycle bias in legal cases" className="w-full h-96 object-cover rounded-lg shadow-xl" />
+              <img 
+                src={biasDefenseImage} 
+                alt="Fighting motorcycle bias in legal cases" 
+                className="w-full h-96 object-cover rounded-lg shadow-xl"
+              />
             </div>
 
             <div className="order-1 lg:order-2">
@@ -916,7 +1045,11 @@ const MotorcycleAccidentsNew: React.FC = () => {
                 </CollapsibleContent>
               </Collapsible>
 
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white"
+                onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+              >
                 Fight Bias in Your Case
               </Button>
             </div>
@@ -1064,8 +1197,16 @@ const MotorcycleAccidentsNew: React.FC = () => {
             </div>
 
             <div className="mt-12 text-center">
-              <img src={legalProcessImage} alt="Motorcycle accident legal process" className="w-full h-64 object-cover rounded-lg mb-6" />
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+              <img 
+                src={legalProcessImage} 
+                alt="Motorcycle accident legal process" 
+                className="w-full h-64 object-cover rounded-lg mb-6"
+              />
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white"
+                onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+              >
                 Start Your Legal Process Today
               </Button>
             </div>
@@ -1085,11 +1226,18 @@ const MotorcycleAccidentsNew: React.FC = () => {
             </div>
 
             <div className="space-y-4">
-              {filteredFaqs.map((faq, index) => <Card key={index} className="overflow-hidden">
-                  <CardHeader className="cursor-pointer hover:bg-gray-50 transition-colors" onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}>
+              {filteredFaqs.map((faq, index) => (
+                <Card key={index} className="overflow-hidden">
+                  <CardHeader 
+                    className="cursor-pointer hover:bg-gray-50 transition-colors"
+                    onClick={() => setExpandedFaq(expandedFaq === index ? null : index)}
+                  >
                     <div className="flex items-center justify-between">
                       <h3 className="text-lg font-semibold text-left pr-4">{faq.question}</h3>
-                      {expandedFaq === index ? <ChevronUp className="w-5 h-5 text-red-600 flex-shrink-0" /> : <ChevronDown className="w-5 h-5 text-red-600 flex-shrink-0" />}
+                      {expandedFaq === index ? 
+                        <ChevronUp className="w-5 h-5 text-red-600 flex-shrink-0" /> : 
+                        <ChevronDown className="w-5 h-5 text-red-600 flex-shrink-0" />
+                      }
                     </div>
                   </CardHeader>
                   <Collapsible open={expandedFaq === index}>
@@ -1099,14 +1247,19 @@ const MotorcycleAccidentsNew: React.FC = () => {
                       </CardContent>
                     </CollapsibleContent>
                   </Collapsible>
-                </Card>)}
+                </Card>
+              ))}
             </div>
 
             <div className="mt-12 text-center">
               <p className="text-muted-foreground mb-6">
                 Have more questions? Our motorcycle accident attorneys are here to help.
               </p>
-              <Button size="lg" className="bg-red-600 hover:bg-red-700 text-white" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+              <Button 
+                size="lg" 
+                className="bg-red-600 hover:bg-red-700 text-white"
+                onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+              >
                 Get Your Questions Answered
               </Button>
             </div>
@@ -1134,7 +1287,10 @@ const MotorcycleAccidentsNew: React.FC = () => {
                 <p className="text-muted-foreground mb-4">
                   Understanding motorcycle injuries and treatment options to ensure proper medical care.
                 </p>
-                <Link to="/motorcycle-medical-guidance" className="text-red-600 hover:text-red-700 font-medium">
+                <Link 
+                  to="/motorcycle-medical-guidance" 
+                  className="text-red-600 hover:text-red-700 font-medium"
+                >
                   Learn More →
                 </Link>
               </Card>
@@ -1147,7 +1303,10 @@ const MotorcycleAccidentsNew: React.FC = () => {
                 <p className="text-muted-foreground mb-4">
                   Estimate potential compensation for your motorcycle accident injuries and damages.
                 </p>
-                <Link to="/motorcycle-compensation-calculator" className="text-red-600 hover:text-red-700 font-medium">
+                <Link 
+                  to="/motorcycle-compensation-calculator" 
+                  className="text-red-600 hover:text-red-700 font-medium"
+                >
                   Calculate Now →
                 </Link>
               </Card>
@@ -1160,7 +1319,10 @@ const MotorcycleAccidentsNew: React.FC = () => {
                 <p className="text-muted-foreground mb-4">
                   Free comprehensive evaluation of your motorcycle accident case and legal options.
                 </p>
-                <Link to="/motorcycle-case-evaluation" className="text-red-600 hover:text-red-700 font-medium">
+                <Link 
+                  to="/motorcycle-case-evaluation" 
+                  className="text-red-600 hover:text-red-700 font-medium"
+                >
                   Start Now →
                 </Link>
               </Card>
@@ -1239,7 +1401,11 @@ const MotorcycleAccidentsNew: React.FC = () => {
               </div>
             </div>
 
-            <Button size="lg" className="bg-white text-red-600 hover:bg-gray-100 font-bold px-12 py-6 text-xl" onClick={() => window.location.href = '/motorcycle-case-evaluation'}>
+            <Button 
+              size="lg" 
+              className="bg-white text-red-600 hover:bg-gray-100 font-bold px-12 py-6 text-xl"
+              onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+            >
               PROTECT YOUR RIGHTS - START YOUR FREE CASE EVALUATION NOW
             </Button>
 
@@ -1249,6 +1415,8 @@ const MotorcycleAccidentsNew: React.FC = () => {
           </div>
         </section>
       </div>
-    </div>;
+    </div>
+  );
 };
+
 export default MotorcycleAccidentsNew;

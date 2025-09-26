@@ -13,7 +13,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Progress } from '@/components/ui/progress';
-import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import { ThreeDVisualEffects } from '@/components/3DVisualEffects';
+import '@/styles/premium-3d-effects.css';
 import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft, ChevronLeft, ChevronRight, CheckCircle, Camera, MapPin, Calendar, DollarSign, BookOpen, HelpCircle, Home } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
 import whatToDoImage from '@/assets/practice-areas/premises-liability.jpg';

@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Phone, Mail, Star, Stethoscope, Eye, Heart, AlertTriangle } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import heroImage from '@/assets/vision-loss-medical-guidance-hero.jpg';
 
@@ -21,7 +21,7 @@ const VisionLossMedicalGuidance: React.FC = () => {
         canonical="/practice-areas/vision-loss/medical-guidance"
       />
 
-      <GoBack fallbackPath="/practice-areas/vision-loss" />
+      
 
       <section 
         className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat hero-section"

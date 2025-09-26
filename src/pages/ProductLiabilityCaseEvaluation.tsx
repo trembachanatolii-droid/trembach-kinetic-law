@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import GoBack from '@/components/GoBack';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -127,7 +127,6 @@ Please provide comprehensive case evaluation and next steps.
           canonical="/product-liability-case-evaluation"
         />
 
-        <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
 
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -196,7 +195,7 @@ Please provide comprehensive case evaluation and next steps.
         canonical="/product-liability-case-evaluation"
       />
 
-      <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
+      
 
       {/* Hero Section */}
       <section 

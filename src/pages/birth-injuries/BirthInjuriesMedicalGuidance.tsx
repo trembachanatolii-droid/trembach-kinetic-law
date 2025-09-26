@@ -19,7 +19,7 @@ import {
   AlertTriangle,
   FileText
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-medical-facility-new.jpg';

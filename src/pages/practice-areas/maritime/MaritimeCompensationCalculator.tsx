@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calculator, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/maritime-compensation-hero.jpg';
 
 const MaritimeCompensationCalculator: React.FC = () => {
@@ -54,7 +54,7 @@ const MaritimeCompensationCalculator: React.FC = () => {
         keywords="maritime compensation calculator, case value estimator, Jones Act compensation, LHWCA benefits calculator"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

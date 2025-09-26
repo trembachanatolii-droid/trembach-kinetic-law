@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import GoBack from '@/components/GoBack';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -154,7 +154,7 @@ const WrongfulDeathCompensationCalculator: React.FC = () => {
         canonical="/wrongful-death-compensation-calculator"
       />
 
-      <GoBack fallbackPath="/practice-areas/wrongful-death" />
+      
 
       {/* Hero Section */}
       <section 

@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Calculator, DollarSign, FileText, Users } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import compensationHero from '@/assets/silicosis-compensation-calculator.jpg';
 
 const SilicosisCompensationCalculator: React.FC = () => {
@@ -120,7 +120,7 @@ const SilicosisCompensationCalculator: React.FC = () => {
       />
       
       <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
-        <GoBack className="container mx-auto px-4" />
+        
         
         {/* Hero Section */}
         <section className="relative py-20 overflow-hidden">

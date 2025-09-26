@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Checkbox } from '@/components/ui/checkbox';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
+
 import { 
   Phone, 
   Mail, 
@@ -88,7 +88,7 @@ const SexualAbuseCaseEvaluation: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack fallbackPath="/practice-areas/sexual-abuse" />
+      
       
       {/* Hero Section */}
       <section 

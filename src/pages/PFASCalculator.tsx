@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, AlertTriangle, DollarSign } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/pfas-testing-equipment.jpg';
 
 interface CompensationFactors {
@@ -111,7 +111,7 @@ const PFASCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section 

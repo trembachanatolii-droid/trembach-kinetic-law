@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Scale, Shield, Clock, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/maritime-legal-guidance-hero.jpg';
 
 const MaritimeLegalGuidance: React.FC = () => {
@@ -15,7 +15,7 @@ const MaritimeLegalGuidance: React.FC = () => {
         keywords="maritime legal guidance, maritime law help, Jones Act guidance, LHWCA legal help, maritime accident legal advice"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

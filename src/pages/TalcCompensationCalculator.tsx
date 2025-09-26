@@ -8,7 +8,7 @@ import { Alert, AlertDescription } from '@/components/ui/alert';
 import { Calculator, DollarSign, AlertTriangle, Scale, Heart } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/practice-areas/talc-compensation-calculation.jpg';
 
 const TalcCompensationCalculator = () => {
@@ -215,7 +215,7 @@ const TalcCompensationCalculator = () => {
         canonical={seoData.canonical}
       />
       <Navigation />
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

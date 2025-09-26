@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import GoBack from '@/components/GoBack';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -439,7 +439,7 @@ const ProductLiabilityMedicalGuidance: React.FC = () => {
         canonical="/product-liability-medical-guidance"
       />
 
-      <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
+      
 
       {/* Hero Section */}
       <section 

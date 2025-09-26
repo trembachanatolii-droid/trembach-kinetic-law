@@ -20,7 +20,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/practice-areas/workplace-medical-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 const WorkplaceInjuriesMedicalGuidance: React.FC = () => {
   return (
@@ -31,7 +31,7 @@ const WorkplaceInjuriesMedicalGuidance: React.FC = () => {
         canonical="/workplace-injuries-medical-guidance"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

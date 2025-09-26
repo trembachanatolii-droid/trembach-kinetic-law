@@ -110,6 +110,20 @@
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
+/* Solid, high-contrast blue glass variant for readability */
+.premium-form-container--blue-solid {
+  background: linear-gradient(135deg,
+    hsl(var(--primary) / 0.92) 0%,
+    hsl(var(--primary) / 0.96) 50%,
+    hsl(var(--primary) / 1) 100%
+  );
+  border: 1px solid hsl(var(--primary) / 0.6);
+  box-shadow:
+    0 30px 60px hsl(var(--primary) / 0.25),
+    0 0 0 1px hsl(var(--primary) / 0.3),
+    inset 0 1px 0 hsl(var(--primary-foreground) / 0.2);
+}
+
 .premium-form-container::before {
   content: '';
   position: absolute;

@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
-import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
+import { ThreeDVisualEffects as AdvancedThreeDVisualEffects } from '@/components/3DVisualEffects';
 import motorcycleHero from '@/assets/practice-areas/motorcycle-accidents.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -249,8 +249,8 @@ const MotorcycleAccidents = () => {
               <div className="max-w-6xl mx-auto px-6 py-12">
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                   <div className="lg:col-span-2">
-                    <ThreeDVisualEffects>
-                      <div className="premium-form-container interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
+                    <AdvancedThreeDVisualEffects>
+                      <div className="premium-form-container premium-form-container--blue-solid interactive-card glass-card rounded-2xl p-8 gpu-accelerated">
                         <div className="text-center mb-8">
                           <h3 className="text-2xl md:text-3xl font-display text-white mb-2 font-bold">Get Your Free Motorcycle Accident Case Evaluation</h3>
                           <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto mb-4"></div>
@@ -470,7 +470,7 @@ const MotorcycleAccidents = () => {
                           </Button>
                         </form>
                       </div>
-                    </ThreeDVisualEffects>
+                    </AdvancedThreeDVisualEffects>
                   </div>
 
                   <div className="lg:col-span-1">

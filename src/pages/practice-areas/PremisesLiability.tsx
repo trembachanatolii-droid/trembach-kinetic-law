@@ -105,7 +105,62 @@ const PremisesLiability: React.FC = () => {
         </div>
       </section>
 
+      {/* Bar Tools Section */}
+      <section className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 py-8 border-y border-slate-700">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <Button 
+              variant="outline" 
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
+              onClick={() => window.location.href = '#case-evaluation'}
+            >
+              <FileText className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium">Free Evaluation</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
+              onClick={() => window.location.href = 'tel:8553742906'}
+            >
+              <Phone className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium">Call Now</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
+              onClick={() => window.location.href = '#faq'}
+            >
+              <HelpCircle className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium">Get Answers</span>
+            </Button>
+            <Button 
+              variant="outline" 
+              className="bg-white/10 text-white border-white/20 hover:bg-white/20 h-16 flex flex-col items-center justify-center group transition-all duration-300"
+              onClick={() => window.location.href = '#types-of-accidents'}
+            >
+              <Shield className="w-5 h-5 mb-1 group-hover:scale-110 transition-transform" />
+              <span className="text-sm font-medium">Learn More</span>
+            </Button>
+          </div>
+        </div>
+      </section>
+
       <div className="max-w-7xl mx-auto px-4 py-16">
+        {/* What To Do Section */}
+        <section id="what-to-do" className="content-section mb-12">
+          <h2 className="text-3xl font-bold text-red-600 mb-6">What To Do After a Premises Liability Accident</h2>
+          
+          <div className="mb-8">
+            <img src={whatToDoImage} alt="What to do after a premises liability accident - immediate steps for documentation and safety" className="w-full h-64 object-cover rounded-lg shadow-lg" />
+          </div>
+          
+          <div className="prose prose-lg max-w-none">
+            <p>
+              If you've been injured on someone else's property, taking immediate action can significantly impact your ability to recover compensation. Document the scene, seek medical attention, and contact an experienced premises liability attorney to protect your rights.
+            </p>
+          </div>
+        </section>
+
         {/* Free Case Evaluation Section */}
         <section id="case-evaluation" className="content-section mb-16">
           <ThreeDVisualEffects>
@@ -235,21 +290,6 @@ const PremisesLiability: React.FC = () => {
               </div>
             </div>
           </ThreeDVisualEffects>
-        </section>
-
-        {/* What To Do Section */}
-        <section id="what-to-do" className="content-section mb-12">
-          <h2 className="text-3xl font-bold text-red-600 mb-6">What To Do After a Premises Liability Accident</h2>
-          
-          <div className="mb-8">
-            <img src={whatToDoImage} alt="What to do after a premises liability accident - immediate steps for documentation and safety" className="w-full h-64 object-cover rounded-lg shadow-lg" />
-          </div>
-          
-          <div className="prose prose-lg max-w-none">
-            <p>
-              If you've been injured on someone else's property, taking immediate action can significantly impact your ability to recover compensation. Document the scene, seek medical attention, and contact an experienced premises liability attorney to protect your rights.
-            </p>
-          </div>
         </section>
 
         {/* Types of Accidents Section */}

@@ -8,7 +8,7 @@ import { Calculator, AlertTriangle, DollarSign, FileText, ArrowLeft } from 'luci
 import { toast } from 'sonner';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import GoBack from '@/components/GoBack';
+
 import calculatorHero from '@/assets/swimming-pool-calculator-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -236,7 +236,7 @@ const SwimmingPoolCompensationCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack fallbackPath="/practice-areas/swimming-pool-accidents" />
+      
       
       {/* Hero Section */}
       <section 

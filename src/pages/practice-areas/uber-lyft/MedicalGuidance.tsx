@@ -25,7 +25,7 @@ import {
   Pill
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/uber-lyft-medical-guidance-hero.jpg';
 import emergencyRoomImage from '@/assets/emergency-room-treatment.jpg';
@@ -252,7 +252,7 @@ const MedicalGuidance: React.FC = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-red-900/80 via-black/60 to-blue-900/80 pointer-events-none"></div>
         
-        <GoBack />
+        
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">

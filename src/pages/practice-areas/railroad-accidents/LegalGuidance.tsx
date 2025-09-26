@@ -4,7 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Shield, Scale, Clock, Phone, FileText, AlertTriangle, Users, Award } from 'lucide-react';
 import heroBackground from '@/assets/railroad-guidance-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 const RailroadAccidentsLegalGuidance: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const RailroadAccidentsLegalGuidance: React.FC = () => {
         keywords="railroad accident legal guidance, FELA legal help, train accident lawyer advice, California railroad attorney guidance"
       />
 
-      <GoBack fallbackPath="/practice-areas/railroad-accidents" />
+      
 
       {/* Hero Section */}
       <section 

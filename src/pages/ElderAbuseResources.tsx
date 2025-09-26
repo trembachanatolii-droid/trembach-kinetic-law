@@ -23,51 +23,6 @@ import {
 } from 'lucide-react';
 import elderAbuseResourcesHero from '@/assets/elder-abuse-resources-hero-new.jpg';
 
-interface GoBackProps {
-  onGoBack?: () => void;
-  fromSection?: string;
-}
-
-const GoBack: React.FC<GoBackProps> = ({ onGoBack, fromSection }) => {
-  const [isVisible, setIsVisible] = useState(false);
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrolled = window.scrollY > 100;
-      setIsVisible(scrolled);
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-  
-  const handleClick = () => {
-    if (onGoBack) {
-      onGoBack();
-    } else if (fromSection) {
-      const targetElement = document.getElementById(fromSection);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      window.history.back();
-    } else {
-      window.history.back();
-    }
-  };
-  
-  return (
-    <div className={`fixed top-20 left-6 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-      <Button 
-        variant="ghost" 
-        onClick={handleClick}
-        className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Go Back
-      </Button>
-    </div>
-  );
-};
 
 const ElderAbuseResources: React.FC = () => {
   const emergencyContacts = [
@@ -273,7 +228,7 @@ const ElderAbuseResources: React.FC = () => {
 
       <div className="min-h-screen bg-background">
         {/* Go Back Component */}
-        <GoBack />
+        
 
         {/* Hero Section */}
         <section 

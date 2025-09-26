@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calculator, ArrowLeft, Phone, Clock, Shield, FileText } from 'lucide-react';
 import heroBackground from '@/assets/railroad-calculator-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 const RailroadAccidentsCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -59,7 +59,7 @@ const RailroadAccidentsCompensationCalculator: React.FC = () => {
         keywords="railroad accident compensation calculator, FELA calculator, train accident settlement, railroad injury compensation"
       />
 
-      <GoBack fallbackPath="/practice-areas/railroad-accidents" />
+      
 
       {/* Hero Section */}
       <section 

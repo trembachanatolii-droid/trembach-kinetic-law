@@ -2,7 +2,6 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpen, FlaskConical, AlertTriangle, Factory, Star, Phone } from 'lucide-react';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/benzene-education-hero.jpg';
@@ -19,7 +18,6 @@ const BenzeneEducation: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        <GoBack fallbackPath="/practice-areas/benzene-exposure" />
         
         {/* Hero Section */}
         <section 

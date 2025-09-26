@@ -5,9 +5,11 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Link } from 'react-router-dom';
+import ThreeDVisualEffects from '@/components/3DVisualEffects';
 import { 
   Phone, 
   Mail, 
@@ -52,9 +54,18 @@ const MotorcycleAccidentsNew: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
   const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
     accidentDate: '',
-    bikeType: '',
-    injuryType: ''
+    motorcycleType: '',
+    accidentType: '',
+    injuryType: '',
+    medicalTreatment: '',
+    insuranceClaim: '',
+    description: '',
+    consent: false
   });
 
   const heroRef = useRef<HTMLDivElement>(null);
@@ -114,8 +125,8 @@ const MotorcycleAccidentsNew: React.FC = () => {
 
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission - redirect to motorcycle case evaluation
-    window.location.href = '/motorcycle-case-evaluation';
+    console.log('Motorcycle Accidents Free Case Evaluation:', formData);
+    alert('Thanks! We will contact you within 24 hours about your motorcycle accident case.');
   };
 
   // FAQ Data - 50+ questions
@@ -567,69 +578,213 @@ const MotorcycleAccidentsNew: React.FC = () => {
                   alt="Motorcycle accident scene investigation" 
                   className="w-full h-48 object-cover rounded-lg mb-6"
                 />
-                
-                <h3 className="text-xl font-semibold mb-4">Start Your Free Case Evaluation</h3>
-                
-                <form onSubmit={handleFormSubmit} className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium text-foreground">Accident Date</label>
-                    <Input 
-                      type="date"
-                      value={formData.accidentDate}
-                      onChange={(e) => setFormData({...formData, accidentDate: e.target.value})}
-                      className="mt-1"
-                    />
-                  </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-foreground">Type of Motorcycle</label>
-                    <Select value={formData.bikeType} onValueChange={(value) => setFormData({...formData, bikeType: value})}>
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Select bike type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="street">Street/Standard</SelectItem>
-                        <SelectItem value="sport">Sport Bike</SelectItem>
-                        <SelectItem value="cruiser">Cruiser</SelectItem>
-                        <SelectItem value="touring">Touring</SelectItem>
-                        <SelectItem value="dirt">Dirt Bike</SelectItem>
-                        <SelectItem value="scooter">Scooter</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                <ThreeDVisualEffects>
+                  <div className="premium-form-container interactive-card glass-card rounded-2xl p-6 gpu-accelerated">
+                    <div className="text-center mb-6">
+                      <h3 className="text-2xl md:text-3xl font-display text-white font-bold mb-2">Get Your Free Motorcycle Accident Case Evaluation</h3>
+                      <div className="w-16 h-1 bg-gradient-to-r from-blue-400 to-blue-600 rounded-full mx-auto"></div>
+                    </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-foreground">Primary Injury Type</label>
-                    <Select value={formData.injuryType} onValueChange={(value) => setFormData({...formData, injuryType: value})}>
-                      <SelectTrigger className="mt-1">
-                        <SelectValue placeholder="Select injury type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
-                        <SelectItem value="spinal">Spinal Cord Injury</SelectItem>
-                        <SelectItem value="broken-bones">Broken Bones</SelectItem>
-                        <SelectItem value="road-rash">Road Rash</SelectItem>
-                        <SelectItem value="internal">Internal Injuries</SelectItem>
-                        <SelectItem value="multiple">Multiple Injuries</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
+                    <form onSubmit={handleFormSubmit} className="space-y-6" role="form" aria-label="Motorcycle Accident Case Evaluation Form">
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">First Name *</label>
+                          <Input
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="Enter your first name"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Last Name *</label>
+                          <Input
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="Enter your last name"
+                          />
+                        </div>
+                      </div>
 
-                  <Button type="submit" className="w-full bg-red-600 hover:bg-red-700 text-white">
-                    Get My Free Evaluation
-                  </Button>
-                </form>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Email *</label>
+                          <Input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="your.email@example.com"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Phone *</label>
+                          <Input
+                            type="tel"
+                            name="phone"
+                            value={formData.phone}
+                            onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                            placeholder="(555) 123-4567"
+                          />
+                        </div>
+                      </div>
 
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <div className="flex items-center mb-2">
-                    <Phone className="w-5 h-5 text-red-600 mr-2" />
-                    <span className="font-semibold">Call 24/7</span>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Date of Accident *</label>
+                          <Input
+                            type="date"
+                            name="accidentDate"
+                            value={formData.accidentDate}
+                            onChange={(e) => setFormData({ ...formData, accidentDate: e.target.value })}
+                            required
+                            aria-required="true"
+                            className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base"
+                          />
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Type of Motorcycle *</label>
+                          <Select value={formData.motorcycleType} onValueChange={(value) => setFormData({ ...formData, motorcycleType: value })} required>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select motorcycle type" className="text-blue-200/70" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white z-50">
+                              <SelectItem value="street">Street/Standard</SelectItem>
+                              <SelectItem value="sport">Sport Bike</SelectItem>
+                              <SelectItem value="cruiser">Cruiser</SelectItem>
+                              <SelectItem value="touring">Touring</SelectItem>
+                              <SelectItem value="dirt">Dirt Bike</SelectItem>
+                              <SelectItem value="scooter">Scooter</SelectItem>
+                              <SelectItem value="electric">Electric</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Type of Accident *</label>
+                          <Select value={formData.accidentType} onValueChange={(value) => setFormData({ ...formData, accidentType: value })} required>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select accident type" className="text-blue-200/70" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white z-50">
+                              <SelectItem value="left-turn">Left-Turn Collision</SelectItem>
+                              <SelectItem value="lane-splitting">Lane Splitting Accident</SelectItem>
+                              <SelectItem value="rear-end">Rear-End Collision</SelectItem>
+                              <SelectItem value="merging">Highway Merging/Lane Change</SelectItem>
+                              <SelectItem value="dooring">Dooring Accident</SelectItem>
+                              <SelectItem value="intersection">Intersection Accident</SelectItem>
+                              <SelectItem value="head-on">Head-On Collision</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Primary Injury Type *</label>
+                          <Select value={formData.injuryType} onValueChange={(value) => setFormData({ ...formData, injuryType: value })} required>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select injury type" className="text-blue-200/70" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white z-50">
+                              <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                              <SelectItem value="spinal">Spinal Cord Injury</SelectItem>
+                              <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                              <SelectItem value="road-rash">Road Rash</SelectItem>
+                              <SelectItem value="internal">Internal Injuries</SelectItem>
+                              <SelectItem value="multiple">Multiple Injuries</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="grid md:grid-cols-2 gap-4">
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Medical Treatment *</label>
+                          <Select value={formData.medicalTreatment} onValueChange={(value) => setFormData({ ...formData, medicalTreatment: value })} required>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select treatment level" className="text-blue-200/70" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white z-50">
+                              <SelectItem value="er-only">Emergency Room Only</SelectItem>
+                              <SelectItem value="hospitalized">Hospitalized</SelectItem>
+                              <SelectItem value="surgery">Surgery Required</SelectItem>
+                              <SelectItem value="ongoing">Ongoing Treatment</SelectItem>
+                              <SelectItem value="pt">Physical Therapy</SelectItem>
+                              <SelectItem value="rehab">Rehabilitation</SelectItem>
+                              <SelectItem value="none">No Treatment Yet</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div className="space-y-2">
+                          <label className="text-white text-base font-medium">Insurance Status *</label>
+                          <Select value={formData.insuranceClaim} onValueChange={(value) => setFormData({ ...formData, insuranceClaim: value })} required>
+                            <SelectTrigger className="bg-white/10 border-blue-300/40 text-white focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30 h-12 text-base">
+                              <SelectValue placeholder="Select claim status" className="text-blue-200/70" />
+                            </SelectTrigger>
+                            <SelectContent className="bg-white z-50">
+                              <SelectItem value="not-filed">Not Filed Yet</SelectItem>
+                              <SelectItem value="filed">Filed - Pending</SelectItem>
+                              <SelectItem value="investigation">Under Investigation</SelectItem>
+                              <SelectItem value="offer">Settlement Offer Received</SelectItem>
+                              <SelectItem value="denied">Claim Denied</SelectItem>
+                              <SelectItem value="disputed">Fault Being Disputed</SelectItem>
+                              <SelectItem value="low-offer">Unreasonably Low Offer</SelectItem>
+                              <SelectItem value="no-insurance">Other Party Uninsured</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+
+                      <div className="space-y-2">
+                        <label className="text-white text-base font-medium">Please describe your motorcycle accident *</label>
+                        <Textarea
+                          name="description"
+                          value={formData.description}
+                          onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                          placeholder="Provide details about how the accident occurred..."
+                          rows={5}
+                          className="bg-white/10 border-blue-300/40 text-white placeholder:text-blue-200/70 focus:border-blue-400 focus:ring-2 focus:ring-blue-400/30"
+                          required
+                          aria-required="true"
+                        />
+                      </div>
+
+                      <div className="flex items-start space-x-2">
+                        <input
+                          type="checkbox"
+                          name="consent"
+                          checked={formData.consent}
+                          onChange={(e) => setFormData({ ...formData, consent: e.target.checked })}
+                          className="mt-1 w-4 h-4 text-blue-600 border-gray-300 rounded"
+                          required
+                          aria-required="true"
+                        />
+                        <label className="text-white text-sm leading-relaxed">
+                          I consent to being contacted by Trembach Law Firm regarding my motorcycle accident case. I understand this consultation is free and there is no obligation. *
+                        </label>
+                      </div>
+
+                      <Button type="submit" className="w-full btn-enhanced py-4 text-lg">Get My Free Case Evaluation</Button>
+                    </form>
                   </div>
-                  <p className="text-2xl font-bold text-red-600">(818) 123-4567</p>
-                  <p className="text-sm text-muted-foreground">No fees unless we win your case</p>
-                </div>
+                </ThreeDVisualEffects>
               </Card>
             </div>
           </div>

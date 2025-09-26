@@ -8,7 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Phone, Star, Calculator, AlertTriangle, DollarSign, TrendingUp, Scale } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/hearing-loss-calculator-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -226,7 +226,7 @@ const HearingLossCompensationCalculator: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        <GoBack fallbackPath="/practice-areas/hearing-loss" />
+        
         
         {/* Hero Section */}
         <section 

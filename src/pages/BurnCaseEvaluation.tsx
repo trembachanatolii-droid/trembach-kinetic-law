@@ -10,7 +10,6 @@ import { Phone, Star, Shield, Clock, Award } from 'lucide-react';
 import { toast } from 'sonner';
 import heroBackground from '@/assets/burn-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -78,8 +77,6 @@ const BurnCaseEvaluation: React.FC = () => {
         description="Get a free evaluation of your California burn injury case. No fees unless we win. Former defense attorney fighting for burn victims."
         canonical="/burn-case-evaluation"
       />
-      
-      <GoBack />
       
       {/* Hero Section */}
       <section 

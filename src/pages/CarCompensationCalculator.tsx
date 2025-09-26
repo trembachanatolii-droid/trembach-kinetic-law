@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Calculator, DollarSign, FileText, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImage from '@/assets/practice-areas/car-accident-compensation.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const CarCompensationCalculator = () => {
@@ -43,8 +42,6 @@ const CarCompensationCalculator = () => {
         description="Estimate your California car accident compensation with our free calculator. Get personalized assessment of your potential settlement value."
         canonical="/car-compensation-calculator"
       />
-
-      <GoBack />
 
       {/* Hero Section */}
       <section 

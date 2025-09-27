@@ -8,45 +8,53 @@ const TruthAboutCase = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
     const ctx = gsap.context(() => {
-      // Animate the flowing line
-      gsap.set('.flowing-line', { 
-        pathLength: 0, 
-        strokeDasharray: '1000 1000',
-        strokeDashoffset: 1000
-      });
-      
-      gsap.to('.flowing-line', {
-        strokeDashoffset: 0,
-        duration: 2,
-        ease: "power2.inOut",
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 70%",
-          toggleActions: "play none none reverse"
-        }
-      });
+      const line = section.querySelector('.flowing-line') as SVGPathElement | null;
+
+      if (line) {
+        // Prepare stroke for draw-on animation using actual path length
+        const length = line.getTotalLength();
+        gsap.set(line, {
+          attr: {
+            'stroke-dasharray': length,
+            'stroke-dashoffset': length,
+          },
+        });
+
+        gsap.to(line, {
+          attr: { 'stroke-dashoffset': 0 },
+          duration: 2,
+          ease: 'power2.inOut',
+          scrollTrigger: {
+            trigger: section,
+            start: 'top 70%',
+            toggleActions: 'play none none reverse',
+          },
+        });
+      }
 
       // Animate process steps
-      gsap.fromTo('.process-step', 
-        {
-          opacity: 0,
-          x: -50,
-        },
+      const steps = section.querySelectorAll('.process-step');
+      gsap.fromTo(
+        steps,
+        { opacity: 0, x: -50 },
         {
           opacity: 1,
           x: 0,
           duration: 0.8,
           stagger: 0.2,
-          ease: "power2.out",
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top 60%",
-            toggleActions: "play none none reverse"
-          }
+            trigger: section,
+            start: 'top 60%',
+            toggleActions: 'play none none reverse',
+          },
         }
       );
-    }, sectionRef);
+    });
 
     return () => ctx.revert();
   }, []);

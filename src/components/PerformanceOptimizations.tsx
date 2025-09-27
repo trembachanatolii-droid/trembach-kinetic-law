@@ -11,8 +11,8 @@ export const useIntersectionObserver = (
     const observer = new IntersectionObserver(([entry]) => {
       callback(entry);
     }, {
-      threshold: 0.01,
-      rootMargin: '600px',
+      threshold: 0,
+      rootMargin: '1200px',
       ...options
     });
 
@@ -41,7 +41,6 @@ export const LazyImage: React.FC<{
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useIntersectionObserver((entry) => {
     if (entry.isIntersecting && imgRef.current) {
-      imgRef.current.src = src;
       imgRef.current.classList.remove('opacity-0');
       imgRef.current.classList.add('opacity-100');
     }
@@ -52,8 +51,22 @@ export const LazyImage: React.FC<{
       <img
         ref={imgRef}
         alt={alt}
-        className="w-full h-full object-cover transition-opacity duration-200 opacity-0"
+        className="w-full h-full object-cover transition-opacity duration-150 opacity-0"
+        src={src}
         loading="lazy"
+        decoding="async"
+        onLoad={() => {
+          if (imgRef.current) {
+            imgRef.current.classList.remove('opacity-0');
+            imgRef.current.classList.add('opacity-100');
+          }
+        }}
+        onError={() => {
+          if (imgRef.current) {
+            imgRef.current.classList.remove('opacity-0');
+            imgRef.current.classList.add('opacity-100');
+          }
+        }}
         style={{
           backgroundImage: blurDataURL ? `url(${blurDataURL})` : 'none',
           backgroundSize: 'cover',

@@ -73,6 +73,9 @@ const Index = () => {
       {/* Truth About Your Case Section */}
       <TruthAboutCase />
 
+      {/* Practice Areas */}
+      <PracticeAreasReference key="practice-areas-v2" />
+
       {/* Marquee Bands */}
       <div className="relative z-10">
         <MarqueeBand 
@@ -110,9 +113,6 @@ const Index = () => {
 
       {/* Featured Results */}
       <FeaturedResults />
-
-      {/* Practice Areas */}
-      <PracticeAreasReference key="practice-areas-v2" />
 
       {/* Process */}
       <Process />

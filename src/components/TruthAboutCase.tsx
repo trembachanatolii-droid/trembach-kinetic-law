@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Card, CardContent } from '@/components/ui/card';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,24 +9,39 @@ const TruthAboutCase = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Animate cards on scroll
-      gsap.fromTo('.truth-card', 
+      // Animate the flowing line
+      gsap.set('.flowing-line', { 
+        pathLength: 0, 
+        strokeDasharray: '1000 1000',
+        strokeDashoffset: 1000
+      });
+      
+      gsap.to('.flowing-line', {
+        strokeDashoffset: 0,
+        duration: 2,
+        ease: "power2.inOut",
+        scrollTrigger: {
+          trigger: sectionRef.current,
+          start: "top 70%",
+          toggleActions: "play none none reverse"
+        }
+      });
+
+      // Animate process steps
+      gsap.fromTo('.process-step', 
         {
           opacity: 0,
-          y: 30,
-          scale: 0.95
+          x: -50,
         },
         {
           opacity: 1,
-          y: 0,
-          scale: 1,
-          duration: 0.6,
-          stagger: 0.15,
+          x: 0,
+          duration: 0.8,
+          stagger: 0.2,
           ease: "power2.out",
           scrollTrigger: {
             trigger: sectionRef.current,
-            start: "top 80%",
-            end: "bottom 20%",
+            start: "top 60%",
             toggleActions: "play none none reverse"
           }
         }
@@ -39,97 +53,108 @@ const TruthAboutCase = () => {
 
   const problems = [
     {
-      number: 1,
+      number: "01",
       title: "They're Recording Everything",
       description: "That friendly adjuster? They're building a case against you. Every word you say is being analyzed to minimize or deny your claim. One wrong statement costs you thousands.",
-      cost: "Average Loss: $75,000"
+      tags: ["Recording", "Analysis", "Minimize", "Deny"]
     },
     {
-      number: 2,
+      number: "02", 
       title: "Evidence is Disappearing Fast",
       description: "Surveillance footage gets deleted in 30 days. Witnesses forget details. Skid marks fade. Every day you wait makes your case weaker and their defense stronger.",
-      cost: "Case Impact: -40% Value"
+      tags: ["Surveillance", "Witnesses", "Evidence", "Time"]
     },
     {
-      number: 3,
-      title: "Your Doctor Works for Them",
+      number: "03",
+      title: "Your Doctor Works for Them", 
       description: "Insurance companies have networks of doctors who minimize injuries. They'll send you to \"their\" doctor who will say you're fine, destroying your case value.",
-      cost: "Medical Manipulation: -60% Settlement"
+      tags: ["Medical", "Networks", "Minimize", "Destroy"]
     },
     {
-      number: 4,
+      number: "04",
       title: "The First Offer is an Insult",
       description: "They know you need money now. Bills are piling up. So they offer 10% of what your case is worth, hoping desperation makes you accept. Don't fall for it.",
-      cost: "Lowball Tactics: 90% Underpaid"
+      tags: ["Lowball", "Desperation", "Accept", "Insult"]
     },
     {
-      number: 5,
+      number: "05",
       title: "Most Lawyers are Scared of Trial",
       description: "95% of attorneys never go to trial. Insurance companies know this. They lowball because they know your lawyer will push you to settle. I'm not afraid. They know it.",
-      cost: "Weak Representation: -$100,000+"
+      tags: ["Trial", "Scared", "Settle", "Weak"]
     },
     {
-      number: 6,
+      number: "06",
       title: "Time Limits are Ticking",
       description: "California has strict deadlines. Miss them and you get nothing. Government claims? 6 months. Regular claims? 2 years. But evidence disappears much faster.",
-      cost: "Deadline Missed: $0 Recovery"
+      tags: ["Deadlines", "Limits", "Miss", "Nothing"]
     }
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-24 bg-background">
-      <div className="container mx-auto px-8 max-w-7xl">
+    <section ref={sectionRef} className="relative py-32 bg-white overflow-hidden">
+      <div className="container mx-auto px-8 max-w-6xl">
         {/* Section Header */}
-        <div className="text-center mb-20">
-          <h2 className="text-display font-display text-foreground mb-6">
-            The <span className="relative inline-block">
-              <span className="text-accent">Truth</span>
-              <span className="absolute inset-0 bg-accent/20 -skew-x-12 transform"></span>
-            </span> About Your Case
+        <div className="text-center mb-24">
+          <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-8 leading-none">
+            The <span className="text-blue-500">Truth</span> About Your Case
           </h2>
-          <p className="text-headline text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
             What insurance companies don't want you to know
           </p>
+          
+          {/* Flowing Line SVG */}
+          <div className="mt-16 flex justify-center">
+            <svg
+              width="800"
+              height="100"
+              viewBox="0 0 800 100"
+              className="max-w-full h-auto"
+            >
+              <path
+                className="flowing-line"
+                d="M0,50 Q200,10 400,50 T800,50"
+                fill="none"
+                stroke="#3b82f6"
+                strokeWidth="3"
+                strokeLinecap="round"
+              />
+            </svg>
+          </div>
         </div>
 
-        {/* Problems Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {/* Process Steps */}
+        <div className="space-y-16">
           {problems.map((problem, index) => (
-            <Card key={index} className="truth-card relative bg-surface border-2 border-border/20 hover:border-accent/50 transition-all duration-300 group hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/10">
-              {/* Problem Number */}
-              <div className="absolute -top-6 left-6 w-12 h-12 bg-foreground text-background rounded-full flex items-center justify-center font-bold text-xl group-hover:bg-accent transition-colors duration-300">
-                {problem.number}
+            <div key={index} className="process-step flex items-start gap-8 md:gap-12">
+              {/* Step Number */}
+              <div className="flex-shrink-0">
+                <div className="w-20 h-20 md:w-24 md:h-24 bg-slate-900 text-white rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold">
+                  {problem.number}
+                </div>
               </div>
               
-              <CardContent className="p-8 pt-12">
-                <h3 className="text-title font-display font-bold text-foreground mb-4 leading-tight">
-                  {problem.title.split(' ').map((word, wordIndex) => {
-                    // Highlight key words
-                    const highlightWords = ['Recording', 'Disappearing', 'Works', 'Insult', 'Scared', 'Ticking'];
-                    if (highlightWords.includes(word)) {
-                      return (
-                        <span key={wordIndex} className="relative">
-                          <span className="text-accent font-bold">{word}</span>
-                          <span className="absolute bottom-0 left-0 w-full h-1 bg-accent/30"></span>
-                        </span>
-                      );
-                    }
-                    return <span key={wordIndex}>{word} </span>;
-                  })}
+              {/* Step Content */}
+              <div className="flex-1 pt-2">
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+                  {problem.title}
                 </h3>
-                
-                <p className="text-body text-muted-foreground leading-relaxed mb-6">
+                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6 max-w-4xl">
                   {problem.description}
                 </p>
                 
-                <div className="border-t-2 border-accent/30 pt-4">
-                  <p className="text-body font-bold text-foreground">
-                    <span className="text-accent">{problem.cost.split(':')[0]}:</span>
-                    <span className="ml-2">{problem.cost.split(':')[1]}</span>
-                  </p>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-3">
+                  {problem.tags.map((tag, tagIndex) => (
+                    <span
+                      key={tagIndex}
+                      className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           ))}
         </div>
       </div>

@@ -218,8 +218,8 @@ const TruthAboutCase = () => {
               <div
                 key={index}
                 className={`
-                  process-step group relative p-6 rounded-2xl border-2 transition-all duration-500
-                  hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-white/90
+                  process-step group relative p-8 rounded-2xl border-2 transition-all duration-500
+                  hover:scale-105 hover:shadow-2xl backdrop-blur-sm bg-white/80
                   ${borderColor} ${shadowColor} ${bgGradient}
                 `}
                 style={{
@@ -233,42 +233,37 @@ const TruthAboutCase = () => {
                   ${isImmediate ? 'bg-gradient-to-r from-green-400/10 to-emerald-400/10' : 'bg-gradient-to-r from-red-400/10 to-rose-400/10'}
                 `}></div>
                 
-                {/* Content Container */}
-                <div className="relative flex items-start gap-4">
-                  {/* Step Number - Fixed size container */}
-                  <div className="flex-shrink-0 w-16 h-16 flex items-center justify-center">
-                    <span className={`text-3xl font-bold ${accentColor} group-hover:scale-110 transition-transform duration-300`}>
-                      {problem.number}
-                    </span>
-                  </div>
+                {/* Step Number */}
+                <div className={`relative text-6xl md:text-7xl font-bold mb-6 ${accentColor} group-hover:scale-110 transition-transform duration-300`}>
+                  {problem.number}
+                </div>
+                
+                {/* Step Content */}
+                <div className="relative">
+                  <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight group-hover:text-slate-800 transition-colors duration-300">
+                    {problem.title}
+                  </h3>
+                  <p className="text-lg text-slate-600 leading-relaxed mb-6 group-hover:text-slate-700 transition-colors duration-300">
+                    {problem.description}
+                  </p>
                   
-                  {/* Step Content */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-3 leading-tight group-hover:text-slate-800 transition-colors duration-300">
-                      {problem.title}
-                    </h3>
-                    <p className="text-base text-slate-600 leading-relaxed mb-4 group-hover:text-slate-700 transition-colors duration-300">
-                      {problem.description}
-                    </p>
-                    
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {problem.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className={`
-                            px-3 py-1 rounded-full text-xs font-medium transition-all duration-300
-                            ${isImmediate 
-                              ? 'bg-green-100 text-green-700 group-hover:bg-green-200 group-hover:text-green-800' 
-                              : 'bg-red-100 text-red-700 group-hover:bg-red-200 group-hover:text-red-800'
-                            }
-                            group-hover:scale-105
-                          `}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-3">
+                    {problem.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className={`
+                          px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
+                          ${isImmediate 
+                            ? 'bg-green-100 text-green-700 group-hover:bg-green-200 group-hover:text-green-800' 
+                            : 'bg-red-100 text-red-700 group-hover:bg-red-200 group-hover:text-red-800'
+                          }
+                          group-hover:scale-105
+                        `}
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
                 </div>
               </div>

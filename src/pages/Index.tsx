@@ -35,17 +35,12 @@ const Index = () => {
 
   const handlePreloaderComplete = () => {
     setIsLoading(false);
+    setShowContent(true);
     
-    // Animate main content in
-    gsap.to("main", {
-      opacity: 1,
-      duration: 0.4,
-      ease: "power1.out",
-      onComplete: () => {
-        setShowContent(true);
-        ScrollTrigger.refresh();
-      }
-    });
+    // Refresh ScrollTrigger after showing content
+    setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
   };
 
   useEffect(() => {
@@ -61,7 +56,7 @@ const Index = () => {
     <>
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
-    <main className="relative bg-background text-foreground" style={{ opacity: isLoading ? 0 : 1 }}>
+    <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>
       <SEO 
         title="Trembach Law Firm | California Injury & Asbestos Attorney"
         description="Former insurance defense attorney helping Californians. New firm, insider tactics, no fees unless we win."

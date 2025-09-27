@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, TrendingUp, Users, Award } from 'lucide-react';
+import { ArrowRight, TrendingUp, Users, Trophy } from 'lucide-react';
 
 // Interactive statistics component with animations
 export const InteractiveStats: React.FC = () => {
@@ -102,7 +102,7 @@ export const InteractiveCTA: React.FC = () => {
               isHovered ? 'scale-110 shadow-lg' : ''
             }`}
           >
-            <Award className="w-5 h-5 mr-2" />
+            <Trophy className="w-5 h-5 mr-2" />
             Free Case Review
             <ArrowRight className="w-5 h-5 ml-2" />
           </Button>

@@ -5,33 +5,46 @@ import LadyJusticeStatue from './LadyJusticeStatue';
 
 const HeroScene: React.FC = () => {
   return (
-    <div className="absolute right-8 top-1/2 transform -translate-y-1/2 w-80 h-80 z-20">
+    <div className="absolute right-8 top-1/2 transform -translate-y-1/2 w-96 h-96 z-20">
       <Canvas
         camera={{ 
-          position: [3, 2, 5], 
-          fov: 45,
+          position: [4, 1, 6], 
+          fov: 50,
           near: 0.1,
-          far: 100
+          far: 1000
         }}
         gl={{ 
           antialias: true,
           alpha: true,
           powerPreference: "high-performance"
         }}
+        shadows
       >
-        <ambientLight intensity={0.4} />
+        <ambientLight intensity={0.3} />
         <directionalLight 
-          position={[5, 5, 5]} 
-          intensity={1.2}
+          position={[10, 10, 5]} 
+          intensity={1.5}
           castShadow
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
+          shadow-mapSize-width={4096}
+          shadow-mapSize-height={4096}
+          shadow-camera-far={50}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
         />
-        <pointLight position={[-2, 3, 2]} intensity={0.6} color="#ffd700" />
+        <pointLight position={[-5, 5, 5]} intensity={0.8} color="#ffd700" />
+        <spotLight 
+          position={[0, 10, 0]} 
+          intensity={0.5} 
+          angle={0.15} 
+          penumbra={1}
+          castShadow
+        />
         
         <Suspense fallback={null}>
           <LadyJusticeStatue />
-          <Environment preset="studio" />
+          <Environment preset="city" />
         </Suspense>
         
         <OrbitControls 
@@ -40,8 +53,10 @@ const HeroScene: React.FC = () => {
           autoRotate={false}
           enableDamping={true}
           dampingFactor={0.05}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 4}
+          maxPolarAngle={Math.PI / 1.8}
+          minPolarAngle={Math.PI / 3}
+          maxAzimuthAngle={Math.PI / 4}
+          minAzimuthAngle={-Math.PI / 4}
         />
       </Canvas>
     </div>

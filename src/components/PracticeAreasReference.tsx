@@ -436,6 +436,19 @@ const PracticeAreasReference: React.FC = () => {
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
+    // Initialize all cards with proper styling on mount
+    cardsRef.current.forEach((card) => {
+      if (card) {
+        gsap.set(card, {
+          filter: 'brightness(1) saturate(1)',
+          opacity: 1,
+          scale: 1
+        });
+      }
+    });
+  }, []);
+
+  useEffect(() => {
     const ctx = gsap.context(() => {
       // Header animation
       gsap.fromTo(headerRef.current?.children || [],
@@ -525,11 +538,11 @@ const PracticeAreasReference: React.FC = () => {
               ease: 'power2.out' 
             });
           } else {
-            // Fade out other cards
+            // Fade out other cards (but keep brightness normal for images)
             gsap.to(card, { 
-              scale: 0.95, 
-              opacity: 0.4,
-              filter: 'brightness(0.8)',
+              scale: 0.98, 
+              opacity: 0.6,
+              filter: 'brightness(1) saturate(0.8)',
               duration: 0.3, 
               ease: 'power2.out' 
             });
@@ -543,7 +556,7 @@ const PracticeAreasReference: React.FC = () => {
           gsap.to(card, { 
             scale: 1, 
             opacity: 1,
-            filter: 'brightness(1) drop-shadow(0 0 0px transparent)',
+            filter: 'brightness(1) saturate(1) drop-shadow(0 0 0px transparent)',
             duration: 0.3, 
             ease: 'power2.out' 
           });

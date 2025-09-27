@@ -3,6 +3,7 @@ import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
+import TruthAboutCase from '../components/TruthAboutCase';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
@@ -36,6 +37,9 @@ const Index = () => {
       />
       {/* Hero Section */}
       <Hero />
+
+      {/* Truth About Your Case Section */}
+      <TruthAboutCase />
 
       {/* Marquee Bands */}
       <div className="relative z-10">

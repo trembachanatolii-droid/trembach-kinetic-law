@@ -108,9 +108,6 @@ const Index = () => {
       {/* Every Problem Solved */}
       <EveryProblemSolved />
 
-      {/* Capability Stripes */}
-      <CapabilityStripes />
-
       {/* Featured Results */}
       <FeaturedResults />
 

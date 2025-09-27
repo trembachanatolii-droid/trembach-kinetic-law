@@ -3,6 +3,7 @@ import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
+import About from '../components/About';
 import TruthAboutCase from '../components/TruthAboutCase';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
@@ -65,6 +66,9 @@ const Index = () => {
       />
       {/* Hero Section */}
       <Hero />
+
+      {/* About Section */}
+      <About />
 
       {/* Truth About Your Case Section */}
       <TruthAboutCase />

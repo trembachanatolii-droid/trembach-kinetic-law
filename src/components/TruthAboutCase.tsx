@@ -12,38 +12,14 @@ const TruthAboutCase = () => {
     if (!section) return;
 
     const ctx = gsap.context(() => {
-      const line = section.querySelector('.flowing-line') as SVGPathElement | null;
-
-      if (line) {
-        // Prepare stroke for draw-on animation using actual path length
-        const length = line.getTotalLength();
-        gsap.set(line, {
-          attr: {
-            'stroke-dasharray': length,
-            'stroke-dashoffset': length,
-          },
-        });
-
-        gsap.to(line, {
-          attr: { 'stroke-dashoffset': 0 },
-          duration: 2,
-          ease: 'power2.inOut',
-          scrollTrigger: {
-            trigger: section,
-            start: 'top 70%',
-            toggleActions: 'play none none reverse',
-          },
-        });
-      }
-
       // Animate process steps
       const steps = section.querySelectorAll('.process-step');
       gsap.fromTo(
         steps,
-        { opacity: 0, x: -50 },
+        { opacity: 0, y: 50 },
         {
           opacity: 1,
-          x: 0,
+          y: 0,
           duration: 0.8,
           stagger: 0.2,
           ease: 'power2.out',
@@ -63,101 +39,81 @@ const TruthAboutCase = () => {
     {
       number: "01",
       title: "They're Recording Everything",
-      description: "That friendly adjuster? They're building a case against you. Every word you say is being analyzed to minimize or deny your claim. One wrong statement costs you thousands.",
+      description: "Understanding your vision, requirements, and target audience",
       tags: ["Recording", "Analysis", "Minimize", "Deny"]
     },
     {
       number: "02", 
       title: "Evidence is Disappearing Fast",
-      description: "Surveillance footage gets deleted in 30 days. Witnesses forget details. Skid marks fade. Every day you wait makes your case weaker and their defense stronger.",
+      description: "Creating stunning interfaces and seamless user experiences",
       tags: ["Surveillance", "Witnesses", "Evidence", "Time"]
     },
     {
       number: "03",
       title: "Your Doctor Works for Them", 
-      description: "Insurance companies have networks of doctors who minimize injuries. They'll send you to \"their\" doctor who will say you're fine, destroying your case value.",
+      description: "Building robust, scalable applications with modern technology",
       tags: ["Medical", "Networks", "Minimize", "Destroy"]
     },
     {
       number: "04",
       title: "The First Offer is an Insult",
-      description: "They know you need money now. Bills are piling up. So they offer 10% of what your case is worth, hoping desperation makes you accept. Don't fall for it.",
+      description: "Launching your project with ongoing support and optimization",
       tags: ["Lowball", "Desperation", "Accept", "Insult"]
     },
     {
       number: "05",
       title: "Most Lawyers are Scared of Trial",
-      description: "95% of attorneys never go to trial. Insurance companies know this. They lowball because they know your lawyer will push you to settle. I'm not afraid. They know it.",
+      description: "Comprehensive testing and quality assurance procedures",
       tags: ["Trial", "Scared", "Settle", "Weak"]
     },
     {
       number: "06",
       title: "Time Limits are Ticking",
-      description: "California has strict deadlines. Miss them and you get nothing. Government claims? 6 months. Regular claims? 2 years. But evidence disappears much faster.",
+      description: "Final delivery with documentation and training materials",
       tags: ["Deadlines", "Limits", "Miss", "Nothing"]
     }
   ];
 
   return (
-    <section ref={sectionRef} className="relative py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-8 max-w-6xl">
+    <section ref={sectionRef} className="relative py-24 bg-white overflow-hidden">
+      <div className="container mx-auto px-8 max-w-4xl">
         {/* Section Header */}
-        <div className="text-center mb-24">
-          <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-8 leading-none">
-            The <span className="text-blue-500">Truth</span> About Your Case
+        <div className="text-center mb-20">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+            The Truth About Your Case
           </h2>
-          <p className="text-xl md:text-2xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            What insurance companies don't want you to know
+          <p className="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto leading-relaxed">
+            A structured approach to bringing your digital vision to life
           </p>
-          
-          {/* Flowing Line SVG */}
-          <div className="mt-16 flex justify-center">
-            <svg
-              width="800"
-              height="100"
-              viewBox="0 0 800 100"
-              className="max-w-full h-auto"
-            >
-              <path
-                className="flowing-line"
-                d="M0,50 Q200,10 400,50 T800,50"
-                fill="none"
-                stroke="#3b82f6"
-                strokeWidth="3"
-                strokeLinecap="round"
-              />
-            </svg>
-          </div>
         </div>
 
         {/* Process Steps */}
-        <div className="space-y-16">
+        <div className="space-y-12">
           {problems.map((problem, index) => (
-            <div key={index} className="process-step flex items-start gap-8 md:gap-12">
+            <div key={index} className="process-step">
               {/* Step Number */}
-              <div className="flex-shrink-0">
-                <div className="w-20 h-20 md:w-24 md:h-24 bg-slate-900 text-white rounded-full flex items-center justify-center text-2xl md:text-3xl font-bold">
-                  {problem.number}
-                </div>
+              <div className="text-5xl md:text-6xl font-bold text-slate-300 mb-4">
+                {problem.number}
               </div>
               
               {/* Step Content */}
-              <div className="flex-1 pt-2">
-                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-4 leading-tight">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-3 leading-tight">
                   {problem.title}
                 </h3>
-                <p className="text-lg md:text-xl text-slate-600 leading-relaxed mb-6 max-w-4xl">
+                <p className="text-lg text-slate-600 leading-relaxed mb-4 max-w-3xl">
                   {problem.description}
                 </p>
                 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-3">
+                <div className="flex flex-wrap gap-2">
                   {problem.tags.map((tag, tagIndex) => (
                     <span
                       key={tagIndex}
-                      className="px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
+                      className="text-sm text-slate-500 font-medium"
                     >
                       {tag}
+                      {tagIndex < problem.tags.length - 1 && <span className="ml-2">•</span>}
                     </span>
                   ))}
                 </div>

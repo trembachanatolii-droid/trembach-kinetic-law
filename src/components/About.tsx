@@ -62,14 +62,14 @@ const About = () => {
       tl.fromTo(section, 
         { 
           opacity: 0,
-          filter: 'blur(20px)',
-          y: 60
+          filter: 'blur(10px)',
+          y: 30
         },
         { 
           opacity: 1,
           filter: 'blur(0px)',
           y: 0,
-          duration: 1.2,
+          duration: 0.6,
           ease: "power2.out"
         }
       );
@@ -77,73 +77,69 @@ const About = () => {
       // Profile image animation
       tl.fromTo(profile,
         {
-          x: -100,
+          x: -50,
           opacity: 0,
-          rotateY: -15,
-          scale: 0.9
+          scale: 0.95
         },
         {
           x: 0,
           opacity: 1,
-          rotateY: 0,
-          scale: 1,
-          duration: 1,
-          ease: "back.out(1.7)"
-        },
-        "-=0.8"
-      );
-
-      // Content fade in
-      tl.fromTo(content.querySelectorAll('.animate-content'),
-        {
-          y: 30,
-          opacity: 0
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          stagger: 0.1,
-          ease: "power2.out"
-        },
-        "-=0.6"
-      );
-
-      // Skills icons stagger
-      tl.fromTo(skills.querySelectorAll('.skill-icon'),
-        {
-          y: 20,
-          opacity: 0,
-          scale: 0.8
-        },
-        {
-          y: 0,
-          opacity: 1,
           scale: 1,
           duration: 0.6,
-          stagger: 0.05,
           ease: "back.out(1.7)"
         },
         "-=0.4"
       );
 
-      // Credentials cards
-      gsap.fromTo(credentials.querySelectorAll('.credential-card'),
+      // Content fade in
+      tl.fromTo(content.querySelectorAll('.animate-content'),
         {
-          y: 40,
-          opacity: 0,
-          rotateX: 15
+          y: 20,
+          opacity: 0
         },
         {
           y: 0,
           opacity: 1,
-          rotateX: 0,
-          duration: 0.8,
-          stagger: 0.1,
+          duration: 0.5,
+          stagger: 0.05,
+          ease: "power2.out"
+        },
+        "-=0.4"
+      );
+
+      // Skills icons stagger
+      tl.fromTo(skills.querySelectorAll('.skill-icon'),
+        {
+          y: 15,
+          opacity: 0,
+          scale: 0.9
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.4,
+          stagger: 0.03,
+          ease: "back.out(1.7)"
+        },
+        "-=0.3"
+      );
+
+      // Credentials cards
+      gsap.fromTo(credentials.querySelectorAll('.credential-card'),
+        {
+          y: 20,
+          opacity: 0
+        },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.5,
+          stagger: 0.05,
           ease: "power2.out",
           scrollTrigger: {
             trigger: credentials,
-            start: "top 85%",
+            start: "top 90%",
             toggleActions: "play none none reverse"
           }
         }

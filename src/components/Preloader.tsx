@@ -40,7 +40,7 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     // Progress bar animation
     tl.to(progressBarRef.current, {
       width: "100%",
-      duration: 2.5,
+      duration: 1,
       ease: "power2.out",
       onUpdate: function() {
         const progress = Math.round(this.progress() * 100);
@@ -67,9 +67,8 @@ const Preloader: React.FC<PreloaderProps> = ({ onComplete }) => {
     }, "-=0.3")
     .to(preloaderRef.current, {
       opacity: 0,
-      scale: 0.9,
-      filter: 'blur(20px)',
-      duration: 1,
+      scale: 0.95,
+      duration: 0.5,
       ease: "power2.inOut",
       onComplete: () => {
         if (preloaderRef.current) {

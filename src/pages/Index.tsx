@@ -40,14 +40,14 @@ const Index = () => {
     gsap.fromTo("main", 
       { 
         opacity: 0, 
-        filter: 'blur(20px)',
-        scale: 0.95
+        filter: 'blur(10px)',
+        scale: 0.98
       }, 
       { 
         opacity: 1, 
         filter: 'blur(0px)',
         scale: 1,
-        duration: 1.5,
+        duration: 0.8,
         ease: "power2.out",
         onComplete: () => setShowContent(true)
       }

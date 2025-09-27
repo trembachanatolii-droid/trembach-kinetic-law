@@ -36,7 +36,7 @@ const LadyJusticeStatue: React.FC = () => {
   }, [fbx]);
 
   return (
-    <group ref={meshRef} position={[0, -2, 0]} scale={[0.015, 0.015, 0.015]}>
+    <group ref={meshRef} position={[0, -1, 0]} scale={[0.02, 0.02, 0.02]}>
       <primitive object={fbx} />
     </group>
   );

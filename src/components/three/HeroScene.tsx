@@ -5,7 +5,7 @@ import LadyJusticeStatue from './LadyJusticeStatue';
 
 const HeroScene: React.FC = () => {
   return (
-    <div className="absolute right-8 top-1/2 transform -translate-y-1/2 w-96 h-96 z-20">
+    <div className="absolute right-8 top-1/2 transform -translate-y-1/2 w-80 h-80 z-10 opacity-30">
       <Canvas
         camera={{ 
           position: [4, 1, 6], 

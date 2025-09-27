@@ -7,7 +7,7 @@ const LadyJusticeStatue: React.FC = () => {
   const meshRef = useRef<THREE.Group>(null);
   
   // Load the actual FBX model
-  const fbx = useFBX('./src/assets/lady_justice_statue_3d_model.fbx');
+  const fbx = useFBX('/assets/lady_justice_statue_3d_model.fbx');
   
   useFrame((state) => {
     if (meshRef.current) {

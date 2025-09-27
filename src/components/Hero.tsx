@@ -64,14 +64,8 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20">
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20 bg-[hsl(0_0%_100%)]">
       {/* Hero Background Image */}
-      <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
-        <div className="absolute inset-0 bg-background/60 backdrop-blur-sm" />
-      </div>
 
       {/* 3D Lady Justice Statue */}
       <HeroScene />

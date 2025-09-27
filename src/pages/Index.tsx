@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,10 +12,14 @@ import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
 import SEO from '../components/SEO';
+import Preloader from '../components/Preloader';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false);
+
   useEffect(() => {
     // Initialize smooth scrolling and animations
     gsap.registerPlugin(ScrollTrigger);
@@ -28,8 +32,32 @@ const Index = () => {
     };
   }, []);
 
+  const handlePreloaderComplete = () => {
+    setIsLoading(false);
+    
+    // Animate main content in
+    gsap.fromTo("main", 
+      { 
+        opacity: 0, 
+        filter: 'blur(20px)',
+        scale: 0.95
+      }, 
+      { 
+        opacity: 1, 
+        filter: 'blur(0px)',
+        scale: 1,
+        duration: 1.5,
+        ease: "power2.out",
+        onComplete: () => setShowContent(true)
+      }
+    );
+  };
+
   return (
-    <main className="relative bg-background text-foreground">
+    <>
+      {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
+      
+    <main className="relative bg-background text-foreground" style={{ opacity: isLoading ? 0 : 1 }}>
       <SEO 
         title="Trembach Law Firm | California Injury & Asbestos Attorney"
         description="Former insurance defense attorney helping Californians. New firm, insider tactics, no fees unless we win."
@@ -160,6 +188,7 @@ const Index = () => {
         </div>
       </footer>
     </main>
+    </>
   );
 };
 

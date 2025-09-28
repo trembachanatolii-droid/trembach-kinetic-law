@@ -17,7 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { RopeSection, JusticeRopeSection, ElegantRopeSection } from '../components/animations/RopeSection';
+import { FlowingRopeSection } from '../components/animations/FlowingRopeSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,19 +90,19 @@ const Index = () => {
       <Hero />
 
       {/* About Section */}
-      <JusticeRopeSection>
+      <FlowingRopeSection id="about" ropeType="hero">
         <About />
-      </JusticeRopeSection>
+      </FlowingRopeSection>
 
       {/* Truth About Your Case Section */}
-      <RopeSection ropeConfig={{ type: 'artistic', position: 'left', multiple: true, opacity: 0.4 }}>
+      <FlowingRopeSection id="truth" ropeType="flowing">
         <TruthAboutCase />
-      </RopeSection>
+      </FlowingRopeSection>
 
       {/* Practice Areas */}
-      <ElegantRopeSection>
+      <FlowingRopeSection id="practice-areas" ropeType="curved">
         <PracticeAreasReference key="practice-areas-v2" />
-      </ElegantRopeSection>
+      </FlowingRopeSection>
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -131,24 +131,24 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <RopeSection ropeConfig={{ type: 'flowing', position: 'right', opacity: 0.3, width: 4 }}>
+      <FlowingRopeSection id="critical-steps" ropeType="wave">
         <CriticalStepsSection />
-      </RopeSection>
+      </FlowingRopeSection>
 
       {/* Every Problem Solved */}
-      <JusticeRopeSection>
+      <FlowingRopeSection id="problems" ropeType="hero">
         <EveryProblemSolved />
-      </JusticeRopeSection>
+      </FlowingRopeSection>
 
       {/* Featured Results */}
-      <RopeSection ropeConfig={{ type: 'elegant', position: 'center', width: 3, multiple: true }}>
+      <FlowingRopeSection id="results" ropeType="flowing">
         <FeaturedResults />
-      </RopeSection>
+      </FlowingRopeSection>
 
       {/* Process */}
-      <RopeSection ropeConfig={{ type: 'vertical', position: 'right', opacity: 0.5 }}>
+      <FlowingRopeSection id="process" ropeType="curved">
         <Process />
-      </RopeSection>
+      </FlowingRopeSection>
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

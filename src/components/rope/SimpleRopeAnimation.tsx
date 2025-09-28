@@ -91,15 +91,11 @@ const SimpleRopeAnimation: React.FC = () => {
     >
       {/* Main rope - bright and visible */}
       <mesh geometry={ropeGeometry}>
-        <meshStandardMaterial
-          ref={materialRef}
+        <meshBasicMaterial
+          ref={materialRef as any}
           color={primaryHsl}
           transparent
-          opacity={0.8} // Start with strong opacity
-          metalness={0.15}
-          roughness={0.55}
-          emissive={primaryHsl}
-          emissiveIntensity={0.15}
+          opacity={0.9}
         />
       </mesh>
       
@@ -108,7 +104,7 @@ const SimpleRopeAnimation: React.FC = () => {
         <meshBasicMaterial
           color={primaryHsl}
           transparent
-          opacity={0.35}
+          opacity={0.5}
           side={THREE.BackSide}
         />
       </mesh>

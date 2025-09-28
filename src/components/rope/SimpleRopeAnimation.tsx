@@ -4,19 +4,27 @@ import { useFrame } from '@react-three/fiber';
 
 const SimpleRopeAnimation: React.FC = () => {
   const groupRef = useRef<THREE.Group>(null);
-  const materialRef = useRef<THREE.MeshStandardMaterial>(null);
+  const materialRef = useRef<THREE.MeshBasicMaterial>(null);
   const scrollProgress = useRef(0);
   const targetProgress = useRef(0);
 
-  // Use design token color if available
-  const primaryHsl = useMemo(() => {
+  // Use design token color (HSL) parsed to THREE.Color for reliable rendering
+  const primaryColor = useMemo(() => {
     try {
       const root = getComputedStyle(document.documentElement);
-      const val = root.getPropertyValue('--primary').trim();
-      return val ? `hsl(${val})` : 'hsl(221 83% 53%)';
-    } catch {
-      return 'hsl(221 83% 53%)';
-    }
+      const val = root.getPropertyValue('--primary').trim(); // e.g., "221 83% 53%"
+      const match = val.match(/(\d+(?:\.\d+)?)\s+(\d+(?:\.\d+)?)%\s+(\d+(?:\.\d+)?)%/);
+      if (match) {
+        const h = parseFloat(match[1]) / 360;
+        const s = parseFloat(match[2]) / 100;
+        const l = parseFloat(match[3]) / 100;
+        const c = new THREE.Color();
+        c.setHSL(h, s, l);
+        return c;
+      }
+    } catch {}
+    // Fallback bright blue
+    return new THREE.Color('#3b82f6');
   }, []);
 
   // Create a simple visible spiral curve
@@ -113,7 +121,7 @@ const SimpleRopeAnimation: React.FC = () => {
       <mesh geometry={ropeGeometry}>
         <meshBasicMaterial
           ref={materialRef as any}
-          color={primaryHsl}
+          color={primaryColor}
           transparent
           opacity={0.9}
           side={THREE.DoubleSide}
@@ -123,10 +131,13 @@ const SimpleRopeAnimation: React.FC = () => {
       {/* Bright glow effect */}
       <mesh geometry={ropeGeometry}>
         <meshBasicMaterial
-          color={primaryHsl}
+          color={primaryColor}
           transparent
-          opacity={0.5}
+          opacity={0.6}
           side={THREE.BackSide}
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+          toneMapped={false}
         />
       </mesh>
     </group>

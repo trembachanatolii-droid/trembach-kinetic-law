@@ -82,7 +82,7 @@ const Index = () => {
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
       {/* Rope Animation - Only show after loading */}
-      {showContent && <RopeScene />}
+      <RopeScene />
       
     <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>
       <SEO 

@@ -35,22 +35,25 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
       strokeDashoffset: total,
     });
 
-    // Draw on scroll within the section
+    // Draw once when section enters, keep visible afterwards
     const startPos = isMobile ? 'top 95%' : 'top 80%';
-    const endPos = isMobile ? 'bottom 5%' : 'bottom 20%';
-    const tween = gsap.to([path, glow], {
-      strokeDashoffset: 0,
-      ease: 'none',
-      scrollTrigger: {
-        trigger: `#${sectionId}`,
-        start: startPos,
-        end: endPos,
-        scrub: 1,
-      },
-      duration: 1,
-    });
+    const tween = gsap.fromTo(
+      [path, glow],
+      { strokeDashoffset: total },
+      {
+        strokeDashoffset: 0,
+        ease: 'power1.out',
+        duration: isMobile ? 1.1 : 1.4,
+        scrollTrigger: {
+          trigger: `#${sectionId}`,
+          start: startPos,
+          once: true,
+          invalidateOnRefresh: true,
+        },
+      }
+    );
 
-    // Gentle sway animation
+    // Gentle sway animation (continuous, independent of scroll)
     const sway = gsap.to([path, glow], {
       x: isMobile ? 8 : 4,
       y: isMobile ? 6 : 0,

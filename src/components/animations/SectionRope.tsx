@@ -74,46 +74,36 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Flowing loop around content area like the red marker
+      // Mobile: follow the red marker path (big top swoop, down right, flat-ish bottom, exit bottom-left)
       return [
-        `M ${viewW * 0.1} ${viewH * 0.15}`,
-        // Top curve
-        `C ${viewW * 0.25} ${viewH * 0.08}, ${viewW * 0.75} ${viewH * 0.08}, ${viewW * 0.9} ${viewH * 0.15}`,
-        // Right side down
-        `C ${viewW * 0.95} ${viewH * 0.3}, ${viewW * 0.92} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.7}`,
-        // Bottom right curve
-        `C ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.7} ${viewH * 0.9}, ${viewW * 0.5} ${viewH * 0.88}`,
-        // Bottom wavy section
-        `C ${viewW * 0.35} ${viewH * 0.86}, ${viewW * 0.25} ${viewH * 0.92}, ${viewW * 0.1} ${viewH * 0.85}`,
-        // Left side up
-        `C ${viewW * 0.05} ${viewH * 0.65}, ${viewW * 0.08} ${viewH * 0.4}, ${viewW * 0.1} ${viewH * 0.15}`,
-        `Z`
+        `M ${viewW * 0.06} ${viewH * 0.22}`,
+        // Top sweeping arc from left to right
+        `C ${viewW * 0.3} ${viewH * 0.06}, ${viewW * 0.7} ${viewH * 0.06}, ${viewW * 0.9} ${viewH * 0.2}`,
+        // Right side descending curve
+        `C ${viewW * 0.98} ${viewH * 0.35}, ${viewW * 0.96} ${viewH * 0.5}, ${viewW * 0.88} ${viewH * 0.6}`,
+        // Bottom path moving left, slightly curved
+        `C ${viewW * 0.75} ${viewH * 0.68}, ${viewW * 0.55} ${viewH * 0.68}, ${viewW * 0.38} ${viewH * 0.66}`,
+        // Down-left tail
+        `C ${viewW * 0.22} ${viewH * 0.64}, ${viewW * 0.12} ${viewH * 0.74}, ${viewW * 0.06} ${viewH * 0.88}`,
+        `C ${viewW * 0.04} ${viewH * 0.95}, ${viewW * 0.03} ${viewH * 1.05}, ${viewW * 0.02} ${viewH * 1.1}`
       ].join(' ');
     }
 
-    // Desktop: Flowing loop around content area like the red marker  
+    // Desktop: mirrored shape, more width but same overall movement
     return [
-      `M ${viewW * 0.08} ${viewH * 0.12}`,
-      // Top curve across
-      `C ${viewW * 0.2} ${viewH * 0.05}, ${viewW * 0.8} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.12}`,
-      // Right side down with curves
-      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.95} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
-      `C ${viewW * 0.89} ${viewH * 0.75}, ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.78} ${viewH * 0.88}`,
-      // Bottom right curve
-      `C ${viewW * 0.65} ${viewH * 0.95}, ${viewW * 0.5} ${viewH * 0.92}, ${viewW * 0.35} ${viewH * 0.88}`,
-      // Bottom wavy section
-      `C ${viewW * 0.25} ${viewH * 0.86}, ${viewW * 0.18} ${viewH * 0.9}, ${viewW * 0.08} ${viewH * 0.85}`,
-      // Left side up with curves
-      `C ${viewW * 0.02} ${viewH * 0.7}, ${viewW * 0.05} ${viewH * 0.5}, ${viewW * 0.06} ${viewH * 0.3}`,
-      `C ${viewW * 0.07} ${viewH * 0.2}, ${viewW * 0.08} ${viewH * 0.12}, ${viewW * 0.08} ${viewH * 0.12}`,
-      `Z`
+      `M ${viewW * 0.05} ${viewH * 0.2}`,
+      `C ${viewW * 0.25} ${viewH * 0.05}, ${viewW * 0.75} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.18}`,
+      `C ${viewW * 0.98} ${viewH * 0.35}, ${viewW * 0.96} ${viewH * 0.52}, ${viewW * 0.86} ${viewH * 0.62}`,
+      `C ${viewW * 0.72} ${viewH * 0.7}, ${viewW * 0.52} ${viewH * 0.7}, ${viewW * 0.34} ${viewH * 0.68}`,
+      `C ${viewW * 0.2} ${viewH * 0.66}, ${viewW * 0.12} ${viewH * 0.76}, ${viewW * 0.06} ${viewH * 0.9}`,
+      `C ${viewW * 0.04} ${viewH * 0.98}, ${viewW * 0.03} ${viewH * 1.08}, ${viewW * 0.02} ${viewH * 1.14}`
     ].join(' ');
   };
 
   const pathData = createPath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-10 ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-0 ${className}`}>
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}

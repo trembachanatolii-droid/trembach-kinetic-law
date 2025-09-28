@@ -49,12 +49,27 @@ const SimpleRopeAnimation: React.FC = () => {
     console.log('[Rope] mount');
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.min(scrollTop / Math.max(maxScroll * 0.5, 1), 1);
-      targetProgress.current = progress;
+      const about = document.getElementById('about');
+
+      if (about) {
+        const rect = about.getBoundingClientRect();
+        const aboutTop = scrollTop + rect.top;
+        const aboutHeight = (about as HTMLElement).offsetHeight || rect.height;
+
+        // Start a bit before the About section enters, finish after it passes
+        const start = aboutTop - window.innerHeight * 0.4;
+        const end = aboutTop + aboutHeight - window.innerHeight * 0.2;
+        const range = Math.max(end - start, 1);
+        const p = (scrollTop - start) / range;
+        targetProgress.current = THREE.MathUtils.clamp(p, 0, 1);
+      } else {
+        // Fallback to page progress if About not found
+        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+        targetProgress.current = Math.min(scrollTop / Math.max(maxScroll * 0.5, 1), 1);
+      }
     };
 
-    targetProgress.current = 0.5;
+    targetProgress.current = 0;
     window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
@@ -72,7 +87,7 @@ const SimpleRopeAnimation: React.FC = () => {
 
     if (groupRef.current && materialRef.current) {
       // Always keep some minimum opacity for visibility
-      materialRef.current.opacity = Math.max(0.7, scrollProgress.current * 0.95);
+      materialRef.current.opacity = Math.max(0, scrollProgress.current * 0.95);
       
       // Rotate the entire rope for dynamic effect
       groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
@@ -96,6 +111,7 @@ const SimpleRopeAnimation: React.FC = () => {
           color={primaryHsl}
           transparent
           opacity={0.9}
+          side={THREE.DoubleSide}
         />
       </mesh>
       

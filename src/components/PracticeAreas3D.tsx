@@ -143,11 +143,11 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
 
       {/* Practice Area Info */}
       <div className="p-6 space-y-4">
-        <h3 className="text-xl font-semibold text-foreground group-hover:text-primary transition-colors">
+        <h3 className="text-xl font-semibold text-primary transition-colors">
           {title}
         </h3>
         
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3">
+        <p className="text-sm text-primary/80 leading-relaxed line-clamp-3">
           {description}
         </p>
         
@@ -559,10 +559,10 @@ const PracticeAreas3D = () => {
         {/* Call to Action */}
         <div className="text-center mt-16">
           <div className="glass-card max-w-2xl mx-auto p-8">
-            <h3 className="text-3xl font-bold text-foreground mb-4">
+            <h3 className="text-3xl font-bold text-primary mb-4">
               Don't See Your Case Type?
             </h3>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-primary/80 mb-6">
               We handle virtually every type of personal injury and mass tort case. Contact us for a free consultation.
             </p>
             <a 

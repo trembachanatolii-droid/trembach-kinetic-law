@@ -26,9 +26,9 @@ const SimpleRopeAnimation: React.FC = () => {
     // Create a prominent spiral that's easy to see
     for (let i = 0; i < 60; i++) {
       const t = i / 59;
-      const angle = t * Math.PI * 3; // 1.5 rotations like sweeping arc
-      const radius = 4.5 + Math.sin(t * Math.PI * 2) * 0.6;
-      const height = t * 16 - 8;
+      const angle = t * Math.PI * 2.5; // sweeping arc
+      const radius = 6 + Math.sin(t * Math.PI * 2) * 0.8;
+      const height = t * 20 - 10;
       
       points.push(new THREE.Vector3(
         Math.cos(angle) * radius,
@@ -42,11 +42,11 @@ const SimpleRopeAnimation: React.FC = () => {
 
   // Create rope geometry - make it thicker and more visible
   const ropeGeometry = useMemo(() => {
-    return new THREE.TubeGeometry(curve, 100, 0.35, 16, false);
+    return new THREE.TubeGeometry(curve, 100, 0.6, 20, false);
   }, [curve]);
 
-  // Handle scroll events
   useEffect(() => {
+    console.log('[Rope] mount');
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
@@ -54,9 +54,8 @@ const SimpleRopeAnimation: React.FC = () => {
       targetProgress.current = progress;
     };
 
-    // Start with some visibility for testing
-    targetProgress.current = 0.3;
-    window.addEventListener('scroll', handleScroll);
+    targetProgress.current = 0.5;
+    window.addEventListener('scroll', handleScroll, { passive: true });
     handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);

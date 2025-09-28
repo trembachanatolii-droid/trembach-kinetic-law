@@ -9,7 +9,7 @@ const RopeScene: React.FC = () => {
       <Canvas
         camera={{ 
           position: [0, 0, 15],
-          fov: 75,
+          fov: 65,
           near: 0.1,
           far: 1000
         }}
@@ -17,6 +17,10 @@ const RopeScene: React.FC = () => {
           antialias: true,
           alpha: true,
           powerPreference: "high-performance"
+        }}
+        onCreated={({ gl }) => {
+          try { gl.setClearAlpha(0); } catch {}
+          console.log('[RopeScene] Canvas created');
         }}
         style={{ background: 'transparent', width: '100%', height: '100%' }}
         dpr={[1, 2]}

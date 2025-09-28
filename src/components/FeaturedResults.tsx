@@ -25,14 +25,12 @@ const ResultCard: React.FC<ResultCardProps> = ({ title, metric, description, cas
       {
         opacity: 0,
         y: 80,
-        scale: 0.9,
-        filter: "blur(10px)",
+        scale: 0.95
       },
       {
         opacity: 1,
         y: 0,
         scale: 1,
-        filter: "blur(0px)",
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {
@@ -72,7 +70,7 @@ const ResultCard: React.FC<ResultCardProps> = ({ title, metric, description, cas
   return (
     <div 
       ref={cardRef}
-      className="group relative bg-surface/30 backdrop-blur-sm border border-border/20 rounded-2xl p-8 glass hover:bg-surface/50 transition-all duration-500 cursor-pointer"
+      className="group relative bg-surface/30 border border-border/20 rounded-2xl p-8 hover:bg-surface/50 transition-all duration-500 cursor-pointer"
     >
       {/* Background glow on hover */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-accent/10 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
@@ -165,13 +163,11 @@ const FeaturedResults = () => {
       ".results-header",
       {
         opacity: 0,
-        y: 60,
-        filter: "blur(10px)"
+        y: 60
       },
       {
         opacity: 1,
         y: 0,
-        filter: "blur(0px)",
         duration: 1,
         ease: "power3.out",
         scrollTrigger: {

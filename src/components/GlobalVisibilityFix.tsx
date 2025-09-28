@@ -54,6 +54,23 @@ const GlobalVisibilityFix: React.FC = () => {
         htmlEl.style.display = 'none';
       });
       
+      // Remove any blur filters applied via CSS or inline styles
+      const allElements = document.querySelectorAll('*');
+      allElements.forEach((el: Element) => {
+        const htmlEl = el as HTMLElement;
+        const cs = window.getComputedStyle(htmlEl) as any;
+        const filterVal = cs.filter as string;
+        const backdropVal = (cs.backdropFilter || cs["-webkit-backdrop-filter"]) as string;
+        if (filterVal && filterVal.includes('blur')) {
+          htmlEl.style.setProperty('filter', 'none', 'important');
+          htmlEl.style.setProperty('-webkit-filter', 'none', 'important');
+        }
+        if (backdropVal && backdropVal !== 'none') {
+          htmlEl.style.setProperty('backdrop-filter', 'none', 'important');
+          htmlEl.style.setProperty('-webkit-backdrop-filter', 'none', 'important');
+        }
+      });
+      
       console.log('GlobalVisibilityFix: Applied visibility fixes');
     };
     

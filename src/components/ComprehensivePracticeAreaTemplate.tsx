@@ -67,7 +67,7 @@ const ComprehensivePracticeAreaTemplate: React.FC<ComprehensivePracticeAreaTempl
               <Button size="lg" className="text-lg px-8 py-6">
                 Free Case Review
               </Button>
-              <Button variant="secondary" size="lg" className="text-lg px-8 py-6 bg-white/10 backdrop-blur-sm border-white/30 text-white hover:bg-white/20 transition-colors">
+              <Button variant="secondary" size="lg" className="text-lg px-8 py-6 bg-white/10 border-white/30 text-white hover:bg-white/20 transition-colors">
                 Call (555) 123-4567
               </Button>
             </div>

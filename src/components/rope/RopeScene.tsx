@@ -1,5 +1,6 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
+import '@/styles/rope-effects.css';
 import SimpleRopeAnimation from './SimpleRopeAnimation';
 
 const RopeScene: React.FC = () => {

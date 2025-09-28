@@ -8,16 +8,27 @@ const SimpleRopeAnimation: React.FC = () => {
   const scrollProgress = useRef(0);
   const targetProgress = useRef(0);
 
+  // Use design token color if available
+  const primaryHsl = useMemo(() => {
+    try {
+      const root = getComputedStyle(document.documentElement);
+      const val = root.getPropertyValue('--primary').trim();
+      return val ? `hsl(${val})` : 'hsl(221 83% 53%)';
+    } catch {
+      return 'hsl(221 83% 53%)';
+    }
+  }, []);
+
   // Create a simple visible spiral curve
   const curve = useMemo(() => {
     const points: THREE.Vector3[] = [];
     
     // Create a prominent spiral that's easy to see
-    for (let i = 0; i < 50; i++) {
-      const t = i / 49;
-      const angle = t * Math.PI * 4; // 2 full rotations
-      const radius = 3 + Math.sin(t * Math.PI * 2) * 1;
-      const height = t * 12 - 6;
+    for (let i = 0; i < 60; i++) {
+      const t = i / 59;
+      const angle = t * Math.PI * 3; // 1.5 rotations like sweeping arc
+      const radius = 4.5 + Math.sin(t * Math.PI * 2) * 0.6;
+      const height = t * 16 - 8;
       
       points.push(new THREE.Vector3(
         Math.cos(angle) * radius,
@@ -31,7 +42,7 @@ const SimpleRopeAnimation: React.FC = () => {
 
   // Create rope geometry - make it thicker and more visible
   const ropeGeometry = useMemo(() => {
-    return new THREE.TubeGeometry(curve, 100, 0.15, 12, false);
+    return new THREE.TubeGeometry(curve, 100, 0.35, 16, false);
   }, [curve]);
 
   // Handle scroll events
@@ -62,14 +73,14 @@ const SimpleRopeAnimation: React.FC = () => {
 
     if (groupRef.current && materialRef.current) {
       // Always keep some minimum opacity for visibility
-      materialRef.current.opacity = Math.max(0.4, scrollProgress.current * 0.9);
+      materialRef.current.opacity = Math.max(0.7, scrollProgress.current * 0.95);
       
       // Rotate the entire rope for dynamic effect
       groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
       groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
       
       // Scale with minimum visibility
-      const scale = Math.max(0.4, 0.3 + scrollProgress.current * 0.5);
+      const scale = Math.max(0.8, 0.6 + scrollProgress.current * 0.5);
       groupRef.current.scale.setScalar(scale);
     }
   });
@@ -77,28 +88,28 @@ const SimpleRopeAnimation: React.FC = () => {
   return (
     <group 
       ref={groupRef}
-      position={[-6, 0, 0]} // Centered left position for visibility
+      position={[0, 0, 0]} // Centered position for visibility
     >
       {/* Main rope - bright and visible */}
       <mesh geometry={ropeGeometry}>
         <meshStandardMaterial
           ref={materialRef}
-          color="#2563eb" // Bright blue
+          color={primaryHsl}
           transparent
-          opacity={0.4} // Start with some opacity
-          metalness={0.2}
-          roughness={0.6}
-          emissive="#1d4ed8"
-          emissiveIntensity={0.2}
+          opacity={0.8} // Start with strong opacity
+          metalness={0.15}
+          roughness={0.55}
+          emissive={primaryHsl}
+          emissiveIntensity={0.15}
         />
       </mesh>
       
       {/* Bright glow effect */}
       <mesh geometry={ropeGeometry}>
         <meshBasicMaterial
-          color="#60a5fa"
+          color={primaryHsl}
           transparent
-          opacity={0.6}
+          opacity={0.35}
           side={THREE.BackSide}
         />
       </mesh>

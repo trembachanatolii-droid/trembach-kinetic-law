@@ -77,29 +77,29 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: follow the red marker path (big top swoop, down right, flat-ish bottom, exit bottom-left)
+      // Mobile: closely follow the red marker path (start top-center, arc right, descend, long bottom sweep to left, exit bottom-left)
       return [
-        `M ${viewW * 0.06} ${viewH * 0.22}`,
-        // Top sweeping arc from left to right
-        `C ${viewW * 0.3} ${viewH * 0.06}, ${viewW * 0.7} ${viewH * 0.06}, ${viewW * 0.9} ${viewH * 0.2}`,
-        // Right side descending curve
-        `C ${viewW * 0.98} ${viewH * 0.35}, ${viewW * 0.96} ${viewH * 0.5}, ${viewW * 0.88} ${viewH * 0.6}`,
-        // Bottom path moving left, slightly curved
-        `C ${viewW * 0.75} ${viewH * 0.68}, ${viewW * 0.55} ${viewH * 0.68}, ${viewW * 0.38} ${viewH * 0.66}`,
-        // Down-left tail
-        `C ${viewW * 0.22} ${viewH * 0.64}, ${viewW * 0.12} ${viewH * 0.74}, ${viewW * 0.06} ${viewH * 0.88}`,
-        `C ${viewW * 0.04} ${viewH * 0.95}, ${viewW * 0.03} ${viewH * 1.05}, ${viewW * 0.02} ${viewH * 1.1}`
+        `M ${viewW * 0.5} ${viewH * 0.09}`,
+        // Upper arc to the right
+        `C ${viewW * 0.68} ${viewH * 0.12}, ${viewW * 0.86} ${viewH * 0.18}, ${viewW * 0.94} ${viewH * 0.42}`,
+        // Descend on the right side
+        `C ${viewW * 0.9} ${viewH * 0.6}, ${viewW * 0.74} ${viewH * 0.7}, ${viewW * 0.58} ${viewH * 0.72}`,
+        // Long, fairly flat bottom sweep toward the left
+        `C ${viewW * 0.42} ${viewH * 0.74}, ${viewW * 0.28} ${viewH * 0.74}, ${viewW * 0.16} ${viewH * 0.73}`,
+        // Bottom-left tail
+        `C ${viewW * 0.10} ${viewH * 0.72}, ${viewW * 0.07} ${viewH * 0.82}, ${viewW * 0.05} ${viewH * 0.90}`,
+        `C ${viewW * 0.04} ${viewH * 0.97}, ${viewW * 0.03} ${viewH * 1.05}, ${viewW * 0.03} ${viewH * 1.12}`
       ].join(' ');
     }
 
-    // Desktop: mirrored shape, more width but same overall movement
+    // Desktop: same movement but with a bit more width and gentle curvature
     return [
-      `M ${viewW * 0.05} ${viewH * 0.2}`,
-      `C ${viewW * 0.25} ${viewH * 0.05}, ${viewW * 0.75} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.18}`,
-      `C ${viewW * 0.98} ${viewH * 0.35}, ${viewW * 0.96} ${viewH * 0.52}, ${viewW * 0.86} ${viewH * 0.62}`,
-      `C ${viewW * 0.72} ${viewH * 0.7}, ${viewW * 0.52} ${viewH * 0.7}, ${viewW * 0.34} ${viewH * 0.68}`,
-      `C ${viewW * 0.2} ${viewH * 0.66}, ${viewW * 0.12} ${viewH * 0.76}, ${viewW * 0.06} ${viewH * 0.9}`,
-      `C ${viewW * 0.04} ${viewH * 0.98}, ${viewW * 0.03} ${viewH * 1.08}, ${viewW * 0.02} ${viewH * 1.14}`
+      `M ${viewW * 0.5} ${viewH * 0.08}`,
+      `C ${viewW * 0.7} ${viewH * 0.12}, ${viewW * 0.9} ${viewH * 0.18}, ${viewW * 0.96} ${viewH * 0.44}`,
+      `C ${viewW * 0.92} ${viewH * 0.62}, ${viewW * 0.78} ${viewH * 0.72}, ${viewW * 0.62} ${viewH * 0.74}`,
+      `C ${viewW * 0.46} ${viewH * 0.76}, ${viewW * 0.30} ${viewH * 0.76}, ${viewW * 0.16} ${viewH * 0.75}`,
+      `C ${viewW * 0.10} ${viewH * 0.74}, ${viewW * 0.07} ${viewH * 0.84}, ${viewW * 0.05} ${viewH * 0.92}`,
+      `C ${viewW * 0.04} ${viewH * 1.00}, ${viewW * 0.03} ${viewH * 1.10}, ${viewW * 0.02} ${viewH * 1.16}`
     ].join(' ');
   };
 

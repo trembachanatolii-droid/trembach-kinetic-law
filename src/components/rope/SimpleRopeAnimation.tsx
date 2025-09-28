@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useMemo } from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
-import nurbsJson from '@/assets/nurbs-canxerian.json';
 
 const SimpleRopeAnimation: React.FC = () => {
   const groupRef = useRef<THREE.Group>(null);
@@ -9,29 +8,30 @@ const SimpleRopeAnimation: React.FC = () => {
   const scrollProgress = useRef(0);
   const targetProgress = useRef(0);
 
-  // Create the spiral curve from NURBS data
+  // Create a simple visible spiral curve
   const curve = useMemo(() => {
     const points: THREE.Vector3[] = [];
     
-    // Use the NURBS points to create a simple spiral
-    nurbsJson[0].points.forEach((p, i) => {
-      const angle = (i / nurbsJson[0].points.length) * Math.PI * 4; // 2 full rotations
-      const radius = 2 + Math.sin(angle * 0.5) * 0.5;
-      const height = (i / nurbsJson[0].points.length) * 8 - 4;
+    // Create a prominent spiral that's easy to see
+    for (let i = 0; i < 50; i++) {
+      const t = i / 49;
+      const angle = t * Math.PI * 4; // 2 full rotations
+      const radius = 3 + Math.sin(t * Math.PI * 2) * 1;
+      const height = t * 12 - 6;
       
       points.push(new THREE.Vector3(
         Math.cos(angle) * radius,
         height,
         Math.sin(angle) * radius
       ));
-    });
+    }
     
     return new THREE.CatmullRomCurve3(points);
   }, []);
 
-  // Create rope geometry
+  // Create rope geometry - make it thicker and more visible
   const ropeGeometry = useMemo(() => {
-    return new THREE.TubeGeometry(curve, 100, 0.08, 8, false);
+    return new THREE.TubeGeometry(curve, 100, 0.15, 12, false);
   }, [curve]);
 
   // Handle scroll events
@@ -39,12 +39,14 @@ const SimpleRopeAnimation: React.FC = () => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = Math.min(scrollTop / (maxScroll * 0.7), 1); // Start animation earlier
+      const progress = Math.min(scrollTop / Math.max(maxScroll * 0.5, 1), 1);
       targetProgress.current = progress;
     };
 
+    // Start with some visibility for testing
+    targetProgress.current = 0.3;
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); // Initial call
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -55,19 +57,19 @@ const SimpleRopeAnimation: React.FC = () => {
     scrollProgress.current = THREE.MathUtils.lerp(
       scrollProgress.current,
       targetProgress.current,
-      delta * 3
+      delta * 2
     );
 
     if (groupRef.current && materialRef.current) {
-      // Update opacity based on scroll progress
-      materialRef.current.opacity = scrollProgress.current * 0.8;
+      // Always keep some minimum opacity for visibility
+      materialRef.current.opacity = Math.max(0.4, scrollProgress.current * 0.9);
       
       // Rotate the entire rope for dynamic effect
-      groupRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
+      groupRef.current.rotation.y = state.clock.elapsedTime * 0.1;
+      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.3) * 0.05;
       
-      // Scale based on progress (rope grows as you scroll)
-      const scale = 0.3 + scrollProgress.current * 0.4;
+      // Scale with minimum visibility
+      const scale = Math.max(0.4, 0.3 + scrollProgress.current * 0.5);
       groupRef.current.scale.setScalar(scale);
     }
   });
@@ -75,38 +77,29 @@ const SimpleRopeAnimation: React.FC = () => {
   return (
     <group 
       ref={groupRef}
-      position={[-4, -1, -2]} // Position at bottom-left, more visible
+      position={[-6, 0, 0]} // Centered left position for visibility
     >
-      {/* Main rope */}
+      {/* Main rope - bright and visible */}
       <mesh geometry={ropeGeometry}>
         <meshStandardMaterial
           ref={materialRef}
-          color="#1e40af" // Professional blue from your design system
+          color="#2563eb" // Bright blue
           transparent
-          opacity={0}
-          metalness={0.3}
-          roughness={0.7}
-          emissive="#0f1629"
-          emissiveIntensity={0.1}
+          opacity={0.4} // Start with some opacity
+          metalness={0.2}
+          roughness={0.6}
+          emissive="#1d4ed8"
+          emissiveIntensity={0.2}
         />
       </mesh>
       
-      {/* Glow effect */}
-      <mesh geometry={ropeGeometry}>
-        <meshBasicMaterial
-          color="#3b82f6"
-          transparent
-          opacity={0.15}
-          side={THREE.BackSide}
-        />
-      </mesh>
-      
-      {/* Inner core for more depth */}
+      {/* Bright glow effect */}
       <mesh geometry={ropeGeometry}>
         <meshBasicMaterial
           color="#60a5fa"
           transparent
-          opacity={0.3}
+          opacity={0.6}
+          side={THREE.BackSide}
         />
       </mesh>
     </group>

@@ -1,15 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Environment } from '@react-three/drei';
-import EnhancedRopeAnimation from './EnhancedRopeAnimation';
+import SimpleRopeAnimation from './SimpleRopeAnimation';
 
 const RopeScene: React.FC = () => {
   return (
     <div className="rope-scene-container">
       <Canvas
         camera={{ 
-          position: [0, 0, 10],
-          fov: 50,
+          position: [0, 0, 15],
+          fov: 75,
           near: 0.1,
           far: 1000
         }}
@@ -18,18 +17,18 @@ const RopeScene: React.FC = () => {
           alpha: true,
           powerPreference: "high-performance"
         }}
-        style={{ background: 'transparent' }}
+        style={{ background: 'transparent', width: '100%', height: '100%' }}
+        dpr={[1, 2]}
       >
-        <ambientLight intensity={0.5} />
+        <ambientLight intensity={0.8} />
         <directionalLight 
-          position={[10, 10, 5]} 
-          intensity={1}
+          position={[5, 5, 5]} 
+          intensity={1.2}
+          castShadow
         />
+        <pointLight position={[-5, -5, 5]} intensity={0.5} color="#60a5fa" />
         
-        <Suspense fallback={null}>
-          <EnhancedRopeAnimation />
-          <Environment files="/assets/quarry_01_1k.hdr" />
-        </Suspense>
+        <SimpleRopeAnimation />
       </Canvas>
     </div>
   );

@@ -17,7 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { FlowingRopeSection } from '../components/animations/FlowingRopeSection';
+import { VerticalRope } from '../components/animations/VerticalRope';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,20 +89,23 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
+      {/* Single Vertical Rope Animation */}
+      <VerticalRope startElement="#about" />
+
       {/* About Section */}
-      <FlowingRopeSection id="about" ropeType="hero">
+      <section id="about">
         <About />
-      </FlowingRopeSection>
+      </section>
 
       {/* Truth About Your Case Section */}
-      <FlowingRopeSection id="truth" ropeType="flowing">
+      <section id="truth">
         <TruthAboutCase />
-      </FlowingRopeSection>
+      </section>
 
       {/* Practice Areas */}
-      <FlowingRopeSection id="practice-areas" ropeType="curved">
+      <section id="practice-areas">
         <PracticeAreasReference key="practice-areas-v2" />
-      </FlowingRopeSection>
+      </section>
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -131,24 +134,24 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <FlowingRopeSection id="critical-steps" ropeType="wave">
+      <section id="critical-steps">
         <CriticalStepsSection />
-      </FlowingRopeSection>
+      </section>
 
       {/* Every Problem Solved */}
-      <FlowingRopeSection id="problems" ropeType="hero">
+      <section id="problems">
         <EveryProblemSolved />
-      </FlowingRopeSection>
+      </section>
 
       {/* Featured Results */}
-      <FlowingRopeSection id="results" ropeType="flowing">
+      <section id="results">
         <FeaturedResults />
-      </FlowingRopeSection>
+      </section>
 
       {/* Process */}
-      <FlowingRopeSection id="process" ropeType="curved">
+      <section id="process">
         <Process />
-      </FlowingRopeSection>
+      </section>
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

@@ -17,7 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { VerticalRope } from '../components/animations/VerticalRope';
+import { SectionRope } from '../components/animations/SectionRope';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,21 +89,21 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
-      {/* Single Vertical Rope Animation */}
-      <VerticalRope startElement="#about" />
-
       {/* About Section */}
-      <section id="about">
+      <section id="about" className="relative">
+        <SectionRope sectionId="about" direction="left-to-right" />
         <About />
       </section>
 
       {/* Truth About Your Case Section */}
-      <section id="truth">
+      <section id="truth" className="relative">
+        <SectionRope sectionId="truth" direction="right-to-left" />
         <TruthAboutCase />
       </section>
 
       {/* Practice Areas */}
-      <section id="practice-areas">
+      <section id="practice-areas" className="relative">
+        <SectionRope sectionId="practice-areas" direction="left-to-right" />
         <PracticeAreasReference key="practice-areas-v2" />
       </section>
 
@@ -134,22 +134,26 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <section id="critical-steps">
+      <section id="critical-steps" className="relative">
+        <SectionRope sectionId="critical-steps" direction="right-to-left" />
         <CriticalStepsSection />
       </section>
 
       {/* Every Problem Solved */}
-      <section id="problems">
+      <section id="problems" className="relative">
+        <SectionRope sectionId="problems" direction="left-to-right" />
         <EveryProblemSolved />
       </section>
 
       {/* Featured Results */}
-      <section id="results">
+      <section id="results" className="relative">
+        <SectionRope sectionId="results" direction="right-to-left" />
         <FeaturedResults />
       </section>
 
       {/* Process */}
-      <section id="process">
+      <section id="process" className="relative">
+        <SectionRope sectionId="process" direction="left-to-right" />
         <Process />
       </section>
 

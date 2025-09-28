@@ -2,16 +2,32 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+// Import practice area images
+import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
+import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries.jpg';
+import carAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
+import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder.jpg';
+import truck18WheelerImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
+import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
+import amputationImg from '@/assets/practice-areas/amputation.jpg';
+import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
+import campLejeuneImg from '@/assets/practice-areas/camp-lejeune.jpg';
+import birthInjuriesImg from '@/assets/practice-areas/birth-injuries.jpg';
+import amusementParksImg from '@/assets/practice-areas/amusement-parks.jpg';
+import electrocutionImg from '@/assets/practice-areas/electrocution.jpg';
+import defamationImg from '@/assets/practice-areas/defamation.jpg';
+
 gsap.registerPlugin(ScrollTrigger);
 
 interface PracticeAreaProps {
   title: string;
   description: string;
   icon: string;
+  image?: string;
   index: number;
 }
 
-const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, icon, index }) => {
+const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, icon, image, index }) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -88,12 +104,25 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
     >
       {/* Practice Area Image/Icon */}
       <div className="relative overflow-hidden aspect-[4/3] bg-gradient-to-br from-primary/20 via-accent/10 to-electric/20">
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-6xl transform transition-transform duration-700 group-hover:scale-110">
-            {icon}
-          </div>
-        </div>
-        <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        {image ? (
+          <>
+            <img 
+              src={image} 
+              alt={title}
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </>
+        ) : (
+          <>
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="text-6xl transform transition-transform duration-700 group-hover:scale-110">
+                {icon}
+              </div>
+            </div>
+            <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </>
+        )}
         
         {/* Overlay Button */}
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -153,6 +182,23 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
 
 const PracticeAreas3D = () => {
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Image mapping for specific practice areas
+  const practiceAreaImages: Record<string, string> = {
+    "Mesothelioma & Asbestos": mesotheliomaAsbestosImg,
+    "Silicosis Injuries": silicosisInjuriesImg,
+    "Car Accidents": carAccidentsImg,
+    "Talc & Baby Powder Cancer": talcBabyPowderImg,
+    "Truck & 18-Wheeler": truck18WheelerImg,
+    "Product Liability": productLiabilityImg,
+    "Amputation": amputationImg,
+    "Medical Devices": medicalDevicesImg,
+    "Camp Lejeune": campLejeuneImg,
+    "Birth Injuries": birthInjuriesImg,
+    "Amusement Park Injuries": amusementParksImg,
+    "Electrocution": electrocutionImg,
+    "Defamation": defamationImg,
+  };
 
   const practiceAreas = [
     {
@@ -409,6 +455,16 @@ const PracticeAreas3D = () => {
       title: "Fire Accidents",
       description: "Building fires, electrical failures, gas explosions, and negligent fire safety maintenance causing injuries and death.",
       icon: "🔥"
+    },
+    {
+      title: "Electrocution",
+      description: "Electrical injuries from power lines, faulty wiring, and defective electrical equipment causing burns, shock, and death.",
+      icon: "⚡"
+    },
+    {
+      title: "Defamation",
+      description: "False statements that damage reputation and cause financial harm through libel, slander, and online defamation.",
+      icon: "📰"
     }
   ];
 
@@ -491,6 +547,7 @@ const PracticeAreas3D = () => {
               title={area.title}
               description={area.description}
               icon={area.icon}
+              image={practiceAreaImages[area.title]}
               index={index}
             />
           ))}

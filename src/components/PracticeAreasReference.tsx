@@ -737,38 +737,6 @@ const PracticeAreasReference: React.FC = () => {
                       <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       
                       {/* Overlay Buttons */}
-                      <div className="absolute inset-0 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                      <Link 
-                      to={activeArea.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' : 
-                           activeArea.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
-                           activeArea.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
-                            activeArea.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                            activeArea.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
-                            activeArea.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                           activeArea.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
-                           `/practice-areas/${activeArea.slug}`}
-                      className="flex-1"
-                    >
-                      <Button className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
-                        Learn More
-                      </Button>
-                    </Link>
-                    
-                      <Link 
-                      to={activeArea.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
-                           activeArea.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
-                           activeArea.title === 'Maritime Accidents' ? '/maritime/case-evaluation' :
-                           activeArea.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
-                           activeArea.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
-                           activeArea.title === 'Swimming Pool' ? '/practice-areas/swimming-pool/case-evaluation' :
-                          '/case-evaluation'}
-                      className="flex-1"
-                    >
-                      <Button variant="outline" className="w-full border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 text-lg transition-all duration-300 hover:scale-105">
-                        Free Consultation
-                      </Button>
-                     </Link>
-                       </div>
                      </div>
 
                     {/* Practice Info */}
@@ -796,12 +764,57 @@ const PracticeAreasReference: React.FC = () => {
                       {/* CTA */}
                       <div className="pt-2">
                         <Link
-                        to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
-                            area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                        to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                            area.title === 'Silicosis Injuries' ? '/practice-areas/silicosis-injuries' :
+                            area.title === 'Talc & Baby Powder Cancer' ? '/practice-areas/talc-baby-powder-cancer' :
+                            area.title === 'Car Accidents' ? '/practice-areas/car-accidents' :
+                            area.title === 'Truck & 18-Wheeler' ? '/practice-areas/truck-18-wheeler' :
+                            area.title === 'Motorcycle Accidents' ? '/practice-areas/motorcycle-accidents' :
+                            area.title === 'Pedestrian Accidents' ? '/practice-areas/pedestrian-accidents' :
+                            area.title === 'Bicycle Accidents' ? '/practice-areas/bicycle-accidents' :
+                            area.title === 'Premises Liability' ? '/practice-areas/premises-liability' :
+                            area.title === 'Dog Bites' ? '/practice-areas/dog-bites-animal-attacks' :
+                            area.title === 'Medical Malpractice' ? '/practice-areas/medical-malpractice' :
+                            area.title === 'Wrongful Death' ? '/practice-areas/wrongful-death' :
+                            area.title === 'Product Liability' ? '/practice-areas/product-liability' :
+                            area.title === 'Construction Accidents' ? '/practice-areas/construction-accidents' :
+                            area.title === 'Brain Injuries' ? '/practice-areas/brain-injuries' :
+                            area.title === 'Spinal Cord Injuries' ? '/practice-areas/spinal-cord-injuries' :
+                            area.title === 'Burn Injuries' ? '/practice-areas/burn-injuries' :
+                            area.title === 'Amputation' ? '/practice-areas/amputation' :
+                            area.title === 'Workplace Injuries' ? '/practice-areas/workplace-injuries' :
+                            area.title === 'Medical Devices' ? '/practice-areas/medical-devices' :
+                            area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
+                            area.title === 'Mass Torts' ? '/practice-areas/mass-torts' :
+                            area.title === 'Class Actions' ? '/practice-areas/class-actions' :
+                            area.title === 'Environmental & Toxic' ? '/practice-areas/environmental-toxic' :
+                            area.title === 'Camp Lejeune' ? '/practice-areas/camp-lejeune' :
+                            area.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' :
+                            area.title === 'Benzene Exposure' ? '/practice-areas/benzene-exposure' :
                             area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                            area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' : 
+                            area.title === 'Sexual Abuse' ? '/practice-areas/sexual-abuse' :
+                            area.title === 'Clergy Abuse' ? '/practice-areas/clergy-abuse' :
+                            area.title === 'Elder Abuse' ? '/practice-areas/elder-abuse' :
+                            area.title === 'Birth Injuries' ? '/practice-areas/birth-injuries' :
+                            area.title === 'Uber & Lyft Accidents' ? '/practice-areas/uber-lyft-accidents' :
+                            area.title === 'Bus Accidents' ? '/practice-areas/bus-accidents' :
+                            area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                            area.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
                             area.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
-                            '/practice-areas/coming-soon'}
+                            area.title === 'Amusement Parks' ? '/practice-areas/amusement-parks' :
+                            area.title === 'Electrocution' ? '/practice-areas/electrocution' :
+                            area.title === 'Explosions' ? '/practice-areas/explosions' :
+                            area.title === 'Vision Loss' ? '/practice-areas/vision-loss' :
+                            area.title === 'Hearing Loss' ? '/practice-areas/hearing-loss' :
+                            area.title === 'Paralysis' ? '/practice-areas/paralysis' :
+                            area.title === 'Civil Rights' ? '/practice-areas/civil-rights' :
+                            area.title === 'Retail Accidents' ? '/practice-areas/retail-accidents' :
+                            area.title === 'Scaffolding Falls' ? '/practice-areas/scaffolding-falls' :
+                            area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
+                            area.title === 'Railroad Accidents' ? '/practice-areas/railroad-accidents' :
+                            area.title === 'Defamation' ? '/practice-areas/defamation' :
+                            area.title === 'General Personal Injury' ? '/practice-areas/general-personal-injury' :
+                            `/practice-areas/${area.slug}`}
                           className="ghost-button group/btn"
                           onClick={(e) => e.stopPropagation()}
                         >
@@ -863,14 +876,57 @@ const PracticeAreasReference: React.FC = () => {
                   {/* Quick action button */}
                   <div className="p-3">
                     <Link
-                      to={area.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
-                           area.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
-                           area.title === 'Maritime Accidents' ? '/maritime/case-evaluation' :
-                           area.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
-                           area.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
-                           area.title === 'Swimming Pool' ? '/practice-areas/swimming-pool/case-evaluation' :
-                           area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents/case-evaluation' :
-                          '/case-evaluation'}
+                      to={area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
+                           area.title === 'Silicosis Injuries' ? '/practice-areas/silicosis-injuries' :
+                           area.title === 'Talc & Baby Powder Cancer' ? '/practice-areas/talc-baby-powder-cancer' :
+                           area.title === 'Car Accidents' ? '/practice-areas/car-accidents' :
+                           area.title === 'Truck & 18-Wheeler' ? '/practice-areas/truck-18-wheeler' :
+                           area.title === 'Motorcycle Accidents' ? '/practice-areas/motorcycle-accidents' :
+                           area.title === 'Pedestrian Accidents' ? '/practice-areas/pedestrian-accidents' :
+                           area.title === 'Bicycle Accidents' ? '/practice-areas/bicycle-accidents' :
+                           area.title === 'Premises Liability' ? '/practice-areas/premises-liability' :
+                           area.title === 'Dog Bites' ? '/practice-areas/dog-bites-animal-attacks' :
+                           area.title === 'Medical Malpractice' ? '/practice-areas/medical-malpractice' :
+                           area.title === 'Wrongful Death' ? '/practice-areas/wrongful-death' :
+                           area.title === 'Product Liability' ? '/practice-areas/product-liability' :
+                           area.title === 'Construction Accidents' ? '/practice-areas/construction-accidents' :
+                           area.title === 'Brain Injuries' ? '/practice-areas/brain-injuries' :
+                           area.title === 'Spinal Cord Injuries' ? '/practice-areas/spinal-cord-injuries' :
+                           area.title === 'Burn Injuries' ? '/practice-areas/burn-injuries' :
+                           area.title === 'Amputation' ? '/practice-areas/amputation' :
+                           area.title === 'Workplace Injuries' ? '/practice-areas/workplace-injuries' :
+                           area.title === 'Medical Devices' ? '/practice-areas/medical-devices' :
+                           area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
+                           area.title === 'Mass Torts' ? '/practice-areas/mass-torts' :
+                           area.title === 'Class Actions' ? '/practice-areas/class-actions' :
+                           area.title === 'Environmental & Toxic' ? '/practice-areas/environmental-toxic' :
+                           area.title === 'Camp Lejeune' ? '/practice-areas/camp-lejeune' :
+                           area.title === 'PFAS Exposure' ? '/practice-areas/pfas-exposure' :
+                           area.title === 'Benzene Exposure' ? '/practice-areas/benzene-exposure' :
+                           area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
+                           area.title === 'Sexual Abuse' ? '/practice-areas/sexual-abuse' :
+                           area.title === 'Clergy Abuse' ? '/practice-areas/clergy-abuse' :
+                           area.title === 'Elder Abuse' ? '/practice-areas/elder-abuse' :
+                           area.title === 'Birth Injuries' ? '/practice-areas/birth-injuries' :
+                           area.title === 'Uber & Lyft Accidents' ? '/practice-areas/uber-lyft-accidents' :
+                           area.title === 'Bus Accidents' ? '/practice-areas/bus-accidents' :
+                           area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
+                           area.title === 'Maritime Accidents' ? '/practice-areas/maritime-accidents' :
+                           area.title === 'Swimming Pool' ? '/practice-areas/swimming-pool-accidents' :
+                           area.title === 'Amusement Parks' ? '/practice-areas/amusement-parks' :
+                           area.title === 'Electrocution' ? '/practice-areas/electrocution' :
+                           area.title === 'Explosions' ? '/practice-areas/explosions' :
+                           area.title === 'Vision Loss' ? '/practice-areas/vision-loss' :
+                           area.title === 'Hearing Loss' ? '/practice-areas/hearing-loss' :
+                           area.title === 'Paralysis' ? '/practice-areas/paralysis' :
+                           area.title === 'Civil Rights' ? '/practice-areas/civil-rights' :
+                           area.title === 'Retail Accidents' ? '/practice-areas/retail-accidents' :
+                           area.title === 'Scaffolding Falls' ? '/practice-areas/scaffolding-falls' :
+                           area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
+                           area.title === 'Railroad Accidents' ? '/practice-areas/railroad-accidents' :
+                           area.title === 'Defamation' ? '/practice-areas/defamation' :
+                           area.title === 'General Personal Injury' ? '/practice-areas/general-personal-injury' :
+                           `/practice-areas/${area.slug}`}
                       className="block"
                       onClick={(e) => e.stopPropagation()}
                     >
@@ -878,7 +934,7 @@ const PracticeAreasReference: React.FC = () => {
                         size="sm"
                         className="w-full bg-primary hover:bg-primary/90 text-white font-medium text-xs py-2 transition-all duration-300"
                       >
-                        Free Consultation
+                        View Details
                       </Button>
                     </Link>
                   </div>

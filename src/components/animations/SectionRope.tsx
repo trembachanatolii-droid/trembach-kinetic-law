@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useIsMobile } from '../../hooks/use-mobile';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,6 +20,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 }) => {
   const mainPathRef = useRef<SVGPathElement>(null);
   const glowPathRef = useRef<SVGPathElement>(null);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const path = mainPathRef.current;
@@ -48,8 +50,9 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
     // Gentle sway animation
     const sway = gsap.to([path, glow], {
-      x: 4,
-      duration: 3,
+      x: isMobile ? 8 : 4,
+      y: isMobile ? 6 : 0,
+      duration: isMobile ? 4.5 : 3,
       ease: 'sine.inOut',
       yoyo: true,
       repeat: -1,
@@ -60,15 +63,34 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
       tween.kill();
       sway.kill();
     };
-  }, [sectionId]);
+  }, [sectionId, isMobile]);
 
   // Create curved diagonal path based on direction
   const viewW = 1200;
   const viewH = 800;
-  
+  const sw = isMobile ? Math.max(4, strokeWidth * 0.5) : strokeWidth;
+
   const createPath = () => {
+    if (isMobile) {
+      if (direction === 'left-to-right') {
+        // Mobile: pronounced sweep from top-left curving down, then towards bottom-right
+        return [
+          `M 0 60`,
+          `C ${viewW * 0.15} 180, ${viewW * 0.25} 360, ${viewW * 0.38} ${viewH * 0.6}`,
+          `C ${viewW * 0.55} ${viewH * 0.8}, ${viewW * 0.75} ${viewH * 0.9}, ${viewW} ${viewH - 40}`
+        ].join(' ');
+      } else {
+        // Mobile mirrored path
+        return [
+          `M ${viewW} 60`,
+          `C ${viewW * 0.85} 180, ${viewW * 0.75} 360, ${viewW * 0.62} ${viewH * 0.6}`,
+          `C ${viewW * 0.45} ${viewH * 0.8}, ${viewW * 0.25} ${viewH * 0.9}, 0 ${viewH - 40}`
+        ].join(' ');
+      }
+    }
+
     if (direction === 'left-to-right') {
-      // Top-left to bottom-right with elegant S-curve across the whole section
+      // Desktop: Top-left to bottom-right with elegant S-curve across the whole section
       return [
         `M 0 40`,
         `C ${viewW * 0.2} 120, ${viewW * 0.3} 180, ${viewW * 0.42} ${viewH * 0.35}`,
@@ -76,7 +98,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
         `C ${viewW * 0.94} ${viewH * 0.72}, ${viewW * 0.98} ${viewH * 0.86}, ${viewW} ${viewH - 40}`
       ].join(' ');
     } else {
-      // Top-right to bottom-left mirrored S-curve
+      // Desktop mirrored S-curve
       return [
         `M ${viewW} 40`,
         `C ${viewW * 0.8} 120, ${viewW * 0.7} 180, ${viewW * 0.58} ${viewH * 0.35}`,
@@ -89,7 +111,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
   const pathData = createPath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-10 ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-0 ${className}`}>
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}
@@ -115,7 +137,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
           d={pathData}
           fill="none"
           stroke={`url(#ropeGradient-${sectionId})`}
-          strokeWidth={strokeWidth * 1.8}
+          strokeWidth={sw * 1.8}
           strokeLinecap="round"
           strokeLinejoin="round"
           opacity={0.12}
@@ -128,7 +150,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
           d={pathData}
           fill="none"
           stroke={`url(#ropeGradient-${sectionId})`}
-          strokeWidth={strokeWidth}
+          strokeWidth={sw}
           strokeLinecap="round"
           strokeLinejoin="round"
           opacity={0.8}

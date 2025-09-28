@@ -13,7 +13,7 @@ interface CircularRopeProps {
 
 export const CircularRope: React.FC<CircularRopeProps> = ({
   size = 300,
-  strokeWidth = 10,
+  strokeWidth = 20,
   className = '',
   trigger = '.rope-trigger'
 }) => {
@@ -115,7 +115,7 @@ export const CircularRope: React.FC<CircularRopeProps> = ({
   const pathData = createRopePath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none z-0 flex items-center justify-center ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none z-20 flex items-center justify-center ${className}`}>
       <svg
         width={size}
         height={size}

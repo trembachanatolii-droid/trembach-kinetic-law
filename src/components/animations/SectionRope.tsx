@@ -14,7 +14,7 @@ interface SectionRopeProps {
 export const SectionRope: React.FC<SectionRopeProps> = ({
   sectionId,
   direction = 'left-to-right',
-  strokeWidth = 12,
+  strokeWidth = 24,
   className = '',
 }) => {
   const mainPathRef = useRef<SVGPathElement>(null);
@@ -89,7 +89,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
   const pathData = createPath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-0 ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-10 ${className}`}>
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}

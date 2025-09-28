@@ -35,25 +35,22 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
       strokeDashoffset: total,
     });
 
-    // Draw once when section enters, keep visible afterwards
+    // Draw on scroll within the section
     const startPos = isMobile ? 'top 95%' : 'top 80%';
-    const tween = gsap.fromTo(
-      [path, glow],
-      { strokeDashoffset: total },
-      {
-        strokeDashoffset: 0,
-        ease: 'power1.out',
-        duration: isMobile ? 1.1 : 1.4,
-        scrollTrigger: {
-          trigger: `#${sectionId}`,
-          start: startPos,
-          once: true,
-          invalidateOnRefresh: true,
-        },
-      }
-    );
+    const endPos = isMobile ? 'bottom 5%' : 'bottom 20%';
+    const tween = gsap.to([path, glow], {
+      strokeDashoffset: 0,
+      ease: 'none',
+      scrollTrigger: {
+        trigger: `#${sectionId}`,
+        start: startPos,
+        end: endPos,
+        scrub: 1,
+      },
+      duration: 1,
+    });
 
-    // Gentle sway animation (continuous, independent of scroll)
+    // Gentle sway animation
     const sway = gsap.to([path, glow], {
       x: isMobile ? 8 : 4,
       y: isMobile ? 6 : 0,
@@ -77,29 +74,39 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: closely follow the red marker path (start top-center, arc right, descend, long bottom sweep to left, exit bottom-left)
+      // Mobile: Flowing loop around content area like the red marker
       return [
-        `M ${viewW * 0.5} ${viewH * 0.09}`,
-        // Upper arc to the right
-        `C ${viewW * 0.68} ${viewH * 0.12}, ${viewW * 0.86} ${viewH * 0.18}, ${viewW * 0.94} ${viewH * 0.42}`,
-        // Descend on the right side
-        `C ${viewW * 0.9} ${viewH * 0.6}, ${viewW * 0.74} ${viewH * 0.7}, ${viewW * 0.58} ${viewH * 0.72}`,
-        // Long, fairly flat bottom sweep toward the left
-        `C ${viewW * 0.42} ${viewH * 0.74}, ${viewW * 0.28} ${viewH * 0.74}, ${viewW * 0.16} ${viewH * 0.73}`,
-        // Bottom-left tail
-        `C ${viewW * 0.10} ${viewH * 0.72}, ${viewW * 0.07} ${viewH * 0.82}, ${viewW * 0.05} ${viewH * 0.90}`,
-        `C ${viewW * 0.04} ${viewH * 0.97}, ${viewW * 0.03} ${viewH * 1.05}, ${viewW * 0.03} ${viewH * 1.12}`
+        `M ${viewW * 0.1} ${viewH * 0.15}`,
+        // Top curve
+        `C ${viewW * 0.25} ${viewH * 0.08}, ${viewW * 0.75} ${viewH * 0.08}, ${viewW * 0.9} ${viewH * 0.15}`,
+        // Right side down
+        `C ${viewW * 0.95} ${viewH * 0.3}, ${viewW * 0.92} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.7}`,
+        // Bottom right curve
+        `C ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.7} ${viewH * 0.9}, ${viewW * 0.5} ${viewH * 0.88}`,
+        // Bottom wavy section
+        `C ${viewW * 0.35} ${viewH * 0.86}, ${viewW * 0.25} ${viewH * 0.92}, ${viewW * 0.1} ${viewH * 0.85}`,
+        // Left side up
+        `C ${viewW * 0.05} ${viewH * 0.65}, ${viewW * 0.08} ${viewH * 0.4}, ${viewW * 0.1} ${viewH * 0.15}`,
+        `Z`
       ].join(' ');
     }
 
-    // Desktop: same movement but with a bit more width and gentle curvature
+    // Desktop: Flowing loop around content area like the red marker  
     return [
-      `M ${viewW * 0.5} ${viewH * 0.08}`,
-      `C ${viewW * 0.7} ${viewH * 0.12}, ${viewW * 0.9} ${viewH * 0.18}, ${viewW * 0.96} ${viewH * 0.44}`,
-      `C ${viewW * 0.92} ${viewH * 0.62}, ${viewW * 0.78} ${viewH * 0.72}, ${viewW * 0.62} ${viewH * 0.74}`,
-      `C ${viewW * 0.46} ${viewH * 0.76}, ${viewW * 0.30} ${viewH * 0.76}, ${viewW * 0.16} ${viewH * 0.75}`,
-      `C ${viewW * 0.10} ${viewH * 0.74}, ${viewW * 0.07} ${viewH * 0.84}, ${viewW * 0.05} ${viewH * 0.92}`,
-      `C ${viewW * 0.04} ${viewH * 1.00}, ${viewW * 0.03} ${viewH * 1.10}, ${viewW * 0.02} ${viewH * 1.16}`
+      `M ${viewW * 0.08} ${viewH * 0.12}`,
+      // Top curve across
+      `C ${viewW * 0.2} ${viewH * 0.05}, ${viewW * 0.8} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.12}`,
+      // Right side down with curves
+      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.95} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
+      `C ${viewW * 0.89} ${viewH * 0.75}, ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.78} ${viewH * 0.88}`,
+      // Bottom right curve
+      `C ${viewW * 0.65} ${viewH * 0.95}, ${viewW * 0.5} ${viewH * 0.92}, ${viewW * 0.35} ${viewH * 0.88}`,
+      // Bottom wavy section
+      `C ${viewW * 0.25} ${viewH * 0.86}, ${viewW * 0.18} ${viewH * 0.9}, ${viewW * 0.08} ${viewH * 0.85}`,
+      // Left side up with curves
+      `C ${viewW * 0.02} ${viewH * 0.7}, ${viewW * 0.05} ${viewH * 0.5}, ${viewW * 0.06} ${viewH * 0.3}`,
+      `C ${viewW * 0.07} ${viewH * 0.2}, ${viewW * 0.08} ${viewH * 0.12}, ${viewW * 0.08} ${viewH * 0.12}`,
+      `Z`
     ].join(' ');
   };
 

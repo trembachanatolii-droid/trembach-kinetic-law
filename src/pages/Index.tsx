@@ -17,7 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { SectionRope } from '../components/animations/SectionRope';
+import { RopeSection } from '../components/animations/RopeSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,22 +90,19 @@ const Index = () => {
       <Hero />
 
       {/* About Section */}
-      <section id="about" className="relative">
-        <SectionRope sectionId="about" direction="left-to-right" />
+      <RopeSection id="about" direction="tl-br">
         <About />
-      </section>
+      </RopeSection>
 
       {/* Truth About Your Case Section */}
-      <section id="truth" className="relative">
-        <SectionRope sectionId="truth" direction="right-to-left" />
+      <RopeSection id="truth" direction="tr-bl" alt>
         <TruthAboutCase />
-      </section>
+      </RopeSection>
 
       {/* Practice Areas */}
-      <section id="practice-areas" className="relative">
-        <SectionRope sectionId="practice-areas" direction="left-to-right" />
+      <RopeSection id="practice-areas" direction="tl-br">
         <PracticeAreasReference key="practice-areas-v2" />
-      </section>
+      </RopeSection>
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -134,28 +131,24 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <section id="critical-steps" className="relative">
-        <SectionRope sectionId="critical-steps" direction="right-to-left" />
+      <RopeSection id="critical-steps" direction="tr-bl" alt>
         <CriticalStepsSection />
-      </section>
+      </RopeSection>
 
       {/* Every Problem Solved */}
-      <section id="problems" className="relative">
-        <SectionRope sectionId="problems" direction="left-to-right" />
+      <RopeSection id="problems" direction="tl-br">
         <EveryProblemSolved />
-      </section>
+      </RopeSection>
 
       {/* Featured Results */}
-      <section id="results" className="relative">
-        <SectionRope sectionId="results" direction="right-to-left" />
+      <RopeSection id="results" direction="tr-bl" alt>
         <FeaturedResults />
-      </section>
+      </RopeSection>
 
       {/* Process */}
-      <section id="process" className="relative">
-        <SectionRope sectionId="process" direction="left-to-right" />
+      <RopeSection id="process" direction="tl-br">
         <Process />
-      </section>
+      </RopeSection>
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

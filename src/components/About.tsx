@@ -265,7 +265,7 @@ const About = () => {
           {/* Header */}
           <div className="text-center mb-20">
             <h2 className="animate-content text-display font-display font-bold text-foreground mb-6">
-              About National Injury Law
+              About Trembach Law Firm
             </h2>
             <div className="animate-content w-24 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-8"></div>
             <p className="animate-content text-title text-muted-foreground max-w-3xl mx-auto leading-relaxed">
@@ -346,7 +346,7 @@ const About = () => {
 
               <div className="animate-content p-8 bg-gradient-to-br from-primary/10 to-accent/10 backdrop-blur-xl border border-border/20 rounded-2xl">
                 <blockquote className="text-body text-muted-foreground italic leading-relaxed mb-4">
-                  "Having seen firsthand how insurance companies systematically minimize and deny legitimate claims, I founded National Injury Law 
+                  "Having seen firsthand how insurance companies systematically minimize and deny legitimate claims, I founded Trembach Law Firm 
                   to level the playing field for injury victims. When insurance lawyers see me on the other side, they know I understand their playbook better than they do."
                 </blockquote>
                 <cite className="text-small font-medium text-primary">

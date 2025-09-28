@@ -16,7 +16,7 @@ interface VerticalRopeProps {
 export const VerticalRope: React.FC<VerticalRopeProps> = ({
   startElement = '#about',
   className = '',
-  strokeWidth = 28,
+  strokeWidth = 64,
   lengthPx = 3000,
 }) => {
   const mainPathRef = useRef<SVGPathElement>(null);
@@ -41,7 +41,7 @@ export const VerticalRope: React.FC<VerticalRopeProps> = ({
       ease: 'none',
       scrollTrigger: {
         trigger: startElement,
-        start: 'top center',
+        start: 'top top',
         end: `+=${Math.floor(total)}`,
         scrub: 1.5,
       },
@@ -69,14 +69,13 @@ export const VerticalRope: React.FC<VerticalRopeProps> = ({
   const viewW = 1440;
   const viewH = lengthPx; // Make SVG tall so rope can extend
 
-  // Center x is 720; we swing around it using cubic curves.
+  // Diagonal rope: from top-left toward bottom-right with gentle arcs.
+  const margin = 96;
   const d = [
-    `M 720 0`,
-    `C 1100 160, 420 360, 820 600`,
-    `C 1200 820, 540 1050, 700 1300`,
-    `C 940 1520, 360 1700, 760 1950`,
-    `C 1160 2200, 500 2450, 700 2700`,
-    `C 980 ${viewH - 180}, 520 ${viewH - 120}, 720 ${viewH - 20}`
+    `M ${margin} 0`,
+    `C ${viewW * 0.25} ${viewH * 0.12}, ${viewW * 0.18} ${viewH * 0.28}, ${viewW * 0.36} ${viewH * 0.36}`,
+    `C ${viewW * 0.54} ${viewH * 0.46}, ${viewW * 0.48} ${viewH * 0.62}, ${viewW * 0.66} ${viewH * 0.72}`,
+    `C ${viewW * 0.84} ${viewH * 0.82}, ${viewW * 0.72} ${viewH * 0.92}, ${viewW - margin} ${viewH - margin}`
   ].join(' ');
 
   return (
@@ -84,7 +83,7 @@ export const VerticalRope: React.FC<VerticalRopeProps> = ({
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="xMinYMin slice"
       >
         <defs>
           <linearGradient id="ropeGradient" x1="0%" y1="0%" x2="100%" y2="0%">

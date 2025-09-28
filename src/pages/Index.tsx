@@ -17,6 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
+import { RopeSection, JusticeRopeSection, ElegantRopeSection } from '../components/animations/RopeSection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -89,13 +90,19 @@ const Index = () => {
       <Hero />
 
       {/* About Section */}
-      <About />
+      <JusticeRopeSection>
+        <About />
+      </JusticeRopeSection>
 
       {/* Truth About Your Case Section */}
-      <TruthAboutCase />
+      <RopeSection ropeConfig={{ type: 'artistic', position: 'left', multiple: true, opacity: 0.4 }}>
+        <TruthAboutCase />
+      </RopeSection>
 
       {/* Practice Areas */}
-      <PracticeAreasReference key="practice-areas-v2" />
+      <ElegantRopeSection>
+        <PracticeAreasReference key="practice-areas-v2" />
+      </ElegantRopeSection>
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -124,16 +131,24 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <CriticalStepsSection />
+      <RopeSection ropeConfig={{ type: 'flowing', position: 'right', opacity: 0.3, width: 4 }}>
+        <CriticalStepsSection />
+      </RopeSection>
 
       {/* Every Problem Solved */}
-      <EveryProblemSolved />
+      <JusticeRopeSection>
+        <EveryProblemSolved />
+      </JusticeRopeSection>
 
       {/* Featured Results */}
-      <FeaturedResults />
+      <RopeSection ropeConfig={{ type: 'elegant', position: 'center', width: 3, multiple: true }}>
+        <FeaturedResults />
+      </RopeSection>
 
       {/* Process */}
-      <Process />
+      <RopeSection ropeConfig={{ type: 'vertical', position: 'right', opacity: 0.5 }}>
+        <Process />
+      </RopeSection>
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

@@ -42,38 +42,43 @@ const SimpleRopeAnimation: React.FC = () => {
 
   // Create rope geometry - make it thicker and more visible
   const ropeGeometry = useMemo(() => {
-    return new THREE.TubeGeometry(curve, 100, 0.6, 20, false);
+    return new THREE.TubeGeometry(curve, 120, 1.0, 24, false);
   }, [curve]);
 
   useEffect(() => {
     console.log('[Rope] mount');
-    const handleScroll = () => {
-      const scrollTop = window.scrollY;
+    const computeProgressFromAbout = () => {
       const about = document.getElementById('about');
+      if (!about) return 0;
+      const rect = about.getBoundingClientRect();
 
-      if (about) {
-        const rect = about.getBoundingClientRect();
-        const aboutTop = scrollTop + rect.top;
-        const aboutHeight = (about as HTMLElement).offsetHeight || rect.height;
+      // If section is offscreen, return 0
+      if (rect.bottom <= 0 || rect.top >= window.innerHeight) return 0;
 
-        // Start a bit before the About section enters, finish after it passes
-        const start = aboutTop - window.innerHeight * 0.4;
-        const end = aboutTop + aboutHeight - window.innerHeight * 0.2;
-        const range = Math.max(end - start, 1);
-        const p = (scrollTop - start) / range;
-        targetProgress.current = THREE.MathUtils.clamp(p, 0, 1);
-      } else {
-        // Fallback to page progress if About not found
-        const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-        targetProgress.current = Math.min(scrollTop / Math.max(maxScroll * 0.5, 1), 1);
-      }
+      // Visible fraction of the section within the viewport
+      const visible = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const fraction = visible / Math.min(rect.height, window.innerHeight);
+
+      // Map to a smoother 0..1 curve as the section comes fully into view
+      const centerOffset = 1 - Math.abs((rect.top + rect.height / 2 - window.innerHeight / 2) / (window.innerHeight / 2));
+      const p = THREE.MathUtils.clamp((fraction * 0.6 + centerOffset * 0.4), 0, 1);
+      return p;
+    };
+
+    const handleScrollOrResize = () => {
+      const p = computeProgressFromAbout();
+      if (p !== undefined) targetProgress.current = p;
     };
 
     targetProgress.current = 0;
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true });
+    window.addEventListener('resize', handleScrollOrResize);
+    handleScrollOrResize();
 
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize);
+      window.removeEventListener('resize', handleScrollOrResize);
+    };
   }, []);
 
   // Animation loop

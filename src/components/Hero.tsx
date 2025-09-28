@@ -62,8 +62,8 @@ const Hero = () => {
     <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20 bg-[hsl(0_0%_100%)]">
       {/* Hero Background Image */}
 
-      {/* 3D Lady Justice Statue */}
-      <HeroScene />
+      {/* 3D Lady Justice Statue - Disabled due to missing model */}
+      {/* <HeroScene /> */}
 
       <div className="relative z-10 flex w-full min-h-[calc(100vh-5rem)]">
         {/* Main Content - Left Side */}

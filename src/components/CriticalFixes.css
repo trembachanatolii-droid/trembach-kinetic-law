@@ -1,0 +1,98 @@
+/* CRITICAL WEBSITE FIXES - EMERGENCY OVERRIDES */
+
+/* Force all text to be visible with high contrast */
+* {
+  color: inherit !important;
+}
+
+/* Ensure all headings are visible */
+h1, h2, h3, h4, h5, h6,
+.text-display, .text-headline, .text-title {
+  color: hsl(0 0% 7%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+  font-weight: 700 !important;
+}
+
+/* Ensure all body text is visible */
+p, span, div, li, label,
+.text-body, .text-small {
+  color: hsl(0 0% 20%) !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Hero section specific fixes */
+.hero-line {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: hsl(0 0% 7%) !important;
+}
+
+/* Ensure all sections are visible */
+section {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Force button text visibility */
+button, [role="button"] {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+button *, [role="button"] * {
+  opacity: 1 !important;
+  visibility: visible !important;
+  color: inherit !important;
+}
+
+/* Override any stuck GSAP animations */
+[style*="opacity: 0"] {
+  opacity: 1 !important;
+}
+
+/* Remove any loading indicators that might be stuck */
+.loading, .spinner, [data-loading="true"] {
+  display: none !important;
+}
+
+/* Ensure form elements are visible */
+input, textarea, select, .select-trigger {
+  color: hsl(0 0% 7%) !important;
+  background-color: white !important;
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
+/* Fix any 3D canvas elements that might be causing issues */
+canvas {
+  display: none !important;
+}
+
+/* Ensure practice areas text is visible */
+.practice-areas h3,
+.practice-areas p,
+.practice-areas span {
+  color: hsl(0 0% 7%) !important;
+  opacity: 1 !important;
+}
+
+/* Emergency text color fix for all components */
+.text-foreground {
+  color: hsl(0 0% 7%) !important;
+}
+
+.text-muted-foreground {
+  color: hsl(0 0% 30%) !important;
+}
+
+.text-primary {
+  color: hsl(260 100% 45%) !important;
+}
+
+/* Ensure navigation is visible */
+nav, nav * {
+  opacity: 1 !important;
+  visibility: visible !important;
+}

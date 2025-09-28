@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import '../components/CriticalFixes.css'; // Emergency visibility fixes
 import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -14,6 +15,7 @@ import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
 import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
+import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -72,6 +74,7 @@ const Index = () => {
 
   return (
     <>
+      <GlobalVisibilityFix />
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
     <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>

@@ -1,0 +1,67 @@
+/* Rope Animation Styles */
+.rope-scene-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 10;
+  overflow: hidden;
+}
+
+/* Ensure Three.js canvas renders behind content but above background */
+.rope-scene-container canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  background: transparent !important;
+}
+
+/* Performance optimizations for the rope animation */
+.rope-scene-container {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rope-scene-container {
+    display: none; /* Hide on mobile for performance */
+  }
+}
+
+@media (max-width: 1024px) {
+  .rope-scene-container {
+    opacity: 0.7; /* Reduce opacity on tablets */
+  }
+}
+
+/* Smooth transitions for scroll-based animations */
+.rope-scroll-indicator {
+  position: fixed;
+  bottom: 2rem;
+  left: 2rem;
+  width: 4px;
+  height: 100px;
+  background: linear-gradient(to top, transparent, hsl(var(--primary)), transparent);
+  opacity: 0.3;
+  border-radius: 2px;
+  z-index: 20;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.rope-scroll-indicator.active {
+  opacity: 0.6;
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .rope-scene-container {
+    display: none;
+  }
+}

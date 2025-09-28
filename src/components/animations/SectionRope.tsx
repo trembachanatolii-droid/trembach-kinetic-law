@@ -74,39 +74,38 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Zig-zag through content sections - start upper right, weave through boxes
+      // Mobile: Smooth flowing rope path starting from top-left corner
       return [
-        `M ${viewW * 0.82} ${viewH * 0.16}`,
-        // Curve down right edge
-        `C ${viewW * 0.9} ${viewH * 0.14}, ${viewW * 0.96} ${viewH * 0.18}, ${viewW * 0.98} ${viewH * 0.24}`,
-        `C ${viewW * 0.99} ${viewH * 0.32}, ${viewW * 0.96} ${viewH * 0.38}, ${viewW * 0.9} ${viewH * 0.42}`,
-        // Zig-zag through top row sections (Legal Defense -> Client Advocacy -> Trial Experience)
-        `C ${viewW * 0.75} ${viewH * 0.45}, ${viewW * 0.6} ${viewH * 0.43}, ${viewW * 0.5} ${viewH * 0.46}`,
-        `C ${viewW * 0.35} ${viewH * 0.49}, ${viewW * 0.25} ${viewH * 0.47}, ${viewW * 0.15} ${viewH * 0.5}`,
-        // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)
-        `C ${viewW * 0.25} ${viewH * 0.58}, ${viewW * 0.35} ${viewH * 0.62}, ${viewW * 0.5} ${viewH * 0.6}`,
-        `C ${viewW * 0.65} ${viewH * 0.58}, ${viewW * 0.8} ${viewH * 0.62}, ${viewW * 0.9} ${viewH * 0.65}`,
-        // Long horizontal sweep at bottom
-        `C ${viewW * 0.8} ${viewH * 0.8}, ${viewW * 0.6} ${viewH * 0.85}, ${viewW * 0.4} ${viewH * 0.87}`,
-        `C ${viewW * 0.25} ${viewH * 0.88}, ${viewW * 0.15} ${viewH * 0.86}, ${viewW * 0.08} ${viewH * 0.84}`
+        `M ${viewW * 0.05} ${viewH * 0.08}`,
+        // Flow smoothly to the right, curving around profile area
+        `C ${viewW * 0.15} ${viewH * 0.06}, ${viewW * 0.35} ${viewH * 0.05}, ${viewW * 0.55} ${viewH * 0.12}`,
+        `C ${viewW * 0.7} ${viewH * 0.18}, ${viewW * 0.85} ${viewH * 0.25}, ${viewW * 0.92} ${viewH * 0.35}`,
+        // Continue flowing down and around content sections
+        `C ${viewW * 0.95} ${viewH * 0.42}, ${viewW * 0.9} ${viewH * 0.48}, ${viewW * 0.8} ${viewH * 0.52}`,
+        `C ${viewW * 0.65} ${viewH * 0.55}, ${viewW * 0.5} ${viewH * 0.53}, ${viewW * 0.35} ${viewH * 0.56}`,
+        `C ${viewW * 0.2} ${viewH * 0.58}, ${viewW * 0.08} ${viewH * 0.62}, ${viewW * 0.03} ${viewH * 0.68}`,
+        // Flow through bottom sections smoothly
+        `C ${viewW * 0.05} ${viewH * 0.75}, ${viewW * 0.15} ${viewH * 0.78}, ${viewW * 0.3} ${viewH * 0.76}`,
+        `C ${viewW * 0.5} ${viewH * 0.74}, ${viewW * 0.7} ${viewH * 0.78}, ${viewW * 0.85} ${viewH * 0.82}`,
+        // Final smooth curve to bottom right
+        `C ${viewW * 0.92} ${viewH * 0.85}, ${viewW * 0.95} ${viewH * 0.88}, ${viewW * 0.96} ${viewH * 0.92}`
       ].join(' ');
     }
 
-    // Desktop: Zig-zag through content sections exactly like the red marker
+    // Desktop: Smooth flowing rope path matching the red rope exactly
     return [
-      `M ${viewW * 0.82} ${viewH * 0.14}`,
-      // Curve down right edge
-      `C ${viewW * 0.9} ${viewH * 0.12}, ${viewW * 0.96} ${viewH * 0.16}, ${viewW * 0.985} ${viewH * 0.22}`,
-      `C ${viewW * 0.995} ${viewH * 0.3}, ${viewW * 0.97} ${viewH * 0.36}, ${viewW * 0.92} ${viewH * 0.4}`,
-      // Zig-zag through top row sections (Trial Experience -> Client Advocacy -> Legal Defense)
-      `C ${viewW * 0.8} ${viewH * 0.42}, ${viewW * 0.65} ${viewH * 0.41}, ${viewW * 0.5} ${viewH * 0.43}`,
-      `C ${viewW * 0.35} ${viewH * 0.45}, ${viewW * 0.2} ${viewH * 0.44}, ${viewW * 0.08} ${viewH * 0.46}`,
-      // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)  
-      `C ${viewW * 0.2} ${viewH * 0.54}, ${viewW * 0.35} ${viewH * 0.58}, ${viewW * 0.5} ${viewH * 0.56}`,
-      `C ${viewW * 0.65} ${viewH * 0.54}, ${viewW * 0.8} ${viewH * 0.58}, ${viewW * 0.92} ${viewH * 0.62}`,
-      // Long horizontal sweep at bottom
-      `C ${viewW * 0.8} ${viewH * 0.75}, ${viewW * 0.6} ${viewH * 0.82}, ${viewW * 0.4} ${viewH * 0.85}`,
-      `C ${viewW * 0.25} ${viewW * 0.86}, ${viewW * 0.15} ${viewH * 0.85}, ${viewW * 0.05} ${viewH * 0.84}`
+      `M ${viewW * 0.05} ${viewH * 0.08}`,
+      // Flow smoothly to the right, creating the organic curve around profile area
+      `C ${viewW * 0.2} ${viewH * 0.04}, ${viewW * 0.4} ${viewH * 0.02}, ${viewW * 0.6} ${viewH * 0.08}`,
+      `C ${viewW * 0.75} ${viewH * 0.14}, ${viewW * 0.88} ${viewH * 0.22}, ${viewW * 0.94} ${viewH * 0.32}`,
+      // Continue the smooth flow around the content
+      `C ${viewW * 0.97} ${viewH * 0.4}, ${viewW * 0.95} ${viewH * 0.48}, ${viewW * 0.88} ${viewH * 0.54}`,
+      `C ${viewW * 0.75} ${viewH * 0.58}, ${viewW * 0.6} ${viewH * 0.56}, ${viewW * 0.45} ${viewH * 0.59}`,
+      `C ${viewW * 0.3} ${viewH * 0.62}, ${viewW * 0.15} ${viewH * 0.65}, ${viewW * 0.05} ${viewH * 0.7}`,
+      // Flow through bottom sections with smooth curves
+      `C ${viewW * 0.02} ${viewH * 0.75}, ${viewW * 0.08} ${viewH * 0.8}, ${viewW * 0.2} ${viewH * 0.82}`,
+      `C ${viewW * 0.35} ${viewH * 0.84}, ${viewW * 0.5} ${viewH * 0.82}, ${viewW * 0.65} ${viewH * 0.85}`,
+      `C ${viewW * 0.8} ${viewH * 0.88}, ${viewW * 0.9} ${viewH * 0.9}, ${viewW * 0.96} ${viewH * 0.92}`
     ].join(' ');
   };
 

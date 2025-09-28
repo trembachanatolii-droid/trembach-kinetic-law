@@ -251,7 +251,7 @@ const About = () => {
   ];
 
   return (
-    <section id="about" ref={sectionRef} className="relative py-32 bg-background overflow-hidden">
+    <section ref={sectionRef} className="relative py-32 bg-background overflow-hidden">
       {/* Floating glow orbs */}
       <div className="absolute inset-0 pointer-events-none">
         <div className="glow-orb absolute top-20 left-10 w-32 h-32 bg-primary/20 rounded-full blur-xl"></div>

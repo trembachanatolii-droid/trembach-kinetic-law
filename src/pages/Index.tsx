@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../components/CriticalFixes.css'; // Emergency visibility fixes
-import '../styles/rope-effects.css'; // Rope animation styles
 import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,7 +17,6 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import RopeScene from '../components/rope/RopeScene';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -80,9 +78,6 @@ const Index = () => {
       <GlobalVisibilityFix />
       <BlurFix />
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
-      
-      {/* Rope Animation - Only show after loading */}
-      <RopeScene />
       
     <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>
       <SEO 

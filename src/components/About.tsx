@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import profileImage from '@/assets/profile.jpg';
-import { CircularRope } from './animations/CircularRope';
 import { 
   Users, 
   Shield, 
@@ -280,7 +279,7 @@ const About = () => {
             <div className="relative">
               <div 
                 ref={profileRef}
-                className="relative p-8 bg-card/50 backdrop-blur-xl border border-border/20 rounded-3xl shadow-2xl rope-trigger"
+                className="relative p-8 bg-card/50 backdrop-blur-xl border border-border/20 rounded-3xl shadow-2xl"
                 style={{ 
                   background: 'linear-gradient(135deg, hsl(var(--card))/60, hsl(var(--card))/30)',
                   backdropFilter: 'blur(20px)',
@@ -295,13 +294,6 @@ const About = () => {
                       className="w-full h-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-                    {/* Circular Rope Animation */}
-                    <CircularRope 
-                      size={320} 
-                      strokeWidth={16} 
-                      trigger=".rope-trigger"
-                      className="absolute -inset-8"
-                    />
                   </div>
                   {/* Glow effect */}
                   <div className="absolute inset-0 rounded-full bg-gradient-to-br from-primary/30 to-accent/30 blur-2xl scale-110 -z-10"></div>

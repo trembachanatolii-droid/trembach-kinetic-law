@@ -15,29 +15,25 @@ const Hero = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero entrance animation - instant
-      gsap.fromTo(
-        heroRef.current,
-        { opacity: 0 },
-        { opacity: 1, duration: 0.1, ease: "power2.out" }
-      );
+      // Ensure hero visible immediately (no fade to prevent blank screen)
+      if (heroRef.current) {
+        gsap.set(heroRef.current, { opacity: 1 });
+      }
 
       // Staggered headline animation
       gsap.fromTo(
         ".hero-line",
         {
-          opacity: 0,
-          y: 60,
-          filter: "blur(10px)"
+          y: 24,
+          filter: "blur(8px)"
         },
         {
-          opacity: 1,
           y: 0,
           filter: "blur(0px)",
           duration: 0.8,
           stagger: 0.08,
           ease: "power3.out",
-          delay: 0.5
+          delay: 0.2
         }
       );
 
@@ -45,7 +41,6 @@ const Hero = () => {
       gsap.fromTo(
         formRef.current,
         {
-          opacity: 0,
           x: 40,
           filter: "blur(5px)"
         },
@@ -53,9 +48,9 @@ const Hero = () => {
           opacity: 1,
           x: 0,
           filter: "blur(0px)",
-          duration: 1,
+          duration: 0.8,
           ease: "power3.out",
-          delay: 1.2
+          delay: 0.6
         }
       );
     }, heroRef);

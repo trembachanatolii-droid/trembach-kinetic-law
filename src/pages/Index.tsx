@@ -52,6 +52,24 @@ const Index = () => {
     }
   }, [isLoading]);
 
+  // Global failsafe: ensure all sections are visible even if animations fail
+  useEffect(() => {
+    if (!showContent) return;
+    const ensureVisible = () => {
+      const sections = Array.from(document.querySelectorAll('section')) as HTMLElement[];
+      sections.forEach((el) => {
+        const op = parseFloat(getComputedStyle(el).opacity || '1');
+        if (!isNaN(op) && op < 0.99) {
+          el.style.opacity = '1';
+        }
+      });
+      ScrollTrigger.refresh();
+    };
+
+    const id = setTimeout(ensureVisible, 200);
+    return () => clearTimeout(id);
+  }, [showContent]);
+
   return (
     <>
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}

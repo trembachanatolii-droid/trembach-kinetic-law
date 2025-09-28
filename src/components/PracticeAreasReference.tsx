@@ -821,37 +821,10 @@ const PracticeAreasReference: React.FC = () => {
 
         {/* Mobile Layout */}
         <div className="lg:hidden">
-          {/* Practice Area Navigation */}
-          <div className="glass-card mb-8">
-            <div className="bg-gradient-primary px-6 py-4 rounded-t-2xl">
-              <h3 className="text-lg font-semibold text-primary-foreground">
-                Select Practice Area
-              </h3>
-            </div>
-            <div className="p-6">
-              <nav className="space-y-2">
-                {practiceAreas.map((area) => {
-                  const state = getItemState(area.id);
-                  return (
-                    <button
-                      key={area.id}
-                      onClick={() => handleAreaClick(area.id)}
-                      className={`w-full text-left px-4 py-3 text-sm font-medium rounded-lg transition-all duration-300 glass-button border-0 ${
-                        state === 'active'
-                          ? 'bg-primary/20 text-primary border border-primary/30' 
-                          : 'text-foreground hover:text-primary hover:bg-primary/10'
-                      }`}
-                    >
-                      {area.title}
-                    </button>
-                  );
-                })}
-              </nav>
-            </div>
-          </div>
+          {/* Mobile Practice Areas Grid - Compact Card Layout */}
 
           {/* Mobile Practice Cards Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-2 gap-3 sm:gap-4">
             {practiceAreas.map((area, index) => {
               const state = getItemState(area.id);
               const tags = getPracticeAreaTags(area.title);
@@ -859,11 +832,11 @@ const PracticeAreasReference: React.FC = () => {
               return (
                 <div
                   key={area.id}
-                  className="glass-card group hover-glow-primary cursor-pointer overflow-hidden"
+                  className="glass-card group cursor-pointer overflow-hidden hover:scale-[1.02] transition-all duration-300"
                   onClick={() => handleAreaClick(area.id)}
                 >
                   {/* Practice Area Image */}
-                  <div className="relative overflow-hidden aspect-video">
+                  <div className="relative overflow-hidden aspect-[4/3]">
                     <img 
                       src={area.image}
                       alt={`${area.title} legal services`}
@@ -872,44 +845,41 @@ const PracticeAreasReference: React.FC = () => {
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                       onError={(e) => { (e.currentTarget as HTMLImageElement).src = heroFallback; }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/70 via-background/20 to-transparent"></div>
                     
                     {/* Title Overlay */}
-                    <div className="absolute bottom-4 left-4 right-4">
-                      <h3 className="text-lg font-semibold text-white group-hover:text-primary-glow transition-colors">
+                    <div className="absolute bottom-0 left-0 right-0 p-3">
+                      <h3 className="text-sm font-semibold text-white leading-tight line-clamp-2 group-hover:text-primary-glow transition-colors">
                         {area.title}
                       </h3>
+                      
+                      {/* Primary tag for context */}
+                      <span className="inline-block mt-1 px-2 py-0.5 text-[10px] bg-primary/20 text-primary-glow rounded-full border border-primary/30">
+                        {tags[0]}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Practice Info */}
-                  <div className="p-4 space-y-3">                    
-                    {/* Practice Area Tags */}
-                    <div className="flex flex-wrap gap-1">
-                      {tags.slice(0, 2).map((tag) => (
-                        <span 
-                          key={tag}
-                          className="px-2 py-1 text-xs bg-primary/10 text-primary rounded-full border border-primary/20"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    
-                    {/* CTA */}
+                  {/* Quick action button */}
+                  <div className="p-3">
                     <Link
-                       to={area.title === 'Aviation Accidents' ? '/practice-areas/aviation-accidents' :
-                            area.title === 'Mesothelioma & Asbestos' ? '/practice-areas/mesothelioma-asbestos' :
-                            area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents' :
-                           area.title === 'Opioid Litigation' ? '/practice-areas/opioid-litigation' :
-                           area.title === 'Pharmaceutical' ? '/practice-areas/pharmaceutical' :
-                           area.title === 'Class Actions' ? '/practice-areas/class-actions' :
-                           area.title === 'Environmental Toxic' ? '/practice-areas/environmental-toxic' :
-                          '/practice-areas/coming-soon'}
-                      className="ghost-button w-full justify-center"
+                      to={area.title === 'PFAS Exposure' ? '/pfas-case-evaluation' :
+                           area.title === 'Aviation Accidents' ? '/aviation/case-evaluation' :
+                           area.title === 'Maritime Accidents' ? '/maritime/case-evaluation' :
+                           area.title === 'Mesothelioma & Asbestos' ? '/case-evaluation' :
+                           area.title === 'Opioid Litigation' ? '/opioid-case-evaluation' :
+                           area.title === 'Swimming Pool' ? '/practice-areas/swimming-pool/case-evaluation' :
+                           area.title === 'Crane Accidents' ? '/practice-areas/crane-accidents/case-evaluation' :
+                          '/case-evaluation'}
+                      className="block"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      Learn More
+                      <Button 
+                        size="sm"
+                        className="w-full bg-primary hover:bg-primary/90 text-white font-medium text-xs py-2 transition-all duration-300"
+                      >
+                        Free Consultation
+                      </Button>
                     </Link>
                   </div>
                 </div>

@@ -14,7 +14,7 @@ interface SectionRopeProps {
 export const SectionRope: React.FC<SectionRopeProps> = ({
   sectionId,
   direction = 'left-to-right',
-  strokeWidth = 16,
+  strokeWidth = 24,
   className = '',
 }) => {
   const mainPathRef = useRef<SVGPathElement>(null);

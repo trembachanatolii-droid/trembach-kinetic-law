@@ -74,39 +74,30 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Flowing loop around content area like the red marker
+      // Mobile: Match red marker - top center to right, down right side, long bottom sweep
       return [
-        `M ${viewW * 0.1} ${viewH * 0.15}`,
-        // Top curve
-        `C ${viewW * 0.25} ${viewH * 0.08}, ${viewW * 0.75} ${viewH * 0.08}, ${viewW * 0.9} ${viewH * 0.15}`,
+        `M ${viewW * 0.5} ${viewH * 0.08}`,
+        // Top arc across to upper right
+        `C ${viewW * 0.65} ${viewH * 0.05}, ${viewW * 0.85} ${viewH * 0.08}, ${viewW * 0.92} ${viewH * 0.15}`,
         // Right side down
-        `C ${viewW * 0.95} ${viewH * 0.3}, ${viewW * 0.92} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.7}`,
-        // Bottom right curve
-        `C ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.7} ${viewH * 0.9}, ${viewW * 0.5} ${viewH * 0.88}`,
-        // Bottom wavy section
-        `C ${viewW * 0.35} ${viewH * 0.86}, ${viewW * 0.25} ${viewH * 0.92}, ${viewW * 0.1} ${viewH * 0.85}`,
-        // Left side up
-        `C ${viewW * 0.05} ${viewH * 0.65}, ${viewW * 0.08} ${viewH * 0.4}, ${viewW * 0.1} ${viewH * 0.15}`,
-        `Z`
+        `C ${viewW * 0.96} ${viewH * 0.3}, ${viewW * 0.94} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.75}`,
+        // Long sweeping curve across bottom
+        `C ${viewW * 0.8} ${viewH * 0.9}, ${viewW * 0.6} ${viewH * 0.95}, ${viewW * 0.4} ${viewH * 0.92}`,
+        `C ${viewW * 0.25} ${viewH * 0.88}, ${viewW * 0.15} ${viewH * 0.85}, ${viewW * 0.08} ${viewH * 0.8}`
       ].join(' ');
     }
 
-    // Desktop: Flowing loop around content area like the red marker  
+    // Desktop: Match red marker exactly - top center arc to right, down, long bottom sweep
     return [
-      `M ${viewW * 0.08} ${viewH * 0.12}`,
-      // Top curve across
-      `C ${viewW * 0.2} ${viewH * 0.05}, ${viewW * 0.8} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.12}`,
-      // Right side down with curves
-      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.95} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
-      `C ${viewW * 0.89} ${viewH * 0.75}, ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.78} ${viewH * 0.88}`,
-      // Bottom right curve
-      `C ${viewW * 0.65} ${viewH * 0.95}, ${viewW * 0.5} ${viewH * 0.92}, ${viewW * 0.35} ${viewH * 0.88}`,
-      // Bottom wavy section
-      `C ${viewW * 0.25} ${viewH * 0.86}, ${viewW * 0.18} ${viewH * 0.9}, ${viewW * 0.08} ${viewH * 0.85}`,
-      // Left side up with curves
-      `C ${viewW * 0.02} ${viewH * 0.7}, ${viewW * 0.05} ${viewH * 0.5}, ${viewW * 0.06} ${viewH * 0.3}`,
-      `C ${viewW * 0.07} ${viewH * 0.2}, ${viewW * 0.08} ${viewH * 0.12}, ${viewW * 0.08} ${viewH * 0.12}`,
-      `Z`
+      `M ${viewW * 0.5} ${viewH * 0.06}`,
+      // Top arc from center to upper right
+      `C ${viewW * 0.65} ${viewH * 0.02}, ${viewW * 0.85} ${viewH * 0.05}, ${viewW * 0.95} ${viewH * 0.12}`,
+      // Right side curve down
+      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.96} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
+      `C ${viewW * 0.88} ${viewH * 0.78}, ${viewW * 0.82} ${viewH * 0.85}, ${viewW * 0.75} ${viewH * 0.88}`,
+      // Long sweeping curve across the entire bottom
+      `C ${viewW * 0.65} ${viewH * 0.92}, ${viewW * 0.5} ${viewH * 0.95}, ${viewW * 0.35} ${viewH * 0.92}`,
+      `C ${viewW * 0.25} ${viewH * 0.89}, ${viewW * 0.15} ${viewH * 0.86}, ${viewW * 0.05} ${viewH * 0.8}`
     ].join(' ');
   };
 

@@ -862,7 +862,7 @@ const PracticeAreasReference: React.FC = () => {
                     
                     {/* Title Overlay */}
                     <div className="absolute bottom-0 left-0 right-0 p-3">
-                      <h3 className="text-sm font-semibold text-white leading-tight line-clamp-2 group-hover:text-primary-glow transition-colors">
+                      <h3 className="text-sm font-semibold text-primary leading-tight line-clamp-2 group-hover:text-primary-glow transition-colors">
                         {area.title}
                       </h3>
                       

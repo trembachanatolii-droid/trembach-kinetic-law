@@ -36,13 +36,15 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
     });
 
     // Draw on scroll within the section
+    const startPos = isMobile ? 'top 95%' : 'top 80%';
+    const endPos = isMobile ? 'bottom 5%' : 'bottom 20%';
     const tween = gsap.to([path, glow], {
       strokeDashoffset: 0,
       ease: 'none',
       scrollTrigger: {
         trigger: `#${sectionId}`,
-        start: 'top 80%',
-        end: 'bottom 20%',
+        start: startPos,
+        end: endPos,
         scrub: 1,
       },
       duration: 1,
@@ -111,7 +113,7 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
   const pathData = createPath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-0 ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-10 ${className}`}>
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}

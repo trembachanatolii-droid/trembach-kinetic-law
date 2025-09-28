@@ -74,30 +74,32 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Match red marker - top center to right, down right side, long bottom sweep
+      // Mobile: Follow the red marker — start near top-right, descend the right edge, sweep across bottom to left
       return [
-        `M ${viewW * 0.5} ${viewH * 0.08}`,
-        // Top arc across to upper right
-        `C ${viewW * 0.65} ${viewH * 0.05}, ${viewW * 0.85} ${viewH * 0.08}, ${viewW * 0.92} ${viewH * 0.15}`,
-        // Right side down
-        `C ${viewW * 0.96} ${viewH * 0.3}, ${viewW * 0.94} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.75}`,
-        // Long sweeping curve across bottom
-        `C ${viewW * 0.8} ${viewH * 0.9}, ${viewW * 0.6} ${viewH * 0.95}, ${viewW * 0.4} ${viewH * 0.92}`,
-        `C ${viewW * 0.25} ${viewH * 0.88}, ${viewW * 0.15} ${viewH * 0.85}, ${viewW * 0.08} ${viewH * 0.8}`
+        `M ${viewW * 0.82} ${viewH * 0.16}`,
+        // slight lead to the right, then begin descending
+        `C ${viewW * 0.9} ${viewH * 0.14}, ${viewW * 0.96} ${viewH * 0.18}, ${viewW * 0.98} ${viewH * 0.24}`,
+        // right side down
+        `C ${viewW * 0.99} ${viewH * 0.36}, ${viewW * 0.95} ${viewH * 0.58}, ${viewW * 0.9} ${viewH * 0.76}`,
+        // long bottom sweep to the left
+        `C ${viewW * 0.8} ${viewH * 0.88}, ${viewW * 0.6} ${viewH * 0.92}, ${viewW * 0.42} ${viewH * 0.9}`,
+        `C ${viewW * 0.26} ${viewH * 0.88}, ${viewW * 0.16} ${viewH * 0.86}, ${viewW * 0.08} ${viewH * 0.84}`
       ].join(' ');
     }
 
-    // Desktop: Match red marker exactly - top center arc to right, down, long bottom sweep
+    // Desktop: Follow the red marker — start upper-right, descend along right curve, then a long near-horizontal bottom sweep
     return [
-      `M ${viewW * 0.5} ${viewH * 0.06}`,
-      // Top arc from center to upper right
-      `C ${viewW * 0.65} ${viewH * 0.02}, ${viewW * 0.85} ${viewH * 0.05}, ${viewW * 0.95} ${viewH * 0.12}`,
-      // Right side curve down
-      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.96} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
-      `C ${viewW * 0.88} ${viewH * 0.78}, ${viewW * 0.82} ${viewH * 0.85}, ${viewW * 0.75} ${viewH * 0.88}`,
-      // Long sweeping curve across the entire bottom
-      `C ${viewW * 0.65} ${viewH * 0.92}, ${viewW * 0.5} ${viewH * 0.95}, ${viewW * 0.35} ${viewH * 0.92}`,
-      `C ${viewW * 0.25} ${viewH * 0.89}, ${viewW * 0.15} ${viewH * 0.86}, ${viewW * 0.05} ${viewH * 0.8}`
+      `M ${viewW * 0.82} ${viewH * 0.14}`,
+      // gentle move to the right top
+      `C ${viewW * 0.9} ${viewH * 0.12}, ${viewW * 0.96} ${viewH * 0.16}, ${viewW * 0.985} ${viewH * 0.22}`,
+      // right side descent
+      `C ${viewW * 0.995} ${viewH * 0.34}, ${viewW * 0.97} ${viewH * 0.56}, ${viewW * 0.92} ${viewH * 0.74}`,
+      // begin bottom rounding
+      `C ${viewW * 0.85} ${viewH * 0.86}, ${viewW * 0.72} ${viewH * 0.9}, ${viewW * 0.58} ${viewH * 0.9}`,
+      // long, almost straight sweep to the left
+      `C ${viewW * 0.42} ${viewH * 0.9}, ${viewW * 0.26} ${viewH * 0.9}, ${viewW * 0.12} ${viewH * 0.88}`,
+      // taper toward left bottom
+      `C ${viewW * 0.08} ${viewH * 0.87}, ${viewW * 0.06} ${viewH * 0.86}, ${viewW * 0.05} ${viewH * 0.86}`
     ].join(' ');
   };
 

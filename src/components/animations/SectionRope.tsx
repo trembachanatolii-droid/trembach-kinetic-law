@@ -74,40 +74,40 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      if (direction === 'left-to-right') {
-        // Mobile: pronounced sweep from top-left curving down, then towards bottom-right
-        return [
-          `M 0 60`,
-          `C ${viewW * 0.15} 180, ${viewW * 0.25} 360, ${viewW * 0.38} ${viewH * 0.6}`,
-          `C ${viewW * 0.55} ${viewH * 0.8}, ${viewW * 0.75} ${viewH * 0.9}, ${viewW} ${viewH - 40}`
-        ].join(' ');
-      } else {
-        // Mobile mirrored path
-        return [
-          `M ${viewW} 60`,
-          `C ${viewW * 0.85} 180, ${viewW * 0.75} 360, ${viewW * 0.62} ${viewH * 0.6}`,
-          `C ${viewW * 0.45} ${viewH * 0.8}, ${viewW * 0.25} ${viewH * 0.9}, 0 ${viewH - 40}`
-        ].join(' ');
-      }
+      // Mobile: Flowing loop around content area like the red marker
+      return [
+        `M ${viewW * 0.1} ${viewH * 0.15}`,
+        // Top curve
+        `C ${viewW * 0.25} ${viewH * 0.08}, ${viewW * 0.75} ${viewH * 0.08}, ${viewW * 0.9} ${viewH * 0.15}`,
+        // Right side down
+        `C ${viewW * 0.95} ${viewH * 0.3}, ${viewW * 0.92} ${viewH * 0.5}, ${viewW * 0.9} ${viewH * 0.7}`,
+        // Bottom right curve
+        `C ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.7} ${viewH * 0.9}, ${viewW * 0.5} ${viewH * 0.88}`,
+        // Bottom wavy section
+        `C ${viewW * 0.35} ${viewH * 0.86}, ${viewW * 0.25} ${viewH * 0.92}, ${viewW * 0.1} ${viewH * 0.85}`,
+        // Left side up
+        `C ${viewW * 0.05} ${viewH * 0.65}, ${viewW * 0.08} ${viewH * 0.4}, ${viewW * 0.1} ${viewH * 0.15}`,
+        `Z`
+      ].join(' ');
     }
 
-    if (direction === 'left-to-right') {
-      // Desktop: Top-left to bottom-right with elegant S-curve across the whole section
-      return [
-        `M 0 40`,
-        `C ${viewW * 0.2} 120, ${viewW * 0.3} 180, ${viewW * 0.42} ${viewH * 0.35}`,
-        `C ${viewW * 0.58} ${viewH * 0.5}, ${viewW * 0.7} ${viewH * 0.62}, ${viewW * 0.84} ${viewH * 0.68}`,
-        `C ${viewW * 0.94} ${viewH * 0.72}, ${viewW * 0.98} ${viewH * 0.86}, ${viewW} ${viewH - 40}`
-      ].join(' ');
-    } else {
-      // Desktop mirrored S-curve
-      return [
-        `M ${viewW} 40`,
-        `C ${viewW * 0.8} 120, ${viewW * 0.7} 180, ${viewW * 0.58} ${viewH * 0.35}`,
-        `C ${viewW * 0.42} ${viewH * 0.5}, ${viewW * 0.3} ${viewH * 0.62}, ${viewW * 0.16} ${viewH * 0.68}`,
-        `C ${viewW * 0.06} ${viewH * 0.72}, ${viewW * 0.02} ${viewH * 0.86}, 0 ${viewH - 40}`
-      ].join(' ');
-    }
+    // Desktop: Flowing loop around content area like the red marker  
+    return [
+      `M ${viewW * 0.08} ${viewH * 0.12}`,
+      // Top curve across
+      `C ${viewW * 0.2} ${viewH * 0.05}, ${viewW * 0.8} ${viewH * 0.05}, ${viewW * 0.92} ${viewH * 0.12}`,
+      // Right side down with curves
+      `C ${viewW * 0.98} ${viewH * 0.25}, ${viewW * 0.95} ${viewH * 0.45}, ${viewW * 0.92} ${viewH * 0.65}`,
+      `C ${viewW * 0.89} ${viewH * 0.75}, ${viewW * 0.85} ${viewH * 0.85}, ${viewW * 0.78} ${viewH * 0.88}`,
+      // Bottom right curve
+      `C ${viewW * 0.65} ${viewH * 0.95}, ${viewW * 0.5} ${viewH * 0.92}, ${viewW * 0.35} ${viewH * 0.88}`,
+      // Bottom wavy section
+      `C ${viewW * 0.25} ${viewH * 0.86}, ${viewW * 0.18} ${viewH * 0.9}, ${viewW * 0.08} ${viewH * 0.85}`,
+      // Left side up with curves
+      `C ${viewW * 0.02} ${viewH * 0.7}, ${viewW * 0.05} ${viewH * 0.5}, ${viewW * 0.06} ${viewH * 0.3}`,
+      `C ${viewW * 0.07} ${viewH * 0.2}, ${viewW * 0.08} ${viewH * 0.12}, ${viewW * 0.08} ${viewH * 0.12}`,
+      `Z`
+    ].join(' ');
   };
 
   const pathData = createPath();

@@ -74,48 +74,39 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Start at far left top of "About Trembach Law Firm" and weave smoothly between all subsections
+      // Mobile: Zig-zag through content sections - start upper right, weave through boxes
       return [
-        `M ${viewW * 0.04} ${viewH * 0.08}`,
-        // Between main title and subtitle
-        `C ${viewW * 0.18} ${viewH * 0.08}, ${viewW * 0.32} ${viewH * 0.10}, ${viewW * 0.46} ${viewH * 0.12}`,
-        // A Unique Advantage -> Having seen firsthand...
-        `C ${viewW * 0.64} ${viewH * 0.14}, ${viewW * 0.78} ${viewH * 0.18}, ${viewW * 0.90} ${viewH * 0.20}`,
-        `C ${viewW * 0.76} ${viewH * 0.24}, ${viewW * 0.58} ${viewH * 0.26}, ${viewW * 0.40} ${viewH * 0.28}`,
-        // The Inside Advantage -> Attorney Credentials
-        `C ${viewW * 0.24} ${viewH * 0.30}, ${viewW * 0.14} ${viewH * 0.32}, ${viewW * 0.10} ${viewH * 0.34}`,
-        `C ${viewW * 0.26} ${viewH * 0.36}, ${viewW * 0.44} ${viewH * 0.38}, ${viewW * 0.60} ${viewH * 0.40}`,
-        // Client Service -> Bar Admissions
-        `C ${viewW * 0.76} ${viewH * 0.42}, ${viewW * 0.88} ${viewH * 0.46}, ${viewW * 0.94} ${viewH * 0.50}`,
-        `C ${viewW * 0.78} ${viewH * 0.54}, ${viewW * 0.60} ${viewH * 0.56}, ${viewW * 0.44} ${viewH * 0.58}`,
-        // The Truth About Your Case -> gentle finish
-        `C ${viewW * 0.28} ${viewH * 0.60}, ${viewW * 0.16} ${viewH * 0.62}, ${viewW * 0.08} ${viewH * 0.64}`,
-        `C ${viewW * 0.24} ${viewH * 0.68}, ${viewW * 0.44} ${viewH * 0.72}, ${viewW * 0.62} ${viewH * 0.74}`,
-        `C ${viewW * 0.76} ${viewH * 0.78}, ${viewW * 0.60} ${viewH * 0.84}, ${viewW * 0.36} ${viewH * 0.86}`,
-        `C ${viewW * 0.22} ${viewH * 0.88}, ${viewW * 0.12} ${viewH * 0.88}, ${viewW * 0.06} ${viewH * 0.86}`
+        `M ${viewW * 0.82} ${viewH * 0.16}`,
+        // Curve down right edge
+        `C ${viewW * 0.9} ${viewH * 0.14}, ${viewW * 0.96} ${viewH * 0.18}, ${viewW * 0.98} ${viewH * 0.24}`,
+        `C ${viewW * 0.99} ${viewH * 0.32}, ${viewW * 0.96} ${viewH * 0.38}, ${viewW * 0.9} ${viewH * 0.42}`,
+        // Zig-zag through top row sections (Legal Defense -> Client Advocacy -> Trial Experience)
+        `C ${viewW * 0.75} ${viewH * 0.45}, ${viewW * 0.6} ${viewH * 0.43}, ${viewW * 0.5} ${viewH * 0.46}`,
+        `C ${viewW * 0.35} ${viewH * 0.49}, ${viewW * 0.25} ${viewH * 0.47}, ${viewW * 0.15} ${viewH * 0.5}`,
+        // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)
+        `C ${viewW * 0.25} ${viewH * 0.58}, ${viewW * 0.35} ${viewH * 0.62}, ${viewW * 0.5} ${viewH * 0.6}`,
+        `C ${viewW * 0.65} ${viewH * 0.58}, ${viewW * 0.8} ${viewH * 0.62}, ${viewW * 0.9} ${viewH * 0.65}`,
+        // Long horizontal sweep at bottom
+        `C ${viewW * 0.8} ${viewH * 0.8}, ${viewW * 0.6} ${viewH * 0.85}, ${viewW * 0.4} ${viewH * 0.87}`,
+        `C ${viewW * 0.25} ${viewH * 0.88}, ${viewW * 0.15} ${viewH * 0.86}, ${viewW * 0.08} ${viewH * 0.84}`
       ].join(' ');
     }
 
-    // Desktop: Start at far left top and zig-zag smoothly between all listed subsections
+    // Desktop: Zig-zag through content sections exactly like the red marker
     return [
-      `M ${viewW * 0.02} ${viewH * 0.06}`,
-      // Between main title and subtitle ("From Defense to Your Defense")
-      `C ${viewW * 0.18} ${viewH * 0.06}, ${viewW * 0.32} ${viewH * 0.08}, ${viewW * 0.48} ${viewH * 0.11}`,
-      // A Unique Advantage -> Having seen firsthand
-      `C ${viewW * 0.68} ${viewH * 0.12}, ${viewW * 0.82} ${viewH * 0.16}, ${viewW * 0.96} ${viewH * 0.19}`,
-      `C ${viewW * 0.82} ${viewH * 0.23}, ${viewW * 0.64} ${viewH * 0.25}, ${viewW * 0.46} ${viewH * 0.27}`,
-      // The Inside Advantage -> Attorney Credentials & Qualifications
-      `C ${viewW * 0.30} ${viewH * 0.29}, ${viewW * 0.18} ${viewH * 0.31}, ${viewW * 0.10} ${viewH * 0.33}`,
-      `C ${viewW * 0.26} ${viewH * 0.35}, ${viewW * 0.44} ${viewH * 0.37}, ${viewW * 0.62} ${viewH * 0.39}`,
-      // Client Service -> Bar Admissions
-      `C ${viewW * 0.78} ${viewH * 0.41}, ${viewW * 0.90} ${viewH * 0.45}, ${viewW * 0.96} ${viewH * 0.48}`,
-      `C ${viewW * 0.82} ${viewH * 0.52}, ${viewW * 0.64} ${viewH * 0.54}, ${viewW * 0.48} ${viewH * 0.56}`,
-      `C ${viewW * 0.32} ${viewH * 0.58}, ${viewW * 0.18} ${viewH * 0.60}, ${viewW * 0.08} ${viewH * 0.62}`,
-      // The Truth About Your Case -> graceful finish
-      `C ${viewW * 0.24} ${viewH * 0.64}, ${viewW * 0.44} ${viewH * 0.66}, ${viewW * 0.62} ${viewH * 0.68}`,
-      `C ${viewW * 0.78} ${viewH * 0.70}, ${viewW * 0.90} ${viewH * 0.74}, ${viewW * 0.96} ${viewH * 0.76}`,
-      `C ${viewW * 0.80} ${viewH * 0.80}, ${viewW * 0.58} ${viewH * 0.84}, ${viewW * 0.36} ${viewH * 0.86}`,
-      `C ${viewW * 0.22} ${viewH * 0.88}, ${viewW * 0.12} ${viewH * 0.88}, ${viewW * 0.06} ${viewH * 0.86}`
+      `M ${viewW * 0.82} ${viewH * 0.14}`,
+      // Curve down right edge
+      `C ${viewW * 0.9} ${viewH * 0.12}, ${viewW * 0.96} ${viewH * 0.16}, ${viewW * 0.985} ${viewH * 0.22}`,
+      `C ${viewW * 0.995} ${viewH * 0.3}, ${viewW * 0.97} ${viewH * 0.36}, ${viewW * 0.92} ${viewH * 0.4}`,
+      // Zig-zag through top row sections (Trial Experience -> Client Advocacy -> Legal Defense)
+      `C ${viewW * 0.8} ${viewH * 0.42}, ${viewW * 0.65} ${viewH * 0.41}, ${viewW * 0.5} ${viewH * 0.43}`,
+      `C ${viewW * 0.35} ${viewH * 0.45}, ${viewW * 0.2} ${viewH * 0.44}, ${viewW * 0.08} ${viewH * 0.46}`,
+      // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)  
+      `C ${viewW * 0.2} ${viewH * 0.54}, ${viewW * 0.35} ${viewH * 0.58}, ${viewW * 0.5} ${viewH * 0.56}`,
+      `C ${viewW * 0.65} ${viewH * 0.54}, ${viewW * 0.8} ${viewH * 0.58}, ${viewW * 0.92} ${viewH * 0.62}`,
+      // Long horizontal sweep at bottom
+      `C ${viewW * 0.8} ${viewH * 0.75}, ${viewW * 0.6} ${viewH * 0.82}, ${viewW * 0.4} ${viewH * 0.85}`,
+      `C ${viewW * 0.25} ${viewW * 0.86}, ${viewW * 0.15} ${viewH * 0.85}, ${viewW * 0.05} ${viewH * 0.84}`
     ].join(' ');
   };
 

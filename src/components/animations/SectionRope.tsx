@@ -14,7 +14,7 @@ interface SectionRopeProps {
 export const SectionRope: React.FC<SectionRopeProps> = ({
   sectionId,
   direction = 'left-to-right',
-  strokeWidth = 24,
+  strokeWidth = 16,
   className = '',
 }) => {
   const mainPathRef = useRef<SVGPathElement>(null);
@@ -39,8 +39,8 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
       ease: 'none',
       scrollTrigger: {
         trigger: `#${sectionId}`,
-        start: 'top center',
-        end: 'bottom center',
+        start: 'top 80%',
+        end: 'bottom 20%',
         scrub: 1,
       },
       duration: 1,
@@ -68,20 +68,20 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
   
   const createPath = () => {
     if (direction === 'left-to-right') {
-      // Top-left to bottom-right with elegant curves
+      // Top-left to bottom-right with elegant S-curve across the whole section
       return [
-        `M 80 60`,
-        `C 200 120, 300 180, 450 300`,
-        `C 600 420, 750 480, 900 580`,
-        `C 1000 640, 1080 700, 1120 740`
+        `M 0 40`,
+        `C ${viewW * 0.2} 120, ${viewW * 0.3} 180, ${viewW * 0.42} ${viewH * 0.35}`,
+        `C ${viewW * 0.58} ${viewH * 0.5}, ${viewW * 0.7} ${viewH * 0.62}, ${viewW * 0.84} ${viewH * 0.68}`,
+        `C ${viewW * 0.94} ${viewH * 0.72}, ${viewW * 0.98} ${viewH * 0.86}, ${viewW} ${viewH - 40}`
       ].join(' ');
     } else {
-      // Top-right to bottom-left with elegant curves
+      // Top-right to bottom-left mirrored S-curve
       return [
-        `M 1120 60`,
-        `C 1000 120, 900 180, 750 300`,
-        `C 600 420, 450 480, 300 580`,
-        `C 200 640, 120 700, 80 740`
+        `M ${viewW} 40`,
+        `C ${viewW * 0.8} 120, ${viewW * 0.7} 180, ${viewW * 0.58} ${viewH * 0.35}`,
+        `C ${viewW * 0.42} ${viewH * 0.5}, ${viewW * 0.3} ${viewH * 0.62}, ${viewW * 0.16} ${viewH * 0.68}`,
+        `C ${viewW * 0.06} ${viewH * 0.72}, ${viewW * 0.02} ${viewH * 0.86}, 0 ${viewH - 40}`
       ].join(' ');
     }
   };
@@ -89,16 +89,15 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
   const pathData = createPath();
 
   return (
-    <div className={`absolute inset-0 pointer-events-none overflow-hidden ${className}`}>
+    <div className={`absolute inset-0 pointer-events-none overflow-hidden z-10 ${className}`}>
       <svg
         className="w-full h-full"
         viewBox={`0 0 ${viewW} ${viewH}`}
-        preserveAspectRatio="xMidYMid slice"
+        preserveAspectRatio="none"
       >
         <defs>
           <linearGradient id={`ropeGradient-${sectionId}`} x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="hsl(var(--primary))" />
-            <stop offset="50%" stopColor="hsl(var(--primary-foreground))" />
             <stop offset="100%" stopColor="hsl(var(--accent))" />
           </linearGradient>
           <filter id={`ropeGlow-${sectionId}`} x="-50%" y="-50%" width="200%" height="200%">

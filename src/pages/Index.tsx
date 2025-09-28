@@ -16,6 +16,7 @@ import Process from '../components/Process';
 import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
+import BlurFix from '../components/BlurFix';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -75,6 +76,7 @@ const Index = () => {
   return (
     <>
       <GlobalVisibilityFix />
+      <BlurFix />
       {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
     <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>

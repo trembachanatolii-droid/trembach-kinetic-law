@@ -291,46 +291,14 @@ const CriticalStepsSection = () => {
 
   return (
     <section ref={sectionRef} className="relative py-20 bg-surface/10 backdrop-blur-sm overflow-hidden">
-      {/* 3D Container with Perspective */}
-      <div 
-        ref={threeDContainerRef}
-        className="relative"
-        style={{ 
-          perspective: '1200px',
-          transformStyle: 'preserve-3d'
-        }}
-      >
-        {/* Background Layers */}
+      {/* Simplified container without 3D transforms */}
+      <div className="relative">
+        {/* Background Layers - Simplified */}
         <div className="absolute inset-0 pointer-events-none">
-          {/* Back Layer */}
-          <div
-            ref={backLayerRef}
-            className="absolute inset-0 opacity-30"
-            style={{ transform: 'translateZ(-500px)' }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/30 blur-3xl" />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-20" />
-          </div>
-
-          {/* Mid Layer */}
-          <div
-            ref={midLayerRef}
-            className="absolute inset-0 opacity-40"
-            style={{ transform: 'translateZ(-250px)' }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-tr from-accent/20 via-transparent to-primary/20 blur-2xl" />
-            <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl" />
-          </div>
-
-          {/* Front Layer */}
-          <div
-            ref={frontLayerRef}
-            className="absolute inset-0 opacity-20"
-            style={{ transform: 'translateZ(-100px)' }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-bl from-primary/10 via-transparent to-accent/15 blur-xl" />
-            <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-2xl" />
-          </div>
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-primary/30 blur-3xl opacity-30" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--primary))_0%,transparent_50%)] opacity-20" />
+          <div className="absolute top-1/4 left-1/3 w-96 h-96 bg-accent/10 rounded-full blur-3xl opacity-40" />
+          <div className="absolute bottom-1/3 right-1/4 w-64 h-64 bg-primary/5 rounded-full blur-2xl opacity-20" />
         </div>
 
         <div className="container mx-auto px-4 relative z-10">

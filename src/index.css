@@ -1668,10 +1668,8 @@ a[href^="tel:"],
   color: hsl(var(--red-600)) !important;
 }
 
-/* Enhanced 3D Pharmaceutical Styles */
+/* Disabled 3D effects to prevent blur issues */
 .pharmaceutical-3d-container {
-  perspective: 1200px;
-  transform-style: preserve-3d;
   position: relative;
   overflow: hidden;
 }
@@ -1680,13 +1678,6 @@ a[href^="tel:"],
   font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
   font-weight: 900;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transform: translateZ(20px);
-  animation: titleGlow 3s ease-in-out infinite alternate;
-}
-
-@keyframes titleGlow {
-  0% { filter: brightness(1) drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
-  100% { filter: brightness(1.1) drop-shadow(0 0 20px rgba(255,255,255,0.5)); }
 }
 
 .premium-badge {
@@ -1713,7 +1704,6 @@ a[href^="tel:"],
 .premium-cta-button {
   position: relative;
   overflow: hidden;
-  transform: translateZ(10px);
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -1736,12 +1726,11 @@ a[href^="tel:"],
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  transform-style: preserve-3d;
   transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .glass-morphism-card:hover {
-  transform: translateZ(20px) rotateX(5deg) rotateY(5deg);
+  transform: scale(1.02);
 }
 
 /* Color-Coded Hover Glows */
@@ -1787,104 +1776,8 @@ a[href^="tel:"],
   transform: translateY(-5px) scale(1.02);
 }
 
-/* Enhanced 3D Visual Effects & Comprehensive Animations for Camp Lejeune */
-.pharmaceutical-3d-container {
-  perspective: 1200px;
-  transform-style: preserve-3d;
-  position: relative;
-  overflow: hidden;
-}
-
-.floating-layer {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.floating-layer-1 {
-  animation: floatingComplex1 18s ease-in-out infinite;
-  transform: translateZ(-500px);
-}
-
-.floating-layer-2 {
-  animation: floatingComplex2 14s ease-in-out infinite;
-  transform: translateZ(-250px);
-}
-
-.floating-layer-3 {
-  animation: floatingComplex3 20s ease-in-out infinite;
-  transform: translateZ(-100px);
-}
-
-.pharmaceutical-hero-title {
-  transform: translateZ(50px);
-  text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-  animation: heroTitle3D 2s ease-out forwards;
-}
-
-@keyframes floatingComplex1 {
-  0%, 100% { transform: translateZ(-500px) translateY(0px) translateX(0px) rotateY(0deg); }
-  25% { transform: translateZ(-500px) translateY(-30px) translateX(20px) rotateY(5deg); }
-  50% { transform: translateZ(-500px) translateY(0px) translateX(-15px) rotateY(-3deg); }
-  75% { transform: translateZ(-500px) translateY(25px) translateX(10px) rotateY(2deg); }
-}
-
-@keyframes floatingComplex2 {
-  0%, 100% { transform: translateZ(-250px) translateY(0px) translateX(0px) rotateX(0deg); }
-  33% { transform: translateZ(-250px) translateY(40px) translateX(-25px) rotateX(3deg); }
-  66% { transform: translateZ(-250px) translateY(-20px) translateX(35px) rotateX(-2deg); }
-}
-
-@keyframes floatingComplex3 {
-  0%, 100% { transform: translateZ(-100px) translateY(0px) translateX(0px) rotateY(0deg) rotateX(0deg); }
-  20% { transform: translateZ(-100px) translateY(-20px) translateX(25px) rotateY(2deg) rotateX(1deg); }
-  40% { transform: translateZ(-100px) translateY(15px) translateX(-20px) rotateY(-3deg) rotateX(-1deg); }
-  60% { transform: translateZ(-100px) translateY(-10px) translateX(15px) rotateY(1deg) rotateX(2deg); }
-  80% { transform: translateZ(-100px) translateY(25px) translateX(-10px) rotateY(-1deg) rotateX(-1deg); }
-}
-
-@keyframes heroTitle3D {
-  0% {
-    transform: translateZ(50px) translateY(100px) rotateX(-45deg);
-    opacity: 0;
-  }
-  100% {
-    transform: translateZ(50px) translateY(0px) rotateX(0deg);
-    opacity: 1;
-  }
-}
-
-.glass-morphism-card:hover {
-  transform: translateZ(30px) rotateX(8deg) rotateY(8deg) scale(1.05);
-  box-shadow: 
-    0 20px 60px rgba(0, 0, 0, 0.2),
-    0 10px 30px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
-}
-
-.premium-cta-button {
-  transform-style: preserve-3d;
-  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.premium-cta-button::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  transition: left 0.5s;
-}
-
-.premium-cta-button:hover::before {
-  left: 100%;
-}
-
 .premium-cta-button:hover {
-  transform: translateZ(10px) scale(1.05);
+  transform: scale(1.05);
   box-shadow: 
     0 15px 40px rgba(0, 0, 0, 0.2),
     0 0 20px rgba(147, 51, 234, 0.4);
@@ -2131,16 +2024,11 @@ a[href^="tel:"],
   }
 }
 
-.animate-float-back {
-  animation: float-back 14s ease-in-out infinite;
-}
-
-.animate-float-mid {
-  animation: float-mid 18s ease-in-out infinite;
-}
-
+/* Disabled floating animations to prevent blur */
+.animate-float-back,
+.animate-float-mid,
 .animate-float-front {
-  animation: float-front 22s ease-in-out infinite;
+  animation: none !important;
 }
 
 /* Fix checkbox double border/box issues */

@@ -69,13 +69,31 @@ export const VerticalRope: React.FC<VerticalRopeProps> = ({
   const viewW = 1440;
   const viewH = lengthPx; // Make SVG tall so rope can extend
 
-  // Diagonal rope: from top-left toward bottom-right with gentle arcs.
-  const margin = 96;
+  // Flowing rope with loops like the reference image
+  const centerX = viewW / 2;
+  const loopRadius = 120;
+  
   const d = [
-    `M ${margin} 0`,
-    `C ${viewW * 0.25} ${viewH * 0.12}, ${viewW * 0.18} ${viewH * 0.28}, ${viewW * 0.36} ${viewH * 0.36}`,
-    `C ${viewW * 0.54} ${viewH * 0.46}, ${viewW * 0.48} ${viewH * 0.62}, ${viewW * 0.66} ${viewH * 0.72}`,
-    `C ${viewW * 0.84} ${viewH * 0.82}, ${viewW * 0.72} ${viewH * 0.92}, ${viewW - margin} ${viewH - margin}`
+    // Start from top-left area
+    `M ${centerX - 200} 50`,
+    
+    // First flowing curve down and right
+    `C ${centerX - 100} 180, ${centerX + 80} 280, ${centerX + 150} 420`,
+    
+    // First loop (clockwise circle)
+    `C ${centerX + 150 + loopRadius} 420, ${centerX + 150 + loopRadius} ${420 + loopRadius * 2}, ${centerX + 150} ${420 + loopRadius * 2}`,
+    `C ${centerX + 150 - loopRadius} ${420 + loopRadius * 2}, ${centerX + 150 - loopRadius} 420, ${centerX + 150} 420`,
+    
+    // Flow down and left
+    `C ${centerX + 50} 720, ${centerX - 120} 880, ${centerX - 180} 1020`,
+    
+    // Second loop (clockwise circle)
+    `C ${centerX - 180 - loopRadius} 1020, ${centerX - 180 - loopRadius} ${1020 + loopRadius * 2}, ${centerX - 180} ${1020 + loopRadius * 2}`,
+    `C ${centerX - 180 + loopRadius} ${1020 + loopRadius * 2}, ${centerX - 180 + loopRadius} 1020, ${centerX - 180} 1020`,
+    
+    // Continue flowing down with curves
+    `C ${centerX - 80} 1400, ${centerX + 100} 1600, ${centerX + 200} 1800`,
+    `C ${centerX + 300} 2000, ${centerX - 50} 2200, ${centerX} ${viewH - 100}`
   ].join(' ');
 
   return (

@@ -74,32 +74,39 @@ export const SectionRope: React.FC<SectionRopeProps> = ({
 
   const createPath = () => {
     if (isMobile) {
-      // Mobile: Follow the red marker — start near top-right, descend the right edge, sweep across bottom to left
+      // Mobile: Zig-zag through content sections - start upper right, weave through boxes
       return [
         `M ${viewW * 0.82} ${viewH * 0.16}`,
-        // slight lead to the right, then begin descending
+        // Curve down right edge
         `C ${viewW * 0.9} ${viewH * 0.14}, ${viewW * 0.96} ${viewH * 0.18}, ${viewW * 0.98} ${viewH * 0.24}`,
-        // right side down
-        `C ${viewW * 0.99} ${viewH * 0.36}, ${viewW * 0.95} ${viewH * 0.58}, ${viewW * 0.9} ${viewH * 0.76}`,
-        // long bottom sweep to the left
-        `C ${viewW * 0.8} ${viewH * 0.88}, ${viewW * 0.6} ${viewH * 0.92}, ${viewW * 0.42} ${viewH * 0.9}`,
-        `C ${viewW * 0.26} ${viewH * 0.88}, ${viewW * 0.16} ${viewH * 0.86}, ${viewW * 0.08} ${viewH * 0.84}`
+        `C ${viewW * 0.99} ${viewH * 0.32}, ${viewW * 0.96} ${viewH * 0.38}, ${viewW * 0.9} ${viewH * 0.42}`,
+        // Zig-zag through top row sections (Legal Defense -> Client Advocacy -> Trial Experience)
+        `C ${viewW * 0.75} ${viewH * 0.45}, ${viewW * 0.6} ${viewH * 0.43}, ${viewW * 0.5} ${viewH * 0.46}`,
+        `C ${viewW * 0.35} ${viewH * 0.49}, ${viewW * 0.25} ${viewH * 0.47}, ${viewW * 0.15} ${viewH * 0.5}`,
+        // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)
+        `C ${viewW * 0.25} ${viewH * 0.58}, ${viewW * 0.35} ${viewH * 0.62}, ${viewW * 0.5} ${viewH * 0.6}`,
+        `C ${viewW * 0.65} ${viewH * 0.58}, ${viewW * 0.8} ${viewH * 0.62}, ${viewW * 0.9} ${viewH * 0.65}`,
+        // Long horizontal sweep at bottom
+        `C ${viewW * 0.8} ${viewH * 0.8}, ${viewW * 0.6} ${viewH * 0.85}, ${viewW * 0.4} ${viewH * 0.87}`,
+        `C ${viewW * 0.25} ${viewH * 0.88}, ${viewW * 0.15} ${viewH * 0.86}, ${viewW * 0.08} ${viewH * 0.84}`
       ].join(' ');
     }
 
-    // Desktop: Follow the red marker — start upper-right, descend along right curve, then a long near-horizontal bottom sweep
+    // Desktop: Zig-zag through content sections exactly like the red marker
     return [
       `M ${viewW * 0.82} ${viewH * 0.14}`,
-      // gentle move to the right top
+      // Curve down right edge
       `C ${viewW * 0.9} ${viewH * 0.12}, ${viewW * 0.96} ${viewH * 0.16}, ${viewW * 0.985} ${viewH * 0.22}`,
-      // right side descent
-      `C ${viewW * 0.995} ${viewH * 0.34}, ${viewW * 0.97} ${viewH * 0.56}, ${viewW * 0.92} ${viewH * 0.74}`,
-      // begin bottom rounding
-      `C ${viewW * 0.85} ${viewH * 0.86}, ${viewW * 0.72} ${viewH * 0.9}, ${viewW * 0.58} ${viewH * 0.9}`,
-      // long, almost straight sweep to the left
-      `C ${viewW * 0.42} ${viewH * 0.9}, ${viewW * 0.26} ${viewH * 0.9}, ${viewW * 0.12} ${viewH * 0.88}`,
-      // taper toward left bottom
-      `C ${viewW * 0.08} ${viewH * 0.87}, ${viewW * 0.06} ${viewH * 0.86}, ${viewW * 0.05} ${viewH * 0.86}`
+      `C ${viewW * 0.995} ${viewH * 0.3}, ${viewW * 0.97} ${viewH * 0.36}, ${viewW * 0.92} ${viewH * 0.4}`,
+      // Zig-zag through top row sections (Trial Experience -> Client Advocacy -> Legal Defense)
+      `C ${viewW * 0.8} ${viewH * 0.42}, ${viewW * 0.65} ${viewH * 0.41}, ${viewW * 0.5} ${viewH * 0.43}`,
+      `C ${viewW * 0.35} ${viewH * 0.45}, ${viewW * 0.2} ${viewH * 0.44}, ${viewW * 0.08} ${viewH * 0.46}`,
+      // Drop down and zig-zag through bottom row (USC Law -> Strategy -> Results)  
+      `C ${viewW * 0.2} ${viewH * 0.54}, ${viewW * 0.35} ${viewH * 0.58}, ${viewW * 0.5} ${viewH * 0.56}`,
+      `C ${viewW * 0.65} ${viewH * 0.54}, ${viewW * 0.8} ${viewH * 0.58}, ${viewW * 0.92} ${viewH * 0.62}`,
+      // Long horizontal sweep at bottom
+      `C ${viewW * 0.8} ${viewH * 0.75}, ${viewW * 0.6} ${viewH * 0.82}, ${viewW * 0.4} ${viewH * 0.85}`,
+      `C ${viewW * 0.25} ${viewW * 0.86}, ${viewW * 0.15} ${viewH * 0.85}, ${viewW * 0.05} ${viewH * 0.84}`
     ].join(' ');
   };
 

@@ -35,56 +35,56 @@ const Navigation = () => {
         </a>
 
         {/* Navigation Links */}
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="/" className="text-white/90 hover:text-white transition-colors text-xs">
+        <div className="hidden md:flex items-center space-x-7">
+          <a href="/" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             Home
           </a>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-white/90 hover:text-white transition-colors text-xs outline-none">
+            <DropdownMenuTrigger className="flex items-center gap-1 text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal outline-none opacity-80 hover:opacity-100">
               Practice Areas
               <ChevronDown className="w-3 h-3" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 bg-black border border-white/20 z-[60]">
-              <DropdownMenuItem className="hover:bg-white/10 text-white/90 focus:bg-white/10 focus:text-white">
+            <DropdownMenuContent className="w-56 bg-[#1d1d1f] border border-white/10 z-[60]">
+              <DropdownMenuItem className="hover:bg-white/10 text-[#f5f5f7] focus:bg-white/10 focus:text-white cursor-pointer">
                 <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
                   Mesothelioma & Asbestos
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-white/10 text-white/90 focus:bg-white/10 focus:text-white">
+              <DropdownMenuItem className="hover:bg-white/10 text-[#f5f5f7] focus:bg-white/10 focus:text-white cursor-pointer">
                 <a href="/practice-areas/crane-accidents" className="w-full">
                   Crane Accidents
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-white/10 text-white/90 focus:bg-white/10 focus:text-white">
+              <DropdownMenuItem className="hover:bg-white/10 text-[#f5f5f7] focus:bg-white/10 focus:text-white cursor-pointer">
                 <a href="/practice-areas/amusement-parks" className="w-full">
                   Amusement Park Injuries
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-white/10 text-white/90 focus:bg-white/10 focus:text-white">
+              <DropdownMenuItem className="hover:bg-white/10 text-[#f5f5f7] focus:bg-white/10 focus:text-white cursor-pointer">
                 <a href="/practice-areas/medical-malpractice" className="w-full">
                   Medical Malpractice
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-white/10 text-white/90 focus:bg-white/10 focus:text-white">
+              <DropdownMenuItem className="hover:bg-white/10 text-[#f5f5f7] focus:bg-white/10 focus:text-white cursor-pointer">
                 <a href="/practice-areas/personal-injury" className="w-full">
                   Personal Injury
                 </a>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <a href="/about" className="text-white/90 hover:text-white transition-colors text-xs">
+          <a href="/about" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             About Us
           </a>
-          <a href="/results" className="text-white/90 hover:text-white transition-colors text-xs">
+          <a href="/results" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             Results
           </a>
-          <a href="/testimonials" className="text-white/90 hover:text-white transition-colors text-xs">
+          <a href="/testimonials" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             Testimonials
           </a>
-          <a href="/blog" className="text-white/90 hover:text-white transition-colors text-xs">
+          <a href="/blog" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             Blog
           </a>
-          <a href="/contact" className="text-white/90 hover:text-white transition-colors text-xs">
+          <a href="/contact" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal opacity-80 hover:opacity-100">
             Contact
           </a>
         </div>

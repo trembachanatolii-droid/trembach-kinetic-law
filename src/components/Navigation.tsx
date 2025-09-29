@@ -4,138 +4,128 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { ChevronDown } from 'lucide-react';
+import Logo from './Logo';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const scrollTrigger = ScrollTrigger.create({
-      trigger: "body",
-      start: "top -10px",
-      end: "bottom bottom",
+    const nav = navRef.current;
+    if (!nav) return;
+
+    // Scroll-triggered navigation changes
+    ScrollTrigger.create({
+      trigger: document.body,
+      start: "100px top",
       onUpdate: (self) => {
-        setIsScrolled(self.direction === 1 && self.progress > 0.01);
+        setIsScrolled(self.progress > 0);
       }
     });
 
     // Navigation entrance animation
-    if (navRef.current) {
-      gsap.fromTo(navRef.current, 
-        { 
-          y: -80,
-          opacity: 0
-        },
-        { 
-          y: 0,
-          opacity: 1,
-          duration: 0.8,
-          ease: "power3.out"
-        }
-      );
-    }
+    gsap.fromTo(
+      nav,
+      { y: -100, opacity: 0 },
+      { y: 0, opacity: 1, duration: 1, ease: "power3.out", delay: 2 }
+    );
 
     return () => {
-      scrollTrigger.kill();
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
   return (
     <nav 
       ref={navRef}
-      className={`
-        fixed top-0 left-0 right-0 z-50 transition-all duration-300
-        ${isScrolled 
-          ? 'bg-white shadow-lg' 
-          : 'bg-white'
-        }
-      `}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+        isScrolled 
+          ? 'bg-background/80 backdrop-blur-xl border-b border-border/20' 
+          : 'bg-transparent'
+      }`}
     >
-      <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="flex flex-col">
-              <div className="text-2xl font-bold">
-                <span className="text-red-600">mike</span>
-                <span className="text-black">morse</span>
-                <span className="text-red-600">law</span>
-                <span className="text-black">firm</span>
-              </div>
-              <div className="text-xs text-gray-600 -mt-1">
-                Michigan's Largest Injury Law Firm
-              </div>
-            </div>
-          </div>
+      <div className="container mx-auto px-8 py-4 flex items-center justify-between">
+        {/* Logo */}
+        <Logo size="sm" className={isScrolled ? 'text-foreground' : 'text-white'} />
 
-          {/* Navigation Links */}
-          <div className="hidden lg:flex items-center space-x-8">
-            
-            {/* Cases We Handle Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger 
-                className="flex items-center text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors uppercase tracking-wide"
-              >
-                CASES WE HANDLE
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuItem>Car Accidents</DropdownMenuItem>
-                <DropdownMenuItem>Truck Accidents</DropdownMenuItem>
-                <DropdownMenuItem>Motorcycle Accidents</DropdownMenuItem>
-                <DropdownMenuItem>Slip & Fall</DropdownMenuItem>
-                <DropdownMenuItem>Medical Malpractice</DropdownMenuItem>
-                <DropdownMenuItem>Workers' Compensation</DropdownMenuItem>
-                <DropdownMenuItem>Wrongful Death</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-
-            <a 
-              href="/team" 
-              className="text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors uppercase tracking-wide"
-            >
-              MEET YOUR TEAM
-            </a>
-            
-            {/* Resources Dropdown */}
-            <DropdownMenu>
-              <DropdownMenuTrigger 
-                className="flex items-center text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors uppercase tracking-wide"
-              >
-                RESOURCES
-                <ChevronDown className="ml-1 h-4 w-4" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56">
-                <DropdownMenuItem>Blog</DropdownMenuItem>
-                <DropdownMenuItem>FAQ</DropdownMenuItem>
-                <DropdownMenuItem>Legal Resources</DropdownMenuItem>
-                <DropdownMenuItem>Case Results</DropdownMenuItem>
-                <DropdownMenuItem>Testimonials</DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-            
-            <a 
-              href="/contact" 
-              className="text-sm font-semibold text-gray-700 hover:text-red-600 transition-colors uppercase tracking-wide"
-            >
-              CONTACT US
-            </a>
-          </div>
-
-          {/* Phone Number */}
-          <div className="flex flex-col items-end">
-            <div className="text-xs text-gray-500 font-medium">AVAILABLE 24/7</div>
-            <Button 
-              className="bg-red-600 hover:bg-red-700 text-white font-bold text-lg px-6 py-2 -mt-1"
-              onClick={() => window.location.href = 'tel:+18553742904'}
-            >
-              (855) 374-2904
-            </Button>
-          </div>
+        {/* Navigation Links */}
+        <div className="hidden md:flex items-center space-x-8">
+          <DropdownMenu>
+            <DropdownMenuTrigger className={`flex items-center gap-1 hover:text-primary transition-colors font-medium ${
+              isScrolled ? 'text-foreground' : 'text-white'
+            }`}>
+              Practice Areas
+              <ChevronDown className="w-4 h-4" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuItem>
+                <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
+                  Mesothelioma & Asbestos
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/crane-accidents" className="w-full">
+                  Crane Accidents
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/amusement-parks" className="w-full">
+                  Amusement Park Injuries
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/medical-malpractice" className="w-full">
+                  Medical Malpractice
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="/practice-areas/personal-injury" className="w-full">
+                  Personal Injury
+                </a>
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <a href="#practice-areas" className="w-full">
+                  View All Practice Areas
+                </a>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <a href="#results" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
+            Why Us
+          </a>
+          <a href="#about" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
+            About
+          </a>
+          <a href="#locations" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
+            Locations
+          </a>
+          <a href="#contact" className={`hover:text-primary transition-colors font-medium ${
+            isScrolled ? 'text-foreground' : 'text-white'
+          }`}>
+            Contact
+          </a>
         </div>
+
+        {/* CTA Button */}
+          <Button 
+            size="sm" 
+            className={`magnetic font-semibold transition-all duration-300 relative ${
+              isScrolled 
+                ? 'bg-red-600 hover:bg-red-700 text-white' 
+                : 'bg-red-600/90 hover:bg-red-700 text-white glow-accent'
+            }`}
+            onClick={() => window.location.href = 'tel:8181234567'}
+          >
+            <span className="relative z-10 text-white">Call (818) 123-4567</span>
+          </Button>
       </div>
     </nav>
   );

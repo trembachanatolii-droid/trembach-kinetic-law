@@ -52,49 +52,58 @@ const Navigation = () => {
               Practice Areas
             </a>
             
-            {/* Mega Menu */}
+            {/* Mega Menu - Full Screen Overlay */}
             {showMegaMenu && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[560px] bg-white shadow-2xl border border-gray-200 z-[100] rounded-xl">
-                <div className="p-10">
-                  <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cases We Handle</h2>
-                  <p className="text-base text-gray-600 mb-10 max-w-xl leading-relaxed">
-                    We fight for every case—big or small. As one of the leading injury firms, you get a team of legal professionals dedicated to getting you every dollar you deserve.
-                  </p>
-                  
-                  <div className="grid grid-cols-2 gap-16">
-                    {/* Auto Accidents Column */}
+              <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
+                <div className="max-w-[1200px] mx-auto px-6 py-16">
+                  <div className="grid grid-cols-3 gap-16">
+                    {/* Left Column - Introduction */}
                     <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <Car className="w-10 h-10 text-red-600" />
+                      <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cases We Handle</h2>
+                      <p className="text-base text-gray-600 leading-relaxed">
+                        We fight for every case—big or small. As Michigan's largest injury firm, you get a team of legal professionals dedicated to getting you every dollar you deserve. And with over $2 billion recovered, thousands of clients served, and decades of experience, we know what it takes to win. Why call anyone else?
+                      </p>
+                    </div>
+
+                    {/* Middle Column - Auto Accidents */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-8">
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2" />
+                          </svg>
+                        </div>
                         <h3 className="text-2xl font-bold text-[#1d1d1f]">Auto Accidents</h3>
                       </div>
                       <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/truck-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/truck-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Truck Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/car-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/car-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Car Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/motorcycle-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/motorcycle-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Motorcycle Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/uber-lyft" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/uber-lyft" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Uber & Lyft Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/pedestrian-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/pedestrian-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Pedestrian Accidents
                           </a>
                         </li>
-                        <li className="pt-3">
+                        <li className="pt-4">
                           <a href="/practice-areas?category=auto" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>
@@ -102,39 +111,44 @@ const Navigation = () => {
                       </ul>
                     </div>
 
-                    {/* Personal Injury Column */}
+                    {/* Right Column - Personal Injury */}
                     <div>
-                      <div className="flex items-center gap-3 mb-6">
-                        <User className="w-10 h-10 text-red-600" />
+                      <div className="flex items-center gap-3 mb-8">
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                          </svg>
+                        </div>
                         <h3 className="text-2xl font-bold text-[#1d1d1f]">Personal Injury</h3>
                       </div>
                       <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/dog-bite" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/dog-bite" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Dog Bite Injuries
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/social-security" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Social Security Disability
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/birth-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/birth-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Birth Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/burn-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/burn-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Burn/Fire Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/brain-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/brain-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Brain Injury
                           </a>
                         </li>
-                        <li className="pt-3">
+                        <li className="pt-4">
                           <a href="/practice-areas?category=personal" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>

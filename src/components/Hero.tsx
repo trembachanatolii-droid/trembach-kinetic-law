@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import lawyerPortrait from '@/assets/lawyer-portrait.png';
-import lawOfficeBg from '@/assets/law-office-background.png';
+import heroBackground from '@/assets/hero-background.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -98,24 +97,19 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/hero-video.webm" type="video/webm" />
-      </video>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 w-full h-full bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      />
       
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      {/* Subtle Overlay */}
+      <div className="absolute inset-0 bg-white/5" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
               <span className="hero-line block">You Focus on Healing.</span>
               <span className="hero-line block">We Focus on Winning.</span>
             </h1>

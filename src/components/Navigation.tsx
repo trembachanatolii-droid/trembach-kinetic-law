@@ -70,28 +70,28 @@ const Navigation = () => {
                       </div>
                       <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/mesothelioma" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Mesothelioma
+                          <a href="/practice-areas/mesothelioma-asbestos" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Mesothelioma & Asbestos
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/asbestos-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Asbestos Exposure
+                          <a href="/practice-areas/talc-baby-powder-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Talc/Baby Powder Cancer
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/lung-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Lung Cancer
+                          <a href="/practice-areas/benzene-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Benzene Exposure Cancer
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/toxic-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Toxic Exposure Cancer
+                          <a href="/practice-areas/camp-lejeune" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Camp Lejeune Cancer
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/industrial-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Industrial Cancer
+                          <a href="/practice-areas/silicosis-injuries" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Silicosis Injuries
                           </a>
                         </li>
                         <li className="pt-4">

@@ -1,21 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
-import heroJusticeBackground from '@/assets/hero-background-fixed.png';
-import HeroScene from '@/components/three/HeroScene';
+import lawyerPortrait from '@/assets/lawyer-portrait.png';
+import lawOfficeBg from '@/assets/law-office-background.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
-  const formRef = useRef<HTMLDivElement>(null);
+  const lawyerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Ensure hero visible immediately (no fade to prevent blank screen)
+      // Ensure hero visible immediately
       if (heroRef.current) {
         gsap.set(heroRef.current, { opacity: 1 });
       }
@@ -24,33 +22,70 @@ const Hero = () => {
       gsap.fromTo(
         ".hero-line",
         {
-          y: 24,
-          filter: "blur(8px)"
+          y: 50,
+          opacity: 0,
+          filter: "blur(10px)"
         },
         {
           y: 0,
+          opacity: 1,
           filter: "blur(0px)",
-          duration: 0.8,
-          stagger: 0.08,
+          duration: 1,
+          stagger: 0.15,
           ease: "power3.out",
-          delay: 0.2
+          delay: 0.5
         }
       );
 
-      // Form entrance
+      // Button animation
       gsap.fromTo(
-        formRef.current,
+        buttonRef.current,
         {
-          x: 40,
+          y: 30,
+          opacity: 0,
+          scale: 0.9
+        },
+        {
+          y: 0,
+          opacity: 1,
+          scale: 1,
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 1.2
+        }
+      );
+
+      // Lawyer image animation
+      gsap.fromTo(
+        lawyerRef.current,
+        {
+          x: 100,
+          opacity: 0,
           filter: "blur(5px)"
         },
         {
-          opacity: 1,
           x: 0,
+          opacity: 1,
           filter: "blur(0px)",
-          duration: 0.8,
+          duration: 1,
           ease: "power3.out",
-          delay: 0.6
+          delay: 0.8
+        }
+      );
+
+      // Chat widget animation
+      gsap.fromTo(
+        chatRef.current,
+        {
+          scale: 0,
+          rotation: -10
+        },
+        {
+          scale: 1,
+          rotation: 0,
+          duration: 0.6,
+          ease: "back.out(1.7)",
+          delay: 2
         }
       );
     }, heroRef);
@@ -61,111 +96,56 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24"
       style={{
-        backgroundImage: `url(${heroJusticeBackground})`,
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${lawOfficeBg})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center 20%',
+        backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Targeted gradient only behind left content for readability */}
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-background/40 via-background/10 to-transparent" />
-
-      {/* 3D Lady Justice Statue - Disabled due to missing model */}
-      {/* <HeroScene /> */}
-
-      <div className="relative z-10 flex w-full min-h-[calc(100vh-5rem)]">
-        {/* Main Content - Left Side */}
-        <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 pr-96">
-          <div ref={headlineRef} className="space-y-2">
-            <h1 className="text-display font-display leading-[0.8] tracking-tighter">
-              <span className="hero-line block">Former Insurance</span>
-              <span className="hero-line block">Defense Attorney</span>
+      <div className="container mx-auto px-8 flex items-center min-h-[calc(100vh-6rem)]">
+        {/* Left Content */}
+        <div className="flex-1 max-w-2xl pr-8">
+          <div ref={headlineRef} className="space-y-4">
+            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+              <span className="hero-line block">You Focus on Healing.</span>
+              <span className="hero-line block">We Focus on Winning.</span>
             </h1>
-            <h2 className="text-headline font-display text-primary glow mt-4">
-              <span className="hero-line block">Now Using Their Tactics</span>
-              <span className="hero-line block">To Maximize</span>
-              <span className="hero-line block text-accent">YOUR Compensation</span>
-            </h2>
           </div>
 
-          <div className="hero-line mt-8 max-w-2xl">
-            <p className="text-body text-muted-foreground">
-              Anatolii Trembach, Esq. leverages insider knowledge to fight for California injury victims.
-            </p>
-          </div>
-
+          <Button 
+            ref={buttonRef}
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+            onClick={() => window.location.href = '/case-evaluation'}
+          >
+            START YOUR FREE CASE REVIEW
+          </Button>
         </div>
 
-        {/* Intake Form - Right Side */}
-        <div ref={formRef} className="w-full max-w-xs lg:max-w-sm xl:max-w-md bg-transparent p-4 m-6 h-fit mt-16">
-          <div className="mb-4">
-            <h3 className="text-title font-display text-foreground mb-1">Free Case Evaluation</h3>
-            <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>
+        {/* Right Content - Lawyer Image */}
+        <div ref={lawyerRef} className="flex-1 flex justify-end">
+          <div className="relative max-w-md">
+            <img 
+              src={lawyerPortrait} 
+              alt="Professional Attorney" 
+              className="w-full h-auto object-cover rounded-lg shadow-2xl"
+            />
           </div>
+        </div>
+      </div>
 
-          <form className="space-y-3">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="text-small font-medium text-foreground">First Name*</label>
-                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="John" />
-              </div>
-              <div>
-                <label className="text-small font-medium text-foreground">Last Name*</label>
-                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="Doe" />
-              </div>
+      {/* Chat Widget */}
+      <div ref={chatRef} className="fixed bottom-6 right-6 z-40">
+        <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+              <span className="text-xl">👨‍💼</span>
             </div>
-
-            <div>
-              <label className="text-small font-medium text-foreground">Phone*</label>
-              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="(555) 123-4567" type="tel" />
+            <div className="bg-white rounded-2xl px-4 py-2 shadow-md">
+              <p className="text-sm text-gray-700 font-medium">How can we help you?</p>
             </div>
-
-            <div>
-              <label className="text-small font-medium text-foreground">Email*</label>
-              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="john@example.com" type="email" />
-            </div>
-
-            <div>
-              <label className="text-small font-medium text-foreground">Type of Case*</label>
-              <Select>
-                <SelectTrigger className="mt-1 bg-transparent border-foreground/20">
-                  <SelectValue placeholder="Select case type" />
-                </SelectTrigger>
-                <SelectContent className="bg-surface border-border/30">
-                  <SelectItem value="car-accident">Car Accident</SelectItem>
-                  <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                  <SelectItem value="silicosis">Silicosis</SelectItem>
-                  <SelectItem value="talc">Talc/Talcum</SelectItem>
-                  <SelectItem value="dog-bite">Dog Bite</SelectItem>
-                  <SelectItem value="product-liability">Product Liability</SelectItem>
-                  <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-                  <SelectItem value="other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div>
-              <label className="text-small font-medium text-foreground">Message (Optional)</label>
-              <Textarea 
-                className="mt-1 bg-transparent border-foreground/20" 
-                placeholder="Brief description of your case..."
-                rows={2}
-              />
-            </div>
-
-            <div className="flex items-start space-x-2">
-              <Checkbox id="consent" className="mt-1" />
-              <label htmlFor="consent" className="text-[8px] text-muted-foreground leading-tight">
-                I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the Terms & acknowledge the Privacy Policy.
-              </label>
-            </div>
-
-            <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-3 glow-accent group transition-all duration-300" onClick={() => window.location.href = '/case-evaluation'}>
-              Get Free Consultation
-            </Button>
-          </form>
+          </div>
         </div>
       </div>
     </section>

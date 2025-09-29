@@ -17,7 +17,6 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { SectionRope } from '../components/animations/SectionRope';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -90,22 +89,13 @@ const Index = () => {
       <Hero />
 
       {/* About Section */}
-      <section id="about" className="relative">
-        <SectionRope sectionId="about" direction="left-to-right" />
-        <About />
-      </section>
+      <About />
 
       {/* Truth About Your Case Section */}
-      <section id="truth" className="relative">
-        <SectionRope sectionId="truth" direction="right-to-left" />
-        <TruthAboutCase />
-      </section>
+      <TruthAboutCase />
 
       {/* Practice Areas */}
-      <section id="practice-areas" className="relative">
-        <SectionRope sectionId="practice-areas" direction="left-to-right" />
-        <PracticeAreasReference key="practice-areas-v2" />
-      </section>
+      <PracticeAreasReference key="practice-areas-v2" />
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -134,28 +124,16 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <section id="critical-steps" className="relative">
-        <SectionRope sectionId="critical-steps" direction="right-to-left" />
-        <CriticalStepsSection />
-      </section>
+      <CriticalStepsSection />
 
       {/* Every Problem Solved */}
-      <section id="problems" className="relative">
-        <SectionRope sectionId="problems" direction="left-to-right" />
-        <EveryProblemSolved />
-      </section>
+      <EveryProblemSolved />
 
       {/* Featured Results */}
-      <section id="results" className="relative">
-        <SectionRope sectionId="results" direction="right-to-left" />
-        <FeaturedResults />
-      </section>
+      <FeaturedResults />
 
       {/* Process */}
-      <section id="process" className="relative">
-        <SectionRope sectionId="process" direction="left-to-right" />
-        <Process />
-      </section>
+      <Process />
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

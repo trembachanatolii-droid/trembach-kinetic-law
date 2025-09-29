@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
-import heroBackground from '@/assets/hero-background-new.jpg';
+import heroJusticeBackground from '@/assets/hero-justice-background.jpg';
 import HeroScene from '@/components/three/HeroScene';
 
 const Hero = () => {
@@ -59,8 +59,18 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20 bg-[hsl(0_0%_100%)]">
-      {/* Hero Background Image */}
+    <section 
+      ref={heroRef} 
+      className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20"
+      style={{
+        backgroundImage: `url(${heroJusticeBackground})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      {/* Overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px]" />
 
       {/* 3D Lady Justice Statue - Disabled due to missing model */}
       {/* <HeroScene /> */}

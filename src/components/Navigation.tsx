@@ -166,11 +166,6 @@ const Navigation = () => {
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Social Security Disability
-                          </a>
-                        </li>
-                        <li>
                           <a href="/practice-areas/birth-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Birth Injury
                           </a>
@@ -183,6 +178,11 @@ const Navigation = () => {
                         <li>
                           <a href="/practice-areas/brain-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
                             Brain Injury
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Social Security Disability
                           </a>
                         </li>
                         <li className="pt-4">

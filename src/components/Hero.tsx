@@ -65,12 +65,12 @@ const Hero = () => {
       style={{
         backgroundImage: `url(${heroJusticeBackground})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundPosition: 'center 20%',
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Light overlay for better text readability */}
-      <div className="absolute inset-0 bg-background/20" />
+      {/* Targeted gradient only behind left content for readability */}
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-background/40 via-background/10 to-transparent" />
 
       {/* 3D Lady Justice Statue - Disabled due to missing model */}
       {/* <HeroScene /> */}

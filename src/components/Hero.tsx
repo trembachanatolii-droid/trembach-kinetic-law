@@ -97,14 +97,21 @@ const Hero = () => {
     <section 
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${lawOfficeBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
     >
-      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)]">
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-video.webm" type="video/webm" />
+      </video>
+      
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/50" />
+      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
@@ -125,7 +132,7 @@ const Hero = () => {
       </div>
 
       {/* Chat Widget */}
-      <div ref={chatRef} className="fixed bottom-6 right-6 z-40">
+      <div ref={chatRef} className="fixed bottom-6 right-6 z-50">
         <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
           <div className="flex items-center space-x-3">
             <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">

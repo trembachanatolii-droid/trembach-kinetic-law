@@ -39,39 +39,43 @@ const Navigation = () => {
           <a href="/" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
             Home
           </a>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal outline-none">
+          <div className="flex items-center gap-1">
+            <a href="/practice-areas" className="relative text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
               Practice Areas
-              <ChevronDown className="w-3 h-3" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 bg-white border border-gray-200 z-[60]">
-              <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
-                  Mesothelioma & Asbestos
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                <a href="/practice-areas/crane-accidents" className="w-full">
-                  Crane Accidents
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                <a href="/practice-areas/amusement-parks" className="w-full">
-                  Amusement Park Injuries
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                <a href="/practice-areas/medical-malpractice" className="w-full">
-                  Medical Malpractice
-                </a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                <a href="/practice-areas/personal-injury" className="w-full">
-                  Personal Injury
-                </a>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+            </a>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="flex items-center text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal outline-none">
+                <ChevronDown className="w-3 h-3" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56 bg-white border border-gray-200 z-[60]">
+                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
+                  <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
+                    Mesothelioma & Asbestos
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
+                  <a href="/practice-areas/crane-accidents" className="w-full">
+                    Crane Accidents
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
+                  <a href="/practice-areas/amusement-parks" className="w-full">
+                    Amusement Park Injuries
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
+                  <a href="/practice-areas/medical-malpractice" className="w-full">
+                    Medical Malpractice
+                  </a>
+                </DropdownMenuItem>
+                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
+                  <a href="/practice-areas/personal-injury" className="w-full">
+                    Personal Injury
+                  </a>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <a href="/about" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
             About Us
           </a>

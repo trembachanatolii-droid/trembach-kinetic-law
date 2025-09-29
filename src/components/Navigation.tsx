@@ -59,96 +59,97 @@ const Navigation = () => {
                   <div className="grid grid-cols-3 gap-16">
                     {/* Left Column - Introduction */}
                     <div>
-                      <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cancer</h2>
+                      <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cases We Handle</h2>
                       <p className="text-base text-gray-600 leading-relaxed">
                         We fight for every case—big or small. As Michigan's largest injury firm, you get a team of legal professionals dedicated to getting you every dollar you deserve. And with over $2 billion recovered, thousands of clients served, and decades of experience, we know what it takes to win. Why call anyone else?
                       </p>
                     </div>
 
-                    {/* Middle Column - Occupational Cancer */}
+                    {/* Middle Column - Auto Accidents */}
                     <div>
                       <div className="flex items-center gap-3 mb-8">
                         <div className="w-12 h-12 flex items-center justify-center">
                           <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M9 11l3 3L22 4" />
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+                            <path d="M7 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M17 17m-2 0a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+                            <path d="M5 17h-2v-6l2-5h9l4 5h1a2 2 0 0 1 2 2v4h-2" />
                           </svg>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Occupational Cancer</h3>
+                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Auto Accidents</h3>
                       </div>
                       <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/mesothelioma" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Mesothelioma
+                          <a href="/practice-areas/truck-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Truck Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/asbestos-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Asbestos Exposure
+                          <a href="/practice-areas/car-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Car Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/lung-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Lung Cancer
+                          <a href="/practice-areas/motorcycle-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Motorcycle Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/chemical-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Chemical Exposure Cancer
+                          <a href="/practice-areas/uber-lyft" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Uber & Lyft Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/industrial-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Industrial Cancer
+                          <a href="/practice-areas/pedestrian-accidents" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Pedestrian Accidents
                           </a>
                         </li>
                         <li className="pt-4">
-                          <a href="/practice-areas?category=occupational" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                          <a href="/practice-areas?category=auto" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>
                         </li>
                       </ul>
                     </div>
 
-                    {/* Right Column - Environmental Cancer */}
+                    {/* Right Column - Personal Injury */}
                     <div>
                       <div className="flex items-center gap-3 mb-8">
                         <div className="w-12 h-12 flex items-center justify-center">
                           <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                            <path d="M12 2a10 10 0 1 0 10 10" />
-                            <path d="M12 2v10l5 5" />
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
                           </svg>
                         </div>
-                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Environmental Cancer</h3>
+                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Personal Injury</h3>
                       </div>
                       <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/toxic-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Toxic Exposure
+                          <a href="/practice-areas/dog-bite" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Dog Bite Injuries
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/contaminated-water" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Contaminated Water
+                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Social Security Disability
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/radiation-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Radiation Exposure
+                          <a href="/practice-areas/birth-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Birth Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/defective-products" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Defective Products Cancer
+                          <a href="/practice-areas/burn-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Burn/Fire Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/pharmaceutical-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Pharmaceutical Cancer
+                          <a href="/practice-areas/brain-injury" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Brain Injury
                           </a>
                         </li>
                         <li className="pt-4">
-                          <a href="/practice-areas?category=environmental" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                          <a href="/practice-areas?category=personal" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>
                         </li>

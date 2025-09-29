@@ -2,11 +2,12 @@ import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { ChevronDown } from 'lucide-react';
+import { Car, User } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 const Navigation = () => {
   const navRef = useRef<HTMLElement>(null);
+  const [showMegaMenu, setShowMegaMenu] = useState(false);
+  
   useEffect(() => {
     const nav = navRef.current;
     if (!nav) return;
@@ -39,42 +40,111 @@ const Navigation = () => {
           <a href="/" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
             Home
           </a>
-          <div className="flex items-center gap-1">
-            <a href="/practice-areas" className="relative text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
+          <div 
+            className="relative"
+            onMouseEnter={() => setShowMegaMenu(true)}
+            onMouseLeave={() => setShowMegaMenu(false)}
+          >
+            <a 
+              href="/practice-areas" 
+              className="relative text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full"
+            >
               Practice Areas
             </a>
-            <DropdownMenu>
-              <DropdownMenuTrigger className="flex items-center text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal outline-none">
-                <ChevronDown className="w-3 h-3" />
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56 bg-white border border-gray-200 z-[60]">
-                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                  <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
-                    Mesothelioma & Asbestos
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                  <a href="/practice-areas/crane-accidents" className="w-full">
-                    Crane Accidents
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                  <a href="/practice-areas/amusement-parks" className="w-full">
-                    Amusement Park Injuries
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                  <a href="/practice-areas/medical-malpractice" className="w-full">
-                    Medical Malpractice
-                  </a>
-                </DropdownMenuItem>
-                <DropdownMenuItem className="hover:bg-gray-100 text-[#1d1d1f] focus:bg-gray-100 focus:text-[#1d1d1f] cursor-pointer">
-                  <a href="/practice-areas/personal-injury" className="w-full">
-                    Personal Injury
-                  </a>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            
+            {/* Mega Menu */}
+            {showMegaMenu && (
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[600px] bg-white shadow-2xl border border-gray-200 z-[100] rounded-lg">
+                <div className="p-8">
+                  <h2 className="text-3xl font-bold text-[#1d1d1f] mb-8">Cases We Handle</h2>
+                  <p className="text-sm text-gray-600 mb-8 max-w-lg">
+                    We fight for every case—big or small. As one of the leading injury firms, you get a team of legal professionals dedicated to getting you every dollar you deserve.
+                  </p>
+                  
+                  <div className="grid grid-cols-2 gap-12">
+                    {/* Auto Accidents Column */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <Car className="w-8 h-8 text-red-600" />
+                        <h3 className="text-xl font-bold text-[#1d1d1f]">Auto Accidents</h3>
+                      </div>
+                      <ul className="space-y-3">
+                        <li>
+                          <a href="/practice-areas/truck-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Truck Accidents
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/car-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Car Accidents
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/motorcycle-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Motorcycle Accidents
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/uber-lyft" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Uber & Lyft Accidents
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/pedestrian-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Pedestrian Accidents
+                          </a>
+                        </li>
+                        <li className="pt-2">
+                          <a href="/practice-areas?category=auto" className="text-sm font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                            See All →
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    {/* Personal Injury Column */}
+                    <div>
+                      <div className="flex items-center gap-3 mb-4">
+                        <User className="w-8 h-8 text-red-600" />
+                        <h3 className="text-xl font-bold text-[#1d1d1f]">Personal Injury</h3>
+                      </div>
+                      <ul className="space-y-3">
+                        <li>
+                          <a href="/practice-areas/dog-bite" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Dog Bite Injuries
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/social-security" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Social Security Disability
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/birth-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Birth Injury
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/burn-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Burn/Fire Injury
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/brain-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                            Brain Injury
+                          </a>
+                        </li>
+                        <li className="pt-2">
+                          <a href="/practice-areas?category=personal" className="text-sm font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                            See All →
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <a href="/about" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
             About Us

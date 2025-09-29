@@ -104,9 +104,9 @@ const Hero = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      <div className="container mx-auto px-8 flex items-center min-h-[calc(100vh-6rem)]">
-        {/* Left Content */}
-        <div className="flex-1 max-w-2xl pr-8">
+      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)]">
+        {/* Center Content */}
+        <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
             <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
               <span className="hero-line block">You Focus on Healing.</span>
@@ -121,17 +121,6 @@ const Hero = () => {
           >
             START YOUR FREE CASE REVIEW
           </Button>
-        </div>
-
-        {/* Right Content - Lawyer Image */}
-        <div ref={lawyerRef} className="flex-1 flex justify-end">
-          <div className="relative max-w-md">
-            <img 
-              src={lawyerPortrait} 
-              alt="Professional Attorney" 
-              className="w-full h-auto object-cover rounded-lg shadow-2xl"
-            />
-          </div>
         </div>
       </div>
 

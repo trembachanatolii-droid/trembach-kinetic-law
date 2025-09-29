@@ -69,8 +69,8 @@ const Hero = () => {
         backgroundRepeat: 'no-repeat'
       }}
     >
-      {/* Overlay for better text readability */}
-      <div className="absolute inset-0 bg-background/60 backdrop-blur-[1px]" />
+      {/* Light overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/20" />
 
       {/* 3D Lady Justice Statue - Disabled due to missing model */}
       {/* <HeroScene /> */}

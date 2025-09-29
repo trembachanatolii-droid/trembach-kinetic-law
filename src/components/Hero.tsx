@@ -95,33 +95,31 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-white"
     >
-      {/* Background Image */}
-      <div 
-        className="absolute inset-0 w-full h-full bg-cover bg-center"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      />
-      
-      {/* Subtle Overlay */}
-      <div className="absolute inset-0 bg-white/5" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
-          <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-              <span className="hero-line block">You Focus on Healing.</span>
-              <span className="hero-line block">We Focus on Winning.</span>
+          <div ref={headlineRef} className="space-y-6">
+            <h1 className="text-5xl lg:text-6xl font-semibold leading-tight">
+              <span className="hero-line block text-[#1d1d1f]">TREMBACH LAW FIRM</span>
             </h1>
+            <p className="hero-line text-2xl lg:text-3xl text-[#86868b] font-normal mt-4">
+              You Focus on Healing.<br/>We Focus on Winning.
+            </p>
           </div>
 
           <Button 
             ref={buttonRef}
-            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+            className="mt-12 bg-[#0071e3] hover:bg-[#0077ed] text-white font-normal px-6 py-3 text-base rounded-full shadow-sm transform hover:scale-105 transition-all duration-200"
             onClick={() => window.location.href = '/case-evaluation'}
           >
-            START YOUR FREE CASE REVIEW
+            Start Your Free Case Review
           </Button>
+          
+          <p className="text-sm text-[#86868b] mt-4">
+            No Win, No Fee Guarantee
+          </p>
         </div>
       </div>
 

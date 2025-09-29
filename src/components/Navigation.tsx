@@ -40,7 +40,7 @@ const Navigation = () => {
             Home
           </a>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal outline-none">
+            <DropdownMenuTrigger className="relative flex items-center gap-1 text-[#1d1d1f] hover:text-[#1d1d1f] transition-colors text-xs font-medium outline-none uppercase tracking-wide after:absolute after:bottom-[-12px] after:left-0 after:right-0 after:h-[3px] after:bg-red-600 after:opacity-0 hover:after:opacity-100 after:transition-opacity">
               Practice Areas
               <ChevronDown className="w-3 h-3" />
             </DropdownMenuTrigger>

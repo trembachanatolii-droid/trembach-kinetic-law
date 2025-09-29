@@ -26,88 +26,76 @@ const Navigation = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
-  return <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div className="container mx-auto px-8 py-4 flex items-center justify-between">
+  return <nav ref={navRef} className="fixed top-0 left-0 right-0 z-50 bg-[#1d1d1f] backdrop-blur-2xl bg-opacity-95">
+      <div className="max-w-[980px] mx-auto px-6 h-[44px] flex items-center justify-between">
         {/* Logo */}
-        <div className="trembach-logo flex items-center gap-3">
-          <div className="text-red-600 text-2xl">⚖️</div>
-          <div className="text">
-            <div className="font-bold text-xl leading-tight tracking-wide text-gray-900">
-              TREMBACH <span className="text-gray-700">LAW FIRM</span>
-            </div>
-            <div className="text-xs text-gray-500 font-medium tracking-wider">
-              California's Premier Injury Law Firm
-            </div>
-          </div>
-        </div>
+        <a href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+          <div className="text-red-600 text-xl">⚖️</div>
+          <span className="font-semibold text-sm text-white tracking-tight">TREMBACH LAW FIRM</span>
+        </a>
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-8">
+          <a href="/" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            Home
+          </a>
           <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 hover:text-red-600 transition-colors font-medium text-gray-700 uppercase text-sm">
-              CASES WE HANDLE
-              <ChevronDown className="w-4 h-4" />
+            <DropdownMenuTrigger className="flex items-center gap-1 text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+              Practice Areas
+              <ChevronDown className="w-3 h-3" />
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56 bg-white border border-gray-200">
-              <DropdownMenuItem className="hover:bg-gray-50">
+            <DropdownMenuContent className="w-56 bg-[#1d1d1f] border border-gray-700 z-[60]">
+              <DropdownMenuItem className="hover:bg-gray-800 text-[#f5f5f7]">
                 <a href="/practice-areas/mesothelioma-asbestos" className="w-full">
                   Mesothelioma & Asbestos
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
+              <DropdownMenuItem className="hover:bg-gray-800 text-[#f5f5f7]">
                 <a href="/practice-areas/crane-accidents" className="w-full">
                   Crane Accidents
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
+              <DropdownMenuItem className="hover:bg-gray-800 text-[#f5f5f7]">
                 <a href="/practice-areas/amusement-parks" className="w-full">
                   Amusement Park Injuries
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
+              <DropdownMenuItem className="hover:bg-gray-800 text-[#f5f5f7]">
                 <a href="/practice-areas/medical-malpractice" className="w-full">
                   Medical Malpractice
                 </a>
               </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
+              <DropdownMenuItem className="hover:bg-gray-800 text-[#f5f5f7]">
                 <a href="/practice-areas/personal-injury" className="w-full">
                   Personal Injury
                 </a>
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
-          <a href="#team" className="hover:text-red-600 transition-colors font-medium text-gray-700 uppercase text-sm">
-            MEET YOUR TEAM
+          <a href="/about" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            About Us
           </a>
-          <DropdownMenu>
-            <DropdownMenuTrigger className="flex items-center gap-1 hover:text-red-600 transition-colors font-medium text-gray-700 uppercase text-sm">
-              RESOURCES
-              <ChevronDown className="w-4 h-4" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-48 bg-white border border-gray-200">
-              <DropdownMenuItem className="hover:bg-gray-50">
-                <a href="/blog" className="w-full">Blog</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
-                <a href="/faq" className="w-full">FAQ</a>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="hover:bg-gray-50">
-                <a href="/testimonials" className="w-full">Testimonials</a>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-          <a href="#contact" className="hover:text-red-600 transition-colors font-medium text-gray-700 uppercase text-sm">
-            CONTACT US
+          <a href="/results" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            Results
+          </a>
+          <a href="/testimonials" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            Testimonials
+          </a>
+          <a href="/blog" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            Blog
+          </a>
+          <a href="/contact" className="text-[#f5f5f7] hover:text-white transition-colors text-xs font-normal">
+            Contact
           </a>
         </div>
 
-        {/* CTA Section */}
-        <div className="flex flex-col items-end">
-          <div className="text-xs text-gray-500 font-medium mb-1">AVAILABLE 24/7</div>
-          <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded text-lg shadow-[0_4px_0_0_rgb(153,27,27)] hover:shadow-[0_2px_0_0_rgb(153,27,27)] hover:translate-y-[2px] transition-all" onClick={() => window.location.href = 'tel:8181234567'}>
-            (818) 123-4567
-          </Button>
-        </div>
+        {/* CTA Phone */}
+        <Button 
+          className="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-1 rounded-full text-xs h-[28px] shadow-lg hover:shadow-xl transition-all" 
+          onClick={() => window.location.href = 'tel:8181234567'}
+        >
+          (818) 123-4567
+        </Button>
       </div>
     </nav>;
 };

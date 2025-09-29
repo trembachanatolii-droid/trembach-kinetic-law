@@ -57,12 +57,49 @@ const Navigation = () => {
               <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
                 <div className="max-w-[1200px] mx-auto px-6 py-16">
                   <div className="grid grid-cols-3 gap-16">
-                    {/* Left Column - Introduction */}
+                    {/* Left Column - Cancer Cases */}
                     <div>
-                      <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cases We Handle</h2>
-                      <p className="text-base text-gray-600 leading-relaxed">
-                        We fight for every case—big or small. As Michigan's largest injury firm, you get a team of legal professionals dedicated to getting you every dollar you deserve. And with over $2 billion recovered, thousands of clients served, and decades of experience, we know what it takes to win. Why call anyone else?
-                      </p>
+                      <div className="flex items-center gap-3 mb-8">
+                        <div className="w-12 h-12 flex items-center justify-center">
+                          <svg className="w-8 h-8 text-red-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z" />
+                            <path d="M12 6v6l4 2" />
+                          </svg>
+                        </div>
+                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Cancer Cases</h3>
+                      </div>
+                      <ul className="space-y-4">
+                        <li>
+                          <a href="/practice-areas/mesothelioma" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Mesothelioma
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/asbestos-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Asbestos Exposure
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/lung-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Lung Cancer
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/toxic-exposure" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Toxic Exposure Cancer
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/practice-areas/industrial-cancer" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Industrial Cancer
+                          </a>
+                        </li>
+                        <li className="pt-4">
+                          <a href="/practice-areas?category=cancer" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                            See All →
+                          </a>
+                        </li>
+                      </ul>
                     </div>
 
                     {/* Middle Column - Auto Accidents */}

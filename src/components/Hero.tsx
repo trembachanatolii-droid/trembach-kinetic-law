@@ -109,10 +109,9 @@ const Hero = () => {
             </p>
           </div>
 
-          <Button
+          <Button 
             ref={buttonRef}
-            variant="destructive"
-            className="mt-12 bg-destructive text-destructive-foreground hover:bg-destructive/90 font-semibold px-8 py-4 text-base rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 ease-out uppercase tracking-wide focus-visible:ring-2 focus-visible:ring-destructive/40"
+            className="mt-12 bg-[#0071e3] hover:bg-[#0077ed] text-white font-normal px-6 py-3 text-base rounded-full shadow-[0_4px_12px_rgba(0,113,227,0.25)] hover:shadow-[0_8px_24px_rgba(0,113,227,0.35)] transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 ease-out"
             onClick={() => window.location.href = '/case-evaluation'}
           >
             Start Your Free Case Review

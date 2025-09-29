@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import PracticeAreasLanding from './PracticeAreasLanding';
 import MedicalMalpractice from './MedicalMalpractice';
 import MesotheliomaAsbestos from './MesotheliomaAsbestos';
 import MedicalDevices from './MedicalDevices';
@@ -32,6 +33,7 @@ import ParalysisMedicalGuidance from './paralysis/MedicalGuidance';
 const PracticeAreaRouter = () => {
   return (
     <Routes>
+      <Route index element={<PracticeAreasLanding />} />
       <Route path="mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
       <Route path="medical-devices" element={<MedicalDevices />} />
       <Route path="medical-malpractice" element={<MedicalMalpractice />} />

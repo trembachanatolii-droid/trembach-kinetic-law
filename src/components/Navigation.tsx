@@ -33,7 +33,7 @@ const Navigation = () => {
           <div className="text-red-600 text-2xl">⚖️</div>
           <div className="text">
             <div className="font-bold text-xl leading-tight tracking-wide text-gray-900">
-              <span className="text-red-600">TREMBACH </span><span className="text-gray-700">LAWFIRM</span>
+              <span className="text-red-600">LAW FIRM</span><span className="text-gray-700">LAWFIRM</span>
             </div>
             <div className="text-xs text-gray-500 font-medium tracking-wider uppercase">
               California's Premier Injury Law Firm

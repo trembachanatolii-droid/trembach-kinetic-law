@@ -33,9 +33,9 @@ const Navigation = () => {
           <div className="text-red-600 text-2xl">⚖️</div>
           <div className="text">
             <div className="font-bold text-xl leading-tight tracking-wide text-gray-900">
-              <span className="text-gray-700">LAWFIRM</span>
+              TREMBACH <span className="text-gray-700">LAW FIRM</span>
             </div>
-            <div className="text-xs text-gray-500 font-medium tracking-wider uppercase">
+            <div className="text-xs text-gray-500 font-medium tracking-wider">
               California's Premier Injury Law Firm
             </div>
           </div>
@@ -104,7 +104,7 @@ const Navigation = () => {
         {/* CTA Section */}
         <div className="flex flex-col items-end">
           <div className="text-xs text-gray-500 font-medium mb-1">AVAILABLE 24/7</div>
-          <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded text-lg" onClick={() => window.location.href = 'tel:8181234567'}>
+          <Button className="bg-red-600 hover:bg-red-700 text-white font-bold px-6 py-2 rounded text-lg shadow-[0_4px_0_0_rgb(153,27,27)] hover:shadow-[0_2px_0_0_rgb(153,27,27)] hover:translate-y-[2px] transition-all" onClick={() => window.location.href = 'tel:8181234567'}>
             (818) 123-4567
           </Button>
         </div>

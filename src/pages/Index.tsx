@@ -17,6 +17,7 @@ import SEO from '../components/SEO';
 import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
+import { VerticalRope } from '../components/animations/VerticalRope';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -88,14 +89,23 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
+      {/* Single Vertical Rope Animation */}
+      <VerticalRope startElement="#about" />
+
       {/* About Section */}
-      <About />
+      <section id="about">
+        <About />
+      </section>
 
       {/* Truth About Your Case Section */}
-      <TruthAboutCase />
+      <section id="truth">
+        <TruthAboutCase />
+      </section>
 
       {/* Practice Areas */}
-      <PracticeAreasReference key="practice-areas-v2" />
+      <section id="practice-areas">
+        <PracticeAreasReference key="practice-areas-v2" />
+      </section>
 
       {/* Marquee Bands */}
       <div className="relative z-10">
@@ -124,16 +134,24 @@ const Index = () => {
       </div>
 
       {/* Critical Steps Section */}
-      <CriticalStepsSection />
+      <section id="critical-steps">
+        <CriticalStepsSection />
+      </section>
 
       {/* Every Problem Solved */}
-      <EveryProblemSolved />
+      <section id="problems">
+        <EveryProblemSolved />
+      </section>
 
       {/* Featured Results */}
-      <FeaturedResults />
+      <section id="results">
+        <FeaturedResults />
+      </section>
 
       {/* Process */}
-      <Process />
+      <section id="process">
+        <Process />
+      </section>
 
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">

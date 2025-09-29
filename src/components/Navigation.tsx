@@ -54,48 +54,48 @@ const Navigation = () => {
             
             {/* Mega Menu */}
             {showMegaMenu && (
-              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[600px] bg-white shadow-2xl border border-gray-200 z-[100] rounded-lg">
-                <div className="p-8">
-                  <h2 className="text-3xl font-bold text-[#1d1d1f] mb-8">Cases We Handle</h2>
-                  <p className="text-sm text-gray-600 mb-8 max-w-lg">
+              <div className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[560px] bg-white shadow-2xl border border-gray-200 z-[100] rounded-xl">
+                <div className="p-10">
+                  <h2 className="text-4xl font-bold text-[#1d1d1f] mb-6">Cases We Handle</h2>
+                  <p className="text-base text-gray-600 mb-10 max-w-xl leading-relaxed">
                     We fight for every case—big or small. As one of the leading injury firms, you get a team of legal professionals dedicated to getting you every dollar you deserve.
                   </p>
                   
-                  <div className="grid grid-cols-2 gap-12">
+                  <div className="grid grid-cols-2 gap-16">
                     {/* Auto Accidents Column */}
                     <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <Car className="w-8 h-8 text-red-600" />
-                        <h3 className="text-xl font-bold text-[#1d1d1f]">Auto Accidents</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <Car className="w-10 h-10 text-red-600" />
+                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Auto Accidents</h3>
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/truck-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/truck-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Truck Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/car-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/car-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Car Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/motorcycle-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/motorcycle-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Motorcycle Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/uber-lyft" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/uber-lyft" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Uber & Lyft Accidents
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/pedestrian-accidents" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/pedestrian-accidents" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Pedestrian Accidents
                           </a>
                         </li>
-                        <li className="pt-2">
-                          <a href="/practice-areas?category=auto" className="text-sm font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                        <li className="pt-3">
+                          <a href="/practice-areas?category=auto" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>
                         </li>
@@ -104,38 +104,38 @@ const Navigation = () => {
 
                     {/* Personal Injury Column */}
                     <div>
-                      <div className="flex items-center gap-3 mb-4">
-                        <User className="w-8 h-8 text-red-600" />
-                        <h3 className="text-xl font-bold text-[#1d1d1f]">Personal Injury</h3>
+                      <div className="flex items-center gap-3 mb-6">
+                        <User className="w-10 h-10 text-red-600" />
+                        <h3 className="text-2xl font-bold text-[#1d1d1f]">Personal Injury</h3>
                       </div>
-                      <ul className="space-y-3">
+                      <ul className="space-y-4">
                         <li>
-                          <a href="/practice-areas/dog-bite" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/dog-bite" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Dog Bite Injuries
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/social-security" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/social-security" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Social Security Disability
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/birth-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/birth-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Birth Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/burn-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/burn-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Burn/Fire Injury
                           </a>
                         </li>
                         <li>
-                          <a href="/practice-areas/brain-injury" className="text-sm text-[#1d1d1f] hover:text-red-600 transition-colors">
+                          <a href="/practice-areas/brain-injury" className="text-base text-[#1d1d1f] hover:text-red-600 transition-colors">
                             Brain Injury
                           </a>
                         </li>
-                        <li className="pt-2">
-                          <a href="/practice-areas?category=personal" className="text-sm font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
+                        <li className="pt-3">
+                          <a href="/practice-areas?category=personal" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →
                           </a>
                         </li>

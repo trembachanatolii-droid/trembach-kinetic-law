@@ -266,26 +266,26 @@ const PracticeAreasOverview = () => {
                           className="w-full h-full object-cover"
                         />
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
                     </div>
 
                     {/* Content */}
-                    <div className="relative h-full flex flex-col justify-between p-6">
+                    <div className="relative h-full flex flex-col justify-between p-8">
                       {/* Category badge */}
                       <div className="self-start">
-                        <span className="inline-block px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-gray-900 text-xs font-medium">
+                        <span className="inline-block px-4 py-1.5 bg-white/95 backdrop-blur-sm rounded-full text-gray-900 text-xs font-semibold tracking-wide">
                           {area.category}
                         </span>
                       </div>
 
-                      {/* Title */}
-                      <div>
-                        <h3 className="text-2xl font-semibold text-white mb-3 tracking-tight leading-tight">
+                      {/* Title and CTA */}
+                      <div className="space-y-4">
+                        <h3 className="text-3xl font-semibold text-white tracking-tight leading-tight">
                           {area.title}
                         </h3>
 
-                        {/* CTA */}
-                        <div className="flex items-center gap-2 text-white text-sm font-medium group-hover:gap-3 transition-all duration-300">
+                        {/* Apple-style CTA with backdrop */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-black/30 backdrop-blur-md rounded-full border border-white/20 text-white text-sm font-medium group-hover:bg-black/40 group-hover:border-white/30 transition-all duration-300">
                           <span>Learn more</span>
                           <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </div>

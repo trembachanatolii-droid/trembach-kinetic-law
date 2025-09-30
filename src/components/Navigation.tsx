@@ -54,7 +54,10 @@ const Navigation = () => {
             
             {/* Mega Menu - Full Screen Overlay */}
             {showMegaMenu && (
-              <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
+              <>
+                {/* Backdrop blur overlay */}
+                <div className="fixed inset-0 top-[44px] bg-black/20 backdrop-blur-md z-[90]" />
+                <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
                 <div className="max-w-[1200px] mx-auto px-6 py-16">
                   <div className="grid grid-cols-3 gap-16">
                     {/* Left Column - Cancer Cases */}
@@ -94,11 +97,11 @@ const Navigation = () => {
                             Silicosis Injuries
                           </a>
                         </li>
-                        <li className="pt-4">
-                          <a href="/practice-areas?category=cancer" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
-                            See All →
-                          </a>
-                        </li>
+        <li className="pt-4">
+          <a href="/practice-areas?category=cancer" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+            See All →
+          </a>
+        </li>
                       </ul>
                     </div>
 
@@ -140,11 +143,11 @@ const Navigation = () => {
                             Pedestrian Accidents
                           </a>
                         </li>
-                        <li className="pt-4">
-                          <a href="/practice-areas?category=auto" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
-                            See All →
-                          </a>
-                        </li>
+        <li className="pt-4">
+          <a href="/practice-areas?category=auto" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+            See All →
+          </a>
+        </li>
                       </ul>
                     </div>
 
@@ -180,21 +183,22 @@ const Navigation = () => {
                             Brain Injury
                           </a>
                         </li>
-                        <li>
-                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
-                            Social Security Disability
-                          </a>
-                        </li>
-                        <li className="pt-4">
-                          <a href="/practice-areas?category=personal" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
-                            See All →
-                          </a>
-                        </li>
+        <li>
+          <a href="/practice-areas/medical-malpractice" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+            Medical Malpractice
+          </a>
+        </li>
+        <li className="pt-4">
+          <a href="/practice-areas?category=personal" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+            See All →
+          </a>
+        </li>
                       </ul>
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
+              </>
             )}
           </div>
           <a href="/about" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">

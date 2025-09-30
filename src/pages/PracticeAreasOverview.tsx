@@ -284,10 +284,10 @@ const PracticeAreasOverview = () => {
                           {area.title}
                         </h3>
 
-                        {/* Apple-style CTA with backdrop */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2.5 bg-black/30 backdrop-blur-md rounded-full border border-white/20 text-white text-sm font-medium group-hover:bg-black/40 group-hover:border-white/30 transition-all duration-300">
+                        {/* Apple-style CTA - always visible */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-gray-900 text-sm font-semibold border border-gray-200 shadow-sm z-10">
                           <span>Learn more</span>
-                          <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                          <ChevronRight className="h-4 w-4" />
                         </div>
                       </div>
                     </div>

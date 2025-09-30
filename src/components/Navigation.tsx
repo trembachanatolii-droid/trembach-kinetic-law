@@ -56,7 +56,14 @@ const Navigation = () => {
             {showMegaMenu && (
               <>
                 {/* Backdrop blur overlay */}
-                <div className="fixed inset-0 top-[44px] bg-black/30 backdrop-blur-xl z-[90] animate-in fade-in duration-200" />
+                <div 
+                  className="fixed inset-0 top-[44px] z-[90] animate-in fade-in duration-200" 
+                  style={{
+                    backgroundColor: 'rgba(0, 0, 0, 0.3)',
+                    backdropFilter: 'blur(20px)',
+                    WebkitBackdropFilter: 'blur(20px)'
+                  }}
+                />
                 <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
                 <div className="max-w-[1200px] mx-auto px-6 py-16">
                   <div className="grid grid-cols-3 gap-16">

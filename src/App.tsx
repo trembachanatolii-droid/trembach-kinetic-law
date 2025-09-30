@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
+import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Defamation from "./pages/practice-areas/Defamation";
 import DefamationCaseEvaluation from "./pages/practice-areas/defamation/CaseEvaluation";
@@ -259,6 +260,7 @@ function App() {
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/practice-areas" element={<PracticeAreasOverview />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/defamation" element={<Defamation />} />
             <Route path="/practice-areas/defamation/case-evaluation" element={<DefamationCaseEvaluation />} />

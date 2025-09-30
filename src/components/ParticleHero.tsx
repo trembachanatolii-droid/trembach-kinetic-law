@@ -397,6 +397,8 @@ const ParticleHero = () => {
             if (!isMorphing) triggerMorph();
           }, 8000);
 
+          window.addEventListener('resize', onWindowResize);
+
           isInitialized = true;
           animate();
         }
@@ -476,33 +478,33 @@ const ParticleHero = () => {
         function setupParticleSystem() {
           targetPositions = SHAPES.map(shape => shape.generator(CONFIG.particleCount, CONFIG.shapeSize));
           particlesGeometry = new THREE.BufferGeometry();
-          
           currentPositions = new Float32Array(targetPositions[0]);
           sourcePositions = new Float32Array(targetPositions[0]);
           swarmPositions = new Float32Array(CONFIG.particleCount * 3);
-          
           particlesGeometry.setAttribute('position', new THREE.BufferAttribute(currentPositions, 3));
-          
+
           particleSizes = new Float32Array(CONFIG.particleCount);
           particleOpacities = new Float32Array(CONFIG.particleCount);
           particleEffectStrengths = new Float32Array(CONFIG.particleCount);
-          
+
           for (let i = 0; i < CONFIG.particleCount; i++) {
             particleSizes[i] = THREE.MathUtils.randFloat(CONFIG.particleSizeRange[0], CONFIG.particleSizeRange[1]);
             particleOpacities[i] = 1.0;
             particleEffectStrengths[i] = 0.0;
           }
-          
+
           particlesGeometry.setAttribute('size', new THREE.BufferAttribute(particleSizes, 1));
           particlesGeometry.setAttribute('opacity', new THREE.BufferAttribute(particleOpacities, 1));
           particlesGeometry.setAttribute('aEffectStrength', new THREE.BufferAttribute(particleEffectStrengths, 1));
-          
+
           const colors = new Float32Array(CONFIG.particleCount * 3);
           updateColorArray(colors, currentPositions);
           particlesGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-          
+
           particlesMaterial = new THREE.ShaderMaterial({
-            uniforms: { pointTexture: { value: createStarTexture() } },
+            uniforms: {
+              pointTexture: { value: createStarTexture() }
+            },
             vertexShader: `
               attribute float size;
               attribute float opacity;
@@ -510,48 +512,57 @@ const ParticleHero = () => {
               varying vec3 vColor;
               varying float vOpacity;
               varying float vEffectStrength;
+
               void main() {
                 vColor = color;
                 vOpacity = opacity;
                 vEffectStrength = aEffectStrength;
+
                 vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
+
                 float sizeScale = 1.0 - vEffectStrength * ${CONFIG.morphSizeFactor.toFixed(2)};
                 gl_PointSize = size * sizeScale * (400.0 / -mvPosition.z);
+
                 gl_Position = projectionMatrix * mvPosition;
-              }`,
+              }
+            `,
             fragmentShader: `
               uniform sampler2D pointTexture;
               varying vec3 vColor;
               varying float vOpacity;
               varying float vEffectStrength;
+
               void main() {
                 float alpha = texture2D(pointTexture, gl_PointCoord).a;
                 if (alpha < 0.05) discard;
+
                 vec3 finalColor = vColor * (1.0 + vEffectStrength * ${CONFIG.morphBrightnessFactor.toFixed(2)});
+
                 gl_FragColor = vec4(finalColor, alpha * vOpacity);
-              }`,
+              }
+            `,
             blending: THREE.AdditiveBlending,
             depthTest: true,
             depthWrite: false,
             transparent: true,
             vertexColors: true
           });
-          
+
           particleSystem = new THREE.Points(particlesGeometry, particlesMaterial);
           scene.add(particleSystem);
         }
 
         function updateColorArray(colors: Float32Array, positionsArray: Float32Array) {
-          const colorScheme = COLOR_SCHEMES[CONFIG.colorScheme];
+          const colorScheme = COLOR_SCHEMES[CONFIG.colorScheme as keyof typeof COLOR_SCHEMES];
           const center = new THREE.Vector3(0, 0, 0);
           const maxRadius = CONFIG.shapeSize * 1.1;
-          
+
           for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             tempVec.fromArray(positionsArray, i3);
             const dist = tempVec.distanceTo(center);
-            
             let hue;
+
             if (CONFIG.colorScheme === 'rainbow') {
               const normX = (tempVec.x / maxRadius + 1) / 2;
               const normY = (tempVec.y / maxRadius + 1) / 2;
@@ -560,70 +571,59 @@ const ParticleHero = () => {
             } else {
               hue = THREE.MathUtils.mapLinear(dist, 0, maxRadius, colorScheme.startHue, colorScheme.endHue);
             }
-            
+
             const noiseValue = (noise3D(tempVec.x * 0.2, tempVec.y * 0.2, tempVec.z * 0.2) + 1) * 0.5;
             const saturation = THREE.MathUtils.clamp(colorScheme.saturation * (0.9 + noiseValue * 0.2), 0, 1);
             const lightness = THREE.MathUtils.clamp(colorScheme.lightness * (0.85 + noiseValue * 0.3), 0.1, 0.9);
-            
+
             const color = new THREE.Color().setHSL(hue / 360, saturation, lightness);
             color.toArray(colors, i3);
           }
-        }
-
-        function updateColors() {
-          const colors = particlesGeometry.attributes.color.array;
-          updateColorArray(colors, particlesGeometry.attributes.position.array);
-          particlesGeometry.attributes.color.needsUpdate = true;
         }
 
         function triggerMorph() {
           if (isMorphing) return;
           isMorphing = true;
           controls.autoRotate = false;
-          
+
           if (infoRef.current) {
             infoRef.current.innerText = 'Morphing...';
             infoRef.current.style.textShadow = '0 0 8px rgba(255, 150, 50, 0.9)';
           }
-          
+
           sourcePositions.set(currentPositions);
           const nextShapeIndex = (currentShapeIndex + 1) % SHAPES.length;
           const nextTargetPositions = targetPositions[nextShapeIndex];
-          
-          // Generate swarm positions
           const centerOffsetAmount = CONFIG.shapeSize * CONFIG.swarmDistanceFactor;
+
           for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             sourceVec.fromArray(sourcePositions, i3);
             targetVec.fromArray(nextTargetPositions, i3);
             swarmVec.lerpVectors(sourceVec, targetVec, 0.5);
-            
             const offsetDir = tempVec.set(
               noise3D(i * 0.05, 10, 10),
               noise3D(20, i * 0.05, 20),
               noise3D(30, 30, i * 0.05)
             ).normalize();
-            
             const distFactor = sourceVec.distanceTo(targetVec) * 0.1 + centerOffsetAmount;
             swarmVec.addScaledVector(offsetDir, distFactor * (0.5 + Math.random() * 0.8));
-            
             swarmPositions[i3] = swarmVec.x;
             swarmPositions[i3 + 1] = swarmVec.y;
             swarmPositions[i3 + 2] = swarmVec.z;
           }
-          
+
           currentShapeIndex = nextShapeIndex;
           morphState.progress = 0;
-          
-          // Simple animation without external library
-          const startTime = Date.now();
-          const morphUpdate = () => {
-            const elapsed = Date.now() - startTime;
-            morphState.progress = Math.min(elapsed / CONFIG.morphDuration, 1);
-            
-            if (morphState.progress < 1) {
-              requestAnimationFrame(morphUpdate);
-            } else {
+
+          // Simplified morph animation using requestAnimationFrame
+          const startTime = performance.now();
+          const morphAnimation = () => {
+            const elapsed = performance.now() - startTime;
+            const progress = Math.min(elapsed / CONFIG.morphDuration, 1);
+            morphState.progress = progress;
+
+            if (progress >= 1) {
               if (infoRef.current) {
                 infoRef.current.innerText = `Shape: ${SHAPES[currentShapeIndex].name} (Click to morph)`;
                 infoRef.current.style.textShadow = '0 0 5px rgba(0, 128, 255, 0.8)';
@@ -636,34 +636,42 @@ const ParticleHero = () => {
               updateColors();
               isMorphing = false;
               controls.autoRotate = true;
+            } else {
+              requestAnimationFrame(morphAnimation);
             }
           };
-          morphUpdate();
+          morphAnimation();
+        }
+
+        function updateColors() {
+          const colors = particlesGeometry.attributes.color.array;
+          updateColorArray(colors, particlesGeometry.attributes.position.array);
+          particlesGeometry.attributes.color.needsUpdate = true;
         }
 
         function animate() {
           if (!isInitialized) return;
           animationId = requestAnimationFrame(animate);
-          
+
           const elapsedTime = clock.getElapsedTime();
           const deltaTime = clock.getDelta();
-          
+
           controls.update();
-          
+
           const positions = particlesGeometry.attributes.position.array;
           const effectStrengths = particlesGeometry.attributes.aEffectStrength.array;
-          
+
           if (isMorphing) {
             updateMorphAnimation(positions, effectStrengths, elapsedTime, deltaTime);
           } else {
             updateIdleAnimation(positions, effectStrengths, elapsedTime, deltaTime);
           }
-          
+
           particlesGeometry.attributes.position.needsUpdate = true;
-          if (isMorphing) {
+          if (isMorphing || particlesGeometry.attributes.aEffectStrength.needsUpdate) {
             particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
           }
-          
+
           composer.render(deltaTime);
         }
 
@@ -673,23 +681,21 @@ const ParticleHero = () => {
           const effectStrength = Math.sin(t * Math.PI);
           const currentSwirl = effectStrength * CONFIG.swirlFactor * deltaTime * 50;
           const currentNoise = effectStrength * CONFIG.noiseMaxStrength;
-          
+
           for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             sourceVec.fromArray(sourcePositions, i3);
             swarmVec.fromArray(swarmPositions, i3);
             targetVec.fromArray(targets, i3);
-            
-            // Bezier interpolation
+
             const t_inv = 1.0 - t;
             const t_inv_sq = t_inv * t_inv;
             const t_sq = t * t;
-            
+
             bezPos.copy(sourceVec).multiplyScalar(t_inv_sq);
             bezPos.addScaledVector(swarmVec, 2.0 * t_inv * t);
             bezPos.addScaledVector(targetVec, t_sq);
-            
-            // Add swirl effect
+
             if (currentSwirl > 0.01) {
               tempVec.subVectors(bezPos, sourceVec);
               swirlAxis.set(
@@ -700,8 +706,7 @@ const ParticleHero = () => {
               tempVec.applyAxisAngle(swirlAxis, currentSwirl * (0.5 + Math.random() * 0.5));
               bezPos.copy(sourceVec).add(tempVec);
             }
-            
-            // Add noise
+
             if (currentNoise > 0.01) {
               const noiseTime = elapsedTime * CONFIG.noiseTimeScale;
               noiseOffset.set(
@@ -711,67 +716,78 @@ const ParticleHero = () => {
               );
               bezPos.addScaledVector(noiseOffset, currentNoise);
             }
-            
+
             positions[i3] = bezPos.x;
             positions[i3 + 1] = bezPos.y;
             positions[i3 + 2] = bezPos.z;
             effectStrengths[i] = effectStrength;
           }
+          particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
         }
 
         function updateIdleAnimation(positions: any, effectStrengths: any, elapsedTime: number, deltaTime: number) {
           const breathScale = 1.0 + Math.sin(elapsedTime * 0.5) * 0.015;
           const timeScaled = elapsedTime * CONFIG.idleFlowSpeed;
           const freq = 0.1;
-          
+          let needsEffectStrengthReset = false;
+
           for (let i = 0; i < CONFIG.particleCount; i++) {
             const i3 = i * 3;
             sourceVec.fromArray(sourcePositions, i3);
             tempVec.copy(sourceVec).multiplyScalar(breathScale);
-            
             flowVec.set(
               noise4D(tempVec.x * freq, tempVec.y * freq, tempVec.z * freq, timeScaled),
               noise4D(tempVec.x * freq + 10, tempVec.y * freq + 10, tempVec.z * freq + 10, timeScaled),
               noise4D(tempVec.x * freq + 20, tempVec.y * freq + 20, tempVec.z * freq + 20, timeScaled)
             );
-            
             tempVec.addScaledVector(flowVec, CONFIG.idleFlowStrength);
-            
             currentVec.fromArray(positions, i3);
             currentVec.lerp(tempVec, 0.05);
-            
             positions[i3] = currentVec.x;
             positions[i3 + 1] = currentVec.y;
             positions[i3 + 2] = currentVec.z;
-            effectStrengths[i] = 0.0;
+
+            if (effectStrengths[i] !== 0.0) {
+              effectStrengths[i] = 0.0;
+              needsEffectStrengthReset = true;
+            }
+          }
+
+          if (needsEffectStrengthReset) {
+            particlesGeometry.attributes.aEffectStrength.needsUpdate = true;
           }
         }
 
         function onWindowResize() {
+          if (!camera || !renderer || !composer) return;
           camera.aspect = window.innerWidth / window.innerHeight;
           camera.updateProjectionMatrix();
           renderer.setSize(window.innerWidth, window.innerHeight);
           composer.setSize(window.innerWidth, window.innerHeight);
         }
 
-        function onCanvasClick(event: any) {
-          if (event.target.closest('#controls')) return;
-          triggerMorph();
-        }
-
-        window.addEventListener('resize', onWindowResize);
-        canvasRef.current.addEventListener('click', onCanvasClick);
-
+        // Initialize the particle system
         init();
 
+        // Cleanup function
         return () => {
+          if (animationId) {
+            cancelAnimationFrame(animationId);
+          }
           window.removeEventListener('resize', onWindowResize);
-          if (animationId) cancelAnimationFrame(animationId);
-          if (renderer) renderer.dispose();
+          if (renderer) {
+            renderer.dispose();
+          }
+          if (particlesGeometry) {
+            particlesGeometry.dispose();
+          }
+          if (particlesMaterial) {
+            particlesMaterial.dispose();
+          }
         };
 
       } catch (error) {
-        console.error('Failed to initialize particle system:', error);
+        console.error('Error initializing particle system:', error);
       }
     };
 
@@ -779,35 +795,39 @@ const ParticleHero = () => {
   }, []);
 
   return (
-    <section 
-      ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{
-        margin: 0,
-        backgroundColor: '#000000',
-        color: 'white',
-        fontFamily: "'Courier New', monospace"
-      }}
-    >
+    <>
       {/* Loading Screen */}
       <div 
         ref={loadingRef}
-        className="fixed w-full h-full bg-black flex flex-col justify-center items-center z-[1000] transition-opacity duration-[600ms]"
+        className="fixed inset-0 bg-black flex flex-col justify-center items-center z-50"
+        style={{
+          transition: 'opacity 0.6s ease-out'
+        }}
       >
-        <span className="text-2xl tracking-[2px] mb-4">Initializing Particles...</span>
-        <div className="w-[60%] max-w-[300px] h-[6px] bg-white/10 rounded-[3px] overflow-hidden">
+        <span className="text-2xl tracking-wider mb-4 text-white font-mono">
+          Initializing Particles...
+        </span>
+        <div className="w-3/5 max-w-xs h-1.5 bg-white/10 rounded-full overflow-hidden">
           <div 
             id="progress"
-            className="h-full w-0 bg-gradient-to-r from-[#00a2ff] to-[#00ffea] transition-all duration-300 rounded-[3px]"
+            className="h-full w-0 bg-gradient-to-r from-blue-400 to-cyan-400 transition-all duration-300 rounded-full"
           />
         </div>
       </div>
 
-      {/* Info UI */}
-      <div className="absolute top-4 w-full text-center z-[100] pointer-events-none">
+      {/* Particle Canvas - Fixed Background */}
+      <canvas 
+        ref={canvasRef}
+        id="webglCanvas"
+        className="fixed inset-0 w-full h-full pointer-events-none z-0"
+        style={{ display: 'block' }}
+      />
+
+      {/* UI Overlay for Particle Info */}
+      <div className="fixed top-4 left-1/2 transform -translate-x-1/2 z-30 pointer-events-none">
         <div 
           ref={infoRef}
-          className="text-sm px-[18px] py-[10px] bg-[rgba(25,30,50,0.35)] rounded-[10px] inline-block border border-white/10 backdrop-blur-[10px] transition-all duration-300"
+          className="text-sm px-5 py-2.5 bg-slate-900/35 rounded-xl inline-block text-white/90 font-mono border border-white/10 backdrop-blur-xl shadow-inner transition-all duration-300"
           style={{
             textShadow: '0 0 5px rgba(0, 128, 255, 0.8)',
             boxShadow: 'inset 0 0 10px rgba(255, 255, 255, 0.05)'
@@ -817,47 +837,46 @@ const ParticleHero = () => {
         </div>
       </div>
 
-      {/* Canvas */}
-      <canvas 
-        ref={canvasRef}
-        className="block w-full h-full absolute inset-0"
-        style={{ cursor: 'pointer' }}
-      />
-
-      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
-        {/* Center Content */}
-        <div className="text-center max-w-4xl">
-          <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
-              <span className="hero-line block">You Focus on Healing.</span>
-              <span className="hero-line block">We Focus on Winning.</span>
-            </h1>
-          </div>
-
-          <Button 
-            ref={buttonRef}
-            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
-            onClick={() => window.location.href = '/case-evaluation'}
-          >
-            START YOUR FREE CASE REVIEW
-          </Button>
-        </div>
-      </div>
-
-      {/* Chat Widget */}
-      <div ref={chatRef} className="fixed bottom-6 right-6 z-50">
-        <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-xl">👨‍💼</span>
+      {/* Hero Content Section */}
+      <section 
+        ref={heroRef} 
+        className="relative min-h-screen overflow-hidden bg-transparent flex items-center justify-center z-10"
+      >
+        {/* Content */}
+        <div className="relative z-20 text-center max-w-4xl mx-auto px-8">
+          <div className="text-center space-y-8">
+            <div ref={headlineRef} className="space-y-4">
+              <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight drop-shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                <span className="hero-line block">You Focus on Healing.</span>
+                <span className="hero-line block">We Focus on Winning.</span>
+              </h1>
             </div>
-            <div className="bg-white rounded-2xl px-4 py-2 shadow-md">
-              <p className="text-sm text-gray-700 font-medium">How can we help you?</p>
-            </div>
+
+            <Button 
+              ref={buttonRef}
+              className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+              onClick={() => window.location.href = '/case-evaluation'}
+            >
+              START YOUR FREE CASE REVIEW
+            </Button>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Chat Widget */}
+        <div ref={chatRef} className="fixed bottom-6 right-6 z-50">
+          <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+            <div className="flex items-center space-x-3">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                <span className="text-xl">👨‍💼</span>
+              </div>
+              <div className="bg-white rounded-2xl px-4 py-2 shadow-md">
+                <p className="text-sm text-gray-700 font-medium">How can we help you?</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

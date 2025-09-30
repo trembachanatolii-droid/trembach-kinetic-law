@@ -180,6 +180,11 @@ const Navigation = () => {
                             Brain Injury
                           </a>
                         </li>
+                        <li>
+                          <a href="/practice-areas/social-security" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                            Social Security Disability
+                          </a>
+                        </li>
                         <li className="pt-4">
                           <a href="/practice-areas?category=personal" className="text-base font-semibold text-[#1d1d1f] hover:text-red-600 transition-colors inline-flex items-center gap-2">
                             See All →

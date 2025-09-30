@@ -15,7 +15,6 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 border border-border",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        apple: "bg-[#0071e3] text-white hover:bg-[#0077ed] font-medium transition-all duration-200",
       },
       size: {
         default: "h-10 px-4 py-2",

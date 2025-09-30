@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import heroBackground from '@/assets/hero-background.png';
+import lawyerPortrait from '@/assets/lawyer-portrait.png';
+import lawOfficeBg from '@/assets/law-office-background.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -95,31 +96,38 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-white"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
+      {/* Video Background */}
+      <video
+        autoPlay
+        loop
+        muted
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="/hero-video.webm" type="video/webm" />
+      </video>
+      
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-black/30" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
-          <div ref={headlineRef} className="space-y-6">
-            <h1 className="text-5xl lg:text-6xl font-semibold leading-tight">
-              <span className="hero-line block text-[#1d1d1f]">TREMBACH LAW FIRM</span>
+          <div ref={headlineRef} className="space-y-4">
+            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+              <span className="hero-line block">You Focus on Healing.</span>
+              <span className="hero-line block">We Focus on Winning.</span>
             </h1>
-            <p className="hero-line text-2xl lg:text-3xl text-[#86868b] font-normal mt-4">
-              You Focus on Healing.<br/>We Focus on Winning.
-            </p>
           </div>
 
-          <Button
+          <Button 
             ref={buttonRef}
-            className="mt-12 rounded-full bg-[hsl(208,100%,45%)] text-white hover:bg-[hsl(209,100%,46%)] font-medium px-6 py-2 text-sm leading-none transition-colors duration-200"
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
             onClick={() => window.location.href = '/case-evaluation'}
           >
-            Start Your Free Case Review
+            START YOUR FREE CASE REVIEW
           </Button>
-          
-          <p className="text-sm text-[#86868b] mt-4">
-            No Win, No Fee Guarantee
-          </p>
         </div>
       </div>
 

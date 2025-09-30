@@ -6,7 +6,6 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
-import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Defamation from "./pages/practice-areas/Defamation";
 import DefamationCaseEvaluation from "./pages/practice-areas/defamation/CaseEvaluation";
@@ -255,7 +254,6 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <CustomCursor />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           
           <Navigation />

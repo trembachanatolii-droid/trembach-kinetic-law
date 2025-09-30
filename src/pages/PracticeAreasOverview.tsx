@@ -66,54 +66,60 @@ interface PracticeArea {
 }
 
 const practiceAreas: PracticeArea[] = [
-  { id: 'mesothelioma-asbestos', title: 'Mesothelioma & Asbestos', image: mesotheliomaAsbestosImg, slug: 'mesothelioma-asbestos', category: 'toxic' },
-  { id: 'silicosis-injuries', title: 'Silicosis Injuries', image: silicosisInjuriesImg, slug: 'silicosis-injuries', category: 'toxic' },
-  { id: 'talc-baby-powder-cancer', title: 'Talc & Baby Powder Cancer', image: talcBabyPowderCancerImg, slug: 'talc-baby-powder-cancer', category: 'toxic' },
-  { id: 'truck-18-wheeler-accidents', title: 'Truck & 18-Wheeler Accidents', image: truck18WheelerAccidentsImg, slug: 'truck-18-wheeler-accidents', category: 'vehicle' },
-  { id: 'car-accidents', title: 'Car Accidents', image: carAccidentsImg, slug: 'car-accidents', category: 'vehicle' },
-  { id: 'motorcycle-accidents', title: 'Motorcycle Accidents', image: motorcycleAccidentsImg, slug: 'motorcycle-accidents', category: 'vehicle' },
-  { id: 'pedestrian-accidents', title: 'Pedestrian Accidents', image: pedestrianAccidentsImg, slug: 'pedestrian-accidents', category: 'vehicle' },
-  { id: 'bicycle-accidents', title: 'Bicycle Accidents', image: bicycleAccidentsImg, slug: 'bicycle-accidents', category: 'vehicle' },
-  { id: 'uber-lyft-accidents', title: 'Uber & Lyft Accidents', image: uberLyftAccidentsImg, slug: 'uber-lyft-accidents', category: 'vehicle' },
-  { id: 'bus-accidents', title: 'Bus Accidents', image: busAccidentsImg, slug: 'bus-accidents', category: 'vehicle' },
-  { id: 'aviation-accidents', title: 'Aviation Accidents', image: aviationAccidentsImg, slug: 'aviation-accidents', category: 'vehicle' },
-  { id: 'boating-accidents', title: 'Boating Accidents', image: boatingAccidentsImg, slug: 'boating-accidents', category: 'vehicle' },
-  { id: 'train-accidents', title: 'Train Accidents', image: trainAccidentsImg, slug: 'train-accidents', category: 'vehicle' },
-  { id: 'hit-run-accidents', title: 'Hit & Run Accidents', image: hitRunAccidentsImg, slug: 'hit-run-accidents', category: 'vehicle' },
-  { id: 'driving-under-influence', title: 'Driving Under Influence', image: drivingUnderInfluenceImg, slug: 'driving-under-influence', category: 'vehicle' },
-  { id: 'electrical-injuries', title: 'Electrical Injuries', image: electricalInjuriesImg, slug: 'electrical-injuries', category: 'workplace' },
-  { id: 'workplace-injuries', title: 'Workplace Injuries', image: workplaceInjuriesImg, slug: 'workplace-injuries', category: 'workplace' },
-  { id: 'construction-accidents', title: 'Construction Accidents', image: constructionAccidentsImg, slug: 'construction-accidents', category: 'workplace' },
-  { id: 'slip-fall-accidents', title: 'Slip & Fall Accidents', image: slipFallAccidentsImg, slug: 'slip-fall-accidents', category: 'premises' },
-  { id: 'premises-liability', title: 'Premises Liability', image: premisesLiabilityImg, slug: 'premises-liability', category: 'premises' },
-  { id: 'product-liability', title: 'Product Liability', image: productLiabilityImg, slug: 'product-liability', category: 'product' },
-  { id: 'defective-products', title: 'Defective Products', image: defectiveProductsImg, slug: 'defective-products', category: 'product' },
-  { id: 'medical-device-injuries', title: 'Medical Device Injuries', image: medicalDeviceInjuriesImg, slug: 'medical-device-injuries', category: 'medical' },
-  { id: 'pharmaceutical-negligence', title: 'Pharmaceutical Negligence', image: pharmaceuticalNegligenceImg, slug: 'pharmaceutical-negligence', category: 'medical' },
-  { id: 'medical-malpractice', title: 'Medical Malpractice', image: medicalMalpracticeImg, slug: 'medical-malpractice', category: 'medical' },
-  { id: 'surgical-errors', title: 'Surgical Errors', image: surgicalErrorsImg, slug: 'surgical-errors', category: 'medical' },
-  { id: 'birth-injuries', title: 'Birth Injuries', image: birthInjuriesImg, slug: 'birth-injuries', category: 'medical' },
-  { id: 'nursing-hom-abuse', title: 'Nursing Home Abuse', image: nursingHomAbuseImg, slug: 'nursing-hom-abuse', category: 'medical' },
-  { id: 'wrongful-death', title: 'Wrongful Death', image: wrongfulDeathImg, slug: 'wrongful-death', category: 'catastrophic' },
-  { id: 'catastrophic-injuries', title: 'Catastrophic Injuries', image: catastrophicInjuriesImg, slug: 'catastrophic-injuries', category: 'catastrophic' },
-  { id: 'brain-injuries', title: 'Brain Injuries', image: brainInjuriesImg, slug: 'brain-injuries', category: 'catastrophic' },
-  { id: 'spinal-cord-injuries', title: 'Spinal Cord Injuries', image: spinalCordInjuriesImg, slug: 'spinal-cord-injuries', category: 'catastrophic' },
-  { id: 'burn-injuries', title: 'Burn Injuries', image: burnInjuriesImg, slug: 'burn-injuries', category: 'catastrophic' },
-  { id: 'amputation-injuries', title: 'Amputation Injuries', image: amputationInjuriesImg, slug: 'amputation-injuries', category: 'catastrophic' },
-  { id: 'fracture-bone-injuries', title: 'Fracture & Bone Injuries', image: fractureBoneInjuriesImg, slug: 'fracture-bone-injuries', category: 'catastrophic' },
-  { id: 'dog-bites', title: 'Dog Bites', image: dogBitesImg, slug: 'dog-bites', category: 'animal' },
-  { id: 'animal-attacks', title: 'Animal Attacks', image: animalAttacksImg, slug: 'animal-attacks', category: 'animal' },
-  { id: 'toxic-exposure', title: 'Toxic Exposure', image: toxicExposureImg, slug: 'toxic-exposure', category: 'toxic' },
-  { id: 'environmental-pollution', title: 'Environmental Pollution', image: environmentalPollutionImg, slug: 'environmental-pollution', category: 'toxic' },
-  { id: 'industrial-accidents', title: 'Industrial Accidents', image: industrialAccidentsImg, slug: 'industrial-accidents', category: 'workplace' },
-  { id: 'pipeline-explosions', title: 'Pipeline Explosions', image: pipelineExplosionsImg, slug: 'pipeline-explosions', category: 'workplace' },
-  { id: 'refineries', title: 'Refineries', image: refineriesImg, slug: 'refineries', category: 'workplace' },
-  { id: 'chemical-plants', title: 'Chemical Plants', image: chemicalPlantsImg, slug: 'chemical-plants', category: 'workplace' },
-  { id: 'civil-rights-violations', title: 'Civil Rights Violations', image: civilRightsViolationsImg, slug: 'civil-rights-violations', category: 'civil' },
-  { id: 'police-brutality', title: 'Police Brutality', image: policeBrutalityImg, slug: 'police-brutality', category: 'civil' },
-  { id: 'sexual-abuse-assault', title: 'Sexual Abuse & Assault', image: sexualAbuseAssaultImg, slug: 'sexual-abuse-assault', category: 'civil' },
-  { id: 'child-abuse', title: 'Child Abuse', image: childAbuseImg, slug: 'child-abuse', category: 'civil' },
-  { id: 'human-trafficking', title: 'Human Trafficking', image: humanTraffickingImg, slug: 'human-trafficking', category: 'civil' },
+  // Toxic Exposure & Environmental
+  { id: 'mesothelioma-asbestos', title: 'Mesothelioma & Asbestos', image: mesotheliomaAsbestosImg, slug: 'mesothelioma-asbestos', category: 'Environmental' },
+  { id: 'silicosis-injuries', title: 'Silicosis Injuries', image: silicosisInjuriesImg, slug: 'silicosis-injuries', category: 'Environmental' },
+  { id: 'talc-baby-powder-cancer', title: 'Talc & Baby Powder Cancer', image: talcBabyPowderCancerImg, slug: 'talc-baby-powder-cancer', category: 'Environmental' },
+  { id: 'toxic-exposure', title: 'Toxic Exposure', image: toxicExposureImg, slug: 'toxic-exposure', category: 'Environmental' },
+  { id: 'environmental-pollution', title: 'Environmental Pollution', image: environmentalPollutionImg, slug: 'environmental-pollution', category: 'Environmental' },
+  
+  // Vehicle Accidents
+  { id: 'truck-18-wheeler-accidents', title: 'Truck & 18-Wheeler Accidents', image: truck18WheelerAccidentsImg, slug: 'truck-18-wheeler-accidents', category: 'Vehicle Accidents' },
+  { id: 'car-accidents', title: 'Car Accidents', image: carAccidentsImg, slug: 'car-accidents', category: 'Vehicle Accidents' },
+  { id: 'motorcycle-accidents', title: 'Motorcycle Accidents', image: motorcycleAccidentsImg, slug: 'motorcycle-accidents', category: 'Vehicle Accidents' },
+  { id: 'pedestrian-accidents', title: 'Pedestrian Accidents', image: pedestrianAccidentsImg, slug: 'pedestrian-accidents', category: 'Vehicle Accidents' },
+  { id: 'bicycle-accidents', title: 'Bicycle Accidents', image: bicycleAccidentsImg, slug: 'bicycle-accidents', category: 'Vehicle Accidents' },
+  { id: 'uber-lyft-accidents', title: 'Uber & Lyft Accidents', image: uberLyftAccidentsImg, slug: 'uber-lyft-accidents', category: 'Vehicle Accidents' },
+  { id: 'bus-accidents', title: 'Bus Accidents', image: busAccidentsImg, slug: 'bus-accidents', category: 'Vehicle Accidents' },
+  { id: 'aviation-accidents', title: 'Aviation Accidents', image: aviationAccidentsImg, slug: 'aviation-accidents', category: 'Vehicle Accidents' },
+  { id: 'boating-accidents', title: 'Maritime Accidents', image: boatingAccidentsImg, slug: 'boating-accidents', category: 'Vehicle Accidents' },
+  { id: 'train-accidents', title: 'Train Accidents', image: trainAccidentsImg, slug: 'train-accidents', category: 'Vehicle Accidents' },
+  
+  // Workplace Injuries
+  { id: 'electrical-injuries', title: 'Electrocution Injuries', image: electricalInjuriesImg, slug: 'electrical-injuries', category: 'Workplace' },
+  { id: 'workplace-injuries', title: 'Workplace Injuries', image: workplaceInjuriesImg, slug: 'workplace-injuries', category: 'Workplace' },
+  { id: 'construction-accidents', title: 'Construction Accidents', image: constructionAccidentsImg, slug: 'construction-accidents', category: 'Workplace' },
+  { id: 'industrial-accidents', title: 'Industrial Accidents', image: industrialAccidentsImg, slug: 'industrial-accidents', category: 'Workplace' },
+  { id: 'pipeline-explosions', title: 'Pipeline Explosions', image: pipelineExplosionsImg, slug: 'pipeline-explosions', category: 'Workplace' },
+  
+  // Premises Liability
+  { id: 'slip-fall-accidents', title: 'Slip & Fall Accidents', image: slipFallAccidentsImg, slug: 'slip-fall-accidents', category: 'Premises' },
+  { id: 'premises-liability', title: 'Premises Liability', image: premisesLiabilityImg, slug: 'premises-liability', category: 'Premises' },
+  
+  // Product Liability
+  { id: 'product-liability', title: 'Product Liability', image: productLiabilityImg, slug: 'product-liability', category: 'Products' },
+  { id: 'defective-products', title: 'Defective Products', image: defectiveProductsImg, slug: 'defective-products', category: 'Products' },
+  
+  // Medical Negligence
+  { id: 'medical-device-injuries', title: 'Medical Device Injuries', image: medicalDeviceInjuriesImg, slug: 'medical-device-injuries', category: 'Medical' },
+  { id: 'pharmaceutical-negligence', title: 'Pharmaceutical Negligence', image: pharmaceuticalNegligenceImg, slug: 'pharmaceutical-negligence', category: 'Medical' },
+  { id: 'medical-malpractice', title: 'Medical Malpractice', image: medicalMalpracticeImg, slug: 'medical-malpractice', category: 'Medical' },
+  { id: 'surgical-errors', title: 'Surgical Errors', image: surgicalErrorsImg, slug: 'surgical-errors', category: 'Medical' },
+  { id: 'birth-injuries', title: 'Birth Injuries', image: birthInjuriesImg, slug: 'birth-injuries', category: 'Medical' },
+  { id: 'nursing-hom-abuse', title: 'Nursing Home Abuse', image: nursingHomAbuseImg, slug: 'nursing-hom-abuse', category: 'Medical' },
+  
+  // Catastrophic Injuries
+  { id: 'wrongful-death', title: 'Wrongful Death', image: wrongfulDeathImg, slug: 'wrongful-death', category: 'Catastrophic' },
+  { id: 'catastrophic-injuries', title: 'Catastrophic Injuries', image: catastrophicInjuriesImg, slug: 'catastrophic-injuries', category: 'Catastrophic' },
+  { id: 'brain-injuries', title: 'Traumatic Brain Injuries', image: brainInjuriesImg, slug: 'brain-injuries', category: 'Catastrophic' },
+  { id: 'spinal-cord-injuries', title: 'Spinal Cord Injuries', image: spinalCordInjuriesImg, slug: 'spinal-cord-injuries', category: 'Catastrophic' },
+  { id: 'burn-injuries', title: 'Burn Injuries', image: burnInjuriesImg, slug: 'burn-injuries', category: 'Catastrophic' },
+  { id: 'amputation-injuries', title: 'Amputation Injuries', image: amputationInjuriesImg, slug: 'amputation-injuries', category: 'Catastrophic' },
+  { id: 'fracture-bone-injuries', title: 'Fracture & Bone Injuries', image: fractureBoneInjuriesImg, slug: 'fracture-bone-injuries', category: 'Catastrophic' },
+  
+  // Animal Attacks
+  { id: 'dog-bites', title: 'Dog Bites', image: dogBitesImg, slug: 'dog-bites', category: 'Animal Attacks' },
+  { id: 'animal-attacks', title: 'Animal Attacks', image: animalAttacksImg, slug: 'animal-attacks', category: 'Animal Attacks' },
 ];
 
 const PracticeAreasOverview = () => {
@@ -186,28 +192,27 @@ const PracticeAreasOverview = () => {
         canonical="/practice-areas"
       />
 
-      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-blue-50 pt-[44px]">
+      <div className="min-h-screen bg-white pt-[44px]">
         <div className="flex">
-          {/* Sidebar with 3D depth */}
-          <aside className="hidden lg:block w-[320px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 shadow-2xl">
-            <div className="p-8 pb-12 backdrop-blur-sm bg-black/10">
-              <div className="flex items-center gap-3 mb-8">
-                <Scale className="h-8 w-8 text-red-500" />
-                <h1 className="text-3xl font-bold text-white">Practice Areas</h1>
+          {/* Apple-style Sidebar */}
+          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white/80 backdrop-blur-2xl border-r border-gray-100">
+            <div className="p-6 pb-12">
+              <div className="mb-8">
+                <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">Practice Areas</h1>
+                <p className="text-sm text-gray-500 mt-1">{practiceAreas.length} specializations</p>
               </div>
-              <nav className="space-y-1">
+              <nav className="space-y-0.5">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area.id)}
-                    className={`group w-full text-left py-3 px-4 text-sm transition-all duration-300 border-l-4 rounded-r-lg relative overflow-hidden ${
+                    className={`group w-full text-left py-2.5 px-3 text-sm font-medium transition-all duration-200 rounded-lg ${
                       selectedArea === area.id
-                        ? 'border-red-600 bg-gradient-to-r from-red-600/20 to-red-600/10 text-white font-semibold shadow-lg shadow-red-500/20'
-                        : 'border-transparent text-gray-400 hover:text-white hover:bg-white/5 hover:border-red-500/50'
+                        ? 'bg-gray-900 text-white'
+                        : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                     }`}
                   >
-                    <span className="relative z-10">{area.title}</span>
-                    <div className={`absolute inset-0 bg-gradient-to-r from-red-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300`} />
+                    {area.title}
                   </button>
                 ))}
               </nav>
@@ -215,135 +220,120 @@ const PracticeAreasOverview = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1 lg:ml-[320px]">
-            {/* Hero Section with parallax */}
+          <main className="flex-1 lg:ml-[280px]">
+            {/* Apple-style Hero Section */}
             <section 
               ref={heroRef}
-              className="relative min-h-[50vh] flex items-center justify-center overflow-hidden"
+              className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gray-50"
             >
-              {/* Animated background gradient */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-600 via-purple-600 to-red-600 opacity-90">
-                <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4xIi8+PC9nPjwvc3ZnPg==')] opacity-20" />
-              </div>
-              
-              <div className="relative z-10 text-center px-6 py-20">
-                <Shield className="h-20 w-20 text-white mx-auto mb-6 drop-shadow-2xl" />
-                <h2 className="text-6xl md:text-7xl font-bold mb-6 text-white drop-shadow-2xl">
-                  Cases We Handle
+              <div className="relative z-10 text-center px-6 py-32 max-w-5xl mx-auto">
+                <h2 className="text-6xl md:text-8xl font-semibold mb-6 text-gray-900 tracking-tight leading-none">
+                  Expert Legal<br />Representation
                 </h2>
-                <p className="text-2xl text-white/90 mb-8 max-w-3xl mx-auto drop-shadow-lg">
-                  Comprehensive legal representation across 50+ practice areas throughout California
+                <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
+                  Comprehensive injury law coverage across California.<br />
+                  We fight for your rights.
                 </p>
-                <div className="flex gap-4 justify-center">
-                  <div className="px-6 py-3 bg-white/20 backdrop-blur-md rounded-full text-white font-semibold border border-white/30">
-                    50+ Practice Areas
+                <div className="flex gap-3 justify-center flex-wrap">
+                  <div className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium">
+                    {practiceAreas.length}+ Practice Areas
                   </div>
-                  <div className="px-6 py-3 bg-white/20 backdrop-blur-md rounded-full text-white font-semibold border border-white/30">
+                  <div className="px-5 py-2.5 bg-white text-gray-900 rounded-full text-sm font-medium border border-gray-200">
                     No Fees Unless We Win
                   </div>
                 </div>
               </div>
-
-              {/* 3D floating elements */}
-              <div className="absolute top-20 left-10 w-32 h-32 bg-white/10 backdrop-blur-md rounded-3xl transform rotate-12 animate-pulse" />
-              <div className="absolute bottom-20 right-10 w-40 h-40 bg-white/10 backdrop-blur-md rounded-3xl transform -rotate-12 animate-pulse" style={{ animationDelay: '1s' }} />
             </section>
 
-            {/* Practice Area Cards Grid with 3D effects */}
+            {/* Apple-style Cards Grid with 3D effects */}
             <section ref={cardsRef} className="py-20 px-6 max-w-7xl mx-auto">
-              <div className="grid md:grid-cols-2 gap-8">
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {practiceAreas.map((area, index) => (
                   <Link
                     key={area.id}
                     id={`card-${area.id}`}
                     to={`/practice-areas/${area.slug}`}
-                    className="practice-card group relative h-[450px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-500 hover:shadow-red-500/20"
+                    className="practice-card group relative h-[400px] rounded-3xl overflow-hidden bg-white transition-all duration-500 hover:scale-[1.02]"
                     style={{
                       perspective: '1000px',
                       transformStyle: 'preserve-3d',
                     }}
                   >
-                    {/* Background Image with parallax */}
-                    <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-110">
-                      <img
-                        src={area.image}
-                        alt={area.title}
-                        className="w-full h-full object-cover"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-90 group-hover:opacity-95 transition-opacity duration-500" />
+                    {/* Background Image with 3D parallax */}
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div className="absolute inset-0 transition-transform duration-700 group-hover:scale-105">
+                        <img
+                          src={area.image}
+                          alt={area.title}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent" />
                     </div>
 
-                    {/* 3D layered content */}
-                    <div className="relative h-full flex flex-col justify-end p-8 transform transition-transform duration-500 group-hover:translate-z-12">
+                    {/* Content */}
+                    <div className="relative h-full flex flex-col justify-between p-6">
                       {/* Category badge */}
-                      <div className="absolute top-6 right-6 px-4 py-2 bg-red-600 text-white text-sm font-bold rounded-full shadow-lg transform transition-all duration-300 group-hover:scale-110 group-hover:shadow-red-500/50">
-                        {area.category.toUpperCase()}
+                      <div className="self-start">
+                        <span className="inline-block px-3 py-1.5 bg-white/90 backdrop-blur-md rounded-full text-gray-900 text-xs font-medium">
+                          {area.category}
+                        </span>
                       </div>
 
-                      {/* Title with 3D text effect */}
-                      <h3 className="text-4xl font-bold text-white mb-4 transform transition-all duration-500 group-hover:translate-y-[-12px] drop-shadow-2xl">
-                        {area.title}
-                      </h3>
+                      {/* Title */}
+                      <div>
+                        <h3 className="text-2xl font-semibold text-white mb-3 tracking-tight leading-tight">
+                          {area.title}
+                        </h3>
 
-                      {/* Animated underline */}
-                      <div className="w-20 h-1 bg-red-600 mb-6 transform transition-all duration-500 group-hover:w-32 group-hover:bg-gradient-to-r group-hover:from-red-600 group-hover:to-purple-600" />
-
-                      {/* CTA with icon */}
-                      <div className="flex items-center text-white font-semibold text-lg opacity-0 transform translate-y-8 transition-all duration-500 group-hover:opacity-100 group-hover:translate-y-0">
-                        <span className="mr-2">Explore This Practice</span>
-                        <ChevronRight className="h-6 w-6 transform transition-transform duration-300 group-hover:translate-x-2" />
+                        {/* CTA */}
+                        <div className="flex items-center gap-2 text-white text-sm font-medium group-hover:gap-3 transition-all duration-300">
+                          <span>Learn more</span>
+                          <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+                        </div>
                       </div>
-
-                      {/* Hover glow effect */}
-                      <div className="absolute inset-0 border-4 border-red-500/0 rounded-2xl transition-all duration-500 group-hover:border-red-500/30 pointer-events-none" />
                     </div>
 
-                    {/* 3D shine effect */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none transform group-hover:translate-x-full" style={{ transitionDelay: '100ms' }} />
+                    {/* Subtle shine effect */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/10 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
                   </Link>
                 ))}
               </div>
             </section>
 
-            {/* CTA Section with depth */}
-            <section className="relative py-24 px-6 overflow-hidden">
-              {/* Gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-red-900 to-gray-900" />
-              <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGQ9Ik0zNiAxOGMzLjMxNCAwIDYgMi42ODYgNiA2cy0yLjY4NiA2LTYgNi02LTIuNjg2LTYtNiAyLjY4Ni02IDYtNnoiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii4wNSIvPjwvZz48L3N2Zz4=')] opacity-30" />
-              
-              <div className="relative z-10 max-w-4xl mx-auto text-center">
-                <Scale className="h-16 w-16 text-red-500 mx-auto mb-6 animate-pulse" />
-                <h2 className="text-5xl md:text-6xl font-bold mb-6 text-white drop-shadow-2xl">
-                  Ready to Discuss Your Case?
+            {/* Apple-style CTA Section */}
+            <section className="py-32 px-6 bg-gray-50">
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-5xl md:text-7xl font-semibold text-gray-900 mb-6 tracking-tight">
+                  Get the compensation<br />you deserve.
                 </h2>
-                <p className="text-2xl text-gray-300 mb-10 leading-relaxed">
-                  Free consultation with a former insurance defense attorney who knows their tactics
+                <p className="text-xl text-gray-600 mb-12 font-light max-w-2xl mx-auto">
+                  Free consultation. No fees unless we win your case.<br />
+                  Available 24/7 with multilingual support.
                 </p>
-                <Link
-                  to="/case-evaluation"
-                  className="inline-flex items-center gap-3 bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white font-bold px-10 py-5 rounded-full text-xl transition-all duration-300 transform hover:scale-105 hover:shadow-2xl hover:shadow-red-500/50"
-                >
-                  START YOUR FREE CASE REVIEW
-                  <ChevronRight className="h-6 w-6" />
-                </Link>
-
-                {/* Floating badges */}
-                <div className="mt-12 flex flex-wrap gap-4 justify-center">
-                  <div className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-full text-white font-medium border border-white/20">
-                    No Fees Unless We Win
-                  </div>
-                  <div className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-full text-white font-medium border border-white/20">
-                    Former Insurance Defense Attorney
-                  </div>
-                  <div className="px-6 py-3 bg-white/10 backdrop-blur-md rounded-full text-white font-medium border border-white/20">
-                    All 58 California Counties
-                  </div>
+                <div className="flex gap-4 justify-center flex-wrap mb-12">
+                  <a
+                    href="tel:213-908-9708"
+                    className="group px-8 py-4 bg-gray-900 text-white font-medium text-base rounded-full transition-all duration-200 hover:bg-gray-800 flex items-center gap-2"
+                  >
+                    Call (213) 908-9708
+                    <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                  </a>
+                  <Link
+                    to="/contact"
+                    className="px-8 py-4 bg-white text-gray-900 font-medium text-base rounded-full border border-gray-300 transition-all duration-200 hover:border-gray-900"
+                  >
+                    Free Consultation
+                  </Link>
+                </div>
+                <div className="flex gap-8 justify-center text-sm text-gray-600">
+                  <div>Available 24/7</div>
+                  <div>·</div>
+                  <div>Multilingual Staff</div>
+                  <div>·</div>
+                  <div>$100M+ Recovered</div>
                 </div>
               </div>
-
-              {/* 3D geometric elements */}
-              <div className="absolute top-10 left-10 w-40 h-40 bg-red-500/10 backdrop-blur-md rounded-full transform -translate-x-1/2 -translate-y-1/2" />
-              <div className="absolute bottom-10 right-10 w-56 h-56 bg-purple-500/10 backdrop-blur-md rounded-full transform translate-x-1/2 translate-y-1/2" />
             </section>
           </main>
         </div>

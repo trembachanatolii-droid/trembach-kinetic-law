@@ -111,7 +111,9 @@ const Hero = () => {
 
           <Button
             ref={buttonRef}
-            className="mt-12 rounded-full bg-[hsl(211,100%,43%)] text-white hover:bg-[hsl(211,100%,38%)] font-normal px-8 py-4 text-base shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 ease-out"
+            variant="apple"
+            size="lg"
+            className="mt-12 rounded-full px-8 py-4 text-base shadow-lg hover:shadow-xl transform hover:scale-105 hover:-translate-y-0.5 transition-all duration-300 ease-out"
             onClick={() => window.location.href = '/case-evaluation'}
           >
             Start Your Free Case Review

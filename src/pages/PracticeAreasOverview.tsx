@@ -145,9 +145,9 @@ const PracticeAreasOverview = () => {
       <div className="min-h-screen bg-background pt-[44px]">
         <div className="flex">
           {/* Sidebar */}
-          <aside className="hidden lg:block w-[365px] bg-[#2c2c2c] text-white fixed left-0 top-[44px] bottom-0 overflow-y-auto">
+          <aside className="hidden lg:block w-[365px] bg-white border-r border-gray-200 fixed left-0 top-[44px] bottom-0 overflow-y-auto shadow-sm">
             <div className="p-8 pb-12">
-              <h1 className="text-3xl font-bold mb-8">Our Practice Areas</h1>
+              <h1 className="text-3xl font-bold mb-8 text-gray-900">Our Practice Areas</h1>
               <nav className="space-y-0">
                 {practiceAreas.map((area) => (
                   <button
@@ -155,8 +155,8 @@ const PracticeAreasOverview = () => {
                     onClick={() => handleAreaClick(area.id)}
                     className={`w-full text-left py-3 px-4 text-base transition-all duration-200 border-l-4 ${
                       selectedArea === area.id
-                        ? 'border-red-600 bg-[#3c3c3c] text-white font-medium'
-                        : 'border-transparent text-gray-300 hover:text-white hover:bg-[#3c3c3c]'
+                        ? 'border-red-600 bg-red-50 text-gray-900 font-medium'
+                        : 'border-transparent text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
                     {area.title}
@@ -169,10 +169,10 @@ const PracticeAreasOverview = () => {
           {/* Main Content */}
           <main className="flex-1 lg:ml-[365px]">
             {/* Hero Section */}
-            <section className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 px-6">
+            <section className="bg-gradient-to-br from-gray-50 via-white to-gray-50 py-20 px-6 border-b border-gray-200">
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-5xl font-bold mb-6">Cases We Handle</h2>
-                <p className="text-xl text-gray-300 mb-8">
+                <h2 className="text-5xl font-bold mb-6 text-gray-900">Cases We Handle</h2>
+                <p className="text-xl text-gray-600 mb-8">
                   Comprehensive legal representation across 50+ practice areas throughout California
                 </p>
               </div>
@@ -214,10 +214,10 @@ const PracticeAreasOverview = () => {
             </section>
 
             {/* CTA Section */}
-            <section className="bg-gray-900 text-white py-16 px-6">
+            <section className="bg-gradient-to-br from-blue-50 to-gray-50 py-16 px-6 border-t border-gray-200">
               <div className="max-w-4xl mx-auto text-center">
-                <h2 className="text-4xl font-bold mb-6">Ready to Discuss Your Case?</h2>
-                <p className="text-xl text-gray-300 mb-8">
+                <h2 className="text-4xl font-bold mb-6 text-gray-900">Ready to Discuss Your Case?</h2>
+                <p className="text-xl text-gray-600 mb-8">
                   Free consultation with a former insurance defense attorney who knows their tactics
                 </p>
                 <Link

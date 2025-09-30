@@ -186,8 +186,6 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 			ref={containerRef}
 			className={cn('pointer-events-none fixed inset-0 -z-1', className)}
 			{...props}
-		>
-			{props.children}
-		</div>
+		/>
 	);
 }

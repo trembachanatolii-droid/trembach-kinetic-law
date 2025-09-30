@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { DottedSurface } from '@/components/ui/dotted-surface';
-import { ThemeProvider } from 'next-themes';
+
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
@@ -98,16 +98,7 @@ const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
       {/* Dotted Surface Background */}
-      <ThemeProvider attribute="class" forcedTheme="dark">
-        <DottedSurface className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div
-              aria-hidden="true"
-              className={"pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,hsl(var(--foreground)/.2),transparent_60%)] blur-[40px]"}
-            />
-          </div>
-        </DottedSurface>
-      </ThemeProvider>
+      <DottedSurface className="absolute inset-0 w-full h-full" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">

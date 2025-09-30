@@ -22,9 +22,9 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 	useEffect(() => {
 		if (!containerRef.current) return;
 
-		const SEPARATION = 100;
-		const AMOUNTX = 70;
-		const AMOUNTY = 90;
+		const SEPARATION = 150;
+		const AMOUNTX = 40;
+		const AMOUNTY = 60;
 
 		// Scene setup
 		const scene = new THREE.Scene();
@@ -64,9 +64,9 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
 				positions.push(x, y, z);
 				if (theme === 'dark') {
-					colors.push(0.85, 0.85, 0.85);
+					colors.push(200, 200, 200);
 				} else {
-					colors.push(0.15, 0.15, 0.15);
+					colors.push(0, 0, 0);
 				}
 			}
 		}
@@ -79,10 +79,10 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
 		// Create material
 		const material = new THREE.PointsMaterial({
-			size: 2.4,
+			size: 8,
 			vertexColors: true,
 			transparent: true,
-			opacity: 0.9,
+			opacity: 0.8,
 			sizeAttenuation: true,
 		});
 
@@ -107,8 +107,8 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 
 					// Animate Y position with sine waves
 					positions[index + 1] =
-						Math.sin((ix + count) * 0.3) * 35 +
-						Math.sin((iy + count) * 0.5) * 35;
+						Math.sin((ix + count) * 0.3) * 50 +
+						Math.sin((iy + count) * 0.5) * 50;
 
 					i++;
 				}
@@ -184,7 +184,7 @@ export function DottedSurface({ className, ...props }: DottedSurfaceProps) {
 	return (
 		<div
 			ref={containerRef}
-			className={cn('pointer-events-none fixed inset-0 -z-10', className)}
+			className={cn('pointer-events-none fixed inset-0 -z-1', className)}
 			{...props}
 		/>
 	);

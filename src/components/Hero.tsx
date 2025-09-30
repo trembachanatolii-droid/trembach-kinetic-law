@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import { DottedSurface } from '@/components/ui/dotted-surface';
+import Threads from '@/components/ui/Threads';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -97,8 +97,14 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
-      {/* Dotted Surface Background */}
-      <DottedSurface className="absolute inset-0 w-full h-full" />
+      {/* Threads Background */}
+      <Threads 
+        color={[0.2, 0.2, 0.2]} 
+        amplitude={0.8} 
+        distance={0.3} 
+        enableMouseInteraction={true}
+        className="absolute inset-0 w-full h-full"
+      />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">

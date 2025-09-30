@@ -1,6 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
+import { DottedSurface } from '@/components/ui/dotted-surface';
+import { cn } from '@/lib/utils';
 import lawyerPortrait from '@/assets/lawyer-portrait.png';
 import lawOfficeBg from '@/assets/law-office-background.png';
 
@@ -98,19 +100,22 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/hero-video.webm" type="video/webm" />
-      </video>
+      {/* Dotted Surface Background */}
+      <DottedSurface className="absolute inset-0 w-full h-full">
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            aria-hidden="true"
+            className={cn(
+              'pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full',
+              'bg-[radial-gradient(ellipse_at_center,hsl(var(--foreground)/.1),transparent_50%)]',
+              'blur-[30px]',
+            )}
+          />
+        </div>
+      </DottedSurface>
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-black/20" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">

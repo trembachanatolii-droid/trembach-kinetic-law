@@ -57,7 +57,7 @@ const Navigation = () => {
               <>
                 {/* Backdrop blur overlay */}
                 <div 
-                  className="fixed inset-0 top-[44px] z-[90] animate-in fade-in duration-200" 
+                  className="mega-blur-overlay fixed inset-0 top-[44px] z-[90] animate-in fade-in duration-200" 
                   style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
                     backdropFilter: 'blur(20px)',

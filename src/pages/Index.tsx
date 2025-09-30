@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../components/CriticalFixes.css'; // Emergency visibility fixes
 import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
@@ -14,7 +14,6 @@ import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreasReference from '../components/PracticeAreasReference';
 import Process from '../components/Process';
 import SEO from '../components/SEO';
-import Preloader from '../components/Preloader';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
 import { VerticalRope } from '../components/animations/VerticalRope';
@@ -22,9 +21,6 @@ import { VerticalRope } from '../components/animations/VerticalRope';
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [showContent, setShowContent] = useState(false);
-
   useEffect(() => {
     // Initialize smooth scrolling and animations
     gsap.registerPlugin(ScrollTrigger);
@@ -37,50 +33,12 @@ const Index = () => {
     };
   }, []);
 
-  const handlePreloaderComplete = () => {
-    setIsLoading(false);
-    setShowContent(true);
-    
-    // Refresh ScrollTrigger after showing content
-    setTimeout(() => {
-      ScrollTrigger.refresh();
-    }, 100);
-  };
-
-  useEffect(() => {
-    if (isLoading) {
-      const t = setTimeout(() => {
-        handlePreloaderComplete();
-      }, 1200);
-      return () => clearTimeout(t);
-    }
-  }, [isLoading]);
-
-  // Global failsafe: ensure all sections are visible even if animations fail
-  useEffect(() => {
-    if (!showContent) return;
-    const ensureVisible = () => {
-      const sections = Array.from(document.querySelectorAll('section')) as HTMLElement[];
-      sections.forEach((el) => {
-        const op = parseFloat(getComputedStyle(el).opacity || '1');
-        if (!isNaN(op) && op < 0.99) {
-          el.style.opacity = '1';
-        }
-      });
-      ScrollTrigger.refresh();
-    };
-
-    const id = setTimeout(ensureVisible, 200);
-    return () => clearTimeout(id);
-  }, [showContent]);
-
   return (
     <>
       <GlobalVisibilityFix />
       <BlurFix />
-      {isLoading && <Preloader onComplete={handlePreloaderComplete} />}
       
-    <main className="relative bg-background text-foreground" style={{ opacity: showContent ? 1 : 0 }}>
+    <main className="relative bg-background text-foreground">
       <SEO 
         title="Trembach Law Firm | California Injury & Asbestos Attorney"
         description="Former insurance defense attorney helping Californians. New firm, insider tactics, no fees unless we win."

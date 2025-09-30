@@ -199,15 +199,15 @@ const PracticeAreasOverview = () => {
                 <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">Practice Areas</h1>
                 <p className="text-sm text-gray-500 mt-1">{practiceAreas.length} specializations</p>
               </div>
-              <nav className="space-y-0.5">
+              <nav className="space-y-1">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area.id)}
-                    className={`group w-full text-left py-2.5 px-3 text-sm font-medium transition-all duration-200 rounded-lg ${
+                    className={`group w-full text-left py-2 px-3 text-sm font-medium transition-all duration-150 ${
                       selectedArea === area.id
-                        ? 'bg-gray-900 text-white'
-                        : 'text-gray-700 hover:bg-gray-100 hover:text-gray-900'
+                        ? 'text-gray-900 bg-gray-100'
+                        : 'text-gray-600 hover:text-gray-900'
                     }`}
                   >
                     {area.title}
@@ -234,11 +234,14 @@ const PracticeAreasOverview = () => {
                 </p>
                 <div className="flex gap-3 justify-center flex-wrap">
                   <div className="px-5 py-2.5 bg-gray-900 text-white rounded-full text-sm font-medium">
-                    {practiceAreas.length}+ Practice Areas
+                    {practiceAreas.length} Practice Areas
                   </div>
-                  <div className="px-5 py-2.5 bg-white text-gray-900 rounded-full text-sm font-medium border border-gray-200">
-                    No Fees Unless We Win
-                  </div>
+                  <Link
+                    to="/free-consultation"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-full text-sm font-medium transition-all duration-200"
+                  >
+                    START YOUR FREE CASE REVIEW
+                  </Link>
                 </div>
               </div>
             </section>
@@ -312,14 +315,14 @@ const PracticeAreasOverview = () => {
                 <div className="flex gap-4 justify-center flex-wrap mb-12">
                   <a
                     href="tel:213-908-9708"
-                    className="group px-8 py-4 bg-gray-900 text-white font-medium text-base rounded-full transition-all duration-200 hover:bg-gray-800 flex items-center gap-2"
+                    className="group px-8 py-4 bg-gray-900 text-white font-semibold text-base rounded-full transition-all duration-200 hover:bg-gray-800 flex items-center gap-2 shadow-lg"
                   >
-                    Call (213) 908-9708
-                    <ChevronRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+                    <span className="text-white">Call (213) 908-9708</span>
+                    <ChevronRight className="h-4 w-4 text-white transition-transform duration-200 group-hover:translate-x-1" />
                   </a>
                   <Link
-                    to="/contact"
-                    className="px-8 py-4 bg-white text-gray-900 font-medium text-base rounded-full border border-gray-300 transition-all duration-200 hover:border-gray-900"
+                    to="/free-consultation"
+                    className="px-8 py-4 bg-red-600 text-white font-semibold text-base rounded-full transition-all duration-200 hover:bg-red-700 shadow-lg"
                   >
                     Free Consultation
                   </Link>

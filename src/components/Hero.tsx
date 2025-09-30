@@ -106,7 +106,7 @@ const Hero = () => {
         playsInline
         className="absolute inset-0 w-full h-full object-cover"
       >
-        <source src="/hero-video.webm" type="video/webm" />
+        <source src="/videos/hero-background.webm" type="video/webm" />
       </video>
       
       {/* Dark Overlay */}

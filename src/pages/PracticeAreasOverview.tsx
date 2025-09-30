@@ -8,52 +8,54 @@ import SEO from '@/components/SEO';
 // Import practice area images
 import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
 import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries.jpg';
-import talcBabyPowderCancerImg from '@/assets/practice-areas/talc-baby-powder.jpg';
-import truck18WheelerAccidentsImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
+import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder.jpg';
 import carAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
+import truckAccidentsImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
 import motorcycleAccidentsImg from '@/assets/practice-areas/motorcycle-accidents.jpg';
 import pedestrianAccidentsImg from '@/assets/practice-areas/pedestrian-accidents.jpg';
 import bicycleAccidentsImg from '@/assets/practice-areas/bicycle-accidents.jpg';
-import uberLyftAccidentsImg from '@/assets/practice-areas/uber-lyft-accidents.jpg';
-import busAccidentsImg from '@/assets/practice-areas/bus-accidents.jpg';
-import aviationAccidentsImg from '@/assets/practice-areas/aviation-accidents.jpg';
-import boatingAccidentsImg from '@/assets/practice-areas/maritime-accidents.jpg';
-import trainAccidentsImg from '@/assets/practice-areas/railroad-accidents.jpg';
-import hitRunAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
-import drivingUnderInfluenceImg from '@/assets/practice-areas/car-accidents.jpg';
-import electricalInjuriesImg from '@/assets/practice-areas/electrocution.jpg';
-import workplaceInjuriesImg from '@/assets/practice-areas/workplace-injuries.jpg';
-import constructionAccidentsImg from '@/assets/practice-areas/construction-accidents.jpg';
-import slipFallAccidentsImg from '@/assets/practice-areas/premises-liability.jpg';
 import premisesLiabilityImg from '@/assets/practice-areas/premises-liability.jpg';
-import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
-import defectiveProductsImg from '@/assets/practice-areas/product-liability.jpg';
-import medicalDeviceInjuriesImg from '@/assets/practice-areas/medical-devices.jpg';
-import pharmaceuticalNegligenceImg from '@/assets/practice-areas/pharmaceutical.jpg';
+import dogBitesImg from '@/assets/practice-areas/dog-bites.jpg';
 import medicalMalpracticeImg from '@/assets/practice-areas/medical-malpractice.jpg';
-import surgicalErrorsImg from '@/assets/practice-areas/medical-malpractice.jpg';
-import birthInjuriesImg from '@/assets/practice-areas/birth-injuries.jpg';
-import nursingHomAbuseImg from '@/assets/practice-areas/elder-abuse.jpg';
 import wrongfulDeathImg from '@/assets/practice-areas/wrongful-death.jpg';
-import catastrophicInjuriesImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
+import constructionAccidentsImg from '@/assets/practice-areas/construction-accidents.jpg';
 import brainInjuriesImg from '@/assets/practice-areas/brain-injuries.jpg';
 import spinalCordInjuriesImg from '@/assets/practice-areas/spinal-cord-injuries.jpg';
 import burnInjuriesImg from '@/assets/practice-areas/burn-injuries.jpg';
-import amputationInjuriesImg from '@/assets/practice-areas/amputation.jpg';
-import fractureBoneInjuriesImg from '@/assets/practice-areas/general-personal-injury.jpg';
-import dogBitesImg from '@/assets/practice-areas/dog-bites.jpg';
-import animalAttacksImg from '@/assets/practice-areas/dog-bites.jpg';
-import toxicExposureImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
-import environmentalPollutionImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
-import industrialAccidentsImg from '@/assets/practice-areas/workplace-injuries.jpg';
-import pipelineExplosionsImg from '@/assets/practice-areas/explosions.jpg';
-import refineriesImg from '@/assets/practice-areas/explosions.jpg';
-import chemicalPlantsImg from '@/assets/practice-areas/explosions.jpg';
-import civilRightsViolationsImg from '@/assets/practice-areas/civil-rights.jpg';
-import policeBrutalityImg from '@/assets/practice-areas/civil-rights.jpg';
-import sexualAbuseAssaultImg from '@/assets/practice-areas/sexual-abuse.jpg';
-import childAbuseImg from '@/assets/practice-areas/sexual-abuse.jpg';
-import humanTraffickingImg from '@/assets/practice-areas/sexual-abuse.jpg';
+import amputationImg from '@/assets/practice-areas/amputation.jpg';
+import workplaceInjuriesImg from '@/assets/practice-areas/workplace-injuries.jpg';
+import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
+import pharmaceuticalImg from '@/assets/practice-areas/pharmaceutical.jpg';
+import massTortsImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import classActionsImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import environmentalToxicImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
+import campLejeuneImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
+import pfasExposureImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
+import benzeneExposureImg from '@/assets/practice-areas/environmental-toxic-hero.jpg';
+import opioidLitigationImg from '@/assets/practice-areas/pharmaceutical.jpg';
+import sexualAbuseImg from '@/assets/practice-areas/sexual-abuse.jpg';
+import clergyAbuseImg from '@/assets/practice-areas/sexual-abuse.jpg';
+import elderAbuseImg from '@/assets/practice-areas/elder-abuse.jpg';
+import birthInjuriesImg from '@/assets/practice-areas/birth-injuries.jpg';
+import uberLyftAccidentsImg from '@/assets/practice-areas/uber-lyft-accidents.jpg';
+import busAccidentsImg from '@/assets/practice-areas/bus-accidents.jpg';
+import aviationAccidentsImg from '@/assets/practice-areas/aviation-accidents.jpg';
+import maritimeAccidentsImg from '@/assets/practice-areas/maritime-accidents.jpg';
+import swimmingPoolImg from '@/assets/practice-areas/premises-liability.jpg';
+import amusementParksImg from '@/assets/practice-areas/premises-liability.jpg';
+import electrocutionImg from '@/assets/practice-areas/electrocution.jpg';
+import explosionsImg from '@/assets/practice-areas/explosions.jpg';
+import visionLossImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import hearingLossImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import paralysisImg from '@/assets/practice-areas/spinal-cord-injuries.jpg';
+import civilRightsImg from '@/assets/practice-areas/civil-rights.jpg';
+import retailAccidentsImg from '@/assets/practice-areas/premises-liability.jpg';
+import scaffoldingFallsImg from '@/assets/practice-areas/construction-accidents.jpg';
+import craneAccidentsImg from '@/assets/practice-areas/construction-accidents.jpg';
+import railroadAccidentsImg from '@/assets/practice-areas/railroad-accidents.jpg';
+import defamationImg from '@/assets/practice-areas/general-personal-injury.jpg';
+import generalPersonalInjuryImg from '@/assets/practice-areas/general-personal-injury.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -66,60 +68,56 @@ interface PracticeArea {
 }
 
 const practiceAreas: PracticeArea[] = [
-  // Toxic Exposure & Environmental
-  { id: 'mesothelioma-asbestos', title: 'Mesothelioma & Asbestos', image: mesotheliomaAsbestosImg, slug: 'mesothelioma-asbestos', category: 'Environmental' },
-  { id: 'silicosis-injuries', title: 'Silicosis Injuries', image: silicosisInjuriesImg, slug: 'silicosis-injuries', category: 'Environmental' },
-  { id: 'talc-baby-powder-cancer', title: 'Talc & Baby Powder Cancer', image: talcBabyPowderCancerImg, slug: 'talc-baby-powder-cancer', category: 'Environmental' },
-  { id: 'toxic-exposure', title: 'Toxic Exposure', image: toxicExposureImg, slug: 'toxic-exposure', category: 'Environmental' },
-  { id: 'environmental-pollution', title: 'Environmental Pollution', image: environmentalPollutionImg, slug: 'environmental-pollution', category: 'Environmental' },
-  
-  // Vehicle Accidents
-  { id: 'truck-18-wheeler-accidents', title: 'Truck & 18-Wheeler Accidents', image: truck18WheelerAccidentsImg, slug: 'truck-18-wheeler-accidents', category: 'Vehicle Accidents' },
+  { id: 'mesothelioma-asbestos', title: 'Mesothelioma & Asbestos', image: mesotheliomaAsbestosImg, slug: 'mesothelioma-asbestos', category: 'Toxic Exposure' },
+  { id: 'silicosis-injuries', title: 'Silicosis Injuries', image: silicosisInjuriesImg, slug: 'silicosis-injuries', category: 'Toxic Exposure' },
+  { id: 'talc-baby-powder', title: 'Talc & Baby Powder Cancer', image: talcBabyPowderImg, slug: 'talc-baby-powder-cancer', category: 'Toxic Exposure' },
   { id: 'car-accidents', title: 'Car Accidents', image: carAccidentsImg, slug: 'car-accidents', category: 'Vehicle Accidents' },
+  { id: 'truck-18-wheeler', title: 'Truck & 18-Wheeler', image: truckAccidentsImg, slug: 'truck-18-wheeler', category: 'Vehicle Accidents' },
   { id: 'motorcycle-accidents', title: 'Motorcycle Accidents', image: motorcycleAccidentsImg, slug: 'motorcycle-accidents', category: 'Vehicle Accidents' },
   { id: 'pedestrian-accidents', title: 'Pedestrian Accidents', image: pedestrianAccidentsImg, slug: 'pedestrian-accidents', category: 'Vehicle Accidents' },
   { id: 'bicycle-accidents', title: 'Bicycle Accidents', image: bicycleAccidentsImg, slug: 'bicycle-accidents', category: 'Vehicle Accidents' },
-  { id: 'uber-lyft-accidents', title: 'Uber & Lyft Accidents', image: uberLyftAccidentsImg, slug: 'uber-lyft-accidents', category: 'Vehicle Accidents' },
-  { id: 'bus-accidents', title: 'Bus Accidents', image: busAccidentsImg, slug: 'bus-accidents', category: 'Vehicle Accidents' },
-  { id: 'aviation-accidents', title: 'Aviation Accidents', image: aviationAccidentsImg, slug: 'aviation-accidents', category: 'Vehicle Accidents' },
-  { id: 'boating-accidents', title: 'Maritime Accidents', image: boatingAccidentsImg, slug: 'boating-accidents', category: 'Vehicle Accidents' },
-  { id: 'train-accidents', title: 'Train Accidents', image: trainAccidentsImg, slug: 'train-accidents', category: 'Vehicle Accidents' },
-  
-  // Workplace Injuries
-  { id: 'electrical-injuries', title: 'Electrocution Injuries', image: electricalInjuriesImg, slug: 'electrical-injuries', category: 'Workplace' },
-  { id: 'workplace-injuries', title: 'Workplace Injuries', image: workplaceInjuriesImg, slug: 'workplace-injuries', category: 'Workplace' },
-  { id: 'construction-accidents', title: 'Construction Accidents', image: constructionAccidentsImg, slug: 'construction-accidents', category: 'Workplace' },
-  { id: 'industrial-accidents', title: 'Industrial Accidents', image: industrialAccidentsImg, slug: 'industrial-accidents', category: 'Workplace' },
-  { id: 'pipeline-explosions', title: 'Pipeline Explosions', image: pipelineExplosionsImg, slug: 'pipeline-explosions', category: 'Workplace' },
-  
-  // Premises Liability
-  { id: 'slip-fall-accidents', title: 'Slip & Fall Accidents', image: slipFallAccidentsImg, slug: 'slip-fall-accidents', category: 'Premises' },
   { id: 'premises-liability', title: 'Premises Liability', image: premisesLiabilityImg, slug: 'premises-liability', category: 'Premises' },
-  
-  // Product Liability
-  { id: 'product-liability', title: 'Product Liability', image: productLiabilityImg, slug: 'product-liability', category: 'Products' },
-  { id: 'defective-products', title: 'Defective Products', image: defectiveProductsImg, slug: 'defective-products', category: 'Products' },
-  
-  // Medical Negligence
-  { id: 'medical-device-injuries', title: 'Medical Device Injuries', image: medicalDeviceInjuriesImg, slug: 'medical-device-injuries', category: 'Medical' },
-  { id: 'pharmaceutical-negligence', title: 'Pharmaceutical Negligence', image: pharmaceuticalNegligenceImg, slug: 'pharmaceutical-negligence', category: 'Medical' },
+  { id: 'dog-bites', title: 'Dog Bites', image: dogBitesImg, slug: 'dog-bites-animal-attacks', category: 'Animal Attacks' },
   { id: 'medical-malpractice', title: 'Medical Malpractice', image: medicalMalpracticeImg, slug: 'medical-malpractice', category: 'Medical' },
-  { id: 'surgical-errors', title: 'Surgical Errors', image: surgicalErrorsImg, slug: 'surgical-errors', category: 'Medical' },
-  { id: 'birth-injuries', title: 'Birth Injuries', image: birthInjuriesImg, slug: 'birth-injuries', category: 'Medical' },
-  { id: 'nursing-hom-abuse', title: 'Nursing Home Abuse', image: nursingHomAbuseImg, slug: 'nursing-hom-abuse', category: 'Medical' },
-  
-  // Catastrophic Injuries
   { id: 'wrongful-death', title: 'Wrongful Death', image: wrongfulDeathImg, slug: 'wrongful-death', category: 'Catastrophic' },
-  { id: 'catastrophic-injuries', title: 'Catastrophic Injuries', image: catastrophicInjuriesImg, slug: 'catastrophic-injuries', category: 'Catastrophic' },
-  { id: 'brain-injuries', title: 'Traumatic Brain Injuries', image: brainInjuriesImg, slug: 'brain-injuries', category: 'Catastrophic' },
+  { id: 'product-liability', title: 'Product Liability', image: productLiabilityImg, slug: 'product-liability', category: 'Products' },
+  { id: 'construction-accidents', title: 'Construction Accidents', image: constructionAccidentsImg, slug: 'construction-accidents', category: 'Workplace' },
+  { id: 'brain-injuries', title: 'Brain Injuries', image: brainInjuriesImg, slug: 'brain-injuries', category: 'Catastrophic' },
   { id: 'spinal-cord-injuries', title: 'Spinal Cord Injuries', image: spinalCordInjuriesImg, slug: 'spinal-cord-injuries', category: 'Catastrophic' },
   { id: 'burn-injuries', title: 'Burn Injuries', image: burnInjuriesImg, slug: 'burn-injuries', category: 'Catastrophic' },
-  { id: 'amputation-injuries', title: 'Amputation Injuries', image: amputationInjuriesImg, slug: 'amputation-injuries', category: 'Catastrophic' },
-  { id: 'fracture-bone-injuries', title: 'Fracture & Bone Injuries', image: fractureBoneInjuriesImg, slug: 'fracture-bone-injuries', category: 'Catastrophic' },
-  
-  // Animal Attacks
-  { id: 'dog-bites', title: 'Dog Bites', image: dogBitesImg, slug: 'dog-bites', category: 'Animal Attacks' },
-  { id: 'animal-attacks', title: 'Animal Attacks', image: animalAttacksImg, slug: 'animal-attacks', category: 'Animal Attacks' },
+  { id: 'amputation', title: 'Amputation', image: amputationImg, slug: 'amputation-injuries', category: 'Catastrophic' },
+  { id: 'workplace-injuries', title: 'Workplace Injuries', image: workplaceInjuriesImg, slug: 'workplace-injuries', category: 'Workplace' },
+  { id: 'medical-devices', title: 'Medical Devices', image: medicalDevicesImg, slug: 'medical-devices', category: 'Medical' },
+  { id: 'pharmaceutical', title: 'Pharmaceutical', image: pharmaceuticalImg, slug: 'pharmaceutical', category: 'Medical' },
+  { id: 'mass-torts', title: 'Mass Torts', image: massTortsImg, slug: 'mass-torts', category: 'Complex Litigation' },
+  { id: 'class-actions', title: 'Class Actions', image: classActionsImg, slug: 'class-actions', category: 'Complex Litigation' },
+  { id: 'environmental-toxic', title: 'Environmental Toxic', image: environmentalToxicImg, slug: 'environmental-toxic', category: 'Toxic Exposure' },
+  { id: 'camp-lejeune', title: 'Camp Lejeune', image: campLejeuneImg, slug: 'camp-lejeune', category: 'Toxic Exposure' },
+  { id: 'pfas-exposure', title: 'PFAS Exposure', image: pfasExposureImg, slug: 'pfas-exposure', category: 'Toxic Exposure' },
+  { id: 'benzene-exposure', title: 'Benzene Exposure', image: benzeneExposureImg, slug: 'benzene-exposure', category: 'Toxic Exposure' },
+  { id: 'opioid-litigation', title: 'Opioid Litigation', image: opioidLitigationImg, slug: 'opioid-litigation', category: 'Medical' },
+  { id: 'sexual-abuse', title: 'Sexual Abuse', image: sexualAbuseImg, slug: 'sexual-abuse', category: 'Abuse' },
+  { id: 'clergy-abuse', title: 'Clergy Abuse', image: clergyAbuseImg, slug: 'clergy-abuse', category: 'Abuse' },
+  { id: 'elder-abuse', title: 'Elder Abuse', image: elderAbuseImg, slug: 'elder-abuse', category: 'Abuse' },
+  { id: 'birth-injuries', title: 'Birth Injuries', image: birthInjuriesImg, slug: 'birth-injuries', category: 'Medical' },
+  { id: 'uber-lyft-accidents', title: 'Uber/Lyft Accidents', image: uberLyftAccidentsImg, slug: 'uber-lyft-accidents', category: 'Vehicle Accidents' },
+  { id: 'bus-accidents', title: 'Bus Accidents', image: busAccidentsImg, slug: 'bus-accidents', category: 'Vehicle Accidents' },
+  { id: 'aviation-accidents', title: 'Aviation Accidents', image: aviationAccidentsImg, slug: 'aviation-accidents', category: 'Vehicle Accidents' },
+  { id: 'maritime-accidents', title: 'Maritime Accidents', image: maritimeAccidentsImg, slug: 'maritime-accidents', category: 'Vehicle Accidents' },
+  { id: 'swimming-pool', title: 'Swimming Pool', image: swimmingPoolImg, slug: 'swimming-pool', category: 'Premises' },
+  { id: 'amusement-parks', title: 'Amusement Parks', image: amusementParksImg, slug: 'amusement-parks', category: 'Premises' },
+  { id: 'electrocution', title: 'Electrocution', image: electrocutionImg, slug: 'electrocution', category: 'Workplace' },
+  { id: 'explosions', title: 'Explosions', image: explosionsImg, slug: 'explosions', category: 'Workplace' },
+  { id: 'vision-loss', title: 'Vision Loss', image: visionLossImg, slug: 'vision-loss', category: 'Catastrophic' },
+  { id: 'hearing-loss', title: 'Hearing Loss', image: hearingLossImg, slug: 'hearing-loss', category: 'Catastrophic' },
+  { id: 'paralysis', title: 'Paralysis', image: paralysisImg, slug: 'paralysis', category: 'Catastrophic' },
+  { id: 'civil-rights', title: 'Civil Rights', image: civilRightsImg, slug: 'civil-rights', category: 'Civil Rights' },
+  { id: 'retail-accidents', title: 'Retail Accidents', image: retailAccidentsImg, slug: 'retail-accidents', category: 'Premises' },
+  { id: 'scaffolding-falls', title: 'Scaffolding Falls', image: scaffoldingFallsImg, slug: 'scaffolding-falls', category: 'Workplace' },
+  { id: 'crane-accidents', title: 'Crane Accidents', image: craneAccidentsImg, slug: 'crane-accidents', category: 'Workplace' },
+  { id: 'railroad-accidents', title: 'Railroad Accidents', image: railroadAccidentsImg, slug: 'railroad-accidents', category: 'Vehicle Accidents' },
+  { id: 'defamation', title: 'Defamation', image: defamationImg, slug: 'defamation', category: 'Civil Rights' },
+  { id: 'general-personal-injury', title: 'General Personal Injury', image: generalPersonalInjuryImg, slug: 'general-personal-injury', category: 'General' },
 ];
 
 const PracticeAreasOverview = () => {
@@ -188,7 +186,7 @@ const PracticeAreasOverview = () => {
     <>
       <SEO
         title="Practice Areas | California Injury Lawyers | Trembach Law Firm"
-        description="Comprehensive legal representation across 50+ practice areas including personal injury, medical malpractice, and toxic exposure. Free consultation."
+        description="Comprehensive legal representation across 50 practice areas including personal injury, medical malpractice, and toxic exposure. Free consultation."
         canonical="/practice-areas"
       />
 

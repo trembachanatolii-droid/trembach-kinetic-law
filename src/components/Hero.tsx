@@ -98,15 +98,19 @@ const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
       {/* Dotted Surface Background */}
-      <DottedSurface className="absolute inset-0 w-full h-full" />
-      
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/20" />
+      <DottedSurface className="absolute inset-0 w-full h-full" >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            aria-hidden="true"
+            className={"pointer-events-none absolute -top-10 left-1/2 size-full -translate-x-1/2 rounded-full bg-[radial-gradient(ellipse_at_center,hsl(var(--foreground)/.1),transparent_50%)] blur-[30px]"}
+          />
+        </div>
+      </DottedSurface>
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
+            <h1 className="text-6xl lg:text-7xl font-bold text-foreground leading-tight">
               <span className="hero-line block">You Focus on Healing.</span>
               <span className="hero-line block">We Focus on Winning.</span>
             </h1>

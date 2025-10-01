@@ -16,7 +16,7 @@ import {
   Users,
   Gavel
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import legalGuidanceHero from '@/assets/personal-injury-legal-guidance-hero.jpg';
 
@@ -51,7 +51,7 @@ const LegalGuidance: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section 

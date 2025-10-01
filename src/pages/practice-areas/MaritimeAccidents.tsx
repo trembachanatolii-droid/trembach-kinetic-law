@@ -30,7 +30,7 @@ import {
   Ship
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/maritime-hero-bg.jpg';
 import sidebarImage from '@/assets/maritime-sidebar.jpg';
 import medicalImage from '@/assets/maritime-medical-facility.jpg';
@@ -441,7 +441,7 @@ const MaritimeAccidents: React.FC = () => {
         }}
       />
 
-      <GoBack fallbackPath="/practice-areas" />
+      
 
       {/* 3D Floating Background Layers */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">

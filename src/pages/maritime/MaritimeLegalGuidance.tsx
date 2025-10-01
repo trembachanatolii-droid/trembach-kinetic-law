@@ -23,7 +23,7 @@ import {
   Building
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/maritime-legal-guidance-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -77,7 +77,7 @@ const MaritimeLegalGuidance: React.FC = () => {
         canonical="/maritime/legal-guidance"
       />
       
-      <GoBack fallbackPath="/practice-areas/maritime-accidents" />
+      
       
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

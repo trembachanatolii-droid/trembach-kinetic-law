@@ -18,7 +18,7 @@ import {
   HardHat,
   Construction
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import legalGuidanceImage from '@/assets/crane-legal-guidance-hero.jpg';
 
@@ -41,7 +41,7 @@ const CraneAccidentsLegalGuidance: React.FC = () => {
         canonical="/practice-areas/crane-accidents/legal-guidance"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

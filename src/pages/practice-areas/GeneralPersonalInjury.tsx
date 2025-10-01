@@ -24,7 +24,7 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import ThreeDVisualEffects from '@/components/3DVisualEffects';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { gsap } from 'gsap';
@@ -131,7 +131,7 @@ const GeneralPersonalInjury: React.FC = () => {
   return (
     <>
       <SEO {...seo} />
-      <GoBack />
+      
       
       <div className="min-h-screen bg-background text-foreground">
         {/* Hero Section */}

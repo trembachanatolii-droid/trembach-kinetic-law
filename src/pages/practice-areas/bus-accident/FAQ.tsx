@@ -15,7 +15,7 @@ import {
   Shield
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/bus-faq-hero.jpg';
 
 const BusAccidentFAQ: React.FC = () => {
@@ -103,7 +103,7 @@ const BusAccidentFAQ: React.FC = () => {
         canonical="https://www.trembachlawfirm.com/bus-accident/faq"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section className="relative h-[40vh] flex items-center justify-center">

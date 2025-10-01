@@ -6,7 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, DollarSign, TrendingUp, AlertCircle, Phone, Mail } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import compensationImage from '@/assets/personal-injury-compensation-calculator.jpg';
 
@@ -142,7 +142,7 @@ const CompensationCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section 

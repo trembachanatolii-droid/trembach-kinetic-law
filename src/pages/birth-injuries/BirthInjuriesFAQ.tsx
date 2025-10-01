@@ -16,7 +16,7 @@ import {
   Shield,
   DollarSign
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-hero-new.jpg';
@@ -229,7 +229,7 @@ const BirthInjuriesFAQ: React.FC = () => {
         description="Comprehensive FAQ about birth injury legal cases in California. Get answers to common questions about cerebral palsy, HIE, medical malpractice, compensation, and legal rights."
       />
 
-      <GoBack />
+      
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

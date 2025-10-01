@@ -44,7 +44,7 @@ import injuryTypesImage from '@/assets/practice-areas/workplace-injury-types.jpg
 import thirdPartyImage from '@/assets/practice-areas/workplace-third-party.jpg';
 import compensationImage from '@/assets/practice-areas/workplace-compensation.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -340,7 +340,7 @@ const WorkplaceInjuries: React.FC = () => {
         }}
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

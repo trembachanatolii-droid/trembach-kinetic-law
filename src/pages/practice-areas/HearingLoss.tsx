@@ -32,7 +32,7 @@ import {
   Activity
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/hearing-loss-hero.jpg';
 import diagnosisImage from '@/assets/hearing-loss-diagnosis.jpg';
 import treatmentImage from '@/assets/hearing-loss-treatment.jpg';
@@ -470,7 +470,7 @@ const HearingLoss: React.FC = () => {
           }}
         />
         
-        <GoBack fallbackPath="/practice-areas" />
+        
         
         {/* Hero Section */}
         <section 

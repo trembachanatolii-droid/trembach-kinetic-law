@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Phone, Mail, MessageCircle, Star, ChevronDown, ChevronUp, Heart, Shield, Scale, Clock, Users, Award, FileText, AlertTriangle, Stethoscope, Building, Map, ArrowLeft } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/opioid-hero-bg.jpg';
 import diagnosisImage from '@/assets/opioid-diagnosis-process.jpg';
 import legalProcessImage from '@/assets/opioid-legal-process.jpg';
@@ -229,7 +229,7 @@ const OpioidLitigation: React.FC = () => {
   };
   return <div className="min-h-screen bg-background">
       {/* Go Back Component */}
-      <GoBack fallbackPath="/practice-areas" />
+      
 
       {/* Hero Section */}
       <section ref={heroRef} className="relative h-[600px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{

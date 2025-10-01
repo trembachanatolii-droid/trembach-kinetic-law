@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Star, Phone, Scale } from 'lucide-react';
 import heroBackground from '@/assets/amusement-park-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 

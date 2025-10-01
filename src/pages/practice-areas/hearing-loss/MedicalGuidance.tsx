@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Phone, Star, Heart, AlertTriangle, CheckCircle, Clock, Stethoscope, Building2, Users } from 'lucide-react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import heroBackground from '@/assets/hearing-loss-medical-guidance-hero.jpg';
 import treatmentImage from '@/assets/hearing-loss-treatment.jpg';
 import medicalDevicesImage from '@/assets/hearing-loss-medical-devices.jpg';
@@ -24,7 +24,7 @@ const HearingLossMedicalGuidance: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        <GoBack fallbackPath="/practice-areas/hearing-loss" />
+        
         
         {/* Hero Section */}
         <section 

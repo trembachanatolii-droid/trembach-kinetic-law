@@ -12,41 +12,6 @@ import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
-interface GoBackProps {
-  onGoBack?: () => void;
-  fromSection?: string;
-}
-
-const GoBack: React.FC<GoBackProps> = ({ onGoBack, fromSection }) => {
-  const [isVisible, setIsVisible] = useState(true);
-  
-  const handleClick = () => {
-    if (onGoBack) {
-      onGoBack();
-    } else if (fromSection) {
-      const targetElement = document.getElementById(fromSection);
-      if (targetElement) {
-        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-      window.history.back();
-    } else {
-      window.history.back();
-    }
-  };
-  
-  return (
-    <div className={`fixed top-20 left-6 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
-      <Button 
-        variant="ghost" 
-        onClick={handleClick}
-        className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Go Back
-      </Button>
-    </div>
-  );
-};
 
 const ElderAbuseCaseEvaluation: React.FC = () => {
   const { toast } = useToast();
@@ -120,7 +85,7 @@ const ElderAbuseCaseEvaluation: React.FC = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Go Back Component */}
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

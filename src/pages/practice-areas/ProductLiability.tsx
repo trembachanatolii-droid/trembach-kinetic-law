@@ -54,7 +54,7 @@ import manufacturingImage from '@/assets/practice-areas/product-liability-manufa
 import compensationImage from '@/assets/practice-areas/product-liability-compensation-new.jpg';
 import designImage from '@/assets/practice-areas/product-liability-design-new.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 import { useNavigate } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -350,7 +350,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
         canonical="/practice-areas/product-liability"
       />
 
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

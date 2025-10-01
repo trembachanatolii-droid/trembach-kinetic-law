@@ -40,7 +40,7 @@ import deviceTypesImage from '@/assets/practice-areas/medical-device-types.jpg';
 import fdaProcessImage from '@/assets/practice-areas/medical-device-fda-process.jpg';
 import legalProcessImage from '@/assets/practice-areas/medical-device-legal-process.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -131,7 +131,7 @@ const MedicalDevices: React.FC = () => {
       />
 
       {/* Go Back Component */}
-      <GoBack />
+      
 
       {/* Hero Section */}
       <section 

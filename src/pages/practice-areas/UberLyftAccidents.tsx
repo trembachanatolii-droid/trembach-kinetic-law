@@ -31,7 +31,7 @@ import {
   DollarSign
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/uber-lyft-hero-bg.jpg';
 import sidebarImage from '@/assets/uber-lyft-sidebar.jpg';
@@ -135,7 +135,7 @@ const UberLyftAccidents: React.FC = () => {
       >
         <div className="absolute inset-0 bg-black/70 pointer-events-none"></div>
         
-        <GoBack />
+        
         
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">

@@ -71,7 +71,39 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">5. Information Sharing and Disclosure</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">5. Newsletter and Marketing Communications</h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-4">
+              We may offer newsletter subscriptions and other marketing communications to keep you informed about legal updates, case results, and firm news. When you sign up for our newsletter:
+            </p>
+            <ul className="list-disc pl-6 text-base text-muted-foreground leading-relaxed space-y-2 mb-4">
+              <li>Your email address will be used solely for sending newsletters and legal updates</li>
+              <li>You can unsubscribe at any time by clicking the unsubscribe link in any email</li>
+              <li>We will not share your email address with third parties for marketing purposes</li>
+              <li>Newsletter frequency may vary based on legal developments and firm announcements</li>
+            </ul>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              To sign up for our newsletter or manage your subscription preferences, please contact us at info@trembachlaw.com or call (213) 908-9708. We are available 24 hours a day, 7 days a week to assist you.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-bold text-foreground mb-4">6. No Fees Unless We Win</h2>
+            <p className="text-base text-muted-foreground leading-relaxed mb-4">
+              Trembach Law Firm operates on a contingency fee basis for personal injury cases. This means:
+            </p>
+            <ul className="list-disc pl-6 text-base text-muted-foreground leading-relaxed space-y-2 mb-4">
+              <li>You pay nothing upfront for our legal services</li>
+              <li>We only collect attorney fees if we successfully recover compensation for you</li>
+              <li>All case evaluations and initial consultations are completely free</li>
+              <li>There are no hidden fees or costs unless we win your case</li>
+            </ul>
+            <p className="text-base text-muted-foreground leading-relaxed">
+              This contingency fee structure is designed to make quality legal representation accessible to all injury victims, regardless of their financial situation. For questions about our fee structure, please call us at (213) 908-9708 - we're available 24/7.
+            </p>
+          </section>
+
+          <section>
+            <h2 className="text-3xl font-bold text-foreground mb-4">7. Information Sharing and Disclosure</h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-4">
               We do not sell your personal information. We may share your information with:
             </p>
@@ -83,7 +115,7 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">6. Your California Privacy Rights (CCPA)</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">8. Your California Privacy Rights (CCPA)</h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-4">
               Under California law, you have the right to:
             </p>
@@ -99,44 +131,52 @@ const PrivacyPolicy = () => {
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">7. Data Security</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">9. Data Security</h2>
             <p className="text-base text-muted-foreground leading-relaxed">
               We implement appropriate technical and organizational security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
             </p>
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">8. Third-Party Services</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">10. Third-Party Services</h2>
             <p className="text-base text-muted-foreground leading-relaxed">
               Our website may contain links to third-party websites or services, including Google's services. This Privacy Policy does not apply to such third-party services. We encourage you to review their privacy policies. Our site is protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms of Service</a> apply.
             </p>
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">9. Children's Privacy</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">11. Children's Privacy</h2>
             <p className="text-base text-muted-foreground leading-relaxed">
               Our services are not directed to individuals under the age of 18. We do not knowingly collect personal information from children.
             </p>
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">10. Changes to This Privacy Policy</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">12. Changes to This Privacy Policy</h2>
             <p className="text-base text-muted-foreground leading-relaxed">
               We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page with an updated effective date.
             </p>
           </section>
 
           <section>
-            <h2 className="text-3xl font-bold text-foreground mb-4">11. Contact Us</h2>
+            <h2 className="text-3xl font-bold text-foreground mb-4">13. Contact Us</h2>
             <p className="text-base text-muted-foreground leading-relaxed mb-4">
-              If you have questions or concerns about this Privacy Policy or our privacy practices, please contact us:
+              If you have questions or concerns about this Privacy Policy or our privacy practices, please contact us. We are available 24 hours a day, 7 days a week:
             </p>
-            <div className="text-base text-muted-foreground leading-relaxed">
-              <p className="font-semibold">Trembach Law Firm</p>
-              <p>Email: info@trembachlaw.com</p>
-              <p>Phone: (213) 908-9708</p>
-              <p>Serving All of California</p>
+            <div className="text-base text-muted-foreground leading-relaxed space-y-1">
+              <p className="font-semibold text-lg">Trembach Law Firm</p>
+              <p>Phone: <a href="tel:2139089708" className="text-primary underline hover:text-primary/80">(213) 908-9708</a></p>
+              <p>Email: <a href="mailto:info@trembachlaw.com" className="text-primary underline hover:text-primary/80">info@trembachlaw.com</a></p>
+              <p>Available: 24/7 - Call anytime for a free consultation</p>
+              <p>Service Area: All of California</p>
+              <p className="mt-4 font-semibold">You Pay Nothing Unless We Win!</p>
             </div>
+          </section>
+
+          <section className="border-t pt-8 mt-8">
+            <p className="text-sm text-muted-foreground text-center">
+              © {new Date().getFullYear()} Trembach Law Firm. All Rights Reserved. | <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a>
+            </p>
           </section>
         </div>
       </div>

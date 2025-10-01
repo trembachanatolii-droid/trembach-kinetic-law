@@ -1,15 +1,9 @@
 import React from 'react';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
-
 const PrivacyPolicy = () => {
-  return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Privacy Policy | Trembach Law Firm" 
-        description="Privacy Policy for Trembach Law Firm. Learn how we protect your personal information and comply with California law." 
-        canonical="/privacy-policy" 
-      />
+  return <div className="min-h-screen bg-background">
+      <SEO title="Privacy Policy | Trembach Law Firm" description="Privacy Policy for Trembach Law Firm. Learn how we protect your personal information and comply with California law." canonical="/privacy-policy" />
       
       <div className="container mx-auto px-6 py-12 max-w-5xl">
         <div className="mb-8">
@@ -20,9 +14,7 @@ const PrivacyPolicy = () => {
           Privacy Policy
         </h1>
 
-        <p className="text-base text-muted-foreground leading-relaxed mb-8 uppercase tracking-wide">
-          THIS PRIVACY POLICY IS FOR TREMBACH LAW FIRM. THIS PRIVACY POLICY EXPLAINS HOW WE COLLECT, USE, DISCLOSE, AND SAFEGUARD YOUR INFORMATION WHEN YOU VISIT OUR WEBSITE OR USE OUR SERVICES, IN COMPLIANCE WITH CALIFORNIA LAW INCLUDING THE CALIFORNIA CONSUMER PRIVACY ACT (CCPA). EFFECTIVE DATE: OCTOBER 1, 2025.
-        </p>
+        
 
         <div className="space-y-12">
           <section>
@@ -180,8 +172,6 @@ const PrivacyPolicy = () => {
           </section>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default PrivacyPolicy;

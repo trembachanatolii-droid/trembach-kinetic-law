@@ -19,7 +19,7 @@ import {
   Shield
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/uber-lyft-medical-hero.jpg';
 
 const UberLyftMedicalGuidance = () => {
@@ -36,7 +36,7 @@ const UberLyftMedicalGuidance = () => {
 
   return (
     <div className="uberlyft-page min-h-screen bg-background">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section 

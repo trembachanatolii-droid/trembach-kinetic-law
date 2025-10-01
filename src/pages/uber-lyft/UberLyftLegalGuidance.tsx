@@ -5,7 +5,7 @@ import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Scale, Shield, FileText, AlertTriangle, Clock, Phone, ChevronDown, ChevronUp, BookOpen, Users, DollarSign, Gavel } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/uber-lyft-legal-hero.jpg';
 const UberLyftLegalGuidance = () => {
   useScrollRestoration();
@@ -17,7 +17,7 @@ const UberLyftLegalGuidance = () => {
     }));
   };
   return <div className="uberlyft-page min-h-screen bg-background text-white">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section className="hero relative py-20 bg-gradient-to-r from-primary/90 to-secondary/90 text-white" style={{

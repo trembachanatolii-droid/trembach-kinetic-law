@@ -7,7 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Shield, Clock, Phone } from 'lucide-react';
 import heroBackground from '@/assets/railroad-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 
 const RailroadAccidentsCaseEvaluation: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(1);
@@ -36,7 +36,7 @@ const RailroadAccidentsCaseEvaluation: React.FC = () => {
         keywords="railroad accident case evaluation, FELA claims evaluation, train accident lawyer, California railroad attorney"
       />
 
-      <GoBack fallbackPath="/practice-areas/railroad-accidents" />
+      
 
       {/* Hero Section */}
       <section 

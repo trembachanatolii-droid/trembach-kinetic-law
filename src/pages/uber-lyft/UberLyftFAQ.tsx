@@ -13,7 +13,7 @@ import {
   HelpCircle
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-import GoBack from '@/components/GoBack';
+
 import heroImage from '@/assets/uber-lyft-faq-hero.jpg';
 
 const UberLyftFAQ = () => {
@@ -169,7 +169,7 @@ const UberLyftFAQ = () => {
 
   return (
     <div className="uberlyft-page min-h-screen bg-background">
-      <GoBack />
+      
       
       {/* Hero Section */}
       <section 

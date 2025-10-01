@@ -15,7 +15,7 @@ import {
   Book,
   Gavel
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 // Import hero image
@@ -37,7 +37,7 @@ const VisionLossLegalGuidance: React.FC = () => {
         canonical="/practice-areas/vision-loss/legal-guidance"
       />
 
-      <GoBack fallbackPath="/practice-areas/vision-loss" />
+      
 
       {/* Hero Section */}
       <section 

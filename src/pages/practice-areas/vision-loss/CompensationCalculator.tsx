@@ -16,7 +16,7 @@ import {
   FileText,
   TrendingUp
 } from 'lucide-react';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 
 // Import hero image
@@ -137,7 +137,7 @@ const VisionLossCompensationCalculator: React.FC = () => {
         canonical="/practice-areas/vision-loss/compensation-calculator"
       />
 
-      <GoBack fallbackPath="/practice-areas/vision-loss" />
+      
 
       {/* Hero Section */}
       <section 

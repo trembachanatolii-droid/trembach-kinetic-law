@@ -6,7 +6,7 @@ import { Phone, Mail, Stethoscope, Heart, Brain, Activity, AlertTriangle, Clock,
 import heroBackground from '@/assets/railroad-guidance-hero.jpg';
 import medicalImage from '@/assets/railroad-medical-facility.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
+
 const RailroadAccidentsMedicalGuidance: React.FC = () => {
   const specialists = [{
     specialty: "Traumatic Brain Injury",
@@ -54,7 +54,7 @@ const RailroadAccidentsMedicalGuidance: React.FC = () => {
   return <div className="min-h-screen bg-background">
       <SEO title="Railroad Accident Medical Guidance | FELA Injury Treatment | California Train Accident Doctors" description="Medical guidance for California railroad accident victims. FELA injury specialists, treatment options, and medical care coordination for train accident injuries." keywords="railroad accident medical guidance, FELA injury treatment, train accident doctors, California railroad injury specialists" />
 
-      <GoBack fallbackPath="/practice-areas/railroad-accidents" />
+      
 
       {/* Hero Section */}
       <section className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{

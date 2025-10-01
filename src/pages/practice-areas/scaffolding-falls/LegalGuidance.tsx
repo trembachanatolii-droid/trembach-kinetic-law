@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import scaffoldingLegalImage from '@/assets/scaffolding-legal-guidance-hero.jpg';
 
@@ -38,7 +38,7 @@ const ScaffoldingFallsLegalGuidance: React.FC = () => {
         </div>
       </section>
 
-      <GoBack className="container mx-auto px-8 pt-8" />
+      
 
       <div className="container mx-auto px-8 py-12">
         <div className="max-w-6xl mx-auto">

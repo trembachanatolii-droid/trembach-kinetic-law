@@ -21,7 +21,7 @@ import {
 import { toast } from 'sonner';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import GoBack from '@/components/GoBack';
+
 import evaluationHero from '@/assets/swimming-pool-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -570,7 +570,7 @@ const SwimmingPoolCaseEvaluation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack fallbackPath="/practice-areas/swimming-pool-accidents" />
+      
       
       {/* Hero Section */}
       <section 

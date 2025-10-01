@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
-import GoBack from '@/components/GoBack';
+
 import SEO from '@/components/SEO';
 import scaffoldingHeroImage from '@/assets/scaffolding-case-evaluation-hero.jpg';
 
@@ -172,7 +172,6 @@ Insurance Claim: ${formData.insuranceClaim}
           canonical="https://www.trembachlawfirm.com/practice-areas/scaffolding-falls/case-evaluation"
         />
         
-        <GoBack className="container mx-auto px-8 pt-8" />
         
         <div className="container mx-auto px-8 py-20">
           <div className="max-w-2xl mx-auto text-center">
@@ -224,7 +223,7 @@ Insurance Claim: ${formData.insuranceClaim}
         </div>
       </section>
 
-      <GoBack className="container mx-auto px-8 pt-8" />
+      
 
       {/* Key Benefits */}
       <section ref={sectionRef} className="container mx-auto px-8 py-12">

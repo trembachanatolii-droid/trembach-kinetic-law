@@ -6,169 +6,53 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SEO from '@/components/SEO';
 import { Button } from '@/components/ui/button';
 gsap.registerPlugin(ScrollTrigger);
-interface PracticeArea {
+interface InjuryType {
   id: string;
   title: string;
 }
-const practiceAreas: PracticeArea[] = [{
-  id: 'mesothelioma-asbestos',
-  title: 'Mesothelioma & Asbestos'
-}, {
-  id: 'silicosis-injuries',
-  title: 'Silicosis Injuries'
-}, {
-  id: 'talc-baby-powder',
-  title: 'Talc & Baby Powder Cancer'
-}, {
-  id: 'car-accidents',
-  title: 'Car Accidents'
-}, {
-  id: 'truck-18-wheeler',
-  title: 'Truck & 18-Wheeler'
-}, {
-  id: 'motorcycle-accidents',
-  title: 'Motorcycle Accidents'
-}, {
-  id: 'pedestrian-accidents',
-  title: 'Pedestrian Accidents'
-}, {
-  id: 'bicycle-accidents',
-  title: 'Bicycle Accidents'
-}, {
-  id: 'premises-liability',
-  title: 'Premises Liability'
-}, {
-  id: 'dog-bites',
-  title: 'Dog Bites & Animal Attacks'
-}, {
-  id: 'medical-malpractice',
-  title: 'Medical Malpractice'
-}, {
-  id: 'wrongful-death',
-  title: 'Wrongful Death'
-}, {
-  id: 'product-liability',
-  title: 'Product Liability'
-}, {
-  id: 'construction-accidents',
-  title: 'Construction Accidents'
-}, {
-  id: 'brain-injuries',
-  title: 'Brain Injuries'
-}, {
-  id: 'spinal-cord-injuries',
-  title: 'Spinal Cord Injuries'
-}, {
-  id: 'burn-injuries',
-  title: 'Burn Injuries'
-}, {
-  id: 'amputation',
-  title: 'Amputation Injuries'
-}, {
-  id: 'workplace-injuries',
-  title: 'Workplace Injuries'
-}, {
-  id: 'medical-devices',
-  title: 'Medical Devices'
-}, {
-  id: 'pharmaceutical',
-  title: 'Pharmaceutical'
-}, {
-  id: 'mass-torts',
-  title: 'Mass Torts'
-}, {
-  id: 'class-actions',
-  title: 'Class Actions'
-}, {
-  id: 'environmental-toxic',
-  title: 'Environmental Toxic'
-}, {
-  id: 'camp-lejeune',
-  title: 'Camp Lejeune'
-}, {
-  id: 'pfas-exposure',
-  title: 'PFAS Exposure'
-}, {
-  id: 'benzene-exposure',
-  title: 'Benzene Exposure'
-}, {
-  id: 'opioid-litigation',
-  title: 'Opioid Litigation'
-}, {
-  id: 'sexual-abuse',
-  title: 'Sexual Abuse'
-}, {
-  id: 'clergy-abuse',
-  title: 'Clergy Abuse'
-}, {
-  id: 'elder-abuse',
-  title: 'Elder Abuse'
-}, {
-  id: 'birth-injuries',
-  title: 'Birth Injuries'
-}, {
-  id: 'uber-lyft-accidents',
-  title: 'Uber/Lyft Accidents'
-}, {
-  id: 'bus-accidents',
-  title: 'Bus Accidents'
-}, {
-  id: 'aviation-accidents',
-  title: 'Aviation Accidents'
-}, {
-  id: 'maritime-accidents',
-  title: 'Maritime Accidents'
-}, {
-  id: 'swimming-pool',
-  title: 'Swimming Pool Accidents'
-}, {
-  id: 'amusement-parks',
-  title: 'Amusement Park Accidents'
-}, {
-  id: 'electrocution',
-  title: 'Electrocution'
-}, {
-  id: 'explosions',
-  title: 'Explosions'
-}, {
-  id: 'vision-loss',
-  title: 'Vision Loss'
-}, {
-  id: 'hearing-loss',
-  title: 'Hearing Loss'
-}, {
-  id: 'paralysis',
-  title: 'Paralysis'
-}, {
-  id: 'civil-rights',
-  title: 'Civil Rights'
-}, {
-  id: 'retail-accidents',
-  title: 'Retail Accidents'
-}, {
-  id: 'scaffolding-falls',
-  title: 'Scaffolding Falls'
-}, {
-  id: 'crane-accidents',
-  title: 'Crane Accidents'
-}, {
-  id: 'railroad-accidents',
-  title: 'Railroad Accidents'
-}, {
-  id: 'defamation',
-  title: 'Defamation'
-}, {
-  id: 'general-personal-injury',
-  title: 'General Personal Injury'
-}];
+const injuryTypes: InjuryType[] = [
+  {
+    id: 'car-accident',
+    title: 'Car Accident'
+  },
+  {
+    id: 'mesothelioma',
+    title: 'Mesothelioma'
+  },
+  {
+    id: 'silicosis',
+    title: 'Silicosis'
+  },
+  {
+    id: 'talc-talcum',
+    title: 'Talc/Talcum'
+  },
+  {
+    id: 'dog-bite',
+    title: 'Dog Bite'
+  },
+  {
+    id: 'product-liability',
+    title: 'Product Liability'
+  },
+  {
+    id: 'wrongful-death',
+    title: 'Wrongful Death'
+  },
+  {
+    id: 'other',
+    title: 'Other'
+  }
+];
 const FreeConsultation = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     phone: '',
-    practiceArea: '',
+    injuryType: '',
     incidentDate: '',
+    cityCounty: '',
     description: ''
   });
   const heroRef = useRef<HTMLDivElement>(null);
@@ -271,9 +155,9 @@ const FreeConsultation = () => {
               We only get paid when you win.
             </p>
             <div className="flex gap-3 justify-center flex-wrap">
-              <a href="tel:213-908-9708" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 text-white rounded-full text-base font-medium hover:bg-gray-800 transition-all duration-200">
-                <Phone className="h-5 w-5" />
-                Call (213) 908-9708
+              <a href="tel:213-908-9708" className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 rounded-full text-base font-medium hover:bg-gray-800 transition-all duration-200">
+                <Phone className="h-5 w-5 text-white" />
+                <span className="text-white">Call (213) 908-9708</span>
               </a>
               <div className="px-6 py-3 bg-white text-gray-900 rounded-full text-base font-medium border border-gray-200">
                 Response within 2 hours
@@ -333,29 +217,36 @@ const FreeConsultation = () => {
                 </div>
 
                 <div>
-                  <label htmlFor="practiceArea" className="block text-sm font-medium text-gray-900 mb-2">
-                    Practice Area *
+                  <label htmlFor="injuryType" className="block text-sm font-medium text-gray-900 mb-2">
+                    Type of Injury *
                   </label>
-                  <select id="practiceArea" name="practiceArea" required value={formData.practiceArea} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all appearance-none cursor-pointer">
-                    <option value="">Select a practice area</option>
-                    {practiceAreas.map(area => <option key={area.id} value={area.id}>
-                        {area.title}
+                  <select id="injuryType" name="injuryType" required value={formData.injuryType} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all appearance-none cursor-pointer">
+                    <option value="">Select case type</option>
+                    {injuryTypes.map(type => <option key={type.id} value={type.id}>
+                        {type.title}
                       </option>)}
                   </select>
                 </div>
 
                 <div>
                   <label htmlFor="incidentDate" className="block text-sm font-medium text-gray-900 mb-2">
-                    Incident Date *
+                    Date of Injury/Accident/Diagnosis *
                   </label>
-                  <input type="date" id="incidentDate" name="incidentDate" required value={formData.incidentDate} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all" />
+                  <input type="text" id="incidentDate" name="incidentDate" required value={formData.incidentDate} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all" placeholder="mm/dd/yyyy" />
+                </div>
+
+                <div>
+                  <label htmlFor="cityCounty" className="block text-sm font-medium text-gray-900 mb-2">
+                    City/County Where Injury Occurred *
+                  </label>
+                  <input type="text" id="cityCounty" name="cityCounty" required value={formData.cityCounty} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all" placeholder="e.g., Los Angeles, Orange County, San Francisco" />
                 </div>
 
                 <div>
                   <label htmlFor="description" className="block text-sm font-medium text-gray-900 mb-2">
                     Case Description *
                   </label>
-                  <textarea id="description" name="description" required rows={6} value={formData.description} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none" placeholder="Please describe what happened..." />
+                  <textarea id="description" name="description" required rows={6} value={formData.description} onChange={handleChange} className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition-all resize-none" placeholder="Briefly describe what happened, your injuries/diagnosis, and any medical treatment received. For silicosis cases, include years worked with engineered stone and manufacturer (Caesarstone, Cambria, Silestone, Cosentino, MSI)..." />
                 </div>
 
                 <Button type="submit" className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold py-4 px-8 rounded-full text-base transition-all duration-200 hover:shadow-lg">
@@ -363,8 +254,8 @@ const FreeConsultation = () => {
                   <ChevronRight className="ml-2 h-5 w-5" />
                 </Button>
 
-                <p className="text-sm text-gray-500 text-center">
-                  By submitting this form, you agree to our terms of service and privacy policy.
+                <p className="text-sm text-gray-500 text-center leading-relaxed">
+                  I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the <a href="https://www.855mikewins.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="text-gray-900 underline hover:text-gray-700">Terms</a> & acknowledge the Privacy Policy.
                 </p>
               </form>
             </div>
@@ -381,9 +272,9 @@ const FreeConsultation = () => {
               Our team is standing by to answer your questions.<br />
               Multilingual support available.
             </p>
-            <a href="tel:213-908-9708" className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 text-white font-medium text-lg rounded-full transition-all duration-200 hover:bg-gray-800 hover:shadow-lg">
-              <Phone className="h-5 w-5" />
-              Call (213) 908-9708
+            <a href="tel:213-908-9708" className="inline-flex items-center gap-2 px-8 py-4 bg-gray-900 rounded-full font-medium text-lg transition-all duration-200 hover:bg-gray-800 hover:shadow-lg">
+              <Phone className="h-5 w-5 text-white" />
+              <span className="text-white">Call (213) 908-9708</span>
             </a>
           </div>
         </section>

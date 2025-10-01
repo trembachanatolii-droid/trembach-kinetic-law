@@ -21,7 +21,6 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/class-actions-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -105,8 +104,6 @@ const ClassActionsCaseEvaluation: React.FC = () => {
           </p>
         </div>
       </section>
-
-      <GoBack />
 
       {/* Quick Benefits */}
       <section className="py-12 bg-gradient-to-r from-primary/5 to-primary/10">

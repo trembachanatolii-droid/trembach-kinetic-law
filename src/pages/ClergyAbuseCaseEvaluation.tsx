@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, Phone, Shield, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -37,7 +36,6 @@ const ClergyAbuseCaseEvaluation: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack fallbackPath="/practice-areas/clergy-abuse" />
       
       <div className="min-h-screen bg-background py-20">
         <div className="container mx-auto px-4 max-w-4xl">

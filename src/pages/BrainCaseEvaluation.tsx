@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { CheckCircle, Phone, Mail, Shield, Clock, Award } from 'lucide-react';
 import heroBackground from '@/assets/brain-case-evaluation-hero.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -52,8 +51,6 @@ const BrainCaseEvaluation: React.FC = () => {
         description="Get a free evaluation of your brain injury case from experienced California attorneys. No fees unless we win your TBI compensation claim."
         canonical="/brain-case-evaluation"
       />
-
-      <GoBack />
 
       {/* Hero Section */}
       <section

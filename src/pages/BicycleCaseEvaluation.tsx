@@ -20,7 +20,6 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/bicycle-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -60,8 +59,6 @@ const BicycleCaseEvaluation = () => {
         description="Get a free evaluation of your bicycle accident case from experienced California attorneys. No fees unless we win your bike injury claim."
         canonical="/bicycle-case-evaluation"
       />
-
-      <GoBack />
 
       {/* Hero Section */}
       <section

@@ -50,7 +50,7 @@ import visionLossImg from '@/assets/practice-areas/vision-loss-bright.jpg';
 import hearingLossImg from '@/assets/practice-areas/hearing-loss-bright.jpg';
 import paralysisImg from '@/assets/practice-areas/paralysis-bright.jpg';
 import civilRightsImg from '@/assets/practice-areas/civil-rights-bright.jpg';
-import retailAccidentsImg from '@/assets/practice-areas/premises-liability.jpg';
+const retailAccidentsImg = 'https://images.unsplash.com/photo-1540340061722-9293d5163008?auto=format&fit=crop&w=1920&q=80';
 import scaffoldingFallsImg from '@/assets/practice-areas/scaffolding-falls-bright.jpg';
 import craneAccidentsImg from '@/assets/practice-areas/crane-accidents-bright.jpg';
 import railroadAccidentsImg from '@/assets/practice-areas/railroad-accidents-bright.jpg';

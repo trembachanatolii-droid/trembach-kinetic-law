@@ -195,9 +195,9 @@ const PracticeAreasOverview = () => {
           {/* Apple-style Sidebar */}
           <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white">
             <div className="px-6 py-8 pb-12">
-              <div className="mb-6 border border-gray-300 rounded-lg p-4">
-                <h1 className="text-2xl font-bold text-black">Practice Areas</h1>
-                <p className="text-sm text-gray-600 mt-1">
+              <div className="mb-6 border border-gray-300 rounded-lg p-3">
+                <h1 className="text-lg font-semibold text-gray-900">Practice Areas</h1>
+                <p className="text-xs text-gray-600 mt-0.5">
                   {practiceAreas.length} specializations
                 </p>
               </div>
@@ -227,10 +227,10 @@ const PracticeAreasOverview = () => {
               className="relative min-h-[70vh] flex items-center justify-center overflow-hidden bg-gray-50"
             >
               <div className="relative z-10 text-center px-6 py-32 max-w-5xl mx-auto">
-                <h2 className="text-6xl md:text-8xl font-semibold mb-6 text-gray-900 tracking-tight leading-none">
+                <h2 className="text-5xl md:text-7xl font-semibold mb-4 text-gray-900 tracking-tight leading-tight">
                   Expert Legal<br />Representation
                 </h2>
-                <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-2xl mx-auto font-light">
+                <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-2xl mx-auto font-normal leading-relaxed">
                   Comprehensive injury law coverage across California.<br />
                   We fight for your rights.
                 </p>
@@ -240,7 +240,7 @@ const PracticeAreasOverview = () => {
                   </div>
                   <Link
                     to="/free-consultation"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0071E3] hover:bg-[#0066CC] text-white active:text-red-500 rounded-full text-sm font-medium transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0071E3] hover:bg-[#0066CC] text-white rounded-full text-sm font-medium transition-all duration-200 active:!text-red-500"
                   >
                     START YOUR FREE CASE REVIEW
                   </Link>

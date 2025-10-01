@@ -324,7 +324,7 @@ const PracticeAreasOverview = () => {
                   </a>
                   <Link
                     to="/free-consultation"
-                    className="px-8 py-4 bg-red-600 text-white font-semibold text-base rounded-full transition-all duration-200 hover:bg-red-700 shadow-lg"
+                    className="px-8 py-4 rounded-full font-semibold text-base transition-all duration-200 bg-red-600 hover:bg-red-700 shadow-lg !text-white hover:!text-white active:!text-white visited:!text-white hover:visited:!text-white focus:!text-white no-underline hover:no-underline visited:no-underline hover:visited:no-underline focus:no-underline focus-visible:ring-2 focus-visible:ring-white/40"
                   >
                     Free Consultation
                   </Link>

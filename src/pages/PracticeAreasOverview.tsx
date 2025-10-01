@@ -193,21 +193,21 @@ const PracticeAreasOverview = () => {
       <div className="min-h-screen bg-white pt-[44px]">
         <div className="flex">
           {/* Apple-style Sidebar */}
-          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white/80 backdrop-blur-2xl border-r border-gray-100">
-            <div className="p-6 pb-12">
-              <div className="mb-8">
-                <h1 className="text-5xl font-bold text-gray-900 tracking-tight leading-tight">Practice<br />Areas</h1>
-                <p className="text-base text-gray-600 mt-3 font-normal">{practiceAreas.length} specializations</p>
+          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white border-r border-gray-200/60">
+            <div className="px-6 py-8 pb-12">
+              <div className="mb-6">
+                <h1 className="text-3xl font-bold text-gray-900 mb-1">Practice Areas</h1>
+                <p className="text-sm text-gray-500">{practiceAreas.length} specializations</p>
               </div>
-              <nav className="space-y-0.5">
+              <nav className="space-y-0">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area.id)}
-                    className={`group w-full text-left py-3 px-4 text-sm font-normal transition-all duration-150 border-b border-gray-200/50 ${
+                    className={`group w-full text-left py-3 px-4 text-[15px] transition-all duration-200 rounded-lg ${
                       selectedArea === area.id
-                        ? 'text-gray-900 bg-gray-100/50'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
+                        ? 'text-gray-900 bg-blue-50 font-medium'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-normal'
                     }`}
                   >
                     {area.title}

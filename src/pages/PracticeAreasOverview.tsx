@@ -196,18 +196,18 @@ const PracticeAreasOverview = () => {
           <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white/80 backdrop-blur-2xl border-r border-gray-100">
             <div className="p-6 pb-12">
               <div className="mb-8">
-                <h1 className="text-2xl font-semibold text-gray-900 tracking-tight">Practice Areas</h1>
-                <p className="text-sm text-gray-500 mt-1">{practiceAreas.length} specializations</p>
+                <h1 className="text-5xl font-bold text-gray-900 tracking-tight leading-tight">Practice<br />Areas</h1>
+                <p className="text-base text-gray-600 mt-3 font-normal">{practiceAreas.length} specializations</p>
               </div>
-              <nav className="space-y-1">
+              <nav className="space-y-0.5">
                 {practiceAreas.map((area) => (
                   <button
                     key={area.id}
                     onClick={() => handleAreaClick(area.id)}
-                    className={`group w-full text-left py-2 px-3 text-sm font-medium transition-all duration-150 ${
+                    className={`group w-full text-left py-3 px-4 text-sm font-normal transition-all duration-150 border-b border-gray-200/50 ${
                       selectedArea === area.id
-                        ? 'text-gray-900 bg-gray-100'
-                        : 'text-gray-600 hover:text-gray-900'
+                        ? 'text-gray-900 bg-gray-100/50'
+                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
                     {area.title}

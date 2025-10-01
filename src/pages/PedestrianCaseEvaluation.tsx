@@ -7,7 +7,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { ArrowLeft, ArrowRight, Star, Phone, Mail, MessageCircle, Shield, Award, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pedestrian-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -430,8 +429,6 @@ const PedestrianCaseEvaluation = () => {
           </div>
         </div>
       </section>
-
-      <GoBack className="top-20 z-[60]" />
 
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

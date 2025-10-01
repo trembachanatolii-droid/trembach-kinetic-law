@@ -7,7 +7,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { AlertTriangle, Calculator, DollarSign } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/environmental-toxic-compensation-calculator-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -127,7 +126,6 @@ const EnvironmentalToxicCompensationCalculator: React.FC = () => {
       />
       
       <Navigation />
-      <GoBack />
 
       {/* Hero Section */}
       <section 

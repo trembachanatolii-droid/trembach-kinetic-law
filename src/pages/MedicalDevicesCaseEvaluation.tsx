@@ -11,7 +11,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useToast } from '@/hooks/use-toast';
 import SEO from '@/components/SEO';
 import heroImage from '@/assets/practice-areas/medical-devices-evaluation-hero.jpg';
-import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 

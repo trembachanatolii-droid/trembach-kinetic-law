@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Slider } from '@/components/ui/slider';
 import { Badge } from '@/components/ui/badge';
 import { Calculator, Star, AlertTriangle, Shield, Phone, FileText } from 'lucide-react';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/opioid-calculator-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -118,8 +117,6 @@ const OpioidCalculator: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack fallbackPath="/practice-areas/opioid-litigation" />
-
       {/* Hero Section */}
       <section 
         className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"

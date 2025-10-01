@@ -8,7 +8,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, Phone, Mail, Shield, Star, FileText, Clock } from 'lucide-react';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -67,8 +66,6 @@ const OpioidCaseEvaluation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <GoBack fallbackPath="/practice-areas/opioid-litigation" />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-red-900 to-red-700 text-white py-20">
         <div className="max-w-4xl mx-auto px-6 text-center">

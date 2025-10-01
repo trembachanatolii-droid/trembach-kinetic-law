@@ -11,7 +11,6 @@ import { Badge } from '@/components/ui/badge';
 import { Calculator, DollarSign, TrendingUp, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
 import heroBackground from '@/assets/mass-torts-compensation-calculator-hero.jpg';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -185,8 +184,6 @@ const MassTortsCompensationCalculator: React.FC = () => {
           </p>
         </div>
       </section>
-
-      <GoBack />
 
       {/* Main Content */}
       <section className="py-20">

@@ -29,7 +29,6 @@ import {
 } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/environmental-toxic-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -580,7 +579,6 @@ const EnvironmentalToxicCaseEvaluation: React.FC = () => {
     <div className="min-h-screen bg-background">
       <SEO {...seo} />
       <Navigation />
-      <GoBack />
 
       {/* Hero Section */}
       <section 

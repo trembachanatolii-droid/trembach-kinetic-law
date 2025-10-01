@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -213,8 +212,6 @@ const ProductLiabilityCompensationCalculator: React.FC = () => {
         description="Calculate potential product liability compensation in California. Free estimation tool based on recent settlements and California law. Get expert legal consultation."
         canonical="/product-liability-compensation-calculator"
       />
-
-      <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
 
       {/* Hero Section */}
       <section 

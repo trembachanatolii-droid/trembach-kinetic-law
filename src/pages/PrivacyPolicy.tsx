@@ -315,7 +315,7 @@ const PrivacyPolicy = () => {
                   <Label htmlFor="description">Case Description *</Label>
                   <Textarea
                     id="description"
-                    placeholder="Briefly describe what happened, your injuries/diagnosis, and any medical treatment received. For silicosis cases, include years worked with engineered stone and manufacturer (Caesarstone, Cambria, Silestone, Cosentino, MSI)..."
+                    placeholder="Briefly describe what happened, your injuries/diagnosis, and any medical treatment received..."
                     value={formData.description}
                     onChange={(e) => handleInputChange('description', e.target.value)}
                     rows={4}

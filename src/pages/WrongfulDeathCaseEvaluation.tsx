@@ -94,7 +94,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
 Please provide comprehensive case evaluation and next steps.
     `;
     
-    window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const nextStep = () => {

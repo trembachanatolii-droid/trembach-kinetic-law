@@ -142,7 +142,7 @@ Relationship to Deceased: ${formData.relationship}
 Description: ${formData.description}
 Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
     `;
-    window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const toggleSection = (sectionId: string) => {
@@ -1321,7 +1321,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     onClick={() => {
                       const subject = 'Free Wrongful Death Case Evaluation';
                       const body = 'I would like to start a free wrongful death case evaluation.';
-                      window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+                      window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
                     }}
                   >
                     <Mail className="w-5 h-5 mr-2" />

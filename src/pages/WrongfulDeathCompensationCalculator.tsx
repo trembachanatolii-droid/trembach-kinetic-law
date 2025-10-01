@@ -520,7 +520,7 @@ const WrongfulDeathCompensationCalculator: React.FC = () => {
                       onClick={() => {
                         const subject = 'Wrongful Death Compensation Discussion';
                         const body = 'I used your compensation calculator and would like to discuss my case with an attorney.';
-                        window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+                        window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
                       }}
                     >
                       <Mail className="w-4 h-4 mr-2" />

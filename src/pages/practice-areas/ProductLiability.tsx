@@ -113,7 +113,7 @@ Injury Date: ${formData.injuryDate}
 Description: ${formData.description}
 Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
     `);
-    window.location.href = `mailto:contact@trembachlaw.com?subject=${subject}&body=${body}`;
+    window.location.href = `mailto:info@trembachlaw.com?subject=${subject}&body=${body}`;
   };
 
   const toggleSection = (section: string) => {

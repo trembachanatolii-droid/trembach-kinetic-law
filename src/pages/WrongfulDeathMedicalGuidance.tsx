@@ -650,7 +650,7 @@ const WrongfulDeathMedicalGuidance: React.FC = () => {
                       onClick={() => {
                         const subject = 'Medical Guidance & Legal Consultation';
                         const body = 'I would like guidance on medical aspects of my wrongful death case and legal consultation.';
-                        window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+                        window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
                       }}
                     >
                       <Mail className="w-4 h-4 mr-2" />

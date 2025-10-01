@@ -98,7 +98,7 @@ const PrivacyPolicy = () => {
                 <li>Non-discrimination for exercising your privacy rights</li>
               </ul>
               <p className="text-muted-foreground leading-relaxed mt-4">
-                To exercise these rights, please contact us at contact@trembachlaw.com or (213) 908-9708.
+                To exercise these rights, please contact us at info@trembachlaw.com or (213) 908-9708.
               </p>
             </section>
 
@@ -137,7 +137,7 @@ const PrivacyPolicy = () => {
               </p>
               <div className="mt-4 text-muted-foreground">
                 <p><strong>Trembach Law Firm</strong></p>
-                <p>Email: contact@trembachlaw.com</p>
+                <p>Email: info@trembachlaw.com</p>
                 <p>Phone: (213) 908-9708</p>
                 <p>Serving All of California</p>
               </div>

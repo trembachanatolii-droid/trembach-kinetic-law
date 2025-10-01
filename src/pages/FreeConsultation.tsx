@@ -301,7 +301,7 @@ const FreeConsultation = () => {
                     <Mail className="w-5 h-5 text-primary" />
                     <div>
                       <p className="font-semibold">Email Us</p>
-                      <p className="text-muted-foreground">contact@trembachlaw.com</p>
+                      <p className="text-muted-foreground">info@trembachlaw.com</p>
                     </div>
                   </div>
                   

@@ -240,7 +240,7 @@ const PracticeAreasOverview = () => {
                   </div>
                   <Link
                     to="/free-consultation"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0071E3] hover:bg-[#0066CC] text-white rounded-full text-sm font-medium transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0071E3] hover:bg-[#0066CC] text-white active:text-red-500 rounded-full text-sm font-medium transition-all duration-200"
                   >
                     START YOUR FREE CASE REVIEW
                   </Link>

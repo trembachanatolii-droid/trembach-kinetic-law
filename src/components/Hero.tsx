@@ -19,75 +19,84 @@ const Hero = () => {
       }
 
       // Staggered headline animation
-      gsap.fromTo(
-        ".hero-line",
-        {
-          y: 50,
-          opacity: 0,
-          filter: "blur(10px)"
-        },
-        {
-          y: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1,
-          stagger: 0.15,
-          ease: "power3.out",
-          delay: 0.5
-        }
-      );
+      const heroLines = heroRef.current?.querySelectorAll(".hero-line");
+      if (heroLines && heroLines.length > 0) {
+        gsap.fromTo(
+          heroLines,
+          {
+            y: 50,
+            opacity: 0,
+            filter: "blur(10px)"
+          },
+          {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.5
+          }
+        );
+      }
 
       // Button animation
-      gsap.fromTo(
-        buttonRef.current,
-        {
-          y: 30,
-          opacity: 0,
-          scale: 0.9
-        },
-        {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          ease: "power3.out",
-          delay: 1.2
-        }
-      );
+      if (buttonRef.current) {
+        gsap.fromTo(
+          buttonRef.current,
+          {
+            y: 30,
+            opacity: 0,
+            scale: 0.9
+          },
+          {
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            duration: 0.8,
+            ease: "power3.out",
+            delay: 1.2
+          }
+        );
+      }
 
       // Lawyer image animation
-      gsap.fromTo(
-        lawyerRef.current,
-        {
-          x: 100,
-          opacity: 0,
-          filter: "blur(5px)"
-        },
-        {
-          x: 0,
-          opacity: 1,
-          filter: "blur(0px)",
-          duration: 1,
-          ease: "power3.out",
-          delay: 0.8
-        }
-      );
+      if (lawyerRef.current) {
+        gsap.fromTo(
+          lawyerRef.current,
+          {
+            x: 100,
+            opacity: 0,
+            filter: "blur(5px)"
+          },
+          {
+            x: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.8
+          }
+        );
+      }
 
       // Chat widget animation
-      gsap.fromTo(
-        chatRef.current,
-        {
-          scale: 0,
-          rotation: -10
-        },
-        {
-          scale: 1,
-          rotation: 0,
-          duration: 0.6,
-          ease: "back.out(1.7)",
-          delay: 2
-        }
-      );
+      if (chatRef.current) {
+        gsap.fromTo(
+          chatRef.current,
+          {
+            scale: 0,
+            rotation: -10
+          },
+          {
+            scale: 1,
+            rotation: 0,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+            delay: 2
+          }
+        );
+      }
     }, heroRef);
 
     return () => ctx.revert();

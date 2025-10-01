@@ -6,9 +6,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/case-evaluation-hero.jpg';
+import heroBackground from '@/assets/free-consultation-hero.jpg';
 import SEO from '@/components/SEO';
 import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -62,7 +63,8 @@ const FreeConsultation = () => {
     injuryType: '',
     incidentDate: '',
     cityCounty: '',
-    description: ''
+    description: '',
+    smsConsent: false
   });
 
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -253,14 +255,27 @@ const FreeConsultation = () => {
                         />
                       </div>
 
+                      <div className="flex items-start gap-3">
+                        <Checkbox 
+                          id="smsConsent" 
+                          checked={formData.smsConsent}
+                          onCheckedChange={(checked) => handleInputChange('smsConsent', String(checked))}
+                          required
+                        />
+                        <div className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                          <label htmlFor="smsConsent" className="cursor-pointer">
+                            By checking this box, you agree to receive TEXT messages from Trembach Law Firm related to your inquiry, follow-ups, and review requests at the phone number provided above. You may reply STOP to opt out at any time. For assistance, reply HELP. Messages and data rates may apply. Message frequency will vary. Please review our <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and terms of service.
+                          </label>
+                          <p>
+                            Protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms of Service</a>.
+                          </p>
+                        </div>
+                      </div>
+
                       <Button type="submit" size="lg" className="w-full btn-enhanced group">
                         Submit Case Review
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
-
-                      <p className="text-sm text-muted-foreground text-center leading-relaxed">
-                        I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the <a href="https://www.855mikewins.com/terms-of-use/" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms</a> & acknowledge the Privacy Policy.
-                      </p>
                     </form>
                   </CardContent>
                 </Card>

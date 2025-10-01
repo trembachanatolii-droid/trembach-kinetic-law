@@ -247,6 +247,7 @@ import RailroadAccidentsCompensationCalculator from "./pages/practice-areas/rail
 import RailroadAccidentsLegalGuidance from "./pages/practice-areas/railroad-accidents/LegalGuidance";
 import RailroadAccidentsResources from "./pages/practice-areas/railroad-accidents/Resources";
 import RailroadAccidentsMedicalGuidance from "./pages/practice-areas/railroad-accidents/MedicalGuidance";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -262,6 +263,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/free-consultation" element={<FreeConsultation />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/practice-areas" element={<PracticeAreasOverview />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/defamation" element={<Defamation />} />

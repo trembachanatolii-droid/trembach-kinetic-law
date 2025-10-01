@@ -206,10 +206,10 @@ const PracticeAreasOverview = () => {
                   <Link
                     key={area.id}
                     to={`/practice-areas/${area.slug}`}
-                    className={`block w-full text-left py-3 px-4 text-[15px] transition-all duration-200 rounded-lg ${
+                    className={`block w-full text-left py-3 px-4 text-[15px] transition-all duration-200 rounded-lg apple-blue-hover ${
                       selectedArea === area.id
-                        ? 'text-black bg-blue-400 font-normal'
-                        : 'text-black hover:bg-blue-400 font-normal'
+                        ? 'text-white bg-[#0071E3] font-normal'
+                        : 'text-black font-normal'
                     }`}
                   >
                     {area.title}

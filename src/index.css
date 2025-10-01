@@ -1181,6 +1181,12 @@
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
   }
+
+  /* Apple Blue Color for Practice Areas Sidebar */
+  .apple-blue-hover:hover {
+    background-color: #0071E3 !important;
+    color: #ffffff !important;
+  }
   .vision-loss-page .progress-indicator {
     background-color: #e5e7eb !important;
   }

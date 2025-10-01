@@ -121,7 +121,7 @@ const practiceAreas: PracticeArea[] = [
 ];
 
 const PracticeAreasOverview = () => {
-  const [selectedArea, setSelectedArea] = useState<string>(practiceAreas[0].id);
+  const [selectedArea, setSelectedArea] = useState<string>('');
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
 

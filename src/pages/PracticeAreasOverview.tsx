@@ -193,27 +193,27 @@ const PracticeAreasOverview = () => {
       <div className="min-h-screen bg-white pt-[44px]">
         <div className="flex">
           {/* Apple-style Sidebar */}
-          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-gradient-to-br from-background via-background/95 to-primary/5">
+          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white">
             <div className="px-6 py-8 pb-12">
               <div className="mb-6">
-                <h1 className="text-2xl text-blue-600 font-display transition-colors">Practice Areas</h1>
-                <p className="text-muted-foreground">
+                <h1 className="text-2xl font-bold text-black">Practice Areas</h1>
+                <p className="text-sm text-gray-600 mt-1">
                   {practiceAreas.length} specializations
                 </p>
               </div>
-              <nav className="space-y-0">
+              <nav className="space-y-1">
                 {practiceAreas.map((area) => (
-                  <button
+                  <Link
                     key={area.id}
-                    onClick={() => handleAreaClick(area.id)}
-                    className={`group w-full text-left py-3 px-4 text-[15px] transition-all duration-200 rounded-lg ${
+                    to={`/practice-areas/${area.slug}`}
+                    className={`block w-full text-left py-3 px-4 text-[15px] transition-all duration-200 rounded-lg ${
                       selectedArea === area.id
-                        ? 'text-gray-900 bg-blue-50 font-medium'
-                        : 'text-gray-700 hover:text-gray-900 hover:bg-gray-50 font-normal'
+                        ? 'text-black bg-blue-400 font-normal'
+                        : 'text-black hover:bg-blue-400 font-normal'
                     }`}
                   >
                     {area.title}
-                  </button>
+                  </Link>
                 ))}
               </nav>
             </div>

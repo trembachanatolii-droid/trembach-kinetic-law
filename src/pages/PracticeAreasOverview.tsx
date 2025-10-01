@@ -523,13 +523,7 @@ const PracticeAreasOverview = () => {
                     Free Consultation
                   </Link>
                 </div>
-                <div className="flex gap-8 justify-center text-sm text-gray-600">
-                  <div>Available 24/7</div>
-                  <div>·</div>
-                  <div>Multilingual Staff</div>
-                  <div>·</div>
-                  
-                </div>
+                
               </div>
             </section>
           </main>

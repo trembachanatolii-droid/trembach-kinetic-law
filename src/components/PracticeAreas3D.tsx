@@ -131,7 +131,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
           <a 
             href={`/practice-areas/${generateSlug(title)}`}
-            className="bg-white text-black font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
+            className="bg-white !text-black hover:!text-black active:!text-black visited:!text-black font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2 no-underline hover:no-underline visited:no-underline"
           >
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
               <path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path>
@@ -170,7 +170,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         <div className="pt-2">
           <a 
             href={`/practice-areas/${generateSlug(title)}`}
-            className="ghost-button group/btn"
+            className="ghost-button group/btn no-underline hover:no-underline visited:no-underline"
           >
             See More Information
             <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover/btn:translate-x-1">
@@ -567,7 +567,7 @@ const PracticeAreas3D = () => {
             </p>
             <a 
               href="/case-evaluation"
-              className="hero-button text-lg px-8 py-4"
+              className="hero-button text-lg px-8 py-4 !text-white hover:!text-white active:!text-white visited:!text-white no-underline hover:no-underline visited:no-underline"
             >
               Get Free Case Review
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 256 256">

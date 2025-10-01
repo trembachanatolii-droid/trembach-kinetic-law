@@ -105,7 +105,7 @@ const Navigation = () => {
                           </a>
                         </li>
         <li className="pt-4">
-          <a href="/practice-areas?category=cancer" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+          <a href="/practice-areas?category=cancer" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] !text-black hover:!text-black active:!text-black visited:!text-black font-medium px-4 py-2 rounded-full text-sm transition-colors no-underline hover:no-underline visited:no-underline">
             See All →
           </a>
         </li>
@@ -151,7 +151,7 @@ const Navigation = () => {
                           </a>
                         </li>
         <li className="pt-4">
-          <a href="/practice-areas?category=auto" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+          <a href="/practice-areas?category=auto" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] !text-black hover:!text-black active:!text-black visited:!text-black font-medium px-4 py-2 rounded-full text-sm transition-colors no-underline hover:no-underline visited:no-underline">
             See All →
           </a>
         </li>
@@ -196,7 +196,7 @@ const Navigation = () => {
           </a>
         </li>
         <li className="pt-4">
-          <a href="/practice-areas?category=personal" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] text-black font-medium px-4 py-2 rounded-full text-sm transition-colors">
+          <a href="/practice-areas?category=personal" className="inline-flex items-center gap-2 bg-[#30d158] hover:bg-[#28cd4c] !text-black hover:!text-black active:!text-black visited:!text-black font-medium px-4 py-2 rounded-full text-sm transition-colors no-underline hover:no-underline visited:no-underline">
             See All →
           </a>
         </li>

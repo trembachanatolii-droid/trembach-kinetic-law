@@ -193,11 +193,13 @@ const PracticeAreasOverview = () => {
       <div className="min-h-screen bg-white pt-[44px]">
         <div className="flex">
           {/* Apple-style Sidebar */}
-          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white border-r border-gray-200/60">
+          <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-gradient-to-br from-background via-background/95 to-primary/5">
             <div className="px-6 py-8 pb-12">
               <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-900 mb-1">Practice Areas</h1>
-                <p className="text-sm text-gray-500">{practiceAreas.length} specializations</p>
+                <h1 className="text-2xl text-blue-600 font-display transition-colors">Practice Areas</h1>
+                <p className="text-muted-foreground">
+                  {practiceAreas.length} specializations
+                </p>
               </div>
               <nav className="space-y-0">
                 {practiceAreas.map((area) => (

@@ -195,7 +195,7 @@ const PracticeAreasOverview = () => {
           {/* Apple-style Sidebar */}
           <aside className="hidden lg:block w-[280px] fixed left-0 top-[44px] bottom-0 overflow-y-auto bg-white">
             <div className="px-6 py-8 pb-12">
-              <div className="mb-6">
+              <div className="mb-6 border border-gray-300 rounded-lg p-4">
                 <h1 className="text-2xl font-bold text-black">Practice Areas</h1>
                 <p className="text-sm text-gray-600 mt-1">
                   {practiceAreas.length} specializations
@@ -240,7 +240,7 @@ const PracticeAreasOverview = () => {
                   </div>
                   <Link
                     to="/free-consultation"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white rounded-full text-sm font-medium transition-all duration-200"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#0071E3] hover:bg-[#0066CC] text-white rounded-full text-sm font-medium transition-all duration-200"
                   >
                     START YOUR FREE CASE REVIEW
                   </Link>

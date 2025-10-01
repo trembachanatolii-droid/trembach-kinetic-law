@@ -4,7 +4,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import Navigation from '@/components/Navigation';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -74,9 +73,6 @@ const ComprehensivePracticeAreaTemplate: React.FC<ComprehensivePracticeAreaTempl
           </div>
         </div>
       </section>
-
-      {/* Go Back Button - Positioned below hero */}
-      <GoBack className="container mx-auto px-8 pt-8" />
 
       {/* Main Content */}
       <div ref={contentRef} className="container mx-auto px-8 py-12">

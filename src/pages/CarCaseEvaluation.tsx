@@ -8,7 +8,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Shield, Clock, Star, Phone } from 'lucide-react';
 import heroImage from '@/assets/case-evaluation-hero.jpg';
-import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -81,8 +80,6 @@ const CarCaseEvaluation = () => {
         description="Get a free, confidential evaluation of your California car accident case. Former defense attorney now fighting for accident victims. Quick response guaranteed."
         canonical="/car-case-evaluation"
       />
-
-      <GoBack />
 
       {/* Hero Section */}
       <section 

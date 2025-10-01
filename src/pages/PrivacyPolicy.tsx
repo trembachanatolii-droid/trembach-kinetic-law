@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SEO from '@/components/SEO';
-import GoBack from '@/components/GoBack';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -51,9 +50,6 @@ const PrivacyPolicy = () => {
       <SEO title="Privacy Policy | Trembach Law Firm" description="Privacy Policy for Trembach Law Firm. Learn how we protect your personal information and comply with California law." canonical="/privacy-policy" />
       
       <div className="container mx-auto px-6 py-12 max-w-5xl">
-        <div className="mb-8">
-          <GoBack />
-        </div>
 
         <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-8">
           Privacy Policy

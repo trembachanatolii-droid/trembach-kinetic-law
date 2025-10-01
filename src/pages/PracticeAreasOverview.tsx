@@ -5,23 +5,23 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SEO from '@/components/SEO';
 
-// Import practice area images
-import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
-import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries.jpg';
-import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder.jpg';
-import carAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
-import truckAccidentsImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
-import motorcycleAccidentsImg from '@/assets/practice-areas/motorcycle-accidents.jpg';
-import pedestrianAccidentsImg from '@/assets/practice-areas/pedestrian-accidents.jpg';
-import bicycleAccidentsImg from '@/assets/practice-areas/bicycle-accidents.jpg';
-import premisesLiabilityImg from '@/assets/practice-areas/premises-liability.jpg';
-import dogBitesImg from '@/assets/practice-areas/dog-bites.jpg';
-import medicalMalpracticeImg from '@/assets/practice-areas/medical-malpractice.jpg';
-import wrongfulDeathImg from '@/assets/practice-areas/wrongful-death.jpg';
-import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
-import constructionAccidentsImg from '@/assets/practice-areas/construction-accidents.jpg';
-import brainInjuriesImg from '@/assets/practice-areas/brain-injuries.jpg';
-import spinalCordInjuriesImg from '@/assets/practice-areas/spinal-cord-injuries.jpg';
+// Import practice area images - bright versions with natural light
+import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos-bright.jpg';
+import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries-bright.jpg';
+import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder-bright.jpg';
+import carAccidentsImg from '@/assets/practice-areas/car-accidents-bright.jpg';
+import truckAccidentsImg from '@/assets/practice-areas/truck-accidents-bright.jpg';
+import motorcycleAccidentsImg from '@/assets/practice-areas/motorcycle-accidents-bright.jpg';
+import pedestrianAccidentsImg from '@/assets/practice-areas/pedestrian-accidents-bright.jpg';
+import bicycleAccidentsImg from '@/assets/practice-areas/bicycle-accidents-bright.jpg';
+import premisesLiabilityImg from '@/assets/practice-areas/premises-liability-bright.jpg';
+import dogBitesImg from '@/assets/practice-areas/dog-bites-bright.jpg';
+import medicalMalpracticeImg from '@/assets/practice-areas/medical-malpractice-bright.jpg';
+import wrongfulDeathImg from '@/assets/practice-areas/wrongful-death-bright.jpg';
+import productLiabilityImg from '@/assets/practice-areas/product-liability-bright.jpg';
+import constructionAccidentsImg from '@/assets/practice-areas/construction-accidents-bright.jpg';
+import brainInjuriesImg from '@/assets/practice-areas/brain-injuries-bright.jpg';
+import spinalCordInjuriesImg from '@/assets/practice-areas/spinal-cord-injuries-bright.jpg';
 import burnInjuriesImg from '@/assets/practice-areas/burn-injuries.jpg';
 import amputationImg from '@/assets/practice-areas/amputation.jpg';
 import workplaceInjuriesImg from '@/assets/practice-areas/workplace-injuries.jpg';
@@ -268,31 +268,24 @@ const PracticeAreasOverview = () => {
                         <img
                           src={area.image}
                           alt={area.title}
-                          className="w-full h-full object-cover"
+                          className="w-full h-full object-cover brightness-110"
                         />
                       </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                     </div>
 
                     {/* Content */}
-                    <div className="relative h-full flex flex-col justify-between p-8">
-                      {/* Category badge */}
-                      <div className="self-start">
-                        <span className="inline-block px-4 py-1.5 bg-white/95 backdrop-blur-sm rounded-full text-gray-900 text-xs font-semibold tracking-wide">
-                          {area.category}
-                        </span>
-                      </div>
-
+                    <div className="relative h-full flex flex-col justify-end p-8">
                       {/* Title and CTA */}
                       <div className="space-y-4">
                         <h3 className="text-3xl font-semibold text-white tracking-tight leading-tight">
                           {area.title}
                         </h3>
 
-                        {/* Apple-style CTA - always visible */}
-                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-gray-900 text-sm font-semibold border border-gray-200 shadow-sm z-10">
-                          <span>Learn more</span>
-                          <ChevronRight className="h-4 w-4" />
+                        {/* Apple-style interactive CTA */}
+                        <div className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-gray-900 text-sm font-semibold border border-gray-200/20 shadow-lg transition-all duration-300 group-hover:bg-gray-50 group-hover:shadow-xl group-hover:scale-105 group-hover:border-gray-300">
+                          <span className="transition-all duration-300">Learn more</span>
+                          <ChevronRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
                         </div>
                       </div>
                     </div>

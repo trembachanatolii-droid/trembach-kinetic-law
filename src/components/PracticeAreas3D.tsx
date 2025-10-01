@@ -4,16 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import practice area images
 import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
-import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries.jpg';
-import carAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
+import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries-bright.jpg';
+import carAccidentsImg from '@/assets/practice-areas/car-accidents-bright.jpg';
 import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder.jpg';
 import truck18WheelerImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
-import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
+import productLiabilityImg from '@/assets/practice-areas/product-liability-bright.jpg';
 import amputationImg from '@/assets/practice-areas/amputation.jpg';
 import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
-import campLejeuneImg from '@/assets/practice-areas/camp-lejeune.jpg';
+import campLejeuneImg from '@/assets/practice-areas/camp-lejeune-bright.jpg';
 import birthInjuriesImg from '@/assets/practice-areas/birth-injuries.jpg';
-import amusementParksImg from '@/assets/practice-areas/amusement-parks.jpg';
+import amusementParksImg from '@/assets/practice-areas/amusement-parks-bright.jpg';
 import electrocutionImg from '@/assets/practice-areas/electrocution.jpg';
 import defamationImg from '@/assets/practice-areas/defamation.jpg';
 

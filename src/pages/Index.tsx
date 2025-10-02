@@ -4,7 +4,6 @@ import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
-import About from '../components/About';
 import TruthAboutCase from '../components/TruthAboutCase';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
@@ -16,7 +15,6 @@ import Process from '../components/Process';
 import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
-import { VerticalRope } from '../components/animations/VerticalRope';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -46,14 +44,6 @@ const Index = () => {
       />
       {/* Hero Section */}
       <Hero />
-
-      {/* Single Vertical Rope Animation */}
-      <VerticalRope startElement="#about" />
-
-      {/* About Section */}
-      <section id="about">
-        <About />
-      </section>
 
       {/* Truth About Your Case Section */}
       <section id="truth">

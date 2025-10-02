@@ -1,7 +1,7 @@
 import React from 'react';
 import Navigation from '@/components/Navigation';
 import About from '@/components/About';
-import ConsultationForm from '@/components/ConsultationForm';
+import EvaluationForm from '@/components/EvaluationForm';
 import SEO from '@/components/SEO';
 
 const AboutPage = () => {
@@ -42,7 +42,7 @@ const AboutPage = () => {
       />
       <Navigation />
       <About />
-      <ConsultationForm />
+      <EvaluationForm />
     </>
   );
 };

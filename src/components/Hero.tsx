@@ -124,10 +124,7 @@ const Hero = () => {
         {/* Center Content */}
         <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
-            <p className="hero-line text-xl md:text-2xl font-medium text-apple mb-6">
-              California's premier personal injury and mesothelioma law firm with insider advantage
-            </p>
-            <h1 className="text-6xl lg:text-8xl font-black text-apple leading-tight tracking-tight">
+            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
               <span className="hero-line block">You Focus on Healing.</span>
               <span className="hero-line block">We Focus on Winning.</span>
             </h1>
@@ -135,7 +132,7 @@ const Hero = () => {
 
           <Button 
             ref={buttonRef}
-            className="mt-12 bg-apple hover:bg-apple/90 text-white font-semibold px-10 py-6 text-lg rounded-full shadow-2xl transform hover:scale-105 transition-all duration-300"
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
             onClick={() => window.location.href = '/free-consultation'}
           >
             START YOUR FREE CASE REVIEW

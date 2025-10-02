@@ -398,7 +398,7 @@ const About = () => {
               ))}
             </nav>
             <div className="mt-8 text-center">
-              <a href="/practice-areas" className="inline-flex items-center gap-2 text-[#0071E3] hover:underline font-medium">
+              <a href="/practice-areas#top" className="inline-flex items-center gap-2 text-[#0071E3] hover:underline font-medium">
                 See all 50 practice areas
                 <ArrowRight className="w-4 h-4" />
               </a>
@@ -411,17 +411,17 @@ const About = () => {
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center fade-in-section">
-            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight text-lime-400">
+            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#34C759' }}>
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">
-              <p className="text-2xl md:text-3xl leading-relaxed text-lime-300 font-semibold">
+              <p className="text-2xl md:text-3xl leading-relaxed font-semibold" style={{ color: '#34C759' }}>
                 Keep letting them win with lowball offers
               </p>
-              <p className="text-3xl md:text-4xl font-bold tracking-tight text-lime-400">
+              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#34C759' }}>
                 OR
               </p>
-              <p className="text-2xl md:text-3xl leading-relaxed text-lime-300 font-semibold">
+              <p className="text-2xl md:text-3xl leading-relaxed font-semibold" style={{ color: '#34C759' }}>
                 Get what you're actually owed with someone who knows their secrets
               </p>
             </div>

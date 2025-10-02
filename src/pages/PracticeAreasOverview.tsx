@@ -233,7 +233,7 @@ const PracticeAreasOverview = () => {
           </aside>
 
           {/* Main Content */}
-          <main className="flex-1 lg:ml-[280px]">
+          <main id="top" className="flex-1 lg:ml-[280px]">
             {/* Apple-style Hero Section */}
             <section 
               ref={heroRef}

@@ -58,23 +58,19 @@ const About = () => {
         );
       });
 
-      // Stats counter animation
-      gsap.utils.toArray<HTMLElement>('.stat-number').forEach((stat) => {
-        const value = parseInt(stat.getAttribute('data-value') || '0');
-        gsap.fromTo(stat,
-          { textContent: 0 },
+      // Stats subtle fade and scale animation
+      gsap.utils.toArray<HTMLElement>('.stat-card').forEach((card) => {
+        gsap.fromTo(card,
+          { opacity: 0, scale: 0.95 },
           {
-            textContent: value,
-            duration: 2,
-            ease: "power1.out",
-            snap: { textContent: 1 },
+            opacity: 1,
+            scale: 1,
+            duration: 0.6,
+            ease: "power2.out",
             scrollTrigger: {
-              trigger: stat,
-              start: "top 80%",
+              trigger: card,
+              start: "top 85%",
               toggleActions: "play none none none"
-            },
-            onUpdate: function() {
-              stat.textContent = Math.ceil(gsap.getProperty(stat, "textContent") as number).toString();
             }
           }
         );
@@ -178,21 +174,50 @@ const About = () => {
         </div>
       </section>
 
-      {/* Stats Section - Light gray background */}
-      <section className="py-16 bg-gray-50">
+      {/* Stats Section - Apple-inspired stats */}
+      <section className="py-20 bg-white border-y border-gray-100">
         <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto text-center">
-            <div className="fade-in-section">
-              <div className="stat-number text-5xl font-bold mb-2" data-value="50" style={{ color: '#000000' }}>0</div>
-              <div className="text-base font-medium" style={{ color: '#6b7280' }}>Million+ Recovered</div>
+          <div className="grid md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+            <div className="stat-card text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center">
+                  <TrendingUp className="w-8 h-8 text-green-600" />
+                </div>
+              </div>
+              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                $50M+
+              </div>
+              <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
+                Recovered for Clients
+              </div>
             </div>
-            <div className="fade-in-section">
-              <div className="stat-number text-5xl font-bold mb-2" data-value="24" style={{ color: '#000000' }}>0</div>
-              <div className="text-base font-medium" style={{ color: '#6b7280' }}>Hours Available</div>
+            
+            <div className="stat-card text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center">
+                  <Phone className="w-8 h-8 text-blue-600" />
+                </div>
+              </div>
+              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                24/7
+              </div>
+              <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
+                Available to Help You
+              </div>
             </div>
-            <div className="fade-in-section">
-              <div className="stat-number text-5xl font-bold mb-2" data-value="0" style={{ color: '#000000' }}>0</div>
-              <div className="text-base font-medium" style={{ color: '#6b7280' }}>Upfront Fees</div>
+            
+            <div className="stat-card text-center">
+              <div className="mb-4 flex justify-center">
+                <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center">
+                  <Shield className="w-8 h-8 text-indigo-600" />
+                </div>
+              </div>
+              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                $0
+              </div>
+              <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
+                Unless We Win Your Case
+              </div>
             </div>
           </div>
         </div>

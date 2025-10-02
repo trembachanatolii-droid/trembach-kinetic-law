@@ -147,7 +147,7 @@ const About = () => {
               className="text-5xl md:text-7xl font-bold mb-8 tracking-tight leading-tight"
               style={{ color: '#ffffff' }}
             >
-              From Defense Attorney<br />To Your Defender
+              Their Strategy.<br />Your Victory.
             </h1>
             <p 
               className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto leading-relaxed"

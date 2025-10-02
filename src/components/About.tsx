@@ -405,17 +405,17 @@ const About = () => {
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center fade-in-section">
-            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#ffffff' }}>
+            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#10b981' }}>
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">
-              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#d1d5db' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#10b981' }}>
                 Keep letting them win with lowball offers
               </p>
-              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
+              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#10b981' }}>
                 OR
               </p>
-              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#d1d5db' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#10b981' }}>
                 Get what you're actually owed with someone who knows their secrets
               </p>
             </div>

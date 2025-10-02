@@ -404,13 +404,21 @@ const About = () => {
       {/* CTA Section - Dark */}
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
-          <div className="max-w-4xl mx-auto text-center fade-in-section">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6" style={{ color: '#ffffff' }}>
-              Ready to Get Started?
+          <div className="max-w-5xl mx-auto text-center fade-in-section">
+            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#ffffff' }}>
+              Two Choices. Two Futures.
             </h2>
-            <p className="text-xl mb-8 text-gray-300" style={{ color: '#d1d5db' }}>
-              Free consultation. No fees unless we win. Available 24/7.
-            </p>
+            <div className="space-y-6 mb-12">
+              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#d1d5db' }}>
+                Keep letting them win with lowball offers
+              </p>
+              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#ffffff' }}>
+                OR
+              </p>
+              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#d1d5db' }}>
+                Get what you're actually owed with someone who knows their secrets
+              </p>
+            </div>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
                 href="tel:2139089708"

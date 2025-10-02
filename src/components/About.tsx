@@ -192,7 +192,7 @@ const About = () => {
       icon: <BookOpen weight="light" />,
       title: 'Education & Training',
       items: [
-        'USC Gould School of Law Graduate - Juris Doctor',
+        'USC Gould School of Law Graduate',
         'Dean\'s List Recognition',
         'Advanced Trial Advocacy Training',
         'Insurance Law Specialization'
@@ -334,9 +334,9 @@ const About = () => {
                   A Unique Advantage for California Injury Victims
                 </h4>
                 <p className="text-body text-muted-foreground leading-relaxed mb-6">
-                  Attorney Anatolii Trembach brings unique insight to personal injury cases through his extensive experience as a former 
-                  defense attorney representing major insurance companies and corporations. Having defended State Farm, Allstate, GEICO, Progressive, 
-                  and Fortune 500 companies, he understands their tactics and strategies from the inside.
+                  Led by former insurance defense attorney Anatolii Trembach, our firm brings unique insight to personal injury cases. 
+                  With extensive experience defending major insurance companies and Fortune 500 corporations, Attorney Trembach understands 
+                  insurance company tactics and strategies from the inside.
                 </p>
                 <p className="text-body text-muted-foreground leading-relaxed">
                   This background provides invaluable advantages for our clients throughout California. We know exactly what evidence insurance companies 
@@ -346,8 +346,9 @@ const About = () => {
 
               <div className="animate-content p-8 bg-gradient-to-br from-primary/10 to-accent/10 backdrop-blur-xl border border-border/20 rounded-2xl">
                 <blockquote className="text-body text-muted-foreground italic leading-relaxed mb-4">
-                  "Having seen firsthand how insurance companies systematically minimize and deny legitimate claims, I founded Trembach Law Firm 
-                  to level the playing field for injury victims. When insurance lawyers see me on the other side, they know I understand their playbook better than they do."
+                  "Having worked as an insurance defense attorney, I saw firsthand how insurance companies systematically minimize and deny legitimate claims. 
+                  I founded Trembach Law Firm to level the playing field for injury victims. When insurance lawyers see me on the other side, 
+                  they know I understand their playbook better than they do."
                 </blockquote>
                 <cite className="text-small font-medium text-primary">
                   - Anatolii Trembach, Esq., Founding Attorney

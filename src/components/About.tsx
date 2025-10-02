@@ -408,10 +408,10 @@ const About = () => {
       </section>
 
       {/* CTA Section - Dark */}
-      <section className="py-24 bg-black text-white">
+      <section className="py-24 bg-black text-white relative isolate">
         <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center">
-            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#34C759' }}>
+          <div className="max-w-5xl mx-auto text-center relative z-10">
+            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">

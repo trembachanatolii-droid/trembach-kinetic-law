@@ -415,13 +415,13 @@ const About = () => {
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">
-              <p className="text-2xl md:text-3xl leading-relaxed font-semibold" style={{ color: '#34C759' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
                 Keep letting them win with lowball offers
               </p>
-              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#34C759' }}>
+              <p className="text-3xl md:text-4xl font-black tracking-tight opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
                 OR
               </p>
-              <p className="text-2xl md:text-3xl leading-relaxed font-semibold" style={{ color: '#34C759' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
                 Get what you're actually owed with someone who knows their secrets
               </p>
             </div>

@@ -128,7 +128,7 @@ const Hero = () => {
               <span className="hero-line block">California's premier personal injury and mesothelioma law firm with insider advantage</span>
             </h1>
             <p className="text-xl lg:text-2xl text-white font-medium leading-relaxed max-w-3xl mx-auto">
-              Your medical concerns become our mission. Leveraging insider defense knowledge to maximize compensation for injury victims throughout California.
+              After defending insurance companies, our lead attorny switched sides. Now we use their playbook to maximize your compensation and secure your medical future.
             </p>
           </div>
 

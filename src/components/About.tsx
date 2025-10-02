@@ -233,7 +233,7 @@ const About = () => {
             <div className="grid lg:grid-cols-2 gap-16 items-center">
               {/* Profile Image */}
               <div className="fade-in-section">
-                <div className="relative">
+                <div className="relative max-w-sm mx-auto lg:max-w-none">
                   <img 
                     src={profileImage}
                     alt="Anatolii Trembach, Esq. - Former Insurance Defense Attorney, USC Law Graduate"

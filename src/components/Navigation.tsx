@@ -37,7 +37,7 @@ const Navigation = () => {
 
         {/* Navigation Links */}
         <div className="hidden md:flex items-center space-x-7">
-          <a href="/" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Home
           </a>
           <div 
@@ -47,7 +47,7 @@ const Navigation = () => {
           >
             <a 
               href="/practice-areas" 
-              className="relative text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full"
+              className="relative text-[#1d1d1f] transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full"
             >
               Practice Areas
             </a>
@@ -208,19 +208,19 @@ const Navigation = () => {
               </>
             )}
           </div>
-          <a href="/about" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/about" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             About Us
           </a>
-          <a href="/results" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/results" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Results
           </a>
-          <a href="/testimonials" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/testimonials" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Testimonials
           </a>
-          <a href="/blog" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/blog" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Blog
           </a>
-          <a href="/contact" className="text-[#1d1d1f] hover:text-[#1d1d1f]/70 transition-colors text-xs font-normal">
+          <a href="/contact" className="relative text-[#1d1d1f] transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Contact
           </a>
         </div>

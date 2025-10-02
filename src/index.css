@@ -2125,4 +2125,12 @@ label:after {
   opacity: 1 !important;
 }
 
+/* Navigation hover/visited reset - keep nav links black and decoration-free */
+.site-nav a,
+.site-nav a:visited,
+.site-nav a:hover,
+.site-nav a:focus {
+  color: #1d1d1f !important;
+  text-decoration: none !important;
+}
 

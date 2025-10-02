@@ -47,7 +47,7 @@ const Navigation = () => {
           >
             <a 
               href="/practice-areas" 
-              className="relative text-[#1d1d1f] transition-colors text-xs font-medium uppercase tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full"
+              className="relative text-[#1d1d1f] transition-colors text-xs font-medium tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full"
             >
               Practice Areas
             </a>

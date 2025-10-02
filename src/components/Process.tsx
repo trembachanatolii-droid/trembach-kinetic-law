@@ -176,7 +176,7 @@ const Process = () => {
             </p>
             <Button 
               size="lg"
-              className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-12 py-4 text-lg font-semibold glow mr-4 group transition-all duration-300"
+              className="magnetic bg-[#0071E3] hover:bg-[#0066CC] active:bg-[#0057A3] !text-white hover:!text-white active:!text-white px-12 py-4 text-lg font-semibold mr-4 group transition-all duration-300 shadow-lg"
               onClick={() => window.location.href = '/free-consultation'}
             >
               Start your Free Case Review

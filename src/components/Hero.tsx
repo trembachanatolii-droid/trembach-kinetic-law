@@ -124,9 +124,8 @@ const Hero = () => {
         {/* Center Content */}
         <div className="text-center max-w-4xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-6xl lg:text-7xl font-bold text-white leading-tight">
-              <span className="hero-line block">You Focus on Healing.</span>
-              <span className="hero-line block">We Focus on Winning.</span>
+            <h1 className="text-5xl lg:text-7xl font-black text-apple leading-tight">
+              <span className="hero-line block">California's premier personal injury and mesothelioma law firm with insider advantage</span>
             </h1>
           </div>
 

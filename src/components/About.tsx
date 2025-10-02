@@ -81,10 +81,10 @@ const About = () => {
   }, []);
 
   const practiceAreas = [
-    { title: 'Silicosis & Occupational Disease', url: '/practice-areas/silicosis' },
-    { title: 'Mesothelioma & Asbestos', url: '/practice-areas/mesothelioma' },
-    { title: 'Catastrophic Injury', url: '/practice-areas/catastrophic-injury' },
-    { title: 'Wrongful Death', url: '/practice-areas/wrongful-death' }
+    { title: 'Silicosis & Occupational Disease', url: '/practice-areas#silicosis' },
+    { title: 'Mesothelioma & Asbestos', url: '/practice-areas#mesothelioma' },
+    { title: 'Catastrophic Injury', url: '/practice-areas#catastrophic-injury' },
+    { title: 'Wrongful Death', url: '/practice-areas#wrongful-death' }
   ];
 
   const advantages = [
@@ -405,17 +405,17 @@ const About = () => {
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center fade-in-section">
-            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#10b981' }}>
+            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight text-green-500">
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">
-              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#10b981' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed text-green-400">
                 Keep letting them win with lowball offers
               </p>
-              <p className="text-3xl md:text-4xl font-bold tracking-tight" style={{ color: '#10b981' }}>
+              <p className="text-3xl md:text-4xl font-bold tracking-tight text-green-500">
                 OR
               </p>
-              <p className="text-2xl md:text-3xl leading-relaxed" style={{ color: '#10b981' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed text-green-400">
                 Get what you're actually owed with someone who knows their secrets
               </p>
             </div>

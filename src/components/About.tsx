@@ -138,19 +138,22 @@ const About = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black via-black to-gray-900 opacity-90" />
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="hero-content max-w-4xl mx-auto text-center">
+          <div className="hero-content max-w-5xl mx-auto text-center">
+            <p className="text-lg md:text-xl mb-4 font-semibold tracking-wide" style={{ color: '#9ca3af' }}>
+              The Inside Advantage
+            </p>
             <h1 
               id="about-heading"
-              className="text-5xl md:text-7xl font-bold mb-6 tracking-tight"
+              className="text-5xl md:text-7xl font-bold mb-8 tracking-tight leading-tight"
               style={{ color: '#ffffff' }}
             >
-              Your Advantage.<br />Our Experience.
+              From Defense Attorney<br />To Your Defender
             </h1>
             <p 
-              className="text-xl md:text-2xl mb-8 text-gray-300 font-medium"
+              className="text-xl md:text-2xl mb-10 max-w-4xl mx-auto leading-relaxed"
               style={{ color: '#d1d5db' }}
             >
-              Former insurance defense attorney now fighting for California injury victims.
+              Led by former insurance defense attorney <span className="font-semibold" style={{ color: '#ffffff' }}>Anatolii Trembach, Esq.</span>, we know exactly how insurance companies think—because we used to work for them.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
@@ -181,42 +184,42 @@ const About = () => {
             <div className="stat-card text-center">
               <div className="mb-4 flex justify-center">
                 <div className="w-16 h-16 bg-green-50 rounded-2xl flex items-center justify-center">
-                  <TrendingUp className="w-8 h-8 text-green-600" />
+                  <Shield className="w-8 h-8 text-green-600" />
                 </div>
               </div>
-              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
-                $50M+
+              <div className="text-5xl md:text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                No Fees
               </div>
               <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
-                Recovered for Clients
+                Unless We Win
               </div>
             </div>
             
             <div className="stat-card text-center">
               <div className="mb-4 flex justify-center">
                 <div className="w-16 h-16 bg-blue-50 rounded-2xl flex items-center justify-center">
-                  <Phone className="w-8 h-8 text-blue-600" />
+                  <CheckCircle2 className="w-8 h-8 text-blue-600" />
                 </div>
               </div>
-              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
-                24/7
+              <div className="text-5xl md:text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                Free
               </div>
               <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
-                Available to Help You
+                Consultation
               </div>
             </div>
             
             <div className="stat-card text-center">
               <div className="mb-4 flex justify-center">
                 <div className="w-16 h-16 bg-indigo-50 rounded-2xl flex items-center justify-center">
-                  <Shield className="w-8 h-8 text-indigo-600" />
+                  <Phone className="w-8 h-8 text-indigo-600" />
                 </div>
               </div>
-              <div className="text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
-                $0
+              <div className="text-5xl md:text-6xl font-bold mb-3 tracking-tight" style={{ color: '#000000' }}>
+                24/7
               </div>
               <div className="text-lg font-medium" style={{ color: '#6b7280' }}>
-                Unless We Win Your Case
+                Available 24/7
               </div>
             </div>
           </div>

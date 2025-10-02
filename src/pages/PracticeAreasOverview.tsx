@@ -23,7 +23,7 @@ import constructionAccidentsImg from '@/assets/practice-areas/construction-accid
 import brainInjuriesImg from '@/assets/practice-areas/brain-injuries-bright.jpg';
 import spinalCordInjuriesImg from '@/assets/practice-areas/spinal-cord-injuries-bright.jpg';
 import burnInjuriesImg from '@/assets/practice-areas/burn-injuries.jpg';
-import amputationImg from '@/assets/practice-areas/amputation.jpg';
+import amputationImg from '@/assets/practice-areas/amputation-bright.jpg';
 import workplaceInjuriesImg from '@/assets/practice-areas/workplace-injuries.jpg';
 import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
 import pharmaceuticalImg from '@/assets/practice-areas/pharmaceutical.jpg';

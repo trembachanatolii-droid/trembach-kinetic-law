@@ -214,9 +214,9 @@ const FeaturedResults = () => {
           <Button 
             size="lg"
             className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow group transition-all duration-300"
-            onClick={() => window.location.href = '/case-evaluation'}
+            onClick={() => window.location.href = '/free-consultation'}
           >
-            Start Your Case Today — Free Consultation
+            Start your Free Case Review
           </Button>
         </div>
       </div>

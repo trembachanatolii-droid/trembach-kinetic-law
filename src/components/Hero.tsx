@@ -133,7 +133,7 @@ const Hero = () => {
           <Button 
             ref={buttonRef}
             className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
-            onClick={() => window.location.href = '/case-evaluation'}
+            onClick={() => window.location.href = '/free-consultation'}
           >
             START YOUR FREE CASE REVIEW
           </Button>

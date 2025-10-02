@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { ChevronRight, Scale, Shield } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -124,6 +124,7 @@ const PracticeAreasOverview = () => {
   const [selectedArea, setSelectedArea] = useState<string>('');
   const heroRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+  const location = useLocation();
 
   useEffect(() => {
     // Hero parallax animation
@@ -173,6 +174,18 @@ const PracticeAreasOverview = () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
+
+  // Hash-based deep-linking support
+  useEffect(() => {
+    if (location.hash) {
+      const id = location.hash.replace('#', '');
+      const el = document.getElementById(`card-${id}`) || document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setSelectedArea(id);
+      }
+    }
+  }, [location.hash]);
 
   const handleAreaClick = (areaId: string) => {
     setSelectedArea(areaId);

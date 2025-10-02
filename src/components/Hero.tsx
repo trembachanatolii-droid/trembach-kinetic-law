@@ -123,10 +123,13 @@ const Hero = () => {
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">
-          <div ref={headlineRef} className="space-y-4">
+          <div ref={headlineRef} className="space-y-6">
             <h1 className="text-5xl lg:text-7xl font-black text-apple leading-tight">
               <span className="hero-line block">California's premier personal injury and mesothelioma law firm with insider advantage</span>
             </h1>
+            <p className="text-xl lg:text-2xl text-white font-medium leading-relaxed max-w-3xl mx-auto">
+              Your medical concerns become our mission. Leveraging insider defense knowledge to maximize compensation for injury victims throughout California.
+            </p>
           </div>
 
           <Button 

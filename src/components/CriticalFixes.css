@@ -1,9 +1,6 @@
 /* CRITICAL WEBSITE FIXES - EMERGENCY OVERRIDES */
 
-/* Force all text to be visible with high contrast */
-* {
-  color: inherit !important;
-}
+/* High contrast safeguards: removed unsafe global color inheritance that caused low-contrast text on dark sections. */
 
 /* Ensure all headings are visible */
 h1, h2, h3, h4, h5, h6,
@@ -115,4 +112,21 @@ nav, nav * {
   backdrop-filter: blur(24px) !important;
   -webkit-backdrop-filter: blur(24px) !important;
   background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Dark background exceptions: keep text light */
+.bg-black, .bg-gray-900 { color: #ffffff !important; }
+.bg-black *, .bg-gray-900 * { color: #ffffff !important; }
+
+/* Apple green token and utilities */
+:root { --apple: 135 73% 49%; }
+
+/* Utility for Apple green text */
+.text-apple { color: hsl(var(--apple)) !important; }
+
+/* CTA Apple section: force green text regardless of other overrides */
+.cta-apple h1,
+.cta-apple h2,
+.cta-apple p {
+  color: hsl(var(--apple)) !important;
 }

@@ -408,20 +408,20 @@ const About = () => {
       </section>
 
       {/* CTA Section - Dark */}
-      <section className="py-24 bg-black text-white relative isolate">
+      <section className="py-24 bg-black text-white relative isolate cta-apple">
         <div className="container mx-auto px-6">
           <div className="max-w-5xl mx-auto text-center relative z-10">
-            <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
+            <h2 className="text-5xl md:text-7xl font-black mb-12 tracking-tight leading-tight opacity-100 text-apple">
               Two Choices. Two Futures.
             </h2>
             <div className="space-y-6 mb-12">
-              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100 text-apple">
                 Keep letting them win with lowball offers
               </p>
-              <p className="text-3xl md:text-4xl font-black tracking-tight opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
+              <p className="text-3xl md:text-4xl font-black tracking-tight opacity-100 text-apple">
                 OR
               </p>
-              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100" style={{ color: '#34C759', opacity: 1 as number, mixBlendMode: 'normal' }}>
+              <p className="text-2xl md:text-3xl leading-relaxed font-black opacity-100 text-apple">
                 Get what you're actually owed with someone who knows their secrets
               </p>
             </div>

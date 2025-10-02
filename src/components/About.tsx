@@ -410,7 +410,7 @@ const About = () => {
       {/* CTA Section - Dark */}
       <section className="py-24 bg-black text-white">
         <div className="container mx-auto px-6">
-          <div className="max-w-5xl mx-auto text-center fade-in-section">
+          <div className="max-w-5xl mx-auto text-center">
             <h2 className="text-5xl md:text-7xl font-bold mb-12 tracking-tight leading-tight" style={{ color: '#34C759' }}>
               Two Choices. Two Futures.
             </h2>

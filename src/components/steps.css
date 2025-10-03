@@ -261,7 +261,7 @@
 /* Massive step numbers with enhanced effects */
 .apple-step-card .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(220px, 18vw, 360px) !important;
+  font-size: clamp(110px, 9vw, 180px) !important;
   font-weight: 800;
   background: linear-gradient(135deg, #2997ff 0%, #64d2ff 50%, #2997ff 100%);
   background-size: 200% 200%;
@@ -580,7 +580,7 @@
   }
 
   .apple-step-card .apple-step-number {
-    font-size: 180px !important;
+    font-size: 90px !important;
     margin-bottom: 24px;
   }
   

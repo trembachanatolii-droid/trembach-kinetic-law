@@ -75,40 +75,39 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
   return (
     <div 
       ref={sectionRef}
-      className={`py-[90px] border-y border-border ${index % 2 === 0 ? 'bg-background' : 'bg-muted/10'}`}
+      className={`py-24 lg:py-32 border-b border-border ${index % 2 === 0 ? 'bg-background' : 'bg-muted/5'}`}
     >
-      <div className="container mx-auto px-8 max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
+      <div className="container mx-auto px-6 lg:px-12 max-w-[1400px]">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
           {/* Left: Headline + Paragraph */}
-          <div className="lg:col-span-7 space-y-6">
-            <h2 
+          <div className="space-y-6 lg:space-y-8">
+            <h3 
               ref={headlineRef}
-              className="text-[clamp(38px,5.8vw,72px)] font-black leading-[1.05] tracking-[-0.02em] text-foreground"
-              style={{ maxWidth: '58ch' }}
+              className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] font-bold leading-[1.1] tracking-[-0.02em] text-foreground"
             >
               {headline}
-            </h2>
+            </h3>
             <p 
               ref={paragraphRef}
-              className="text-[clamp(17px,2.1vw,21px)] text-muted-foreground leading-[1.55] font-medium max-w-[58ch]"
+              className="text-[16px] lg:text-[18px] text-muted-foreground leading-[1.6] font-normal"
             >
               {paragraph}
             </p>
           </div>
 
           {/* Right: 3-Point List */}
-          <div className="lg:col-span-5 lg:pt-4">
-            <ul ref={pointsRef} className="space-y-5">
+          <div className="lg:pt-2">
+            <ul ref={pointsRef} className="space-y-6 lg:space-y-8">
               {points.map((point, i) => (
                 <li 
                   key={i}
                   className="leading-tight"
                 >
-                  <span className="block text-[clamp(28px,4.2vw,56px)] font-extrabold tracking-[-0.015em] text-foreground">
+                  <span className="block text-[28px] sm:text-[36px] lg:text-[42px] xl:text-[48px] font-bold tracking-[-0.01em] text-foreground leading-[1.15]">
                     {typeof point === 'string' ? point : point.title}
                   </span>
                   {typeof point !== 'string' && point.sub && (
-                    <small className="block text-[clamp(14px,1.6vw,18px)] text-muted-foreground font-medium mt-1.5 tracking-[-0.01em]">
+                    <small className="block text-[14px] lg:text-[16px] text-muted-foreground/80 font-normal mt-2 tracking-normal">
                       {point.sub}
                     </small>
                   )}
@@ -216,16 +215,14 @@ const WhyChoose: React.FC = () => {
   ];
 
   return (
-    <section className="relative bg-background">
+    <section className="relative bg-background py-16 lg:py-24">
       {/* Section Header */}
-      <div className="container mx-auto px-8 max-w-7xl py-16">
-        <div ref={headerRef} className="text-left">
-          <h2 className="text-[clamp(28px,4.6vw,44px)] font-black text-foreground tracking-[-0.02em]">
+      <div className="container mx-auto px-6 lg:px-12 max-w-[1400px]">
+        <div ref={headerRef} className="text-center mb-12 lg:mb-16">
+          <h2 className="text-[48px] sm:text-[56px] lg:text-[72px] xl:text-[80px] font-bold text-foreground tracking-[-0.02em] leading-[1.1]">
             Why Choose Trembach Law Firm
           </h2>
-          <p className="text-muted-foreground mt-2">Aggressive, insider-led personal injury representation across California.</p>
         </div>
-        <div className="mt-6 border-t border-border" />
       </div>
 
       {/* Subsections */}

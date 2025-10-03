@@ -110,7 +110,7 @@ const Hero = () => {
       <img
         src={ladyJusticeHero}
         alt="Lady Justice statue"
-        className="absolute inset-y-0 right-0 h-full w-auto object-contain pointer-events-none select-none opacity-90"
+        className="absolute bottom-0 right-0 h-[110%] w-auto object-contain pointer-events-none select-none opacity-90 translate-x-8"
       />
       
       

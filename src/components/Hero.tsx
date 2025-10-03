@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import ladyJusticeHero from '@/assets/lady-justice-3d.png';
+import ladyJusticeHero from '@/assets/lady-justice-hero-bright.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -104,44 +104,37 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex flex-col overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
       {/* Lady Justice Background */}
       <img
         src={ladyJusticeHero}
         alt="Lady Justice statue"
-        className="absolute inset-0 w-full h-full object-cover object-center"
+        className="absolute inset-0 w-full h-full object-cover"
       />
       
-      {/* Subtle Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
-      
-      <div className="container mx-auto px-8 lg:px-16 flex-1 flex items-center relative z-10 pt-32 pb-32">
-        {/* Left Column Content - Apple Style */}
-        <div className="max-w-2xl">
-          <div ref={headlineRef} className="space-y-8">
-            <h1 className="text-5xl lg:text-7xl xl:text-8xl font-bold text-white leading-[1.05] tracking-tight">
-              <span className="hero-line block">Design</span>
-              <span className="hero-line block">faw</span>
-              <span className="hero-line block">lawm</span>
-              <span className="hero-line block">Joursfice</span>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
+      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
+        {/* Center Content */}
+        <div className="text-center max-w-4xl">
+          <div ref={headlineRef} className="space-y-6">
+            <h1 className="text-5xl lg:text-7xl font-black text-apple leading-tight">
+              <span className="hero-line block">California's premier personal injury and mesothelioma law firm with insider advantage</span>
             </h1>
-            <p className="text-lg lg:text-xl text-white/90 font-light leading-relaxed max-w-lg">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation and secure your medical future.
+            <p className="text-xl lg:text-2xl text-white font-medium leading-relaxed max-w-3xl mx-auto">
+              After defending insurance companies, our lead attorny switched sides. Now we use their playbook to maximize your compensation and secure your medical future.
             </p>
           </div>
-        </div>
-      </div>
 
-      {/* Button at Bottom Center - Apple Style */}
-      <div className="relative z-10 pb-12 flex justify-center">
-        <Button 
-          ref={buttonRef}
-          className="bg-white/10 backdrop-blur-md hover:bg-white/20 text-white font-semibold px-12 py-6 text-base rounded-full border border-white/30 shadow-2xl transition-all duration-300"
-          onClick={() => window.location.href = '/free-consultation'}
-        >
-          START YOUR FREE CASE REVIEW
-        </Button>
+          <Button 
+            ref={buttonRef}
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+            onClick={() => window.location.href = '/free-consultation'}
+          >
+            START YOUR FREE CASE REVIEW
+          </Button>
+        </div>
       </div>
 
       {/* Chat Widget */}

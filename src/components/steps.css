@@ -1,0 +1,17 @@
+:root{
+  --ink:#17181A; --sub:#4C5156; --muted:#6E757C; --bg:#F8F8F9;
+  --blue:#0A67FF; --red:#E3362C; --chip:#FF4B37; --white:#fff;
+}
+
+.steps h5, .steps h3, .steps p, .steps .chip, .steps .num { font-family: Inter, "SF Pro Text", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+
+.steps { background: var(--bg); }
+
+.steps .strap { font-weight:500; font-size:22px; color:var(--muted); }
+.steps .strap b { color:var(--red); font-weight:700; text-transform:uppercase; }
+
+.steps .num { font-weight:900; font-size:clamp(92px,12vw,160px); color:var(--blue); line-height:1; }
+.steps h3 { font-weight:700; font-size:clamp(28px,3.2vw,38px); line-height:1.2; color:var(--ink); }
+.steps .chip { display:inline-block; padding:.35rem .8rem; border-radius:9999px; background:var(--chip); color:var(--white); font-weight:600; font-size:12px; letter-spacing:.04em; text-transform:uppercase; box-shadow:0 6px 18px rgba(0,0,0,.12); }
+.steps p { font-weight:400; font-size:18px; line-height:1.62; color:var(--sub); max-width:52ch; }
+.steps p b { color:var(--red); font-weight:700; text-transform:uppercase; }

@@ -141,12 +141,12 @@ const WhyChoose: React.FC = () => {
         itemDistance={150}
         itemScale={0.04}
         itemStackDistance={40}
-        stackPosition="8%"
+        stackPosition="20%"
         scaleEndPosition="15%"
         baseScale={0.88}
         rotationAmount={0}
         blurAmount={0}
-        useWindowScroll={true}
+        useWindowScroll={false}
         className="why-choose-stack"
       >
         {subsections.map((section, index) => (

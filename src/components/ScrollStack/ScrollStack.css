@@ -55,16 +55,3 @@
   }
 }
 
-/* Overrides for WhyChoose stack when using window scroll */
-.why-choose-stack.scroll-stack-scroller {
-  height: auto;
-  overflow: visible;
-}
-.why-choose-stack .scroll-stack-inner {
-  padding-top: 4vh;
-}
-@media (max-width: 768px) {
-  .why-choose-stack .scroll-stack-inner {
-    padding-top: 4vh;
-  }
-}

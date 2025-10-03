@@ -109,8 +109,12 @@ const Hero = () => {
       {/* Lady Justice Background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12"
-        style={{ backgroundImage: `url(${ladyJusticeHero})` }}
+        className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12 mix-blend-multiply transform-gpu"
+        style={{
+          backgroundImage: `url(${ladyJusticeHero})`,
+          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 100%)',
+          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 100%)'
+        }}
       />
       
       {/* Dark Overlay - Smooth gradient to prevent banding */}

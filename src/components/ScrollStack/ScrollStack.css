@@ -56,12 +56,12 @@
 
 /* Balanced bottom space for Why Choose stack (avoid large gap, prevent clipping) */
 .why-choose-stack .scroll-stack-inner {
-  padding-bottom: clamp(6rem, 12vh, 12rem);
+  padding-bottom: 8rem;
 }
 
-/* Extend end sentinel so last card can fully clear before next section */
+/* Keep end sentinel minimal; pin duration handled in JS */
 .why-choose-stack .scroll-stack-end {
-  height: 22vh;
+  height: 1px;
 }
 
 @media (max-width: 768px) {
@@ -69,14 +69,13 @@
     padding: 1vh 1.5rem 24rem;
   }
   
-  /* More bottom padding on mobile for Why Choose to prevent card clipping */
+  /* Mobile-specific spacing */
   .why-choose-stack .scroll-stack-inner {
-    padding-bottom: clamp(16rem, 48vh, 28rem);
+    padding-bottom: 12rem;
   }
 
-  /* Taller sentinel on mobile to ensure last card fully clears */
   .why-choose-stack .scroll-stack-end {
-    height: 40vh;
+    height: 1px;
   }
   
   .scroll-stack-card {

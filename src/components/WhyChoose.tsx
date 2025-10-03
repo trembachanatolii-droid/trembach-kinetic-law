@@ -16,34 +16,34 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
         itemScope
         itemType="https://schema.org/Service"
       >
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 h-full">
-          {/* Left: Point List (Large Items) */}
-          <div className="space-y-4 lg:space-y-6">
-            {points.map((point, i) => (
-              <h3 
-                key={i}
-                className="text-[28px] sm:text-[36px] lg:text-[44px] xl:text-[52px] font-bold leading-[1.1] tracking-tight text-foreground"
-              >
-                {point}
-              </h3>
-            ))}
-          </div>
-
-          {/* Right: Headline + Paragraph */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-12 h-full">
+          {/* Left: Headline + Paragraph */}
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6">
             <h3 
-              className="text-[24px] sm:text-[28px] lg:text-[36px] font-bold leading-[1.2] tracking-tight text-foreground"
+              className="text-[18px] sm:text-[24px] lg:text-[32px] xl:text-[36px] font-light leading-[1.15] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}
             </h3>
             
             <p 
-              className="text-[15px] lg:text-[17px] text-muted-foreground leading-relaxed font-normal"
+              className="text-[11px] sm:text-[13px] lg:text-[15px] text-muted-foreground/80 leading-relaxed font-light tracking-wide"
               itemProp="description"
             >
               {paragraph}
             </p>
+          </div>
+
+          {/* Right: Point List */}
+          <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+            {points.map((point, i) => (
+              <h3 
+                key={i}
+                className="text-[16px] sm:text-[20px] lg:text-[28px] xl:text-[32px] font-light leading-[1.2] tracking-tight text-foreground"
+              >
+                {point}
+              </h3>
+            ))}
           </div>
         </div>
       </article>

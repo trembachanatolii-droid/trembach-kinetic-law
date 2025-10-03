@@ -4,12 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  html {
-    scroll-behavior: smooth;
-  }
-}
-
 /* Trembach Law Firm - Cinematic Design System */
 
 /* Logo Styles */

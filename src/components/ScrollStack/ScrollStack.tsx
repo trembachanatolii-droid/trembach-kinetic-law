@@ -157,10 +157,10 @@ const ScrollStack = ({
       const lastTransform = lastTransformsRef.current.get(i);
       const hasChanged =
         !lastTransform ||
-        Math.abs(lastTransform.translateY - newTransform.translateY) > 0.5 ||
-        Math.abs(lastTransform.scale - newTransform.scale) > 0.002 ||
-        Math.abs(lastTransform.rotation - newTransform.rotation) > 0.5 ||
-        Math.abs(lastTransform.blur - newTransform.blur) > 0.5;
+        Math.abs(lastTransform.translateY - newTransform.translateY) > 0.1 ||
+        Math.abs(lastTransform.scale - newTransform.scale) > 0.001 ||
+        Math.abs(lastTransform.rotation - newTransform.rotation) > 0.1 ||
+        Math.abs(lastTransform.blur - newTransform.blur) > 0.1;
 
       if (hasChanged) {
         const transform = `translate3d(0, ${newTransform.translateY}px, 0) scale(${newTransform.scale}) rotate(${newTransform.rotation}deg)`;
@@ -206,22 +206,28 @@ const ScrollStack = ({
 
   const setupLenis = useCallback(() => {
     if (useWindowScroll) {
-      // For window scroll mode, use native smooth scrolling without Lenis to prevent jitter
-      const handleWindowScroll = () => {
-        if (!animationFrameRef.current) {
-          animationFrameRef.current = requestAnimationFrame(() => {
-            updateCardTransforms();
-            animationFrameRef.current = null;
-          });
-        }
+      const lenis = new Lenis({
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 2,
+        infinite: false,
+        wheelMultiplier: 1,
+        lerp: 0.1,
+        syncTouch: true,
+        syncTouchLerp: 0.075
+      });
+
+      lenis.on('scroll', handleScroll);
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        animationFrameRef.current = requestAnimationFrame(raf);
       };
-      
-      window.addEventListener('scroll', handleWindowScroll, { passive: true });
-      lenisRef.current = null;
-      
-      return () => {
-        window.removeEventListener('scroll', handleWindowScroll);
-      };
+      animationFrameRef.current = requestAnimationFrame(raf);
+
+      lenisRef.current = lenis;
+      return lenis;
     } else {
       const scroller = scrollerRef.current;
       if (!scroller) return;
@@ -277,13 +283,10 @@ const ScrollStack = ({
       card.style.perspective = '1000px';
     });
 
-    const cleanup = setupLenis();
+    setupLenis();
     updateCardTransforms();
 
     return () => {
-      if (typeof cleanup === 'function') {
-        cleanup();
-      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

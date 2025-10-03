@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Shield, Target, Zap, Award, TrendingUp, CheckCircle } from 'lucide-react';
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,11 +9,10 @@ interface SubsectionProps {
   headline: string;
   paragraph: string;
   points: string[];
-  icon: React.ReactNode;
   index: number;
 }
 
-const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, icon, index }) => {
+const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, index }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
@@ -76,25 +75,22 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, ic
   return (
     <div 
       ref={sectionRef}
-      className={`py-[90px] ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'}`}
+      className={`py-[90px] ${index % 2 === 0 ? 'bg-background' : 'bg-muted/20'}`}
     >
       <div className="container mx-auto px-8 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
           {/* Left: Headline + Paragraph */}
           <div className="space-y-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-red-700 mb-4">
-              {icon}
-            </div>
             <h2 
               ref={headlineRef}
-              className="text-[clamp(38px,5vw,72px)] font-black leading-[1.1] tracking-tight text-gray-900"
+              className="text-[clamp(38px,5vw,72px)] font-black leading-[1.1] tracking-tight text-foreground"
               style={{ maxWidth: '58ch' }}
             >
               {headline}
             </h2>
             <p 
               ref={paragraphRef}
-              className="text-lg lg:text-xl text-gray-600 leading-relaxed font-medium"
+              className="text-lg lg:text-xl text-muted-foreground leading-relaxed font-medium"
               style={{ maxWidth: '58ch' }}
             >
               {paragraph}
@@ -107,10 +103,9 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, ic
               {points.map((point, i) => (
                 <li 
                   key={i}
-                  className="flex items-start gap-4 group"
+                  className="leading-tight"
                 >
-                  <div className="flex-shrink-0 w-2 h-2 rounded-full bg-red-600 mt-2.5 group-hover:scale-150 transition-transform duration-300" />
-                  <span className="text-xl lg:text-2xl font-bold text-gray-900 leading-tight">
+                  <span className="text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">
                     {point}
                   </span>
                 </li>
@@ -162,7 +157,7 @@ const WhyChoose: React.FC = () => {
         "We Know Their Every Move",
         "Now We Fight ONLY for Victims"
       ],
-      icon: <Shield className="w-8 h-8 text-white" />
+      
     },
     {
       headline: "We Know Their Secrets Because We Created Them",
@@ -172,7 +167,7 @@ const WhyChoose: React.FC = () => {
         "Their Experts Are Our Targets",
         "Their Pressure Points Are Our Advantage"
       ],
-      icon: <Target className="w-8 h-8 text-white" />
+      
     },
     {
       headline: "We Rip Apart Their Dirtiest Strategies",
@@ -182,7 +177,7 @@ const WhyChoose: React.FC = () => {
         "Delay & Deny — Stall until you quit",
         "Twist Your Words — One slip = $50K gone"
       ],
-      icon: <Zap className="w-8 h-8 text-white" />
+      
     },
     {
       headline: "Led by the Lawyer Who Switched Sides",
@@ -192,7 +187,7 @@ const WhyChoose: React.FC = () => {
         "We Break Their Paid Doctors",
         "We Turn Defense Tactics Into Cash for Victims"
       ],
-      icon: <Award className="w-8 h-8 text-white" />
+      
     },
     {
       headline: "They're Paid to Rip You Off — And They're Damn Good at It",
@@ -202,7 +197,7 @@ const WhyChoose: React.FC = () => {
         "93% Take First Offer — Don't Be a Statistic",
         "Every Day You Wait = More Money Lost"
       ],
-      icon: <TrendingUp className="w-8 h-8 text-white" />
+      
     },
     {
       headline: "No Risk. No Excuses. Maximum Results.",
@@ -212,22 +207,20 @@ const WhyChoose: React.FC = () => {
         "95% Settle Without Trial",
         "Led by Anatolii Trembach, Former Insurance Defense Insider"
       ],
-      icon: <CheckCircle className="w-8 h-8 text-white" />
+      
     }
   ];
 
   return (
-    <section className="relative bg-white">
+    <section className="relative bg-background">
       {/* Section Header */}
-      <div className="py-20 bg-gradient-to-b from-gray-900 to-gray-800">
-        <div className="container mx-auto px-8 max-w-7xl">
-          <div ref={headerRef} className="text-center">
-            <h2 className="text-[clamp(48px,6vw,84px)] font-black text-white leading-tight tracking-tight mb-6">
-              Why Choose <span className="text-apple">Trembach Law Firm</span>
-            </h2>
-            <div className="w-24 h-1.5 bg-red-600 mx-auto rounded-full" />
-          </div>
+      <div className="container mx-auto px-8 max-w-7xl py-24">
+        <div ref={headerRef} className="text-center">
+          <h2 className="text-[clamp(48px,6vw,84px)] font-black text-foreground leading-tight tracking-tight">
+            Why Choose Trembach Law Firm
+          </h2>
         </div>
+        <div className="mt-10 border-t border-border" />
       </div>
 
       {/* Subsections */}
@@ -238,7 +231,6 @@ const WhyChoose: React.FC = () => {
             headline={section.headline}
             paragraph={section.paragraph}
             points={section.points}
-            icon={section.icon}
             index={index}
           />
         ))}

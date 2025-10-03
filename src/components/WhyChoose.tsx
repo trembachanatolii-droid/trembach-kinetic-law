@@ -118,9 +118,9 @@ const WhyChoose: React.FC = () => {
       aria-labelledby="why-choose-heading"
     >
       {/* Section Header */}
-      <header className="px-6 lg:px-16 py-20 lg:py-32">
+      <header className="px-6 lg:px-16 py-12 lg:py-16">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-12">
+          <div className="flex items-center justify-center gap-4 mb-8">
             <h2 
               id="why-choose-heading"
               className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"
@@ -138,15 +138,15 @@ const WhyChoose: React.FC = () => {
 
       {/* Scroll Stack Subsections */}
       <ScrollStack
-        itemDistance={150}
+        itemDistance={120}
         itemScale={0.04}
-        itemStackDistance={40}
-        stackPosition="12%"
-        scaleEndPosition="15%"
-        baseScale={0.88}
+        itemStackDistance={36}
+        stackPosition="15%"
+        scaleEndPosition="8%"
+        baseScale={0.92}
         rotationAmount={0}
         blurAmount={0}
-        useWindowScroll={true}
+        useWindowScroll={false}
         className="why-choose-stack"
       >
         {subsections.map((section, index) => (

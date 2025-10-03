@@ -160,7 +160,7 @@ const WhyChoose: React.FC = () => {
         ))}
 
         {/* Divider after the last card (inside stack) */}
-        <div className="px-6 lg:px-16 py-6">
+        <div className="scroll-stack-divider px-6 lg:px-16 py-6 relative z-[1]">
           <div className="max-w-[1400px] mx-auto">
             <div className="w-full h-[1px] bg-border" />
           </div>

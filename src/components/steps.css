@@ -1,12 +1,37 @@
-/* Apple Dark Mode Steps Section - Enhanced with Premium Interactions */
+/* ============================================
+   APPLE-INSPIRED STEPS SECTION - PREMIUM VERSION
+   All 15 enhancement categories implemented
+   ============================================ */
+
+/* Main Section with Advanced Background */
 .apple-steps-section {
   background: #000000;
   background-image: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.08) 0%, transparent 60%);
   background-size: 100% 200%;
-  padding: 140px 24px 160px;
+  padding: 160px 24px 180px;
   width: 100%;
   position: relative;
   overflow: hidden;
+  isolation: isolate;
+}
+
+/* Timeline Progress Indicator */
+.timeline-indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 10;
+}
+
+.timeline-progress {
+  height: 100%;
+  background: linear-gradient(90deg, #2997ff 0%, #7b68ee 50%, #64d2ff 100%);
+  transform-origin: left;
+  transform: scaleX(0);
+  box-shadow: 0 0 20px rgba(41, 151, 255, 0.6);
 }
 
 /* Animated Mesh Gradient Background */
@@ -17,25 +42,56 @@
   right: 0;
   bottom: 0;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(41, 151, 255, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(100, 210, 255, 0.06) 0%, transparent 50%),
-    radial-gradient(circle at 40% 80%, rgba(41, 151, 255, 0.05) 0%, transparent 50%);
-  animation: meshMove 20s ease-in-out infinite;
+    radial-gradient(circle at 20% 30%, rgba(41, 151, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(123, 104, 238, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(100, 210, 255, 0.1) 0%, transparent 50%);
+  animation: meshMove 25s ease-in-out infinite;
   pointer-events: none;
+  will-change: filter;
 }
 
 @keyframes meshMove {
   0%, 100% { 
-    opacity: 0.6;
+    opacity: 0.7;
     transform: scale(1) rotate(0deg); 
   }
-  50% { 
-    opacity: 0.8;
-    transform: scale(1.1) rotate(2deg); 
+  33% {
+    opacity: 0.85;
+    transform: scale(1.05) rotate(1deg);
+  }
+  66% {
+    opacity: 0.9;
+    transform: scale(1.08) rotate(-1deg);
   }
 }
 
-/* Floating Particles */
+/* Spotlight Effect Following Cursor */
+.spotlight-effect {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  transition: background 0.15s ease-out;
+  mix-blend-mode: screen;
+  z-index: 1;
+}
+
+/* Grain Texture Overlay for Depth */
+.grain-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='4' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+  opacity: 0.4;
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Floating Particles with Varied Sizes */
 .floating-particles {
   position: absolute;
   top: 0;
@@ -48,147 +104,163 @@
 
 .particle {
   position: absolute;
-  width: 4px;
-  height: 4px;
-  background: radial-gradient(circle, rgba(100, 210, 255, 0.6), transparent);
+  background: radial-gradient(circle, rgba(100, 210, 255, 0.8), rgba(41, 151, 255, 0.4));
   border-radius: 50%;
   animation: floatUp linear infinite;
+  filter: blur(1px);
 }
 
 @keyframes floatUp {
   0% {
-    transform: translateY(100vh) translateX(0) scale(0);
+    transform: translateY(100vh) translateX(0) scale(0) rotate(0deg);
     opacity: 0;
   }
   10% {
+    opacity: 0.8;
+  }
+  50% {
     opacity: 0.6;
   }
   90% {
-    opacity: 0.3;
+    opacity: 0.2;
   }
   100% {
-    transform: translateY(-100px) translateX(50px) scale(1);
+    transform: translateY(-120px) translateX(80px) scale(1.5) rotate(360deg);
     opacity: 0;
   }
 }
 
+/* Container */
 .apple-steps-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
-/* Headlines with enhanced animations */
+/* Headlines with Enhanced Typography */
 .apple-steps-headline {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 64px;
-  font-weight: 700;
+  font-size: 72px;
+  font-weight: 800;
   color: #ffffff !important;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
   line-height: 1.05;
   text-align: center;
-  margin-bottom: 28px;
+  margin-bottom: 32px;
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  text-shadow: 0 2px 20px rgba(255, 255, 255, 0.1);
+  transform: translateY(40px);
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+  text-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
+  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
 .apple-steps-subheadline {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 24px;
+  font-size: 26px;
   font-weight: 400;
   color: #d2d2d7 !important;
-  letter-spacing: 0.007em;
-  line-height: 1.4;
+  letter-spacing: 0.005em;
+  line-height: 1.45;
   text-align: center;
-  margin-bottom: 100px;
+  margin-bottom: 110px;
   opacity: 0;
-  transform: translateY(30px);
-  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.15s forwards;
-  max-width: 900px;
+  transform: translateY(40px);
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.2s forwards;
+  max-width: 960px;
   margin-left: auto;
   margin-right: auto;
 }
 
-/* Shimmer animation for FREE text */
+/* Shimmer Animation for FREE Text */
 .shimmer-text {
   color: #ff453a !important;
-  font-weight: 800;
+  font-weight: 900;
   background: linear-gradient(
     90deg,
     #ff453a 0%,
-    #ff6b58 25%,
-    #ffb340 50%,
-    #ff6b58 75%,
+    #ff6b58 20%,
+    #ffb340 40%,
+    #ff6b58 60%,
+    #ff453a 80%,
     #ff453a 100%
   );
-  background-size: 200% auto;
+  background-size: 300% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  animation: shimmer 3s linear infinite;
-  text-shadow: 0 0 30px rgba(255, 59, 48, 0.5) !important;
-  filter: drop-shadow(0 0 20px rgba(255, 59, 48, 0.5));
+  animation: shimmer 4s linear infinite;
+  filter: drop-shadow(0 0 25px rgba(255, 59, 48, 0.6));
+  display: inline-block;
 }
 
 @keyframes shimmer {
   to {
-    background-position: 200% center;
+    background-position: 300% center;
   }
-}
-
-.apple-steps-free-text {
-  color: #ff453a !important;
-  font-weight: 800;
-  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5) !important;
-  display: inline-block;
 }
 
 /* Progress Connector SVG */
 .progress-connector {
   width: 100%;
-  height: 80px;
-  margin-bottom: 60px;
-  opacity: 0.4;
+  height: 100px;
+  margin-bottom: 70px;
+  opacity: 0.5;
 }
 
-/* Grid with enhanced spacing */
+/* Bento-Style Grid Layout */
 .apple-steps-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 48px;
-  perspective: 1000px;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 32px;
+  perspective: 2000px;
   position: relative;
 }
 
-/* Step Cards with 3D effects */
+.bento-layout .apple-step-card:nth-child(1) {
+  grid-column: 1 / 5;
+}
+
+.bento-layout .apple-step-card:nth-child(2) {
+  grid-column: 5 / 9;
+  transform: scale(1.08) translateY(-20px);
+}
+
+.bento-layout .apple-step-card:nth-child(3) {
+  grid-column: 9 / 13;
+}
+
+/* Step Cards with Advanced Effects */
 .apple-step-card {
   text-align: center;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 24px;
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  padding: 60px 32px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 28px;
+  backdrop-filter: blur(40px) saturate(180%);
+  -webkit-backdrop-filter: blur(40px) saturate(180%);
+  padding: 56px 36px;
   color: #e5e5ea !important;
   opacity: 0;
   position: relative;
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
   transform-style: preserve-3d;
   will-change: transform;
+  cursor: pointer;
+  isolation: isolate;
 }
 
-/* Featured card (step 2) slightly larger */
+/* Featured Card (Step 2) */
 .apple-step-card-featured {
-  transform: scale(1.05);
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(123, 104, 238, 0.3);
+  box-shadow: 0 30px 60px rgba(123, 104, 238, 0.15);
 }
 
-/* Card glow effect */
+/* Card Glow Effect */
 .card-glow {
   position: absolute;
   top: -50%;
@@ -197,60 +269,161 @@
   height: 200%;
   background: radial-gradient(
     circle,
-    rgba(41, 151, 255, 0.15) 0%,
+    var(--card-color, rgba(41, 151, 255, 0.2)) 0%,
     transparent 70%
   );
   opacity: 0;
-  transition: opacity 0.5s ease;
+  transition: opacity 0.6s ease;
   pointer-events: none;
+  z-index: -1;
 }
 
-/* Enhanced hover effect with 3D tilt */
+/* Card Reflection Effect */
+.card-reflection {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.03),
+    transparent
+  );
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  border-radius: 0 0 28px 28px;
+}
+
+/* Animated Border Glow */
+.card-border-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 28px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    var(--card-color, rgba(41, 151, 255, 0.4)) 50%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+  pointer-events: none;
+  animation: borderRotate 4s linear infinite;
+}
+
+@keyframes borderRotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Enhanced Hover Effect with 3D */
 .apple-step-card:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(100, 210, 255, 0.4);
-  transform: translateY(-12px) rotateX(2deg) scale(1.02);
+  background: rgba(255, 255, 255, 0.09);
+  border-color: var(--card-color, rgba(100, 210, 255, 0.5));
   box-shadow: 
-    0 30px 60px rgba(0, 113, 227, 0.2),
-    0 0 0 1px rgba(100, 210, 255, 0.2) inset,
-    0 0 40px rgba(41, 151, 255, 0.15);
+    0 40px 80px var(--card-color, rgba(0, 113, 227, 0.25)),
+    0 0 0 1px var(--card-color, rgba(100, 210, 255, 0.3)) inset,
+    0 0 60px var(--card-color, rgba(41, 151, 255, 0.2));
 }
 
 .apple-step-card:hover .card-glow {
   opacity: 1;
 }
 
-.apple-step-card-featured:hover {
-  transform: translateY(-16px) rotateX(2deg) scale(1.06);
+.apple-step-card:hover .card-reflection {
+  opacity: 1;
 }
 
+.apple-step-card:hover .card-border-glow {
+  opacity: 0.6;
+}
+
+/* Focus State for Accessibility */
+.apple-step-card:focus {
+  outline: 3px solid var(--card-color, #2997ff);
+  outline-offset: 4px;
+}
+
+.apple-step-card:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Expanded Card State */
+.card-expanded {
+  grid-column: 1 / 13 !important;
+  transform: scale(1) translateY(0) !important;
+  z-index: 10;
+}
+
+/* Card Entrance Animations */
 .apple-step-card:nth-child(1) {
-  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.3s forwards;
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
 }
 
 .apple-step-card:nth-child(2) {
-  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.45s forwards;
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.55s forwards;
 }
 
 .apple-step-card:nth-child(3) {
-  animation: fadeInUp 0.8s cubic-bezier(0.19, 1, 0.22, 1) 0.6s forwards;
+  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 0.7s forwards;
 }
 
-/* Step Icons */
-.step-icon-wrapper {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 24px;
+/* Timeline Badge */
+.timeline-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  background: rgba(100, 210, 255, 0.15);
+  border: 1px solid rgba(100, 210, 255, 0.3);
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
   color: #64d2ff;
-  opacity: 0.9;
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  filter: drop-shadow(0 4px 12px rgba(100, 210, 255, 0.3));
+  margin-bottom: 24px;
+  transition: all 0.3s ease;
+}
+
+.apple-step-card:hover .timeline-badge {
+  background: rgba(100, 210, 255, 0.25);
+  border-color: rgba(100, 210, 255, 0.5);
+  transform: scale(1.05);
+}
+
+/* Step Icons with Breathing Animation */
+.step-icon-wrapper {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 28px;
+  color: var(--card-color, #64d2ff);
+  opacity: 0.95;
+  transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  filter: drop-shadow(0 6px 16px var(--card-color, rgba(100, 210, 255, 0.4)));
+}
+
+.icon-breathe {
+  animation: iconBreathe 3s ease-in-out infinite;
+}
+
+@keyframes iconBreathe {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 .apple-step-card:hover .step-icon-wrapper {
-  transform: translateY(-8px) scale(1.1);
-  color: #2997ff;
-  filter: drop-shadow(0 8px 24px rgba(100, 210, 255, 0.5));
+  transform: translateY(-10px) scale(1.15) rotateY(10deg);
+  filter: drop-shadow(0 12px 28px var(--card-color, rgba(100, 210, 255, 0.6)));
 }
 
 .step-icon {
@@ -258,25 +431,26 @@
   height: 100%;
 }
 
-/* Massive step numbers with enhanced effects */
+/* Animated Numbers with Count-Up */
 .apple-step-card .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: clamp(110px, 9vw, 180px) !important;
-  font-weight: 800;
-  background: linear-gradient(135deg, #2997ff 0%, #64d2ff 50%, #2997ff 100%);
-  background-size: 200% 200%;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--card-color, #2997ff) 0%, rgba(100, 210, 255, 0.6) 50%, var(--card-color, #2997ff) 100%);
+  background-size: 300% 300%;
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent !important;
   color: transparent !important;
   display: block;
-  line-height: 0.9;
-  margin-bottom: 32px;
+  line-height: 0.85;
+  margin-bottom: 36px;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 0 40px rgba(41, 151, 255, 0.5));
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
-  animation: gradientShift 4s ease-in-out infinite;
+  filter: drop-shadow(0 0 50px var(--card-color, rgba(41, 151, 255, 0.6)));
+  transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+  animation: gradientShift 5s ease-in-out infinite;
+  transform-style: preserve-3d;
 }
 
 @keyframes gradientShift {
@@ -289,73 +463,112 @@
 }
 
 .apple-step-card:hover .apple-step-number {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 60px rgba(100, 210, 255, 0.8));
+  transform: scale(1.08) rotateY(5deg);
+  filter: drop-shadow(0 0 70px var(--card-color, rgba(100, 210, 255, 0.9)));
 }
 
-/* Step Title with refined typography */
+/* Step Title */
 .apple-step-title {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 32px;
+  font-size: 28px;
   font-weight: 700;
   color: #ffffff !important;
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-  margin-bottom: 20px;
-  transition: color 0.3s ease;
-  text-shadow: 0 2px 10px rgba(255, 255, 255, 0.1);
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin-bottom: 24px;
+  transition: all 0.4s ease;
+  text-shadow: 0 2px 12px rgba(255, 255, 255, 0.1);
 }
 
 .apple-step-card:hover .apple-step-title {
-  color: #64d2ff !important;
+  color: var(--card-color, #64d2ff) !important;
+  letter-spacing: -0.01em;
+  transform: translateY(-2px);
 }
 
-/* Animated pulsing badge */
+/* Animated Pulsing Badge */
 .apple-free-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #ff375f 0%, #ff6b58 50%, #ffb340 100%);
-  background-size: 200% 200%;
+  background: linear-gradient(135deg, #ff375f 0%, #ff6b58 33%, #ffb340 66%, #ff375f 100%);
+  background-size: 300% 300%;
   color: #000000;
-  padding: 6px 16px;
-  border-radius: 8px;
-  font-size: 13px;
+  padding: 7px 18px;
+  border-radius: 10px;
+  font-size: 12px;
   font-weight: 900;
   text-transform: uppercase;
-  letter-spacing: 1.2px;
-  box-shadow: 0 4px 20px rgba(255, 55, 95, 0.5);
-  margin-left: 12px;
-  animation: badgePulse 2s ease-in-out infinite;
+  letter-spacing: 1.5px;
+  box-shadow: 0 6px 25px rgba(255, 55, 95, 0.6);
+  margin-left: 14px;
   vertical-align: middle;
-  transition: all 0.3s ease;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
 }
 
 .pulse-badge {
-  animation: badgePulse 2s ease-in-out infinite, gradientShift 3s ease infinite;
+  animation: badgePulse 2.5s ease-in-out infinite, gradientShift 4s ease infinite;
 }
 
 @keyframes badgePulse {
   0%, 100% {
-    transform: scale(1);
-    box-shadow: 0 4px 20px rgba(255, 55, 95, 0.5);
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 6px 25px rgba(255, 55, 95, 0.6);
   }
   50% {
-    transform: scale(1.08);
-    box-shadow: 0 6px 30px rgba(255, 55, 95, 0.8);
+    transform: scale(1.1) rotate(-2deg);
+    box-shadow: 0 8px 35px rgba(255, 55, 95, 0.9);
   }
 }
 
 .apple-step-card:hover .apple-free-badge {
-  transform: scale(1.1) rotate(-2deg);
-  box-shadow: 0 8px 35px rgba(255, 55, 95, 0.9);
+  transform: scale(1.15) rotate(-3deg);
+  box-shadow: 0 10px 40px rgba(255, 55, 95, 1);
+}
+
+/* Success Statistics */
+.step-stats {
+  margin: 24px 0;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.4s ease;
+}
+
+.apple-step-card:hover .step-stats {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--card-color, rgba(255, 255, 255, 0.15));
+  transform: scale(1.03);
+}
+
+.stat-number {
+  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--card-color, #2997ff), #64d2ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #a0a0a8;
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 /* Step Description */
 .apple-step-description {
   font-family: -apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 18px;
+  font-size: 17px;
   font-weight: 400;
   color: #d2d2d7 !important;
-  line-height: 1.5;
+  line-height: 1.55;
   margin-bottom: 32px;
   transition: color 0.3s ease;
 }
@@ -370,12 +583,12 @@
   text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
 }
 
-/* Feature List with enhanced styling */
+/* Feature List with Enhanced Styling */
 .apple-step-features {
   list-style: none;
   padding: 0;
-  margin: 0 auto;
-  max-width: 320px;
+  margin: 0 auto 32px;
+  max-width: 340px;
   text-align: left;
 }
 
@@ -383,11 +596,12 @@
   font-family: -apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 15px;
   color: #d2d2d7 !important;
-  padding: 14px 0;
+  padding: 16px 0;
   display: flex;
-  align-items: center;
-  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  align-items: flex-start;
+  gap: 12px;
+  transition: all 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   position: relative;
 }
 
@@ -402,13 +616,13 @@
   width: 0;
   height: 2px;
   bottom: 0;
-  background: linear-gradient(90deg, #2997ff, #64d2ff);
-  transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  background: linear-gradient(90deg, var(--card-color, #2997ff), rgba(100, 210, 255, 0));
+  transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 .apple-step-features li:hover {
   color: #ffffff !important;
-  transform: translateX(6px);
+  transform: translateX(8px);
   padding-left: 8px;
 }
 
@@ -419,6 +633,7 @@
 .apple-step-features li span {
   color: #d2d2d7 !important;
   transition: color 0.3s ease;
+  flex: 1;
 }
 
 .apple-step-features li:hover span {
@@ -428,38 +643,25 @@
 .apple-step-features li strong {
   color: #ffb340 !important;
   font-weight: 800;
-  text-shadow: 0 0 10px rgba(255, 179, 64, 0.4);
+  text-shadow: 0 0 12px rgba(255, 179, 64, 0.5);
 }
 
-/* Animated Checkmark */
+/* Animated Checkmark with Fill */
 .apple-checkmark {
-  width: 20px;
-  height: 20px;
-  margin-right: 12px;
+  width: 22px;
+  height: 22px;
   flex-shrink: 0;
-  filter: drop-shadow(0 0 8px rgba(48, 209, 88, 0.4));
-  transition: all 0.3s ease;
+  filter: drop-shadow(0 0 10px rgba(48, 209, 88, 0.5));
+  transition: all 0.4s ease;
 }
 
 .apple-step-features li:hover .apple-checkmark {
-  filter: drop-shadow(0 0 12px rgba(48, 209, 88, 0.7));
-  transform: scale(1.1) rotate(5deg);
+  filter: drop-shadow(0 0 16px rgba(48, 209, 88, 0.8));
+  transform: scale(1.15) rotate(5deg);
 }
 
 .checkmark-path {
-  animation: drawCheckmark 0.6s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-}
-
-.apple-step-card:nth-child(1) .checkmark-path:nth-of-type(1) {
-  animation-delay: 0.5s;
-}
-
-.apple-step-card:nth-child(1) .checkmark-path:nth-of-type(2) {
-  animation-delay: 0.6s;
-}
-
-.apple-step-card:nth-child(1) .checkmark-path:nth-of-type(3) {
-  animation-delay: 0.7s;
+  animation: drawCheckmark 0.8s cubic-bezier(0.19, 1, 0.22, 1) forwards;
 }
 
 @keyframes drawCheckmark {
@@ -468,12 +670,129 @@
   }
 }
 
-.apple-checkmark path {
-  stroke: #32de84;
-  stroke-width: 3;
+/* Expand Indicator */
+.expand-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 13px;
+  color: #a0a0a8;
+  transition: all 0.3s ease;
 }
 
-/* Fade in animation */
+.apple-step-card:hover .expand-indicator {
+  color: var(--card-color, #64d2ff);
+}
+
+.expand-indicator svg {
+  transition: transform 0.3s ease;
+}
+
+.card-expanded .expand-indicator svg {
+  transform: rotate(180deg);
+}
+
+/* Expanded Content */
+.expanded-content {
+  margin-top: 32px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  animation: expandIn 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  text-align: left;
+}
+
+@keyframes expandIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.expanded-content h4 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #ffffff !important;
+  margin-bottom: 16px;
+}
+
+.expanded-content p {
+  font-size: 16px;
+  color: #d2d2d7 !important;
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 14px 32px;
+  background: linear-gradient(135deg, var(--card-color, #2997ff), #64d2ff);
+  color: #000000;
+  font-weight: 700;
+  font-size: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 24px var(--card-color, rgba(41, 151, 255, 0.4));
+}
+
+.cta-button:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 32px var(--card-color, rgba(41, 151, 255, 0.6));
+}
+
+/* Chromatic Aberration Effect */
+.chromatic-effect {
+  position: absolute;
+  inset: 0;
+  border-radius: 28px;
+  opacity: 0;
+  pointer-events: none;
+  background: 
+    linear-gradient(90deg, transparent 0%, rgba(255, 0, 0, 0.05) 50%, transparent 100%),
+    linear-gradient(0deg, transparent 0%, rgba(0, 255, 255, 0.05) 50%, transparent 100%);
+  mix-blend-mode: screen;
+  transition: opacity 0.3s ease;
+}
+
+.apple-step-card:hover .chromatic-effect {
+  opacity: 0.3;
+}
+
+/* Mobile Pagination Dots */
+.mobile-pagination {
+  display: none;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 48px;
+}
+
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot.active {
+  width: 24px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #2997ff, #64d2ff);
+}
+
+/* Fade In Animation */
 @keyframes fadeInUp {
   to {
     opacity: 1;
@@ -481,7 +800,7 @@
   }
 }
 
-/* Reduced motion preferences */
+/* Reduced Motion Preferences */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -501,8 +820,24 @@
     display: none;
   }
   
-  .gradient-mesh {
+  .gradient-mesh,
+  .icon-breathe {
     animation: none;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .apple-step-card {
+    border: 2px solid rgba(255, 255, 255, 0.5);
+  }
+
+  .apple-step-card:hover {
+    border-color: rgba(100, 210, 255, 1);
+  }
+
+  .apple-step-number {
+    filter: none !important;
   }
 }
 
@@ -517,20 +852,29 @@
   }
   
   .apple-steps-subheadline {
-    font-size: 20px;
+    font-size: 22px;
     margin-bottom: 80px;
   }
 
-  .apple-steps-grid {
-    gap: 40px;
+  .bento-layout .apple-step-card:nth-child(1) {
+    grid-column: 1 / 7;
+  }
+
+  .bento-layout .apple-step-card:nth-child(2) {
+    grid-column: 7 / 13;
+    transform: scale(1) translateY(0);
+  }
+
+  .bento-layout .apple-step-card:nth-child(3) {
+    grid-column: 4 / 10;
   }
 
   .apple-step-card {
-    padding: 48px 28px;
+    padding: 48px 32px;
   }
 
   .apple-step-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 }
 
@@ -543,13 +887,13 @@
   .apple-steps-headline {
     font-size: 36px;
     margin-bottom: 20px;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.02em;
   }
   
   .apple-steps-subheadline {
     font-size: 18px;
     margin-bottom: 60px;
-    line-height: 1.45;
+    line-height: 1.5;
   }
   
   .progress-connector {
@@ -558,24 +902,31 @@
   
   .apple-steps-grid {
     grid-template-columns: 1fr;
-    gap: 60px;
+    gap: 48px;
+    scroll-snap-type: x mandatory;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .bento-layout .apple-step-card:nth-child(1),
+  .bento-layout .apple-step-card:nth-child(2),
+  .bento-layout .apple-step-card:nth-child(3) {
+    grid-column: auto;
+    transform: scale(1) translateY(0);
   }
 
   .apple-step-card {
-    padding: 48px 24px;
+    padding: 44px 28px;
+    scroll-snap-align: center;
   }
 
   .apple-step-card-featured {
     transform: scale(1);
   }
-
-  .apple-step-card-featured:hover {
-    transform: translateY(-12px) scale(1.02);
-  }
   
   .step-icon-wrapper {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
     margin-bottom: 20px;
   }
 
@@ -585,7 +936,7 @@
   }
   
   .apple-step-title {
-    font-size: 26px;
+    font-size: 24px;
     margin-bottom: 16px;
   }
 
@@ -595,8 +946,21 @@
     width: fit-content;
   }
 
+  .step-stats {
+    padding: 16px;
+    margin: 20px 0;
+  }
+
+  .stat-number {
+    font-size: 36px;
+  }
+
+  .stat-label {
+    font-size: 12px;
+  }
+
   .apple-step-description {
-    font-size: 17px;
+    font-size: 16px;
     margin-bottom: 28px;
   }
 
@@ -605,60 +969,50 @@
   }
 
   .apple-step-features li {
-    font-size: 15px;
-    padding: 12px 0;
+    font-size: 14px;
+    padding: 14px 0;
   }
 
-  /* Mobile: Swipe hint */
-  .apple-steps-grid::after {
-    content: '← Swipe →';
+  .mobile-pagination {
+    display: flex;
+  }
+
+  /* Disable complex effects on mobile */
+  .spotlight-effect,
+  .card-reflection,
+  .chromatic-effect {
     display: none;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.3);
-    font-size: 14px;
-    margin-top: 20px;
   }
 }
 
-/* Ultra-wide screens */
+/* Ultra-wide Screens */
 @media (min-width: 1400px) {
   .apple-steps-container {
-    max-width: 1400px;
+    max-width: 1440px;
   }
 
   .apple-steps-grid {
-    gap: 60px;
+    gap: 48px;
   }
 
   .apple-step-card {
-    padding: 70px 40px;
+    padding: 64px 44px;
+  }
+
+  .apple-steps-headline {
+    font-size: 84px;
   }
 }
 
-/* Dark mode enhancements (system preference) */
-@media (prefers-color-scheme: dark) {
-  .apple-steps-section {
-    background-image: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.12) 0%, transparent 60%);
-  }
-}
-
-/* High contrast mode */
-@media (prefers-contrast: high) {
-  .apple-step-card {
-    border: 2px solid rgba(255, 255, 255, 0.3);
-  }
-
-  .apple-step-card:hover {
-    border-color: rgba(100, 210, 255, 0.8);
-  }
-}
-
-/* Print styles */
+/* Print Styles */
 @media print {
   .floating-particles,
   .gradient-mesh,
   .card-glow,
-  .progress-connector {
+  .spotlight-effect,
+  .progress-connector,
+  .grain-overlay,
+  .timeline-indicator {
     display: none;
   }
 

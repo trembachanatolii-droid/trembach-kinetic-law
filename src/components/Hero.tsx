@@ -113,8 +113,13 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full object-contain object-right scale-75 translate-x-8 md:translate-x-12 mix-blend-multiply pointer-events-none select-none"
       />
       
-      {/* Dark Overlay */}
-      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
+      {/* Dark Overlay - Smooth gradient to prevent banding */}
+      <div 
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: 'linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 80%, transparent 100%)'
+        }}
+      />
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">

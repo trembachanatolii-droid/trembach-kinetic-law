@@ -162,7 +162,7 @@ const WhyChoose: React.FC = () => {
       </ScrollStack>
 
       {/* Bottom divider matching header */}
-      <div className="px-6 lg:px-16 py-8 lg:py-12">
+      <div className="why-choose-divider px-6 lg:px-16 py-8 lg:py-12" aria-hidden="true">
         <div className="max-w-[1400px] mx-auto">
           <div className="w-full h-[1px] bg-border" />
         </div>

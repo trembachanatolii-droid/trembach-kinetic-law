@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import ladyJusticeHero from '@/assets/lady-justice-hero.png';
+import ladyJusticeHero from '@/assets/lady-justice-hero-bright.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);

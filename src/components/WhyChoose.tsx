@@ -18,45 +18,73 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
   const pointsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      return; // Skip animations if user prefers reduced motion
+    }
+
     const ctx = gsap.context(() => {
+      // Determine translateY based on viewport size
+      const isMobile = window.innerWidth < 768;
+      const translateY = isMobile ? 12 : 17;
+      const duration = isMobile ? 0.5 : 0.6;
+
+      // Set initial states with will-change for performance
       gsap.set([headlineRef.current, paragraphRef.current], {
-        y: 30,
-        opacity: 0
+        y: translateY,
+        opacity: 0,
+        willChange: 'transform, opacity'
       });
 
       const pointItems = pointsRef.current?.querySelectorAll('h3');
       if (pointItems) {
         gsap.set(pointItems, {
-          y: 30,
-          opacity: 0
+          y: translateY,
+          opacity: 0,
+          willChange: 'transform, opacity'
         });
       }
 
+      // Create timeline with scroll trigger at 25% into viewport
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 75%",
-          end: "top 25%",
-          toggleActions: "play none none none"
+          start: "top 75%", // 25% into viewport
+          toggleActions: "play none none none", // Only play once
+          once: true // One-time reveal
         }
       });
 
-      tl.to([headlineRef.current, paragraphRef.current], {
+      // Animate headline first
+      tl.to(headlineRef.current, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
+        duration: duration,
+        ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
+        clearProps: "willChange" // Clean up after animation
       });
 
+      // Animate paragraph 120ms after headline
+      tl.to(paragraphRef.current, {
+        y: 0,
+        opacity: 1,
+        duration: duration,
+        ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
+        clearProps: "willChange"
+      }, "-=0.48"); // 120ms stagger (0.6s - 0.12s = 0.48s overlap)
+
+      // Animate bullet points with stagger 120ms after paragraph
       if (pointItems) {
         tl.to(pointItems, {
           y: 0,
           opacity: 1,
-          duration: 0.6,
-          stagger: 0.1,
-          ease: "power3.out"
-        }, "-=0.3");
+          duration: duration,
+          stagger: 0.09, // 90ms stagger between items
+          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
+          clearProps: "willChange"
+        }, "-=0.48"); // 120ms stagger from paragraph
       }
     }, sectionRef);
 
@@ -116,22 +144,34 @@ const WhyChoose: React.FC = () => {
   const lineRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    
+    if (prefersReducedMotion) {
+      return;
+    }
+
     const ctx = gsap.context(() => {
+      const isMobile = window.innerWidth < 768;
+      const translateY = isMobile ? 12 : 17;
+      
       gsap.fromTo(
         headerRef.current,
         {
-          y: 50,
-          opacity: 0
+          y: translateY,
+          opacity: 0,
+          willChange: 'transform, opacity'
         },
         {
           y: 0,
           opacity: 1,
-          duration: 1,
-          ease: "power3.out",
+          duration: 0.6,
+          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
+          clearProps: "willChange",
           scrollTrigger: {
             trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none"
+            start: "top 75%",
+            toggleActions: "play none none none",
+            once: true
           }
         }
       );
@@ -140,17 +180,20 @@ const WhyChoose: React.FC = () => {
         lineRef.current,
         {
           scaleX: 0,
-          opacity: 0
+          opacity: 0,
+          willChange: 'transform, opacity'
         },
         {
           scaleX: 1,
           opacity: 1,
-          duration: 1.2,
-          ease: "power3.out",
+          duration: 0.65,
+          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
+          clearProps: "willChange",
           scrollTrigger: {
             trigger: lineRef.current,
-            start: "top 85%",
-            toggleActions: "play none none none"
+            start: "top 75%",
+            toggleActions: "play none none none",
+            once: true
           }
         }
       );

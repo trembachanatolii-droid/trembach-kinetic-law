@@ -49,6 +49,9 @@ const ScrollStack = ({
   const cardsRef = useRef<HTMLElement[]>([]);
   const lastTransformsRef = useRef(new Map());
   const isUpdatingRef = useRef(false);
+  const cardOffsetsRef = useRef<Map<HTMLElement, number>>(new Map());
+  const updateRafRef = useRef<number | null>(null);
+  const updateScheduledRef = useRef(false);
 
   const calculateProgress = useCallback((scrollTop: number, start: number, end: number) => {
     if (scrollTop < start) return 0;
@@ -80,17 +83,44 @@ const ScrollStack = ({
     }
   }, [useWindowScroll]);
 
+  const getDocumentOffsetTop = useCallback((el: HTMLElement) => {
+    let top = 0;
+    let node: HTMLElement | null = el;
+    while (node) {
+      top += node.offsetTop;
+      node = node.offsetParent as HTMLElement | null;
+    }
+    return top;
+  }, []);
+
   const getElementOffset = useCallback(
     (element: HTMLElement) => {
+      const cached = cardOffsetsRef.current.get(element);
+      if (cached != null) return cached;
       if (useWindowScroll) {
-        const rect = element.getBoundingClientRect();
-        return rect.top + window.scrollY;
+        return getDocumentOffsetTop(element);
       } else {
-        return element.offsetTop;
+        const scroller = scrollerRef.current;
+        const docTop = getDocumentOffsetTop(element);
+        const scrollerDocTop = scroller ? getDocumentOffsetTop(scroller) : 0;
+        return docTop - scrollerDocTop;
       }
     },
-    [useWindowScroll]
+    [useWindowScroll, getDocumentOffsetTop]
   );
+
+  const computeOffsets = useCallback(() => {
+    const scroller = scrollerRef.current;
+    if (!cardsRef.current.length) return;
+    const map = new Map<HTMLElement, number>();
+    const scrollerDocTop = scroller ? getDocumentOffsetTop(scroller) : 0;
+    cardsRef.current.forEach((card) => {
+      const docTop = getDocumentOffsetTop(card);
+      const offset = useWindowScroll ? docTop : docTop - scrollerDocTop;
+      map.set(card, offset);
+    });
+    cardOffsetsRef.current = map;
+  }, [useWindowScroll, getDocumentOffsetTop]);
 
   const updateCardTransforms = useCallback(() => {
     if (!cardsRef.current.length || isUpdatingRef.current) return;
@@ -201,7 +231,12 @@ const ScrollStack = ({
   ]);
 
   const handleScroll = useCallback(() => {
-    updateCardTransforms();
+    if (updateScheduledRef.current) return;
+    updateScheduledRef.current = true;
+    updateRafRef.current = requestAnimationFrame(() => {
+      updateScheduledRef.current = false;
+      updateCardTransforms();
+    });
   }, [updateCardTransforms]);
 
   const setupLenis = useCallback(() => {
@@ -272,6 +307,9 @@ const ScrollStack = ({
     cardsRef.current = cards;
     const transformsCache = lastTransformsRef.current;
 
+    // Measure static offsets to avoid jitter from transform-influenced DOM reads
+    computeOffsets();
+
     cards.forEach((card, i) => {
       if (i < cards.length - 1) {
         card.style.marginBottom = `${itemDistance}px`;
@@ -286,13 +324,25 @@ const ScrollStack = ({
     setupLenis();
     updateCardTransforms();
 
+    const onResize = () => {
+      computeOffsets();
+      updateCardTransforms();
+    };
+    window.addEventListener('resize', onResize);
+    window.addEventListener('orientationchange', onResize);
+
     return () => {
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }
+      if (updateRafRef.current) {
+        cancelAnimationFrame(updateRafRef.current);
+      }
       if (lenisRef.current) {
         lenisRef.current.destroy();
       }
+      window.removeEventListener('resize', onResize);
+      window.removeEventListener('orientationchange', onResize);
       stackCompletedRef.current = false;
       cardsRef.current = [];
       transformsCache.clear();
@@ -311,7 +361,8 @@ const ScrollStack = ({
     useWindowScroll,
     onStackComplete,
     setupLenis,
-    updateCardTransforms
+    updateCardTransforms,
+    computeOffsets
   ]);
 
   return (

@@ -104,7 +104,7 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
       {/* Lady Justice Background */}
       <img
@@ -113,35 +113,28 @@ const Hero = () => {
         className="absolute inset-0 w-full h-full object-cover"
       />
       
-      {/* Dark Overlay for better text visibility */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent" />
-      
-      <div className="container mx-auto px-8 lg:px-16 flex items-start justify-start min-h-screen relative z-10 pt-32">
-        {/* Left-aligned Content - Apple Style */}
-        <div className="max-w-2xl">
-          <div ref={headlineRef} className="space-y-8">
-            <h1 className="text-5xl lg:text-7xl font-light text-white leading-tight tracking-tight">
-              <span className="hero-line block">California's premier</span>
-              <span className="hero-line block font-semibold">personal injury</span>
-              <span className="hero-line block">and mesothelioma</span>
-              <span className="hero-line block font-semibold">law firm</span>
+      {/* Dark Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
+      <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
+        {/* Center Content */}
+        <div className="text-center max-w-4xl">
+          <div ref={headlineRef} className="space-y-6">
+            <h1 className="text-5xl lg:text-7xl font-black text-apple leading-tight">
+              <span className="hero-line block">California's premier personal injury and mesothelioma law firm with insider advantage</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-white/90 font-light leading-relaxed">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+            <p className="text-xl lg:text-2xl text-white font-medium leading-relaxed max-w-3xl mx-auto">
+              After defending insurance companies, our lead attorny switched sides. Now we use their playbook to maximize your compensation and secure your medical future.
             </p>
           </div>
+
+          <Button 
+            ref={buttonRef}
+            className="mt-8 bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+            onClick={() => window.location.href = '/free-consultation'}
+          >
+            START YOUR FREE CASE REVIEW
+          </Button>
         </div>
-      </div>
-      
-      {/* Bottom Center Button - Apple Style */}
-      <div className="absolute bottom-16 left-0 right-0 z-20 flex justify-center">
-        <Button 
-          ref={buttonRef}
-          className="bg-white/95 hover:bg-white text-gray-900 font-semibold px-12 py-6 text-lg rounded-full shadow-2xl backdrop-blur-sm border border-white/20 transform hover:scale-105 transition-all duration-300"
-          onClick={() => window.location.href = '/free-consultation'}
-        >
-          START YOUR FREE CASE REVIEW
-        </Button>
       </div>
 
       {/* Chat Widget */}

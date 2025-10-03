@@ -248,13 +248,22 @@ const WhyChoose: React.FC = () => {
       {/* Subsections */}
       <div className="relative">
         {subsections.map((section, index) => (
-          <Subsection
-            key={index}
-            headline={section.headline}
-            paragraph={section.paragraph}
-            points={section.points}
-            index={index}
-          />
+          <React.Fragment key={index}>
+            <Subsection
+              headline={section.headline}
+              paragraph={section.paragraph}
+              points={section.points}
+              index={index}
+            />
+            {/* Divider line between subsections */}
+            {index < subsections.length - 1 && (
+              <div className="px-6 lg:px-16">
+                <div className="max-w-[1400px] mx-auto">
+                  <div className="w-full h-[1px] bg-border" />
+                </div>
+              </div>
+            )}
+          </React.Fragment>
         ))}
       </div>
 

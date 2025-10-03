@@ -204,21 +204,6 @@ const ScrollStack = ({
     updateCardTransforms();
   }, [updateCardTransforms]);
 
-  const handleWheel = useCallback((e: WheelEvent) => {
-    const scroller = scrollerRef.current;
-    if (!scroller || useWindowScroll) return;
-    const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1;
-    if (atBottom && e.deltaY > 0) {
-      const sectionEl = scroller.closest('section');
-      const nextSection = sectionEl?.nextElementSibling as HTMLElement | null;
-      if (nextSection) {
-        e.preventDefault();
-        const targetTop = nextSection.getBoundingClientRect().top + window.scrollY;
-        window.scrollTo({ top: targetTop, behavior: 'smooth' });
-      }
-    }
-  }, [useWindowScroll]);
-
   const setupLenis = useCallback(() => {
     if (useWindowScroll) {
       const lenis = new Lenis({
@@ -245,13 +230,32 @@ const ScrollStack = ({
       return lenis;
     } else {
       const scroller = scrollerRef.current;
-      if (!scroller) return null;
+      if (!scroller) return;
 
-      // Use native scrolling for internal scroller to allow scroll chaining and prevent scroll traps
-      scroller.addEventListener('scroll', handleScroll as EventListener, { passive: true });
-      scroller.addEventListener('wheel', handleWheel as EventListener, { passive: false });
-      lenisRef.current = null;
-      return null;
+      const lenis = new Lenis({
+        wrapper: scroller,
+        content: scroller.querySelector('.scroll-stack-inner') as HTMLElement,
+        duration: 1.2,
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smoothWheel: true,
+        touchMultiplier: 2,
+        infinite: false,
+        wheelMultiplier: 1,
+        lerp: 0.1,
+        syncTouch: true,
+        syncTouchLerp: 0.075
+      });
+
+      lenis.on('scroll', handleScroll);
+
+      const raf = (time: number) => {
+        lenis.raf(time);
+        animationFrameRef.current = requestAnimationFrame(raf);
+      };
+      animationFrameRef.current = requestAnimationFrame(raf);
+
+      lenisRef.current = lenis;
+      return lenis;
     }
   }, [handleScroll, useWindowScroll]);
 
@@ -283,10 +287,6 @@ const ScrollStack = ({
     updateCardTransforms();
 
     return () => {
-      if (!useWindowScroll && scroller) {
-        scroller.removeEventListener('scroll', handleScroll as EventListener);
-        scroller.removeEventListener('wheel', handleWheel as EventListener);
-      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

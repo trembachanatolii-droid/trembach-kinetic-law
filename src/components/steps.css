@@ -16,10 +16,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 56px;
   font-weight: 600;
-  background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  color: #ffffff;
   letter-spacing: -0.005em;
   line-height: 1.07143;
   text-align: center;
@@ -89,7 +86,7 @@
 
 .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 96px;
+  font-size: 160px;
   font-weight: 700;
   background: linear-gradient(135deg, #2997ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;
@@ -97,7 +94,7 @@
   background-clip: text;
   filter: drop-shadow(0 0 30px rgba(41, 151, 255, 0.4));
   line-height: 1;
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .apple-step-title {
@@ -231,7 +228,7 @@
   }
   
   .apple-step-number {
-    font-size: 72px;
+    font-size: 120px;
   }
   
   .apple-step-title {

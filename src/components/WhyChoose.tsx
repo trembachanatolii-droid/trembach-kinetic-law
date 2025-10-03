@@ -8,7 +8,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface SubsectionProps {
   headline: string;
   paragraph: string;
-  points: string[];
+  points: Array<string | { title: string; sub?: string }>;
   index: number;
 }
 
@@ -22,7 +22,7 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
     const ctx = gsap.context(() => {
       // Set initial states
       gsap.set([headlineRef.current, paragraphRef.current], {
-        y: 60,
+        y: 28,
         opacity: 0,
         filter: "blur(8px)"
       });
@@ -51,7 +51,7 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
         y: 0,
         opacity: 1,
         filter: "blur(0px)",
-        duration: 1,
+        duration: 0.7,
         stagger: 0.2,
         ease: "power3.out"
       });
@@ -62,8 +62,8 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
           y: 0,
           opacity: 1,
           filter: "blur(0px)",
-          duration: 0.8,
-          stagger: 0.15,
+          duration: 0.55,
+          stagger: 0.09,
           ease: "power3.out"
         }, "-=0.4");
       }
@@ -75,39 +75,43 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
   return (
     <div 
       ref={sectionRef}
-      className={`py-[90px] ${index % 2 === 0 ? 'bg-background' : 'bg-muted/20'}`}
+      className={`py-[90px] border-y border-border ${index % 2 === 0 ? 'bg-background' : 'bg-muted/10'}`}
     >
       <div className="container mx-auto px-8 max-w-7xl">
-        <div className="grid lg:grid-cols-2 gap-16 lg:gap-20 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-20 items-start">
           {/* Left: Headline + Paragraph */}
-          <div className="space-y-6">
+          <div className="lg:col-span-7 space-y-6">
             <h2 
               ref={headlineRef}
-              className="text-[clamp(38px,5vw,72px)] font-black leading-[1.1] tracking-tight text-foreground"
+              className="text-[clamp(38px,5.8vw,72px)] font-black leading-[1.05] tracking-[-0.02em] text-foreground"
               style={{ maxWidth: '58ch' }}
             >
               {headline}
             </h2>
             <p 
               ref={paragraphRef}
-              className="text-lg lg:text-xl text-muted-foreground leading-relaxed font-medium"
-              style={{ maxWidth: '58ch' }}
+              className="text-[clamp(17px,2.1vw,21px)] text-muted-foreground leading-[1.55] font-medium max-w-[58ch]"
             >
               {paragraph}
             </p>
           </div>
 
           {/* Right: 3-Point List */}
-          <div className="lg:pt-12">
-            <ul ref={pointsRef} className="space-y-6">
+          <div className="lg:col-span-5 lg:pt-4">
+            <ul ref={pointsRef} className="space-y-5">
               {points.map((point, i) => (
                 <li 
                   key={i}
                   className="leading-tight"
                 >
-                  <span className="text-2xl lg:text-3xl font-semibold text-foreground tracking-tight">
-                    {point}
+                  <span className="block text-[clamp(28px,4.2vw,56px)] font-extrabold tracking-[-0.015em] text-foreground">
+                    {typeof point === 'string' ? point : point.title}
                   </span>
+                  {typeof point !== 'string' && point.sub && (
+                    <small className="block text-[clamp(14px,1.6vw,18px)] text-muted-foreground font-medium mt-1.5 tracking-[-0.01em]">
+                      {point.sub}
+                    </small>
+                  )}
                 </li>
               ))}
             </ul>
@@ -173,9 +177,9 @@ const WhyChoose: React.FC = () => {
       headline: "We Rip Apart Their Dirtiest Strategies",
       paragraph: "Insurance companies spend millions training adjusters to beat victims. They try to scare you, stall you, and trap you into saying the wrong thing. We know every one of these tricks — and we crush them in court and across the negotiating table.",
       points: [
-        "Lowball Offers — 15¢ on the dollar",
-        "Delay & Deny — Stall until you quit",
-        "Twist Your Words — One slip = $50K gone"
+        { title: "Lowball Offers", sub: "15¢ on the dollar" },
+        { title: "Delay & Deny", sub: "Stall until you quit" },
+        { title: "Twist Your Words", sub: "One slip = $50K gone" }
       ],
       
     },
@@ -193,9 +197,9 @@ const WhyChoose: React.FC = () => {
       headline: "They're Paid to Rip You Off — And They're Damn Good at It",
       paragraph: "Insurance adjusters earn bonuses for underpaying claims. They already set aside 10X more than what they offered you — hoping you'll never know. We make sure they pay full value, and we do it fast.",
       points: [
-        "Trained to Pay Less — It's Their Job",
-        "93% Take First Offer — Don't Be a Statistic",
-        "Every Day You Wait = More Money Lost"
+        { title: "Trained to Pay Less", sub: "It’s Their Job" },
+        { title: "93% Take First Offer", sub: "Don’t Be a Statistic" },
+        { title: "Every Day You Wait", sub: "= More Money Lost" }
       ],
       
     },
@@ -214,13 +218,14 @@ const WhyChoose: React.FC = () => {
   return (
     <section className="relative bg-background">
       {/* Section Header */}
-      <div className="container mx-auto px-8 max-w-7xl py-24">
-        <div ref={headerRef} className="text-center">
-          <h2 className="text-[clamp(48px,6vw,84px)] font-black text-foreground leading-tight tracking-tight">
+      <div className="container mx-auto px-8 max-w-7xl py-16">
+        <div ref={headerRef} className="text-left">
+          <h2 className="text-[clamp(28px,4.6vw,44px)] font-black text-foreground tracking-[-0.02em]">
             Why Choose Trembach Law Firm
           </h2>
+          <p className="text-muted-foreground mt-2">Aggressive, insider-led personal injury representation across California.</p>
         </div>
-        <div className="mt-10 border-t border-border" />
+        <div className="mt-6 border-t border-border" />
       </div>
 
       {/* Subsections */}

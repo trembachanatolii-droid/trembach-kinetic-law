@@ -70,7 +70,7 @@ export default {
       
       fontFamily: {
         sans: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
-        display: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
+        display: ['Playfair Display', 'Georgia', 'serif'],
         body: ['Inter', 'Helvetica Neue', 'Arial', 'sans-serif'],
       },
       fontSize: {

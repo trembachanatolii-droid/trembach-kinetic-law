@@ -119,13 +119,13 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-2xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight text-white leading-[1.1]">
+            <h1 className="font-display text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight text-white leading-[1.1]">
               <span className="hero-line block">California's premier</span>
               <span className="hero-line block">personal injury and</span>
               <span className="hero-line block">mesothelioma</span>
-              <span className="hero-line block font-semibold">law firm</span>
+              <span className="hero-line block">law firm</span>
             </h1>
-            <p className="text-xl lg:text-2xl text-white/90 font-light leading-relaxed max-w-xl pt-4">
+            <p className="font-display text-xl lg:text-2xl text-white/90 font-normal leading-relaxed max-w-xl pt-4">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>

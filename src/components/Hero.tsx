@@ -107,10 +107,10 @@ const Hero = () => {
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
       {/* Lady Justice Background */}
-      <img
-        src={ladyJusticeHero}
-        alt="Lady Justice statue"
-        className="absolute inset-0 w-full h-full object-contain object-right scale-75 translate-x-8 md:translate-x-12 mix-blend-multiply pointer-events-none select-none"
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12"
+        style={{ backgroundImage: `url(${ladyJusticeHero})` }}
       />
       
       {/* Dark Overlay - Smooth gradient to prevent banding */}

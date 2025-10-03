@@ -16,7 +16,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 56px;
   font-weight: 600;
-  color: #ffffff;
+  color: #ffffff !important;
   letter-spacing: -0.005em;
   line-height: 1.07143;
   text-align: center;
@@ -30,7 +30,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 21px;
   font-weight: 400;
-  color: #d2d2d7;
+  color: #d2d2d7 !important;
   letter-spacing: 0.011em;
   line-height: 1.381;
   text-align: center;
@@ -41,9 +41,9 @@
 }
 
 .apple-steps-free-text {
-  color: #ff453a;
+  color: #ff453a !important;
   font-weight: 700;
-  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
+  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5) !important;
 }
 
 .apple-steps-grid {
@@ -157,12 +157,16 @@
 }
 
 .apple-step-features li:hover {
-  color: #ffffff;
+  color: #ffffff !important;
   transform: translateX(3px);
 }
 
+.apple-step-features li span {
+  color: #d2d2d7 !important;
+}
+
 .apple-step-features li strong {
-  color: #ffb340;
+  color: #ffb340 !important;
   font-weight: 700;
   text-shadow: 0 0 10px rgba(255, 149, 0, 0.3);
 }

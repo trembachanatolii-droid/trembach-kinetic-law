@@ -230,32 +230,12 @@ const ScrollStack = ({
       return lenis;
     } else {
       const scroller = scrollerRef.current;
-      if (!scroller) return;
+      if (!scroller) return null;
 
-      const lenis = new Lenis({
-        wrapper: scroller,
-        content: scroller.querySelector('.scroll-stack-inner') as HTMLElement,
-        duration: 1.2,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-        smoothWheel: true,
-        touchMultiplier: 2,
-        infinite: false,
-        wheelMultiplier: 1,
-        lerp: 0.1,
-        syncTouch: true,
-        syncTouchLerp: 0.075
-      });
-
-      lenis.on('scroll', handleScroll);
-
-      const raf = (time: number) => {
-        lenis.raf(time);
-        animationFrameRef.current = requestAnimationFrame(raf);
-      };
-      animationFrameRef.current = requestAnimationFrame(raf);
-
-      lenisRef.current = lenis;
-      return lenis;
+      // Use native scrolling for internal scroller to allow scroll chaining and prevent scroll traps
+      scroller.addEventListener('scroll', handleScroll as EventListener, { passive: true });
+      lenisRef.current = null;
+      return null;
     }
   }, [handleScroll, useWindowScroll]);
 
@@ -287,6 +267,9 @@ const ScrollStack = ({
     updateCardTransforms();
 
     return () => {
+      if (!useWindowScroll && scroller) {
+        scroller.removeEventListener('scroll', handleScroll as EventListener);
+      }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);
       }

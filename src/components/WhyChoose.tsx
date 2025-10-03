@@ -146,7 +146,7 @@ const WhyChoose: React.FC = () => {
         baseScale={0.92}
         rotationAmount={0}
         blurAmount={0}
-        useWindowScroll={false}
+        useWindowScroll={true}
         className="why-choose-stack"
       >
         {subsections.map((section, index) => (

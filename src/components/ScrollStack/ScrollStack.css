@@ -46,6 +46,13 @@
   height: 1px;
 }
 
+/* Avoid trapping scroll inside Why Choose section when using window scroll */
+.why-choose-stack.scroll-stack-scroller {
+  height: auto;
+  overflow: visible;
+  -webkit-overflow-scrolling: auto;
+}
+
 @media (max-width: 768px) {
   .scroll-stack-inner {
     padding: 1vh 1.5rem 24rem;

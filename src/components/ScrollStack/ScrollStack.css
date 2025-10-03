@@ -4,7 +4,7 @@
   height: 100vh;
   overflow-y: auto;
   overflow-x: visible;
-  overscroll-behavior: contain;
+  overscroll-behavior: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
   -webkit-transform: translateZ(0);
@@ -13,7 +13,7 @@
 }
 
 .scroll-stack-inner {
-  padding: 20vh 5rem 50rem;
+  padding: 6vh 5rem 50rem;
   min-height: 100vh;
 }
 
@@ -46,7 +46,7 @@
 
 @media (max-width: 768px) {
   .scroll-stack-inner {
-    padding: 15vh 1.5rem 30rem;
+    padding: 6vh 1.5rem 30rem;
   }
   
   .scroll-stack-card {

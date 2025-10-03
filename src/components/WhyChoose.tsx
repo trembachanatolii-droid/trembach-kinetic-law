@@ -141,7 +141,7 @@ const WhyChoose: React.FC = () => {
         itemDistance={150}
         itemScale={0.04}
         itemStackDistance={40}
-        stackPosition="20%"
+        stackPosition="12%"
         scaleEndPosition="15%"
         baseScale={0.88}
         rotationAmount={0}

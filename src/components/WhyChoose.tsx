@@ -83,24 +83,6 @@ const WhyChoose: React.FC = () => {
       ]
     },
     {
-      headline: "Led by the Lawyer Who Switched Sides",
-      paragraph: "After years defending billion-dollar insurers, Anatolii walked away. He couldn't stomach watching them ruin lives. Now he leads us in flipping their entire system upside down. They hate it. Our clients love it.",
-      points: [
-        "We Know Their Settlement Triggers",
-        "We Break Their Paid Doctors",
-        "We Turn Defense Tactics Into Cash for Victims"
-      ]
-    },
-    {
-      headline: "They're Paid to Rip You Off — And They're Damn Good at It",
-      paragraph: "Insurance adjusters earn bonuses for underpaying claims. They already set aside 10X more than what they offered you — hoping you'll never know. We make sure they pay full value, and we do it fast.",
-      points: [
-        "Trained to Pay Less",
-        "93% Take First Offer",
-        "Every Day You Wait = More Money Lost"
-      ]
-    },
-    {
       headline: "No Risk. No Excuses. Maximum Results.",
       paragraph: "With us, you pay nothing unless we win. Most cases settle before trial because insurers know fighting us is suicide — we have their insider. Already have an offer? Perfect. Our average client gets over 3X MORE than the first number.",
       points: [

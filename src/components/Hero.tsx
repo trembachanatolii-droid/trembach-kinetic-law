@@ -110,7 +110,11 @@ const Hero = () => {
       <div
         aria-hidden="true"
         className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12 transform-gpu"
-        style={{ backgroundImage: `url(${ladyJusticeHero})` }}
+        style={{
+          backgroundImage: `url(${ladyJusticeHero})`,
+          WebkitMaskImage: 'linear-gradient(to right, transparent 0%, transparent 42%, black 58%, black 100%)',
+          maskImage: 'linear-gradient(to right, transparent 0%, transparent 42%, black 58%, black 100%)'
+        }}
       />
       
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">

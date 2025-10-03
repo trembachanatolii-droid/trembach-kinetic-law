@@ -63,9 +63,9 @@
     padding: 1vh 1.5rem 24rem;
   }
   
-  /* Tighter bottom padding on mobile for Why Choose */
+  /* More bottom padding on mobile for Why Choose to prevent card clipping */
   .why-choose-stack .scroll-stack-inner {
-    padding-bottom: 12vh;
+    padding-bottom: 20rem;
   }
   
   .scroll-stack-card {

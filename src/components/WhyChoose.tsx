@@ -1,89 +1,62 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ArrowRight, Shield, Target, Zap } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 interface SubsectionProps {
   headline: string;
   paragraph: string;
-  points: Array<string | { title: string; sub?: string }>;
+  points: Array<string>;
   index: number;
-  icon?: React.ReactNode;
 }
 
-const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, index, icon }) => {
+const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, index }) => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLHeadingElement>(null);
   const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const pointsRef = useRef<HTMLUListElement>(null);
-  const iconRef = useRef<HTMLDivElement>(null);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const pointsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Apple-style smooth reveal with subtle scale
-      gsap.set([headlineRef.current, paragraphRef.current, iconRef.current], {
-        y: 40,
-        opacity: 0,
-        scale: 0.98,
-        willChange: "transform, opacity"
+      gsap.set([headlineRef.current, paragraphRef.current], {
+        y: 30,
+        opacity: 0
       });
 
-      const pointItems = pointsRef.current?.querySelectorAll('li');
+      const pointItems = pointsRef.current?.querySelectorAll('h3');
       if (pointItems) {
         gsap.set(pointItems, {
           y: 30,
-          opacity: 0,
-          scale: 0.98,
-          willChange: "transform, opacity"
+          opacity: 0
         });
       }
 
-      // Apple-inspired smooth timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: sectionRef.current,
-          start: "top 80%",
-          end: "top 30%",
+          start: "top 75%",
+          end: "top 25%",
           toggleActions: "play none none none"
         }
       });
 
-      // Icon appears first
-      if (iconRef.current) {
-        tl.to(iconRef.current, {
-          y: 0,
-          opacity: 1,
-          scale: 1,
-          duration: 0.9,
-          ease: "power4.out"
-        });
-      }
-
-      // Headline and paragraph with Apple's signature ease
       tl.to([headlineRef.current, paragraphRef.current], {
         y: 0,
         opacity: 1,
-        scale: 1,
-        duration: 1,
-        stagger: 0.12,
-        ease: "power4.out",
-        clearProps: "willChange"
-      }, "-=0.6");
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+      });
 
-      // Points cascade in
       if (pointItems) {
         tl.to(pointItems, {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 0.8,
-          stagger: 0.08,
-          ease: "power4.out",
-          clearProps: "willChange"
-        }, "-=0.7");
+          duration: 0.6,
+          stagger: 0.1,
+          ease: "power3.out"
+        }, "-=0.3");
       }
     }, sectionRef);
 
@@ -93,28 +66,32 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
   return (
     <article 
       ref={sectionRef}
-      className="relative py-24 lg:py-36 px-6 lg:px-16 transition-colors duration-700 hover:bg-muted/5"
+      className="py-20 lg:py-28 px-6 lg:px-16"
       itemScope
       itemType="https://schema.org/Service"
     >
       <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-16 lg:gap-24 items-start">
-          {/* Left: Icon, Headline + Paragraph */}
-          <div className="space-y-10">
-            {icon && (
-              <div 
-                ref={iconRef}
-                className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-gradient-to-br from-primary/10 to-primary/5 flex items-center justify-center backdrop-blur-sm border border-primary/10 transition-all duration-500 hover:scale-110 hover:bg-primary/20 hover:border-primary/30"
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+          {/* Left: Point List (Large Items) */}
+          <div 
+            ref={pointsRef}
+            className="space-y-6 lg:space-y-8"
+          >
+            {points.map((point, i) => (
+              <h3 
+                key={i}
+                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] font-bold leading-[1.1] tracking-tight text-foreground"
               >
-                <div className="text-primary transition-transform duration-500">
-                  {icon}
-                </div>
-              </div>
-            )}
-            
+                {point}
+              </h3>
+            ))}
+          </div>
+
+          {/* Right: Headline + Paragraph */}
+          <div className="space-y-8">
             <h3 
               ref={headlineRef}
-              className="text-[clamp(32px,4.5vw,56px)] font-bold leading-[1.1] tracking-[-0.03em] text-foreground"
+              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-[1.2] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}
@@ -122,63 +99,11 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
             
             <p 
               ref={paragraphRef}
-              className="text-[clamp(16px,1.8vw,19px)] text-muted-foreground leading-[1.65] font-normal max-w-[600px]"
+              className="text-[16px] lg:text-[18px] text-muted-foreground leading-relaxed font-normal"
               itemProp="description"
             >
               {paragraph}
             </p>
-          </div>
-
-          {/* Right: Point List with Apple-style hover effects */}
-          <div className="flex items-start lg:pt-12">
-            <ul 
-              ref={pointsRef} 
-              className="space-y-8 w-full"
-              role="list"
-            >
-              {points.map((point, i) => (
-                <li 
-                  key={i}
-                  className="group relative text-[clamp(24px,3.2vw,42px)] font-semibold leading-[1.15] tracking-[-0.02em] text-foreground transition-all duration-500 cursor-default"
-                  onMouseEnter={() => setHoveredIndex(i)}
-                  onMouseLeave={() => setHoveredIndex(null)}
-                  itemProp="serviceOutput"
-                >
-                  <div className="flex items-start gap-4">
-                    <ArrowRight 
-                      className={`w-6 h-6 lg:w-8 lg:h-8 mt-2 flex-shrink-0 transition-all duration-500 ${
-                        hoveredIndex === i 
-                          ? 'text-primary translate-x-2 opacity-100' 
-                          : 'text-muted-foreground/30 translate-x-0 opacity-60'
-                      }`}
-                    />
-                    <div className="flex-1">
-                      {typeof point === 'string' ? (
-                        <span className="group-hover:text-primary transition-colors duration-500">
-                          {point}
-                        </span>
-                      ) : (
-                        <>
-                          <div className="group-hover:text-primary transition-colors duration-500">
-                            {point.title}
-                          </div>
-                          {point.sub && (
-                            <div className="text-[clamp(14px,1.6vw,17px)] text-muted-foreground font-normal mt-2 tracking-normal leading-relaxed">
-                              {point.sub}
-                            </div>
-                          )}
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  
-                  {/* Apple-style subtle hover line */}
-                  <div className={`absolute left-0 bottom-0 h-[1px] bg-gradient-to-r from-primary/40 to-transparent transition-all duration-700 ${
-                    hoveredIndex === i ? 'w-full opacity-100' : 'w-0 opacity-0'
-                  }`} />
-                </li>
-              ))}
-            </ul>
           </div>
         </div>
       </div>
@@ -192,22 +117,17 @@ const WhyChoose: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Apple-style header animation with scale
       gsap.fromTo(
         headerRef.current,
         {
           y: 50,
-          opacity: 0,
-          scale: 0.98,
-          willChange: "transform, opacity"
+          opacity: 0
         },
         {
           y: 0,
           opacity: 1,
-          scale: 1,
-          duration: 1.2,
-          ease: "power4.out",
-          clearProps: "willChange",
+          duration: 1,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: headerRef.current,
             start: "top 85%",
@@ -216,7 +136,6 @@ const WhyChoose: React.FC = () => {
         }
       );
 
-      // Elegant line expansion from center
       gsap.fromTo(
         lineRef.current,
         {
@@ -226,8 +145,8 @@ const WhyChoose: React.FC = () => {
         {
           scaleX: 1,
           opacity: 1,
-          duration: 1.4,
-          ease: "power4.out",
+          duration: 1.2,
+          ease: "power3.out",
           scrollTrigger: {
             trigger: lineRef.current,
             start: "top 85%",
@@ -248,8 +167,7 @@ const WhyChoose: React.FC = () => {
         "Former Corporate & Insurance Insider",
         "We Know Their Every Move",
         "Now We Fight ONLY for Victims"
-      ],
-      icon: <Shield className="w-10 h-10 lg:w-12 lg:h-12" />
+      ]
     },
     {
       headline: "We Know Their Secrets Because We Created Them",
@@ -258,18 +176,16 @@ const WhyChoose: React.FC = () => {
         "Their Playbook Is Our Weapon",
         "Their Experts Are Our Targets",
         "Their Pressure Points Are Our Advantage"
-      ],
-      icon: <Target className="w-10 h-10 lg:w-12 lg:h-12" />
+      ]
     },
     {
       headline: "We Rip Apart Their Dirtiest Strategies",
       paragraph: "Insurance companies spend millions training adjusters to beat victims. They try to scare you, stall you, and trap you into saying the wrong thing. We know every one of these tricks — and we crush them in court and across the negotiating table.",
       points: [
-        { title: "Lowball Offers", sub: "15¢ on the dollar" },
-        { title: "Delay & Deny", sub: "Stall until you quit" },
-        { title: "Twist Your Words", sub: "One slip = $50K gone" }
-      ],
-      icon: <Zap className="w-10 h-10 lg:w-12 lg:h-12" />
+        "Lowball Offers",
+        "Delay & Deny",
+        "Twist Your Words"
+      ]
     },
     {
       headline: "Led by the Lawyer Who Switched Sides",
@@ -278,18 +194,16 @@ const WhyChoose: React.FC = () => {
         "We Know Their Settlement Triggers",
         "We Break Their Paid Doctors",
         "We Turn Defense Tactics Into Cash for Victims"
-      ],
-      icon: <Shield className="w-10 h-10 lg:w-12 lg:h-12" />
+      ]
     },
     {
       headline: "They're Paid to Rip You Off — And They're Damn Good at It",
       paragraph: "Insurance adjusters earn bonuses for underpaying claims. They already set aside 10X more than what they offered you — hoping you'll never know. We make sure they pay full value, and we do it fast.",
       points: [
-        { title: "Trained to Pay Less", sub: "It's Their Job" },
-        { title: "93% Take First Offer", sub: "Don't Be a Statistic" },
-        { title: "Every Day You Wait", sub: "= More Money Lost" }
-      ],
-      icon: <Target className="w-10 h-10 lg:w-12 lg:h-12" />
+        "Trained to Pay Less",
+        "93% Take First Offer",
+        "Every Day You Wait = More Money Lost"
+      ]
     },
     {
       headline: "No Risk. No Excuses. Maximum Results.",
@@ -297,47 +211,41 @@ const WhyChoose: React.FC = () => {
       points: [
         "Zero Risk: No Win = No Fee",
         "95% Settle Without Trial",
-        "Led by Anatolii Trembach, Former Insurance Defense Insider"
-      ],
-      icon: <Zap className="w-10 h-10 lg:w-12 lg:h-12" />
+        "Led by Former Insurance Defense Insider"
+      ]
     }
   ];
 
   return (
     <section 
-      className="relative bg-background py-24 lg:py-40 overflow-hidden"
+      className="relative bg-background py-20 lg:py-32"
       itemScope
       itemType="https://schema.org/LegalService"
       aria-labelledby="why-choose-heading"
     >
-      {/* Apple-style ambient gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/5 to-background pointer-events-none" />
-      
       {/* Section Header */}
-      <header className="px-6 lg:px-16 mb-20 lg:mb-32 relative">
+      <header className="px-6 lg:px-16 mb-16 lg:mb-20">
         <div className="max-w-[1400px] mx-auto">
-          <div ref={headerRef} className="text-center space-y-6">
+          <div ref={headerRef} className="flex items-center justify-center gap-4 mb-12">
             <h2 
               id="why-choose-heading"
-              className="text-[clamp(48px,7vw,96px)] font-bold text-foreground tracking-[-0.04em] leading-[0.95]"
+              className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"
               itemProp="name"
             >
               Why Choose Trembach Law Firm
             </h2>
-            <p className="text-[clamp(18px,2.2vw,24px)] text-muted-foreground font-normal max-w-[800px] mx-auto leading-relaxed">
-              California's premier personal injury attorneys with insider knowledge
-            </p>
+            <div className="w-[2px] h-16 lg:h-20 bg-foreground/20" />
           </div>
           
-          {/* Apple-style divider with gradient */}
+          {/* Horizontal divider line */}
           <div 
             ref={lineRef}
-            className="w-full h-[1px] bg-gradient-to-r from-transparent via-border to-transparent origin-center mt-12"
+            className="w-full h-[1px] bg-border origin-left"
           />
         </div>
       </header>
 
-      {/* Subsections with structured data */}
+      {/* Subsections */}
       <div className="relative">
         {subsections.map((section, index) => (
           <Subsection
@@ -346,7 +254,6 @@ const WhyChoose: React.FC = () => {
             paragraph={section.paragraph}
             points={section.points}
             index={index}
-            icon={section.icon}
           />
         ))}
       </div>

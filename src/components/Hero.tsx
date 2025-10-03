@@ -115,14 +115,17 @@ const Hero = () => {
       
       {/* Dark Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
-      <div className="container mx-auto px-8 flex items-center min-h-[calc(100vh-6rem)] relative z-10">
+      <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
-        <div className="max-w-2xl">
+        <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-sans text-white text-4xl md:text-[40px] leading-[1.5] max-w-3xl">
-              California's premier personal injury and mesothelioma law firm
+            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5]">
+              California's premier<br />
+              personal injury<br />
+              and mesothelioma<br />
+              law firm
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-2xl">
+            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>

@@ -538,10 +538,14 @@ const ThreeStepProcess = () => {
                 {isExpanded && (
                   <div className="expanded-content">
                     <h4>What to Expect:</h4>
-                    <p>Detailed information about step {step.number} goes here with additional insights about the process.</p>
-                    <button className="cta-button" onClick={(e) => { e.stopPropagation(); }}>
-                      Get Started Now
-                    </button>
+                    <p>Our California personal injury attorneys will guide you through every step of the process. We handle all the legal work so you can focus on recovery.</p>
+                    <a 
+                      href="#free-evaluation" 
+                      className="cta-button" 
+                      onClick={(e) => { e.stopPropagation(); }}
+                    >
+                      Get Free Case Evaluation →
+                    </a>
                   </div>
                 )}
                 
@@ -552,19 +556,6 @@ const ThreeStepProcess = () => {
           })}
         </div>
 
-        {/* Mobile pagination dots */}
-        <div className="mobile-pagination" role="tablist" aria-label="Step navigation">
-          {[0, 1, 2].map(i => (
-            <button
-              key={i}
-              role="tab"
-              aria-selected={expandedCard === i}
-              aria-label={`Go to step ${i + 1}`}
-              className={`pagination-dot ${expandedCard === i ? 'active' : ''}`}
-              onClick={() => setExpandedCard(i)}
-            />
-          ))}
-        </div>
       </div>
     </section>
   );

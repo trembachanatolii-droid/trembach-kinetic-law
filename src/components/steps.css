@@ -735,6 +735,7 @@
   padding: 14px 32px;
   background: linear-gradient(135deg, var(--card-color, #2997ff), #64d2ff);
   color: #000000;
+  text-decoration: none;
   font-weight: 700;
   font-size: 16px;
   border: none;
@@ -767,30 +768,6 @@
   opacity: 0.3;
 }
 
-/* Mobile Pagination Dots */
-.mobile-pagination {
-  display: none;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 48px;
-}
-
-.pagination-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pagination-dot.active {
-  width: 24px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #2997ff, #64d2ff);
-}
 
 /* Fade In Animation */
 @keyframes fadeInUp {
@@ -971,10 +948,6 @@
   .apple-step-features li {
     font-size: 14px;
     padding: 14px 0;
-  }
-
-  .mobile-pagination {
-    display: flex;
   }
 
   /* Disable complex effects on mobile */

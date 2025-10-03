@@ -4,7 +4,7 @@
 }
 
 .scroll-stack-inner {
-  padding: 0 5rem 40rem;
+  padding: 10vh 5rem 60rem;
 }
 
 .scroll-stack-card-wrapper {
@@ -38,7 +38,7 @@
 
 @media (max-width: 768px) {
   .scroll-stack-inner {
-    padding: 0 1.5rem 24rem;
+    padding: 5vh 1.5rem 40rem;
   }
   
   .scroll-stack-card {

@@ -34,17 +34,18 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
             </p>
           </div>
 
-          {/* Right: Point List (Smaller, top-aligned) */}
-          <div className="space-y-2 sm:space-y-3 lg:space-y-4 pt-1">
+          {/* Right: Point List */}
+          <ul className="space-y-2 sm:space-y-2.5 lg:space-y-3 pt-1 list-none">
             {points.map((point, i) => (
-              <h4 
+              <li 
                 key={i}
-                className="text-[13px] sm:text-[15px] lg:text-[18px] xl:text-[20px] font-light leading-[1.3] tracking-tight text-foreground/90"
+                className="text-[15px] sm:text-[18px] lg:text-[22px] xl:text-[24px] font-light leading-[1.25] tracking-tight text-foreground flex items-start gap-2"
               >
-                {point}
-              </h4>
+                <span className="text-foreground/40 mt-0.5">•</span>
+                <span>{point}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </article>
     </ScrollStackItem>

@@ -204,6 +204,21 @@ const ScrollStack = ({
     updateCardTransforms();
   }, [updateCardTransforms]);
 
+  const handleWheel = useCallback((e: WheelEvent) => {
+    const scroller = scrollerRef.current;
+    if (!scroller || useWindowScroll) return;
+    const atBottom = scroller.scrollTop + scroller.clientHeight >= scroller.scrollHeight - 1;
+    if (atBottom && e.deltaY > 0) {
+      const sectionEl = scroller.closest('section');
+      const nextSection = sectionEl?.nextElementSibling as HTMLElement | null;
+      if (nextSection) {
+        e.preventDefault();
+        const targetTop = nextSection.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
+      }
+    }
+  }, [useWindowScroll]);
+
   const setupLenis = useCallback(() => {
     if (useWindowScroll) {
       const lenis = new Lenis({
@@ -234,6 +249,7 @@ const ScrollStack = ({
 
       // Use native scrolling for internal scroller to allow scroll chaining and prevent scroll traps
       scroller.addEventListener('scroll', handleScroll as EventListener, { passive: true });
+      scroller.addEventListener('wheel', handleWheel as EventListener, { passive: false });
       lenisRef.current = null;
       return null;
     }
@@ -269,6 +285,7 @@ const ScrollStack = ({
     return () => {
       if (!useWindowScroll && scroller) {
         scroller.removeEventListener('scroll', handleScroll as EventListener);
+        scroller.removeEventListener('wheel', handleWheel as EventListener);
       }
       if (animationFrameRef.current) {
         cancelAnimationFrame(animationFrameRef.current);

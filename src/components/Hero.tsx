@@ -110,22 +110,22 @@ const Hero = () => {
       <img
         src={ladyJusticeHero}
         alt="Lady Justice statue"
-        className="absolute inset-0 w-full h-full object-contain object-right scale-75 translate-x-12"
+        className="absolute inset-0 w-full h-full object-contain object-right scale-75 translate-x-8 md:translate-x-12 mix-blend-multiply pointer-events-none select-none"
       />
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-transparent to-transparent" />
+      <div className="absolute inset-0 pointer-events-none bg-gradient-to-r from-black/90 via-black/40 to-transparent" />
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5]" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
+            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5] drop-shadow-lg md:drop-shadow-xl">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               law firm
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.7)' }}>
+            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md drop-shadow">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>

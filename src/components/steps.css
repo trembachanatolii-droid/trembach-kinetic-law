@@ -60,6 +60,7 @@
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   padding: 40px 20px;
+  color: #e5e5ea !important; /* base text color for all content */
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
@@ -86,7 +87,7 @@
 
 .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 160px;
+  font-size: 220px;
   font-weight: 700;
   background: linear-gradient(135deg, #2997ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;

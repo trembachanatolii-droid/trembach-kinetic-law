@@ -56,7 +56,7 @@
 
 /* Balanced bottom space for Why Choose stack (avoid large gap, prevent clipping) */
 .why-choose-stack .scroll-stack-inner {
-  padding-bottom: 8rem;
+  padding-bottom: 24rem;
 }
 
 /* Keep end sentinel minimal; pin duration handled in JS */
@@ -70,9 +70,9 @@
   }
   
   /* Mobile-specific spacing */
-  .why-choose-stack .scroll-stack-inner {
-    padding-bottom: 12rem;
-  }
+.why-choose-stack .scroll-stack-inner {
+  padding-bottom: 16rem;
+}
 
   .why-choose-stack .scroll-stack-end {
     height: 1px;

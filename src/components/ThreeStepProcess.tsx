@@ -2,7 +2,7 @@ import React from 'react';
 
 const ThreeStepProcess = () => {
   return (
-    <section className="relative pt-32 pb-24 mt-24 bg-surface/20 border-t-2 border-border">
+    <section className="relative z-20 pt-32 pb-24 mt-24 bg-surface/20 border-t-2 border-border">
       <div className="container mx-auto px-8">
         <h2 className="text-display font-display font-bold text-foreground mb-6 text-center">
           Steps to File a California Personal Injury Lawsuit

@@ -53,9 +53,19 @@
   -webkit-overflow-scrolling: auto;
 }
 
+/* Reduce excessive bottom space for Why Choose stack */
+.why-choose-stack .scroll-stack-inner {
+  padding-bottom: 12rem;
+}
+
 @media (max-width: 768px) {
   .scroll-stack-inner {
     padding: 1vh 1.5rem 24rem;
+  }
+  
+  /* Tighter bottom padding on mobile for Why Choose */
+  .why-choose-stack .scroll-stack-inner {
+    padding-bottom: 12vh;
   }
   
   .scroll-stack-card {

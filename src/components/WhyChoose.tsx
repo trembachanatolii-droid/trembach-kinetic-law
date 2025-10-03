@@ -160,6 +160,13 @@ const WhyChoose: React.FC = () => {
         ))}
       </ScrollStack>
 
+      {/* Bottom divider matching header */}
+      <div className="px-6 lg:px-16">
+        <div className="max-w-[1400px] mx-auto">
+          <div className="w-full h-[1px] bg-border" />
+        </div>
+      </div>
+
       {/* Schema.org structured data for SEO */}
       <script type="application/ld+json">
         {JSON.stringify({

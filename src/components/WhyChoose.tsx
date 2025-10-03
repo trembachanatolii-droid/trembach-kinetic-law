@@ -158,6 +158,13 @@ const WhyChoose: React.FC = () => {
             index={index}
           />
         ))}
+
+        {/* Divider after the last card (inside stack) */}
+        <div className="px-6 lg:px-16 py-6">
+          <div className="max-w-[1400px] mx-auto">
+            <div className="w-full h-[1px] bg-border" />
+          </div>
+        </div>
       </ScrollStack>
 
       {/* Bottom divider matching header */}

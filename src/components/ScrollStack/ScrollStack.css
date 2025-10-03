@@ -53,9 +53,9 @@
   -webkit-overflow-scrolling: auto;
 }
 
-/* Reduce excessive bottom space for Why Choose stack */
+/* Balanced bottom space for Why Choose stack (avoid large gap, prevent clipping) */
 .why-choose-stack .scroll-stack-inner {
-  padding-bottom: 12rem;
+  padding-bottom: clamp(10rem, 28vh, 16rem);
 }
 
 @media (max-width: 768px) {
@@ -65,7 +65,7 @@
   
   /* More bottom padding on mobile for Why Choose to prevent card clipping */
   .why-choose-stack .scroll-stack-inner {
-    padding-bottom: 20rem;
+    padding-bottom: clamp(16rem, 48vh, 28rem);
   }
   
   .scroll-stack-card {

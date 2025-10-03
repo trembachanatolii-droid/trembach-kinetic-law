@@ -87,7 +87,7 @@
 
 .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 220px;
+  font-size: clamp(200px, 18vw, 340px);
   font-weight: 700;
   background: linear-gradient(135deg, #2997ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;
@@ -233,7 +233,7 @@
   }
   
   .apple-step-number {
-    font-size: 120px;
+    font-size: 180px;
   }
   
   .apple-step-title {

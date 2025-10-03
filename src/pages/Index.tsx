@@ -15,6 +15,7 @@ import Process from '../components/Process';
 import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
+import WhyChoose from '../components/WhyChoose';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,6 +45,11 @@ const Index = () => {
       />
       {/* Hero Section */}
       <Hero />
+
+      {/* Why Choose Section */}
+      <section id="why-choose">
+        <WhyChoose />
+      </section>
 
       {/* Truth About Your Case Section */}
       <section id="truth">

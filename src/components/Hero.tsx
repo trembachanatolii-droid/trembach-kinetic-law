@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import lawyerPortrait from '@/assets/lawyer-portrait.png';
-import lawOfficeBg from '@/assets/law-office-background.png';
+import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -107,19 +106,15 @@ const Hero = () => {
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24"
     >
-      {/* Video Background */}
-      <video
-        autoPlay
-        loop
-        muted
-        playsInline
+      {/* Lady Justice Background */}
+      <img
+        src={ladyJusticeHero}
+        alt="Lady Justice statue"
         className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="/videos/hero-background.webm" type="video/webm" />
-      </video>
+      />
       
       {/* Dark Overlay */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/70" />
       <div className="container mx-auto px-8 flex items-center justify-center min-h-[calc(100vh-6rem)] relative z-10">
         {/* Center Content */}
         <div className="text-center max-w-4xl">

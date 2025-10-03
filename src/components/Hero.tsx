@@ -104,37 +104,26 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-background"
     >
       {/* Lady Justice Background */}
       <div
         aria-hidden="true"
-        className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12 mix-blend-multiply transform-gpu"
-        style={{
-          backgroundImage: `url(${ladyJusticeHero})`,
-          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 100%)',
-          maskImage: 'linear-gradient(to bottom, transparent 0%, black 10%, black 100%)'
-        }}
+        className="absolute inset-0 bg-no-repeat bg-right bg-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12 transform-gpu"
+        style={{ backgroundImage: `url(${ladyJusticeHero})` }}
       />
       
-      {/* Dark Overlay - Smooth gradient to prevent banding */}
-      <div 
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to right, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 20%, rgba(0,0,0,0.6) 40%, rgba(0,0,0,0.3) 60%, rgba(0,0,0,0.1) 80%, transparent 100%)'
-        }}
-      />
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5] drop-shadow-lg md:drop-shadow-xl">
+            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3]">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               law firm
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md drop-shadow">
+            <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>
@@ -145,7 +134,9 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
-          className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 text-lg rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+          variant="outline"
+          size="lg"
+          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
           onClick={() => window.location.href = '/free-consultation'}
         >
           START YOUR FREE CASE REVIEW

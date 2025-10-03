@@ -1,8 +1,5 @@
-import React, { useEffect, useRef } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
+import ScrollStack, { ScrollStackItem } from './ScrollStack';
 
 interface SubsectionProps {
   headline: string;
@@ -11,104 +8,21 @@ interface SubsectionProps {
   index: number;
 }
 
-const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, index }) => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const paragraphRef = useRef<HTMLParagraphElement>(null);
-  const pointsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (prefersReducedMotion) {
-      return; // Skip animations if user prefers reduced motion
-    }
-
-    const ctx = gsap.context(() => {
-      // Determine translateY based on viewport size
-      const isMobile = window.innerWidth < 768;
-      const translateY = isMobile ? 12 : 17;
-      const duration = isMobile ? 0.5 : 0.6;
-
-      // Set initial states with will-change for performance
-      gsap.set([headlineRef.current, paragraphRef.current], {
-        y: translateY,
-        opacity: 0,
-        willChange: 'transform, opacity'
-      });
-
-      const pointItems = pointsRef.current?.querySelectorAll('h3');
-      if (pointItems) {
-        gsap.set(pointItems, {
-          y: translateY,
-          opacity: 0,
-          willChange: 'transform, opacity'
-        });
-      }
-
-      // Create timeline with scroll trigger at 25% into viewport
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%", // 25% into viewport
-          toggleActions: "play none none none", // Only play once
-          once: true // One-time reveal
-        }
-      });
-
-      // Animate headline first
-      tl.to(headlineRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: duration,
-        ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
-        clearProps: "willChange" // Clean up after animation
-      });
-
-      // Animate paragraph 120ms after headline
-      tl.to(paragraphRef.current, {
-        y: 0,
-        opacity: 1,
-        duration: duration,
-        ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
-        clearProps: "willChange"
-      }, "-=0.48"); // 120ms stagger (0.6s - 0.12s = 0.48s overlap)
-
-      // Animate bullet points with stagger 120ms after paragraph
-      if (pointItems) {
-        tl.to(pointItems, {
-          y: 0,
-          opacity: 1,
-          duration: duration,
-          stagger: 0.09, // 90ms stagger between items
-          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
-          clearProps: "willChange"
-        }, "-=0.48"); // 120ms stagger from paragraph
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
-  }, []);
-
+const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) => {
   return (
-    <article 
-      ref={sectionRef}
-      className="py-20 lg:py-28 px-6 lg:px-16"
-      itemScope
-      itemType="https://schema.org/Service"
-    >
-      <div className="max-w-[1400px] mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-32">
+    <ScrollStackItem itemClassName="subsection-card">
+      <article 
+        className="h-full"
+        itemScope
+        itemType="https://schema.org/Service"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 h-full">
           {/* Left: Point List (Large Items) */}
-          <div 
-            ref={pointsRef}
-            className="space-y-6 lg:space-y-8"
-          >
+          <div className="space-y-4 lg:space-y-6">
             {points.map((point, i) => (
               <h3 
                 key={i}
-                className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] font-bold leading-[1.1] tracking-tight text-foreground"
+                className="text-[28px] sm:text-[36px] lg:text-[44px] xl:text-[52px] font-bold leading-[1.1] tracking-tight text-foreground"
               >
                 {point}
               </h3>
@@ -116,91 +30,28 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points, in
           </div>
 
           {/* Right: Headline + Paragraph */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             <h3 
-              ref={headlineRef}
-              className="text-[28px] sm:text-[32px] lg:text-[40px] font-bold leading-[1.2] tracking-tight text-foreground"
+              className="text-[24px] sm:text-[28px] lg:text-[36px] font-bold leading-[1.2] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}
             </h3>
             
             <p 
-              ref={paragraphRef}
-              className="text-[16px] lg:text-[18px] text-muted-foreground leading-relaxed font-normal"
+              className="text-[15px] lg:text-[17px] text-muted-foreground leading-relaxed font-normal"
               itemProp="description"
             >
               {paragraph}
             </p>
           </div>
         </div>
-      </div>
-    </article>
+      </article>
+    </ScrollStackItem>
   );
 };
 
 const WhyChoose: React.FC = () => {
-  const headerRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (prefersReducedMotion) {
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      const isMobile = window.innerWidth < 768;
-      const translateY = isMobile ? 12 : 17;
-      
-      gsap.fromTo(
-        headerRef.current,
-        {
-          y: translateY,
-          opacity: 0,
-          willChange: 'transform, opacity'
-        },
-        {
-          y: 0,
-          opacity: 1,
-          duration: 0.6,
-          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
-          clearProps: "willChange",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 75%",
-            toggleActions: "play none none none",
-            once: true
-          }
-        }
-      );
-
-      gsap.fromTo(
-        lineRef.current,
-        {
-          scaleX: 0,
-          opacity: 0,
-          willChange: 'transform, opacity'
-        },
-        {
-          scaleX: 1,
-          opacity: 1,
-          duration: 0.65,
-          ease: "cubic-bezier(0.2, 0.65, 0.2, 1)",
-          clearProps: "willChange",
-          scrollTrigger: {
-            trigger: lineRef.current,
-            start: "top 75%",
-            toggleActions: "play none none none",
-            once: true
-          }
-        }
-      );
-    }, headerRef);
-
-    return () => ctx.revert();
-  }, []);
 
   const subsections = [
     {
@@ -261,15 +112,15 @@ const WhyChoose: React.FC = () => {
 
   return (
     <section 
-      className="relative bg-background py-20 lg:py-32"
+      className="relative bg-background"
       itemScope
       itemType="https://schema.org/LegalService"
       aria-labelledby="why-choose-heading"
     >
       {/* Section Header */}
-      <header className="px-6 lg:px-16 mb-16 lg:mb-20">
+      <header className="px-6 lg:px-16 py-20 lg:py-32">
         <div className="max-w-[1400px] mx-auto">
-          <div ref={headerRef} className="flex items-center justify-center gap-4 mb-12">
+          <div className="flex items-center justify-center gap-4 mb-12">
             <h2 
               id="why-choose-heading"
               className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"
@@ -281,34 +132,33 @@ const WhyChoose: React.FC = () => {
           </div>
           
           {/* Horizontal divider line */}
-          <div 
-            ref={lineRef}
-            className="w-full h-[1px] bg-border origin-left"
-          />
+          <div className="w-full h-[1px] bg-border" />
         </div>
       </header>
 
-      {/* Subsections */}
-      <div className="relative">
+      {/* Scroll Stack Subsections */}
+      <ScrollStack
+        itemDistance={150}
+        itemScale={0.04}
+        itemStackDistance={40}
+        stackPosition="25%"
+        scaleEndPosition="15%"
+        baseScale={0.88}
+        rotationAmount={0}
+        blurAmount={0}
+        useWindowScroll={false}
+        className="why-choose-stack"
+      >
         {subsections.map((section, index) => (
-          <React.Fragment key={index}>
-            <Subsection
-              headline={section.headline}
-              paragraph={section.paragraph}
-              points={section.points}
-              index={index}
-            />
-            {/* Divider line between subsections */}
-            {index < subsections.length - 1 && (
-              <div className="px-6 lg:px-16">
-                <div className="max-w-[1400px] mx-auto">
-                  <div className="w-full h-[1px] bg-border" />
-                </div>
-              </div>
-            )}
-          </React.Fragment>
+          <Subsection
+            key={index}
+            headline={section.headline}
+            paragraph={section.paragraph}
+            points={section.points}
+            index={index}
+          />
         ))}
-      </div>
+      </ScrollStack>
 
       {/* Schema.org structured data for SEO */}
       <script type="application/ld+json">

@@ -118,7 +118,7 @@ const Hero = () => {
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
-          <div ref={headlineRef} className="space-y-8">
+          <div ref={headlineRef} className="space-y-8 bg-black/60 backdrop-blur-sm p-8 rounded-2xl">
             <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5]">
               California's premier<br />
               personal injury<br />

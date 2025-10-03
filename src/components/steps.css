@@ -85,17 +85,19 @@
   animation: fadeInUp 0.6s cubic-bezier(0.19, 1, 0.22, 1) 0.4s forwards;
 }
 
-.apple-step-number {
+.apple-step-card .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(200px, 18vw, 340px);
+  font-size: clamp(220px, 18vw, 360px) !important;
   font-weight: 700;
   background: linear-gradient(135deg, #2997ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 30px rgba(41, 151, 255, 0.4));
+  -webkit-text-fill-color: transparent !important;
+  color: transparent !important; /* defeat aggressive global overrides */
+  display: block;
   line-height: 1;
   margin-bottom: 24px;
+  z-index: 1;
 }
 
 .apple-step-title {
@@ -232,9 +234,9 @@
     gap: 80px;
   }
   
-  .apple-step-number {
-    font-size: 180px;
-  }
+.apple-step-card .apple-step-number {
+  font-size: 180px !important;
+}
   
   .apple-step-title {
     font-size: 24px;

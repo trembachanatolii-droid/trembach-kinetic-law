@@ -110,7 +110,7 @@ const Hero = () => {
       <img
         src={ladyJusticeHero}
         alt="Lady Justice statue"
-        className="absolute bottom-0 right-0 h-full md:h-[92%] w-auto object-contain pointer-events-none select-none opacity-90 z-0"
+        className="absolute bottom-0 right-0 h-[75%] md:h-[80%] w-auto object-contain pointer-events-none select-none opacity-90 z-0"
       />
       
       
@@ -118,13 +118,13 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3]">
+            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_2px_8px_rgba(0,0,0,0.3)]">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               law firm
             </h1>
-            <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md">
+            <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>

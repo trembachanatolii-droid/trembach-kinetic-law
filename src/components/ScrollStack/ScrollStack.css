@@ -13,7 +13,7 @@
 }
 
 .scroll-stack-inner {
-  padding: 5vh 5rem 50rem;
+  padding: 0 5rem 40rem;
   min-height: 100vh;
 }
 
@@ -38,6 +38,7 @@
   position: relative;
   background: hsl(var(--card));
   border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
 }
 
 .scroll-stack-end {
@@ -47,7 +48,7 @@
 
 @media (max-width: 768px) {
   .scroll-stack-inner {
-    padding: 3vh 1.5rem 30rem;
+    padding: 1vh 1.5rem 24rem;
   }
   
   .scroll-stack-card {

@@ -138,12 +138,12 @@ const WhyChoose: React.FC = () => {
 
       {/* Scroll Stack Subsections */}
       <ScrollStack
-        itemDistance={150}
+        itemDistance={120}
         itemScale={0.04}
-        itemStackDistance={40}
-        stackPosition="25%"
-        scaleEndPosition="15%"
-        baseScale={0.88}
+        itemStackDistance={36}
+        stackPosition="15%"
+        scaleEndPosition="8%"
+        baseScale={0.92}
         rotationAmount={0}
         blurAmount={0}
         useWindowScroll={false}

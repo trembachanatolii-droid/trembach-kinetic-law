@@ -118,9 +118,9 @@ const WhyChoose: React.FC = () => {
       aria-labelledby="why-choose-heading"
     >
       {/* Section Header */}
-      <header className="px-6 lg:px-16 py-20 lg:py-32">
+      <header className="px-6 lg:px-16 py-12 lg:py-16">
         <div className="max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-center gap-4 mb-12">
+          <div className="flex items-center justify-center gap-4 mb-8">
             <h2 
               id="why-choose-heading"
               className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"

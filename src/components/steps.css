@@ -1,8 +1,10 @@
-/* Apple-inspired Steps Section */
+/* Apple Dark Mode Steps Section */
 .apple-steps-section {
-  background: #f5f5f7;
+  background: #000000;
+  background-image: radial-gradient(circle at top, rgba(0, 113, 227, 0.05) 0%, transparent 60%);
   padding: 120px 24px;
   width: 100%;
+  position: relative;
 }
 
 .apple-steps-container {
@@ -14,7 +16,10 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 56px;
   font-weight: 600;
-  color: #1d1d1f;
+  background: linear-gradient(180deg, #ffffff 0%, #86868b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   letter-spacing: -0.005em;
   line-height: 1.07143;
   text-align: center;
@@ -28,7 +33,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 21px;
   font-weight: 400;
-  color: #86868b;
+  color: #d2d2d7;
   letter-spacing: 0.011em;
   line-height: 1.381;
   text-align: center;
@@ -39,8 +44,9 @@
 }
 
 .apple-steps-free-text {
-  color: #ff3b30;
+  color: #ff453a;
   font-weight: 700;
+  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
 }
 
 .apple-steps-grid {
@@ -51,8 +57,22 @@
 
 .apple-step-card {
   text-align: center;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 40px 20px;
   opacity: 0;
   transform: translateY(30px);
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.apple-step-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.12);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 113, 227, 0.1);
 }
 
 .apple-step-card:nth-child(1) {
@@ -71,10 +91,11 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 96px;
   font-weight: 700;
-  background: linear-gradient(135deg, #0071e3 0%, #007aff 100%);
+  background: linear-gradient(135deg, #2997ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 0 30px rgba(41, 151, 255, 0.4));
   line-height: 1;
   margin-bottom: 16px;
 }
@@ -83,7 +104,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 28px;
   font-weight: 600;
-  color: #1d1d1f;
+  color: #f5f5f7;
   letter-spacing: 0.007em;
   line-height: 1.14286;
   margin-bottom: 16px;
@@ -91,31 +112,32 @@
 
 .apple-free-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #ff3b30 0%, #ff6b35 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ff375f 0%, #ffb340 100%);
+  color: #000000;
   padding: 4px 12px;
   border-radius: 6px;
   font-size: 14px;
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1px;
-  box-shadow: 0 2px 8px rgba(255, 59, 48, 0.3);
+  box-shadow: 0 2px 15px rgba(255, 55, 95, 0.4);
   margin-left: 8px;
-  animation: pulse 2s linear infinite;
+  animation: pulseDark 2s linear infinite;
 }
 
 .apple-step-description {
   font-family: -apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 17px;
   font-weight: 400;
-  color: #86868b;
+  color: #d2d2d7;
   line-height: 1.47059;
   margin-bottom: 24px;
 }
 
 .apple-step-description strong {
-  color: #ff3b30;
+  color: #ff453a;
   font-weight: 700;
+  text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
 }
 
 .apple-step-features {
@@ -129,14 +151,22 @@
 .apple-step-features li {
   font-family: -apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: 14px;
-  color: #86868b;
+  color: #d2d2d7;
   padding: 10px 0;
   display: flex;
   align-items: center;
+  transition: all 0.3s ease;
+}
+
+.apple-step-features li:hover {
+  color: #ffffff;
+  transform: translateX(3px);
 }
 
 .apple-step-features li strong {
+  color: #ffb340;
   font-weight: 700;
+  text-shadow: 0 0 10px rgba(255, 149, 0, 0.3);
 }
 
 .apple-checkmark {
@@ -144,6 +174,11 @@
   height: 16px;
   margin-right: 10px;
   flex-shrink: 0;
+  filter: drop-shadow(0 0 5px rgba(48, 209, 88, 0.3));
+}
+
+.apple-checkmark path {
+  stroke: #32de84;
 }
 
 @keyframes fadeInUp {
@@ -153,12 +188,14 @@
   }
 }
 
-@keyframes pulse {
+@keyframes pulseDark {
   0%, 100% {
     transform: scale(1);
+    box-shadow: 0 2px 15px rgba(255, 55, 95, 0.4);
   }
   50% {
     transform: scale(1.05);
+    box-shadow: 0 2px 20px rgba(255, 55, 95, 0.6);
   }
 }
 

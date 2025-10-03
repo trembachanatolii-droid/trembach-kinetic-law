@@ -110,7 +110,7 @@ const Hero = () => {
       <img
         src={ladyJusticeHero}
         alt="Lady Justice statue"
-        className="absolute inset-0 w-full h-full object-contain object-right"
+        className="absolute inset-0 w-full h-full object-contain object-right scale-75 translate-x-12"
       />
       
       {/* Dark Overlay */}
@@ -119,13 +119,13 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5]">
+            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.5]" style={{ textShadow: '0 2px 8px rgba(0,0,0,0.8)' }}>
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               law firm
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md">
+            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-md" style={{ textShadow: '0 2px 6px rgba(0,0,0,0.7)' }}>
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>

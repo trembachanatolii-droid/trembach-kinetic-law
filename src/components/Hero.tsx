@@ -1,8 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import ladyJusticeHero from '@/assets/lady-justice-hero.png';
-import { removeBackground } from '@/lib/removeBackground';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -10,7 +9,6 @@ const Hero = () => {
   const lawyerRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const chatRef = useRef<HTMLDivElement>(null);
-  const [statueUrl, setStatueUrl] = useState<string | null>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -103,34 +101,17 @@ const Hero = () => {
     return () => ctx.revert();
   }, []);
 
-  useEffect(() => {
-    const img = new Image();
-    img.crossOrigin = 'anonymous';
-    img.src = ladyJusticeHero as unknown as string;
-    img.onload = async () => {
-      try {
-        const blob = await removeBackground(img);
-        const url = URL.createObjectURL(blob);
-        setStatueUrl(url);
-      } catch (e) {
-        console.error('Background removal failed', e);
-      }
-    };
-  }, []);
-
   return (
     <section 
       ref={heroRef} 
       className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-background"
     >
       {/* Lady Justice Background */}
-      {statueUrl && (
-        <img
-          src={statueUrl}
-          alt="Lady Justice statue"
-          className="absolute inset-y-0 right-0 h-full w-auto object-contain pointer-events-none select-none scale-75 translate-x-8 md:translate-x-12 transform-gpu"
-        />
-      )}
+      <img
+        src={ladyJusticeHero}
+        alt="Lady Justice statue"
+        className="absolute inset-y-0 right-0 h-full w-auto object-contain pointer-events-none select-none opacity-90"
+      />
       
       
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">

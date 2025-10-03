@@ -119,12 +119,12 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-2xl">
           <div ref={headlineRef} className="space-y-8">
-            <p className="hero-line font-sans text-[#0A0A0A] text-lg md:text-xl leading-tight">
-              California's premier personal injury and mesothelioma law firm
-            </p>
             <h1 className="hero-line font-sans text-white text-4xl md:text-[40px] leading-[1.5] max-w-3xl">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+              California's premier personal injury and mesothelioma law firm
             </h1>
+            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.5] max-w-2xl">
+              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+            </p>
           </div>
         </div>
       </div>

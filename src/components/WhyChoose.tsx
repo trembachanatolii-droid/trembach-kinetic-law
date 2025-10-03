@@ -16,7 +16,7 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
         itemScope
         itemType="https://schema.org/Service"
       >
-        <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:gap-12 h-full">
+        <div className="grid grid-cols-[1.5fr_1fr] sm:grid-cols-[1.8fr_1fr] lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-16 h-full items-start">
           {/* Left: Headline + Paragraph */}
           <div className="space-y-3 sm:space-y-4 lg:space-y-6">
             <h3 
@@ -34,15 +34,15 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
             </p>
           </div>
 
-          {/* Right: Point List */}
-          <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+          {/* Right: Point List (Smaller, top-aligned) */}
+          <div className="space-y-2 sm:space-y-3 lg:space-y-4 pt-1">
             {points.map((point, i) => (
-              <h3 
+              <h4 
                 key={i}
-                className="text-[16px] sm:text-[20px] lg:text-[28px] xl:text-[32px] font-light leading-[1.2] tracking-tight text-foreground"
+                className="text-[13px] sm:text-[15px] lg:text-[18px] xl:text-[20px] font-light leading-[1.3] tracking-tight text-foreground/90"
               >
                 {point}
-              </h3>
+              </h4>
             ))}
           </div>
         </div>

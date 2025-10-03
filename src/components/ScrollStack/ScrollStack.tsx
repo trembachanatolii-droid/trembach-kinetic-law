@@ -82,11 +82,24 @@ const ScrollStack = ({
 
   const getElementOffset = useCallback(
     (element: HTMLElement) => {
+      const cumulativeOffsetTop = (el: HTMLElement | null) => {
+        let top = 0;
+        let node: HTMLElement | null = el;
+        while (node) {
+          top += node.offsetTop || 0;
+          node = node.offsetParent as HTMLElement | null;
+        }
+        return top;
+      };
+
       if (useWindowScroll) {
-        const rect = element.getBoundingClientRect();
-        return rect.top + window.scrollY;
+        // Use layout-based offsets that are not affected by CSS transforms
+        return cumulativeOffsetTop(element);
       } else {
-        return element.offsetTop;
+        const scroller = scrollerRef.current;
+        if (!scroller) return element.offsetTop;
+        const scrollerTop = cumulativeOffsetTop(scroller);
+        return cumulativeOffsetTop(element) - scrollerTop;
       }
     },
     [useWindowScroll]

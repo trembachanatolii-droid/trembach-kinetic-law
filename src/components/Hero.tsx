@@ -119,7 +119,7 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-2xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="text-7xl lg:text-8xl xl:text-9xl font-light tracking-tight text-white leading-[1.05]">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-light tracking-tight text-white leading-[1.1]">
               <span className="hero-line block">California's premier</span>
               <span className="hero-line block">personal injury and</span>
               <span className="hero-line block">mesothelioma</span>

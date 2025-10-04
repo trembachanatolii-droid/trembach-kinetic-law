@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, Stethoscope, Shield, FileText, Users, CheckCircle, AlertTriangle, Clock } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import imeHero from '@/assets/ime-hero.jpg';
+import imeHero from '@/assets/ime-hero-apple.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +49,7 @@ const MedicalEvaluation = () => {
       
       <main ref={sectionRef} className="bg-white">
         {/* Hero Section - Apple Watch Style */}
-        <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
+        <section className="relative isolate min-h-[85vh] flex items-center justify-center overflow-hidden">
           <div 
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
             style={{ backgroundImage: `url(${imeHero})` }}
@@ -68,10 +68,10 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-slate-900 text-white"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
-                Get Legal Guidance
+                Get Your Free Evaluation
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>
@@ -290,15 +290,15 @@ const MedicalEvaluation = () => {
         </section>
 
         {/* How We Help Section */}
-        <section className="py-20 bg-slate-900">
+        <section className="py-20 bg-slate-900 relative">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center mb-16">
               <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
                 How We Protect You During IMEs
               </h2>
-              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
-                Our experienced attorneys know how to counter biased IME reports
-              </p>
+            <p className="text-xl text-slate-200 max-w-3xl mx-auto">
+              Our experienced attorneys know how to counter biased IME reports
+            </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
@@ -307,7 +307,7 @@ const MedicalEvaluation = () => {
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Pre-IME Preparation</h3>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-slate-200 leading-relaxed">
                   We thoroughly prepare you for the IME, explaining your rights and what to expect during the examination.
                 </p>
               </div>
@@ -317,7 +317,7 @@ const MedicalEvaluation = () => {
                   <FileText className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Report Analysis</h3>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-slate-200 leading-relaxed">
                   We carefully review IME reports to identify bias, inconsistencies, and medical errors that we can challenge.
                 </p>
               </div>
@@ -327,7 +327,7 @@ const MedicalEvaluation = () => {
                   <Stethoscope className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Counter Evaluations</h3>
-                <p className="text-slate-300 leading-relaxed">
+                <p className="text-slate-200 leading-relaxed">
                   When necessary, we arrange truly independent medical evaluations from respected experts to counter biased IME findings.
                 </p>
               </div>
@@ -347,10 +347,10 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-slate-900 text-white"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
-                Schedule Free Consultation
+                Get Your Free Evaluation
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>

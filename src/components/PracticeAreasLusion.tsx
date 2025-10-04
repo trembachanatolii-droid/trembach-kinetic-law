@@ -345,10 +345,10 @@ const PracticeAreasLusion: React.FC = () => {
           {/* Header */}
           <div className="mb-12 lg:mb-20">
             <h2 className="text-5xl lg:text-6xl font-bold tracking-tight text-center text-foreground mb-2">
-              Our Practice Areas
+              50 Types of Injury Cases We Handle
             </h2>
             <p className="text-center text-foreground/60 text-lg">
-              {practiceAreas.length} areas of legal expertise
+              Backed by Proven Experience
             </p>
           </div>
 

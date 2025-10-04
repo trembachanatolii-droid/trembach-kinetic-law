@@ -1,462 +1,459 @@
-import React, { useState, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { Calculator, AlertTriangle, DollarSign, Star } from 'lucide-react';
-import SEO from '@/components/SEO';
-import useScrollRestoration from '@/hooks/useScrollRestoration';
-import heroBackground from '@/assets/benzene-calculator-hero.jpg';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertTriangle } from 'lucide-react';
 
-interface CompensationFactors {
+interface FormData {
   bloodCancerType: string;
   age: string;
   exposureDuration: string;
   medicalCosts: string;
   severity: string;
+  employmentStatus: string;
 }
 
-const BenzeneCalculator: React.FC = () => {
-  const [factors, setFactors] = useState<CompensationFactors>({
+const BenzeneCalculator = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState<FormData>({
     bloodCancerType: '',
     age: '',
     exposureDuration: '',
     medicalCosts: '',
-    severity: ''
+    severity: '',
+    employmentStatus: ''
   });
-  
-  const [results, setResults] = useState<{
-    range: string;
-    factors: string[];
-    confidence: string;
-  } | null>(null);
+  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
-  // Add scroll restoration
-  useScrollRestoration();
-
-  const calculateCompensation = () => {
-    const factorsList: string[] = [];
-    let baseAmount = 50000;
-    let multiplier = 1;
-
-    // Blood cancer type impact
-    switch (factors.bloodCancerType) {
-      case 'aml':
-        baseAmount = 500000;
-        multiplier = 3.0;
-        factorsList.push('Acute Myeloid Leukemia significantly increases compensation potential');
-        break;
-      case 'all':
-        baseAmount = 450000;
-        multiplier = 2.8;
-        factorsList.push('Acute Lymphoblastic Leukemia from benzene exposure');
-        break;
-      case 'multiple-myeloma':
-        baseAmount = 400000;
-        multiplier = 2.5;
-        factorsList.push('Multiple Myeloma linked to benzene exposure');
-        break;
-      case 'non-hodgkin':
-        baseAmount = 350000;
-        multiplier = 2.2;
-        factorsList.push('Non-Hodgkin Lymphoma associated with benzene');
-        break;
-      case 'cll':
-        baseAmount = 300000;
-        multiplier = 2.0;
-        factorsList.push('Chronic Lymphocytic Leukemia from benzene');
-        break;
-      case 'cml':
-        baseAmount = 280000;
-        multiplier = 1.9;
-        factorsList.push('Chronic Myeloid Leukemia related to benzene');
-        break;
-      case 'mds':
-        baseAmount = 250000;
-        multiplier = 1.8;
-        factorsList.push('Myelodysplastic Syndromes from benzene exposure');
-        break;
-      case 'aplastic-anemia':
-        baseAmount = 200000;
-        multiplier = 1.6;
-        factorsList.push('Aplastic Anemia caused by benzene');
-        break;
-      default:
-        factorsList.push('Blood cancer type impacts compensation value');
-    }
-
-    // Age impact
-    switch (factors.age) {
-      case 'under-30':
-        multiplier += 0.8;
-        factorsList.push('Younger age increases compensation due to longer life impact');
-        break;
-      case '30-45':
-        multiplier += 0.6;
-        factorsList.push('Prime working age affects earning capacity calculations');
-        break;
-      case '45-60':
-        multiplier += 0.4;
-        factorsList.push('Peak earning years impact compensation');
-        break;
-      case '60-70':
-        multiplier += 0.2;
-        factorsList.push('Pre-retirement age considered in calculations');
-        break;
-      case 'over-70':
-        multiplier += 0.1;
-        factorsList.push('Retirement age affects future earning calculations');
-        break;
-    }
-
-    // Exposure duration impact
-    switch (factors.exposureDuration) {
-      case 'more-than-20':
-        multiplier += 0.7;
-        factorsList.push('Long-term exposure significantly strengthens your case');
-        break;
-      case '10-20':
-        multiplier += 0.5;
-        factorsList.push('Extended exposure period supports causation claims');
-        break;
-      case '5-10':
-        multiplier += 0.3;
-        factorsList.push('Moderate exposure duration builds case strength');
-        break;
-      case '1-5':
-        multiplier += 0.2;
-        factorsList.push('Short-term but significant exposure documented');
-        break;
-      case 'less-than-1':
-        multiplier += 0.1;
-        factorsList.push('Even brief exposure to benzene can cause cancer');
-        break;
-    }
-
-    // Medical costs impact
-    switch (factors.medicalCosts) {
-      case 'over-500k':
-        multiplier += 0.6;
-        factorsList.push('Extensive medical expenses significantly increase damages');
-        break;
-      case '250k-500k':
-        multiplier += 0.4;
-        factorsList.push('Substantial medical costs strengthen compensation claim');
-        break;
-      case '100k-250k':
-        multiplier += 0.3;
-        factorsList.push('Significant medical expenses included in calculations');
-        break;
-      case '50k-100k':
-        multiplier += 0.2;
-        factorsList.push('Medical costs contribute to overall compensation');
-        break;
-      case 'under-50k':
-        multiplier += 0.1;
-        factorsList.push('All medical expenses are recoverable');
-        break;
-    }
-
-    // Severity impact
-    switch (factors.severity) {
-      case 'terminal':
-        multiplier += 1.0;
-        factorsList.push('Terminal diagnosis maximizes pain and suffering damages');
-        break;
-      case 'advanced':
-        multiplier += 0.7;
-        factorsList.push('Advanced cancer stage increases compensation significantly');
-        break;
-      case 'moderate':
-        multiplier += 0.4;
-        factorsList.push('Ongoing treatment impacts quality of life');
-        break;
-      case 'early':
-        multiplier += 0.2;
-        factorsList.push('Early detection allows for comprehensive treatment planning');
-        break;
-      case 'remission':
-        multiplier += 0.3;
-        factorsList.push('Successful treatment still merits compensation for suffering endured');
-        break;
-    }
-
-    const finalAmount = baseAmount * multiplier;
-    const lowEnd = Math.floor(finalAmount * 0.7);
-    const highEnd = Math.floor(finalAmount * 1.5);
-
-    let confidence = 'Low';
-    if (factors.bloodCancerType && factors.age && factors.exposureDuration) {
-      confidence = 'Moderate';
-    }
-    if (factors.bloodCancerType && factors.age && factors.exposureDuration && factors.medicalCosts && factors.severity) {
-      confidence = 'High';
-    }
-
-    setResults({
-      range: `$${lowEnd.toLocaleString()} - $${highEnd.toLocaleString()}`,
-      factors: factorsList,
-      confidence
-    });
+  const handleInputChange = (field: keyof FormData, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const resetCalculator = () => {
-    setFactors({
-      bloodCancerType: '',
-      age: '',
-      exposureDuration: '',
-      medicalCosts: '',
-      severity: ''
+  const calculateCompensation = () => {
+    let baseMin = 100000;
+    let baseMax = 300000;
+
+    // Cancer type multipliers
+    const cancerMultipliers: Record<string, number> = {
+      'aml': 5.0,
+      'all': 4.5,
+      'multiple-myeloma': 4.0,
+      'non-hodgkin': 3.5,
+      'cll': 3.0,
+      'cml': 2.8,
+      'mds': 2.5,
+      'aplastic-anemia': 2.0
+    };
+
+    const multiplier = cancerMultipliers[formData.bloodCancerType] || 2;
+    baseMin *= multiplier;
+    baseMax *= multiplier;
+
+    // Age adjustments
+    const ageMultipliers: Record<string, number> = {
+      'under-30': 1.8,
+      '30-45': 1.6,
+      '45-60': 1.4,
+      '60-70': 1.2,
+      'over-70': 1.1
+    };
+    const ageMult = ageMultipliers[formData.age] || 1;
+    baseMin *= ageMult;
+    baseMax *= ageMult;
+
+    // Exposure duration
+    const exposureMultipliers: Record<string, number> = {
+      'more-than-20': 1.7,
+      '10-20': 1.5,
+      '5-10': 1.3,
+      '1-5': 1.2,
+      'less-than-1': 1.1
+    };
+    const expMult = exposureMultipliers[formData.exposureDuration] || 1;
+    baseMin *= expMult;
+    baseMax *= expMult;
+
+    // Medical costs
+    const costMultipliers: Record<string, number> = {
+      'over-500k': 1.6,
+      '250k-500k': 1.4,
+      '100k-250k': 1.3,
+      '50k-100k': 1.2,
+      'under-50k': 1.1
+    };
+    const costMult = costMultipliers[formData.medicalCosts] || 1;
+    baseMin *= costMult;
+    baseMax *= costMult;
+
+    setResults({
+      min: Math.round(baseMin),
+      max: Math.round(baseMax)
     });
-    setResults(null);
+    setStep(3);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateCompensation();
+  };
+
+  const isStepComplete = () => {
+    if (step === 1) {
+      return formData.bloodCancerType && formData.exposureDuration;
+    }
+    if (step === 2) {
+      return formData.age && formData.medicalCosts && formData.severity;
+    }
+    return false;
   };
 
   return (
     <>
-      <SEO
-        title="Benzene Exposure Compensation Calculator | Estimate Your Blood Cancer Settlement"
-        description="Calculate potential compensation for benzene exposure blood cancer cases. Free settlement estimator for leukemia, lymphoma, and other benzene-related cancers."
-        canonical="/benzene-calculator"
-      />
-      
-      <div className="min-h-screen bg-background">
-        {/* Hero Section */}
-        <section 
-          className="relative h-[400px] flex items-center justify-center bg-cover bg-center" 
-          style={{ backgroundImage: `url(${heroBackground})` }}
-        >
-          <div className="absolute inset-0 bg-black/70"></div>
-          
-          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-            <div className="flex items-center justify-center mb-4">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-              ))}
-              <span className="ml-2 text-lg">Professional Compensation Analysis</span>
+      <Helmet>
+        <title>Benzene Exposure Calculator | Blood Cancer Compensation | Trembach Law</title>
+        <meta 
+          name="description" 
+          content="Calculate potential compensation for benzene-related blood cancers. Free, confidential estimates for leukemia, lymphoma, and other benzene exposure illnesses." 
+        />
+      </Helmet>
+
+      <main className="min-h-screen bg-white">
+        {/* Breadcrumb */}
+        <div className="border-b border-slate-200 bg-white">
+          <div className="container mx-auto px-6 py-4 max-w-5xl">
+            <Link
+              to="/calculators"
+              className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline transition-colors"
+            >
+              <ArrowLeft size={16} className="mr-2" />
+              <span className="text-sm font-medium">Back to All Calculators</span>
+            </Link>
+          </div>
+        </div>
+
+        {/* Hero */}
+        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
+                Benzene Exposure<br />Calculator
+              </h1>
+              <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed">
+                Estimate compensation for benzene-related blood cancers
+              </p>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Benzene Compensation Calculator</h1>
-            <p className="text-xl">
-              Get an estimate of your potential benzene exposure compensation based on your specific circumstances.
-            </p>
           </div>
         </section>
 
-        {/* Main Content */}
-        <div className="max-w-6xl mx-auto px-6 py-12">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            
-            {/* Calculator Form */}
-            <Card className="shadow-xl">
-              <CardHeader className="bg-red-600 text-white">
-                <CardTitle className="flex items-center text-xl">
-                  <Calculator className="w-6 h-6 mr-2" />
-                  Compensation Calculator
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="p-6">
-                <div className="space-y-6">
-                  
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">Blood Cancer Type</label>
-                    <Select value={factors.bloodCancerType} onValueChange={(value) => setFactors(prev => ({ ...prev, bloodCancerType: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your diagnosis..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="aml">Acute Myeloid Leukemia (AML)</SelectItem>
-                        <SelectItem value="all">Acute Lymphoblastic Leukemia (ALL)</SelectItem>
-                        <SelectItem value="multiple-myeloma">Multiple Myeloma</SelectItem>
-                        <SelectItem value="non-hodgkin">Non-Hodgkin Lymphoma</SelectItem>
-                        <SelectItem value="cll">Chronic Lymphocytic Leukemia (CLL)</SelectItem>
-                        <SelectItem value="cml">Chronic Myeloid Leukemia (CML)</SelectItem>
-                        <SelectItem value="mds">Myelodysplastic Syndromes (MDS)</SelectItem>
-                        <SelectItem value="aplastic-anemia">Aplastic Anemia</SelectItem>
-                      </SelectContent>
-                    </Select>
+        {/* Progress */}
+        <div className="border-b border-slate-200 bg-white">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="flex justify-center items-center py-8 space-x-4">
+              {[1, 2, 3].map((num) => (
+                <React.Fragment key={num}>
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
+                      step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'
+                    }`}
+                  >
+                    {num}
                   </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">Age at Diagnosis</label>
-                    <Select value={factors.age} onValueChange={(value) => setFactors(prev => ({ ...prev, age: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select age range..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-30">Under 30 years old</SelectItem>
-                        <SelectItem value="30-45">30-45 years old</SelectItem>
-                        <SelectItem value="45-60">45-60 years old</SelectItem>
-                        <SelectItem value="60-70">60-70 years old</SelectItem>
-                        <SelectItem value="over-70">Over 70 years old</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">Benzene Exposure Duration</label>
-                    <Select value={factors.exposureDuration} onValueChange={(value) => setFactors(prev => ({ ...prev, exposureDuration: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="How long were you exposed?" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="less-than-1">Less than 1 year</SelectItem>
-                        <SelectItem value="1-5">1-5 years</SelectItem>
-                        <SelectItem value="5-10">5-10 years</SelectItem>
-                        <SelectItem value="10-20">10-20 years</SelectItem>
-                        <SelectItem value="more-than-20">More than 20 years</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">Estimated Medical Costs</label>
-                    <Select value={factors.medicalCosts} onValueChange={(value) => setFactors(prev => ({ ...prev, medicalCosts: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Total medical expenses..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="under-50k">Under $50,000</SelectItem>
-                        <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                        <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                        <SelectItem value="250k-500k">$250,000 - $500,000</SelectItem>
-                        <SelectItem value="over-500k">Over $500,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2 text-foreground">Cancer Severity/Stage</label>
-                    <Select value={factors.severity} onValueChange={(value) => setFactors(prev => ({ ...prev, severity: value }))}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Current condition..." />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="early">Early stage/Newly diagnosed</SelectItem>
-                        <SelectItem value="moderate">Moderate stage/Ongoing treatment</SelectItem>
-                        <SelectItem value="advanced">Advanced stage/Aggressive treatment</SelectItem>
-                        <SelectItem value="terminal">Terminal/End-stage</SelectItem>
-                        <SelectItem value="remission">In remission/Completed treatment</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <Button 
-                      onClick={calculateCompensation} 
-                      className="flex-1 bg-red-600 hover:bg-red-700 text-white"
-                      disabled={!factors.bloodCancerType || !factors.age}
-                    >
-                      Calculate Compensation
-                    </Button>
-                    <Button 
-                      onClick={resetCalculator} 
-                      variant="outline"
-                      className="text-foreground border-border hover:bg-muted"
-                    >
-                      Reset
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Results */}
-            <div className="space-y-6">
-              {results ? (
-                <>
-                  <Card className="shadow-xl border-2 border-green-200">
-                    <CardHeader className="bg-green-600 text-white">
-                      <CardTitle className="flex items-center text-xl">
-                        <DollarSign className="w-6 h-6 mr-2" />
-                        Estimated Compensation Range
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="p-6">
-                      <div className="text-center mb-6">
-                        <div className="text-4xl font-bold text-green-600 mb-2">{results.range}</div>
-                        <Badge variant={results.confidence === 'High' ? 'default' : results.confidence === 'Moderate' ? 'secondary' : 'outline'}>
-                          {results.confidence} Confidence
-                        </Badge>
-                      </div>
-                      
-                      <div>
-                        <h4 className="font-semibold mb-3 text-foreground">Factors Affecting Your Compensation:</h4>
-                        <ul className="space-y-2">
-                          {results.factors.map((factor, index) => (
-                            <li key={index} className="flex items-start">
-                              <span className="text-green-600 mr-2">•</span>
-                              <span className="text-sm text-muted-foreground">{factor}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </CardContent>
-                  </Card>
-
-                  <Card>
-                    <CardContent className="p-6">
-                      <h4 className="font-semibold mb-3 text-foreground">Next Steps:</h4>
-                      <div className="space-y-3">
-                        <Button 
-                          className="w-full bg-red-600 hover:bg-red-700 text-white"
-                          onClick={() => window.location.href = '/benzene-case-evaluation'}
-                        >
-                          Get Free Case Evaluation
-                        </Button>
-                        <Button 
-                          variant="outline"
-                          className="w-full text-foreground border-border hover:bg-muted"
-                          onClick={() => window.location.href = 'tel:8181234567'}
-                        >
-                          Call (818) 123-4567
-                        </Button>
-                      </div>
-                      <p className="text-xs text-center text-muted-foreground mt-3">
-                        For an accurate assessment, schedule a free consultation with our experienced benzene attorneys.
-                      </p>
-                    </CardContent>
-                  </Card>
-                </>
-              ) : (
-                <Card>
-                  <CardContent className="p-6 text-center">
-                    <Calculator className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                    <h3 className="text-lg font-semibold mb-2 text-foreground">Ready to Calculate?</h3>
-                    <p className="text-muted-foreground mb-4">
-                      Fill out the form to get an estimate of your potential benzene exposure compensation.
-                    </p>
-                    <div className="bg-muted p-4 rounded-lg">
-                      <h4 className="font-medium mb-2 text-foreground">Compensation May Include:</h4>
-                      <ul className="text-sm space-y-1 text-muted-foreground">
-                        <li>• Medical expenses (past and future)</li>
-                        <li>• Lost wages and earning capacity</li>
-                        <li>• Pain and suffering</li>
-                        <li>• Loss of life enjoyment</li>
-                        <li>• Punitive damages</li>
-                      </ul>
-                    </div>
-                  </CardContent>
-                </Card>
-              )}
-
-              {/* Important Notice */}
-              <Card className="border-amber-200 bg-amber-50">
-                <CardContent className="p-6">
-                  <div className="flex items-start">
-                    <AlertTriangle className="w-6 h-6 text-amber-600 mr-3 mt-1 flex-shrink-0" />
-                    <div>
-                      <h4 className="font-semibold text-amber-800 mb-2">Important Legal Disclaimer</h4>
-                      <p className="text-sm text-amber-700">
-                        This calculator provides estimates only and is not a guarantee of compensation. Actual settlement amounts depend on many factors including case strength, available evidence, defendant assets, and negotiation outcomes. Each case is unique and requires individual evaluation by qualified attorneys. Consult with our experienced benzene lawyers for an accurate assessment of your specific situation.
-                      </p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  {num < 3 && (
+                    <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />
+                  )}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>
-      </div>
+
+        {/* Form */}
+        <section className="py-16">
+          <div className="container mx-auto px-6 max-w-3xl">
+            <form onSubmit={handleSubmit} className="space-y-12">
+              {/* Step 1 */}
+              {step === 1 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                      Your diagnosis and exposure
+                    </h2>
+                    <p className="text-slate-600">Tell us about your benzene-related illness</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">
+                        Type of blood cancer or illness
+                      </label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'aml', label: 'Acute Myeloid Leukemia (AML)' },
+                          { value: 'all', label: 'Acute Lymphoblastic Leukemia' },
+                          { value: 'multiple-myeloma', label: 'Multiple Myeloma' },
+                          { value: 'non-hodgkin', label: "Non-Hodgkin's Lymphoma" },
+                          { value: 'cll', label: 'Chronic Lymphocytic Leukemia' },
+                          { value: 'cml', label: 'Chronic Myeloid Leukemia' },
+                          { value: 'mds', label: 'Myelodysplastic Syndrome' },
+                          { value: 'aplastic-anemia', label: 'Aplastic Anemia' }
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => handleInputChange('bloodCancerType', option.value)}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                              formData.bloodCancerType === option.value
+                                ? 'border-slate-900 bg-slate-50'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span className="font-medium text-slate-900">{option.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">
+                        Duration of benzene exposure
+                      </label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'more-than-20', label: 'More than 20 years' },
+                          { value: '10-20', label: '10-20 years' },
+                          { value: '5-10', label: '5-10 years' },
+                          { value: '1-5', label: '1-5 years' },
+                          { value: 'less-than-1', label: 'Less than 1 year' }
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => handleInputChange('exposureDuration', option.value)}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                              formData.exposureDuration === option.value
+                                ? 'border-slate-900 bg-slate-50'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span className="font-medium text-slate-900">{option.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    disabled={!isStepComplete()}
+                    className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
+                  >
+                    Continue
+                    <ArrowRight className="ml-2" size={20} />
+                  </button>
+                </div>
+              )}
+
+              {/* Step 2 */}
+              {step === 2 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                      Additional details
+                    </h2>
+                    <p className="text-slate-600">Help us calculate your total damages</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">
+                        Your age at diagnosis
+                      </label>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { value: 'under-30', label: 'Under 30' },
+                          { value: '30-45', label: '30-45' },
+                          { value: '45-60', label: '45-60' },
+                          { value: '60-70', label: '60-70' },
+                          { value: 'over-70', label: 'Over 70' }
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => handleInputChange('age', option.value)}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                              formData.age === option.value
+                                ? 'border-slate-900 bg-slate-50'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span className="font-medium text-slate-900">{option.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">
+                        Total medical expenses
+                      </label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'over-500k', label: 'Over $500,000' },
+                          { value: '250k-500k', label: '$250,000 - $500,000' },
+                          { value: '100k-250k', label: '$100,000 - $250,000' },
+                          { value: '50k-100k', label: '$50,000 - $100,000' },
+                          { value: 'under-50k', label: 'Under $50,000' }
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => handleInputChange('medicalCosts', option.value)}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                              formData.medicalCosts === option.value
+                                ? 'border-slate-900 bg-slate-50'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span className="font-medium text-slate-900">{option.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">
+                        Severity of condition
+                      </label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'terminal', label: 'Terminal / Advanced Stage' },
+                          { value: 'severe', label: 'Severe' },
+                          { value: 'moderate', label: 'Moderate' },
+                          { value: 'mild', label: 'Early Stage / Remission' }
+                        ].map((option) => (
+                          <button
+                            key={option.value}
+                            type="button"
+                            onClick={() => handleInputChange('severity', option.value)}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
+                              formData.severity === option.value
+                                ? 'border-slate-900 bg-slate-50'
+                                : 'border-slate-200 hover:border-slate-400'
+                            }`}
+                          >
+                            <span className="font-medium text-slate-900">{option.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 font-semibold transition-all inline-flex items-center justify-center"
+                    >
+                      <ArrowLeft className="mr-2" size={20} />
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={!isStepComplete()}
+                      className="flex-1 h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
+                    >
+                      Calculate Compensation
+                      <Calculator className="ml-2" size={20} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {/* Step 3: Results */}
+              {step === 3 && results && (
+                <div className="space-y-8 animate-fade-in">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                      <DollarSign className="text-green-600" size={32} />
+                    </div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
+                      Your Estimated Compensation
+                    </h2>
+                    <p className="text-slate-600">Based on benzene exposure and blood cancer diagnosis</p>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-3xl p-8 md:p-12 text-center border border-slate-200">
+                    <div className="text-6xl md:text-7xl font-bold text-slate-900 mb-4">
+                      ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+                    </div>
+                    <p className="text-xl text-slate-600">Potential compensation range</p>
+                  </div>
+
+                  <div className="bg-orange-50 rounded-2xl p-6 border border-orange-200">
+                    <div className="flex items-start gap-4">
+                      <AlertTriangle className="text-orange-600 shrink-0 mt-1" size={24} />
+                      <div>
+                        <h3 className="font-semibold text-slate-900 mb-2">Time-Sensitive Case</h3>
+                        <p className="text-slate-700 leading-relaxed">
+                          Benzene exposure cases have strict time limits. Contact an attorney immediately to preserve your rights and maximize compensation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Link
+                      to="/free-consultation"
+                      className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 visited:text-white font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center no-underline"
+                    >
+                      Get Free Case Evaluation
+                      <ArrowRight className="ml-2" size={20} />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep(1);
+                        setResults(null);
+                        setFormData({
+                          bloodCancerType: '',
+                          age: '',
+                          exposureDuration: '',
+                          medicalCosts: '',
+                          severity: '',
+                          employmentStatus: ''
+                        });
+                      }}
+                      className="w-full h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 visited:text-slate-900 font-semibold transition-all inline-flex items-center justify-center no-underline"
+                    >
+                      Calculate Another Case
+                    </button>
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section className="py-20 bg-slate-50 border-t border-slate-200">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">$500K+</div>
+                <p className="text-slate-600">Average benzene settlement</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
+                <p className="text-slate-600">Available for urgent cases</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
+                <p className="text-slate-600">Unless we win your case</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
     </>
   );
 };

@@ -57,10 +57,9 @@ const MedicalEvaluation = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
           
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-6 tracking-tight">
-              Independent Medical
-              <br />
-              <span className="text-blue-600">Evaluations</span>
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 mb-6 tracking-tight">
+              <span className="block">Independent Medical</span>
+              <span className="block text-blue-600">Evaluations</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-700 max-w-3xl mx-auto mb-12 leading-relaxed">
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
@@ -68,7 +67,7 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
                 Get Your Free Evaluation
@@ -296,7 +295,7 @@ const MedicalEvaluation = () => {
               <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
                 How We Protect You During IMEs
               </h2>
-            <p className="text-xl text-slate-200 max-w-3xl mx-auto">
+            <p className="text-xl text-white/90 max-w-3xl mx-auto">
               Our experienced attorneys know how to counter biased IME reports
             </p>
             </div>
@@ -307,7 +306,7 @@ const MedicalEvaluation = () => {
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Pre-IME Preparation</h3>
-                <p className="text-slate-200 leading-relaxed">
+                <p className="text-white/90 leading-relaxed">
                   We thoroughly prepare you for the IME, explaining your rights and what to expect during the examination.
                 </p>
               </div>
@@ -317,7 +316,7 @@ const MedicalEvaluation = () => {
                   <FileText className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Report Analysis</h3>
-                <p className="text-slate-200 leading-relaxed">
+                <p className="text-white/90 leading-relaxed">
                   We carefully review IME reports to identify bias, inconsistencies, and medical errors that we can challenge.
                 </p>
               </div>
@@ -327,7 +326,7 @@ const MedicalEvaluation = () => {
                   <Stethoscope className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Counter Evaluations</h3>
-                <p className="text-slate-200 leading-relaxed">
+                <p className="text-white/90 leading-relaxed">
                   When necessary, we arrange truly independent medical evaluations from respected experts to counter biased IME findings.
                 </p>
               </div>
@@ -347,7 +346,7 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
                 Get Your Free Evaluation

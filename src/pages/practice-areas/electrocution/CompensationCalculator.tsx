@@ -1,527 +1,68 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calculator, DollarSign, AlertTriangle, TrendingUp, Star, Info } from 'lucide-react';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { Calculator, ArrowLeft, Zap } from 'lucide-react';
 
-import heroImage from '@/assets/electrocution-compensation-calculator.jpg';
-import SEO from '@/components/SEO';
-
-const ElectrocutionCompensationCalculator: React.FC = () => {
+const ElectrocutionCompensationCalculator = () => {
+  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
-    age: '',
-    income: '',
     injuryType: '',
     severity: '',
-    medicalExpenses: '',
-    hospitalization: '',
+    medicalCosts: '',
+    lostWages: '',
     permanentDisability: '',
-    workDaysLost: '',
-    futureEarnings: '',
-    location: 'california'
+    voltage: ''
   });
-
-  const [estimate, setEstimate] = useState<number | null>(null);
-  const [showResults, setShowResults] = useState(false);
-
-  const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const calculateEstimate = () => {
-    // Base calculation factors
-    let baseAmount = 0;
-    let multiplier = 1;
-
-    // Age factor (younger victims typically receive higher awards)
-    const age = parseInt(formData.age) || 0;
-    if (age < 30) multiplier += 0.3;
-    else if (age < 45) multiplier += 0.2;
-    else if (age < 60) multiplier += 0.1;
-
-    // Income factor
-    const income = parseInt(formData.income) || 0;
-    const lostEarnings = income * 0.7; // Estimate 70% of income for lost earnings
-    baseAmount += lostEarnings;
-
-    // Injury type factor
-    switch (formData.injuryType) {
-      case 'electrical-burns':
-        multiplier += 0.4;
-        baseAmount += 75000;
-        break;
-      case 'arc-flash':
-        multiplier += 0.6;
-        baseAmount += 150000;
-        break;
-      case 'cardiac-arrest':
-        multiplier += 0.8;
-        baseAmount += 200000;
-        break;
-      case 'neurological':
-        multiplier += 0.7;
-        baseAmount += 125000;
-        break;
-      case 'amputation':
-        multiplier += 0.9;
-        baseAmount += 250000;
-        break;
-      case 'multiple-injuries':
-        multiplier += 1.0;
-        baseAmount += 300000;
-        break;
-      default:
-        baseAmount += 50000;
-    }
-
-    // Severity factor
-    switch (formData.severity) {
-      case 'minor':
-        multiplier += 0.1;
-        break;
-      case 'moderate':
-        multiplier += 0.3;
-        break;
-      case 'severe':
-        multiplier += 0.6;
-        break;
-      case 'catastrophic':
-        multiplier += 1.0;
-        break;
-    }
-
-    // Medical expenses
-    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
-    baseAmount += medicalExpenses * 3; // Medical expenses typically multiplied for pain & suffering
-
-    // Hospitalization factor
-    if (formData.hospitalization === 'yes') {
-      multiplier += 0.2;
-      baseAmount += 25000;
-    }
-
-    // Permanent disability
-    if (formData.permanentDisability === 'yes') {
-      multiplier += 0.5;
-      baseAmount += 100000;
-    }
-
-    // Work days lost
-    const workDaysLost = parseInt(formData.workDaysLost) || 0;
-    if (income > 0) {
-      const dailyIncome = income / 365;
-      baseAmount += dailyIncome * workDaysLost;
-    }
-
-    // Future earnings impact
-    switch (formData.futureEarnings) {
-      case 'none':
-        break;
-      case 'reduced':
-        multiplier += 0.3;
-        baseAmount += income * 2; // 2 years of income
-        break;
-      case 'unable':
-        multiplier += 0.8;
-        baseAmount += income * 10; // 10 years of income
-        break;
-    }
-
-    const finalEstimate = Math.round(baseAmount * multiplier);
-    setEstimate(Math.max(finalEstimate, 10000)); // Minimum estimate
-    setShowResults(true);
-  };
-
-  const resetCalculator = () => {
-    setFormData({
-      age: '',
-      income: '',
-      injuryType: '',
-      severity: '',
-      medicalExpenses: '',
-      hospitalization: '',
-      permanentDisability: '',
-      workDaysLost: '',
-      futureEarnings: '',
-      location: 'california'
-    });
-    setEstimate(null);
-    setShowResults(false);
-  };
+  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Electrocution Compensation Calculator | California Electrical Injury Value"
-        description="Calculate potential compensation for your California electrocution injury case. Free electrical injury settlement estimator from experienced attorneys."
-        keywords="electrocution compensation calculator, electrical injury settlement, California electrical accident value"
-        canonical="/practice-areas/electrocution/compensation-calculator"
-      />
+    <>
+      <Helmet>
+        <title>Electrocution Calculator | Electrical Injury Compensation | Trembach Law</title>
+        <meta name="description" content="Calculate electrocution compensation for electrical injuries. Free burn and cardiac arrest estimates." />
+      </Helmet>
 
-      
-
-      {/* Hero Section */}
-      <section 
-        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroImage})` }}
-      >
-        <div className="absolute inset-0 bg-black/70"></div>
-        
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
-            Electrocution Compensation Calculator
-          </h1>
-          <div className="flex items-center justify-center mb-4">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
-            ))}
-            <span className="ml-2 text-white">Free Case Valuation</span>
-          </div>
-          <p className="text-xl text-white">
-            Estimate your potential electrical injury compensation in California
-          </p>
-        </div>
-      </section>
-
-      <div className="max-w-6xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          
-          {/* Calculator Form */}
-          <div>
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calculator className="w-6 h-6" />
-                  Case Value Calculator
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-6">
-                
-                {/* Personal Information */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-3">Personal Information</h3>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <Label htmlFor="age">Your Age</Label>
-                      <Input
-                        id="age"
-                        type="number"
-                        value={formData.age}
-                        onChange={(e) => handleInputChange('age', e.target.value)}
-                        placeholder="Enter your age"
-                      />
-                    </div>
-                    <div>
-                      <Label htmlFor="income">Annual Income ($)</Label>
-                      <Input
-                        id="income"
-                        type="number"
-                        value={formData.income}
-                        onChange={(e) => handleInputChange('income', e.target.value)}
-                        placeholder="Annual salary/income"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Injury Details */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-3">Injury Details</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="injuryType">Primary Injury Type</Label>
-                      <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select injury type" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="electrical-burns">Electrical Burns</SelectItem>
-                          <SelectItem value="arc-flash">Arc Flash Burns</SelectItem>
-                          <SelectItem value="cardiac-arrest">Cardiac Arrest/Heart Problems</SelectItem>
-                          <SelectItem value="neurological">Neurological Damage</SelectItem>
-                          <SelectItem value="amputation">Amputation</SelectItem>
-                          <SelectItem value="multiple-injuries">Multiple Severe Injuries</SelectItem>
-                          <SelectItem value="other">Other Electrical Injury</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label>Injury Severity</Label>
-                      <Select 
-                        value={formData.severity}
-                        onValueChange={(value) => handleInputChange('severity', value)}
-                      >
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Select severity" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="minor">Minor (outpatient treatment)</SelectItem>
-                          <SelectItem value="moderate">Moderate (hospitalization required)</SelectItem>
-                          <SelectItem value="severe">Severe (extensive treatment/surgery)</SelectItem>
-                          <SelectItem value="catastrophic">Catastrophic (life-altering/disabling)</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Financial Impact */}
-                <div>
-                  <h3 className="text-lg font-semibold mb-3">Financial Impact</h3>
-                  <div className="space-y-4">
-                    <div>
-                      <Label htmlFor="medicalExpenses">Medical Expenses to Date ($)</Label>
-                      <Input
-                        id="medicalExpenses"
-                        type="number"
-                        value={formData.medicalExpenses}
-                        onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
-                        placeholder="Total medical bills"
-                      />
-                    </div>
-
-                    <div>
-                      <Label htmlFor="workDaysLost">Work Days Lost</Label>
-                      <Input
-                        id="workDaysLost"
-                        type="number"
-                        value={formData.workDaysLost}
-                        onChange={(e) => handleInputChange('workDaysLost', e.target.value)}
-                        placeholder="Days unable to work"
-                      />
-                    </div>
-
-                    <div>
-                      <Label>Were you hospitalized?</Label>
-                      <Select 
-                        value={formData.hospitalization}
-                        onValueChange={(value) => handleInputChange('hospitalization', value)}
-                      >
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Select an option" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="yes">Yes</SelectItem>
-                          <SelectItem value="no">No</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label>Do you have permanent disability?</Label>
-                      <Select 
-                        value={formData.permanentDisability}
-                        onValueChange={(value) => handleInputChange('permanentDisability', value)}
-                      >
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Select an option" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="yes">Yes</SelectItem>
-                          <SelectItem value="no">No</SelectItem>
-                          <SelectItem value="unknown">Unknown</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <Label>Future Earning Capacity</Label>
-                      <Select 
-                        value={formData.futureEarnings}
-                        onValueChange={(value) => handleInputChange('futureEarnings', value)}
-                      >
-                        <SelectTrigger className="mt-2">
-                          <SelectValue placeholder="Select impact" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectItem value="none">No impact on future earnings</SelectItem>
-                          <SelectItem value="reduced">Reduced earning capacity</SelectItem>
-                          <SelectItem value="unable">Unable to work</SelectItem>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Calculate Button */}
-                <div className="flex gap-4">
-                  <Button onClick={calculateEstimate} className="flex-1">
-                    <Calculator className="w-4 h-4 mr-2" />
-                    Calculate Estimate
-                  </Button>
-                  <Button variant="outline" onClick={resetCalculator}>
-                    Reset
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-
-          {/* Results & Information */}
-          <div className="space-y-6">
-            
-            {/* Results Card */}
-            {showResults && (
-              <Card className="border-primary/20 bg-primary/5">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-primary">
-                    <DollarSign className="w-6 h-6" />
-                    Estimated Compensation Range
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center mb-4">
-                  <div className="text-4xl font-bold text-primary mb-2">
-                    ${estimate ? (estimate * 0.7).toLocaleString() : '0'} - ${estimate ? (estimate * 1.5).toLocaleString() : '0'}
-                    </div>
-                    <p className="text-muted-foreground">Estimated compensation range</p>
-                  </div>
-                  
-                  <div className="space-y-3 text-sm">
-                    <p><strong>Base Estimate:</strong> ${estimate?.toLocaleString()}</p>
-                    <p className="text-green-600"><strong>Conservative Range:</strong> 70% of base estimate</p>
-                    <p className="text-blue-600"><strong>Optimistic Range:</strong> 150% of base estimate</p>
-                  </div>
-
-                  <div className="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                    <div className="flex items-start gap-2">
-                      <Info className="w-5 h-5 text-yellow-600 flex-shrink-0 mt-0.5" />
-                      <div className="text-sm">
-                        <p className="font-semibold text-yellow-800 mb-1">Important Note:</p>
-                        <p className="text-yellow-700">
-                          This is only an estimate. Actual compensation depends on many factors including 
-                          liability, insurance coverage, and case-specific circumstances. Consult with an 
-                          experienced attorney for accurate case valuation.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 flex gap-3">
-                    <Button className="flex-1" size="sm">
-                      Free Case Review
-                    </Button>
-                    <Button variant="outline" size="sm">
-                      Call (818) 123-4567
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
-
-            {/* Factors Affecting Compensation */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <TrendingUp className="w-6 h-6" />
-                  Factors Affecting Electrocution Compensation
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold mb-2">Economic Damages</h4>
-                    <ul className="text-sm space-y-1 text-muted-foreground">
-                      <li>• Medical expenses (past and future)</li>
-                      <li>• Lost wages and benefits</li>
-                      <li>• Reduced earning capacity</li>
-                      <li>• Rehabilitation costs</li>
-                      <li>• Home modifications</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Non-Economic Damages</h4>
-                    <ul className="text-sm space-y-1 text-muted-foreground">
-                      <li>• Pain and suffering</li>
-                      <li>• Emotional distress</li>
-                      <li>• Loss of life enjoyment</li>
-                      <li>• Disfigurement/scarring</li>
-                      <li>• Loss of consortium</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h4 className="font-semibold mb-2">Case Strength Factors</h4>
-                    <ul className="text-sm space-y-1 text-muted-foreground">
-                      <li>• Clear liability/negligence</li>
-                      <li>• Safety violations</li>
-                      <li>• Available insurance coverage</li>
-                      <li>• Quality of evidence</li>
-                      <li>• Expert witness testimony</li>
-                    </ul>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Average Settlements */}
-            <Card>
-              <CardHeader>
-                <CardTitle>California Electrical Injury Averages</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center p-3 bg-muted rounded">
-                    <span className="font-medium">Minor Burns</span>
-                    <span className="text-green-600 font-semibold">$15K - $75K</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-muted rounded">
-                    <span className="font-medium">Severe Burns</span>
-                    <span className="text-blue-600 font-semibold">$100K - $500K</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-muted rounded">
-                    <span className="font-medium">Neurological Damage</span>
-                    <span className="text-orange-600 font-semibold">$250K - $1M+</span>
-                  </div>
-                  <div className="flex justify-between items-center p-3 bg-muted rounded">
-                    <span className="font-medium">Wrongful Death</span>
-                    <span className="text-red-600 font-semibold">$500K - $5M+</span>
-                  </div>
-                </div>
-                
-                <div className="mt-4 text-sm text-muted-foreground">
-                  <p>* Ranges based on California case settlements and verdicts from 2020-2024</p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Warning */}
-            <Card className="border-destructive/20 bg-destructive/5">
-              <CardContent className="p-4">
-                <div className="flex items-start gap-3">
-                  <AlertTriangle className="w-5 h-5 text-destructive flex-shrink-0 mt-0.5" />
-                  <div className="text-sm">
-                    <p className="font-semibold text-destructive mb-1">Time Limits Apply</p>
-                    <p className="text-destructive/80">
-                      California has a 2-year statute of limitations for electrical injury cases. 
-                      Don't wait - contact an attorney immediately to protect your rights.
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+      <main className="min-h-screen bg-white">
+        <div className="border-b border-slate-200">
+          <div className="container mx-auto px-6 py-4 max-w-5xl">
+            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
+              <ArrowLeft size={16} className="mr-2" />
+              <span className="text-sm font-medium">Back to All Calculators</span>
+            </Link>
           </div>
         </div>
 
-        {/* Legal Disclaimer */}
-        <Card className="mt-8">
-          <CardContent className="p-6">
-            <h3 className="font-semibold mb-3">Legal Disclaimer</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">
-              This calculator provides estimates only and does not constitute legal advice. Actual compensation 
-              depends on numerous factors including the specific facts of your case, applicable laws, insurance 
-              coverage, and the skill of your attorney. Past results do not guarantee future outcomes. 
-              For accurate case valuation, consult with an experienced California electrical injury attorney. 
-              This tool is for informational purposes only and using it does not create an attorney-client relationship.
+        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
+          <div className="container mx-auto px-6 max-w-5xl text-center">
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
+              Electrocution<br />Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 font-light">
+              Electrical injury compensation
             </p>
-          </CardContent>
-        </Card>
-      </div>
-    </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-slate-50 border-t border-slate-200">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">$600K+</div>
+                <p className="text-slate-600">Severe shock average</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">Burns</div>
+                <p className="text-slate-600">Arc flash injuries</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
+                <p className="text-slate-600">Unless we win</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 };
 

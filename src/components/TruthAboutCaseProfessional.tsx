@@ -47,7 +47,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Professional recording equipment used by insurance companies to analyze injury claims',
       urgency: 'immediate',
       actionText: 'Protect Your Statements',
-      internalLink: '#legal-representation',
+      internalLink: '/legal-representation',
       seoKeywords: ['insurance recording laws', 'recorded statement rights', 'claim protection strategy']
     },
     {
@@ -60,7 +60,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Digital evidence deletion countdown showing automatic data removal systems',
       urgency: 'critical',
       actionText: 'Secure Evidence Now',
-      internalLink: '#evidence-preservation',
+      internalLink: '/evidence-preservation',
       seoKeywords: ['evidence preservation California', 'surveillance footage retention', 'accident documentation']
     },
     {
@@ -73,7 +73,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Medical examination equipment with insurance company documentation systems',
       urgency: 'immediate',
       actionText: 'Get Independent Assessment',
-      internalLink: '#medical-evaluation',
+      internalLink: '/medical-evaluation',
       seoKeywords: ['IME examination bias', 'independent medical evaluation', 'insurance doctor networks']
     },
     {
@@ -86,7 +86,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Insurance settlement calculations showing minimal offer amounts versus true case value',
       urgency: 'critical',
       actionText: 'Calculate True Value',
-      internalLink: '#case-valuation',
+      internalLink: '/case-valuation',
       seoKeywords: ['personal injury settlement value', 'insurance settlement calculator', 'maximum compensation']
     },
     {
@@ -99,7 +99,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Empty courtroom showing scales of justice and legal proceedings preparation',
       urgency: 'immediate',
       actionText: 'Find Trial Attorney',
-      internalLink: '#trial-experience',
+      internalLink: '/trial-experience',
       seoKeywords: ['trial attorney California', 'courtroom experience', 'litigation success rate']
     },
     {
@@ -112,7 +112,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Legal deadline countdown showing statute of limitations urgency in California',
       urgency: 'critical',
       actionText: 'Verify Deadlines',
-      internalLink: '#statute-limitations',
+      internalLink: '/statute-limitations',
       seoKeywords: ['California statute of limitations', 'personal injury deadlines', 'legal filing requirements']
     }
   ];
@@ -280,7 +280,7 @@ const TruthAboutCaseProfessional = () => {
           <header ref={headerRef} className="text-center mb-16 lg:mb-24">
             <div className="inline-flex items-center justify-center mb-8">
               <div className="h-px w-12 bg-border"></div>
-              <span className="mx-6 text-xs font-semibold tracking-[0.3em] uppercase text-muted-foreground">
+              <span className="mx-6 text-xs font-semibold tracking-[0.15em] uppercase text-muted-foreground">
                 Professional Analysis
               </span>
               <div className="h-px w-12 bg-border"></div>

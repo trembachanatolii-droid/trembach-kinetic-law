@@ -48,68 +48,45 @@ const MoneyIcon = () => (
 const ThreeStepProcess = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const numbersRef = useRef<HTMLDivElement[]>([]);
-  const progressPathRef = useRef<SVGPathElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Parallax effect on numbers
-      numbersRef.current.forEach((number, index) => {
-        if (!number) return;
-        
-        gsap.to(number, {
-          y: -100,
-          scale: 1.2,
-          opacity: 0.3,
-          scrollTrigger: {
-            trigger: number,
-            start: "top center",
-            end: "bottom top",
-            scrub: 1,
-          }
-        });
-      });
-
-      // Card entrance animations with stagger
+      // Simple card entrance with stagger
       gsap.from(cardsRef.current, {
-        y: 100,
+        y: 60,
         opacity: 0,
-        rotateX: -15,
-        scale: 0.9,
-        stagger: 0.2,
-        duration: 1,
-        ease: "power3.out",
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out",
         scrollTrigger: {
           trigger: ".apple-steps-grid",
-          start: "top 80%",
+          start: "top 85%",
         }
       });
 
-      // Animate progress path
-      if (progressPathRef.current) {
-        gsap.from(progressPathRef.current, {
-          strokeDashoffset: 1000,
-          duration: 2,
-          ease: "power2.inOut",
-          scrollTrigger: {
-            trigger: ".apple-steps-grid",
-            start: "top 60%",
-          }
+      // Animate stats counter
+      if (statsRef.current) {
+        const counters = statsRef.current.querySelectorAll('.stat-number');
+        counters.forEach((counter) => {
+          const target = parseInt(counter.getAttribute('data-target') || '0');
+          gsap.from(counter, {
+            textContent: 0,
+            duration: 2,
+            ease: "power1.out",
+            snap: { textContent: 1 },
+            scrollTrigger: {
+              trigger: statsRef.current,
+              start: "top 80%",
+            },
+            onUpdate: function() {
+              counter.textContent = Math.ceil(this.targets()[0].textContent).toString();
+            }
+          });
         });
       }
-
-      // Background gradient animation
-      gsap.to(".apple-steps-section", {
-        backgroundPosition: "50% 100%",
-        scrollTrigger: {
-          trigger: ".apple-steps-section",
-          start: "top bottom",
-          end: "bottom top",
-          scrub: 1,
-        }
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -117,85 +94,73 @@ const ThreeStepProcess = () => {
 
   return (
     <section ref={sectionRef} className="apple-steps-section">
-      {/* Animated mesh gradient background */}
+      {/* Subtle mesh gradient background */}
       <div className="gradient-mesh"></div>
-      <div className="floating-particles">
-        {[...Array(20)].map((_, i) => (
-          <div key={i} className="particle" style={{ 
-            left: `${Math.random() * 100}%`, 
-            animationDelay: `${Math.random() * 10}s`,
-            animationDuration: `${15 + Math.random() * 10}s`
-          }}></div>
-        ))}
-      </div>
 
       <div className="apple-steps-container">
+        {/* FREE Consultation Banner */}
+        <div className="free-consultation-banner">
+          <span className="banner-icon">✓</span>
+          <span className="banner-text">FREE Case Evaluation • No Obligation • Confidential</span>
+        </div>
+
         <h2 className="apple-steps-headline">
           Steps to File a California Personal Injury Lawsuit
         </h2>
         
         <p className="apple-steps-subheadline">
-          Our proven 3-step process makes getting justice in California simple and stress-free.{" "}
-          <span className="apple-steps-free-text shimmer-text">
-            100% FREE TO START - NO FEES UNLESS WE WIN
-          </span>
+          Our proven 3-step process makes getting justice simple and stress-free.
         </p>
 
-        {/* Progress connector SVG */}
-        <svg className="progress-connector" viewBox="0 0 1200 120" preserveAspectRatio="none">
-          <path 
-            ref={progressPathRef}
-            d="M 50 60 Q 300 20, 600 60 T 1150 60" 
-            stroke="url(#progressGradient)" 
-            strokeWidth="2" 
-            fill="none"
-            strokeDasharray="1000"
-            strokeDashoffset="0"
-          />
-          <defs>
-            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stopColor="#2997ff" stopOpacity="0.3"/>
-              <stop offset="50%" stopColor="#64d2ff" stopOpacity="0.6"/>
-              <stop offset="100%" stopColor="#2997ff" stopOpacity="0.3"/>
-            </linearGradient>
-          </defs>
-        </svg>
+        {/* Trust Stats */}
+        <div ref={statsRef} className="trust-stats">
+          <div className="stat-item">
+            <div className="stat-number" data-target="1000">0</div>
+            <div className="stat-label">Free Evaluations</div>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <div className="stat-number" data-target="100">0</div>
+            <div className="stat-label">% No Win, No Fee</div>
+          </div>
+          <div className="stat-divider"></div>
+          <div className="stat-item">
+            <div className="stat-number" data-target="24">0</div>
+            <div className="stat-label">Hour Response</div>
+          </div>
+        </div>
 
         <div className="apple-steps-grid">
           {/* Step 1 */}
           <div 
             className="apple-step-card" 
             ref={el => el && (cardsRef.current[0] = el)}
-            data-tilt
           >
-            <div className="card-glow"></div>
+            <div className="step-label">Step 1 of 3</div>
             <div className="step-icon-wrapper">
               <PhoneIcon />
             </div>
-            <div 
-              className="apple-step-number" 
-              ref={el => el && (numbersRef.current[0] = el)}
-            >1</div>
+            <div className="apple-step-number">1</div>
             <h3 className="apple-step-title">
-              Contact Our California Attorneys
-              <span className="apple-free-badge pulse-badge">FREE</span>
+              Contact Our Attorneys
+              <span className="apple-free-badge">FREE</span>
             </h3>
+            <div className="timeline-estimate">~5 minutes</div>
             <p className="apple-step-description">
-              Reach out to our experienced California personal injury team for a{" "}
-              <strong>FREE</strong> consultation. We'll evaluate your case and explain your legal options under California law—with no obligation.
+              Get a <strong>FREE</strong> consultation with our experienced California personal injury team. We'll evaluate your case and explain your legal options—with zero obligation.
             </p>
             <ul className="apple-step-features">
               <li>
                 <Checkmark />
-                <span><strong>FREE</strong> case evaluation by California personal injury lawyers</span>
+                <span><strong className="free-text">FREE</strong> case evaluation</span>
               </li>
               <li>
                 <Checkmark />
-                <span>No upfront fees required under California law</span>
+                <span>No upfront fees required</span>
               </li>
               <li>
                 <Checkmark />
-                <span><strong>STRONG</strong> track record with California insurance companies</span>
+                <span>Proven California track record</span>
               </li>
             </ul>
           </div>
@@ -204,36 +169,32 @@ const ThreeStepProcess = () => {
           <div 
             className="apple-step-card apple-step-card-featured" 
             ref={el => el && (cardsRef.current[1] = el)}
-            data-tilt
           >
-            <div className="card-glow"></div>
+            <div className="step-label">Step 2 of 3</div>
             <div className="step-icon-wrapper">
               <DocumentIcon />
             </div>
-            <div 
-              className="apple-step-number" 
-              ref={el => el && (numbersRef.current[1] = el)}
-            >2</div>
+            <div className="apple-step-number">2</div>
             <h3 className="apple-step-title">
-              We'll File Your California Claim
-              <span className="apple-free-badge pulse-badge">FREE</span>
+              We Handle Everything
+              <span className="apple-free-badge">$0 COST</span>
             </h3>
+            <div className="timeline-estimate">We do the work</div>
             <p className="apple-step-description">
-              Once you hire us, we handle all California legal paperwork and communications at{" "}
-              <strong>ZERO COST</strong> to you. We'll gather evidence, work with experts, and build a strong California personal injury case.
+              We handle all legal paperwork and communications at <strong>ZERO COST</strong> to you. Our team gathers evidence, works with experts, and builds your strong case.
             </p>
             <ul className="apple-step-features">
               <li>
                 <Checkmark />
-                <span>Expert handling of California statute of limitations</span>
+                <span>Expert California statute handling</span>
               </li>
               <li>
                 <Checkmark />
-                <span><strong>ZERO</strong> upfront attorney fees—we pay all case costs</span>
+                <span><strong className="free-text">$0</strong> upfront fees—we cover costs</span>
               </li>
               <li>
                 <Checkmark />
-                <span>Direct negotiation with California insurance adjusters</span>
+                <span>Direct insurance negotiation</span>
               </li>
             </ul>
           </div>
@@ -242,38 +203,52 @@ const ThreeStepProcess = () => {
           <div 
             className="apple-step-card" 
             ref={el => el && (cardsRef.current[2] = el)}
-            data-tilt
           >
-            <div className="card-glow"></div>
+            <div className="step-label">Step 3 of 3</div>
             <div className="step-icon-wrapper">
               <MoneyIcon />
             </div>
-            <div 
-              className="apple-step-number" 
-              ref={el => el && (numbersRef.current[2] = el)}
-            >3</div>
+            <div className="apple-step-number">3</div>
             <h3 className="apple-step-title">
-              Get Maximum California Compensation
+              Get Maximum Compensation
             </h3>
+            <div className="timeline-estimate">You get paid</div>
             <p className="apple-step-description">
-              We fight for every dollar you deserve under California personal injury law. You pay{" "}
-              <strong>NOTHING</strong> unless we win your case—our fee only comes from your settlement or court award.
+              We fight for every dollar you deserve. You pay <strong>NOTHING</strong> unless we win—our fee only comes from your settlement or court award.
             </p>
             <ul className="apple-step-features">
               <li>
                 <Checkmark />
-                <span>Proven results with California injury settlements</span>
+                <span>Proven settlement results</span>
               </li>
               <li>
                 <Checkmark />
-                <span>No win = <strong>NO FEE</strong> under our California contingency agreement</span>
+                <span>No win = <strong className="free-text">NO FEE</strong> guarantee</span>
               </li>
               <li>
                 <Checkmark />
-                <span>Maximum compensation for your California injuries</span>
+                <span>Maximum injury compensation</span>
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="steps-cta-section">
+          <div className="trust-badge">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
+                    fill="#34c759" stroke="#34c759" strokeWidth="2" strokeLinejoin="round"/>
+            </svg>
+            <span>No Win = No Fee Guarantee</span>
+          </div>
+          <a href="#free-evaluation" className="primary-cta-button">
+            Start Your Free Evaluation
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </a>
+          <p className="cta-subtext">Confidential consultation • No obligation • 24-hour response time</p>
         </div>
       </div>
     </section>

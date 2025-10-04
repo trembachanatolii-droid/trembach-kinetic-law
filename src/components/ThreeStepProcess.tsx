@@ -53,90 +53,337 @@ const MoneyIcon = () => (
   </svg>
 );
 
+interface CounterProps {
+  end: number;
+  duration?: number;
+  suffix?: string;
+  prefix?: string;
+}
+
+const AnimatedCounter = ({ end, duration = 2, suffix = "", prefix = "" }: CounterProps) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef<HTMLSpanElement>(null);
+  const hasAnimated = useRef(false);
+
+  useEffect(() => {
+    if (!countRef.current || hasAnimated.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !hasAnimated.current) {
+          hasAnimated.current = true;
+          gsap.to({ value: 0 }, {
+            value: end,
+            duration,
+            ease: "power2.out",
+            onUpdate: function() {
+              setCount(Math.round(this.targets()[0].value));
+            }
+          });
+        }
+      },
+      { threshold: 0.5 }
+    );
+
+    observer.observe(countRef.current);
+    return () => observer.disconnect();
+  }, [end, duration]);
+
+  return <span ref={countRef}>{prefix}{count}{suffix}</span>;
+};
 
 const ThreeStepProcess = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const numbersRef = useRef<(HTMLDivElement | null)[]>([]);
   const progressPathRef = useRef<SVGPathElement>(null);
+  const spotlightRef = useRef<HTMLDivElement>(null);
+  const timelineProgressRef = useRef<HTMLDivElement>(null);
+  
+  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
+  // Mouse tracking for magnetic effect and spotlight
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      setMousePosition({ x, y });
+
+      // Update spotlight position
+      if (spotlightRef.current) {
+        spotlightRef.current.style.background = `radial-gradient(circle 400px at ${x}px ${y}px, rgba(41, 151, 255, 0.15), transparent)`;
+      }
+
+      // Magnetic effect on cards
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        
+        const cardRect = card.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2 - rect.left;
+        const cardCenterY = cardRect.top + cardRect.height / 2 - rect.top;
+        
+        const deltaX = x - cardCenterX;
+        const deltaY = y - cardCenterY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        if (distance < 300) {
+          const force = (300 - distance) / 300;
+          const moveX = (deltaX * force * 0.15);
+          const moveY = (deltaY * force * 0.15);
+          const rotateY = (deltaX * force * 0.02);
+          const rotateX = -(deltaY * force * 0.02);
+          
+          gsap.to(card, {
+            x: moveX,
+            y: moveY,
+            rotateY: rotateY,
+            rotateX: rotateX,
+            duration: 0.3,
+            ease: "power2.out"
+          });
+        } else {
+          gsap.to(card, {
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            rotateX: 0,
+            duration: 0.5,
+            ease: "power2.out"
+          });
+        }
+      });
+    };
+
+    const section = sectionRef.current;
+    if (section) {
+      section.addEventListener('mousemove', handleMouseMove);
+    }
+
+    return () => {
+      if (section) {
+        section.removeEventListener('mousemove', handleMouseMove);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (!sectionRef.current) return;
 
     const ctx = gsap.context(() => {
-      // Simple card entrance animations
+      // Number count-up animation
+      numbersRef.current.forEach((number, index) => {
+        if (!number) return;
+        
+        // Parallax effect on numbers
+        gsap.to(number, {
+          y: -80,
+          scale: 1.15,
+          opacity: 0.4,
+          scrollTrigger: {
+            trigger: number,
+            start: "top center",
+            end: "bottom top",
+            scrub: 1,
+          }
+        });
+
+        // Count-up animation
+        gsap.from(number, {
+          textContent: 0,
+          duration: 1.5,
+          ease: "power2.out",
+          snap: { textContent: 1 },
+          scrollTrigger: {
+            trigger: number,
+            start: "top 80%",
+          },
+          onUpdate: function() {
+            if (number) {
+              number.textContent = Math.round(parseFloat(number.textContent || "0")).toString();
+            }
+          }
+        });
+      });
+
+      // Enhanced card entrance animations with stagger
       gsap.from(cardsRef.current, {
-        y: 60,
+        y: 120,
         opacity: 0,
-        stagger: 0.15,
-        duration: 0.8,
-        ease: "power2.out",
+        rotateX: -20,
+        scale: 0.85,
+        stagger: {
+          each: 0.15,
+          from: "start"
+        },
+        duration: 1.2,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: ".apple-steps-grid",
-          start: "top 80%",
+          start: "top 75%",
         }
       });
+
+      // Animate progress path
+      if (progressPathRef.current) {
+        gsap.from(progressPathRef.current, {
+          strokeDashoffset: 1000,
+          duration: 2.5,
+          ease: "power2.inOut",
+          scrollTrigger: {
+            trigger: ".apple-steps-grid",
+            start: "top 65%",
+          }
+        });
+      }
+
+      // Timeline progress indicator
+      if (timelineProgressRef.current) {
+        gsap.to(timelineProgressRef.current, {
+          scaleX: 1,
+          scrollTrigger: {
+            trigger: ".apple-steps-section",
+            start: "top center",
+            end: "bottom center",
+            scrub: 1,
+          }
+        });
+      }
+
+      // Background gradient animation
+      gsap.to(".apple-steps-section", {
+        backgroundPosition: "50% 100%",
+        scrollTrigger: {
+          trigger: ".apple-steps-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        }
+      });
+
+      // Dynamic color shift based on scroll
+      gsap.to(".gradient-mesh", {
+        filter: "hue-rotate(30deg)",
+        scrollTrigger: {
+          trigger: ".apple-steps-section",
+          start: "top center",
+          end: "bottom center",
+          scrub: 1,
+        }
+      });
+
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
+  // Click to expand card
+  const handleCardClick = (index: number) => {
+    setExpandedCard(expandedCard === index ? null : index);
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (expandedCard === null) return;
+      
+      if (e.key === 'Escape') {
+        setExpandedCard(null);
+      } else if (e.key === 'ArrowLeft') {
+        setExpandedCard(Math.max(0, expandedCard - 1));
+      } else if (e.key === 'ArrowRight') {
+        setExpandedCard(Math.min(2, expandedCard + 1));
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [expandedCard]);
 
   const stepData = [
     {
       icon: PhoneIcon,
       number: 1,
       title: "Contact Our California Attorneys",
-      badge: "100% FREE",
-      description: "Reach out to our experienced California personal injury team for a completely FREE consultation. We'll evaluate your case and explain your legal options—with absolutely no obligation or upfront costs.",
+      badge: "FREE",
+      description: "Reach out to our experienced California personal injury team for a FREE consultation. We'll evaluate your case and explain your legal options under California law—with no obligation.",
       features: [
-        { text: "100% FREE case evaluation—no hidden fees", highlight: "100% FREE" },
-        { text: "Zero upfront costs or retainer fees", highlight: "Zero" },
-        { text: "Trusted by California injury victims" }
+        { text: "FREE case evaluation by California personal injury lawyers", highlight: "FREE" },
+        { text: "No upfront fees required under California law" },
+        { text: "STRONG track record with California insurance companies", highlight: "STRONG" }
       ],
+      stats: { value: 95, label: "Win Rate", suffix: "%" },
       timeline: "24 Hours",
-      guarantee: "No Cost to Start"
+      color: "#2997ff"
     },
     {
       icon: DocumentIcon,
       number: 2,
-      title: "We Handle All Legal Paperwork",
-      badge: "100% FREE",
-      description: "Once you hire us, we manage everything at zero cost to you. We gather evidence, work with experts, and build your strongest possible case under California law.",
+      title: "We'll File Your California Claim",
+      badge: "FREE",
+      description: "Once you hire us, we handle all California legal paperwork and communications at ZERO COST to you. We'll gather evidence, work with experts, and build a strong California personal injury case.",
       features: [
-        { text: "Expert handling of all California legal requirements" },
-        { text: "Zero upfront attorney fees—we cover all costs", highlight: "Zero" },
-        { text: "Direct communication with insurance companies" }
+        { text: "Expert handling of California statute of limitations" },
+        { text: "ZERO upfront attorney fees—we pay all case costs", highlight: "ZERO" },
+        { text: "Direct negotiation with California insurance adjusters" }
       ],
+      stats: { value: 500, label: "Cases Filed", suffix: "+" },
       timeline: "2-4 Weeks",
-      guarantee: "We Pay All Costs"
+      color: "#7b68ee"
     },
     {
       icon: MoneyIcon,
       number: 3,
-      title: "Get Maximum Compensation",
+      title: "Get Maximum California Compensation",
       badge: "",
-      description: "We fight for every dollar you deserve. You pay nothing unless we win—our fee only comes from your settlement or court award. It's that simple.",
+      description: "We fight for every dollar you deserve under California personal injury law. You pay NOTHING unless we win your case—our fee only comes from your settlement or court award.",
       features: [
-        { text: "Proven track record with California settlements" },
-        { text: "No Win = No Fee—guaranteed", highlight: "No Win = No Fee" },
-        { text: "Maximum compensation for your injuries" }
+        { text: "Proven results with California injury settlements" },
+        { text: "No win = NO FEE under our California contingency agreement", highlight: "NO FEE" },
+        { text: "Maximum compensation for your California injuries" }
       ],
+      stats: { value: 10, label: "Million Won", prefix: "$", suffix: "M+" },
       timeline: "3-6 Months",
-      guarantee: "No Win, No Fee"
+      color: "#64d2ff"
     }
   ];
 
   return (
     <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process">
-      {/* Simplified background */}
-      <div className="simple-gradient-bg"></div>
+      {/* Animated mesh gradient background */}
+      <div className="gradient-mesh"></div>
       
+      {/* Spotlight effect */}
+      <div ref={spotlightRef} className="spotlight-effect"></div>
+      
+      {/* Floating particles */}
+      <div className="floating-particles" aria-hidden="true">
+        {[...Array(25)].map((_, i) => (
+          <div 
+            key={i} 
+            className="particle" 
+            style={{ 
+              left: `${Math.random() * 100}%`, 
+              animationDelay: `${Math.random() * 12}s`,
+              animationDuration: `${12 + Math.random() * 15}s`,
+              width: `${2 + Math.random() * 4}px`,
+              height: `${2 + Math.random() * 4}px`
+            }}
+          ></div>
+        ))}
+      </div>
+
+      {/* Grain texture overlay */}
+      <div className="grain-overlay" aria-hidden="true"></div>
+
       <div className="apple-steps-container">
-        {/* FREE Consultation Banner */}
-        <div className="free-consultation-banner">
-          <div className="free-badge-large">100% FREE CONSULTATION</div>
-          <div className="no-fee-guarantee">No Fees Unless We Win Your Case</div>
+        {/* Timeline progress indicator */}
+        <div className="timeline-indicator" aria-hidden="true">
+          <div ref={timelineProgressRef} className="timeline-progress"></div>
         </div>
 
         <h2 className="apple-steps-headline">
@@ -144,52 +391,109 @@ const ThreeStepProcess = () => {
         </h2>
         
         <p className="apple-steps-subheadline">
-          Our simple 3-step process makes getting justice easy and stress-free.
+          Our proven 3-step process makes getting justice in California simple and stress-free.{" "}
+          <span className="apple-steps-free-text shimmer-text">
+            100% FREE TO START - NO FEES UNLESS WE WIN
+          </span>
         </p>
 
-        {/* Simple cards grid */}
-        <div className="apple-steps-grid">
+        {/* Progress connector SVG */}
+        <svg className="progress-connector" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+          <path 
+            ref={progressPathRef}
+            d="M 50 60 Q 300 20, 600 60 T 1150 60" 
+            stroke="url(#progressGradient)" 
+            strokeWidth="2" 
+            fill="none"
+            strokeDasharray="1000"
+            strokeDashoffset="0"
+          />
+          <defs>
+            <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="#2997ff" stopOpacity="0.4"/>
+              <stop offset="33%" stopColor="#7b68ee" stopOpacity="0.6"/>
+              <stop offset="66%" stopColor="#64d2ff" stopOpacity="0.6"/>
+              <stop offset="100%" stopColor="#2997ff" stopOpacity="0.4"/>
+            </linearGradient>
+          </defs>
+        </svg>
+
+        {/* Bento-style grid */}
+        <div className="apple-steps-grid bento-layout">
           {stepData.map((step, index) => {
             const Icon = step.icon;
+            const isExpanded = expandedCard === index;
+            const isFeatured = index === 1;
             
             return (
               <div 
                 key={index}
-                className="apple-step-card"
+                className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''} ${isExpanded ? 'card-expanded' : ''}`}
                 ref={el => cardsRef.current[index] = el}
-                role="article"
+                onClick={() => handleCardClick(index)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick(index);
+                  }
+                }}
+                role="button"
+                tabIndex={0}
+                aria-expanded={isExpanded}
                 aria-label={`Step ${step.number}: ${step.title}`}
+                style={{
+                  '--card-color': step.color
+                } as React.CSSProperties}
               >
-                {/* Simple card background */}
-                <div className="card-simple-bg" aria-hidden="true"></div>
+                {/* Card effects */}
+                <div className="card-glow" aria-hidden="true"></div>
+                <div className="card-reflection" aria-hidden="true"></div>
+                <div className="card-border-glow" aria-hidden="true"></div>
                 
-                {/* Step icon */}
+                {/* Step icon with breathing animation */}
                 <div className="step-icon-wrapper">
                   <Icon />
                 </div>
                 
-                {/* Step number */}
-                <div className="apple-step-number" aria-hidden="true">
+                {/* Large animated number */}
+                <div 
+                  className="apple-step-number" 
+                  ref={el => numbersRef.current[index] = el}
+                  aria-hidden="true"
+                >
                   {step.number}
                 </div>
                 
-                {/* Guarantee badge */}
-                <div className="guarantee-badge" aria-label={step.guarantee}>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M8 1l2 4 4.5 0.5-3.5 3 1 4.5-4-2.5-4 2.5 1-4.5-3.5-3 4.5-0.5z" fill="currentColor"/>
+                {/* Timeline badge */}
+                <div className="timeline-badge" aria-label={`Typical duration: ${step.timeline}`}>
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <circle cx="6" cy="6" r="5" stroke="currentColor" strokeWidth="1"/>
+                    <path d="M6 3v3l2 2" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
                   </svg>
-                  {step.guarantee}
+                  {step.timeline}
                 </div>
                 
-                {/* Title with prominent badge */}
+                {/* Title with badge */}
                 <h3 className="apple-step-title">
                   {step.title}
+                  {step.badge && (
+                    <span className="apple-free-badge pulse-badge" aria-label="Free service">
+                      {step.badge}
+                    </span>
+                  )}
                 </h3>
-                {step.badge && (
-                  <div className="apple-free-badge" aria-label="Free service">
-                    {step.badge}
+                
+                {/* Success statistics */}
+                <div className="step-stats">
+                  <div className="stat-number">
+                    <AnimatedCounter 
+                      end={step.stats.value} 
+                      prefix={step.stats.prefix}
+                      suffix={step.stats.suffix}
+                    />
                   </div>
-                )}
+                  <div className="stat-label">{step.stats.label}</div>
+                </div>
                 
                 {/* Description */}
                 <p className="apple-step-description">
@@ -215,54 +519,52 @@ const ThreeStepProcess = () => {
                     </li>
                   ))}
                 </ul>
+                
+                {/* Expand indicator */}
+                <div className="expand-indicator" aria-hidden="true">
+                  <span>{isExpanded ? 'Click to collapse' : 'Click to expand'}</span>
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path 
+                      d={isExpanded ? "M4 10L8 6L12 10" : "M4 6L8 10L12 6"} 
+                      stroke="currentColor" 
+                      strokeWidth="2" 
+                      strokeLinecap="round" 
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+                
+                {/* Expanded content */}
+                {isExpanded && (
+                  <div className="expanded-content">
+                    <h4>What to Expect:</h4>
+                    <p>Detailed information about step {step.number} goes here with additional insights about the process.</p>
+                    <button className="cta-button" onClick={(e) => { e.stopPropagation(); }}>
+                      Get Started Now
+                    </button>
+                  </div>
+                )}
+                
+                {/* Chromatic aberration effect on hover */}
+                <div className="chromatic-effect" aria-hidden="true"></div>
               </div>
             );
           })}
         </div>
 
-        {/* Trust badges */}
-        <div className="trust-badges">
-          <div className="trust-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>No Win, No Fee</span>
-          </div>
-          <div className="trust-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L4 7v5c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V7l-8-5z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>Licensed CA Attorneys</span>
-          </div>
-          <div className="trust-item">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="2"/>
-              <path d="M12 6v6l4 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
-            <span>24/7 Support</span>
-          </div>
+        {/* Mobile pagination dots */}
+        <div className="mobile-pagination" role="tablist" aria-label="Step navigation">
+          {[0, 1, 2].map(i => (
+            <button
+              key={i}
+              role="tab"
+              aria-selected={expandedCard === i}
+              aria-label={`Go to step ${i + 1}`}
+              className={`pagination-dot ${expandedCard === i ? 'active' : ''}`}
+              onClick={() => setExpandedCard(i)}
+            />
+          ))}
         </div>
-
-        {/* Prominent CTA Section */}
-        <div className="steps-cta-section">
-          <h3 className="cta-headline">Ready to Get Started?</h3>
-          <p className="cta-description">Get your free case evaluation today. No obligations, no upfront costs.</p>
-          <a 
-            href="#free-evaluation" 
-            className="hero-cta-button"
-          >
-            <span className="cta-button-text">Start Your Free Evaluation</span>
-            <span className="cta-arrow">→</span>
-          </a>
-          <p className="cta-subtext">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="9" cy="9" r="8" stroke="currentColor" strokeWidth="1.5"/>
-              <path d="M6 9l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            100% Free Consultation • No Fees Unless We Win • Zero Risk
-          </p>
-        </div>
-
       </div>
     </section>
   );

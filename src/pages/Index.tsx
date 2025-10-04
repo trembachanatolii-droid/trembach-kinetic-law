@@ -57,14 +57,14 @@ const Index = () => {
         <ThreeStepProcess />
       </section>
 
-      {/* Truth About Your Case Section */}
-      <section id="truth">
-        <TruthAboutCase />
-      </section>
-
       {/* Practice Areas */}
       <section id="practice-areas">
         <PracticeAreasReference key="practice-areas-v2" />
+      </section>
+
+      {/* Truth About Your Case Section */}
+      <section id="truth">
+        <TruthAboutCase />
       </section>
 
       {/* Marquee Bands */}

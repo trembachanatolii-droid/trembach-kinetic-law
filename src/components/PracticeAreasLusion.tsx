@@ -477,13 +477,13 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
           </div>
 
           {/* Content Below Image */}
-          <div className="mt-4">
-            <div className="text-xs text-foreground/60 mb-2 font-medium tracking-wider uppercase">
-              {area.tags}
-            </div>
+          <div className="mt-4 flex items-center justify-between">
             <h3 className="project-title text-2xl font-bold text-foreground leading-tight">
               {area.title}
             </h3>
+            <button className="bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium px-6 py-2.5 rounded-full transition-colors duration-200 whitespace-nowrap">
+              Learn more
+            </button>
           </div>
         </Link>
       </div>

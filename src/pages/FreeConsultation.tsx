@@ -8,7 +8,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, ArrowRight, Check } from 'lucide-react';
 import heroBackground from '@/assets/free-consultation-hero-neutral.jpg';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -249,28 +249,40 @@ const FreeConsultation = () => {
                         />
                       </div>
 
-                      <div className="flex items-start gap-3 relative z-10">
-                        <input
-                          type="checkbox"
-                          id="smsConsent"
-                          name="smsConsent"
-                          checked={formData.smsConsent}
-                          onChange={(e) => setFormData((prev) => ({ ...prev, smsConsent: e.target.checked }))}
-                          required
-                          className="mt-1 h-6 w-6 shrink-0 rounded-sm border border-primary cursor-pointer accent-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 pointer-events-auto"
-                          aria-describedby="smsConsent-help smsConsent-legal"
-                        />
+                      <div className="flex items-start gap-3 select-none">
+                        <button
+                          type="button"
+                          role="checkbox"
+                          aria-checked={formData.smsConsent}
+                          onClick={() => setFormData((p) => ({ ...p, smsConsent: !p.smsConsent }))}
+                          className={
+                            `mt-0.5 inline-flex h-7 w-7 items-center justify-center rounded-md border transition-colors cursor-pointer ` +
+                            (formData.smsConsent ? `bg-primary text-primary-foreground border-primary` : `bg-background border-primary`)
+                          }
+                        >
+                          {formData.smsConsent && <Check className="h-5 w-5" />}
+                        </button>
                         <div className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                          <Label htmlFor="smsConsent" className="cursor-pointer block">
+                          <span
+                            onClick={(e) => {
+                              const target = e.target as HTMLElement
+                              if (!target.closest('a')) {
+                                setFormData((p) => ({ ...p, smsConsent: !p.smsConsent }))
+                              }
+                            }}
+                            className="block cursor-pointer"
+                          >
                             By checking this box, you agree to receive TEXT messages from Trembach Law Firm related to your inquiry, follow-ups, and review requests at the phone number provided above. You may reply STOP to opt out at any time. For assistance, reply HELP. Messages and data rates may apply. Message frequency will vary.
-                          </Label>
-                          <p id="smsConsent-help">
+                          </span>
+                          <p>
                             Please review our <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and terms of service.
                           </p>
-                          <p id="smsConsent-legal">
+                          <p>
                             Protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms of Service</a>.
                           </p>
                         </div>
+                        {/* Hidden form field to reflect consent value for submissions */}
+                        <input type="hidden" name="smsConsent" value={String(formData.smsConsent)} />
                       </div>
 
                       <Button type="submit" size="lg" className="w-full btn-enhanced group">

@@ -48,6 +48,11 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
+      {/* Why Choose Trembach Law Firm */}
+      <section id="why-choose">
+        <WhyChoose />
+      </section>
+
       {/* Three Step Process Section */}
       <section id="three-step-process">
         <ThreeStepProcess />
@@ -97,11 +102,6 @@ const Index = () => {
       {/* Every Problem Solved */}
       <section id="problems">
         <EveryProblemSolved />
-      </section>
-
-      {/* Why Choose Trembach Law Firm */}
-      <section id="why-choose">
-        <WhyChoose />
       </section>
 
       {/* Featured Results */}

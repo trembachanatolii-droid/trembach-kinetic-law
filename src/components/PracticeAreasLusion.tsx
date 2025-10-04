@@ -122,7 +122,6 @@ const PracticeAreasLusion: React.FC = () => {
   const [cardPositions, setCardPositions] = useState<Array<{ x: number; y: number; z: number; width: number; height: number; visible: boolean }>>([]);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {

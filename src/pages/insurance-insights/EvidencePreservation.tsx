@@ -49,23 +49,23 @@ const EvidencePreservation = () => {
             <img 
               src={evidenceDeletion} 
               alt="Evidence preservation and data protection" 
-              className="w-full h-full object-cover opacity-70"
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/20 to-white/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/50"></div>
           </div>
 
           <div className="hero-content container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div className="inline-flex items-center bg-blue-600/20 border border-blue-500/50 rounded-full px-6 py-2 mb-8 backdrop-blur-sm">
-              <AlertTriangle className="text-blue-700 mr-2" size={20} />
-              <span className="text-blue-900 font-semibold">Time-Sensitive Action Required</span>
+            <div className="inline-flex items-center bg-blue-500/30 border border-blue-400/50 rounded-full px-6 py-2 mb-8 backdrop-blur-sm">
+              <AlertTriangle className="text-blue-100 mr-2" size={20} />
+              <span className="text-white font-semibold">Time-Sensitive Action Required</span>
             </div>
             
-            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 mb-6 leading-tight" style={{ letterSpacing: '-0.02em' }}>
+            <h1 className="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ letterSpacing: '-0.02em' }}>
               Evidence Disappears
               <br />
-              <span className="text-slate-700">On Schedules</span>
+              <span className="text-blue-100">On Schedules</span>
             </h1>
-            <p className="text-xl sm:text-2xl text-slate-800 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-xl sm:text-2xl text-blue-50 max-w-3xl mx-auto leading-relaxed">
               Critical surveillance footage and digital evidence are automatically deleted. Act now to preserve your case.
             </p>
           </div>
@@ -189,7 +189,7 @@ const EvidencePreservation = () => {
               <Button 
                 asChild
                 size="lg" 
-                className="bg-blue-600 text-white hover:bg-blue-700 h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg"
+                className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <a href="/free-consultation">
                   Secure Evidence Now

@@ -48,31 +48,27 @@ const MedicalEvaluation = () => {
       </Helmet>
       
       <main ref={sectionRef} className="bg-white">
-        {/* Hero Section - Apple Watch Style */}
-        <section className="relative isolate min-h-[85vh] flex items-center justify-center overflow-hidden">
-          <div 
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${imeHero})` }}
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
-          
-          <div className="container mx-auto px-6 relative z-10 text-center">
-            <h1 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-6 tracking-tight">
-              <span className="block">Independent Medical Evaluations</span>
+        {/* Hero Section - Apple Style */}
+        <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+          <div className="container mx-auto px-6 py-20 text-center max-w-5xl">
+            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold text-black mb-8 tracking-tight leading-[1.1] animate-fade-in">
+              Independent Medical<br />Evaluations
             </h1>
-            <p className="text-xl md:text-2xl text-slate-700 max-w-3xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl md:text-2xl lg:text-3xl text-slate-600 max-w-4xl mx-auto mb-12 leading-relaxed font-light animate-fade-in" style={{ animationDelay: '0.2s' }}>
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
             </p>
-            <Button 
-              asChild
-              size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
-            >
-              <a href="/free-consultation" className="no-underline">
-                Get Your Free Evaluation
-                <ArrowRight className="ml-2" size={20} />
-              </a>
-            </Button>
+            <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
+              <Button 
+                asChild
+                size="lg" 
+                className="h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-medium rounded-full transition-all duration-300 hover:scale-105 bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl"
+              >
+                <a href="/free-consultation" className="no-underline text-white">
+                  Get Your Free Evaluation
+                  <ArrowRight className="ml-2" size={20} />
+                </a>
+              </Button>
+            </div>
           </div>
         </section>
 

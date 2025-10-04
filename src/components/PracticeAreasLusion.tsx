@@ -39,7 +39,7 @@ const practiceAreas: PracticeArea[] = [
     slug: 'mesothelioma-asbestos',
     colorBg: '#1a1a1a',
     colorText: '#ffffff',
-    size: 'large'
+    size: 'medium'
   },
   {
     id: 'silicosis-injuries',
@@ -69,7 +69,7 @@ const practiceAreas: PracticeArea[] = [
     slug: 'car-accidents',
     colorBg: '#dc2626',
     colorText: '#ffffff',
-    size: 'large'
+    size: 'medium'
   },
   {
     id: 'uber-lyft-accidents',
@@ -79,7 +79,7 @@ const practiceAreas: PracticeArea[] = [
     slug: 'uber-lyft-accidents',
     colorBg: '#059669',
     colorText: '#ffffff',
-    size: 'small'
+    size: 'medium'
   },
   {
     id: 'dog-bites',
@@ -109,7 +109,7 @@ const practiceAreas: PracticeArea[] = [
     slug: 'medical-malpractice',
     colorBg: '#0891b2',
     colorText: '#ffffff',
-    size: 'large'
+    size: 'medium'
   },
 ];
 
@@ -357,9 +357,9 @@ const PracticeAreasLusion: React.FC = () => {
           </div>
         </div>
 
-        {/* Masonry Grid */}
+        {/* Grid Layout */}
         <div ref={gridRef} className="container mx-auto px-6">
-          <div className="columns-1 md:columns-2 gap-6 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {practiceAreas.map((area, index) => (
               <PracticeCard
                 key={area.id}
@@ -445,14 +445,12 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
       }
     };
 
-    const heightClass = area.size === 'large' ? 'h-[500px]' : area.size === 'medium' ? 'h-[400px]' : 'h-[320px]';
-
     return (
-      <div ref={ref} className="break-inside-avoid mb-6">
+      <div ref={ref}>
         <Link
           to={`/practice-areas/${area.slug}`}
           ref={cardRef}
-          className={`block relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-shadow duration-500 group ${heightClass}`}
+          className="block group"
           style={{ 
             transformStyle: 'preserve-3d',
             perspective: '1000px',
@@ -460,34 +458,33 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          {/* Image */}
-          <div className="absolute inset-0 overflow-hidden">
+          {/* Image Container */}
+          <div className="relative overflow-hidden rounded-2xl bg-background shadow-lg hover:shadow-2xl transition-shadow duration-500 h-[400px]">
             <img
               src={area.image}
               alt={area.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-500"></div>
+            
+            {/* Hover Glow */}
+            <div 
+              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+              style={{
+                background: `radial-gradient(circle at 50% 50%, ${area.colorBg}40 0%, transparent 70%)`,
+              }}
+            ></div>
           </div>
 
-          {/* Content */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-            <div className="text-xs text-white/70 mb-2 font-medium tracking-wide">
+          {/* Content Below Image */}
+          <div className="mt-4">
+            <div className="text-xs text-foreground/60 mb-2 font-medium tracking-wider uppercase">
               {area.tags}
             </div>
-            <h3 className="project-title text-3xl font-bold text-white leading-tight">
+            <h3 className="project-title text-2xl font-bold text-foreground leading-tight">
               {area.title}
             </h3>
           </div>
-
-          {/* Hover Glow */}
-          <div 
-            className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-            style={{
-              background: `radial-gradient(circle at 50% 50%, ${area.colorBg}40 0%, transparent 70%)`,
-            }}
-          ></div>
         </Link>
       </div>
     );

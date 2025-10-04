@@ -7,11 +7,11 @@ import { Button } from '@/components/ui/button';
 
 // Import professional concept images (no people)
 import recordingSystem from '@/assets/recording-system.jpg';
-import evidenceDeletion from '@/assets/evidence-deletion.jpg';
-import medicalInsurance from '@/assets/medical-insurance.jpg';
-import lowballSettlement from '@/assets/lowball-settlement.jpg';
-import courtroomEmpty from '@/assets/courtroom-empty.jpg';
-import deadlineUrgency from '@/assets/deadline-urgency.jpg';
+import evidenceRetention from '@/assets/evidence-retention.jpg';
+import medicalNetwork from '@/assets/medical-network.jpg';
+import settlementCalculation from '@/assets/settlement-calculation.jpg';
+import trialStatistics from '@/assets/trial-statistics.jpg';
+import statutoryLimitations from '@/assets/statutory-limitations.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -56,7 +56,7 @@ const TruthAboutCaseProfessional = () => {
       subtitle: 'Critical data disappears on schedules',
       description: 'Surveillance systems automatically delete footage after predetermined timeframes. Digital evidence follows corporate retention policies that favor insurance companies.',
       insight: 'Every day of delay exponentially reduces the strength of your legal position.',
-      image: evidenceDeletion,
+      image: evidenceRetention,
       imageAlt: 'Digital evidence deletion countdown showing automatic data removal systems',
       urgency: 'critical',
       actionText: 'Secure Evidence Now',
@@ -69,7 +69,7 @@ const TruthAboutCaseProfessional = () => {
       subtitle: 'Insurance-aligned healthcare evaluations',
       description: 'Corporate medical networks systematically minimize injury assessments. Independent medical examinations often favor insurance company interests over patient care.',
       insight: 'IME doctors are financially incentivized to find minimal injuries and faster recovery times.',
-      image: medicalInsurance,
+      image: medicalNetwork,
       imageAlt: 'Medical examination equipment with insurance company documentation systems',
       urgency: 'immediate',
       actionText: 'Get Independent Assessment',
@@ -82,7 +82,7 @@ const TruthAboutCaseProfessional = () => {
       subtitle: 'Initial offers use minimum formulas',
       description: 'Insurance algorithms calculate lowest acceptable settlement amounts based on desperation indicators. Corporate strategies exploit financial pressure.',
       insight: 'First offers typically represent 10-20% of actual case value using internal valuation models.',
-      image: lowballSettlement,
+      image: settlementCalculation,
       imageAlt: 'Insurance settlement calculations showing minimal offer amounts versus true case value',
       urgency: 'critical',
       actionText: 'Calculate True Value',
@@ -95,7 +95,7 @@ const TruthAboutCaseProfessional = () => {
       subtitle: 'Attorney settlement patterns analyzed',
       description: 'Insurance companies maintain databases tracking which attorneys avoid trial. Settlement pressure tactics target lawyers with limited courtroom experience.',
       insight: 'Only 5% of personal injury attorneys have significant trial experience, and insurers know exactly who they are.',
-      image: courtroomEmpty,
+      image: trialStatistics,
       imageAlt: 'Empty courtroom showing scales of justice and legal proceedings preparation',
       urgency: 'immediate',
       actionText: 'Find Trial Attorney',
@@ -108,7 +108,7 @@ const TruthAboutCaseProfessional = () => {
       subtitle: 'Legal deadlines with severe consequences',
       description: 'California legal system enforces absolute deadlines with zero tolerance. Government entity claims have accelerated timeframes that create additional complexity.',
       insight: 'Missing deadlines by even one day results in complete case dismissal regardless of merit.',
-      image: deadlineUrgency,
+      image: statutoryLimitations,
       imageAlt: 'Legal deadline countdown showing statute of limitations urgency in California',
       urgency: 'critical',
       actionText: 'Verify Deadlines',
@@ -382,16 +382,16 @@ const TruthAboutCaseProfessional = () => {
 
           {/* Professional CTA section */}
           <div className="mt-20 lg:mt-28 text-center">
-            <div className="max-w-4xl mx-auto bg-slate-900 rounded-2xl p-8 lg:p-12 text-white">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 lg:p-12 border border-slate-700/50 shadow-xl">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight text-white">
                 Professional Legal Analysis
               </h2>
-              <p className="text-lg lg:text-xl text-slate-300 mb-8 leading-relaxed">
+              <p className="text-lg lg:text-xl text-slate-200 mb-8 leading-relaxed">
                 Get expert case evaluation based on former insurance defense experience
               </p>
               <Button
                 size="lg"
-                className="bg-white text-slate-900 hover:bg-slate-100 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105"
+                className="bg-white text-slate-900 hover:bg-slate-50 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
               >
                 Request Professional Consultation
                 <ArrowRight className="ml-2" size={18} />

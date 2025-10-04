@@ -263,39 +263,50 @@ const PracticeAreasLusion: React.FC = () => {
     text.split('').forEach((char, i) => {
       const charWrapper = document.createElement('div');
       charWrapper.className = 'char-wrapper';
-      charWrapper.style.cssText = 'display: inline-block; position: relative; overflow: hidden; height: 1.2em; vertical-align: top;';
       
-      const charList = document.createElement('div');
-      charList.className = 'char-list';
-      charList.style.cssText = 'display: flex; flex-direction: column; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);';
-      
-      // Create 4 copies of the character for slot machine effect
-      for (let j = 0; j < 4; j++) {
-        const span = document.createElement('span');
-        span.textContent = char;
-        span.style.cssText = 'display: block; height: 1.2em;';
-        charList.appendChild(span);
+      // Handle spaces properly to prevent collapsing
+      if (char === ' ') {
+        charWrapper.style.cssText = 'display: inline-block; width: 0.3em;';
+        charWrapper.innerHTML = '&nbsp;';
+      } else {
+        charWrapper.style.cssText = 'display: inline-block; position: relative; overflow: hidden; height: 1.2em; vertical-align: top;';
+        
+        const charList = document.createElement('div');
+        charList.className = 'char-list';
+        charList.style.cssText = 'display: flex; flex-direction: column; transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);';
+        
+        // Create 4 copies of the character for slot machine effect
+        for (let j = 0; j < 4; j++) {
+          const span = document.createElement('span');
+          span.textContent = char;
+          span.style.cssText = 'display: block; height: 1.2em;';
+          charList.appendChild(span);
+        }
+        
+        charWrapper.appendChild(charList);
       }
       
-      charWrapper.appendChild(charList);
       titleElement.appendChild(charWrapper);
 
-      // Animate
-      if (isEntering) {
-        gsap.fromTo(
-          charList,
-          { y: '-300%' },
-          {
-            y: '-300%',
-            duration: 0.001,
-          }
-        );
-        gsap.to(charList, {
-          y: '-0%',
-          duration: 0.8,
-          delay: i * 0.03,
-          ease: 'expo.out',
-        });
+      // Animate only non-space characters
+      if (char !== ' ' && isEntering) {
+        const charList = charWrapper.querySelector('.char-list') as HTMLElement;
+        if (charList) {
+          gsap.fromTo(
+            charList,
+            { y: '-300%' },
+            {
+              y: '-300%',
+              duration: 0.001,
+            }
+          );
+          gsap.to(charList, {
+            y: '-0%',
+            duration: 0.8,
+            delay: i * 0.03,
+            ease: 'expo.out',
+          });
+        }
       }
     });
   };
@@ -481,7 +492,7 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
 
           {/* Content Below Image */}
           <div className="mt-5 flex items-center justify-between gap-4">
-            <h3 className="project-title text-4xl lg:text-5xl font-semibold text-foreground leading-tight break-words flex-1">
+            <h3 className="project-title text-5xl lg:text-6xl font-bold text-foreground leading-tight break-words flex-1">
               {area.title}
             </h3>
             <span className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-base font-semibold px-8 py-3 rounded-full transition-all duration-200 group-hover:scale-105 whitespace-nowrap flex-shrink-0">

@@ -1,9 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 import { Eye, Clock, Shield, CurrencyDollar, Scales, Warning } from 'phosphor-react';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
 const TruthAboutCase = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -292,7 +293,7 @@ const TruthAboutCase = () => {
     },
     {
       number: "02", 
-      title: "Evidence is Disappearing Fast",
+      title: "Evidence Disappears Fast",
       description: "Surveillance footage gets deleted in 30 days. Witnesses forget details. Skid marks fade. Every day you wait makes your case weaker and their defense stronger.",
       tags: ["Surveillance", "Witnesses", "Evidence", "Time"],
       type: "immediate",
@@ -302,7 +303,7 @@ const TruthAboutCase = () => {
     {
       number: "03",
       title: "Your Doctor Works for Them", 
-      description: "Insurance companies have networks of doctors who minimize injuries. They'll send you to \"their\" doctor who will say you're fine, destroying your case value.",
+      description: "Insurance companies have a network of doctors who minimize injuries. They'll send you to their doctor who will say you're fine, destroying your case value.",
       tags: ["Medical", "Networks", "Minimize", "Destroy"],
       type: "never",
       icon: Shield,
@@ -310,7 +311,7 @@ const TruthAboutCase = () => {
     },
     {
       number: "04",
-      title: "The First Offer is an Insult",
+      title: "The First Offer Is an Insult",
       description: "They know you need money now. Bills are piling up. So they offer 10% of what your case is worth, hoping desperation makes you accept. Don't fall for it.",
       tags: ["Lowball", "Desperation", "Accept", "Insult"],
       type: "never",
@@ -319,7 +320,7 @@ const TruthAboutCase = () => {
     },
     {
       number: "05",
-      title: "Most Lawyers are Scared of Trial",
+      title: "Most Lawyers Are Scared of Trial",
       description: "95% of attorneys never go to trial. Insurance companies know this. They lowball because they know your lawyer will push you to settle. I'm not afraid. They know it.",
       tags: ["Trial", "Scared", "Settle", "Weak"],
       type: "never",
@@ -328,7 +329,7 @@ const TruthAboutCase = () => {
     },
     {
       number: "06",
-      title: "Time Limits are Ticking",
+      title: "Time Limits Are Ticking",
       description: "California has strict deadlines. Miss them and you get nothing. Government claims? 6 months. Regular claims? 2 years. But evidence disappears much faster.",
       tags: ["Deadlines", "Limits", "Miss", "Nothing"],
       type: "immediate",
@@ -463,14 +464,14 @@ const TruthAboutCase = () => {
                       {problem.tags.map((tag, tagIndex) => (
                         <span
                           key={tagIndex}
-                          className={`
-                            card-tag px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
-                            backdrop-blur-sm border
-                            ${isImmediate 
-                              ? 'bg-emerald-500/20 border-emerald-400/40 text-emerald-200 hover:bg-emerald-400/30' 
-                              : 'bg-rose-500/20 border-rose-400/40 text-rose-200 hover:bg-rose-400/30'
-                            }
-                          `}
+                   className={`
+                     card-tag px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300
+                     backdrop-blur-sm border
+                     ${isImmediate 
+                       ? 'bg-primary/20 border-primary/40 text-primary-foreground/90 hover:bg-primary/30' 
+                       : 'bg-destructive/20 border-destructive/40 text-destructive-foreground/90 hover:bg-destructive/30'
+                     }
+                   `}
                         >
                           {tag}
                         </span>

@@ -4,7 +4,7 @@ import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
-import TruthAboutCase from '../components/TruthAboutCase';
+import TruthAboutCaseRevised from '../components/TruthAboutCaseRevised';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
@@ -57,9 +57,9 @@ const Index = () => {
         <PracticeAreasLusion key="practice-areas-lusion" />
       </section>
 
-      {/* Truth About Your Case Section */}
+      {/* Truth About Your Case Section - Apple Watch Inspired */}
       <section id="truth">
-        <TruthAboutCase />
+        <TruthAboutCaseRevised />
       </section>
 
       {/* Marquee Bands */}

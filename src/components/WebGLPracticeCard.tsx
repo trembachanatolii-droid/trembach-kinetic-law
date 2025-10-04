@@ -107,14 +107,9 @@ export const WebGLPracticeCard: React.FC<WebGLPracticeCardProps> = ({
     <mesh
       ref={meshRef}
       position={[position.x, position.y, position.z]}
-      material={shaderMaterial}
     >
       <planeGeometry args={[scale.width, scale.height, 32, 32]} />
-      <shaderMaterial
-        ref={materialRef}
-        attach="material"
-        args={[shaderMaterial]}
-      />
+      <primitive object={shaderMaterial} attach="material" ref={materialRef} />
     </mesh>
   );
 };

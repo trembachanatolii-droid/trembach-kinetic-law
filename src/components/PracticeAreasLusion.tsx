@@ -334,32 +334,26 @@ const PracticeAreasLusion: React.FC = () => {
       {/* DOM Layer */}
       <section 
         ref={containerRef} 
-        className="py-24 relative overflow-hidden z-10 transition-colors duration-700"
+        className="py-20 lg:py-32 relative overflow-hidden z-10 transition-colors duration-700"
         style={{
           backgroundColor: hoveredCard !== null 
             ? `${practiceAreas[hoveredCard].colorBg}15` 
             : '#fafafa'
         }}
       >
-        {/* Header */}
-        <div className="container mx-auto px-6 mb-16">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <h4 className="text-sm font-bold tracking-wider text-foreground">OUR PRACTICE AREAS</h4>
-              <span className="text-sm font-bold text-foreground/60">{practiceAreas.length}</span>
-              <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" fill="none">
-                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m2 2 34 34m0 0V6.046M36 36H6.046"></path>
-              </svg>
-            </div>
-            <Link to="/practice-areas" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-              View All →
-            </Link>
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          {/* Header */}
+          <div className="mb-12 lg:mb-20">
+            <h2 className="text-5xl lg:text-6xl font-bold tracking-tight text-center text-foreground mb-2">
+              Our Practice Areas
+            </h2>
+            <p className="text-center text-foreground/60 text-lg">
+              {practiceAreas.length} areas of legal expertise
+            </p>
           </div>
-        </div>
 
-        {/* Grid Layout */}
-        <div ref={gridRef} className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Grid Layout */}
+          <div ref={gridRef} className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-12 lg:gap-x-8 lg:gap-y-16">
             {practiceAreas.map((area, index) => (
               <PracticeCard
                 key={area.id}
@@ -378,10 +372,11 @@ const PracticeAreasLusion: React.FC = () => {
           </div>
           
           {/* See All Button */}
-          <div className="flex justify-center mt-12">
+          <div className="flex justify-center mt-16 lg:mt-20">
             <Link 
               to="/practice-areas"
-              className="bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium px-8 py-3 rounded-full transition-colors duration-200"
+              className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-base font-semibold px-8 py-3 rounded-full transition-all duration-200 hover:scale-105"
+              aria-label="View all 50 practice areas"
             >
               See all 50 practice areas
             </Link>
@@ -456,7 +451,7 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
     };
 
     return (
-      <div ref={ref}>
+      <article ref={ref}>
         <Link
           to={`/practice-areas/${area.slug}`}
           ref={cardRef}
@@ -467,36 +462,34 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
           }}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
+          aria-label={`Learn more about ${area.title}`}
         >
           {/* Image Container */}
-          <div className="relative overflow-hidden rounded-2xl bg-background shadow-lg hover:shadow-2xl transition-shadow duration-500 h-[400px]">
+          <div className="relative overflow-hidden rounded-2xl bg-background shadow-md group-hover:shadow-xl transition-all duration-500 aspect-[4/3]">
             <img
               src={area.image}
-              alt={area.title}
-              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              alt={`${area.title} legal services`}
+              className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               loading="lazy"
             />
             
-            {/* Hover Glow */}
+            {/* Hover Overlay */}
             <div 
-              className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
-              style={{
-                background: `radial-gradient(circle at 50% 50%, ${area.colorBg}40 0%, transparent 70%)`,
-              }}
+              className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"
             ></div>
           </div>
 
           {/* Content Below Image */}
-          <div className="mt-4 flex items-center justify-between">
-            <h3 className="project-title text-2xl font-bold text-foreground leading-tight">
+          <div className="mt-5 flex items-center justify-between gap-4">
+            <h3 className="project-title text-3xl font-semibold text-foreground leading-tight break-words flex-1">
               {area.title}
             </h3>
-            <button className="bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium px-6 py-2.5 rounded-full transition-colors duration-200 whitespace-nowrap">
+            <span className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-base font-semibold px-8 py-3 rounded-full transition-all duration-200 group-hover:scale-105 whitespace-nowrap flex-shrink-0">
               Learn more
-            </button>
+            </span>
           </div>
         </Link>
-      </div>
+      </article>
     );
   }
 );

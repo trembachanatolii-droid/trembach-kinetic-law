@@ -221,15 +221,15 @@
 }
 
 .bento-layout .apple-step-card:nth-child(1) {
-  grid-column: 1 / 5;
+  grid-column: 2 / 5;
 }
 
 .bento-layout .apple-step-card:nth-child(2) {
-  grid-column: 5 / 9;
+  grid-column: 5 / 8;
 }
 
 .bento-layout .apple-step-card:nth-child(3) {
-  grid-column: 9 / 13;
+  grid-column: 8 / 11;
 }
 
 /* Step Cards with Advanced Effects */
@@ -348,13 +348,17 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: clamp(100px, 8vw, 140px) !important;
   font-weight: 900;
-  color: rgba(100, 210, 255, 0.15) !important;
+  color: rgba(0, 113, 227, 0.35) !important;
   display: block;
   line-height: 0.85;
   margin-bottom: 28px;
   position: relative;
   z-index: 1;
   transition: all 0.3s ease;
+  text-shadow: 
+    0 0 40px rgba(0, 113, 227, 0.6),
+    0 0 80px rgba(0, 113, 227, 0.4),
+    0 0 120px rgba(0, 113, 227, 0.2);
 }
 
 /* Step Title */

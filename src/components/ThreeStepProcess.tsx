@@ -316,9 +316,7 @@ const ThreeStepProcess = () => {
         { text: "No upfront fees required under California law" },
         { text: "STRONG track record with California insurance companies", highlight: "STRONG" }
       ],
-      stats: { value: 95, label: "Win Rate", suffix: "%" },
-      timeline: "24 Hours",
-      color: "#2997ff"
+      timeline: "24 Hours"
     },
     {
       icon: DocumentIcon,
@@ -331,9 +329,7 @@ const ThreeStepProcess = () => {
         { text: "ZERO upfront attorney fees—we pay all case costs", highlight: "ZERO" },
         { text: "Direct negotiation with California insurance adjusters" }
       ],
-      stats: { value: 500, label: "Cases Filed", suffix: "+" },
-      timeline: "2-4 Weeks",
-      color: "#7b68ee"
+      timeline: "2-4 Weeks"
     },
     {
       icon: MoneyIcon,
@@ -346,9 +342,7 @@ const ThreeStepProcess = () => {
         { text: "No win = NO FEE under our California contingency agreement", highlight: "NO FEE" },
         { text: "Maximum compensation for your California injuries" }
       ],
-      stats: { value: 10, label: "Million Won", prefix: "$", suffix: "M+" },
-      timeline: "3-6 Months",
-      color: "#64d2ff"
+      timeline: "3-6 Months"
     }
   ];
 
@@ -441,14 +435,10 @@ const ThreeStepProcess = () => {
                 tabIndex={0}
                 aria-expanded={isExpanded}
                 aria-label={`Step ${step.number}: ${step.title}`}
-                style={{
-                  '--card-color': step.color
-                } as React.CSSProperties}
               >
                 {/* Card effects */}
                 <div className="card-glow" aria-hidden="true"></div>
                 <div className="card-reflection" aria-hidden="true"></div>
-                <div className="card-border-glow" aria-hidden="true"></div>
                 
                 {/* Step icon with breathing animation */}
                 <div className="step-icon-wrapper">
@@ -482,18 +472,6 @@ const ThreeStepProcess = () => {
                     </span>
                   )}
                 </h3>
-                
-                {/* Success statistics */}
-                <div className="step-stats">
-                  <div className="stat-number">
-                    <AnimatedCounter 
-                      end={step.stats.value} 
-                      prefix={step.stats.prefix}
-                      suffix={step.stats.suffix}
-                    />
-                  </div>
-                  <div className="stat-label">{step.stats.label}</div>
-                </div>
                 
                 {/* Description */}
                 <p className="apple-step-description">
@@ -552,18 +530,25 @@ const ThreeStepProcess = () => {
           })}
         </div>
 
-        {/* Mobile pagination dots */}
-        <div className="mobile-pagination" role="tablist" aria-label="Step navigation">
-          {[0, 1, 2].map(i => (
-            <button
-              key={i}
-              role="tab"
-              aria-selected={expandedCard === i}
-              aria-label={`Go to step ${i + 1}`}
-              className={`pagination-dot ${expandedCard === i ? 'active' : ''}`}
-              onClick={() => setExpandedCard(i)}
-            />
-          ))}
+        {/* CTA Section */}
+        <div className="steps-cta-wrapper">
+          <a 
+            href="#free-evaluation" 
+            className="start-evaluation-cta"
+            aria-label="Start your free case evaluation"
+          >
+            <span className="cta-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path d="M9 11l3 3L22 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <span className="cta-content">
+              <span className="cta-main-text">Start Your Free Evaluation</span>
+              <span className="cta-sub-text">No cost • No obligation • Confidential</span>
+            </span>
+            <span className="cta-arrow">→</span>
+          </a>
         </div>
       </div>
     </section>

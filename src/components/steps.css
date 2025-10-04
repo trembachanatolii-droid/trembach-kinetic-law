@@ -214,39 +214,31 @@
 /* Bento-Style Grid Layout */
 .apple-steps-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
   perspective: 2000px;
   position: relative;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.bento-layout .apple-step-card:nth-child(1) {
-  grid-column: 1 / 5;
-}
-
-.bento-layout .apple-step-card:nth-child(2) {
-  grid-column: 5 / 9;
-  transform: scale(1.08) translateY(-20px);
-}
-
-.bento-layout .apple-step-card:nth-child(3) {
-  grid-column: 9 / 13;
-}
 
 /* Step Cards with Advanced Effects */
 .apple-step-card {
   text-align: center;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
+  border-radius: 24px;
   backdrop-filter: blur(40px) saturate(180%);
   -webkit-backdrop-filter: blur(40px) saturate(180%);
-  padding: 56px 36px;
+  padding: 2rem;
+  max-height: 520px;
   color: #e5e5ea !important;
   opacity: 0;
   position: relative;
   overflow: hidden;
-  transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
   transform-style: preserve-3d;
   will-change: transform;
   cursor: pointer;
@@ -256,26 +248,26 @@
 /* Featured Card (Step 2) */
 .apple-step-card-featured {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(123, 104, 238, 0.3);
-  box-shadow: 0 30px 60px rgba(123, 104, 238, 0.15);
+  border-color: rgba(41, 151, 255, 0.3);
+  box-shadow: 0 30px 60px rgba(41, 151, 255, 0.15);
 }
 
 /* Card Glow Effect */
 .card-glow {
   position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(
-    circle,
-    var(--card-color, rgba(41, 151, 255, 0.2)) 0%,
-    transparent 70%
+    circle at 50% 0%,
+    rgba(41, 151, 255, 0.4) 0%,
+    transparent 60%
   );
   opacity: 0;
-  transition: opacity 0.6s ease;
+  transition: opacity 0.4s ease;
   pointer-events: none;
-  z-index: -1;
+  border-radius: 24px;
 }
 
 /* Card Reflection Effect */
@@ -296,58 +288,29 @@
   border-radius: 0 0 28px 28px;
 }
 
-/* Animated Border Glow */
-.card-border-glow {
-  position: absolute;
-  inset: -2px;
-  border-radius: 28px;
-  padding: 2px;
-  background: linear-gradient(
-    135deg,
-    transparent 0%,
-    var(--card-color, rgba(41, 151, 255, 0.4)) 50%,
-    transparent 100%
-  );
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  transition: opacity 0.6s ease;
-  pointer-events: none;
-  animation: borderRotate 4s linear infinite;
-}
-
-@keyframes borderRotate {
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 /* Enhanced Hover Effect with 3D */
 .apple-step-card:hover {
-  background: rgba(255, 255, 255, 0.09);
-  border-color: var(--card-color, rgba(100, 210, 255, 0.5));
+  transform: translateY(-8px);
+  border-color: rgba(41, 151, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
   box-shadow: 
-    0 40px 80px var(--card-color, rgba(0, 113, 227, 0.25)),
-    0 0 0 1px var(--card-color, rgba(100, 210, 255, 0.3)) inset,
-    0 0 60px var(--card-color, rgba(41, 151, 255, 0.2));
+    0 20px 40px -10px rgba(41, 151, 255, 0.2),
+    0 0 0 1px rgba(41, 151, 255, 0.1),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
 }
 
 .apple-step-card:hover .card-glow {
-  opacity: 1;
+  opacity: 0.12;
 }
 
 .apple-step-card:hover .card-reflection {
   opacity: 1;
 }
 
-.apple-step-card:hover .card-border-glow {
-  opacity: 0.6;
-}
-
 /* Focus State for Accessibility */
 .apple-step-card:focus {
-  outline: 3px solid var(--card-color, #2997ff);
+  outline: 3px solid #2997ff;
   outline-offset: 4px;
 }
 
@@ -402,10 +365,10 @@
   width: 72px;
   height: 72px;
   margin: 0 auto 28px;
-  color: var(--card-color, #64d2ff);
+  color: #64d2ff;
   opacity: 0.95;
   transition: all 0.5s cubic-bezier(0.19, 1, 0.22, 1);
-  filter: drop-shadow(0 6px 16px var(--card-color, rgba(100, 210, 255, 0.4)));
+  filter: drop-shadow(0 6px 16px rgba(100, 210, 255, 0.4));
 }
 
 .icon-breathe {
@@ -423,7 +386,7 @@
 
 .apple-step-card:hover .step-icon-wrapper {
   transform: translateY(-10px) scale(1.15) rotateY(10deg);
-  filter: drop-shadow(0 12px 28px var(--card-color, rgba(100, 210, 255, 0.6)));
+  filter: drop-shadow(0 12px 28px rgba(100, 210, 255, 0.6));
 }
 
 .step-icon {
@@ -434,10 +397,9 @@
 /* Animated Numbers with Count-Up */
 .apple-step-card .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: clamp(110px, 9vw, 180px) !important;
+  font-size: 120px !important;
   font-weight: 900;
-  background: linear-gradient(135deg, var(--card-color, #2997ff) 0%, rgba(100, 210, 255, 0.6) 50%, var(--card-color, #2997ff) 100%);
-  background-size: 300% 300%;
+  background: linear-gradient(135deg, #2997ff 0%, rgba(100, 210, 255, 0.6) 50%, #2997ff 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent !important;
@@ -447,24 +409,14 @@
   margin-bottom: 36px;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 0 50px var(--card-color, rgba(41, 151, 255, 0.6)));
+  filter: drop-shadow(0 0 50px rgba(41, 151, 255, 0.6));
   transition: all 0.7s cubic-bezier(0.19, 1, 0.22, 1);
-  animation: gradientShift 5s ease-in-out infinite;
   transform-style: preserve-3d;
 }
 
-@keyframes gradientShift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
 .apple-step-card:hover .apple-step-number {
-  transform: scale(1.08) rotateY(5deg);
-  filter: drop-shadow(0 0 70px var(--card-color, rgba(100, 210, 255, 0.9)));
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 70px rgba(100, 210, 255, 0.9));
 }
 
 /* Step Title */
@@ -481,7 +433,7 @@
 }
 
 .apple-step-card:hover .apple-step-title {
-  color: var(--card-color, #64d2ff) !important;
+  color: #64d2ff !important;
   letter-spacing: -0.01em;
   transform: translateY(-2px);
 }
@@ -526,41 +478,6 @@
   box-shadow: 0 10px 40px rgba(255, 55, 95, 1);
 }
 
-/* Success Statistics */
-.step-stats {
-  margin: 24px 0;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.03);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  transition: all 0.4s ease;
-}
-
-.apple-step-card:hover .step-stats {
-  background: rgba(255, 255, 255, 0.06);
-  border-color: var(--card-color, rgba(255, 255, 255, 0.15));
-  transform: scale(1.03);
-}
-
-.stat-number {
-  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 48px;
-  font-weight: 800;
-  background: linear-gradient(135deg, var(--card-color, #2997ff), #64d2ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.stat-label {
-  font-size: 14px;
-  font-weight: 600;
-  color: #a0a0a8;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
 
 /* Step Description */
 .apple-step-description {
@@ -616,7 +533,7 @@
   width: 0;
   height: 2px;
   bottom: 0;
-  background: linear-gradient(90deg, var(--card-color, #2997ff), rgba(100, 210, 255, 0));
+  background: linear-gradient(90deg, #2997ff, rgba(100, 210, 255, 0));
   transition: width 0.5s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
@@ -685,7 +602,7 @@
 }
 
 .apple-step-card:hover .expand-indicator {
-  color: var(--card-color, #64d2ff);
+  color: #64d2ff;
 }
 
 .expand-indicator svg {
@@ -733,7 +650,7 @@
 .cta-button {
   display: inline-block;
   padding: 14px 32px;
-  background: linear-gradient(135deg, var(--card-color, #2997ff), #64d2ff);
+  background: linear-gradient(135deg, #2997ff, #64d2ff);
   color: #000000;
   font-weight: 700;
   font-size: 16px;
@@ -741,12 +658,12 @@
   border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 8px 24px var(--card-color, rgba(41, 151, 255, 0.4));
+  box-shadow: 0 8px 24px rgba(41, 151, 255, 0.4);
 }
 
 .cta-button:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 12px 32px var(--card-color, rgba(41, 151, 255, 0.6));
+  box-shadow: 0 12px 32px rgba(41, 151, 255, 0.6);
 }
 
 /* Chromatic Aberration Effect */
@@ -767,29 +684,105 @@
   opacity: 0.3;
 }
 
-/* Mobile Pagination Dots */
-.mobile-pagination {
-  display: none;
+/* CTA Section */
+.steps-cta-wrapper {
+  margin-top: 4rem;
+  display: flex;
   justify-content: center;
-  gap: 12px;
-  margin-top: 48px;
+  padding-bottom: 2rem;
 }
 
-.pagination-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  border: none;
-  padding: 0;
-  cursor: pointer;
+.start-evaluation-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem 3rem;
+  background: linear-gradient(135deg, #2997ff 0%, #1a7fd4 100%);
+  border-radius: 16px;
+  color: white;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.125rem;
+  box-shadow: 
+    0 10px 30px -5px rgba(41, 151, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.start-evaluation-cta::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.6s ease;
+}
+
+.start-evaluation-cta:hover::before {
+  left: 100%;
+}
+
+.start-evaluation-cta:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 
+    0 20px 40px -10px rgba(41, 151, 255, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.start-evaluation-cta:active {
+  transform: translateY(-2px) scale(1.01);
+}
+
+.cta-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  flex-shrink: 0;
   transition: all 0.3s ease;
 }
 
-.pagination-dot.active {
-  width: 24px;
-  border-radius: 4px;
-  background: linear-gradient(90deg, #2997ff, #64d2ff);
+.start-evaluation-cta:hover .cta-icon {
+  background: rgba(255, 255, 255, 0.25);
+  transform: rotate(5deg);
+}
+
+.cta-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  text-align: left;
+}
+
+.cta-main-text {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cta-sub-text {
+  font-size: 0.875rem;
+  font-weight: 400;
+  opacity: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.cta-arrow {
+  font-size: 1.5rem;
+  transition: transform 0.3s ease;
+}
+
+.start-evaluation-cta:hover .cta-arrow {
+  transform: translateX(4px);
 }
 
 /* Fade In Animation */
@@ -856,18 +849,6 @@
     margin-bottom: 80px;
   }
 
-  .bento-layout .apple-step-card:nth-child(1) {
-    grid-column: 1 / 7;
-  }
-
-  .bento-layout .apple-step-card:nth-child(2) {
-    grid-column: 7 / 13;
-    transform: scale(1) translateY(0);
-  }
-
-  .bento-layout .apple-step-card:nth-child(3) {
-    grid-column: 4 / 10;
-  }
 
   .apple-step-card {
     padding: 48px 32px;
@@ -908,12 +889,6 @@
     -webkit-overflow-scrolling: touch;
   }
 
-  .bento-layout .apple-step-card:nth-child(1),
-  .bento-layout .apple-step-card:nth-child(2),
-  .bento-layout .apple-step-card:nth-child(3) {
-    grid-column: auto;
-    transform: scale(1) translateY(0);
-  }
 
   .apple-step-card {
     padding: 44px 28px;
@@ -946,18 +921,6 @@
     width: fit-content;
   }
 
-  .step-stats {
-    padding: 16px;
-    margin: 20px 0;
-  }
-
-  .stat-number {
-    font-size: 36px;
-  }
-
-  .stat-label {
-    font-size: 12px;
-  }
 
   .apple-step-description {
     font-size: 16px;
@@ -973,8 +936,27 @@
     padding: 14px 0;
   }
 
-  .mobile-pagination {
-    display: flex;
+  .start-evaluation-cta {
+    flex-direction: column;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    text-align: center;
+  }
+
+  .cta-content {
+    text-align: center;
+  }
+
+  .cta-main-text {
+    font-size: 1.125rem;
+  }
+
+  .cta-arrow {
+    transform: rotate(90deg);
+  }
+
+  .start-evaluation-cta:hover .cta-arrow {
+    transform: rotate(90deg) translateX(4px);
   }
 
   /* Disable complex effects on mobile */

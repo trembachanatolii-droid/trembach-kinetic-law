@@ -376,6 +376,16 @@ const PracticeAreasLusion: React.FC = () => {
               />
             ))}
           </div>
+          
+          {/* See All Button */}
+          <div className="flex justify-center mt-12">
+            <Link 
+              to="/practice-areas"
+              className="bg-[#0071e3] hover:bg-[#0077ed] text-white font-medium px-8 py-3 rounded-full transition-colors duration-200"
+            >
+              See all 50 practice areas
+            </Link>
+          </div>
         </div>
       </section>
     </>

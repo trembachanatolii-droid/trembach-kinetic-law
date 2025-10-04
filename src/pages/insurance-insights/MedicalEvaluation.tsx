@@ -5,55 +5,73 @@ import { ArrowRight, Stethoscope, Shield, FileText, Users, CheckCircle, AlertTri
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import imeHero from '@/assets/ime-hero.jpg';
+
 gsap.registerPlugin(ScrollTrigger);
+
 const MedicalEvaluation = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.fromTo(cardsRef.current?.children || [], {
-        opacity: 0,
-        y: 60
-      }, {
-        opacity: 1,
-        y: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: 'power2.out',
-        scrollTrigger: {
-          trigger: cardsRef.current,
-          start: 'top 80%'
+      gsap.fromTo(
+        cardsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 60,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 80%',
+          }
         }
-      });
+      );
     }, sectionRef);
+
     return () => ctx.revert();
   }, []);
-  return <>
+
+  return (
+    <>
       <Helmet>
         <title>Independent Medical Evaluation (IME) | Trembach Law Firm</title>
-        <meta name="description" content="Understand Independent Medical Evaluations (IME) and how insurance companies use them. Get expert legal guidance to protect your injury claim from biased IME reports." />
+        <meta 
+          name="description" 
+          content="Understand Independent Medical Evaluations (IME) and how insurance companies use them. Get expert legal guidance to protect your injury claim from biased IME reports." 
+        />
       </Helmet>
       
       <main ref={sectionRef} className="bg-white">
         {/* Hero Section - Apple Watch Style */}
         <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-          <div className="absolute inset-0 bg-cover bg-center bg-no-repeat" style={{
-          backgroundImage: `url(${imeHero})`
-        }} />
-          <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-white/80" />
+          <div 
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${imeHero})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-white/40 via-white/30 to-white/50" />
           
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <h1 className="font-display text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 tracking-tight drop-shadow-lg leading-[0.9]">
-              <span className="text-slate-900 text-6xl">Independent Medical</span>
+            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold text-slate-900 mb-6 tracking-tight">
+              Independent Medical
               <br />
-              <span className="text-slate-900">Evaluations</span>
+              <span className="text-blue-600">Evaluations</span>
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-slate-900 font-medium max-w-5xl mx-auto mb-12 leading-relaxed drop-shadow-md">
+            <p className="text-xl md:text-2xl text-slate-700 max-w-3xl mx-auto mb-12 leading-relaxed">
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
             </p>
-            <Button asChild size="lg" className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-blue-700 text-white hover:!text-black">
+            <Button 
+              asChild
+              size="lg" 
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-slate-900 text-white"
+            >
               <a href="/free-consultation">
-                Get Your Free Evaluation
+                Get Legal Guidance
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>
@@ -272,13 +290,13 @@ const MedicalEvaluation = () => {
         </section>
 
         {/* How We Help Section */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-slate-900">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center mb-16">
-              <h2 className="font-display text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+              <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
                 How We Protect You During IMEs
               </h2>
-              <p className="text-xl text-slate-600 max-w-3xl mx-auto">
+              <p className="text-xl text-slate-300 max-w-3xl mx-auto">
                 Our experienced attorneys know how to counter biased IME reports
               </p>
             </div>
@@ -288,8 +306,8 @@ const MedicalEvaluation = () => {
                 <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <Shield className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Pre-IME Preparation</h3>
-                <p className="text-slate-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-4">Pre-IME Preparation</h3>
+                <p className="text-slate-300 leading-relaxed">
                   We thoroughly prepare you for the IME, explaining your rights and what to expect during the examination.
                 </p>
               </div>
@@ -298,8 +316,8 @@ const MedicalEvaluation = () => {
                 <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <FileText className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Report Analysis</h3>
-                <p className="text-slate-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-4">Report Analysis</h3>
+                <p className="text-slate-300 leading-relaxed">
                   We carefully review IME reports to identify bias, inconsistencies, and medical errors that we can challenge.
                 </p>
               </div>
@@ -308,8 +326,8 @@ const MedicalEvaluation = () => {
                 <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <Stethoscope className="text-white" size={32} />
                 </div>
-                <h3 className="text-2xl font-bold text-slate-900 mb-4">Counter Evaluations</h3>
-                <p className="text-slate-600 leading-relaxed">
+                <h3 className="text-2xl font-bold text-white mb-4">Counter Evaluations</h3>
+                <p className="text-slate-300 leading-relaxed">
                   When necessary, we arrange truly independent medical evaluations from respected experts to counter biased IME findings.
                 </p>
               </div>
@@ -326,9 +344,13 @@ const MedicalEvaluation = () => {
             <p className="text-xl text-slate-600 mb-10 leading-relaxed">
               Having an experienced attorney on your side during the IME process can make a significant difference in protecting your claim value.
             </p>
-            <Button asChild size="lg" className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-blue-700 text-white hover:!text-black">
+            <Button 
+              asChild
+              size="lg" 
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-slate-900 text-white"
+            >
               <a href="/free-consultation">
-                Get Your Free Evaluation
+                Schedule Free Consultation
                 <ArrowRight className="ml-2" size={20} />
               </a>
             </Button>
@@ -338,6 +360,8 @@ const MedicalEvaluation = () => {
           </div>
         </section>
       </main>
-    </>;
+    </>
+  );
 };
+
 export default MedicalEvaluation;

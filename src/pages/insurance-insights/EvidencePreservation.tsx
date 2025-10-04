@@ -189,7 +189,7 @@ const EvidencePreservation = () => {
               <Button 
                 asChild
                 size="lg" 
-                className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-blue-700 text-white"
+                className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-slate-900 text-white"
               >
                 <a href="/free-consultation">
                   Secure Evidence Now

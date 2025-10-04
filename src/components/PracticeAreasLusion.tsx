@@ -3,7 +3,10 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
-import SplitType from 'split-type';
+import { Canvas } from '@react-three/fiber';
+import { EffectComposer, Bloom, Noise, Vignette } from '@react-three/postprocessing';
+import * as THREE from 'three';
+import { WebGLPracticeCard } from './WebGLPracticeCard';
 
 // Import practice area images
 import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
@@ -116,7 +119,11 @@ const PracticeAreasLusion: React.FC = () => {
   const gridRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
+  const [normalizedMouse, setNormalizedMouse] = useState(new THREE.Vector2(0.5, 0.5));
+  const [cardPositions, setCardPositions] = useState<Array<{ x: number; y: number; z: number; width: number; height: number; visible: boolean }>>([]);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
   const lenisRef = useRef<Lenis | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   // Initialize Lenis smooth scroll
   useEffect(() => {
@@ -151,14 +158,61 @@ const PracticeAreasLusion: React.FC = () => {
     };
   }, []);
 
-  // Mouse tracking for magnetic effect
+  // Mouse tracking for magnetic effect and WebGL
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
+      
+      // Normalize mouse position for WebGL (0 to 1)
+      if (typeof window !== 'undefined') {
+        setNormalizedMouse(new THREE.Vector2(
+          e.clientX / window.innerWidth,
+          1 - (e.clientY / window.innerHeight)
+        ));
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
+
+  // Sync DOM card positions with WebGL planes
+  useEffect(() => {
+    const updatePositions = () => {
+      if (!gridRef.current) return;
+
+      const positions = cardsRef.current.map((card, index) => {
+        if (!card) return { x: 0, y: 0, z: 0, width: 0, height: 0, visible: false };
+
+        const rect = card.getBoundingClientRect();
+        const scrollY = window.scrollY || window.pageYOffset;
+        
+        // Convert DOM coordinates to WebGL coordinates
+        const x = (rect.left + rect.width / 2 - window.innerWidth / 2) / 100;
+        const y = -(rect.top + rect.height / 2 + scrollY - window.innerHeight / 2) / 100;
+        const width = rect.width / 100;
+        const height = rect.height / 100;
+        
+        // Check if card is in viewport
+        const visible = rect.top < window.innerHeight && rect.bottom > 0;
+        
+        return { x, y, z: index * -0.1, width, height, visible };
+      });
+
+      setCardPositions(positions);
+    };
+
+    updatePositions();
+    window.addEventListener('resize', updatePositions);
+    window.addEventListener('scroll', updatePositions);
+
+    const interval = setInterval(updatePositions, 100);
+
+    return () => {
+      window.removeEventListener('resize', updatePositions);
+      window.removeEventListener('scroll', updatePositions);
+      clearInterval(interval);
+    };
   }, []);
 
   // Staggered entrance animations
@@ -249,41 +303,83 @@ const PracticeAreasLusion: React.FC = () => {
   };
 
   return (
-    <section ref={containerRef} className="py-24 bg-[#fafafa] relative overflow-hidden">
-      {/* Header */}
-      <div className="container mx-auto px-6 mb-16">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <h4 className="text-sm font-bold tracking-wider text-foreground">OUR PRACTICE AREAS</h4>
-            <span className="text-sm font-bold text-foreground/60">{practiceAreas.length}</span>
-            <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" fill="none">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m2 2 34 34m0 0V6.046M36 36H6.046"></path>
-            </svg>
-          </div>
-          <Link to="/practice-areas" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
-            View All →
-          </Link>
-        </div>
+    <>
+      {/* WebGL Canvas Layer */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <Canvas
+          ref={canvasRef}
+          camera={{ position: [0, 0, 10], fov: 50 }}
+          style={{ background: 'transparent' }}
+        >
+          <ambientLight intensity={0.5} />
+          <pointLight position={[10, 10, 10]} intensity={1} />
+          
+          {/* Render WebGL cards */}
+          {cardPositions.map((pos, index) => {
+            if (!pos.visible) return null;
+            
+            return (
+              <WebGLPracticeCard
+                key={practiceAreas[index].id}
+                imageUrl={practiceAreas[index].image}
+                position={pos}
+                scale={{ width: pos.width, height: pos.height }}
+                mousePosition={normalizedMouse}
+                isHovered={hoveredCard === index}
+                scrollProgress={0.5}
+              />
+            );
+          })}
+
+          {/* Post-processing effects */}
+          <EffectComposer>
+            <Bloom luminanceThreshold={0.9} luminanceSmoothing={0.9} intensity={0.3} />
+            <Noise opacity={0.02} />
+            <Vignette eskil={false} offset={0.1} darkness={0.5} />
+          </EffectComposer>
+        </Canvas>
       </div>
 
-      {/* Masonry Grid */}
-      <div ref={gridRef} className="container mx-auto px-6">
-        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
-          {practiceAreas.map((area, index) => (
-            <PracticeCard
-              key={area.id}
-              area={area}
-              index={index}
-              mousePos={mousePos}
-              onHover={(isEntering) => handleCardHover(index, isEntering)}
-              ref={(el) => {
-                if (el) cardsRef.current[index] = el;
-              }}
-            />
-          ))}
+      {/* DOM Layer */}
+      <section ref={containerRef} className="py-24 bg-[#fafafa] relative overflow-hidden z-10">
+        {/* Header */}
+        <div className="container mx-auto px-6 mb-16">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-6">
+              <h4 className="text-sm font-bold tracking-wider text-foreground">OUR PRACTICE AREAS</h4>
+              <span className="text-sm font-bold text-foreground/60">{practiceAreas.length}</span>
+              <svg className="w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 38 38" fill="none">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="m2 2 34 34m0 0V6.046M36 36H6.046"></path>
+              </svg>
+            </div>
+            <Link to="/practice-areas" className="text-sm font-medium text-foreground hover:text-primary transition-colors">
+              View All →
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+
+        {/* Masonry Grid */}
+        <div ref={gridRef} className="container mx-auto px-6">
+          <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+            {practiceAreas.map((area, index) => (
+              <PracticeCard
+                key={area.id}
+                area={area}
+                index={index}
+                mousePos={mousePos}
+                onHover={(isEntering) => {
+                  handleCardHover(index, isEntering);
+                  setHoveredCard(isEntering ? index : null);
+                }}
+                ref={(el) => {
+                  if (el) cardsRef.current[index] = el;
+                }}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
   );
 };
 

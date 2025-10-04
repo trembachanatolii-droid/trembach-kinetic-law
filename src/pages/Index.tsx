@@ -7,6 +7,7 @@ import Hero from '../components/Hero';
 import TruthAboutCaseProfessional from '../components/TruthAboutCaseProfessional';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
+import WhyChoose from '../components/WhyChoose';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
@@ -96,6 +97,11 @@ const Index = () => {
       {/* Every Problem Solved */}
       <section id="problems">
         <EveryProblemSolved />
+      </section>
+
+      {/* Why Choose Trembach Law Firm */}
+      <section id="why-choose">
+        <WhyChoose />
       </section>
 
       {/* Featured Results */}

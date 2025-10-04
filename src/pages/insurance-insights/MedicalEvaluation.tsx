@@ -59,7 +59,7 @@ const MedicalEvaluation = () => {
           <div className="container mx-auto px-6 relative z-10 text-center">
             <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold text-slate-900 mb-6 tracking-tight">
               <span className="block">Independent Medical</span>
-              <span className="block text-blue-600">Evaluations</span>
+              <span className="block text-blue-600 text-7xl md:text-9xl lg:text-[10rem] leading-none">Evaluations</span>
             </h1>
             <p className="text-xl md:text-2xl text-slate-700 max-w-3xl mx-auto mb-12 leading-relaxed">
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
@@ -67,7 +67,7 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
                 Get Your Free Evaluation
@@ -289,44 +289,44 @@ const MedicalEvaluation = () => {
         </section>
 
         {/* How We Help Section */}
-        <section className="py-20 bg-slate-900 relative">
+        <section className="py-20 bg-gradient-to-br from-blue-600 to-blue-700 relative">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center mb-16">
               <h2 className="font-display text-4xl md:text-5xl font-bold text-white mb-6">
                 How We Protect You During IMEs
               </h2>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
               Our experienced attorneys know how to counter biased IME reports
             </p>
             </div>
 
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="text-center">
-                <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center">
+                <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <Shield className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Pre-IME Preparation</h3>
-                <p className="text-white/90 leading-relaxed">
+                <p className="text-blue-100 leading-relaxed">
                   We thoroughly prepare you for the IME, explaining your rights and what to expect during the examination.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center">
+                <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <FileText className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Report Analysis</h3>
-                <p className="text-white/90 leading-relaxed">
+                <p className="text-blue-100 leading-relaxed">
                   We carefully review IME reports to identify bias, inconsistencies, and medical errors that we can challenge.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="bg-blue-600 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
+              <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 border border-white/20 text-center">
+                <div className="bg-white/20 rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-6">
                   <Stethoscope className="text-white" size={32} />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-4">Counter Evaluations</h3>
-                <p className="text-white/90 leading-relaxed">
+                <p className="text-blue-100 leading-relaxed">
                   When necessary, we arrange truly independent medical evaluations from respected experts to counter biased IME findings.
                 </p>
               </div>
@@ -346,7 +346,7 @@ const MedicalEvaluation = () => {
             <Button 
               asChild
               size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
               <a href="/free-consultation">
                 Get Your Free Evaluation

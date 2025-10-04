@@ -69,7 +69,7 @@ const MedicalEvaluation = () => {
               size="lg" 
               className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
-              <a href="/free-consultation">
+              <a href="/free-consultation" className="no-underline text-current visited:text-black hover:text-current active:text-black focus:text-black">
                 Get Your Free Evaluation
                 <ArrowRight className="ml-2" size={20} />
               </a>
@@ -348,7 +348,7 @@ const MedicalEvaluation = () => {
               size="lg" 
               className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
             >
-              <a href="/free-consultation">
+              <a href="/free-consultation" className="no-underline text-current visited:text-black hover:text-current active:text-black focus:text-black">
                 Get Your Free Evaluation
                 <ArrowRight className="ml-2" size={20} />
               </a>

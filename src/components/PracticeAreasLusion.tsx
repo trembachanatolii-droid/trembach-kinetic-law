@@ -6,6 +6,7 @@ import Lenis from 'lenis';
 import { Canvas } from '@react-three/fiber';
 import * as THREE from 'three';
 import { WebGLPracticeCard } from './WebGLPracticeCard';
+import CustomCursor from './CustomCursor';
 
 // Import practice area images
 import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
@@ -121,6 +122,8 @@ const PracticeAreasLusion: React.FC = () => {
   const [normalizedMouse, setNormalizedMouse] = useState(new THREE.Vector2(0.5, 0.5));
   const [cardPositions, setCardPositions] = useState<Array<{ x: number; y: number; z: number; width: number; height: number; visible: boolean }>>([]);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [hoveredColor, setHoveredColor] = useState('#ffffff');
+  const [isCursorHovering, setIsCursorHovering] = useState(false);
   const lenisRef = useRef<Lenis | null>(null);
 
   // Initialize Lenis smooth scroll
@@ -302,6 +305,12 @@ const PracticeAreasLusion: React.FC = () => {
 
   return (
     <>
+      {/* Custom Cursor */}
+      <CustomCursor 
+        hoveredColor={hoveredColor}
+        isHovering={isCursorHovering}
+      />
+
       {/* WebGL Canvas Layer */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <Canvas
@@ -332,7 +341,15 @@ const PracticeAreasLusion: React.FC = () => {
       </div>
 
       {/* DOM Layer */}
-      <section ref={containerRef} className="py-24 bg-[#fafafa] relative overflow-hidden z-10">
+      <section 
+        ref={containerRef} 
+        className="py-24 relative overflow-hidden z-10 transition-colors duration-700"
+        style={{
+          backgroundColor: hoveredCard !== null 
+            ? `${practiceAreas[hoveredCard].colorBg}15` 
+            : '#fafafa'
+        }}
+      >
         {/* Header */}
         <div className="container mx-auto px-6 mb-16">
           <div className="flex items-center justify-between">
@@ -361,6 +378,8 @@ const PracticeAreasLusion: React.FC = () => {
                 onHover={(isEntering) => {
                   handleCardHover(index, isEntering);
                   setHoveredCard(isEntering ? index : null);
+                  setHoveredColor(isEntering ? area.colorBg : '#ffffff');
+                  setIsCursorHovering(isEntering);
                 }}
                 ref={(el) => {
                   if (el) cardsRef.current[index] = el;

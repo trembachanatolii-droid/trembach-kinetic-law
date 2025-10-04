@@ -257,7 +257,12 @@
     text-decoration: underline !important;
     color: #dc2626 !important; /* Red hover for better visibility */
   }
-  
+
+  /* Global accessibility fix: ensure any Tailwind `hover:text-white` remains readable
+     by mapping it to the design token `--primary-foreground` instead. */
+  .hover\:text-white:hover {
+    color: hsl(var(--primary-foreground)) !important; /* equals hover:!text-primary-foreground */
+  }
   /* FORCED TEXT VISIBILITY */
   
   .text-white,

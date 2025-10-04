@@ -1,511 +1,358 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Badge } from '@/components/ui/badge';
-import { 
-  Phone, 
-  Mail, 
-  Clock,
-  Shield,
-  AlertTriangle,
-  CheckCircle,
-  Scale,
-  Building,
-  Calculator,
-  DollarSign,
-  TrendingUp,
-  FileText,
-  Stethoscope,
-  Activity,
-  Heart
-} from 'lucide-react';
-import heroBackground from '@/assets/medical-malpractice-compensation-calculator-hero.jpg';
-import SEO from '@/components/SEO';
-import Navigation from '@/components/Navigation';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertCircle } from 'lucide-react';
 
-interface FormData {
-  typeOfError: string;
-  severityOfInjury: string;
-  age: string;
-  medicalExpenses: string;
-  lostWages: string;
-  futureCareCosts: string;
-  painAndSuffering: string;
-  permanentDisability: string;
-  impactOnLife: string;
-}
-
-interface CalculationResult {
-  economicDamages: number;
-  nonEconomicDamages: number;
-  totalDamages: number;
-  micraCap: number;
-  estimatedRecovery: number;
-}
-
-const MedicalMalpracticeCompensationCalculator: React.FC = () => {
-  const [formData, setFormData] = useState<FormData>({
-    typeOfError: '',
-    severityOfInjury: '',
-    age: '',
-    medicalExpenses: '',
+const MedicalMalpracticeCompensationCalculator = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    errorType: '',
+    injurySeverity: '',
+    medicalCosts: '',
     lostWages: '',
-    futureCareCosts: '',
-    painAndSuffering: '',
-    permanentDisability: '',
-    impactOnLife: ''
+    age: '',
+    permanentImpact: ''
   });
-
-  const [calculation, setCalculation] = useState<CalculationResult | null>(null);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
+  const [results, setResults] = useState<{ min: number; max: number; micraCapped: number } | null>(null);
 
   const calculateCompensation = () => {
-    // Economic damages calculation
-    const medicalExpenses = parseFloat(formData.medicalExpenses) || 0;
-    const lostWages = parseFloat(formData.lostWages) || 0;
-    const futureCareCosts = parseFloat(formData.futureCareCosts) || 0;
-    const economicDamages = medicalExpenses + lostWages + futureCareCosts;
+    let baseMin = 50000;
+    let baseMax = 500000;
 
-    // Pain and suffering multiplier based on severity
-    const painMultiplier = {
-      'minor': 1.5,
-      'moderate': 3,
-      'severe': 5,
-      'catastrophic': 7
-    }[formData.severityOfInjury] || 2;
+    const errorMult: Record<string, number> = {
+      'misdiagnosis': 2.0,
+      'surgical-error': 3.5,
+      'medication-error': 1.8,
+      'birth-injury': 4.0,
+      'anesthesia-error': 3.0,
+      'failure-diagnose': 2.5
+    };
+    baseMin *= errorMult[formData.errorType] || 1;
+    baseMax *= errorMult[formData.errorType] || 1;
 
-    // Additional factors
-    const permanentDisabilityMultiplier = formData.permanentDisability === 'yes' ? 1.5 : 1;
-    const impactMultiplier = {
-      'minimal': 1,
-      'moderate': 1.3,
-      'significant': 1.6,
-      'life-changing': 2
-    }[formData.impactOnLife] || 1;
+    const medical = parseInt(formData.medicalCosts) || 0;
+    baseMin += medical * 2;
+    baseMax += medical * 5;
 
-    // Calculate non-economic damages
-    const basePainSuffering = Math.max(economicDamages * painMultiplier, 50000);
-    const adjustedPainSuffering = basePainSuffering * permanentDisabilityMultiplier * impactMultiplier;
+    const wages = parseInt(formData.lostWages) || 0;
+    baseMin += wages * 3;
+    baseMax += wages * 6;
 
-    // MICRA cap for 2024 (medical malpractice cases)
-    const currentYear = new Date().getFullYear();
-    const micraCap = currentYear >= 2023 ? 430000 : 350000; // Increasing annually
+    // California MICRA cap on non-economic damages
+    const micraCapped = Math.min(baseMax, 250000 + medical + wages);
 
-    const nonEconomicDamages = Math.min(adjustedPainSuffering, micraCap);
-    const totalDamages = economicDamages + nonEconomicDamages;
-
-    setCalculation({
-      economicDamages,
-      nonEconomicDamages,
-      totalDamages,
-      micraCap,
-      estimatedRecovery: totalDamages
+    setResults({
+      min: Math.round(baseMin),
+      max: Math.round(baseMax),
+      micraCapped: Math.round(micraCapped)
     });
+    setStep(3);
   };
 
-  const resetCalculator = () => {
-    setFormData({
-      typeOfError: '',
-      severityOfInjury: '',
-      age: '',
-      medicalExpenses: '',
-      lostWages: '',
-      futureCareCosts: '',
-      painAndSuffering: '',
-      permanentDisability: '',
-      impactOnLife: ''
-    });
-    setCalculation(null);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateCompensation();
+  };
+
+  const isStepComplete = () => {
+    if (step === 1) return formData.errorType && formData.injurySeverity;
+    if (step === 2) return formData.medicalCosts && formData.lostWages && formData.age && formData.permanentImpact;
+    return false;
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <SEO 
-        title="Medical Malpractice Compensation Calculator | California | Trembach Law"
-        description="Calculate potential compensation for your California medical malpractice case. Free calculator considers MICRA caps, economic damages, and pain & suffering for all medical errors."
-      />
-      
-      <Navigation />
+    <>
+      <Helmet>
+        <title>Medical Malpractice Calculator | Doctor Negligence Compensation | Trembach Law</title>
+        <meta name="description" content="Calculate medical malpractice compensation for surgical errors, misdiagnosis, and doctor negligence. Free estimates with MICRA cap considerations." />
+      </Helmet>
 
-      {/* Hero Section */}
-      <section 
-        className="relative h-96 bg-cover bg-center bg-no-repeat flex items-center justify-center"
-        style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url(${heroBackground})` }}
-      >
-        <div className="text-center text-white px-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            Medical Malpractice Compensation Calculator
-          </h1>
-          <p className="text-xl md:text-2xl">
-            Estimate Your Potential Recovery Under California MICRA Laws
-          </p>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <main className="container mx-auto px-6 py-16">
-        <div className="grid lg:grid-cols-3 gap-8">
-          
-          {/* Calculator Form */}
-          <div className="lg:col-span-2">
-            <Card className="p-8">
-              <CardHeader>
-                <CardTitle className="text-3xl mb-4 flex items-center gap-3">
-                  <Calculator className="h-8 w-8 text-primary" />
-                  Medical Malpractice Compensation Calculator
-                </CardTitle>
-                <p className="text-lg text-muted-foreground">
-                  This calculator provides estimates based on California medical malpractice law and MICRA damage caps. Actual compensation depends on specific case details and requires legal evaluation.
-                </p>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-8">
-                  
-                  {/* Medical Error Information */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <Stethoscope className="h-5 w-5 text-primary" />
-                      Medical Error Information
-                    </h3>
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Type of Medical Error</label>
-                        <Select onValueChange={(value) => handleSelectChange('typeOfError', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select type of error" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="misdiagnosis">Misdiagnosis/Delayed Diagnosis</SelectItem>
-                            <SelectItem value="surgical-error">Surgical Error</SelectItem>
-                            <SelectItem value="medication-error">Medication Error</SelectItem>
-                            <SelectItem value="birth-injury">Birth Injury</SelectItem>
-                            <SelectItem value="anesthesia-error">Anesthesia Error</SelectItem>
-                            <SelectItem value="emergency-room">Emergency Room Error</SelectItem>
-                            <SelectItem value="hospital-infection">Hospital-Acquired Infection</SelectItem>
-                            <SelectItem value="nursing-error">Nursing Error</SelectItem>
-                            <SelectItem value="other">Other Medical Error</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Severity of Injury</label>
-                        <Select onValueChange={(value) => handleSelectChange('severityOfInjury', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select injury severity" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="minor">Minor Injury (temporary)</SelectItem>
-                            <SelectItem value="moderate">Moderate Injury (some lasting effects)</SelectItem>
-                            <SelectItem value="severe">Severe Injury (significant impact)</SelectItem>
-                            <SelectItem value="catastrophic">Catastrophic Injury (life-altering)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Economic Damages */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <DollarSign className="h-5 w-5 text-primary" />
-                      Economic Damages (No Limits Under MICRA)
-                    </h3>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Medical Expenses</label>
-                        <Input 
-                          type="number"
-                          name="medicalExpenses"
-                          value={formData.medicalExpenses}
-                          onChange={handleInputChange}
-                          placeholder="$0"
-                          className="w-full"
-                        />
-                        <p className="text-xs text-muted-foreground mt-1">Past & future medical costs</p>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Lost Wages</label>
-                        <Input 
-                          type="number"
-                          name="lostWages"
-                          value={formData.lostWages}
-                          onChange={handleInputChange}
-                          placeholder="$0"
-                          className="w-full"
-                        />
-                        <p className="text-xs text-muted-foreground mt-1">Past & future lost income</p>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Future Care Costs</label>
-                        <Input 
-                          type="number"
-                          name="futureCareCosts"
-                          value={formData.futureCareCosts}
-                          onChange={handleInputChange}
-                          placeholder="$0"
-                          className="w-full"
-                        />
-                        <p className="text-xs text-muted-foreground mt-1">Long-term care, therapy</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Impact on Life */}
-                  <div>
-                    <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-                      <Heart className="h-5 w-5 text-primary" />
-                      Impact on Your Life
-                    </h3>
-                    <div className="grid md:grid-cols-3 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Your Age</label>
-                        <Select onValueChange={(value) => handleSelectChange('age', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select age range" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="under-30">Under 30</SelectItem>
-                            <SelectItem value="30-50">30-50</SelectItem>
-                            <SelectItem value="51-65">51-65</SelectItem>
-                            <SelectItem value="over-65">Over 65</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Permanent Disability</label>
-                        <Select onValueChange={(value) => handleSelectChange('permanentDisability', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="no">No permanent disability</SelectItem>
-                            <SelectItem value="yes">Yes, permanent disability</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium mb-2">Impact on Daily Life</label>
-                        <Select onValueChange={(value) => handleSelectChange('impactOnLife', value)}>
-                          <SelectTrigger>
-                            <SelectValue placeholder="Select impact level" />
-                          </SelectTrigger>
-                          <SelectContent>
-                            <SelectItem value="minimal">Minimal impact</SelectItem>
-                            <SelectItem value="moderate">Moderate impact</SelectItem>
-                            <SelectItem value="significant">Significant impact</SelectItem>
-                            <SelectItem value="life-changing">Life-changing impact</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Buttons */}
-                  <div className="flex gap-4">
-                    <Button 
-                      onClick={calculateCompensation}
-                      size="lg" 
-                      className="flex-1"
-                      disabled={!formData.severityOfInjury || !formData.typeOfError}
-                    >
-                      <Calculator className="mr-2 h-5 w-5" />
-                      Calculate Compensation
-                    </Button>
-                    <Button 
-                      onClick={resetCalculator}
-                      variant="outline"
-                      size="lg"
-                    >
-                      Reset
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Results */}
-            {calculation && (
-              <Card className="mt-8 p-8 bg-green-50 border-green-200">
-                <CardHeader>
-                  <CardTitle className="text-2xl text-green-700 flex items-center gap-3">
-                    <TrendingUp className="h-8 w-8" />
-                    Your Estimated Compensation
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid md:grid-cols-2 gap-6 mb-6">
-                    <div className="text-center p-6 bg-white rounded-lg shadow">
-                      <h4 className="text-lg font-semibold text-green-700 mb-2">Economic Damages</h4>
-                      <p className="text-3xl font-bold text-green-600">
-                        ${calculation.economicDamages.toLocaleString()}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">No limits under MICRA</p>
-                    </div>
-                    <div className="text-center p-6 bg-white rounded-lg shadow">
-                      <h4 className="text-lg font-semibold text-green-700 mb-2">Non-Economic Damages</h4>
-                      <p className="text-3xl font-bold text-green-600">
-                        ${calculation.nonEconomicDamages.toLocaleString()}
-                      </p>
-                      <p className="text-sm text-muted-foreground mt-1">Subject to MICRA cap</p>
-                    </div>
-                  </div>
-                  
-                  <div className="text-center p-6 bg-primary text-primary-foreground rounded-lg">
-                    <h4 className="text-xl font-semibold mb-2">Total Estimated Recovery</h4>
-                    <p className="text-4xl font-bold mb-2">
-                      ${calculation.estimatedRecovery.toLocaleString()}
-                    </p>
-                    <p className="text-sm opacity-90">
-                      Based on current MICRA cap of ${calculation.micraCap.toLocaleString()}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-lg">
-                    <h5 className="font-semibold text-amber-800 mb-2">Important Disclaimer</h5>
-                    <p className="text-sm text-amber-700">
-                      This is an estimate only. Actual compensation depends on many factors including case strength, evidence quality, defendant's assets, and negotiation skills. Contact us for a professional case evaluation to understand your true potential recovery.
-                    </p>
-                  </div>
-
-                  <div className="mt-6 text-center">
-                    <Button size="lg" asChild>
-                      <a href="/medical-malpractice-case-evaluation">
-                        <Scale className="mr-2 h-5 w-5" />
-                        Get Professional Case Review
-                      </a>
-                    </Button>
-                  </div>
-                </CardContent>
-              </Card>
-            )}
+      <main className="min-h-screen bg-white">
+        <div className="border-b border-slate-200">
+          <div className="container mx-auto px-6 py-4 max-w-5xl">
+            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
+              <ArrowLeft size={16} className="mr-2" />
+              <span className="text-sm font-medium">Back to All Calculators</span>
+            </Link>
           </div>
+        </div>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
-              
-              {/* Contact Card */}
-              <Card className="p-6">
-                <CardHeader>
-                  <CardTitle className="text-xl flex items-center gap-2">
-                    <Phone className="h-5 w-5 text-primary" />
-                    Get Expert Analysis
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="text-center">
-                    <Button size="lg" className="w-full text-lg" asChild>
-                      <a href="tel:8181234567">
-                        <Phone className="mr-2 h-5 w-5" />
-                        Call (818) 123-4567
-                      </a>
-                    </Button>
-                    <p className="text-sm text-muted-foreground mt-2">Free consultation available 24/7</p>
-                  </div>
-                </CardContent>
-              </Card>
+        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
+          <div className="container mx-auto px-6 max-w-5xl text-center">
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
+              Medical Malpractice<br />Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 font-light">
+              Estimate doctor negligence compensation
+            </p>
+          </div>
+        </section>
 
-              {/* Factors Affecting Compensation */}
-              <Card className="p-6">
-                <CardHeader>
-                  <CardTitle className="text-xl">Factors Affecting Compensation</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3 text-sm">
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Severity and permanence of injuries</span>
+        <div className="border-b border-slate-200">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="flex justify-center items-center py-8 space-x-4">
+              {[1, 2, 3].map((num) => (
+                <React.Fragment key={num}>
+                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'}`}>
+                    {num}
                   </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Clear evidence of medical negligence</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Impact on earning capacity</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Age and life expectancy</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Quality of medical expert testimony</span>
-                  </div>
-                  <div className="flex items-start gap-2">
-                    <span className="text-primary mt-1">•</span>
-                    <span>Defendant's insurance coverage</span>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* MICRA Information */}
-              <Card className="bg-blue-50 border-blue-200 p-6">
-                <CardHeader>
-                  <CardTitle className="text-xl text-blue-700">California MICRA Laws</CardTitle>
-                </CardHeader>
-                <CardContent className="text-sm text-blue-600 space-y-2">
-                  <p><strong>2024 Non-Economic Caps:</strong></p>
-                  <p>• Medical Injury: $430,000</p>
-                  <p>• Wrongful Death: $600,000</p>
-                  <p className="mt-3"><strong>Economic Damages:</strong> Unlimited (medical bills, lost wages, future care)</p>
-                  <p className="mt-3">Caps increase annually until reaching $750,000/$1,000,000 in 2033</p>
-                </CardContent>
-              </Card>
-
-              {/* Time Warning */}
-              <Card className="bg-red-50 border-red-200 p-6">
-                <CardHeader>
-                  <CardTitle className="text-xl text-red-700 flex items-center gap-2">
-                    <Clock className="h-5 w-5" />
-                    Time-Sensitive Warning
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-red-600 text-sm leading-relaxed">
-                    California medical malpractice cases have strict deadlines. Evidence disappears quickly. Don't delay - contact us immediately to protect your rights and maximize your compensation.
-                  </p>
-                </CardContent>
-              </Card>
-
-              {/* Why Choose Us */}
-              <Card className="p-6">
-                <CardHeader>
-                  <CardTitle className="text-xl">Why Choose Trembach Law?</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-sm">Medical experts on our team</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-sm">Proven MICRA expertise</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-sm">No fees unless we win</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <CheckCircle className="h-5 w-5 text-green-500" />
-                    <span className="text-sm">Maximum compensation pursuit</span>
-                  </div>
-                </CardContent>
-              </Card>
+                  {num < 3 && <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />}
+                </React.Fragment>
+              ))}
             </div>
           </div>
         </div>
+
+        <section className="py-16">
+          <div className="container mx-auto px-6 max-w-3xl">
+            <form onSubmit={handleSubmit} className="space-y-12">
+              {step === 1 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Type of medical error</h2>
+                    <p className="text-slate-600">What type of negligence occurred?</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Medical error category</label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'misdiagnosis', label: 'Misdiagnosis' },
+                          { value: 'surgical-error', label: 'Surgical Error' },
+                          { value: 'medication-error', label: 'Medication Error' },
+                          { value: 'birth-injury', label: 'Birth Injury' },
+                          { value: 'anesthesia-error', label: 'Anesthesia Error' },
+                          { value: 'failure-diagnose', label: 'Failure to Diagnose' }
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, errorType: opt.value }))}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.errorType === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
+                          >
+                            <span className="font-medium text-slate-900">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Injury severity</label>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[
+                          { value: 'minor', label: 'Minor' },
+                          { value: 'moderate', label: 'Moderate' },
+                          { value: 'severe', label: 'Severe' },
+                          { value: 'catastrophic', label: 'Catastrophic' }
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, injurySeverity: opt.value }))}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.injurySeverity === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
+                          >
+                            <span className="font-medium text-slate-900">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={() => setStep(2)}
+                    disabled={!isStepComplete()}
+                    className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
+                  >
+                    Continue
+                    <ArrowRight className="ml-2" size={20} />
+                  </button>
+                </div>
+              )}
+
+              {step === 2 && (
+                <div className="space-y-8 animate-fade-in">
+                  <div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Financial details</h2>
+                    <p className="text-slate-600">Calculate your damages</p>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Medical expenses</label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                        <input
+                          type="number"
+                          placeholder="0"
+                          value={formData.medicalCosts}
+                          onChange={(e) => setFormData(prev => ({ ...prev, medicalCosts: e.target.value }))}
+                          className="w-full h-14 pl-8 pr-4 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none text-lg font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Lost wages</label>
+                      <div className="relative">
+                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
+                        <input
+                          type="number"
+                          placeholder="0"
+                          value={formData.lostWages}
+                          onChange={(e) => setFormData(prev => ({ ...prev, lostWages: e.target.value }))}
+                          className="w-full h-14 pl-8 pr-4 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none text-lg font-medium"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Your age</label>
+                      <div className="grid md:grid-cols-3 gap-3">
+                        {[
+                          { value: 'under-40', label: 'Under 40' },
+                          { value: '40-60', label: '40-60' },
+                          { value: 'over-60', label: 'Over 60' }
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, age: opt.value }))}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.age === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
+                          >
+                            <span className="font-medium text-slate-900">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-semibold text-slate-900 mb-3">Permanent impact</label>
+                      <div className="grid md:grid-cols-2 gap-3">
+                        {[
+                          { value: 'none', label: 'No Permanent Impact' },
+                          { value: 'minor', label: 'Minor Permanent' },
+                          { value: 'significant', label: 'Significant Permanent' },
+                          { value: 'total-disability', label: 'Total Disability' }
+                        ].map((opt) => (
+                          <button
+                            key={opt.value}
+                            type="button"
+                            onClick={() => setFormData(prev => ({ ...prev, permanentImpact: opt.value }))}
+                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.permanentImpact === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
+                          >
+                            <span className="font-medium text-slate-900">{opt.label}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <button
+                      type="button"
+                      onClick={() => setStep(1)}
+                      className="h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 font-semibold transition-all inline-flex items-center justify-center"
+                    >
+                      <ArrowLeft className="mr-2" size={20} />
+                      Back
+                    </button>
+                    <button
+                      type="submit"
+                      disabled={!isStepComplete()}
+                      className="flex-1 h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
+                    >
+                      Calculate Compensation
+                      <Calculator className="ml-2" size={20} />
+                    </button>
+                  </div>
+                </div>
+              )}
+
+              {step === 3 && results && (
+                <div className="space-y-8 animate-fade-in">
+                  <div className="text-center">
+                    <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
+                      <DollarSign className="text-green-600" size={32} />
+                    </div>
+                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Your Estimated Compensation</h2>
+                    <p className="text-slate-600">Based on medical negligence details</p>
+                  </div>
+
+                  <div className="bg-slate-50 rounded-3xl p-8 md:p-12 text-center border border-slate-200">
+                    <div className="text-6xl md:text-7xl font-bold text-slate-900 mb-4">
+                      ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+                    </div>
+                    <p className="text-xl text-slate-600 mb-4">Potential range</p>
+                    <p className="text-sm text-slate-500">MICRA capped estimate: ${results.micraCapped.toLocaleString()}</p>
+                  </div>
+
+                  <div className="bg-orange-50 rounded-2xl p-6 border border-orange-200">
+                    <div className="flex items-start gap-4">
+                      <AlertCircle className="text-orange-600 shrink-0 mt-1" size={24} />
+                      <div>
+                        <h3 className="font-semibold text-slate-900 mb-2">California MICRA Law</h3>
+                        <p className="text-slate-700 leading-relaxed">
+                          California caps non-economic damages at $250,000 in medical malpractice cases. Economic damages (medical bills, lost wages) are not capped.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <Link
+                      to="/free-consultation"
+                      className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 visited:text-white font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center no-underline"
+                    >
+                      Get Free Case Review
+                      <ArrowRight className="ml-2" size={20} />
+                    </Link>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setStep(1);
+                        setResults(null);
+                        setFormData({
+                          errorType: '',
+                          injurySeverity: '',
+                          medicalCosts: '',
+                          lostWages: '',
+                          age: '',
+                          permanentImpact: ''
+                        });
+                      }}
+                      className="w-full h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 visited:text-slate-900 font-semibold transition-all inline-flex items-center justify-center no-underline"
+                    >
+                      Calculate Another Case
+                    </button>
+                  </div>
+                </div>
+              )}
+            </form>
+          </div>
+        </section>
+
+        <section className="py-20 bg-slate-50 border-t border-slate-200">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">$500K+</div>
+                <p className="text-slate-600">Average malpractice award</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
+                <p className="text-slate-600">Expert consultation</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
+                <p className="text-slate-600">Unless we win</p>
+              </div>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+    </>
   );
 };
 

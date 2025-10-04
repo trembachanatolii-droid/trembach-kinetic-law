@@ -257,7 +257,7 @@ const FreeConsultation = () => {
                           checked={formData.smsConsent}
                           onChange={(e) => setFormData(prev => ({ ...prev, smsConsent: e.target.checked }))}
                           required
-                          className="mt-0.5 h-4 w-4 rounded-sm border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          className="mt-1 h-6 w-6 shrink-0 rounded-md border border-primary accent-primary cursor-pointer relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                           aria-describedby="smsConsent-help smsConsent-legal"
                         />
                         <div className="text-sm text-muted-foreground leading-relaxed space-y-2">

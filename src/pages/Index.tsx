@@ -11,6 +11,7 @@ import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
 import FeaturedResults from '../components/FeaturedResults';
 import PracticeAreasReference from '../components/PracticeAreasReference';
+import PracticeAreasLusion from '../components/PracticeAreasLusion';
 import Process from '../components/Process';
 import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
@@ -59,7 +60,7 @@ const Index = () => {
 
       {/* Practice Areas */}
       <section id="practice-areas">
-        <PracticeAreasReference key="practice-areas-v2" />
+        <PracticeAreasLusion key="practice-areas-lusion" />
       </section>
 
       {/* Truth About Your Case Section */}

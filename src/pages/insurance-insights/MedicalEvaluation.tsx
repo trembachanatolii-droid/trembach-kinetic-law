@@ -58,12 +58,12 @@ const MedicalEvaluation = () => {
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
             </p>
             <div className="animate-fade-in" style={{ animationDelay: '0.4s' }}>
-              <Button 
+              <Button
                 asChild
-                size="lg" 
-                className="h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-medium rounded-full transition-all duration-300 hover:scale-105 bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl"
+                size="lg"
+                className="h-12 md:h-14 px-8 md:px-10 text-base md:text-lg font-medium rounded-full transition-all duration-300 hover:scale-105 bg-blue-600 hover:bg-blue-600 text-white hover:text-black visited:text-white shadow-lg hover:shadow-xl"
               >
-                <a href="/free-consultation" className="no-underline text-white">
+                <a href="/free-consultation" className="no-underline">
                   Get Your Free Evaluation
                   <ArrowRight className="ml-2" size={20} />
                 </a>
@@ -338,10 +338,10 @@ const MedicalEvaluation = () => {
             <p className="text-xl text-slate-600 mb-10 leading-relaxed">
               Having an experienced attorney on your side during the IME process can make a significant difference in protecting your claim value.
             </p>
-            <Button 
+            <Button
               asChild
-              size="lg" 
-              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 text-white hover:bg-blue-600 hover:text-white visited:text-white active:bg-blue-600 active:text-black focus-visible:bg-blue-600 focus-visible:text-black"
+              size="lg"
+              className="h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg bg-blue-600 hover:bg-blue-600 text-white hover:text-black visited:text-white active:bg-blue-600 focus-visible:bg-blue-600"
             >
               <a href="/free-consultation" className="no-underline">
                 Get Your Free Evaluation

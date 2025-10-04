@@ -57,16 +57,16 @@ const LegalRepresentation = () => {
             <img 
               src={recordingSystem} 
               alt="Legal protection against insurance recording systems" 
-              className="w-full h-full object-cover opacity-30"
+              className="w-full h-full object-cover opacity-80"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/95"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/20 via-slate-900/10 to-slate-900/50"></div>
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
             <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ letterSpacing: '-0.02em', textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
               Protect Your
               <br />
-              <span className="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Legal Rights</span>
+              <span className="text-white">Legal Rights</span>
             </h1>
             <p className="hero-subtitle text-xl sm:text-2xl text-white max-w-3xl mx-auto leading-relaxed font-medium" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}>
               Expert legal representation against insurance company statement analysis systems

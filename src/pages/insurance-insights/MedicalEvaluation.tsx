@@ -57,7 +57,7 @@ const MedicalEvaluation = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-white/80" />
           
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 tracking-tight drop-shadow-lg">
+            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight drop-shadow-lg leading-none">
               <span className="text-slate-900">Independent Medical</span>
               <br />
               <span className="text-slate-900">Evaluations</span>

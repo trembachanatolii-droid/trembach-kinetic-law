@@ -21,7 +21,7 @@ export const WebGLPracticeCard: React.FC<WebGLPracticeCardProps> = ({
   scrollProgress,
 }) => {
   const meshRef = useRef<THREE.Mesh>(null);
-  const materialRef = useRef<THREE.ShaderMaterial>(null);
+  
   const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const { size } = useThree();
   
@@ -63,9 +63,9 @@ export const WebGLPracticeCard: React.FC<WebGLPracticeCardProps> = ({
 
   // Animation loop
   useFrame(({ clock }) => {
-    if (!materialRef.current) return;
+    if (!shaderMaterial) return;
 
-    const uniforms = materialRef.current.uniforms;
+    const uniforms = (shaderMaterial as THREE.ShaderMaterial).uniforms;
 
     // Update time
     uniforms.uTime.value = clock.getElapsedTime();
@@ -107,9 +107,9 @@ export const WebGLPracticeCard: React.FC<WebGLPracticeCardProps> = ({
     <mesh
       ref={meshRef}
       position={[position.x, position.y, position.z]}
+      material={shaderMaterial as any}
     >
       <planeGeometry args={[scale.width, scale.height, 32, 32]} />
-      <primitive object={shaderMaterial} attach="material" ref={materialRef} />
     </mesh>
   );
 };

@@ -4,7 +4,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { Canvas } from '@react-three/fiber';
-import { EffectComposer, Bloom, Noise, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
 import { WebGLPracticeCard } from './WebGLPracticeCard';
 
@@ -307,7 +306,6 @@ const PracticeAreasLusion: React.FC = () => {
       {/* WebGL Canvas Layer */}
       <div className="fixed inset-0 pointer-events-none z-0">
         <Canvas
-          ref={canvasRef}
           camera={{ position: [0, 0, 10], fov: 50 }}
           style={{ background: 'transparent' }}
         >
@@ -331,12 +329,6 @@ const PracticeAreasLusion: React.FC = () => {
             );
           })}
 
-          {/* Post-processing effects */}
-          <EffectComposer>
-            <Bloom luminanceThreshold={0.9} luminanceSmoothing={0.9} intensity={0.3} />
-            <Noise opacity={0.02} />
-            <Vignette eskil={false} offset={0.1} darkness={0.5} />
-          </EffectComposer>
         </Canvas>
       </div>
 

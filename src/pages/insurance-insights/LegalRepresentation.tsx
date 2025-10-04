@@ -57,9 +57,9 @@ const LegalRepresentation = () => {
             <img 
               src={recordingSystem} 
               alt="Legal protection against insurance recording systems" 
-              className="w-full h-full object-cover opacity-20"
+              className="w-full h-full object-cover opacity-40"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/80 via-slate-900/60 to-slate-900"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/40 to-slate-900/80"></div>
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -189,9 +189,10 @@ const LegalRepresentation = () => {
               
               <Button 
                 size="lg" 
+                onClick={() => (window.location.href = '/free-consultation')}
                 className="bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600 h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg shadow-blue-500/30"
               >
-                Schedule Free Consultation
+                Get Free Evaluation
                 <ArrowRight className="ml-2" size={20} />
               </Button>
             </div>

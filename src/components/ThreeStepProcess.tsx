@@ -53,44 +53,6 @@ const MoneyIcon = () => (
   </svg>
 );
 
-interface CounterProps {
-  end: number;
-  duration?: number;
-  suffix?: string;
-  prefix?: string;
-}
-
-const AnimatedCounter = ({ end, duration = 2, suffix = "", prefix = "" }: CounterProps) => {
-  const [count, setCount] = useState(0);
-  const countRef = useRef<HTMLSpanElement>(null);
-  const hasAnimated = useRef(false);
-
-  useEffect(() => {
-    if (!countRef.current || hasAnimated.current) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          gsap.to({ value: 0 }, {
-            value: end,
-            duration,
-            ease: "power2.out",
-            onUpdate: function() {
-              setCount(Math.round(this.targets()[0].value));
-            }
-          });
-        }
-      },
-      { threshold: 0.5 }
-    );
-
-    observer.observe(countRef.current);
-    return () => observer.disconnect();
-  }, [end, duration]);
-
-  return <span ref={countRef}>{prefix}{count}{suffix}</span>;
-};
 
 const ThreeStepProcess = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -316,9 +278,7 @@ const ThreeStepProcess = () => {
         { text: "No upfront fees required under California law" },
         { text: "STRONG track record with California insurance companies", highlight: "STRONG" }
       ],
-      stats: { value: 95, label: "Win Rate", suffix: "%" },
-      timeline: "24 Hours",
-      color: "#2997ff"
+      timeline: "24 Hours"
     },
     {
       icon: DocumentIcon,
@@ -331,9 +291,7 @@ const ThreeStepProcess = () => {
         { text: "ZERO upfront attorney fees—we pay all case costs", highlight: "ZERO" },
         { text: "Direct negotiation with California insurance adjusters" }
       ],
-      stats: { value: 500, label: "Cases Filed", suffix: "+" },
-      timeline: "2-4 Weeks",
-      color: "#7b68ee"
+      timeline: "2-4 Weeks"
     },
     {
       icon: MoneyIcon,
@@ -346,9 +304,7 @@ const ThreeStepProcess = () => {
         { text: "No win = NO FEE under our California contingency agreement", highlight: "NO FEE" },
         { text: "Maximum compensation for your California injuries" }
       ],
-      stats: { value: 10, label: "Million Won", prefix: "$", suffix: "M+" },
-      timeline: "3-6 Months",
-      color: "#64d2ff"
+      timeline: "3-6 Months"
     }
   ];
 
@@ -441,14 +397,9 @@ const ThreeStepProcess = () => {
                 tabIndex={0}
                 aria-expanded={isExpanded}
                 aria-label={`Step ${step.number}: ${step.title}`}
-                style={{
-                  '--card-color': step.color
-                } as React.CSSProperties}
               >
                 {/* Card effects */}
-                <div className="card-glow" aria-hidden="true"></div>
                 <div className="card-reflection" aria-hidden="true"></div>
-                <div className="card-border-glow" aria-hidden="true"></div>
                 
                 {/* Step icon with breathing animation */}
                 <div className="step-icon-wrapper">
@@ -482,18 +433,6 @@ const ThreeStepProcess = () => {
                     </span>
                   )}
                 </h3>
-                
-                {/* Success statistics */}
-                <div className="step-stats">
-                  <div className="stat-number">
-                    <AnimatedCounter 
-                      end={step.stats.value} 
-                      prefix={step.stats.prefix}
-                      suffix={step.stats.suffix}
-                    />
-                  </div>
-                  <div className="stat-label">{step.stats.label}</div>
-                </div>
                 
                 {/* Description */}
                 <p className="apple-step-description">
@@ -554,6 +493,24 @@ const ThreeStepProcess = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* CTA Section */}
+        <div className="steps-cta-section">
+          <a 
+            href="#free-evaluation" 
+            className="hero-cta-button"
+          >
+            <span className="cta-button-text">Start Your Free Evaluation</span>
+            <span className="cta-arrow">→</span>
+          </a>
+          <p className="cta-subtext">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5"/>
+              <path d="M5 8l2 2 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            No fees unless we win your case
+          </p>
         </div>
 
       </div>

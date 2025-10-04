@@ -57,18 +57,18 @@ const LegalRepresentation = () => {
             <img 
               src={recordingSystem} 
               alt="Legal protection against insurance recording systems" 
-              className="w-full h-full object-cover opacity-40"
+              className="w-full h-full object-cover opacity-30"
             />
-            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/70 via-slate-900/40 to-slate-900/80"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-900/90 via-slate-900/70 to-slate-900/95"></div>
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg" style={{ letterSpacing: '-0.02em' }}>
+            <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ letterSpacing: '-0.02em', textShadow: '0 2px 20px rgba(0,0,0,0.5)' }}>
               Protect Your
               <br />
-              <span className="text-blue-100">Legal Rights</span>
+              <span className="bg-gradient-to-r from-blue-300 to-blue-100 bg-clip-text text-transparent">Legal Rights</span>
             </h1>
-            <p className="hero-subtitle text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow">
+            <p className="hero-subtitle text-xl sm:text-2xl text-white max-w-3xl mx-auto leading-relaxed font-medium" style={{ textShadow: '0 2px 10px rgba(0,0,0,0.7)' }}>
               Expert legal representation against insurance company statement analysis systems
             </p>
           </div>
@@ -123,9 +123,9 @@ const LegalRepresentation = () => {
 
           {/* Protection Strategies */}
           <section className="content-section mb-20">
-            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 lg:p-12 text-white shadow-xl">
+            <div className="bg-gradient-to-br from-blue-600 to-blue-700 rounded-3xl p-8 lg:p-12 text-white shadow-2xl">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4">
+                <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mr-4 border border-white/30">
                   <FileText className="text-white" size={24} />
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-white">Your Protection Strategy</h2>
@@ -134,36 +134,36 @@ const LegalRepresentation = () => {
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-white">Before Speaking</h3>
-                  <ul className="space-y-3 text-white/90">
+                  <ul className="space-y-3 text-white/95">
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Never provide recorded statements without legal counsel</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Never provide recorded statements without legal counsel</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Understand your legal rights to representation</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Understand your legal rights to representation</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Request preparation time to organize facts</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Request preparation time to organize facts</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="space-y-4">
                   <h3 className="text-2xl font-bold text-white">With Legal Support</h3>
-                  <ul className="space-y-3 text-white/90">
+                  <ul className="space-y-3 text-white/95">
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Attorney reviews statement strategy beforehand</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Attorney reviews statement strategy beforehand</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Legal objections to improper questions</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Legal objections to improper questions</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
-                      <span>Professional documentation of the entire process</span>
+                      <ArrowRight className="text-white mr-3 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-white">Professional documentation of the entire process</span>
                     </li>
                   </ul>
                 </div>

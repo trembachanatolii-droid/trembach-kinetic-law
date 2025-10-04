@@ -85,60 +85,16 @@
   margin-right: auto;
 }
 
-/* Trust Stats */
-.trust-stats {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 48px;
-  margin-bottom: 80px;
-  opacity: 0;
-  animation: fadeInUp 0.6s ease-out 0.3s forwards;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-number {
-  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 48px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #34c759 0%, #30d158 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  line-height: 1;
-  margin-bottom: 8px;
-}
-
-.stat-number::after {
-  content: '+';
-  margin-left: 2px;
-}
-
-.stat-label {
-  font-size: 13px;
-  font-weight: 500;
-  color: #86868b;
-  text-transform: uppercase;
-  letter-spacing: 0.8px;
-}
-
-.stat-divider {
-  width: 1px;
-  height: 40px;
-  background: rgba(255, 255, 255, 0.1);
-}
-
-
 /* Grid with 8px spacing system */
 .apple-steps-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
+  gap: 24px;
   position: relative;
-  margin-bottom: 64px;
+  margin-bottom: 48px;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Step Cards - Clean Professional Design */
@@ -149,33 +105,30 @@
   border-radius: 18px;
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 48px 32px;
+  padding: 32px 24px;
   color: #e5e5ea !important;
   opacity: 0;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* Featured card (step 2) subtle emphasis */
 .apple-step-card-featured {
-  transform: scale(1.03);
+  transform: scale(1.02);
   background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(100, 210, 255, 0.15);
 }
 
-/* Simple professional hover */
+/* Simple professional hover - unified blue color */
 .apple-step-card:hover {
   background: rgba(255, 255, 255, 0.06);
-  border-color: rgba(100, 210, 255, 0.25);
-  transform: translateY(-8px);
-  box-shadow: 
-    0 20px 40px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(100, 210, 255, 0.1) inset;
+  border-color: rgba(10, 132, 255, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 .apple-step-card-featured:hover {
-  transform: translateY(-8px) scale(1.03);
+  transform: translateY(-4px) scale(1.02);
 }
 
 /* Step Label */
@@ -212,7 +165,7 @@
 /* Step numbers - Professional sizing */
 .apple-step-card .apple-step-number {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 120px !important;
+  font-size: 96px !important;
   font-weight: 600;
   background: linear-gradient(135deg, #0a84ff 0%, #64d2ff 100%);
   -webkit-background-clip: text;
@@ -221,7 +174,7 @@
   color: transparent !important;
   display: block;
   line-height: 1;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
   transition: all 0.3s ease;
 }
 
@@ -242,12 +195,12 @@
 /* Step Title - Professional */
 .apple-step-title {
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 600;
   color: #ffffff !important;
   letter-spacing: -0.01em;
   line-height: 1.2;
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   transition: color 0.3s ease;
 }
 
@@ -269,11 +222,11 @@
 /* Step Description - Better readability */
 .apple-step-description {
   font-family: -apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 400;
   color: #a1a1a6 !important;
-  line-height: 1.6;
-  margin-bottom: 32px;
+  line-height: 1.5;
+  margin-bottom: 24px;
 }
 
 .apple-step-description strong {
@@ -330,48 +283,82 @@
   stroke-width: 3;
 }
 
-/* CTA Section */
+/* Prominent CTA Section */
 .steps-cta-section {
   text-align: center;
-  padding: 48px 24px 0;
+  padding: 64px 24px 0;
+  max-width: 720px;
+  margin: 0 auto;
 }
 
-.trust-badge {
+.hero-cta-button {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  color: #34c759;
-  font-size: 14px;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #4a9eff 0%, #0a84ff 100%);
+  color: #000000;
+  font-size: 21px;
   font-weight: 600;
-  margin-bottom: 24px;
-}
-
-.primary-cta-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  background: #0a84ff;
-  color: #ffffff;
-  font-size: 17px;
-  font-weight: 600;
-  padding: 16px 32px;
-  border-radius: 12px;
+  padding: 20px 48px;
+  border-radius: 16px;
   text-decoration: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 16px rgba(10, 132, 255, 0.3);
+  transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+  box-shadow: 
+    0 8px 32px rgba(10, 132, 255, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 600px;
 }
 
-.primary-cta-button:hover {
-  background: #0077ed;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 24px rgba(10, 132, 255, 0.4);
+.hero-cta-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s ease;
+}
+
+.hero-cta-button:hover::before {
+  left: 100%;
+}
+
+.hero-cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 
+    0 12px 48px rgba(10, 132, 255, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.2) inset;
+}
+
+.cta-button-text {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-arrow {
+  position: relative;
+  z-index: 1;
+  transition: transform 0.3s ease;
+}
+
+.hero-cta-button:hover .cta-arrow {
+  transform: translateX(4px);
 }
 
 .cta-subtext {
-  font-size: 13px;
-  color: #86868b;
-  margin-top: 16px;
+  font-size: 14px;
+  color: #a1a1a6;
+  margin-top: 20px;
   letter-spacing: 0.2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
 }
 
 /* Fade in animation */
@@ -414,14 +401,6 @@
     margin-bottom: 40px;
   }
 
-  .trust-stats {
-    gap: 32px;
-    margin-bottom: 64px;
-  }
-
-  .stat-number {
-    font-size: 40px;
-  }
 
   .apple-steps-grid {
     gap: 24px;
@@ -432,11 +411,16 @@
   }
 
   .apple-step-number {
-    font-size: 96px !important;
+    font-size: 80px !important;
   }
 
   .apple-step-title {
-    font-size: 24px;
+    font-size: 22px;
+  }
+  
+  .hero-cta-button {
+    font-size: 19px;
+    padding: 18px 40px;
   }
 }
 
@@ -464,23 +448,6 @@
     line-height: 1.5;
   }
 
-  .trust-stats {
-    flex-direction: column;
-    gap: 24px;
-    margin-bottom: 48px;
-  }
-
-  .stat-divider {
-    display: none;
-  }
-
-  .stat-number {
-    font-size: 36px;
-  }
-
-  .stat-label {
-    font-size: 12px;
-  }
   
   .apple-steps-grid {
     grid-template-columns: 1fr;
@@ -552,19 +519,18 @@
     height: 16px;
   }
 
-  .primary-cta-button {
+  .hero-cta-button {
+    font-size: 18px;
+    padding: 18px 32px;
     width: 100%;
-    justify-content: center;
-    font-size: 16px;
-    padding: 14px 24px;
   }
 
   .cta-subtext {
-    font-size: 12px;
-  }
-
-  .trust-badge {
     font-size: 13px;
+  }
+  
+  .steps-cta-section {
+    padding: 48px 20px 0;
   }
 }
 
@@ -603,8 +569,7 @@
 @media print {
   .gradient-mesh,
   .free-consultation-banner,
-  .trust-stats,
-  .primary-cta-button {
+  .hero-cta-button {
     display: none;
   }
 

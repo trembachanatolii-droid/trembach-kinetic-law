@@ -48,7 +48,6 @@ const MoneyIcon = () => (
 const ThreeStepProcess = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement[]>([]);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!sectionRef.current) return;
@@ -66,27 +65,6 @@ const ThreeStepProcess = () => {
           start: "top 85%",
         }
       });
-
-      // Animate stats counter
-      if (statsRef.current) {
-        const counters = statsRef.current.querySelectorAll('.stat-number');
-        counters.forEach((counter) => {
-          const target = parseInt(counter.getAttribute('data-target') || '0');
-          gsap.from(counter, {
-            textContent: 0,
-            duration: 2,
-            ease: "power1.out",
-            snap: { textContent: 1 },
-            scrollTrigger: {
-              trigger: statsRef.current,
-              start: "top 80%",
-            },
-            onUpdate: function() {
-              counter.textContent = Math.ceil(this.targets()[0].textContent).toString();
-            }
-          });
-        });
-      }
     }, sectionRef);
 
     return () => ctx.revert();
@@ -112,23 +90,6 @@ const ThreeStepProcess = () => {
           Our proven 3-step process makes getting justice simple and stress-free.
         </p>
 
-        {/* Trust Stats */}
-        <div ref={statsRef} className="trust-stats">
-          <div className="stat-item">
-            <div className="stat-number" data-target="1000">0</div>
-            <div className="stat-label">Free Evaluations</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number" data-target="100">0</div>
-            <div className="stat-label">% No Win, No Fee</div>
-          </div>
-          <div className="stat-divider"></div>
-          <div className="stat-item">
-            <div className="stat-number" data-target="24">0</div>
-            <div className="stat-label">Hour Response</div>
-          </div>
-        </div>
 
         <div className="apple-steps-grid">
           {/* Step 1 */}
@@ -233,22 +194,20 @@ const ThreeStepProcess = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
+        {/* Prominent CTA Section */}
         <div className="steps-cta-section">
-          <div className="trust-badge">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" 
-                    fill="#34c759" stroke="#34c759" strokeWidth="2" strokeLinejoin="round"/>
-            </svg>
-            <span>No Win = No Fee Guarantee</span>
-          </div>
-          <a href="#free-evaluation" className="primary-cta-button">
-            Start Your Free Evaluation
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M7.5 15L12.5 10L7.5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+          <a href="#free-evaluation" className="hero-cta-button">
+            <span className="cta-button-text">Start Your Free Evaluation</span>
+            <svg className="cta-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 18L15 12L9 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </a>
-          <p className="cta-subtext">Confidential consultation • No obligation • 24-hour response time</p>
+          <p className="cta-subtext">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ display: 'inline', marginRight: '6px' }}>
+              <path d="M13.5 4L6 11.5L2.5 8" stroke="#34c759" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            No Win = No Fee • Confidential • 24-Hour Response
+          </p>
         </div>
       </div>
     </section>

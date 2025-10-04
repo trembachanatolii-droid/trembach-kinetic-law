@@ -121,12 +121,12 @@ const FreeConsultation = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/20 to-black/40" />
         <div className="relative container mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 animate-fade-in">
             Get Your Free Case Review
           </h1>
-          <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
+          <p className="text-xl md:text-2xl text-white/95 max-w-4xl mx-auto leading-relaxed animate-fade-in">
             Expert legal representation with no upfront costs. We only get paid when you win.
           </p>
         </div>

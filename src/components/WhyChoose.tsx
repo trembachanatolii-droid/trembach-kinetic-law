@@ -16,18 +16,18 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
         itemScope
         itemType="https://schema.org/Service"
       >
-        <div className="grid grid-cols-[1.5fr_1fr] sm:grid-cols-[1.8fr_1fr] lg:grid-cols-[2fr_1fr] gap-6 sm:gap-8 lg:gap-16 h-full items-center">
+        <div className="grid grid-cols-[1.5fr_1fr] sm:grid-cols-[1.8fr_1fr] lg:grid-cols-[2fr_1fr] gap-8 sm:gap-12 lg:gap-20 xl:gap-24 h-full items-center">
           {/* Left: Headline + Paragraph */}
-          <div className="space-y-3 sm:space-y-4 lg:space-y-6">
+          <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             <h3 
-              className="text-[18px] sm:text-[24px] lg:text-[32px] xl:text-[36px] font-light leading-[1.15] tracking-tight text-foreground"
+              className="text-[18px] sm:text-[28px] lg:text-[40px] xl:text-[48px] font-light leading-[1.15] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}
             </h3>
             
             <p 
-              className="text-[11px] sm:text-[13px] lg:text-[15px] text-muted-foreground/80 leading-relaxed font-light tracking-wide"
+              className="text-[11px] sm:text-[15px] lg:text-[18px] xl:text-[20px] text-muted-foreground/80 leading-relaxed font-light tracking-wide"
               itemProp="description"
             >
               {paragraph}
@@ -35,11 +35,11 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
           </div>
 
           {/* Right: Point List */}
-          <ul className="space-y-3 sm:space-y-4 lg:space-y-5 list-none">
+          <ul className="space-y-4 sm:space-y-5 lg:space-y-6 xl:space-y-7 list-none">
             {points.map((point, i) => (
               <li 
                 key={i}
-                className="text-[18px] sm:text-[22px] lg:text-[26px] xl:text-[28px] font-light leading-[1.25] tracking-tight text-foreground flex items-start gap-3"
+                className="text-[18px] sm:text-[26px] lg:text-[32px] xl:text-[36px] font-light leading-[1.25] tracking-tight text-foreground flex items-start gap-3"
               >
                 <span className="text-foreground/40 mt-1">•</span>
                 <span>{point}</span>

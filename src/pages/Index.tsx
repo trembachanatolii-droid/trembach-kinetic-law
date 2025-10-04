@@ -4,7 +4,7 @@ import Logo from '@/components/Logo';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
-import TruthAboutCaseProfessional from '../components/TruthAboutCaseProfessional';
+import TruthAboutCase from '../components/TruthAboutCase';
 import { MarqueeBand } from '../components/Marquee';
 import CriticalStepsSection from '../components/CriticalStepsSection';
 import EveryProblemSolved from '../components/EveryProblemSolved';
@@ -16,6 +16,7 @@ import Process from '../components/Process';
 import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
+import WhyChoose from '../components/WhyChoose';
 import ThreeStepProcess from '../components/ThreeStepProcess';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -47,6 +48,11 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
+      {/* Why Choose Section */}
+      <section id="why-choose">
+        <WhyChoose />
+      </section>
+
       {/* Three Step Process Section */}
       <section id="three-step-process">
         <ThreeStepProcess />
@@ -57,9 +63,9 @@ const Index = () => {
         <PracticeAreasLusion key="practice-areas-lusion" />
       </section>
 
-      {/* Truth About Your Case Section - Professional Apple Style */}
+      {/* Truth About Your Case Section */}
       <section id="truth">
-        <TruthAboutCaseProfessional />
+        <TruthAboutCase />
       </section>
 
       {/* Marquee Bands */}

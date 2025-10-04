@@ -57,12 +57,12 @@ const MedicalEvaluation = () => {
           <div className="absolute inset-0 bg-gradient-to-b from-white/60 via-white/70 to-white/80" />
           
           <div className="container mx-auto px-6 relative z-10 text-center">
-            <h1 className="font-display text-6xl md:text-8xl lg:text-9xl font-bold mb-6 tracking-tight drop-shadow-lg leading-none">
+            <h1 className="font-display text-7xl sm:text-8xl md:text-9xl lg:text-[10rem] xl:text-[12rem] font-bold mb-8 tracking-tight drop-shadow-lg leading-[0.95]">
               <span className="text-slate-900">Independent Medical</span>
               <br />
               <span className="text-slate-900">Evaluations</span>
             </h1>
-            <p className="text-xl md:text-2xl text-slate-900 font-semibold max-w-3xl mx-auto mb-12 leading-relaxed drop-shadow-md">
+            <p className="text-2xl md:text-3xl lg:text-4xl text-slate-900 font-semibold max-w-5xl mx-auto mb-12 leading-relaxed drop-shadow-md">
               Understanding IMEs and protecting your rights during insurance-requested medical examinations
             </p>
             <Button 

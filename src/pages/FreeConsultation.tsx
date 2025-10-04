@@ -249,7 +249,7 @@ const FreeConsultation = () => {
                         />
                       </div>
 
-                      <div className="flex items-start gap-3">
+                      <label htmlFor="smsConsent" className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed cursor-pointer select-none">
                         <input 
                           type="checkbox" 
                           id="smsConsent"
@@ -257,21 +257,21 @@ const FreeConsultation = () => {
                           checked={formData.smsConsent}
                           onChange={(e) => setFormData(prev => ({ ...prev, smsConsent: e.target.checked }))}
                           required
-                          className="mt-1 h-6 w-6 shrink-0 rounded-md border border-primary accent-primary cursor-pointer relative z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          className="mt-1 h-6 w-6 shrink-0 rounded-sm border border-primary accent-primary pointer-events-auto"
                           aria-describedby="smsConsent-help smsConsent-legal"
                         />
-                        <div className="text-sm text-muted-foreground leading-relaxed space-y-2">
-                          <label htmlFor="smsConsent" className="cursor-pointer block">
+                        <span className="space-y-2">
+                          <span className="block">
                             By checking this box, you agree to receive TEXT messages from Trembach Law Firm related to your inquiry, follow-ups, and review requests at the phone number provided above. You may reply STOP to opt out at any time. For assistance, reply HELP. Messages and data rates may apply. Message frequency will vary.
-                          </label>
-                          <p id="smsConsent-help">
+                          </span>
+                          <span id="smsConsent-help" className="block">
                             Please review our <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and terms of service.
-                          </p>
-                          <p id="smsConsent-legal">
+                          </span>
+                          <span id="smsConsent-legal" className="block">
                             Protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms of Service</a>.
-                          </p>
-                        </div>
-                      </div>
+                          </span>
+                        </span>
+                      </label>
 
                       <Button type="submit" size="lg" className="w-full btn-enhanced group">
                         Submit Case Review

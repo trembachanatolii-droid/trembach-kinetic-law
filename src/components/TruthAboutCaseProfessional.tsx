@@ -382,19 +382,22 @@ const TruthAboutCaseProfessional = () => {
 
           {/* Professional CTA section */}
           <div className="mt-20 lg:mt-28 text-center">
-            <div className="max-w-4xl mx-auto bg-white rounded-2xl p-8 lg:p-12 border-2 border-slate-200 shadow-lg">
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight text-slate-900">
+            <div className="max-w-4xl mx-auto bg-gradient-to-br from-blue-600 to-blue-700 rounded-2xl p-8 lg:p-12 shadow-xl">
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-tight text-white">
                 Professional Legal Analysis
               </h2>
-              <p className="text-lg lg:text-xl text-slate-600 mb-8 leading-relaxed">
+              <p className="text-lg lg:text-xl text-blue-50 mb-8 leading-relaxed">
                 Get expert case evaluation based on former insurance defense experience
               </p>
               <Button
+                asChild
                 size="lg"
-                className="bg-slate-900 text-white hover:bg-slate-800 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-md"
+                className="bg-white text-blue-600 hover:bg-blue-50 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
               >
-                Request Professional Consultation
-                <ArrowRight className="ml-2" size={18} />
+                <a href="/free-consultation">
+                  Get Free Evaluation
+                  <ArrowRight className="ml-2" size={18} />
+                </a>
               </Button>
             </div>
           </div>

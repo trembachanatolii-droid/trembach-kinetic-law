@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
-import heroBackground from '@/assets/free-consultation-hero-clean.jpg';
+import heroBackground from '@/assets/free-consultation-hero-neutral.jpg';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -121,12 +121,12 @@ const FreeConsultation = () => {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: `url(${heroBackground})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/50 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/70" />
         <div className="relative container mx-auto px-6 text-center z-10">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-2xl">
+          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 relative">
             Get Your Free Case Review
           </h1>
-          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed drop-shadow-lg">
+          <p className="text-xl md:text-2xl text-white max-w-4xl mx-auto leading-relaxed relative">
             Expert legal representation with no upfront costs. We only get paid when you win.
           </p>
         </div>

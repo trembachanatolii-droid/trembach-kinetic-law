@@ -63,12 +63,12 @@ const LegalRepresentation = () => {
           </div>
 
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight" style={{ letterSpacing: '-0.02em' }}>
+            <h1 className="hero-title font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight drop-shadow-lg" style={{ letterSpacing: '-0.02em' }}>
               Protect Your
               <br />
-              <span className="text-slate-300">Legal Rights</span>
+              <span className="text-blue-100">Legal Rights</span>
             </h1>
-            <p className="hero-subtitle text-xl sm:text-2xl text-slate-200 max-w-3xl mx-auto leading-relaxed">
+            <p className="hero-subtitle text-xl sm:text-2xl text-white/90 max-w-3xl mx-auto leading-relaxed drop-shadow">
               Expert legal representation against insurance company statement analysis systems
             </p>
           </div>
@@ -79,9 +79,9 @@ const LegalRepresentation = () => {
           
           {/* Recording Systems Explained */}
           <section className="content-section mb-20">
-            <div className="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200">
+            <div className="bg-white rounded-3xl p-8 lg:p-12 border border-slate-200 shadow-sm">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-slate-900 rounded-xl flex items-center justify-center mr-4">
+                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4">
                   <Shield className="text-white" size={24} />
                 </div>
                 <h2 className="text-3xl lg:text-4xl font-bold text-slate-900">How Recording Systems Work</h2>
@@ -92,7 +92,7 @@ const LegalRepresentation = () => {
                   Insurance companies employ sophisticated AI-powered transcription and analysis systems that process every word you say during recorded statements. These systems are designed to identify inconsistencies, minimize liability, and build denial strategies.
                 </p>
                 
-                <div className="bg-slate-50 rounded-2xl p-6 border-l-4 border-slate-900">
+                <div className="bg-blue-50 rounded-2xl p-6 border-l-4 border-blue-500">
                   <h3 className="text-xl font-bold text-slate-900 mb-3">What They Analyze</h3>
                   <ul className="space-y-2 text-slate-700">
                     <li className="flex items-start">
@@ -123,46 +123,46 @@ const LegalRepresentation = () => {
 
           {/* Protection Strategies */}
           <section className="content-section mb-20">
-            <div className="bg-slate-900 rounded-3xl p-8 lg:p-12 text-white">
+            <div className="bg-gradient-to-br from-slate-800 to-slate-900 rounded-3xl p-8 lg:p-12 text-white shadow-xl">
               <div className="flex items-center mb-6">
-                <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mr-4">
-                  <FileText className="text-slate-900" size={24} />
+                <div className="w-12 h-12 bg-blue-500 rounded-xl flex items-center justify-center mr-4">
+                  <FileText className="text-white" size={24} />
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-bold">Your Protection Strategy</h2>
+                <h2 className="text-3xl lg:text-4xl font-bold text-white">Your Protection Strategy</h2>
               </div>
 
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-slate-100">Before Speaking</h3>
-                  <ul className="space-y-3 text-slate-300">
+                  <h3 className="text-2xl font-bold text-white">Before Speaking</h3>
+                  <ul className="space-y-3 text-white/90">
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Never provide recorded statements without legal counsel</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Understand your legal rights to representation</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Request preparation time to organize facts</span>
                     </li>
                   </ul>
                 </div>
 
                 <div className="space-y-4">
-                  <h3 className="text-2xl font-bold text-slate-100">With Legal Support</h3>
-                  <ul className="space-y-3 text-slate-300">
+                  <h3 className="text-2xl font-bold text-white">With Legal Support</h3>
+                  <ul className="space-y-3 text-white/90">
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Attorney reviews statement strategy beforehand</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Legal objections to improper questions</span>
                     </li>
                     <li className="flex items-start">
-                      <ArrowRight className="text-slate-400 mr-3 mt-1 flex-shrink-0" size={20} />
+                      <ArrowRight className="text-blue-400 mr-3 mt-1 flex-shrink-0" size={20} />
                       <span>Professional documentation of the entire process</span>
                     </li>
                   </ul>
@@ -173,9 +173,9 @@ const LegalRepresentation = () => {
 
           {/* CTA Section */}
           <section className="content-section text-center">
-            <div className="bg-gradient-to-br from-slate-50 to-white rounded-3xl p-8 lg:p-12 border border-slate-200">
+            <div className="bg-gradient-to-br from-blue-50 to-white rounded-3xl p-8 lg:p-12 border border-blue-200 shadow-sm">
               <div className="flex justify-center mb-6">
-                <div className="w-16 h-16 bg-slate-900 rounded-2xl flex items-center justify-center">
+                <div className="w-16 h-16 bg-blue-500 rounded-2xl flex items-center justify-center">
                   <Phone className="text-white" size={32} />
                 </div>
               </div>
@@ -189,7 +189,7 @@ const LegalRepresentation = () => {
               
               <Button 
                 size="lg" 
-                className="bg-slate-900 text-white hover:bg-slate-800 h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105"
+                className="bg-gradient-to-r from-blue-600 to-blue-500 text-white hover:from-blue-700 hover:to-blue-600 h-14 px-10 text-lg font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-lg shadow-blue-500/30"
               >
                 Schedule Free Consultation
                 <ArrowRight className="ml-2" size={20} />

@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Checkbox } from '@/components/ui/checkbox';
+
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail, MapPin, Clock, ArrowRight } from 'lucide-react';
 import heroBackground from '@/assets/free-consultation-hero-neutral.jpg';
@@ -249,24 +249,29 @@ const FreeConsultation = () => {
                         />
                       </div>
 
-                      <label className="flex items-start gap-3 text-sm text-muted-foreground leading-relaxed cursor-pointer">
+                      <div className="flex items-start gap-3">
                         <input 
                           type="checkbox" 
                           id="smsConsent"
+                          name="smsConsent"
                           checked={formData.smsConsent}
                           onChange={(e) => setFormData(prev => ({ ...prev, smsConsent: e.target.checked }))}
                           required
-                          className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600 focus:ring-blue-500"
+                          className="mt-0.5 h-4 w-4 rounded-sm border border-primary text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                          aria-describedby="smsConsent-help smsConsent-legal"
                         />
-                        <span className="space-y-2">
-                          <span className="block">
-                            By checking this box, you agree to receive TEXT messages from Trembach Law Firm related to your inquiry, follow-ups, and review requests at the phone number provided above. You may reply STOP to opt out at any time. For assistance, reply HELP. Messages and data rates may apply. Message frequency will vary. Please review our <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and terms of service.
-                          </span>
-                          <span className="block">
+                        <div className="text-sm text-muted-foreground leading-relaxed space-y-2">
+                          <label htmlFor="smsConsent" className="cursor-pointer block">
+                            By checking this box, you agree to receive TEXT messages from Trembach Law Firm related to your inquiry, follow-ups, and review requests at the phone number provided above. You may reply STOP to opt out at any time. For assistance, reply HELP. Messages and data rates may apply. Message frequency will vary.
+                          </label>
+                          <p id="smsConsent-help">
+                            Please review our <a href="/privacy-policy" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and terms of service.
+                          </p>
+                          <p id="smsConsent-legal">
                             Protected by reCAPTCHA, and Google's <a href="https://policies.google.com/privacy?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Privacy Policy</a> and <a href="https://policies.google.com/terms?hl=en" target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Terms of Service</a>.
-                          </span>
-                        </span>
-                      </label>
+                          </p>
+                        </div>
+                      </div>
 
                       <Button type="submit" size="lg" className="w-full btn-enhanced group">
                         Submit Case Review

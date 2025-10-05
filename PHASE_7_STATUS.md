@@ -108,9 +108,36 @@
 - Age-based future earnings calculations
 - Dropdown-only form with workers' comp vs. third-party disclaimer
 
+### Phase 7R: Scaffolding Falls Calculator ✅ NEW
+- Fall height multipliers (under 6ft to over 30ft)
+- Landing surface impact factors
+- Guardrail/fall protection absence
+- Scaffold type considerations
+- OSHA fall protection violation factors
+- Permanent disability and age adjustments
+- Dropdown-only form with third-party liability disclaimer
+
+### Phase 7S: Crane Accident Calculator ✅ NEW
+- Crane type multipliers (tower, mobile, crawler, overhead)
+- Accident cause factors (collapse, load dropped, boom failure)
+- Operator certification status
+- Equipment maintenance record considerations
+- Load capacity violations
+- Third-party and product liability potential
+- Dropdown-only form with comprehensive disclaimer
+
+### Phase 7T: Electrocution Calculator ✅ NEW
+- Voltage level multipliers (120V to high voltage/arc flash)
+- Contact type factors (direct, power line, equipment fault)
+- Burn degree severity (1st to 4th degree, arc flash)
+- Cardiac complications (arrest, arrhythmia, heart damage)
+- Neurological damage considerations
+- Electrical safety violation factors
+- Dropdown-only form with hidden injury disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (23 calculators)
+### Fully Implemented (26 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -134,8 +161,11 @@
 21. ✅ Sexual Abuse (NEW)
 22. ✅ Talc/Baby Powder Cancer (NEW)
 23. ✅ Construction Accidents (NEW)
+24. ✅ Scaffolding Falls (NEW)
+25. ✅ Crane Accidents (NEW)
+26. ✅ Electrocution (NEW)
 
-### Templated (30 calculators remaining)
+### Templated (27 calculators remaining)
 
 **Personal Injury** (8)
 - Personal Injury, Swimming Pool, Amusement Park
@@ -146,9 +176,8 @@
 - Bicycle, Pedestrian, Bus Accidents
 - Uber/Lyft, Aviation, Maritime, Railroad
 
-**Workplace** (4)
-- Scaffolding Falls, Crane Accidents
-- Electrocution, Explosions & Fires
+**Workplace** (1)
+- Explosions & Fires
 
 **Toxic Exposure** (2)
 - Environmental Toxic
@@ -193,29 +222,29 @@
 - Responsive design
 - Professional presentation
 
-## 🔄 Next Phases (Phases 7R+)
+## 🔄 Next Phases (Phases 7U+)
 
 ### Priority Order
 
-**Phase 7R: Scaffolding Falls Calculator**
-- Fall height and impact
-- Safety equipment failures
-- OSHA violations
+**Phase 7U: Explosions & Fires Calculator**
+- Explosion type and blast radius
+- Burn severity and blast injuries
+- Respiratory damage from smoke/chemicals
 - Third-party liability
 
-**Phase 7S: Crane Accident Calculator**
-- Crane type and failure mode
-- Operator negligence
-- Equipment maintenance
-- Third-party claims
+**Phase 7V: Bicycle Accident Calculator**
+- Cyclist vulnerability factors
+- Vehicle type and speed
+- Right-of-way violations
+- Helmet use and injury severity
 
-**Phase 7T: Electrocution Calculator**
-- Voltage and exposure duration
-- Power line contact
-- Equipment grounding failures
-- Burn severity and neurological damage
+**Phase 7W: Pedestrian Accident Calculator**
+- Crosswalk vs. jaywalking
+- Vehicle speed and type
+- Age vulnerability factors
+- Permanent mobility impairment
 
-Continue incrementally with remaining 27+ calculators...
+Continue incrementally with remaining 24+ calculators...
 
 ## 📝 Implementation Pattern
 
@@ -231,9 +260,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **23 of 53 calculators** fully implemented (43%)
+- **26 of 53 calculators** fully implemented (49%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7R+ implementation
+- Ready for incremental Phase 7U+ implementation

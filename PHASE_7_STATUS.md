@@ -272,9 +272,35 @@
 - Responsible party considerations
 - Dropdown-only form with causation/expert testimony disclaimer
 
+### Phase 7AJ: Personal Injury (General) Calculator ✅ NEW
+- All injury types coverage (soft tissue to catastrophic)
+- Severity and liability strength multipliers
+- Comprehensive economic and non-economic damages
+- Permanent disability ratings
+- Comparative fault reductions
+- Age-based future damage calculations
+- Dropdown-only form with general PI disclaimer
+
+### Phase 7AK: Clergy Abuse Calculator ✅ NEW
+- Religious organization institutional liability
+- Abuse type and duration multipliers
+- Age vulnerability factors
+- Organization knowledge/cover-up factors
+- Therapy costs and life impact
+- Evidence strength and statute of limitations
+- Dropdown-only form with confidentiality disclaimer
+
+### Phase 7AL: Product Liability Calculator ✅ NEW
+- Product type multipliers (medical devices, pharma, consumer goods)
+- Defect type (design, manufacturing, warning)
+- Strict liability standard application
+- Recall status and multiple victim factors
+- Manufacturer size/resources considerations
+- Dropout-only form with strict liability disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (41 calculators)
+### Fully Implemented (44 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -313,14 +339,17 @@
 36. ✅ Maritime Accidents
 37. ✅ Retail Store Accidents
 38. ✅ Paralysis Injuries
-39. ✅ Birth Injuries (NEW)
-40. ✅ Defamation (NEW)
-41. ✅ Environmental Toxic Exposure (NEW)
+39. ✅ Birth Injuries
+40. ✅ Defamation
+41. ✅ Environmental Toxic Exposure
+42. ✅ Personal Injury (General) (NEW)
+43. ✅ Clergy Abuse (NEW)
+44. ✅ Product Liability (NEW)
 
-### Templated (12 calculators remaining)
+### Templated (9 calculators remaining)
 
-**Personal Injury** (1)
-- Personal Injury (General)
+**Personal Injury** (0)
+- All personal injury calculators complete
 
 **Transportation** (0)
 - All transportation calculators complete
@@ -328,11 +357,11 @@
 **Toxic Exposure** (0)
 - All toxic exposure calculators complete
 
-**Abuse** (1)
-- Clergy Abuse
+**Abuse** (0)
+- All abuse calculators complete
 
-**Product Liability** (3)
-- Product Liability, Mass Torts, Class Actions
+**Product Liability** (2)
+- Mass Torts, Class Actions
 
 **Civil Rights** (2)
 - Civil Rights Violations, Pharmaceutical
@@ -406,9 +435,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **41 of 53 calculators** fully implemented (77%)
+- **44 of 53 calculators** fully implemented (83%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7AJ+ implementation
+- Ready for incremental Phase 7AM+ implementation

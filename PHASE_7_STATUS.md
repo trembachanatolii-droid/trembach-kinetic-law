@@ -72,9 +72,26 @@
 - Exposure duration and source factors
 - Dropdown-only form with time-sensitive disclaimer
 
+### Phase 7N: Elder Abuse Calculator ✅ NEW
+- Abuse type multipliers (physical, sexual, neglect, financial)
+- Facility type factors (nursing home, assisted living, etc.)
+- Injury severity and medical costs
+- Duration and age adjustments
+- Punitive damages potential
+- Dropdown-only form with comprehensive disclaimer
+
+### Phase 7O: Sexual Abuse Calculator ✅ NEW
+- Institution liability multipliers (religious, school, care facility)
+- Abuse type and duration factors
+- Age at abuse impact
+- Therapy and treatment costs
+- Life impact severity
+- Evidence strength considerations
+- Dropdown-only form with confidential disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (19 calculators)
+### Fully Implemented (21 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -94,8 +111,10 @@
 17. ✅ Silicosis (NEW)
 18. ✅ Camp Lejeune (NEW)
 19. ✅ Benzene Exposure (NEW)
+20. ✅ Elder Abuse (NEW)
+21. ✅ Sexual Abuse (NEW)
 
-### Templated (34 calculators remaining)
+### Templated (32 calculators remaining)
 
 **Personal Injury** (8)
 - Personal Injury, Swimming Pool, Amusement Park
@@ -113,8 +132,8 @@
 **Toxic Exposure** (3)
 - Environmental Toxic, Talc
 
-**Abuse** (3)
-- Elder Abuse, Sexual Abuse, Clergy Abuse
+**Abuse** (1)
+- Clergy Abuse
 
 **Product Liability** (3)
 - Product Liability, Mass Torts, Class Actions
@@ -153,21 +172,9 @@
 - Responsive design
 - Professional presentation
 
-## 🔄 Next Phases (Phases 7N+)
+## 🔄 Next Phases (Phases 7P+)
 
 ### Priority Order
-
-**Phase 7N: Elder Abuse Calculator**
-- Neglect type multipliers
-- Facility type factors
-- Injury severity
-- Punitive damages potential
-
-**Phase 7O: Sexual Abuse Calculator**
-- Abuse type and duration
-- Institution liability
-- Age at abuse factors
-- Therapy and treatment costs
 
 **Phase 7P: Talc/Asbestos Product Calculator**
 - Product type exposure
@@ -197,9 +204,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **19 of 53 calculators** fully implemented (36%)
+- **21 of 53 calculators** fully implemented (40%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7N+ implementation
+- Ready for incremental Phase 7P+ implementation

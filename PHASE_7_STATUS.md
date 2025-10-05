@@ -86,7 +86,7 @@
 
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (12 calculators)
+### Fully Implemented (13 calculators)
 1. ✅ Brain Injury - Complete calculation logic
 2. ✅ Spinal Cord - Complete calculation logic  
 3. ✅ Burn Injury - Complete calculation logic
@@ -99,8 +99,9 @@
 10. ✅ Dog Bite - Complete with strict liability logic
 11. ✅ Premises Liability - Complete with duty of care analysis
 12. ✅ Motorcycle Accident - Complete with helmet law factors
+13. ✅ Asbestos/Mesothelioma - Complete with trust fund logic
 
-### Apple-Style Template Only (41 calculators)
+### Apple-Style Template Only (40 calculators)
 These have the modern UI but need calculation logic added:
 
 **Personal Injury** (10)
@@ -116,8 +117,8 @@ These have the modern UI but need calculation logic added:
 - Construction, Scaffolding Falls, Crane Accidents
 - Electrocution, Explosions & Fires
 
-**Toxic Exposure** (7)
-- Asbestos/Mesothelioma, Benzene, PFAS, Camp Lejeune
+**Toxic Exposure** (6)
+- Benzene, PFAS, Camp Lejeune
 - Environmental Toxic, Silicosis, Talc
 
 **Abuse** (3)

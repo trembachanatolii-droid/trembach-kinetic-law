@@ -243,9 +243,38 @@
 - Pain and suffering levels
 - Dropdown-only form with catastrophic injury disclaimer
 
+### Phase 7AG: Birth Injury Calculator ✅ NEW
+- Injury type multipliers (cerebral palsy, Erb's palsy, brain damage)
+- Cause factors (oxygen deprivation, delayed C-section, improper delivery)
+- Severity and lifetime care needs
+- Cognitive and physical disability impact
+- Medical negligence evidence
+- Lifetime cost estimates
+- Dropdown-only form with medical malpractice disclaimer
+
+### Phase 7AH: Defamation Calculator ✅ NEW
+- Defamation type (libel, slander, per se, per quod)
+- Plaintiff status (private citizen vs public figure)
+- Publishing medium and statement type
+- Reputation damage extent
+- Economic loss documentation
+- Actual malice evidence (critical for public figures)
+- Retraction factors
+- Dropdown-only form with First Amendment disclaimer
+
+### Phase 7AI: Environmental Toxic Exposure Calculator ✅ NEW
+- Contaminant type multipliers (lead, asbestos, mold, chemicals)
+- Exposure source factors (water, industrial, Superfund site)
+- Illness type (cancer, neurological, respiratory)
+- Exposure duration considerations
+- Number of victims (class action potential)
+- Property damage factors
+- Responsible party considerations
+- Dropdown-only form with causation/expert testimony disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (38 calculators)
+### Fully Implemented (41 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -281,21 +310,23 @@
 33. ✅ Amusement Park Accidents
 34. ✅ Aviation Accidents
 35. ✅ Railroad Accidents
-36. ✅ Maritime Accidents (NEW)
-37. ✅ Retail Store Accidents (NEW)
-38. ✅ Paralysis Injuries (NEW)
+36. ✅ Maritime Accidents
+37. ✅ Retail Store Accidents
+38. ✅ Paralysis Injuries
+39. ✅ Birth Injuries (NEW)
+40. ✅ Defamation (NEW)
+41. ✅ Environmental Toxic Exposure (NEW)
 
-### Templated (15 calculators remaining)
+### Templated (12 calculators remaining)
 
-**Personal Injury** (3)
-- Personal Injury (General), Birth Injuries
-- Defamation
+**Personal Injury** (1)
+- Personal Injury (General)
 
 **Transportation** (0)
 - All transportation calculators complete
 
-**Toxic Exposure** (2)
-- Environmental Toxic
+**Toxic Exposure** (0)
+- All toxic exposure calculators complete
 
 **Abuse** (1)
 - Clergy Abuse
@@ -375,9 +406,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **38 of 53 calculators** fully implemented (72%)
+- **41 of 53 calculators** fully implemented (77%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7AG+ implementation
+- Ready for incremental Phase 7AJ+ implementation

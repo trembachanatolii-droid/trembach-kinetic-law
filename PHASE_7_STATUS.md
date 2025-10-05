@@ -101,7 +101,7 @@
 
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (14 calculators)
+### Fully Implemented (16 calculators)
 1. ✅ Brain Injury - Complete calculation logic
 2. ✅ Spinal Cord - Complete calculation logic  
 3. ✅ Burn Injury - Complete calculation logic
@@ -116,8 +116,10 @@
 12. ✅ Motorcycle Accident - Complete with helmet law factors
 13. ✅ Asbestos/Mesothelioma - Complete with trust fund logic
 14. ✅ PFAS Exposure - Complete with MDL litigation logic
+15. ✅ Vision Loss - Complete with adaptive technology needs
+16. ✅ Hearing Loss - Complete with tinnitus and occupational factors
 
-### Apple-Style Template Only (39 calculators)
+### Apple-Style Template Only (37 calculators)
 These have the modern UI but need calculation logic added:
 
 **Personal Injury** (10)

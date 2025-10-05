@@ -1,110 +1,126 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertTriangle } from 'lucide-react';
+import { ArrowLeft, AlertCircle } from 'lucide-react';
+import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
 
-interface FormData {
+interface BenzeneFormData extends CalculatorFormData {
   bloodCancerType: string;
-  age: string;
   exposureDuration: string;
+  exposureSource: string;
+  age: string;
   medicalCosts: string;
   severity: string;
-  employmentStatus: string;
+  lostWages: string;
+  futureCareCosts: string;
+  [key: string]: string;
 }
 
+const initialFormData: BenzeneFormData = {
+  bloodCancerType: '',
+  exposureDuration: '',
+  exposureSource: '',
+  age: '',
+  medicalCosts: '',
+  severity: '',
+  lostWages: '',
+  futureCareCosts: ''
+};
+
+const calculateCompensation = (data: BenzeneFormData): CalculatorResults => {
+  const cancerMultipliers: { [key: string]: number } = {
+    'aml': 5.0,
+    'all': 4.5,
+    'multiple-myeloma': 4.0,
+    'non-hodgkin': 3.5,
+    'cll': 3.0,
+    'cml': 2.8,
+    'mds': 2.5,
+    'aplastic-anemia': 2.0
+  };
+
+  const exposureMultipliers: { [key: string]: number } = {
+    'more-than-20': 2.2,
+    '10-20': 1.8,
+    '5-10': 1.5,
+    '1-5': 1.3,
+    'less-than-1': 1.1
+  };
+
+  const sourceMultipliers: { [key: string]: number } = {
+    'petroleum': 2.0,
+    'chemical-plant': 2.2,
+    'refinery': 2.1,
+    'lab-tech': 1.8,
+    'painter': 1.7,
+    'printer': 1.6,
+    'consumer-product': 2.5,
+    'other': 1.5
+  };
+
+  const severityMultipliers: { [key: string]: number } = {
+    'terminal': 4.0,
+    'severe': 2.5,
+    'moderate': 1.8,
+    'mild': 1.3
+  };
+
+  let baseMin = 120000;
+  let baseMax = 350000;
+
+  const cancerMult = cancerMultipliers[data.bloodCancerType] || 1;
+  const exposureMult = exposureMultipliers[data.exposureDuration] || 1;
+  const sourceMult = sourceMultipliers[data.exposureSource] || 1;
+  const severityMult = severityMultipliers[data.severity] || 1;
+
+  baseMin *= cancerMult * exposureMult * sourceMult * severityMult;
+  baseMax *= cancerMult * exposureMult * sourceMult * severityMult;
+
+  const age = parseInt(data.age) || 40;
+  if (age < 50) {
+    const ageFactor = 1 + ((50 - age) * 0.018);
+    baseMin *= ageFactor;
+    baseMax *= ageFactor;
+  }
+
+  const medicalCosts = parseInt(data.medicalCosts) || 0;
+  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
+  const lostWages = parseInt(data.lostWages) || 0;
+
+  baseMin += medicalCosts + futureCareCosts * 0.9 + lostWages * 0.85;
+  baseMax += medicalCosts * 1.5 + futureCareCosts * 1.6 + lostWages * 1.5;
+
+  return {
+    min: Math.round(baseMin),
+    max: Math.round(baseMax)
+  };
+};
+
+const validateStep = (data: BenzeneFormData, step: number): boolean => {
+  if (step === 1) {
+    return !!(data.bloodCancerType && data.exposureDuration && data.exposureSource && data.severity);
+  }
+  if (step === 2) {
+    return !!(data.age && data.medicalCosts && data.lostWages && data.futureCareCosts);
+  }
+  return true;
+};
+
 const BenzeneCalculator = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
-    bloodCancerType: '',
-    age: '',
-    exposureDuration: '',
-    medicalCosts: '',
-    severity: '',
-    employmentStatus: ''
-  });
-  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
-
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const calculateCompensation = () => {
-    let baseMin = 100000;
-    let baseMax = 300000;
-
-    // Cancer type multipliers
-    const cancerMultipliers: Record<string, number> = {
-      'aml': 5.0,
-      'all': 4.5,
-      'multiple-myeloma': 4.0,
-      'non-hodgkin': 3.5,
-      'cll': 3.0,
-      'cml': 2.8,
-      'mds': 2.5,
-      'aplastic-anemia': 2.0
-    };
-
-    const multiplier = cancerMultipliers[formData.bloodCancerType] || 2;
-    baseMin *= multiplier;
-    baseMax *= multiplier;
-
-    // Age adjustments
-    const ageMultipliers: Record<string, number> = {
-      'under-30': 1.8,
-      '30-45': 1.6,
-      '45-60': 1.4,
-      '60-70': 1.2,
-      'over-70': 1.1
-    };
-    const ageMult = ageMultipliers[formData.age] || 1;
-    baseMin *= ageMult;
-    baseMax *= ageMult;
-
-    // Exposure duration
-    const exposureMultipliers: Record<string, number> = {
-      'more-than-20': 1.7,
-      '10-20': 1.5,
-      '5-10': 1.3,
-      '1-5': 1.2,
-      'less-than-1': 1.1
-    };
-    const expMult = exposureMultipliers[formData.exposureDuration] || 1;
-    baseMin *= expMult;
-    baseMax *= expMult;
-
-    // Medical costs
-    const costMultipliers: Record<string, number> = {
-      'over-500k': 1.6,
-      '250k-500k': 1.4,
-      '100k-250k': 1.3,
-      '50k-100k': 1.2,
-      'under-50k': 1.1
-    };
-    const costMult = costMultipliers[formData.medicalCosts] || 1;
-    baseMin *= costMult;
-    baseMax *= costMult;
-
-    setResults({
-      min: Math.round(baseMin),
-      max: Math.round(baseMax)
-    });
-    setStep(3);
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    calculateCompensation();
-  };
-
-  const isStepComplete = () => {
-    if (step === 1) {
-      return formData.bloodCancerType && formData.exposureDuration;
-    }
-    if (step === 2) {
-      return formData.age && formData.medicalCosts && formData.severity;
-    }
-    return false;
-  };
+  const {
+    step,
+    formData,
+    results,
+    updateField,
+    handleNext,
+    handleBack,
+    resetForm,
+    isStepValid
+  } = useCalculatorForm<BenzeneFormData>(
+    initialFormData,
+    calculateCompensation,
+    validateStep
+  );
 
   return (
     <>
@@ -130,311 +146,17 @@ const BenzeneCalculator = () => {
           </div>
         </div>
 
-        {/* Hero */}
         <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-                Benzene Exposure<br />Calculator
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed">
-                Estimate compensation for benzene-related blood cancers
-              </p>
-            </div>
+          <div className="container mx-auto px-6 max-w-5xl text-center">
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
+              Benzene Exposure<br />Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 font-light">
+              Estimate compensation for benzene-related blood cancers
+            </p>
           </div>
         </section>
 
-        {/* Progress */}
-        <div className="border-b border-slate-200 bg-white">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="flex justify-center items-center py-8 space-x-4">
-              {[1, 2, 3].map((num) => (
-                <React.Fragment key={num}>
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${
-                      step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'
-                    }`}
-                  >
-                    {num}
-                  </div>
-                  {num < 3 && (
-                    <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />
-                  )}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Form */}
-        <section className="py-16">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <form onSubmit={handleSubmit} className="space-y-12">
-              {/* Step 1 */}
-              {step === 1 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                      Your diagnosis and exposure
-                    </h2>
-                    <p className="text-slate-600">Tell us about your benzene-related illness</p>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">
-                        Type of blood cancer or illness
-                      </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'aml', label: 'Acute Myeloid Leukemia (AML)' },
-                          { value: 'all', label: 'Acute Lymphoblastic Leukemia' },
-                          { value: 'multiple-myeloma', label: 'Multiple Myeloma' },
-                          { value: 'non-hodgkin', label: "Non-Hodgkin's Lymphoma" },
-                          { value: 'cll', label: 'Chronic Lymphocytic Leukemia' },
-                          { value: 'cml', label: 'Chronic Myeloid Leukemia' },
-                          { value: 'mds', label: 'Myelodysplastic Syndrome' },
-                          { value: 'aplastic-anemia', label: 'Aplastic Anemia' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('bloodCancerType', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.bloodCancerType === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">
-                        Duration of benzene exposure
-                      </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'more-than-20', label: 'More than 20 years' },
-                          { value: '10-20', label: '10-20 years' },
-                          { value: '5-10', label: '5-10 years' },
-                          { value: '1-5', label: '1-5 years' },
-                          { value: 'less-than-1', label: 'Less than 1 year' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('exposureDuration', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.exposureDuration === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    disabled={!isStepComplete()}
-                    className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
-                  >
-                    Continue
-                    <ArrowRight className="ml-2" size={20} />
-                  </button>
-                </div>
-              )}
-
-              {/* Step 2 */}
-              {step === 2 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                      Additional details
-                    </h2>
-                    <p className="text-slate-600">Help us calculate your total damages</p>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">
-                        Your age at diagnosis
-                      </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { value: 'under-30', label: 'Under 30' },
-                          { value: '30-45', label: '30-45' },
-                          { value: '45-60', label: '45-60' },
-                          { value: '60-70', label: '60-70' },
-                          { value: 'over-70', label: 'Over 70' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('age', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.age === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">
-                        Total medical expenses
-                      </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'over-500k', label: 'Over $500,000' },
-                          { value: '250k-500k', label: '$250,000 - $500,000' },
-                          { value: '100k-250k', label: '$100,000 - $250,000' },
-                          { value: '50k-100k', label: '$50,000 - $100,000' },
-                          { value: 'under-50k', label: 'Under $50,000' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('medicalCosts', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.medicalCosts === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">
-                        Severity of condition
-                      </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'terminal', label: 'Terminal / Advanced Stage' },
-                          { value: 'severe', label: 'Severe' },
-                          { value: 'moderate', label: 'Moderate' },
-                          { value: 'mild', label: 'Early Stage / Remission' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('severity', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.severity === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 font-semibold transition-all inline-flex items-center justify-center"
-                    >
-                      <ArrowLeft className="mr-2" size={20} />
-                      Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!isStepComplete()}
-                      className="flex-1 h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
-                    >
-                      Calculate Compensation
-                      <Calculator className="ml-2" size={20} />
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {/* Step 3: Results */}
-              {step === 3 && results && (
-                <div className="space-y-8 animate-fade-in">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-                      <DollarSign className="text-green-600" size={32} />
-                    </div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">
-                      Your Estimated Compensation
-                    </h2>
-                    <p className="text-slate-600">Based on benzene exposure and blood cancer diagnosis</p>
-                  </div>
-
-                  <div className="bg-slate-50 rounded-3xl p-8 md:p-12 text-center border border-slate-200">
-                    <div className="text-6xl md:text-7xl font-bold text-slate-900 mb-4">
-                      ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                    </div>
-                    <p className="text-xl text-slate-600">Potential compensation range</p>
-                  </div>
-
-                  <div className="bg-orange-50 rounded-2xl p-6 border border-orange-200">
-                    <div className="flex items-start gap-4">
-                      <AlertTriangle className="text-orange-600 shrink-0 mt-1" size={24} />
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-2">Time-Sensitive Case</h3>
-                        <p className="text-slate-700 leading-relaxed">
-                          Benzene exposure cases have strict time limits. Contact an attorney immediately to preserve your rights and maximize compensation.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Link
-                      to="/free-consultation"
-                      className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 visited:text-white font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center no-underline"
-                    >
-                      Get Free Case Evaluation
-                      <ArrowRight className="ml-2" size={20} />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setStep(1);
-                        setResults(null);
-                        setFormData({
-                          bloodCancerType: '',
-                          age: '',
-                          exposureDuration: '',
-                          medicalCosts: '',
-                          severity: '',
-                          employmentStatus: ''
-                        });
-                      }}
-                      className="w-full h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 visited:text-slate-900 font-semibold transition-all inline-flex items-center justify-center no-underline"
-                    >
-                      Calculate Another Case
-                    </button>
-                  </div>
-                </div>
-              )}
-            </form>
-          </div>
-        </section>
-
-        {/* Stats */}
         <section className="py-20 bg-slate-50 border-t border-slate-200">
           <div className="container mx-auto px-6 max-w-5xl">
             <div className="grid md:grid-cols-3 gap-8 text-center">
@@ -448,7 +170,247 @@ const BenzeneCalculator = () => {
               </div>
               <div>
                 <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win your case</p>
+                <p className="text-slate-600">Unless we win</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 bg-white">
+          <div className="container mx-auto px-6 max-w-3xl">
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
+              <div className="bg-slate-900 px-8 py-6">
+                <div className="flex items-center justify-between">
+                  <h2 className="text-2xl font-bold text-white">Calculate Your Case Value</h2>
+                  <div className="flex gap-2">
+                    {[1, 2, 3].map((s) => (
+                      <div
+                        key={s}
+                        className={`w-10 h-1 rounded-full transition-colors ${
+                          step >= s ? 'bg-white' : 'bg-slate-700'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <div className="p-8">
+                {step === 1 && (
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Type of Blood Cancer or Illness
+                      </label>
+                      <select
+                        value={formData.bloodCancerType}
+                        onChange={(e) => updateField('bloodCancerType', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select diagnosis</option>
+                        <option value="aml">Acute Myeloid Leukemia (AML)</option>
+                        <option value="all">Acute Lymphoblastic Leukemia</option>
+                        <option value="multiple-myeloma">Multiple Myeloma</option>
+                        <option value="non-hodgkin">Non-Hodgkin's Lymphoma</option>
+                        <option value="cll">Chronic Lymphocytic Leukemia</option>
+                        <option value="cml">Chronic Myeloid Leukemia</option>
+                        <option value="mds">Myelodysplastic Syndrome</option>
+                        <option value="aplastic-anemia">Aplastic Anemia</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Duration of Benzene Exposure
+                      </label>
+                      <select
+                        value={formData.exposureDuration}
+                        onChange={(e) => updateField('exposureDuration', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select duration</option>
+                        <option value="more-than-20">More than 20 years</option>
+                        <option value="10-20">10-20 years</option>
+                        <option value="5-10">5-10 years</option>
+                        <option value="1-5">1-5 years</option>
+                        <option value="less-than-1">Less than 1 year</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Source of Benzene Exposure
+                      </label>
+                      <select
+                        value={formData.exposureSource}
+                        onChange={(e) => updateField('exposureSource', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select source</option>
+                        <option value="consumer-product">Consumer Product (Sunscreen, Hand Sanitizer)</option>
+                        <option value="chemical-plant">Chemical Plant</option>
+                        <option value="refinery">Oil Refinery</option>
+                        <option value="petroleum">Petroleum Industry</option>
+                        <option value="lab-tech">Laboratory Technician</option>
+                        <option value="painter">Painting/Coatings Industry</option>
+                        <option value="printer">Printing Industry</option>
+                        <option value="other">Other Occupational Exposure</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Severity of Condition
+                      </label>
+                      <select
+                        value={formData.severity}
+                        onChange={(e) => updateField('severity', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select severity</option>
+                        <option value="terminal">Terminal / Advanced Stage</option>
+                        <option value="severe">Severe</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="mild">Early Stage / Remission</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {step === 2 && (
+                  <div className="space-y-6">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Your Age at Diagnosis
+                      </label>
+                      <select
+                        value={formData.age}
+                        onChange={(e) => updateField('age', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select age</option>
+                        <option value="25">Under 30</option>
+                        <option value="37">30-45</option>
+                        <option value="52">45-60</option>
+                        <option value="65">60-70</option>
+                        <option value="75">Over 70</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Total Medical Expenses to Date
+                      </label>
+                      <select
+                        value={formData.medicalCosts}
+                        onChange={(e) => updateField('medicalCosts', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select amount</option>
+                        <option value="25000">Under $50,000</option>
+                        <option value="75000">$50,000 - $100,000</option>
+                        <option value="175000">$100,000 - $250,000</option>
+                        <option value="375000">$250,000 - $500,000</option>
+                        <option value="750000">Over $500,000</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Estimated Future Medical Care
+                      </label>
+                      <select
+                        value={formData.futureCareCosts}
+                        onChange={(e) => updateField('futureCareCosts', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select amount</option>
+                        <option value="50000">$0 - $100,000</option>
+                        <option value="200000">$100,000 - $300,000</option>
+                        <option value="500000">$300,000 - $700,000</option>
+                        <option value="1000000">$700,000 - $1,300,000</option>
+                        <option value="2000000">Over $1,300,000</option>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-900 mb-2">
+                        Lost Wages and Income
+                      </label>
+                      <select
+                        value={formData.lostWages}
+                        onChange={(e) => updateField('lostWages', e.target.value)}
+                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
+                      >
+                        <option value="">Select amount</option>
+                        <option value="25000">$0 - $50,000</option>
+                        <option value="100000">$50,000 - $150,000</option>
+                        <option value="250000">$150,000 - $350,000</option>
+                        <option value="500000">$350,000 - $650,000</option>
+                        <option value="1000000">Over $650,000</option>
+                      </select>
+                    </div>
+                  </div>
+                )}
+
+                {step === 3 && results && (
+                  <div className="space-y-6">
+                    <div className="text-center py-8">
+                      <h3 className="text-3xl font-bold text-slate-900 mb-4">
+                        Estimated Compensation Range
+                      </h3>
+                      <div className="text-5xl font-bold text-slate-900 mb-2">
+                        ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+                      </div>
+                      <p className="text-slate-600 mt-4">
+                        Based on your benzene exposure and blood cancer diagnosis
+                      </p>
+                    </div>
+
+                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+                      <div className="flex gap-3">
+                        <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={20} />
+                        <div className="text-sm text-amber-900">
+                          <p className="font-semibold mb-2">Important Legal Disclaimer:</p>
+                          <p className="mb-2">
+                            This calculator provides a general estimate only and does not constitute legal advice or a guarantee of compensation. Actual case values depend on multiple factors including specific cancer diagnosis, duration and intensity of exposure, proof of causation, and individual circumstances.
+                          </p>
+                          <p>
+                            Benzene exposure cases have strict filing deadlines and complex causation requirements. Contact an experienced attorney immediately to evaluate your case and protect your legal rights.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                <div className="flex gap-4 mt-8">
+                  {step > 1 && step < 3 && (
+                    <button
+                      onClick={handleBack}
+                      className="px-6 py-3 border border-slate-300 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition-colors"
+                    >
+                      Back
+                    </button>
+                  )}
+                  {step < 3 && (
+                    <button
+                      onClick={handleNext}
+                      disabled={!isStepValid()}
+                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {step === 2 ? 'Calculate' : 'Continue'}
+                    </button>
+                  )}
+                  {step === 3 && (
+                    <button
+                      onClick={resetForm}
+                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
+                    >
+                      Start New Calculation
+                    </button>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -1,255 +1,594 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertCircle } from 'lucide-react';
+import React from 'react';
+import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
+import {
+  CalculatorLayout,
+  CalculatorProgress,
+  FormNavigation,
+  OptionButton,
+  CalculatorSEO
+} from '@/components/calculator';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Button } from '@/components/ui/button';
 
-const MotorcycleCompensationCalculator = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    injuryType: '',
-    medicalCosts: '',
-    lostWages: '',
-    bikeValue: '',
-    fault: '',
-    helmetWorn: ''
-  });
-  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
+interface MotorcycleFormData extends CalculatorFormData {
+  injuryType: string;
+  injurySeverity: string;
+  crashType: string;
+  medicalCosts: string;
+  futureMedical: string;
+  lostWages: string;
+  bikeValue: string;
+  helmetWorn: string;
+  speedEstimate: string;
+  roadConditions: string;
+  faultPercentage: string;
+  permanentImpact: string;
+}
 
-  const calculateCompensation = () => {
-    let baseMin = 15000;
-    let baseMax = 75000;
+const initialFormData: MotorcycleFormData = {
+  injuryType: '',
+  injurySeverity: '',
+  crashType: '',
+  medicalCosts: '',
+  futureMedical: '',
+  lostWages: '',
+  bikeValue: '',
+  helmetWorn: '',
+  speedEstimate: '',
+  roadConditions: '',
+  faultPercentage: '',
+  permanentImpact: ''
+};
 
-    const injuryMult: Record<string, number> = {
-      'road-rash': 1.5,
-      'fractures': 2.5,
-      'head-injury': 4.0,
-      'spinal': 5.0,
-      'multiple': 3.5
-    };
-    baseMin *= injuryMult[formData.injuryType] || 1;
-    baseMax *= injuryMult[formData.injuryType] || 1;
+const injuryTypeOptions = [
+  { value: 'road-rash', label: 'Road Rash/Abrasions', description: 'Skin injuries from sliding' },
+  { value: 'fractures', label: 'Broken Bones/Fractures', description: 'Bone injuries' },
+  { value: 'head-injury', label: 'Head/Brain Injury', description: 'TBI or concussion' },
+  { value: 'spinal-injury', label: 'Spinal Cord Injury', description: 'Back/paralysis' },
+  { value: 'internal-injuries', label: 'Internal Injuries', description: 'Organ damage' },
+  { value: 'amputation', label: 'Amputation', description: 'Loss of limb' },
+  { value: 'multiple', label: 'Multiple Serious Injuries', description: 'Several injury types' },
+  { value: 'death', label: 'Wrongful Death', description: 'Fatal motorcycle crash' }
+];
 
-    const medical = parseInt(formData.medicalCosts) || 0;
-    baseMin += medical * 3;
-    baseMax += medical * 6;
+const injurySeverityOptions = [
+  { value: 'minor', label: 'Minor', description: 'Quick recovery expected' },
+  { value: 'moderate', label: 'Moderate', description: 'Weeks to months recovery' },
+  { value: 'severe', label: 'Severe', description: 'Major medical intervention' },
+  { value: 'catastrophic', label: 'Catastrophic', description: 'Life-changing injuries' }
+];
 
-    const wages = parseInt(formData.lostWages) || 0;
-    baseMin += wages * 2;
-    baseMax += wages * 4;
+const crashTypeOptions = [
+  { value: 'left-turn', label: 'Left-Turn Collision', description: 'Car turned into path' },
+  { value: 'rear-end', label: 'Rear-Ended', description: 'Hit from behind' },
+  { value: 'head-on', label: 'Head-On Collision', description: 'Frontal impact' },
+  { value: 'sideswipe', label: 'Sideswipe', description: 'Clipped by vehicle' },
+  { value: 'lane-splitting', label: 'Lane Splitting Accident', description: 'Crash while filtering' },
+  { value: 'single-vehicle', label: 'Single Vehicle Crash', description: 'No other vehicle involved' },
+  { value: 'dooring', label: 'Dooring', description: 'Hit by opened car door' }
+];
 
-    const bike = parseInt(formData.bikeValue) || 0;
-    baseMin += bike;
-    baseMax += bike;
+const helmetOptions = [
+  { value: 'full-face', label: 'Full-Face Helmet', description: 'Maximum protection' },
+  { value: 'modular', label: 'Modular/3/4 Helmet', description: 'Good protection' },
+  { value: 'half-helmet', label: 'Half Helmet', description: 'Minimal protection' },
+  { value: 'none', label: 'No Helmet', description: 'May impact compensation' }
+];
 
-    setResults({ min: Math.round(baseMin), max: Math.round(baseMax) });
-    setStep(3);
+const speedOptions = [
+  { value: 'under-25', label: 'Under 25 mph', description: 'Low speed' },
+  { value: '25-45', label: '25-45 mph', description: 'Moderate speed' },
+  { value: '45-65', label: '45-65 mph', description: 'Highway speed' },
+  { value: 'over-65', label: 'Over 65 mph', description: 'High speed' }
+];
+
+const roadConditionsOptions = [
+  { value: 'good', label: 'Good Conditions', description: 'Dry, clear, well-maintained' },
+  { value: 'poor-weather', label: 'Poor Weather', description: 'Rain, fog, or snow' },
+  { value: 'poor-road', label: 'Poor Road Conditions', description: 'Potholes, debris, gravel' },
+  { value: 'poor-visibility', label: 'Poor Visibility', description: 'Night, no lighting' }
+];
+
+const faultOptions = [
+  { value: '100-other', label: '100% Other Driver', description: 'Clear liability' },
+  { value: '75-99-other', label: '75-99% Other Driver', description: 'Mostly at fault' },
+  { value: '50-74-other', label: '50-74% Other Driver', description: 'Shared fault' },
+  { value: 'rider-mostly', label: 'Rider Mostly at Fault', description: 'May limit recovery' }
+];
+
+const permanentImpactOptions = [
+  { value: 'none', label: 'No Permanent Impact', description: 'Full recovery' },
+  { value: 'scarring', label: 'Permanent Scarring', description: 'Visible scars' },
+  { value: 'minor-disability', label: 'Minor Disability', description: 'Slight limitations' },
+  { value: 'significant-disability', label: 'Significant Disability', description: 'Major life changes' },
+  { value: 'total-disability', label: 'Total Disability', description: 'Unable to work' },
+  { value: 'paralysis', label: 'Paralysis', description: 'Wheelchair bound' }
+];
+
+function calculateCompensation(data: MotorcycleFormData): CalculatorResults {
+  // Base amounts (motorcycles typically have higher settlements due to severity)
+  let baseMin = 25000;
+  let baseMax = 125000;
+
+  // Injury type multipliers (motorcycle injuries are typically severe)
+  const injuryMultipliers: Record<string, number> = {
+    'road-rash': 1.5,
+    'fractures': 2.5,
+    'head-injury': 4.5,
+    'spinal-injury': 6.0,
+    'internal-injuries': 3.8,
+    'amputation': 7.0,
+    'multiple': 4.0,
+    'death': 8.0
   };
+
+  const injuryMult = injuryMultipliers[data.injuryType] || 1;
+  baseMin *= injuryMult;
+  baseMax *= injuryMult;
+
+  // Severity multipliers
+  const severityMultipliers: Record<string, number> = {
+    'minor': 1,
+    'moderate': 2.2,
+    'severe': 4.0,
+    'catastrophic': 6.5
+  };
+
+  const severityMult = severityMultipliers[data.injurySeverity] || 1;
+  baseMin *= severityMult;
+  baseMax *= severityMult;
+
+  // Crash type impact
+  const crashMultipliers: Record<string, number> = {
+    'left-turn': 1.6, // Most common, usually clear fault
+    'rear-end': 1.4,
+    'head-on': 2.0,
+    'sideswipe': 1.3,
+    'lane-splitting': 0.9, // May be disputed
+    'single-vehicle': 0.8, // Harder to prove liability
+    'dooring': 1.5
+  };
+
+  const crashMult = crashMultipliers[data.crashType] || 1;
+  baseMin *= crashMult;
+  baseMax *= crashMult;
+
+  // Add economic damages
+  const medicalCosts = parseInt(data.medicalCosts) || 0;
+  const futureMedical = parseInt(data.futureMedical) || 0;
+  const lostWages = parseInt(data.lostWages) || 0;
+  const bikeValue = parseInt(data.bikeValue) || 0;
+
+  baseMin += medicalCosts * 3 + futureMedical * 1.5 + lostWages * 2 + bikeValue;
+  baseMax += medicalCosts * 6 + futureMedical * 2.5 + lostWages * 4 + bikeValue * 1.2;
+
+  // Helmet usage (lack of helmet may reduce non-economic damages in some states)
+  const helmetMultipliers: Record<string, number> = {
+    'full-face': 1.0,
+    'modular': 0.95,
+    'half-helmet': 0.85,
+    'none': 0.7 // May reduce damages due to contributory negligence
+  };
+
+  const helmetMult = helmetMultipliers[data.helmetWorn] || 1;
+  baseMin *= helmetMult;
+  baseMax *= helmetMult;
+
+  // Speed at time of crash
+  const speedMultipliers: Record<string, number> = {
+    'under-25': 1.0,
+    '25-45': 1.2,
+    '45-65': 1.4,
+    'over-65': 1.6
+  };
+
+  const speedMult = speedMultipliers[data.speedEstimate] || 1;
+  baseMin *= speedMult;
+  baseMax *= speedMult;
+
+  // Road conditions (poor conditions may support negligence claim)
+  const conditionMultipliers: Record<string, number> = {
+    'good': 1.0,
+    'poor-weather': 1.2,
+    'poor-road': 1.4,
+    'poor-visibility': 1.3
+  };
+
+  const conditionMult = conditionMultipliers[data.roadConditions] || 1;
+  baseMin *= conditionMult;
+  baseMax *= conditionMult;
+
+  // Fault percentage (California comparative negligence)
+  const faultReductions: Record<string, number> = {
+    '100-other': 1.0,
+    '75-99-other': 0.85,
+    '50-74-other': 0.6,
+    'rider-mostly': 0.35
+  };
+
+  const faultReduction = faultReductions[data.faultPercentage] || 1;
+  baseMin *= faultReduction;
+  baseMax *= faultReduction;
+
+  // Permanent impact
+  const permanentMultipliers: Record<string, number> = {
+    'none': 1,
+    'scarring': 1.4,
+    'minor-disability': 1.8,
+    'significant-disability': 2.8,
+    'total-disability': 4.0,
+    'paralysis': 5.0
+  };
+
+  const permanentMult = permanentMultipliers[data.permanentImpact] || 1;
+  baseMin *= permanentMult;
+  baseMax *= permanentMult;
+
+  return {
+    min: Math.round(baseMin),
+    max: Math.round(baseMax),
+    medicalExpenses: medicalCosts,
+    futureCare: futureMedical,
+    lostIncome: lostWages,
+    propertyDamage: bikeValue,
+    totalEconomic: medicalCosts + futureMedical + lostWages + bikeValue
+  };
+}
+
+function validateForm(data: MotorcycleFormData, step: number): boolean {
+  if (step === 1) {
+    return Boolean(
+      data.injuryType &&
+      data.injurySeverity &&
+      data.crashType &&
+      data.helmetWorn
+    );
+  }
+  if (step === 2) {
+    return Boolean(
+      data.medicalCosts &&
+      data.lostWages &&
+      data.bikeValue &&
+      data.speedEstimate &&
+      data.roadConditions &&
+      data.faultPercentage &&
+      data.permanentImpact
+    );
+  }
+  return false;
+}
+
+export default function MotorcycleCompensationCalculator() {
+  const {
+    step,
+    formData,
+    results,
+    updateField,
+    handleNext,
+    handleBack,
+    resetForm,
+    isStepValid
+  } = useCalculatorForm<MotorcycleFormData>(
+    initialFormData,
+    calculateCompensation,
+    validateForm
+  );
 
   return (
     <>
-      <Helmet>
-        <title>Motorcycle Accident Calculator | Bike Crash Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate motorcycle accident compensation for crashes, road rash, and serious injuries. Free estimates for bike damage and medical costs." />
-      </Helmet>
+      <CalculatorSEO
+        title="Motorcycle Accident Compensation Calculator | Free Crash Settlement Estimate"
+        description="Calculate potential compensation for motorcycle accident injuries including road rash, fractures, and TBI. Free estimates with helmet usage and fault percentage analysis."
+        canonical="/motorcycle-calculator"
+        injuryType="motorcycle accident"
+      />
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
+      <CalculatorLayout
+        title="Motorcycle Accident Calculator"
+        subtitle="Estimate compensation for motorcycle crash injuries"
+        metaTitle="Motorcycle Accident Compensation Calculator"
+        metaDescription="Free motorcycle crash settlement calculator. Instant estimates."
+        stats={[
+          { value: '$75K+', label: 'Average Settlement' },
+          { value: '5,000', label: 'Fatal Crashes/Year' },
+          { value: '29x', label: 'More Dangerous Than Cars' }
+        ]}
+      >
+        <CalculatorProgress currentStep={step} totalSteps={3} />
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Motorcycle Accident<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Estimate bike crash compensation
-            </p>
-          </div>
-        </section>
-
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="flex justify-center items-center py-8 space-x-4">
-              {[1, 2, 3].map((num) => (
-                <React.Fragment key={num}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                    {num}
-                  </div>
-                  {num < 3 && <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-
+        {/* Step 1: Injury & Crash Details */}
         {step === 1 && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <h2 className="text-3xl font-bold text-black mb-8">Injury Information</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Injury Type</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { value: 'road-rash', label: 'Road Rash' },
-                      { value: 'fractures', label: 'Fractures' },
-                      { value: 'head-injury', label: 'Head Injury' },
-                      { value: 'spinal', label: 'Spinal Injury' },
-                      { value: 'multiple', label: 'Multiple Injuries' }
-                    ].map((opt) => (
-                      <button
-                        key={opt.value}
-                        onClick={() => setFormData({ ...formData, injuryType: opt.value })}
-                        className={`p-4 border-2 rounded-xl text-left transition-all ${formData.injuryType === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-300'}`}
-                      >
-                        <span className="font-medium text-slate-900">{opt.label}</span>
-                      </button>
-                    ))}
-                  </div>
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-2xl font-semibold mb-2">Injury & Crash Details</h2>
+              <p className="text-muted-foreground">Tell us about the motorcycle accident</p>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <Label className="text-base font-medium mb-4 block">Type of Injury</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {injuryTypeOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.injuryType === option.value}
+                      onClick={() => updateField('injuryType', option.value)}
+                    />
+                  ))}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Helmet Worn?</label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {[
-                      { value: 'yes', label: 'Yes' },
-                      { value: 'no', label: 'No' }
-                    ].map((opt) => (
-                      <button
-                        key={opt.value}
-                        onClick={() => setFormData({ ...formData, helmetWorn: opt.value })}
-                        className={`p-4 border-2 rounded-xl text-left transition-all ${formData.helmetWorn === opt.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-300'}`}
-                      >
-                        <span className="font-medium text-slate-900">{opt.label}</span>
-                      </button>
-                    ))}
-                  </div>
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
+                <div className="grid grid-cols-2 gap-4">
+                  {injurySeverityOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.injurySeverity === option.value}
+                      onClick={() => updateField('injurySeverity', option.value)}
+                    />
+                  ))}
                 </div>
-                <button
-                  onClick={() => setStep(2)}
-                  disabled={!formData.injuryType || !formData.helmetWorn}
-                  className="w-full bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all flex items-center justify-center mt-8"
-                >
-                  Continue <ArrowRight className="ml-2" size={20} />
-                </button>
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Type of Crash</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {crashTypeOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.crashType === option.value}
+                      onClick={() => updateField('crashType', option.value)}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Helmet Worn at Time of Crash</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {helmetOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.helmetWorn === option.value}
+                      onClick={() => updateField('helmetWorn', option.value)}
+                    />
+                  ))}
+                </div>
               </div>
             </div>
-          </section>
+
+            <FormNavigation
+              currentStep={step}
+              totalSteps={3}
+              isValid={isStepValid()}
+              onBack={handleBack}
+              onNext={handleNext}
+            />
+          </div>
         )}
 
+        {/* Step 2: Financial & Case Details */}
         {step === 2 && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <h2 className="text-3xl font-bold text-black mb-8">Financial Impact</h2>
-              <div className="space-y-4">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Medical Costs</label>
-                  <input
-                    type="number"
-                    placeholder="$"
-                    value={formData.medicalCosts}
-                    onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                    className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+          <div className="space-y-8">
+            <div>
+              <h2 className="text-2xl font-semibold mb-2">Financial Impact & Case Details</h2>
+              <p className="text-muted-foreground">Damages and accident circumstances</p>
+            </div>
+
+            <div className="space-y-6">
+              <div>
+                <Label htmlFor="medicalCosts" className="text-base font-medium">
+                  Medical Expenses to Date ($)
+                </Label>
+                <Input
+                  id="medicalCosts"
+                  type="number"
+                  placeholder="25000"
+                  value={formData.medicalCosts}
+                  onChange={(e) => updateField('medicalCosts', e.target.value)}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="futureMedical" className="text-base font-medium">
+                  Future Medical Costs ($)
+                </Label>
+                <Input
+                  id="futureMedical"
+                  type="number"
+                  placeholder="50000"
+                  value={formData.futureMedical}
+                  onChange={(e) => updateField('futureMedical', e.target.value)}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="lostWages" className="text-base font-medium">
+                  Lost Wages & Income ($)
+                </Label>
+                <Input
+                  id="lostWages"
+                  type="number"
+                  placeholder="15000"
+                  value={formData.lostWages}
+                  onChange={(e) => updateField('lostWages', e.target.value)}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label htmlFor="bikeValue" className="text-base font-medium">
+                  Motorcycle Value/Damage ($)
+                </Label>
+                <Input
+                  id="bikeValue"
+                  type="number"
+                  placeholder="12000"
+                  value={formData.bikeValue}
+                  onChange={(e) => updateField('bikeValue', e.target.value)}
+                  className="mt-2"
+                />
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Estimated Speed at Impact</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {speedOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.speedEstimate === option.value}
+                      onClick={() => updateField('speedEstimate', option.value)}
+                    />
+                  ))}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Lost Wages</label>
-                  <input
-                    type="number"
-                    placeholder="$"
-                    value={formData.lostWages}
-                    onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                    className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Road Conditions</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {roadConditionsOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.roadConditions === option.value}
+                      onClick={() => updateField('roadConditions', option.value)}
+                    />
+                  ))}
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Motorcycle Value</label>
-                  <input
-                    type="number"
-                    placeholder="$"
-                    value={formData.bikeValue}
-                    onChange={(e) => setFormData({ ...formData, bikeValue: e.target.value })}
-                    className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Fault Percentage</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {faultOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.faultPercentage === option.value}
+                      onClick={() => updateField('faultPercentage', option.value)}
+                    />
+                  ))}
                 </div>
-                <div className="flex space-x-4 mt-8">
-                  <button
-                    onClick={() => setStep(1)}
-                    className="flex-1 bg-slate-100 text-slate-900 py-4 px-6 rounded-xl font-semibold hover:bg-slate-200 transition-all"
-                  >
-                    Back
-                  </button>
-                  <button
-                    onClick={calculateCompensation}
-                    disabled={!formData.medicalCosts || !formData.lostWages || !formData.bikeValue}
-                    className="flex-1 bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-all"
-                  >
-                    Calculate
-                  </button>
+              </div>
+
+              <div>
+                <Label className="text-base font-medium mb-4 block">Permanent Impact</Label>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {permanentImpactOptions.map((option) => (
+                    <OptionButton
+                      key={option.value}
+                      value={option.value}
+                      label={option.label}
+                      description={option.description}
+                      isSelected={formData.permanentImpact === option.value}
+                      onClick={() => updateField('permanentImpact', option.value)}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
-          </section>
+
+            <FormNavigation
+              currentStep={step}
+              totalSteps={3}
+              isValid={isStepValid()}
+              onBack={handleBack}
+              onNext={handleNext}
+              nextButtonText="Calculate Settlement"
+            />
+          </div>
         )}
 
+        {/* Step 3: Results */}
         {step === 3 && results && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <div className="bg-slate-50 rounded-2xl p-8 mb-8">
-                <h2 className="text-2xl font-bold text-black mb-6">Estimated Compensation Range</h2>
-                <div className="bg-white rounded-xl p-6 mb-4">
-                  <div className="flex items-baseline justify-between mb-2">
-                    <span className="text-slate-600">Low Estimate</span>
-                    <span className="text-3xl font-bold text-slate-900">${results.min.toLocaleString()}</span>
-                  </div>
-                  <div className="h-2 bg-slate-100 rounded-full mb-4">
-                    <div className="h-full bg-slate-900 rounded-full" style={{ width: '40%' }} />
-                  </div>
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-slate-600">High Estimate</span>
-                    <span className="text-3xl font-bold text-slate-900">${results.max.toLocaleString()}</span>
-                  </div>
+          <div className="space-y-8">
+            <div className="text-center">
+              <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Settlement Range</h2>
+              <p className="text-slate-600">Based on motorcycle crash details</p>
+            </div>
+
+            <div className="bg-slate-50 rounded-2xl p-8 text-center">
+              <div className="text-5xl font-bold text-black mb-2">
+                ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+              </div>
+              <p className="text-slate-600">Potential Settlement Range</p>
+            </div>
+
+            <div className="space-y-4">
+              <div className="bg-white border border-slate-200 rounded-xl p-6">
+                <h4 className="font-semibold text-black mb-2">Economic Damages Breakdown</h4>
+                <div className="text-sm text-slate-600 space-y-1">
+                  <p>Medical Expenses: ${results.medicalExpenses?.toLocaleString()}</p>
+                  <p>Future Medical Care: ${results.futureCare?.toLocaleString()}</p>
+                  <p>Lost Wages: ${results.lostIncome?.toLocaleString()}</p>
+                  <p>Motorcycle Damage: ${results.propertyDamage?.toLocaleString()}</p>
+                  <p className="font-semibold pt-2 border-t border-slate-200">
+                    Total Economic: ${results.totalEconomic?.toLocaleString()}
+                  </p>
                 </div>
-                <p className="text-sm text-slate-600 mt-4">
-                  Based on motorcycle crash settlements. Actual compensation varies by liability and injuries.
+              </div>
+
+              <div className="bg-white border border-slate-200 rounded-xl p-6">
+                <h4 className="font-semibold text-black mb-2">Motorcycle Accident Severity</h4>
+                <p className="text-sm text-slate-600">
+                  Motorcyclists are 29x more likely to die in a crash than car occupants. Injuries are typically severe due to lack of protection, resulting in higher settlement values.
                 </p>
               </div>
-              <Link
-                to="/contact"
-                className="block w-full bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 transition-all text-center no-underline"
-              >
-                Get Free Case Review
-              </Link>
-            </div>
-          </section>
-        )}
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$75K+</div>
-                <p className="text-slate-600">Average motorcycle settlement</p>
+              <div className="bg-white border border-slate-200 rounded-xl p-6">
+                <h4 className="font-semibold text-black mb-2">Helmet Laws & Compensation</h4>
+                <p className="text-sm text-slate-600">
+                  California requires all riders to wear helmets. Not wearing a helmet may reduce non-economic damages but won't eliminate your claim. Helmet type affects head injury severity.
+                </p>
               </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
-                <p className="text-slate-600">Rider support available</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
+            </div>
+
+            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+              <p className="text-sm text-amber-900">
+                <strong>Important:</strong> Motorcycle accidents often result in catastrophic injuries. Left-turn collisions are the most common type. Comparative negligence applies - your recovery is reduced by your fault percentage. This estimate assumes provable liability and documented injuries.
+              </p>
+            </div>
+
+            <div className="text-center pt-4 space-y-4">
+              <h3 className="text-xl font-semibold text-black">Get maximum compensation for your crash</h3>
+              <Button size="lg" className="h-14 px-8 text-base">
+                Get Free Case Evaluation
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                onClick={resetForm}
+                className="h-14 px-8 text-base ml-4"
+              >
+                Calculate Another Case
+              </Button>
             </div>
           </div>
-        </section>
-      </main>
+        )}
+      </CalculatorLayout>
     </>
   );
-};
-
-export default MotorcycleCompensationCalculator;
+}

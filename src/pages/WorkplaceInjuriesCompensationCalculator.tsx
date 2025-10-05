@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
-import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertCircle } from 'lucide-react';
+import { ArrowLeft, HardHat } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const WorkplaceInjuriesCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -15,17 +17,28 @@ const WorkplaceInjuriesCompensationCalculator = () => {
   });
   const [results, setResults] = useState<{ workersComp: number; thirdParty: number; total: number } | null>(null);
 
+  const handleNext = () => {
+    if (step === 2) {
+      calculateCompensation();
+    } else {
+      setStep(step + 1);
+    }
+  };
+
+  const handleBack = () => setStep(step - 1);
+
   const calculateCompensation = () => {
-    const medical = parseInt(formData.medicalCosts) || 0;
-    const wages = parseInt(formData.lostWages) || 0;
+    const medical = parseInt(formData.medicalCosts) || 50000;
+    const wages = parseInt(formData.lostWages) || 60000;
 
-    // Workers' Comp (limited)
-    const workersComp = medical + (wages * 0.66); // 2/3 wage replacement
+    let multiplier = 1.5;
+    if (formData.severity === 'severe') multiplier = 3;
+    if (formData.severity === 'catastrophic') multiplier = 5;
 
-    // Third-party claim (if applicable)
+    const workersComp = medical + (wages * 0.66);
     let thirdParty = 0;
     if (formData.thirdPartyLiability === 'yes') {
-      thirdParty = (medical + wages) * 3;
+      thirdParty = (medical + wages) * multiplier;
     }
 
     setResults({
@@ -34,6 +47,12 @@ const WorkplaceInjuriesCompensationCalculator = () => {
       total: Math.round(workersComp + thirdParty)
     });
     setStep(3);
+  };
+
+  const isStepValid = () => {
+    if (step === 1) return formData.injuryType && formData.severity && formData.permanentDisability;
+    if (step === 2) return formData.medicalCosts && formData.lostWages && formData.thirdPartyLiability;
+    return false;
   };
 
   return (
@@ -55,12 +74,241 @@ const WorkplaceInjuriesCompensationCalculator = () => {
 
         <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
           <div className="container mx-auto px-6 max-w-5xl text-center">
+            <HardHat className="mx-auto mb-6" size={64} strokeWidth={1.5} />
             <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
               Workplace Injury<br />Calculator
             </h1>
             <p className="text-xl md:text-2xl text-slate-600 font-light">
               Workers' comp & third-party claims
             </p>
+          </div>
+        </section>
+
+        <section className="py-20">
+          <div className="container mx-auto px-6 max-w-3xl">
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex gap-3">
+                  {[1, 2, 3].map((s) => (
+                    <div
+                      key={s}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        s === step ? 'bg-black' : s < step ? 'bg-slate-400' : 'bg-slate-200'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-slate-500">Step {step} of 3</span>
+              </div>
+            </div>
+
+            {step === 1 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-3xl font-bold text-black mb-2">Injury Details</h2>
+                  <p className="text-slate-600">Tell us about your workplace injury</p>
+                </div>
+
+                <div className="space-y-4">
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Type of Injury</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {['Back/Spine', 'Fracture/Broken Bone', 'Repetitive Strain', 'Chemical Exposure', 'Machinery Accident', 'Other'].map((type) => (
+                        <button
+                          key={type}
+                          onClick={() => setFormData({ ...formData, injuryType: type })}
+                          className={`p-4 rounded-xl border-2 text-left transition-all ${
+                            formData.injuryType === type
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="font-medium">{type}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Injury Severity</span>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                      {[
+                        { value: 'minor', label: 'Minor', desc: 'Full recovery expected' },
+                        { value: 'severe', label: 'Severe', desc: 'Partial disability' },
+                        { value: 'catastrophic', label: 'Catastrophic', desc: 'Permanent disability' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, severity: option.value })}
+                          className={`p-4 rounded-xl border-2 text-left transition-all ${
+                            formData.severity === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <div className="font-medium mb-1">{option.label}</div>
+                          <div className={`text-sm ${formData.severity === option.value ? 'text-white/70' : 'text-slate-500'}`}>
+                            {option.desc}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Permanent Disability</span>
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, permanentDisability: option.value })}
+                          className={`p-4 rounded-xl border-2 text-center transition-all ${
+                            formData.permanentDisability === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="font-medium">{option.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-3xl font-bold text-black mb-2">Financial Impact</h2>
+                  <p className="text-slate-600">Help us calculate your total compensation</p>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Medical Costs (including future treatment)
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="$50,000"
+                      value={formData.medicalCosts}
+                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
+                      className="h-14 text-lg"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Lost Wages (annual income)
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="$60,000"
+                      value={formData.lostWages}
+                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
+                      className="h-14 text-lg"
+                    />
+                  </div>
+
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Third-Party Liability (non-employer fault)?</span>
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, thirdPartyLiability: option.value })}
+                          className={`p-4 rounded-xl border-2 text-center transition-all ${
+                            formData.thirdPartyLiability === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="font-medium">{option.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && results && (
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation</h2>
+                  <p className="text-slate-600">Based on the information provided</p>
+                </div>
+
+                <div className="bg-slate-50 rounded-2xl p-8 space-y-6">
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center pb-4 border-b border-slate-200">
+                      <span className="text-slate-600">Workers' Compensation</span>
+                      <span className="text-2xl font-bold text-black">
+                        ${results.workersComp.toLocaleString()}
+                      </span>
+                    </div>
+                    {results.thirdParty > 0 && (
+                      <div className="flex justify-between items-center pb-4 border-b border-slate-200">
+                        <span className="text-slate-600">Third-Party Claim</span>
+                        <span className="text-2xl font-bold text-black">
+                          ${results.thirdParty.toLocaleString()}
+                        </span>
+                      </div>
+                    )}
+                    <div className="flex justify-between items-center pt-4">
+                      <span className="text-lg font-semibold text-black">Total Potential Compensation</span>
+                      <span className="text-4xl font-bold text-black">
+                        ${results.total.toLocaleString()}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                  <p className="text-sm text-amber-900">
+                    <strong>Important:</strong> This is an estimate only. Actual compensation depends on many factors including state laws, 
+                    employer insurance, and case specifics. Third-party claims can significantly increase your total compensation.
+                  </p>
+                </div>
+
+                <div className="text-center pt-4">
+                  <h3 className="text-xl font-semibold text-black mb-4">Ready to discuss your case?</h3>
+                  <Button size="lg" className="h-14 px-8 text-base">
+                    Get Free Case Review
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {step < 3 && (
+              <div className="flex gap-4 pt-8">
+                {step > 1 && (
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={handleBack}
+                    className="flex-1 h-14"
+                  >
+                    Back
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  onClick={handleNext}
+                  disabled={!isStepValid()}
+                  className="flex-1 h-14"
+                >
+                  {step === 2 ? 'Calculate' : 'Continue'}
+                </Button>
+              </div>
+            )}
           </div>
         </section>
 

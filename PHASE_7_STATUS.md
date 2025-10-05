@@ -135,9 +135,36 @@
 - Electrical safety violation factors
 - Dropdown-only form with hidden injury disclaimer
 
+### Phase 7U: Explosions & Fires Calculator ✅ NEW
+- Explosion type multipliers (gas, industrial, chemical, electrical)
+- Blast radius distance factors
+- Burn degree severity and respiratory damage
+- Hearing loss and blast injuries
+- OSHA violation factors
+- Third-party liability potential
+- Dropdown-only form with comprehensive disclaimer
+
+### Phase 7V: Bicycle Accident Calculator ✅ NEW
+- Accident type multipliers (dooring, right-hook, left-turn)
+- Vehicle type and speed factors
+- Location and right-of-way considerations
+- Helmet use and injury severity
+- Permanent impairment levels
+- California comparative fault
+- Dropdown-only form with cyclist rights disclaimer
+
+### Phase 7W: Pedestrian Accident Calculator ✅ NEW
+- Accident location multipliers (crosswalk, jaywalking, intersection)
+- Vehicle type and speed factors
+- Crosswalk use and right-of-way
+- Age vulnerability factors
+- Permanent disability and mobility impairment
+- California comparative negligence
+- Dropdown-only form with pedestrian priority disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (26 calculators)
+### Fully Implemented (29 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -164,20 +191,19 @@
 24. ✅ Scaffolding Falls (NEW)
 25. ✅ Crane Accidents (NEW)
 26. ✅ Electrocution (NEW)
+27. ✅ Explosions & Fires (NEW)
+28. ✅ Bicycle Accidents (NEW)
+29. ✅ Pedestrian Accidents (NEW)
 
-### Templated (27 calculators remaining)
+### Templated (24 calculators remaining)
 
 **Personal Injury** (8)
 - Personal Injury, Swimming Pool, Amusement Park
 - Retail Accidents, Paralysis, Birth Injuries
 - Defamation, Medical Devices
 
-**Transportation** (7)
-- Bicycle, Pedestrian, Bus Accidents
-- Uber/Lyft, Aviation, Maritime, Railroad
-
-**Workplace** (1)
-- Explosions & Fires
+**Transportation** (5)
+- Bus, Uber/Lyft, Aviation, Maritime, Railroad
 
 **Toxic Exposure** (2)
 - Environmental Toxic
@@ -222,29 +248,29 @@
 - Responsive design
 - Professional presentation
 
-## 🔄 Next Phases (Phases 7U+)
+## 🔄 Next Phases (Phases 7X+)
 
 ### Priority Order
 
-**Phase 7U: Explosions & Fires Calculator**
-- Explosion type and blast radius
-- Burn severity and blast injuries
-- Respiratory damage from smoke/chemicals
-- Third-party liability
+**Phase 7X: Bus Accident Calculator**
+- Common carrier liability
+- Passenger injury multipliers
+- Multiple victim incidents
+- Municipal vs. private operators
 
-**Phase 7V: Bicycle Accident Calculator**
-- Cyclist vulnerability factors
-- Vehicle type and speed
-- Right-of-way violations
-- Helmet use and injury severity
+**Phase 7Y: Uber/Lyft Rideshare Calculator**
+- Driver status (app on/off/en route/occupied)
+- Insurance coverage tiers
+- Background check failures
+- Multi-party liability
 
-**Phase 7W: Pedestrian Accident Calculator**
-- Crosswalk vs. jaywalking
-- Vehicle speed and type
-- Age vulnerability factors
-- Permanent mobility impairment
+**Phase 7Z: Swimming Pool Accident Calculator**
+- Drowning vs. near-drowning
+- Premises liability factors
+- Supervision requirements
+- Safety violation multipliers
 
-Continue incrementally with remaining 24+ calculators...
+Continue incrementally with remaining 21+ calculators...
 
 ## 📝 Implementation Pattern
 
@@ -260,9 +286,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **26 of 53 calculators** fully implemented (49%)
+- **29 of 53 calculators** fully implemented (55%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7U+ implementation
+- Ready for incremental Phase 7X+ implementation

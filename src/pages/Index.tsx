@@ -117,7 +117,7 @@ const Index = () => {
       {/* Footer */}
       <footer className="relative py-20 bg-surface/20 border-t border-border/20">
         <div className="container mx-auto px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-4 gap-12">
             {/* Firm Info */}
             <div>
               <Logo size="lg" className="mb-4" />
@@ -139,18 +139,42 @@ const Index = () => {
               </h4>
               <div className="space-y-3">
                 {[
-                  'Practice Areas',
-                  'About Attorney',
-                  'California Law',
-                  'Locations',
-                  'Free Consultation'
+                  { label: 'Practice Areas', href: '/practice-areas' },
+                  { label: 'Calculators', href: '/calculators' },
+                  { label: 'About Attorney', href: '/about' },
+                  { label: 'Results', href: '/results' },
+                  { label: 'Free Consultation', href: '/free-consultation' }
                 ].map((link, index) => (
                   <a 
                     key={index}
-                    href="#"
+                    href={link.href}
                     className="block text-muted-foreground hover:text-primary transition-colors duration-300"
                   >
-                    {link}
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Popular Calculators */}
+            <div>
+              <h4 className="text-title font-display font-semibold text-foreground mb-6">
+                Case Calculators
+              </h4>
+              <div className="space-y-3">
+                {[
+                  { label: 'Car Accident', href: '/practice-areas/car-accidents/compensation-calculator' },
+                  { label: 'Brain Injury', href: '/brain-injury-calculator' },
+                  { label: 'Wrongful Death', href: '/wrongful-death-calculator' },
+                  { label: 'Spinal Cord', href: '/spinal-cord-calculator' },
+                  { label: 'View All (50+)', href: '/calculators' }
+                ].map((link, index) => (
+                  <a 
+                    key={index}
+                    href={link.href}
+                    className="block text-muted-foreground hover:text-primary transition-colors duration-300"
+                  >
+                    {link.label}
                   </a>
                 ))}
               </div>

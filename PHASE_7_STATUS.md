@@ -190,9 +190,36 @@
 - Lifeguard requirement violations
 - Dropdown-only form with premises liability disclaimer
 
+### Phase 7AA: Amusement Park Accident Calculator ✅ NEW
+- Ride type multipliers (roller coaster, water ride, drop tower, etc.)
+- Accident type factors (ejection, restraint failure, mechanical failure)
+- Safety violation considerations (willful, repeat violations)
+- Operator negligence factors
+- Age vulnerability adjustments
+- Permanent disability ratings
+- Dropdown-only form with park liability disclaimer
+
+### Phase 7AB: Aviation Accident Calculator ✅ NEW
+- Aircraft type multipliers (commercial, charter, private, helicopter)
+- Accident type factors (fatal crash, emergency landing, mid-air collision)
+- FAA regulation violations
+- Pilot certification status
+- Maintenance issue considerations
+- Number of victims factors
+- Dropdown-only form with federal aviation law disclaimer
+
+### Phase 7AC: Railroad Accident Calculator ✅ NEW
+- Victim type multipliers (FELA railroad workers, passengers, pedestrians)
+- Accident type factors (crossing collision, derailment, struck by train)
+- Railroad crossing signal status
+- Federal Railroad Administration violations
+- Railroad type considerations
+- Permanent disability ratings
+- Dropdown-only form with FELA/federal regulation disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (32 calculators)
+### Fully Implemented (35 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -222,19 +249,22 @@
 27. ✅ Explosions & Fires
 28. ✅ Bicycle Accidents
 29. ✅ Pedestrian Accidents
-30. ✅ Bus Accidents (NEW)
-31. ✅ Uber/Lyft Rideshare (NEW)
-32. ✅ Swimming Pool Accidents (NEW)
+30. ✅ Bus Accidents
+31. ✅ Uber/Lyft Rideshare
+32. ✅ Swimming Pool Accidents
+33. ✅ Amusement Park Accidents (NEW)
+34. ✅ Aviation Accidents (NEW)
+35. ✅ Railroad Accidents (NEW)
 
-### Templated (21 calculators remaining)
+### Templated (18 calculators remaining)
 
-**Personal Injury** (6)
-- Personal Injury, Amusement Park
-- Retail Accidents, Paralysis, Birth Injuries
+**Personal Injury** (5)
+- Personal Injury, Retail Accidents
+- Paralysis, Birth Injuries
 - Defamation, Medical Devices
 
-**Transportation** (3)
-- Aviation, Maritime, Railroad
+**Transportation** (1)
+- Maritime
 
 **Toxic Exposure** (2)
 - Environmental Toxic
@@ -317,9 +347,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **32 of 53 calculators** fully implemented (60%)
+- **35 of 53 calculators** fully implemented (66%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7AA+ implementation
+- Ready for incremental Phase 7AD+ implementation

@@ -1,357 +1,384 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import React, { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { ArrowLeft, Pill } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Slider } from '@/components/ui/slider';
-import { Badge } from '@/components/ui/badge';
-import { Calculator, Star, AlertTriangle, Shield, Phone, FileText } from 'lucide-react';
-import heroBackground from '@/assets/opioid-calculator-hero.jpg';
 
-gsap.registerPlugin(ScrollTrigger);
-
-interface CalculatorData {
-  age: number;
-  addictionType: string;
-  addictionSeverity: string;
-  treatmentCosts: number;
-  lostWages: number;
-  addictionDuration: number;
-  familySize: number;
-}
-
-const OpioidCalculator: React.FC = () => {
-  const [calculatorData, setCalculatorData] = useState<CalculatorData>({
-    age: 35,
+const OpioidCalculator = () => {
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
     addictionType: '',
     addictionSeverity: '',
-    treatmentCosts: 0,
-    lostWages: 0,
-    addictionDuration: 1,
-    familySize: 1
+    treatmentCosts: '',
+    lostWages: '',
+    addictionDuration: '',
+    overdoseHistory: '',
+    age: ''
   });
+  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
-  const [estimatedCompensation, setEstimatedCompensation] = useState({
-    low: 0,
-    high: 0,
-    average: 0
-  });
+  const handleNext = () => {
+    if (step === 2) {
+      calculateCompensation();
+    } else {
+      setStep(step + 1);
+    }
+  };
 
-  const calculatorRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(calculatorRef.current?.querySelectorAll('.calculator-card'),
-        { opacity: 0, y: 50 },
-        { 
-          opacity: 1, 
-          y: 0, 
-          duration: 0.8, 
-          stagger: 0.2,
-          scrollTrigger: {
-            trigger: calculatorRef.current,
-            start: 'top 80%'
-          }
-        }
-      );
-    });
-
-    return () => ctx.revert();
-  }, []);
-
-  useEffect(() => {
-    calculateCompensation();
-  }, [calculatorData]);
+  const handleBack = () => setStep(step - 1);
 
   const calculateCompensation = () => {
-    let baseAmount = 50000;
-    
-    // Age factor (younger victims typically get higher settlements)
-    const ageFactor = calculatorData.age < 30 ? 1.3 : 
-                     calculatorData.age < 50 ? 1.1 : 
-                     calculatorData.age < 65 ? 1.0 : 0.8;
+    let baseMin = 75000;
+    let baseMax = 300000;
 
-    // Addiction severity factor
-    const severityMultiplier = {
-      'mild': 1.0,
-      'moderate': 1.5,
-      'severe': 2.2,
-      'overdose-survival': 3.0
-    }[calculatorData.addictionSeverity] || 1.0;
+    // Addiction severity multipliers
+    const severityMultipliers: Record<string, number> = {
+      'mild': 1,
+      'moderate': 2,
+      'severe': 4,
+      'overdose-survival': 6
+    };
+    const multiplier = severityMultipliers[formData.addictionSeverity] || 1;
+    baseMin *= multiplier;
+    baseMax *= multiplier;
 
-    // Treatment costs factor
-    const treatmentFactor = Math.min(calculatorData.treatmentCosts / 10000, 10);
+    // Treatment costs
+    const treatment = parseInt(formData.treatmentCosts) || 50000;
+    baseMin += treatment;
+    baseMax += treatment * 2;
 
-    // Lost wages factor
-    const wagesFactor = Math.min(calculatorData.lostWages / 25000, 8);
+    // Lost wages
+    const wages = parseInt(formData.lostWages) || 40000;
+    const duration = parseInt(formData.addictionDuration) || 2;
+    baseMin += wages * duration * 0.8;
+    baseMax += wages * duration * 1.5;
 
-    // Duration factor
-    const durationFactor = Math.min(calculatorData.addictionDuration * 0.2, 2.0);
+    // Overdose history premium
+    if (formData.overdoseHistory === 'yes') {
+      baseMin *= 1.8;
+      baseMax *= 2.5;
+    }
 
-    // Family impact factor
-    const familyFactor = Math.min(calculatorData.familySize * 0.1, 0.5);
+    // Age factor (younger victims often higher settlements)
+    const age = parseInt(formData.age) || 35;
+    if (age < 30) {
+      baseMax *= 1.3;
+    } else if (age < 50) {
+      baseMax *= 1.1;
+    }
 
-    const multiplier = ageFactor * severityMultiplier * (1 + treatmentFactor + wagesFactor + durationFactor + familyFactor);
-    
-    const average = Math.round(baseAmount * multiplier);
-    const low = Math.round(average * 0.6);
-    const high = Math.round(average * 1.8);
-
-    setEstimatedCompensation({ low, high, average });
+    setResults({ 
+      min: Math.round(baseMin), 
+      max: Math.round(baseMax) 
+    });
+    setStep(3);
   };
 
-  const handleInputChange = (field: keyof CalculatorData, value: any) => {
-    setCalculatorData(prev => ({ ...prev, [field]: value }));
-  };
-
-  const formatCurrency = (amount: number): string => {
-    return new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
+  const isStepValid = () => {
+    if (step === 1) return formData.addictionType && formData.addictionSeverity && formData.overdoseHistory;
+    if (step === 2) return formData.treatmentCosts && formData.lostWages && formData.addictionDuration && formData.age;
+    return false;
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      {/* Hero Section */}
-      <section 
-        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${heroBackground})` }}
-      >
-        <div className="absolute inset-0 bg-black/70"></div>
-        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">
-            Opioid Compensation Calculator
-          </h1>
-          <div className="flex items-center justify-center mb-6">
-            {[...Array(5)].map((_, i) => (
-              <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
-            ))}
-            <span className="ml-2 text-lg">Get Your Estimate</span>
+    <>
+      <Helmet>
+        <title>Opioid Calculator | Addiction Injury Compensation | Trembach Law</title>
+        <meta name="description" content="Calculate opioid crisis compensation for prescription addiction and overdose injuries. Free pharmaceutical liability estimates." />
+      </Helmet>
+
+      <main className="min-h-screen bg-white">
+        <div className="border-b border-slate-200">
+          <div className="container mx-auto px-6 py-4 max-w-5xl">
+            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
+              <ArrowLeft size={16} className="mr-2" />
+              <span className="text-sm font-medium">Back to All Calculators</span>
+            </Link>
           </div>
-          <p className="text-xl opacity-90">
-            Calculate your potential compensation for opioid addiction damages
-          </p>
         </div>
-      </section>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
-          {/* Calculator Section */}
-          <div className="lg:col-span-2" ref={calculatorRef}>
-            <Card className="calculator-card p-8">
-              <CardHeader>
-                <CardTitle className="flex items-center text-2xl text-red-600">
-                  <Calculator className="w-6 h-6 mr-3" />
-                  Opioid Compensation Calculator
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-8">
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Your Age</label>
-                    <Slider
-                      value={[calculatorData.age]}
-                      onValueChange={(value) => handleInputChange('age', value[0])}
-                      max={80}
-                      min={18}
-                      step={1}
-                    />
-                    <span className="text-sm text-muted-foreground">{calculatorData.age} years old</span>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Addiction Type</label>
-                    <Select value={calculatorData.addictionType} onValueChange={(value) => handleInputChange('addictionType', value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select addiction type" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="prescription-opioids">Prescription Opioids</SelectItem>
-                        <SelectItem value="heroin-from-pills">Heroin (Started with Pills)</SelectItem>
-                        <SelectItem value="fentanyl">Fentanyl</SelectItem>
-                        <SelectItem value="multiple-substances">Multiple Substances</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">Addiction Severity</label>
-                  <Select value={calculatorData.addictionSeverity} onValueChange={(value) => handleInputChange('addictionSeverity', value)}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select severity level" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="mild">Mild - Functional addiction</SelectItem>
-                      <SelectItem value="moderate">Moderate - Significant impairment</SelectItem>
-                      <SelectItem value="severe">Severe - Life disruption</SelectItem>
-                      <SelectItem value="overdose-survival">Overdose Survivor</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Treatment Costs</label>
-                    <Input
-                      type="number"
-                      value={calculatorData.treatmentCosts}
-                      onChange={(e) => handleInputChange('treatmentCosts', parseInt(e.target.value) || 0)}
-                      placeholder="Enter total treatment costs"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Lost Wages</label>
-                    <Input
-                      type="number"
-                      value={calculatorData.lostWages}
-                      onChange={(e) => handleInputChange('lostWages', parseInt(e.target.value) || 0)}
-                      placeholder="Enter lost wages"
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Addiction Duration (Years)</label>
-                    <Slider
-                      value={[calculatorData.addictionDuration]}
-                      onValueChange={(value) => handleInputChange('addictionDuration', value[0])}
-                      max={20}
-                      min={0.5}
-                      step={0.5}
-                    />
-                    <span className="text-sm text-muted-foreground">{calculatorData.addictionDuration} years</span>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">Family Size</label>
-                    <Slider
-                      value={[calculatorData.familySize]}
-                      onValueChange={(value) => handleInputChange('familySize', value[0])}
-                      max={10}
-                      min={1}
-                      step={1}
-                    />
-                    <span className="text-sm text-muted-foreground">{calculatorData.familySize} family members</span>
-                  </div>
-                </div>
-
-                {/* Results Section */}
-                {estimatedCompensation.average > 0 && (
-                  <div className="mt-8 p-6 bg-green-50 rounded-lg border-2 border-green-200">
-                    <h3 className="text-xl font-bold text-green-800 mb-4">Estimated Compensation Range</h3>
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-green-700">{formatCurrency(estimatedCompensation.low)}</div>
-                        <div className="text-sm text-green-600">Conservative Estimate</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-3xl font-bold text-green-800">{formatCurrency(estimatedCompensation.average)}</div>
-                        <div className="text-sm text-green-600">Average Estimate</div>
-                      </div>
-                      <div className="text-center">
-                        <div className="text-2xl font-bold text-green-700">{formatCurrency(estimatedCompensation.high)}</div>
-                        <div className="text-sm text-green-600">Optimistic Estimate</div>
-                      </div>
-                    </div>
-                    
-                    <div className="mt-4 text-center">
-                      <Button 
-                        size="lg" 
-                        className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-3"
-                        onClick={() => window.location.href = '/opioid-case-evaluation'}
-                      >
-                        GET FREE CASE EVALUATION
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
+        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
+          <div className="container mx-auto px-6 max-w-5xl text-center">
+            <Pill className="mx-auto mb-6" size={64} strokeWidth={1.5} />
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
+              Opioid Crisis<br />Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-slate-600 font-light">
+              Prescription addiction compensation
+            </p>
           </div>
+        </section>
 
-          {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
-              
-              {/* Legal Disclaimer */}
-              <Card className="calculator-card p-6 bg-yellow-50 border-yellow-200">
-                <CardHeader>
-                  <CardTitle className="flex items-center text-lg text-yellow-800">
-                    <AlertTriangle className="w-5 h-5 mr-2" />
-                    Legal Disclaimer
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-yellow-700">
-                    This calculator provides estimates based on general factors and should not be considered a guarantee of compensation. 
-                    Actual settlements depend on many case-specific factors including liability strength, available defendants, 
-                    and individual damages. Consult with an experienced opioid litigation attorney for accurate case evaluation.
-                  </p>
-                </CardContent>
-              </Card>
+        <section className="py-20">
+          <div className="container mx-auto px-6 max-w-3xl">
+            <div className="mb-12">
+              <div className="flex items-center justify-between mb-8">
+                <div className="flex gap-3">
+                  {[1, 2, 3].map((s) => (
+                    <div
+                      key={s}
+                      className={`w-3 h-3 rounded-full transition-colors ${
+                        s === step ? 'bg-black' : s < step ? 'bg-slate-400' : 'bg-slate-200'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <span className="text-sm text-slate-500">Step {step} of 3</span>
+              </div>
+            </div>
 
-              {/* Compensation Factors */}
-              <Card className="calculator-card p-6">
-                <CardHeader>
-                  <CardTitle className="text-lg text-red-600">Factors Affecting Compensation</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <ul className="space-y-2 text-sm">
-                    <li>• Medical treatment costs</li>
-                    <li>• Rehabilitation expenses</li>
-                    <li>• Lost wages and earning capacity</li>
-                    <li>• Pain and suffering</li>
-                    <li>• Family impact</li>
-                    <li>• Addiction duration and severity</li>
-                    <li>• Available liable parties</li>
-                  </ul>
-                </CardContent>
-              </Card>
+            {step === 1 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-3xl font-bold text-black mb-2">Addiction Details</h2>
+                  <p className="text-slate-600">Tell us about your opioid exposure</p>
+                </div>
 
-              {/* Contact Card */}
-              <Card className="calculator-card p-6 bg-blue-50 border-blue-200">
-                <CardHeader>
-                  <CardTitle className="text-lg text-blue-800">Ready to Pursue Your Case?</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <p className="text-sm text-blue-700">
-                    Get a personalized case evaluation from experienced opioid litigation attorneys.
-                  </p>
-                  <div className="space-y-2">
-                    <Button 
-                      className="w-full bg-green-600 hover:bg-green-700"
-                      onClick={() => window.location.href = 'tel:8181234567'}
-                    >
-                      <Phone className="w-4 h-4 mr-2" />
-                      Call (818) 123-4567
-                    </Button>
-                    <Button 
-                      variant="outline" 
-                      className="w-full border-blue-600 text-blue-600 hover:bg-blue-50"
-                      onClick={() => window.location.href = '/opioid-case-evaluation'}
-                    >
-                      <FileText className="w-4 h-4 mr-2" />
-                      Free Case Evaluation
-                    </Button>
+                <div className="space-y-4">
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Type of Opioid</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {[
+                        { value: 'oxycontin', label: 'OxyContin', desc: 'Prescription pain medication' },
+                        { value: 'percocet', label: 'Percocet', desc: 'Oxycodone/acetaminophen' },
+                        { value: 'vicodin', label: 'Vicodin', desc: 'Hydrocodone combination' },
+                        { value: 'fentanyl', label: 'Fentanyl', desc: 'Synthetic opioid' },
+                        { value: 'morphine', label: 'Morphine', desc: 'Natural opioid' },
+                        { value: 'heroin', label: 'Heroin (from pills)', desc: 'Street drug progression' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, addictionType: option.value })}
+                          className={`p-4 rounded-xl border-2 text-left transition-all ${
+                            formData.addictionType === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <div className="font-medium mb-1">{option.label}</div>
+                          <div className={`text-sm ${formData.addictionType === option.value ? 'text-white/70' : 'text-slate-500'}`}>
+                            {option.desc}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Addiction Severity</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                      {[
+                        { value: 'mild', label: 'Mild', desc: 'Dependency developed' },
+                        { value: 'moderate', label: 'Moderate', desc: 'Required treatment' },
+                        { value: 'severe', label: 'Severe', desc: 'Multiple rehab stays' },
+                        { value: 'overdose-survival', label: 'Overdose Survivor', desc: 'Life-threatening event' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, addictionSeverity: option.value })}
+                          className={`p-4 rounded-xl border-2 text-left transition-all ${
+                            formData.addictionSeverity === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <div className="font-medium mb-1">{option.label}</div>
+                          <div className={`text-sm ${formData.addictionSeverity === option.value ? 'text-white/70' : 'text-slate-500'}`}>
+                            {option.desc}
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+
+                  <label className="block">
+                    <span className="text-sm font-medium text-black mb-3 block">Overdose History</span>
+                    <div className="grid grid-cols-2 gap-3">
+                      {[
+                        { value: 'yes', label: 'Yes' },
+                        { value: 'no', label: 'No' }
+                      ].map((option) => (
+                        <button
+                          key={option.value}
+                          onClick={() => setFormData({ ...formData, overdoseHistory: option.value })}
+                          className={`p-4 rounded-xl border-2 text-center transition-all ${
+                            formData.overdoseHistory === option.value
+                              ? 'border-black bg-black text-white'
+                              : 'border-slate-200 hover:border-slate-300'
+                          }`}
+                        >
+                          <span className="font-medium">{option.label}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {step === 2 && (
+              <div className="space-y-8">
+                <div>
+                  <h2 className="text-3xl font-bold text-black mb-2">Financial Impact</h2>
+                  <p className="text-slate-600">Calculate treatment and damages</p>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Treatment & Rehabilitation Costs
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="$50,000"
+                      value={formData.treatmentCosts}
+                      onChange={(e) => setFormData({ ...formData, treatmentCosts: e.target.value })}
+                      className="h-14 text-lg"
+                    />
+                    <p className="text-xs text-slate-500 mt-2">Rehab, therapy, medications, ongoing treatment</p>
                   </div>
-                </CardContent>
-              </Card>
+
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Annual Income Lost
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="$40,000"
+                      value={formData.lostWages}
+                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
+                      className="h-14 text-lg"
+                    />
+                    <p className="text-xs text-slate-500 mt-2">Income lost due to addiction</p>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Years of Addiction
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="2"
+                      value={formData.addictionDuration}
+                      onChange={(e) => setFormData({ ...formData, addictionDuration: e.target.value })}
+                      className="h-14 text-lg"
+                      min="1"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Your Age
+                    </label>
+                    <Input
+                      type="number"
+                      placeholder="35"
+                      value={formData.age}
+                      onChange={(e) => setFormData({ ...formData, age: e.target.value })}
+                      className="h-14 text-lg"
+                      min="0"
+                      max="100"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {step === 3 && results && (
+              <div className="space-y-8">
+                <div className="text-center">
+                  <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation</h2>
+                  <p className="text-slate-600">Based on similar opioid crisis cases</p>
+                </div>
+
+                <div className="bg-slate-50 rounded-2xl p-8 text-center">
+                  <div className="text-5xl font-bold text-black mb-2">
+                    ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+                  </div>
+                  <p className="text-slate-600">Estimated Compensation Range</p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="bg-white border border-slate-200 rounded-xl p-6">
+                    <h4 className="font-semibold text-black mb-2">Treatment & Rehabilitation</h4>
+                    <p className="text-sm text-slate-600">Detox, inpatient/outpatient programs, therapy, medications</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 rounded-xl p-6">
+                    <h4 className="font-semibold text-black mb-2">Lost Wages & Income</h4>
+                    <p className="text-sm text-slate-600">Employment loss, career damage, reduced earning capacity</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 rounded-xl p-6">
+                    <h4 className="font-semibold text-black mb-2">Medical Complications</h4>
+                    <p className="text-sm text-slate-600">Overdose treatment, organ damage, infectious diseases</p>
+                  </div>
+                  <div className="bg-white border border-slate-200 rounded-xl p-6">
+                    <h4 className="font-semibold text-black mb-2">Pain & Suffering</h4>
+                    <p className="text-sm text-slate-600">Addiction trauma, family impact, loss of quality of life</p>
+                  </div>
+                </div>
+
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                  <p className="text-sm text-amber-900">
+                    <strong>Important:</strong> Opioid cases are part of mass tort litigation against pharmaceutical manufacturers 
+                    and distributors. Your actual compensation depends on the settlement terms and proof of prescription history.
+                  </p>
+                </div>
+
+                <div className="text-center pt-4">
+                  <h3 className="text-xl font-semibold text-black mb-4">Join the opioid litigation</h3>
+                  <Button size="lg" className="h-14 px-8 text-base">
+                    Get Free Case Review
+                  </Button>
+                </div>
+              </div>
+            )}
+
+            {step < 3 && (
+              <div className="flex gap-4 pt-8">
+                {step > 1 && (
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={handleBack}
+                    className="flex-1 h-14"
+                  >
+                    Back
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  onClick={handleNext}
+                  disabled={!isStepValid()}
+                  className="flex-1 h-14"
+                >
+                  {step === 2 ? 'Calculate' : 'Continue'}
+                </Button>
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="py-20 bg-slate-50 border-t border-slate-200">
+          <div className="container mx-auto px-6 max-w-5xl">
+            <div className="grid md:grid-cols-3 gap-8 text-center">
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">$26B+</div>
+                <p className="text-slate-600">Total opioid settlements</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">Thousands</div>
+                <p className="text-slate-600">Of victims compensated</p>
+              </div>
+              <div>
+                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
+                <p className="text-slate-600">Unless we win</p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </section>
+      </main>
+    </>
   );
 };
 

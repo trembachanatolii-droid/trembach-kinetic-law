@@ -217,9 +217,35 @@
 - Permanent disability ratings
 - Dropdown-only form with FELA/federal regulation disclaimer
 
+### Phase 7AD: Maritime Accident Calculator ✅ NEW
+- Victim type multipliers (seamen, longshoremen, passengers)
+- Jones Act applicability for seamen
+- Vessel type and unseaworthiness factors
+- Maintenance and cure obligations
+- Accident type considerations
+- Permanent disability ratings
+- Dropdown-only form with admiralty law disclaimer
+
+### Phase 7AE: Retail Store Accident Calculator ✅ NEW
+- Store type multipliers (big-box, grocery, warehouse club)
+- Accident type factors (slip/fall, falling merchandise, assault)
+- Hazard type and warning sign presence
+- Store notice/awareness requirements
+- Permanent impact considerations
+- Dropdown-only form with premises liability disclaimer
+
+### Phase 7AF: Paralysis Injury Calculator ✅ NEW
+- Paralysis type multipliers (quadriplegia, paraplegia, hemiplegia)
+- Cause of injury factors
+- Age-based lifetime care multipliers
+- Home modification and care needs
+- Employment impact and lost earning capacity
+- Pain and suffering levels
+- Dropdown-only form with catastrophic injury disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (35 calculators)
+### Fully Implemented (38 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -252,19 +278,21 @@
 30. ✅ Bus Accidents
 31. ✅ Uber/Lyft Rideshare
 32. ✅ Swimming Pool Accidents
-33. ✅ Amusement Park Accidents (NEW)
-34. ✅ Aviation Accidents (NEW)
-35. ✅ Railroad Accidents (NEW)
+33. ✅ Amusement Park Accidents
+34. ✅ Aviation Accidents
+35. ✅ Railroad Accidents
+36. ✅ Maritime Accidents (NEW)
+37. ✅ Retail Store Accidents (NEW)
+38. ✅ Paralysis Injuries (NEW)
 
-### Templated (18 calculators remaining)
+### Templated (15 calculators remaining)
 
-**Personal Injury** (5)
-- Personal Injury, Retail Accidents
-- Paralysis, Birth Injuries
-- Defamation, Medical Devices
+**Personal Injury** (3)
+- Personal Injury (General), Birth Injuries
+- Defamation
 
-**Transportation** (1)
-- Maritime
+**Transportation** (0)
+- All transportation calculators complete
 
 **Toxic Exposure** (2)
 - Environmental Toxic
@@ -347,9 +375,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **35 of 53 calculators** fully implemented (66%)
+- **38 of 53 calculators** fully implemented (72%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7AD+ implementation
+- Ready for incremental Phase 7AG+ implementation

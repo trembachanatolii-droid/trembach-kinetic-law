@@ -89,9 +89,28 @@
 - Evidence strength considerations
 - Dropdown-only form with confidential disclaimer
 
+### Phase 7P: Talc/Asbestos Product Calculator ✅ NEW
+- Cancer type multipliers (ovarian, mesothelioma, lung, endometrial)
+- Exposure duration and frequency factors
+- Product type specifics (Baby Powder, Shower to Shower)
+- Pathology evidence importance
+- Age-based future damage adjustments
+- Economic damages (medical, future care, lost wages)
+- Dropdown-only form with litigation disclaimer
+
+### Phase 7Q: Construction Accident Calculator ✅ NEW
+- Accident type multipliers (falls, scaffolding, crane, electrocution, etc.)
+- OSHA violation factors (willful, serious, repeat)
+- Injury severity and type combinations
+- Permanent disability ratings
+- Third-party liability potential
+- Equipment failure product liability
+- Age-based future earnings calculations
+- Dropdown-only form with workers' comp vs. third-party disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (21 calculators)
+### Fully Implemented (23 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -113,8 +132,10 @@
 19. ✅ Benzene Exposure (NEW)
 20. ✅ Elder Abuse (NEW)
 21. ✅ Sexual Abuse (NEW)
+22. ✅ Talc/Baby Powder Cancer (NEW)
+23. ✅ Construction Accidents (NEW)
 
-### Templated (32 calculators remaining)
+### Templated (30 calculators remaining)
 
 **Personal Injury** (8)
 - Personal Injury, Swimming Pool, Amusement Park
@@ -125,12 +146,12 @@
 - Bicycle, Pedestrian, Bus Accidents
 - Uber/Lyft, Aviation, Maritime, Railroad
 
-**Workplace** (5)
-- Construction, Scaffolding Falls, Crane Accidents
+**Workplace** (4)
+- Scaffolding Falls, Crane Accidents
 - Electrocution, Explosions & Fires
 
-**Toxic Exposure** (3)
-- Environmental Toxic, Talc
+**Toxic Exposure** (2)
+- Environmental Toxic
 
 **Abuse** (1)
 - Clergy Abuse
@@ -172,23 +193,29 @@
 - Responsive design
 - Professional presentation
 
-## 🔄 Next Phases (Phases 7P+)
+## 🔄 Next Phases (Phases 7R+)
 
 ### Priority Order
 
-**Phase 7P: Talc/Asbestos Product Calculator**
-- Product type exposure
-- Mesothelioma/ovarian cancer
-- Duration of use
-- Corporate liability
-
-**Phase 7Q: Construction Accident Calculator**
+**Phase 7R: Scaffolding Falls Calculator**
+- Fall height and impact
+- Safety equipment failures
 - OSHA violations
-- Equipment failure
-- Fall protection
 - Third-party liability
 
-Continue incrementally with remaining 30+ calculators...
+**Phase 7S: Crane Accident Calculator**
+- Crane type and failure mode
+- Operator negligence
+- Equipment maintenance
+- Third-party claims
+
+**Phase 7T: Electrocution Calculator**
+- Voltage and exposure duration
+- Power line contact
+- Equipment grounding failures
+- Burn severity and neurological damage
+
+Continue incrementally with remaining 27+ calculators...
 
 ## 📝 Implementation Pattern
 
@@ -204,9 +231,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **21 of 53 calculators** fully implemented (40%)
+- **23 of 53 calculators** fully implemented (43%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7P+ implementation
+- Ready for incremental Phase 7R+ implementation

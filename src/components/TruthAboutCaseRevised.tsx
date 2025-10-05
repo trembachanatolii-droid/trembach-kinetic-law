@@ -81,7 +81,7 @@ const TruthAboutCaseRevised = () => {
       imageAlt: 'Lowball insurance settlement offer compared to actual case value',
       type: 'warning',
       cta: 'Know Your True Case Value',
-      internalLink: '#case-valuation',
+      internalLink: '/calculators',
       seoKeywords: ['settlement value', 'lowball offer', 'maximum compensation']
     },
     {

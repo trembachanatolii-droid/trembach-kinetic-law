@@ -238,7 +238,7 @@ import ParalysisCaseEvaluation from "./pages/practice-areas/paralysis/CaseEvalua
 import LegalRepresentation from "./pages/insurance-insights/LegalRepresentation";
 import EvidencePreservation from "./pages/insurance-insights/EvidencePreservation";
 import MedicalEvaluation from "./pages/insurance-insights/MedicalEvaluation";
-import CaseValuation from "./pages/insurance-insights/CaseValuation";
+
 import TrialExperience from "./pages/insurance-insights/TrialExperience";
 import StatuteLimitations from "./pages/insurance-insights/StatuteLimitations";
 import ParalysisCompensationCalculator from "./pages/practice-areas/paralysis/CompensationCalculator";
@@ -418,7 +418,7 @@ function App() {
             <Route path="/legal-representation" element={<LegalRepresentation />} />
             <Route path="/evidence-preservation" element={<EvidencePreservation />} />
             <Route path="/medical-evaluation" element={<MedicalEvaluation />} />
-            <Route path="/case-valuation" element={<CaseValuation />} />
+            
             <Route path="/trial-experience" element={<TrialExperience />} />
             <Route path="/statute-limitations" element={<StatuteLimitations />} />
           <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />

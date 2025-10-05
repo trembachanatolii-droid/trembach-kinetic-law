@@ -86,7 +86,7 @@ const TruthAboutCaseProfessional = () => {
       imageAlt: 'Insurance settlement calculations showing minimal offer amounts versus true case value',
       urgency: 'critical',
       actionText: 'Calculate True Value',
-      internalLink: '/case-valuation',
+      internalLink: '/calculators',
       seoKeywords: ['personal injury settlement value', 'insurance settlement calculator', 'maximum compensation']
     },
     {

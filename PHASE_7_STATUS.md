@@ -162,9 +162,37 @@
 - California comparative negligence
 - Dropdown-only form with pedestrian priority disclaimer
 
+### Phase 7X: Bus Accident Calculator ✅ NEW
+- Bus operator type multipliers (municipal, private, school, interstate)
+- Passenger status factors (seated, standing, boarding, pedestrian)
+- Common carrier liability standards
+- Accident type considerations
+- Multiple victims strengthens case
+- Bus defect/maintenance issues
+- Dropdown-only form with common carrier disclaimer
+
+### Phase 7Y: Uber/Lyft Rideshare Calculator ✅ NEW
+- Driver status multipliers (app off/on/en route/passenger onboard)
+- Insurance coverage tiers ($50K/$100K contingent to $1M+)
+- Background check failure factors
+- Victim role considerations
+- Multi-party liability potential
+- California comparative fault
+- Dropdown-only form with coverage tier disclaimer
+
+### Phase 7Z: Swimming Pool Accident Calculator ✅ NEW
+- Incident type multipliers (drowning, near-drowning, diving injury)
+- Property type factors (private, apartment, hotel, public, water park)
+- Age vulnerability (children = attractive nuisance)
+- Supervision adequacy and safety violations
+- Neurological damage from hypoxia
+- Fencing/barrier code violations
+- Lifeguard requirement violations
+- Dropdown-only form with premises liability disclaimer
+
 ## 📊 Calculator Implementation Status
 
-### Fully Implemented (29 calculators)
+### Fully Implemented (32 calculators)
 1. ✅ Brain Injury
 2. ✅ Spinal Cord
 3. ✅ Burn Injury
@@ -181,29 +209,32 @@
 14. ✅ PFAS Exposure
 15. ✅ Vision Loss
 16. ✅ Hearing Loss
-17. ✅ Silicosis (NEW)
-18. ✅ Camp Lejeune (NEW)
-19. ✅ Benzene Exposure (NEW)
-20. ✅ Elder Abuse (NEW)
-21. ✅ Sexual Abuse (NEW)
-22. ✅ Talc/Baby Powder Cancer (NEW)
-23. ✅ Construction Accidents (NEW)
-24. ✅ Scaffolding Falls (NEW)
-25. ✅ Crane Accidents (NEW)
-26. ✅ Electrocution (NEW)
-27. ✅ Explosions & Fires (NEW)
-28. ✅ Bicycle Accidents (NEW)
-29. ✅ Pedestrian Accidents (NEW)
+17. ✅ Silicosis
+18. ✅ Camp Lejeune
+19. ✅ Benzene Exposure
+20. ✅ Elder Abuse
+21. ✅ Sexual Abuse
+22. ✅ Talc/Baby Powder Cancer
+23. ✅ Construction Accidents
+24. ✅ Scaffolding Falls
+25. ✅ Crane Accidents
+26. ✅ Electrocution
+27. ✅ Explosions & Fires
+28. ✅ Bicycle Accidents
+29. ✅ Pedestrian Accidents
+30. ✅ Bus Accidents (NEW)
+31. ✅ Uber/Lyft Rideshare (NEW)
+32. ✅ Swimming Pool Accidents (NEW)
 
-### Templated (24 calculators remaining)
+### Templated (21 calculators remaining)
 
-**Personal Injury** (8)
-- Personal Injury, Swimming Pool, Amusement Park
+**Personal Injury** (6)
+- Personal Injury, Amusement Park
 - Retail Accidents, Paralysis, Birth Injuries
 - Defamation, Medical Devices
 
-**Transportation** (5)
-- Bus, Uber/Lyft, Aviation, Maritime, Railroad
+**Transportation** (3)
+- Aviation, Maritime, Railroad
 
 **Toxic Exposure** (2)
 - Environmental Toxic
@@ -248,29 +279,29 @@
 - Responsive design
 - Professional presentation
 
-## 🔄 Next Phases (Phases 7X+)
+## 🔄 Next Phases (Phases 7AA+)
 
 ### Priority Order
 
-**Phase 7X: Bus Accident Calculator**
-- Common carrier liability
-- Passenger injury multipliers
-- Multiple victim incidents
-- Municipal vs. private operators
+**Phase 7AA: Amusement Park Accident Calculator**
+- Ride type multipliers
+- Safety violation factors
+- Age and injury severity
+- Operator negligence
 
-**Phase 7Y: Uber/Lyft Rideshare Calculator**
-- Driver status (app on/off/en route/occupied)
-- Insurance coverage tiers
-- Background check failures
+**Phase 7AB: Aviation Accident Calculator**
+- Commercial vs. private aircraft
+- Wrongful death focus
+- Federal aviation regulations
 - Multi-party liability
 
-**Phase 7Z: Swimming Pool Accident Calculator**
-- Drowning vs. near-drowning
-- Premises liability factors
-- Supervision requirements
-- Safety violation multipliers
+**Phase 7AC: Railroad Accident Calculator**
+- FELA claims for workers
+- Crossing accidents
+- Train vs. vehicle/pedestrian
+- Federal regulations
 
-Continue incrementally with remaining 21+ calculators...
+Continue incrementally with remaining 18+ calculators...
 
 ## 📝 Implementation Pattern
 
@@ -286,9 +317,9 @@ Each calculator follows this structure:
 
 ## 🎉 Progress Summary
 
-- **29 of 53 calculators** fully implemented (55%)
+- **32 of 53 calculators** fully implemented (60%)
 - **100%** include legal disclaimers
 - **100%** use dropdown-only format
 - **Zero** text input fields in questions
 - Consistent design and calculation patterns
-- Ready for incremental Phase 7X+ implementation
+- Ready for incremental Phase 7AA+ implementation

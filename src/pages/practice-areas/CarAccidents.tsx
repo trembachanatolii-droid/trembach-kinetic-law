@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { Phone, Users, Shield, Award, Clock, Heart, Star, ArrowRight, ChevronDown, ChevronUp, Car, AlertTriangle, Scale, FileText } from 'lucide-react';
+import { CalculatorCTA } from '@/components/CalculatorCTA';
 import heroImage from '@/assets/practice-areas/car-accident-scene.jpg';
 import medicalImage from '@/assets/practice-areas/car-accident-medical-documentation.jpg';
 import legalImage from '@/assets/practice-areas/car-accident-defense-attorney.jpg';
@@ -437,6 +438,14 @@ const CarAccidents: React.FC = () => {
           </div>
         </div>
       </section>
+
+      {/* Calculator CTA */}
+      <CalculatorCTA
+        title="Calculate Your Car Accident Compensation"
+        description="Get an instant estimate of what your car accident case may be worth based on your injuries, damages, and circumstances."
+        calculatorUrl="/practice-areas/car-accidents/compensation-calculator"
+        calculatorName="Start Car Accident Calculator"
+      />
 
       {/* Call to Action */}
       <section className="py-16 px-8 bg-primary text-primary-foreground">

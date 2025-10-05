@@ -208,17 +208,14 @@ const Navigation = () => {
               </>
             )}
           </div>
+          <a href="/calculators" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-medium tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
+            Calculators
+          </a>
           <a href="/about" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             About Us
           </a>
           <a href="/results" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Results
-          </a>
-          <a href="/testimonials" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
-            Testimonials
-          </a>
-          <a href="/blog" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
-            Blog
           </a>
           <a href="/contact" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Contact

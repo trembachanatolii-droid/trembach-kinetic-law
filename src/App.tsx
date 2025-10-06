@@ -28,6 +28,9 @@ import SettlementStrategyBlog from "./pages/blog/SettlementStrategy";
 import ProductLiabilityBlog from "./pages/blog/ProductLiability";
 import RideshareAccidentsBlog from "./pages/blog/RideshareAccidents";
 import ElderAbuseBlog from "./pages/blog/ElderAbuse";
+import DogBitesBlog from "./pages/blog/DogBites";
+import SlipAndFallBlog from "./pages/blog/SlipAndFall";
+import SpinalCordInjuriesBlog from "./pages/blog/SpinalCordInjuries";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -600,7 +603,10 @@ function App() {
             <Route path="/blog/workplace-injuries" element={<WorkplaceInjuriesBlog />} />
             {/* Placeholder routes - will be implemented */}
             <Route path="/blog/accident-response" element={<AccidentResponseBlog />} />
-            <Route path="/blog/animal-attacks" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/animal-attacks" element={<DogBitesBlog />} />
+            <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
+            <Route path="/blog/slip-and-fall" element={<SlipAndFallBlog />} />
+            <Route path="/blog/spinal-cord-injuries" element={<SpinalCordInjuriesBlog />} />
             <Route path="/blog/auto-safety" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-protection" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-resolution" element={<AutoAccidentsBlog />} />

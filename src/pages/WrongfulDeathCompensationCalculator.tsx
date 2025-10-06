@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const WrongfulDeathCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -158,14 +158,18 @@ const WrongfulDeathCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Number of Dependents
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="0"
-                      value={formData.dependents}
-                      onChange={(e) => setFormData({ ...formData, dependents: e.target.value })}
-                      className="h-14 text-lg"
-                      min="0"
-                    />
+                    <Select value={formData.dependents} onValueChange={(value) => setFormData({ ...formData, dependents: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select number of dependents" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0">No dependents</SelectItem>
+                        <SelectItem value="1">1 dependent</SelectItem>
+                        <SelectItem value="2">2 dependents</SelectItem>
+                        <SelectItem value="3">3 dependents</SelectItem>
+                        <SelectItem value="4">4+ dependents</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -183,39 +187,53 @@ const WrongfulDeathCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Income (before death)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$75,000"
-                      value={formData.annualIncome}
-                      onChange={(e) => setFormData({ ...formData, annualIncome: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.annualIncome} onValueChange={(value) => setFormData({ ...formData, annualIncome: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual income" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="35000">Under $35,000</SelectItem>
+                        <SelectItem value="50000">$35,000 - $60,000</SelectItem>
+                        <SelectItem value="75000">$60,000 - $90,000</SelectItem>
+                        <SelectItem value="110000">$90,000 - $130,000</SelectItem>
+                        <SelectItem value="175000">Over $130,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
                       Years to Retirement
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="20"
-                      value={formData.yearsToRetirement}
-                      onChange={(e) => setFormData({ ...formData, yearsToRetirement: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.yearsToRetirement} onValueChange={(value) => setFormData({ ...formData, yearsToRetirement: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select years to retirement" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="5">Under 5 years</SelectItem>
+                        <SelectItem value="10">5-15 years</SelectItem>
+                        <SelectItem value="20">15-25 years</SelectItem>
+                        <SelectItem value="30">25-35 years</SelectItem>
+                        <SelectItem value="40">Over 35 years</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
                       Funeral & Burial Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$15,000"
-                      value={formData.funeralCosts}
-                      onChange={(e) => setFormData({ ...formData, funeralCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.funeralCosts} onValueChange={(value) => setFormData({ ...formData, funeralCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select funeral cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="8000">Under $8,000</SelectItem>
+                        <SelectItem value="15000">$8,000 - $20,000</SelectItem>
+                        <SelectItem value="30000">$20,000 - $40,000</SelectItem>
+                        <SelectItem value="60000">Over $40,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -250,10 +268,14 @@ const WrongfulDeathCompensationCalculator = () => {
                   </div>
                 </div>
 
-                <div className="bg-blue-50 border border-blue-200 rounded-xl p-6">
-                  <p className="text-sm text-blue-900">
-                    <strong>Our deepest condolences.</strong> Every wrongful death case is unique. This estimate is based on similar cases, 
-                    but your actual compensation will depend on specific circumstances, state laws, and the strength of your case.
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Our deepest condolences.</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Every wrongful death case is unique and actual compensation varies significantly based on specific circumstances, 
+                    state laws, jurisdiction, jury composition, the strength of your case, and many other factors. Results are not guaranteed. 
+                    No attorney-client relationship is created by using this calculator. Each case must be evaluated individually by a qualified 
+                    wrongful death attorney licensed in your state. Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

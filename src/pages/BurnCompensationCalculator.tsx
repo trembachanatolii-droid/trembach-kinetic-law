@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const BurnCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -172,15 +172,18 @@ const BurnCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Body Surface Area Affected (%)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="10"
-                      value={formData.bodyPercentage}
-                      onChange={(e) => setFormData({ ...formData, bodyPercentage: e.target.value })}
-                      className="h-14 text-lg"
-                      min="1"
-                      max="100"
-                    />
+                    <Select value={formData.bodyPercentage} onValueChange={(value) => setFormData({ ...formData, bodyPercentage: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select body surface area" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="5">Under 10%</SelectItem>
+                        <SelectItem value="15">10% - 20%</SelectItem>
+                        <SelectItem value="30">20% - 40%</SelectItem>
+                        <SelectItem value="55">40% - 70%</SelectItem>
+                        <SelectItem value="80">Over 70%</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Percentage of body covered by burns</p>
                   </div>
 
@@ -223,13 +226,18 @@ const BurnCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Current Medical Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$150,000"
-                      value={formData.medicalCosts}
-                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select medical cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="50000">Under $50,000</SelectItem>
+                        <SelectItem value="150000">$50,000 - $250,000</SelectItem>
+                        <SelectItem value="400000">$250,000 - $550,000</SelectItem>
+                        <SelectItem value="800000">$550,000 - $1,000,000</SelectItem>
+                        <SelectItem value="1500000">Over $1,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Emergency care, hospitalization, surgery</p>
                   </div>
 
@@ -237,13 +245,18 @@ const BurnCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Future Care Costs (estimated total)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$50,000"
-                      value={formData.futureCareCosts}
-                      onChange={(e) => setFormData({ ...formData, futureCareCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.futureCareCosts} onValueChange={(value) => setFormData({ ...formData, futureCareCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select future care cost" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="25000">Under $25,000</SelectItem>
+                        <SelectItem value="50000">$25,000 - $75,000</SelectItem>
+                        <SelectItem value="125000">$75,000 - $175,000</SelectItem>
+                        <SelectItem value="250000">$175,000 - $325,000</SelectItem>
+                        <SelectItem value="500000">Over $325,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Skin grafts, reconstructive surgery, therapy</p>
                   </div>
 
@@ -251,13 +264,18 @@ const BurnCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Income (before injury)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$60,000"
-                      value={formData.lostWages}
-                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual income" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="35000">Under $35,000</SelectItem>
+                        <SelectItem value="50000">$35,000 - $60,000</SelectItem>
+                        <SelectItem value="75000">$60,000 - $90,000</SelectItem>
+                        <SelectItem value="110000">$90,000 - $130,000</SelectItem>
+                        <SelectItem value="175000">Over $130,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -297,9 +315,14 @@ const BurnCompensationCalculator = () => {
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <p className="text-sm text-amber-900">
-                    <strong>Note:</strong> Burn injury compensation varies widely based on visibility of scars, 
-                    location on body, and impact on daily life. Facial burns typically receive higher compensation.
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Burn injury compensation varies widely based on visibility of scars, location on body, and impact on daily life. 
+                    Actual compensation depends significantly on medical evidence, expert testimony, jurisdiction, jury composition, 
+                    and specific case facts. Facial burns typically receive higher compensation. Results are not guaranteed. 
+                    No attorney-client relationship is created by using this calculator. Each case must be evaluated individually 
+                    by a qualified burn injury attorney licensed in your state. Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

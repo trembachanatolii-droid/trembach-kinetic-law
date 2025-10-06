@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Activity } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const SpinalCordCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -190,15 +190,18 @@ const SpinalCordCompensationCalculator = () => {
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">Your Age</label>
-                    <Input
-                      type="number"
-                      placeholder="35"
-                      value={formData.age}
-                      onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="h-14 text-lg"
-                      min="0"
-                      max="100"
-                    />
+                    <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select your age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="25">Under 30</SelectItem>
+                        <SelectItem value="35">30-39</SelectItem>
+                        <SelectItem value="45">40-49</SelectItem>
+                        <SelectItem value="55">50-59</SelectItem>
+                        <SelectItem value="65">60+</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -216,13 +219,18 @@ const SpinalCordCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Current Medical Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$200,000"
-                      value={formData.medicalCosts}
-                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select medical cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="100000">Under $100,000</SelectItem>
+                        <SelectItem value="200000">$100,000 - $200,000</SelectItem>
+                        <SelectItem value="350000">$200,000 - $500,000</SelectItem>
+                        <SelectItem value="750000">$500,000 - $1,000,000</SelectItem>
+                        <SelectItem value="1500000">Over $1,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Surgery, hospitalization, initial treatment</p>
                   </div>
 
@@ -230,13 +238,18 @@ const SpinalCordCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Future Care Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$100,000"
-                      value={formData.futureCareCosts}
-                      onChange={(e) => setFormData({ ...formData, futureCareCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.futureCareCosts} onValueChange={(value) => setFormData({ ...formData, futureCareCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual care cost" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="50000">Under $50,000/year</SelectItem>
+                        <SelectItem value="100000">$50,000 - $100,000/year</SelectItem>
+                        <SelectItem value="150000">$100,000 - $200,000/year</SelectItem>
+                        <SelectItem value="250000">$200,000 - $300,000/year</SelectItem>
+                        <SelectItem value="350000">Over $300,000/year</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">24/7 care, equipment, therapy, medications</p>
                   </div>
 
@@ -244,13 +257,18 @@ const SpinalCordCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Income (before injury)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$60,000"
-                      value={formData.lostWages}
-                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual income" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="35000">Under $35,000</SelectItem>
+                        <SelectItem value="50000">$35,000 - $60,000</SelectItem>
+                        <SelectItem value="75000">$60,000 - $90,000</SelectItem>
+                        <SelectItem value="110000">$90,000 - $130,000</SelectItem>
+                        <SelectItem value="175000">Over $130,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
               </div>
@@ -290,9 +308,15 @@ const SpinalCordCompensationCalculator = () => {
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <p className="text-sm text-amber-900">
-                    <strong>Critical:</strong> Spinal cord injury cases require expert medical testimony and life care planning. 
-                    Settlement should cover all future needs for the rest of your life.
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Spinal cord injury cases are extremely complex and actual compensation varies significantly based on medical evidence, 
+                    expert testimony, life care planning, jurisdiction, jury composition, and specific case facts. These cases require 
+                    expert medical testimony and comprehensive life care planning. Settlement should cover all future needs for the rest 
+                    of your life. Results are not guaranteed. No attorney-client relationship is created by using this calculator. 
+                    Each case must be evaluated individually by a qualified spinal cord injury attorney licensed in your state. 
+                    Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

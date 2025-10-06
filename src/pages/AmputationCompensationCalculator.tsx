@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Hand } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const AmputationCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -238,15 +238,18 @@ const AmputationCompensationCalculator = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">Your Age</label>
-                    <Input
-                      type="number"
-                      placeholder="45"
-                      value={formData.age}
-                      onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="h-14 text-lg"
-                      min="0"
-                      max="100"
-                    />
+                    <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select your age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="25">Under 30</SelectItem>
+                        <SelectItem value="35">30-39</SelectItem>
+                        <SelectItem value="45">40-49</SelectItem>
+                        <SelectItem value="55">50-59</SelectItem>
+                        <SelectItem value="65">60+</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Used to calculate lifetime prosthetic costs</p>
                   </div>
 
@@ -254,13 +257,18 @@ const AmputationCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Current Medical Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$100,000"
-                      value={formData.medicalCosts}
-                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select medical cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="50000">Under $50,000</SelectItem>
+                        <SelectItem value="100000">$50,000 - $100,000</SelectItem>
+                        <SelectItem value="200000">$100,000 - $300,000</SelectItem>
+                        <SelectItem value="400000">$300,000 - $500,000</SelectItem>
+                        <SelectItem value="750000">Over $500,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Surgery, hospitalization, rehabilitation</p>
                   </div>
 
@@ -268,13 +276,17 @@ const AmputationCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Future Care Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$30,000"
-                      value={formData.futureCareCosts}
-                      onChange={(e) => setFormData({ ...formData, futureCareCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.futureCareCosts} onValueChange={(value) => setFormData({ ...formData, futureCareCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual care cost" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="15000">Under $15,000/year</SelectItem>
+                        <SelectItem value="30000">$15,000 - $45,000/year</SelectItem>
+                        <SelectItem value="60000">$45,000 - $75,000/year</SelectItem>
+                        <SelectItem value="100000">Over $75,000/year</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Prosthetics, replacements, therapy, maintenance</p>
                   </div>
                 </div>
@@ -315,9 +327,14 @@ const AmputationCompensationCalculator = () => {
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <p className="text-sm text-amber-900">
-                    <strong>Important:</strong> Amputation cases require detailed life care planning. Modern prosthetics 
-                    are expensive and need replacement every 3-5 years. Ensure your settlement covers lifetime needs.
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Amputation cases are highly complex and actual compensation varies significantly based on medical evidence, 
+                    expert testimony, life care planning, jurisdiction, jury composition, and specific case facts. Modern prosthetics 
+                    are expensive and need replacement every 3-5 years. Ensure your settlement covers all lifetime needs. Results are not 
+                    guaranteed. No attorney-client relationship is created by using this calculator. Each case must be evaluated 
+                    individually by a qualified amputation injury attorney licensed in your state. Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

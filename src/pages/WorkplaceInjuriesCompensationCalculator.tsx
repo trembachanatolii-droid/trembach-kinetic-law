@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, HardHat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const WorkplaceInjuriesCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -192,26 +192,36 @@ const WorkplaceInjuriesCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Medical Costs (including future treatment)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$50,000"
-                      value={formData.medicalCosts}
-                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select medical cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="25000">Under $25,000</SelectItem>
+                        <SelectItem value="50000">$25,000 - $75,000</SelectItem>
+                        <SelectItem value="125000">$75,000 - $175,000</SelectItem>
+                        <SelectItem value="250000">$175,000 - $325,000</SelectItem>
+                        <SelectItem value="500000">Over $325,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
                       Lost Wages (annual income)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$60,000"
-                      value={formData.lostWages}
-                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual income" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="35000">Under $35,000</SelectItem>
+                        <SelectItem value="50000">$35,000 - $60,000</SelectItem>
+                        <SelectItem value="75000">$60,000 - $90,000</SelectItem>
+                        <SelectItem value="110000">$90,000 - $130,000</SelectItem>
+                        <SelectItem value="175000">Over $130,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <label className="block">
@@ -272,9 +282,14 @@ const WorkplaceInjuriesCompensationCalculator = () => {
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <p className="text-sm text-amber-900">
-                    <strong>Important:</strong> This is an estimate only. Actual compensation depends on many factors including state laws, 
-                    employer insurance, and case specifics. Third-party claims can significantly increase your total compensation.
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Actual compensation depends on many factors including state workers' compensation laws, employer insurance, 
+                    third-party liability, jurisdiction, and specific case facts. Third-party claims can significantly increase 
+                    your total compensation. Results are not guaranteed. No attorney-client relationship is created by using this 
+                    calculator. Each case must be evaluated individually by a qualified workplace injury attorney licensed in your state. 
+                    Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

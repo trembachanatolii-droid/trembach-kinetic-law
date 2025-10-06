@@ -76,6 +76,47 @@ const Index = () => {
         <PracticeAreasLusion key="practice-areas-lusion" />
       </section>
 
+      {/* Newsletter Section - Apple Glass Blue Style */}
+      <section className="relative bg-gradient-to-b from-white via-blue-50/30 to-blue-100/40 py-24 overflow-hidden">
+        {/* Glassmorphism Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 relative">
+          <div className="backdrop-blur-xl bg-white/60 border border-white/40 rounded-3xl p-12 shadow-2xl">
+            <h2 className="text-5xl font-bold mb-6 text-center text-[#1d1d1f] tracking-tight">
+              Newsletter Sign Up
+            </h2>
+            <p className="text-lg text-[#424245] mb-10 max-w-2xl mx-auto text-center leading-relaxed">
+              Never miss out on the latest updates! Get important legal insights, fun
+              event information, and more. Sign up today and stay connected!
+            </p>
+
+            <form
+              onSubmit={handleSubscribe}
+              className="max-w-xl mx-auto flex flex-col sm:flex-row gap-4"
+            >
+              <Input
+                type="email"
+                placeholder="example@subscribe.com *"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="flex-1 h-14 px-6 text-base bg-white/80 backdrop-blur-sm border-white/60 focus:border-[#007AFF] focus:ring-2 focus:ring-[#007AFF]/20 rounded-xl transition-all"
+              />
+              <Button
+                type="submit"
+                className="h-14 px-10 font-semibold text-base bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+              >
+                SUBSCRIBE
+              </Button>
+            </form>
+          </div>
+        </div>
+      </section>
+
       {/* Truth About Your Case Section - Professional Apple Style */}
       <section id="truth">
         <TruthAboutCaseProfessional />
@@ -125,40 +166,6 @@ const Index = () => {
       {/* Process */}
       <section id="process">
         <Process />
-      </section>
-
-      {/* Newsletter Section */}
-      <section className="bg-white py-16 border-t border-gray-200">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold mb-4" style={{ color: '#007AFF' }}>
-            Newsletter Sign Up
-          </h2>
-          <p className="text-lg text-foreground mb-8 max-w-2xl mx-auto">
-            Never miss out on the latest updates! Get important legal insights, fun
-            event information, and more. Sign up today and stay connected!
-          </p>
-
-          <form
-            onSubmit={handleSubscribe}
-            className="max-w-xl mx-auto flex flex-col sm:flex-row gap-4"
-          >
-            <Input
-              type="email"
-              placeholder="example@subscribe.com *"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="flex-1 h-12 px-4 text-base border-gray-300"
-            />
-            <Button
-              type="submit"
-              className="h-12 px-8 font-semibold text-base text-white hover:opacity-90"
-              style={{ backgroundColor: '#007AFF' }}
-            >
-              SUBSCRIBE
-            </Button>
-          </form>
-        </div>
       </section>
 
       {/* Footer Section - Apple Blue Glass Style */}

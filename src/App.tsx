@@ -40,6 +40,9 @@ import ScarringDisfigurementBlog from "./pages/blog/ScarringDisfigurement";
 import WhiplashBlog from "./pages/blog/Whiplash";
 import BrokenBonesBlog from "./pages/blog/BrokenBones";
 import InternalInjuriesBlog from "./pages/blog/InternalInjuries";
+import BackInjuriesBlog from "./pages/blog/BackInjuries";
+import SoftTissueInjuriesBlog from "./pages/blog/SoftTissueInjuries";
+import HitAndRunBlog from "./pages/blog/HitAndRun";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -673,6 +676,9 @@ function App() {
             <Route path="/blog/whiplash" element={<WhiplashBlog />} />
             <Route path="/blog/broken-bones" element={<BrokenBonesBlog />} />
             <Route path="/blog/internal-injuries" element={<InternalInjuriesBlog />} />
+            <Route path="/blog/back-injuries" element={<BackInjuriesBlog />} />
+            <Route path="/blog/soft-tissue-injuries" element={<SoftTissueInjuriesBlog />} />
+            <Route path="/blog/hit-and-run" element={<HitAndRunBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

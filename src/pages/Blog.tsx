@@ -13,6 +13,16 @@ import { Breadcrumbs } from '@/components/blog/Breadcrumbs';
 import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 import { LazyImage } from '@/components/PerformanceOptimizations';
 
+// Import county images
+import losAngelesImg from '@/assets/counties/los-angeles.jpg';
+import sanFranciscoImg from '@/assets/counties/san-francisco.jpg';
+import sanDiegoImg from '@/assets/counties/san-diego.jpg';
+import sacramentoImg from '@/assets/counties/sacramento.jpg';
+import fresnoImg from '@/assets/counties/fresno.jpg';
+import oaklandImg from '@/assets/counties/oakland.jpg';
+import bakersfieldImg from '@/assets/counties/bakersfield.jpg';
+import riversideImg from '@/assets/counties/riverside.jpg';
+
 const POSTS_PER_PAGE = 10;
 
 const Blog = () => {
@@ -423,91 +433,73 @@ const Blog = () => {
                 city: 'Los Angeles',
                 county: 'Los Angeles County',
                 region: 'Southern CA',
-                office: 'Main Office',
-                address: '27001 Agoura Road, Suite 350',
-                cityState: 'Calabasas, CA 91301',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1534190239940-9ba8944ea261?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '1,500+',
-                established: '2010'
+                office: 'By Appointment Only',
+                phone: '(818) 123-4567',
+                bgImage: losAngelesImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'San Francisco',
                 county: 'San Francisco County',
                 region: 'Northern CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '800+',
-                established: '2015'
+                phone: '(818) 123-4567',
+                bgImage: sanFranciscoImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'San Diego',
                 county: 'San Diego County',
                 region: 'Southern CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '600+',
-                established: '2016'
+                phone: '(818) 123-4567',
+                bgImage: sanDiegoImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'Sacramento',
                 county: 'Sacramento County',
                 region: 'Central CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '400+',
-                established: '2017'
+                phone: '(818) 123-4567',
+                bgImage: sacramentoImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'Fresno',
                 county: 'Fresno County',
                 region: 'Central CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '300+',
-                established: '2018'
+                phone: '(818) 123-4567',
+                bgImage: fresnoImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'Oakland',
                 county: 'Alameda County',
                 region: 'Northern CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '500+',
-                established: '2016'
+                phone: '(818) 123-4567',
+                bgImage: oaklandImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'Bakersfield',
                 county: 'Kern County',
                 region: 'Central CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '250+',
-                established: '2019'
+                phone: '(818) 123-4567',
+                bgImage: bakersfieldImg,
+                slug: '/practice-areas/car-accidents'
               },
               {
                 city: 'Riverside',
                 county: 'Riverside County',
                 region: 'Southern CA',
                 office: 'By Appointment Only',
-                phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80',
-                slug: '/practice-areas/car-accidents',
-                casesWon: '350+',
-                established: '2018'
+                phone: '(818) 123-4567',
+                bgImage: riversideImg,
+                slug: '/practice-areas/car-accidents'
               }
             ]
               .filter(location => {
@@ -525,19 +517,12 @@ const Blog = () => {
                       "@type": "LocalBusiness",
                       "name": `Trembach Law Firm - ${location.city}`,
                       "image": location.bgImage,
-                      "address": location.address ? {
-                        "@type": "PostalAddress",
-                        "streetAddress": location.address,
-                        "addressLocality": location.city,
-                        "addressRegion": "CA",
-                        "postalCode": location.cityState?.split(' ').pop()
-                      } : undefined,
                       "telephone": location.phone,
                       "areaServed": {
                         "@type": "City",
                         "name": location.county
                       },
-                      "priceRange": "$$"
+                      "priceRange": "No fees unless we win"
                     })}
                   </script>
 
@@ -557,8 +542,8 @@ const Blog = () => {
                       />
                     </div>
 
-                    {/* Glassmorphism Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/75 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/85 transition-all duration-500"></div>
+                    {/* Lighter Overlay for Better Visibility */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/50 group-hover:from-black/15 group-hover:via-black/25 group-hover:to-black/60 transition-all duration-500"></div>
                     
                     {/* Map Pin Icon */}
                     <div className="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-[#007AFF] transition-all duration-300">
@@ -586,23 +571,7 @@ const Blog = () => {
                       </div>
                       
                       <div className="space-y-2 text-sm drop-shadow-md mb-4">
-                        {location.address && (
-                          <div>
-                            <p className="font-medium opacity-95">{location.address}</p>
-                            <p className="font-medium opacity-95">{location.cityState}</p>
-                          </div>
-                        )}
                         <p className="font-bold text-lg opacity-100">{location.phone}</p>
-                        
-                        {/* Stats */}
-                        <div className="flex gap-4 mt-3 text-xs">
-                          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-                            <span className="font-semibold">{location.casesWon}</span> Cases Won
-                          </div>
-                          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-                            Since <span className="font-semibold">{location.established}</span>
-                          </div>
-                        </div>
                       </div>
                       
                       {/* CTA Arrow */}

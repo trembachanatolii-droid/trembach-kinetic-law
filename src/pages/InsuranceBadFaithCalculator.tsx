@@ -5,6 +5,7 @@ import { Calculator, ArrowLeft, FileWarning } from 'lucide-react';
 import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
 import { FormNavigation } from '@/components/calculator/FormNavigation';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface InsuranceBadFaithFormData extends CalculatorFormData {
   insuranceType: string;
@@ -168,53 +169,65 @@ const InsuranceBadFaithCalculator = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Type of Insurance</label>
-                    <select value={formData.insuranceType} onChange={(e) => updateField('insuranceType', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select insurance type</option>
-                      <option value="health">Health Insurance</option>
-                      <option value="disability">Disability Insurance</option>
-                      <option value="life">Life Insurance</option>
-                      <option value="property">Property/Homeowners Insurance</option>
-                      <option value="auto">Auto Insurance</option>
-                    </select>
+                    <Select value={formData.insuranceType} onValueChange={(value) => updateField('insuranceType', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select insurance type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="health">Health Insurance</SelectItem>
+                        <SelectItem value="disability">Disability Insurance</SelectItem>
+                        <SelectItem value="life">Life Insurance</SelectItem>
+                        <SelectItem value="property">Property/Homeowners Insurance</SelectItem>
+                        <SelectItem value="auto">Auto Insurance</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Type of Bad Faith Claim</label>
-                    <select value={formData.claimType} onChange={(e) => updateField('claimType', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select claim type</option>
-                      <option value="wrongfulDenial">Wrongful Denial of Claim</option>
-                      <option value="unreasonableDelay">Unreasonable Delay in Payment</option>
-                      <option value="inadequateInvestigation">Inadequate Investigation</option>
-                      <option value="lowballOffer">Lowball Settlement Offer</option>
-                      <option value="failureToDefend">Failure to Defend (liability policy)</option>
-                    </select>
+                    <Select value={formData.claimType} onValueChange={(value) => updateField('claimType', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select claim type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="wrongfulDenial">Wrongful Denial of Claim</SelectItem>
+                        <SelectItem value="unreasonableDelay">Unreasonable Delay in Payment</SelectItem>
+                        <SelectItem value="inadequateInvestigation">Inadequate Investigation</SelectItem>
+                        <SelectItem value="lowballOffer">Lowball Settlement Offer</SelectItem>
+                        <SelectItem value="failureToDefend">Failure to Defend (liability policy)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Original Claim Amount</label>
-                    <select value={formData.claimAmount} onChange={(e) => updateField('claimAmount', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select claim amount</option>
-                      <option value="under50k">Under $50,000</option>
-                      <option value="50k-200k">$50,000 - $200,000</option>
-                      <option value="200k-500k">$200,000 - $500,000</option>
-                      <option value="500k-1m">$500,000 - $1,000,000</option>
-                      <option value="over1m">Over $1,000,000</option>
-                    </select>
+                    <Select value={formData.claimAmount} onValueChange={(value) => updateField('claimAmount', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select claim amount" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under50k">Under $50,000</SelectItem>
+                        <SelectItem value="50k-200k">$50,000 - $200,000</SelectItem>
+                        <SelectItem value="200k-500k">$200,000 - $500,000</SelectItem>
+                        <SelectItem value="500k-1m">$500,000 - $1,000,000</SelectItem>
+                        <SelectItem value="over1m">Over $1,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Reason for Denial/Delay</label>
-                    <select value={formData.denialReason} onChange={(e) => updateField('denialReason', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select denial reason</option>
-                      <option value="noReason">No Reason Given</option>
-                      <option value="pretextual">Pretextual Reason (bad excuse)</option>
-                      <option value="policyMisinterpretation">Policy Misinterpretation</option>
-                      <option value="disputed">Disputed Coverage Issue</option>
-                    </select>
+                    <Select value={formData.denialReason} onValueChange={(value) => updateField('denialReason', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select denial reason" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="noReason">No Reason Given</SelectItem>
+                        <SelectItem value="pretextual">Pretextual Reason (bad excuse)</SelectItem>
+                        <SelectItem value="policyMisinterpretation">Policy Misinterpretation</SelectItem>
+                        <SelectItem value="disputed">Disputed Coverage Issue</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 
@@ -232,49 +245,61 @@ const InsuranceBadFaithCalculator = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Delay Duration</label>
-                    <select value={formData.delayDuration} onChange={(e) => updateField('delayDuration', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select delay duration</option>
-                      <option value="under3months">Under 3 months</option>
-                      <option value="3-6months">3-6 months</option>
-                      <option value="6-12months">6-12 months</option>
-                      <option value="over12months">Over 12 months</option>
-                    </select>
+                    <Select value={formData.delayDuration} onValueChange={(value) => updateField('delayDuration', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select delay duration" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under3months">Under 3 months</SelectItem>
+                        <SelectItem value="3-6months">3-6 months</SelectItem>
+                        <SelectItem value="6-12months">6-12 months</SelectItem>
+                        <SelectItem value="over12months">Over 12 months</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Insurer's Conduct</label>
-                    <select value={formData.conductType} onChange={(e) => updateField('conductType', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select conduct type</option>
-                      <option value="willful">Willful/Intentional (fraud, lies)</option>
-                      <option value="reckless">Reckless Disregard</option>
-                      <option value="negligent">Negligent Handling</option>
-                      <option value="goodFaith">Good Faith Dispute</option>
-                    </select>
+                    <Select value={formData.conductType} onValueChange={(value) => updateField('conductType', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select conduct type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="willful">Willful/Intentional (fraud, lies)</SelectItem>
+                        <SelectItem value="reckless">Reckless Disregard</SelectItem>
+                        <SelectItem value="negligent">Negligent Handling</SelectItem>
+                        <SelectItem value="goodFaith">Good Faith Dispute</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Consequential Damages</label>
-                    <select value={formData.consequentialDamages} onChange={(e) => updateField('consequentialDamages', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select damages severity</option>
-                      <option value="severe">Severe (foreclosure, bankruptcy, medical crisis)</option>
-                      <option value="moderate">Moderate (financial hardship, debt)</option>
-                      <option value="minor">Minor (inconvenience, stress)</option>
-                      <option value="none">None (claim eventually paid)</option>
-                    </select>
+                    <Select value={formData.consequentialDamages} onValueChange={(value) => updateField('consequentialDamages', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select damages severity" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="severe">Severe (foreclosure, bankruptcy, medical crisis)</SelectItem>
+                        <SelectItem value="moderate">Moderate (financial hardship, debt)</SelectItem>
+                        <SelectItem value="minor">Minor (inconvenience, stress)</SelectItem>
+                        <SelectItem value="none">None (claim eventually paid)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="block text-sm font-medium text-foreground mb-3">Your Age</label>
-                    <select value={formData.age} onChange={(e) => updateField('age', e.target.value)}
-                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground">
-                      <option value="">Select age range</option>
-                      <option value="30">Under 40</option>
-                      <option value="50">40-64</option>
-                      <option value="70">65 or older</option>
-                    </select>
+                    <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
+                      <SelectTrigger className="h-14">
+                        <SelectValue placeholder="Select age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="30">Under 40</SelectItem>
+                        <SelectItem value="50">40-64</SelectItem>
+                        <SelectItem value="70">65 or older</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
                 </div>
 

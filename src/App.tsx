@@ -17,6 +17,11 @@ import TruckAccidentsBlog from "./pages/blog/TruckAccidents";
 import PedestrianAccidentsBlog from "./pages/blog/PedestrianAccidents";
 import BicycleAccidentsBlog from "./pages/blog/BicycleAccidents";
 import WorkplaceInjuriesBlog from "./pages/blog/WorkplaceInjuries";
+import CompensationBlog from "./pages/blog/Compensation";
+import CatastrophicInjuriesBlog from "./pages/blog/CatastrophicInjuries";
+import InsuranceClaimsBlog from "./pages/blog/InsuranceClaims";
+import WrongfulDeathBlog from "./pages/blog/WrongfulDeath";
+import PremisesLiabilityBlog from "./pages/blog/PremisesLiability";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -594,9 +599,9 @@ function App() {
             <Route path="/blog/case-protection" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-resolution" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/catastrophic-injuries" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/catastrophic-injuries" element={<CatastrophicInjuriesBlog />} />
             <Route path="/blog/common-injuries" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/compensation" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/compensation" element={<CompensationBlog />} />
             <Route path="/blog/complex-litigation" element={<AutoAccidentsBlog />} />
             <Route path="/blog/damages-calculation" element={<AutoAccidentsBlog />} />
             <Route path="/blog/elder-abuse" element={<AutoAccidentsBlog />} />
@@ -604,7 +609,7 @@ function App() {
             <Route path="/blog/evidence" element={<AutoAccidentsBlog />} />
             <Route path="/blog/family-impact" element={<AutoAccidentsBlog />} />
             <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/insurance-claims" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
             <Route path="/blog/insurance-coverage" element={<AutoAccidentsBlog />} />
             <Route path="/blog/insurance-defense" element={<AutoAccidentsBlog />} />
             <Route path="/blog/legal-concepts" element={<AutoAccidentsBlog />} />
@@ -616,12 +621,12 @@ function App() {
             <Route path="/blog/legal-process" element={<AutoAccidentsBlog />} />
             <Route path="/blog/legal-remedies" element={<AutoAccidentsBlog />} />
             <Route path="/blog/legal-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/premises-liability" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/premises-liability" element={<PremisesLiabilityBlog />} />
             <Route path="/blog/product-liability" element={<AutoAccidentsBlog />} />
             <Route path="/blog/rideshare-accidents" element={<AutoAccidentsBlog />} />
             <Route path="/blog/serious-injuries" element={<AutoAccidentsBlog />} />
             <Route path="/blog/settlement-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/wrongful-death" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/wrongful-death" element={<WrongfulDeathBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

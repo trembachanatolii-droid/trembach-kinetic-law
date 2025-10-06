@@ -31,6 +31,9 @@ import ElderAbuseBlog from "./pages/blog/ElderAbuse";
 import DogBitesBlog from "./pages/blog/DogBites";
 import SlipAndFallBlog from "./pages/blog/SlipAndFall";
 import SpinalCordInjuriesBlog from "./pages/blog/SpinalCordInjuries";
+import BurnInjuriesBlog from "./pages/blog/BurnInjuries";
+import ConstructionAccidentsBlog from "./pages/blog/ConstructionAccidents";
+import DefectiveProductsBlog from "./pages/blog/DefectiveProducts";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -607,6 +610,9 @@ function App() {
             <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
             <Route path="/blog/slip-and-fall" element={<SlipAndFallBlog />} />
             <Route path="/blog/spinal-cord-injuries" element={<SpinalCordInjuriesBlog />} />
+            <Route path="/blog/burn-injuries" element={<BurnInjuriesBlog />} />
+            <Route path="/blog/construction-accidents" element={<ConstructionAccidentsBlog />} />
+            <Route path="/blog/defective-products" element={<DefectiveProductsBlog />} />
             <Route path="/blog/auto-safety" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-protection" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-resolution" element={<AutoAccidentsBlog />} />

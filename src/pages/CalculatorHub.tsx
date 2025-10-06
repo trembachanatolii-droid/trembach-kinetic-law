@@ -13,17 +13,17 @@ interface CalculatorArea {
 
 const calculatorAreas: CalculatorArea[] = [
   // Personal Injury - Catastrophic
-  { id: 'brain-injury', name: 'Brain Injury', description: 'Traumatic brain injury compensation', route: '/brain-injury-calculator', category: 'personal-injury' },
-  { id: 'spinal-cord', name: 'Spinal Cord Injury', description: 'Spinal damage compensation', route: '/spinal-cord-calculator', category: 'personal-injury' },
-  { id: 'burn-injury', name: 'Burn Injury', description: 'Burn injury settlement estimates', route: '/burn-injury-calculator', category: 'personal-injury' },
-  { id: 'amputation', name: 'Amputation', description: 'Loss of limb compensation', route: '/amputation-calculator', category: 'personal-injury' },
+  { id: 'brain-injury', name: 'Brain Injury', description: 'Traumatic brain injury compensation', route: '/brain-compensation-calculator', category: 'personal-injury' },
+  { id: 'spinal-cord', name: 'Spinal Cord Injury', description: 'Spinal damage compensation', route: '/spinal-cord-compensation-calculator', category: 'personal-injury' },
+  { id: 'burn-injury', name: 'Burn Injury', description: 'Burn injury settlement estimates', route: '/burn-compensation-calculator', category: 'personal-injury' },
+  { id: 'amputation', name: 'Amputation', description: 'Loss of limb compensation', route: '/amputation-compensation-calculator', category: 'personal-injury' },
   { id: 'paralysis', name: 'Paralysis', description: 'Quadriplegia & paraplegia claims', route: '/practice-areas/paralysis/compensation-calculator', category: 'personal-injury' },
-  { id: 'wrongful-death', name: 'Wrongful Death', description: 'Loss of loved one claims', route: '/wrongful-death-calculator', category: 'personal-injury' },
+  { id: 'wrongful-death', name: 'Wrongful Death', description: 'Loss of loved one claims', route: '/wrongful-death-compensation-calculator', category: 'personal-injury' },
   
   // Personal Injury - General
-  { id: 'personal-injury', name: 'Personal Injury', description: 'General injury compensation', route: '/personal-injury-calculator', category: 'personal-injury' },
-  { id: 'dog-bite', name: 'Dog Bite', description: 'Animal attack injury claims', route: '/dog-bite-calculator', category: 'personal-injury' },
-  { id: 'premises-liability', name: 'Premises Liability', description: 'Property accident compensation', route: '/premises-liability-calculator', category: 'personal-injury' },
+  { id: 'personal-injury', name: 'Personal Injury', description: 'General injury compensation', route: '/practice-areas/general-personal-injury/compensation-calculator', category: 'personal-injury' },
+  { id: 'dog-bite', name: 'Dog Bite', description: 'Animal attack injury claims', route: '/dog-bite-compensation-calculator', category: 'personal-injury' },
+  { id: 'premises-liability', name: 'Premises Liability', description: 'Property accident compensation', route: '/premises-liability-compensation-calculator', category: 'personal-injury' },
   { id: 'vision-loss', name: 'Vision Loss', description: 'Eye injury & blindness claims', route: '/practice-areas/vision-loss/compensation-calculator', category: 'personal-injury' },
   { id: 'hearing-loss', name: 'Hearing Loss', description: 'Occupational deafness claims', route: '/practice-areas/hearing-loss/compensation-calculator', category: 'personal-injury' },
   { id: 'swimming-pool', name: 'Swimming Pool Accidents', description: 'Pool & spa injury claims', route: '/practice-areas/swimming-pool/compensation-calculator', category: 'personal-injury' },
@@ -32,37 +32,37 @@ const calculatorAreas: CalculatorArea[] = [
   
   // Transportation
   { id: 'car-accident', name: 'Car Accidents', description: 'Auto collision compensation', route: '/practice-areas/car-accidents/compensation-calculator', category: 'transportation' },
-  { id: 'motorcycle', name: 'Motorcycle Accidents', description: 'Motorcycle crash claims', route: '/motorcycle-calculator', category: 'transportation' },
-  { id: 'bicycle', name: 'Bicycle Accidents', description: 'Bicycle injury claims', route: '/bicycle-calculator', category: 'transportation' },
-  { id: 'pedestrian', name: 'Pedestrian Accidents', description: 'Pedestrian injury compensation', route: '/pedestrian-calculator', category: 'transportation' },
-  { id: 'bus-accident', name: 'Bus Accidents', description: 'Bus crash injury claims', route: '/practice-areas/bus-accident/compensation-calculator', category: 'transportation' },
-  { id: 'uber-lyft', name: 'Uber & Lyft', description: 'Rideshare accident claims', route: '/practice-areas/uber-lyft/compensation-calculator', category: 'transportation' },
-  { id: 'aviation', name: 'Aviation Accidents', description: 'Airplane crash compensation', route: '/practice-areas/aviation/compensation-calculator', category: 'transportation' },
-  { id: 'maritime', name: 'Maritime Accidents', description: 'Jones Act & LHWCA claims', route: '/practice-areas/maritime/compensation-calculator', category: 'transportation' },
+  { id: 'motorcycle', name: 'Motorcycle Accidents', description: 'Motorcycle crash claims', route: '/motorcycle-compensation-calculator', category: 'transportation' },
+  { id: 'bicycle', name: 'Bicycle Accidents', description: 'Bicycle injury claims', route: '/bicycle-compensation-calculator', category: 'transportation' },
+  { id: 'pedestrian', name: 'Pedestrian Accidents', description: 'Pedestrian injury compensation', route: '/pedestrian-compensation-calculator', category: 'transportation' },
+  { id: 'bus-accident', name: 'Bus Accidents', description: 'Bus crash injury claims', route: '/bus-accident/compensation-calculator', category: 'transportation' },
+  { id: 'uber-lyft', name: 'Uber & Lyft', description: 'Rideshare accident claims', route: '/uber-lyft-compensation-calculator', category: 'transportation' },
+  { id: 'aviation', name: 'Aviation Accidents', description: 'Airplane crash compensation', route: '/aviation/compensation-calculator', category: 'transportation' },
+  { id: 'maritime', name: 'Maritime Accidents', description: 'Jones Act & LHWCA claims', route: '/maritime/compensation-calculator', category: 'transportation' },
   { id: 'railroad', name: 'Railroad Accidents', description: 'FELA railroad worker claims', route: '/practice-areas/railroad-accidents/compensation-calculator', category: 'transportation' },
   
   // Workplace
-  { id: 'workplace-injury', name: 'Workplace Injuries', description: 'Workers comp & third-party', route: '/workplace-injury-calculator', category: 'workplace' },
-  { id: 'construction', name: 'Construction Accidents', description: 'Construction site injuries', route: '/construction-calculator', category: 'workplace' },
+  { id: 'workplace-injury', name: 'Workplace Injuries', description: 'Workers comp & third-party', route: '/workplace-injuries-compensation-calculator', category: 'workplace' },
+  { id: 'construction', name: 'Construction Accidents', description: 'Construction site injuries', route: '/construction-compensation-calculator', category: 'workplace' },
   { id: 'scaffolding', name: 'Scaffolding Falls', description: 'Height injury compensation', route: '/practice-areas/scaffolding-falls/compensation-calculator', category: 'workplace' },
   { id: 'crane-accident', name: 'Crane Accidents', description: 'Crane-related injuries', route: '/practice-areas/crane-accidents/compensation-calculator', category: 'workplace' },
   { id: 'electrocution', name: 'Electrocution', description: 'Electrical injury compensation', route: '/practice-areas/electrocution/compensation-calculator', category: 'workplace' },
   { id: 'explosions', name: 'Explosions & Fires', description: 'Blast injury compensation', route: '/practice-areas/explosions/compensation-calculator', category: 'workplace' },
   
   // Medical
-  { id: 'medical-malpractice', name: 'Medical Malpractice', description: 'Medical negligence claims', route: '/medical-malpractice-calculator', category: 'medical' },
-  { id: 'birth-injury', name: 'Birth Injuries', description: 'Birth trauma compensation', route: '/birth-injury-calculator', category: 'medical' },
-  { id: 'medical-devices', name: 'Medical Devices', description: 'Defective device claims', route: '/medical-devices-calculator', category: 'medical' },
-  { id: 'pharmaceutical', name: 'Pharmaceutical', description: 'Dangerous drug compensation', route: '/pharmaceutical-calculator', category: 'medical' },
+  { id: 'medical-malpractice', name: 'Medical Malpractice', description: 'Medical negligence claims', route: '/medical-malpractice-compensation-calculator', category: 'medical' },
+  { id: 'birth-injury', name: 'Birth Injuries', description: 'Birth trauma compensation', route: '/birth-injuries/compensation-calculator', category: 'medical' },
+  { id: 'medical-devices', name: 'Medical Devices', description: 'Defective device claims', route: '/medical-devices-compensation-calculator', category: 'medical' },
+  { id: 'pharmaceutical', name: 'Pharmaceutical', description: 'Dangerous drug compensation', route: '/pharmaceutical-compensation-calculator', category: 'medical' },
   
   // Toxic Exposure
   { id: 'asbestos', name: 'Asbestos & Mesothelioma', description: 'Asbestos exposure claims', route: '/compensation-calculator', category: 'toxic-exposure' },
   { id: 'benzene', name: 'Benzene Exposure', description: 'Benzene-related illness', route: '/benzene-calculator', category: 'toxic-exposure' },
   { id: 'pfas', name: 'PFAS Contamination', description: 'Forever chemicals exposure', route: '/pfas-calculator', category: 'toxic-exposure' },
   { id: 'camp-lejeune', name: 'Camp Lejeune', description: 'Water contamination claims', route: '/camp-lejeune-calculator', category: 'toxic-exposure' },
-  { id: 'environmental-toxic', name: 'Environmental Toxic', description: 'Chemical exposure claims', route: '/environmental-toxic-calculator', category: 'toxic-exposure' },
-  { id: 'silicosis', name: 'Silicosis', description: 'Silica dust exposure', route: '/silicosis-calculator', category: 'toxic-exposure' },
-  { id: 'talc', name: 'Talc Exposure', description: 'Talcum powder claims', route: '/talc-calculator', category: 'toxic-exposure' },
+  { id: 'environmental-toxic', name: 'Environmental Toxic', description: 'Chemical exposure claims', route: '/environmental-toxic-compensation-calculator', category: 'toxic-exposure' },
+  { id: 'silicosis', name: 'Silicosis', description: 'Silica dust exposure', route: '/silicosis-compensation-calculator', category: 'toxic-exposure' },
+  { id: 'talc', name: 'Talc Exposure', description: 'Talcum powder claims', route: '/talc-compensation-calculator', category: 'toxic-exposure' },
   
   // Abuse
   { id: 'elder-abuse', name: 'Elder Abuse', description: 'Nursing home neglect claims', route: '/elder-abuse-calculator', category: 'abuse' },
@@ -70,14 +70,14 @@ const calculatorAreas: CalculatorArea[] = [
   { id: 'clergy-abuse', name: 'Clergy Abuse', description: 'Religious abuse claims', route: '/clergy-abuse-calculator', category: 'abuse' },
   
   // Product Liability & Mass Torts
-  { id: 'product-liability', name: 'Product Liability', description: 'Defective product injuries', route: '/product-liability-calculator', category: 'product-liability' },
-  { id: 'mass-torts', name: 'Mass Torts', description: 'Multi-party injury claims', route: '/mass-torts-calculator', category: 'product-liability' },
-  { id: 'class-actions', name: 'Class Action', description: 'Group litigation claims', route: '/class-actions-calculator', category: 'product-liability' },
+  { id: 'product-liability', name: 'Product Liability', description: 'Defective product injuries', route: '/product-liability-compensation-calculator', category: 'product-liability' },
+  { id: 'mass-torts', name: 'Mass Torts', description: 'Multi-party injury claims', route: '/mass-torts-compensation-calculator', category: 'product-liability' },
+  { id: 'class-actions', name: 'Class Action', description: 'Group litigation claims', route: '/class-actions-compensation-calculator', category: 'product-liability' },
   { id: 'opioid', name: 'Opioid Crisis', description: 'Opioid addiction claims', route: '/opioid-calculator', category: 'product-liability' },
   
   // Civil Rights
   { id: 'civil-rights', name: 'Civil Rights Violations', description: 'Constitutional rights claims', route: '/practice-areas/civil-rights/compensation-calculator', category: 'civil-rights' },
-  { id: 'defamation', name: 'Defamation', description: 'Libel & slander damages', route: '/defamation-calculator', category: 'civil-rights' },
+  { id: 'defamation', name: 'Defamation', description: 'Libel & slander damages', route: '/practice-areas/defamation/compensation-calculator', category: 'civil-rights' },
 ];
 
 const categories = [

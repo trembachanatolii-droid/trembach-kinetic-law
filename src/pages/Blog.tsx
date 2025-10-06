@@ -605,122 +605,211 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Footer Section - Apple Style */}
-      <footer className="bg-white">
-        <div className="max-w-[1400px] mx-auto px-6">
-          {/* Main Footer Content */}
-          <div className="py-16 border-b border-[#d2d2d7]">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {/* Newsletter Column */}
-              <div>
-                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
-                  Newsletter Sign Up
+      {/* Footer Section - Apple Blue Glass Style */}
+      <footer className="relative bg-gradient-to-b from-white via-blue-50/30 to-blue-100/40 overflow-hidden">
+        {/* Structured Data for Organization */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Trembach Law Firm, APC",
+            "url": "https://www.trembachlawfirm.com",
+            "logo": "https://www.trembachlawfirm.com/logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+1-818-123-4567",
+              "contactType": "customer service",
+              "availableLanguage": "English",
+              "areaServed": "US-CA"
+            },
+            "sameAs": [
+              "https://www.facebook.com/trembachlawfirm",
+              "https://www.linkedin.com/company/trembachlawfirm"
+            ]
+          })}
+        </script>
+
+        {/* Glassmorphism Background Elements */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/10 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div className="max-w-[1400px] mx-auto px-6 relative">
+          {/* Main Footer Content - 4 Column Grid */}
+          <div className="py-20">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+              
+              {/* Newsletter Column with Glass Card */}
+              <div className="backdrop-blur-xl bg-white/60 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                <h3 className="text-xl font-bold text-[#1d1d1f] mb-2 tracking-tight">
+                  Stay Informed
                 </h3>
-                <form onSubmit={handleSubscribe} className="space-y-4">
+                <p className="text-sm text-[#6e6e73] mb-6">Get legal insights delivered</p>
+                
+                <form onSubmit={handleSubscribe} className="space-y-3">
                   <Input
                     type="email"
-                    placeholder="example@subscribe.com *"
+                    placeholder="Enter your email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="h-12 px-4 text-base bg-white border-[#d2d2d7] focus:border-[#007AFF] focus:ring-[#007AFF]"
+                    className="h-11 px-4 text-sm bg-white/80 backdrop-blur-sm border-white/60 focus:border-[#007AFF] focus:ring-2 focus:ring-[#007AFF]/20 rounded-xl transition-all"
                   />
                   <Button
                     type="submit"
-                    className="w-full h-12 font-semibold text-base hover:opacity-90 transition-opacity"
-                    style={{ backgroundColor: '#007AFF', color: 'white' }}
+                    className="w-full h-11 font-semibold text-sm bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
                   >
-                    SUBSCRIBE
+                    Subscribe
                   </Button>
                 </form>
               </div>
 
               {/* Practice Areas Column */}
-              <div>
-                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+              <div className="backdrop-blur-xl bg-white/60 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                <h3 className="text-xl font-bold text-[#1d1d1f] mb-6 tracking-tight">
                   Practice Areas
                 </h3>
-                <ul className="space-y-3">
-                  {[
-                    { label: 'Car Accident Lawyers', href: '/practice-areas/car-accidents' },
-                    { label: 'Dog Bite Lawyers', href: '/practice-areas/dog-bites' },
-                    { label: 'Bicycle Accident Lawyers', href: '/practice-areas/bicycle-accidents' },
-                    { label: 'Motorcycle Accident Lawyers', href: '/practice-areas/motorcycle-accidents' },
-                    { label: 'Pedestrian Accident Lawyers', href: '/practice-areas/pedestrian-accidents' },
-                    { label: 'Truck Accident Lawyers', href: '/practice-areas/truck-accidents' },
-                    { label: 'Wrongful Death Lawyers', href: '/practice-areas/wrongful-death' }
-                  ].map((link, index) => (
-                    <li key={index}>
-                      <Link
-                        to={link.href}
-                        className="text-[#424245] hover:text-[#007AFF] transition-colors text-sm"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                  <li>
-                    <Link
-                      to="/practice-areas"
-                      className="text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-semibold flex items-center gap-2"
-                      onClick={() => window.scrollTo(0, 0)}
-                    >
-                      See all 50 practice areas <ArrowRight className="w-4 h-4" />
-                    </Link>
-                  </li>
-                </ul>
+                <nav>
+                  <ul className="space-y-3">
+                    {[
+                      { label: 'Car Accidents', href: '/practice-areas/car-accidents' },
+                      { label: 'Truck Accidents', href: '/practice-areas/truck-accidents' },
+                      { label: 'Motorcycle Accidents', href: '/practice-areas/motorcycle-accidents' },
+                      { label: 'Mesothelioma', href: '/practice-areas/mesothelioma' },
+                      { label: 'Silica Exposure', href: '/practice-areas/silica' },
+                      { label: 'Talc Poisoning', href: '/practice-areas/talc' },
+                      { label: 'Wrongful Death', href: '/practice-areas/wrongful-death' }
+                    ].map((link, index) => (
+                      <li key={index}>
+                        <Link
+                          to={link.href}
+                          className="group flex items-center text-sm text-[#424245] hover:text-[#007AFF] transition-all duration-300"
+                        >
+                          <span className="w-1 h-1 bg-[#007AFF] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <Link
+                    to="/practice-areas"
+                    className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-[#007AFF] hover:text-[#0051D5] transition-all group"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    View All Practice Areas
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </nav>
+              </div>
+
+              {/* Resources Column */}
+              <div className="backdrop-blur-xl bg-white/60 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                <h3 className="text-xl font-bold text-[#1d1d1f] mb-6 tracking-tight">
+                  Resources
+                </h3>
+                <nav>
+                  <ul className="space-y-3">
+                    {[
+                      { label: 'Blog & Legal Insights', href: '/blog' },
+                      { label: 'Case Results', href: '/results' },
+                      { label: 'About Our Firm', href: '/about' },
+                      { label: 'Meet The Team', href: '/about' },
+                      { label: 'Free Consultation', href: '/free-consultation' },
+                      { label: 'Contact Us', href: '/contact' }
+                    ].map((link, index) => (
+                      <li key={index}>
+                        <Link
+                          to={link.href}
+                          className="group flex items-center text-sm text-[#424245] hover:text-[#007AFF] transition-all duration-300"
+                          onClick={() => window.scrollTo(0, 0)}
+                        >
+                          <span className="w-1 h-1 bg-[#007AFF] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                          {link.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
               </div>
 
               {/* Contact Column */}
-              <div>
-                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+              <div className="backdrop-blur-xl bg-white/60 border border-white/40 rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1">
+                <h3 className="text-xl font-bold text-[#1d1d1f] mb-2 tracking-tight">
                   Contact Us
                 </h3>
+                <p className="text-sm text-[#6e6e73] mb-6">Available 24/7</p>
+                
                 <div className="space-y-4 mb-6">
-                  <p className="text-[#424245] text-base">
-                    <span className="font-semibold text-[#1d1d1f]">Phone:</span> (800) 555-0000
-                  </p>
-                  <p className="text-[#424245] text-sm">
-                    24 hours a day, 7 days a week
-                  </p>
+                  <a 
+                    href="tel:+18181234567"
+                    className="block group"
+                  >
+                    <p className="text-xs text-[#6e6e73] mb-1">Phone</p>
+                    <p className="text-2xl font-bold text-[#007AFF] group-hover:text-[#0051D5] transition-colors">
+                      (818) 123-4567
+                    </p>
+                  </a>
+                  
+                  <div className="pt-4 border-t border-white/60">
+                    <p className="text-xs text-[#6e6e73] mb-2">Hours</p>
+                    <p className="text-sm font-semibold text-[#1d1d1f]">
+                      24/7 Emergency Service
+                    </p>
+                  </div>
                 </div>
                 
-                <div className="space-y-3">
+                <div className="space-y-2">
                   <Link
-                    to="/practice-areas"
-                    className="flex items-center gap-2 text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-medium"
-                    onClick={() => window.scrollTo(0, 0)}
+                    to="/free-consultation"
+                    className="flex items-center justify-between px-4 py-2.5 bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-xl text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-lg group"
                   >
-                    Cases We Handle <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    to="/about"
-                    className="flex items-center gap-2 text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-medium"
-                    onClick={() => window.scrollTo(0, 0)}
-                  >
-                    Meet Your Team <ArrowRight className="w-5 h-5" />
+                    <span>Free Case Review</span>
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                   </Link>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Legal Section - Apple Style */}
-          <div className="bg-[#f5f5f7] -mx-6 px-6 py-8">
-            <div className="max-w-[1400px] mx-auto">
-              <p className="text-[#86868b] text-xs leading-relaxed mb-6">
-                The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
-              </p>
-              
-              <div className="flex flex-wrap items-center gap-4 mb-4">
-                <Link to="/privacy-policy" className="text-[#06c] hover:underline text-xs">
-                  Privacy Policy
-                </Link>
+          {/* Bottom Legal Section with Glass Effect */}
+          <div className="border-t border-white/40 backdrop-blur-sm">
+            <div className="py-8">
+              <div className="backdrop-blur-xl bg-white/40 rounded-2xl p-6 mb-6">
+                <p className="text-[#6e6e73] text-xs leading-relaxed">
+                  <strong className="text-[#1d1d1f]">Legal Disclaimer:</strong> The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Past results do not guarantee future outcomes.
+                </p>
               </div>
               
-              <p className="text-[#86868b] text-xs">
-                Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
-              </p>
+              <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="flex flex-wrap items-center gap-4">
+                  <Link 
+                    to="/privacy-policy" 
+                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
+                  >
+                    Privacy Policy
+                  </Link>
+                  <span className="text-[#d2d2d7]">|</span>
+                  <Link 
+                    to="/terms" 
+                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
+                  >
+                    Terms of Service
+                  </Link>
+                  <span className="text-[#d2d2d7]">|</span>
+                  <Link 
+                    to="/sitemap" 
+                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
+                  >
+                    Sitemap
+                  </Link>
+                </div>
+                
+                <p className="text-[#86868b] text-xs">
+                  Copyright © 2025 Trembach Law Firm, APC. All rights reserved.
+                </p>
+              </div>
             </div>
           </div>
         </div>

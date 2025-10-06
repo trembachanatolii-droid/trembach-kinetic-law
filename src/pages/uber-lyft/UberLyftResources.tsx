@@ -17,6 +17,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
+import ResourcesCTA from '@/components/ResourcesCTA';
 
 import heroImage from '@/assets/uber-lyft-resources-hero.jpg';
 
@@ -430,6 +431,9 @@ const UberLyftResources = () => {
                 </p>
               </CardContent>
             </Card>
+
+            {/* Resources Toolbar CTA */}
+            <ResourcesCTA />
 
           </div>
         </div>

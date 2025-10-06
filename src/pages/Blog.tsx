@@ -197,10 +197,10 @@ const Blog = () => {
                     <article
                       ref={ref}
                       key={post.id}
-                      className={`flex flex-col md:flex-row gap-8 pb-20 border-b border-gray-200 last:border-0 transition-all duration-700 ${
+                      className={`flex flex-col md:flex-row gap-8 pb-20 border-b border-gray-200 last:border-0 transition-all duration-500 ${
                         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
                       }`}
-                      style={{ transitionDelay: `${index * 100}ms` }}
+                      style={{ transitionDelay: `${index * 50}ms` }}
                     >
                       {/* Structured Data for each post */}
                       <script type="application/ld+json">
@@ -374,13 +374,13 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* All 58 Counties Section */}
-      <section className="bg-[#f5f5f7] py-20">
+      {/* All 58 Counties Section - Apple Style */}
+      <section className="bg-white py-24">
         <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: '#1d1d1f' }}>
+          <h2 className="text-5xl md:text-6xl font-semibold text-center mb-3 text-[#1d1d1f] tracking-tight">
             All 58 Counties
           </h2>
-          <p className="text-2xl text-center mb-16" style={{ color: '#1d1d1f' }}>
+          <p className="text-2xl md:text-3xl text-center mb-20 text-[#6e6e73] font-light">
             Statewide Representation
           </p>
 
@@ -439,27 +439,40 @@ const Blog = () => {
             ].map((location, index) => (
               <div
                 key={index}
-                className="relative h-[280px] rounded-2xl overflow-hidden group cursor-pointer shadow-lg"
+                className="relative h-[340px] rounded-3xl overflow-hidden group cursor-pointer transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl"
                 style={{
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(${location.bgImage})`,
+                  backgroundImage: `url(${location.bgImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
               >
-                <div className="absolute inset-0 p-6 flex flex-col justify-start text-white">
-                  <h3 className="text-3xl font-bold mb-1">{location.city}</h3>
+                {/* Gradient Overlay - Lighter for better visibility */}
+                <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/70 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/80 transition-all duration-500"></div>
+                
+                {/* Content */}
+                <div className="absolute inset-0 p-7 flex flex-col justify-end text-white">
+                  <h3 className="text-4xl font-semibold mb-2 tracking-tight drop-shadow-lg">
+                    {location.city}
+                  </h3>
                   {location.office && (
-                    <p className="text-sm mb-4 opacity-90">({location.office})</p>
+                    <p className="text-base mb-4 font-medium opacity-95 drop-shadow-md">
+                      {location.office}
+                    </p>
                   )}
                   
-                  <div className="space-y-1 text-sm">
+                  <div className="space-y-1.5 text-sm drop-shadow-md">
                     {location.address && (
-                      <>
-                        <p className="font-medium">{location.address}</p>
-                        <p className="font-medium">{location.cityState}</p>
-                      </>
+                      <div className="mb-3">
+                        <p className="font-medium opacity-95">{location.address}</p>
+                        <p className="font-medium opacity-95">{location.cityState}</p>
+                      </div>
                     )}
-                    <p className="font-bold mt-3 text-base">{location.phone}</p>
+                    <p className="font-bold text-lg opacity-100">{location.phone}</p>
+                  </div>
+                  
+                  {/* Hover indicator */}
+                  <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="w-6 h-6" />
                   </div>
                 </div>
               </div>
@@ -468,117 +481,120 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Footer Section */}
-      <footer className="py-16" style={{ background: 'linear-gradient(135deg, #007AFF 0%, #0051D5 100%)' }}>
+      {/* Footer Section - Apple Style */}
+      <footer className="bg-white">
         <div className="max-w-[1400px] mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            {/* Newsletter Column */}
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Newsletter Sign Up
-              </h3>
-              <form onSubmit={handleSubscribe} className="space-y-4">
-                <Input
-                  type="email"
-                  placeholder="example@subscribe.com *"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="h-12 px-4 text-base bg-white"
-                />
-                <Button
-                  type="submit"
-                  className="w-full h-12 font-semibold text-base hover:bg-white/90"
-                  style={{ backgroundColor: '#ffffff', color: '#007AFF' }}
-                >
-                  SUBSCRIBE
-                </Button>
-              </form>
-            </div>
+          {/* Main Footer Content */}
+          <div className="py-16 border-b border-[#d2d2d7]">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              {/* Newsletter Column */}
+              <div>
+                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                  Newsletter Sign Up
+                </h3>
+                <form onSubmit={handleSubscribe} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="example@subscribe.com *"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="h-12 px-4 text-base bg-white border-[#d2d2d7] focus:border-[#007AFF] focus:ring-[#007AFF]"
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full h-12 font-semibold text-base hover:opacity-90 transition-opacity"
+                    style={{ backgroundColor: '#007AFF', color: 'white' }}
+                  >
+                    SUBSCRIBE
+                  </Button>
+                </form>
+              </div>
 
-            {/* Practice Areas Column */}
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Practice Areas
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  { label: 'Car Accident Lawyers', href: '/practice-areas/car-accidents' },
-                  { label: 'Dog Bite Lawyers', href: '/practice-areas/dog-bites' },
-                  { label: 'Bicycle Accident Lawyers', href: '/practice-areas/bicycle-accidents' },
-                  { label: 'Motorcycle Accident Lawyers', href: '/practice-areas/motorcycle-accidents' },
-                  { label: 'Pedestrian Accident Lawyers', href: '/practice-areas/pedestrian-accidents' },
-                  { label: 'Truck Accident Lawyers', href: '/practice-areas/truck-accidents' },
-                  { label: 'Wrongful Death Lawyers', href: '/practice-areas/wrongful-death' }
-                ].map((link, index) => (
-                  <li key={index}>
+              {/* Practice Areas Column */}
+              <div>
+                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                  Practice Areas
+                </h3>
+                <ul className="space-y-3">
+                  {[
+                    { label: 'Car Accident Lawyers', href: '/practice-areas/car-accidents' },
+                    { label: 'Dog Bite Lawyers', href: '/practice-areas/dog-bites' },
+                    { label: 'Bicycle Accident Lawyers', href: '/practice-areas/bicycle-accidents' },
+                    { label: 'Motorcycle Accident Lawyers', href: '/practice-areas/motorcycle-accidents' },
+                    { label: 'Pedestrian Accident Lawyers', href: '/practice-areas/pedestrian-accidents' },
+                    { label: 'Truck Accident Lawyers', href: '/practice-areas/truck-accidents' },
+                    { label: 'Wrongful Death Lawyers', href: '/practice-areas/wrongful-death' }
+                  ].map((link, index) => (
+                    <li key={index}>
+                      <Link
+                        to={link.href}
+                        className="text-[#424245] hover:text-[#007AFF] transition-colors text-sm"
+                      >
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                  <li>
                     <Link
-                      to={link.href}
-                      className="text-white hover:text-white transition-colors text-base"
+                      to="/practice-areas"
+                      className="text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-semibold flex items-center gap-2"
+                      onClick={() => window.scrollTo(0, 0)}
                     >
-                      {link.label}
+                      See all 50 practice areas <ArrowRight className="w-4 h-4" />
                     </Link>
                   </li>
-                ))}
-                <li>
+                </ul>
+              </div>
+
+              {/* Contact Column */}
+              <div>
+                <h3 className="text-xl font-semibold text-[#1d1d1f] mb-6">
+                  Contact Us
+                </h3>
+                <div className="space-y-4 mb-6">
+                  <p className="text-[#424245] text-base">
+                    <span className="font-semibold text-[#1d1d1f]">Phone:</span> (800) 555-0000
+                  </p>
+                  <p className="text-[#424245] text-sm">
+                    24 hours a day, 7 days a week
+                  </p>
+                </div>
+                
+                <div className="space-y-3">
                   <Link
                     to="/practice-areas"
-                    className="text-white hover:text-white transition-colors text-base font-semibold flex items-center gap-2"
+                    className="flex items-center gap-2 text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-medium"
                     onClick={() => window.scrollTo(0, 0)}
                   >
-                    See all 50 practice areas <ArrowRight className="w-4 h-4" />
+                    Cases We Handle <ArrowRight className="w-5 h-5" />
                   </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Contact Column */}
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Contact Us
-              </h3>
-              <div className="space-y-4 mb-6">
-                <p className="text-white text-lg">
-                  <span className="font-bold">Phone:</span> (800) 555-0000
-                </p>
-                <p className="text-white text-base">
-                  24 hours a day, 7 days a week
-                </p>
-              </div>
-              
-              <div className="space-y-3">
-                <Link
-                  to="/practice-areas"
-                  className="flex items-center gap-2 text-white hover:text-white transition-colors text-base font-medium"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  Cases We Handle <ArrowRight className="w-5 h-5" />
-                </Link>
-                <Link
-                  to="/about"
-                  className="flex items-center gap-2 text-white hover:text-white transition-colors text-base font-medium"
-                  onClick={() => window.scrollTo(0, 0)}
-                >
-                  Meet Your Team <ArrowRight className="w-5 h-5" />
-                </Link>
+                  <Link
+                    to="/about"
+                    className="flex items-center gap-2 text-[#007AFF] hover:text-[#0051D5] transition-colors text-sm font-medium"
+                    onClick={() => window.scrollTo(0, 0)}
+                  >
+                    Meet Your Team <ArrowRight className="w-5 h-5" />
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Bottom Bar */}
-          <div className="border-t border-white/20 pt-8">
-            <div className="bg-[#f5f5f7] -mx-6 px-6 py-8 rounded-t-2xl">
-              <p className="text-[#86868b] text-xs leading-relaxed">
+          {/* Bottom Legal Section - Apple Style */}
+          <div className="bg-[#f5f5f7] -mx-6 px-6 py-8">
+            <div className="max-w-[1400px] mx-auto">
+              <p className="text-[#86868b] text-xs leading-relaxed mb-6">
                 The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
               </p>
               
-              <div className="flex flex-wrap items-center gap-3 mt-4 text-xs">
-                <Link to="/privacy-policy" className="text-[#06c] hover:underline">
+              <div className="flex flex-wrap items-center gap-4 mb-4">
+                <Link to="/privacy-policy" className="text-[#06c] hover:underline text-xs">
                   Privacy Policy
                 </Link>
               </div>
               
-              <p className="text-[#86868b] text-xs mt-4">
+              <p className="text-[#86868b] text-xs">
                 Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
               </p>
             </div>

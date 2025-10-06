@@ -416,13 +416,25 @@ const Blog = () => {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/20 pt-8">
-            <p className="text-white text-sm leading-relaxed">
-              *Trembach Law Firm, APC attorneys have recovered in aggregate over Two Billion Dollars for their clients is derived from the total recoveries achieved by Trembach Law Firm, APC and its affiliated lawyers from various sources for their clients. These recoveries include but are not limited to recoveries for property damage claims, medical payments benefits claims, bodily injury claims, recovery of workers' compensation benefits and other compensation derived for the benefit of their clients. The total Two Billion Dollar amount also includes recoveries achieved as a result of co-counsel ventures with outside law firms, from results obtained by current Trembach Law Firm, APC partners while they held previous positions within other law firms, and by each of the partners' previous individual legal ventures.
-            </p>
-            <p className="text-white text-sm leading-relaxed mt-4">
+            <p className="text-white/80 text-xs leading-relaxed">
               The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
             </p>
-            <p className="text-white text-sm mt-4">
+            
+            <div className="flex flex-wrap items-center gap-3 mt-4 text-xs">
+              <Link to="/privacy-policy" className="text-white/80 hover:text-white transition-colors">
+                Privacy Policy
+              </Link>
+              <span className="text-white/40">|</span>
+              <Link to="/terms-of-service" className="text-white/80 hover:text-white transition-colors">
+                Terms of Service
+              </Link>
+              <span className="text-white/40">|</span>
+              <Link to="/sitemap" className="text-white/80 hover:text-white transition-colors">
+                Sitemap
+              </Link>
+            </div>
+            
+            <p className="text-white/80 text-xs mt-4">
               Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
             </p>
           </div>

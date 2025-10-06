@@ -399,28 +399,25 @@
 - Age-based future damage calculations (younger = higher)
 - Dropdown-only form with life care planning disclaimer
 
-### Templated (2 calculators remaining)
+### Phase 7AT: Trucking Accident Calculator ✅ NEW
+- Truck type multipliers (semi-truck, tanker, delivery truck)
+- Accident type factors (rear-end, head-on, jackknife, underride)
+- FMCSA violation considerations (hours of service, maintenance)
+- Driver conduct (impaired, distracted, fatigued, speeding)
+- Injury severity and employment impact
+- Age-based adjustments and medical cost multipliers
+- Dropdown-only form with federal FMCSA disclaimer
 
-**Personal Injury** (0)
-- All personal injury calculators complete
+### Phase 7AU: Toxic Mold Calculator ✅ NEW
+- Property type multipliers (apartment, rental, workplace, school)
+- Mold type factors (black mold/stachybotrys most serious)
+- Exposure duration and health effects severity
+- Property damage extent (uninhabitable highest multiplier)
+- Landlord response (ignored vs appropriate)
+- Medical costs and vulnerable age groups
+- Dropdown-only form with causation/expert testimony disclaimer
 
-**Transportation** (0)
-- All transportation calculators complete
-
-**Toxic Exposure** (0)
-- All toxic exposure calculators complete
-
-**Abuse** (0)
-- All abuse calculators complete
-
-**Product Liability** (2)
-- Mass Torts, Class Actions
-
-**Civil Rights** (2)
-- Civil Rights Violations, Pharmaceutical
-
-**Other** (3)
-- Additional specialized calculators
+### 🎉 ALL CALCULATORS COMPLETE (50 total)
 
 ## 🎯 Key Requirements Met
 

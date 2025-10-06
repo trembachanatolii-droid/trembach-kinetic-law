@@ -81,15 +81,15 @@ const calculatorAreas: CalculatorArea[] = [
 ];
 
 const categories = [
-  { id: 'all', name: 'All Areas', color: 'bg-slate-900' },
-  { id: 'personal-injury', name: 'Personal Injury', color: 'bg-blue-600' },
-  { id: 'transportation', name: 'Transportation', color: 'bg-purple-600' },
-  { id: 'workplace', name: 'Workplace', color: 'bg-orange-600' },
-  { id: 'medical', name: 'Medical', color: 'bg-red-600' },
-  { id: 'toxic-exposure', name: 'Toxic Exposure', color: 'bg-green-600' },
-  { id: 'abuse', name: 'Abuse', color: 'bg-pink-600' },
-  { id: 'product-liability', name: 'Product Liability', color: 'bg-yellow-600' },
-  { id: 'civil-rights', name: 'Civil Rights', color: 'bg-indigo-600' },
+  { id: 'all', name: 'All Areas' },
+  { id: 'personal-injury', name: 'Personal Injury' },
+  { id: 'transportation', name: 'Transportation' },
+  { id: 'workplace', name: 'Workplace' },
+  { id: 'medical', name: 'Medical' },
+  { id: 'toxic-exposure', name: 'Toxic Exposure' },
+  { id: 'abuse', name: 'Abuse' },
+  { id: 'product-liability', name: 'Product Liability' },
+  { id: 'civil-rights', name: 'Civil Rights' },
 ];
 
 const CalculatorHub = () => {
@@ -113,27 +113,27 @@ const CalculatorHub = () => {
         />
       </Helmet>
 
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-background">
         {/* Hero Section - Apple Style */}
-        <section className="relative pt-32 pb-20 bg-gradient-to-b from-slate-50 to-white">
+        <section className="relative pt-32 pb-20 bg-gradient-to-b from-muted/30 to-background">
           <div className="container mx-auto px-6 max-w-7xl">
             <div className="text-center max-w-4xl mx-auto">
-              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-black mb-6 tracking-tight leading-[1.05]">
+              <h1 className="text-6xl md:text-7xl lg:text-8xl font-bold text-foreground mb-6 tracking-tight leading-[1.05]">
                 Calculate Your<br />Case Value
               </h1>
-              <p className="text-xl md:text-2xl text-slate-600 mb-12 font-light leading-relaxed">
+              <p className="text-xl md:text-2xl text-muted-foreground mb-12 font-light leading-relaxed">
                 Instant estimates across 50+ practice areas.<br />Professional. Accurate. Free.
               </p>
 
               {/* Search Bar */}
               <div className="relative max-w-2xl mx-auto mb-16">
-                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-slate-400" size={24} />
+                <Search className="absolute left-6 top-1/2 -translate-y-1/2 text-muted-foreground" size={24} />
                 <input
                   type="text"
                   placeholder="Search by injury type or practice area..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full h-16 pl-16 pr-6 text-lg bg-white border border-slate-200 rounded-full focus:outline-none focus:ring-2 focus:ring-slate-900 focus:border-transparent transition-all shadow-sm hover:shadow-md"
+                  className="w-full h-16 pl-16 pr-6 text-lg bg-background border border-border rounded-full focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent transition-all shadow-sm hover:shadow-md text-foreground placeholder:text-muted-foreground"
                 />
               </div>
 
@@ -145,8 +145,8 @@ const CalculatorHub = () => {
                     onClick={() => setSelectedCategory(cat.id)}
                     className={`px-6 py-3 rounded-full text-sm font-medium transition-all duration-300 ${
                       selectedCategory === cat.id
-                        ? 'bg-slate-900 text-white shadow-lg scale-105'
-                        : 'bg-white text-slate-700 border border-slate-200 hover:border-slate-900 hover:shadow-md'
+                        ? 'bg-primary text-primary-foreground shadow-lg scale-105'
+                        : 'bg-background text-foreground border border-border hover:bg-accent hover:text-accent-foreground hover:border-primary hover:shadow-md'
                     }`}
                   >
                     {cat.name}
@@ -158,19 +158,19 @@ const CalculatorHub = () => {
         </section>
 
         {/* Calculator Grid */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-background">
           <div className="container mx-auto px-6 max-w-7xl">
             {filteredAreas.length === 0 ? (
               <div className="text-center py-20">
-                <Calculator className="mx-auto mb-6 text-slate-300" size={64} />
-                <h3 className="text-2xl font-bold text-slate-900 mb-3">No calculators found</h3>
-                <p className="text-slate-600">Try adjusting your search or category filter</p>
+                <Calculator className="mx-auto mb-6 text-muted" size={64} />
+                <h3 className="text-2xl font-bold text-foreground mb-3">No calculators found</h3>
+                <p className="text-muted-foreground">Try adjusting your search or category filter</p>
               </div>
             ) : (
               <>
                 <div className="text-center mb-12">
-                  <p className="text-slate-600 text-lg">
-                    Showing <span className="font-semibold text-slate-900">{filteredAreas.length}</span> calculator{filteredAreas.length !== 1 ? 's' : ''}
+                  <p className="text-muted-foreground text-lg">
+                    Showing <span className="font-semibold text-foreground">{filteredAreas.length}</span> calculator{filteredAreas.length !== 1 ? 's' : ''}
                   </p>
                 </div>
 
@@ -179,19 +179,19 @@ const CalculatorHub = () => {
                     <Link
                       key={area.id}
                       to={area.route}
-                      className="group bg-white rounded-2xl p-8 border border-slate-200 hover:border-slate-900 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+                      className="group bg-card rounded-2xl p-8 border border-border hover:border-primary transition-all duration-300 hover:shadow-xl hover:-translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                     >
                       <div className="flex items-start justify-between mb-4">
-                        <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center group-hover:bg-slate-900 transition-colors">
-                          <Calculator className="text-slate-600 group-hover:text-white transition-colors" size={24} />
+                        <div className="w-12 h-12 bg-accent rounded-full flex items-center justify-center group-hover:bg-primary transition-colors">
+                          <Calculator className="text-accent-foreground group-hover:text-primary-foreground transition-colors" size={24} />
                         </div>
-                        <ArrowRight className="text-slate-400 group-hover:text-slate-900 transition-all group-hover:translate-x-1" size={20} />
+                        <ArrowRight className="text-muted-foreground group-hover:text-primary transition-all group-hover:translate-x-1" size={20} />
                       </div>
                       
-                      <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-900">
+                      <h3 className="text-xl font-bold text-foreground mb-2">
                         {area.name}
                       </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed">
+                      <p className="text-muted-foreground text-sm leading-relaxed">
                         {area.description}
                       </p>
                     </Link>
@@ -203,22 +203,22 @@ const CalculatorHub = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-slate-50">
+        <section className="py-20 bg-muted/50">
           <div className="container mx-auto px-6 max-w-4xl text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
               Need Help Calculating?
             </h2>
-            <p className="text-xl text-slate-600 mb-10 leading-relaxed font-light">
+            <p className="text-xl text-muted-foreground mb-10 leading-relaxed font-light">
               Our attorneys provide personalized case evaluations with detailed compensation analysis
             </p>
             <Link
               to="/free-consultation"
-              className="inline-flex items-center justify-center h-14 px-10 text-lg font-semibold rounded-full bg-slate-900 text-white hover:bg-slate-800 hover:text-white visited:text-white no-underline transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-900 focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center h-14 px-10 text-lg font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 visited:text-primary-foreground no-underline transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Get Free Consultation
               <ArrowRight className="ml-2" size={20} />
             </Link>
-            <p className="text-slate-500 mt-6 text-sm">
+            <p className="text-muted-foreground mt-6 text-sm">
               Available 24/7 • Free Case Review • No Fees Unless We Win
             </p>
           </div>

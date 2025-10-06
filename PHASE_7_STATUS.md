@@ -346,7 +346,10 @@
 43. ✅ Clergy Abuse (NEW)
 44. ✅ Product Liability (NEW)
 
-### Templated (9 calculators remaining)
+### Phase 7AM: Mass Torts Calculator ✅ NEW
+### Phase 7AN: Class Actions Calculator ✅ NEW
+
+### Templated (7 calculators remaining)
 
 **Personal Injury** (0)
 - All personal injury calculators complete

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
 import {
   CalculatorLayout,
@@ -541,9 +542,11 @@ export default function DogBiteCompensationCalculator() {
 
             <div className="text-center pt-4 space-y-4">
               <h3 className="text-xl font-semibold text-black">Get maximum compensation for your injuries</h3>
-              <Button size="lg" className="h-14 px-8 text-base">
-                Get Free Case Review
-              </Button>
+              <Link to="/contact">
+                <Button size="lg" className="h-14 px-8 text-base bg-blue-600 hover:bg-blue-700 text-white">
+                  Get My Free Case Evaluation
+                </Button>
+              </Link>
               <Button
                 variant="outline"
                 size="lg"

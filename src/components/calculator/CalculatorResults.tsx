@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 interface DamageCategory {
@@ -70,9 +71,11 @@ export function CalculatorResults({
       {/* CTA */}
       <div className="text-center pt-4">
         <h3 className="text-xl font-semibold text-black mb-4">{ctaSubtext}</h3>
-        <Button size="lg" className="h-14 px-8 text-base">
-          {ctaText}
-        </Button>
+        <Link to="/contact">
+          <Button size="lg" className="h-14 px-8 text-base bg-blue-600 hover:bg-blue-700 text-white">
+            Get My Free Case Evaluation
+          </Button>
+        </Link>
       </div>
     </div>
   );

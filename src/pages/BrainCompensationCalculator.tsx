@@ -302,9 +302,11 @@ const BrainCompensationCalculator = () => {
 
                 <div className="text-center pt-4">
                   <h3 className="text-xl font-semibold text-black mb-4">Maximize your brain injury compensation</h3>
-                  <Button size="lg" className="h-14 px-8 text-base">
-                    Get Free Case Review
-                  </Button>
+                  <Link to="/contact">
+                    <Button size="lg" className="h-14 px-8 text-base bg-blue-600 hover:bg-blue-700 text-white">
+                      Get My Free Case Evaluation
+                    </Button>
+                  </Link>
                 </div>
               </div>
             )}

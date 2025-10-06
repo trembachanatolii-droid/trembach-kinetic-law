@@ -458,9 +458,11 @@ const ProductLiabilityCompensationCalculator = () => {
           Most cases handled on contingency - no fee unless we win.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Button size="lg" variant="secondary" className="text-lg px-8">
-            Free Case Evaluation
-          </Button>
+          <Link to="/contact">
+            <Button size="lg" className="text-lg px-8 bg-blue-600 hover:bg-blue-700 text-white">
+              Get My Free Case Evaluation
+            </Button>
+          </Link>
           <Button
             size="lg"
             variant="outline"

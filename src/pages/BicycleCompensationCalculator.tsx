@@ -603,9 +603,11 @@ const BicycleCompensationCalculator = () => {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button size="lg" className="flex-1" onClick={() => window.location.href = '/contact'}>
-                    Get Free Case Review
-                  </Button>
+                  <Link to="/contact" className="flex-1">
+                    <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
+                      Get My Free Case Evaluation
+                    </Button>
+                  </Link>
                   <Button size="lg" variant="outline" className="flex-1" onClick={resetForm}>
                     Start New Calculation
                   </Button>

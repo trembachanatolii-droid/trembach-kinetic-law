@@ -204,9 +204,9 @@ const MedicalDevicesCompensationCalculator = () => {
               </div>
               <Link
                 to="/contact"
-                className="block w-full bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 transition-all text-center no-underline"
+                className="block w-full bg-blue-600 hover:bg-blue-700 text-white py-4 px-6 rounded-xl font-semibold transition-all text-center no-underline"
               >
-                Get Free Case Review
+                Get My Free Case Evaluation
               </Link>
             </div>
           </section>

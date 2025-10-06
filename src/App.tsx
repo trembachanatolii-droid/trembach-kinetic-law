@@ -412,7 +412,7 @@ function App() {
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
         <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />
             <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
-            <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpracticeNew />} />
+            <Route path="/practice-areas/medical-malpractice" element={<ComingSoon />} />
             <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
             <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
             <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />

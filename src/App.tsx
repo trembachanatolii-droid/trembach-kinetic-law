@@ -65,6 +65,22 @@ import NightAccidentsBlog from "./pages/blog/NightAccidents";
 import RoadRageBlog from "./pages/blog/RoadRage";
 import TireBlowoutsBlog from "./pages/blog/TireBlowouts";
 import DefensiveDriverBlog from "./pages/blog/DefensiveDriver";
+import AirbagFailuresBlog from "./pages/blog/AirbagFailures";
+import SeatBeltDefectsBlog from "./pages/blog/SeatBeltDefects";
+import LeftTurnAccidentsBlog from "./pages/blog/LeftTurnAccidents";
+import FreewayAccidentsBlog from "./pages/blog/FreewayAccidents";
+import MergingAccidentsBlog from "./pages/blog/MergingAccidents";
+import ConstructionZoneAccidentsBlog from "./pages/blog/ConstructionZoneAccidents";
+import ForkliftAccidentsBlog from "./pages/blog/ForkliftAccidents";
+import ScaffoldingAccidentsBlog from "./pages/blog/ScaffoldingAccidents";
+import LadderAccidentsBlog from "./pages/blog/LadderAccidents";
+import CellTowerAccidentsBlog from "./pages/blog/CellTowerAccidents";
+import ElectricalAccidentsBlog from "./pages/blog/ElectricalAccidents";
+import MachineryAccidentsBlog from "./pages/blog/MachineryAccidents";
+import FallingObjectsBlog from "./pages/blog/FallingObjects";
+import TrenchCollapseBlog from "./pages/blog/TrenchCollapse";
+import RoofingAccidentsBlog from "./pages/blog/RoofingAccidents";
+import HeavyEquipmentBlog from "./pages/blog/HeavyEquipment";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -724,6 +740,22 @@ function App() {
             <Route path="/blog/road-rage-accidents" element={<RoadRageBlog />} />
             <Route path="/blog/tire-blowouts" element={<TireBlowoutsBlog />} />
             <Route path="/blog/defensive-driver-accidents" element={<DefensiveDriverBlog />} />
+            <Route path="/blog/airbag-failures" element={<AirbagFailuresBlog />} />
+            <Route path="/blog/seat-belt-defects" element={<SeatBeltDefectsBlog />} />
+            <Route path="/blog/left-turn-accidents" element={<LeftTurnAccidentsBlog />} />
+            <Route path="/blog/freeway-accidents" element={<FreewayAccidentsBlog />} />
+            <Route path="/blog/merging-accidents" element={<MergingAccidentsBlog />} />
+            <Route path="/blog/construction-zone-accidents" element={<ConstructionZoneAccidentsBlog />} />
+            <Route path="/blog/forklift-accidents" element={<ForkliftAccidentsBlog />} />
+            <Route path="/blog/scaffolding-accidents" element={<ScaffoldingAccidentsBlog />} />
+            <Route path="/blog/ladder-accidents" element={<LadderAccidentsBlog />} />
+            <Route path="/blog/cell-tower-accidents" element={<CellTowerAccidentsBlog />} />
+            <Route path="/blog/electrical-accidents" element={<ElectricalAccidentsBlog />} />
+            <Route path="/blog/machinery-accidents" element={<MachineryAccidentsBlog />} />
+            <Route path="/blog/falling-objects" element={<FallingObjectsBlog />} />
+            <Route path="/blog/trench-collapse" element={<TrenchCollapseBlog />} />
+            <Route path="/blog/roofing-accidents" element={<RoofingAccidentsBlog />} />
+            <Route path="/blog/heavy-equipment-accidents" element={<HeavyEquipmentBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

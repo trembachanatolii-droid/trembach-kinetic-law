@@ -65,7 +65,11 @@ const Navigation = () => {
                     WebkitBackdropFilter: 'blur(20px)'
                   }}
                 />
-                <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
+                <div 
+                  className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]"
+                  onMouseEnter={() => setShowMegaMenu(true)}
+                  onMouseLeave={() => setShowMegaMenu(false)}
+                >
                 <div className="max-w-[1200px] mx-auto px-6 py-16">
                   <div className="grid grid-cols-3 gap-16">
                     {/* Left Column - Cancer Cases */}
@@ -235,7 +239,11 @@ const Navigation = () => {
                     WebkitBackdropFilter: 'blur(20px)'
                   }}
                 />
-                <div className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]">
+                <div 
+                  className="fixed left-0 right-0 top-[44px] bg-white border-b border-gray-200 z-[100] min-h-[50vh]"
+                  onMouseEnter={() => setShowResourcesMenu(true)}
+                  onMouseLeave={() => setShowResourcesMenu(false)}
+                >
                   <div className="max-w-[1200px] mx-auto px-6 py-16">
                     <div className="grid grid-cols-2 gap-24">
                       {/* Left Column - Resources */}

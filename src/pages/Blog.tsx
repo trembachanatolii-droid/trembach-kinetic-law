@@ -276,7 +276,7 @@ const Blog = () => {
 
                         <div className="flex items-center justify-between mt-auto">
                           <Link
-                            to="#"
+                            to={`/blog/${post.slug}`}
                             className="inline-flex items-center gap-2 text-base font-semibold hover:gap-3 transition-all group text-[#007AFF]"
                             onClick={() => window.scrollTo(0, 0)}
                           >

@@ -34,6 +34,9 @@ import SpinalCordInjuriesBlog from "./pages/blog/SpinalCordInjuries";
 import BurnInjuriesBlog from "./pages/blog/BurnInjuries";
 import ConstructionAccidentsBlog from "./pages/blog/ConstructionAccidents";
 import DefectiveProductsBlog from "./pages/blog/DefectiveProducts";
+import AmputationBlog from "./pages/blog/Amputation";
+import ParalysisBlog from "./pages/blog/Paralysis";
+import ScarringDisfigurementBlog from "./pages/blog/ScarringDisfigurement";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -661,6 +664,9 @@ function App() {
             <Route path="/blog/serious-injuries" element={<AutoAccidentsBlog />} />
             <Route path="/blog/settlement-strategy" element={<SettlementStrategyBlog />} />
             <Route path="/blog/wrongful-death" element={<WrongfulDeathBlog />} />
+            <Route path="/blog/amputation" element={<AmputationBlog />} />
+            <Route path="/blog/paralysis" element={<ParalysisBlog />} />
+            <Route path="/blog/scarring-disfigurement" element={<ScarringDisfigurementBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

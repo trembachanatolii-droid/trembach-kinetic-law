@@ -55,6 +55,16 @@ import HeadOnCollisionsBlog from "./pages/blog/HeadOnCollisions";
 import RolloverAccidentsBlog from "./pages/blog/RolloverAccidents";
 import MultiVehicleBlog from "./pages/blog/MultiVehicle";
 import ParkingLotBlog from "./pages/blog/ParkingLot";
+import SchoolBusAccidentsBlog from "./pages/blog/SchoolBusAccidents";
+import SideswipeAccidentsBlog from "./pages/blog/SideswipeAccidents";
+import SingleVehicleBlog from "./pages/blog/SingleVehicle";
+import LowSpeedAccidentsBlog from "./pages/blog/LowSpeedAccidents";
+import HighSpeedCrashesBlog from "./pages/blog/HighSpeedCrashes";
+import WeatherAccidentsBlog from "./pages/blog/WeatherAccidents";
+import NightAccidentsBlog from "./pages/blog/NightAccidents";
+import RoadRageBlog from "./pages/blog/RoadRage";
+import TireBlowoutsBlog from "./pages/blog/TireBlowouts";
+import DefensiveDriverBlog from "./pages/blog/DefensiveDriver";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -704,6 +714,16 @@ function App() {
             <Route path="/blog/rollover-accidents" element={<RolloverAccidentsBlog />} />
             <Route path="/blog/multi-vehicle-accidents" element={<MultiVehicleBlog />} />
             <Route path="/blog/parking-lot-accidents" element={<ParkingLotBlog />} />
+            <Route path="/blog/school-bus-accidents" element={<SchoolBusAccidentsBlog />} />
+            <Route path="/blog/sideswipe-accidents" element={<SideswipeAccidentsBlog />} />
+            <Route path="/blog/single-vehicle-accidents" element={<SingleVehicleBlog />} />
+            <Route path="/blog/low-speed-accidents" element={<LowSpeedAccidentsBlog />} />
+            <Route path="/blog/high-speed-crashes" element={<HighSpeedCrashesBlog />} />
+            <Route path="/blog/weather-accidents" element={<WeatherAccidentsBlog />} />
+            <Route path="/blog/nighttime-accidents" element={<NightAccidentsBlog />} />
+            <Route path="/blog/road-rage-accidents" element={<RoadRageBlog />} />
+            <Route path="/blog/tire-blowouts" element={<TireBlowoutsBlog />} />
+            <Route path="/blog/defensive-driver-accidents" element={<DefensiveDriverBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

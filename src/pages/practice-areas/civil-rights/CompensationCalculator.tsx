@@ -237,7 +237,9 @@ const CivilRightsCompensationCalculator = () => {
                 </div>
 
                 <div className="text-center pt-4">
-                  <Button size="lg" className="h-14 px-8">Get Free Case Review</Button>
+                  <Button size="lg" className="h-14 px-8" asChild>
+                    <Link to="/free-consultation">Get Free Case Review</Link>
+                  </Button>
                   <button onClick={resetForm} className="block mx-auto mt-4 text-sm text-slate-600 hover:text-black">
                     Calculate Another Case
                   </button>

@@ -7,6 +7,7 @@ import { OptionButton } from '@/components/calculator/OptionButton';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 interface HearingLossFormData extends CalculatorFormData {
   hearingLossType: string;
@@ -429,9 +430,8 @@ export default function HearingLossCompensationCalculator() {
             </div>
 
             <div className="text-center pt-4 space-y-4">
-              <h3 className="text-xl font-semibold">Get maximum compensation for your hearing loss</h3>
-              <Button size="lg" className="h-14 px-8 text-base">
-                Get Free Case Review
+              <Button size="lg" className="h-14 px-8 text-base" asChild>
+                <Link to="/free-consultation">Get Free Case Review</Link>
               </Button>
               <Button
                 variant="outline"

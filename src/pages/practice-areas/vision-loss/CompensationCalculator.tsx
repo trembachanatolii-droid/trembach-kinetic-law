@@ -7,6 +7,7 @@ import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Link } from 'react-router-dom';
 
 interface VisionLossFormData extends CalculatorFormData {
   visionLossType: string;
@@ -436,8 +437,8 @@ export default function VisionLossCompensationCalculator() {
 
             <div className="text-center pt-4 space-y-4">
               <h3 className="text-xl font-semibold">Get maximum compensation for your vision loss</h3>
-              <Button size="lg" className="h-14 px-8 text-base">
-                Get Free Case Review
+              <Button size="lg" className="h-14 px-8 text-base" asChild>
+                <Link to="/free-consultation">Get Free Case Review</Link>
               </Button>
               <Button
                 variant="outline"

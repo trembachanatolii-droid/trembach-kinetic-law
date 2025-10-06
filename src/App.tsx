@@ -25,6 +25,9 @@ import PremisesLiabilityBlog from "./pages/blog/PremisesLiability";
 import AccidentResponseBlog from "./pages/blog/AccidentResponse";
 import EvidenceBlog from "./pages/blog/Evidence";
 import SettlementStrategyBlog from "./pages/blog/SettlementStrategy";
+import ProductLiabilityBlog from "./pages/blog/ProductLiability";
+import RideshareAccidentsBlog from "./pages/blog/RideshareAccidents";
+import ElderAbuseBlog from "./pages/blog/ElderAbuse";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -607,10 +610,26 @@ function App() {
             <Route path="/blog/compensation" element={<CompensationBlog />} />
             <Route path="/blog/complex-litigation" element={<AutoAccidentsBlog />} />
             <Route path="/blog/damages-calculation" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/elder-abuse" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/elder-abuse" element={<ElderAbuseBlog />} />
             <Route path="/blog/emotional-trauma" element={<AutoAccidentsBlog />} />
             <Route path="/blog/evidence" element={<EvidenceBlog />} />
             <Route path="/blog/family-impact" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
+            <Route path="/blog/insurance-coverage" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/insurance-defense" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-concepts" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-deadlines" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-education" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-fees" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-guidance" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-insights" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-process" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-remedies" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/legal-strategy" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/premises-liability" element={<PremisesLiabilityBlog />} />
+            <Route path="/blog/product-liability" element={<ProductLiabilityBlog />} />
+            <Route path="/blog/rideshare-accidents" element={<RideshareAccidentsBlog />} />
             <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
             <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
             <Route path="/blog/insurance-coverage" element={<AutoAccidentsBlog />} />

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -199,14 +200,13 @@ const FeaturedResults = () => {
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <div className="text-center mt-16">
           <Button 
             size="lg"
             className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow group transition-all duration-300"
-            onClick={() => window.location.href = '/free-consultation'}
+            asChild
           >
-            Start your Free Case Review
+            <Link to="/free-consultation">Start your Free Case Review</Link>
           </Button>
         </div>
       </div>

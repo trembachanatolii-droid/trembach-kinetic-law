@@ -4,7 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Helmet } from 'react-helmet-async';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
+import { Link } from 'react-router-dom';
 // Import professional concept images (no people)
 import recordingSystem from '@/assets/recording-system.jpg';
 import evidenceRetention from '@/assets/evidence-retention.jpg';
@@ -389,16 +389,16 @@ const TruthAboutCaseProfessional = () => {
               <p className="text-lg lg:text-xl text-blue-50 mb-8 leading-relaxed">
                 Get expert case evaluation based on former insurance defense experience
               </p>
-              <Button
-                asChild
-                size="lg"
-                className="bg-white text-blue-600 hover:bg-blue-50 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
-              >
-                <a href="/free-consultation">
-                  Get Free Evaluation
-                  <ArrowRight className="ml-2" size={18} />
-                </a>
-              </Button>
+            <Button
+              asChild
+              size="lg"
+              className="bg-white text-blue-600 hover:bg-blue-50 h-12 px-8 text-base font-semibold rounded-lg transition-all duration-300 hover:scale-105 shadow-lg"
+            >
+              <Link to="/free-consultation">
+                Get Free Evaluation
+                <ArrowRight className="ml-2" size={18} />
+              </Link>
+            </Button>
             </div>
           </div>
         </div>

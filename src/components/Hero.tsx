@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
@@ -131,16 +132,15 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* Bottom Center Button */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
           variant="outline"
           size="lg"
           className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
-          onClick={() => window.location.href = '/free-consultation'}
+          asChild
         >
-          START YOUR FREE CASE REVIEW
+          <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
         </Button>
       </div>
 

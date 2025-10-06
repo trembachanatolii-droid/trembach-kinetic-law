@@ -209,9 +209,6 @@ const Navigation = () => {
               </>
             )}
           </div>
-          <a href="/calculators" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-medium tracking-wide after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
-            Calculators
-          </a>
           <a href="/about" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             About Us
           </a>
@@ -254,8 +251,8 @@ const Navigation = () => {
                         </div>
                         <ul className="space-y-4">
                           <li>
-                            <a href="#" className="text-base text-gray-700 hover:text-red-600 transition-colors pointer-events-none">
-                              Settlement Calculator
+                            <a href="/calculators" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                              Calculators
                             </a>
                           </li>
                           <li>

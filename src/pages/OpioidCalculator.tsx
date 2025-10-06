@@ -229,13 +229,17 @@ const OpioidCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Treatment & Rehabilitation Costs
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$50,000"
+                    <select
                       value={formData.treatmentCosts}
                       onChange={(e) => setFormData({ ...formData, treatmentCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-slate-200 text-lg"
+                    >
+                      <option value="">Select treatment costs</option>
+                      <option value="10000">Under $20,000</option>
+                      <option value="30000">$20,000 - $50,000</option>
+                      <option value="75000">$50,000 - $100,000</option>
+                      <option value="150000">Over $100,000</option>
+                    </select>
                     <p className="text-xs text-slate-500 mt-2">Rehab, therapy, medications, ongoing treatment</p>
                   </div>
 
@@ -243,13 +247,17 @@ const OpioidCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Income Lost
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$40,000"
+                    <select
                       value={formData.lostWages}
                       onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-slate-200 text-lg"
+                    >
+                      <option value="">Select annual income lost</option>
+                      <option value="10000">Under $20,000</option>
+                      <option value="30000">$20,000 - $50,000</option>
+                      <option value="60000">$50,000 - $75,000</option>
+                      <option value="100000">Over $75,000</option>
+                    </select>
                     <p className="text-xs text-slate-500 mt-2">Income lost due to addiction</p>
                   </div>
 
@@ -257,29 +265,34 @@ const OpioidCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Years of Addiction
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="2"
+                    <select
                       value={formData.addictionDuration}
                       onChange={(e) => setFormData({ ...formData, addictionDuration: e.target.value })}
-                      className="h-14 text-lg"
-                      min="1"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-slate-200 text-lg"
+                    >
+                      <option value="">Select duration</option>
+                      <option value="1">Less than 1 year</option>
+                      <option value="2">1-2 years</option>
+                      <option value="4">3-5 years</option>
+                      <option value="7">Over 5 years</option>
+                    </select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
                       Your Age
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="35"
+                    <select
                       value={formData.age}
                       onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="h-14 text-lg"
-                      min="0"
-                      max="100"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-slate-200 text-lg"
+                    >
+                      <option value="">Select age range</option>
+                      <option value="25">Under 30</option>
+                      <option value="40">30-49</option>
+                      <option value="60">50-64</option>
+                      <option value="70">65 or older</option>
+                    </select>
                   </div>
                 </div>
               </div>

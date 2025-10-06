@@ -293,19 +293,22 @@ const CompensationCalculator = () => {
                   </div>
 
                   <div>
-                    <Label htmlFor="exposureYears" className="text-base mb-2 block">
+                    <Label htmlFor="exposureYears" className="text-base mb-3 block">
                       Years of Asbestos Exposure
                     </Label>
-                    <Input
+                    <select
                       id="exposureYears"
-                      type="number"
-                      min="1"
-                      max="50"
                       value={formData.exposureYears}
                       onChange={(e) => updateField('exposureYears', e.target.value)}
-                      placeholder="Enter years"
-                      className="text-base p-6"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                    >
+                      <option value="">Select exposure duration</option>
+                      <option value="2">Less than 5 years</option>
+                      <option value="7">5-10 years</option>
+                      <option value="15">10-20 years</option>
+                      <option value="25">20-30 years</option>
+                      <option value="35">Over 30 years</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -320,38 +323,44 @@ const CompensationCalculator = () => {
                 
                 <div className="space-y-6">
                   <div>
-                    <Label htmlFor="medicalCosts" className="text-base mb-2 block">
+                    <Label htmlFor="medicalCosts" className="text-base mb-3 block">
                       Total Medical Costs (to date)
                     </Label>
-                    <Input
+                    <select
                       id="medicalCosts"
-                      type="number"
-                      min="0"
-                      step="1000"
                       value={formData.medicalCosts}
                       onChange={(e) => updateField('medicalCosts', e.target.value)}
-                      placeholder="$0"
-                      className="text-base p-6"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                    >
+                      <option value="">Select medical cost range</option>
+                      <option value="25000">Under $50,000</option>
+                      <option value="100000">$50,000 - $150,000</option>
+                      <option value="250000">$150,000 - $350,000</option>
+                      <option value="500000">$350,000 - $650,000</option>
+                      <option value="1000000">Over $650,000</option>
+                    </select>
                     <p className="text-sm text-muted-foreground mt-2">
                       Include surgery, chemotherapy, radiation, and ongoing treatment
                     </p>
                   </div>
 
                   <div>
-                    <Label htmlFor="age" className="text-base mb-2 block">
+                    <Label htmlFor="age" className="text-base mb-3 block">
                       Your Current Age
                     </Label>
-                    <Input
+                    <select
                       id="age"
-                      type="number"
-                      min="18"
-                      max="100"
                       value={formData.age}
                       onChange={(e) => updateField('age', e.target.value)}
-                      placeholder="Age"
-                      className="text-base p-6"
-                    />
+                      className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                    >
+                      <option value="">Select age range</option>
+                      <option value="35">Under 40</option>
+                      <option value="45">40-49</option>
+                      <option value="55">50-59</option>
+                      <option value="65">60-69</option>
+                      <option value="75">70 or older</option>
+                    </select>
                   </div>
 
                   <div>
@@ -380,19 +389,21 @@ const CompensationCalculator = () => {
 
                   {formData.employmentStatus === 'employed' && (
                     <div>
-                      <Label htmlFor="annualIncome" className="text-base mb-2 block">
+                      <Label htmlFor="annualIncome" className="text-base mb-3 block">
                         Annual Income
                       </Label>
-                      <Input
+                      <select
                         id="annualIncome"
-                        type="number"
-                        min="0"
-                        step="1000"
                         value={formData.annualIncome}
                         onChange={(e) => updateField('annualIncome', e.target.value)}
-                        placeholder="$0"
-                        className="text-base p-6"
-                      />
+                        className="w-full h-14 px-4 rounded-lg border border-input bg-background text-foreground text-base"
+                      >
+                        <option value="">Select annual income</option>
+                        <option value="30000">Under $40,000</option>
+                        <option value="55000">$40,000 - $70,000</option>
+                        <option value="85000">$70,000 - $100,000</option>
+                        <option value="125000">Over $100,000</option>
+                      </select>
                     </div>
                   )}
                 </div>

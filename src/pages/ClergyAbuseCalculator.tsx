@@ -105,13 +105,17 @@ const ClergyAbuseCalculator = () => {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Duration of Abuse</label>
-                  <input
-                    type="text"
-                    placeholder="Years"
+                  <select
                     value={formData.duration}
                     onChange={(e) => setFormData({ ...formData, duration: e.target.value })}
                     className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+                  >
+                    <option value="">Select duration</option>
+                    <option value="1">Less than 1 year</option>
+                    <option value="2">1-2 years</option>
+                    <option value="3">2-5 years</option>
+                    <option value="5">Over 5 years</option>
+                  </select>
                 </div>
                 <button
                   onClick={() => setStep(2)}
@@ -132,23 +136,31 @@ const ClergyAbuseCalculator = () => {
               <div className="space-y-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Therapy Costs</label>
-                  <input
-                    type="number"
-                    placeholder="$"
+                  <select
                     value={formData.therapyCosts}
                     onChange={(e) => setFormData({ ...formData, therapyCosts: e.target.value })}
                     className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+                  >
+                    <option value="">Select therapy costs</option>
+                    <option value="5000">Under $10,000</option>
+                    <option value="20000">$10,000 - $30,000</option>
+                    <option value="50000">$30,000 - $70,000</option>
+                    <option value="100000">Over $70,000</option>
+                  </select>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-2">Age at Time of Abuse</label>
-                  <input
-                    type="number"
-                    placeholder="Years old"
+                  <select
                     value={formData.ageAtAbuse}
                     onChange={(e) => setFormData({ ...formData, ageAtAbuse: e.target.value })}
                     className="w-full p-4 border-2 border-slate-200 rounded-xl focus:border-slate-900 focus:outline-none"
-                  />
+                  >
+                    <option value="">Select age range</option>
+                    <option value="8">Under 10 years old</option>
+                    <option value="12">10-14 years old</option>
+                    <option value="16">15-17 years old</option>
+                    <option value="20">18 or older</option>
+                  </select>
                 </div>
                 <div className="flex space-x-4 mt-8">
                   <button
@@ -188,9 +200,14 @@ const ClergyAbuseCalculator = () => {
                     <span className="text-3xl font-bold text-slate-900">${results.max.toLocaleString()}</span>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 mt-4">
-                  This estimate is confidential and based on similar cases. Actual compensation may vary.
-                </p>
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This estimate is confidential and based on similar clergy abuse cases. 
+                    Actual compensation depends on evidence quality, institutional liability, jurisdiction, and individual circumstances. 
+                    Many states have extended statutes of limitations for childhood sexual abuse cases. This calculator 
+                    does not constitute legal advice. Consult with an experienced attorney for a comprehensive case evaluation.
+                  </p>
+                </div>
               </div>
               <Link
                 to="/contact"

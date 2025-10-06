@@ -1,21 +1,64 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Clock, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import SEO from '@/components/SEO';
 import { blogPosts } from '@/data/blogPosts';
+import { BlogSearch } from '@/components/blog/BlogSearch';
+import { CategoryFilter } from '@/components/blog/CategoryFilter';
+import { SocialShare } from '@/components/blog/SocialShare';
+import { RelatedPosts } from '@/components/blog/RelatedPosts';
+import { Breadcrumbs } from '@/components/blog/Breadcrumbs';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 const POSTS_PER_PAGE = 10;
 
 const Blog = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [email, setEmail] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
-  const totalPages = Math.ceil(blogPosts.length / POSTS_PER_PAGE);
+  // Get unique categories
+  const categories = useMemo(() => {
+    const uniqueCategories = Array.from(new Set(blogPosts.map(post => post.category)));
+    return uniqueCategories.sort();
+  }, []);
+
+  // Filter posts based on search and category
+  const filteredPosts = useMemo(() => {
+    return blogPosts.filter(post => {
+      const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                          post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === 'All' || post.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [searchQuery, selectedCategory]);
+
+  const totalPages = Math.ceil(filteredPosts.length / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const endIndex = startIndex + POSTS_PER_PAGE;
-  const currentPosts = blogPosts.slice(startIndex, endIndex);
+  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+
+  // Scroll to top listener
+  React.useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 400);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // Reset to page 1 when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, selectedCategory]);
 
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
@@ -72,7 +115,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white scroll-smooth">
       <SEO
         title="Blog: Your Legal Resource | Trembach Law Firm, APC"
         description="Expert legal insights, accident prevention tips, and personal injury law guidance from California's trusted injury attorneys. Stay informed with our comprehensive legal blog."
@@ -80,70 +123,167 @@ const Blog = () => {
         canonical="https://www.trembachlawfirm.com/blog"
       />
 
+      {/* Structured Data for SEO */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          "name": "Trembach Law Firm Legal Blog",
+          "description": "Expert legal insights and personal injury law guidance",
+          "url": "https://www.trembachlawfirm.com/blog",
+          "publisher": {
+            "@type": "Organization",
+            "name": "Trembach Law Firm, APC",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://www.trembachlawfirm.com/logo.png"
+            }
+          }
+        })}
+      </script>
+
       {/* Hero Section */}
-      <section className="bg-white border-b border-gray-200 py-16">
+      <section className="bg-white border-b border-gray-200 py-20">
         <div className="max-w-[1200px] mx-auto px-6">
-          <h1 className="text-5xl font-bold mb-4" style={{ color: '#007AFF' }}>
+          <Breadcrumbs items={[
+            { label: 'Home', href: '/' },
+            { label: 'Blog' }
+          ]} />
+          
+          <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight" style={{ color: '#007AFF' }}>
             Blog: Your Legal Resource
           </h1>
+          <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+            Expert legal insights, accident prevention tips, and personal injury law guidance from California's trusted injury attorneys.
+          </p>
+        </div>
+      </section>
+
+      {/* Search and Filters */}
+      <section className="bg-[#f5f5f7] py-12">
+        <div className="max-w-[1200px] mx-auto px-6">
+          <BlogSearch value={searchQuery} onChange={setSearchQuery} />
+          <CategoryFilter
+            categories={categories}
+            selectedCategory={selectedCategory}
+            onSelectCategory={setSelectedCategory}
+          />
         </div>
       </section>
 
       {/* Blog Posts Grid */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-[1200px] mx-auto px-6">
-          <div className="space-y-16">
-            {currentPosts.map((post, index) => (
-              <article
-                key={post.id}
-                className="flex flex-col md:flex-row gap-8 pb-16 border-b border-gray-200 last:border-0"
+          {currentPosts.length === 0 ? (
+            <div className="text-center py-16">
+              <p className="text-2xl text-gray-600">No articles found matching your criteria.</p>
+              <Button
+                onClick={() => {
+                  setSearchQuery('');
+                  setSelectedCategory('All');
+                }}
+                className="mt-6 bg-[#007AFF] hover:bg-[#0051D5] text-white"
               >
-                {/* Image */}
-                <div className="md:w-[426px] flex-shrink-0">
-                  <img
-                    src={post.image}
-                    alt={post.title}
-                    className="w-full h-[320px] object-cover rounded-lg"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 flex flex-col justify-start pt-4">
-                  <time className="text-base text-foreground mb-3 block">
-                    {post.date}
-                  </time>
-
-                  <h2 className="text-3xl font-bold text-foreground mb-3 leading-tight">
-                    {post.title}
-                  </h2>
-
-                  <p className="text-base text-foreground mb-3">
-                    Posted in{' '}
-                    <Link
-                      to="#"
-                      className="hover:underline font-medium"
-                      style={{ color: '#007AFF' }}
+                Clear Filters
+              </Button>
+            </div>
+          ) : (
+            <div className="space-y-20">
+              {currentPosts.map((post, index) => {
+                const BlogPostCard = () => {
+                  const { ref, isVisible } = useScrollAnimation();
+                  
+                  return (
+                    <article
+                      ref={ref}
+                      key={post.id}
+                      className={`flex flex-col md:flex-row gap-8 pb-20 border-b border-gray-200 last:border-0 transition-all duration-700 ${
+                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
+                      }`}
+                      style={{ transitionDelay: `${index * 100}ms` }}
                     >
-                      {post.category}
-                    </Link>
-                  </p>
+                      {/* Structured Data for each post */}
+                      <script type="application/ld+json">
+                        {JSON.stringify({
+                          "@context": "https://schema.org",
+                          "@type": "BlogPosting",
+                          "headline": post.title,
+                          "description": post.excerpt,
+                          "image": post.image,
+                          "datePublished": post.date,
+                          "author": {
+                            "@type": "Organization",
+                            "name": post.author || "Trembach Law Firm, APC"
+                          }
+                        })}
+                      </script>
 
-                  <p className="text-base text-foreground leading-relaxed mb-6">
-                    {post.excerpt}
-                  </p>
+                      {/* Image */}
+                      <div className="md:w-[426px] flex-shrink-0 overflow-hidden rounded-2xl group">
+                        <img
+                          src={post.image}
+                          alt={post.title}
+                          className="w-full h-[320px] object-cover transform group-hover:scale-105 transition-transform duration-500 shadow-lg"
+                          loading="lazy"
+                        />
+                      </div>
 
-                  <Link
-                    to="#"
-                    className="inline-flex items-center gap-2 text-base font-semibold hover:gap-3 transition-all group"
-                    style={{ color: '#007AFF' }}
-                  >
-                    Read More
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
+                      {/* Content */}
+                      <div className="flex-1 flex flex-col justify-start pt-4">
+                        <div className="flex items-center gap-4 text-sm text-gray-600 mb-4">
+                          <time dateTime={post.date}>{post.date}</time>
+                          {post.readTime && (
+                            <>
+                              <span>•</span>
+                              <span className="flex items-center gap-1">
+                                <Clock className="w-4 h-4" />
+                                {post.readTime}
+                              </span>
+                            </>
+                          )}
+                        </div>
+
+                        <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight hover:text-[#007AFF] transition-colors">
+                          {post.title}
+                        </h2>
+
+                        <p className="text-sm font-medium mb-4">
+                          Posted in{' '}
+                          <button
+                            onClick={() => setSelectedCategory(post.category)}
+                            className="hover:underline font-semibold text-[#007AFF]"
+                          >
+                            {post.category}
+                          </button>
+                        </p>
+
+                        <p className="text-base text-gray-700 leading-relaxed mb-6">
+                          {post.excerpt}
+                        </p>
+
+                        <div className="flex items-center justify-between mt-auto">
+                          <Link
+                            to="#"
+                            className="inline-flex items-center gap-2 text-base font-semibold hover:gap-3 transition-all group text-[#007AFF]"
+                          >
+                            Read More
+                            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                          </Link>
+
+                          <SocialShare
+                            url={`https://www.trembachlawfirm.com/blog/${post.slug}`}
+                            title={post.title}
+                          />
+                        </div>
+                      </div>
+                    </article>
+                  );
+                };
+                
+                return <BlogPostCard key={post.id} />;
+              })}
+            </div>
+          )}
 
           {/* Pagination */}
           {totalPages > 1 && (
@@ -161,6 +301,14 @@ const Blog = () => {
           )}
         </div>
       </section>
+
+      {/* Related Posts */}
+      {currentPosts.length > 0 && (
+        <RelatedPosts
+          posts={blogPosts}
+          currentCategory={currentPosts[0].category}
+        />
+      )}
 
       {/* Newsletter Section */}
       <section className="bg-white py-16 border-t border-gray-200">
@@ -437,6 +585,17 @@ const Blog = () => {
           </div>
         </div>
       </footer>
+
+      {/* Scroll to Top Button */}
+      {showScrollTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-8 right-8 p-4 bg-[#007AFF] text-white rounded-full shadow-2xl hover:bg-[#0051D5] transition-all duration-300 transform hover:scale-110 z-50"
+          aria-label="Scroll to top"
+        >
+          <ChevronUp className="w-6 h-6" />
+        </button>
+      )}
     </div>
   );
 };

@@ -4,6 +4,11 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Apple-inspired smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
 /* Trembach Law Firm - Cinematic Design System */
 
 /* Logo Styles */

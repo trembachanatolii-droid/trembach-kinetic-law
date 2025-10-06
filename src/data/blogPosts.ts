@@ -6,6 +6,8 @@ export interface BlogPost {
   category: string;
   image: string;
   slug: string;
+  readTime?: string;
+  author?: string;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -16,7 +18,9 @@ export const blogPosts: BlogPost[] = [
     date: "Oct 5, 2025",
     category: "Legal Insights",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop",
-    slug: "understanding-california-personal-injury-law"
+    slug: "understanding-california-personal-injury-law",
+    readTime: "7 min read",
+    author: "Trembach Law Firm"
   },
   {
     id: "2",
@@ -25,7 +29,8 @@ export const blogPosts: BlogPost[] = [
     date: "Oct 3, 2025",
     category: "Auto Accidents",
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop",
-    slug: "true-cost-of-car-accidents"
+    slug: "true-cost-of-car-accidents",
+    readTime: "6 min read"
   },
   {
     id: "3",
@@ -34,7 +39,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 30, 2025",
     category: "Case Strategy",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop",
-    slug: "medical-documentation-critical"
+    slug: "medical-documentation-critical",
+    readTime: "8 min read"
   },
   {
     id: "4",
@@ -43,7 +49,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 27, 2025",
     category: "Insurance Claims",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
-    slug: "navigating-insurance-companies"
+    slug: "navigating-insurance-companies",
+    readTime: "7 min read"
   },
   {
     id: "5",
@@ -52,7 +59,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 24, 2025",
     category: "Rideshare Accidents",
     image: "https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?w=800&h=600&fit=crop",
-    slug: "rideshare-accidents-legal-challenges"
+    slug: "rideshare-accidents-legal-challenges",
+    readTime: "9 min read"
   },
   {
     id: "6",
@@ -61,7 +69,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 21, 2025",
     category: "Legal Education",
     image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&h=600&fit=crop",
-    slug: "personal-injury-myths-debunked"
+    slug: "personal-injury-myths-debunked",
+    readTime: "6 min read"
   },
   {
     id: "7",
@@ -70,7 +79,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 18, 2025",
     category: "Legal Deadlines",
     image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=600&fit=crop",
-    slug: "california-statute-of-limitations"
+    slug: "california-statute-of-limitations",
+    readTime: "5 min read"
   },
   {
     id: "8",
@@ -79,7 +89,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 15, 2025",
     category: "Case Strategy",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&h=600&fit=crop",
-    slug: "pre-existing-conditions-injury-claims"
+    slug: "pre-existing-conditions-injury-claims",
+    readTime: "7 min read"
   },
   {
     id: "9",
@@ -88,7 +99,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 12, 2025",
     category: "Truck Accidents",
     image: "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=800&h=600&fit=crop",
-    slug: "truck-vs-car-accidents"
+    slug: "truck-vs-car-accidents",
+    readTime: "8 min read"
   },
   {
     id: "10",
@@ -97,7 +109,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 9, 2025",
     category: "Accident Response",
     image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?w=800&h=600&fit=crop",
-    slug: "protecting-rights-accident-scene"
+    slug: "protecting-rights-accident-scene",
+    readTime: "6 min read"
   },
   {
     id: "11",
@@ -106,7 +119,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 6, 2025",
     category: "Legal Guidance",
     image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
-    slug: "when-to-hire-attorney"
+    slug: "when-to-hire-attorney",
+    readTime: "7 min read"
   },
   {
     id: "12",
@@ -115,7 +129,8 @@ export const blogPosts: BlogPost[] = [
     date: "Sep 3, 2025",
     category: "Compensation",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&h=600&fit=crop",
-    slug: "pain-suffering-damages"
+    slug: "pain-suffering-damages",
+    readTime: "8 min read"
   },
   {
     id: "13",
@@ -124,7 +139,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 31, 2025",
     category: "Motorcycle Accidents",
     image: "https://images.unsplash.com/photo-1558981033-6f9c2c46abdd?w=800&h=600&fit=crop",
-    slug: "motorcycle-accidents-overcoming-bias"
+    slug: "motorcycle-accidents-overcoming-bias",
+    readTime: "6 min read"
   },
   {
     id: "14",
@@ -133,7 +149,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 28, 2025",
     category: "Legal Strategy",
     image: "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=800&h=600&fit=crop",
-    slug: "expert-witnesses-injury-cases"
+    slug: "expert-witnesses-injury-cases",
+    readTime: "9 min read"
   },
   {
     id: "15",
@@ -142,7 +159,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 25, 2025",
     category: "Pedestrian Accidents",
     image: "https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=800&h=600&fit=crop",
-    slug: "pedestrian-accidents-protection"
+    slug: "pedestrian-accidents-protection",
+    readTime: "7 min read"
   },
   {
     id: "16",
@@ -151,7 +169,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 22, 2025",
     category: "Case Protection",
     image: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=600&fit=crop",
-    slug: "social-media-injury-cases"
+    slug: "social-media-injury-cases",
+    readTime: "5 min read"
   },
   {
     id: "17",
@@ -160,7 +179,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 19, 2025",
     category: "Wrongful Death",
     image: "https://images.unsplash.com/photo-1505664194779-8beaceb93744?w=800&h=600&fit=crop",
-    slug: "wrongful-death-claims-justice"
+    slug: "wrongful-death-claims-justice",
+    readTime: "10 min read"
   },
   {
     id: "18",
@@ -169,7 +189,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 16, 2025",
     category: "Serious Injuries",
     image: "https://images.unsplash.com/photo-1559757175-0eb30cd8c063?w=800&h=600&fit=crop",
-    slug: "brain-injuries-hidden-epidemic"
+    slug: "brain-injuries-hidden-epidemic",
+    readTime: "8 min read"
   },
   {
     id: "19",
@@ -178,7 +199,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 13, 2025",
     category: "Premises Liability",
     image: "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&h=600&fit=crop",
-    slug: "premises-liability-property-owners"
+    slug: "premises-liability-property-owners",
+    readTime: "7 min read"
   },
   {
     id: "20",
@@ -187,7 +209,8 @@ export const blogPosts: BlogPost[] = [
     date: "Aug 10, 2025",
     category: "Medical Malpractice",
     image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=600&fit=crop",
-    slug: "medical-malpractice-california"
+    slug: "medical-malpractice-california",
+    readTime: "9 min read"
   },
   {
     id: "21",

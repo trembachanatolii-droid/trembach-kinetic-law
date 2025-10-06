@@ -407,7 +407,7 @@ const MassTortsCompensationCalculator = () => {
                 </div>
 
                 <div className="text-center pt-4">
-                  <Link to="/contact">
+                  <Link to="/free-consultation">
                     <Button size="lg" className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white">
                       Get My Free Case Evaluation
                     </Button>

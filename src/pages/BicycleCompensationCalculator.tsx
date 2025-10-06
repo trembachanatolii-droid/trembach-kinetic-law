@@ -603,7 +603,7 @@ const BicycleCompensationCalculator = () => {
                 </div>
 
                 <div className="flex gap-4">
-                  <Link to="/contact" className="flex-1">
+                  <Link to="/free-consultation" className="flex-1">
                     <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
                       Get My Free Case Evaluation
                     </Button>

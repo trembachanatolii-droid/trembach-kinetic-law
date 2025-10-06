@@ -404,7 +404,7 @@ export default function ParalysisCompensationCalculator() {
                   </Button>
                   <Button
                     size="lg"
-                    onClick={() => navigate('/contact')}
+                    onClick={() => navigate('/free-consultation')}
                     className="flex-1"
                   >
                     Contact Us

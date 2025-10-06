@@ -387,7 +387,7 @@ const SexualAbuseCalculator = () => {
 
               <div className="space-y-4">
                 <Link
-                  to="/contact"
+                  to="/free-consultation"
                   className="block w-full bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 transition-all text-center no-underline"
                 >
                   Confidential Case Review

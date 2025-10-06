@@ -307,7 +307,7 @@ const BurnCompensationCalculator = () => {
 
                 <div className="text-center pt-4">
                   <h3 className="text-xl font-semibold text-black mb-4">Get maximum burn injury compensation</h3>
-                  <Link to="/contact">
+                  <Link to="/free-consultation">
                     <Button size="lg" className="h-14 px-8 text-base bg-blue-600 hover:bg-blue-700 text-white">
                       Get My Free Case Evaluation
                     </Button>

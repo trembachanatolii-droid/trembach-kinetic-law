@@ -366,7 +366,7 @@ const Blog = () => {
                   <li key={index}>
                     <Link
                       to={link.href}
-                      className="text-white hover:text-white/80 transition-colors text-base"
+                      className="text-white hover:text-white transition-colors text-base"
                     >
                       {link.label}
                     </Link>
@@ -375,7 +375,8 @@ const Blog = () => {
                 <li>
                   <Link
                     to="/practice-areas"
-                    className="text-white hover:text-white/80 transition-colors text-base font-semibold flex items-center gap-2"
+                    className="text-white hover:text-white transition-colors text-base font-semibold flex items-center gap-2"
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     See all 50 practice areas <ArrowRight className="w-4 h-4" />
                   </Link>
@@ -400,13 +401,15 @@ const Blog = () => {
               <div className="space-y-3">
                 <Link
                   to="/practice-areas"
-                  className="flex items-center gap-2 text-white hover:text-white/80 transition-colors text-base font-medium"
+                  className="flex items-center gap-2 text-white hover:text-white transition-colors text-base font-medium"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   Cases We Handle <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link
                   to="/about"
-                  className="flex items-center gap-2 text-white hover:text-white/80 transition-colors text-base font-medium"
+                  className="flex items-center gap-2 text-white hover:text-white transition-colors text-base font-medium"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   Meet Your Team <ArrowRight className="w-5 h-5" />
                 </Link>
@@ -416,27 +419,21 @@ const Blog = () => {
 
           {/* Bottom Bar */}
           <div className="border-t border-white/20 pt-8">
-            <p className="text-white/80 text-xs leading-relaxed">
-              The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
-            </p>
-            
-            <div className="flex flex-wrap items-center gap-3 mt-4 text-xs">
-              <Link to="/privacy-policy" className="text-white/80 hover:text-white transition-colors">
-                Privacy Policy
-              </Link>
-              <span className="text-white/40">|</span>
-              <Link to="/terms-of-service" className="text-white/80 hover:text-white transition-colors">
-                Terms of Service
-              </Link>
-              <span className="text-white/40">|</span>
-              <Link to="/sitemap" className="text-white/80 hover:text-white transition-colors">
-                Sitemap
-              </Link>
+            <div className="bg-[#f5f5f7] -mx-6 px-6 py-8 rounded-t-2xl">
+              <p className="text-[#86868b] text-xs leading-relaxed">
+                The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
+              </p>
+              
+              <div className="flex flex-wrap items-center gap-3 mt-4 text-xs">
+                <Link to="/privacy-policy" className="text-[#06c] hover:underline">
+                  Privacy Policy
+                </Link>
+              </div>
+              
+              <p className="text-[#86868b] text-xs mt-4">
+                Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
+              </p>
             </div>
-            
-            <p className="text-white/80 text-xs mt-4">
-              Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
-            </p>
           </div>
         </div>
       </footer>

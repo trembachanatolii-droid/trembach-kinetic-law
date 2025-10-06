@@ -217,7 +217,7 @@ const Navigation = () => {
           <a href="/results" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Results
           </a>
-          <a href="/contact" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
+          <a href="/free-consultation" className="relative text-[#1d1d1f] visited:!text-[#1d1d1f] hover:!text-[#1d1d1f] hover:visited:!text-[#1d1d1f] !no-underline visited:!no-underline hover:!no-underline hover:visited:!no-underline transition-colors text-xs font-normal after:absolute after:left-0 after:-bottom-2 after:h-0.5 after:w-0 after:bg-red-600 after:transition-[width] after:duration-300 hover:after:w-full">
             Contact
           </a>
         </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -586,9 +587,9 @@ const CaseEvaluation: React.FC = () => {
               <Button
                 size="lg"
                 variant="outline"
-                onClick={() => window.location.href = '/contact'}
+                asChild
               >
-                Request Callback
+                <Link to="/free-consultation">Request Callback</Link>
               </Button>
             </div>
           </CardContent>

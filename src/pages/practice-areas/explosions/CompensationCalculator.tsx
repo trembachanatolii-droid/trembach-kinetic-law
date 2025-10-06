@@ -633,8 +633,8 @@ const ExplosionsCompensationCalculator = () => {
                 </div>
 
                 <div className="flex gap-4">
-                  <Button size="lg" className="flex-1" onClick={() => window.location.href = '/contact'}>
-                    Get Free Case Review
+                  <Button size="lg" className="flex-1" asChild>
+                    <Link to="/free-consultation">Get Free Case Review</Link>
                   </Button>
                   <Button size="lg" variant="outline" className="flex-1" onClick={resetForm}>
                     Start New Calculation

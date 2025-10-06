@@ -287,30 +287,59 @@
     visibility: visible !important;
   }
 
-  /* UNIVERSAL DARK PANEL READABILITY FIX (calculators and CTAs) */
-  .bg-slate-900,
-  .bg-slate-900 *,
-  .bg-slate-800,
-  .bg-slate-800 *,
-  .bg-gray-900,
-  .bg-gray-900 *,
-  .bg-neutral-900,
-  .bg-neutral-900 *,
-  .bg-black,
-  .bg-black * {
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important; /* Safari text rendering */
+  /* APPLE-STYLE CTA SECTIONS - Clean, minimal, high contrast */
+  .calculator-cta-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    border-radius: 24px;
+    padding: 48px 32px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
   }
-  /* Ensure any Tailwind muted text utilities still render readable inside dark panels */
-  .bg-slate-900 .text-slate-300,
-  .bg-slate-900 .text-slate-400,
-  .bg-slate-900 .text-muted-foreground,
-  .bg-slate-800 .text-slate-300,
-  .bg-slate-800 .text-slate-400,
-  .bg-gray-900 .text-slate-300,
-  .bg-gray-900 .text-slate-400 {
+
+  .calculator-cta-section h3,
+  .calculator-cta-section h2 {
     color: #ffffff !important;
-    opacity: 0.92 !important;
+    font-weight: 600 !important;
+    font-size: 32px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 16px !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  .calculator-cta-section p {
+    color: rgba(255, 255, 255, 0.85) !important;
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+    margin-bottom: 32px !important;
+    font-weight: 400 !important;
+  }
+
+  /* Apple-style buttons inside CTA - maintain their own colors */
+  .calculator-cta-section button {
+    background-color: #ffffff !important;
+    color: #1a1a1a !important;
+    border: none !important;
+    font-weight: 600 !important;
+    transition: all 0.2s ease !important;
+  }
+
+  .calculator-cta-section button:hover {
+    background-color: rgba(255, 255, 255, 0.92) !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  }
+
+  .calculator-cta-section button.outline,
+  .calculator-cta-section button[class*="outline"] {
+    background-color: transparent !important;
+    color: #ffffff !important;
+    border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  }
+
+  .calculator-cta-section button.outline:hover,
+  .calculator-cta-section button[class*="outline"]:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: rgba(255, 255, 255, 0.5) !important;
   }
 
   /* CRITICAL: Force high contrast for all Explosions section text */

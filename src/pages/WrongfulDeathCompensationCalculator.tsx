@@ -268,13 +268,19 @@ const WrongfulDeathCompensationCalculator = () => {
                   </p>
                 </div>
 
-                <div className="text-center pt-4">
-                  <h3 className="text-xl font-semibold text-black mb-4">Speak with a compassionate attorney</h3>
-                  <Link to="/free-consultation">
-                    <Button size="lg" className="h-14 px-8 text-base bg-blue-600 hover:bg-blue-700 text-white">
-                      Get My Free Case Evaluation
-                    </Button>
-                  </Link>
+                <div className="calculator-cta-section">
+                  <h3 className="text-2xl font-bold mb-4">Speak with a compassionate attorney</h3>
+                  <p className="mb-6 max-w-2xl mx-auto">
+                    Wrongful death cases require sensitivity and expertise. We'll fight for full compensation 
+                    to help your family during this difficult time. No fee unless we win.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link to="/free-consultation">
+                      <Button size="lg" className="text-lg px-8">
+                        Get My Free Case Evaluation
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             )}

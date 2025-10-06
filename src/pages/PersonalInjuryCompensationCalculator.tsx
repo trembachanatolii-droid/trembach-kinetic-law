@@ -442,15 +442,15 @@ const PersonalInjuryCompensationCalculator = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900 text-white rounded-2xl p-8 text-center">
+      <div className="calculator-cta-section">
         <h3 className="text-2xl font-bold mb-4">Ready to Discuss Your Case?</h3>
-        <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+        <p className="mb-6 max-w-2xl mx-auto">
           Get a detailed case evaluation from an experienced personal injury attorney.
           Most personal injury cases are handled on contingency - no fee unless we win.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/free-consultation">
-            <Button size="lg" className="text-lg px-8 bg-blue-600 hover:bg-blue-700 text-white">
+            <Button size="lg" className="text-lg px-8">
               Get My Free Case Evaluation
             </Button>
           </Link>
@@ -458,7 +458,7 @@ const PersonalInjuryCompensationCalculator = () => {
             size="lg"
             variant="outline"
             onClick={resetForm}
-            className="text-lg px-8 border-white text-white hover:bg-white hover:text-slate-900"
+            className="text-lg px-8 outline"
           >
             Calculate Again
           </Button>

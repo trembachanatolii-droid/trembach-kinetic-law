@@ -602,15 +602,22 @@ const BicycleCompensationCalculator = () => {
                   </p>
                 </div>
 
-                <div className="flex gap-4">
-                  <Link to="/free-consultation" className="flex-1">
-                    <Button size="lg" className="w-full bg-blue-600 hover:bg-blue-700 text-white">
-                      Get My Free Case Evaluation
+                <div className="calculator-cta-section">
+                  <h3 className="text-2xl font-bold mb-4">Get maximum bicycle accident compensation</h3>
+                  <p className="mb-6 max-w-2xl mx-auto">
+                    Cyclists deserve safe roads. Our attorneys will hold negligent drivers accountable and fight for 
+                    your full compensation. No fee unless we win.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link to="/free-consultation" className="flex-1">
+                      <Button size="lg" className="w-full text-lg px-8">
+                        Get My Free Case Evaluation
+                      </Button>
+                    </Link>
+                    <Button size="lg" variant="outline" className="flex-1 outline" onClick={resetForm}>
+                      Start New Calculation
                     </Button>
-                  </Link>
-                  <Button size="lg" variant="outline" className="flex-1" onClick={resetForm}>
-                    Start New Calculation
-                  </Button>
+                  </div>
                 </div>
               </div>
             )}

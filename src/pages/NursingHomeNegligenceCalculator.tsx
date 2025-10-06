@@ -322,11 +322,27 @@ const NursingHomeNegligenceCalculator = () => {
                   </p>
                 </div>
 
-                <div className="text-center pt-4">
-                  <Link to="/free-consultation"><Button size="lg" className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white">Get My Free Case Evaluation</Button></Link>
-                  <button onClick={resetForm} className="block mx-auto mt-4 text-sm text-muted-foreground hover:text-foreground">
-                    Calculate Another Case
-                  </button>
+                <div className="calculator-cta-section">
+                  <h3 className="text-2xl font-bold mb-4">Protect vulnerable seniors from abuse</h3>
+                  <p className="mb-6 max-w-2xl mx-auto">
+                    Elder abuse and nursing home neglect deserve serious legal action. We'll investigate your case 
+                    and hold facilities accountable for failing to protect your loved one. No fee unless we win.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                    <Link to="/free-consultation">
+                      <Button size="lg" className="text-lg px-8">
+                        Get My Free Case Evaluation
+                      </Button>
+                    </Link>
+                    <Button
+                      size="lg"
+                      variant="outline"
+                      onClick={resetForm}
+                      className="text-lg px-8 outline"
+                    >
+                      Calculate Another Case
+                    </Button>
+                  </div>
                 </div>
               </div>
             )}

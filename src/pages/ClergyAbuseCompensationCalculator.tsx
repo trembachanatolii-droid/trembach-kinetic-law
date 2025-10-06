@@ -440,16 +440,16 @@ const ClergyAbuseCompensationCalculator = () => {
         </div>
       </div>
 
-      <div className="bg-slate-900 text-white rounded-2xl p-8 text-center">
+      <div className="calculator-cta-section">
         <h3 className="text-2xl font-bold mb-4">Confidential Case Review Available</h3>
-        <p className="text-slate-300 mb-6 max-w-2xl mx-auto">
+        <p className="mb-6 max-w-2xl mx-auto">
           Speak with an attorney who specializes in clergy abuse cases. Your conversation
           is completely confidential. Many cases are handled on contingency - no fee unless
           we win. Recent law changes may give you new rights to pursue justice.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link to="/free-consultation">
-            <Button size="lg" className="text-lg px-8 bg-blue-600 hover:bg-blue-700 text-white">
+            <Button size="lg" className="text-lg px-8">
               Get My Free Case Evaluation
             </Button>
           </Link>
@@ -457,7 +457,7 @@ const ClergyAbuseCompensationCalculator = () => {
             size="lg"
             variant="outline"
             onClick={resetForm}
-            className="text-lg px-8 border-white text-white hover:bg-white hover:text-slate-900"
+            className="text-lg px-8 outline"
           >
             Calculate Again
           </Button>

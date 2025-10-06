@@ -5,12 +5,12 @@ import {
   CalculatorLayout,
   CalculatorProgress,
   FormNavigation,
-  OptionButton,
   CalculatorSEO
 } from '@/components/calculator';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface MotorcycleFormData extends CalculatorFormData {
   injuryType: string;
@@ -309,66 +309,66 @@ export default function MotorcycleCompensationCalculator() {
             <div className="space-y-6">
               <div>
                 <Label className="text-base font-medium mb-4 block">Type of Injury</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {injuryTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.injuryType === option.value}
-                      onClick={() => updateField('injuryType', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.injuryType} onValueChange={(value) => updateField('injuryType', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select injury type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {injuryTypeOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
-                <div className="grid grid-cols-2 gap-4">
-                  {injurySeverityOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.injurySeverity === option.value}
-                      onClick={() => updateField('injurySeverity', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select severity" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {injurySeverityOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Type of Crash</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {crashTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.crashType === option.value}
-                      onClick={() => updateField('crashType', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.crashType} onValueChange={(value) => updateField('crashType', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select crash type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {crashTypeOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Helmet Worn at Time of Crash</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {helmetOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.helmetWorn === option.value}
-                      onClick={() => updateField('helmetWorn', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.helmetWorn} onValueChange={(value) => updateField('helmetWorn', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select helmet type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {helmetOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -449,66 +449,66 @@ export default function MotorcycleCompensationCalculator() {
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Estimated Speed at Impact</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {speedOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.speedEstimate === option.value}
-                      onClick={() => updateField('speedEstimate', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.speedEstimate} onValueChange={(value) => updateField('speedEstimate', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select speed range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {speedOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Road Conditions</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {roadConditionsOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.roadConditions === option.value}
-                      onClick={() => updateField('roadConditions', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.roadConditions} onValueChange={(value) => updateField('roadConditions', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select road conditions" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {roadConditionsOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Fault Percentage</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {faultOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.faultPercentage === option.value}
-                      onClick={() => updateField('faultPercentage', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.faultPercentage} onValueChange={(value) => updateField('faultPercentage', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select fault percentage" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {faultOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Permanent Impact</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {permanentImpactOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.permanentImpact === option.value}
-                      onClick={() => updateField('permanentImpact', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.permanentImpact} onValueChange={(value) => updateField('permanentImpact', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select permanent impact" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {permanentImpactOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

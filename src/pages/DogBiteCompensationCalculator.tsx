@@ -5,12 +5,12 @@ import {
   CalculatorLayout,
   CalculatorProgress,
   FormNavigation,
-  OptionButton,
   CalculatorSEO
 } from '@/components/calculator';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface DogBiteFormData extends CalculatorFormData {
   injurySeverity: string;
@@ -291,50 +291,50 @@ export default function DogBiteCompensationCalculator() {
             <div className="space-y-6">
               <div>
                 <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {injurySeverityOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.injurySeverity === option.value}
-                      onClick={() => updateField('injurySeverity', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select injury severity" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {injurySeverityOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Attack Location on Body</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {attackLocationOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.attackLocation === option.value}
-                      onClick={() => updateField('attackLocation', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.attackLocation} onValueChange={(value) => updateField('attackLocation', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select attack location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {attackLocationOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Scarring Level</Label>
-                <div className="grid grid-cols-2 gap-4">
-                  {scarringLevelOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.scarringLevel === option.value}
-                      onClick={() => updateField('scarringLevel', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.scarringLevel} onValueChange={(value) => updateField('scarringLevel', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select scarring level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {scarringLevelOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -401,82 +401,82 @@ export default function DogBiteCompensationCalculator() {
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Scar Location</Label>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {scarringLocationOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.scarringLocation === option.value}
-                      onClick={() => updateField('scarringLocation', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.scarringLocation} onValueChange={(value) => updateField('scarringLocation', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select scar location" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {scarringLocationOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Infection Complications</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {infectionOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.infection === option.value}
-                      onClick={() => updateField('infection', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.infection} onValueChange={(value) => updateField('infection', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select infection status" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {infectionOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Victim's Age</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {ageOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.age === option.value}
-                      onClick={() => updateField('age', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select age range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ageOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Emotional/Psychological Impact</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {emotionalImpactOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.emotionalImpact === option.value}
-                      onClick={() => updateField('emotionalImpact', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.emotionalImpact} onValueChange={(value) => updateField('emotionalImpact', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select emotional impact" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {emotionalImpactOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Dog's Prior History</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {priorHistoryOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.priorHistory === option.value}
-                      onClick={() => updateField('priorHistory', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.priorHistory} onValueChange={(value) => updateField('priorHistory', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select dog's history" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {priorHistoryOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

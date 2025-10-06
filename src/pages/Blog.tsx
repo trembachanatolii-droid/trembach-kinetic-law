@@ -40,9 +40,10 @@ const Blog = () => {
         onClick={() => setCurrentPage(pageNum)}
         className={`px-4 py-2 rounded-md transition-colors ${
           currentPage === pageNum
-            ? 'bg-primary text-primary-foreground font-semibold'
+            ? 'font-semibold text-white'
             : 'bg-white text-foreground hover:bg-gray-100 border border-gray-200'
         }`}
+        style={currentPage === pageNum ? { backgroundColor: '#007AFF' } : {}}
       >
         {page}
       </button>
@@ -82,7 +83,7 @@ const Blog = () => {
       {/* Hero Section */}
       <section className="bg-white border-b border-gray-200 py-16">
         <div className="max-w-[1200px] mx-auto px-6">
-          <h1 className="text-5xl font-bold text-primary mb-4">
+          <h1 className="text-5xl font-bold mb-4" style={{ color: '#007AFF' }}>
             Blog: Your Legal Resource
           </h1>
         </div>
@@ -120,7 +121,8 @@ const Blog = () => {
                     Posted in{' '}
                     <Link
                       to="#"
-                      className="text-primary hover:underline font-medium"
+                      className="hover:underline font-medium"
+                      style={{ color: '#007AFF' }}
                     >
                       {post.category}
                     </Link>
@@ -132,7 +134,8 @@ const Blog = () => {
 
                   <Link
                     to="#"
-                    className="inline-flex items-center gap-2 text-base text-primary font-semibold hover:gap-3 transition-all group"
+                    className="inline-flex items-center gap-2 text-base font-semibold hover:gap-3 transition-all group"
+                    style={{ color: '#007AFF' }}
                   >
                     Read More
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -162,7 +165,7 @@ const Blog = () => {
       {/* Newsletter Section */}
       <section className="bg-white py-16 border-t border-gray-200">
         <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h2 className="text-4xl font-bold text-primary mb-4">
+          <h2 className="text-4xl font-bold mb-4" style={{ color: '#007AFF' }}>
             Newsletter Sign Up
           </h2>
           <p className="text-lg text-foreground mb-8 max-w-2xl mx-auto">
@@ -184,7 +187,8 @@ const Blog = () => {
             />
             <Button
               type="submit"
-              className="h-12 px-8 bg-primary text-primary-foreground hover:bg-primary/90 font-semibold text-base"
+              className="h-12 px-8 font-semibold text-base text-white hover:opacity-90"
+              style={{ backgroundColor: '#007AFF' }}
             >
               SUBSCRIBE
             </Button>
@@ -193,7 +197,7 @@ const Blog = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-[#1a1a1a] py-16">
+      <section className="py-16" style={{ background: 'linear-gradient(135deg, #007AFF 0%, #0051D5 100%)' }}>
         <div className="max-w-[1200px] mx-auto px-6 text-center">
           <h2 className="text-4xl font-bold text-white mb-6">
             Get a FREE Case Evaluation Today!
@@ -205,14 +209,16 @@ const Blog = () => {
             <Button
               asChild
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 h-14"
+              className="bg-white hover:bg-white/90 text-lg px-8 h-14 font-semibold"
+              style={{ color: '#007AFF' }}
             >
               <Link to="/free-consultation">CALL</Link>
             </Button>
             <Button
               asChild
               size="lg"
-              className="bg-primary text-primary-foreground hover:bg-primary/90 text-lg px-8 h-14"
+              className="bg-white hover:bg-white/90 text-lg px-8 h-14 font-semibold"
+              style={{ color: '#007AFF' }}
             >
               <Link to="/free-consultation">EMAIL</Link>
             </Button>
@@ -220,17 +226,213 @@ const Blog = () => {
         </div>
       </section>
 
-      {/* Contact Bar */}
-      <section className="bg-primary py-6">
-        <div className="max-w-[1200px] mx-auto px-6 text-center">
-          <h3 className="text-3xl font-bold text-primary-foreground mb-2">
-            855-MIKE-WINS (855-374-2832)
-          </h3>
-          <p className="text-lg text-primary-foreground">
-            We're here to help, 24 hours a day, 7 days a week
+      {/* All 58 Counties Section */}
+      <section className="bg-[#1a1a1a] py-20">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <h2 className="text-4xl font-bold text-white text-center mb-4">
+            All 58 Counties
+          </h2>
+          <p className="text-2xl text-white text-center mb-16">
+            Statewide Representation
           </p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                city: 'Los Angeles',
+                office: 'Main Office',
+                address: '27001 Agoura Road, Suite 350',
+                cityState: 'Calabasas, CA 91301',
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'San Francisco',
+                office: 'By Appointment Only',
+                address: '123 Market Street, Suite 200',
+                cityState: 'San Francisco, CA 94103',
+                phone: '(800) 555-0001',
+                bgImage: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'San Diego',
+                office: 'By Appointment Only',
+                address: '456 Broadway, Suite 100',
+                cityState: 'San Diego, CA 92101',
+                phone: '(800) 555-0002',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'Sacramento',
+                office: 'By Appointment Only',
+                address: '789 Capitol Mall, Suite 300',
+                cityState: 'Sacramento, CA 95814',
+                phone: '(800) 555-0003',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'Fresno',
+                office: 'By Appointment Only',
+                address: '321 Fulton Street, Suite 150',
+                cityState: 'Fresno, CA 93721',
+                phone: '(800) 555-0004',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'Oakland',
+                office: 'By Appointment Only',
+                address: '654 Broadway, Suite 250',
+                cityState: 'Oakland, CA 94607',
+                phone: '(800) 555-0005',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'Bakersfield',
+                office: 'By Appointment Only',
+                address: '987 Chester Avenue, Suite 400',
+                cityState: 'Bakersfield, CA 93301',
+                phone: '(800) 555-0006',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              },
+              {
+                city: 'Riverside',
+                office: 'By Appointment Only',
+                address: '147 Mission Inn Avenue',
+                cityState: 'Riverside, CA 92501',
+                phone: '(800) 555-0007',
+                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+              }
+            ].map((location, index) => (
+              <div
+                key={index}
+                className="relative h-[280px] rounded-lg overflow-hidden group cursor-pointer"
+                style={{
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${location.bgImage})`,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center'
+                }}
+              >
+                <div className="absolute inset-0 p-6 flex flex-col justify-start text-white">
+                  <h3 className="text-3xl font-bold mb-1">{location.city}</h3>
+                  {location.office && (
+                    <p className="text-sm mb-4 opacity-90">({location.office})</p>
+                  )}
+                  
+                  <div className="space-y-1 text-sm">
+                    <p className="font-medium">{location.address}</p>
+                    <p className="font-medium">{location.cityState}</p>
+                    <p className="font-bold mt-3 text-base">{location.phone}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
+
+      {/* Footer Section */}
+      <footer className="bg-[#1a1a1a] border-t border-gray-800 py-16">
+        <div className="max-w-[1400px] mx-auto px-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            {/* Newsletter Column */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Newsletter Sign Up
+              </h3>
+              <form onSubmit={handleSubscribe} className="space-y-4">
+                <Input
+                  type="email"
+                  placeholder="example@subscribe.com *"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="h-12 px-4 text-base bg-white border-gray-600"
+                />
+                <Button
+                  type="submit"
+                  className="w-full h-12 font-semibold text-base text-white"
+                  style={{ backgroundColor: '#dc2626' }}
+                >
+                  SUBSCRIBE
+                </Button>
+              </form>
+            </div>
+
+            {/* Practice Areas Column */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Practice Areas
+              </h3>
+              <ul className="space-y-3">
+                {[
+                  { label: 'Car Accident Lawyers', href: '/practice-areas/car-accidents' },
+                  { label: 'Dog Bite Lawyers', href: '/practice-areas/dog-bites' },
+                  { label: 'Bicycle Accident Lawyers', href: '/practice-areas/bicycle-accidents' },
+                  { label: 'Motorcycle Accident Lawyers', href: '/practice-areas/motorcycle-accidents' },
+                  { label: 'Pedestrian Accident Lawyers', href: '/practice-areas/pedestrian-accidents' },
+                  { label: 'Truck Accident Lawyers', href: '/practice-areas/truck-accidents' },
+                  { label: 'Wrongful Death Lawyers', href: '/practice-areas/wrongful-death' }
+                ].map((link, index) => (
+                  <li key={index}>
+                    <Link
+                      to={link.href}
+                      className="text-white hover:text-gray-300 transition-colors text-base"
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact Column */}
+            <div>
+              <h3 className="text-2xl font-bold text-white mb-6">
+                Contact Us
+              </h3>
+              <div className="space-y-4 mb-6">
+                <p className="text-white text-lg">
+                  <span className="font-bold">Phone:</span> (800) 555-0000
+                </p>
+                <p className="text-white text-base">
+                  24 hours a day, 7 days a week
+                </p>
+              </div>
+              
+              <div className="space-y-3">
+                <Link
+                  to="/practice-areas"
+                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
+                >
+                  Cases We Handle <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  to="/about"
+                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
+                >
+                  Meet Your Team <ArrowRight className="w-5 h-5" />
+                </Link>
+                <Link
+                  to="/results"
+                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
+                >
+                  Case Results <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-gray-800 pt-8">
+            <p className="text-center text-gray-400 text-sm">
+              © 2025 Trembach Law Firm, APC. All Rights Reserved.{' '}
+              <Link to="#" className="hover:text-gray-300">Sitemap</Link> |{' '}
+              <Link to="#" className="hover:text-gray-300">Privacy Policy</Link> |{' '}
+              <Link to="#" className="hover:text-gray-300">Terms Of Service</Link>
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };

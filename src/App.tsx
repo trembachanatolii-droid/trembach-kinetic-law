@@ -45,6 +45,16 @@ import SoftTissueInjuriesBlog from "./pages/blog/SoftTissueInjuries";
 import HitAndRunBlog from "./pages/blog/HitAndRun";
 import TraumaticBrainInjuryBlog from "./pages/blog/TraumaticBrainInjury";
 import UninsuredMotoristBlog from "./pages/blog/UninsuredMotorist";
+import CommercialVehicleBlog from "./pages/blog/CommercialVehicle";
+import IntersectionAccidentsBlog from "./pages/blog/IntersectionAccidents";
+import DistractedDrivingBlog from "./pages/blog/DistractedDriving";
+import DrunkDrivingBlog from "./pages/blog/DrunkDriving";
+import RearEndCollisionsBlog from "./pages/blog/RearEndCollisions";
+import TBoneAccidentsBlog from "./pages/blog/TBoneAccidents";
+import HeadOnCollisionsBlog from "./pages/blog/HeadOnCollisions";
+import RolloverAccidentsBlog from "./pages/blog/RolloverAccidents";
+import MultiVehicleBlog from "./pages/blog/MultiVehicle";
+import ParkingLotBlog from "./pages/blog/ParkingLot";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -684,6 +694,16 @@ function App() {
             <Route path="/blog/traumatic-brain-injury" element={<TraumaticBrainInjuryBlog />} />
             <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
             <Route path="/blog/uninsured-motorist" element={<UninsuredMotoristBlog />} />
+            <Route path="/blog/commercial-vehicle-accidents" element={<CommercialVehicleBlog />} />
+            <Route path="/blog/intersection-accidents" element={<IntersectionAccidentsBlog />} />
+            <Route path="/blog/distracted-driving" element={<DistractedDrivingBlog />} />
+            <Route path="/blog/drunk-driving-accidents" element={<DrunkDrivingBlog />} />
+            <Route path="/blog/rear-end-collisions" element={<RearEndCollisionsBlog />} />
+            <Route path="/blog/t-bone-accidents" element={<TBoneAccidentsBlog />} />
+            <Route path="/blog/head-on-collisions" element={<HeadOnCollisionsBlog />} />
+            <Route path="/blog/rollover-accidents" element={<RolloverAccidentsBlog />} />
+            <Route path="/blog/multi-vehicle-accidents" element={<MultiVehicleBlog />} />
+            <Route path="/blog/parking-lot-accidents" element={<ParkingLotBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

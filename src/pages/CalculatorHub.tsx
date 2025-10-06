@@ -213,7 +213,7 @@ const CalculatorHub = () => {
             </p>
             <Link
               to="/free-consultation"
-              className="inline-flex items-center justify-center h-14 px-10 text-lg font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/80 active:text-primary-foreground visited:text-primary-foreground no-underline transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="inline-flex items-center justify-center h-14 px-10 text-lg font-semibold rounded-full bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/80 active:text-primary-foreground visited:text-primary-foreground no-underline transition-all duration-300 hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               Get Free Consultation
               <ArrowRight className="ml-2" size={20} />

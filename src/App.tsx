@@ -11,6 +11,8 @@ import Blog from "./pages/Blog";
 // Blog Category Pages
 import AutoAccidents from "./pages/blog/AutoAccidents";
 import BrainInjuries from "./pages/blog/BrainInjuries";
+import MedicalMalpractice from "./pages/blog/MedicalMalpractice";
+import MotorcycleAccidents from "./pages/blog/MotorcycleAccidents";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -105,14 +107,12 @@ import CarCaseEvaluation from "./pages/CarCaseEvaluation";
 import CarMedicalGuidance from "./pages/CarMedicalGuidance";
 import CarCompensationCalculator from "./pages/CarCompensationCalculator";
 import TruckAccidentsNew from "./pages/practice-areas/TruckAccidentsNew";
-import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
 import TalcBabyPowderCancer from "./pages/practice-areas/TalcBabyPowderCancer";
 import TalcCaseEvaluation from "./pages/TalcCaseEvaluation";
 import TalcCompensationCalculator from "./pages/TalcCompensationCalculator";
 import TalcMedicalGuidance from "./pages/TalcMedicalGuidance";
 import BicycleAccidents from "./pages/practice-areas/BicycleAccidents";
-import MotorcycleAccidents from "./pages/practice-areas/MotorcycleAccidents";
 import MotorcycleAccidentsNew from "./pages/practice-areas/MotorcycleAccidentsNew";
 import BicycleCaseEvaluation from "./pages/BicycleCaseEvaluation";
 import BicycleMedicalGuidance from "./pages/BicycleMedicalGuidance";
@@ -577,6 +577,8 @@ function App() {
             {/* Blog Category Pages */}
             <Route path="/blog/auto-accidents" element={<AutoAccidents />} />
             <Route path="/blog/brain-injuries" element={<BrainInjuries />} />
+            <Route path="/blog/medical-malpractice" element={<MedicalMalpractice />} />
+            <Route path="/blog/motorcycle-accidents" element={<MotorcycleAccidents />} />
             <Route path="/blog/accident-response" element={<AutoAccidents />} />
             <Route path="/blog/animal-attacks" element={<AutoAccidents />} />
             <Route path="/blog/auto-safety" element={<AutoAccidents />} />

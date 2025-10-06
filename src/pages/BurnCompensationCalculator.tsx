@@ -141,32 +141,20 @@ const BurnCompensationCalculator = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Burn Severity</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[
-                        { value: 'first-degree', label: 'First-Degree', desc: 'Surface layer only' },
-                        { value: 'second-degree', label: 'Second-Degree', desc: 'Blistering, dermis affected' },
-                        { value: 'third-degree', label: 'Third-Degree', desc: 'Full thickness, charred' },
-                        { value: 'fourth-degree', label: 'Fourth-Degree', desc: 'Muscle, bone damage' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, burnSeverity: option.value })}
-                          className={`p-4 rounded-xl border-2 text-left transition-all ${
-                            formData.burnSeverity === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="font-medium mb-1">{option.label}</div>
-                          <div className={`text-sm ${formData.burnSeverity === option.value ? 'text-white/70' : 'text-slate-500'}`}>
-                            {option.desc}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Burn Severity</label>
+                    <Select value={formData.burnSeverity} onValueChange={(value) => setFormData({ ...formData, burnSeverity: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select burn severity" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="first-degree">First-Degree - Surface layer only</SelectItem>
+                        <SelectItem value="second-degree">Second-Degree - Blistering, dermis affected</SelectItem>
+                        <SelectItem value="third-degree">Third-Degree - Full thickness, charred</SelectItem>
+                        <SelectItem value="fourth-degree">Fourth-Degree - Muscle, bone damage</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
@@ -187,29 +175,20 @@ const BurnCompensationCalculator = () => {
                     <p className="text-xs text-slate-500 mt-2">Percentage of body covered by burns</p>
                   </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Scarring & Disfigurement</span>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {[
-                        { value: 'minimal', label: 'Minimal' },
-                        { value: 'moderate', label: 'Moderate' },
-                        { value: 'severe', label: 'Severe' },
-                        { value: 'disfiguring', label: 'Disfiguring' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, scarring: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.scarring === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Scarring & Disfigurement</label>
+                    <Select value={formData.scarring} onValueChange={(value) => setFormData({ ...formData, scarring: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select scarring level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="minimal">Minimal</SelectItem>
+                        <SelectItem value="moderate">Moderate</SelectItem>
+                        <SelectItem value="severe">Severe</SelectItem>
+                        <SelectItem value="disfiguring">Disfiguring</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </div>
             )}

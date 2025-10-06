@@ -111,48 +111,37 @@ const WrongfulDeathCompensationCalculator = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Your Relationship</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {['Spouse', 'Child', 'Parent', 'Sibling', 'Other Family', 'Estate Representative'].map((rel) => (
-                        <button
-                          key={rel}
-                          onClick={() => setFormData({ ...formData, relationship: rel })}
-                          className={`p-4 rounded-xl border-2 text-left transition-all ${
-                            formData.relationship === rel
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{rel}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Your Relationship</label>
+                    <Select value={formData.relationship} onValueChange={(value) => setFormData({ ...formData, relationship: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select your relationship" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="Spouse">Spouse</SelectItem>
+                        <SelectItem value="Child">Child</SelectItem>
+                        <SelectItem value="Parent">Parent</SelectItem>
+                        <SelectItem value="Sibling">Sibling</SelectItem>
+                        <SelectItem value="Other Family">Other Family</SelectItem>
+                        <SelectItem value="Estate Representative">Estate Representative</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Deceased's Age</span>
-                    <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                      {[
-                        { value: '18-35', label: '18-35' },
-                        { value: '36-50', label: '36-50' },
-                        { value: '51-65', label: '51-65' },
-                        { value: '66+', label: '66+' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, age: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.age === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Deceased's Age</label>
+                    <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="18-35">18-35</SelectItem>
+                        <SelectItem value="36-50">36-50</SelectItem>
+                        <SelectItem value="51-65">51-65</SelectItem>
+                        <SelectItem value="66+">66+</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">

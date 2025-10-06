@@ -146,84 +146,54 @@ const AmputationCompensationCalculator = () => {
                 </div>
 
                 <div className="space-y-4">
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Type of Amputation</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[
-                        { value: 'finger', label: 'Finger(s)', desc: 'One or more fingers' },
-                        { value: 'hand', label: 'Hand', desc: 'At wrist level' },
-                        { value: 'arm-below', label: 'Arm Below Elbow', desc: 'Below-elbow amputation' },
-                        { value: 'arm-above', label: 'Arm Above Elbow', desc: 'Above-elbow amputation' },
-                        { value: 'leg-below', label: 'Leg Below Knee', desc: 'Below-knee amputation' },
-                        { value: 'leg-above', label: 'Leg Above Knee', desc: 'Above-knee amputation' },
-                        { value: 'multiple', label: 'Multiple Limbs', desc: 'Two or more limbs' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, amputationType: option.value })}
-                          className={`p-4 rounded-xl border-2 text-left transition-all ${
-                            formData.amputationType === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="font-medium mb-1">{option.label}</div>
-                          <div className={`text-sm ${formData.amputationType === option.value ? 'text-white/70' : 'text-slate-500'}`}>
-                            {option.desc}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Type of Amputation</label>
+                    <Select value={formData.amputationType} onValueChange={(value) => setFormData({ ...formData, amputationType: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select amputation type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="finger">Finger(s) - One or more fingers</SelectItem>
+                        <SelectItem value="hand">Hand - At wrist level</SelectItem>
+                        <SelectItem value="arm-below">Arm Below Elbow</SelectItem>
+                        <SelectItem value="arm-above">Arm Above Elbow</SelectItem>
+                        <SelectItem value="leg-below">Leg Below Knee</SelectItem>
+                        <SelectItem value="leg-above">Leg Above Knee</SelectItem>
+                        <SelectItem value="multiple">Multiple Limbs</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Occupation Type</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[
-                        { value: 'manual-labor', label: 'Manual Labor' },
-                        { value: 'skilled-trades', label: 'Skilled Trades' },
-                        { value: 'office-work', label: 'Office Work' },
-                        { value: 'professional', label: 'Professional' },
-                        { value: 'retired', label: 'Retired' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, occupation: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.occupation === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Occupation Type</label>
+                    <Select value={formData.occupation} onValueChange={(value) => setFormData({ ...formData, occupation: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select occupation type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="manual-labor">Manual Labor</SelectItem>
+                        <SelectItem value="skilled-trades">Skilled Trades</SelectItem>
+                        <SelectItem value="office-work">Office Work</SelectItem>
+                        <SelectItem value="professional">Professional</SelectItem>
+                        <SelectItem value="retired">Retired</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Pain & Phantom Limb Pain Level</span>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {[
-                        { value: 'minimal', label: 'Minimal' },
-                        { value: 'moderate', label: 'Moderate' },
-                        { value: 'severe', label: 'Severe' },
-                        { value: 'extreme', label: 'Extreme' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, painLevel: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.painLevel === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">Pain & Phantom Limb Pain Level</label>
+                    <Select value={formData.painLevel} onValueChange={(value) => setFormData({ ...formData, painLevel: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select pain level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="minimal">Minimal</SelectItem>
+                        <SelectItem value="moderate">Moderate</SelectItem>
+                        <SelectItem value="severe">Severe</SelectItem>
+                        <SelectItem value="extreme">Extreme</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </div>
             )}

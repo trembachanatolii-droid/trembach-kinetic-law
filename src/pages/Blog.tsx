@@ -674,9 +674,9 @@ const Blog = () => {
                 <nav>
                   <ul className="space-y-3">
                     {[
-                      { label: 'Mesothelioma & Asbestos', href: '/practice-areas/mesothelioma' },
-                      { label: 'Silicosis Injuries', href: '/practice-areas/silica' },
-                      { label: 'Talc & Baby Powder Cancer', href: '/practice-areas/talc' },
+                      { label: 'Mesothelioma & Asbestos', href: '/practice-areas/mesothelioma-asbestos' },
+                      { label: 'Silicosis Injuries', href: '/practice-areas/silicosis-injuries' },
+                      { label: 'Talc & Baby Powder Cancer', href: '/practice-areas/talc-baby-powder-cancer' },
                       { label: 'Car Accidents', href: '/practice-areas/car-accidents' },
                       { label: 'Truck Accidents', href: '/practice-areas/truck-accidents' },
                       { label: 'Motorcycle Accidents', href: '/practice-areas/motorcycle-accidents' },

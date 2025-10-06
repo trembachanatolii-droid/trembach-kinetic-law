@@ -1,178 +1,233 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, Clock, Calendar } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ArrowLeft, Calendar, Clock } from 'lucide-react';
 import SEO from '@/components/SEO';
-import pedestrianAccidentsImg from '@/assets/blog/pedestrian-accidents.jpg';
+import { RelatedPosts } from '@/components/blog/RelatedPosts';
+import { blogPosts } from '@/data/blogPosts';
 
 const PedestrianAccidents = () => {
+  const currentCategory = 'Vehicle Accidents';
+  
   return (
-    <div className="min-h-screen bg-white">
-      <SEO
-        title="Pedestrian Accident Claims: Your Rights and Legal Options | Trembach Law Firm"
-        description="Complete guide to pedestrian accident claims in California. Learn about liability, compensation, crosswalk laws, and protecting your legal rights."
-        keywords="pedestrian accidents, crosswalk accidents, California pedestrian laws, pedestrian injury claims, hit by car"
+    <>
+      <SEO 
+        title="Pedestrian Accident Claims in California: Rights & Compensation | Trembach Law"
+        description="Understanding pedestrian rights, crosswalk laws, and compensation for pedestrian accidents in California. Expert legal representation for injured pedestrians from Trembach Law Firm."
+        keywords="pedestrian accident lawyer, crosswalk accident attorney, hit by car, California pedestrian laws, jaywalking accident, pedestrian injury compensation"
         canonical="https://www.trembachlawfirm.com/blog/pedestrian-accidents"
       />
-
-      {/* Hero Section */}
-      <section className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
-        <div className="absolute inset-0">
-          <img
-            src={pedestrianAccidentsImg}
-            alt="Pedestrian Accidents Legal Guide"
-            className="w-full h-full object-cover"
+      
+      <article className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+        {/* Hero Section */}
+        <div className="relative h-[60vh] min-h-[500px] flex items-center justify-center overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/90 to-[#0051D5]/90 z-10" />
+          <img 
+            src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?auto=format&fit=crop&q=80"
+            alt="Pedestrian safety and crosswalk protection"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-black/50" />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Pedestrian Accident Claims: Your Rights and Legal Options
-          </h1>
-          <div className="flex items-center justify-center gap-6 text-white/90 text-sm">
-            <span className="flex items-center gap-2">
-              <Calendar className="w-4 h-4" />
-              November 8, 2025
-            </span>
-            <span className="flex items-center gap-2">
-              <Clock className="w-4 h-4" />
-              10 min read
-            </span>
+          <div className="relative z-20 max-w-4xl mx-auto px-6 text-center text-white">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+              Pedestrian Accident Claims: Your Rights After Being Hit
+            </h1>
+            <div className="flex items-center justify-center gap-6 text-white/90">
+              <span className="flex items-center gap-2">
+                <Calendar className="w-5 h-5" />
+                October 29, 2025
+              </span>
+              <span className="flex items-center gap-2">
+                <Clock className="w-5 h-5" />
+                12 min read
+              </span>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-6 py-16">
-        <Link
-          to="/blog"
-          className="inline-flex items-center gap-2 text-[#007AFF] hover:underline mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          Back to Blog
-        </Link>
+        {/* Article Content */}
+        <div className="max-w-4xl mx-auto px-6 py-16">
+          <Link 
+            to="/blog" 
+            className="inline-flex items-center gap-2 text-[#007AFF] hover:text-[#0051D5] mb-8 transition-colors"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Back to Blog
+          </Link>
 
-        <div className="prose prose-lg max-w-none">
-          <p className="text-xl text-gray-700 leading-relaxed mb-8">
-            Pedestrian accidents often result in severe injuries due to the vulnerability of those on foot compared to occupants of vehicles. California law provides strong protections for pedestrians, but navigating the legal process after being struck by a vehicle requires understanding your rights and the available compensation options.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">California Pedestrian Right-of-Way Laws</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            California Vehicle Code Section 21950 grants pedestrians the right-of-way in marked crosswalks and at intersections. Drivers must yield to pedestrians who have entered the crosswalk or are close enough to constitute an immediate hazard. Violations of these laws establish driver negligence in most pedestrian accident cases.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Even outside designated crosswalks, drivers maintain a duty to exercise due care for pedestrian safety. While pedestrians have specific responsibilities regarding where and when to cross streets, driver negligence often outweighs pedestrian violations in determining fault and liability.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Common Causes of Pedestrian Accidents</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Distracted driving has become the leading cause of pedestrian accidents in California. Drivers texting, talking on phones, eating, or engaging with vehicle entertainment systems fail to notice pedestrians in crosswalks or along roadways. These preventable accidents often result in serious injuries or fatalities.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Failure to yield at crosswalks and intersections causes numerous pedestrian strikes annually. Drivers rolling through stop signs, making right turns on red without checking for pedestrians, or rushing through yellow lights strike people lawfully crossing streets. These violations demonstrate clear driver negligence.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Poor visibility conditions, including darkness, rain, or fog, contribute to many pedestrian accidents. However, reduced visibility doesn't excuse drivers from their duty of care. Drivers must reduce speed and increase vigilance in low-visibility conditions to prevent striking pedestrians.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Common Pedestrian Injuries</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Traumatic brain injuries frequently occur when pedestrians strike their heads on vehicle hoods, windshields, or pavement. Even seemingly minor head impacts can cause concussions, contusions, or more severe traumatic brain injuries requiring extensive medical treatment and long-term care.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Spinal cord injuries and paralysis result from the severe impact forces in pedestrian accidents. These catastrophic injuries often permanently alter victims' lives, requiring lifetime medical care, home modifications, and assistive devices. Compensation must account for these extensive future needs.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Orthopedic injuries including fractures, dislocations, and soft tissue damage commonly affect pedestrians struck by vehicles. Lower extremity injuries occur frequently as vehicles impact legs and hips. Multiple fractures requiring surgeries, hardware implantation, and extensive rehabilitation are typical in serious pedestrian accidents.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Establishing Liability</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Driver negligence forms the basis of most pedestrian accident claims. Proving the driver violated traffic laws, failed to maintain proper lookout, drove distracted, or exceeded safe speeds establishes liability. Police reports, witness statements, and traffic camera footage provide crucial evidence.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            California's comparative fault system means pedestrian violations don't automatically bar recovery. Even if a pedestrian crossed outside a crosswalk or against a signal, they can still recover damages reduced by their percentage of fault. An experienced attorney can minimize fault attribution to maximize compensation.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Third-party liability may exist beyond the driver. Vehicle owners, employers of drivers operating commercial vehicles, bars that overserved drunk drivers, and municipalities with dangerous road conditions might share liability. Identifying all potential defendants maximizes available compensation.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Available Compensation</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Medical expenses constitute a major component of pedestrian accident damages. Emergency treatment, hospitalization, surgeries, rehabilitation, physical therapy, and ongoing medical care all qualify for compensation. Future medical needs must be carefully calculated and included in settlement demands or trial presentations.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Lost income and diminished earning capacity significantly impact pedestrian accident victims. Time away from work during recovery, reduced ability to perform job duties, and permanent disability affecting future earnings all merit compensation. Economic experts often testify regarding lifetime earning losses.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Pain and suffering damages address the physical discomfort and emotional trauma of pedestrian accidents. The fear and helplessness of being struck by a vehicle, ongoing pain from injuries, and psychological effects like PTSD warrant substantial compensation beyond economic losses.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Steps to Take After a Pedestrian Accident</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Seeking immediate medical attention is crucial even if injuries seem minor initially. Some serious injuries including head trauma and internal bleeding may not manifest symptoms immediately. Medical evaluation creates vital documentation linking injuries to the accident.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Reporting the accident to police ensures an official record exists. Police reports document the accident scene, driver information, witness statements, and preliminary fault determinations. This report becomes foundational evidence in your claim.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Preserving evidence at the scene when safely possible helps your case. Photographs of vehicle damage, skid marks, traffic signals, crosswalk markings, and injuries provide valuable documentation. Witness contact information proves invaluable when insurance companies dispute liability.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Dealing with Insurance Companies</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Insurance adjusters often contact pedestrian accident victims quickly, seeking recorded statements before victims consult attorneys. These statements can be used against you to minimize your claim. Always consult an attorney before providing statements to any insurance company except your own.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Early settlement offers rarely reflect true case value. Insurance companies know pedestrian accidents often involve serious injuries with long-term consequences. Accepting quick settlements before understanding the full extent of injuries and future needs almost always results in inadequate compensation.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Your own insurance policy may provide coverage through uninsured/underinsured motorist provisions. If the at-fault driver lacks adequate insurance, your policy might cover your losses. An experienced attorney can navigate these complex coverage issues to maximize your recovery.
-          </p>
-
-          <h2 className="text-3xl font-bold mt-12 mb-6 text-gray-900">Why Legal Representation Matters</h2>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Pedestrian accident cases require thorough investigation to establish liability and document damages fully. Attorneys can obtain accident scene evidence, traffic camera footage, driver phone records, and witness statements that victims cannot access independently. This evidence often proves crucial in disputed cases.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Calculating future damages requires expertise in medical care costs, life care planning, and economic loss analysis. Attorneys work with medical experts, economists, and vocational specialists to accurately project lifetime costs and earning losses, ensuring settlements address all future needs.
-          </p>
-          <p className="text-gray-700 leading-relaxed mb-6">
-            Insurance companies employ teams of adjusters, investigators, and attorneys to minimize payouts. Having experienced legal representation levels the playing field, ensuring your rights are protected and you receive fair compensation for your injuries and losses.
-          </p>
-
-          <div className="bg-[#f5f5f7] p-8 rounded-2xl my-12">
-            <h3 className="text-2xl font-bold mb-4 text-gray-900">Get the Legal Help You Deserve</h3>
-            <p className="text-gray-700 mb-6">
-              If you've been injured in a pedestrian accident, don't navigate the legal process alone. Our experienced attorneys understand California pedestrian laws and will fight to protect your rights and maximize your compensation.
+          <div className="prose prose-lg max-w-none">
+            <p className="text-xl text-gray-600 leading-relaxed mb-8">
+              Pedestrians are the most vulnerable road users. When drivers fail to exercise reasonable care, the results can be catastrophic. Understanding your legal rights is essential for obtaining fair compensation.
             </p>
-            <Button
-              asChild
-              size="lg"
-              className="bg-[#007AFF] hover:bg-[#0051D5] text-white font-semibold"
-            >
-              <Link to="/free-consultation">Schedule Your Free Consultation</Link>
-            </Button>
-          </div>
 
-          <div className="mt-12 pt-8 border-t border-gray-200">
-            <h3 className="text-xl font-semibold mb-4 text-gray-900">Related Articles</h3>
-            <div className="space-y-3">
-              <Link to="/blog/auto-accidents" className="block text-[#007AFF] hover:underline">
-                Auto Accident Claims in California
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Common Causes of Pedestrian Accidents</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Most pedestrian accidents involve driver negligence:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Failure to Yield at Crosswalks:</strong> Not stopping for pedestrians in marked or unmarked crosswalks</li>
+              <li><strong>Left Turns:</strong> Turning left without checking for pedestrians</li>
+              <li><strong>Right Turns on Red:</strong> Failing to yield when turning right</li>
+              <li><strong>Distracted Driving:</strong> Texting, phone calls, or other distractions</li>
+              <li><strong>Speeding:</strong> Excessive speed reducing reaction time</li>
+              <li><strong>Impaired Driving:</strong> DUI accidents involving pedestrians</li>
+              <li><strong>Backing Up:</strong> Not checking for pedestrians when reversing</li>
+              <li><strong>Poor Visibility:</strong> Failing to use headlights or adjust for conditions</li>
+              <li><strong>Parking Lots:</strong> Negligent driving in pedestrian-heavy areas</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">California Pedestrian Right-of-Way Laws</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              California Vehicle Code provides strong pedestrian protections:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Marked Crosswalks:</strong> Drivers must yield to pedestrians in crosswalks</li>
+              <li><strong>Unmarked Crosswalks:</strong> Right-of-way exists at all intersections, marked or not</li>
+              <li><strong>Mid-Block Crossings:</strong> Drivers must exercise due care even outside crosswalks</li>
+              <li><strong>Sidewalk Safety:</strong> Vehicles entering/exiting driveways must yield to sidewalk pedestrians</li>
+              <li><strong>Traffic Signals:</strong> Pedestrians have right-of-way when signal permits crossing</li>
+              <li><strong>School Zones:</strong> Enhanced pedestrian protections near schools</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Severe Pedestrian Injuries</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Pedestrians lack any protection, often resulting in catastrophic injuries:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Traumatic Brain Injuries:</strong> Head impact causing permanent cognitive damage</li>
+              <li><strong>Spinal Cord Injuries:</strong> Paralysis or permanent mobility impairment</li>
+              <li><strong>Multiple Fractures:</strong> Broken bones throughout body</li>
+              <li><strong>Internal Injuries:</strong> Organ damage, internal bleeding</li>
+              <li><strong>Amputations:</strong> Loss of limbs from severe trauma</li>
+              <li><strong>Pelvic Fractures:</strong> Long-term mobility and pain issues</li>
+              <li><strong>Soft Tissue Damage:</strong> Torn ligaments, muscle damage</li>
+              <li><strong>Facial Injuries:</strong> Dental damage, jaw fractures, disfigurement</li>
+              <li><strong>Wrongful Death:</strong> Fatal pedestrian accidents</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Jaywalking and Comparative Negligence</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Even if crossing illegally, pedestrians may still recover:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>California Comparative Fault:</strong> Damages reduced by pedestrian's percentage of fault, not eliminated</li>
+              <li><strong>Driver's Duty of Care:</strong> Even jaywalking pedestrians must be avoided if reasonably possible</li>
+              <li><strong>Burden on Driver:</strong> Drivers must prove pedestrian's negligence contributed to accident</li>
+              <li><strong>Partial Recovery:</strong> Can still recover damages even if 49% at fault</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Hit-and-Run Pedestrian Accidents</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              When drivers flee after hitting a pedestrian:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Uninsured Motorist Coverage:</strong> Your own auto policy may cover hit-and-run</li>
+              <li><strong>Police Investigation:</strong> Critical to report immediately</li>
+              <li><strong>Surveillance Footage:</strong> Traffic cameras, business security systems</li>
+              <li><strong>Witness Information:</strong> Descriptions of vehicle and driver</li>
+              <li><strong>Physical Evidence:</strong> Vehicle parts, paint, tire marks</li>
+              <li><strong>Crime Victim Compensation:</strong> State program may provide assistance</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Determining Liability</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Multiple parties may be responsible:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Negligent Drivers:</strong> Primary liability for traffic violations</li>
+              <li><strong>Employers:</strong> If driver was working at time of accident</li>
+              <li><strong>Vehicle Owners:</strong> If different from driver</li>
+              <li><strong>Municipalities:</strong> Dangerous intersections, poor lighting, inadequate crosswalks</li>
+              <li><strong>Property Owners:</strong> Parking lot accidents on private property</li>
+              <li><strong>Bars/Restaurants:</strong> Dram shop liability for over-serving intoxicated drivers</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Evidence in Pedestrian Accident Cases</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Building a strong case requires:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Police Reports:</strong> Official documentation of accident and violations</li>
+              <li><strong>Accident Scene Photos:</strong> Crosswalk location, traffic signals, lighting</li>
+              <li><strong>Witness Statements:</strong> Testimony from people who saw the accident</li>
+              <li><strong>Traffic Camera Footage:</strong> Video evidence of accident</li>
+              <li><strong>Medical Records:</strong> Documenting injuries and treatment</li>
+              <li><strong>Accident Reconstruction:</strong> Expert analysis of impact and fault</li>
+              <li><strong>Driver's Cell Phone Records:</strong> Proving distracted driving</li>
+              <li><strong>Toxicology Reports:</strong> Evidence of impaired driving</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Compensation for Pedestrian Accidents</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Injured pedestrians may recover:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Medical Expenses:</strong> Emergency care, surgery, rehabilitation, future treatment</li>
+              <li><strong>Lost Wages:</strong> Income lost during recovery</li>
+              <li><strong>Lost Earning Capacity:</strong> Reduced ability to work due to permanent injuries</li>
+              <li><strong>Pain and Suffering:</strong> Physical pain and emotional trauma</li>
+              <li><strong>Disability:</strong> Permanent impairments affecting quality of life</li>
+              <li><strong>Scarring/Disfigurement:</strong> Permanent visible injuries</li>
+              <li><strong>Loss of Enjoyment:</strong> Inability to participate in activities</li>
+              <li><strong>Wrongful Death:</strong> If pedestrian dies from injuries</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Children and Pedestrian Accidents</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Special considerations for child pedestrians:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Lower Standard:</strong> Children not held to adult standard of care</li>
+              <li><strong>School Zones:</strong> Enhanced driver responsibility near schools</li>
+              <li><strong>Residential Areas:</strong> Duty to anticipate children in neighborhoods</li>
+              <li><strong>Extended Time Limits:</strong> Statute of limitations may be tolled until age 18</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Steps After a Pedestrian Accident</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              Protect your rights by:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li>Calling 911 immediately for medical help and police</li>
+              <li>Getting driver's information and insurance details if possible</li>
+              <li>Taking photos of scene, vehicles, and injuries</li>
+              <li>Collecting witness names and contact information</li>
+              <li>Seeking immediate medical evaluation, even if injuries seem minor</li>
+              <li>Not admitting fault or signing any documents</li>
+              <li>Documenting all injuries and treatment</li>
+              <li>Consulting with an attorney before giving insurance statements</li>
+            </ul>
+
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Time Limits for Filing Claims</h2>
+            <p className="text-gray-700 leading-relaxed mb-6">
+              California statutes of limitations:
+            </p>
+            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
+              <li><strong>Personal Injury:</strong> Two years from date of accident</li>
+              <li><strong>Wrongful Death:</strong> Two years from date of death</li>
+              <li><strong>Government Claims:</strong> Six months to file claim against city/county for dangerous conditions</li>
+              <li><strong>Minor Victims:</strong> Time may be extended for children</li>
+            </ul>
+
+            <div className="bg-[#007AFF]/5 border-l-4 border-[#007AFF] p-8 my-12 rounded-r-lg">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Experienced Pedestrian Accident Representation</h3>
+              <p className="text-gray-700 mb-6">
+                Pedestrian accidents often result in life-changing injuries. Our firm fights to hold negligent drivers accountable and secure maximum compensation for injured pedestrians and their families.
+              </p>
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center gap-2 bg-[#007AFF] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#0051D5] transition-all shadow-lg hover:shadow-xl"
+              >
+                Free Consultation
               </Link>
-              <Link to="/blog/brain-injuries" className="block text-[#007AFF] hover:underline">
-                Understanding Traumatic Brain Injuries
-              </Link>
-              <Link to="/blog/compensation" className="block text-[#007AFF] hover:underline">
-                Maximizing Your Injury Compensation
-              </Link>
+            </div>
+
+            <div className="mt-12 pt-8 border-t border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
+              <RelatedPosts posts={blogPosts} currentCategory={currentCategory} />
             </div>
           </div>
         </div>
       </article>
-    </div>
+    </>
   );
 };
 

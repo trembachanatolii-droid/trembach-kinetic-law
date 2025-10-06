@@ -33,7 +33,7 @@ const ConstructionAccidents = () => {
             <div className="flex items-center justify-center gap-6 text-white/90">
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                January 12, 2026
+                October 27, 2025
               </span>
               <span className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />

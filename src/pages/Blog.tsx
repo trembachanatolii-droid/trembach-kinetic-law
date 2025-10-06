@@ -227,12 +227,12 @@ const Blog = () => {
       </section>
 
       {/* All 58 Counties Section */}
-      <section className="bg-[#1a1a1a] py-20">
+      <section className="bg-[#f5f5f7] py-20">
         <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-4xl font-bold text-white text-center mb-4">
+          <h2 className="text-4xl font-bold text-center mb-4" style={{ color: '#1d1d1f' }}>
             All 58 Counties
           </h2>
-          <p className="text-2xl text-white text-center mb-16">
+          <p className="text-2xl text-center mb-16" style={{ color: '#1d1d1f' }}>
             Statewide Representation
           </p>
 
@@ -244,70 +244,56 @@ const Blog = () => {
                 address: '27001 Agoura Road, Suite 350',
                 cityState: 'Calabasas, CA 91301',
                 phone: '(800) 555-0000',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+                bgImage: 'https://images.unsplash.com/photo-1534190239940-9ba8944ea261?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'San Francisco',
                 office: 'By Appointment Only',
-                address: '123 Market Street, Suite 200',
-                cityState: 'San Francisco, CA 94103',
-                phone: '(800) 555-0001',
-                bgImage: 'https://images.unsplash.com/photo-1449034446853-66c86144b0ad?auto=format&fit=crop&w=800&q=80'
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1501594907352-04cda38ebc29?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'San Diego',
                 office: 'By Appointment Only',
-                address: '456 Broadway, Suite 100',
-                cityState: 'San Diego, CA 92101',
-                phone: '(800) 555-0002',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1578474846511-04ba529f0b88?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'Sacramento',
                 office: 'By Appointment Only',
-                address: '789 Capitol Mall, Suite 300',
-                cityState: 'Sacramento, CA 95814',
-                phone: '(800) 555-0003',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1590859808308-3d2d9c515b1a?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'Fresno',
                 office: 'By Appointment Only',
-                address: '321 Fulton Street, Suite 150',
-                cityState: 'Fresno, CA 93721',
-                phone: '(800) 555-0004',
+                phone: '(800) 555-0000',
                 bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'Oakland',
                 office: 'By Appointment Only',
-                address: '654 Broadway, Suite 250',
-                cityState: 'Oakland, CA 94607',
-                phone: '(800) 555-0005',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1568632234157-ce7aecd03d0d?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'Bakersfield',
                 office: 'By Appointment Only',
-                address: '987 Chester Avenue, Suite 400',
-                cityState: 'Bakersfield, CA 93301',
-                phone: '(800) 555-0006',
-                bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
+                phone: '(800) 555-0000',
+                bgImage: 'https://images.unsplash.com/photo-1464219789935-c2d9d9aba644?auto=format&fit=crop&w=800&q=80'
               },
               {
                 city: 'Riverside',
                 office: 'By Appointment Only',
-                address: '147 Mission Inn Avenue',
-                cityState: 'Riverside, CA 92501',
-                phone: '(800) 555-0007',
+                phone: '(800) 555-0000',
                 bgImage: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?auto=format&fit=crop&w=800&q=80'
               }
             ].map((location, index) => (
               <div
                 key={index}
-                className="relative h-[280px] rounded-lg overflow-hidden group cursor-pointer"
+                className="relative h-[280px] rounded-2xl overflow-hidden group cursor-pointer shadow-lg"
                 style={{
-                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(${location.bgImage})`,
+                  backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)), url(${location.bgImage})`,
                   backgroundSize: 'cover',
                   backgroundPosition: 'center'
                 }}
@@ -319,8 +305,12 @@ const Blog = () => {
                   )}
                   
                   <div className="space-y-1 text-sm">
-                    <p className="font-medium">{location.address}</p>
-                    <p className="font-medium">{location.cityState}</p>
+                    {location.address && (
+                      <>
+                        <p className="font-medium">{location.address}</p>
+                        <p className="font-medium">{location.cityState}</p>
+                      </>
+                    )}
                     <p className="font-bold mt-3 text-base">{location.phone}</p>
                   </div>
                 </div>
@@ -331,7 +321,7 @@ const Blog = () => {
       </section>
 
       {/* Footer Section */}
-      <footer className="bg-[#1a1a1a] border-t border-gray-800 py-16">
+      <footer className="py-16" style={{ background: 'linear-gradient(135deg, #007AFF 0%, #0051D5 100%)' }}>
         <div className="max-w-[1400px] mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
             {/* Newsletter Column */}
@@ -346,12 +336,12 @@ const Blog = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
-                  className="h-12 px-4 text-base bg-white border-gray-600"
+                  className="h-12 px-4 text-base bg-white"
                 />
                 <Button
                   type="submit"
-                  className="w-full h-12 font-semibold text-base text-white"
-                  style={{ backgroundColor: '#dc2626' }}
+                  className="w-full h-12 font-semibold text-base hover:bg-white/90"
+                  style={{ backgroundColor: '#ffffff', color: '#007AFF' }}
                 >
                   SUBSCRIBE
                 </Button>
@@ -376,12 +366,20 @@ const Blog = () => {
                   <li key={index}>
                     <Link
                       to={link.href}
-                      className="text-white hover:text-gray-300 transition-colors text-base"
+                      className="text-white hover:text-white/80 transition-colors text-base"
                     >
                       {link.label}
                     </Link>
                   </li>
                 ))}
+                <li>
+                  <Link
+                    to="/practice-areas"
+                    className="text-white hover:text-white/80 transition-colors text-base font-semibold flex items-center gap-2"
+                  >
+                    See all 50 practice areas <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </li>
               </ul>
             </div>
 
@@ -402,33 +400,30 @@ const Blog = () => {
               <div className="space-y-3">
                 <Link
                   to="/practice-areas"
-                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
+                  className="flex items-center gap-2 text-white hover:text-white/80 transition-colors text-base font-medium"
                 >
                   Cases We Handle <ArrowRight className="w-5 h-5" />
                 </Link>
                 <Link
                   to="/about"
-                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
+                  className="flex items-center gap-2 text-white hover:text-white/80 transition-colors text-base font-medium"
                 >
                   Meet Your Team <ArrowRight className="w-5 h-5" />
-                </Link>
-                <Link
-                  to="/results"
-                  className="flex items-center gap-2 text-white hover:text-gray-300 transition-colors text-base font-medium"
-                >
-                  Case Results <ArrowRight className="w-5 h-5" />
                 </Link>
               </div>
             </div>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-gray-800 pt-8">
-            <p className="text-center text-gray-400 text-sm">
-              © 2025 Trembach Law Firm, APC. All Rights Reserved.{' '}
-              <Link to="#" className="hover:text-gray-300">Sitemap</Link> |{' '}
-              <Link to="#" className="hover:text-gray-300">Privacy Policy</Link> |{' '}
-              <Link to="#" className="hover:text-gray-300">Terms Of Service</Link>
+          <div className="border-t border-white/20 pt-8">
+            <p className="text-white text-sm leading-relaxed">
+              *Trembach Law Firm, APC attorneys have recovered in aggregate over Two Billion Dollars for their clients is derived from the total recoveries achieved by Trembach Law Firm, APC and its affiliated lawyers from various sources for their clients. These recoveries include but are not limited to recoveries for property damage claims, medical payments benefits claims, bodily injury claims, recovery of workers' compensation benefits and other compensation derived for the benefit of their clients. The total Two Billion Dollar amount also includes recoveries achieved as a result of co-counsel ventures with outside law firms, from results obtained by current Trembach Law Firm, APC partners while they held previous positions within other law firms, and by each of the partners' previous individual legal ventures.
+            </p>
+            <p className="text-white text-sm leading-relaxed mt-4">
+              The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Reviews, testimonials, endorsements, and results contained herein do not constitute a guarantee, warranty, or prediction of outcomes for your case matter.
+            </p>
+            <p className="text-white text-sm mt-4">
+              Copyright © 2025 - Trembach Law Firm, APC. All rights reserved.
             </p>
           </div>
         </div>

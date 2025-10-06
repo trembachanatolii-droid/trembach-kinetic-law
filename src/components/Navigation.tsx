@@ -274,8 +274,8 @@ const Navigation = () => {
                             </a>
                           </li>
                           <li>
-                            <a href="#" className="text-base text-gray-700 hover:text-red-600 transition-colors pointer-events-none">
-                              Blog: Legal Tips & News
+                            <a href="/blog" className="text-base text-gray-700 hover:text-red-600 transition-colors">
+                              Blog: Your Legal Resource
                             </a>
                           </li>
                           <li>

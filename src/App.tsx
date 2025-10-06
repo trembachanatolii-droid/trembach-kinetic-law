@@ -6,6 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
+import Blog from "./pages/Blog";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -565,6 +566,9 @@ function App() {
             
             {/* Paralysis Routes also need to be in PracticeAreaRouter */}
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
+            
+            {/* Blog Route */}
+            <Route path="/blog" element={<Blog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

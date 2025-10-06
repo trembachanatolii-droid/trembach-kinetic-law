@@ -137,79 +137,55 @@ const BrainCompensationCalculator = () => {
                   <p className="text-slate-600">Help us understand your brain injury</p>
                 </div>
 
-                <div className="space-y-4">
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Injury Severity</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                      {[
-                        { value: 'mild', label: 'Mild Concussion', desc: 'Brief loss of consciousness' },
-                        { value: 'moderate', label: 'Moderate TBI', desc: 'Extended recovery needed' },
-                        { value: 'severe', label: 'Severe TBI', desc: 'Long-term impairments' },
-                        { value: 'catastrophic', label: 'Catastrophic', desc: 'Permanent brain damage' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, injurySeverity: option.value })}
-                          className={`p-4 rounded-xl border-2 text-left transition-all ${
-                            formData.injurySeverity === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <div className="font-medium mb-1">{option.label}</div>
-                          <div className={`text-sm ${formData.injurySeverity === option.value ? 'text-white/70' : 'text-slate-500'}`}>
-                            {option.desc}
-                          </div>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                <div className="space-y-6">
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Injury Severity
+                    </label>
+                    <Select value={formData.injurySeverity} onValueChange={(value) => setFormData({ ...formData, injurySeverity: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select injury severity" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="mild">Mild Concussion - Brief loss of consciousness</SelectItem>
+                        <SelectItem value="moderate">Moderate TBI - Extended recovery needed</SelectItem>
+                        <SelectItem value="severe">Severe TBI - Long-term impairments</SelectItem>
+                        <SelectItem value="catastrophic">Catastrophic - Permanent brain damage</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Permanent Cognitive Disability</span>
-                    <div className="grid grid-cols-2 gap-3">
-                      {[
-                        { value: 'yes', label: 'Yes' },
-                        { value: 'no', label: 'No' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, permanentDisability: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.permanentDisability === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Permanent Cognitive Disability
+                    </label>
+                    <Select value={formData.permanentDisability} onValueChange={(value) => setFormData({ ...formData, permanentDisability: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select yes or no" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="yes">Yes</SelectItem>
+                        <SelectItem value="no">No</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-                  <label className="block">
-                    <span className="text-sm font-medium text-black mb-3 block">Pain & Suffering Level</span>
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                      {[
-                        { value: 'minimal', label: 'Minimal' },
-                        { value: 'moderate', label: 'Moderate' },
-                        { value: 'severe', label: 'Severe' },
-                        { value: 'extreme', label: 'Extreme' }
-                      ].map((option) => (
-                        <button
-                          key={option.value}
-                          onClick={() => setFormData({ ...formData, painLevel: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.painLevel === option.value
-                              ? 'border-black bg-black text-white'
-                              : 'border-slate-200 hover:border-slate-300'
-                          }`}
-                        >
-                          <span className="font-medium">{option.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  </label>
+                  <div>
+                    <label className="text-sm font-medium text-black mb-3 block">
+                      Pain & Suffering Level
+                    </label>
+                    <Select value={formData.painLevel} onValueChange={(value) => setFormData({ ...formData, painLevel: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select pain level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="minimal">Minimal</SelectItem>
+                        <SelectItem value="moderate">Moderate</SelectItem>
+                        <SelectItem value="severe">Severe</SelectItem>
+                        <SelectItem value="extreme">Extreme</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
                 </div>
               </div>
             )}

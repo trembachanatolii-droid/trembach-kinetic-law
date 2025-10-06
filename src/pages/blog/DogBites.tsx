@@ -6,14 +6,14 @@ import { RelatedPosts } from '@/components/blog/RelatedPosts';
 import { blogPosts } from '@/data/blogPosts';
 
 const DogBites = () => {
-  const currentCategory = 'Animal Attacks';
+  const currentCategory = 'Premises Liability';
   
   return (
     <>
       <SEO 
-        title="Dog Bite Laws in California: Owner Liability and Your Rights | Trembach Law"
-        description="Understanding California's strict liability dog bite laws, owner responsibilities, and how to protect your rights after a dog attack. Expert legal guidance from Trembach Law Firm."
-        keywords="dog bite lawyer, California dog attack, strict liability, animal attack attorney, dog owner liability, bite injury claim"
+        title="California Dog Bite Laws: Owner Liability and Your Rights | Trembach Law"
+        description="Understand California's strict liability dog bite laws, what compensation is available, and how to protect your rights after a dog attack."
+        keywords="dog bite, dog attack, California dog bite law, strict liability, dog owner liability, animal attack, dog bite injury, dog bite attorney"
         canonical="https://www.trembachlawfirm.com/blog/dog-bites"
       />
       
@@ -23,21 +23,21 @@ const DogBites = () => {
           <div className="absolute inset-0 bg-gradient-to-br from-[#007AFF]/90 to-[#0051D5]/90 z-10" />
           <img 
             src="https://images.unsplash.com/photo-1587300003388-59208cc962cb?auto=format&fit=crop&q=80"
-            alt="Dog bite injury legal representation"
+            alt="Dog bite injury and legal protection"
             className="absolute inset-0 w-full h-full object-cover"
           />
           <div className="relative z-20 max-w-4xl mx-auto px-6 text-center text-white">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              Dog Bite Laws in California: Owner Liability and Your Rights
+              California Dog Bite Laws: Owner Liability and Your Rights
             </h1>
             <div className="flex items-center justify-center gap-6 text-white/90">
               <span className="flex items-center gap-2">
                 <Calendar className="w-5 h-5" />
-                December 31, 2025
+                October 29, 2025
               </span>
               <span className="flex items-center gap-2">
                 <Clock className="w-5 h-5" />
-                10 min read
+                11 min read
               </span>
             </div>
           </div>
@@ -55,111 +55,107 @@ const DogBites = () => {
 
           <div className="prose prose-lg max-w-none">
             <p className="text-xl text-gray-600 leading-relaxed mb-8">
-              California has some of the strictest dog bite laws in the nation, designed to protect victims and hold owners accountable. Understanding these laws is crucial if you've been injured by a dog attack.
+              Dog bites can cause serious physical injuries, emotional trauma, and financial hardship. California's strict liability laws protect victims by holding dog owners accountable regardless of the animal's history.
             </p>
 
             <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">California's Strict Liability Law</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Under California Civil Code Section 3342, dog owners are strictly liable for injuries caused by their dogs. This means the owner is responsible regardless of whether the dog has shown aggressive tendencies before or whether the owner was negligent. The victim doesn't need to prove the owner knew the dog was dangerous.
+            
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Civil Code Section 3342</h3>
+            <p className="text-gray-700 mb-6">
+              California Civil Code Section 3342 imposes strict liability on dog owners for bite injuries. This means:
             </p>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>No "one bite" rule:</strong> Owner is liable even if dog has never bitten before</li>
+              <li><strong>No proof of negligence required:</strong> Victim doesn't need to prove owner was careless</li>
+              <li><strong>Owner knowledge irrelevant:</strong> Liability exists even if owner had no reason to know dog was dangerous</li>
+              <li><strong>Applies in public and private spaces:</strong> Covers bites occurring anywhere victim is lawfully present</li>
+            </ul>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">When Strict Liability Applies</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              California's strict liability law applies when:
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">When You're Lawfully Present</h3>
+            <p className="text-gray-700 mb-6">
+              Strict liability applies when the victim was:
             </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li><strong>Public or Lawful Private Property:</strong> The victim was in a public place or lawfully on private property</li>
-              <li><strong>No Provocation:</strong> The victim did not provoke the dog</li>
-              <li><strong>Direct Bite:</strong> The injury resulted from a dog bite (not just scratches or knockdowns)</li>
-              <li><strong>Ownership:</strong> The defendant owned or had control of the dog</li>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li>In a public place (sidewalk, park, etc.)</li>
+              <li>Lawfully on private property (invited guest, mail carrier, utility worker)</li>
+              <li>Performing official duties (police officer, firefighter)</li>
             </ul>
 
             <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Common Dog Bite Injuries</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Dog attacks can cause severe injuries including:
-            </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li>Puncture wounds and lacerations requiring stitches or surgery</li>
-              <li>Nerve damage affecting sensation and movement</li>
-              <li>Broken bones from powerful bites</li>
-              <li>Facial scarring and disfigurement</li>
-              <li>Infections including rabies and tetanus</li>
-              <li>Psychological trauma and PTSD, especially in children</li>
+            
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Physical Injuries</h3>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>Puncture wounds:</strong> Deep wounds from dog's teeth requiring stitches or surgery</li>
+              <li><strong>Lacerations:</strong> Tearing injuries that may damage muscles, nerves, and tendons</li>
+              <li><strong>Infections:</strong> Bacteria from dog's mouth can cause serious infections including sepsis</li>
+              <li><strong>Nerve damage:</strong> Permanent loss of sensation or mobility</li>
+              <li><strong>Broken bones:</strong> Fractures from large dog attacks</li>
+              <li><strong>Facial injuries:</strong> Especially common in children, often requiring reconstructive surgery</li>
+              <li><strong>Scarring and disfigurement:</strong> Permanent cosmetic damage</li>
+              <li><strong>Eye injuries:</strong> Can result in vision loss or blindness</li>
             </ul>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Defenses Dog Owners May Use</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Despite strict liability, owners may argue:
-            </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li><strong>Provocation:</strong> The victim provoked the dog through teasing, hitting, or threatening behavior</li>
-              <li><strong>Trespassing:</strong> The victim was not lawfully on the property where the bite occurred</li>
-              <li><strong>Assumption of Risk:</strong> In cases involving veterinarians, groomers, or dog trainers who knowingly work with dogs</li>
-              <li><strong>No Ownership:</strong> The defendant didn't own or control the dog</li>
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Disease Risks</h3>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>Rabies:</strong> Fatal if not treated immediately after exposure</li>
+              <li><strong>Tetanus:</strong> Bacterial infection affecting nervous system</li>
+              <li><strong>Sepsis:</strong> Life-threatening response to infection</li>
+              <li><strong>MRSA:</strong> Antibiotic-resistant bacterial infection</li>
+              <li><strong>Pasteurella:</strong> Common bacterial infection from dog bites</li>
             </ul>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Other Types of Dog-Related Injuries</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Not all dog injuries involve bites. You may have a claim for:
-            </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li><strong>Knockdown Injuries:</strong> When a dog jumps on someone causing them to fall</li>
-              <li><strong>Bicycle Accidents:</strong> Dogs chasing cyclists causing crashes</li>
-              <li><strong>Scratches and Clawing:</strong> May require proof of negligence rather than strict liability</li>
-              <li><strong>Attack on Another Pet:</strong> Veterinary bills and emotional distress from attacks on your animal</li>
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Psychological Trauma</h3>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>Post-traumatic stress disorder (PTSD):</strong> Flashbacks, nightmares, anxiety</li>
+              <li><strong>Cynophobia:</strong> Extreme fear of dogs</li>
+              <li><strong>Anxiety and depression:</strong> Lasting emotional impacts</li>
+              <li><strong>Sleep disturbances:</strong> Difficulty sleeping due to trauma</li>
+              <li><strong>Social withdrawal:</strong> Avoiding activities due to fear</li>
             </ul>
 
             <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Children and Dog Bites</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Children are particularly vulnerable to dog attacks and often suffer more severe injuries, especially to the face and head. California law provides special protections for child victims, and courts generally do not find that young children provoked a dog, even if they were playing roughly.
+            <p className="text-gray-700 mb-6">
+              Children are disproportionately affected by dog bites:
             </p>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Steps to Take After a Dog Bite</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Immediate actions can protect your health and legal rights:
-            </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li>Seek immediate medical attention, even for seemingly minor bites</li>
-              <li>Report the incident to local animal control or police</li>
-              <li>Document the scene with photos of injuries and location</li>
-              <li>Get contact information from the dog owner and any witnesses</li>
-              <li>Keep records of all medical treatment and expenses</li>
-              <li>Avoid discussing fault with the dog owner or their insurance</li>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li>Children under 10 suffer nearly half of all dog bite injuries</li>
+              <li>Children are more likely to suffer facial and head injuries</li>
+              <li>Injuries can cause lasting psychological trauma</li>
+              <li>Scarring may require multiple surgeries as child grows</li>
+              <li>Social and emotional development may be affected</li>
             </ul>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Compensation for Dog Bite Victims</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Victims may recover damages for:
-            </p>
-            <ul className="list-disc pl-6 mb-6 text-gray-700 space-y-3">
-              <li>Medical expenses including emergency care, surgery, and reconstructive procedures</li>
-              <li>Lost wages if unable to work during recovery</li>
-              <li>Pain and suffering from physical injuries</li>
-              <li>Emotional distress and psychological counseling</li>
-              <li>Scarring and disfigurement, especially on visible areas</li>
-              <li>Future medical care for ongoing treatment</li>
+            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Immediate Steps After a Dog Bite</h2>
+            
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Medical Care</h3>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>Seek immediate medical attention:</strong> Even minor bites can become infected</li>
+              <li><strong>Clean the wound:</strong> Rinse with soap and water</li>
+              <li><strong>Apply pressure:</strong> Control bleeding with clean cloth</li>
+              <li><strong>Document injuries:</strong> Take photos of wounds</li>
+              <li><strong>Get rabies information:</strong> Determine if dog has current vaccination</li>
+              <li><strong>Follow up care:</strong> Attend all appointments, complete antibiotics</li>
             </ul>
 
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Homeowner's Insurance Coverage</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              Most dog bite claims are covered by the owner's homeowner's or renter's insurance policy. These policies typically cover liability for dog bites up to the policy limits, which often range from $100,000 to $300,000. However, some insurance companies exclude certain breeds or have special requirements for coverage.
-            </p>
-
-            <h2 className="text-3xl font-bold text-gray-900 mt-12 mb-6">Statute of Limitations</h2>
-            <p className="text-gray-700 leading-relaxed mb-6">
-              In California, you have two years from the date of the dog bite to file a personal injury lawsuit. For injuries to minors, the statute of limitations may be tolled (paused) until they turn 18, but it's best to act quickly to preserve evidence and witness testimony.
-            </p>
+            <h3 className="text-2xl font-semibold text-gray-900 mt-8 mb-4">Report the Incident</h3>
+            <ul className="space-y-3 text-gray-700 mb-6">
+              <li><strong>Call animal control:</strong> Report the bite to local authorities</li>
+              <li><strong>File police report:</strong> Creates official record of incident</li>
+              <li><strong>Obtain owner information:</strong> Name, address, phone number, insurance</li>
+              <li><strong>Get dog information:</strong> Breed, name, vaccination records</li>
+              <li><strong>Identify witnesses:</strong> Get contact information for anyone who saw attack</li>
+            </ul>
 
             <div className="bg-[#007AFF]/5 border-l-4 border-[#007AFF] p-8 my-12 rounded-r-lg">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Why Choose Trembach Law Firm?</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Experienced Dog Bite Representation</h3>
               <p className="text-gray-700 mb-6">
-                Dog bite cases require understanding of both strict liability and negligence law. Our attorneys have extensive experience handling animal attack cases and fighting for maximum compensation for our clients' injuries.
+                Dog bite cases require prompt action to preserve evidence and protect your rights. Our firm has successfully represented numerous dog bite victims throughout California, securing compensation for medical expenses, scarring, and emotional trauma.
               </p>
               <Link 
                 to="/contact" 
                 className="inline-flex items-center gap-2 bg-[#007AFF] text-white px-8 py-4 rounded-full font-semibold hover:bg-[#0051D5] transition-all shadow-lg hover:shadow-xl"
               >
-                Schedule Free Consultation
+                Free Consultation
               </Link>
             </div>
 

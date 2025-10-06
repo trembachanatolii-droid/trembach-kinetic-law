@@ -43,6 +43,7 @@ import InternalInjuriesBlog from "./pages/blog/InternalInjuries";
 import BackInjuriesBlog from "./pages/blog/BackInjuries";
 import SoftTissueInjuriesBlog from "./pages/blog/SoftTissueInjuries";
 import HitAndRunBlog from "./pages/blog/HitAndRun";
+import TraumaticBrainInjuryBlog from "./pages/blog/TraumaticBrainInjury";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -679,6 +680,8 @@ function App() {
             <Route path="/blog/back-injuries" element={<BackInjuriesBlog />} />
             <Route path="/blog/soft-tissue-injuries" element={<SoftTissueInjuriesBlog />} />
             <Route path="/blog/hit-and-run" element={<HitAndRunBlog />} />
+            <Route path="/blog/traumatic-brain-injury" element={<TraumaticBrainInjuryBlog />} />
+            <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

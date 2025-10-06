@@ -374,7 +374,32 @@
 - FDA warning considerations (black box, safety alerts)
 - Dropdown-only form with causation/expert testimony disclaimer
 
-### Templated (5 calculators remaining)
+### Phase 7AQ: Insurance Bad Faith Calculator ✅ NEW
+- Insurance type multipliers (health, disability, life, property, auto)
+- Claim type factors (wrongful denial, unreasonable delay, lowball offer)
+- Claim amount and denial reason considerations
+- Insurer conduct type (willful, reckless, negligent)
+- Consequential damages and delay duration
+- Dropdown-only form with bad faith disclaimer
+
+### Phase 7AR: Nursing Home Negligence Calculator ✅ NEW
+- Abuse type multipliers (physical, sexual, neglect, financial exploitation)
+- Facility type and injury severity factors
+- Duration of abuse and regulatory violations
+- Victim age vulnerability (85+ highest multiplier)
+- Facility response (cover-up vs appropriate)
+- Dropdown-only form with elder abuse disclaimer
+
+### Phase 7AS: Catastrophic Injury Calculator ✅ NEW
+- Injury type multipliers (quadriplegia, severe TBI, multiple amputations)
+- Cause of injury and liability strength factors
+- Lifetime care needs (24/7 nursing to independent)
+- Cognitive impairment and employment impact
+- Home modification requirements
+- Age-based future damage calculations (younger = higher)
+- Dropdown-only form with life care planning disclaimer
+
+### Templated (2 calculators remaining)
 
 **Personal Injury** (0)
 - All personal injury calculators complete

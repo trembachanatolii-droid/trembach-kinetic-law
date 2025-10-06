@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertCircle } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface FormData {
   defamationType: string;
@@ -189,58 +190,38 @@ const DefamationCompensationCalculator = () => {
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         What type of defamation occurred?
                       </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'business', label: 'Business Defamation' },
-                          { value: 'professional', label: 'Professional Reputation' },
-                          { value: 'online-libel', label: 'Online Libel' },
-                          { value: 'social-media', label: 'Social Media Posts' },
-                          { value: 'review-sites', label: 'Fake Reviews' },
-                          { value: 'slander', label: 'Spoken Slander' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('defamationType', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.defamationType === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.defamationType} onValueChange={(value) => handleInputChange('defamationType', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select defamation type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="business">Business Defamation</SelectItem>
+                          <SelectItem value="professional">Professional Reputation</SelectItem>
+                          <SelectItem value="online-libel">Online Libel</SelectItem>
+                          <SelectItem value="social-media">Social Media Posts</SelectItem>
+                          <SelectItem value="review-sites">Fake Reviews</SelectItem>
+                          <SelectItem value="slander">Spoken Slander</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         Where was it published?
                       </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'social-media', label: 'Social Media' },
-                          { value: 'website', label: 'Website / Blog' },
-                          { value: 'review-site', label: 'Review Site' },
-                          { value: 'news-media', label: 'News Media' },
-                          { value: 'email', label: 'Email / Private Message' },
-                          { value: 'spoken', label: 'Spoken Word' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('platform', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.platform === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.platform} onValueChange={(value) => handleInputChange('platform', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select platform" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="social-media">Social Media</SelectItem>
+                          <SelectItem value="website">Website / Blog</SelectItem>
+                          <SelectItem value="review-site">Review Site</SelectItem>
+                          <SelectItem value="news-media">News Media</SelectItem>
+                          <SelectItem value="email">Email / Private Message</SelectItem>
+                          <SelectItem value="spoken">Spoken Word</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 
@@ -271,107 +252,67 @@ const DefamationCompensationCalculator = () => {
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         Are you a public figure?
                       </label>
-                      <div className="grid md:grid-cols-3 gap-3">
-                        {[
-                          { value: 'private', label: 'Private Citizen' },
-                          { value: 'limited-public', label: 'Limited Public' },
-                          { value: 'public', label: 'Public Figure' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('publicFigure', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.publicFigure === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.publicFigure} onValueChange={(value) => handleInputChange('publicFigure', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select public figure status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="private">Private Citizen</SelectItem>
+                          <SelectItem value="limited-public">Limited Public</SelectItem>
+                          <SelectItem value="public">Public Figure</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         Scope of reputation damage
                       </label>
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { value: 'local', label: 'Local Community' },
-                          { value: 'regional', label: 'Regional' },
-                          { value: 'national', label: 'National' },
-                          { value: 'international', label: 'International' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('reputationScope', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.reputationScope === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.reputationScope} onValueChange={(value) => handleInputChange('reputationScope', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select reputation scope" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="local">Local Community</SelectItem>
+                          <SelectItem value="regional">Regional</SelectItem>
+                          <SelectItem value="national">National</SelectItem>
+                          <SelectItem value="international">International</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         Financial impact
                       </label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'severe', label: 'Severe - Lost Business' },
-                          { value: 'significant', label: 'Significant Losses' },
-                          { value: 'moderate', label: 'Moderate Impact' },
-                          { value: 'minor', label: 'Minor Impact' },
-                          { value: 'none', label: 'No Proven Losses' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('financialImpact', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.financialImpact === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.financialImpact} onValueChange={(value) => handleInputChange('financialImpact', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select financial impact" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="severe">Severe - Lost Business</SelectItem>
+                          <SelectItem value="significant">Significant Losses</SelectItem>
+                          <SelectItem value="moderate">Moderate Impact</SelectItem>
+                          <SelectItem value="minor">Minor Impact</SelectItem>
+                          <SelectItem value="none">No Proven Losses</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-900 mb-3">
                         Strength of evidence
                       </label>
-                      <div className="grid md:grid-cols-3 gap-3">
-                        {[
-                          { value: 'strong', label: 'Strong Documentation' },
-                          { value: 'moderate', label: 'Moderate Evidence' },
-                          { value: 'weak', label: 'Limited Evidence' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('evidenceStrength', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${
-                              formData.evidenceStrength === option.value
-                                ? 'border-slate-900 bg-slate-50'
-                                : 'border-slate-200 hover:border-slate-400'
-                            }`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
+                      <Select value={formData.evidenceStrength} onValueChange={(value) => handleInputChange('evidenceStrength', value)}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="Select evidence strength" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="strong">Strong Documentation</SelectItem>
+                          <SelectItem value="moderate">Moderate Evidence</SelectItem>
+                          <SelectItem value="weak">Limited Evidence</SelectItem>
+                        </SelectContent>
+                      </Select>
                     </div>
                   </div>
 

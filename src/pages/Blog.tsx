@@ -542,42 +542,42 @@ const Blog = () => {
                       />
                     </div>
 
-                    {/* Lighter Overlay for Better Visibility */}
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-black/20 to-black/50 group-hover:from-black/15 group-hover:via-black/25 group-hover:to-black/60 transition-all duration-500"></div>
+                    {/* Strong Gradient Overlay for Text Readability */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/50 to-black/80 group-hover:from-black/50 group-hover:via-black/60 group-hover:to-black/90 transition-all duration-500"></div>
                     
                     {/* Map Pin Icon */}
                     <div className="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-[#007AFF] transition-all duration-300">
                       <MapPin className="w-5 h-5 text-white" />
                     </div>
 
-                    {/* Content */}
+                    {/* Content with Strong Text Shadows */}
                     <div className="absolute inset-0 p-7 flex flex-col justify-end text-white">
                       <div className="mb-4">
-                        <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium mb-3">
+                        <div className="inline-block px-3 py-1 bg-white/30 backdrop-blur-md rounded-full text-xs font-semibold mb-3 shadow-lg" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
                           {location.region}
                         </div>
                         
-                        <h3 className="text-4xl font-semibold mb-2 tracking-tight drop-shadow-lg group-hover:text-[#007AFF] transition-colors">
+                        <h3 className="text-4xl font-bold mb-2 tracking-tight group-hover:text-[#007AFF] transition-colors" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)' }}>
                           {location.city}
                         </h3>
                         
                         {location.office && (
-                          <p className="text-base mb-2 font-medium opacity-95 drop-shadow-md">
+                          <p className="text-base mb-2 font-semibold" style={{ textShadow: '0 3px 6px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.7)' }}>
                             {location.office}
                           </p>
                         )}
                         
-                        <p className="text-sm opacity-90 mb-3">{location.county}</p>
+                        <p className="text-sm mb-3 font-medium" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>{location.county}</p>
                       </div>
                       
                       <div className="space-y-2 text-sm drop-shadow-md mb-4">
-                        <p className="font-bold text-lg opacity-100">{location.phone}</p>
+                        <p className="font-bold text-xl" style={{ textShadow: '0 4px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.8)' }}>{location.phone}</p>
                       </div>
                       
-                      {/* CTA Arrow */}
-                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                        <span className="text-sm font-semibold">Schedule Consultation</span>
-                        <ArrowRight className="w-5 h-5" />
+                      {/* CTA with Strong Visibility */}
+                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full w-fit">
+                        <span className="text-sm font-bold" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>Schedule Consultation</span>
+                        <ArrowRight className="w-5 h-5" style={{ filter: 'drop-shadow(0 2px 4px rgba(0,0,0,0.8))' }} />
                       </div>
                     </div>
 

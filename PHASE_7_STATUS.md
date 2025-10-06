@@ -347,9 +347,34 @@
 44. ✅ Product Liability (NEW)
 
 ### Phase 7AM: Mass Torts Calculator ✅ NEW
-### Phase 7AN: Class Actions Calculator ✅ NEW
+- Tort type multipliers (pharmaceutical, medical device, chemical exposure)
+- Case strength and MDL settlement stage factors
+- Victim count and documentation quality considerations
+- Injury severity scaling with age adjustments
+- Dropdown-only form with MDL-specific disclaimer
 
-### Templated (7 calculators remaining)
+### Phase 7AN: Class Actions Calculator ✅ NEW
+- Action type multipliers (consumer fraud, employment, securities)
+- Class size and certification status factors
+- Individual damages and evidence strength
+- Defendant type and damage type considerations
+- Dropdown-only form with class action disclaimer
+
+### Phase 7AO: Civil Rights Violations Calculator ✅ NEW
+- Violation type multipliers (police brutality, false arrest, discrimination)
+- Perpetrator type and policy violation clarity
+- Injury severity with economic damages
+- Documentation quality and public interest factors
+- Dropdown-only form with Section 1983 disclaimer
+
+### Phase 7AP: Pharmaceutical Calculator ✅ NEW
+- Drug type multipliers (prescription, OTC, vaccine, medical device)
+- Adverse event severity (cancer, heart attack, stroke, death)
+- Usage duration and recall status factors
+- FDA warning considerations (black box, safety alerts)
+- Dropdown-only form with causation/expert testimony disclaimer
+
+### Templated (5 calculators remaining)
 
 **Personal Injury** (0)
 - All personal injury calculators complete

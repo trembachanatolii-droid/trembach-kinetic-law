@@ -7,6 +7,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
 import Blog from "./pages/Blog";
+
+// Blog Category Pages
+import AutoAccidents from "./pages/blog/AutoAccidents";
+import BrainInjuries from "./pages/blog/BrainInjuries";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -569,6 +573,50 @@ function App() {
             
             {/* Blog Route */}
             <Route path="/blog" element={<Blog />} />
+          
+            {/* Blog Category Pages */}
+            <Route path="/blog/auto-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/brain-injuries" element={<BrainInjuries />} />
+            <Route path="/blog/accident-response" element={<AutoAccidents />} />
+            <Route path="/blog/animal-attacks" element={<AutoAccidents />} />
+            <Route path="/blog/auto-safety" element={<AutoAccidents />} />
+            <Route path="/blog/bicycle-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/case-protection" element={<AutoAccidents />} />
+            <Route path="/blog/case-resolution" element={<AutoAccidents />} />
+            <Route path="/blog/case-strategy" element={<AutoAccidents />} />
+            <Route path="/blog/catastrophic-injuries" element={<AutoAccidents />} />
+            <Route path="/blog/common-injuries" element={<AutoAccidents />} />
+            <Route path="/blog/compensation" element={<AutoAccidents />} />
+            <Route path="/blog/complex-litigation" element={<AutoAccidents />} />
+            <Route path="/blog/damages-calculation" element={<AutoAccidents />} />
+            <Route path="/blog/elder-abuse" element={<AutoAccidents />} />
+            <Route path="/blog/emotional-trauma" element={<AutoAccidents />} />
+            <Route path="/blog/evidence" element={<AutoAccidents />} />
+            <Route path="/blog/family-impact" element={<AutoAccidents />} />
+            <Route path="/blog/government-liability" element={<AutoAccidents />} />
+            <Route path="/blog/insurance-claims" element={<AutoAccidents />} />
+            <Route path="/blog/insurance-coverage" element={<AutoAccidents />} />
+            <Route path="/blog/insurance-defense" element={<AutoAccidents />} />
+            <Route path="/blog/legal-concepts" element={<AutoAccidents />} />
+            <Route path="/blog/legal-deadlines" element={<AutoAccidents />} />
+            <Route path="/blog/legal-education" element={<AutoAccidents />} />
+            <Route path="/blog/legal-fees" element={<AutoAccidents />} />
+            <Route path="/blog/legal-guidance" element={<AutoAccidents />} />
+            <Route path="/blog/legal-insights" element={<AutoAccidents />} />
+            <Route path="/blog/legal-process" element={<AutoAccidents />} />
+            <Route path="/blog/legal-remedies" element={<AutoAccidents />} />
+            <Route path="/blog/legal-strategy" element={<AutoAccidents />} />
+            <Route path="/blog/medical-malpractice" element={<AutoAccidents />} />
+            <Route path="/blog/motorcycle-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/pedestrian-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/premises-liability" element={<AutoAccidents />} />
+            <Route path="/blog/product-liability" element={<AutoAccidents />} />
+            <Route path="/blog/rideshare-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/serious-injuries" element={<AutoAccidents />} />
+            <Route path="/blog/settlement-strategy" element={<AutoAccidents />} />
+            <Route path="/blog/truck-accidents" element={<AutoAccidents />} />
+            <Route path="/blog/workplace-injuries" element={<AutoAccidents />} />
+            <Route path="/blog/wrongful-death" element={<AutoAccidents />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -22,6 +22,9 @@ import CatastrophicInjuriesBlog from "./pages/blog/CatastrophicInjuries";
 import InsuranceClaimsBlog from "./pages/blog/InsuranceClaims";
 import WrongfulDeathBlog from "./pages/blog/WrongfulDeath";
 import PremisesLiabilityBlog from "./pages/blog/PremisesLiability";
+import AccidentResponseBlog from "./pages/blog/AccidentResponse";
+import EvidenceBlog from "./pages/blog/Evidence";
+import SettlementStrategyBlog from "./pages/blog/SettlementStrategy";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -593,7 +596,7 @@ function App() {
             <Route path="/blog/bicycle-accidents" element={<BicycleAccidentsBlog />} />
             <Route path="/blog/workplace-injuries" element={<WorkplaceInjuriesBlog />} />
             {/* Placeholder routes - will be implemented */}
-            <Route path="/blog/accident-response" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/accident-response" element={<AccidentResponseBlog />} />
             <Route path="/blog/animal-attacks" element={<AutoAccidentsBlog />} />
             <Route path="/blog/auto-safety" element={<AutoAccidentsBlog />} />
             <Route path="/blog/case-protection" element={<AutoAccidentsBlog />} />
@@ -606,7 +609,7 @@ function App() {
             <Route path="/blog/damages-calculation" element={<AutoAccidentsBlog />} />
             <Route path="/blog/elder-abuse" element={<AutoAccidentsBlog />} />
             <Route path="/blog/emotional-trauma" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/evidence" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/evidence" element={<EvidenceBlog />} />
             <Route path="/blog/family-impact" element={<AutoAccidentsBlog />} />
             <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
             <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
@@ -625,7 +628,7 @@ function App() {
             <Route path="/blog/product-liability" element={<AutoAccidentsBlog />} />
             <Route path="/blog/rideshare-accidents" element={<AutoAccidentsBlog />} />
             <Route path="/blog/serious-injuries" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/settlement-strategy" element={<AutoAccidentsBlog />} />
+            <Route path="/blog/settlement-strategy" element={<SettlementStrategyBlog />} />
             <Route path="/blog/wrongful-death" element={<WrongfulDeathBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

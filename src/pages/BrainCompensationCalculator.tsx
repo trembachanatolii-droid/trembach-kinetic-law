@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 const BrainCompensationCalculator = () => {
   const [step, setStep] = useState(1);
@@ -226,13 +226,19 @@ const BrainCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Total Medical Costs (past & future)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$100,000"
-                      value={formData.medicalCosts}
-                      onChange={(e) => setFormData({ ...formData, medicalCosts: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select medical cost range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="50000">Under $50,000</SelectItem>
+                        <SelectItem value="100000">$50,000 - $100,000</SelectItem>
+                        <SelectItem value="250000">$100,000 - $250,000</SelectItem>
+                        <SelectItem value="500000">$250,000 - $500,000</SelectItem>
+                        <SelectItem value="1000000">$500,000 - $1,000,000</SelectItem>
+                        <SelectItem value="2000000">Over $1,000,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Include therapy, medications, assistive devices</p>
                   </div>
 
@@ -240,28 +246,38 @@ const BrainCompensationCalculator = () => {
                     <label className="text-sm font-medium text-black mb-3 block">
                       Annual Income (before injury)
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="$75,000"
-                      value={formData.lostWages}
-                      onChange={(e) => setFormData({ ...formData, lostWages: e.target.value })}
-                      className="h-14 text-lg"
-                    />
+                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select annual income range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="30000">Under $30,000</SelectItem>
+                        <SelectItem value="50000">$30,000 - $50,000</SelectItem>
+                        <SelectItem value="75000">$50,000 - $75,000</SelectItem>
+                        <SelectItem value="100000">$75,000 - $100,000</SelectItem>
+                        <SelectItem value="150000">$100,000 - $150,000</SelectItem>
+                        <SelectItem value="200000">Over $150,000</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div>
                     <label className="text-sm font-medium text-black mb-3 block">
                       Your Age
                     </label>
-                    <Input
-                      type="number"
-                      placeholder="45"
-                      value={formData.age}
-                      onChange={(e) => setFormData({ ...formData, age: e.target.value })}
-                      className="h-14 text-lg"
-                      min="0"
-                      max="100"
-                    />
+                    <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
+                      <SelectTrigger className="h-14 text-lg">
+                        <SelectValue placeholder="Select your age range" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="25">Under 30</SelectItem>
+                        <SelectItem value="35">30-39</SelectItem>
+                        <SelectItem value="45">40-49</SelectItem>
+                        <SelectItem value="55">50-59</SelectItem>
+                        <SelectItem value="65">60-69</SelectItem>
+                        <SelectItem value="75">70 or older</SelectItem>
+                      </SelectContent>
+                    </Select>
                     <p className="text-xs text-slate-500 mt-2">Used to calculate future lost earnings</p>
                   </div>
                 </div>
@@ -298,9 +314,13 @@ const BrainCompensationCalculator = () => {
                 </div>
 
                 <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <p className="text-sm text-amber-900">
-                    <strong>Important:</strong> This is an estimate only. Brain injury cases are complex and actual compensation 
-                    varies significantly based on medical evidence, expert testimony, and long-term prognosis.
+                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
+                  <p className="text-sm text-amber-900 leading-relaxed">
+                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
+                    Brain injury cases are highly complex and actual compensation varies significantly based on medical evidence, 
+                    expert testimony, long-term prognosis, jurisdiction, jury composition, and specific case facts. Results are not 
+                    guaranteed. No attorney-client relationship is created by using this calculator. Each case must be evaluated 
+                    individually by a qualified brain injury attorney licensed in your state. Past results do not guarantee future outcomes.
                   </p>
                 </div>
 

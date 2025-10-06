@@ -287,13 +287,13 @@
     visibility: visible !important;
   }
 
-  /* APPLE-STYLE CTA SECTIONS - Clean, minimal, high contrast */
+  /* APPLE-STYLE CTA SECTIONS - Apple Blue Color */
   .calculator-cta-section {
-    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
     border-radius: 24px;
     padding: 48px 32px;
     text-align: center;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 122, 255, 0.3);
   }
 
   .calculator-cta-section h3,
@@ -307,7 +307,7 @@
   }
 
   .calculator-cta-section p {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: rgba(255, 255, 255, 0.95) !important;
     font-size: 18px !important;
     line-height: 1.5 !important;
     margin-bottom: 32px !important;
@@ -317,7 +317,7 @@
   /* Apple-style buttons inside CTA - maintain their own colors */
   .calculator-cta-section button {
     background-color: #ffffff !important;
-    color: #1a1a1a !important;
+    color: #007AFF !important;
     border: none !important;
     font-weight: 600 !important;
     transition: all 0.2s ease !important;
@@ -325,8 +325,8 @@
 
   .calculator-cta-section button:hover {
     background-color: rgba(255, 255, 255, 0.92) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+    transform: translateY(-2px) scale(1.02) !important;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4) !important;
   }
 
   .calculator-cta-section button.outline,
@@ -338,7 +338,7 @@
 
   .calculator-cta-section button.outline:hover,
   .calculator-cta-section button[class*="outline"]:hover {
-    background-color: rgba(255, 255, 255, 0.1) !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
     border-color: rgba(255, 255, 255, 0.5) !important;
   }
 

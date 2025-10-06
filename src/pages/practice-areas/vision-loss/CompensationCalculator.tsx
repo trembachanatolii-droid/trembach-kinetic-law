@@ -3,10 +3,10 @@ import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
 import { CalculatorProgress } from '@/components/calculator/CalculatorProgress';
 import { CalculatorSEO } from '@/components/calculator/CalculatorSEO';
 import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { OptionButton } from '@/components/calculator/OptionButton';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface VisionLossFormData extends CalculatorFormData {
   visionLossType: string;
@@ -224,50 +224,50 @@ export default function VisionLossCompensationCalculator() {
             <div className="space-y-6">
               <div>
                 <Label className="text-base font-medium mb-4 block">Type of Vision Loss</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {visionLossTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.visionLossType === option.value}
-                      onClick={() => updateField('visionLossType', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.visionLossType} onValueChange={(value) => updateField('visionLossType', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select vision loss type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {visionLossTypeOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Severity Level</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {severityOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.severity === option.value}
-                      onClick={() => updateField('severity', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.severity} onValueChange={(value) => updateField('severity', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select severity level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {severityOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Cause of Vision Loss</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {causeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.cause === option.value}
-                      onClick={() => updateField('cause', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.cause} onValueChange={(value) => updateField('cause', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select cause" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {causeOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
@@ -334,50 +334,50 @@ export default function VisionLossCompensationCalculator() {
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Your Age</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {ageOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.age === option.value}
-                      onClick={() => updateField('age', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select age range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ageOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Occupation Type</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {occupationOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.occupation === option.value}
-                      onClick={() => updateField('occupation', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.occupation} onValueChange={(value) => updateField('occupation', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select occupation type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {occupationOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
 
               <div>
                 <Label className="text-base font-medium mb-4 block">Adaptive Needs</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {adaptiveNeedsOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.adaptiveNeeds === option.value}
-                      onClick={() => updateField('adaptiveNeeds', option.value)}
-                    />
-                  ))}
-                </div>
+                <Select value={formData.adaptiveNeeds} onValueChange={(value) => updateField('adaptiveNeeds', value)}>
+                  <SelectTrigger className="h-14 text-lg">
+                    <SelectValue placeholder="Select adaptive needs level" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {adaptiveNeedsOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label} - {option.description}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

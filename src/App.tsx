@@ -37,6 +37,9 @@ import DefectiveProductsBlog from "./pages/blog/DefectiveProducts";
 import AmputationBlog from "./pages/blog/Amputation";
 import ParalysisBlog from "./pages/blog/Paralysis";
 import ScarringDisfigurementBlog from "./pages/blog/ScarringDisfigurement";
+import WhiplashBlog from "./pages/blog/Whiplash";
+import BrokenBonesBlog from "./pages/blog/BrokenBones";
+import InternalInjuriesBlog from "./pages/blog/InternalInjuries";
 import AboutPage from "./pages/About";
 import PracticeAreasOverview from "./pages/PracticeAreasOverview";
 import FreeConsultation from "./pages/FreeConsultation";
@@ -667,6 +670,9 @@ function App() {
             <Route path="/blog/amputation" element={<AmputationBlog />} />
             <Route path="/blog/paralysis" element={<ParalysisBlog />} />
             <Route path="/blog/scarring-disfigurement" element={<ScarringDisfigurementBlog />} />
+            <Route path="/blog/whiplash" element={<WhiplashBlog />} />
+            <Route path="/blog/broken-bones" element={<BrokenBonesBlog />} />
+            <Route path="/blog/internal-injuries" element={<InternalInjuriesBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -516,122 +516,121 @@ const Blog = () => {
                 const matchesRegion = selectedRegion === 'All' || location.region === selectedRegion;
                 return matchesSearch && matchesRegion;
               })
-              .map((location, index) => {
-                const { ref, isVisible } = useScrollAnimation();
-                
-                return (
-                  <div key={index} ref={ref}>
-                    {/* Structured Data for Local Business */}
-                    <script type="application/ld+json">
-                      {JSON.stringify({
-                        "@context": "https://schema.org",
-                        "@type": "LocalBusiness",
-                        "name": `Trembach Law Firm - ${location.city}`,
-                        "image": location.bgImage,
-                        "address": location.address ? {
-                          "@type": "PostalAddress",
-                          "streetAddress": location.address,
-                          "addressLocality": location.city,
-                          "addressRegion": "CA",
-                          "postalCode": location.cityState?.split(' ').pop()
-                        } : undefined,
-                        "telephone": location.phone,
-                        "areaServed": {
-                          "@type": "City",
-                          "name": location.county
-                        },
-                        "priceRange": "$$"
-                      })}
-                    </script>
+              .map((location, index) => (
+                <div key={index} className="animate-fade-in" style={{ animationDelay: `${index * 80}ms` }}>
+                  {/* Structured Data for Local Business */}
+                  <script type="application/ld+json">
+                    {JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "LocalBusiness",
+                      "name": `Trembach Law Firm - ${location.city}`,
+                      "image": location.bgImage,
+                      "address": location.address ? {
+                        "@type": "PostalAddress",
+                        "streetAddress": location.address,
+                        "addressLocality": location.city,
+                        "addressRegion": "CA",
+                        "postalCode": location.cityState?.split(' ').pop()
+                      } : undefined,
+                      "telephone": location.phone,
+                      "areaServed": {
+                        "@type": "City",
+                        "name": location.county
+                      },
+                      "priceRange": "$$"
+                    })}
+                  </script>
 
-                    <Link
-                      to={location.slug}
-                      className={`block relative h-[340px] rounded-3xl overflow-hidden group cursor-pointer transition-all duration-500 hover:shadow-2xl ${
-                        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
-                      }`}
-                      style={{
-                        transitionDelay: `${index * 80}ms`,
-                        boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
-                      }}
-                    >
-                      {/* Lazy Loaded Image */}
-                      <div className="absolute inset-0">
-                        <LazyImage
-                          src={location.bgImage}
-                          alt={`${location.city} Office - Trembach Law Firm`}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
-                        />
+                  <Link
+                    to={location.slug}
+                    className="block relative h-[340px] rounded-3xl overflow-hidden group cursor-pointer transition-all duration-500 hover:shadow-2xl"
+                    style={{
+                      boxShadow: '0 2px 8px rgba(0,0,0,0.08)'
+                    }}
+                  >
+                    {/* Lazy Loaded Image */}
+                    <div className="absolute inset-0">
+                      <LazyImage
+                        src={location.bgImage}
+                        alt={`${location.city} Office - Trembach Law Firm`}
+                        className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                      />
+                    </div>
+
+                    {/* Glassmorphism Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/75 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/85 transition-all duration-500"></div>
+                    
+                    {/* Map Pin Icon */}
+                    <div className="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-[#007AFF] transition-all duration-300">
+                      <MapPin className="w-5 h-5 text-white" />
+                    </div>
+
+                    {/* Content */}
+                    <div className="absolute inset-0 p-7 flex flex-col justify-end text-white">
+                      <div className="mb-4">
+                        <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium mb-3">
+                          {location.region}
+                        </div>
+                        
+                        <h3 className="text-4xl font-semibold mb-2 tracking-tight drop-shadow-lg group-hover:text-[#007AFF] transition-colors">
+                          {location.city}
+                        </h3>
+                        
+                        {location.office && (
+                          <p className="text-base mb-2 font-medium opacity-95 drop-shadow-md">
+                            {location.office}
+                          </p>
+                        )}
+                        
+                        <p className="text-sm opacity-90 mb-3">{location.county}</p>
                       </div>
-
-                      {/* Glassmorphism Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/75 group-hover:from-black/30 group-hover:via-black/40 group-hover:to-black/85 transition-all duration-500"></div>
                       
-                      {/* Map Pin Icon */}
-                      <div className="absolute top-6 right-6 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center group-hover:bg-[#007AFF] transition-all duration-300">
-                        <MapPin className="w-5 h-5 text-white" />
-                      </div>
-
-                      {/* Content */}
-                      <div className="absolute inset-0 p-7 flex flex-col justify-end text-white">
-                        <div className="mb-4">
-                          <div className="inline-block px-3 py-1 bg-white/20 backdrop-blur-md rounded-full text-xs font-medium mb-3">
-                            {location.region}
+                      <div className="space-y-2 text-sm drop-shadow-md mb-4">
+                        {location.address && (
+                          <div>
+                            <p className="font-medium opacity-95">{location.address}</p>
+                            <p className="font-medium opacity-95">{location.cityState}</p>
                           </div>
-                          
-                          <h3 className="text-4xl font-semibold mb-2 tracking-tight drop-shadow-lg group-hover:text-[#007AFF] transition-colors">
-                            {location.city}
-                          </h3>
-                          
-                          {location.office && (
-                            <p className="text-base mb-2 font-medium opacity-95 drop-shadow-md">
-                              {location.office}
-                            </p>
-                          )}
-                          
-                          <p className="text-sm opacity-90 mb-3">{location.county}</p>
-                        </div>
+                        )}
+                        <p className="font-bold text-lg opacity-100">{location.phone}</p>
                         
-                        <div className="space-y-2 text-sm drop-shadow-md mb-4">
-                          {location.address && (
-                            <div>
-                              <p className="font-medium opacity-95">{location.address}</p>
-                              <p className="font-medium opacity-95">{location.cityState}</p>
-                            </div>
-                          )}
-                          <p className="font-bold text-lg opacity-100">{location.phone}</p>
-                          
-                          {/* Stats */}
-                          <div className="flex gap-4 mt-3 text-xs">
-                            <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-                              <span className="font-semibold">{location.casesWon}</span> Cases Won
-                            </div>
-                            <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
-                              Since <span className="font-semibold">{location.established}</span>
-                            </div>
+                        {/* Stats */}
+                        <div className="flex gap-4 mt-3 text-xs">
+                          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+                            <span className="font-semibold">{location.casesWon}</span> Cases Won
+                          </div>
+                          <div className="bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-lg">
+                            Since <span className="font-semibold">{location.established}</span>
                           </div>
                         </div>
-                        
-                        {/* CTA Arrow */}
-                        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                          <span className="text-sm font-semibold">Schedule Consultation</span>
-                          <ArrowRight className="w-5 h-5" />
-                        </div>
                       </div>
+                      
+                      {/* CTA Arrow */}
+                      <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
+                        <span className="text-sm font-semibold">Schedule Consultation</span>
+                        <ArrowRight className="w-5 h-5" />
+                      </div>
+                    </div>
 
-                      {/* Hover Glow Effect */}
-                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-                        <div className="absolute inset-0 bg-gradient-to-t from-[#007AFF]/20 to-transparent"></div>
-                      </div>
-                    </Link>
-                  </div>
-                );
-              })}
+                    {/* Hover Glow Effect */}
+                    <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#007AFF]/20 to-transparent"></div>
+                    </div>
+                  </Link>
+                </div>
+              ))}
           </div>
 
           {/* No Results Message */}
-          {[].filter(location => {
-            const matchesSearch = location.city?.toLowerCase().includes(countySearch.toLowerCase()) ||
-                                location.county?.toLowerCase().includes(countySearch.toLowerCase());
+          {[
+            {
+              city: 'Los Angeles',
+              county: 'Los Angeles County',
+              region: 'Southern CA'
+            }
+          ].filter(location => {
+            const matchesSearch = location.city.toLowerCase().includes(countySearch.toLowerCase()) ||
+                                location.county.toLowerCase().includes(countySearch.toLowerCase());
             const matchesRegion = selectedRegion === 'All' || location.region === selectedRegion;
             return matchesSearch && matchesRegion;
           }).length === 0 && countySearch && (

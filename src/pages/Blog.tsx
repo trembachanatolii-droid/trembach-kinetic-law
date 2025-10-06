@@ -278,6 +278,7 @@ const Blog = () => {
                           <Link
                             to="#"
                             className="inline-flex items-center gap-2 text-base font-semibold hover:gap-3 transition-all group text-[#007AFF]"
+                            onClick={() => window.scrollTo(0, 0)}
                           >
                             Read More
                             <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -373,7 +374,7 @@ const Blog = () => {
               className="bg-white hover:bg-white/90 text-lg px-8 h-14 font-semibold"
               style={{ color: '#007AFF' }}
             >
-              <Link to="/free-consultation">CALL</Link>
+              <Link to="/free-consultation" onClick={() => window.scrollTo(0, 0)}>CALL</Link>
             </Button>
             <Button
               asChild
@@ -381,7 +382,7 @@ const Blog = () => {
               className="bg-white hover:bg-white/90 text-lg px-8 h-14 font-semibold"
               style={{ color: '#007AFF' }}
             >
-              <Link to="/free-consultation">EMAIL</Link>
+              <Link to="/free-consultation" onClick={() => window.scrollTo(0, 0)}>EMAIL</Link>
             </Button>
           </div>
         </div>
@@ -673,18 +674,19 @@ const Blog = () => {
                 <nav>
                   <ul className="space-y-3">
                     {[
+                      { label: 'Mesothelioma & Asbestos', href: '/practice-areas/mesothelioma' },
+                      { label: 'Silicosis Injuries', href: '/practice-areas/silica' },
+                      { label: 'Talc & Baby Powder Cancer', href: '/practice-areas/talc' },
                       { label: 'Car Accidents', href: '/practice-areas/car-accidents' },
                       { label: 'Truck Accidents', href: '/practice-areas/truck-accidents' },
                       { label: 'Motorcycle Accidents', href: '/practice-areas/motorcycle-accidents' },
-                      { label: 'Mesothelioma', href: '/practice-areas/mesothelioma' },
-                      { label: 'Silica Exposure', href: '/practice-areas/silica' },
-                      { label: 'Talc Poisoning', href: '/practice-areas/talc' },
                       { label: 'Wrongful Death', href: '/practice-areas/wrongful-death' }
                     ].map((link, index) => (
                       <li key={index}>
                         <Link
                           to={link.href}
                           className="group flex items-center text-sm text-[#424245] hover:text-[#007AFF] transition-all duration-300"
+                          onClick={() => window.scrollTo(0, 0)}
                         >
                           <span className="w-1 h-1 bg-[#007AFF] rounded-full mr-2 opacity-0 group-hover:opacity-100 transition-opacity"></span>
                           {link.label}
@@ -713,9 +715,7 @@ const Blog = () => {
                   <ul className="space-y-3">
                     {[
                       { label: 'Blog & Legal Insights', href: '/blog' },
-                      { label: 'Case Results', href: '/results' },
                       { label: 'About Our Firm', href: '/about' },
-                      { label: 'Meet The Team', href: '/about' },
                       { label: 'Free Consultation', href: '/free-consultation' },
                       { label: 'Contact Us', href: '/contact' }
                     ].map((link, index) => (
@@ -764,6 +764,7 @@ const Blog = () => {
                   <Link
                     to="/free-consultation"
                     className="flex items-center justify-between px-4 py-2.5 bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-xl text-sm font-semibold transition-all duration-300 shadow-md hover:shadow-lg group"
+                    onClick={() => window.scrollTo(0, 0)}
                   >
                     <span>Free Case Review</span>
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -778,33 +779,18 @@ const Blog = () => {
             <div className="py-8">
               <div className="backdrop-blur-xl bg-white/40 rounded-2xl p-6 mb-6">
                 <p className="text-[#6e6e73] text-xs leading-relaxed">
-                  <strong className="text-[#1d1d1f]">Legal Disclaimer:</strong> The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Past results do not guarantee future outcomes.
+                  The information on this website is for general information purposes only. Nothing on this site should be taken as legal advice for any individual case or situation. This information is not intended to create, and receipt or viewing does not constitute, an attorney-client relationship. Past results do not guarantee future outcomes.
                 </p>
               </div>
               
               <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-4">
-                  <Link 
-                    to="/privacy-policy" 
-                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
-                  >
-                    Privacy Policy
-                  </Link>
-                  <span className="text-[#d2d2d7]">|</span>
-                  <Link 
-                    to="/terms" 
-                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
-                  >
-                    Terms of Service
-                  </Link>
-                  <span className="text-[#d2d2d7]">|</span>
-                  <Link 
-                    to="/sitemap" 
-                    className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
-                  >
-                    Sitemap
-                  </Link>
-                </div>
+                <Link 
+                  to="/privacy-policy" 
+                  className="text-xs text-[#007AFF] hover:text-[#0051D5] font-medium transition-colors"
+                  onClick={() => window.scrollTo(0, 0)}
+                >
+                  Privacy Policy
+                </Link>
                 
                 <p className="text-[#86868b] text-xs">
                   Copyright © 2025 Trembach Law Firm, APC. All rights reserved.

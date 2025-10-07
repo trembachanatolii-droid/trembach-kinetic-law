@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import heroStatue from '@/assets/hero-statue-main.webp';
+import heroStatue from '@/assets/hero-statue-centered.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -79,11 +79,11 @@ const Hero = () => {
         <div className="absolute top-0 right-0 w-1/3 h-full bg-gradient-to-l from-white/10 to-transparent"></div>
       </div>
       
-      {/* Lady Justice Statue - Right Side */}
+      {/* Lady Justice Statue - Right Border */}
       <img
         src={heroStatue}
         alt="Lady Justice statue representing legal excellence"
-        className="absolute bottom-0 right-[5%] h-[85%] w-auto object-contain pointer-events-none select-none z-10 opacity-95"
+        className="absolute bottom-0 right-0 h-[90%] w-auto object-contain pointer-events-none select-none z-10 opacity-95"
         loading="eager"
       />
       
@@ -95,7 +95,7 @@ const Hero = () => {
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
-              law firm
+              lawyers
             </h1>
             <p className="hero-line font-sans text-white/90 text-lg md:text-xl lg:text-2xl leading-[1.5] max-w-xl font-normal drop-shadow-lg">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.

@@ -63,7 +63,7 @@ const ThreeStepProcess = () => {
   const spotlightRef = useRef<HTMLDivElement>(null);
   const timelineProgressRef = useRef<HTMLDivElement>(null);
   
-  const [expandedCard, setExpandedCard] = useState<number | null>(null);
+  // Removed expand functionality per user request
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
   // Mouse tracking for magnetic effect and spotlight
@@ -244,28 +244,7 @@ const ThreeStepProcess = () => {
     return () => ctx.revert();
   }, []);
 
-  // Click to expand card
-  const handleCardClick = (index: number) => {
-    setExpandedCard(expandedCard === index ? null : index);
-  };
-
-  // Keyboard navigation
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (expandedCard === null) return;
-      
-      if (e.key === 'Escape') {
-        setExpandedCard(null);
-      } else if (e.key === 'ArrowLeft') {
-        setExpandedCard(Math.max(0, expandedCard - 1));
-      } else if (e.key === 'ArrowRight') {
-        setExpandedCard(Math.min(2, expandedCard + 1));
-      }
-    };
-
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [expandedCard]);
+  // Removed expand functionality per user request
 
   const stepData = [
     {
@@ -379,24 +358,13 @@ const ThreeStepProcess = () => {
         <div className="apple-steps-grid bento-layout">
           {stepData.map((step, index) => {
             const Icon = step.icon;
-            const isExpanded = expandedCard === index;
             const isFeatured = index === 1;
             
             return (
               <div 
                 key={index}
-                className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''} ${isExpanded ? 'card-expanded' : ''}`}
+                className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''}`}
                 ref={el => cardsRef.current[index] = el}
-                onClick={() => handleCardClick(index)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleCardClick(index);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-expanded={isExpanded}
                 aria-label={`Step ${step.number}: ${step.title}`}
               >
                 
@@ -457,32 +425,18 @@ const ThreeStepProcess = () => {
                     </li>
                   ))}
                 </ul>
-                
-                {/* Expand indicator */}
-                <div className="expand-indicator" aria-hidden="true">
-                  <span>{isExpanded ? 'Click to collapse' : 'Click to expand'}</span>
-                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path 
-                      d={isExpanded ? "M4 10L8 6L12 10" : "M4 6L8 10L12 6"} 
-                      stroke="currentColor" 
-                      strokeWidth="2" 
-                      strokeLinecap="round" 
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </div>
-                
               </div>
             );
           })}
         </div>
 
-        {/* CTA Button */}
+        {/* CTA Button - Now Functional */}
         <div className="steps-cta-container">
           <Link 
             to="/free-consultation" 
             className="hero-cta-button"
             aria-label="Start your free case evaluation"
+            onClick={() => window.scrollTo(0, 0)}
           >
             <span className="cta-button-text">Start Your Free Evaluation</span>
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">

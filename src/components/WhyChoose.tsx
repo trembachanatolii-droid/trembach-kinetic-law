@@ -20,7 +20,7 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
           {/* Left: Headline + Paragraph */}
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             <h3 
-              className="text-[18px] sm:text-[28px] lg:text-[40px] xl:text-[48px] font-light leading-[1.15] tracking-tight text-foreground"
+              className="text-[16px] sm:text-[22px] lg:text-[32px] xl:text-[36px] font-light leading-[1.15] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}

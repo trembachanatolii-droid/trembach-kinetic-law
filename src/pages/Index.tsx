@@ -153,19 +153,9 @@ const Index = () => {
         <CriticalStepsSection />
       </section>
 
-      {/* Every Problem Solved */}
-      <section id="problems">
-        <EveryProblemSolved />
-      </section>
-
       {/* Featured Results */}
       <section id="results">
         <FeaturedResults />
-      </section>
-
-      {/* Process */}
-      <section id="process">
-        <Process />
       </section>
 
       {/* Footer Section - Apple Blue Glass Style */}

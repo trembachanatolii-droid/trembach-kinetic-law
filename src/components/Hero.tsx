@@ -123,7 +123,7 @@ const Hero = () => {
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
-              law firm
+              lawyers
             </h1>
             <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
@@ -133,15 +133,17 @@ const Hero = () => {
       </div>
 
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
-        <Button 
-          ref={buttonRef}
-          variant="outline"
-          size="lg"
-          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
-          asChild
+        <Link 
+          to="/free-consultation"
+          ref={buttonRef as any}
+          className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#D32F2F] to-[#C62828] hover:from-[#C62828] hover:to-[#B71C1C] text-white font-semibold px-10 py-5 rounded-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+          onClick={() => window.scrollTo(0, 0)}
         >
-          <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-        </Button>
+          <span className="text-lg tracking-wide">Get Started</span>
+          <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          </svg>
+        </Link>
       </div>
 
       {/* Chat Widget */}

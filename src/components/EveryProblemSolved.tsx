@@ -1,14 +1,14 @@
 import React, { useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Scale, Shield, Clock, TrendingUp, FileCheck, Users } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Scale, Shield, Clock } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 const EveryProblemSolved = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const headlineWordsRef = useRef<HTMLSpanElement[]>([]);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
-  const cardsRef = useRef<(HTMLAnchorElement | null)[]>([]);
+  const cardsRef = useRef<HTMLDivElement[]>([]);
   const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
   
   const problems = [
@@ -16,55 +16,37 @@ const EveryProblemSolved = () => {
       number: 1,
       problem: "I don't know what my case is worth",
       solution: "Former defense attorney reveals exact formula insurance companies use to value cases (then we 10X it).",
-      icon: Scale,
-      color: 'from-blue-500/20 to-blue-600/20',
-      accentColor: '#007AFF',
-      link: '/free-consultation'
+      icon: Scale
     },
     {
       number: 2,
       problem: "Insurance offered me pennies",
       solution: "We know their entire playbook. Average settlement increase: 347% above initial offer.",
-      icon: TrendingUp,
-      color: 'from-purple-500/20 to-purple-600/20',
-      accentColor: '#7B68EE',
-      link: '/about'
+      icon: Shield
     },
     {
       number: 3,
       problem: "I can't afford a lawyer",
       solution: "$0 upfront. $0 unless we win. We even advance all case costs.",
-      icon: Shield,
-      color: 'from-cyan-500/20 to-cyan-600/20',
-      accentColor: '#64D2FF',
-      link: '/free-consultation'
+      icon: Clock
     },
     {
       number: 4,
       problem: "This will take forever",
-      solution: "Most cases settle in 3-6 months using our insider negotiation tactics.",
-      icon: Clock,
-      color: 'from-green-500/20 to-green-600/20',
-      accentColor: '#30D158',
-      link: '/about'
+      solution: "Most cases settle in 3—6 months using our insider negotiation tactics.",
+      icon: Scale
     },
     {
       number: 5,
       problem: "They're denying liability",
       solution: "We know every excuse they use and exactly how to destroy each one.",
-      icon: FileCheck,
-      color: 'from-orange-500/20 to-orange-600/20',
-      accentColor: '#FF9F0A',
-      link: '/practice-areas'
+      icon: Shield
     },
     {
       number: 6,
       problem: "I'm overwhelmed",
       solution: "We handle 100% of everything. You focus on healing.",
-      icon: Users,
-      color: 'from-pink-500/20 to-pink-600/20',
-      accentColor: '#FF375F',
-      link: '/contact'
+      icon: Clock
     }
   ];
 
@@ -72,47 +54,69 @@ const EveryProblemSolved = () => {
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
-    const headline = headlineRef.current;
+    const headlineWords = headlineWordsRef.current.filter(Boolean);
     const subheading = subheadingRef.current;
     const cards = cardsRef.current.filter(Boolean);
 
-    if (!section || !headline || !subheading || cards.length === 0) return;
+    if (!section || headlineWords.length === 0 || !subheading || cards.length === 0) return;
+
+    // Check for reduced motion preference
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Set initial states
-    gsap.set([headline, subheading], { opacity: 0, y: 40 });
-    gsap.set(cards, { opacity: 0, y: 60, scale: 0.9 });
+    gsap.set(section, { opacity: 0 });
+    gsap.set(headlineWords, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 20 
+    });
+    gsap.set(subheading, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 16 
+    });
+    gsap.set(cards, { 
+      opacity: 0, 
+      y: prefersReducedMotion ? 0 : 30 
+    });
 
     // Create timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top 75%",
-        end: "bottom 25%",
+        start: "top 80%",
+        end: "bottom 20%",
         toggleActions: "play none none reverse"
       }
     });
 
-    // Animations
-    tl.to(headline, {
+    // Section fade in
+    tl.to(section, {
+      opacity: 1,
+      duration: 0.4,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    })
+    // Headline words animation (word by word)
+    .to(headlineWords, {
       opacity: 1,
       y: 0,
-      duration: 0.8,
-      ease: "power3.out"
+      duration: prefersReducedMotion ? 0.3 : 0.5,
+      stagger: prefersReducedMotion ? 0.05 : 0.15,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
     })
+    // Subheading animation (after headline completes + 200ms delay)
     .to(subheading, {
       opacity: 1,
       y: 0,
-      duration: 0.8,
-      ease: "power3.out"
-    }, "-=0.5")
+      duration: 0.5,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    }, "+=0.2")
+    // Cards staggered animation
     .to(cards, {
       opacity: 1,
       y: 0,
-      scale: 1,
-      duration: 0.8,
-      stagger: 0.1,
-      ease: "power3.out"
-    }, "-=0.4");
+      duration: 0.4,
+      stagger: 0.15,
+      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+    }, "-=0.2");
 
     return () => {
       tl.scrollTrigger?.kill();
@@ -121,188 +125,144 @@ const EveryProblemSolved = () => {
   }, []);
 
   return (
-    <section 
-      ref={sectionRef} 
-      className="relative py-32 bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden"
-      aria-labelledby="problems-solved-heading"
-    >
-      {/* Background Elements - Apple Style */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      </div>
-
-      <div className="container mx-auto px-6 lg:px-8 relative z-10">
-        {/* Section Header - Apple Typography */}
-        <div className="text-center mb-20 max-w-4xl mx-auto">
-          <h2 
-            ref={headlineRef}
-            id="problems-solved-heading"
-            className="text-5xl lg:text-7xl font-bold text-[#1d1d1f] mb-6 tracking-tight leading-[1.05]"
-            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}
-          >
-            Every Problem Solved
+    <section ref={sectionRef} className="py-20 bg-background overflow-visible">
+      <div className="container mx-auto px-6 lg:px-8">
+        {/* Section Header */}
+        <div className="text-center -mb-32">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
+            {['Every', 'Problem', 'Solved'].map((word, index) => (
+              <span
+                key={index}
+                ref={el => { if (el) headlineWordsRef.current[index] = el; }}
+                className="inline-block mr-3 last:mr-0"
+              >
+                {word}
+              </span>
+            ))}
           </h2>
           <p 
             ref={subheadingRef}
-            className="text-xl lg:text-2xl text-[#424245] font-normal leading-relaxed"
-            style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
-        {/* Cards Grid - Bento-Style Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
-          {problems.map((item, index) => {
-            const IconComponent = item.icon;
-            const isHovered = hoveredCard === index;
-            
-            return (
-              <Link
-                key={index}
-                to={item.link}
-                ref={el => { cardsRef.current[index] = el; }}
-                className="group relative"
-                onMouseEnter={() => setHoveredCard(index)}
-                onMouseLeave={() => setHoveredCard(null)}
-                onFocus={() => setHoveredCard(index)}
-                onBlur={() => setHoveredCard(null)}
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                <article
-                  className={`
-                    relative overflow-hidden rounded-3xl p-8
-                    bg-white/80 backdrop-blur-xl
-                    border border-gray-200/50
-                    shadow-sm hover:shadow-2xl
-                    transition-all duration-500 ease-out
-                    ${isHovered ? 'scale-[1.02] -translate-y-2' : ''}
-                  `}
+        {/* Cards Fan Arc Layout */}
+        <div className="relative flex justify-center items-center min-h-[600px] mb-12 overflow-visible -mt-48 lg:-mt-64">
+          <div className="relative w-full flex justify-center overflow-visible">
+            {problems.map((item, index) => {
+              const IconComponent = item.icon;
+              // Calculate rotation and position for semicircle fan
+              const totalCards = problems.length;
+              const angleStep = 65 / (totalCards - 1); // 65 degrees total spread
+              const rotation = -25 + (index * angleStep); // -25 to +25 degrees
+              const radiusX = 380; // Horizontal radius (wider spacing for accessibility)
+              const radiusY = 70;  // Vertical radius (increased for larger cards)
+              const radian = (rotation * Math.PI) / 180;
+              const x = radiusX * Math.sin(radian);
+              const y = radiusY * (1 - Math.cos(radian));
+               
+              // Determine card states
+              const isHovered = hoveredCard === index;
+              const isLeftNeighbor = hoveredCard !== null && index === hoveredCard - 1;
+              const isRightNeighbor = hoveredCard !== null && index === hoveredCard + 1;
+              const isNeighbor = isLeftNeighbor || isRightNeighbor;
+              
+              // Bias hover growth away from neighbors
+              const centerIndex = Math.floor((totalCards - 1) / 2);
+              const isLeft = index < centerIndex;
+              const isRight = index > centerIndex;
+              const transformOrigin = isLeft ? 'left center' : isRight ? 'right center' : 'center';
+              
+              // Dynamic classes based on card state with Apple-inspired smoothness
+              let cardClasses = "bg-card/95 backdrop-blur-sm border border-border/30 rounded-3xl p-7 w-80 h-96 shadow-sm transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu will-change-transform";
+              
+              if (isHovered) {
+                // Main active card - Apple-inspired elegant pop-up
+                cardClasses += " scale-[1.08] -translate-y-16 rotate-0 shadow-[0_32px_64px_rgba(0,0,0,0.25),0_8px_24px_rgba(0,0,0,0.15)] border-primary/50 bg-card/98 backdrop-blur-md z-[200] brightness-[1.02]";
+                if (isLeft) cardClasses += " -translate-x-4 lg:-translate-x-6";
+                if (isRight) cardClasses += " translate-x-4 lg:translate-x-6";
+              } else if (isNeighbor) {
+                // Neighbor card - subtle secondary elevation
+                cardClasses += " scale-[1.03] -translate-y-6 shadow-[0_16px_32px_rgba(0,0,0,0.18),0_4px_12px_rgba(0,0,0,0.12)] border-primary/30 bg-card/96 backdrop-blur-sm z-[150] brightness-[1.01]";
+              } else {
+                // Inactive card - refined normal state with gentle hover
+                cardClasses += " hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-border/40 hover:bg-card/96 hover:backdrop-blur-sm";
+              }
+              
+              return (
+                <div
+                  key={index}
+                  ref={el => { if (el) cardsRef.current[index] = el; }}
+                  className="absolute group cursor-pointer"
+                  tabIndex={0}
+                  onMouseEnter={() => setHoveredCard(index)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  onFocus={() => setHoveredCard(index)}
+                  onBlur={() => setHoveredCard(null)}
                   style={{
-                    transformStyle: 'preserve-3d',
-                    willChange: 'transform',
+                    transform: `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
+                    left: '50%',
+                    zIndex: isHovered ? 200 : isNeighbor ? 150 : 10 + index,
+                    transformOrigin
                   }}
                 >
-                  {/* Background Gradient on Hover */}
-                  <div 
-                    className={`absolute inset-0 bg-gradient-to-br ${item.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl`}
-                  ></div>
-
-                  {/* Content */}
-                  <div className="relative z-10">
-                    {/* Icon with Breathing Effect */}
-                    <div className="mb-6 flex items-center justify-between">
-                      <div 
-                        className="w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-300 group-hover:scale-110"
-                        style={{ 
-                          backgroundColor: `${item.accentColor}15`,
-                          color: item.accentColor
-                        }}
-                      >
-                        <IconComponent 
-                          className="w-7 h-7 transition-transform duration-500 group-hover:rotate-12" 
-                          style={{ color: item.accentColor }}
-                        />
-                      </div>
-                      
-                      {/* Number Badge */}
-                      <div 
-                        className="text-6xl font-black opacity-10 group-hover:opacity-20 transition-opacity duration-300"
-                        style={{ 
-                          fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif',
-                          color: item.accentColor
-                        }}
-                      >
-                        {item.number}
-                      </div>
+                  <div className={cardClasses}>
+                    
+                    {/* Icon */}
+                    <div className="mb-3">
+                      <IconComponent className="w-7 h-7 text-accent" />
                     </div>
 
-                    {/* Problem Quote */}
-                    <blockquote className="mb-4">
-                      <p className="text-[#1d1d1f] text-lg font-semibold leading-snug mb-4 italic">
-                        "{item.problem}"
-                      </p>
+                    {/* Problem Number */}
+                    <div className="text-sm font-bold text-accent mb-3 tracking-wide">
+                      Problem #{item.number}
+                    </div>
+
+                    {/* Problem Statement in Quotes */}
+                    <blockquote className="text-sm text-foreground italic mb-3 leading-relaxed font-medium 
+                                         bg-muted/30 p-3 rounded-lg border-l-4 border-accent/50">
+                      "{item.problem}"
                     </blockquote>
 
-                    {/* Divider */}
-                    <div 
-                      className="h-0.5 w-12 mb-4 rounded-full transition-all duration-500 group-hover:w-full"
-                      style={{ backgroundColor: item.accentColor }}
-                    ></div>
+                    {/* Divider Line */}
+                    <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-3 
+                                   group-hover:via-accent/60 transition-all duration-300"></div>
 
-                    {/* Solution Label */}
-                    <div className="text-xs font-bold text-[#86868b] mb-2 tracking-wider uppercase">
-                      Our Solution
+                    {/* Solution Heading */}
+                    <div className="text-xs font-bold text-foreground mb-2 tracking-wide uppercase opacity-90">
+                      WE SOLVE THIS:
                     </div>
 
                     {/* Solution Text */}
-                    <p className="text-[#424245] text-base leading-relaxed font-normal">
+                    <p className="text-xs text-muted-foreground leading-relaxed">
                       {item.solution}
                     </p>
-
-                    {/* Learn More Arrow */}
-                    <div className="mt-6 flex items-center gap-2 text-sm font-semibold group-hover:gap-3 transition-all duration-300" style={{ color: item.accentColor }}>
-                      <span>Learn more</span>
-                      <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </div>
                   </div>
-
-                  {/* Shine Effect on Hover */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-white/40 via-transparent to-transparent rounded-3xl"></div>
-                  </div>
-                </article>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* CTA Section - Apple Glass Morphism */}
-        <div className="max-w-3xl mx-auto">
-          <div className="relative overflow-hidden rounded-3xl p-12 text-center backdrop-blur-xl bg-white/60 border border-gray-200/50 shadow-xl">
-            {/* Background Gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/10 via-purple-500/10 to-cyan-500/10"></div>
-            
-            <div className="relative z-10">
-              <h3 className="text-3xl lg:text-4xl font-bold text-[#1d1d1f] mb-4 tracking-tight leading-tight" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif' }}>
-                Ready to Get Maximum Compensation?
-              </h3>
-              <p className="text-lg text-[#424245] mb-8 font-normal leading-relaxed" style={{ fontFamily: '-apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif' }}>
-                Don't let insurance companies take advantage of you. Get your free case review now.
-              </p>
-              <Link
-                to="/free-consultation"
-                className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-              >
-                <span>Get My Free Case Review</span>
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-                </svg>
-              </Link>
-            </div>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </div>
 
-      {/* SEO Structured Data */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          "mainEntity": problems.map(item => ({
-            "@type": "Question",
-            "name": item.problem,
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": item.solution
-            }
-          }))
-        })}
-      </script>
+        {/* CTA Section */}
+        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-32">
+          <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
+            Ready to Get Maximum Compensation?
+          </h3>
+          <p className="text-muted-foreground mb-6 text-lg">
+            Don't let insurance companies take advantage of you. Get your free case review now.
+          </p>
+          <Button 
+            className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-4 px-12 
+                       rounded-full text-lg transition-all duration-300 hover:scale-105 
+                       shadow-lg hover:shadow-xl hover:shadow-primary/30"
+          >
+            Get My Free Case Review
+          </Button>
+        </div>
+      </div>
     </section>
   );
 };

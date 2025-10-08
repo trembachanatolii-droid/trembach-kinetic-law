@@ -117,7 +117,44 @@ const ResultCard: React.FC<ResultCardProps> = ({ title, metric, description, cas
 const FeaturedResults = () => {
   const sectionRef = useRef<HTMLElement>(null);
 
-  const results = [];
+  const results = [
+    {
+      title: "Former Defense Insight",
+      metric: "Insider Advantage",
+      description: "We anticipate insurance tactics to protect your rights from day one.",
+      caseType: "Strategy"
+    },
+    {
+      title: "Fast-Track Filing",
+      metric: "Speed Matters",
+      description: "Prioritize urgent filings and evidence preservation to move your case quickly.",
+      caseType: "Process"
+    },
+    {
+      title: "Statewide Representation",
+      metric: "All 58 Counties",
+      description: "Remote sign-ups, virtual consults, and home visits across California.",
+      caseType: "Coverage"
+    },
+    {
+      title: "No Upfront Fees",
+      metric: "Contingency Only",
+      description: "You pay nothing unless we recover compensation for you.",
+      caseType: "Costs"
+    },
+    {
+      title: "Personalized Strategy",
+      metric: "Boutique Focus",
+      description: "Small caseload for high-touch, tailored legal strategy.",
+      caseType: "Service"
+    },
+    {
+      title: "24/7 Availability",
+      metric: "Here When You Need",
+      description: "Emergency consultations any time, because timing is critical.",
+      caseType: "Support"
+    }
+  ];
 
   useEffect(() => {
     const section = sectionRef.current;

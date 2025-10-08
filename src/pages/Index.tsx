@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import '../components/CriticalFixes.css'; // Emergency visibility fixes
-import Logo from '@/components/Logo';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -10,14 +9,8 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import TruthAboutCaseProfessional from '../components/TruthAboutCaseProfessional';
 import { MarqueeBand } from '../components/Marquee';
-import CriticalStepsSection from '../components/CriticalStepsSection';
 import WhyChoose from '../components/WhyChoose';
-import EveryProblemSolved from '../components/EveryProblemSolved';
-import CapabilityStripes from '../components/CapabilityStripes';
-import FeaturedResults from '../components/FeaturedResults';
-import PracticeAreasReference from '../components/PracticeAreasReference';
 import PracticeAreasLusion from '../components/PracticeAreasLusion';
-import Process from '../components/Process';
 import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
@@ -148,15 +141,7 @@ const Index = () => {
         />
       </div>
 
-      {/* Critical Steps Section */}
-      <section id="critical-steps">
-        <CriticalStepsSection />
-      </section>
-
-      {/* Featured Results - HIDDEN (sections deleted as requested) */}
-      {/* <section id="results">
-        <FeaturedResults />
-      </section> */}
+      {/* Sections removed per redesign requirements */}
 
       {/* Footer Section - Apple Blue Glass Style */}
       <footer className="relative bg-gradient-to-b from-white via-blue-50/30 to-blue-100/40 overflow-hidden">

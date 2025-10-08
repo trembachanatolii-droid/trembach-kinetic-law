@@ -20,7 +20,7 @@ const Subsection: React.FC<SubsectionProps> = ({ headline, paragraph, points }) 
           {/* Left: Headline + Paragraph */}
           <div className="space-y-4 sm:space-y-6 lg:space-y-8">
             <h3 
-              className="text-[16px] sm:text-[22px] lg:text-[32px] xl:text-[36px] font-light leading-[1.15] tracking-tight text-foreground"
+              className="text-[18px] sm:text-[28px] lg:text-[40px] xl:text-[48px] font-light leading-[1.15] tracking-tight text-foreground"
               itemProp="name"
             >
               {headline}
@@ -106,12 +106,12 @@ const WhyChoose: React.FC = () => {
           <div className="flex items-center justify-center gap-4 mb-8">
             <h2 
               id="why-choose-heading"
-              className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] font-semibold text-foreground tracking-tight leading-none"
+              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight leading-none"
               itemProp="name"
             >
               Why Choose Trembach Law Firm
             </h2>
-            <div className="w-[2px] h-12 lg:h-16 bg-foreground/20" />
+            <div className="w-[2px] h-16 lg:h-20 bg-foreground/20" />
           </div>
           
           {/* Horizontal divider line */}

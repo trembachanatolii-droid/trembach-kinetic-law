@@ -268,6 +268,25 @@
   transform: translateY(-4px);
 }
 
+/* Expanded Card State */
+.card-expanded {
+  background: rgba(255, 255, 255, 0.08) !important;
+  border-color: rgba(100, 210, 255, 0.5) !important;
+  box-shadow: 
+    0 30px 60px rgba(0, 113, 227, 0.3),
+    0 0 0 2px rgba(100, 210, 255, 0.2) !important;
+  transform: scale(1.02) translateY(-8px) !important;
+  z-index: 10;
+}
+
+.card-expanded .apple-step-description {
+  color: #ffffff !important;
+}
+
+.card-expanded .apple-step-title {
+  color: #64d2ff !important;
+}
+
 /* Focus State for Accessibility */
 .apple-step-card:focus {
   outline: 3px solid #2997ff;
@@ -351,7 +370,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: clamp(100px, 8vw, 140px) !important;
   font-weight: 900;
-  color: hsla(211, 100%, 56%, 0.28) !important; /* Apple Blue, lighter */
+  color: hsla(211, 100%, 65%, 0.5) !important; /* Much lighter Apple Blue */
   display: block;
   line-height: 0.85;
   margin-bottom: 28px;
@@ -359,8 +378,8 @@
   z-index: 1;
   transition: all 0.3s ease;
   text-shadow:
-    0 0 24px hsla(211, 100%, 56%, 0.35),
-    0 0 60px hsla(211, 100%, 56%, 0.25);
+    0 0 30px hsla(211, 100%, 65%, 0.6),
+    0 0 70px hsla(211, 100%, 65%, 0.4);
 }
 
 /* Step Title */
@@ -435,6 +454,35 @@
   color: #ff453a;
   font-weight: 800;
   text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
+}
+
+/* Expand Indicator */
+.expand-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 14px;
+  color: #64d2ff;
+  font-weight: 600;
+  opacity: 0.7;
+  transition: all 0.3s ease;
+}
+
+.apple-step-card:hover .expand-indicator {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+.expand-indicator svg {
+  transition: transform 0.3s ease;
+}
+
+.card-expanded .expand-indicator svg {
+  transform: rotate(180deg);
 }
 
 /* Feature List with Enhanced Styling */

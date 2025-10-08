@@ -13,6 +13,7 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
+  z-index: 0; /* ensure this section stays beneath preceding sections */
 }
 
 /* Timeline Progress Indicator */
@@ -48,6 +49,7 @@
   animation: meshMove 25s ease-in-out infinite;
   pointer-events: none;
   will-change: filter;
+  z-index: 0; /* keep background below content and other sections */
 }
 
 @keyframes meshMove {
@@ -89,6 +91,7 @@
   opacity: 0.4;
   pointer-events: none;
   mix-blend-mode: overlay;
+  z-index: 0;
 }
 
 /* Floating Particles with Varied Sizes */
@@ -100,6 +103,7 @@
   bottom: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 0;
 }
 
 .particle {

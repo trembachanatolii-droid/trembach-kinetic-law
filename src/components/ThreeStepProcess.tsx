@@ -1,6 +1,5 @@
 import "./steps.css";
 import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -479,8 +478,8 @@ const ThreeStepProcess = () => {
 
         {/* CTA Button */}
         <div className="steps-cta-container">
-          <Link 
-            to="/free-consultation" 
+          <a 
+            href="#evaluation-form" 
             className="hero-cta-button"
             aria-label="Start your free case evaluation"
           >
@@ -488,7 +487,7 @@ const ThreeStepProcess = () => {
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </Link>
+          </a>
         </div>
       </div>
     </section>

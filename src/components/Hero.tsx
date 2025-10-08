@@ -119,11 +119,11 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-foreground text-5xl md:text-7xl lg:text-8xl leading-[1.05] tracking-tight [text-shadow:0_2px_8px_rgba(0,0,0,0.3)] font-bold">
+            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_2px_8px_rgba(0,0,0,0.3)]">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
-              lawyers
+              law firm
             </h1>
             <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
@@ -135,8 +135,9 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
+          variant="outline"
           size="lg"
-          className="bg-gradient-to-b from-[#dc2626] to-[#b91c1c] hover:from-[#b91c1c] hover:to-[#991b1b] text-white font-bold px-12 py-6 text-lg rounded-2xl shadow-[0_10px_40px_rgba(220,38,38,0.5)] hover:shadow-[0_15px_50px_rgba(220,38,38,0.7)] transform hover:scale-105 transition-all duration-300 border border-[#dc2626]/20"
+          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

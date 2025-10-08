@@ -129,12 +129,12 @@ const EveryProblemSolved = () => {
       <div className="container mx-auto px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center -mb-32">
-          <h2 className="text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground mb-6 font-display tracking-tight">
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
                 key={index}
                 ref={el => { if (el) headlineWordsRef.current[index] = el; }}
-                className="inline-block mr-4 last:mr-0"
+                className="inline-block mr-3 last:mr-0"
               >
                 {word}
               </span>
@@ -142,7 +142,7 @@ const EveryProblemSolved = () => {
           </h2>
           <p 
             ref={subheadingRef}
-            className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto font-medium"
+            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>

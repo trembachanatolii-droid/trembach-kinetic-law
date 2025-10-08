@@ -67,18 +67,13 @@ const Index = () => {
       </section>
 
       {/* Three Step Process Section */}
-      <section id="three-step-process" className="relative z-10">
+      <section id="three-step-process">
         <ThreeStepProcess />
       </section>
 
       {/* Practice Areas */}
-      <section id="practice-areas" className="relative z-20">
+      <section id="practice-areas">
         <PracticeAreasLusion key="practice-areas-lusion" />
-      </section>
-
-      {/* Every Problem Solved */}
-      <section id="problems" className="relative z-20">
-        <EveryProblemSolved />
       </section>
 
       {/* Newsletter Section - Apple Glass Blue Style */}
@@ -156,6 +151,11 @@ const Index = () => {
       {/* Critical Steps Section */}
       <section id="critical-steps">
         <CriticalStepsSection />
+      </section>
+
+      {/* Every Problem Solved */}
+      <section id="problems">
+        <EveryProblemSolved />
       </section>
 
       {/* Featured Results */}

@@ -358,7 +358,7 @@ const PracticeAreasLusion: React.FC = () => {
             <h2 className="text-5xl lg:text-6xl font-bold tracking-tight text-center text-foreground mb-2">
               50 Types of Injury Cases We Handle
             </h2>
-            <p className="text-center text-foreground/60 text-base">
+            <p className="text-center text-foreground/60 text-lg">
               Backed by Proven Experience
             </p>
           </div>
@@ -492,10 +492,10 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
 
           {/* Content Below Image */}
           <div className="mt-5 flex items-center justify-between gap-4">
-            <h3 className="project-title text-base lg:text-lg font-semibold text-foreground leading-tight break-words flex-1 group-hover:text-xl transition-all duration-300">
+            <h3 className="project-title text-6xl lg:text-7xl font-bold text-foreground leading-tight break-words flex-1">
               {area.title}
             </h3>
-            <span className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-sm font-semibold px-6 py-2 rounded-full transition-all duration-200 group-hover:scale-105 whitespace-nowrap flex-shrink-0">
+            <span className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-base font-semibold px-8 py-3 rounded-full transition-all duration-200 group-hover:scale-105 whitespace-nowrap flex-shrink-0">
               Learn more
             </span>
           </div>

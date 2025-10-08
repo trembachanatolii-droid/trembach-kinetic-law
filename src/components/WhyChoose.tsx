@@ -106,7 +106,7 @@ const WhyChoose: React.FC = () => {
           <div className="flex items-center justify-center gap-4 mb-8">
             <h2 
               id="why-choose-heading"
-              className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-foreground tracking-tight leading-none"
+              className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"
               itemProp="name"
             >
               Why Choose Trembach Law Firm

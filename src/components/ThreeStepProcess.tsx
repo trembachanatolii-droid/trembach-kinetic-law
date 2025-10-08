@@ -309,15 +309,15 @@ const ThreeStepProcess = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process" style={{ position: 'relative', isolation: 'isolate', zIndex: 1 }}>
+    <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process">
       {/* Animated mesh gradient background */}
-      <div className="gradient-mesh" style={{ position: 'absolute', zIndex: 0 }}></div>
+      <div className="gradient-mesh"></div>
       
       {/* Spotlight effect */}
-      <div ref={spotlightRef} className="spotlight-effect" style={{ position: 'absolute', zIndex: 1 }}></div>
+      <div ref={spotlightRef} className="spotlight-effect"></div>
       
       {/* Floating particles */}
-      <div className="floating-particles" aria-hidden="true" style={{ position: 'absolute', zIndex: 2 }}>
+      <div className="floating-particles" aria-hidden="true">
         {[...Array(25)].map((_, i) => (
           <div 
             key={i} 

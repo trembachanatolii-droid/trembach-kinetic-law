@@ -135,9 +135,8 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
-          variant="outline"
           size="lg"
-          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+          className="relative overflow-hidden font-bold px-8 py-4 rounded-xl text-white border-0 shadow-[0_4px_14px_0_rgba(255,68,68,0.39),0_8px_24px_0_rgba(255,68,68,0.2),inset_0_1px_0_0_rgba(255,255,255,0.2)] bg-gradient-to-b from-[#ff6b6b] to-[#ee5a52] hover:shadow-[0_6px_20px_rgba(255,68,68,0.5),0_10px_32px_rgba(255,68,68,0.3),inset_0_1px_0_0_rgba(255,255,255,0.3)] hover:from-[#ff7676] hover:to-[#f06560] active:shadow-[inset_0_2px_8px_rgba(0,0,0,0.2)] active:translate-y-[1px] transition-all duration-200 before:absolute before:inset-0 before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

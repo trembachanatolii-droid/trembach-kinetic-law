@@ -67,7 +67,8 @@ const EveryProblemSolved = () => {
               <Link
                 key={index}
                 to={item.link}
-                className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg"
+                className="group p-8 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 hover:shadow-lg animate-fade-in"
+                style={{ animationDelay: `${index * 80}ms` }}
               >
                 <div className="mb-6">
                   <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center group-hover:bg-primary/20 transition-colors">

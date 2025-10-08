@@ -2,6 +2,7 @@ import "./steps.css";
 import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Link } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -382,31 +383,13 @@ const ThreeStepProcess = () => {
             const isFeatured = index === 1;
             
             return (
-              <a
-                href="/free-consultation"
+              <Link
+                to="/free-consultation"
                 key={index}
-                className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''} ${isExpanded ? 'card-expanded' : ''}`}
+                className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''}`}
                 ref={el => cardsRef.current[index] = el}
-                onClick={(e) => {
-                  if (!e.metaKey && !e.ctrlKey) {
-                    e.preventDefault();
-                    handleCardClick(index);
-                    setTimeout(() => {
-                      window.scrollTo({ top: 0, behavior: 'smooth' });
-                      window.location.href = '/free-consultation';
-                    }, 300);
-                  }
-                }}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleCardClick(index);
-                  }
-                }}
-                role="button"
-                tabIndex={0}
-                aria-expanded={isExpanded}
-                aria-label={`Step ${step.number}: ${step.title}. Click to start free consultation.`}
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                aria-label={`Step ${step.number}: ${step.title}. Start free consultation.`}
               >
                 
                 {/* Step icon with breathing animation */}
@@ -481,28 +464,24 @@ const ThreeStepProcess = () => {
                   </svg>
                 </div>
                 
-              </a>
+              </Link>
             );
           })}
         </div>
 
         {/* CTA Button */}
         <div className="steps-cta-container">
-          <a 
-            href="/free-consultation" 
+          <Link 
+            to="/free-consultation" 
             className="hero-cta-button"
             aria-label="Start your free case evaluation"
-            onClick={(e) => {
-              e.preventDefault();
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-              window.location.href = '/free-consultation';
-            }}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <span className="cta-button-text">Start Your Free Evaluation</span>
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

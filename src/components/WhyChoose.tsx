@@ -106,12 +106,12 @@ const WhyChoose: React.FC = () => {
           <div className="flex items-center justify-center gap-4 mb-8">
             <h2 
               id="why-choose-heading"
-              className="text-[48px] sm:text-[64px] lg:text-[80px] xl:text-[96px] font-bold text-foreground tracking-tight leading-none"
+              className="text-[32px] sm:text-[40px] lg:text-[48px] xl:text-[56px] font-semibold text-foreground tracking-tight leading-none"
               itemProp="name"
             >
               Why Choose Trembach Law Firm
             </h2>
-            <div className="w-[2px] h-16 lg:h-20 bg-foreground/20" />
+            <div className="w-[2px] h-12 lg:h-16 bg-foreground/20" />
           </div>
           
           {/* Horizontal divider line */}

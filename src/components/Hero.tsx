@@ -136,12 +136,12 @@ const Hero = () => {
         <Link 
           to="/free-consultation"
           ref={buttonRef as any}
-          className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#D32F2F] to-[#C62828] hover:from-[#C62828] hover:to-[#B71C1C] text-white font-semibold px-10 py-5 rounded-xl shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+          className="group relative inline-flex items-center gap-3 bg-gradient-to-r from-[#D32F2F] via-[#E53935] to-[#D32F2F] hover:from-[#C62828] hover:via-[#D32F2F] hover:to-[#C62828] text-white font-bold px-12 py-6 rounded-2xl shadow-[0_20px_60px_rgba(211,47,47,0.5)] hover:shadow-[0_25px_70px_rgba(211,47,47,0.7)] transform hover:scale-[1.02] hover:-translate-y-1 transition-all duration-300 bg-[length:200%_100%] hover:bg-[length:100%_100%] uppercase tracking-wider text-base"
           onClick={() => window.scrollTo(0, 0)}
         >
-          <span className="text-lg tracking-wide">Get Started</span>
-          <svg className="w-6 h-6 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M9 5l7 7-7 7" />
+          <span className="relative z-10">START YOUR FREE CASE REVIEW</span>
+          <svg className="w-5 h-5 group-hover:translate-x-2 transition-transform relative z-10" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
           </svg>
         </Link>
       </div>

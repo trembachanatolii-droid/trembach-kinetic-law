@@ -153,10 +153,10 @@ const Index = () => {
         <CriticalStepsSection />
       </section>
 
-      {/* Featured Results */}
-      <section id="results">
+      {/* Featured Results - HIDDEN (sections deleted as requested) */}
+      {/* <section id="results">
         <FeaturedResults />
-      </section>
+      </section> */}
 
       {/* Footer Section - Apple Blue Glass Style */}
       <footer className="relative bg-gradient-to-b from-white via-blue-50/30 to-blue-100/40 overflow-hidden">

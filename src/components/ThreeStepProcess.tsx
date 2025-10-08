@@ -483,7 +483,7 @@ const ThreeStepProcess = () => {
             to="/free-consultation"
             className="hero-cta-button"
             aria-label="Start your free case evaluation"
-            onClick={() => window.scrollTo(0, 0)}
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
             <span className="cta-button-text">Start Your Free Evaluation</span>
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">

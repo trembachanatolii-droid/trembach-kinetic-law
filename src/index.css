@@ -1318,7 +1318,7 @@ html {
     --input: 0 0% 98%;
     --ring: 260 100% 70%;
     
-    --destructive: 9 100% 60%;
+    --destructive: 0 85% 60%;
     --destructive-foreground: 0 0% 100%;
     
     --card: 0 0% 100%;

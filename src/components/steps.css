@@ -13,7 +13,6 @@
   position: relative;
   overflow: hidden;
   isolation: isolate;
-  z-index: 0; /* ensure this section stays beneath preceding sections */
 }
 
 /* Timeline Progress Indicator */
@@ -49,7 +48,6 @@
   animation: meshMove 25s ease-in-out infinite;
   pointer-events: none;
   will-change: filter;
-  z-index: 0; /* keep background below content and other sections */
 }
 
 @keyframes meshMove {
@@ -91,7 +89,6 @@
   opacity: 0.4;
   pointer-events: none;
   mix-blend-mode: overlay;
-  z-index: 0;
 }
 
 /* Floating Particles with Varied Sizes */
@@ -103,7 +100,6 @@
   bottom: 0;
   pointer-events: none;
   overflow: hidden;
-  z-index: 0;
 }
 
 .particle {
@@ -250,7 +246,7 @@
   position: relative;
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
-  cursor: pointer; /* make entire card clearly clickable */
+  cursor: default;
   isolation: isolate;
   min-height: 580px;
 }
@@ -352,7 +348,7 @@
   font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
   font-size: clamp(100px, 8vw, 140px) !important;
   font-weight: 900;
-  color: #007AFF !important;
+  color: rgba(0, 113, 227, 0.35) !important;
   display: block;
   line-height: 0.85;
   margin-bottom: 28px;
@@ -360,10 +356,9 @@
   z-index: 1;
   transition: all 0.3s ease;
   text-shadow: 
-    0 0 40px rgba(0, 122, 255, 0.8),
-    0 0 80px rgba(0, 122, 255, 0.6),
-    0 0 120px rgba(0, 122, 255, 0.4);
-  opacity: 0.9;
+    0 0 40px rgba(0, 113, 227, 0.6),
+    0 0 80px rgba(0, 113, 227, 0.4),
+    0 0 120px rgba(0, 113, 227, 0.2);
 }
 
 /* Step Title */

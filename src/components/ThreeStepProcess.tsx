@@ -433,30 +433,31 @@ const ThreeStepProcess = () => {
                   )}
                 </h3>
                 
-                {/* Description */}
-                <p className="apple-step-description">
-                  {step.description}
-                </p>
-                
-                {/* Features list */}
-                <ul className="apple-step-features">
-                  {step.features.map((feature, featureIndex) => (
-                    <li key={featureIndex}>
-                      <Checkmark index={index * 3 + featureIndex} />
-                      <span>
-                        {feature.highlight ? (
-                          <>
-                            {feature.text.split(feature.highlight)[0]}
-                            <strong>{feature.highlight}</strong>
-                            {feature.text.split(feature.highlight)[1]}
-                          </>
-                        ) : (
-                          feature.text
-                        )}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
+                {/* Description + Features (collapsible) */}
+                <div className="apple-step-collapsible" id={`step-${index}-details`}>
+                  <p className="apple-step-description">
+                    {step.description}
+                  </p>
+                  {/* Features list */}
+                  <ul className="apple-step-features">
+                    {step.features.map((feature, featureIndex) => (
+                      <li key={featureIndex}>
+                        <Checkmark index={index * 3 + featureIndex} />
+                        <span>
+                          {feature.highlight ? (
+                            <>
+                              {feature.text.split(feature.highlight)[0]}
+                              <strong>{feature.highlight}</strong>
+                              {feature.text.split(feature.highlight)[1]}
+                            </>
+                          ) : (
+                            feature.text
+                          )}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
                 
                 {/* Expand indicator */}
                 <div className="expand-indicator" aria-hidden="true">

@@ -6,11 +6,12 @@ import { BlogPost } from '@/data/blogPosts';
 interface RelatedPostsProps {
   posts: BlogPost[];
   currentCategory: string;
+  currentPostId?: string;
 }
 
-export const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts, currentCategory }) => {
+export const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts, currentCategory, currentPostId }) => {
   const relatedPosts = posts
-    .filter(post => post.category === currentCategory)
+    .filter(post => post.category === currentCategory && post.id !== currentPostId)
     .slice(0, 3);
 
   if (relatedPosts.length === 0) return null;
@@ -54,8 +55,9 @@ export const RelatedPosts: React.FC<RelatedPostsProps> = ({ posts, currentCatego
                 </h3>
                 
                 <Link
-                  to="#"
+                  to={`/blog/${post.slug}`}
                   className="inline-flex items-center gap-2 text-[#007AFF] font-semibold hover:gap-3 transition-all"
+                  onClick={() => window.scrollTo(0, 0)}
                 >
                   Read More
                   <ArrowRight className="w-4 h-4" />

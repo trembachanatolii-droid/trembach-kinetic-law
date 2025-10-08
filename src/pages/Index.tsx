@@ -62,12 +62,12 @@ const Index = () => {
       <Hero />
 
       {/* Why Choose Trembach Law Firm */}
-      <section id="why-choose" className="relative z-10">
+      <section id="why-choose">
         <WhyChoose />
       </section>
 
       {/* Three Step Process Section */}
-      <section id="three-step-process" className="relative z-0">
+      <section id="three-step-process">
         <ThreeStepProcess />
       </section>
 

@@ -11,9 +11,10 @@
   padding: 160px 24px 180px;
   width: 100%;
   position: relative;
-  z-index: auto;
+  z-index: 0; /* local stacking, not above previous section */
   overflow: hidden;
   isolation: isolate;
+  margin-top: clamp(40px, 6vw, 96px); /* ensure no overlap with previous section */
 }
 
 /* Timeline Progress Indicator */
@@ -73,7 +74,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none;
+  pointer-events: none; /* never block clicks */
   transition: background 0.15s ease-out;
   mix-blend-mode: screen;
   z-index: 1;
@@ -699,6 +700,7 @@
 @media (max-width: 734px) {
   .apple-steps-section {
     padding: 80px 20px 100px;
+    margin-top: 48px; /* extra safe gap on mobile */
   }
   
   .apple-steps-headline {

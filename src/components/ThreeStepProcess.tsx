@@ -310,15 +310,15 @@ const ThreeStepProcess = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process">
+    <section ref={sectionRef} className="apple-steps-section relative" role="region" aria-label="Three Step Process" style={{ position: 'relative', isolation: 'isolate' }}>
       {/* Animated mesh gradient background */}
-      <div className="gradient-mesh"></div>
+      <div className="gradient-mesh" style={{ position: 'absolute', inset: 0, zIndex: 0 }}></div>
       
       {/* Spotlight effect */}
-      <div ref={spotlightRef} className="spotlight-effect"></div>
+      <div ref={spotlightRef} className="spotlight-effect" style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none' }}></div>
       
       {/* Floating particles */}
-      <div className="floating-particles" aria-hidden="true">
+      <div className="floating-particles" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 2, pointerEvents: 'none' }}>
         {[...Array(25)].map((_, i) => (
           <div 
             key={i} 
@@ -335,9 +335,9 @@ const ThreeStepProcess = () => {
       </div>
 
       {/* Grain texture overlay */}
-      <div className="grain-overlay" aria-hidden="true"></div>
+      <div className="grain-overlay" aria-hidden="true" style={{ position: 'absolute', inset: 0, zIndex: 3, pointerEvents: 'none' }}></div>
 
-      <div className="apple-steps-container">
+      <div className="apple-steps-container" style={{ position: 'relative', zIndex: 10 }}>
         {/* Timeline progress indicator */}
         <div className="timeline-indicator" aria-hidden="true">
           <div ref={timelineProgressRef} className="timeline-progress"></div>
@@ -478,15 +478,15 @@ const ThreeStepProcess = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="steps-cta-container">
+        <div className="steps-cta-container" style={{ position: 'relative', zIndex: 100, marginTop: '4rem' }}>
           <Link
             to="/free-consultation"
-            className="hero-cta-button"
+            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-gradient-to-r from-[#007AFF] to-[#0051D5] hover:from-[#0051D5] hover:to-[#003DA5] text-white rounded-full text-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
             aria-label="Start your free case evaluation"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           >
-            <span className="cta-button-text">Start Your Free Evaluation</span>
-            <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <span>Start Your Free Evaluation</span>
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
               <path d="M7 4L13 10L7 16" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
             </svg>
           </Link>

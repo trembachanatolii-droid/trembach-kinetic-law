@@ -123,7 +123,7 @@ const Hero = () => {
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
-              law firm
+              lawyers
             </h1>
             <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.

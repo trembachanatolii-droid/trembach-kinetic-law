@@ -1,20 +1,23 @@
 /* ============================================
-   APPLE-INSPIRED STEPS SECTION - PREMIUM VERSION
-   All 15 enhancement categories implemented
+   APPLE-INSPIRED STEPS SECTION - ULTRA PREMIUM
+   Complete redesign matching apple.com quality
    ============================================ */
 
 /* Main Section with Advanced Background */
 .apple-steps-section {
   background: #000000;
-  background-image: radial-gradient(circle at 50% 0%, rgba(0, 113, 227, 0.08) 0%, transparent 60%);
-  background-size: 100% 200%;
-  padding: 160px 24px 180px;
+  background-image: 
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(0, 122, 255, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 30% 50%, rgba(0, 113, 227, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 70% 80%, rgba(100, 210, 255, 0.04) 0%, transparent 40%);
+  background-attachment: fixed;
+  padding: clamp(120px, 15vh, 180px) 24px clamp(140px, 18vh, 200px);
   width: 100%;
   position: relative;
-  z-index: 0; /* ensure it never overlays the previous section */
+  z-index: 0;
   overflow: hidden;
   isolation: isolate;
-  margin-top: clamp(56px, 7vw, 120px); /* extra safe spacing above */
+  margin-top: clamp(64px, 8vw, 140px);
 }
 
 /* Timeline Progress Indicator */
@@ -67,17 +70,19 @@
   }
 }
 
-/* Spotlight Effect Following Cursor */
+/* Spotlight Effect - Apple Interactive Light */
 .spotlight-effect {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  pointer-events: none; /* never block clicks */
-  transition: background 0.15s ease-out;
+  pointer-events: none;
+  transition: background 0.1s ease-out;
   mix-blend-mode: screen;
-  z-index: 0; /* under content */
+  z-index: 0;
+  opacity: 0.8;
+  will-change: background;
 }
 
 /* Grain Texture Overlay for Depth */
@@ -140,24 +145,24 @@
   z-index: 2; /* above decorative layers */
 }
 
-/* Headlines with Enhanced Typography */
+/* Headlines - Apple Premium Typography */
 .apple-steps-headline {
-  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 72px;
-  font-weight: 800;
+  font-family: -apple-system, "SF Pro Display", Inter, system-ui, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(40px, 6vw, 80px);
+  font-weight: 900;
   color: #ffffff !important;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
   line-height: 1.05;
   text-align: center;
-  margin-bottom: 32px;
+  margin-bottom: clamp(24px, 3vw, 40px);
   opacity: 0;
   transform: translateY(40px);
-  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-  text-shadow: 0 4px 30px rgba(255, 255, 255, 0.15);
-  background: linear-gradient(180deg, #ffffff 0%, #e0e0e0 100%);
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f7 50%, #d2d2d7 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  filter: drop-shadow(0 2px 10px rgba(255, 255, 255, 0.1));
 }
 
 .apple-steps-subheadline {
@@ -234,24 +239,57 @@
   grid-column: 8 / 11;
 }
 
-/* Step Cards with Advanced Effects */
+/* Step Cards - Apple Premium Glass Morphism */
 .apple-step-card {
   text-align: center;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 28px;
-  backdrop-filter: blur(40px) saturate(180%);
-  -webkit-backdrop-filter: blur(40px) saturate(180%);
-  padding: 44px 32px;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05) 0%,
+    rgba(255, 255, 255, 0.02) 100%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 32px;
+  backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(60px) saturate(180%) brightness(1.1);
+  padding: clamp(40px, 5vw, 52px) clamp(28px, 4vw, 40px);
   color: #e5e5ea !important;
   opacity: 0;
   position: relative;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   pointer-events: auto;
   isolation: isolate;
   min-height: 580px;
+  box-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  will-change: transform, box-shadow, border-color;
+}
+
+/* Card Glow Effect on Hover */
+.apple-step-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 32px;
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    rgba(100, 210, 255, 0) 0%,
+    rgba(100, 210, 255, 0.3) 50%,
+    rgba(100, 210, 255, 0) 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.apple-step-card:hover::before {
+  opacity: 1;
 }
 
 /* Featured Card (Step 2) */
@@ -260,22 +298,35 @@
   border-color: rgba(255, 255, 255, 0.12);
 }
 
-/* Enhanced Hover Effect */
+/* Enhanced Hover Effect - Apple Premium */
 .apple-step-card:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(100, 210, 255, 0.3);
-  box-shadow: 0 20px 40px rgba(0, 113, 227, 0.2);
-  transform: translateY(-4px);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08) 0%,
+    rgba(255, 255, 255, 0.04) 100%
+  );
+  border-color: rgba(100, 210, 255, 0.4);
+  box-shadow: 
+    0 24px 60px rgba(0, 122, 255, 0.35),
+    0 12px 30px rgba(100, 210, 255, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  transform: translateY(-8px) scale(1.01);
 }
 
-/* Expanded Card State */
+/* Expanded Card State - Active Interaction */
 .card-expanded {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border-color: rgba(100, 210, 255, 0.5) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  ) !important;
+  border-color: rgba(100, 210, 255, 0.6) !important;
   box-shadow: 
-    0 30px 60px rgba(0, 113, 227, 0.3),
-    0 0 0 2px rgba(100, 210, 255, 0.2) !important;
-  transform: scale(1.02) translateY(-8px) !important;
+    0 32px 80px rgba(0, 122, 255, 0.5),
+    0 16px 40px rgba(100, 210, 255, 0.4),
+    0 0 0 1px rgba(100, 210, 255, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.03) translateY(-12px) !important;
   z-index: 10;
 }
 
@@ -285,6 +336,13 @@
 
 .card-expanded .apple-step-title {
   color: #64d2ff !important;
+  text-shadow: 0 0 20px rgba(100, 210, 255, 0.5);
+}
+
+.card-expanded .apple-step-number {
+  filter: drop-shadow(0 0 80px rgba(100, 210, 255, 1)) 
+          drop-shadow(0 0 160px rgba(100, 210, 255, 0.8))
+          drop-shadow(0 8px 40px rgba(0, 122, 255, 0.6));
 }
 
 /* Focus State for Accessibility */
@@ -365,21 +423,32 @@
   height: 100%;
 }
 
-/* Animated Numbers */
+/* Animated Numbers - Ultra Bright Apple Style */
 .apple-step-card .apple-step-number {
-  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
+  font-family: -apple-system, "SF Pro Display", Inter, system-ui, BlinkMacSystemFont, sans-serif;
   font-size: clamp(100px, 8vw, 140px) !important;
   font-weight: 900;
-  color: hsla(211, 100%, 65%, 0.5) !important; /* Much lighter Apple Blue */
+  background: linear-gradient(135deg, rgba(100, 210, 255, 0.95) 0%, rgba(64, 156, 255, 0.85) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
   display: block;
   line-height: 0.85;
   margin-bottom: 28px;
   position: relative;
   z-index: 1;
-  transition: all 0.3s ease;
-  text-shadow:
-    0 0 30px hsla(211, 100%, 65%, 0.6),
-    0 0 70px hsla(211, 100%, 65%, 0.4);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 40px rgba(100, 210, 255, 0.6)) 
+          drop-shadow(0 0 80px rgba(100, 210, 255, 0.4))
+          drop-shadow(0 4px 20px rgba(0, 122, 255, 0.3));
+  will-change: transform, filter;
+}
+
+.apple-step-card:hover .apple-step-number {
+  filter: drop-shadow(0 0 60px rgba(100, 210, 255, 0.9)) 
+          drop-shadow(0 0 120px rgba(100, 210, 255, 0.6))
+          drop-shadow(0 8px 30px rgba(0, 122, 255, 0.5));
+  transform: scale(1.05);
 }
 
 /* Step Title */
@@ -456,33 +525,46 @@
   text-shadow: 0 0 20px rgba(255, 59, 48, 0.5);
 }
 
-/* Expand Indicator */
+/* Expand Indicator - Apple Interactive Design */
 .expand-indicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  margin-top: 24px;
+  gap: 10px;
+  margin-top: clamp(20px, 3vw, 32px);
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
-  font-size: 14px;
-  color: #64d2ff;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  font-family: -apple-system, "SF Pro Text", Inter, system-ui, sans-serif;
+  font-size: 13px;
+  color: rgba(100, 210, 255, 0.9);
   font-weight: 600;
-  opacity: 0.7;
-  transition: all 0.3s ease;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.75;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
 }
 
 .apple-step-card:hover .expand-indicator {
   opacity: 1;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+  color: rgba(100, 210, 255, 1);
 }
 
 .expand-indicator svg {
-  transition: transform 0.3s ease;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: drop-shadow(0 0 8px rgba(100, 210, 255, 0.4));
+}
+
+.card-expanded .expand-indicator {
+  color: rgba(100, 210, 255, 1);
+  border-top-color: rgba(100, 210, 255, 0.2);
 }
 
 .card-expanded .expand-indicator svg {
   transform: rotate(180deg);
+  filter: drop-shadow(0 0 12px rgba(100, 210, 255, 0.6));
 }
 
 /* Feature List with Enhanced Styling */
@@ -582,29 +664,31 @@
   z-index: 3; /* above decorative overlays */
 }
 
-/* Hero CTA Button - Apple Style */
+/* Hero CTA Button - Apple Premium Design */
 .hero-cta-button {
   display: inline-flex;
   align-items: center;
   gap: 12px;
-  padding: 18px 48px 18px 52px;
-  background: linear-gradient(135deg, #5a9cff 0%, #4a8aef 100%);
-  color: #000000;
-  font-family: -apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif;
-  font-size: 19px;
+  padding: clamp(16px, 2vw, 20px) clamp(40px, 5vw, 56px) clamp(16px, 2vw, 20px) clamp(44px, 5.5vw, 60px);
+  background: linear-gradient(135deg, #0071e3 0%, #005bb5 100%);
+  color: #ffffff;
+  font-family: -apple-system, "SF Pro Display", Inter, system-ui, BlinkMacSystemFont, sans-serif;
+  font-size: clamp(16px, 1.8vw, 19px);
   font-weight: 600;
+  letter-spacing: -0.01em;
   border-radius: 60px;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 
-    0 12px 40px rgba(90, 156, 255, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    0 16px 48px rgba(0, 113, 227, 0.5),
+    0 6px 16px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  animation: fadeInUp 1s cubic-bezier(0.19, 1, 0.22, 1) 1s backwards;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: fadeInUp 1s cubic-bezier(0.4, 0, 0.2, 1) 1s backwards;
+  will-change: transform, box-shadow;
 }
 
 
@@ -629,12 +713,13 @@
 }
 
 .hero-cta-button:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-4px) scale(1.02);
   box-shadow: 
-    0 20px 60px rgba(90, 156, 255, 0.7),
-    0 8px 20px rgba(0, 0, 0, 0.4),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
-  background: linear-gradient(135deg, #6aacff 0%, #5a9aff 100%);
+    0 24px 72px rgba(0, 122, 255, 0.7),
+    0 12px 32px rgba(0, 113, 227, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  background: linear-gradient(135deg, #0077ed 0%, #0060c2 100%);
 }
 
 .hero-cta-button:active {
@@ -695,17 +780,21 @@
   }
 }
 
-/* Collapsible content behavior */
+/* Collapsible Content - Smooth Apple Transitions */
 .apple-step-collapsible {
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+  transform: translateY(-10px);
+  transition: max-height 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
+              opacity 0.5s ease,
+              transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .card-expanded .apple-step-collapsible {
-  max-height: 800px; /* enough to reveal content */
+  max-height: 1000px;
   opacity: 1;
+  transform: translateY(0);
 }
 
 

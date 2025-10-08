@@ -66,7 +66,7 @@ const ThreeStepProcess = () => {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
 
-  // Mouse tracking for magnetic effect and spotlight
+  // Mouse tracking for magnetic effect and Apple-style spotlight
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (!sectionRef.current) return;
@@ -77,9 +77,11 @@ const ThreeStepProcess = () => {
       
       setMousePosition({ x, y });
 
-      // Update spotlight position
+      // Ultra-premium Apple spotlight effect with bloom
       if (spotlightRef.current) {
-        spotlightRef.current.style.background = `radial-gradient(circle 400px at ${x}px ${y}px, rgba(41, 151, 255, 0.15), transparent)`;
+        spotlightRef.current.style.background = `
+          radial-gradient(circle 600px at ${x}px ${y}px, rgba(100, 210, 255, 0.25), rgba(0, 122, 255, 0.08) 50%, transparent 80%)
+        `;
       }
 
       // Magnetic effect on cards
@@ -343,16 +345,37 @@ const ThreeStepProcess = () => {
           <div ref={timelineProgressRef} className="timeline-progress"></div>
         </div>
 
-        <h2 className="apple-steps-headline">
+        <h2 className="apple-steps-headline" itemProp="headline">
           Steps to File a California Personal Injury Lawsuit
         </h2>
         
-        <p className="apple-steps-subheadline">
+        <p className="apple-steps-subheadline" itemProp="description">
           Our proven 3-step process makes getting justice in California simple and stress-free.{" "}
-          <span className="apple-steps-free-text shimmer-text">
+          <span className="apple-steps-free-text shimmer-text" aria-label="Free consultation">
             100% FREE TO START - NO FEES UNLESS WE WIN
           </span>
         </p>
+        
+        {/* Structured Data for SEO */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How to File a California Personal Injury Lawsuit",
+            "description": "A step-by-step guide to filing a personal injury lawsuit in California with Trembach Law Firm",
+            "step": stepData.map((step, idx) => ({
+              "@type": "HowToStep",
+              "position": idx + 1,
+              "name": step.title,
+              "text": step.description,
+              "itemListElement": step.features.map((feature, fIdx) => ({
+                "@type": "HowToDirection",
+                "position": fIdx + 1,
+                "text": feature.text
+              }))
+            }))
+          })}
+        </script>
 
         {/* Progress connector SVG */}
         <svg className="progress-connector" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">

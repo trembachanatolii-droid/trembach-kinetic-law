@@ -189,7 +189,7 @@ const HeadOnCollisions = () => {
 
             <div className="mt-12 pt-8 border-t border-gray-200">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h3>
-              <RelatedPosts posts={blogPosts} currentCategory={currentCategory} />
+              <RelatedPosts posts={blogPosts} currentCategory={currentCategory} currentPostId="head-on-collisions" />
             </div>
           </div>
         </div>

@@ -1,88 +1,169 @@
-import React, { useRef, useEffect } from 'react';
-import { Button } from '@/components/ui/button';
-import { Scale, Shield, Clock } from 'lucide-react';
+import React, { useRef, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Scale, Shield, Clock, ArrowRight, Sparkles } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const EveryProblemSolved = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headlineWordsRef = useRef<HTMLSpanElement[]>([]);
   const subheadingRef = useRef<HTMLParagraphElement>(null);
-  const cardsRef = useRef<HTMLDivElement[]>([]);
-  const [hoveredCard, setHoveredCard] = React.useState<number | null>(null);
+  const cardsRef = useRef<HTMLElement[]>([]);
+  const gridRef = useRef<HTMLDivElement>(null);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   
   const problems = [
     {
       number: 1,
       problem: "I don't know what my case is worth",
       solution: "Former defense attorney reveals exact formula insurance companies use to value cases (then we 10X it).",
-      icon: Scale
+      icon: Scale,
+      link: "/free-consultation",
+      ctaText: "Get Case Valuation",
+      gradient: "from-blue-500/20 via-cyan-500/20 to-blue-600/20"
     },
     {
       number: 2,
       problem: "Insurance offered me pennies",
       solution: "We know their entire playbook. Average settlement increase: 347% above initial offer.",
-      icon: Shield
+      icon: Shield,
+      link: "/practice-areas",
+      ctaText: "Fight Back Now",
+      gradient: "from-purple-500/20 via-pink-500/20 to-purple-600/20"
     },
     {
       number: 3,
       problem: "I can't afford a lawyer",
       solution: "$0 upfront. $0 unless we win. We even advance all case costs.",
-      icon: Clock
+      icon: Clock,
+      link: "/free-consultation",
+      ctaText: "Start Free Review",
+      gradient: "from-emerald-500/20 via-teal-500/20 to-emerald-600/20"
     },
     {
       number: 4,
       problem: "This will take forever",
-      solution: "Most cases settle in 3—6 months using our insider negotiation tactics.",
-      icon: Scale
+      solution: "Most cases settle in 3-6 months using our insider negotiation tactics.",
+      icon: Scale,
+      link: "/practice-areas",
+      ctaText: "Fast-Track My Case",
+      gradient: "from-orange-500/20 via-amber-500/20 to-orange-600/20"
     },
     {
       number: 5,
       problem: "They're denying liability",
       solution: "We know every excuse they use and exactly how to destroy each one.",
-      icon: Shield
+      icon: Shield,
+      link: "/free-consultation",
+      ctaText: "Break Their Defense",
+      gradient: "from-red-500/20 via-rose-500/20 to-red-600/20"
     },
     {
       number: 6,
       problem: "I'm overwhelmed",
       solution: "We handle 100% of everything. You focus on healing.",
-      icon: Clock
+      icon: Clock,
+      link: "/free-consultation",
+      ctaText: "Get Support Today",
+      gradient: "from-indigo-500/20 via-violet-500/20 to-indigo-600/20"
     }
   ];
 
+  // Mouse tracking for magnetic effects and spotlight
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!sectionRef.current) return;
+      
+      const rect = sectionRef.current.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      setMousePosition({ x, y });
+
+      // Magnetic effect on cards
+      cardsRef.current.forEach((card, index) => {
+        if (!card) return;
+        
+        const cardRect = card.getBoundingClientRect();
+        const cardCenterX = cardRect.left + cardRect.width / 2;
+        const cardCenterY = cardRect.top + cardRect.height / 2;
+        
+        const deltaX = e.clientX - cardCenterX;
+        const deltaY = e.clientY - cardCenterY;
+        const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+        
+        if (distance < 250 && hoveredCard === index) {
+          const force = (250 - distance) / 250;
+          const moveX = (deltaX * force * 0.1);
+          const moveY = (deltaY * force * 0.1);
+          const rotateY = (deltaX * force * 0.03);
+          const rotateX = -(deltaY * force * 0.03);
+          
+          gsap.to(card, {
+            x: moveX,
+            y: moveY,
+            rotateY: rotateY,
+            rotateX: rotateX,
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        } else if (hoveredCard !== index) {
+          gsap.to(card, {
+            x: 0,
+            y: 0,
+            rotateY: 0,
+            rotateX: 0,
+            duration: 0.6,
+            ease: "power2.out"
+          });
+        }
+      });
+    };
+
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [hoveredCard]);
+
+  // GSAP Scroll Animations
+  useEffect(() => {
+    if (!sectionRef.current || !gridRef.current) return;
 
     const section = sectionRef.current;
     const headlineWords = headlineWordsRef.current.filter(Boolean);
     const subheading = subheadingRef.current;
     const cards = cardsRef.current.filter(Boolean);
+    const grid = gridRef.current;
 
-    if (!section || headlineWords.length === 0 || !subheading || cards.length === 0) return;
+    if (headlineWords.length === 0 || !subheading || cards.length === 0) return;
 
-    // Check for reduced motion preference
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     // Set initial states
-    gsap.set(section, { opacity: 0 });
+    gsap.set([section], { opacity: 0 });
     gsap.set(headlineWords, { 
       opacity: 0, 
-      y: prefersReducedMotion ? 0 : 20 
+      y: prefersReducedMotion ? 0 : 30,
+      scale: prefersReducedMotion ? 1 : 0.95
     });
     gsap.set(subheading, { 
       opacity: 0, 
-      y: prefersReducedMotion ? 0 : 16 
+      y: prefersReducedMotion ? 0 : 20 
     });
     gsap.set(cards, { 
       opacity: 0, 
-      y: prefersReducedMotion ? 0 : 30 
+      y: prefersReducedMotion ? 0 : 60,
+      scale: prefersReducedMotion ? 1 : 0.9,
+      rotateX: prefersReducedMotion ? 0 : -15
     });
 
-    // Create timeline
+    // Create master timeline
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: section,
-        start: "top 80%",
+        start: "top 75%",
         end: "bottom 20%",
         toggleActions: "play none none reverse"
       }
@@ -91,32 +172,51 @@ const EveryProblemSolved = () => {
     // Section fade in
     tl.to(section, {
       opacity: 1,
-      duration: 0.4,
-      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
+      duration: 0.5,
+      ease: "power2.out"
     })
-    // Headline words animation (word by word)
+    // Headline words with stagger and scale
     .to(headlineWords, {
       opacity: 1,
       y: 0,
-      duration: prefersReducedMotion ? 0.3 : 0.5,
-      stagger: prefersReducedMotion ? 0.05 : 0.15,
-      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
-    })
-    // Subheading animation (after headline completes + 200ms delay)
+      scale: 1,
+      duration: prefersReducedMotion ? 0.4 : 0.7,
+      stagger: prefersReducedMotion ? 0.05 : 0.12,
+      ease: "expo.out"
+    }, "-=0.2")
+    // Subheading
     .to(subheading, {
       opacity: 1,
       y: 0,
-      duration: 0.5,
-      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
-    }, "+=0.2")
-    // Cards staggered animation
+      duration: 0.6,
+      ease: "power3.out"
+    }, "-=0.4")
+    // Cards grid entrance
     .to(cards, {
       opacity: 1,
       y: 0,
-      duration: 0.4,
-      stagger: 0.15,
-      ease: "cubic-bezier(0.22, 1, 0.36, 1)"
-    }, "-=0.2");
+      scale: 1,
+      rotateX: 0,
+      duration: 0.8,
+      stagger: {
+        amount: 0.6,
+        from: "start",
+        grid: "auto",
+        ease: "power2.inOut"
+      },
+      ease: "expo.out"
+    }, "-=0.3");
+
+    // Parallax effect on scroll
+    gsap.to(grid, {
+      y: -50,
+      scrollTrigger: {
+        trigger: section,
+        start: "top bottom",
+        end: "bottom top",
+        scrub: 1
+      }
+    });
 
     return () => {
       tl.scrollTrigger?.kill();
@@ -125,144 +225,245 @@ const EveryProblemSolved = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-20 bg-background overflow-visible">
-      <div className="container mx-auto px-6 lg:px-8">
+    <section 
+      ref={sectionRef} 
+      className="relative py-32 lg:py-40 overflow-hidden"
+      style={{
+        background: 'linear-gradient(180deg, #000000 0%, #0a0a0a 50%, #000000 100%)',
+        isolation: 'isolate'
+      }}
+    >
+      {/* Animated gradient mesh background */}
+      <div 
+        className="absolute inset-0 opacity-40"
+        style={{
+          background: `
+            radial-gradient(circle at 20% 30%, rgba(0, 122, 255, 0.15) 0%, transparent 50%),
+            radial-gradient(circle at 80% 70%, rgba(123, 104, 238, 0.12) 0%, transparent 50%),
+            radial-gradient(circle at 50% 50%, rgba(100, 210, 255, 0.1) 0%, transparent 60%)
+          `,
+          animation: 'meshMove 20s ease-in-out infinite'
+        }}
+      />
+
+      {/* Spotlight following mouse */}
+      <div 
+        className="absolute inset-0 pointer-events-none transition-opacity duration-300"
+        style={{
+          background: `radial-gradient(circle 600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(0, 122, 255, 0.08), transparent)`,
+          opacity: hoveredCard !== null ? 1 : 0
+        }}
+      />
+
+      {/* Grain texture */}
+      <div 
+        className="absolute inset-0 opacity-30 mix-blend-overlay pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='3.5' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E")`
+        }}
+      />
+
+      <div className="container mx-auto px-6 lg:px-8 relative z-10">
         {/* Section Header */}
-        <div className="text-center -mb-32">
-          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 font-display">
+        <div className="text-center mb-20 lg:mb-28">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#007AFF]/10 border border-[#007AFF]/20 mb-6">
+            <Sparkles className="w-4 h-4 text-[#007AFF]" />
+            <span className="text-sm font-semibold text-[#007AFF]">Complete Solutions</span>
+          </div>
+          
+          <h2 className="text-5xl lg:text-7xl font-bold text-white mb-6"
+              style={{
+                fontFamily: '-apple-system, "SF Pro Display", system-ui, BlinkMacSystemFont, sans-serif',
+                letterSpacing: '-0.02em',
+                lineHeight: '1.1'
+              }}>
             {['Every', 'Problem', 'Solved'].map((word, index) => (
               <span
                 key={index}
                 ref={el => { if (el) headlineWordsRef.current[index] = el; }}
-                className="inline-block mr-3 last:mr-0"
+                className="inline-block mr-4 last:mr-0"
+                style={{
+                  background: 'linear-gradient(180deg, #ffffff 0%, #d2d2d7 100%)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  backgroundClip: 'text'
+                }}
               >
                 {word}
               </span>
             ))}
           </h2>
+          
           <p 
             ref={subheadingRef}
-            className="text-xl text-muted-foreground max-w-4xl mx-auto font-medium"
+            className="text-xl lg:text-2xl text-gray-400 max-w-4xl mx-auto font-normal"
+            style={{
+              fontFamily: '-apple-system, "SF Pro Text", system-ui, BlinkMacSystemFont, sans-serif',
+              letterSpacing: '0.005em',
+              lineHeight: '1.5'
+            }}
           >
             Here's how we eliminate every obstacle between you and maximum compensation
           </p>
         </div>
 
-        {/* Cards Fan Arc Layout */}
-        <div className="relative flex justify-center items-center min-h-[600px] mb-12 overflow-visible -mt-48 lg:-mt-64">
-          <div className="relative w-full flex justify-center overflow-visible">
-            {problems.map((item, index) => {
-              const IconComponent = item.icon;
-              // Calculate rotation and position for semicircle fan
-              const totalCards = problems.length;
-              const angleStep = 65 / (totalCards - 1); // 65 degrees total spread
-              const rotation = -25 + (index * angleStep); // -25 to +25 degrees
-              const radiusX = 380; // Horizontal radius (wider spacing for accessibility)
-              const radiusY = 70;  // Vertical radius (increased for larger cards)
-              const radian = (rotation * Math.PI) / 180;
-              const x = radiusX * Math.sin(radian);
-              const y = radiusY * (1 - Math.cos(radian));
-               
-              // Determine card states
-              const isHovered = hoveredCard === index;
-              const isLeftNeighbor = hoveredCard !== null && index === hoveredCard - 1;
-              const isRightNeighbor = hoveredCard !== null && index === hoveredCard + 1;
-              const isNeighbor = isLeftNeighbor || isRightNeighbor;
-              
-              // Bias hover growth away from neighbors
-              const centerIndex = Math.floor((totalCards - 1) / 2);
-              const isLeft = index < centerIndex;
-              const isRight = index > centerIndex;
-              const transformOrigin = isLeft ? 'left center' : isRight ? 'right center' : 'center';
-              
-              // Dynamic classes based on card state with Apple-inspired smoothness
-              let cardClasses = "bg-card/95 backdrop-blur-sm border border-border/30 rounded-3xl p-7 w-80 h-96 shadow-sm transition-all duration-[600ms] ease-[cubic-bezier(0.25,0.46,0.45,0.94)] transform-gpu will-change-transform";
-              
-              if (isHovered) {
-                // Main active card - Apple-inspired elegant pop-up
-                cardClasses += " scale-[1.08] -translate-y-16 rotate-0 shadow-[0_32px_64px_rgba(0,0,0,0.25),0_8px_24px_rgba(0,0,0,0.15)] border-primary/50 bg-card/98 backdrop-blur-md z-[200] brightness-[1.02]";
-                if (isLeft) cardClasses += " -translate-x-4 lg:-translate-x-6";
-                if (isRight) cardClasses += " translate-x-4 lg:translate-x-6";
-              } else if (isNeighbor) {
-                // Neighbor card - subtle secondary elevation
-                cardClasses += " scale-[1.03] -translate-y-6 shadow-[0_16px_32px_rgba(0,0,0,0.18),0_4px_12px_rgba(0,0,0,0.12)] border-primary/30 bg-card/96 backdrop-blur-sm z-[150] brightness-[1.01]";
-              } else {
-                // Inactive card - refined normal state with gentle hover
-                cardClasses += " hover:scale-[1.01] hover:-translate-y-1 hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)] hover:border-border/40 hover:bg-card/96 hover:backdrop-blur-sm";
-              }
-              
-              return (
-                <div
-                  key={index}
-                  ref={el => { if (el) cardsRef.current[index] = el; }}
-                  className="absolute group cursor-pointer"
-                  tabIndex={0}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  onFocus={() => setHoveredCard(index)}
-                  onBlur={() => setHoveredCard(null)}
+        {/* Cards Grid - Apple-style Bento Layout */}
+        <div 
+          ref={gridRef}
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto"
+          style={{ perspective: '2000px' }}
+        >
+          {problems.map((item, index) => {
+            const IconComponent = item.icon;
+            const isHovered = hoveredCard === index;
+            
+            return (
+              <article
+                key={index}
+                ref={el => { if (el) cardsRef.current[index] = el; }}
+                className="group relative"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  willChange: 'transform'
+                }}
+                onMouseEnter={() => setHoveredCard(index)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <div 
+                  className={`relative h-full rounded-3xl p-8 transition-all duration-500 ease-out ${
+                    isHovered ? 'scale-[1.02]' : 'scale-100'
+                  }`}
                   style={{
-                    transform: `translate(-50%, 0) translate(${x}px, ${y}px) rotate(${rotation * 0.2}deg)`,
-                    left: '50%',
-                    zIndex: isHovered ? 200 : isNeighbor ? 150 : 10 + index,
-                    transformOrigin
+                    background: isHovered 
+                      ? 'rgba(255, 255, 255, 0.08)'
+                      : 'rgba(255, 255, 255, 0.04)',
+                    border: '1px solid rgba(255, 255, 255, 0.12)',
+                    backdropFilter: 'blur(40px) saturate(180%)',
+                    WebkitBackdropFilter: 'blur(40px) saturate(180%)',
+                    boxShadow: isHovered 
+                      ? '0 20px 60px rgba(0, 122, 255, 0.3), 0 0 80px rgba(0, 122, 255, 0.15)'
+                      : '0 4px 20px rgba(0, 0, 0, 0.3)',
+                    transform: isHovered ? 'translateZ(20px)' : 'translateZ(0)'
                   }}
                 >
-                  <div className={cardClasses}>
-                    
+                  {/* Gradient overlay */}
+                  <div 
+                    className={`absolute inset-0 rounded-3xl bg-gradient-to-br ${item.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+                  />
+                  
+                  {/* Content */}
+                  <div className="relative z-10">
                     {/* Icon */}
-                    <div className="mb-3">
-                      <IconComponent className="w-7 h-7 text-accent" />
+                    <div className="mb-6">
+                      <div className="w-14 h-14 rounded-2xl bg-[#007AFF]/20 flex items-center justify-center group-hover:scale-110 group-hover:rotate-3 transition-all duration-500">
+                        <IconComponent className="w-7 h-7 text-[#007AFF]" />
+                      </div>
                     </div>
 
                     {/* Problem Number */}
-                    <div className="text-sm font-bold text-accent mb-3 tracking-wide">
+                    <div className="text-xs font-bold text-[#007AFF] mb-3 tracking-wider uppercase">
                       Problem #{item.number}
                     </div>
 
-                    {/* Problem Statement in Quotes */}
-                    <blockquote className="text-sm text-foreground italic mb-3 leading-relaxed font-medium 
-                                         bg-muted/30 p-3 rounded-lg border-l-4 border-accent/50">
+                    {/* Problem Statement */}
+                    <blockquote className="text-lg font-semibold text-white italic mb-4 leading-tight">
                       "{item.problem}"
                     </blockquote>
 
-                    {/* Divider Line */}
-                    <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-3 
-                                   group-hover:via-accent/60 transition-all duration-300"></div>
+                    {/* Divider */}
+                    <div className="h-px bg-gradient-to-r from-transparent via-gray-700 to-transparent mb-4 group-hover:via-[#007AFF]/50 transition-all duration-500" />
 
                     {/* Solution Heading */}
-                    <div className="text-xs font-bold text-foreground mb-2 tracking-wide uppercase opacity-90">
+                    <div className="text-xs font-bold text-gray-400 mb-2 tracking-wide uppercase">
                       WE SOLVE THIS:
                     </div>
 
                     {/* Solution Text */}
-                    <p className="text-xs text-muted-foreground leading-relaxed">
+                    <p className="text-sm text-gray-300 leading-relaxed mb-6">
                       {item.solution}
                     </p>
+
+                    {/* CTA Link */}
+                    <Link
+                      to={item.link}
+                      className="inline-flex items-center gap-2 text-sm font-semibold text-[#007AFF] hover:gap-3 transition-all duration-300 group/link"
+                    >
+                      <span>{item.ctaText}</span>
+                      <ArrowRight className="w-4 h-4 group-hover/link:translate-x-1 transition-transform duration-300" />
+                    </Link>
+                  </div>
+
+                  {/* Large number watermark */}
+                  <div 
+                    className="absolute bottom-4 right-4 text-[120px] font-black leading-none pointer-events-none select-none"
+                    style={{
+                      color: '#007AFF',
+                      opacity: 0.08,
+                      fontFamily: '-apple-system, "SF Pro Display", system-ui',
+                      textShadow: '0 0 80px rgba(0, 122, 255, 0.3)'
+                    }}
+                  >
+                    {item.number}
                   </div>
                 </div>
-              );
-            })}
-          </div>
+              </article>
+            );
+          })}
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-2xl mx-auto text-center bg-card/50 border border-border/20 rounded-3xl p-8 shadow-lg mt-32">
-          <h3 className="text-2xl font-bold text-foreground mb-4 font-display">
-            Ready to Get Maximum Compensation?
-          </h3>
-          <p className="text-muted-foreground mb-6 text-lg">
-            Don't let insurance companies take advantage of you. Get your free case review now.
-          </p>
-          <Button 
-            className="bg-primary hover:bg-primary/80 text-primary-foreground font-bold py-4 px-12 
-                       rounded-full text-lg transition-all duration-300 hover:scale-105 
-                       shadow-lg hover:shadow-xl hover:shadow-primary/30"
+        <div className="mt-20 lg:mt-28 text-center">
+          <div 
+            className="max-w-3xl mx-auto rounded-3xl p-10 lg:p-12"
+            style={{
+              background: 'rgba(255, 255, 255, 0.04)',
+              border: '1px solid rgba(255, 255, 255, 0.1)',
+              backdropFilter: 'blur(40px)',
+              WebkitBackdropFilter: 'blur(40px)'
+            }}
           >
-            Get My Free Case Review
-          </Button>
+            <h3 
+              className="text-3xl lg:text-4xl font-bold text-white mb-4"
+              style={{
+                fontFamily: '-apple-system, "SF Pro Display", system-ui',
+                letterSpacing: '-0.02em'
+              }}
+            >
+              Ready to Get Maximum Compensation?
+            </h3>
+            <p className="text-lg text-gray-400 mb-8 max-w-2xl mx-auto">
+              Don't let insurance companies take advantage of you. Get your free case review now.
+            </p>
+            <Link
+              to="/free-consultation"
+              className="inline-flex items-center gap-3 px-10 py-4 rounded-full font-semibold text-white text-lg transition-all duration-300 hover:scale-105 hover:shadow-2xl group"
+              style={{
+                background: 'linear-gradient(135deg, #007AFF 0%, #0051D5 100%)',
+                boxShadow: '0 10px 40px rgba(0, 122, 255, 0.4)'
+              }}
+            >
+              <span>Get My Free Case Review</span>
+              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+            </Link>
+          </div>
         </div>
       </div>
+
+      {/* SEO Schema Markup */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{
+        __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": problems.map(item => ({
+            "@type": "Question",
+            "name": item.problem,
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": item.solution
+            }
+          }))
+        })
+      }} />
     </section>
   );
 };

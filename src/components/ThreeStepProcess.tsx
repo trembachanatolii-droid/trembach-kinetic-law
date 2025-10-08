@@ -56,7 +56,7 @@ const MoneyIcon = () => (
 
 const ThreeStepProcess = () => {
   const sectionRef = useRef<HTMLElement>(null);
-  const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+  const cardsRef = useRef<(HTMLElement | null)[]>([]);
   const numbersRef = useRef<(HTMLDivElement | null)[]>([]);
   const progressPathRef = useRef<SVGPathElement>(null);
   const spotlightRef = useRef<HTMLDivElement>(null);
@@ -309,15 +309,15 @@ const ThreeStepProcess = () => {
   ];
 
   return (
-    <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process">
+    <section ref={sectionRef} className="apple-steps-section" role="region" aria-label="Three Step Process" style={{ position: 'relative', isolation: 'isolate', zIndex: 1 }}>
       {/* Animated mesh gradient background */}
-      <div className="gradient-mesh"></div>
+      <div className="gradient-mesh" style={{ position: 'absolute', zIndex: 0 }}></div>
       
       {/* Spotlight effect */}
-      <div ref={spotlightRef} className="spotlight-effect"></div>
+      <div ref={spotlightRef} className="spotlight-effect" style={{ position: 'absolute', zIndex: 1 }}></div>
       
       {/* Floating particles */}
-      <div className="floating-particles" aria-hidden="true">
+      <div className="floating-particles" aria-hidden="true" style={{ position: 'absolute', zIndex: 2 }}>
         {[...Array(25)].map((_, i) => (
           <div 
             key={i} 
@@ -382,11 +382,21 @@ const ThreeStepProcess = () => {
             const isFeatured = index === 1;
             
             return (
-              <div 
+              <a
+                href="/free-consultation"
                 key={index}
                 className={`apple-step-card ${isFeatured ? 'apple-step-card-featured' : ''} ${isExpanded ? 'card-expanded' : ''}`}
                 ref={el => cardsRef.current[index] = el}
-                onClick={() => handleCardClick(index)}
+                onClick={(e) => {
+                  if (!e.metaKey && !e.ctrlKey) {
+                    e.preventDefault();
+                    handleCardClick(index);
+                    setTimeout(() => {
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                      window.location.href = '/free-consultation';
+                    }, 300);
+                  }
+                }}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
@@ -396,7 +406,7 @@ const ThreeStepProcess = () => {
                 role="button"
                 tabIndex={0}
                 aria-expanded={isExpanded}
-                aria-label={`Step ${step.number}: ${step.title}`}
+                aria-label={`Step ${step.number}: ${step.title}. Click to start free consultation.`}
               >
                 
                 {/* Step icon with breathing animation */}
@@ -471,7 +481,7 @@ const ThreeStepProcess = () => {
                   </svg>
                 </div>
                 
-              </div>
+              </a>
             );
           })}
         </div>
@@ -479,9 +489,14 @@ const ThreeStepProcess = () => {
         {/* CTA Button */}
         <div className="steps-cta-container">
           <a 
-            href="#evaluation-form" 
+            href="/free-consultation" 
             className="hero-cta-button"
             aria-label="Start your free case evaluation"
+            onClick={(e) => {
+              e.preventDefault();
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+              window.location.href = '/free-consultation';
+            }}
           >
             <span className="cta-button-text">Start Your Free Evaluation</span>
             <svg className="cta-arrow" width="20" height="20" viewBox="0 0 20 20" fill="none">

@@ -135,9 +135,17 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
-          variant="outline"
           size="lg"
-          className="text-white border-white/80 hover:bg-white/20 hover:border-white font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
+          className="hero-cta-button relative overflow-hidden text-white font-bold px-10 py-6 rounded-full text-base tracking-wide
+            bg-gradient-to-b from-[#E63946] to-[#C1272D]
+            shadow-[0_4px_14px_0_rgba(230,57,70,0.39),0_8px_20px_-4px_rgba(193,39,45,0.5),inset_0_-2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_2px_0_rgba(255,255,255,0.3)]
+            hover:shadow-[0_6px_20px_0_rgba(230,57,70,0.5),0_12px_30px_-6px_rgba(193,39,45,0.6),inset_0_-2px_4px_0_rgba(0,0,0,0.3),inset_0_1px_2px_0_rgba(255,255,255,0.4)]
+            active:shadow-[0_2px_8px_0_rgba(230,57,70,0.35),inset_0_2px_6px_0_rgba(0,0,0,0.4)]
+            hover:scale-[1.02] active:scale-[0.98]
+            transition-all duration-300 ease-out
+            before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
+            after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.4),transparent_60%)] after:opacity-70
+            will-change-transform"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

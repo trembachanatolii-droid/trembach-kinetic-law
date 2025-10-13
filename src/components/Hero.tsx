@@ -99,13 +99,13 @@ const Hero = () => {
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-4">
-            <h1 className="hero-line font-sans text-white text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
+            <h1 className="hero-line font-sans text-white text-3xl md:text-4xl font-black leading-[1.1] tracking-tight">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               lawyers
             </h1>
-            <p className="hero-line font-sans text-white text-xl md:text-2xl font-normal leading-[1.4] max-w-2xl">
+            <p className="hero-line font-sans text-white text-base md:text-lg font-normal leading-[1.4] max-w-xl">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>
@@ -115,7 +115,7 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           size="lg"
-          className="text-white font-bold px-8 py-6 rounded text-lg bg-[#E50914] hover:bg-[#C11119]"
+          className="text-white font-bold px-8 py-6 rounded text-lg bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

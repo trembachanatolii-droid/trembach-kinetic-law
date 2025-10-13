@@ -40,26 +40,6 @@ const Hero = () => {
         );
       }
 
-      // Button animation
-      if (buttonRef.current) {
-        gsap.fromTo(
-          buttonRef.current,
-          {
-            y: 30,
-            opacity: 0,
-            scale: 0.9
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "power3.out",
-            delay: 1.2
-          }
-        );
-      }
-
       // Lawyer image animation
       if (lawyerRef.current) {
         gsap.fromTo(
@@ -134,14 +114,8 @@ const Hero = () => {
 
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
-          ref={buttonRef}
           size="lg"
-          className="hero-cta-button text-white font-bold px-8 py-6 rounded text-lg
-            bg-[#E50914]
-            hover:bg-[#C11119]
-            transition-colors duration-200
-            shadow-[0_1px_3px_rgba(0,0,0,0.3)]
-            hover:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
+          className="text-white font-bold px-8 py-6 rounded text-lg bg-[#E50914] hover:bg-[#C11119]"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

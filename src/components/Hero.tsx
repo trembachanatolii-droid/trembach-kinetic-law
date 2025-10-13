@@ -118,14 +118,14 @@ const Hero = () => {
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
-          <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_4px_16px_rgba(0,0,0,0.8)]">
+          <div ref={headlineRef} className="space-y-4">
+            <h1 className="hero-line font-sans text-white text-5xl md:text-6xl font-black leading-[1.1] tracking-tight">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               lawyers
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_2px_8px_rgba(0,0,0,0.7)]">
+            <p className="hero-line font-sans text-white text-xl md:text-2xl font-normal leading-[1.4] max-w-2xl">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>
@@ -136,16 +136,12 @@ const Hero = () => {
         <Button 
           ref={buttonRef}
           size="lg"
-          className="hero-cta-button relative overflow-hidden text-white font-bold px-10 py-6 rounded-full text-base tracking-wide
-            bg-gradient-to-b from-[#E63946] to-[#C1272D]
-            shadow-[0_4px_14px_0_rgba(230,57,70,0.39),0_8px_20px_-4px_rgba(193,39,45,0.5),inset_0_-2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_2px_0_rgba(255,255,255,0.3)]
-            hover:shadow-[0_6px_20px_0_rgba(230,57,70,0.5),0_12px_30px_-6px_rgba(193,39,45,0.6),inset_0_-2px_4px_0_rgba(0,0,0,0.3),inset_0_1px_2px_0_rgba(255,255,255,0.4)]
-            active:shadow-[0_2px_8px_0_rgba(230,57,70,0.35),inset_0_2px_6px_0_rgba(0,0,0,0.4)]
-            hover:scale-[1.02] active:scale-[0.98]
-            transition-all duration-300 ease-out
-            before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-            after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.4),transparent_60%)] after:opacity-70
-            will-change-transform"
+          className="hero-cta-button text-white font-bold px-8 py-6 rounded text-lg
+            bg-[#E50914]
+            hover:bg-[#C11119]
+            transition-colors duration-200
+            shadow-[0_1px_3px_rgba(0,0,0,0.3)]
+            hover:shadow-[0_2px_8px_rgba(0,0,0,0.4)]"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

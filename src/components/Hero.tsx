@@ -125,7 +125,7 @@ const Hero = () => {
               and mesothelioma<br />
               lawyers
             </h1>
-            <p className="hero-line font-sans text-white text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_2px_8px_rgba(0,0,0,0.7)]">
+            <p className="hero-line font-sans text-[#D4AF37] text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_2px_8px_rgba(0,0,0,0.7),0_0_20px_rgba(212,175,55,0.3)] font-medium">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>
@@ -139,8 +139,10 @@ const Hero = () => {
           className="hero-cta-button relative overflow-hidden text-white font-bold px-10 py-6 rounded-full text-base tracking-wide
             bg-gradient-to-b from-[#E63946] to-[#C1272D]
             shadow-[0_4px_14px_0_rgba(230,57,70,0.39),0_8px_20px_-4px_rgba(193,39,45,0.5),inset_0_-2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_2px_0_rgba(255,255,255,0.3)]
-            hover:shadow-[0_6px_20px_0_rgba(230,57,70,0.5),0_12px_30px_-6px_rgba(193,39,45,0.6),inset_0_-2px_4px_0_rgba(0,0,0,0.3),inset_0_1px_2px_0_rgba(255,255,255,0.4)]
-            active:shadow-[0_2px_8px_0_rgba(230,57,70,0.35),inset_0_2px_6px_0_rgba(0,0,0,0.4)]
+            hover:bg-gradient-to-b hover:from-[#2563EB] hover:to-[#1D4ED8]
+            hover:text-[#A855F7]
+            hover:shadow-[0_0_40px_8px_rgba(239,68,68,0.8),0_0_20px_4px_rgba(239,68,68,0.6),inset_0_-2px_4px_0_rgba(0,0,0,0.3),inset_0_1px_2px_0_rgba(255,255,255,0.2)]
+            active:shadow-[0_0_20px_4px_rgba(239,68,68,0.6),inset_0_2px_6px_0_rgba(0,0,0,0.4)]
             hover:scale-[1.02] active:scale-[0.98]
             transition-all duration-300 ease-out
             before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300

@@ -11,10 +11,10 @@ const Hero = () => {
         <SparklesCore
           id="hero-sparkles"
           background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={100}
-          className="w-full h-full"
+          minSize={0.8}
+          maxSize={1.8}
+          particleDensity={220}
+          className="w-full h-full pointer-events-none"
           particleColor="#FFFFFF"
         />
       </div>

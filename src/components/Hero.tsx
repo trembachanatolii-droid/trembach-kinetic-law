@@ -1,41 +1,39 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import scalesJusticeHeroBg from '@/assets/hero-justice-reference.png';
+import { SparklesCore } from '@/components/ui/sparkles';
 
 const Hero = () => {
-
-
   return (
-    <section 
-       
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
-      style={{
-        backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0) 70%), url(${scalesJusticeHeroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      
-      
-      <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
-        {/* Left-aligned Content - Apple Style */}
-        <div className="max-w-xl">
-          <div className="space-y-3">
-            <h1 className="hero-line font-sans text-white text-2xl md:text-3xl font-black leading-tight tracking-tight max-w-lg">
-              California's premier<br />
-              personal injury<br />
-              and mesothelioma<br />
-              lawyers
-            </h1>
-            <p className="hero-line font-sans text-white text-sm md:text-base font-normal leading-relaxed max-w-md">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
-            </p>
-          </div>
+    <section className="relative min-h-screen flex items-center overflow-hidden bg-black">
+      {/* Sparkles Background */}
+      <div className="w-full absolute inset-0 h-screen">
+        <SparklesCore
+          id="hero-sparkles"
+          background="transparent"
+          minSize={0.6}
+          maxSize={1.4}
+          particleDensity={100}
+          className="w-full h-full"
+          particleColor="#FFFFFF"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="container mx-auto px-8 flex flex-col items-center justify-center min-h-screen relative z-10">
+        <div className="text-center space-y-6 max-w-4xl">
+          <h1 className="font-sans text-white text-4xl md:text-6xl lg:text-7xl font-black leading-tight tracking-tight">
+            California's Premier<br />
+            Personal Injury and<br />
+            Mesothelioma Lawyers
+          </h1>
+          <p className="font-sans text-white/90 text-lg md:text-xl font-normal leading-relaxed max-w-2xl mx-auto">
+            After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+          </p>
         </div>
       </div>
 
+      {/* CTA Button */}
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           size="lg"

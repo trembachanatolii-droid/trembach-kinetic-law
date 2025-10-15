@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // Justice Statue Component
@@ -160,6 +160,14 @@ const Hero = () => {
   return (
     <section ref={heroRef} className="relative min-h-[70vh] flex items-start overflow-hidden bg-[#eef1f5] isolate">
 
+      {/* 3D Canvas */}
+      <Canvas className="absolute inset-0 z-10 pointer-events-none" dpr={[1,2]} gl={{ antialias: true, alpha: true }}>
+        <ambientLight intensity={0.6} />
+        <hemisphereLight args={["#f0f7ff", "#0b0e13", 0.9]} />
+        <directionalLight position={[3,5,4]} intensity={1.1} />
+        <directionalLight position={[-3,2,-3]} intensity={0.55} color="#9cc7ff" />
+        <JusticeStatue mousePosition={mousePosition} />
+      </Canvas>
 
       {/* Moving Glow */}
       <div

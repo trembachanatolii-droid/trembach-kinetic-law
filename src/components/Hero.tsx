@@ -176,10 +176,9 @@ const Hero = () => {
       />
 
 
-      {/* Glassmorphism Grid & Content */}
-      <div className="relative z-30 mt-[6%] ml-[6%] mr-[50%] max-w-4xl">
-        {/* Glass Tiles */}
-        <div className="grid grid-cols-3 gap-4 max-w-[720px] mb-6">
+      {/* Glassmorphism Grid (left) */}
+      <div className="absolute z-30 left-[6%] top-[6%] max-w-[720px]">
+        <div className="grid grid-cols-3 gap-4">
           {[...Array(9)].map((_, i) => (
             <div
               key={i}
@@ -191,27 +190,27 @@ const Hero = () => {
             />
           ))}
         </div>
+      </div>
 
-        {/* Copy Card (right) */}
-        <div className="absolute right-[6%] top-[22%] z-30 max-w-[560px]">
-          <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-white/70 shadow-[0_10px_50px_rgba(0,0,0,0.12)] p-6 md:p-8 text-neutral-800 space-y-3">
-            <div className="text-xs uppercase tracking-[0.14em] text-neutral-500">Interactive 3D • Glassmorphism</div>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-              California&apos;s Premier<br />
-              Personal Injury and<br />
-              Mesothelioma Lawyers
-            </h1>
-            <p className="text-sm md:text-base text-neutral-700 leading-relaxed">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
-            </p>
-            <Button
-              size="lg"
-              className="mt-2 text-white font-bold px-7 py-5 rounded-xl text-base bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
-              asChild
-            >
-              <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-            </Button>
-          </div>
+      {/* Copy Card (right) */}
+      <div className="absolute z-30 right-[6%] top-[22%] max-w-[560px]">
+        <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-white/70 shadow-[0_10px_50px_rgba(0,0,0,0.12)] p-6 md:p-8 text-neutral-800 space-y-3">
+          <div className="text-xs uppercase tracking-[0.14em] text-neutral-500">Interactive 3D • Glassmorphism</div>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+            California&apos;s Premier<br />
+            Personal Injury and<br />
+            Mesothelioma Lawyers
+          </h1>
+          <p className="text-sm md:text-base text-neutral-700 leading-relaxed">
+            After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+          </p>
+          <Button
+            size="lg"
+            className="mt-2 text-white font-bold px-7 py-5 rounded-xl text-base bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
+            asChild
+          >
+            <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
+          </Button>
         </div>
       </div>
 

@@ -1,9 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { SparklesCore } from '@/components/ui/sparkles';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Environment } from '@react-three/drei';
+import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 // Justice Statue Component
@@ -160,66 +158,23 @@ const Hero = () => {
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-[70vh] flex items-start overflow-hidden bg-[#0b0e13] isolate">
-      {/* Sparkles Background */}
-      <div className="w-full absolute inset-0 h-full">
-        <SparklesCore
-          id="hero-sparkles"
-          background="transparent"
-          minSize={0.8}
-          maxSize={1.8}
-          particleDensity={220}
-          className="w-full h-full pointer-events-none"
-          particleColor="#FFFFFF"
-        />
-      </div>
+    <section ref={heroRef} className="relative min-h-[70vh] flex items-start overflow-hidden bg-[#eef1f5] isolate">
 
-      {/* Three.js Canvas */}
-      <div className="absolute inset-0 z-10 pointer-events-none">
-        <Canvas
-          camera={{ position: [1.2, 1.25, 3.5], fov: 45 }}
-          gl={{ antialias: true, alpha: true, toneMapping: THREE.ACESFilmicToneMapping }}
-        >
-          <ambientLight intensity={0.5} />
-          <hemisphereLight color="#f0f7ff" groundColor="#0b0e13" intensity={0.9} />
-          <directionalLight position={[3, 5, 4]} intensity={1.1} />
-          <directionalLight position={[-3, 2, -3]} intensity={0.55} color="#9cc7ff" />
-          
-          <JusticeStatue mousePosition={mousePosition} />
-          <Environment preset="city" />
-          
-          <OrbitControls
-            enablePan={false}
-            enableRotate={false}
-            enableZoom={true}
-            minDistance={2.2}
-            maxDistance={4.2}
-            enableDamping
-            dampingFactor={0.06}
-          />
-        </Canvas>
-      </div>
 
       {/* Moving Glow */}
       <div
-        className="absolute z-20 w-[1400px] h-[1400px] rounded-full pointer-events-none transition-all duration-300 ease-out"
+        className="absolute z-20 w-[1600px] h-[1600px] rounded-full pointer-events-none transition-all duration-200 ease-out"
         style={{
           left: glowPosition.x,
           top: glowPosition.y,
           transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(closest-side, rgba(255, 198, 57, 0.38), rgba(255, 198, 57, 0) 70%)',
-          filter: 'blur(20px)',
+          background: 'radial-gradient(closest-side, rgba(255,205,64,0.95) 0%, rgba(255,185,0,0.6) 35%, rgba(255,175,0,0) 70%)',
+          filter: 'blur(30px)',
           mixBlendMode: 'screen',
         }}
+        aria-hidden="true"
       />
 
-      {/* Vignette */}
-      <div
-        className="absolute inset-[-20%] z-10 pointer-events-none"
-        style={{
-          background: 'radial-gradient(1000px 600px at 80% 40%, rgba(79, 70, 229, 0.14), transparent 62%), radial-gradient(900px 520px at 20% 80%, rgba(14, 165, 233, 0.14), transparent 60%)',
-        }}
-      />
 
       {/* Glassmorphism Grid & Content */}
       <div className="relative z-30 mt-[6%] ml-[6%] mr-[50%] max-w-4xl">
@@ -228,32 +183,35 @@ const Hero = () => {
           {[...Array(9)].map((_, i) => (
             <div
               key={i}
-              className={`rounded-3xl bg-white/8 backdrop-blur-md border border-white/18 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.06)] min-h-[90px] ${
-                i >= 6 ? 'hidden lg:block' : ''
-              }`}
-              style={{ backdropFilter: 'blur(16px) saturate(130%)' }}
+              className={`rounded-[22px] bg-white/60 backdrop-blur-xl border border-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(0,0,0,0.06),0_8px_40px_rgba(0,0,0,0.08)] min-h-[100px] ${i >= 6 ? 'hidden lg:block' : ''}`}
+              style={{
+                WebkitBackdropFilter: 'blur(16px) saturate(130%)',
+                backdropFilter: 'blur(16px) saturate(130%)'
+              }}
             />
           ))}
         </div>
 
-        {/* Copy */}
-        <div className="max-w-[560px] text-white space-y-3">
-          <div className="text-xs uppercase tracking-[0.14em] opacity-75">Interactive 3D • Glassmorphism</div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            California's Premier<br />
-            Personal Injury and<br />
-            Mesothelioma Lawyers
-          </h1>
-          <p className="text-sm md:text-base opacity-85 leading-relaxed">
-            After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
-          </p>
-          <Button
-            size="lg"
-            className="mt-4 text-white font-bold px-8 py-6 rounded-xl text-base bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
-            asChild
-          >
-            <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-          </Button>
+        {/* Copy Card (right) */}
+        <div className="absolute right-[6%] top-[22%] z-30 max-w-[560px]">
+          <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-white/70 shadow-[0_10px_50px_rgba(0,0,0,0.12)] p-6 md:p-8 text-neutral-800 space-y-3">
+            <div className="text-xs uppercase tracking-[0.14em] text-neutral-500">Interactive 3D • Glassmorphism</div>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              California&apos;s Premier<br />
+              Personal Injury and<br />
+              Mesothelioma Lawyers
+            </h1>
+            <p className="text-sm md:text-base text-neutral-700 leading-relaxed">
+              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+            </p>
+            <Button
+              size="lg"
+              className="mt-2 text-white font-bold px-7 py-5 rounded-xl text-base bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
+              asChild
+            >
+              <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
+            </Button>
+          </div>
         </div>
       </div>
 

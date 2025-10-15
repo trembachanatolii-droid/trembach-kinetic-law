@@ -1,241 +1,140 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { Canvas, useFrame } from '@react-three/fiber';
-import * as THREE from 'three';
-
-// Justice Statue Component
-const JusticeStatue = ({ mousePosition }: { mousePosition: { x: number; y: number } }) => {
-  const emblemRef = useRef<THREE.Group>(null);
-  const leftScaleRef = useRef<THREE.Group>(null);
-  const rightScaleRef = useRef<THREE.Group>(null);
-
-  useFrame(({ clock }) => {
-    if (!emblemRef.current) return;
-
-    // Smooth rotation based on mouse
-    emblemRef.current.rotation.y += (mousePosition.x * 0.26 - emblemRef.current.rotation.y) * 0.08;
-    emblemRef.current.rotation.x += (-mousePosition.y * 0.16 - emblemRef.current.rotation.x) * 0.08;
-
-    // Subtle scale sway
-    const t = clock.getElapsedTime();
-    const amp = 0.035;
-    if (leftScaleRef.current) leftScaleRef.current.rotation.z = Math.sin(t * 0.9) * amp;
-    if (rightScaleRef.current) rightScaleRef.current.rotation.z = Math.sin(t * 0.9 + Math.PI) * amp;
-  });
-
-  const bronze = new THREE.MeshPhysicalMaterial({
-    color: '#C9A34A',
-    metalness: 1,
-    roughness: 0.3,
-    clearcoat: 0.35,
-    clearcoatRoughness: 0.25,
-    envMapIntensity: 1.0,
-  });
-
-  const darkBronze = bronze.clone();
-  darkBronze.color = new THREE.Color('#8A6E2E');
-  darkBronze.roughness = 0.42;
-
-  const steel = new THREE.MeshPhysicalMaterial({
-    color: '#C7D2E0',
-    metalness: 0.95,
-    roughness: 0.25,
-    envMapIntensity: 1.0,
-  });
-
-  return (
-    <group ref={emblemRef}>
-      {/* Base */}
-      <mesh material={darkBronze}>
-        <cylinderGeometry args={[0.55, 0.75, 0.1, 64]} />
-      </mesh>
-
-      {/* Column */}
-      <mesh position={[0, 0.72, 0]} material={bronze}>
-        <cylinderGeometry args={[0.09, 0.13, 1.3, 64]} />
-      </mesh>
-
-      {/* Beam */}
-      <mesh position={[0, 1.42, 0]} material={bronze}>
-        <boxGeometry args={[1.75, 0.07, 0.07]} />
-      </mesh>
-
-      {/* Finial */}
-      <mesh position={[0, 1.58, 0]} material={steel}>
-        <coneGeometry args={[0.075, 0.18, 32]} />
-      </mesh>
-
-      {/* Sword */}
-      <group position={[0.62, 0.62, -0.12]} rotation={[0.05, -0.28, 0.35]}>
-        <mesh position={[0, 0.05, 0]} material={steel}>
-          <boxGeometry args={[0.055, 1.65, 0.018, 1, 40, 1]} />
-        </mesh>
-        <mesh position={[0, -0.9, 0]} rotation={[0, 0, Math.PI]} material={steel}>
-          <coneGeometry args={[0.055, 0.18, 28]} />
-        </mesh>
-        <mesh position={[0, 0.45, 0]} material={darkBronze}>
-          <boxGeometry args={[0.36, 0.06, 0.06]} />
-        </mesh>
-        <mesh position={[0, 0.62, 0]} material={darkBronze}>
-          <cylinderGeometry args={[0.038, 0.038, 0.3, 28]} />
-        </mesh>
-        <mesh position={[0, 0.8, 0]} material={darkBronze}>
-          <sphereGeometry args={[0.055, 28, 20]} />
-        </mesh>
-      </group>
-
-      {/* Left Scale */}
-      <group ref={leftScaleRef} position={[-0.9, 0, 0]}>
-        {[-1, 0, 1].map((i) => (
-          <React.Fragment key={`left-${i}`}>
-            <mesh position={[i * 0.05, 1.42, 0]} material={steel}>
-              <sphereGeometry args={[0.012, 12, 12]} />
-            </mesh>
-            <mesh position={[i * 0.05, 1.15, 0]} material={steel}>
-              <cylinderGeometry args={[0.005, 0.005, 0.48, 8]} />
-            </mesh>
-          </React.Fragment>
-        ))}
-        <mesh position={[0, 0.94, 0]} material={darkBronze}>
-          <cylinderGeometry args={[0.27, 0.29, 0.045, 56]} />
-        </mesh>
-        <mesh position={[0, 0.96, 0]} rotation={[Math.PI / 2, 0, 0]} material={steel}>
-          <torusGeometry args={[0.28, 0.011, 14, 72]} />
-        </mesh>
-      </group>
-
-      {/* Right Scale */}
-      <group ref={rightScaleRef} position={[0.9, 0, 0]}>
-        {[-1, 0, 1].map((i) => (
-          <React.Fragment key={`right-${i}`}>
-            <mesh position={[i * 0.05, 1.42, 0]} material={steel}>
-              <sphereGeometry args={[0.012, 12, 12]} />
-            </mesh>
-            <mesh position={[i * 0.05, 1.15, 0]} material={steel}>
-              <cylinderGeometry args={[0.005, 0.005, 0.48, 8]} />
-            </mesh>
-          </React.Fragment>
-        ))}
-        <mesh position={[0, 0.94, 0]} material={darkBronze}>
-          <cylinderGeometry args={[0.27, 0.29, 0.045, 56]} />
-        </mesh>
-        <mesh position={[0, 0.96, 0]} rotation={[Math.PI / 2, 0, 0]} material={steel}>
-          <torusGeometry args={[0.28, 0.011, 14, 72]} />
-        </mesh>
-      </group>
-
-      {/* Ground fade */}
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.02, 0]}>
-        <circleGeometry args={[3, 64]} />
-        <meshStandardMaterial color="#0b0e13" roughness={0.95} transparent opacity={0.65} />
-      </mesh>
-    </group>
-  );
-};
+import scalesJusticeHeroBg from '@/assets/scales-justice-hero-bg.png';
 
 const Hero = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [glowPosition, setGlowPosition] = useState({ x: '58%', y: '38%' });
-  const heroRef = useRef<HTMLElement>(null);
+  const heroRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
+  const lawyerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const chatRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!heroRef.current) return;
-      const rect = heroRef.current.getBoundingClientRect();
-      const x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-      const y = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-      
-      setMousePosition({ x, y });
-      setGlowPosition({
-        x: `${((e.clientX - rect.left) / rect.width) * 100}%`,
-        y: `${((e.clientY - rect.top) / rect.height) * 100}%`,
-      });
-    };
+    const ctx = gsap.context(() => {
+      // Ensure hero visible immediately
+      if (heroRef.current) {
+        gsap.set(heroRef.current, { opacity: 1 });
+      }
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+      // Staggered headline animation
+      const heroLines = heroRef.current?.querySelectorAll(".hero-line");
+      if (heroLines && heroLines.length > 0) {
+        gsap.fromTo(
+          heroLines,
+          {
+            y: 50,
+            opacity: 0,
+            filter: "blur(10px)"
+          },
+          {
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            stagger: 0.15,
+            ease: "power3.out",
+            delay: 0.5
+          }
+        );
+      }
+
+      // Lawyer image animation
+      if (lawyerRef.current) {
+        gsap.fromTo(
+          lawyerRef.current,
+          {
+            x: 100,
+            opacity: 0,
+            filter: "blur(5px)"
+          },
+          {
+            x: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            duration: 1,
+            ease: "power3.out",
+            delay: 0.8
+          }
+        );
+      }
+
+      // Chat widget animation
+      if (chatRef.current) {
+        gsap.fromTo(
+          chatRef.current,
+          {
+            scale: 0,
+            rotation: -10
+          },
+          {
+            scale: 1,
+            rotation: 0,
+            duration: 0.6,
+            ease: "back.out(1.7)",
+            delay: 2
+          }
+        );
+      }
+    }, heroRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={heroRef} className="relative min-h-[70vh] flex items-start overflow-hidden bg-[#eef1f5] isolate">
-
-      {/* 3D Canvas */}
-      <Canvas className="absolute inset-0 z-10 pointer-events-none" dpr={[1,2]} gl={{ antialias: true, alpha: true }}>
-        <ambientLight intensity={0.6} />
-        <hemisphereLight args={["#f0f7ff", "#0b0e13", 0.9]} />
-        <directionalLight position={[3,5,4]} intensity={1.1} />
-        <directionalLight position={[-3,2,-3]} intensity={0.55} color="#9cc7ff" />
-        <JusticeStatue mousePosition={mousePosition} />
-      </Canvas>
-
-      {/* Moving Glow */}
-      <div
-        className="absolute z-20 w-[1600px] h-[1600px] rounded-full pointer-events-none transition-all duration-200 ease-out"
-        style={{
-          left: glowPosition.x,
-          top: glowPosition.y,
-          transform: 'translate(-50%, -50%)',
-          background: 'radial-gradient(closest-side, rgba(255,205,64,0.95) 0%, rgba(255,185,0,0.6) 35%, rgba(255,175,0,0) 70%)',
-          filter: 'blur(30px)',
-          mixBlendMode: 'screen',
-        }}
-        aria-hidden="true"
-      />
-
-
-      {/* Glassmorphism Grid (left) */}
-      <div className="absolute z-30 left-[6%] top-[6%] max-w-[720px]">
-        <div className="grid grid-cols-3 gap-4">
-          {[...Array(9)].map((_, i) => (
-            <div
-              key={i}
-              className={`rounded-[22px] bg-white/60 backdrop-blur-xl border border-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.65),inset_0_-1px_0_rgba(0,0,0,0.06),0_8px_40px_rgba(0,0,0,0.08)] min-h-[100px] ${i >= 6 ? 'hidden lg:block' : ''}`}
-              style={{
-                WebkitBackdropFilter: 'blur(16px) saturate(130%)',
-                backdropFilter: 'blur(16px) saturate(130%)'
-              }}
-            />
-          ))}
+    <section 
+      ref={heroRef} 
+      className="relative min-h-screen flex items-center overflow-hidden pt-24"
+      style={{
+        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url(${scalesJusticeHeroBg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat'
+      }}
+    >
+      
+      
+      <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
+        {/* Left-aligned Content - Apple Style */}
+        <div className="max-w-xl">
+          <div ref={headlineRef} className="space-y-4">
+            <h1 className="hero-line font-sans text-white text-3xl md:text-4xl font-black leading-[1.1] tracking-tight">
+              California's premier<br />
+              personal injury<br />
+              and mesothelioma<br />
+              lawyers
+            </h1>
+            <p className="hero-line font-sans text-white text-base md:text-lg font-normal leading-[1.4] max-w-xl">
+              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Copy Card (right) */}
-      <div className="absolute z-30 right-[6%] top-[22%] max-w-[560px]">
-        <div className="rounded-[28px] bg-white/90 backdrop-blur-xl border border-white/70 shadow-[0_10px_50px_rgba(0,0,0,0.12)] p-6 md:p-8 text-neutral-800 space-y-3">
-          <div className="text-xs uppercase tracking-[0.14em] text-neutral-500">Interactive 3D • Glassmorphism</div>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
-            California&apos;s Premier<br />
-            Personal Injury and<br />
-            Mesothelioma Lawyers
-          </h1>
-          <p className="text-sm md:text-base text-neutral-700 leading-relaxed">
-            After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
-          </p>
-          <Button
-            size="lg"
-            className="mt-2 text-white font-bold px-7 py-5 rounded-xl text-base bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
-            asChild
-          >
-            <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-          </Button>
-        </div>
+      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
+        <Button 
+          size="lg"
+          className="text-white font-bold px-8 py-6 rounded text-lg bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200"
+          asChild
+        >
+          <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
+        </Button>
       </div>
 
-      {/* Scroll Cue */}
-      <a
-        href="#next"
-        className="absolute left-1/2 bottom-8 transform -translate-x-1/2 z-40 text-[#c9d4e5] opacity-88 flex items-center gap-2 text-sm tracking-wide hover:opacity-100 transition-opacity"
-      >
-        <span className="text-lg animate-bounce">⌄</span>
-        <span>Scroll</span>
-      </a>
-
-      {/* Bottom Teaser */}
-      <div
-        className="absolute left-0 right-0 bottom-0 h-[120px] z-20 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.35))' }}
-      />
+      {/* Chat Widget */}
+      <div ref={chatRef} className="fixed bottom-6 right-6 z-50">
+        <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+          <div className="flex items-center space-x-3">
+            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+              <span className="text-xl">👨‍💼</span>
+            </div>
+            <div className="bg-white rounded-2xl px-4 py-2 shadow-md">
+              <p className="text-sm text-gray-700 font-medium">How can we help you?</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 };

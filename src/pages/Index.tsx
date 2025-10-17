@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import TruthAboutCaseProfessional from '../components/TruthAboutCaseProfessional';
 import { MarqueeBand } from '../components/Marquee';
-import CriticalStepsSection from '../components/CriticalStepsSection';
+import StepsToFileSection from '../components/StepsToFileSection';
 import WhyChoose from '../components/WhyChoose';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
@@ -60,6 +60,9 @@ const Index = () => {
       />
       {/* Hero Section */}
       <Hero />
+
+      {/* Steps to File Section */}
+      <StepsToFileSection />
 
       {/* Why Choose Trembach Law Firm */}
       <section id="why-choose" className="relative z-20">
@@ -148,10 +151,6 @@ const Index = () => {
         />
       </div>
 
-      {/* Critical Steps Section */}
-      <section id="critical-steps">
-        <CriticalStepsSection />
-      </section>
 
       {/* Every Problem Solved */}
       <section id="problems">

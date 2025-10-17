@@ -4,15 +4,6 @@ import { Link } from 'react-router-dom';
 import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
-  React.useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
     <section 
       className="relative min-h-screen flex items-center overflow-hidden"
@@ -24,14 +15,6 @@ const Hero = () => {
         backgroundColor: '#1a1a1a'
       }}
     >
-      {/* Cursor glow effect */}
-      <div 
-        className="pointer-events-none fixed inset-0 z-[1]"
-        style={{
-          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 200, 50, 0.15), transparent 50%)`
-        }}
-      />
-
       {/* Content container */}
       <div className="container mx-auto px-8 flex items-center justify-start min-h-screen relative z-[3]">
         <div className="max-w-xl pt-24">

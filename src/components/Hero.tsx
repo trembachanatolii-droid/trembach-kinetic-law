@@ -1,49 +1,59 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import scalesJusticeHeroBg from '@/assets/hero-justice-reference.png';
+import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
-
+  React.useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+      document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, []);
 
   return (
     <section 
-       
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
+      className="relative min-h-screen flex items-center overflow-hidden"
       style={{
-        backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.35) 40%, rgba(0,0,0,0) 70%), url(${scalesJusticeHeroBg})`,
+        backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%), url(${ladyJusticeHero})`,
         backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
+        backgroundPosition: 'center right',
+        backgroundRepeat: 'no-repeat',
+        backgroundColor: '#1a1a1a'
       }}
     >
-      
-      
-      <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
-        {/* Left-aligned Content - Apple Style */}
-        <div className="max-w-xl">
-          <div className="space-y-3">
-            <h1 className="hero-line font-sans text-white text-2xl md:text-3xl font-black leading-tight tracking-tight max-w-lg">
+      {/* Cursor glow effect */}
+      <div 
+        className="pointer-events-none fixed inset-0 z-[1]"
+        style={{
+          background: `radial-gradient(600px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(255, 200, 50, 0.15), transparent 50%)`
+        }}
+      />
+
+      {/* Content container */}
+      <div className="container mx-auto px-8 flex items-center justify-start min-h-screen relative z-[3]">
+        <div className="max-w-xl pt-24">
+          <div className="space-y-6">
+            <h1 className="font-sans text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight drop-shadow-2xl">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
               lawyers
             </h1>
-            <p className="hero-line font-sans text-white text-sm md:text-base font-normal leading-relaxed max-w-md">
+            <p className="font-sans text-white text-lg md:text-xl font-normal leading-relaxed drop-shadow-lg max-w-lg">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
+            <Button 
+              size="lg"
+              className="text-white font-bold px-10 py-7 rounded-xl text-lg bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200 shadow-2xl"
+              asChild
+            >
+              <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
+            </Button>
           </div>
         </div>
-      </div>
-
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
-        <Button 
-          size="lg"
-          className="text-white font-bold px-8 py-6 rounded text-lg bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200 focus-visible:ring-0 focus-visible:ring-offset-0 focus:outline-none"
-          asChild
-        >
-          <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-        </Button>
       </div>
 
       {/* Chat Widget */}

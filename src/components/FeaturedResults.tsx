@@ -157,27 +157,6 @@ const FeaturedResults = () => {
   ];
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-
-    gsap.fromTo(
-      ".results-header",
-      {
-        opacity: 0,
-        y: 60
-      },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 70%",
-        }
-      }
-    );
-
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };

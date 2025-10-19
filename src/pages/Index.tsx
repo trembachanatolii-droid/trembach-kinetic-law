@@ -43,7 +43,6 @@ const Index = () => {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle newsletter subscription
-    console.log('Subscribe:', email);
     setEmail('');
   };
 

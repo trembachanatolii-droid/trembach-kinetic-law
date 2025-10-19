@@ -1,4 +1,5 @@
 import React from 'react';
+import logoImage from '@/assets/logo-final.png';
 
 interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
@@ -7,23 +8,17 @@ interface LogoProps {
 
 const Logo: React.FC<LogoProps> = ({ size = 'md', className = '' }) => {
   const sizeClasses = {
-    sm: 'text-lg',
-    md: 'text-xl',
-    lg: 'text-2xl'
+    sm: 'h-8',
+    md: 'h-10',
+    lg: 'h-12'
   };
 
   return (
-    <div className={`trembach-logo flex items-center gap-3 ${className}`}>
-      <div className="scales text-primary text-2xl filter drop-shadow-lg">⚖️</div>
-      <div className="text">
-        <div className={`company font-bold ${sizeClasses[size]} leading-tight tracking-wide`}>
-          TREMBACH
-        </div>
-        <div className="tagline text-xs text-muted-foreground font-medium tracking-wider uppercase">
-          LAW FIRM
-        </div>
-      </div>
-    </div>
+    <img 
+      src={logoImage} 
+      alt="Trembach Law Firm Logo" 
+      className={`trembach-logo ${sizeClasses[size]} ${className}`}
+    />
   );
 };
 

@@ -31,7 +31,7 @@ import heroBackground from '@/assets/maritime-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MaritimeCaseEvaluation: React.FC = () => {
+const MaritimeCaseEvaluation = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -88,7 +88,6 @@ const MaritimeCaseEvaluation: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
-    console.log('Form submitted:', formData);
     // Redirect to thank you page or show success message
   };
 
@@ -592,5 +591,7 @@ const MaritimeCaseEvaluation: React.FC = () => {
     </>
   );
 };
+
+MaritimeCaseEvaluation.displayName = 'MaritimeCaseEvaluation';
 
 export default MaritimeCaseEvaluation;

@@ -150,8 +150,6 @@ const MaritimeCaseEvaluation: React.FC = () => {
         canonical="/maritime/case-evaluation"
       />
       
-      
-      
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
         <section 

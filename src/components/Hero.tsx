@@ -18,6 +18,8 @@ const Hero = () => {
         />
       </div>
       
+      {/* Dark Overlay for Text Visibility */}
+      <div className="absolute inset-0 bg-black/50 z-[2]" />
       
       {/* Lady Justice Image - Top Right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8 z-[3] animate-fade-in">

@@ -1,20 +1,24 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
   return (
-    <section 
-      className="relative min-h-screen flex items-center overflow-hidden"
-      style={{
-        backgroundImage: `linear-gradient(90deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0) 100%), url(${ladyJusticeHero})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center right',
-        backgroundRepeat: 'no-repeat',
-        backgroundColor: '#1a1a1a'
-      }}
-    >
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Spline 3D Background */}
+      <div className="absolute inset-0 w-full h-full">
+        <iframe
+          src="https://my.spline.design/orb-XpZ9UBCVC4Xmof5gjx0kCWq5/"
+          frameBorder="0"
+          width="100%"
+          height="100%"
+          className="w-full h-full"
+          title="3D Background"
+        />
+      </div>
+      
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-[2]" />
       {/* Content container */}
       <div className="container mx-auto px-8 flex items-center justify-start min-h-screen relative z-[3]">
         <div className="max-w-xl pt-24">

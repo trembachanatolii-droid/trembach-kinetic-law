@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import ladyJustice from '@/assets/lady-justice.png';
 
 const Hero = () => {
   return (
@@ -20,16 +19,6 @@ const Hero = () => {
       
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-[2]" />
-      
-      {/* Lady Justice Image - Top Right */}
-      <div className="absolute top-8 right-8 z-[3] animate-fade-in">
-        <img 
-          src={ladyJustice} 
-          alt="Lady Justice statue symbolizing law and justice"
-          className="w-32 h-auto md:w-40 lg:w-48 object-contain drop-shadow-2xl opacity-90"
-        />
-      </div>
-      
       {/* Content container */}
       <div className="container mx-auto px-8 flex items-center justify-center min-h-screen relative z-[3]">
         <div className="max-w-3xl pt-24 text-center">

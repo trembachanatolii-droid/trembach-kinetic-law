@@ -18,8 +18,6 @@ const Hero = () => {
         />
       </div>
       
-      {/* Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-[2]" />
       
       {/* Lady Justice Image - Top Right */}
       <div className="absolute top-4 right-4 md:top-8 md:right-8 z-[3] animate-fade-in">

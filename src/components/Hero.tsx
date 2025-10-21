@@ -20,18 +20,12 @@ const Hero = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/40 to-transparent z-[2]" />
       {/* Content container */}
-      <div className="container mx-auto px-8 flex items-center justify-start min-h-screen relative z-[3]">
-        <div className="max-w-xl pt-24">
-          <div className="space-y-6">
+      <div className="container mx-auto px-8 flex items-center justify-center min-h-screen relative z-[3]">
+        <div className="max-w-3xl pt-24 text-center">
+          <div className="space-y-8 flex flex-col items-center">
             <h1 className="font-sans text-white text-4xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight drop-shadow-2xl">
-              California's premier<br />
-              personal injury<br />
-              and mesothelioma<br />
-              lawyers
+              Former insurance defense attorney now representing injured plaintiffs
             </h1>
-            <p className="font-sans text-white text-lg md:text-xl font-normal leading-relaxed drop-shadow-lg max-w-lg">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
-            </p>
             <Button 
               size="lg"
               className="text-white font-bold px-10 py-7 rounded-xl text-lg bg-[#E50914] hover:bg-[#C11119] transition-colors duration-200 shadow-2xl"

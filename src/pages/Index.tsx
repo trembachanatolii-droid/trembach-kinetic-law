@@ -22,6 +22,7 @@ import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
 import ThreeStepProcess from '../components/ThreeStepProcess';
+import { AnimatedGallerySection } from '../components/AnimatedGallerySection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -67,6 +68,9 @@ const Index = () => {
       <section id="why-choose" className="relative z-20">
         <WhyChoose />
       </section>
+
+      {/* Animated Gallery Section */}
+      <AnimatedGallerySection />
 
       {/* Three Step Process Section */}
       <section id="three-step-process" className="relative z-0">

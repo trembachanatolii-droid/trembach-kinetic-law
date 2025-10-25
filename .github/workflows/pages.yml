@@ -1,8 +1,6 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -12,30 +10,38 @@ permissions:
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+
+      # Use public/combined if your “combine” workflow created it; otherwise use public
+      - name: Pick site folder
+        run: |
+          if [ -d public/combined ]; then
+            echo "USING=public/combined" >> $GITHUB_ENV
+          else
+            echo "USING=public" >> $GITHUB_ENV
+          fi
+          echo "Publishing from: $USING"
+          ls -la "$USING"
+
+      - uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          node-version: 20
-          cache: 'npm'
-      - run: npm ci
-      - run: npm run build
-      # Vite copies everything from /public to /dist, so /combined will be available
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: dist
+          path: ${{ env.USING }}
 
   deploy:
-    needs: build
-    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
     steps:
       - id: deployment
         uses: actions/deploy-pages@v4

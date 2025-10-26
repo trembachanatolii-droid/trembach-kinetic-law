@@ -205,5 +205,5 @@ if (wantsCopy) {
 }
 
 // No recognized instruction — just report which files we would consider.
-console.log(JS
-::contentReference[oaicite:0]{index=0}
+console.log(JSON.stringify(summary, null, 2));
+process.exit(0);

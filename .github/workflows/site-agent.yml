@@ -6,21 +6,14 @@ on:
       files:
         description: 'HTML file (or glob) to edit'
         required: true
-        default: 'public/combined/**/*.html'
+        default: 'comprehensive_site/sites/**/*.html'
       ask:
         description: 'Instruction for the agent (English)'
-        required: false
-        default: ''
-      plan_json:
-        description: 'Optional JSON plan (paste to bypass API usage)'
-        required: false
-        default: ''
+        required: true
       dry_run:
         description: 'Dry run (plan + diff only, no commit)'
         type: boolean
         default: false
-  issue_comment:
-    types: [created]
 
 permissions:
   contents: write
@@ -33,70 +26,35 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      - name: Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: 20
 
-      - name: Install deps
-        run: npm i openai jsdom prettier fs-extra fast-glob
-
-      # Parse "/agent ..." comments from issues/PRs
-      - name: Derive inputs from comment (if any)
-        id: parse
-        if: ${{ github.event_name == 'issue_comment' }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            const body = context.payload.comment?.body || '';
-            if (!body.startsWith('/agent')) return core.setOutput('skip','true');
-            const text = body.replace('/agent','').trim();
-            let files = 'public/combined/**/*.html';
-            let ask = text;
-            const mFiles = text.match(/files\s*:\s*([^;]+)\s*;?/i);
-            if (mFiles) files = mFiles[1].trim();
-            const mAsk = text.match(/ask\s*:\s*([^;]+)\s*;?/i);
-            if (mAsk) ask = mAsk[1].trim();
-            core.setOutput('skip','false');
-            core.setOutput('files', files);
-            core.setOutput('ask', ask);
-
-      - name: Decide inputs
-        id: inputs
+      # IMPORTANT: install only the lightweight deps the agent needs,
+      # not your app's full node_modules (which has peer-dep conflicts).
+      - name: Install agent deps (minimal)
         run: |
-          if [ "${{ github.event_name }}" = "issue_comment" ] && [ "${{ steps.parse.outputs.skip }}" != "true" ]; then
-            echo "files=${{ steps.parse.outputs.files }}" >> $GITHUB_OUTPUT
-            echo "ask=${{ steps.parse.outputs.ask }}" >> $GITHUB_OUTPUT
-            echo "plan_json=" >> $GITHUB_OUTPUT
-            echo "dry_run=false" >> $GITHUB_OUTPUT
-          else
-            echo "files=${{ inputs.files }}" >> $GITHUB_OUTPUT
-            echo "ask=${{ inputs.ask }}" >> $GITHUB_OUTPUT
-            echo "plan_json=${{ inputs.plan_json }}" >> $GITHUB_OUTPUT
-            echo "dry_run=${{ inputs.dry_run }}" >> $GITHUB_OUTPUT
-          fi
+          npm install --no-fund --no-audit --no-save jsdom@22 prettier@3 fs-extra@11 fast-glob@3 || \
+          npm install --no-fund --no-audit --no-save --legacy-peer-deps jsdom@22 prettier@3 fs-extra@11 fast-glob@3
 
-      - name: Run site agent (AI plan or provided plan)
+      # OPENAI_API_KEY is optional; your current script doesn't need it for DOM edits.
+      - name: Run site agent (apply instruction)
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           node tools/super-agent.mjs \
-            --files "${{ steps.inputs.outputs.files }}" \
-            --ask "${{ steps.inputs.outputs.ask }}" \
-            --plan-json '${{ steps.inputs.outputs.plan_json }}' \
-            $([ "${{ steps.inputs.outputs.dry_run }}" = "true" ] && echo "--dry" || true)
+            --files "${{ github.event.inputs.files }}" \
+            --ask   "${{ github.event.inputs.ask }}" \
+            $([ "${{ github.event.inputs.dry_run }}" = "true" ] && echo "--dry" || true)
 
       - name: Create Pull Request
-        if: ${{ steps.inputs.outputs.dry_run == 'false' }}
+        if: ${{ github.event.inputs.dry_run != 'true' }}
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: "Agent: ${{
-            github.event_name == 'issue_comment' && steps.parse.outputs.ask ||
-            steps.inputs.outputs.ask || 'site edit'
-          }}"
-          branch: "agent/auto-${{ github.run_id }}"
+          commit-message: |
+            Agent: ${{ github.event.inputs.ask || 'site edit' }}
+          branch: agent/auto-${{ github.run_id }}
           title: "Agent: site edit"
           body: "Requested by ${{ github.actor }}."

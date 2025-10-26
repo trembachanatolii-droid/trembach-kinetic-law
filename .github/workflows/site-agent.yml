@@ -1,19 +1,17 @@
-- name: Install agent deps (minimal)
-  run: |
-    mkdir -p tools/node_modules
-    npm --prefix tools i --no-fund --no-audit --no-save jsdom prettier fs-extra fast-glob
+name: Site Agent
+
 on:
   workflow_dispatch:
     inputs:
       files:
-        description: 'HTML file (or glob) to edit'
+        description: "HTML file (or glob) to edit"
         required: true
-        default: 'comprehensive_site/sites/**/*.html'
+        default: "comprehensive_site/sites/**/*.html"
       ask:
-        description: 'Instruction for the agent (English)'
+        description: "Instruction for the agent (English)"
         required: true
       dry_run:
-        description: 'Dry run (plan + diff only, no commit)'
+        description: "Dry run (plan + diff only, no commit)"
         type: boolean
         default: false
 
@@ -23,8 +21,8 @@ permissions:
 
 jobs:
   run:
+    name: run
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -32,31 +30,33 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: "20"
 
-      # IMPORTANT: install only the lightweight deps the agent needs,
-      # not your app's full node_modules (which has peer-dep conflicts).
       - name: Install agent deps (minimal)
         run: |
-          npm install --no-fund --no-audit --no-save jsdom@22 prettier@3 fs-extra@11 fast-glob@3 || \
-          npm install --no-fund --no-audit --no-save --legacy-peer-deps jsdom@22 prettier@3 fs-extra@11 fast-glob@3
+          mkdir -p tools/node_modules
+          npm --prefix tools i --no-fund --no-audit --no-save jsdom prettier fs-extra fast-glob
 
-      # OPENAI_API_KEY is optional; your current script doesn't need it for DOM edits.
       - name: Run site agent (apply instruction)
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        id: apply
+        shell: bash
         run: |
+          set -euo pipefail
+          FILES="${{ inputs.files }}"
+          ASK="${{ inputs.ask }}"
+          DRY="${{ inputs.dry_run }}"
+          echo "Files: $FILES"
+          echo "Ask:   $ASK"
           node tools/super-agent.mjs \
-            --files "${{ github.event.inputs.files }}" \
-            --ask   "${{ github.event.inputs.ask }}" \
-            $([ "${{ github.event.inputs.dry_run }}" = "true" ] && echo "--dry" || true)
+            --files "$FILES" \
+            --ask "$ASK" \
+            $([ "$DRY" = "true" ] && echo "--dry" || true)
 
       - name: Create Pull Request
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: inputs.dry_run == 'false'
         uses: peter-evans/create-pull-request@v6
         with:
-          commit-message: |
-            Agent: ${{ github.event.inputs.ask || 'site edit' }}
-          branch: agent/auto-${{ github.run_id }}
+          branch: "agent/auto-${{ github.run_id }}"
           title: "Agent: site edit"
+          commit-message: "Agent: site edit"
           body: "Requested by ${{ github.actor }}."

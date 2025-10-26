@@ -4,14 +4,17 @@ on:
   workflow_dispatch:
     inputs:
       files:
-        description: "HTML file (or glob) to edit"
+        description: 'HTML file (or glob) to edit'
         required: true
-        default: "comprehensive_site/sites/**/*.html"
+        default: 'comprehensive_site/sites/**/*.{html,htm}'
       ask:
-        description: "Instruction for the agent (English)"
+        description: 'Instruction for the agent (English)'
         required: true
+      plan:
+        description: 'Optional JSON plan (paste to bypass API usage)'
+        required: false
       dry_run:
-        description: "Dry run (plan + diff only, no commit)"
+        description: 'Dry run (plan + diff only, no commit)'
         type: boolean
         default: false
 
@@ -21,8 +24,8 @@ permissions:
 
 jobs:
   run:
-    name: run
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -30,33 +33,56 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install agent deps (minimal)
         run: |
           mkdir -p tools/node_modules
-          npm --prefix tools i --no-fund --no-audit --no-save jsdom prettier fs-extra fast-glob
+          npm --prefix tools i --no-audit --no-fund --no-save jsdom prettier fs-extra fast-glob
 
-      - name: Run site agent (apply instruction)
-        id: apply
+      - name: Build inputs.json for the agent
+        id: build_inputs
         shell: bash
         run: |
-          set -euo pipefail
-          FILES="${{ inputs.files }}"
-          ASK="${{ inputs.ask }}"
-          DRY="${{ inputs.dry_run }}"
-          echo "Files: $FILES"
-          echo "Ask:   $ASK"
-          node tools/super-agent.mjs \
-            --files "$FILES" \
-            --ask "$ASK" \
-            $([ "$DRY" = "true" ] && echo "--dry" || true)
+          # Write a JSON file so we avoid all CLI quoting issues.
+          cat > inputs.json <<'JSON'
+          {
+            "files": "${{ inputs.files }}",
+            "ask": "${{ inputs.ask }}",
+            "plan": ___PLAN___,
+            "dry_run": ${{ inputs.dry_run && 'true' || 'false' }}
+          }
+          JSON
+
+          # If a plan was supplied, drop it in raw; otherwise set null.
+          if [ -n "${{ inputs.plan }}" ]; then
+            # Safely replace the placeholder with the raw plan text
+            python3 - "$(< inputs.json)" "${{ inputs.plan }}" > inputs.tmp <<'PY'
+import json,sys
+doc=json.loads(sys.stdin.read())
+try:
+    plan=json.loads(sys.argv[1])
+except Exception:
+    plan=None
+doc["plan"]=plan
+print(json.dumps(doc))
+PY
+            mv inputs.tmp inputs.json
+          else
+            sed -i 's/"plan": ___PLAN___/"plan": null/' inputs.json
+          fi
+
+          echo "Inputs written:"
+          cat inputs.json
+
+      - name: Run site agent (apply instruction)
+        run: |
+          node tools/super-agent.mjs --inputs-file inputs.json
 
       - name: Create Pull Request
-        if: inputs.dry_run == 'false'
+        if: success()
         uses: peter-evans/create-pull-request@v6
         with:
           branch: "agent/auto-${{ github.run_id }}"
           title: "Agent: site edit"
-          commit-message: "Agent: site edit"
-          body: "Requested by ${{ github.actor }}."
+          body: "Requested by @${{ github.actor }}."

@@ -1,232 +1,216 @@
-// tools/super-agent.mjs  (v2)
-// Minimal HTML agent used by GitHub Actions to apply safe edits.
-// Deps: jsdom, prettier (optional), fs-extra, fast-glob
+// tools/super-agent.mjs
+import { createRequire } from 'module';
+import path from 'path';
+import fs from 'fs';
+import url from 'url';
 
-import fs from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
-import fg from "fast-glob";
-import { JSDOM } from "jsdom";
+const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
+const { JSDOM } = require('jsdom');
+const prettier = require('prettier');
+const fg = require('fast-glob');
+const fse = require('fs-extra');
 
-let prettier = null;
-try { prettier = await import("prettier"); } catch (_) {}
+// ---- helpers ---------------------------------------------------------------
+const log = (...a) => console.log(...a);
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+function parseInputs() {
+  // GitHub Actions "workflow_dispatch" inputs land in env as INPUT_*
+  const envFiles = process.env.INPUT_FILES || '';
+  const envAsk = process.env.INPUT_ASK || '';
+  const envPlan = process.env.INPUT_PLAN_JSON || '';
+  const envDry = (process.env.INPUT_DRY_RUN || 'false').toLowerCase() === 'true';
 
-function parseArgs(argv = process.argv.slice(2)) {
-  const out = {};
-  for (let i = 0; i < argv.length; i++) {
-    const a = argv[i];
-    if (a.startsWith("--")) {
-      const k = a.slice(2).replace(/-+/g, "_");
-      const v = argv[i + 1] && !argv[i + 1].startsWith("--") ? argv[++i] : "true";
-      out[k] = v;
-    } else (out._ ??= []).push(a);
-  }
-  if (out.dry == null && process.env.DRY_RUN) out.dry = String(process.env.DRY_RUN);
-  return out;
-}
-const toBool = (v) => /^(1|true|yes|on)$/i.test(String(v ?? "").trim());
-const normList = (s) => (Array.isArray(s) ? s : String(s ?? "").split(",")).map(x=>x.trim()).filter(Boolean);
+  // Support comma or newline separated list, and keep spaces/() intact
+  const files = envFiles
+    .split(/\r?\n|,/)
+    .map((s) => s.trim())
+    .filter(Boolean);
 
-async function expandFiles(patterns) {
-  const list = await fg(patterns, { dot:false, onlyFiles:true, unique:true, absolute:false });
-  list.sort(); return list;
-}
-
-const looksSite2 = (p)=>/(^|\/)site2(\/|$)/i.test(p);
-const looksSite3 = (p)=>/(^|\/)site3(\/|$)/i.test(p);
-
-function pickSourceAndTarget(files) {
-  const s2 = files.find(looksSite2);
-  const s3 = files.find(looksSite3);
-  if (s2 && s3) return { fromFile:s2, toFile:s3 };
-  if (files.length >= 2) return { fromFile:files[0], toFile:files[1] };
-  return { fromFile: files[0] ?? null, toFile:null };
-}
-
-async function readHTML(file){ const html = await fs.readFile(file,"utf8"); return { dom:new JSDOM(html), html }; }
-async function writeHTML(file, html){
-  if (prettier?.format) { try { html = await prettier.format(html, { parser:"html" }); } catch(_){} }
-  await fs.writeFile(file, html, "utf8");
-}
-
-function findFirst(document, selectorsList) {
-  for (const sel of selectorsList) {
-    const hit = document.querySelector(sel);
-    if (hit) return hit;
-  }
-  return null;
-}
-
-function findHero(document, overrideSelectors) {
-  const defaults = ["#hero","section.hero","header.hero","main .hero","section[id*='hero' i]","header"];
-  return findFirst(document, overrideSelectors?.length ? overrideSelectors : defaults) || document.body;
-}
-
-function findCardStack(root, overrideSelectors) {
-  if (overrideSelectors?.length) {
-    const el = findFirst(root, overrideSelectors);
-    if (el) return el;
-  }
-
-  // 1) common names
-  const common = [
-    ".card-stack",".cards-stack",".cards",".cardGrid",".cards-grid",".stack",".deck",
-    ".ui-cards",".swiper",".swiper-container",".carousel",".slider",".slides",".slide-track",
-    ".case-cards",".projects-cards",".work-cards",".gallery",".grid.cards",".grid .card"
-  ];
-  let el = findFirst(root, common);
-  if (el) return el;
-
-  // 2) generic container with many "card-like" descendants
-  const token = /(card|tile|item|panel|work|project|case|slide|swiper|carousel|stack|grid|gallery)/i;
-  const candidates = Array.from(root.querySelectorAll("*")).filter(n=>{
-    const cls = n.className?.toString() ?? "";
-    if (!token.test(cls)) return false;
-    const kids = n.querySelectorAll(
-      ".card,[class*='card-'],.tile,.item,.panel,.work,.project,.case,li,article,.slide,.swiper-slide"
-    );
-    return kids.length >= 3;
-  });
-  candidates.sort((a,b)=>{
-    const ac = a.querySelectorAll(".card,[class*='card-'],.tile,.item,.panel,.work,.project,.case,li,article,.slide,.swiper-slide").length;
-    const bc = b.querySelectorAll(".card,[class*='card-'],.tile,.item,.panel,.work,.project,.case,li,article,.slide,.swiper-slide").length;
-    return bc - ac;
-  });
-  return candidates[0] || null;
-}
-
-function ensureHeadIncludes(document, { cssHrefs=[], jsSrcs=[], inlineScripts=[] }) {
-  const head = document.querySelector("head") || document.documentElement;
-  const hasLink = (href)=>!!document.querySelector(`link[rel="stylesheet"][href="${href}"]`) || !!document.querySelector(`link[rel="stylesheet"][href$="${path.basename(href)}"]`);
-  const hasScript = (src)=>!!document.querySelector(`script[src="${src}"]`) || !!document.querySelector(`script[src$="${path.basename(src)}"]`);
-
-  for (const href of cssHrefs) if (href && !hasLink(href)) {
-    const link=document.createElement("link"); link.rel="stylesheet"; link.href=href; head.appendChild(link);
-  }
-  for (const src of jsSrcs) if (src && !hasScript(src)) {
-    const s=document.createElement("script"); s.src=src; s.defer=true; head.appendChild(s);
-  }
-
-  const existingInline = Array.from(document.querySelectorAll("script:not([src])")).map(s=>(s.textContent||"").trim());
-  for (const code of inlineScripts) {
-    const norm=(code||"").trim(); if(!norm) continue;
-    if (!existingInline.some(t=>t.includes(norm.slice(0,40)))) {
-      const s=document.createElement("script"); s.textContent="\n"+code+"\n"; head.appendChild(s);
-    }
-  }
-}
-
-function collectDependencies(document,{scopeNode}={}) {
-  const head=document.querySelector("head"); if(!head) return {cssHrefs:[],jsSrcs:[],inlineScripts:[]};
-  const hints=["card","stack","deck","swiper","slide","carousel","gsap","anime","motion"];
-  const looks=(v)=>String(v||"").toLowerCase() && hints.some(h=>String(v).toLowerCase().includes(h));
-  const cssHrefs=Array.from(head.querySelectorAll("link[rel='stylesheet'][href]")).map(l=>l.getAttribute("href")).filter(looks);
-  const jsSrcs=Array.from(head.querySelectorAll("script[src]")).map(s=>s.getAttribute("src")).filter(looks);
-
-  const inlineScripts=[];
-  const scopeHTML=(scopeNode?.outerHTML||"").toLowerCase();
-  if(scopeHTML){
-    for(const s of head.querySelectorAll("script:not([src])")){
-      const t=(s.textContent||"").toLowerCase();
-      if(/\b(card|stack|swiper|slide|carousel|gsap|anime|motion)\b/.test(t)) inlineScripts.push(s.textContent||"");
-    }
-  }
-  return { cssHrefs, jsSrcs, inlineScripts };
-}
-
-function insertOrReplace(targetHero, incomingNode){
-  const existing = findCardStack(targetHero);
-  if (existing){ existing.replaceWith(incomingNode); return "replaced"; }
-  targetHero.appendChild(incomingNode); return "appended";
-}
-
-function parseAskMode(ask){
-  if (/COPY_CARD_STACK/i.test(ask)) return "copy-card-stack";
-  if (/PROBE|INSPECT/i.test(ask)) return "probe";
-  return "inspect";
-}
-
-async function copyCardStack(fromFile, toFile, dry, opts={}){
-  const { srcSelectorList=[], dstSelectorList=[] } = opts;
-  const src=await readHTML(fromFile); const dst=await readHTML(toFile);
-  const srcDoc=src.dom.window.document; const dstDoc=dst.dom.window.document;
-
-  const srcHero = findHero(srcDoc, dstSelectorList.length?null:[]); // let auto for src
-  const dstHero = findHero(dstDoc, dstSelectorList);
-
-  const stack = findCardStack(srcHero, srcSelectorList);
-  if (!stack) return { ok:false, reason:"No card/stack/swiper/carousel element found in source hero." };
-
-  const imported = dstDoc.importNode(stack, true);
-  const deps = collectDependencies(srcDoc,{scopeNode:stack});
-  ensureHeadIncludes(dstDoc, deps);
-
-  const action = insertOrReplace(dstHero, imported);
-  const resultHTML = dst.dom.serialize();
-  if (!dry) await writeHTML(toFile, resultHTML);
-
-  return { ok:true, action, from:fromFile, to:toFile, deps_added:deps };
-}
-
-async function probe(file){
-  const { dom } = await readHTML(file);
-  const doc = dom.window.document;
-  const hero = findHero(doc);
-  const classes = new Map();
-  hero.querySelectorAll("*").forEach(n=>{
-    const cls=(n.className?.toString()||"").trim();
-    if(!cls) return;
-    cls.split(/\s+/).forEach(c=>classes.set(c,(classes.get(c)||0)+1));
-  });
-  const top = [...classes.entries()].sort((a,b)=>b[1]-a[1]).slice(0,30);
-  return { heroFound: !!hero, topClasses: top };
-}
-
-async function main(){
-  const args = parseArgs();
-  const patterns = String(args.files||args.file||"").split(/\s+/).map(s=>s.trim()).filter(Boolean);
-  const files = patterns.length ? await expandFiles(patterns) : [];
   let plan = null;
-  if (args.plan_json) { try { plan = JSON.parse(args.plan_json); } catch(_){} }
-  if (plan?.files?.length) files.splice(0, files.length, ...plan.files);
-
-  const ask = args.ask || plan?.ask || "";
-  const dry = toBool(args.dry ?? plan?.dry);
-
-  const mode = parseAskMode(ask);
-  const summary = { mode, inputs:{ files, ask, dry_run:dry } };
-
-  if (!files.length){ summary.error="No files matched."; console.log(JSON.stringify(summary,null,2)); process.exit(2); }
-
-  if (mode === "probe"){
-    const file = files[0];
-    const out = await probe(file);
-    summary.result = out;
-    console.log(JSON.stringify(summary,null,2)); process.exit(0);
-  }
-
-  if (mode === "copy-card-stack"){
-    const { fromFile, toFile } = pickSourceAndTarget(files);
-    if (!fromFile || !toFile || fromFile === toFile){
-      summary.error="Need two distinct HTML files (source + target)."; console.log(JSON.stringify(summary,null,2)); process.exit(2);
-    }
-    const srcSelectorList = normList(plan?.src_selector || args.src_selector || "");
-    const dstSelectorList = normList(plan?.dst_selector || args.dst_selector || "");
+  if (envPlan) {
     try {
-      const result = await copyCardStack(fromFile, toFile, dry, { srcSelectorList, dstSelectorList });
-      summary.result = result;
-      console.log(JSON.stringify(summary,null,2));
-      process.exit(result.ok ? 0 : 2);
-    } catch (e) {
-      summary.error=String(e?.stack||e?.message||e); console.log(JSON.stringify(summary,null,2)); process.exit(1);
-    }
+      plan = JSON.parse(envPlan);
+    } catch {}
   }
 
-  // default: inspect
-  console.log(JSON.stringify(summary,null,2)); process.exit(0);
+  return { files, ask: envAsk, plan, dry_run: envDry };
 }
 
-main().catch(e=>{ console.log(JSON.stringify({error:String(e?.stack||e?.message||e)},null,2)); process.exit(1); });
+function loadHTML(p) {
+  const html = fs.readFileSync(p, 'utf8');
+  const dom = new JSDOM(html);
+  return { dom, html };
+}
+
+function saveHTML(p, html) {
+  const pretty = prettier.format(html, { parser: 'html' });
+  fs.writeFileSync(p, pretty, 'utf8');
+}
+
+function findHero(doc) {
+  // Try common hero hooks
+  let el =
+    doc.querySelector('#hero, .hero, [data-hero]') ||
+    // Section with a large heading near top
+    Array.from(doc.querySelectorAll('section, header')).find((s) => {
+      const h1 = s.querySelector('h1');
+      return h1 && s.getBoundingClientRect ? true : !!h1;
+    }) ||
+    doc.body;
+  return el;
+}
+
+function findCardStack(root) {
+  // broad net: look for anything that smells like a stack/slider/cards
+  const sel =
+    '.card-stack, .cards, .cardstack, .swiper, .swiper-container, .swiper-wrapper, .carousel, .slider, [data-cards], [data-card-stack]';
+  const match = root.querySelector(sel);
+  return match || null;
+}
+
+function ensureTarget(doc, target) {
+  if (!target) return findHero(doc);
+  if (typeof target === 'string' && target !== 'hero') {
+    const explicit = doc.querySelector(target);
+    if (explicit) return explicit;
+  }
+  // default: hero
+  return findHero(doc);
+}
+
+function copyNodeInto(fromNode, targetNode, mode = 'append') {
+  const doc = targetNode.ownerDocument;
+  const clone = fromNode.cloneNode(true);
+  if (mode === 'replace-hero') {
+    targetNode.replaceWith(clone);
+    return clone;
+  }
+  targetNode.appendChild(clone);
+  return clone;
+}
+
+function collectInlineAssets(node) {
+  const styles = Array.from(node.querySelectorAll('style'));
+  const scripts = Array.from(node.querySelectorAll('script'));
+  return { styles, scripts };
+}
+
+function dedupeHead(doc, assets) {
+  const head = doc.querySelector('head') || doc.body;
+  const existingSig = new Set();
+
+  Array.from(head.querySelectorAll('style,script')).forEach((n) =>
+    existingSig.add(n.textContent.trim())
+  );
+
+  for (const s of assets.styles) {
+    const sig = s.textContent.trim();
+    if (!existingSig.has(sig)) head.appendChild(doc.importNode(s, true));
+  }
+  for (const sc of assets.scripts) {
+    // keep inline (no src) only; external <script src> can break cross-file
+    if (!sc.src) {
+      const sig = sc.textContent.trim();
+      if (!existingSig.has(sig)) head.appendChild(doc.importNode(sc, true));
+    }
+  }
+}
+
+// ---- main op ---------------------------------------------------------------
+async function main() {
+  const inputs = parseInputs();
+  log(JSON.stringify({ inputs }, null, 2));
+
+  // Expand globs + keep explicit file paths
+  const matched = new Set();
+  for (const pat of inputs.files) {
+    const expanded = fg.sync(pat, { dot: false });
+    if (expanded.length) expanded.forEach((p) => matched.add(p));
+    else if (fs.existsSync(pat)) matched.add(pat);
+  }
+  const files = Array.from(matched);
+
+  if (!files.length) {
+    console.log(JSON.stringify({ ok: false, error: 'No files matched.' }, null, 2));
+    process.exitCode = 2;
+    return;
+  }
+
+  const plan = inputs.plan || {};
+  const mode = plan.mode || 'copy-card-stack';
+
+  // Determine src/dst
+  // If a plan is provided, prefer explicit file paths in plan
+  const srcFile =
+    plan.from?.file ||
+    files.find((f) => /site2/i.test(f)) ||
+    files[0];
+
+  const dstFile =
+    plan.to?.file ||
+    files.find((f) => /site3/i.test(f) && f !== srcFile) ||
+    files.find((f) => f !== srcFile) ||
+    files[files.length - 1];
+
+  if (!srcFile || !dstFile) {
+    console.log(JSON.stringify({ ok: false, error: 'Need two files (source and destination).' }, null, 2));
+    process.exitCode = 2;
+    return;
+  }
+
+  const { dom: srcDom } = loadHTML(srcFile);
+  const { dom: dstDom } = loadHTML(dstFile);
+
+  // Locate source node
+  let srcHero = findHero(srcDom.window.document);
+  let fromNode = null;
+
+  if (mode === 'copy-node' && plan.from?.selector) {
+    fromNode = srcDom.window.document.querySelector(plan.from.selector);
+  } else {
+    fromNode = findCardStack(srcHero);
+  }
+
+  if (!fromNode) {
+    console.log(JSON.stringify({ ok: false, reason: 'No card/stack/swiper/carousel element found in source hero.' }, null, 2));
+    process.exitCode = 2;
+    return;
+  }
+
+  // Locate destination target
+  let dstTarget = null;
+  if (mode === 'copy-node' && plan.to?.selector) {
+    dstTarget = dstDom.window.document.querySelector(plan.to.selector);
+  } else {
+    // default: hero
+    dstTarget = ensureTarget(dstDom.window.document, plan.to?.target || 'hero');
+  }
+
+  if (!dstTarget) {
+    console.log(JSON.stringify({ ok: false, reason: 'Destination target not found.' }, null, 2));
+    process.exitCode = 2;
+    return;
+  }
+
+  // Copy + bring inline assets
+  const inserted = copyNodeInto(fromNode, dstTarget, plan.to?.insert || 'append');
+  const assets = collectInlineAssets(fromNode);
+  dedupeHead(dstDom.window.document, assets);
+
+  if (inputs.dry_run) {
+    console.log(JSON.stringify({ ok: true, dryRun: true, srcFile, dstFile }, null, 2));
+    return;
+  }
+
+  // Save destination HTML prettified
+  const outHTML = dstDom.serialize();
+  saveHTML(dstFile, outHTML);
+
+  console.log(JSON.stringify({ ok: true, srcFile, dstFile }, null, 2));
+}
+
+main().catch((e) => {
+  console.error(e);
+  process.exitCode = 1;
+});

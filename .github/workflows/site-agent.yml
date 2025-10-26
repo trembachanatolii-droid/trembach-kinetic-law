@@ -1,5 +1,7 @@
-name: Site Agent
-
+- name: Install agent deps (minimal)
+  run: |
+    mkdir -p tools/node_modules
+    npm --prefix tools i --no-fund --no-audit --no-save jsdom prettier fs-extra fast-glob
 on:
   workflow_dispatch:
     inputs:

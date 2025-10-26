@@ -18,16 +18,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Use public/combined if your “combine” workflow created it; otherwise use public
-      - name: Pick site folder
+      # Pick the first site folder that actually exists
+      - name: Locate site directory
         run: |
-          if [ -d public/combined ]; then
-            echo "USING=public/combined" >> $GITHUB_ENV
-          else
-            echo "USING=public" >> $GITHUB_ENV
-          fi
-          echo "Publishing from: $USING"
-          ls -la "$USING"
+          for dir in public/combined comprehensive_site public dist; do
+            if [ -d "$dir" ]; then
+              echo "USING=$dir" >> $GITHUB_ENV
+              echo "Publishing from: $dir"
+              exit 0
+            fi
+          done
+          echo "No site folder found (looked for: public/combined, comprehensive_site, public, dist)" >&2
+          echo "Tip: ensure your index.html is in one of those folders on the main branch."
+          exit 1
 
       - uses: actions/configure-pages@v5
 

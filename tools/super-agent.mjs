@@ -1,217 +1,284 @@
 // tools/super-agent.mjs
-// Node 20 ESM. Minimal deps installed into tools/node_modules by the workflow.
-import fs from "fs/promises";
-import path from "path";
-import { fileURLToPath } from "url";
+// Node 18/20, ESM
+
+import fs from "fs-extra";
+import path from "node:path";
 import fg from "fast-glob";
 import { JSDOM } from "jsdom";
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
-/** -------- arg parsing -------- */
-function parseArgs() {
-  const args = process.argv.slice(2);
-  const out = { files: "", ask: "", plan: null, dry_run: false, inputs_file: "" };
-  for (let i = 0; i < args.length; i++) {
-    const a = args[i];
-    if (a === "--inputs-file") out.inputs_file = args[++i] || "";
-    else if (a === "--files") out.files = args[++i] || "";
-    else if (a === "--ask") out.ask = args[++i] || "";
-    else if (a === "--plan-json") {
-      try { out.plan = JSON.parse(args[++i] || "null"); } catch { out.plan = null; }
-    }
-    else if (a === "--dry") out.dry_run = true;
+/* ----------------------- small arg parser ----------------------- */
+function parseArgs(argv) {
+  const out = { files: "", ask: "", planJsonFile: "", dry: false };
+  for (let i = 2; i < argv.length; i++) {
+    const a = argv[i];
+    if (a === "--files") out.files = argv[++i] ?? "";
+    else if (a === "--ask") out.ask = argv[++i] ?? "";
+    else if (a === "--plan-json-file") out.planJsonFile = argv[++i] ?? "";
+    else if (a === "--dry") out.dry = true;
   }
   return out;
 }
 
-async function loadInputs() {
-  const cli = parseArgs();
-  if (cli.inputs_file) {
-    const txt = await fs.readFile(cli.inputs_file, "utf8");
-    const json = JSON.parse(txt);
-    // Allow either array or string for files
-    const files = Array.isArray(json.files) ? json.files.join(",") : (json.files || "");
-    return {
-      files,
-      ask: json.ask || "",
-      plan: json.plan ?? null,
-      dry_run: !!json.dry_run
-    };
+/* ---------------------------- utils ----------------------------- */
+const read = (p) => fs.readFile(p, "utf8");
+const write = (p, s) => fs.writeFile(p, s, "utf8");
+
+function normSpace(s) { return s.replace(/\s+/g, " ").trim(); }
+
+function uniquePush(arr, item, byString = true) {
+  if (byString ? !arr.some(x => String(x) === String(item)) : !arr.includes(item)) {
+    arr.push(item);
   }
-  return cli;
 }
 
-/** -------- small helpers -------- */
-const readHTML = async (p) => new JSDOM(await fs.readFile(p, "utf8"));
-const saveHTML = async (p, dom) => fs.writeFile(p, dom.serialize(), "utf8");
-
-function uniqueId(prefix) {
-  return prefix + "-" + Math.random().toString(36).slice(2, 9);
+function prettyRel(from, to) {
+  return path.posix.relative(path.posix.dirname(from), to) || ".";
 }
 
-function findHero(dom) {
-  // Heuristics: first <section> with a big heading or a media container
-  const doc = dom.window.document;
+/** Find the first matching element from a selector list */
+function firstSel(doc, selectors) {
+  for (const sel of selectors) {
+    const el = doc.querySelector(sel);
+    if (el) return el;
+  }
+  return null;
+}
+
+/** Select a likely hero container */
+function findHero(doc) {
+  return firstSel(doc, [
+    "section.hero", "header.hero", ".homeHeader", ".hero", "#hero", "[data-hero]",
+    ".homeHeader__content", ".homeHeader__container"
+  ]) || doc.body; // fallback
+}
+
+/** Heuristically find a "card stack" container in source DOM */
+function findCardStack(doc) {
   const candidates = [
-    "section[id*=hero i]",
-    "header[id*=hero i]",
-    "section[class*=hero]",
-    ".homeHeader, .home-header, .header, .hero",
-    "main section"
+    ".card-stack", ".cards", ".cards-stack", ".stack", ".swiper", ".swiper-container",
+    ".homeHeader__mediaCard", ".homeHeader__media", ".media-cards", "[data-card-stack]"
   ];
+  // Prefer deeper “media card” areas first
   for (const sel of candidates) {
     const el = doc.querySelector(sel);
     if (el) return el;
   }
-  return doc.body; // fallback
-}
-
-function findCardStackContainer(dom) {
-  const doc = dom.window.document;
-
-  // Signals observed in your source:
-  // - cards wrapped in a media container with “media” or “card” in class
-  // - inline script with id="unify-card-labels-script"
-  // - card titles like “Mesothelioma”, “Dog Bites”, etc.
-
-  // 1) script anchor
-  const byScript = doc.getElementById("unify-card-labels-script");
-  if (byScript) {
-    // go up a bit to get the visual container
-    const parent = byScript.closest(".homeHeader__media, .homeHeader__mediaCard, .media, [class*=media], [class*=card]");
-    if (parent) return parent;
-  }
-
-  // 2) obvious containers
-  const obvious = doc.querySelector(".homeHeader__mediaCard, .homeHeader__media, [class*=mediaCard], [class*=card-stack], [class*=card] .cards, [class*=cards]");
-  if (obvious) return obvious;
-
-  // 3) textual signal (labels)
-  const labels = ["Mesothelioma","Dog Bites","Slip and Fall","Car Accident","See All Practice Areas"];
-  const textHit = labels.map(l => `:is(div,section,article,aside,main) :is(*):contains('${l}')`).join(",");
-  // jsdom doesn't support :contains — scan manually:
-  let best = null, walk = doc.querySelectorAll("div,section,article,aside,main");
-  for (const el of walk) {
-    const t = el.textContent || "";
-    if (labels.some(l => t.includes(l))) {
-      // choose the smallest container that still looks like a media block
-      if (!best || el.outerHTML.length < best.outerHTML.length) best = el;
-    }
-  }
-  if (best) return best.closest(".homeHeader__media, [class*=media], [class*=card]") || best;
-
+  // As a last resort grab any element that contains a set of repeating cards
+  const manyCards = [...doc.querySelectorAll("[class*='card']")]
+    .map(el => el.closest("section,div,article"))
+    .filter(Boolean);
+  if (manyCards.length) return manyCards[0];
   return null;
 }
 
-function ensureAssetBlocks(sourceHero, targetDoc) {
-  // copy inline <style> or <script> that card stack uses
-  const srcDoc = sourceHero.ownerDocument;
+/** Collect inline <style>/<script> that are likely needed for the copied widget */
+function collectLocalAssets(container) {
+  const need = { styles: [], scripts: [] };
 
-  const styles = Array.from(sourceHero.querySelectorAll("style"));
-  for (const st of styles) {
-    const id = st.id || uniqueId("copied-style");
-    if (!targetDoc.getElementById(id)) {
-      const clone = targetDoc.createElement("style");
-      clone.id = id;
-      clone.textContent = st.textContent;
-      targetDoc.head ? targetDoc.head.appendChild(clone) : targetDoc.body.appendChild(clone);
+  // 1) embedded within the container
+  container.querySelectorAll("style").forEach(s => uniquePush(need.styles, s.textContent.trim()));
+  container.querySelectorAll("script").forEach(s => uniquePush(need.scripts, s.textContent ?? ""));
+
+  // 2) siblings very near container (often authors drop init scripts next to widgets)
+  const parent = container.parentElement;
+  if (parent) {
+    const near = [...parent.querySelectorAll("style,script")].filter(el => {
+      // skip duplicates we already took that are children of the container
+      return !container.contains(el);
+    });
+    for (const el of near) {
+      if (el.tagName === "STYLE") uniquePush(need.styles, el.textContent.trim());
+      if (el.tagName === "SCRIPT") uniquePush(need.scripts, el.textContent ?? "");
     }
   }
 
-  const scripts = Array.from(sourceHero.querySelectorAll("script"));
-  for (const sc of scripts) {
-    const id = sc.id || uniqueId("copied-script");
-    if (!targetDoc.getElementById(id)) {
-      const clone = targetDoc.createElement("script");
-      if (sc.id) clone.id = sc.id;
-      // keep inline JS
-      clone.textContent = sc.textContent || "";
-      targetDoc.body.appendChild(clone);
-    }
+  // De-duplicate by content
+  need.styles = [...new Set(need.styles.filter(Boolean))];
+  need.scripts = [...new Set(need.scripts.filter(Boolean))];
+
+  return need;
+}
+
+/** Adjust relative URLs in <img>, <video>, <link>, etc., to remain valid in destination */
+function rewriteRelativeAssets(fragmentDoc, fromFile, toFile) {
+  const fromDir = path.posix.dirname(fromFile);
+  const toDir = path.posix.dirname(toFile);
+
+  const urlAttrs = [
+    ["img", "src"], ["source", "src"], ["video", "poster"], ["video", "src"],
+    ["link", "href"], ["script", "src"]
+  ];
+
+  for (const [tag, attr] of urlAttrs) {
+    fragmentDoc.querySelectorAll(`${tag}[${attr}]`).forEach(el => {
+      const val = el.getAttribute(attr);
+      if (!val) return;
+      // ignore data URIs and absolute http(s)
+      if (/^(data:|https?:|\/\/)/i.test(val)) return;
+
+      // compute absolute (posix) from src file
+      const absFrom = path.posix.normalize(path.posix.join(fromDir, val));
+      // rebase to destination directory
+      const rebased = path.posix.relative(toDir, absFrom);
+      el.setAttribute(attr, rebased || path.posix.basename(absFrom));
+    });
   }
 }
 
-/** -------- main -------- */
-(async () => {
-  const inputs = await loadInputs();
-  const fileGlobs = (inputs.files || "").split(",").map(s => s.trim()).filter(Boolean);
+/** Create a minimal diff preview (string) */
+function diffPreview(before, after, limit = 1200) {
+  if (before === after) return "No changes.";
+  const linesB = before.split(/\r?\n/);
+  const linesA = after.split(/\r?\n/);
+  const head = [];
+  const n = Math.min(linesB.length, linesA.length);
+  for (let i = 0; i < n; i++) {
+    if (linesB[i] !== linesA[i]) {
+      head.push(`- ${linesB[i]}`);
+      head.push(`+ ${linesA[i]}`);
+      if (head.join("\n").length > limit) break;
+    }
+  }
+  return head.slice(0, 80).join("\n") || "(changed, but large; omitted preview)";
+}
 
-  if (!fileGlobs.length) {
-    console.log(JSON.stringify({ ok: false, error: "No file globs provided." }));
+/* --------------------------- main logic -------------------------- */
+async function main() {
+  const args = parseArgs(process.argv);
+  const result = { ok: false, actions: [], error: "" };
+
+  // Resolve file list
+  const pattern = (args.files && args.files.trim()) || "comprehensive_site/sites/**/*.html";
+  const entries = await fg(pattern, { dot: false, posix: true, onlyFiles: true });
+
+  if (!entries.length) {
+    result.error = `No files matched: ${pattern}`;
+    console.log(JSON.stringify(result, null, 2));
     process.exit(2);
   }
 
-  const matches = await fg(fileGlobs, { dot: false });
-  if (matches.length < 2) {
-    console.log(JSON.stringify({ ok: false, error: "No files matched.", globs: fileGlobs }));
+  // If the ask contains “copy card stack from site2 to site3” we’ll do that specific task.
+  const ask = (args.ask || "").toLowerCase();
+  const wantsCopyStack =
+    /copy.+card\s+stack/.test(ask) &&
+    /(site\s*2|site2)/.test(ask) &&
+    /(site\s*3|site3)/.test(ask);
+
+  if (!wantsCopyStack) {
+    result.error = "This agent currently focuses on: copy card stack from site2 hero to site3 hero.";
+    console.log(JSON.stringify(result, null, 2));
     process.exit(2);
   }
 
-  // Heuristic: take the site2 file as "source" (contains the card stack), and the site3 file as "target".
-  const sourcePath = matches.find(p => /\/site2\//.test(p)) || matches[0];
-  const targetPath = matches.find(p => /\/site3\//.test(p)) || matches[matches.length - 1];
+  // Pick the first html under site2 and site3
+  const srcFile = entries.find(p => /\/site2\/.+\.html$/i.test(p));
+  const dstFile = entries.find(p => /\/site3\/.+\.html$/i.test(p));
 
-  const srcDom = await readHTML(sourcePath);
-  const tgtDom = await readHTML(targetPath);
-
-  const srcHero = findHero(srcDom);
-  const stack = findCardStackContainer(srcDom) || srcHero;
-  if (!stack) {
-    console.log(JSON.stringify({ ok: false, error: "Could not locate card stack container in source." }));
+  if (!srcFile || !dstFile) {
+    result.error = `Could not locate source/destination:
+- src (site2): ${srcFile || "not found"}
+- dst (site3): ${dstFile || "not found"}`;
+    console.log(JSON.stringify(result, null, 2));
     process.exit(2);
   }
 
-  const tgtHero = findHero(tgtDom);
+  const [srcHTML, dstHTML] = await Promise.all([read(srcFile), read(dstFile)]);
 
-  // Insert on the right side: make a wrapper with two columns if needed
-  const tdoc = tgtDom.window.document;
-  let rightSlot = tgtHero.querySelector("[data-right], .hero__media, .media, [class*=right]");
-  if (!rightSlot) {
-    // build a simple two-column grid and move existing content to the left
-    const wrapper = tdoc.createElement("div");
-    wrapper.style.display = "grid";
-    wrapper.style.gridTemplateColumns = "1fr 1fr";
-    wrapper.style.gap = "2rem";
+  const srcDOM = new JSDOM(srcHTML);
+  const dstDOM = new JSDOM(dstHTML);
 
-    // move original hero children into left column
-    const left = tdoc.createElement("div");
-    while (tgtHero.firstChild) left.appendChild(tgtHero.firstChild);
-    const right = tdoc.createElement("div");
-    right.setAttribute("data-right", "true");
+  const srcDoc = srcDOM.window.document;
+  const dstDoc = dstDOM.window.document;
 
-    wrapper.appendChild(left);
-    wrapper.appendChild(right);
-    tgtHero.appendChild(wrapper);
-    rightSlot = right;
+  // Find card stack in site2
+  const srcStack = findCardStack(srcDoc);
+  if (!srcStack) {
+    result.error = "No card/stack/swiper/carousel element found in source hero.";
+    console.log(JSON.stringify(result, null, 2));
+    process.exit(2);
   }
 
-  // Copy the visual stack node
-  const cloned = stack.cloneNode(true);
-  rightSlot.innerHTML = ""; // replace what's there
-  rightSlot.appendChild(cloned);
+  // Clone as a fragment (so we can rewrite asset paths)
+  const tempDOM = new JSDOM("<!doctype html><body></body>");
+  const fragDoc = tempDOM.window.document;
+  const cloneWrapper = fragDoc.createElement("div");
+  cloneWrapper.innerHTML = srcStack.outerHTML;
+  fragDoc.body.appendChild(cloneWrapper);
 
-  // Ensure any inline assets required by the cards exist
-  ensureAssetBlocks(stack, tdoc);
+  rewriteRelativeAssets(fragDoc, srcFile, dstFile);
 
-  if (inputs.dry_run) {
-    console.log(JSON.stringify({
-      ok: true,
-      dry_run: true,
-      files: { source: sourcePath, target: targetPath }
-    }, null, 2));
+  // Collect inline assets (styles/scripts) from around the source widget
+  const { styles, scripts } = collectLocalAssets(srcStack);
+
+  // Find hero (destination)
+  const hero = findHero(dstDoc);
+  if (!hero) {
+    result.error = "Destination hero not found.";
+    console.log(JSON.stringify(result, null, 2));
+    process.exit(2);
+  }
+
+  // Prefer a media/right column in destination hero if present
+  const rightSpot = firstSel(dstDoc, [
+    ".homeHeader__mediaCard", ".homeHeader__media", ".hero__media",
+    "[data-hero-media]", ".hero-right", ".hero__right"
+  ]) || hero;
+
+  // Insert cloned stack at the end of right spot
+  const beforeHTML = dstDoc.documentElement.outerHTML;
+
+  // Create a container so it’s easy to find/remove later
+  const anchor = dstDoc.createElement("div");
+  anchor.setAttribute("data-agent-insert", "hero-card-stack");
+  anchor.innerHTML = cloneWrapper.innerHTML;
+  rightSpot.appendChild(anchor);
+
+  // Ensure styles exist in the <head>
+  const head = dstDoc.querySelector("head") || dstDoc.body;
+  for (const css of styles) {
+    if (!dstDoc.documentElement.outerHTML.includes(css)) {
+      const st = dstDoc.createElement("style");
+      st.textContent = css;
+      head.appendChild(st);
+      result.actions.push("Added inline <style> for card stack.");
+    }
+  }
+
+  // Ensure scripts are placed at end of body (keep order)
+  const body = dstDoc.body || dstDoc.documentElement;
+  for (const js of scripts) {
+    if (!dstDoc.documentElement.outerHTML.includes(js)) {
+      const sc = dstDoc.createElement("script");
+      sc.textContent = js;
+      body.appendChild(sc);
+      result.actions.push("Added inline <script> for card stack.");
+    }
+  }
+
+  const afterHTML = dstDoc.documentElement.outerHTML;
+
+  if (args.dry) {
+    result.ok = true;
+    result.actions.unshift(
+      `Plan: Insert card stack from ${prettyRel(dstFile, srcFile)} into hero of ${path.posix.basename(dstFile)}.`
+    );
+    result.diff = diffPreview(beforeHTML, afterHTML);
+    console.log(JSON.stringify(result, null, 2));
     return;
   }
 
-  await saveHTML(targetPath, tgtDom);
+  // Write back
+  await write(dstFile, afterHTML);
+  result.ok = true;
+  result.actions.unshift(
+    `Inserted card stack from ${prettyRel(dstFile, srcFile)} into ${path.posix.basename(dstFile)}`
+  );
 
-  console.log(JSON.stringify({
-    ok: true,
-    message: "Card stack copied",
-    files: { source: sourcePath, target: targetPath }
-  }, null, 2));
-})().catch(err => {
-  console.error(err);
-  console.log(JSON.stringify({ ok: false, error: String(err && err.message || err) }));
+  console.log(JSON.stringify(result, null, 2));
+}
+
+main().catch(err => {
+  const out = { ok: false, error: err?.message || String(err) };
+  console.log(JSON.stringify(out, null, 2));
   process.exit(1);
 });

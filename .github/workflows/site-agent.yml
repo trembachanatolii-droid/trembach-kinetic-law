@@ -6,16 +6,17 @@ on:
       files:
         description: 'HTML file (or glob) to edit'
         required: true
-        default: 'comprehensive_site/sites/**/*.{html,htm}'
+        default: 'comprehensive_site/sites/**/*.html'
       ask:
         description: 'Instruction for the agent (English)'
         required: true
-      plan:
-        description: 'Optional JSON plan (paste to bypass API usage)'
+      plan_json:
+        description: 'Optional JSON plan (leave empty for normal run)'
         required: false
       dry_run:
         description: 'Dry run (plan + diff only, no commit)'
         type: boolean
+        required: false
         default: false
 
 permissions:
@@ -38,51 +39,53 @@ jobs:
       - name: Install agent deps (minimal)
         run: |
           mkdir -p tools/node_modules
-          npm --prefix tools i --no-audit --no-fund --no-save jsdom prettier fs-extra fast-glob
+          npm --prefix tools i --no-fund --no-audit --silent jsdom prettier fs-extra fast-glob
 
-      - name: Build inputs.json for the agent
-        id: build_inputs
+      - name: Capture inputs (preserve newlines safely)
+        id: inputs
         shell: bash
         run: |
-          # Write a JSON file so we avoid all CLI quoting issues.
-          cat > inputs.json <<'JSON'
           {
-            "files": "${{ inputs.files }}",
-            "ask": "${{ inputs.ask }}",
-            "plan": ___PLAN___,
-            "dry_run": ${{ inputs.dry_run && 'true' || 'false' }}
-          }
-          JSON
+            echo 'files<<__EOF__'
+            echo "${{ inputs.files }}"
+            echo '__EOF__'
+            echo 'ask<<__EOF__'
+            echo "${{ inputs.ask }}"
+            echo '__EOF__'
+            echo "dry_run=${{ inputs.dry_run }}"
+          } >> "$GITHUB_OUTPUT"
 
-          # If a plan was supplied, drop it in raw; otherwise set null.
-          if [ -n "${{ inputs.plan }}" ]; then
-            # Safely replace the placeholder with the raw plan text
-            python3 - "$(< inputs.json)" "${{ inputs.plan }}" > inputs.tmp <<'PY'
-import json,sys
-doc=json.loads(sys.stdin.read())
-try:
-    plan=json.loads(sys.argv[1])
-except Exception:
-    plan=None
-doc["plan"]=plan
-print(json.dumps(doc))
-PY
-            mv inputs.tmp inputs.json
-          else
-            sed -i 's/"plan": ___PLAN___/"plan": null/' inputs.json
+          # Optional plan (multiline-safe)
+          if [[ -n "${{ inputs.plan_json }}" ]]; then
+            printf '%s\n' "${{ inputs.plan_json }}" > /tmp/plan.json
+            echo "plan_file=/tmp/plan.json" >> "$GITHUB_OUTPUT"
           fi
 
-          echo "Inputs written:"
-          cat inputs.json
-
       - name: Run site agent (apply instruction)
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}   # optional; agent runs without if not needed
+          OPENAI_PROJECT: ${{ secrets.OPENAI_PROJECT }}   # optional
+        shell: bash
         run: |
-          node tools/super-agent.mjs --inputs-file inputs.json
+          set -euo pipefail
+          echo "Files: ${{ steps.inputs.outputs.files }}"
+          echo "Ask:   ${{ steps.inputs.outputs.ask }}"
+          PLAN_FLAG=""
+          if [[ -n "${{ steps.inputs.outputs.plan_file }}" ]]; then
+            PLAN_FLAG="--plan-json-file ${{ steps.inputs.outputs.plan_file }}"
+          fi
+
+          node tools/super-agent.mjs \
+            --files "${{ steps.inputs.outputs.files }}" \
+            --ask "${{ steps.inputs.outputs.ask }}" \
+            ${PLAN_FLAG} \
+            $([[ "${{ steps.inputs.outputs.dry_run }}" == "true" ]] && echo "--dry" || true)
 
       - name: Create Pull Request
-        if: success()
+        if: ${{ steps.inputs.outputs.dry_run != 'true' }}
         uses: peter-evans/create-pull-request@v6
         with:
           branch: "agent/auto-${{ github.run_id }}"
           title: "Agent: site edit"
-          body: "Requested by @${{ github.actor }}."
+          body: "Requested by ${{ github.actor }}."
+          commit-message: "Agent: site edit"

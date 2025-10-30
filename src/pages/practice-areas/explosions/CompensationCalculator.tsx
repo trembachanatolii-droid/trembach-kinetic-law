@@ -1,651 +1,521 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Flame } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { CalculatorProgress } from '@/components/calculator/CalculatorProgress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { Label } from '@/components/ui/label';
+import React, { useState, useRef, useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Badge } from '@/components/ui/badge';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { 
+  Calculator, 
+  DollarSign, 
+  TrendingUp,
+  AlertTriangle,
+  Info,
+  ArrowLeft,
+  FileText,
+  Clock,
+  Users,
+  Shield
+} from 'lucide-react';
+import Navigation from '@/components/Navigation';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import heroBackground from '@/assets/explosions-compensation-calculator-hero.jpg';
 
-interface ExplosionFormData extends CalculatorFormData {
-  explosionType: string;
-  blastRadius: string;
-  injuryType: string;
-  burnDegree: string;
-  respiratoryDamage: string;
-  hearingLoss: string;
-  blastInjuries: string;
+gsap.registerPlugin(ScrollTrigger);
+
+interface CalculatorData {
+  incomeLevel: string;
+  ageGroup: string;
+  injurySeverity: string;
   medicalCosts: string;
-  futureCareCosts: string;
-  lostWages: string;
-  age: string;
-  permanentDisability: string;
-  thirdPartyLiability: string;
-  oshaViolation: string;
+  timeOffWork: string;
+  familyImpact: string;
+  explosionType: string;
+  negligenceLevel: string;
 }
 
-const initialFormData: ExplosionFormData = {
-  explosionType: '',
-  blastRadius: '',
-  injuryType: '',
-  burnDegree: '',
-  respiratoryDamage: '',
-  hearingLoss: '',
-  blastInjuries: '',
-  medicalCosts: '',
-  futureCareCosts: '',
-  lostWages: '',
-  age: '',
-  permanentDisability: '',
-  thirdPartyLiability: '',
-  oshaViolation: ''
-};
+const ExplosionsCompensationCalculator: React.FC = () => {
+  const [calculatorData, setCalculatorData] = useState<CalculatorData>({
+    incomeLevel: '',
+    ageGroup: '',
+    injurySeverity: '',
+    medicalCosts: '',
+    timeOffWork: '',
+    familyImpact: '',
+    explosionType: '',
+    negligenceLevel: ''
+  });
 
-function calculateExplosionCompensation(data: ExplosionFormData): CalculatorResults {
-  let baseMin = 100000;
-  let baseMax = 500000;
-
-  // Explosion type multipliers
-  const explosionTypeMultipliers: Record<string, number> = {
-    'gas-leak': 2.8,
-    'industrial': 3.0,
-    'chemical': 3.5,
-    'electrical': 2.5,
-    'propane': 2.6,
-    'fireworks': 1.8,
-    'building': 3.2,
-    'vehicle': 2.4
-  };
-  const explosionMult = explosionTypeMultipliers[data.explosionType] || 1.5;
-  baseMin *= explosionMult;
-  baseMax *= explosionMult;
-
-  // Blast radius multipliers
-  const blastRadiusMultipliers: Record<string, number> = {
-    'immediate': 2.5,
-    'within-10ft': 2.2,
-    'within-25ft': 1.9,
-    'within-50ft': 1.6,
-    'within-100ft': 1.3,
-    'over-100ft': 1.1
-  };
-  const blastMult = blastRadiusMultipliers[data.blastRadius] || 1;
-  baseMin *= blastMult;
-  baseMax *= blastMult;
-
-  // Injury type multipliers
-  const injuryTypeMultipliers: Record<string, number> = {
-    'burns-only': 1.8,
-    'blast-trauma': 2.2,
-    'respiratory': 2.5,
-    'multiple-systems': 3.0,
-    'traumatic-brain': 3.5,
-    'amputation': 4.0,
-    'spinal': 4.5,
-    'fatal': 5.0
-  };
-  const injuryMult = injuryTypeMultipliers[data.injuryType] || 1.5;
-  baseMin *= injuryMult;
-  baseMax *= injuryMult;
-
-  // Burn degree multipliers
-  const burnDegreeMultipliers: Record<string, number> = {
-    'first-degree': 1.1,
-    'second-degree': 1.5,
-    'third-degree': 2.5,
-    'fourth-degree': 3.5,
-    'facial-burns': 2.8,
-    'body-over-30': 3.2,
-    'inhalation': 2.6
-  };
-  const burnMult = burnDegreeMultipliers[data.burnDegree] || 1;
-  baseMin *= burnMult;
-  baseMax *= burnMult;
-
-  // Respiratory damage multipliers
-  const respiratoryMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'smoke-inhalation': 1.4,
-    'chemical-exposure': 1.8,
-    'permanent-lung': 2.5,
-    'ventilator-dependent': 3.5,
-    'lung-transplant': 4.5
-  };
-  const respMult = respiratoryMultipliers[data.respiratoryDamage] || 1;
-  baseMin *= respMult;
-  baseMax *= respMult;
-
-  // Hearing loss multipliers
-  const hearingMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'tinnitus': 1.2,
-    'partial-loss': 1.5,
-    'severe-loss': 2.0,
-    'total-deafness': 2.8,
-    'bilateral': 3.0
-  };
-  const hearingMult = hearingMultipliers[data.hearingLoss] || 1;
-  baseMin *= hearingMult;
-  baseMax *= hearingMult;
-
-  // Blast injuries multipliers
-  const blastInjuryMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'tympanic-rupture': 1.3,
-    'internal-organs': 2.2,
-    'broken-bones': 1.8,
-    'shrapnel-wounds': 2.0,
-    'traumatic-amputation': 3.5,
-    'multiple-injuries': 2.8
-  };
-  const blastInjuryMult = blastInjuryMultipliers[data.blastInjuries] || 1;
-  baseMin *= blastInjuryMult;
-  baseMax *= blastInjuryMult;
-
-  // Economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
+  const [calculatedAmount, setCalculatedAmount] = useState<{
+    min: number;
+    max: number;
+    average: number;
+  } | null>(null);
   
-  baseMin += medicalCosts + futureCareCosts + lostWages;
-  baseMax += (medicalCosts + futureCareCosts + lostWages) * 2;
+  const [showResults, setShowResults] = useState(false);
 
-  // Age adjustments (younger = more future damages)
-  const ageMultipliers: Record<string, number> = {
-    'under-25': 1.4,
-    '25-35': 1.3,
-    '36-45': 1.2,
-    '46-55': 1.1,
-    '56-65': 1.0,
-    'over-65': 0.9
+  const heroRef = useRef<HTMLDivElement>(null);
+  const calculatorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero animation
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      );
+
+      // Calculator animation
+      gsap.fromTo(calculatorRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: calculatorRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const handleInputChange = (field: string, value: string) => {
+    setCalculatorData(prev => ({ ...prev, [field]: value }));
   };
-  const ageMult = ageMultipliers[data.age] || 1;
-  baseMin *= ageMult;
-  baseMax *= ageMult;
 
-  // Permanent disability multipliers
-  const disabilityMultipliers: Record<string, number> = {
-    'none': 1.0,
-    '1-25': 1.3,
-    '26-50': 1.8,
-    '51-75': 2.5,
-    '76-99': 3.2,
-    '100': 4.0
+  const calculateCompensation = () => {
+    // Base calculation factors
+    let baseAmount = 50000;
+    let multiplier = 1;
+
+    // Income level adjustments
+    const incomeMultipliers = {
+      'under-30k': 0.7,
+      '30k-50k': 1.0,
+      '50k-75k': 1.3,
+      '75k-100k': 1.6,
+      'over-100k': 2.0
+    };
+
+    // Age adjustments
+    const ageMultipliers = {
+      'under-25': 1.4,
+      '25-35': 1.3,
+      '35-45': 1.2,
+      '45-55': 1.1,
+      '55-65': 1.0,
+      'over-65': 0.8
+    };
+
+    // Injury severity adjustments
+    const injuryMultipliers = {
+      'minor': 0.5,
+      'moderate': 1.0,
+      'severe': 2.0,
+      'catastrophic': 3.5,
+      'permanent-disability': 4.0
+    };
+
+    // Medical costs adjustments
+    const medicalMultipliers = {
+      'under-10k': 0.8,
+      '10k-50k': 1.0,
+      '50k-100k': 1.3,
+      '100k-250k': 1.6,
+      'over-250k': 2.2
+    };
+
+    // Explosion type adjustments
+    const explosionMultipliers = {
+      'industrial': 1.2,
+      'chemical': 1.5,
+      'gas': 1.1,
+      'electrical': 1.0,
+      'pipeline': 1.4,
+      'refinery': 1.6,
+      'construction': 1.1
+    };
+
+    // Apply all multipliers
+    if (calculatorData.incomeLevel) {
+      multiplier *= incomeMultipliers[calculatorData.incomeLevel as keyof typeof incomeMultipliers] || 1;
+    }
+    if (calculatorData.ageGroup) {
+      multiplier *= ageMultipliers[calculatorData.ageGroup as keyof typeof ageMultipliers] || 1;
+    }
+    if (calculatorData.injurySeverity) {
+      multiplier *= injuryMultipliers[calculatorData.injurySeverity as keyof typeof injuryMultipliers] || 1;
+    }
+    if (calculatorData.medicalCosts) {
+      multiplier *= medicalMultipliers[calculatorData.medicalCosts as keyof typeof medicalMultipliers] || 1;
+    }
+    if (calculatorData.explosionType) {
+      multiplier *= explosionMultipliers[calculatorData.explosionType as keyof typeof explosionMultipliers] || 1;
+    }
+
+    // Calculate range
+    const average = baseAmount * multiplier;
+    const min = average * 0.6;
+    const max = average * 1.8;
+
+    setCalculatedAmount({
+      min: Math.round(min),
+      max: Math.round(max),
+      average: Math.round(average)
+    });
+
+    setShowResults(true);
   };
-  const disabilityMult = disabilityMultipliers[data.permanentDisability] || 1;
-  baseMin *= disabilityMult;
-  baseMax *= disabilityMult;
 
-  // Third-party liability additions
-  if (data.thirdPartyLiability === 'yes') {
-    baseMin *= 1.5;
-    baseMax *= 1.8;
-  }
-
-  // OSHA violation additions
-  if (data.oshaViolation === 'willful') {
-    baseMin += 150000;
-    baseMax += 400000;
-  } else if (data.oshaViolation === 'serious') {
-    baseMin += 75000;
-    baseMax += 200000;
-  } else if (data.oshaViolation === 'repeat') {
-    baseMin += 100000;
-    baseMax += 300000;
-  }
-
-  return {
-    min: Math.max(50000, Math.round(baseMin)),
-    max: Math.round(baseMax),
-    medicalCosts,
-    futureCareCosts,
-    lostWages
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
   };
-}
 
-function validateExplosionForm(data: ExplosionFormData, step: number): boolean {
-  if (step === 1) {
-    return !!(data.explosionType && data.blastRadius && data.injuryType && data.burnDegree);
-  }
-  if (step === 2) {
-    return !!(data.respiratoryDamage && data.hearingLoss && data.blastInjuries && 
-              data.medicalCosts && data.age && data.permanentDisability);
-  }
-  return true;
-}
-
-const ExplosionsCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<ExplosionFormData>(
-    initialFormData,
-    calculateExplosionCompensation,
-    validateExplosionForm
-  );
+  const resetCalculator = () => {
+    setCalculatorData({
+      incomeLevel: '',
+      ageGroup: '',
+      injurySeverity: '',
+      medicalCosts: '',
+      timeOffWork: '',
+      familyImpact: '',
+      explosionType: '',
+      negligenceLevel: ''
+    });
+    setCalculatedAmount(null);
+    setShowResults(false);
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Explosion Calculator | Blast Injury Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate explosion compensation for blast injuries. Free gas explosion and industrial fire estimates." />
-      </Helmet>
-
-      <main className="min-h-screen bg-background">
-        <div className="border-b">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-muted-foreground hover:text-foreground">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="California Explosion Injury Compensation Calculator | Free Estimate"
+        description="Calculate potential compensation for your explosion injury case in California. Get a free estimate of what your explosion injury claim might be worth."
+        canonical="https://www.trembachlawfirm.com/practice-areas/explosions/compensation-calculator"
+      />
+      
+      <Navigation />
+      
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat flex items-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="max-w-4xl">
+            <div className="hero-content text-center text-white">
+              <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
+                Explosion Injury Compensation Calculator
+              </h1>
+              <p className="text-xl md:text-2xl text-white/90 mb-6">
+                Estimate Your Potential Case Value
+              </p>
+              <p className="text-lg text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed">
+                Get a free, confidential estimate of what your explosion injury case might be worth based on California legal standards.
+              </p>
+            </div>
           </div>
         </div>
+      </section>
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-muted/50 to-background">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-100 mb-6">
-              <Flame className="w-8 h-8 text-orange-600" />
+      {/* Go Back Button */}
+      <GoBack className="container mx-auto px-8 pt-8" fallbackPath="/practice-areas/explosions" />
+
+      {/* Main Content */}
+      <div className="container mx-auto px-8 py-12">
+        <div className="max-w-4xl mx-auto">
+          
+          {/* Important Disclaimer */}
+          <Alert className="mb-8">
+            <Info className="h-4 w-4" />
+            <AlertDescription className="text-sm">
+              <strong>Important:</strong> This calculator provides estimates only. Actual compensation depends on many factors specific to your case. 
+              Consult with an experienced explosion injury attorney for a personalized evaluation.
+            </AlertDescription>
+          </Alert>
+
+          {/* Calculator Form */}
+          <Card className="shadow-lg mb-8" ref={calculatorRef}>
+            <CardHeader className="text-center">
+              <div className="mx-auto w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+                <Calculator className="w-8 h-8 text-primary" />
+              </div>
+              <CardTitle className="text-3xl font-bold">Compensation Calculator</CardTitle>
+              <p className="text-muted-foreground">
+                Answer the questions below to get your estimated compensation range
+              </p>
+            </CardHeader>
+            
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                {/* Annual Income */}
+                <div className="space-y-2">
+                  <Label>Annual Income Before Injury</Label>
+                  <Select value={calculatorData.incomeLevel} onValueChange={(value) => handleInputChange('incomeLevel', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select income range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-30k">Under $30,000</SelectItem>
+                      <SelectItem value="30k-50k">$30,000 - $50,000</SelectItem>
+                      <SelectItem value="50k-75k">$50,000 - $75,000</SelectItem>
+                      <SelectItem value="75k-100k">$75,000 - $100,000</SelectItem>
+                      <SelectItem value="over-100k">Over $100,000</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Age Group */}
+                <div className="space-y-2">
+                  <Label>Age at Time of Injury</Label>
+                  <Select value={calculatorData.ageGroup} onValueChange={(value) => handleInputChange('ageGroup', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select age group" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-25">Under 25</SelectItem>
+                      <SelectItem value="25-35">25-35</SelectItem>
+                      <SelectItem value="35-45">35-45</SelectItem>
+                      <SelectItem value="45-55">45-55</SelectItem>
+                      <SelectItem value="55-65">55-65</SelectItem>
+                      <SelectItem value="over-65">Over 65</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Injury Severity */}
+                <div className="space-y-2">
+                  <Label>Injury Severity</Label>
+                  <Select value={calculatorData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select injury severity" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="minor">Minor injuries</SelectItem>
+                      <SelectItem value="moderate">Moderate injuries</SelectItem>
+                      <SelectItem value="severe">Severe injuries</SelectItem>
+                      <SelectItem value="catastrophic">Catastrophic injuries</SelectItem>
+                      <SelectItem value="permanent-disability">Permanent disability</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Medical Costs */}
+                <div className="space-y-2">
+                  <Label>Medical Costs (Current + Future)</Label>
+                  <Select value={calculatorData.medicalCosts} onValueChange={(value) => handleInputChange('medicalCosts', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select cost range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-10k">Under $10,000</SelectItem>
+                      <SelectItem value="10k-50k">$10,000 - $50,000</SelectItem>
+                      <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
+                      <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
+                      <SelectItem value="over-250k">Over $250,000</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Time Off Work */}
+                <div className="space-y-2">
+                  <Label>Time Unable to Work</Label>
+                  <Select value={calculatorData.timeOffWork} onValueChange={(value) => handleInputChange('timeOffWork', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select time period" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">No time off</SelectItem>
+                      <SelectItem value="days">Days to weeks</SelectItem>
+                      <SelectItem value="months">Months</SelectItem>
+                      <SelectItem value="year">Over a year</SelectItem>
+                      <SelectItem value="permanent">Permanently unable</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* Explosion Type */}
+                <div className="space-y-2">
+                  <Label>Type of Explosion</Label>
+                  <Select value={calculatorData.explosionType} onValueChange={(value) => handleInputChange('explosionType', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select explosion type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="industrial">Industrial Explosion</SelectItem>
+                      <SelectItem value="chemical">Chemical Explosion</SelectItem>
+                      <SelectItem value="gas">Gas Explosion</SelectItem>
+                      <SelectItem value="electrical">Electrical Explosion</SelectItem>
+                      <SelectItem value="pipeline">Pipeline Explosion</SelectItem>
+                      <SelectItem value="refinery">Refinery Explosion</SelectItem>
+                      <SelectItem value="construction">Construction Site</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+              </div>
+
+              {/* Calculate Button */}
+              <div className="text-center pt-6">
+                <Button 
+                  onClick={calculateCompensation}
+                  size="lg"
+                  className="bg-primary hover:bg-primary/90 text-white font-bold px-8 py-4"
+                >
+                  <Calculator className="w-5 h-5 mr-2" />
+                  Calculate My Compensation
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Results Section */}
+          {showResults && calculatedAmount && (
+            <Card className="shadow-lg mb-8 border-primary">
+              <CardHeader className="text-center bg-primary/5">
+                <CardTitle className="text-2xl font-bold text-primary">
+                  Your Estimated Compensation Range
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="pt-8">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                  <div className="p-6 bg-muted rounded-lg">
+                    <div className="text-2xl font-bold text-green-600 mb-2">
+                      {formatCurrency(calculatedAmount.min)}
+                    </div>
+                    <div className="text-sm text-muted-foreground">Minimum Estimate</div>
+                  </div>
+                  
+                  <div className="p-6 bg-primary/10 rounded-lg border-2 border-primary">
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      {formatCurrency(calculatedAmount.average)}
+                    </div>
+                    <div className="text-sm text-primary font-semibold">Average Estimate</div>
+                  </div>
+                  
+                  <div className="p-6 bg-muted rounded-lg">
+                    <div className="text-2xl font-bold text-green-600 mb-2">
+                      {formatCurrency(calculatedAmount.max)}
+                    </div>
+                    <div className="text-sm text-muted-foreground">Maximum Estimate</div>
+                  </div>
+                </div>
+
+                <Alert className="mt-6">
+                  <TrendingUp className="h-4 w-4" />
+                  <AlertDescription>
+                    This estimate is based on typical California explosion injury cases. Your actual compensation may be higher or lower 
+                    depending on specific circumstances, evidence, and legal representation quality.
+                  </AlertDescription>
+                </Alert>
+
+                <div className="text-center mt-6 space-y-4">
+                  <Button 
+                    onClick={resetCalculator}
+                    variant="outline"
+                    className="mr-4"
+                  >
+                    Reset Calculator
+                  </Button>
+                  <Button 
+                    onClick={() => window.location.href = '/practice-areas/explosions/case-evaluation'}
+                    className="bg-primary hover:bg-primary/90"
+                  >
+                    Get Free Case Evaluation
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          )}
+
+          {/* Legal Disclaimer */}
+          <Card className="bg-muted/50">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <AlertTriangle className="w-5 h-5 mr-2 text-yellow-600" />
+                Legal Disclaimer
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-sm text-muted-foreground space-y-2">
+              <p>
+                <strong>This calculator is for informational purposes only and does not constitute legal advice.</strong> 
+                The estimates provided are based on general factors and should not be relied upon as a guarantee of compensation.
+              </p>
+              <p>
+                Actual case values depend on numerous specific factors including the strength of evidence, defendant's ability to pay, 
+                jury composition, attorney skill, and many other variables that cannot be captured in a calculator.
+              </p>
+              <p>
+                <strong>No attorney-client relationship is formed</strong> by using this calculator. For a personalized case evaluation, 
+                please consult with a qualified California explosion injury attorney.
+              </p>
+              <p className="font-semibold">
+                Results are estimates only. Past results do not guarantee future outcomes.
+              </p>
+            </CardContent>
+          </Card>
+
+          {/* Next Steps */}
+          <div className="mt-12 text-center">
+            <h3 className="text-2xl font-bold mb-6">Ready to Take the Next Step?</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <FileText className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Free Case Evaluation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">Get a detailed analysis of your specific case from our experienced attorneys.</p>
+                  <Button 
+                    onClick={() => window.location.href = '/practice-areas/explosions/case-evaluation'}
+                    className="w-full"
+                  >
+                    Start Evaluation
+                  </Button>
+                </CardContent>
+              </Card>
+              
+              <Card className="hover:shadow-lg transition-shadow">
+                <CardHeader>
+                  <div className="mx-auto w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+                    <Users className="w-6 h-6 text-primary" />
+                  </div>
+                  <CardTitle>Speak with an Attorney</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="mb-4">Discuss your case directly with one of our explosion injury specialists.</p>
+                  <Button 
+                    variant="outline"
+                    className="w-full"
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                  >
+                    Call (818) 123-4567
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
-              Explosions & Fires<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light">
-              Blast injury compensation estimates
-            </p>
           </div>
-        </section>
-
-        <section className="py-20">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <CalculatorProgress currentStep={step} totalSteps={3} />
-
-            {step === 1 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">Explosion Details</h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="explosionType" className="text-base font-semibold mb-3 block">
-                        Type of Explosion *
-                      </Label>
-                      <select
-                        id="explosionType"
-                        value={formData.explosionType}
-                        onChange={(e) => updateField('explosionType', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select explosion type</option>
-                        <option value="gas-leak">Gas Leak Explosion</option>
-                        <option value="industrial">Industrial Explosion</option>
-                        <option value="chemical">Chemical Explosion</option>
-                        <option value="electrical">Electrical Explosion</option>
-                        <option value="propane">Propane Tank Explosion</option>
-                        <option value="fireworks">Fireworks Explosion</option>
-                        <option value="building">Building Explosion</option>
-                        <option value="vehicle">Vehicle Explosion</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="blastRadius" className="text-base font-semibold mb-3 block">
-                        Distance from Blast *
-                      </Label>
-                      <select
-                        id="blastRadius"
-                        value={formData.blastRadius}
-                        onChange={(e) => updateField('blastRadius', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select distance</option>
-                        <option value="immediate">Immediate Blast Zone (0-5ft)</option>
-                        <option value="within-10ft">Within 10 Feet</option>
-                        <option value="within-25ft">Within 25 Feet</option>
-                        <option value="within-50ft">Within 50 Feet</option>
-                        <option value="within-100ft">Within 100 Feet</option>
-                        <option value="over-100ft">Over 100 Feet</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="injuryType" className="text-base font-semibold mb-3 block">
-                        Primary Injury Type *
-                      </Label>
-                      <select
-                        id="injuryType"
-                        value={formData.injuryType}
-                        onChange={(e) => updateField('injuryType', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select injury type</option>
-                        <option value="burns-only">Burns Only</option>
-                        <option value="blast-trauma">Blast Trauma</option>
-                        <option value="respiratory">Respiratory Damage</option>
-                        <option value="multiple-systems">Multiple System Injuries</option>
-                        <option value="traumatic-brain">Traumatic Brain Injury</option>
-                        <option value="amputation">Amputation</option>
-                        <option value="spinal">Spinal Cord Injury</option>
-                        <option value="fatal">Fatal (Wrongful Death)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="burnDegree" className="text-base font-semibold mb-3 block">
-                        Burn Severity (if applicable) *
-                      </Label>
-                      <select
-                        id="burnDegree"
-                        value={formData.burnDegree}
-                        onChange={(e) => updateField('burnDegree', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select burn severity</option>
-                        <option value="none">No Burns</option>
-                        <option value="first-degree">First-Degree Burns</option>
-                        <option value="second-degree">Second-Degree Burns</option>
-                        <option value="third-degree">Third-Degree Burns</option>
-                        <option value="fourth-degree">Fourth-Degree Burns</option>
-                        <option value="facial-burns">Facial Burns</option>
-                        <option value="body-over-30">Burns Over 30% Body</option>
-                        <option value="inhalation">Inhalation Burns</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                />
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">Injury Details & Financial Impact</h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="respiratoryDamage" className="text-base font-semibold mb-3 block">
-                        Respiratory Damage *
-                      </Label>
-                      <select
-                        id="respiratoryDamage"
-                        value={formData.respiratoryDamage}
-                        onChange={(e) => updateField('respiratoryDamage', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select respiratory damage</option>
-                        <option value="none">None</option>
-                        <option value="smoke-inhalation">Smoke Inhalation</option>
-                        <option value="chemical-exposure">Chemical Exposure</option>
-                        <option value="permanent-lung">Permanent Lung Damage</option>
-                        <option value="ventilator-dependent">Ventilator Dependent</option>
-                        <option value="lung-transplant">Requires Lung Transplant</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="hearingLoss" className="text-base font-semibold mb-3 block">
-                        Hearing Loss *
-                      </Label>
-                      <select
-                        id="hearingLoss"
-                        value={formData.hearingLoss}
-                        onChange={(e) => updateField('hearingLoss', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select hearing loss</option>
-                        <option value="none">No Hearing Loss</option>
-                        <option value="tinnitus">Tinnitus Only</option>
-                        <option value="partial-loss">Partial Hearing Loss (One Ear)</option>
-                        <option value="severe-loss">Severe Hearing Loss</option>
-                        <option value="total-deafness">Total Deafness (One Ear)</option>
-                        <option value="bilateral">Bilateral Deafness</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="blastInjuries" className="text-base font-semibold mb-3 block">
-                        Additional Blast Injuries *
-                      </Label>
-                      <select
-                        id="blastInjuries"
-                        value={formData.blastInjuries}
-                        onChange={(e) => updateField('blastInjuries', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select blast injuries</option>
-                        <option value="none">None</option>
-                        <option value="tympanic-rupture">Tympanic Membrane Rupture</option>
-                        <option value="internal-organs">Internal Organ Damage</option>
-                        <option value="broken-bones">Broken Bones/Fractures</option>
-                        <option value="shrapnel-wounds">Shrapnel Wounds</option>
-                        <option value="traumatic-amputation">Traumatic Amputation</option>
-                        <option value="multiple-injuries">Multiple Blast Injuries</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="medicalCosts" className="text-base font-semibold mb-3 block">
-                        Medical Costs to Date *
-                      </Label>
-                      <select
-                        id="medicalCosts"
-                        value={formData.medicalCosts}
-                        onChange={(e) => updateField('medicalCosts', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select medical costs</option>
-                        <option value="10000">Under $10,000</option>
-                        <option value="25000">$10,000 - $25,000</option>
-                        <option value="50000">$25,000 - $50,000</option>
-                        <option value="100000">$50,000 - $100,000</option>
-                        <option value="250000">$100,000 - $250,000</option>
-                        <option value="500000">$250,000 - $500,000</option>
-                        <option value="1000000">Over $500,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="futureCareCosts" className="text-base font-semibold mb-3 block">
-                        Estimated Future Care Costs
-                      </Label>
-                      <select
-                        id="futureCareCosts"
-                        value={formData.futureCareCosts}
-                        onChange={(e) => updateField('futureCareCosts', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="0">None/Unknown</option>
-                        <option value="50000">$50,000 - $100,000</option>
-                        <option value="150000">$100,000 - $250,000</option>
-                        <option value="400000">$250,000 - $500,000</option>
-                        <option value="750000">$500,000 - $1,000,000</option>
-                        <option value="1500000">Over $1,000,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="lostWages" className="text-base font-semibold mb-3 block">
-                        Lost Wages
-                      </Label>
-                      <select
-                        id="lostWages"
-                        value={formData.lostWages}
-                        onChange={(e) => updateField('lostWages', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="0">None</option>
-                        <option value="10000">Under $10,000</option>
-                        <option value="25000">$10,000 - $25,000</option>
-                        <option value="50000">$25,000 - $50,000</option>
-                        <option value="100000">$50,000 - $100,000</option>
-                        <option value="250000">Over $100,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="age" className="text-base font-semibold mb-3 block">
-                        Your Age *
-                      </Label>
-                      <select
-                        id="age"
-                        value={formData.age}
-                        onChange={(e) => updateField('age', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select age range</option>
-                        <option value="under-25">Under 25</option>
-                        <option value="25-35">25-35</option>
-                        <option value="36-45">36-45</option>
-                        <option value="46-55">46-55</option>
-                        <option value="56-65">56-65</option>
-                        <option value="over-65">Over 65</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="permanentDisability" className="text-base font-semibold mb-3 block">
-                        Permanent Disability Rating *
-                      </Label>
-                      <select
-                        id="permanentDisability"
-                        value={formData.permanentDisability}
-                        onChange={(e) => updateField('permanentDisability', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select disability rating</option>
-                        <option value="none">No Permanent Disability</option>
-                        <option value="1-25">1-25% Disability</option>
-                        <option value="26-50">26-50% Disability</option>
-                        <option value="51-75">51-75% Disability</option>
-                        <option value="76-99">76-99% Disability</option>
-                        <option value="100">100% Disabled</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="thirdPartyLiability" className="text-base font-semibold mb-3 block">
-                        Third-Party Liability Identified?
-                      </Label>
-                      <select
-                        id="thirdPartyLiability"
-                        value={formData.thirdPartyLiability}
-                        onChange={(e) => updateField('thirdPartyLiability', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select</option>
-                        <option value="yes">Yes (Manufacturer, Contractor, etc.)</option>
-                        <option value="no">No/Unknown</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="oshaViolation" className="text-base font-semibold mb-3 block">
-                        OSHA Safety Violations
-                      </Label>
-                      <select
-                        id="oshaViolation"
-                        value={formData.oshaViolation}
-                        onChange={(e) => updateField('oshaViolation', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select violation type</option>
-                        <option value="none">No Violations</option>
-                        <option value="other">Other/Minor Violation</option>
-                        <option value="serious">Serious Violation</option>
-                        <option value="willful">Willful Violation</option>
-                        <option value="repeat">Repeat Violation</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                />
-              </div>
-            )}
-
-            {step === 3 && results && (
-              <div className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl font-bold">Your Estimated Compensation</h2>
-                  <p className="text-muted-foreground">Based on the information provided</p>
-                </div>
-
-                <div className="bg-primary/5 rounded-2xl p-8 text-center border-2 border-primary/20">
-                  <div className="text-5xl font-bold text-primary mb-2">
-                    ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                  </div>
-                  <p className="text-muted-foreground">Estimated Compensation Range</p>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">Compensation Breakdown</h3>
-                  <div className="grid gap-4">
-                    <div className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                      <span>Medical Costs</span>
-                      <span className="font-semibold">${results.medicalCosts.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                      <span>Future Care Costs</span>
-                      <span className="font-semibold">${results.futureCareCosts.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                      <span>Lost Wages</span>
-                      <span className="font-semibold">${results.lostWages.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between p-4 bg-primary/10 rounded-lg border border-primary/20">
-                      <span className="font-semibold">Pain & Suffering</span>
-                      <span className="font-semibold">
-                        ${(results.min - results.medicalCosts - results.futureCareCosts - results.lostWages).toLocaleString()} - ${(results.max - results.medicalCosts - results.futureCareCosts - results.lostWages).toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-amber-900 mb-2">Important Disclaimer</h3>
-                  <p className="text-sm text-amber-800">
-                    This estimate is based on general factors and should not be considered a guarantee of compensation. 
-                    Actual settlement values depend on specific case details, evidence quality, liable parties, insurance 
-                    coverage, jurisdiction, and negotiation. Explosion and fire cases often involve complex liability 
-                    issues, OSHA violations, and third-party claims. Consult with an experienced attorney for a detailed 
-                    case evaluation.
-                  </p>
-                </div>
-
-                <div className="flex gap-4">
-                  <Button size="lg" className="flex-1" asChild>
-                    <Link to="/free-consultation">Get Free Case Review</Link>
-                  </Button>
-                  <Button size="lg" variant="outline" className="flex-1" onClick={resetForm}>
-                    Start New Calculation
-                  </Button>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

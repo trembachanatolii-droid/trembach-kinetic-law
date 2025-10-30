@@ -1,570 +1,416 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import {
-  CalculatorLayout,
-  CalculatorProgress,
-  FormNavigation,
-  CalculatorSEO
-} from '@/components/calculator';
+import React, { useState } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Calculator, DollarSign, FileText, AlertTriangle, PawPrint, Info } from 'lucide-react';
+import heroImage from '@/assets/dog-bite-compensation-calculator-hero.jpg';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import DogBiteQuestionnaire from '@/components/DogBiteQuestionnaire';
 
-interface DogBiteFormData extends CalculatorFormData {
-  injurySeverity: string;
-  attackLocation: string;
-  medicalCosts: string;
-  futureMedical: string;
-  scarringLevel: string;
-  scarringLocation: string;
-  infection: string;
-  age: string;
-  emotionalImpact: string;
-  priorHistory: string;
-  lostWages: string;
-}
+const DogBiteCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    medicalExpenses: '',
+    lostWages: '',
+    futureWages: '',
+    painSuffering: '',
+    injurySeverity: '',
+    scarringVisible: '',
+    therapyCounseling: '',
+    ageGroup: '',
+    occupation: '',
+    permanentDisability: '',
+    emotionalDistress: ''
+  });
 
-const initialFormData: DogBiteFormData = {
-  injurySeverity: '',
-  attackLocation: '',
-  medicalCosts: '',
-  futureMedical: '',
-  scarringLevel: '',
-  scarringLocation: '',
-  infection: '',
-  age: '',
-  emotionalImpact: '',
-  priorHistory: '',
-  lostWages: ''
-};
+  const [estimatedRange, setEstimatedRange] = useState<{min: number, max: number} | null>(null);
+  const [showResults, setShowResults] = useState(false);
 
-const injurySeverityOptions = [
-  { value: 'puncture', label: 'Puncture Wounds', description: 'Deep bite marks' },
-  { value: 'lacerations', label: 'Lacerations', description: 'Torn skin requiring stitches' },
-  { value: 'severe-trauma', label: 'Severe Trauma', description: 'Bone/muscle/nerve damage' },
-  { value: 'disfigurement', label: 'Disfigurement', description: 'Permanent facial/body damage' },
-  { value: 'amputation', label: 'Amputation', description: 'Loss of finger/limb' },
-  { value: 'death', label: 'Fatal Attack', description: 'Wrongful death case' }
-];
-
-const attackLocationOptions = [
-  { value: 'face-head', label: 'Face/Head', description: 'Most serious location' },
-  { value: 'neck-throat', label: 'Neck/Throat', description: 'Life-threatening area' },
-  { value: 'hands-arms', label: 'Hands/Arms', description: 'Common attack site' },
-  { value: 'legs-feet', label: 'Legs/Feet', description: 'Lower extremities' },
-  { value: 'torso', label: 'Torso/Back', description: 'Body area' },
-  { value: 'multiple', label: 'Multiple Areas', description: 'Several body parts' }
-];
-
-const scarringLevelOptions = [
-  { value: 'none', label: 'No Visible Scarring', description: 'Full healing expected' },
-  { value: 'minor', label: 'Minor Scarring', description: 'Small scars, concealed' },
-  { value: 'moderate', label: 'Moderate Scarring', description: 'Noticeable scars' },
-  { value: 'severe', label: 'Severe Scarring', description: 'Extensive disfigurement' }
-];
-
-const scarringLocationOptions = [
-  { value: 'concealed', label: 'Concealed Areas', description: 'Usually covered by clothing' },
-  { value: 'visible', label: 'Visible Areas', description: 'Exposed in daily life' },
-  { value: 'facial', label: 'Facial Scarring', description: 'Face/neck area' }
-];
-
-const infectionOptions = [
-  { value: 'none', label: 'No Infection', description: 'Clean wound healing' },
-  { value: 'treated', label: 'Treated Infection', description: 'Required antibiotics' },
-  { value: 'serious', label: 'Serious Infection', description: 'Hospitalization needed' },
-  { value: 'sepsis', label: 'Sepsis/Life-Threatening', description: 'Critical infection' }
-];
-
-const ageOptions = [
-  { value: 'child-under-12', label: 'Child (Under 12)', description: 'Enhanced emotional damages' },
-  { value: 'teen-12-17', label: 'Teen (12-17)', description: 'Developmental impact' },
-  { value: 'adult-18-60', label: 'Adult (18-60)', description: 'Working age' },
-  { value: 'senior-60-plus', label: 'Senior (60+)', description: 'Longer healing time' }
-];
-
-const emotionalImpactOptions = [
-  { value: 'minimal', label: 'Minimal Impact', description: 'No lasting trauma' },
-  { value: 'moderate', label: 'Moderate Fear', description: 'Anxiety around dogs' },
-  { value: 'severe', label: 'Severe PTSD', description: 'Therapy required' },
-  { value: 'life-altering', label: 'Life-Altering Trauma', description: 'Ongoing psychological care' }
-];
-
-const priorHistoryOptions = [
-  { value: 'no-history', label: 'No Prior History', description: 'First incident' },
-  { value: 'aggressive-behavior', label: 'Known Aggressive', description: 'Dog had prior incidents' },
-  { value: 'prior-bites', label: 'Prior Bites', description: 'Dog bit others before' },
-  { value: 'dangerous-breed', label: 'Dangerous Breed List', description: 'Restricted breed' }
-];
-
-function calculateCompensation(data: DogBiteFormData): CalculatorResults {
-  // Base amounts for dog bites
-  let baseMin = 15000;
-  let baseMax = 75000;
-
-  // Injury severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'puncture': 1.5,
-    'lacerations': 2.0,
-    'severe-trauma': 3.5,
-    'disfigurement': 4.5,
-    'amputation': 6.0,
-    'death': 8.0
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const severityMult = severityMultipliers[data.injurySeverity] || 1;
-  baseMin *= severityMult;
-  baseMax *= severityMult;
+  const calculateCompensation = () => {
+    let baseCompensation = 0;
+    let multiplier = 1;
 
-  // Attack location impact
-  const locationMultipliers: Record<string, number> = {
-    'face-head': 3.0,
-    'neck-throat': 2.8,
-    'hands-arms': 1.5,
-    'legs-feet': 1.3,
-    'torso': 1.4,
-    'multiple': 2.2
+    // Medical expenses (actual costs)
+    const medical = parseFloat(formData.medicalExpenses) || 0;
+    const wages = parseFloat(formData.lostWages) || 0;
+    const futureWages = parseFloat(formData.futureWages) || 0;
+
+    baseCompensation = medical + wages + futureWages;
+
+    // Pain and suffering multiplier based on injury severity
+    switch (formData.injurySeverity) {
+      case 'minor':
+        multiplier = 1.5;
+        break;
+      case 'moderate':
+        multiplier = 3;
+        break;
+      case 'severe':
+        multiplier = 5;
+        break;
+      case 'catastrophic':
+        multiplier = 7;
+        break;
+      default:
+        multiplier = 2;
+    }
+
+    // Additional factors
+    if (formData.scarringVisible === 'yes') {
+      multiplier += 1;
+    }
+    if (formData.permanentDisability === 'yes') {
+      multiplier += 2;
+    }
+    if (formData.emotionalDistress === 'severe') {
+      multiplier += 1;
+    }
+
+    // Age factor (younger victims often receive higher awards)
+    if (formData.ageGroup === 'child') {
+      multiplier += 1.5;
+    } else if (formData.ageGroup === 'young-adult') {
+      multiplier += 0.5;
+    }
+
+    const painSufferingAmount = baseCompensation * multiplier;
+    const totalMin = baseCompensation + painSufferingAmount * 0.7;
+    const totalMax = baseCompensation + painSufferingAmount * 1.5;
+
+    setEstimatedRange({
+      min: Math.round(totalMin),
+      max: Math.round(totalMax)
+    });
+    setShowResults(true);
   };
 
-  const locationMult = locationMultipliers[data.attackLocation] || 1;
-  baseMin *= locationMult;
-  baseMax *= locationMult;
-
-  // Add economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureMedical = parseInt(data.futureMedical) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-
-  baseMin += medicalCosts * 2.5 + futureMedical + lostWages;
-  baseMax += medicalCosts * 5 + futureMedical * 2 + lostWages * 2;
-
-  // Scarring level adjustments
-  const scarringMultipliers: Record<string, number> = {
-    'none': 1,
-    'minor': 1.3,
-    'moderate': 1.8,
-    'severe': 2.5
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateCompensation();
   };
-
-  const scarringMult = scarringMultipliers[data.scarringLevel] || 1;
-  baseMin *= scarringMult;
-  baseMax *= scarringMult;
-
-  // Scarring location impact (facial scars significantly increase damages)
-  const scarLocationMultipliers: Record<string, number> = {
-    'concealed': 1.0,
-    'visible': 1.4,
-    'facial': 2.0
-  };
-
-  const scarLocationMult = scarLocationMultipliers[data.scarringLocation] || 1;
-  baseMin *= scarLocationMult;
-  baseMax *= scarLocationMult;
-
-  // Infection complications
-  const infectionMultipliers: Record<string, number> = {
-    'none': 1,
-    'treated': 1.2,
-    'serious': 1.5,
-    'sepsis': 2.0
-  };
-
-  const infectionMult = infectionMultipliers[data.infection] || 1;
-  baseMin *= infectionMult;
-  baseMax *= infectionMult;
-
-  // Age-based adjustments
-  const ageMultipliers: Record<string, number> = {
-    'child-under-12': 1.8, // Children receive higher damages
-    'teen-12-17': 1.5,
-    'adult-18-60': 1.0,
-    'senior-60-plus': 1.2
-  };
-
-  const ageMult = ageMultipliers[data.age] || 1;
-  baseMin *= ageMult;
-  baseMax *= ageMult;
-
-  // Emotional impact
-  const emotionalMultipliers: Record<string, number> = {
-    'minimal': 1,
-    'moderate': 1.3,
-    'severe': 1.7,
-    'life-altering': 2.2
-  };
-
-  const emotionalMult = emotionalMultipliers[data.emotionalImpact] || 1;
-  baseMin *= emotionalMult;
-  baseMax *= emotionalMult;
-
-  // Prior history (enhances punitive damages potential)
-  const historyMultipliers: Record<string, number> = {
-    'no-history': 1.0,
-    'aggressive-behavior': 1.3,
-    'prior-bites': 1.6,
-    'dangerous-breed': 1.4
-  };
-
-  const historyMult = historyMultipliers[data.priorHistory] || 1;
-  baseMin *= historyMult;
-  baseMax *= historyMult;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax),
-    medicalExpenses: medicalCosts,
-    futureCare: futureMedical,
-    lostIncome: lostWages,
-    totalEconomic: medicalCosts + futureMedical + lostWages
-  };
-}
-
-function validateForm(data: DogBiteFormData, step: number): boolean {
-  if (step === 1) {
-    return Boolean(
-      data.injurySeverity &&
-      data.attackLocation &&
-      data.scarringLevel
-    );
-  }
-  if (step === 2) {
-    return Boolean(
-      data.medicalCosts &&
-      data.scarringLocation &&
-      data.infection &&
-      data.age &&
-      data.emotionalImpact &&
-      data.priorHistory
-    );
-  }
-  return false;
-}
-
-export default function DogBiteCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<DogBiteFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateForm
-  );
 
   return (
     <>
-      <CalculatorSEO
-        title="Dog Bite Compensation Calculator | Free Animal Attack Settlement Estimate"
-        description="Calculate potential compensation for dog bite and animal attack injuries. Free estimates including scarring, infection, and emotional trauma damages under California strict liability law."
-        canonical="/dog-bite-calculator"
-        injuryType="dog bite"
+      <SEO 
+        title="Dog Bite Compensation Calculator - Estimate Your Case Value | California"
+        description="Calculate potential compensation for your dog bite injury. Free tool to estimate medical costs, lost wages, and pain & suffering damages in California."
       />
-
-      <CalculatorLayout
-        title="Dog Bite Calculator"
-        subtitle="Estimate compensation for animal attack injuries"
-        metaTitle="Dog Bite Compensation Calculator"
-        metaDescription="Free dog bite settlement calculator. Instant estimates for animal attacks."
-        stats={[
-          { value: '$50K+', label: 'Average Settlement' },
-          { value: '4.5M', label: 'Dog Bites/Year' },
-          { value: 'Strict', label: 'Liability Law (CA)' }
-        ]}
-      >
-        <CalculatorProgress currentStep={step} totalSteps={3} />
-
-        {/* Step 1: Injury Details */}
-        {step === 1 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Injury Details</h2>
-              <p className="text-muted-foreground">Tell us about the attack and injuries</p>
+      
+      <div className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+        <GoBack className="top-20 z-[60]" />
+        
+        {/* Hero Section */}
+        <div 
+          className="relative h-[50vh] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${heroImage})` }}
+        >
+          <div className="text-center text-white max-w-4xl mx-auto px-6">
+            <div className="flex items-center justify-center mb-4">
+              <Calculator className="w-16 h-16 text-primary mr-4" />
+              <h1 className="text-4xl md:text-6xl font-bold">
+                Dog Bite Compensation Calculator
+              </h1>
             </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
-                <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select injury severity" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {injurySeverityOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Attack Location on Body</Label>
-                <Select value={formData.attackLocation} onValueChange={(value) => updateField('attackLocation', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select attack location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {attackLocationOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Scarring Level</Label>
-                <Select value={formData.scarringLevel} onValueChange={(value) => updateField('scarringLevel', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select scarring level" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {scarringLevelOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-            />
+            <p className="text-xl md:text-2xl text-white/90 max-w-3xl mx-auto">
+              Get an estimate of potential compensation for your dog bite injury case
+            </p>
           </div>
-        )}
+        </div>
 
-        {/* Step 2: Financial & Additional Details */}
-        {step === 2 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Financial Impact & Case Details</h2>
-              <p className="text-muted-foreground">Medical costs and additional factors</p>
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid lg:grid-cols-3 gap-12">
+            
+            {/* Information Panel */}
+            <div className="lg:col-span-1 space-y-8">
+              <Card className="border border-primary/20 shadow-xl bg-card/50 backdrop-blur-sm">
+                <CardHeader className="text-center bg-primary text-primary-foreground rounded-t-lg">
+                  <CardTitle className="text-2xl font-bold">Important Notice</CardTitle>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex items-start space-x-3">
+                    <Info className="w-6 h-6 text-primary mt-1 flex-shrink-0" />
+                    <div>
+                      <p className="text-sm">
+                        This calculator provides estimates only. Actual compensation depends on many factors 
+                        including the specific circumstances of your case, available insurance coverage, 
+                        and California law.
+                      </p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="border border-accent/20 shadow-lg bg-accent/5">
+                <CardContent className="p-6">
+                  <h3 className="font-semibold text-lg mb-3">Compensation May Include:</h3>
+                  <ul className="space-y-2 text-sm">
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Medical expenses (past and future)</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Lost wages and reduced earning capacity</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Pain and suffering</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Emotional distress</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Scarring and disfigurement</span>
+                    </li>
+                    <li className="flex items-start space-x-2">
+                      <DollarSign className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
+                      <span>Property damage</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              {showResults && estimatedRange && (
+                <Card className="border border-primary/20 shadow-xl bg-primary/5">
+                  <CardHeader className="text-center">
+                    <CardTitle className="text-2xl font-bold text-primary">Estimated Range</CardTitle>
+                  </CardHeader>
+                  <CardContent className="p-6 text-center">
+                    <div className="text-3xl font-bold text-primary mb-2">
+                      ${estimatedRange.min.toLocaleString()} - ${estimatedRange.max.toLocaleString()}
+                    </div>
+                    <p className="text-sm text-muted-foreground mb-4">
+                      This is an estimate based on the information provided
+                    </p>
+                    <Button 
+                      onClick={() => window.location.href = '/dog-bite-case-evaluation'}
+                      className="w-full"
+                    >
+                      Get Free Case Review
+                    </Button>
+                  </CardContent>
+                </Card>
+              )}
             </div>
 
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="medicalCosts" className="text-base font-medium">
-                  Medical Expenses to Date ($)
-                </Label>
-                <Input
-                  id="medicalCosts"
-                  type="number"
-                  placeholder="8000"
-                  value={formData.medicalCosts}
-                  onChange={(e) => updateField('medicalCosts', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="futureMedical" className="text-base font-medium">
-                  Future Medical Costs - Surgeries/Treatment ($)
-                </Label>
-                <Input
-                  id="futureMedical"
-                  type="number"
-                  placeholder="15000"
-                  value={formData.futureMedical}
-                  onChange={(e) => updateField('futureMedical', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="lostWages" className="text-base font-medium">
-                  Lost Wages & Income ($)
-                </Label>
-                <Input
-                  id="lostWages"
-                  type="number"
-                  placeholder="5000"
-                  value={formData.lostWages}
-                  onChange={(e) => updateField('lostWages', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Scar Location</Label>
-                <Select value={formData.scarringLocation} onValueChange={(value) => updateField('scarringLocation', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select scar location" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {scarringLocationOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Infection Complications</Label>
-                <Select value={formData.infection} onValueChange={(value) => updateField('infection', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select infection status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {infectionOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Victim's Age</Label>
-                <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select age range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {ageOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Emotional/Psychological Impact</Label>
-                <Select value={formData.emotionalImpact} onValueChange={(value) => updateField('emotionalImpact', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select emotional impact" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {emotionalImpactOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Dog's Prior History</Label>
-                <Select value={formData.priorHistory} onValueChange={(value) => updateField('priorHistory', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select dog's history" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {priorHistoryOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-              nextButtonText="Calculate Compensation"
-            />
-          </div>
-        )}
-
-        {/* Step 3: Results */}
-        {step === 3 && results && (
-          <div className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation Range</h2>
-              <p className="text-slate-600">Based on California strict liability law</p>
-            </div>
-
-            <div className="bg-slate-50 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-black mb-2">
-                ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-              </div>
-              <p className="text-slate-600">Potential Settlement Range</p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Economic Damages Breakdown</h4>
-                <div className="text-sm text-slate-600 space-y-1">
-                  <p>Medical Expenses: ${results.medicalExpenses?.toLocaleString()}</p>
-                  <p>Future Medical Care: ${results.futureCare?.toLocaleString()}</p>
-                  <p>Lost Wages: ${results.lostIncome?.toLocaleString()}</p>
-                  <p className="font-semibold pt-2 border-t border-slate-200">
-                    Total Economic: ${results.totalEconomic?.toLocaleString()}
+            {/* Calculator Form */}
+            <div className="lg:col-span-2">
+              <Card className="border border-primary/20 shadow-2xl bg-card/50 backdrop-blur-sm">
+                <CardHeader className="bg-primary text-primary-foreground rounded-t-lg">
+                  <CardTitle className="text-3xl font-bold text-center">
+                    Compensation Calculator
+                  </CardTitle>
+                  <p className="text-center text-primary-foreground/90 text-lg">
+                    Enter your case details to estimate potential compensation
                   </p>
-                </div>
-              </div>
+                </CardHeader>
+                
+                <CardContent className="p-8">
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    
+                    {/* Economic Damages */}
+                    <div className="space-y-6">
+                      <h3 className="text-2xl font-bold text-primary border-b border-primary/20 pb-2">
+                        Economic Damages
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <Label htmlFor="medicalExpenses" className="text-base font-semibold">
+                            Total Medical Expenses
+                          </Label>
+                          <Input
+                            id="medicalExpenses"
+                            type="number"
+                            value={formData.medicalExpenses}
+                            onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                            placeholder="0"
+                            className="mt-2 h-12 text-base"
+                            min="0"
+                            step="100"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Include emergency room, surgery, therapy, medications
+                          </p>
+                        </div>
+                        
+                        <div>
+                          <Label htmlFor="lostWages" className="text-base font-semibold">
+                            Lost Wages (to date)
+                          </Label>
+                          <Input
+                            id="lostWages"
+                            type="number"
+                            value={formData.lostWages}
+                            onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                            placeholder="0"
+                            className="mt-2 h-12 text-base"
+                            min="0"
+                            step="100"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Income lost due to time off work
+                          </p>
+                        </div>
+                        
+                        <div className="md:col-span-2">
+                          <Label htmlFor="futureWages" className="text-base font-semibold">
+                            Future Lost Wages/Earning Capacity
+                          </Label>
+                          <Input
+                            id="futureWages"
+                            type="number"
+                            value={formData.futureWages}
+                            onChange={(e) => handleInputChange('futureWages', e.target.value)}
+                            placeholder="0"
+                            className="mt-2 h-12 text-base"
+                            min="0"
+                            step="100"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Expected future income loss due to permanent disability
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">California Strict Liability</h4>
-                <p className="text-sm text-slate-600">
-                  Dog owners are strictly liable for bite injuries in California, regardless of the dog's prior behavior. No need to prove negligence.
-                </p>
-              </div>
+                    {/* Injury Severity */}
+                    <div className="space-y-6">
+                      <h3 className="text-2xl font-bold text-primary border-b border-primary/20 pb-2">
+                        Injury Details
+                      </h3>
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div>
+                          <Label className="text-base font-semibold">Injury Severity</Label>
+                          <Select onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select severity" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="minor">Minor (first aid, no scarring)</SelectItem>
+                              <SelectItem value="moderate">Moderate (stitches, minor scarring)</SelectItem>
+                              <SelectItem value="severe">Severe (surgery, significant scarring)</SelectItem>
+                              <SelectItem value="catastrophic">Catastrophic (permanent disability)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <Label className="text-base font-semibold">Age Group</Label>
+                          <Select onValueChange={(value) => handleInputChange('ageGroup', value)}>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select age group" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="child">Child (under 18)</SelectItem>
+                              <SelectItem value="young-adult">Young Adult (18-30)</SelectItem>
+                              <SelectItem value="adult">Adult (31-55)</SelectItem>
+                              <SelectItem value="senior">Senior (over 55)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <Label className="text-base font-semibold">Visible Scarring</Label>
+                          <Select
+                            value={formData.scarringVisible}
+                            onValueChange={(value) => handleInputChange('scarringVisible', value)}
+                          >
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes, visible scarring</SelectItem>
+                              <SelectItem value="no">No visible scarring</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <Label className="text-base font-semibold">Permanent Disability</Label>
+                          <Select
+                            value={formData.permanentDisability}
+                            onValueChange={(value) => handleInputChange('permanentDisability', value)}
+                          >
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select an option" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="yes">Yes</SelectItem>
+                              <SelectItem value="no">No</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <Label className="text-base font-semibold">Emotional Distress Level</Label>
+                          <Select onValueChange={(value) => handleInputChange('emotionalDistress', value)}>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select level" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="minimal">Minimal</SelectItem>
+                              <SelectItem value="moderate">Moderate</SelectItem>
+                              <SelectItem value="severe">Severe (PTSD, therapy needed)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        
+                        <div>
+                          <Label className="text-base font-semibold">Occupation</Label>
+                          <Select onValueChange={(value) => handleInputChange('occupation', value)}>
+                            <SelectTrigger className="mt-2 h-12 text-base">
+                              <SelectValue placeholder="Select occupation" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="student">Student</SelectItem>
+                              <SelectItem value="professional">Professional/Office Worker</SelectItem>
+                              <SelectItem value="manual">Manual Labor</SelectItem>
+                              <SelectItem value="service">Service Industry</SelectItem>
+                              <SelectItem value="retired">Retired</SelectItem>
+                              <SelectItem value="unemployed">Unemployed</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Damages Include</h4>
-                <p className="text-sm text-slate-600">
-                  Medical bills, future treatment, scarring/disfigurement, lost wages, pain & suffering, emotional distress, and potential punitive damages if prior incidents exist.
-                </p>
-              </div>
-            </div>
+                    {/* Calculate Button */}
+                    <div className="text-center pt-8">
+                      <Button 
+                        type="submit" 
+                        size="lg" 
+                        className="px-12 py-4 text-lg font-semibold bg-primary hover:bg-primary/90 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300"
+                      >
+                        <Calculator className="w-6 h-6 mr-2" />
+                        Calculate Compensation Range
+                      </Button>
+                      <p className="text-sm text-muted-foreground mt-4">
+                        This calculator provides estimates only. Consult with an attorney for accurate case valuation.
+                      </p>
+                    </div>
+                  </form>
+                </CardContent>
+              </Card>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-              <p className="text-sm text-amber-900">
-                <strong>Important:</strong> California's strict liability law makes dog owners responsible for bite injuries. Facial scarring, child victims, and prior aggressive history significantly increase compensation. This estimate is based on typical settlements - actual amounts depend on evidence, medical documentation, and case specifics.
-              </p>
-            </div>
-
-            <div className="calculator-cta-section">
-              <h3 className="text-2xl font-bold mb-4">Get maximum compensation for your injuries</h3>
-              <p className="mb-6 max-w-2xl mx-auto">
-                California's strict liability law makes dog owners responsible for bite injuries. 
-                We'll help you get full compensation for medical bills, scarring, and emotional trauma. No fee unless we win.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/free-consultation">
-                  <Button size="lg" className="text-lg px-8">
-                    Get My Free Case Evaluation
-                  </Button>
-                </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={resetForm}
-                  className="text-lg px-8 outline"
-                >
-                  Calculate Another Case
-                </Button>
-              </div>
+              {/* Comprehensive Questionnaire (50+ Questions) */}
+              <DogBiteQuestionnaire />
             </div>
           </div>
-        )}
-      </CalculatorLayout>
+        </div>
+      </div>
     </>
   );
-}
+};
+
+export default DogBiteCompensationCalculator;

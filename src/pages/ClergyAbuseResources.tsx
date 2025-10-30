@@ -6,7 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-import {
+import GoBack from '@/components/GoBack';
+import { 
   Phone, 
   ExternalLink, 
   Heart, 
@@ -152,6 +153,7 @@ const ClergyAbuseResources: React.FC = () => {
       />
       
       <Navigation />
+      <GoBack fallbackPath="/practice-areas/clergy-abuse" />
       
       {/* Hero Section */}
       <section 

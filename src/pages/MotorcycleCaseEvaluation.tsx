@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import heroImage from '@/assets/motorcycle-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 

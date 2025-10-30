@@ -26,7 +26,7 @@ import {
   Scale
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/electrocution-medical-facility.jpg';
 import SEO from '@/components/SEO';
 
@@ -230,7 +230,7 @@ const ElectrocutionMedicalGuidance: React.FC = () => {
         canonical="/practice-areas/electrocution/medical-guidance"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/electrocution" />
       
       {/* Hero Section */}
       <section 

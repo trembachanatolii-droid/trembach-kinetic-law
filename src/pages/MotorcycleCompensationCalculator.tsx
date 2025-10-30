@@ -1,603 +1,608 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import {
-  CalculatorLayout,
-  CalculatorProgress,
-  FormNavigation,
-  CalculatorSEO
-} from '@/components/calculator';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { 
+  ArrowLeft, 
+  Phone, 
+  Calculator,
+  DollarSign,
+  TrendingUp,
+  AlertCircle,
+  Info,
+  Star,
+  Shield,
+  Award,
+  Clock,
+  FileText
+} from 'lucide-react';
+import heroImage from '@/assets/motorcycle-compensation-calculator-hero.jpg';
+import SEO from '@/components/SEO';
 
-interface MotorcycleFormData extends CalculatorFormData {
-  injuryType: string;
-  injurySeverity: string;
-  crashType: string;
-  medicalCosts: string;
-  futureMedical: string;
-  lostWages: string;
-  bikeValue: string;
-  helmetWorn: string;
-  speedEstimate: string;
-  roadConditions: string;
-  faultPercentage: string;
-  permanentImpact: string;
-}
+const MotorcycleCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    medicalBills: '',
+    lostWages: '',
+    futureWages: '',
+    propertyDamage: '',
+    injurySeverity: '',
+    painLevel: '',
+    ageRange: '',
+    faultPercentage: '',
+    insuranceLimits: ''
+  });
 
-const initialFormData: MotorcycleFormData = {
-  injuryType: '',
-  injurySeverity: '',
-  crashType: '',
-  medicalCosts: '',
-  futureMedical: '',
-  lostWages: '',
-  bikeValue: '',
-  helmetWorn: '',
-  speedEstimate: '',
-  roadConditions: '',
-  faultPercentage: '',
-  permanentImpact: ''
-};
+  const [results, setResults] = useState<{
+    economicDamages: number;
+    nonEconomicDamages: number;
+    totalEstimate: number;
+    lowRange: number;
+    highRange: number;
+  } | null>(null);
 
-const injuryTypeOptions = [
-  { value: 'road-rash', label: 'Road Rash/Abrasions', description: 'Skin injuries from sliding' },
-  { value: 'fractures', label: 'Broken Bones/Fractures', description: 'Bone injuries' },
-  { value: 'head-injury', label: 'Head/Brain Injury', description: 'TBI or concussion' },
-  { value: 'spinal-injury', label: 'Spinal Cord Injury', description: 'Back/paralysis' },
-  { value: 'internal-injuries', label: 'Internal Injuries', description: 'Organ damage' },
-  { value: 'amputation', label: 'Amputation', description: 'Loss of limb' },
-  { value: 'multiple', label: 'Multiple Serious Injuries', description: 'Several injury types' },
-  { value: 'death', label: 'Wrongful Death', description: 'Fatal motorcycle crash' }
-];
-
-const injurySeverityOptions = [
-  { value: 'minor', label: 'Minor', description: 'Quick recovery expected' },
-  { value: 'moderate', label: 'Moderate', description: 'Weeks to months recovery' },
-  { value: 'severe', label: 'Severe', description: 'Major medical intervention' },
-  { value: 'catastrophic', label: 'Catastrophic', description: 'Life-changing injuries' }
-];
-
-const crashTypeOptions = [
-  { value: 'left-turn', label: 'Left-Turn Collision', description: 'Car turned into path' },
-  { value: 'rear-end', label: 'Rear-Ended', description: 'Hit from behind' },
-  { value: 'head-on', label: 'Head-On Collision', description: 'Frontal impact' },
-  { value: 'sideswipe', label: 'Sideswipe', description: 'Clipped by vehicle' },
-  { value: 'lane-splitting', label: 'Lane Splitting Accident', description: 'Crash while filtering' },
-  { value: 'single-vehicle', label: 'Single Vehicle Crash', description: 'No other vehicle involved' },
-  { value: 'dooring', label: 'Dooring', description: 'Hit by opened car door' }
-];
-
-const helmetOptions = [
-  { value: 'full-face', label: 'Full-Face Helmet', description: 'Maximum protection' },
-  { value: 'modular', label: 'Modular/3/4 Helmet', description: 'Good protection' },
-  { value: 'half-helmet', label: 'Half Helmet', description: 'Minimal protection' },
-  { value: 'none', label: 'No Helmet', description: 'May impact compensation' }
-];
-
-const speedOptions = [
-  { value: 'under-25', label: 'Under 25 mph', description: 'Low speed' },
-  { value: '25-45', label: '25-45 mph', description: 'Moderate speed' },
-  { value: '45-65', label: '45-65 mph', description: 'Highway speed' },
-  { value: 'over-65', label: 'Over 65 mph', description: 'High speed' }
-];
-
-const roadConditionsOptions = [
-  { value: 'good', label: 'Good Conditions', description: 'Dry, clear, well-maintained' },
-  { value: 'poor-weather', label: 'Poor Weather', description: 'Rain, fog, or snow' },
-  { value: 'poor-road', label: 'Poor Road Conditions', description: 'Potholes, debris, gravel' },
-  { value: 'poor-visibility', label: 'Poor Visibility', description: 'Night, no lighting' }
-];
-
-const faultOptions = [
-  { value: '100-other', label: '100% Other Driver', description: 'Clear liability' },
-  { value: '75-99-other', label: '75-99% Other Driver', description: 'Mostly at fault' },
-  { value: '50-74-other', label: '50-74% Other Driver', description: 'Shared fault' },
-  { value: 'rider-mostly', label: 'Rider Mostly at Fault', description: 'May limit recovery' }
-];
-
-const permanentImpactOptions = [
-  { value: 'none', label: 'No Permanent Impact', description: 'Full recovery' },
-  { value: 'scarring', label: 'Permanent Scarring', description: 'Visible scars' },
-  { value: 'minor-disability', label: 'Minor Disability', description: 'Slight limitations' },
-  { value: 'significant-disability', label: 'Significant Disability', description: 'Major life changes' },
-  { value: 'total-disability', label: 'Total Disability', description: 'Unable to work' },
-  { value: 'paralysis', label: 'Paralysis', description: 'Wheelchair bound' }
-];
-
-function calculateCompensation(data: MotorcycleFormData): CalculatorResults {
-  // Base amounts (motorcycles typically have higher settlements due to severity)
-  let baseMin = 25000;
-  let baseMax = 125000;
-
-  // Injury type multipliers (motorcycle injuries are typically severe)
-  const injuryMultipliers: Record<string, number> = {
-    'road-rash': 1.5,
-    'fractures': 2.5,
-    'head-injury': 4.5,
-    'spinal-injury': 6.0,
-    'internal-injuries': 3.8,
-    'amputation': 7.0,
-    'multiple': 4.0,
-    'death': 8.0
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const injuryMult = injuryMultipliers[data.injuryType] || 1;
-  baseMin *= injuryMult;
-  baseMax *= injuryMult;
+  const calculateCompensation = () => {
+    const medicalBills = parseFloat(formData.medicalBills) || 0;
+    const lostWages = parseFloat(formData.lostWages) || 0;
+    const futureWages = parseFloat(formData.futureWages) || 0;
+    const propertyDamage = parseFloat(formData.propertyDamage) || 0;
 
-  // Severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1,
-    'moderate': 2.2,
-    'severe': 4.0,
-    'catastrophic': 6.5
+    const economicDamages = medicalBills + lostWages + futureWages + propertyDamage;
+
+    // Pain and suffering multiplier based on injury severity and pain level
+    let multiplier = 1.5; // Base multiplier
+    
+    // Adjust based on injury severity
+    switch (formData.injurySeverity) {
+      case 'minor':
+        multiplier = 1.5;
+        break;
+      case 'moderate':
+        multiplier = 2.5;
+        break;
+      case 'serious':
+        multiplier = 4.0;
+        break;
+      case 'severe':
+        multiplier = 5.5;
+        break;
+      case 'catastrophic':
+        multiplier = 7.0;
+        break;
+      default:
+        multiplier = 3.0;
+    }
+
+    // Adjust based on pain level
+    switch (formData.painLevel) {
+      case 'minimal':
+        multiplier *= 0.8;
+        break;
+      case 'moderate':
+        multiplier *= 1.0;
+        break;
+      case 'severe':
+        multiplier *= 1.3;
+        break;
+      case 'extreme':
+        multiplier *= 1.5;
+        break;
+      default:
+        multiplier *= 1.0;
+    }
+
+    // Age adjustment (younger victims typically receive higher awards)
+    switch (formData.ageRange) {
+      case '18-30':
+        multiplier *= 1.2;
+        break;
+      case '31-45':
+        multiplier *= 1.1;
+        break;
+      case '46-60':
+        multiplier *= 1.0;
+        break;
+      case '61+':
+        multiplier *= 0.9;
+        break;
+      default:
+        multiplier *= 1.0;
+    }
+
+    const nonEconomicDamages = Math.max(medicalBills * multiplier, economicDamages * 0.5);
+    const totalBeforeFault = economicDamages + nonEconomicDamages;
+    
+    // Apply comparative negligence
+    const faultReduction = parseFloat(formData.faultPercentage) / 100 || 0;
+    const totalEstimate = totalBeforeFault * (1 - faultReduction);
+
+    // Create range estimates (±30%)
+    const lowRange = totalEstimate * 0.7;
+    const highRange = totalEstimate * 1.3;
+
+    setResults({
+      economicDamages,
+      nonEconomicDamages: nonEconomicDamages * (1 - faultReduction),
+      totalEstimate,
+      lowRange,
+      highRange
+    });
   };
 
-  const severityMult = severityMultipliers[data.injurySeverity] || 1;
-  baseMin *= severityMult;
-  baseMax *= severityMult;
-
-  // Crash type impact
-  const crashMultipliers: Record<string, number> = {
-    'left-turn': 1.6, // Most common, usually clear fault
-    'rear-end': 1.4,
-    'head-on': 2.0,
-    'sideswipe': 1.3,
-    'lane-splitting': 0.9, // May be disputed
-    'single-vehicle': 0.8, // Harder to prove liability
-    'dooring': 1.5
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      maximumFractionDigits: 0
+    }).format(amount);
   };
-
-  const crashMult = crashMultipliers[data.crashType] || 1;
-  baseMin *= crashMult;
-  baseMax *= crashMult;
-
-  // Add economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureMedical = parseInt(data.futureMedical) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-  const bikeValue = parseInt(data.bikeValue) || 0;
-
-  baseMin += medicalCosts * 3 + futureMedical * 1.5 + lostWages * 2 + bikeValue;
-  baseMax += medicalCosts * 6 + futureMedical * 2.5 + lostWages * 4 + bikeValue * 1.2;
-
-  // Helmet usage (lack of helmet may reduce non-economic damages in some states)
-  const helmetMultipliers: Record<string, number> = {
-    'full-face': 1.0,
-    'modular': 0.95,
-    'half-helmet': 0.85,
-    'none': 0.7 // May reduce damages due to contributory negligence
-  };
-
-  const helmetMult = helmetMultipliers[data.helmetWorn] || 1;
-  baseMin *= helmetMult;
-  baseMax *= helmetMult;
-
-  // Speed at time of crash
-  const speedMultipliers: Record<string, number> = {
-    'under-25': 1.0,
-    '25-45': 1.2,
-    '45-65': 1.4,
-    'over-65': 1.6
-  };
-
-  const speedMult = speedMultipliers[data.speedEstimate] || 1;
-  baseMin *= speedMult;
-  baseMax *= speedMult;
-
-  // Road conditions (poor conditions may support negligence claim)
-  const conditionMultipliers: Record<string, number> = {
-    'good': 1.0,
-    'poor-weather': 1.2,
-    'poor-road': 1.4,
-    'poor-visibility': 1.3
-  };
-
-  const conditionMult = conditionMultipliers[data.roadConditions] || 1;
-  baseMin *= conditionMult;
-  baseMax *= conditionMult;
-
-  // Fault percentage (California comparative negligence)
-  const faultReductions: Record<string, number> = {
-    '100-other': 1.0,
-    '75-99-other': 0.85,
-    '50-74-other': 0.6,
-    'rider-mostly': 0.35
-  };
-
-  const faultReduction = faultReductions[data.faultPercentage] || 1;
-  baseMin *= faultReduction;
-  baseMax *= faultReduction;
-
-  // Permanent impact
-  const permanentMultipliers: Record<string, number> = {
-    'none': 1,
-    'scarring': 1.4,
-    'minor-disability': 1.8,
-    'significant-disability': 2.8,
-    'total-disability': 4.0,
-    'paralysis': 5.0
-  };
-
-  const permanentMult = permanentMultipliers[data.permanentImpact] || 1;
-  baseMin *= permanentMult;
-  baseMax *= permanentMult;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax),
-    medicalExpenses: medicalCosts,
-    futureCare: futureMedical,
-    lostIncome: lostWages,
-    propertyDamage: bikeValue,
-    totalEconomic: medicalCosts + futureMedical + lostWages + bikeValue
-  };
-}
-
-function validateForm(data: MotorcycleFormData, step: number): boolean {
-  if (step === 1) {
-    return Boolean(
-      data.injuryType &&
-      data.injurySeverity &&
-      data.crashType &&
-      data.helmetWorn
-    );
-  }
-  if (step === 2) {
-    return Boolean(
-      data.medicalCosts &&
-      data.lostWages &&
-      data.bikeValue &&
-      data.speedEstimate &&
-      data.roadConditions &&
-      data.faultPercentage &&
-      data.permanentImpact
-    );
-  }
-  return false;
-}
-
-export default function MotorcycleCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<MotorcycleFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateForm
-  );
 
   return (
-    <>
-      <CalculatorSEO
-        title="Motorcycle Accident Compensation Calculator | Free Crash Settlement Estimate"
-        description="Calculate potential compensation for motorcycle accident injuries including road rash, fractures, and TBI. Free estimates with helmet usage and fault percentage analysis."
-        canonical="/motorcycle-calculator"
-        injuryType="motorcycle accident"
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="Motorcycle Accident Compensation Calculator | Estimate Your Claim Value"
+        description="Calculate potential compensation for your California motorcycle accident. Free estimation tool for medical bills, lost wages, and pain & suffering."
+        canonical="/motorcycle-compensation-calculator"
       />
 
-      <CalculatorLayout
-        title="Motorcycle Accident Calculator"
-        subtitle="Estimate compensation for motorcycle crash injuries"
-        metaTitle="Motorcycle Accident Compensation Calculator"
-        metaDescription="Free motorcycle crash settlement calculator. Instant estimates."
-        stats={[
-          { value: '$75K+', label: 'Average Settlement' },
-          { value: '5,000', label: 'Fatal Crashes/Year' },
-          { value: '29x', label: 'More Dangerous Than Cars' }
-        ]}
+      {/* Hero Section */}
+      <section 
+        className="relative h-[300px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroImage})` }}
       >
-        <CalculatorProgress currentStep={step} totalSteps={3} />
-
-        {/* Step 1: Injury & Crash Details */}
-        {step === 1 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Injury & Crash Details</h2>
-              <p className="text-muted-foreground">Tell us about the motorcycle accident</p>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Injury</Label>
-                <Select value={formData.injuryType} onValueChange={(value) => updateField('injuryType', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select injury type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {injuryTypeOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
-                <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select severity" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {injurySeverityOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Crash</Label>
-                <Select value={formData.crashType} onValueChange={(value) => updateField('crashType', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select crash type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {crashTypeOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Helmet Worn at Time of Crash</Label>
-                <Select value={formData.helmetWorn} onValueChange={(value) => updateField('helmetWorn', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select helmet type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {helmetOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-            />
+        <div className="absolute inset-0 bg-black/50"></div>
+        
+        {/* Go Back Button - positioned properly */}
+        <div className="absolute top-20 left-6 z-[60]">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="flex items-center justify-center mb-4">
+            <Calculator className="w-12 h-12 mr-4" />
+            <h1 className="text-4xl md:text-5xl font-bold">
+              Motorcycle Compensation Calculator
+            </h1>
           </div>
-        )}
+          <p className="text-xl">
+            Estimate the potential value of your California motorcycle accident claim
+          </p>
+        </div>
+      </section>
 
-        {/* Step 2: Financial & Case Details */}
-        {step === 2 && (
-          <div className="space-y-8">
+      {/* Disclaimer */}
+      <section className="bg-yellow-50 border-l-4 border-yellow-400 py-6">
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="flex items-start">
+            <Info className="w-6 h-6 text-yellow-600 mr-3 mt-1" />
             <div>
-              <h2 className="text-2xl font-semibold mb-2">Financial Impact & Case Details</h2>
-              <p className="text-muted-foreground">Damages and accident circumstances</p>
+              <h3 className="font-semibold text-yellow-800 mb-2">Important Disclaimer</h3>
+              <p className="text-yellow-700">
+                This calculator provides estimates only and should not be considered legal advice. 
+                Actual compensation depends on many factors unique to your case. 
+                Consult with an experienced motorcycle accident attorney for a detailed case evaluation.
+              </p>
             </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="medicalCosts" className="text-base font-medium">
-                  Medical Expenses to Date ($)
-                </Label>
-                <Input
-                  id="medicalCosts"
-                  type="number"
-                  placeholder="25000"
-                  value={formData.medicalCosts}
-                  onChange={(e) => updateField('medicalCosts', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="futureMedical" className="text-base font-medium">
-                  Future Medical Costs ($)
-                </Label>
-                <Input
-                  id="futureMedical"
-                  type="number"
-                  placeholder="50000"
-                  value={formData.futureMedical}
-                  onChange={(e) => updateField('futureMedical', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="lostWages" className="text-base font-medium">
-                  Lost Wages & Income ($)
-                </Label>
-                <Input
-                  id="lostWages"
-                  type="number"
-                  placeholder="15000"
-                  value={formData.lostWages}
-                  onChange={(e) => updateField('lostWages', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="bikeValue" className="text-base font-medium">
-                  Motorcycle Value/Damage ($)
-                </Label>
-                <Input
-                  id="bikeValue"
-                  type="number"
-                  placeholder="12000"
-                  value={formData.bikeValue}
-                  onChange={(e) => updateField('bikeValue', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Estimated Speed at Impact</Label>
-                <Select value={formData.speedEstimate} onValueChange={(value) => updateField('speedEstimate', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select speed range" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {speedOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Road Conditions</Label>
-                <Select value={formData.roadConditions} onValueChange={(value) => updateField('roadConditions', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select road conditions" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {roadConditionsOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Fault Percentage</Label>
-                <Select value={formData.faultPercentage} onValueChange={(value) => updateField('faultPercentage', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select fault percentage" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {faultOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Permanent Impact</Label>
-                <Select value={formData.permanentImpact} onValueChange={(value) => updateField('permanentImpact', value)}>
-                  <SelectTrigger className="h-14 text-lg">
-                    <SelectValue placeholder="Select permanent impact" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {permanentImpactOptions.map((option) => (
-                      <SelectItem key={option.value} value={option.value}>
-                        {option.label} - {option.description}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-              nextButtonText="Calculate Settlement"
-            />
           </div>
-        )}
+        </div>
+      </section>
 
-        {/* Step 3: Results */}
-        {step === 3 && results && (
-          <div className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Settlement Range</h2>
-              <p className="text-slate-600">Based on motorcycle crash details</p>
-            </div>
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid lg:grid-cols-3 gap-8">
+          {/* Calculator Form */}
+          <div className="lg:col-span-2">
+            <Card className="p-8">
+              <CardHeader className="pb-6">
+                <CardTitle className="text-3xl flex items-center">
+                  <Calculator className="w-8 h-8 mr-3 text-red-600" />
+                  Calculate Your Compensation
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Enter your accident details below to estimate potential compensation. 
+                  All information is confidential and secure.
+                </p>
+              </CardHeader>
 
-            <div className="bg-slate-50 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-black mb-2">
-                ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-              </div>
-              <p className="text-slate-600">Potential Settlement Range</p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Economic Damages Breakdown</h4>
-                <div className="text-sm text-slate-600 space-y-1">
-                  <p>Medical Expenses: ${results.medicalExpenses?.toLocaleString()}</p>
-                  <p>Future Medical Care: ${results.futureCare?.toLocaleString()}</p>
-                  <p>Lost Wages: ${results.lostIncome?.toLocaleString()}</p>
-                  <p>Motorcycle Damage: ${results.propertyDamage?.toLocaleString()}</p>
-                  <p className="font-semibold pt-2 border-t border-slate-200">
-                    Total Economic: ${results.totalEconomic?.toLocaleString()}
-                  </p>
+              <CardContent className="space-y-6">
+                {/* Economic Damages */}
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <DollarSign className="w-6 h-6 mr-2 text-green-600" />
+                    Economic Damages (Actual Financial Losses)
+                  </h3>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Total Medical Bills to Date
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.medicalBills}
+                        onChange={(e) => handleInputChange('medicalBills', e.target.value)}
+                        placeholder="$50,000"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Include hospital, surgery, therapy, medications
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Lost Wages to Date
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.lostWages}
+                        onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                        placeholder="$15,000"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Income lost due to injury
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Future Lost Wages (Estimated)
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.futureWages}
+                        onChange={(e) => handleInputChange('futureWages', e.target.value)}
+                        placeholder="$25,000"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        If unable to return to work or reduced capacity
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Property Damage (Motorcycle & Gear)
+                      </label>
+                      <Input
+                        type="number"
+                        value={formData.propertyDamage}
+                        onChange={(e) => handleInputChange('propertyDamage', e.target.value)}
+                        placeholder="$12,000"
+                      />
+                      <p className="text-xs text-muted-foreground mt-1">
+                        Bike, helmet, protective gear replacement
+                      </p>
+                    </div>
+                  </div>
                 </div>
-              </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Motorcycle Accident Severity</h4>
-                <p className="text-sm text-slate-600">
-                  Motorcyclists are 29x more likely to die in a crash than car occupants. Injuries are typically severe due to lack of protection, resulting in higher settlement values.
-                </p>
-              </div>
+                {/* Non-Economic Factors */}
+                <div>
+                  <h3 className="text-xl font-semibold mb-4 flex items-center">
+                    <TrendingUp className="w-6 h-6 mr-2 text-blue-600" />
+                    Pain & Suffering Factors
+                  </h3>
+                  
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Injury Severity Level
+                      </label>
+                      <Select value={formData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minor">Minor (bruises, minor cuts)</SelectItem>
+                          <SelectItem value="moderate">Moderate (fractures, concussion)</SelectItem>
+                          <SelectItem value="serious">Serious (multiple fractures, surgery needed)</SelectItem>
+                          <SelectItem value="severe">Severe (spinal injury, brain trauma)</SelectItem>
+                          <SelectItem value="catastrophic">Catastrophic (paralysis, permanent disability)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Pain Level (1-10 scale)
+                      </label>
+                      <Select value={formData.painLevel} onValueChange={(value) => handleInputChange('painLevel', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select pain level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minimal">Minimal (1-3)</SelectItem>
+                          <SelectItem value="moderate">Moderate (4-6)</SelectItem>
+                          <SelectItem value="severe">Severe (7-8)</SelectItem>
+                          <SelectItem value="extreme">Extreme (9-10)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Your Age Range
+                      </label>
+                      <Select value={formData.ageRange} onValueChange={(value) => handleInputChange('ageRange', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select age range" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="18-30">18-30 years</SelectItem>
+                          <SelectItem value="31-45">31-45 years</SelectItem>
+                          <SelectItem value="46-60">46-60 years</SelectItem>
+                          <SelectItem value="61+">61+ years</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Your Fault Percentage (if any)
+                      </label>
+                      <Select value={formData.faultPercentage} onValueChange={(value) => handleInputChange('faultPercentage', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select fault percentage" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="0">0% - Other driver 100% at fault</SelectItem>
+                          <SelectItem value="10">10% - Mostly other driver's fault</SelectItem>
+                          <SelectItem value="20">20% - Some shared responsibility</SelectItem>
+                          <SelectItem value="30">30% - Significant shared fault</SelectItem>
+                          <SelectItem value="40">40% - Nearly equal fault</SelectItem>
+                          <SelectItem value="50">50% - Equal fault</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+                </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Helmet Laws & Compensation</h4>
-                <p className="text-sm text-slate-600">
-                  California requires all riders to wear helmets. Not wearing a helmet may reduce non-economic damages but won't eliminate your claim. Helmet type affects head injury severity.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-              <p className="text-sm text-amber-900">
-                <strong>Important:</strong> Motorcycle accidents often result in catastrophic injuries. Left-turn collisions are the most common type. Comparative negligence applies - your recovery is reduced by your fault percentage. This estimate assumes provable liability and documented injuries.
-              </p>
-            </div>
-
-            <div className="calculator-cta-section">
-              <h3 className="text-2xl font-bold mb-4">Get maximum compensation for your crash</h3>
-              <p className="mb-6 max-w-2xl mx-auto">
-                Motorcycle accidents often result in catastrophic injuries. Our attorneys understand the unique challenges 
-                riders face and will fight for full compensation. No fee unless we win.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/free-consultation">
-                  <Button size="lg" className="text-lg px-8">
-                    Get My Free Case Evaluation
+                <div className="pt-6 border-t">
+                  <Button 
+                    onClick={calculateCompensation}
+                    className="w-full bg-red-600 hover:bg-red-700 text-white text-lg py-6"
+                    size="lg"
+                  >
+                    Calculate My Compensation Estimate
                   </Button>
-                </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={resetForm}
-                  className="text-lg px-8 outline"
-                >
-                  Calculate Another Case
-                </Button>
-              </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Results */}
+            {results && (
+              <Card className="mt-8 p-8 bg-green-50 border-green-200">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-green-800 flex items-center">
+                    <Calculator className="w-6 h-6 mr-2" />
+                    Your Compensation Estimate
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid md:grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="font-semibold mb-3">Damage Breakdown:</h4>
+                      <div className="space-y-2">
+                        <div className="flex justify-between">
+                          <span>Economic Damages:</span>
+                          <span className="font-semibold">{formatCurrency(results.economicDamages)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Pain & Suffering:</span>
+                          <span className="font-semibold">{formatCurrency(results.nonEconomicDamages)}</span>
+                        </div>
+                        <div className="flex justify-between text-lg font-bold border-t pt-2">
+                          <span>Total Estimate:</span>
+                          <span className="text-green-700">{formatCurrency(results.totalEstimate)}</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div>
+                      <h4 className="font-semibold mb-3">Estimated Range:</h4>
+                      <div className="bg-white p-4 rounded-lg">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-green-700 mb-2">
+                            {formatCurrency(results.lowRange)} - {formatCurrency(results.highRange)}
+                          </div>
+                          <p className="text-sm text-muted-foreground">
+                            Typical settlement range based on similar cases
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 p-4 bg-yellow-50 rounded-lg">
+                    <div className="flex items-start">
+                      <AlertCircle className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
+                      <div className="text-sm">
+                        <p className="font-semibold text-yellow-800 mb-1">Remember:</p>
+                        <ul className="text-yellow-700 space-y-1">
+                          <li>• This is an estimate based on typical cases</li>
+                          <li>• Actual compensation depends on case specifics</li>
+                          <li>• Insurance company tactics can affect outcomes</li>
+                          <li>• Attorney representation typically increases recovery</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="space-y-6 sticky top-6">
+              {/* Contact Card */}
+              <Card className="p-6">
+                <h3 className="text-xl font-semibold mb-4">Get a Precise Evaluation</h3>
+                <p className="text-muted-foreground mb-4">
+                  This calculator provides estimates, but every case is unique. 
+                  Get a detailed analysis from our motorcycle accident attorneys.
+                </p>
+                
+                <div className="space-y-3">
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                    onClick={() => window.location.href = '/motorcycle-case-evaluation'}
+                  >
+                    Get Free Case Evaluation
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full"
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call (818) 123-4567
+                  </Button>
+                </div>
+
+                <div className="mt-4 pt-4 border-t">
+                  <div className="flex items-center text-sm text-muted-foreground">
+                    <Clock className="w-4 h-4 mr-2" />
+                    <span>24/7 Free Consultation Available</span>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Factors Card */}
+              <Card className="p-6">
+                <h3 className="text-xl font-semibold mb-4">Factors That Affect Compensation</h3>
+                
+                <div className="space-y-3">
+                  <div>
+                    <h4 className="font-medium mb-2">Injury Severity</h4>
+                    <p className="text-sm text-muted-foreground">
+                      More severe injuries typically result in higher compensation due to greater medical needs and life impact.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium mb-2">Fault Determination</h4>
+                    <p className="text-sm text-muted-foreground">
+                      California's comparative negligence law reduces compensation by your fault percentage.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium mb-2">Insurance Limits</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Available insurance coverage can limit maximum compensation regardless of damages.
+                    </p>
+                  </div>
+                  
+                  <div>
+                    <h4 className="font-medium mb-2">Legal Representation</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Studies show represented clients recover 3-4x more than those handling cases themselves.
+                    </p>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Benefits Card */}
+              <Card className="p-6 bg-blue-50">
+                <h3 className="text-xl font-semibold mb-4">Why Choose Our Firm?</h3>
+                
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Fighting Anti-Motorcycle Bias</div>
+                      <div className="text-sm text-muted-foreground">Overcoming prejudice that reduces settlements</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Former Defense Attorney</div>
+                      <div className="text-sm text-muted-foreground">Insider knowledge of insurance tactics</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <FileText className="w-5 h-5 text-red-600 mr-3 mt-0.5" />
+                    <div>
+                      <div className="font-medium">Motorcycle Specialists</div>
+                      <div className="text-sm text-muted-foreground">Deep understanding of rider dynamics</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-blue-200">
+                  <div className="flex items-center">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                    ))}
+                    <span className="ml-2 text-sm font-medium">5-Star Client Reviews</span>
+                  </div>
+                </div>
+              </Card>
             </div>
           </div>
-        )}
-      </CalculatorLayout>
-    </>
+        </div>
+
+        {/* Additional Information */}
+        <section className="mt-16">
+          <Card className="p-8">
+            <h2 className="text-3xl font-bold mb-6 text-center">Understanding Motorcycle Accident Compensation</h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Economic Damages</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Past and future medical expenses</li>
+                  <li>• Lost wages and reduced earning capacity</li>
+                  <li>• Property damage to motorcycle and gear</li>
+                  <li>• Transportation costs for medical care</li>
+                  <li>• Home modifications for accessibility</li>
+                  <li>• Vocational rehabilitation costs</li>
+                </ul>
+              </div>
+              
+              <div>
+                <h3 className="text-xl font-semibold mb-4">Non-Economic Damages</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Physical pain and suffering</li>
+                  <li>• Emotional distress and mental anguish</li>
+                  <li>• Loss of enjoyment of life activities</li>
+                  <li>• Disability and disfigurement</li>
+                  <li>• Loss of consortium (for spouses)</li>
+                  <li>• Permanent impairment and limitations</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-8 p-6 bg-gray-50 rounded-lg">
+              <h4 className="text-lg font-semibold mb-3">Important Notes About Motorcycle Cases:</h4>
+              <ul className="space-y-2 text-muted-foreground">
+                <li>• Motorcycle accident injuries are typically more severe than car accidents</li>
+                <li>• Anti-motorcycle bias can reduce settlement offers without proper representation</li>
+                <li>• California's comparative negligence law allows recovery even if partially at fault</li>
+                <li>• Uninsured/underinsured motorist coverage is crucial for full recovery</li>
+                <li>• Expert accident reconstruction may be necessary to prove fault</li>
+              </ul>
+            </div>
+          </Card>
+        </section>
+      </div>
+    </div>
   );
-}
+};
+
+export default MotorcycleCompensationCalculator;

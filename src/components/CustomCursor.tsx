@@ -1,137 +1,84 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
-interface CustomCursorProps {
-  hoveredColor?: string;
-  isHovering?: boolean;
-}
-
-const CustomCursor: React.FC<CustomCursorProps> = ({ 
-  hoveredColor = '#000000',
-  isHovering = false 
-}) => {
+const CustomCursor = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const cursorDotRef = useRef<HTMLDivElement>(null);
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  const [trails, setTrails] = useState<Array<{ x: number; y: number; id: number }>>([]);
-  const trailIdRef = useRef(0);
 
-  // Track mouse position
   useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePos({ x: e.clientX, y: e.clientY });
+    const cursor = cursorRef.current;
+    const cursorDot = cursorDotRef.current;
+    
+    if (!cursor || !cursorDot) return;
 
-      // Add trail point
-      if (isHovering) {
-        trailIdRef.current += 1;
-        setTrails(prev => [...prev, { 
-          x: e.clientX, 
-          y: e.clientY, 
-          id: trailIdRef.current 
-        }].slice(-8)); // Keep last 8 trail points
-      }
+    const moveCursor = (e: MouseEvent) => {
+      gsap.to(cursor, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.3,
+        ease: "power3.out",
+      });
+      
+      gsap.to(cursorDot, {
+        x: e.clientX,
+        y: e.clientY,
+        duration: 0.1,
+        ease: "power3.out",
+      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, [isHovering]);
+    const handleMouseEnter = () => {
+      gsap.to(cursor, {
+        scale: 3,
+        duration: 0.3,
+        ease: "power3.out",
+      });
+    };
 
-  // Animate main cursor
-  useEffect(() => {
-    if (!cursorRef.current) return;
+    const handleMouseLeave = () => {
+      gsap.to(cursor, {
+        scale: 1,
+        duration: 0.3,
+        ease: "power3.out",
+      });
+    };
 
-    gsap.to(cursorRef.current, {
-      x: mousePos.x,
-      y: mousePos.y,
-      duration: 0.3,
-      ease: 'power2.out',
+    // Add event listeners
+    document.addEventListener('mousemove', moveCursor);
+    
+    // Add hover effects for interactive elements
+    const interactiveElements = document.querySelectorAll('a, button, .magnetic, [role="button"]');
+    
+    interactiveElements.forEach(el => {
+      el.addEventListener('mouseenter', handleMouseEnter);
+      el.addEventListener('mouseleave', handleMouseLeave);
     });
-  }, [mousePos]);
 
-  // Animate cursor dot
-  useEffect(() => {
-    if (!cursorDotRef.current) return;
-
-    gsap.to(cursorDotRef.current, {
-      x: mousePos.x,
-      y: mousePos.y,
-      duration: 0.1,
-      ease: 'power2.out',
-    });
-  }, [mousePos]);
-
-  // Scale cursor on hover
-  useEffect(() => {
-    if (!cursorRef.current) return;
-
-    gsap.to(cursorRef.current, {
-      scale: isHovering ? 1.5 : 1,
-      duration: 0.4,
-      ease: 'elastic.out(1, 0.5)',
-    });
-  }, [isHovering]);
-
-  // Clean up old trails
-  useEffect(() => {
-    if (trails.length === 0) return;
-
-    const timeout = setTimeout(() => {
-      setTrails(prev => prev.slice(1));
-    }, 100);
-
-    return () => clearTimeout(timeout);
-  }, [trails]);
+    return () => {
+      document.removeEventListener('mousemove', moveCursor);
+      interactiveElements.forEach(el => {
+        el.removeEventListener('mouseenter', handleMouseEnter);
+        el.removeEventListener('mouseleave', handleMouseLeave);
+      });
+    };
+  }, []);
 
   return (
     <>
-      {/* Trail points */}
-      {trails.map((trail, index) => (
-        <div
-          key={trail.id}
-          className="fixed pointer-events-none z-[9999] mix-blend-difference"
-          style={{
-            left: 0,
-            top: 0,
-            transform: `translate(${trail.x}px, ${trail.y}px) translate(-50%, -50%)`,
-            width: `${8 - index}px`,
-            height: `${8 - index}px`,
-            borderRadius: '50%',
-            backgroundColor: hoveredColor,
-            opacity: 0.3 - (index * 0.03),
-          }}
-        />
-      ))}
-
-      {/* Main cursor ring */}
-      <div
+      {/* Cursor Ring */}
+      <div 
         ref={cursorRef}
-        className="fixed pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          left: 0,
-          top: 0,
-          transform: 'translate(-50%, -50%)',
-          width: '40px',
-          height: '40px',
-          border: `2px solid ${hoveredColor}`,
-          borderRadius: '50%',
-          transition: 'border-color 0.3s ease',
-        }}
-      />
-
-      {/* Inner dot */}
-      <div
+        className="fixed top-0 left-0 w-8 h-8 pointer-events-none z-[9999] mix-blend-difference hidden lg:block"
+        style={{ transform: 'translate(-50%, -50%)' }}
+      >
+        <div className="w-full h-full border border-white/60 rounded-full" />
+      </div>
+      
+      {/* Cursor Dot */}
+      <div 
         ref={cursorDotRef}
-        className="fixed pointer-events-none z-[9999] mix-blend-difference"
-        style={{
-          left: 0,
-          top: 0,
-          transform: 'translate(-50%, -50%)',
-          width: '6px',
-          height: '6px',
-          backgroundColor: hoveredColor,
-          borderRadius: '50%',
-          transition: 'background-color 0.3s ease',
-        }}
+        className="fixed top-0 left-0 w-1 h-1 pointer-events-none z-[9999] bg-white rounded-full hidden lg:block"
+        style={{ transform: 'translate(-50%, -50%)' }}
       />
     </>
   );

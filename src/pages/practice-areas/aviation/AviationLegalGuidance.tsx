@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ChevronDown, ChevronUp, BookOpen, Scale, AlertTriangle, Clock } from 'lucide-react';
 import heroBackground from '@/assets/aviation-legal-guidance-hero.jpg';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const AviationLegalGuidance: React.FC = () => {
@@ -32,7 +32,7 @@ const AviationLegalGuidance: React.FC = () => {
           }
         }}
       />
-      
+      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
       
       {/* Hero Section */}
       <section 

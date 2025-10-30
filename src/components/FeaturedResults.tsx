@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -186,6 +185,16 @@ const FeaturedResults = () => {
   return (
     <section ref={sectionRef} id="results" className="relative py-20 lg:py-32 bg-background">
       <div className="container mx-auto px-8">
+        {/* Section Header */}
+        <div className="results-header text-center max-w-4xl mx-auto mb-16">
+          <h2 className="text-display font-display font-bold text-foreground mb-6 glow">
+            Why Clients Choose Trembach Law Firm
+          </h2>
+          <p className="text-body text-muted-foreground leading-relaxed">
+            We’re a new firm with deep defense-side experience. Here’s how we maximize your advantage—without relying on past verdicts or testimonials.
+          </p>
+        </div>
+
         {/* Results Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {results.map((result, index) => (
@@ -200,13 +209,14 @@ const FeaturedResults = () => {
           ))}
         </div>
 
+        {/* Bottom CTA */}
         <div className="text-center mt-16">
           <Button 
             size="lg"
             className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-8 py-4 text-lg font-semibold glow group transition-all duration-300"
-            asChild
+            onClick={() => window.location.href = '/case-evaluation'}
           >
-            <Link to="/free-consultation">Start your Free Case Review</Link>
+            Start Your Case Today — Free Consultation
           </Button>
         </div>
       </div>

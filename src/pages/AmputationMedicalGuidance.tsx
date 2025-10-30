@@ -2,7 +2,8 @@ import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import SEO from '@/components/SEO';
-import {
+import GoBack from '@/components/GoBack';
+import { 
   Stethoscope,
   Heart,
   Shield,
@@ -31,6 +32,7 @@ const AmputationMedicalGuidance: React.FC = () => {
           style={{ backgroundImage: `url(${heroBackground})` }}
         >
           <div className="absolute inset-0 bg-black/70"></div>
+          <GoBack />
           
           <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">

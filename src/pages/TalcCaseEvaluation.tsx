@@ -9,7 +9,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Heart, Shield, Clock, Phone, Mail } from 'lucide-react';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/talc-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -87,7 +87,7 @@ const TalcCaseEvaluation = () => {
         canonical={seoData.canonical}
       />
       <Navigation />
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

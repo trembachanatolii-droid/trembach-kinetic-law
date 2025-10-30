@@ -6,84 +6,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Navigation from "./components/Navigation";
-import Blog from "./pages/Blog";
-
-// Blog Category Pages
-import AutoAccidentsBlog from "./pages/blog/AutoAccidents";
-import BrainInjuriesBlog from "./pages/blog/BrainInjuries";
-import MedicalMalpracticeBlog from "./pages/blog/MedicalMalpractice";
-import MotorcycleAccidentsBlog from "./pages/blog/MotorcycleAccidents";
-import TruckAccidentsBlog from "./pages/blog/TruckAccidents";
-import PedestrianAccidentsBlog from "./pages/blog/PedestrianAccidents";
-import BicycleAccidentsBlog from "./pages/blog/BicycleAccidents";
-import WorkplaceInjuriesBlog from "./pages/blog/WorkplaceInjuries";
-import CompensationBlog from "./pages/blog/Compensation";
-import CatastrophicInjuriesBlog from "./pages/blog/CatastrophicInjuries";
-import InsuranceClaimsBlog from "./pages/blog/InsuranceClaims";
-import WrongfulDeathBlog from "./pages/blog/WrongfulDeath";
-import PremisesLiabilityBlog from "./pages/blog/PremisesLiability";
-import AccidentResponseBlog from "./pages/blog/AccidentResponse";
-import EvidenceBlog from "./pages/blog/Evidence";
-import SettlementStrategyBlog from "./pages/blog/SettlementStrategy";
-import ProductLiabilityBlog from "./pages/blog/ProductLiability";
-import RideshareAccidentsBlog from "./pages/blog/RideshareAccidents";
-import ElderAbuseBlog from "./pages/blog/ElderAbuse";
-import DogBitesBlog from "./pages/blog/DogBites";
-import SlipAndFallBlog from "./pages/blog/SlipAndFall";
-import SpinalCordInjuriesBlog from "./pages/blog/SpinalCordInjuries";
-import BurnInjuriesBlog from "./pages/blog/BurnInjuries";
-import ConstructionAccidentsBlog from "./pages/blog/ConstructionAccidents";
-import DefectiveProductsBlog from "./pages/blog/DefectiveProducts";
-import AmputationBlog from "./pages/blog/Amputation";
-import ParalysisBlog from "./pages/blog/Paralysis";
-import ScarringDisfigurementBlog from "./pages/blog/ScarringDisfigurement";
-import WhiplashBlog from "./pages/blog/Whiplash";
-import BrokenBonesBlog from "./pages/blog/BrokenBones";
-import InternalInjuriesBlog from "./pages/blog/InternalInjuries";
-import BackInjuriesBlog from "./pages/blog/BackInjuries";
-import SoftTissueInjuriesBlog from "./pages/blog/SoftTissueInjuries";
-import HitAndRunBlog from "./pages/blog/HitAndRun";
-import TraumaticBrainInjuryBlog from "./pages/blog/TraumaticBrainInjury";
-import UninsuredMotoristBlog from "./pages/blog/UninsuredMotorist";
-import CommercialVehicleBlog from "./pages/blog/CommercialVehicle";
-import IntersectionAccidentsBlog from "./pages/blog/IntersectionAccidents";
-import DistractedDrivingBlog from "./pages/blog/DistractedDriving";
-import DrunkDrivingBlog from "./pages/blog/DrunkDriving";
-import RearEndCollisionsBlog from "./pages/blog/RearEndCollisions";
-import TBoneAccidentsBlog from "./pages/blog/TBoneAccidents";
-import HeadOnCollisionsBlog from "./pages/blog/HeadOnCollisions";
-import RolloverAccidentsBlog from "./pages/blog/RolloverAccidents";
-import MultiVehicleBlog from "./pages/blog/MultiVehicle";
-import ParkingLotBlog from "./pages/blog/ParkingLot";
-import SchoolBusAccidentsBlog from "./pages/blog/SchoolBusAccidents";
-import SideswipeAccidentsBlog from "./pages/blog/SideswipeAccidents";
-import SingleVehicleBlog from "./pages/blog/SingleVehicle";
-import LowSpeedAccidentsBlog from "./pages/blog/LowSpeedAccidents";
-import HighSpeedCrashesBlog from "./pages/blog/HighSpeedCrashes";
-import WeatherAccidentsBlog from "./pages/blog/WeatherAccidents";
-import NightAccidentsBlog from "./pages/blog/NightAccidents";
-import RoadRageBlog from "./pages/blog/RoadRage";
-import TireBlowoutsBlog from "./pages/blog/TireBlowouts";
-import DefensiveDriverBlog from "./pages/blog/DefensiveDriver";
-import AirbagFailuresBlog from "./pages/blog/AirbagFailures";
-import SeatBeltDefectsBlog from "./pages/blog/SeatBeltDefects";
-import LeftTurnAccidentsBlog from "./pages/blog/LeftTurnAccidents";
-import FreewayAccidentsBlog from "./pages/blog/FreewayAccidents";
-import MergingAccidentsBlog from "./pages/blog/MergingAccidents";
-import ConstructionZoneAccidentsBlog from "./pages/blog/ConstructionZoneAccidents";
-import ForkliftAccidentsBlog from "./pages/blog/ForkliftAccidents";
-import ScaffoldingAccidentsBlog from "./pages/blog/ScaffoldingAccidents";
-import LadderAccidentsBlog from "./pages/blog/LadderAccidents";
-import CellTowerAccidentsBlog from "./pages/blog/CellTowerAccidents";
-import ElectricalAccidentsBlog from "./pages/blog/ElectricalAccidents";
-import MachineryAccidentsBlog from "./pages/blog/MachineryAccidents";
-import FallingObjectsBlog from "./pages/blog/FallingObjects";
-import TrenchCollapseBlog from "./pages/blog/TrenchCollapse";
-import RoofingAccidentsBlog from "./pages/blog/RoofingAccidents";
-import HeavyEquipmentBlog from "./pages/blog/HeavyEquipment";
-import AboutPage from "./pages/About";
-import PracticeAreasOverview from "./pages/PracticeAreasOverview";
-import FreeConsultation from "./pages/FreeConsultation";
+import CustomCursor from "./components/CustomCursor";
 import MesotheliomaAsbestos from "./pages/practice-areas/MesotheliomaAsbestos";
 import Defamation from "./pages/practice-areas/Defamation";
 import DefamationCaseEvaluation from "./pages/practice-areas/defamation/CaseEvaluation";
@@ -175,12 +98,14 @@ import CarCaseEvaluation from "./pages/CarCaseEvaluation";
 import CarMedicalGuidance from "./pages/CarMedicalGuidance";
 import CarCompensationCalculator from "./pages/CarCompensationCalculator";
 import TruckAccidentsNew from "./pages/practice-areas/TruckAccidentsNew";
+import MedicalMalpractice from "./pages/practice-areas/MedicalMalpractice";
 import SilicosisInjuries from "./pages/practice-areas/SilicosisInjuries";
 import TalcBabyPowderCancer from "./pages/practice-areas/TalcBabyPowderCancer";
 import TalcCaseEvaluation from "./pages/TalcCaseEvaluation";
 import TalcCompensationCalculator from "./pages/TalcCompensationCalculator";
 import TalcMedicalGuidance from "./pages/TalcMedicalGuidance";
 import BicycleAccidents from "./pages/practice-areas/BicycleAccidents";
+import MotorcycleAccidents from "./pages/practice-areas/MotorcycleAccidents";
 import MotorcycleAccidentsNew from "./pages/practice-areas/MotorcycleAccidentsNew";
 import BicycleCaseEvaluation from "./pages/BicycleCaseEvaluation";
 import BicycleMedicalGuidance from "./pages/BicycleMedicalGuidance";
@@ -308,12 +233,6 @@ import CivilRightsCaseEvaluation from "./pages/practice-areas/civil-rights/CaseE
 import CivilRightsCompensationCalculator from "./pages/practice-areas/civil-rights/CompensationCalculator";
 import CivilRightsLegalGuidance from "./pages/practice-areas/civil-rights/LegalGuidance";
 import ParalysisCaseEvaluation from "./pages/practice-areas/paralysis/CaseEvaluation";
-import LegalRepresentation from "./pages/insurance-insights/LegalRepresentation";
-import EvidencePreservation from "./pages/insurance-insights/EvidencePreservation";
-import MedicalEvaluation from "./pages/insurance-insights/MedicalEvaluation";
-
-import TrialExperience from "./pages/insurance-insights/TrialExperience";
-import StatuteLimitations from "./pages/insurance-insights/StatuteLimitations";
 import ParalysisCompensationCalculator from "./pages/practice-areas/paralysis/CompensationCalculator";
 import ParalysisLegalGuidance from "./pages/practice-areas/paralysis/LegalGuidance";
 import ParalysisMedicalGuidance from "./pages/practice-areas/paralysis/MedicalGuidance";
@@ -327,8 +246,6 @@ import RailroadAccidentsCompensationCalculator from "./pages/practice-areas/rail
 import RailroadAccidentsLegalGuidance from "./pages/practice-areas/railroad-accidents/LegalGuidance";
 import RailroadAccidentsResources from "./pages/practice-areas/railroad-accidents/Resources";
 import RailroadAccidentsMedicalGuidance from "./pages/practice-areas/railroad-accidents/MedicalGuidance";
-import PrivacyPolicy from "./pages/PrivacyPolicy";
-import CalculatorHub from "./pages/CalculatorHub";
 
 const queryClient = new QueryClient();
 
@@ -338,16 +255,12 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
+        <CustomCursor />
         <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
           
           <Navigation />
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/free-consultation" element={<FreeConsultation />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            <Route path="/calculators" element={<CalculatorHub />} />
-            <Route path="/practice-areas" element={<PracticeAreasOverview />} />
             <Route path="/practice-areas/mesothelioma-asbestos" element={<MesotheliomaAsbestos />} />
             <Route path="/practice-areas/defamation" element={<Defamation />} />
             <Route path="/practice-areas/defamation/case-evaluation" element={<DefamationCaseEvaluation />} />
@@ -476,7 +389,7 @@ function App() {
         <Route path="/car-medical-guidance" element={<CarMedicalGuidance />} />
         <Route path="/car-compensation-calculator" element={<CarCompensationCalculator />} />
             <Route path="/practice-areas/truck-18-wheeler" element={<TruckAccidentsNew />} />
-            <Route path="/practice-areas/medical-malpractice" element={<ComingSoon />} />
+            <Route path="/practice-areas/medical-malpractice" element={<MedicalMalpractice />} />
             <Route path="/practice-areas/silicosis-injuries" element={<SilicosisInjuries />} />
             <Route path="/practice-areas/talc-baby-powder-cancer" element={<TalcBabyPowderCancer />} />
             <Route path="/practice-areas/bicycle-accidents" element={<BicycleAccidents />} />
@@ -486,14 +399,6 @@ function App() {
             <Route path="/practice-areas/spinal-cord-injuries" element={<SpinalCordInjuries />} />
             <Route path="/practice-areas/coming-soon" element={<ComingSoon />} />
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
-            
-            {/* Insurance Insights Routes */}
-            <Route path="/legal-representation" element={<LegalRepresentation />} />
-            <Route path="/evidence-preservation" element={<EvidencePreservation />} />
-            <Route path="/medical-evaluation" element={<MedicalEvaluation />} />
-            
-            <Route path="/trial-experience" element={<TrialExperience />} />
-            <Route path="/statute-limitations" element={<StatuteLimitations />} />
           <Route path="/talc-case-evaluation" element={<TalcCaseEvaluation />} />
           <Route path="/talc-compensation-calculator" element={<TalcCompensationCalculator />} />
           <Route path="/talc-medical-guidance" element={<TalcMedicalGuidance />} />
@@ -638,124 +543,6 @@ function App() {
             
             {/* Paralysis Routes also need to be in PracticeAreaRouter */}
             <Route path="/practice-areas/*" element={<PracticeAreaRouter />} />
-            
-            {/* Blog Route */}
-            <Route path="/blog" element={<Blog />} />
-          
-            {/* Blog Category Pages */}
-            <Route path="/blog/auto-accidents" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/brain-injuries" element={<BrainInjuriesBlog />} />
-            <Route path="/blog/medical-malpractice" element={<MedicalMalpracticeBlog />} />
-            <Route path="/blog/motorcycle-accidents" element={<MotorcycleAccidentsBlog />} />
-            <Route path="/blog/truck-accidents" element={<TruckAccidentsBlog />} />
-            <Route path="/blog/pedestrian-accidents" element={<PedestrianAccidentsBlog />} />
-            <Route path="/blog/bicycle-accidents" element={<BicycleAccidentsBlog />} />
-            <Route path="/blog/workplace-injuries" element={<WorkplaceInjuriesBlog />} />
-            {/* Placeholder routes - will be implemented */}
-            <Route path="/blog/accident-response" element={<AccidentResponseBlog />} />
-            <Route path="/blog/animal-attacks" element={<DogBitesBlog />} />
-            <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
-            <Route path="/blog/slip-and-fall" element={<SlipAndFallBlog />} />
-            <Route path="/blog/spinal-cord-injuries" element={<SpinalCordInjuriesBlog />} />
-            <Route path="/blog/burn-injuries" element={<BurnInjuriesBlog />} />
-            <Route path="/blog/construction-accidents" element={<ConstructionAccidentsBlog />} />
-            <Route path="/blog/defective-products" element={<DefectiveProductsBlog />} />
-            <Route path="/blog/auto-safety" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/case-protection" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/case-resolution" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/case-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/catastrophic-injuries" element={<CatastrophicInjuriesBlog />} />
-            <Route path="/blog/common-injuries" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/compensation" element={<CompensationBlog />} />
-            <Route path="/blog/complex-litigation" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/damages-calculation" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/elder-abuse" element={<ElderAbuseBlog />} />
-            <Route path="/blog/emotional-trauma" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/evidence" element={<EvidenceBlog />} />
-            <Route path="/blog/family-impact" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
-            <Route path="/blog/insurance-coverage" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/insurance-defense" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-concepts" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-deadlines" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-education" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-fees" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-guidance" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-insights" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-process" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-remedies" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/premises-liability" element={<PremisesLiabilityBlog />} />
-            <Route path="/blog/product-liability" element={<ProductLiabilityBlog />} />
-            <Route path="/blog/rideshare-accidents" element={<RideshareAccidentsBlog />} />
-            <Route path="/blog/government-liability" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/insurance-claims" element={<InsuranceClaimsBlog />} />
-            <Route path="/blog/insurance-coverage" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/insurance-defense" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-concepts" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-deadlines" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-education" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-fees" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-guidance" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-insights" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-process" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-remedies" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/legal-strategy" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/premises-liability" element={<PremisesLiabilityBlog />} />
-            <Route path="/blog/product-liability" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/rideshare-accidents" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/serious-injuries" element={<AutoAccidentsBlog />} />
-            <Route path="/blog/settlement-strategy" element={<SettlementStrategyBlog />} />
-            <Route path="/blog/wrongful-death" element={<WrongfulDeathBlog />} />
-            <Route path="/blog/amputation" element={<AmputationBlog />} />
-            <Route path="/blog/paralysis" element={<ParalysisBlog />} />
-            <Route path="/blog/scarring-disfigurement" element={<ScarringDisfigurementBlog />} />
-            <Route path="/blog/whiplash" element={<WhiplashBlog />} />
-            <Route path="/blog/broken-bones" element={<BrokenBonesBlog />} />
-            <Route path="/blog/internal-injuries" element={<InternalInjuriesBlog />} />
-            <Route path="/blog/back-injuries" element={<BackInjuriesBlog />} />
-            <Route path="/blog/soft-tissue-injuries" element={<SoftTissueInjuriesBlog />} />
-            <Route path="/blog/hit-and-run" element={<HitAndRunBlog />} />
-            <Route path="/blog/traumatic-brain-injury" element={<TraumaticBrainInjuryBlog />} />
-            <Route path="/blog/dog-bites" element={<DogBitesBlog />} />
-            <Route path="/blog/uninsured-motorist" element={<UninsuredMotoristBlog />} />
-            <Route path="/blog/commercial-vehicle-accidents" element={<CommercialVehicleBlog />} />
-            <Route path="/blog/intersection-accidents" element={<IntersectionAccidentsBlog />} />
-            <Route path="/blog/distracted-driving" element={<DistractedDrivingBlog />} />
-            <Route path="/blog/drunk-driving-accidents" element={<DrunkDrivingBlog />} />
-            <Route path="/blog/rear-end-collisions" element={<RearEndCollisionsBlog />} />
-            <Route path="/blog/t-bone-accidents" element={<TBoneAccidentsBlog />} />
-            <Route path="/blog/head-on-collisions" element={<HeadOnCollisionsBlog />} />
-            <Route path="/blog/rollover-accidents" element={<RolloverAccidentsBlog />} />
-            <Route path="/blog/multi-vehicle-accidents" element={<MultiVehicleBlog />} />
-            <Route path="/blog/parking-lot-accidents" element={<ParkingLotBlog />} />
-            <Route path="/blog/school-bus-accidents" element={<SchoolBusAccidentsBlog />} />
-            <Route path="/blog/sideswipe-accidents" element={<SideswipeAccidentsBlog />} />
-            <Route path="/blog/single-vehicle-accidents" element={<SingleVehicleBlog />} />
-            <Route path="/blog/low-speed-accidents" element={<LowSpeedAccidentsBlog />} />
-            <Route path="/blog/high-speed-crashes" element={<HighSpeedCrashesBlog />} />
-            <Route path="/blog/weather-accidents" element={<WeatherAccidentsBlog />} />
-            <Route path="/blog/nighttime-accidents" element={<NightAccidentsBlog />} />
-            <Route path="/blog/road-rage-accidents" element={<RoadRageBlog />} />
-            <Route path="/blog/tire-blowouts" element={<TireBlowoutsBlog />} />
-            <Route path="/blog/defensive-driver-accidents" element={<DefensiveDriverBlog />} />
-            <Route path="/blog/airbag-failures" element={<AirbagFailuresBlog />} />
-            <Route path="/blog/seat-belt-defects" element={<SeatBeltDefectsBlog />} />
-            <Route path="/blog/left-turn-accidents" element={<LeftTurnAccidentsBlog />} />
-            <Route path="/blog/freeway-accidents" element={<FreewayAccidentsBlog />} />
-            <Route path="/blog/merging-accidents" element={<MergingAccidentsBlog />} />
-            <Route path="/blog/construction-zone-accidents" element={<ConstructionZoneAccidentsBlog />} />
-            <Route path="/blog/forklift-accidents" element={<ForkliftAccidentsBlog />} />
-            <Route path="/blog/scaffolding-accidents" element={<ScaffoldingAccidentsBlog />} />
-            <Route path="/blog/ladder-accidents" element={<LadderAccidentsBlog />} />
-            <Route path="/blog/cell-tower-accidents" element={<CellTowerAccidentsBlog />} />
-            <Route path="/blog/electrical-accidents" element={<ElectricalAccidentsBlog />} />
-            <Route path="/blog/machinery-accidents" element={<MachineryAccidentsBlog />} />
-            <Route path="/blog/falling-objects" element={<FallingObjectsBlog />} />
-            <Route path="/blog/trench-collapse" element={<TrenchCollapseBlog />} />
-            <Route path="/blog/roofing-accidents" element={<RoofingAccidentsBlog />} />
-            <Route path="/blog/heavy-equipment-accidents" element={<HeavyEquipmentBlog />} />
             
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />

@@ -1,380 +1,462 @@
-import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { Calculator, ArrowLeft, ArrowRight, DollarSign, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
+import { Calculator, DollarSign, TrendingUp, AlertCircle, Phone, Mail } from 'lucide-react';
+import GoBack from '@/components/GoBack';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
+import compensationImage from '@/assets/personal-injury-compensation-calculator.jpg';
 
-interface FormData {
+interface CalculatorInputs {
   injuryType: string;
   medicalExpenses: string;
   lostWages: string;
-  severity: string;
-  liability: string;
-  recoveryTime: string;
+  futureMedical: string;
+  painSuffering: number[];
+  ageRange: string;
+  treatmentDuration: string;
+  disability: string;
+  faultPercentage: number[];
 }
 
-const PersonalInjuryCompensationCalculator = () => {
-  const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState<FormData>({
+const CompensationCalculator: React.FC = () => {
+  const [inputs, setInputs] = useState<CalculatorInputs>({
     injuryType: '',
     medicalExpenses: '',
     lostWages: '',
-    severity: '',
-    liability: '',
-    recoveryTime: ''
+    futureMedical: '',
+    painSuffering: [5],
+    ageRange: '',
+    treatmentDuration: '',
+    disability: '',
+    faultPercentage: [0]
   });
-  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
+  const [results, setResults] = useState({
+    economicDamages: 0,
+    nonEconomicDamages: 0,
+    totalCompensation: 0,
+    adjustedCompensation: 0
+  });
+
+  useScrollRestoration();
 
   const calculateCompensation = () => {
-    let baseMin = 10000;
-    let baseMax = 30000;
-
-    const injuryMultipliers: Record<string, number> = {
-      'soft-tissue': 1.2,
-      'fracture': 2.0,
-      'concussion': 2.5,
-      'severe-injury': 4.0,
-      'permanent-disability': 6.0
+    const medicalExp = parseFloat(inputs.medicalExpenses) || 0;
+    const lostWages = parseFloat(inputs.lostWages) || 0;
+    const futureMed = parseFloat(inputs.futureMedical) || 0;
+    
+    // Economic damages are straightforward
+    const economicDamages = medicalExp + lostWages + futureMed;
+    
+    // Non-economic damages calculation based on various factors
+    let nonEconomicMultiplier = inputs.painSuffering[0];
+    
+    // Adjust multiplier based on injury type
+    const injuryMultipliers = {
+      'brain-injury': 5.0,
+      'spinal-cord': 4.5,
+      'amputation': 4.0,
+      'severe-burns': 3.5,
+      'multiple-fractures': 3.0,
+      'single-fracture': 2.0,
+      'soft-tissue': 1.5,
+      'minor-injuries': 1.0
     };
-
-    const multiplier = injuryMultipliers[formData.injuryType] || 1;
-    baseMin *= multiplier;
-    baseMax *= multiplier;
-
-    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
-    baseMin += medicalExpenses * 2;
-    baseMax += medicalExpenses * 5;
-
-    const lostWages = parseInt(formData.lostWages) || 0;
-    baseMin += lostWages * 1.5;
-    baseMax += lostWages * 3;
-
-    const severityMultipliers: Record<string, number> = {
-      'minor': 1.1,
-      'moderate': 1.4,
-      'severe': 1.8,
-      'life-threatening': 2.5
+    
+    const injuryMultiplier = injuryMultipliers[inputs.injuryType as keyof typeof injuryMultipliers] || 2.0;
+    
+    // Age factor (younger victims typically get higher awards)
+    const ageMultipliers = {
+      'under-25': 1.3,
+      '25-40': 1.2,
+      '41-55': 1.1,
+      '56-65': 1.0,
+      'over-65': 0.9
     };
-    const sevMult = severityMultipliers[formData.severity] || 1;
-    baseMin *= sevMult;
-    baseMax *= sevMult;
-
+    
+    const ageMultiplier = ageMultipliers[inputs.ageRange as keyof typeof ageMultipliers] || 1.0;
+    
+    // Treatment duration factor
+    const durationMultipliers = {
+      'days': 0.8,
+      'weeks': 1.0,
+      'months': 1.3,
+      'years': 1.6,
+      'permanent': 2.0
+    };
+    
+    const durationMultiplier = durationMultipliers[inputs.treatmentDuration as keyof typeof durationMultipliers] || 1.0;
+    
+    // Disability factor
+    const disabilityMultipliers = {
+      'none': 1.0,
+      'temporary': 1.4,
+      'partial': 1.8,
+      'total': 2.5
+    };
+    
+    const disabilityMultiplier = disabilityMultipliers[inputs.disability as keyof typeof disabilityMultipliers] || 1.0;
+    
+    // Calculate base non-economic damages
+    const baseNonEconomic = medicalExp * nonEconomicMultiplier * injuryMultiplier * ageMultiplier * durationMultiplier * disabilityMultiplier;
+    
+    // Add pain and suffering for lost wages and future impacts
+    const additionalNonEconomic = (lostWages + futureMed) * (nonEconomicMultiplier * 0.5);
+    
+    const nonEconomicDamages = baseNonEconomic + additionalNonEconomic;
+    
+    const totalCompensation = economicDamages + nonEconomicDamages;
+    
+    // Apply comparative fault reduction
+    const faultReduction = inputs.faultPercentage[0] / 100;
+    const adjustedCompensation = totalCompensation * (1 - faultReduction);
+    
     setResults({
-      min: Math.round(baseMin),
-      max: Math.round(baseMax)
+      economicDamages,
+      nonEconomicDamages,
+      totalCompensation,
+      adjustedCompensation
     });
-    setStep(3);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  useEffect(() => {
     calculateCompensation();
+  }, [inputs]);
+
+  const handleInputChange = (field: keyof CalculatorInputs, value: any) => {
+    setInputs(prev => ({ ...prev, [field]: value }));
   };
 
-  const isStepComplete = () => {
-    if (step === 1) return formData.injuryType && formData.severity;
-    if (step === 2) return formData.medicalExpenses && formData.lostWages && formData.liability && formData.recoveryTime;
-    return false;
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Personal Injury Calculator | Free Compensation Estimate | Trembach Law</title>
-        <meta name="description" content="Calculate your personal injury compensation instantly. Free estimates for slip and fall, assault, negligence, and other injury claims." />
-      </Helmet>
-
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200 bg-white">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline transition-colors">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+    <div className="min-h-screen bg-background">
+      <GoBack />
+      
+      {/* Hero Section */}
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${compensationImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Personal Injury Compensation Calculator
+          </h1>
+          <p className="text-xl mb-6 text-white">
+            Get an estimate of your potential personal injury settlement in California
+          </p>
+          <div className="flex flex-wrap justify-center gap-4 text-sm">
+            <Badge className="bg-blue-600 text-white">
+              <Calculator className="w-4 h-4 mr-1" />
+              Free Estimate
+            </Badge>
+            <Badge className="bg-green-600 text-white">
+              <TrendingUp className="w-4 h-4 mr-1" />
+              California Law Based
+            </Badge>
           </div>
         </div>
+      </section>
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-                Personal Injury<br />Calculator
-              </h1>
-              <p className="text-xl md:text-2xl text-slate-600 font-light leading-relaxed">
-                Estimate your case value in minutes
-              </p>
-            </div>
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Calculator Inputs */}
+          <div className="space-y-6">
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Calculator className="w-5 h-5 mr-2" />
+                  Injury Details
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Type of Injury</label>
+                  <Select value={inputs.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select injury type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="brain-injury">Traumatic Brain Injury</SelectItem>
+                      <SelectItem value="spinal-cord">Spinal Cord Injury</SelectItem>
+                      <SelectItem value="amputation">Amputation</SelectItem>
+                      <SelectItem value="severe-burns">Severe Burns</SelectItem>
+                      <SelectItem value="multiple-fractures">Multiple Fractures</SelectItem>
+                      <SelectItem value="single-fracture">Single Fracture</SelectItem>
+                      <SelectItem value="soft-tissue">Soft Tissue Injury</SelectItem>
+                      <SelectItem value="minor-injuries">Minor Injuries</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Age Range</label>
+                  <Select value={inputs.ageRange} onValueChange={(value) => handleInputChange('ageRange', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select age range" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-25">Under 25</SelectItem>
+                      <SelectItem value="25-40">25-40</SelectItem>
+                      <SelectItem value="41-55">41-55</SelectItem>
+                      <SelectItem value="56-65">56-65</SelectItem>
+                      <SelectItem value="over-65">Over 65</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Treatment Duration</label>
+                  <Select value={inputs.treatmentDuration} onValueChange={(value) => handleInputChange('treatmentDuration', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select treatment duration" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="days">Days</SelectItem>
+                      <SelectItem value="weeks">Weeks</SelectItem>
+                      <SelectItem value="months">Months</SelectItem>
+                      <SelectItem value="years">Years</SelectItem>
+                      <SelectItem value="permanent">Permanent/Ongoing</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Disability Level</label>
+                  <Select value={inputs.disability} onValueChange={(value) => handleInputChange('disability', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select disability level" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="none">No Disability</SelectItem>
+                      <SelectItem value="temporary">Temporary Disability</SelectItem>
+                      <SelectItem value="partial">Partial Permanent Disability</SelectItem>
+                      <SelectItem value="total">Total Permanent Disability</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <DollarSign className="w-5 h-5 mr-2" />
+                  Financial Information
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Medical Expenses (to date)</label>
+                  <Input
+                    type="number"
+                    value={inputs.medicalExpenses}
+                    onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                    placeholder="Enter total medical expenses"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Lost Wages (to date)</label>
+                  <Input
+                    type="number"
+                    value={inputs.lostWages}
+                    onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                    placeholder="Enter lost wages"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">Future Medical Costs (estimated)</label>
+                  <Input
+                    type="number"
+                    value={inputs.futureMedical}
+                    onChange={(e) => handleInputChange('futureMedical', e.target.value)}
+                    placeholder="Enter estimated future medical costs"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Pain & Suffering Severity: {inputs.painSuffering[0]}x
+                  </label>
+                  <Slider
+                    value={inputs.painSuffering}
+                    onValueChange={(value) => handleInputChange('painSuffering', value)}
+                    max={10}
+                    min={1}
+                    step={0.5}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <span>Minimal (1x)</span>
+                    <span>Severe (10x)</span>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium mb-2">
+                    Your Fault Percentage: {inputs.faultPercentage[0]}%
+                  </label>
+                  <Slider
+                    value={inputs.faultPercentage}
+                    onValueChange={(value) => handleInputChange('faultPercentage', value)}
+                    max={100}
+                    min={0}
+                    step={5}
+                    className="w-full"
+                  />
+                  <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                    <span>0% (Not at fault)</span>
+                    <span>100% (Completely at fault)</span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
-        </section>
 
-        <div className="border-b border-slate-200 bg-white">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="flex justify-center items-center py-8 space-x-4">
-              {[1, 2, 3].map((num) => (
-                <React.Fragment key={num}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold transition-all ${step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                    {num}
+          {/* Results */}
+          <div className="space-y-6">
+            <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-200">
+              <CardHeader>
+                <CardTitle className="text-blue-800">Compensation Estimate</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-white p-4 rounded-lg">
+                    <h4 className="font-semibold text-sm text-muted-foreground">Economic Damages</h4>
+                    <p className="text-2xl font-bold text-green-600">{formatCurrency(results.economicDamages)}</p>
                   </div>
-                  {num < 3 && <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <section className="py-16">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <form onSubmit={handleSubmit} className="space-y-12">
-              {step === 1 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Your injury details</h2>
-                    <p className="text-slate-600">Help us understand what happened</p>
+                  <div className="bg-white p-4 rounded-lg">
+                    <h4 className="font-semibold text-sm text-muted-foreground">Non-Economic Damages</h4>
+                    <p className="text-2xl font-bold text-blue-600">{formatCurrency(results.nonEconomicDamages)}</p>
                   </div>
+                </div>
 
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Type of injury sustained</label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'soft-tissue', label: 'Soft Tissue / Sprains' },
-                          { value: 'fracture', label: 'Broken Bones' },
-                          { value: 'concussion', label: 'Concussion / Head Injury' },
-                          { value: 'severe-injury', label: 'Severe Trauma' },
-                          { value: 'permanent-disability', label: 'Permanent Disability' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('injuryType', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.injuryType === option.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                <div className="bg-white p-4 rounded-lg border-2 border-primary">
+                  <h4 className="font-semibold text-sm text-muted-foreground">Total Before Fault Adjustment</h4>
+                  <p className="text-3xl font-bold text-primary">{formatCurrency(results.totalCompensation)}</p>
+                </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Severity of injury</label>
-                      <div className="grid grid-cols-2 gap-3">
-                        {[
-                          { value: 'minor', label: 'Minor' },
-                          { value: 'moderate', label: 'Moderate' },
-                          { value: 'severe', label: 'Severe' },
-                          { value: 'life-threatening', label: 'Life-Threatening' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('severity', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.severity === option.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
+                {inputs.faultPercentage[0] > 0 && (
+                  <div className="bg-white p-4 rounded-lg border-2 border-red-500">
+                    <h4 className="font-semibold text-sm text-muted-foreground">
+                      Adjusted for {inputs.faultPercentage[0]}% Fault
+                    </h4>
+                    <p className="text-3xl font-bold text-red-600">{formatCurrency(results.adjustedCompensation)}</p>
                   </div>
+                )}
+              </CardContent>
+            </Card>
 
-                  <button
-                    type="button"
-                    onClick={() => setStep(2)}
-                    disabled={!isStepComplete()}
-                    className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
+            <Card className="bg-yellow-50 border-yellow-200">
+              <CardHeader>
+                <CardTitle className="flex items-center text-yellow-800">
+                  <AlertCircle className="w-5 h-5 mr-2" />
+                  Important Disclaimers
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="text-sm space-y-2">
+                <p>• This calculator provides estimates only and should not be considered legal advice</p>
+                <p>• Actual settlements depend on numerous factors including evidence quality, jurisdiction, and negotiation skills</p>
+                <p>• California uses pure comparative negligence - you can recover even if partially at fault</p>
+                <p>• Economic damages include medical bills, lost wages, and property damage</p>
+                <p>• Non-economic damages include pain, suffering, and loss of enjoyment of life</p>
+                <p>• Punitive damages may apply in cases involving malicious or reckless conduct</p>
+                <p>• Settlement ranges can vary significantly based on individual circumstances</p>
+                <p>• Insurance policy limits may cap available compensation</p>
+                <p>• Attorney experience and reputation significantly impact results</p>
+                <p>• Consultation with an experienced attorney is essential for accurate case evaluation</p>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Factors That Increase Compensation</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-2 text-sm">
+                  <li>• Clear evidence of defendant negligence</li>
+                  <li>• Severe or permanent injuries</li>
+                  <li>• High medical expenses and treatment costs</li>
+                  <li>• Significant lost wages or earning capacity</li>
+                  <li>• Young age of victim</li>
+                  <li>• Strong supporting medical evidence</li>
+                  <li>• Credible witness testimony</li>
+                  <li>• Professional or expert witness support</li>
+                  <li>• Defendant's ability to pay (insurance coverage)</li>
+                  <li>• Sympathetic jury appeal</li>
+                </ul>
+              </CardContent>
+            </Card>
+
+            <Card>
+              <CardHeader>
+                <CardTitle>Get a Professional Evaluation</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <p className="text-sm">
+                  While this calculator provides helpful estimates, every case is unique. 
+                  For an accurate assessment of your personal injury claim's value, 
+                  consult with our experienced California personal injury attorneys.
+                </p>
+                <div className="flex flex-col gap-2">
+                  <Button 
+                    onClick={() => window.location.href = '/practice-areas/general-personal-injury/case-evaluation'}
+                    className="bg-red-600 hover:bg-red-700"
                   >
-                    Continue
-                    <ArrowRight className="ml-2" size={20} />
-                  </button>
+                    Get Free Case Evaluation
+                  </Button>
+                  <Button 
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                    variant="outline"
+                    className="border-green-600 text-green-600 hover:bg-green-600 hover:text-white"
+                  >
+                    <Phone className="w-4 h-4 mr-2" />
+                    Call (818) 123-4567
+                  </Button>
+                  <Button 
+                    onClick={() => window.location.href = 'mailto:info@trembachlawfirm.com'}
+                    variant="outline"
+                  >
+                    <Mail className="w-4 h-4 mr-2" />
+                    Email Us
+                  </Button>
                 </div>
-              )}
-
-              {step === 2 && (
-                <div className="space-y-8 animate-fade-in">
-                  <div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Financial impact</h2>
-                    <p className="text-slate-600">Calculate your total damages</p>
-                  </div>
-
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Total medical expenses</label>
-                      <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
-                        <input
-                          type="number"
-                          placeholder="0"
-                          value={formData.medicalExpenses}
-                          onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
-                          className="w-full h-14 pl-8 pr-4 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none text-lg font-medium transition-colors"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Lost wages / income</label>
-                      <div className="relative">
-                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 font-medium">$</span>
-                        <input
-                          type="number"
-                          placeholder="0"
-                          value={formData.lostWages}
-                          onChange={(e) => handleInputChange('lostWages', e.target.value)}
-                          className="w-full h-14 pl-8 pr-4 rounded-2xl border-2 border-slate-200 focus:border-slate-900 focus:outline-none text-lg font-medium transition-colors"
-                        />
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Liability clarity</label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'clear', label: 'Clear Fault' },
-                          { value: 'mostly-clear', label: 'Mostly Clear' },
-                          { value: 'disputed', label: 'Disputed' },
-                          { value: 'unclear', label: 'Unclear' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('liability', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.liability === option.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-900 mb-3">Expected recovery time</label>
-                      <div className="grid md:grid-cols-2 gap-3">
-                        {[
-                          { value: 'weeks', label: 'Weeks' },
-                          { value: 'months', label: 'Months' },
-                          { value: 'year-plus', label: '1+ Years' },
-                          { value: 'permanent', label: 'Permanent' }
-                        ].map((option) => (
-                          <button
-                            key={option.value}
-                            type="button"
-                            onClick={() => handleInputChange('recoveryTime', option.value)}
-                            className={`p-4 rounded-2xl border-2 text-left transition-all ${formData.recoveryTime === option.value ? 'border-slate-900 bg-slate-50' : 'border-slate-200 hover:border-slate-400'}`}
-                          >
-                            <span className="font-medium text-slate-900">{option.label}</span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-4">
-                    <button
-                      type="button"
-                      onClick={() => setStep(1)}
-                      className="h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 font-semibold transition-all inline-flex items-center justify-center"
-                    >
-                      <ArrowLeft className="mr-2" size={20} />
-                      Back
-                    </button>
-                    <button
-                      type="submit"
-                      disabled={!isStepComplete()}
-                      className="flex-1 h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 disabled:bg-slate-200 disabled:text-slate-400 disabled:cursor-not-allowed font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center"
-                    >
-                      Calculate Compensation
-                      <Calculator className="ml-2" size={20} />
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && results && (
-                <div className="space-y-8 animate-fade-in">
-                  <div className="text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 bg-green-100 rounded-full mb-6">
-                      <DollarSign className="text-green-600" size={32} />
-                    </div>
-                    <h2 className="text-3xl font-bold text-slate-900 mb-2">Your Estimated Compensation</h2>
-                    <p className="text-slate-600">Based on your injury details</p>
-                  </div>
-
-                  <div className="bg-slate-50 rounded-3xl p-8 md:p-12 text-center border border-slate-200">
-                    <div className="text-6xl md:text-7xl font-bold text-slate-900 mb-4">
-                      ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                    </div>
-                    <p className="text-xl text-slate-600">Potential settlement range</p>
-                  </div>
-
-                  <div className="bg-blue-50 rounded-2xl p-6 border border-blue-200">
-                    <div className="flex items-start gap-4">
-                      <AlertCircle className="text-blue-600 shrink-0 mt-1" size={24} />
-                      <div>
-                        <h3 className="font-semibold text-slate-900 mb-2">Important Note</h3>
-                        <p className="text-slate-700 leading-relaxed">
-                          This is an estimate. Actual compensation depends on liability strength, insurance policy limits, and case-specific factors. Get a free consultation for an accurate evaluation.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="space-y-4">
-                    <Link
-                      to="/free-consultation"
-                      className="w-full h-14 px-8 rounded-full bg-slate-900 text-white hover:bg-slate-800 visited:text-white font-semibold transition-all hover:shadow-lg inline-flex items-center justify-center no-underline"
-                    >
-                      Get Free Case Review
-                      <ArrowRight className="ml-2" size={20} />
-                    </Link>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setStep(1);
-                        setResults(null);
-                        setFormData({
-                          injuryType: '',
-                          medicalExpenses: '',
-                          lostWages: '',
-                          severity: '',
-                          liability: '',
-                          recoveryTime: ''
-                        });
-                      }}
-                      className="w-full h-14 px-8 rounded-full border-2 border-slate-900 text-slate-900 hover:bg-slate-50 visited:text-slate-900 font-semibold transition-all inline-flex items-center justify-center no-underline"
-                    >
-                      Calculate Another Case
-                    </button>
-                  </div>
-                </div>
-              )}
-            </form>
+              </CardContent>
+            </Card>
           </div>
-        </section>
+        </div>
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Free</div>
-                <p className="text-slate-600">No fees unless we win</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
-                <p className="text-slate-600">Available anytime</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Fast</div>
-                <p className="text-slate-600">Quick response guaranteed</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+        {/* Legal Disclaimer */}
+        <div className="mt-12 p-6 bg-gray-100 rounded-lg text-center">
+          <h3 className="text-lg font-bold mb-2">Legal Disclaimer</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            This compensation calculator is for informational purposes only and does not constitute legal advice. 
+            The estimates provided are based on general factors and statistical averages for California personal injury cases. 
+            Actual case values depend on numerous specific factors including the strength of evidence, quality of legal representation, 
+            jurisdiction, jury composition, and individual case circumstances. No guarantee is made regarding the accuracy of these estimates 
+            or the outcome of any particular case. Trembach Law Firm is a newly established practice with no prior case results to report. 
+            Past results do not guarantee future outcomes. For accurate case evaluation, please consult with a qualified personal injury attorney.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 };
 
-export default PersonalInjuryCompensationCalculator;
+export default CompensationCalculator;

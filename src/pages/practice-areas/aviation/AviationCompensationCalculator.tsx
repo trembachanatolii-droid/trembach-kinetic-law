@@ -1,310 +1,341 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults } from '@/components/calculator/CalculatorResults';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults as Results } from '@/hooks/useCalculatorForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calculator, DollarSign, AlertTriangle } from 'lucide-react';
+import heroBackground from '@/assets/aviation-calculator-hero.jpg';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
-interface AviationFormData extends CalculatorFormData {
-  accidentType: string;
-  injurySeverity: string;
-  medicalCosts: string;
-  age: string;
-  income: string;
-  aircraftType: string;
-}
+const AviationCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    age: '',
+    income: '',
+    accidentType: '',
+    injurySeverity: '',
+    medicalExpenses: '',
+    timeOffWork: ''
+  });
+  const [results, setResults] = useState<any>(null);
 
-const initialFormData: AviationFormData = {
-  accidentType: '',
-  injurySeverity: '',
-  medicalCosts: '',
-  age: '',
-  income: '',
-  aircraftType: ''
-};
+  const calculateCompensation = () => {
+    const age = parseInt(formData.age) || 0;
+    const income = parseInt(formData.income) || 0;
+    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
+    
+    let baseCompensation = 0;
+    let multiplier = 1;
 
-const calculateCompensation = (data: AviationFormData): Results => {
-  let baseMin = 500000;
-  let baseMax = 3000000;
-
-  const accidentMultipliers: Record<string, number> = {
-    'commercial-crash': 3.0,
-    'private-crash': 2.0,
-    'helicopter-crash': 2.5,
-    'midair-collision': 3.5,
-    'runway-accident': 1.5,
-    'in-flight-injury': 1.2
-  };
-  const accidentMult = accidentMultipliers[data.accidentType] || 1;
-
-  const severityMultipliers: Record<string, number> = {
-    'minor': 0.5,
-    'moderate': 1.0,
-    'severe': 2.0,
-    'catastrophic': 3.5,
-    'wrongful-death': 4.0
-  };
-  const severityMult = severityMultipliers[data.injurySeverity] || 1;
-
-  const medicalAdd = parseInt(data.medicalCosts) || 0;
-  const annualIncome = parseInt(data.income) || 0;
-  const age = parseInt(data.age) || 45;
-  const yearsToRetirement = Math.max(0, 67 - age);
-  const lostEarnings = annualIncome * yearsToRetirement * 0.7;
-
-  const aircraftMultipliers: Record<string, number> = {
-    'commercial-airline': 1.5,
-    'private-jet': 1.3,
-    'small-aircraft': 1.0,
-    'helicopter': 1.2,
-    'charter': 1.1
-  };
-  const aircraftMult = aircraftMultipliers[data.aircraftType] || 1;
-
-  const min = Math.round((baseMin * accidentMult * severityMult * aircraftMult) + medicalAdd + lostEarnings);
-  const max = Math.round((baseMax * accidentMult * severityMult * aircraftMult) + (medicalAdd * 3) + (lostEarnings * 1.5));
-
-  return { min, max };
-};
-
-const validateStep = (data: AviationFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.accidentType && data.aircraftType && data.injurySeverity);
-  }
-  if (step === 2) {
-    return !!(data.medicalCosts && data.age && data.income);
-  }
-  return true;
-};
-
-export default function AviationCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<AviationFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
-
-  const renderStep1 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Accident</label>
-        <Select value={formData.accidentType} onValueChange={(value) => updateField('accidentType', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select accident type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="commercial-crash">Commercial Plane Crash</SelectItem>
-            <SelectItem value="private-crash">Private Plane Crash</SelectItem>
-            <SelectItem value="helicopter-crash">Helicopter Crash</SelectItem>
-            <SelectItem value="midair-collision">Midair Collision</SelectItem>
-            <SelectItem value="runway-accident">Runway Accident</SelectItem>
-            <SelectItem value="in-flight-injury">In-Flight Injury (Turbulence, etc.)</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Aircraft Type</label>
-        <Select value={formData.aircraftType} onValueChange={(value) => updateField('aircraftType', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select aircraft type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="commercial-airline">Commercial Airline</SelectItem>
-            <SelectItem value="private-jet">Private Jet</SelectItem>
-            <SelectItem value="small-aircraft">Small Aircraft (Cessna, etc.)</SelectItem>
-            <SelectItem value="helicopter">Helicopter</SelectItem>
-            <SelectItem value="charter">Charter Flight</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Injury Severity</label>
-        <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select severity" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="minor">Minor Injuries</SelectItem>
-            <SelectItem value="moderate">Moderate Injuries</SelectItem>
-            <SelectItem value="severe">Severe Injuries</SelectItem>
-            <SelectItem value="catastrophic">Catastrophic Injuries</SelectItem>
-            <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Total Medical Costs</label>
-        <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select cost range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="50000">Under $100,000</SelectItem>
-            <SelectItem value="200000">$100,000 - $300,000</SelectItem>
-            <SelectItem value="500000">$300,000 - $700,000</SelectItem>
-            <SelectItem value="1000000">$700,000 - $1,300,000</SelectItem>
-            <SelectItem value="2000000">Over $1,300,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Your Age</label>
-        <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select age range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="25">Under 30</SelectItem>
-            <SelectItem value="35">30-40</SelectItem>
-            <SelectItem value="45">40-50</SelectItem>
-            <SelectItem value="55">50-60</SelectItem>
-            <SelectItem value="65">60+</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Annual Income</label>
-        <Select value={formData.income} onValueChange={(value) => updateField('income', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select income range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="40000">Under $50,000</SelectItem>
-            <SelectItem value="75000">$50,000 - $100,000</SelectItem>
-            <SelectItem value="125000">$100,000 - $150,000</SelectItem>
-            <SelectItem value="200000">$150,000 - $250,000</SelectItem>
-            <SelectItem value="350000">Over $250,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const damageCategories = [
-    {
-      title: 'Medical Expenses',
-      description: 'Emergency care, surgery, rehabilitation, long-term treatment'
-    },
-    {
-      title: 'Lost Income',
-      description: 'Past and future lost earnings, reduced earning capacity'
-    },
-    {
-      title: 'Pain and Suffering',
-      description: 'Physical pain, emotional trauma, PTSD, loss of quality of life'
-    },
-    {
-      title: 'Aviation Liability',
-      description: 'Pilot negligence, aircraft defects, maintenance failures, air traffic control errors'
+    // Aviation accident base values are higher due to catastrophic nature
+    switch (formData.accidentType) {
+      case 'commercial-airline':
+        baseCompensation = 2500000;
+        multiplier = 1.5;
+        break;
+      case 'private-plane':
+        baseCompensation = 1800000;
+        multiplier = 1.3;
+        break;
+      case 'helicopter':
+        baseCompensation = 2200000;
+        multiplier = 1.4;
+        break;
+      case 'military':
+        baseCompensation = 2000000;
+        multiplier = 1.2;
+        break;
+      default:
+        baseCompensation = 1500000;
     }
-  ];
 
-  const disclaimer = "This estimate is for informational purposes only. Aviation accidents involve complex federal regulations including the Federal Aviation Act and Warsaw/Montreal Conventions for international flights. Liability may involve aircraft manufacturers, airlines, maintenance providers, and others. Actual compensation depends on specific circumstances, applicable laws, and degree of negligence.";
+    // Injury severity adjustment
+    switch (formData.injurySeverity) {
+      case 'catastrophic':
+        multiplier *= 2.5;
+        break;
+      case 'severe':
+        multiplier *= 2.0;
+        break;
+      case 'moderate':
+        multiplier *= 1.5;
+        break;
+      case 'minor':
+        multiplier *= 1.0;
+        break;
+    }
+
+    // Age factor - younger victims typically receive higher awards
+    if (age < 40) multiplier *= 1.3;
+    else if (age < 60) multiplier *= 1.1;
+
+    // Income-based calculation for economic damages
+    const yearsOfWork = Math.max(0, 65 - age);
+    const lostEarnings = income * yearsOfWork * 0.8; // Present value factor
+
+    const totalCompensation = (baseCompensation * multiplier) + lostEarnings + medicalExpenses;
+
+    setResults({
+      estimatedRange: {
+        low: Math.round(totalCompensation * 0.7),
+        high: Math.round(totalCompensation * 1.3)
+      },
+      components: {
+        economic: Math.round(lostEarnings + medicalExpenses),
+        nonEconomic: Math.round(baseCompensation * multiplier),
+        punitive: Math.round(totalCompensation * 0.2) // Potential punitive damages
+      }
+    });
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Aviation Accident Compensation Calculator | Plane Crash Claims</title>
-        <meta name="description" content="Calculate potential compensation for aviation accidents and plane crashes. Free catastrophic injury estimates." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="Aviation Accident Compensation Calculator | Estimate Your Case Value California"
+        description="Calculate potential compensation for your aviation accident case. Free tool estimates airplane crash and helicopter accident settlement values in California."
+        keywords="aviation accident compensation calculator, airplane crash settlement, helicopter accident damages, California aviation injury compensation"
+        canonical="https://www.trembachlawfirm.com/aviation/compensation-calculator"
+        structuredData={{
+          "@context": "https://schema.org",
+          "@type": "WebApplication",
+          "name": "Aviation Accident Compensation Calculator",
+          "description": "Calculate potential compensation for aviation accidents in California",
+          "url": "https://www.trembachlawfirm.com/aviation/compensation-calculator",
+          "applicationCategory": "Legal Calculator",
+          "operatingSystem": "Any"
+        }}
+      />
+      <GoBack fallbackPath="/practice-areas/aviation-accidents" />
+      
+      {/* Hero Section */}
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Aviation Accident Compensation Calculator
+          </h1>
+          <p className="text-xl">Estimate potential compensation for your airplane or helicopter crash case</p>
+        </div>
+      </section>
 
-      <div className="min-h-screen bg-background py-12">
-        <div className="container max-w-4xl mx-auto px-4">
-          <Link to="/calculators" className="inline-flex items-center text-primary hover:underline mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Calculators
-          </Link>
-
-          <div className="bg-card rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4">Aviation Accident Calculator</h1>
-            <p className="text-lg text-muted-foreground mb-6">
-              Estimate compensation for plane crash and aviation injuries
-            </p>
-
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">$3M+</div>
-                <div className="text-sm text-muted-foreground">Commercial Crash Average</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Catastrophic</div>
-                <div className="text-sm text-muted-foreground">Injury Specialization</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">No Fee</div>
-                <div className="text-sm text-muted-foreground">Unless We Win</div>
-              </div>
-            </div>
-
-            {step < 3 && (
-              <div className="mb-6">
-                <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                  <span>Step {step} of 2</span>
-                  <span>{step === 1 ? 'Accident Details' : 'Financial Impact'}</span>
+      {/* Calculator Section */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Calculator Form */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-2xl text-primary flex items-center">
+                <Calculator className="w-6 h-6 mr-2" />
+                Aviation Accident Details
+              </CardTitle>
+              <p className="text-muted-foreground">Provide information to estimate your case value</p>
+            </CardHeader>
+            <CardContent className="space-y-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Your Age</label>
+                  <Input
+                    type="number"
+                    value={formData.age}
+                    onChange={(e) => setFormData(prev => ({ ...prev, age: e.target.value }))}
+                    placeholder="35"
+                    className="bg-background border-border text-foreground"
+                  />
                 </div>
-                <Progress value={(step / 2) * 100} />
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Annual Income</label>
+                  <Input
+                    type="number"
+                    value={formData.income}
+                    onChange={(e) => setFormData(prev => ({ ...prev, income: e.target.value }))}
+                    placeholder="75000"
+                    className="bg-background border-border text-foreground"
+                  />
+                </div>
               </div>
-            )}
 
-            {step === 1 && renderStep1()}
-            {step === 2 && renderStep2()}
-            {step === 3 && results && (
-              <CalculatorResults
-                title="Estimated Aviation Accident Compensation"
-                subtitle="Based on federal aviation regulations"
-                min={results.min}
-                max={results.max}
-                damageCategories={damageCategories}
-                disclaimer={disclaimer}
-                ctaText="Get Free Case Evaluation"
-              />
-            )}
+              <div>
+                <label className="block text-sm font-medium mb-2 text-foreground">Type of Aviation Accident</label>
+                <Select value={formData.accidentType} onValueChange={(value) => setFormData(prev => ({ ...prev, accidentType: value }))}>
+                  <SelectTrigger className="bg-background border-border text-foreground">
+                    <SelectValue placeholder="Select accident type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="commercial-airline">Commercial Airline Crash</SelectItem>
+                    <SelectItem value="private-plane">Private Plane Accident</SelectItem>
+                    <SelectItem value="helicopter">Helicopter Crash</SelectItem>
+                    <SelectItem value="military">Military Aircraft</SelectItem>
+                    <SelectItem value="charter">Charter Flight</SelectItem>
+                    <SelectItem value="other">Other Aviation Accident</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
 
-            {step < 3 ? (
-              <FormNavigation
-                currentStep={step}
-                totalSteps={3}
-                isValid={isStepValid()}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
+              <div>
+                <label className="block text-sm font-medium mb-2 text-foreground">Injury Severity</label>
+                <Select value={formData.injurySeverity} onValueChange={(value) => setFormData(prev => ({ ...prev, injurySeverity: value }))}>
+                  <SelectTrigger className="bg-background border-border text-foreground">
+                    <SelectValue placeholder="Select injury severity" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="catastrophic">Catastrophic (Paralysis, Brain Injury, Death)</SelectItem>
+                    <SelectItem value="severe">Severe (Multiple Fractures, Burns, Organ Damage)</SelectItem>
+                    <SelectItem value="moderate">Moderate (Broken Bones, Soft Tissue Injury)</SelectItem>
+                    <SelectItem value="minor">Minor (Cuts, Bruises, Sprains)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Medical Expenses</label>
+                  <Input
+                    type="number"
+                    value={formData.medicalExpenses}
+                    onChange={(e) => setFormData(prev => ({ ...prev, medicalExpenses: e.target.value }))}
+                    placeholder="50000"
+                    className="bg-background border-border text-foreground"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2 text-foreground">Time Off Work (weeks)</label>
+                  <Input
+                    type="number"
+                    value={formData.timeOffWork}
+                    onChange={(e) => setFormData(prev => ({ ...prev, timeOffWork: e.target.value }))}
+                    placeholder="12"
+                    className="bg-background border-border text-foreground"
+                  />
+                </div>
+              </div>
+
+              <Button 
+                onClick={calculateCompensation}
+                className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3"
+              >
+                Calculate My Aviation Case Value
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Results */}
+          <div>
+            {results ? (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-green-600 flex items-center">
+                    <DollarSign className="w-6 h-6 mr-2" />
+                    Estimated Compensation Range
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-center p-6 bg-green-50 rounded-lg">
+                    <div className="text-3xl font-bold text-green-600 mb-2">
+                      {formatCurrency(results.estimatedRange.low)} - {formatCurrency(results.estimatedRange.high)}
+                    </div>
+                    <p className="text-green-700">Estimated Compensation Range</p>
+                  </div>
+
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold text-foreground">Breakdown by Category:</h3>
+                    
+                    <div className="flex justify-between items-center p-3 bg-muted rounded">
+                      <span className="text-foreground">Economic Damages</span>
+                      <span className="font-semibold text-foreground">{formatCurrency(results.components.economic)}</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center p-3 bg-muted rounded">
+                      <span className="text-foreground">Non-Economic Damages</span>
+                      <span className="font-semibold text-foreground">{formatCurrency(results.components.nonEconomic)}</span>
+                    </div>
+                    
+                    <div className="flex justify-between items-center p-3 bg-muted rounded">
+                      <span className="text-foreground">Potential Punitive Damages</span>
+                      <span className="font-semibold text-foreground">{formatCurrency(results.components.punitive)}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-6">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold"
+                      onClick={() => window.location.href = '/aviation/case-evaluation'}
+                    >
+                      Get Free Professional Case Review
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             ) : (
-              <div className="flex gap-4 pt-8">
-                <Button
-                  size="lg"
-                  onClick={resetForm}
-                  variant="outline"
-                  className="flex-1 h-14"
-                >
-                  Start Over
-                </Button>
-              </div>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl text-primary">Aviation Accident Compensation</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    <p className="text-muted-foreground">
+                      Aviation accident cases typically result in higher compensation than other personal injury cases due to the catastrophic nature of aircraft crashes and complex liability issues.
+                    </p>
+                    
+                    <div className="bg-blue-50 p-4 rounded-lg">
+                      <h3 className="font-semibold text-blue-800 mb-2">Average Aviation Settlements in California:</h3>
+                      <ul className="space-y-1 text-blue-700 text-sm">
+                        <li>• Commercial airline crashes: $2M - $50M+</li>
+                        <li>• Private plane accidents: $1M - $20M</li>
+                        <li>• Helicopter crashes: $1.5M - $25M</li>
+                        <li>• Military aircraft: $1M - $15M</li>
+                      </ul>
+                    </div>
+
+                    <p className="text-sm text-muted-foreground">
+                      Complete the form to get a personalized estimate based on your specific circumstances.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             )}
+
+            {/* Legal Disclaimer */}
+            <Card className="mt-6">
+              <CardHeader>
+                <CardTitle className="text-lg text-amber-600 flex items-center">
+                  <AlertTriangle className="w-5 h-5 mr-2" />
+                  Important Legal Disclaimer
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2 text-sm text-muted-foreground">
+                  <p>This calculator provides estimates only and does not constitute legal advice. Actual case values depend on many factors including:</p>
+                  <ul className="list-disc list-inside space-y-1 ml-4">
+                    <li>Specific facts and circumstances of your accident</li>
+                    <li>Strength of evidence and liability proof</li>
+                    <li>Available insurance coverage and defendant assets</li>
+                    <li>Jurisdiction and applicable laws</li>
+                    <li>Quality of legal representation</li>
+                  </ul>
+                  <p className="mt-3 font-medium text-foreground">
+                    Consult with an experienced aviation attorney for accurate case evaluation.
+                  </p>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default AviationCompensationCalculator;

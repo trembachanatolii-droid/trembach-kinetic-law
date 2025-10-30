@@ -30,6 +30,7 @@ import {
 import heroBackground from '@/assets/medical-malpractice-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
+import GoBack from '@/components/GoBack';
 
 const MedicalMalpracticeMedicalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -49,6 +50,7 @@ const MedicalMalpracticeMedicalGuidance: React.FC = () => {
       />
       
       <Navigation />
+      <GoBack />
 
       {/* Hero Section */}
       <section 

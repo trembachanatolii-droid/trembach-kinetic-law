@@ -4,11 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Apple-inspired smooth scrolling */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Trembach Law Firm - Cinematic Design System */
 
 /* Logo Styles */
@@ -60,13 +55,12 @@ html {
     line-height: 1.3 !important;
   }
   
-  /* Removed global heading font-size overrides to allow Tailwind utilities to control heading sizes consistently across pages */
-  /* h1 { font-size: 48px !important; }
+  h1 { font-size: 48px !important; }
   h2 { font-size: 32px !important; }
   h3 { font-size: 24px !important; }
   h4 { font-size: 20px !important; }
   h5 { font-size: 18px !important; }
-  h6 { font-size: 16px !important; } */
+  h6 { font-size: 16px !important; }
   
   /* Body Text Standards */
   p, span, li, label, div,
@@ -262,12 +256,7 @@ html {
     text-decoration: underline !important;
     color: #dc2626 !important; /* Red hover for better visibility */
   }
-
-  /* Global accessibility fix: ensure any Tailwind `hover:text-white` remains readable
-     by mapping it to the design token `--primary-foreground` instead. */
-  .hover\:text-white:hover {
-    color: hsl(var(--primary-foreground)) !important; /* equals hover:!text-primary-foreground */
-  }
+  
   /* FORCED TEXT VISIBILITY */
   
   .text-white,
@@ -290,61 +279,6 @@ html {
     color: inherit !important;
     opacity: 1 !important;
     visibility: visible !important;
-  }
-
-  /* APPLE-STYLE CTA SECTIONS - Apple Blue Color */
-  .calculator-cta-section {
-    background: linear-gradient(135deg, #007AFF 0%, #0051D5 100%);
-    border-radius: 24px;
-    padding: 48px 32px;
-    text-align: center;
-    box-shadow: 0 10px 40px rgba(0, 122, 255, 0.3);
-  }
-
-  .calculator-cta-section h3,
-  .calculator-cta-section h2 {
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    font-size: 32px !important;
-    line-height: 1.2 !important;
-    margin-bottom: 16px !important;
-    letter-spacing: -0.02em !important;
-  }
-
-  .calculator-cta-section p {
-    color: rgba(255, 255, 255, 0.95) !important;
-    font-size: 18px !important;
-    line-height: 1.5 !important;
-    margin-bottom: 32px !important;
-    font-weight: 400 !important;
-  }
-
-  /* Apple-style buttons inside CTA - maintain their own colors */
-  .calculator-cta-section button {
-    background-color: #ffffff !important;
-    color: #007AFF !important;
-    border: none !important;
-    font-weight: 600 !important;
-    transition: all 0.2s ease !important;
-  }
-
-  .calculator-cta-section button:hover {
-    background-color: rgba(255, 255, 255, 0.92) !important;
-    transform: translateY(-2px) scale(1.02) !important;
-    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.4) !important;
-  }
-
-  .calculator-cta-section button.outline,
-  .calculator-cta-section button[class*="outline"] {
-    background-color: transparent !important;
-    color: #ffffff !important;
-    border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  }
-
-  .calculator-cta-section button.outline:hover,
-  .calculator-cta-section button[class*="outline"]:hover {
-    background-color: rgba(255, 255, 255, 0.15) !important;
-    border-color: rgba(255, 255, 255, 0.5) !important;
   }
 
   /* CRITICAL: Force high contrast for all Explosions section text */
@@ -1246,12 +1180,6 @@ html {
   .hearing-loss-page button:hover {
     transform: translateY(-1px) !important;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15) !important;
-  }
-
-  /* Apple Blue Color for Practice Areas Sidebar */
-  .apple-blue-hover:hover {
-    background-color: #0071E3 !important;
-    color: #ffffff !important;
   }
   .vision-loss-page .progress-indicator {
     background-color: #e5e7eb !important;
@@ -2191,12 +2119,4 @@ label:after {
   opacity: 1 !important;
 }
 
-/* Navigation hover/visited reset - keep nav links black and decoration-free */
-.site-nav a,
-.site-nav a:visited,
-.site-nav a:hover,
-.site-nav a:focus {
-  color: #1d1d1f !important;
-  text-decoration: none !important;
-}
 

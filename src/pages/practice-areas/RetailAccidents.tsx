@@ -30,7 +30,7 @@ import {
   Store
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import './retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-accidents-hero.jpg';
 import sidebarImage from '@/assets/practice-areas/retail-accidents-sidebar.jpg';
@@ -124,7 +124,7 @@ const RetailAccidents: React.FC = () => {
           <div className="floating-layer-mid"></div>
           <div className="floating-layer-front"></div>
       {/* Go Back Component */}
-      
+      <GoBack fallbackPath="/practice-areas" />
 
       {/* Hero Section */}
       <section 

@@ -15,7 +15,7 @@ import {
   Stethoscope,
   FileText
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 import heroImage from '@/assets/explosions-support-groups-hero-bright.jpg';
@@ -36,7 +36,7 @@ const SupportGroups: React.FC = () => {
         canonical="/practice-areas/explosions/support-groups"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/explosions" />
 
       {/* Hero Section */}
       <section 

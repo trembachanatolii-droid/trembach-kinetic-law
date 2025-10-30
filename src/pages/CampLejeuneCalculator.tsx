@@ -1,413 +1,381 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, AlertCircle } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { 
+  ArrowLeft,
+  Phone,
+  Calculator,
+  AlertTriangle,
+  DollarSign,
+  Info
+} from 'lucide-react';
+import heroBackground from '@/assets/camp-lejeune-calculator-hero.jpg';
+import SEO from '@/components/SEO';
 
-interface CampLejeuneFormData extends CalculatorFormData {
-  illness: string;
-  residenceYears: string;
-  veteranStatus: string;
-  age: string;
-  medicalCosts: string;
-  futureCareCosts: string;
-  lostWages: string;
-  disability: string;
-  [key: string]: string;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const initialFormData: CampLejeuneFormData = {
-  illness: '',
-  residenceYears: '',
-  veteranStatus: '',
-  age: '',
-  medicalCosts: '',
-  futureCareCosts: '',
-  lostWages: '',
-  disability: ''
-};
+const CampLejeuneCalculator: React.FC = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [formData, setFormData] = useState({
+    condition: '',
+    age: '',
+    severity: '',
+    timeAtBase: '',
+    additionalConditions: '',
+    pathway: ''
+  });
+  const [estimate, setEstimate] = useState<{
+    low: number;
+    high: number;
+    pathway: string;
+  } | null>(null);
 
-const calculateCompensation = (data: CampLejeuneFormData): CalculatorResults => {
-  const illnessMultipliers: { [key: string]: number } = {
-    'bladder-cancer': 4.0,
-    'kidney-cancer': 4.2,
-    'liver-cancer': 4.5,
-    'leukemia': 5.0,
-    'non-hodgkin': 4.8,
-    'multiple-myeloma': 4.5,
-    'parkinsons': 3.5,
-    'kidney-disease': 2.8,
-    'hepatic-steatosis': 3.0,
-    'female-infertility': 2.5,
-    'miscarriage': 2.3,
-    'scleroderma': 3.2,
-    'birth-defects': 4.0,
-    'other': 2.0
+  const heroRef = useRef<HTMLDivElement>(null);
+  const calculatorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 30 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      );
+
+      gsap.fromTo(calculatorRef.current,
+        { opacity: 0, y: 50 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          delay: 0.3,
+          scrollTrigger: {
+            trigger: calculatorRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  const calculateEstimate = () => {
+    if (!formData.condition || !formData.age || !formData.severity) {
+      alert('Please fill in all required fields to calculate your estimate.');
+      return;
+    }
+
+    let baseAmount = 0;
+    let pathway = 'Traditional Litigation';
+
+    // Base amounts by condition
+    switch (formData.condition) {
+      case 'parkinsons':
+        baseAmount = 825000; // Average of $450K-$1.2M
+        break;
+      case 'wrongful-death':
+        baseAmount = 1000000; // Average of $500K-$1.5M
+        break;
+      case 'leukemia':
+        baseAmount = 700000; // Average of $400K-$1M
+        break;
+      case 'myeloma':
+        baseAmount = 650000; // Average of $350K-$950K
+        break;
+      case 'kidney-cancer':
+        baseAmount = 600000; // Average of $300K-$900K
+        break;
+      case 'bladder-cancer':
+        baseAmount = 500000; // Average of $200K-$800K
+        break;
+      case 'liver-cancer':
+        baseAmount = 500000; // Average of $250K-$750K
+        break;
+      case 'lymphoma':
+        baseAmount = 575000; // Average of $300K-$850K
+        break;
+      case 'birth-defects':
+        baseAmount = 400000; // Average of $200K-$600K
+        break;
+      default:
+        baseAmount = 350000; // Other conditions
+    }
+
+    // Adjust for severity
+    const severityMultiplier = formData.severity === 'severe' ? 1.3 : 
+                              formData.severity === 'moderate' ? 1.0 : 0.7;
+    
+    // Adjust for age (younger = higher settlements)
+    const ageMultiplier = parseInt(formData.age) < 50 ? 1.2 :
+                         parseInt(formData.age) < 70 ? 1.0 : 0.8;
+
+    // Adjust for pathway
+    if (formData.pathway === 'elective') {
+      baseAmount = Math.min(baseAmount, 150000); // Cap at $150K for elective option
+      pathway = 'Elective Option (Fast Track)';
+    }
+
+    const adjustedAmount = baseAmount * severityMultiplier * ageMultiplier;
+    
+    setEstimate({
+      low: Math.round(adjustedAmount * 0.7),
+      high: Math.round(adjustedAmount * 1.3),
+      pathway
+    });
   };
-
-  const residenceMultipliers: { [key: string]: number } = {
-    '10+': 2.5,
-    '5-10': 2.0,
-    '2-5': 1.6,
-    '1-2': 1.3,
-    'under-1': 1.1
-  };
-
-  let baseMin = 150000;
-  let baseMax = 500000;
-
-  const illnessMult = illnessMultipliers[data.illness] || 1;
-  const residenceMult = residenceMultipliers[data.residenceYears] || 1;
-
-  baseMin *= illnessMult * residenceMult;
-  baseMax *= illnessMult * residenceMult;
-
-  if (data.veteranStatus === 'veteran') {
-    baseMin *= 1.2;
-    baseMax *= 1.3;
-  }
-
-  const age = parseInt(data.age) || 40;
-  if (age < 50) {
-    const ageFactor = 1 + ((50 - age) * 0.015);
-    baseMin *= ageFactor;
-    baseMax *= ageFactor;
-  }
-
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-
-  baseMin += medicalCosts + futureCareCosts * 0.8 + lostWages * 0.9;
-  baseMax += medicalCosts * 1.5 + futureCareCosts * 1.5 + lostWages * 1.5;
-
-  if (data.disability === 'severe' || data.disability === 'total') {
-    const disabilityMult = data.disability === 'total' ? 2.5 : 1.8;
-    baseMin *= disabilityMult;
-    baseMax *= disabilityMult;
-  }
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax)
-  };
-};
-
-const validateStep = (data: CampLejeuneFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.illness && data.residenceYears && data.veteranStatus && data.age);
-  }
-  if (step === 2) {
-    return !!(data.medicalCosts && data.futureCareCosts && data.lostWages && data.disability);
-  }
-  return true;
-};
-
-const CampLejeuneCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<CampLejeuneFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
 
   return (
-    <>
-      <Helmet>
-        <title>Camp Lejeune Calculator | Water Contamination Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate Camp Lejeune water contamination compensation for cancer and other illnesses. Free estimates for veterans and families." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="Camp Lejeune Compensation Calculator | Estimate Your Settlement"
+        description="Calculate your potential Camp Lejeune settlement amount. Free compensation calculator based on condition, severity, and case factors. Former defense attorney insights."
+        canonical="/camp-lejeune-calculator"
+      />
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
+      {/* Go Back Button - Fade in on scroll */}
+      <div className={`fixed top-24 left-6 z-50 transition-opacity duration-300 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}>
+        <Button 
+          variant="ghost" 
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Go Back
+        </Button>
+      </div>
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Camp Lejeune<br />Calculator
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="hero-content">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4 drop-shadow-2xl">
+              Camp Lejeune Compensation Calculator
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Water contamination compensation
+            <p className="text-xl drop-shadow-lg">
+              Estimate your potential settlement based on your specific circumstances
             </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$1M+</div>
-                <p className="text-slate-600">Potential compensation</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">1953-1987</div>
-                <p className="text-slate-600">Contamination period</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
-              <div className="bg-slate-900 px-8 py-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-white">Calculate Your Case Value</h2>
-                  <div className="flex gap-2">
-                    {[1, 2, 3].map((s) => (
-                      <div
-                        key={s}
-                        className={`w-10 h-1 rounded-full transition-colors ${
-                          step >= s ? 'bg-white' : 'bg-slate-700'
-                        }`}
-                      />
-                    ))}
-                  </div>
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Calculator Column */}
+          <div ref={calculatorRef}>
+            <Card className="glass-card">
+              <CardHeader>
+                <CardTitle className="text-2xl text-primary flex items-center">
+                  <Calculator className="w-6 h-6 mr-2" />
+                  Compensation Calculator
+                </CardTitle>
+                <p className="text-muted-foreground text-lg">Answer these questions to get an estimate of your potential settlement.</p>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div>
+                  <Label htmlFor="condition" className="text-base font-semibold">Primary Health Condition *</Label>
+                  <Select value={formData.condition} onValueChange={(value) => setFormData(prev => ({ ...prev, condition: value }))}>
+                    <SelectTrigger className="text-base">
+                      <SelectValue placeholder="Select your condition..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="parkinsons">Parkinson's Disease</SelectItem>
+                      <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
+                      <SelectItem value="leukemia">Leukemia</SelectItem>
+                      <SelectItem value="myeloma">Multiple Myeloma</SelectItem>
+                      <SelectItem value="kidney-cancer">Kidney Cancer</SelectItem>
+                      <SelectItem value="bladder-cancer">Bladder Cancer</SelectItem>
+                      <SelectItem value="liver-cancer">Liver Cancer</SelectItem>
+                      <SelectItem value="lymphoma">Non-Hodgkin's Lymphoma</SelectItem>
+                      <SelectItem value="birth-defects">Birth Defects</SelectItem>
+                      <SelectItem value="other">Other Condition</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-              </div>
 
-              <div className="p-8">
-                {step === 1 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Illness or Condition
-                      </label>
-                      <select
-                        value={formData.illness}
-                        onChange={(e) => updateField('illness', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select illness</option>
-                        <option value="leukemia">Leukemia</option>
-                        <option value="non-hodgkin">Non-Hodgkin's Lymphoma</option>
-                        <option value="multiple-myeloma">Multiple Myeloma</option>
-                        <option value="bladder-cancer">Bladder Cancer</option>
-                        <option value="kidney-cancer">Kidney Cancer</option>
-                        <option value="liver-cancer">Liver Cancer</option>
-                        <option value="parkinsons">Parkinson's Disease</option>
-                        <option value="kidney-disease">Kidney Disease</option>
-                        <option value="hepatic-steatosis">Hepatic Steatosis</option>
-                        <option value="female-infertility">Female Infertility</option>
-                        <option value="miscarriage">Miscarriage</option>
-                        <option value="scleroderma">Scleroderma</option>
-                        <option value="birth-defects">Birth Defects</option>
-                        <option value="other">Other Condition</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Years at Camp Lejeune (1953-1987)
-                      </label>
-                      <select
-                        value={formData.residenceYears}
-                        onChange={(e) => updateField('residenceYears', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select duration</option>
-                        <option value="10+">10+ years</option>
-                        <option value="5-10">5-10 years</option>
-                        <option value="2-5">2-5 years</option>
-                        <option value="1-2">1-2 years</option>
-                        <option value="under-1">Under 1 year (30+ days)</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Veteran Status
-                      </label>
-                      <select
-                        value={formData.veteranStatus}
-                        onChange={(e) => updateField('veteranStatus', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select status</option>
-                        <option value="veteran">Veteran</option>
-                        <option value="family">Family Member</option>
-                        <option value="civilian">Civilian Worker</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Your Current Age
-                      </label>
-                      <select
-                        value={formData.age}
-                        onChange={(e) => updateField('age', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select age</option>
-                        <option value="30">Under 40</option>
-                        <option value="45">40-49</option>
-                        <option value="55">50-59</option>
-                        <option value="65">60-69</option>
-                        <option value="75">70+</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Medical Costs to Date
-                      </label>
-                      <select
-                        value={formData.medicalCosts}
-                        onChange={(e) => updateField('medicalCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">$0 - $50,000</option>
-                        <option value="100000">$50,000 - $150,000</option>
-                        <option value="250000">$150,000 - $350,000</option>
-                        <option value="500000">$350,000 - $650,000</option>
-                        <option value="1000000">Over $650,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Estimated Future Medical Care
-                      </label>
-                      <select
-                        value={formData.futureCareCosts}
-                        onChange={(e) => updateField('futureCareCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="50000">$0 - $100,000</option>
-                        <option value="200000">$100,000 - $300,000</option>
-                        <option value="500000">$300,000 - $700,000</option>
-                        <option value="1000000">$700,000 - $1,300,000</option>
-                        <option value="2000000">Over $1,300,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Lost Wages and Income
-                      </label>
-                      <select
-                        value={formData.lostWages}
-                        onChange={(e) => updateField('lostWages', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">$0 - $50,000</option>
-                        <option value="100000">$50,000 - $150,000</option>
-                        <option value="250000">$150,000 - $350,000</option>
-                        <option value="500000">$350,000 - $650,000</option>
-                        <option value="1000000">Over $650,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Level of Disability
-                      </label>
-                      <select
-                        value={formData.disability}
-                        onChange={(e) => updateField('disability', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select disability level</option>
-                        <option value="none">None/Minimal</option>
-                        <option value="partial">Partial Disability</option>
-                        <option value="severe">Severe Disability</option>
-                        <option value="total">Total/Permanent Disability</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 3 && results && (
-                  <div className="space-y-6">
-                    <div className="text-center py-8">
-                      <h3 className="text-3xl font-bold text-slate-900 mb-4">
-                        Estimated Compensation Range
-                      </h3>
-                      <div className="text-5xl font-bold text-slate-900 mb-2">
-                        ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                      </div>
-                      <p className="text-slate-600 mt-4">
-                        Based on your illness and economic damages
-                      </p>
-                    </div>
-
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                      <div className="flex gap-3">
-                        <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={20} />
-                        <div className="text-sm text-amber-900">
-                          <p className="font-semibold mb-2">Important Legal Disclaimer:</p>
-                          <p className="mb-2">
-                            This calculator provides a general estimate only and does not constitute legal advice or a guarantee of compensation. Actual case values depend on multiple factors including specific medical conditions, duration of exposure, proof of residence, and individual circumstances.
-                          </p>
-                          <p>
-                            Camp Lejeune Justice Act claims have specific eligibility requirements and filing deadlines. Consult with an experienced attorney immediately to evaluate your case and protect your rights.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                <div className="flex gap-4 mt-8">
-                  {step > 1 && step < 3 && (
-                    <button
-                      onClick={handleBack}
-                      className="px-6 py-3 border border-slate-300 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition-colors"
-                    >
-                      Back
-                    </button>
-                  )}
-                  {step < 3 && (
-                    <button
-                      onClick={handleNext}
-                      disabled={!isStepValid()}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {step === 2 ? 'Calculate' : 'Continue'}
-                    </button>
-                  )}
-                  {step === 3 && (
-                    <button
-                      onClick={resetForm}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
-                    >
-                      Start New Calculation
-                    </button>
-                  )}
+                <div>
+                  <Label htmlFor="severity" className="text-base font-semibold">Condition Severity *</Label>
+                  <Select value={formData.severity} onValueChange={(value) => setFormData(prev => ({ ...prev, severity: value }))}>
+                    <SelectTrigger className="text-base">
+                      <SelectValue placeholder="Select severity..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="mild">Mild - Early stage, minimal impact</SelectItem>
+                      <SelectItem value="moderate">Moderate - Noticeable impact on daily life</SelectItem>
+                      <SelectItem value="severe">Severe - Significant disability or advanced stage</SelectItem>
+                    </SelectContent>
+                  </Select>
                 </div>
-              </div>
-            </div>
+
+                <div>
+                  <Label htmlFor="age" className="text-base font-semibold">Age at Diagnosis *</Label>
+                  <Select value={formData.age} onValueChange={(value) => setFormData(prev => ({ ...prev, age: value }))}>
+                    <SelectTrigger className="text-base">
+                      <SelectValue placeholder="Select age range..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="under-40">Under 40</SelectItem>
+                      <SelectItem value="40-49">40-49</SelectItem>
+                      <SelectItem value="50-59">50-59</SelectItem>
+                      <SelectItem value="60-69">60-69</SelectItem>
+                      <SelectItem value="70-79">70-79</SelectItem>
+                      <SelectItem value="over-80">Over 80</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="timeAtBase" className="text-base font-semibold">Time at Camp Lejeune</Label>
+                  <Select value={formData.timeAtBase} onValueChange={(value) => setFormData(prev => ({ ...prev, timeAtBase: value }))}>
+                    <SelectTrigger className="text-base">
+                      <SelectValue placeholder="Select time period..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="less-1-year">Less than 1 year</SelectItem>
+                      <SelectItem value="1-3-years">1-3 years</SelectItem>
+                      <SelectItem value="3-5-years">3-5 years</SelectItem>
+                      <SelectItem value="over-5-years">Over 5 years</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <div>
+                  <Label htmlFor="pathway" className="text-base font-semibold">Preferred Legal Pathway</Label>
+                  <Select value={formData.pathway} onValueChange={(value) => setFormData(prev => ({ ...prev, pathway: value }))}>
+                    <SelectTrigger className="text-base">
+                      <SelectValue placeholder="Select pathway..." />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="litigation">Traditional Litigation (Higher compensation, longer timeline)</SelectItem>
+                      <SelectItem value="elective">Elective Option (Faster settlement, lower amount)</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                <Button 
+                  onClick={calculateEstimate}
+                  className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3 text-lg"
+                >
+                  <DollarSign className="w-5 h-5 mr-2" />
+                  Calculate My Estimate
+                </Button>
+              </CardContent>
+            </Card>
+
+            {/* Legal Disclaimer */}
+            <Alert className="mt-6">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertDescription className="text-sm">
+                <strong>Legal Disclaimer:</strong> This calculator provides estimates only and should not be considered a guarantee of settlement amounts. Actual compensation depends on many case-specific factors including medical records, exposure evidence, and legal precedents. Consult with an attorney for accurate case evaluation.
+              </AlertDescription>
+            </Alert>
           </div>
-        </section>
-      </main>
-    </>
+
+          {/* Results Column */}
+          <div>
+            {estimate ? (
+              <Card className="glass-card border-l-4 border-l-primary">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-primary">Your Estimated Settlement Range</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="text-center">
+                    <div className="text-4xl font-bold text-primary mb-2">
+                      ${estimate.low.toLocaleString()} - ${estimate.high.toLocaleString()}
+                    </div>
+                    <div className="text-lg text-muted-foreground">
+                      via {estimate.pathway}
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="bg-muted p-4 rounded-lg">
+                      <h4 className="font-semibold mb-2 text-base">Important Notes:</h4>
+                      <ul className="text-sm space-y-1">
+                        <li>• Estimates based on similar case outcomes</li>
+                        <li>• Actual settlements may vary significantly</li>
+                        <li>• Timeline varies: Elective (3-6 months), Litigation (12-24 months)</li>
+                        <li>• Attorney fees: 20% (administrative) or 25% (litigation)</li>
+                      </ul>
+                    </div>
+
+                    <div className="space-y-4">
+                      <Button 
+                        className="w-full bg-primary hover:bg-primary/90 text-white text-lg py-3"
+                        onClick={() => window.location.href = '/camp-lejeune-case-evaluation'}
+                      >
+                        Get Free Professional Case Review
+                      </Button>
+                      
+                      <Button 
+                        variant="outline"
+                        className="w-full border-primary text-primary hover:bg-primary hover:text-white text-lg py-3"
+                        onClick={() => window.location.href = 'tel:8181234567'}
+                      >
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ) : (
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="text-xl">Settlement Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start">
+                    <Info className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-base">How This Calculator Works</h4>
+                      <p className="text-sm text-muted-foreground">Our calculator uses data from actual Camp Lejeune settlements, considering factors like condition type, severity, age, and legal pathway to provide realistic estimates.</p>
+                    </div>
+                  </div>
+
+                  <div className="bg-muted p-4 rounded-lg">
+                    <h4 className="font-semibold mb-2 text-base">Typical Settlement Ranges:</h4>
+                    <ul className="text-sm space-y-1">
+                      <li>• Parkinson's Disease: $450,000-$1.2M</li>
+                      <li>• Wrongful Death: $500,000-$1.5M+</li>
+                      <li>• Cancer Cases: $200,000-$900,000</li>
+                      <li>• Birth Defects: $200,000-$600,000</li>
+                    </ul>
+                  </div>
+
+                  <Alert>
+                    <AlertTriangle className="h-4 w-4" />
+                    <AlertDescription className="text-sm">
+                      Fill out the calculator form to get your personalized estimate based on your specific circumstances.
+                    </AlertDescription>
+                  </Alert>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 

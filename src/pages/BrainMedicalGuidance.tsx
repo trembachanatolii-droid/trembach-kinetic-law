@@ -19,6 +19,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import heroBackground from '@/assets/brain-medical-guidance-hero.jpg';
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const BrainMedicalGuidance: React.FC = () => {
@@ -131,6 +132,8 @@ const BrainMedicalGuidance: React.FC = () => {
         description="Comprehensive medical guidance for brain injury victims. Find the right specialists, understand treatment options, and document your TBI case properly."
         canonical="/brain-medical-guidance"
       />
+
+      <GoBack />
 
       {/* Hero Section */}
       <section

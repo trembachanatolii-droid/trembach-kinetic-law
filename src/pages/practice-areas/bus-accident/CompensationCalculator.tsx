@@ -1,267 +1,446 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults } from '@/components/calculator/CalculatorResults';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults as Results } from '@/hooks/useCalculatorForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
+import { 
+  Calculator, 
+  DollarSign, 
+  AlertTriangle, 
+  TrendingUp,
+  FileText,
+  Stethoscope,
+  Clock,
+  Scale,
+  User,
+  Bus
+} from 'lucide-react';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
+import heroImage from '@/assets/bus-calculator-hero.jpg';
 
-interface BusAccidentFormData extends CalculatorFormData {
-  injuryType: string;
-  busType: string;
-  medicalCosts: string;
-  lostWages: string;
-  painLevel: string;
-  age: string;
-  permanentDisability: string;
-  publicEntity: string;
-}
+const BusAccidentCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    age: 35,
+    income: 50000,
+    medicalCosts: 10000,
+    recoveryTime: 6,
+    injuryType: '',
+    busType: '',
+    painLevel: 5,
+    workDaysLost: 30
+  });
 
-const initialFormData: BusAccidentFormData = {
-  injuryType: '',
-  busType: '',
-  medicalCosts: '',
-  lostWages: '',
-  painLevel: '',
-  age: '',
-  permanentDisability: '',
-  publicEntity: ''
-};
+  const [result, setResult] = useState<{
+    estimated: number;
+    range: { min: number; max: number };
+    factors: string[];
+  } | null>(null);
 
-const calculateCompensation = (data: BusAccidentFormData): Results => {
-  let baseMin = 100000;
-  let baseMax = 250000;
-
-  const injuryMultipliers: Record<string, number> = {
-    'whiplash': 1.2,
-    'broken-bones': 1.8,
-    'spinal-injury': 3.5,
-    'head-injury': 3.0,
-    'internal-injuries': 2.5,
-    'death': 4.0
+  const calculateCompensation = () => {
+    let baseAmount = formData.medicalCosts * 2; // Medical costs multiplier
+    
+    // Lost wages calculation
+    const dailyWage = formData.income / 365;
+    const lostWages = dailyWage * formData.workDaysLost;
+    
+    // Pain and suffering multiplier
+    const painMultiplier = formData.painLevel / 2;
+    const painAndSuffering = formData.medicalCosts * painMultiplier;
+    
+    // Age factor (younger = higher future earning capacity)
+    const ageFactor = formData.age < 30 ? 1.2 : formData.age > 60 ? 0.8 : 1.0;
+    
+    // Bus type factor (government = potentially higher)
+    const busTypeFactor = formData.busType === 'government' ? 1.3 : 1.0;
+    
+    // Injury type factor
+    const injuryFactor = {
+      'traumatic-brain': 3.0,
+      'spinal-cord': 2.8,
+      'multiple-fractures': 2.0,
+      'soft-tissue': 1.2,
+      'cuts-bruises': 1.0
+    }[formData.injuryType] || 1.5;
+    
+    const estimated = Math.round(
+      (baseAmount + lostWages + painAndSuffering) * 
+      ageFactor * busTypeFactor * injuryFactor
+    );
+    
+    const factors = [];
+    if (ageFactor > 1) factors.push("Younger age increases future earning capacity");
+    if (busTypeFactor > 1) factors.push("Government bus increases potential compensation");
+    if (injuryFactor > 2) factors.push("Severe injury type significantly impacts value");
+    if (formData.painLevel > 7) factors.push("High pain level increases suffering damages");
+    
+    setResult({
+      estimated,
+      range: {
+        min: Math.round(estimated * 0.6),
+        max: Math.round(estimated * 1.8)
+      },
+      factors
+    });
   };
-  const injuryMult = injuryMultipliers[data.injuryType] || 1;
 
-  const busMultipliers: Record<string, number> = {
-    'public-transit': 1.3,
-    'school-bus': 1.4,
-    'tour-bus': 1.2,
-    'charter-bus': 1.2,
-    'private-shuttle': 1.1
+  const handleInputChange = (field: string, value: number | string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
+    setResult(null); // Reset result when inputs change
   };
-  const busMult = busMultipliers[data.busType] || 1;
-
-  const medicalAdd = parseInt(data.medicalCosts) || 0;
-  const wages = parseInt(data.lostWages) || 0;
-
-  const painMultipliers: Record<string, number> = {
-    'minimal': 1.0,
-    'moderate': 1.3,
-    'severe': 1.8,
-    'extreme': 2.5
-  };
-  const painMult = painMultipliers[data.painLevel] || 1;
-
-  const ageMultipliers: Record<string, number> = {
-    'under-25': 1.5,
-    '25-45': 1.3,
-    '45-65': 1.0,
-    'over-65': 0.9
-  };
-  const ageMult = ageMultipliers[data.age] || 1;
-
-  const disabilityMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'partial': 1.8,
-    'total': 3.0
-  };
-  const disabilityMult = disabilityMultipliers[data.permanentDisability] || 1;
-
-  const publicMult = data.publicEntity === 'yes' ? 1.2 : 1.0;
-
-  const min = Math.round((baseMin * injuryMult * busMult * painMult * ageMult * disabilityMult * publicMult) + medicalAdd + wages);
-  const max = Math.round((baseMax * injuryMult * busMult * painMult * ageMult * disabilityMult * publicMult) + (medicalAdd * 2) + (wages * 1.5));
-
-  return { min, max };
-};
-
-const validateStep = (data: BusAccidentFormData, step: number): boolean => {
-  if (step === 1) return !!(data.injuryType && data.busType && data.publicEntity);
-  if (step === 2) return !!(data.medicalCosts && data.lostWages && data.painLevel && data.age && data.permanentDisability);
-  return true;
-};
-
-export default function BusAccidentCompensationCalculator() {
-  const { step, formData, results, updateField, handleNext, handleBack, resetForm, isStepValid } = 
-    useCalculatorForm<BusAccidentFormData>(initialFormData, calculateCompensation, validateStep);
-
-  const renderStep1 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Injury</label>
-        <Select value={formData.injuryType} onValueChange={(v) => updateField('injuryType', v)}>
-          <SelectTrigger><SelectValue placeholder="Select injury type" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-            <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-            <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
-            <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-            <SelectItem value="death">Wrongful Death</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Bus</label>
-        <Select value={formData.busType} onValueChange={(v) => updateField('busType', v)}>
-          <SelectTrigger><SelectValue placeholder="Select bus type" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="public-transit">Public Transit Bus</SelectItem>
-            <SelectItem value="school-bus">School Bus</SelectItem>
-            <SelectItem value="tour-bus">Tour/Charter Bus</SelectItem>
-            <SelectItem value="charter-bus">Private Charter</SelectItem>
-            <SelectItem value="private-shuttle">Private Shuttle</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Was it a public/government entity?</label>
-        <Select value={formData.publicEntity} onValueChange={(v) => updateField('publicEntity', v)}>
-          <SelectTrigger><SelectValue placeholder="Select answer" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="yes">Yes - Government Entity</SelectItem>
-            <SelectItem value="no">No - Private Company</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Medical Costs</label>
-        <Select value={formData.medicalCosts} onValueChange={(v) => updateField('medicalCosts', v)}>
-          <SelectTrigger><SelectValue placeholder="Select cost range" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="5000">Under $10,000</SelectItem>
-            <SelectItem value="20000">$10,000 - $30,000</SelectItem>
-            <SelectItem value="50000">$30,000 - $70,000</SelectItem>
-            <SelectItem value="100000">$70,000 - $130,000</SelectItem>
-            <SelectItem value="200000">Over $130,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Lost Wages</label>
-        <Select value={formData.lostWages} onValueChange={(v) => updateField('lostWages', v)}>
-          <SelectTrigger><SelectValue placeholder="Select wage loss" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="5000">Under $10,000</SelectItem>
-            <SelectItem value="20000">$10,000 - $30,000</SelectItem>
-            <SelectItem value="50000">$30,000 - $70,000</SelectItem>
-            <SelectItem value="100000">Over $70,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Pain Level</label>
-        <Select value={formData.painLevel} onValueChange={(v) => updateField('painLevel', v)}>
-          <SelectTrigger><SelectValue placeholder="Select pain level" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="minimal">Minimal Pain</SelectItem>
-            <SelectItem value="moderate">Moderate Pain</SelectItem>
-            <SelectItem value="severe">Severe Pain</SelectItem>
-            <SelectItem value="extreme">Extreme/Chronic Pain</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Your Age</label>
-        <Select value={formData.age} onValueChange={(v) => updateField('age', v)}>
-          <SelectTrigger><SelectValue placeholder="Select age range" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="under-25">Under 25</SelectItem>
-            <SelectItem value="25-45">25-45</SelectItem>
-            <SelectItem value="45-65">45-65</SelectItem>
-            <SelectItem value="over-65">Over 65</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Permanent Disability</label>
-        <Select value={formData.permanentDisability} onValueChange={(v) => updateField('permanentDisability', v)}>
-          <SelectTrigger><SelectValue placeholder="Select disability level" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">No Permanent Disability</SelectItem>
-            <SelectItem value="partial">Partial Disability</SelectItem>
-            <SelectItem value="total">Total Permanent Disability</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
 
   return (
-    <>
-      <Helmet>
-        <title>Bus Accident Compensation Calculator | Public Transit Injuries</title>
-        <meta name="description" content="Calculate bus accident compensation for public transit injuries. Free estimates for government and private bus claims." />
-      </Helmet>
-      <div className="min-h-screen bg-background py-12">
-        <div className="container max-w-4xl mx-auto px-4">
-          <Link to="/calculators" className="inline-flex items-center text-primary hover:underline mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />Back to Calculators
-          </Link>
-          <div className="bg-card rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4">Bus Accident Calculator</h1>
-            <p className="text-lg text-muted-foreground mb-6">Estimate public transit injury compensation</p>
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">$250K+</div>
-                <div className="text-sm text-muted-foreground">Serious Injury Average</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Government</div>
-                <div className="text-sm text-muted-foreground">Agency Claims</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">No Fee</div>
-                <div className="text-sm text-muted-foreground">Unless We Win</div>
-              </div>
-            </div>
-            {step < 3 && (
-              <div className="mb-6">
-                <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                  <span>Step {step} of 2</span>
-                  <span>{step === 1 ? 'Accident Details' : 'Financial Impact'}</span>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Bus Accident Compensation Calculator | California Settlement Estimator | Trembach Law Firm"
+        description="Calculate potential compensation for your California bus accident case. Free settlement estimator considers medical costs, lost wages, pain & suffering. Government vs private bus factors included."
+        canonical="https://www.trembachlawfirm.com/bus-accident/compensation-calculator"
+      />
+
+      <GoBack />
+
+      {/* Hero Section */}
+      <section className="relative h-[40vh] flex items-center justify-center">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroImage})` }}
+        >
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+        
+        <div className="relative z-10 text-center text-white px-6 max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4 text-white">
+            Bus Accident Compensation Calculator
+          </h1>
+          <p className="text-xl md:text-2xl mb-6 leading-relaxed text-white">
+            Estimate your potential California bus accident settlement
+          </p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          
+          {/* Calculator Form */}
+          <div className="lg:col-span-2">
+            <Card className="shadow-lg">
+              <CardHeader className="bg-blue-50 border-b">
+                <CardTitle className="text-2xl text-blue-600 flex items-center">
+                  <Calculator className="w-6 h-6 mr-3" />
+                  Compensation Factors
+                </CardTitle>
+                <p className="text-muted-foreground">
+                  Enter your case details to estimate potential compensation. This is for informational purposes only.
+                </p>
+              </CardHeader>
+              
+              <CardContent className="p-8 bg-gradient-to-br from-blue-50/30 via-white to-purple-50/30 backdrop-blur-sm border border-blue-100/20 rounded-lg shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div className="space-y-8 relative">
+                  
+                  {/* 3D Background Layers */}
+                  <div className="absolute inset-0 -z-10 perspective-1200 transform-style-preserve-3d">
+                    <div className="floating-layer-back absolute inset-0 bg-gradient-to-br from-blue-400/5 to-purple-400/5 rounded-lg transform translate-z-[-500px] animate-float-back"></div>
+                    <div className="floating-layer-mid absolute inset-0 bg-gradient-to-br from-green-400/3 to-blue-400/3 rounded-lg transform translate-z-[-250px] animate-float-mid"></div>
+                    <div className="floating-layer-front absolute inset-0 bg-gradient-to-br from-purple-400/2 to-pink-400/2 rounded-lg transform translate-z-[-100px] animate-float-front"></div>
+                  </div>
+                  
+                  {/* Personal Information */}
+                  <div className="border-l-4 border-l-blue-500 pl-6 glass-card hover-glow-primary transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-white/40 backdrop-blur border border-blue-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-blue-700 flex items-center">
+                      <User className="w-5 h-5 mr-2" />
+                      Personal Information
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Age</label>
+                        <Slider
+                          value={[formData.age]}
+                          onValueChange={(value) => handleInputChange('age', value[0])}
+                          max={80}
+                          min={18}
+                          step={1}
+                          className="w-full"
+                        />
+                        <div className="text-center mt-2 text-sm text-muted-foreground">
+                          {formData.age} years old
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Annual Income</label>
+                        <div className="relative">
+                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <Input
+                            type="number"
+                            value={formData.income}
+                            onChange={(e) => handleInputChange('income', parseInt(e.target.value) || 0)}
+                            className="pl-10"
+                            placeholder="50000"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Accident Details */}
+                  <div className="border-l-4 border-l-red-500 pl-6 glass-card hover-glow-destructive transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-red-50/40 backdrop-blur border border-red-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-red-700 flex items-center">
+                      <Bus className="w-5 h-5 mr-2" />
+                      Accident Details
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Type of Bus</label>
+                        <Select onValueChange={(value) => handleInputChange('busType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select bus type..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="government">Government (MTA, School, City)</SelectItem>
+                            <SelectItem value="private">Private (Charter, Tour)</SelectItem>
+                            <SelectItem value="interstate">Interstate (Greyhound)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Primary Injury Type</label>
+                        <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select injury type..." />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="traumatic-brain">Traumatic Brain Injury</SelectItem>
+                            <SelectItem value="spinal-cord">Spinal Cord Injury</SelectItem>
+                            <SelectItem value="multiple-fractures">Multiple Fractures</SelectItem>
+                            <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                            <SelectItem value="cuts-bruises">Cuts & Bruises</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Medical & Financial Impact */}
+                  <div className="border-l-4 border-l-green-500 pl-6 glass-card hover-glow-success transition-all duration-300 hover:scale-105 p-6 rounded-lg bg-green-50/40 backdrop-blur border border-green-200/30">
+                    <h3 className="text-lg font-semibold mb-4 text-green-700 flex items-center">
+                      <Stethoscope className="w-5 h-5 mr-2" />
+                      Medical & Financial Impact
+                    </h3>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Medical Costs to Date</label>
+                        <div className="relative">
+                          <DollarSign className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+                          <Input
+                            type="number"
+                            value={formData.medicalCosts}
+                            onChange={(e) => handleInputChange('medicalCosts', parseInt(e.target.value) || 0)}
+                            className="pl-10"
+                            placeholder="10000"
+                          />
+                        </div>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-sm font-medium mb-2">Work Days Lost</label>
+                        <Input
+                          type="number"
+                          value={formData.workDaysLost}
+                          onChange={(e) => handleInputChange('workDaysLost', parseInt(e.target.value) || 0)}
+                          placeholder="30"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Pain Level (1-10)</label>
+                      <Slider
+                        value={[formData.painLevel]}
+                        onValueChange={(value) => handleInputChange('painLevel', value[0])}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground mt-2">
+                        <span>Minimal (1)</span>
+                        <span className="font-medium">Current: {formData.painLevel}</span>
+                        <span>Severe (10)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={calculateCompensation}
+                    className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 text-lg"
+                  >
+                    <Calculator className="w-5 h-5 mr-2" />
+                    CALCULATE MY COMPENSATION
+                  </Button>
+
+                    {/* Results */}
+                    {result && (
+                      <div className="mt-8 p-6 bg-gradient-to-r from-green-50 to-blue-50 border-l-4 border-green-500 rounded-lg glass-card hover-glow-success transition-all duration-500 hover:scale-105 relative overflow-hidden">
+                        
+                        {/* 3D Background Animation */}
+                        <div className="absolute inset-0 -z-10 perspective-1200 transform-style-preserve-3d">
+                          <div className="floating-layer-back absolute inset-0 bg-gradient-to-br from-green-400/10 to-blue-400/10 rounded-lg transform translate-z-[-300px] animate-float-back"></div>
+                          <div className="floating-layer-mid absolute inset-0 bg-gradient-to-br from-blue-400/8 to-green-400/8 rounded-lg transform translate-z-[-150px] animate-float-mid"></div>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-green-700 mb-4 flex items-center">
+                          <TrendingUp className="w-6 h-6 mr-2" />
+                          Estimated Compensation Range
+                        </h3>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                        <div className="text-center p-4 bg-white rounded-lg">
+                          <div className="text-sm text-muted-foreground mb-1">Minimum</div>
+                          <div className="text-2xl font-bold text-green-600">
+                            ${result.range.min.toLocaleString()}
+                          </div>
+                        </div>
+                        <div className="text-center p-4 bg-white rounded-lg border-2 border-green-500">
+                          <div className="text-sm text-muted-foreground mb-1">Estimated</div>
+                          <div className="text-3xl font-bold text-green-700">
+                            ${result.estimated.toLocaleString()}
+                          </div>
+                        </div>
+                        <div className="text-center p-4 bg-white rounded-lg">
+                          <div className="text-sm text-muted-foreground mb-1">Maximum</div>
+                          <div className="text-2xl font-bold text-green-600">
+                            ${result.range.max.toLocaleString()}
+                          </div>
+                        </div>
+                      </div>
+
+                      {result.factors.length > 0 && (
+                        <div className="mb-4">
+                          <h4 className="font-semibold mb-2">Factors Increasing Your Compensation:</h4>
+                          <ul className="space-y-1">
+                            {result.factors.map((factor, index) => (
+                              <li key={index} className="flex items-start text-sm">
+                                <TrendingUp className="w-4 h-4 text-green-600 mr-2 mt-0.5" />
+                                {factor}
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      <div className="bg-yellow-50 p-4 rounded-lg border border-yellow-200">
+                        <div className="flex items-start">
+                          <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
+                          <div className="text-sm">
+                            <p className="font-semibold text-yellow-800 mb-1">Important Disclaimer:</p>
+                            <p className="text-yellow-700">
+                              This calculator provides estimates only. Actual compensation depends on many factors including liability, 
+                              insurance coverage, and case-specific circumstances. Consult with an attorney for accurate case evaluation.
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <Progress value={(step / 2) * 100} />
-              </div>
-            )}
-            {step === 1 && renderStep1()}
-            {step === 2 && renderStep2()}
-            {step === 3 && results && (
-              <CalculatorResults
-                title="Estimated Bus Accident Compensation"
-                subtitle="Based on public transit liability"
-                min={results.min}
-                max={results.max}
-                disclaimer="Bus accidents involving government entities have special notice requirements and claim filing deadlines (often 6 months). Actual compensation depends on liability and comparative negligence."
-                ctaText="Get Free Case Evaluation"
-              />
-            )}
-            {step < 3 ? (
-              <FormNavigation currentStep={step} totalSteps={3} isValid={isStepValid()} onBack={handleBack} onNext={handleNext} />
-            ) : (
-              <Button size="lg" onClick={resetForm} variant="outline" className="w-full h-14">Start Over</Button>
-            )}
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Sidebar */}
+          <div className="space-y-6">
+            <Card className="shadow-lg">
+              <CardHeader className="bg-blue-600 text-white">
+                <CardTitle>Get Professional Evaluation</CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <p className="text-sm mb-4">
+                  This calculator provides estimates only. Get a professional evaluation of your actual case value.
+                </p>
+                <Button 
+                  className="w-full bg-red-600 hover:bg-red-700 text-white mb-3"
+                  onClick={() => window.location.href = '/bus-accident/case-evaluation'}
+                >
+                  Free Case Evaluation
+                </Button>
+                <Button 
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                  onClick={() => window.location.href = 'tel:8559851234'}
+                >
+                  Call (855) 985-1234
+                </Button>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Scale className="w-5 h-5 mr-2 text-blue-600" />
+                  What Affects Compensation?
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start">
+                    <Stethoscope className="w-4 h-4 text-blue-600 mt-1 mr-2" />
+                    <div>
+                      <div className="font-medium">Medical Expenses</div>
+                      <div className="text-muted-foreground">Past and future medical costs</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <DollarSign className="w-4 h-4 text-green-600 mt-1 mr-2" />
+                    <div>
+                      <div className="font-medium">Lost Income</div>
+                      <div className="text-muted-foreground">Wages and earning capacity</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <FileText className="w-4 h-4 text-purple-600 mt-1 mr-2" />
+                    <div>
+                      <div className="font-medium">Pain & Suffering</div>
+                      <div className="text-muted-foreground">Physical and emotional distress</div>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Clock className="w-4 h-4 text-red-600 mt-1 mr-2" />
+                    <div>
+                      <div className="font-medium">Recovery Time</div>
+                      <div className="text-muted-foreground">Duration of disability</div>
+                    </div>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-lg border-l-4 border-l-yellow-500">
+              <CardHeader>
+                <CardTitle className="text-yellow-700">Legal Disclaimer</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-muted-foreground">
+                  This calculator is for informational purposes only and does not constitute legal advice. 
+                  Compensation varies significantly based on individual circumstances, liability factors, 
+                  and available insurance coverage. Consult with a qualified attorney for professional 
+                  evaluation of your specific case.
+                </p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default BusAccidentCompensationCalculator;

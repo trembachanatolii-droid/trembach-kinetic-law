@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
@@ -470,7 +470,7 @@ const WrongfulDeathMedicalGuidance: React.FC = () => {
         canonical="/wrongful-death-medical-guidance"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section */}
       <section 
@@ -650,7 +650,7 @@ const WrongfulDeathMedicalGuidance: React.FC = () => {
                       onClick={() => {
                         const subject = 'Medical Guidance & Legal Consultation';
                         const body = 'I would like guidance on medical aspects of my wrongful death case and legal consultation.';
-                        window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+                        window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
                       }}
                     >
                       <Mail className="w-4 h-4 mr-2" />

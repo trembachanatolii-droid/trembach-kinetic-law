@@ -1,463 +1,537 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Sparkles, AlertCircle } from 'lucide-react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults as ResultsDisplay } from '@/components/calculator/CalculatorResults';
-
-interface TalcFormData extends CalculatorFormData {
-  cancerType: string;
-  cancerStage: string;
-  exposureDuration: string;
-  usageFrequency: string;
-  productType: string;
-  age: string;
-  hasPathologyEvidence: string;
-  medicalCosts: string;
-  futureCareCosts: string;
-  lostWages: string;
-}
-
-const initialFormData: TalcFormData = {
-  cancerType: '',
-  cancerStage: '',
-  exposureDuration: '',
-  usageFrequency: '',
-  productType: '',
-  age: '',
-  hasPathologyEvidence: '',
-  medicalCosts: '',
-  futureCareCosts: '',
-  lostWages: ''
-};
-
-const calculateCompensation = (data: TalcFormData): CalculatorResults => {
-  let baseMin = 150000;
-  let baseMax = 300000;
-
-  // Cancer type multipliers
-  const cancerMultipliers: Record<string, number> = {
-    'ovarian-cancer': 2.5,
-    'mesothelioma': 3.0,
-    'lung-cancer': 2.2,
-    'endometrial-cancer': 2.0,
-    'other-cancer': 1.5
-  };
-  const cancerMultiplier = cancerMultipliers[data.cancerType] || 1;
-
-  // Cancer stage multipliers
-  const stageMultipliers: Record<string, number> = {
-    'stage-1': 1.2,
-    'stage-2': 1.5,
-    'stage-3': 2.0,
-    'stage-4': 2.5,
-    'terminal': 3.0
-  };
-  const stageMultiplier = stageMultipliers[data.cancerStage] || 1;
-
-  // Exposure duration multipliers
-  const durationMultipliers: Record<string, number> = {
-    '1-5-years': 1.0,
-    '6-10-years': 1.3,
-    '11-20-years': 1.7,
-    '21-30-years': 2.0,
-    '30-plus-years': 2.5
-  };
-  const durationMultiplier = durationMultipliers[data.exposureDuration] || 1;
-
-  // Usage frequency multipliers
-  const frequencyMultipliers: Record<string, number> = {
-    'occasional': 1.0,
-    'weekly': 1.3,
-    'daily': 1.8,
-    'multiple-daily': 2.2
-  };
-  const frequencyMultiplier = frequencyMultipliers[data.usageFrequency] || 1;
-
-  // Product type multipliers
-  const productMultipliers: Record<string, number> = {
-    'baby-powder': 2.0,
-    'shower-to-shower': 1.8,
-    'body-powder': 1.5,
-    'multiple-products': 2.2,
-    'other': 1.3
-  };
-  const productMultiplier = productMultipliers[data.productType] || 1;
-
-  // Age-based adjustments (younger = higher future damages)
-  const ageMultipliers: Record<string, number> = {
-    'under-40': 1.5,
-    '40-50': 1.3,
-    '51-60': 1.1,
-    '61-70': 1.0,
-    'over-70': 0.9
-  };
-  const ageMultiplier = ageMultipliers[data.age] || 1;
-
-  // Pathology evidence (crucial for talc cases)
-  const evidenceMultiplier = data.hasPathologyEvidence === 'yes' ? 1.8 : 1.0;
-
-  // Economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-  const economicDamages = medicalCosts + futureCareCosts + lostWages;
-
-  // Calculate compensation
-  const multiplier = cancerMultiplier * stageMultiplier * durationMultiplier * 
-                     frequencyMultiplier * productMultiplier * ageMultiplier * evidenceMultiplier;
-  
-  const min = Math.round((baseMin * multiplier + economicDamages) / 1000) * 1000;
-  const max = Math.round((baseMax * multiplier + economicDamages * 1.5) / 1000) * 1000;
-
-  return {
-    min: Math.max(min, 100000),
-    max: Math.max(max, 250000)
-  };
-};
-
-const validateForm = (data: TalcFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.cancerType && data.cancerStage && data.exposureDuration);
-  }
-  if (step === 2) {
-    return !!(data.usageFrequency && data.productType && data.age && 
-              data.hasPathologyEvidence && data.medicalCosts && data.futureCareCosts && data.lostWages);
-  }
-  return true;
-};
+import { Alert, AlertDescription } from '@/components/ui/alert';
+import { Calculator, DollarSign, AlertTriangle, Scale, Heart } from 'lucide-react';
+import SEO from '@/components/SEO';
+import Navigation from '@/components/Navigation';
+import GoBack from '@/components/GoBack';
+import heroBackground from '@/assets/practice-areas/talc-compensation-calculation.jpg';
 
 const TalcCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm(initialFormData, calculateCompensation, validateForm);
+  const [formData, setFormData] = useState({
+    age: '',
+    cancerType: '',
+    cancerStage: '',
+    diagnosisDate: '',
+    exposureDuration: '',
+    usageFrequency: '',
+    medicalExpenses: '',
+    lostWages: '',
+    treatmentStatus: '',
+    prognosis: '',
+    hasPathologyEvidence: '',
+    familyHistory: ''
+  });
 
-  const progressPercentage = (step / 3) * 100;
+  const [results, setResults] = useState<{
+    lowEstimate: number;
+    highEstimate: number;
+    factors: string[];
+    recommendations: string[];
+  } | null>(null);
+
+  const calculateCompensation = () => {
+    let baseAmount = 0;
+    let multiplier = 1;
+    const factors: string[] = [];
+    const recommendations: string[] = [];
+
+    // Base compensation by cancer type
+    switch (formData.cancerType) {
+      case 'ovarian-cancer':
+        baseAmount = 150000;
+        factors.push('Ovarian cancer strongly linked to talc use');
+        break;
+      case 'mesothelioma':
+        baseAmount = 200000;
+        factors.push('Mesothelioma exclusively caused by asbestos exposure');
+        break;
+      case 'fallopian-tube':
+        baseAmount = 140000;
+        factors.push('Fallopian tube cancer linked to talc exposure');
+        break;
+      case 'peritoneal-cancer':
+        baseAmount = 160000;
+        factors.push('Primary peritoneal cancer associated with talc use');
+        break;
+      default:
+        baseAmount = 100000;
+    }
+
+    // Cancer stage multiplier
+    switch (formData.cancerStage) {
+      case 'stage-1':
+        multiplier *= 0.8;
+        factors.push('Early stage cancer (Stage I)');
+        break;
+      case 'stage-2':
+        multiplier *= 1.0;
+        factors.push('Stage II cancer');
+        break;
+      case 'stage-3':
+        multiplier *= 1.3;
+        factors.push('Advanced stage cancer (Stage III)');
+        break;
+      case 'stage-4':
+        multiplier *= 1.8;
+        factors.push('Late stage cancer (Stage IV)');
+        break;
+    }
+
+    // Age factor (younger patients typically receive higher awards)
+    const age = parseInt(formData.age);
+    if (age < 50) {
+      multiplier *= 1.4;
+      factors.push('Younger age at diagnosis increases compensation');
+    } else if (age < 65) {
+      multiplier *= 1.2;
+      factors.push('Working age at diagnosis');
+    } else {
+      multiplier *= 1.0;
+      factors.push('Senior age at diagnosis');
+    }
+
+    // Exposure duration
+    switch (formData.exposureDuration) {
+      case 'more-than-20-years':
+        multiplier *= 1.4;
+        factors.push('Long-term exposure (20+ years)');
+        break;
+      case '11-20-years':
+        multiplier *= 1.2;
+        factors.push('Extended exposure (11-20 years)');
+        break;
+      case '6-10-years':
+        multiplier *= 1.1;
+        factors.push('Moderate exposure duration (6-10 years)');
+        break;
+      default:
+        factors.push('Shorter exposure duration');
+    }
+
+    // Usage frequency
+    switch (formData.usageFrequency) {
+      case 'daily':
+        multiplier *= 1.3;
+        factors.push('Daily talc use increases exposure risk');
+        break;
+      case 'several-times-week':
+        multiplier *= 1.2;
+        factors.push('Frequent talc use (several times weekly)');
+        break;
+      case 'weekly':
+        multiplier *= 1.1;
+        factors.push('Regular weekly talc use');
+        break;
+    }
+
+    // Medical expenses
+    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
+    if (medicalExpenses > 100000) {
+      multiplier *= 1.2;
+      factors.push('Significant medical expenses incurred');
+    }
+
+    // Treatment status
+    switch (formData.treatmentStatus) {
+      case 'currently-treating':
+        multiplier *= 1.3;
+        factors.push('Currently undergoing treatment');
+        break;
+      case 'palliative-care':
+        multiplier *= 1.8;
+        factors.push('Palliative care indicates terminal prognosis');
+        break;
+      case 'completed-treatment':
+        multiplier *= 1.1;
+        factors.push('Completed treatment');
+        break;
+    }
+
+    // Pathology evidence
+    if (formData.hasPathologyEvidence === 'yes') {
+      multiplier *= 1.3;
+      factors.push('Pathology evidence of talc particles strengthens case');
+    }
+
+    const lowEstimate = Math.round(baseAmount * multiplier * 0.7);
+    const highEstimate = Math.round(baseAmount * multiplier * 1.5);
+
+    // Add medical expenses and lost wages
+    const totalMedical = parseInt(formData.medicalExpenses) || 0;
+    const totalLostWages = parseInt(formData.lostWages) || 0;
+
+    // Recommendations
+    recommendations.push('Gather all medical records documenting your cancer diagnosis and treatment');
+    recommendations.push('Document your talc use history, including brands and usage patterns');
+    
+    if (formData.hasPathologyEvidence !== 'yes') {
+      recommendations.push('Request pathology reports from your oncologist to check for talc particles');
+    }
+    
+    if (formData.treatmentStatus === 'currently-treating' || formData.treatmentStatus === 'palliative-care') {
+      recommendations.push('Consider expedited case filing due to your current health situation');
+    }
+    
+    recommendations.push('Consult with an experienced talc cancer attorney immediately');
+    recommendations.push('California has strict time limits for filing cancer claims');
+
+    setResults({
+      lowEstimate: lowEstimate + totalMedical + totalLostWages,
+      highEstimate: highEstimate + totalMedical + totalLostWages,
+      factors,
+      recommendations
+    });
+
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('results-section')?.scrollIntoView({ 
+        behavior: 'smooth' 
+      });
+    }, 100);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateCompensation();
+  };
+
+  const seoData = {
+    title: "Talc Cancer Compensation Calculator | Baby Powder Lawsuit Values",
+    description: "Calculate potential compensation for talc cancer cases. Free estimation tool for ovarian cancer and mesothelioma from baby powder. Get your case value estimate.",
+    keywords: "talc cancer compensation calculator, baby powder lawsuit settlement amounts, ovarian cancer compensation estimate",
+    canonical: "/talc-compensation-calculator"
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Talc Cancer Calculator | Baby Powder Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate talc cancer compensation for baby powder cases. Free estimates for ovarian cancer and mesothelioma." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title={seoData.title}
+        description={seoData.description}
+        canonical={seoData.canonical}
+      />
+      <Navigation />
+      <GoBack />
 
-      <main className="min-h-screen bg-gradient-to-b from-background to-secondary/10">
-        <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container mx-auto px-6 py-4 max-w-4xl">
-            <Link to="/calculators" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
-
-        <div className="container mx-auto px-6 py-12 max-w-4xl">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-              <Sparkles className="w-8 h-8 text-primary" />
+      {/* Hero Section */}
+      <section 
+        className="relative py-20 overflow-hidden"
+        style={{
+          backgroundImage: `url(${heroBackground})`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/70" />
+        
+        <div className="relative z-10 container mx-auto px-8">
+          <div className="max-w-4xl">
+            <div className="flex items-center gap-3 mb-6">
+              <Calculator className="w-12 h-12 text-primary" />
+              <h1 className="text-4xl md:text-6xl font-display font-bold text-foreground">
+                Talc Cancer Compensation Calculator
+              </h1>
             </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Talc Cancer Compensation Calculator
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Estimate potential compensation for talc-related cancer cases
+            <p className="text-xl md:text-2xl text-muted-foreground mb-8">
+              Estimate Your Potential Compensation for Baby Powder Cancer Cases
+            </p>
+            <p className="text-lg text-muted-foreground mb-8 max-w-4xl">
+              Use our compensation calculator to get an estimate of your potential settlement or verdict value based on your specific talc cancer case details.
             </p>
           </div>
+        </div>
+      </section>
 
-          <div className="bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
-            <div className="h-2 bg-secondary">
-              <div 
-                className="h-full bg-gradient-to-r from-primary to-primary/60 transition-all duration-500 ease-out"
-                style={{ width: `${progressPercentage}%` }}
-              />
-            </div>
-
-            <div className="p-8 md:p-12">
-              {step < 3 && (
-                <div className="mb-8">
-                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                    <span>Step {step} of 2</span>
-                    <span>{Math.round(progressPercentage)}% Complete</span>
-                  </div>
-                </div>
-              )}
-
-              {step === 1 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-6 text-foreground">Cancer Information</h2>
-                    
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="cancerType" className="text-base font-medium">
-                          Type of Cancer *
-                        </Label>
-                        <Select value={formData.cancerType} onValueChange={(value) => updateField('cancerType', value)}>
-                          <SelectTrigger id="cancerType" className="h-12 bg-background">
-                            <SelectValue placeholder="Select cancer type" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
-                            <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
-                            <SelectItem value="lung-cancer">Lung Cancer</SelectItem>
-                            <SelectItem value="endometrial-cancer">Endometrial Cancer</SelectItem>
-                            <SelectItem value="other-cancer">Other Cancer Type</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="cancerStage" className="text-base font-medium">
-                          Cancer Stage *
-                        </Label>
-                        <Select value={formData.cancerStage} onValueChange={(value) => updateField('cancerStage', value)}>
-                          <SelectTrigger id="cancerStage" className="h-12 bg-background">
-                            <SelectValue placeholder="Select cancer stage" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="stage-1">Stage I (Early, Localized)</SelectItem>
-                            <SelectItem value="stage-2">Stage II (Local Spread)</SelectItem>
-                            <SelectItem value="stage-3">Stage III (Regional Spread)</SelectItem>
-                            <SelectItem value="stage-4">Stage IV (Metastatic)</SelectItem>
-                            <SelectItem value="terminal">Terminal/Advanced Stage</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="exposureDuration" className="text-base font-medium">
-                          How Long Did You Use Talc Products? *
-                        </Label>
-                        <Select value={formData.exposureDuration} onValueChange={(value) => updateField('exposureDuration', value)}>
-                          <SelectTrigger id="exposureDuration" className="h-12 bg-background">
-                            <SelectValue placeholder="Select duration" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="1-5-years">1-5 Years</SelectItem>
-                            <SelectItem value="6-10-years">6-10 Years</SelectItem>
-                            <SelectItem value="11-20-years">11-20 Years</SelectItem>
-                            <SelectItem value="21-30-years">21-30 Years</SelectItem>
-                            <SelectItem value="30-plus-years">30+ Years</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-6 text-foreground">Exposure & Economic Details</h2>
-                    
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="usageFrequency" className="text-base font-medium">
-                          How Often Did You Use Talc Products? *
-                        </Label>
-                        <Select value={formData.usageFrequency} onValueChange={(value) => updateField('usageFrequency', value)}>
-                          <SelectTrigger id="usageFrequency" className="h-12 bg-background">
-                            <SelectValue placeholder="Select frequency" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="occasional">Occasional Use</SelectItem>
-                            <SelectItem value="weekly">Weekly</SelectItem>
-                            <SelectItem value="daily">Daily</SelectItem>
-                            <SelectItem value="multiple-daily">Multiple Times Daily</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="productType" className="text-base font-medium">
-                          Which Talc Product(s) Did You Use? *
-                        </Label>
-                        <Select value={formData.productType} onValueChange={(value) => updateField('productType', value)}>
-                          <SelectTrigger id="productType" className="h-12 bg-background">
-                            <SelectValue placeholder="Select product type" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="baby-powder">Johnson's Baby Powder</SelectItem>
-                            <SelectItem value="shower-to-shower">Shower to Shower</SelectItem>
-                            <SelectItem value="body-powder">Other Body Powder</SelectItem>
-                            <SelectItem value="multiple-products">Multiple Products</SelectItem>
-                            <SelectItem value="other">Other Talc Product</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="age" className="text-base font-medium">
-                          Your Current Age *
-                        </Label>
-                        <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-                          <SelectTrigger id="age" className="h-12 bg-background">
-                            <SelectValue placeholder="Select age range" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="under-40">Under 40</SelectItem>
-                            <SelectItem value="40-50">40-50</SelectItem>
-                            <SelectItem value="51-60">51-60</SelectItem>
-                            <SelectItem value="61-70">61-70</SelectItem>
-                            <SelectItem value="over-70">Over 70</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="hasPathologyEvidence" className="text-base font-medium">
-                          Do You Have Pathology Evidence Showing Talc Particles? *
-                        </Label>
-                        <Select value={formData.hasPathologyEvidence} onValueChange={(value) => updateField('hasPathologyEvidence', value)}>
-                          <SelectTrigger id="hasPathologyEvidence" className="h-12 bg-background">
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="yes">Yes - Have Pathology Evidence</SelectItem>
-                            <SelectItem value="no">No - No Pathology Evidence Yet</SelectItem>
-                            <SelectItem value="unknown">Unknown/Not Sure</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="medicalCosts" className="text-base font-medium">
-                          Past Medical Costs *
-                        </Label>
-                        <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-                          <SelectTrigger id="medicalCosts" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="25000">Under $25,000</SelectItem>
-                            <SelectItem value="75000">$25,000 - $100,000</SelectItem>
-                            <SelectItem value="150000">$100,000 - $250,000</SelectItem>
-                            <SelectItem value="350000">$250,000 - $500,000</SelectItem>
-                            <SelectItem value="750000">Over $500,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="futureCareCosts" className="text-base font-medium">
-                          Estimated Future Care Costs *
-                        </Label>
-                        <Select value={formData.futureCareCosts} onValueChange={(value) => updateField('futureCareCosts', value)}>
-                          <SelectTrigger id="futureCareCosts" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="50000">Under $50,000</SelectItem>
-                            <SelectItem value="150000">$50,000 - $200,000</SelectItem>
-                            <SelectItem value="350000">$200,000 - $500,000</SelectItem>
-                            <SelectItem value="750000">$500,000 - $1,000,000</SelectItem>
-                            <SelectItem value="1500000">Over $1,000,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="lostWages" className="text-base font-medium">
-                          Lost Wages & Income *
-                        </Label>
-                        <Select value={formData.lostWages} onValueChange={(value) => updateField('lostWages', value)}>
-                          <SelectTrigger id="lostWages" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="0">None/Retired</SelectItem>
-                            <SelectItem value="25000">Under $25,000</SelectItem>
-                            <SelectItem value="75000">$25,000 - $100,000</SelectItem>
-                            <SelectItem value="150000">$100,000 - $250,000</SelectItem>
-                            <SelectItem value="350000">Over $250,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && results && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <ResultsDisplay
-                    min={results.min}
-                    max={results.max}
-                    title="Estimated Talc Cancer Compensation Range"
-                    subtitle="Based on your cancer type, exposure history, and economic damages"
-                    damageCategories={[
-                      {
-                        title: "Economic Damages",
-                        description: "Medical expenses, future care costs, lost wages and earning capacity"
-                      },
-                      {
-                        title: "Non-Economic Damages",
-                        description: "Pain and suffering, loss of quality of life, emotional distress"
-                      },
-                      {
-                        title: "Punitive Damages",
-                        description: "Additional damages awarded to punish corporate misconduct"
-                      }
-                    ]}
-                    disclaimer="This estimate is based on historical talc lawsuit settlements and verdicts. Actual compensation depends on specific medical evidence, pathology results showing talc particles, exposure duration, product liability factors, and individual case circumstances. Talc cases often involve multiple defendants and may be part of mass tort litigation. Many cases have resulted in significant verdicts and settlements. Consultation with an experienced product liability attorney is essential."
-                    ctaText="Speak with a Talc Attorney"
-                  />
-                  
-                  <div className="mt-8 text-center">
-                    <Button 
-                      onClick={resetForm}
-                      variant="outline"
-                      size="lg"
-                      className="min-w-[200px]"
-                    >
-                      Calculate Another Case
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {step < 3 && (
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                  nextButtonText={step === 2 ? 'Calculate Compensation' : 'Continue'}
-                />
-              )}
-            </div>
-          </div>
-
-          <div className="mt-8 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-blue-900 dark:text-blue-100">
-                <p className="font-semibold mb-2">Important Information About Talc Litigation</p>
-                <p>
-                  Thousands of lawsuits have been filed against manufacturers of talc-based products. 
-                  Juries have awarded significant verdicts, with some exceeding $4 billion. 
-                  Key evidence includes pathology reports showing talc particles in tissue samples and 
-                  documented history of product use. Time limits apply for filing claims.
+      {/* Calculator Form */}
+      <section className="py-20">
+        <div className="container mx-auto px-8">
+          <div className="max-w-4xl mx-auto">
+            <Card className="p-8">
+              <CardHeader>
+                <CardTitle className="text-3xl font-bold text-center mb-2">
+                  Compensation Estimation Tool
+                </CardTitle>
+                <p className="text-muted-foreground text-center">
+                  Provide your case details to receive a personalized compensation estimate
                 </p>
+              </CardHeader>
+              
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-8">
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="age">Your Age</Label>
+                      <Input
+                        id="age"
+                        type="number"
+                        value={formData.age}
+                        onChange={(e) => setFormData({...formData, age: e.target.value})}
+                        placeholder="Enter your age"
+                        required
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="cancerType">Type of Cancer</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, cancerType: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select cancer type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="ovarian-cancer">Ovarian Cancer</SelectItem>
+                          <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
+                          <SelectItem value="fallopian-tube">Fallopian Tube Cancer</SelectItem>
+                          <SelectItem value="peritoneal-cancer">Primary Peritoneal Cancer</SelectItem>
+                          <SelectItem value="cervical-cancer">Cervical Cancer</SelectItem>
+                          <SelectItem value="uterine-cancer">Uterine Cancer</SelectItem>
+                          <SelectItem value="other">Other Cancer Type</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="cancerStage">Cancer Stage</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, cancerStage: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select cancer stage" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="stage-1">Stage I</SelectItem>
+                          <SelectItem value="stage-2">Stage II</SelectItem>
+                          <SelectItem value="stage-3">Stage III</SelectItem>
+                          <SelectItem value="stage-4">Stage IV</SelectItem>
+                          <SelectItem value="unknown">Unknown</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="diagnosisDate">Year of Diagnosis</Label>
+                      <Input
+                        id="diagnosisDate"
+                        type="number"
+                        value={formData.diagnosisDate}
+                        onChange={(e) => setFormData({...formData, diagnosisDate: e.target.value})}
+                        placeholder="e.g., 2023"
+                        min="2000"
+                        max={new Date().getFullYear()}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="exposureDuration">Duration of Talc Use</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, exposureDuration: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select duration" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="less-than-1-year">Less than 1 year</SelectItem>
+                          <SelectItem value="1-5-years">1-5 years</SelectItem>
+                          <SelectItem value="6-10-years">6-10 years</SelectItem>
+                          <SelectItem value="11-20-years">11-20 years</SelectItem>
+                          <SelectItem value="more-than-20-years">More than 20 years</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="usageFrequency">Frequency of Use</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, usageFrequency: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select frequency" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="daily">Daily</SelectItem>
+                          <SelectItem value="several-times-week">Several times per week</SelectItem>
+                          <SelectItem value="weekly">Weekly</SelectItem>
+                          <SelectItem value="monthly">Monthly</SelectItem>
+                          <SelectItem value="occasionally">Occasionally</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="medicalExpenses">Total Medical Expenses ($)</Label>
+                      <Input
+                        id="medicalExpenses"
+                        type="number"
+                        value={formData.medicalExpenses}
+                        onChange={(e) => setFormData({...formData, medicalExpenses: e.target.value})}
+                        placeholder="Enter total medical costs"
+                      />
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="lostWages">Lost Wages/Income ($)</Label>
+                      <Input
+                        id="lostWages"
+                        type="number"
+                        value={formData.lostWages}
+                        onChange={(e) => setFormData({...formData, lostWages: e.target.value})}
+                        placeholder="Enter lost income"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <Label htmlFor="treatmentStatus">Current Treatment Status</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, treatmentStatus: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select status" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="currently-treating">Currently Undergoing Treatment</SelectItem>
+                          <SelectItem value="completed-treatment">Completed Treatment</SelectItem>
+                          <SelectItem value="in-remission">In Remission</SelectItem>
+                          <SelectItem value="palliative-care">Palliative Care</SelectItem>
+                          <SelectItem value="not-yet-started">Treatment Not Yet Started</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    
+                    <div>
+                      <Label htmlFor="hasPathologyEvidence">Pathology Evidence of Talc?</Label>
+                      <Select onValueChange={(value) => setFormData({...formData, hasPathologyEvidence: value})}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select answer" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="yes">Yes - Talc particles found in tissue</SelectItem>
+                          <SelectItem value="no">No evidence found</SelectItem>
+                          <SelectItem value="unknown">Unknown/Not tested</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <Button
+                    type="submit"
+                    className="w-full bg-primary hover:bg-primary-dark text-white py-6 text-lg font-semibold"
+                  >
+                    <Calculator className="w-5 h-5 mr-2" />
+                    Calculate My Compensation Estimate
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+
+            {/* Results Section */}
+            {results && (
+              <div id="results-section" className="mt-8 space-y-6">
+                <Card className="p-8 bg-green-50 border-green-200">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-bold text-green-800 flex items-center gap-2">
+                      <DollarSign className="w-6 h-6" />
+                      Your Estimated Compensation Range
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center mb-6">
+                      <div className="text-4xl font-bold text-green-600 mb-2">
+                        ${results.lowEstimate.toLocaleString()} - ${results.highEstimate.toLocaleString()}
+                      </div>
+                      <p className="text-green-700">
+                        Estimated compensation range based on your case details
+                      </p>
+                    </div>
+                    
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-lg font-semibold text-green-800 mb-3">Factors Considered:</h3>
+                        <ul className="space-y-2">
+                          {results.factors.map((factor, index) => (
+                            <li key={index} className="flex items-start gap-2 text-green-700">
+                              <span className="text-green-500">•</span>
+                              {factor}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-lg font-semibold text-green-800 mb-3">Next Steps:</h3>
+                        <ul className="space-y-2">
+                          {results.recommendations.map((rec, index) => (
+                            <li key={index} className="flex items-start gap-2 text-green-700">
+                              <span className="text-green-500">•</span>
+                              {rec}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6 text-center">
+                      <Button asChild className="bg-green-600 hover:bg-green-700">
+                        <a href="/talc-case-evaluation">Get Free Case Evaluation</a>
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Alert>
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertDescription>
+                    <strong>Important Disclaimer:</strong> This calculator provides estimates only and does not constitute legal advice. 
+                    Actual compensation depends on many factors including specific case details, strength of evidence, defendant's liability, 
+                    and court jurisdiction. Consult with an experienced talc cancer attorney for an accurate case evaluation.
+                  </AlertDescription>
+                </Alert>
               </div>
-            </div>
+            )}
+
+            {/* Additional Information */}
+            <Card className="mt-8 p-6">
+              <h3 className="text-xl font-semibold mb-4">Understanding Talc Cancer Compensation</h3>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                  <h4 className="font-semibold text-blue-600 mb-2">Economic Damages</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Medical expenses (past and future)</li>
+                    <li>• Lost wages and benefits</li>
+                    <li>• Loss of earning capacity</li>
+                    <li>• Medical monitoring costs</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-purple-600 mb-2">Non-Economic Damages</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Pain and suffering</li>
+                    <li>• Emotional distress</li>
+                    <li>• Loss of life enjoyment</li>
+                    <li>• Loss of consortium</li>
+                  </ul>
+                </div>
+                
+                <div>
+                  <h4 className="font-semibold text-red-600 mb-2">Punitive Damages</h4>
+                  <ul className="text-sm text-muted-foreground space-y-1">
+                    <li>• Corporate misconduct penalties</li>
+                    <li>• Concealment of health risks</li>
+                    <li>• Failure to warn consumers</li>
+                    <li>• Intentional deception</li>
+                  </ul>
+                </div>
+              </div>
+            </Card>
           </div>
         </div>
-      </main>
-    </>
+      </section>
+    </div>
   );
 };
 

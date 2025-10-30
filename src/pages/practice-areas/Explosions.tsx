@@ -22,7 +22,7 @@ import {
   Gavel,
   MapPin
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 // Import images
@@ -290,7 +290,7 @@ const Explosions: React.FC = () => {
         canonical="/practice-areas/explosions"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas" />
 
       {/* Hero Section */}
       <section 

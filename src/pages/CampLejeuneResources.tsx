@@ -3,9 +3,33 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Helmet } from "react-helmet-async";
+import { useEffect, useState } from "react";
 import resourcesHeroImage from "@/assets/camp-lejeune-resources-hero.jpg";
 
 export default function CampLejeuneResources() {
+  const [showGoBack, setShowGoBack] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowGoBack(window.scrollY > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleGoBack = () => {
+    const savedScrollPosition = sessionStorage.getItem('campLejeuneScrollPosition');
+    window.history.back();
+    
+    if (savedScrollPosition) {
+      setTimeout(() => {
+        window.scrollTo(0, parseInt(savedScrollPosition));
+        sessionStorage.removeItem('campLejeuneScrollPosition');
+      }, 100);
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -17,6 +41,21 @@ export default function CampLejeuneResources() {
       </Helmet>
 
       <div className="min-h-screen bg-gradient-to-b from-background to-muted/30">
+        {/* Go Back Button */}
+        {showGoBack && (
+          <Button
+            onClick={handleGoBack}
+            variant="outline"
+            size="sm"
+            className={`fixed top-20 left-4 z-50 transition-all duration-300 bg-background/95 backdrop-blur-sm border-primary/20 hover:border-primary hover:bg-primary hover:text-primary-foreground text-primary ${
+              showGoBack ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-2'
+            }`}
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Go Back
+          </Button>
+        )}
+
         {/* Hero Section */}
         <section className="relative py-16 bg-gradient-to-r from-primary/10 to-secondary/10">
           <div 

@@ -1,544 +1,435 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, HardHat, AlertCircle } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Card } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults as ResultsDisplay } from '@/components/calculator/CalculatorResults';
+import { Slider } from '@/components/ui/slider';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import scaffoldingCalculatorImage from '@/assets/scaffolding-calculator-hero.jpg';
 
-interface ScaffoldingFormData extends CalculatorFormData {
-  heightOfFall: string;
-  landingSurface: string;
+interface CalculatorData {
+  age: number;
   injurySeverity: string;
-  injuryType: string;
+  heightOfFall: string;
+  medicalExpenses: number;
+  lostWages: number;
+  futureEarnings: number;
+  painAndSuffering: string;
+  employmentStatus: string;
   safetyViolations: string;
-  guardrailsProvided: string;
-  scaffoldType: string;
-  permanentDisability: string;
-  age: string;
-  medicalCosts: string;
-  futureCareCosts: string;
-  lostWages: string;
 }
 
-const initialFormData: ScaffoldingFormData = {
-  heightOfFall: '',
-  landingSurface: '',
-  injurySeverity: '',
-  injuryType: '',
-  safetyViolations: '',
-  guardrailsProvided: '',
-  scaffoldType: '',
-  permanentDisability: '',
-  age: '',
-  medicalCosts: '',
-  futureCareCosts: '',
-  lostWages: ''
-};
+const ScaffoldingFallsCompensationCalculator: React.FC = () => {
+  const navigate = useNavigate();
+  const [calculatorData, setCalculatorData] = useState<CalculatorData>({
+    age: 35,
+    injurySeverity: '',
+    heightOfFall: '',
+    medicalExpenses: 0,
+    lostWages: 0,
+    futureEarnings: 0,
+    painAndSuffering: '',
+    employmentStatus: '',
+    safetyViolations: ''
+  });
 
-const calculateCompensation = (data: ScaffoldingFormData): CalculatorResults => {
-  let baseMin = 120000;
-  let baseMax = 250000;
+  const [estimatedCompensation, setEstimatedCompensation] = useState({
+    low: 0,
+    high: 0,
+    average: 0
+  });
 
-  // Height of fall multipliers (critical factor)
-  const heightMultipliers: Record<string, number> = {
-    'under-6-feet': 1.2,
-    '6-10-feet': 1.8,
-    '11-20-feet': 2.5,
-    '21-30-feet': 3.0,
-    'over-30-feet': 3.5
+  const calculateCompensation = () => {
+    // Base compensation calculation
+    let baseCompensation = calculatorData.medicalExpenses + calculatorData.lostWages + calculatorData.futureEarnings;
+    
+    // If no medical expenses entered, use minimum base
+    if (baseCompensation === 0) {
+      baseCompensation = 25000;
+    }
+
+    // Injury severity multiplier
+    let severityMultiplier = 1.5;
+    switch (calculatorData.injurySeverity) {
+      case 'minor':
+        severityMultiplier = 1.2;
+        break;
+      case 'moderate':
+        severityMultiplier = 2.0;
+        break;
+      case 'severe':
+        severityMultiplier = 3.5;
+        break;
+      case 'catastrophic':
+        severityMultiplier = 5.0;
+        break;
+    }
+
+    // Height of fall multiplier
+    let heightMultiplier = 1.0;
+    switch (calculatorData.heightOfFall) {
+      case '0-6ft':
+        heightMultiplier = 1.0;
+        break;
+      case '6-12ft':
+        heightMultiplier = 1.3;
+        break;
+      case '12-20ft':
+        heightMultiplier = 1.6;
+        break;
+      case '20-30ft':
+        heightMultiplier = 2.0;
+        break;
+      case '30ft+':
+        heightMultiplier = 2.5;
+        break;
+    }
+
+    // Pain and suffering multiplier
+    let painMultiplier = 1.0;
+    switch (calculatorData.painAndSuffering) {
+      case 'minimal':
+        painMultiplier = 1.2;
+        break;
+      case 'moderate':
+        painMultiplier = 1.8;
+        break;
+      case 'severe':
+        painMultiplier = 2.5;
+        break;
+      case 'extreme':
+        painMultiplier = 3.5;
+        break;
+    }
+
+    // Safety violations multiplier
+    let violationsMultiplier = 1.0;
+    switch (calculatorData.safetyViolations) {
+      case 'minor':
+        violationsMultiplier = 1.2;
+        break;
+      case 'major':
+        violationsMultiplier = 1.8;
+        break;
+      case 'willful':
+        violationsMultiplier = 2.5;
+        break;
+    }
+
+    // Age factor (younger victims typically receive higher compensation)
+    let ageFactor = 1.0;
+    if (calculatorData.age < 30) {
+      ageFactor = 1.3;
+    } else if (calculatorData.age < 45) {
+      ageFactor = 1.1;
+    } else if (calculatorData.age > 60) {
+      ageFactor = 0.8;
+    }
+
+    // Calculate ranges
+    const totalMultiplier = severityMultiplier * heightMultiplier * painMultiplier * violationsMultiplier * ageFactor;
+    
+    const low = Math.round(baseCompensation * totalMultiplier * 0.7);
+    const high = Math.round(baseCompensation * totalMultiplier * 1.5);
+    const average = Math.round((low + high) / 2);
+
+    setEstimatedCompensation({ low, high, average });
   };
-  const heightMultiplier = heightMultipliers[data.heightOfFall] || 1;
 
-  // Landing surface multipliers
-  const surfaceMultipliers: Record<string, number> = {
-    'concrete': 1.5,
-    'asphalt': 1.4,
-    'metal': 1.3,
-    'wood': 1.2,
-    'dirt-gravel': 1.1,
-    'safety-net': 0.8
+  const handleInputChange = (field: string, value: any) => {
+    setCalculatorData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-  const surfaceMultiplier = surfaceMultipliers[data.landingSurface] || 1;
 
-  // Injury severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'minor': 0.8,
-    'moderate': 1.4,
-    'serious': 2.2,
-    'severe': 3.0,
-    'catastrophic': 3.8,
-    'fatal': 4.5
+  useEffect(() => {
+    calculateCompensation();
+  }, [calculatorData]);
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0
+    }).format(amount);
   };
-  const severityMultiplier = severityMultipliers[data.injurySeverity] || 1;
-
-  // Injury type multipliers
-  const injuryTypeMultipliers: Record<string, number> = {
-    'traumatic-brain-injury': 3.2,
-    'spinal-cord-injury': 3.5,
-    'multiple-fractures': 2.3,
-    'crush-injury': 2.6,
-    'internal-injuries': 2.5,
-    'amputation': 2.9,
-    'paralysis': 3.8,
-    'back-neck-injury': 2.0,
-    'other': 1.5
-  };
-  const injuryTypeMultiplier = injuryTypeMultipliers[data.injuryType] || 1;
-
-  // Safety violations (crucial for liability)
-  const violationMultipliers: Record<string, number> = {
-    'willful-violations': 2.8,
-    'serious-violations': 2.3,
-    'repeat-violations': 2.5,
-    'no-fall-protection': 2.4,
-    'improper-scaffold': 2.2,
-    'no-violations': 1.0
-  };
-  const violationMultiplier = violationMultipliers[data.safetyViolations] || 1;
-
-  // Guardrails provided
-  const guardrailMultiplier = data.guardrailsProvided === 'no' ? 1.6 : 
-                               data.guardrailsProvided === 'inadequate' ? 1.4 : 1.0;
-
-  // Scaffold type multipliers
-  const scaffoldMultipliers: Record<string, number> = {
-    'suspended': 1.5,
-    'supported': 1.2,
-    'mobile': 1.4,
-    'aerial-lift': 1.3,
-    'other': 1.1
-  };
-  const scaffoldMultiplier = scaffoldMultipliers[data.scaffoldType] || 1;
-
-  // Permanent disability multipliers
-  const disabilityMultipliers: Record<string, number> = {
-    'total-permanent': 3.2,
-    'partial-permanent': 2.4,
-    'temporary-total': 1.6,
-    'temporary-partial': 1.3,
-    'none': 1.0
-  };
-  const disabilityMultiplier = disabilityMultipliers[data.permanentDisability] || 1;
-
-  // Age-based adjustments
-  const ageMultipliers: Record<string, number> = {
-    'under-30': 1.7,
-    '30-40': 1.5,
-    '41-50': 1.3,
-    '51-60': 1.1,
-    'over-60': 0.9
-  };
-  const ageMultiplier = ageMultipliers[data.age] || 1;
-
-  // Economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-  const economicDamages = medicalCosts + futureCareCosts + lostWages;
-
-  // Calculate compensation
-  const multiplier = heightMultiplier * surfaceMultiplier * severityMultiplier * 
-                     injuryTypeMultiplier * violationMultiplier * guardrailMultiplier * 
-                     scaffoldMultiplier * disabilityMultiplier * ageMultiplier;
-  
-  const min = Math.round((baseMin * multiplier + economicDamages) / 1000) * 1000;
-  const max = Math.round((baseMax * multiplier + economicDamages * 1.5) / 1000) * 1000;
-
-  return {
-    min: Math.max(min, 75000),
-    max: Math.max(max, 200000)
-  };
-};
-
-const validateForm = (data: ScaffoldingFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.heightOfFall && data.landingSurface && data.injurySeverity && 
-              data.injuryType && data.safetyViolations);
-  }
-  if (step === 2) {
-    return !!(data.guardrailsProvided && data.scaffoldType && data.permanentDisability && 
-              data.age && data.medicalCosts && data.futureCareCosts && data.lostWages);
-  }
-  return true;
-};
-
-const ScaffoldingFallsCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm(initialFormData, calculateCompensation, validateForm);
-
-  const progressPercentage = (step / 3) * 100;
 
   return (
-    <>
-      <Helmet>
-        <title>Scaffolding Fall Calculator | Height Injury Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate scaffolding fall compensation for construction height injuries. Free OSHA violation estimates." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Scaffolding Falls Compensation Calculator - California"
+        description="Calculate potential compensation for your scaffolding falls accident. Free estimation tool for construction accident injury claims in California."
+        canonical="https://www.trembachlawfirm.com/practice-areas/scaffolding-falls/compensation-calculator"
+        keywords="scaffolding falls compensation calculator, construction accident settlement, scaffolding injury compensation, California construction accident lawyer"
+      />
 
-      <main className="min-h-screen bg-gradient-to-b from-background to-secondary/10">
-        <div className="border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-          <div className="container mx-auto px-6 py-4 max-w-4xl">
-            <Link to="/calculators" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+      {/* Hero Section */}
+      <section 
+        className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat flex items-center"
+        style={{ backgroundImage: `url(${scaffoldingCalculatorImage})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto px-8 relative z-10 text-center">
+          <h1 className="text-5xl md:text-6xl font-display font-bold text-white mb-6">
+            Scaffolding Falls Compensation Calculator
+          </h1>
+          <p className="text-xl md:text-2xl text-white mb-6">
+            Estimate Your Potential Settlement Amount
+          </p>
+          <p className="text-lg text-white max-w-3xl mx-auto leading-relaxed">
+            Get an immediate estimate of potential compensation for your scaffolding falls accident. 
+            This tool considers injury severity, medical costs, and other factors affecting your case value.
+          </p>
+        </div>
+      </section>
+
+      <GoBack className="container mx-auto px-8 pt-8" />
+
+      <div className="container mx-auto px-8 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-12">
+            
+            {/* Calculator Form */}
+            <div>
+              <Card className="p-8">
+                <h2 className="text-3xl font-bold mb-8">Calculate Your Compensation</h2>
+                
+                <div className="space-y-6">
+                  {/* Age */}
+                  <div>
+                    <Label className="text-lg font-semibold">Your Age: {calculatorData.age}</Label>
+                    <Slider
+                      value={[calculatorData.age]}
+                      onValueChange={(value) => handleInputChange('age', value[0])}
+                      max={80}
+                      min={18}
+                      step={1}
+                      className="mt-2"
+                    />
+                    <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                      <span>18</span>
+                      <span>80</span>
+                    </div>
+                  </div>
+
+                  {/* Injury Severity */}
+                  <div>
+                    <Label className="text-lg font-semibold">Injury Severity</Label>
+                    <Select onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Select injury severity" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="minor">Minor (sprains, bruises)</SelectItem>
+                        <SelectItem value="moderate">Moderate (fractures, concussion)</SelectItem>
+                        <SelectItem value="severe">Severe (multiple fractures, head injury)</SelectItem>
+                        <SelectItem value="catastrophic">Catastrophic (spinal cord, brain injury)</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Height of Fall */}
+                  <div>
+                    <Label className="text-lg font-semibold">Height of Fall</Label>
+                    <Select onValueChange={(value) => handleInputChange('heightOfFall', value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Select height of fall" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="0-6ft">0-6 feet</SelectItem>
+                        <SelectItem value="6-12ft">6-12 feet</SelectItem>
+                        <SelectItem value="12-20ft">12-20 feet</SelectItem>
+                        <SelectItem value="20-30ft">20-30 feet</SelectItem>
+                        <SelectItem value="30ft+">Over 30 feet</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Medical Expenses */}
+                  <div>
+                    <Label htmlFor="medicalExpenses" className="text-lg font-semibold">
+                      Medical Expenses (to date)
+                    </Label>
+                    <Input
+                      id="medicalExpenses"
+                      type="number"
+                      value={calculatorData.medicalExpenses || ''}
+                      onChange={(e) => handleInputChange('medicalExpenses', Number(e.target.value))}
+                      placeholder="Enter amount in USD"
+                      className="mt-2"
+                    />
+                  </div>
+
+                  {/* Lost Wages */}
+                  <div>
+                    <Label htmlFor="lostWages" className="text-lg font-semibold">
+                      Lost Wages (to date)
+                    </Label>
+                    <Input
+                      id="lostWages"
+                      type="number"
+                      value={calculatorData.lostWages || ''}
+                      onChange={(e) => handleInputChange('lostWages', Number(e.target.value))}
+                      placeholder="Enter amount in USD"
+                      className="mt-2"
+                    />
+                  </div>
+
+                  {/* Future Earnings Impact */}
+                  <div>
+                    <Label htmlFor="futureEarnings" className="text-lg font-semibold">
+                      Estimated Future Earnings Impact
+                    </Label>
+                    <Input
+                      id="futureEarnings"
+                      type="number"
+                      value={calculatorData.futureEarnings || ''}
+                      onChange={(e) => handleInputChange('futureEarnings', Number(e.target.value))}
+                      placeholder="Enter amount in USD"
+                      className="mt-2"
+                    />
+                  </div>
+
+                  {/* Pain and Suffering */}
+                  <div>
+                    <Label className="text-lg font-semibold">Pain and Suffering Level</Label>
+                    <Select onValueChange={(value) => handleInputChange('painAndSuffering', value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Select pain level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="minimal">Minimal</SelectItem>
+                        <SelectItem value="moderate">Moderate</SelectItem>
+                        <SelectItem value="severe">Severe</SelectItem>
+                        <SelectItem value="extreme">Extreme</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  {/* Safety Violations */}
+                  <div>
+                    <Label className="text-lg font-semibold">Safety Violations Present</Label>
+                    <Select onValueChange={(value) => handleInputChange('safetyViolations', value)}>
+                      <SelectTrigger className="mt-2">
+                        <SelectValue placeholder="Select violation level" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="none">No Violations</SelectItem>
+                        <SelectItem value="minor">Minor Violations</SelectItem>
+                        <SelectItem value="major">Major Violations</SelectItem>
+                        <SelectItem value="willful">Willful Violations</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+
+                {/* Results */}
+                {estimatedCompensation.average > 0 && (
+                  <div className="mt-8 p-6 bg-primary/5 rounded-lg border">
+                    <h3 className="text-2xl font-bold mb-4 text-primary">Estimated Compensation Range</h3>
+                    <div className="grid grid-cols-3 gap-4 text-center">
+                      <div>
+                        <p className="text-sm text-muted-foreground">Low Estimate</p>
+                        <p className="text-xl font-bold text-green-600">{formatCurrency(estimatedCompensation.low)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">Average</p>
+                        <p className="text-2xl font-bold text-primary">{formatCurrency(estimatedCompensation.average)}</p>
+                      </div>
+                      <div>
+                        <p className="text-sm text-muted-foreground">High Estimate</p>
+                        <p className="text-xl font-bold text-green-600">{formatCurrency(estimatedCompensation.high)}</p>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-6 text-center">
+                      <Button 
+                        size="lg" 
+                        className="text-lg px-8 py-4"
+                        onClick={() => navigate('/practice-areas/scaffolding-falls/case-evaluation')}
+                      >
+                        Get Free Case Review
+                      </Button>
+                    </div>
+                  </div>
+                )}
+              </Card>
+            </div>
+
+            {/* Information Cards */}
+            <div className="space-y-6">
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4">Important Disclaimer</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  This calculator provides estimates only and should not be considered a guarantee of compensation. 
+                  Actual settlement amounts depend on many factors including case specifics, evidence quality, 
+                  insurance coverage, and negotiation outcomes. Each case is unique and requires individual evaluation 
+                  by qualified legal professionals.
+                </p>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4">Factors Affecting Compensation</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• <strong>Injury severity:</strong> More severe injuries typically result in higher compensation</li>
+                  <li>• <strong>Fall height:</strong> Greater heights often correlate with more serious injuries</li>
+                  <li>• <strong>Medical costs:</strong> All current and future medical expenses are considered</li>
+                  <li>• <strong>Lost income:</strong> Both past and future earnings capacity impacts</li>
+                  <li>• <strong>Safety violations:</strong> Employer negligence can increase compensation</li>
+                  <li>• <strong>Age factor:</strong> Younger victims may receive higher future earnings calculations</li>
+                  <li>• <strong>Pain and suffering:</strong> Non-economic damages for physical and emotional distress</li>
+                </ul>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4">Why Choose Professional Legal Help?</h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li>• Experienced in construction accident law</li>
+                  <li>• Knowledge of OSHA regulations and safety standards</li>
+                  <li>• Ability to investigate and gather evidence</li>
+                  <li>• Negotiation skills with insurance companies</li>
+                  <li>• No fees unless we win your case</li>
+                  <li>• Maximize your compensation potential</li>
+                </ul>
+              </Card>
+
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4">Next Steps</h3>
+                <ol className="space-y-2 text-muted-foreground">
+                  <li>1. <strong>Document everything:</strong> Keep all medical records and accident reports</li>
+                  <li>2. <strong>Preserve evidence:</strong> Photos, witness statements, safety violations</li>
+                  <li>3. <strong>Get medical attention:</strong> Even if injuries seem minor initially</li>
+                  <li>4. <strong>Contact an attorney:</strong> Free consultation to evaluate your case</li>
+                  <li>5. <strong>Act quickly:</strong> California has time limits for filing claims</li>
+                </ol>
+              </Card>
+            </div>
           </div>
         </div>
+      </div>
 
-        <div className="container mx-auto px-6 py-12 max-w-4xl">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-6">
-              <HardHat className="w-8 h-8 text-primary" />
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-              Scaffolding Fall Compensation Calculator
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Estimate potential compensation for scaffolding falls and height-related injuries
+      {/* Legal Disclaimer */}
+      <section className="bg-muted py-12">
+        <div className="container mx-auto px-8">
+          <div className="max-w-4xl mx-auto text-center">
+            <h2 className="text-2xl font-bold mb-4">Legal Disclaimer</h2>
+            <p className="text-muted-foreground leading-relaxed">
+              The information provided by this compensation calculator is for educational purposes only and does not constitute legal advice. 
+              Every scaffolding falls case is unique, and compensation amounts can vary significantly based on specific circumstances, 
+              evidence, jurisdiction, and other factors. This calculator's estimates are based on general statistical data and should not 
+              be relied upon as a prediction of your case outcome. For accurate case evaluation, please consult with a qualified attorney 
+              who can review the specific details of your situation. Trembach Law Firm provides free consultations and operates on a 
+              contingency fee basis - no fees unless we win your case.
             </p>
           </div>
-
-          <div className="bg-card rounded-2xl shadow-xl border border-border overflow-hidden">
-            <div className="h-2 bg-secondary">
-              <div 
-                className="h-full bg-gradient-to-r from-primary to-primary/60 transition-all duration-500 ease-out"
-                style={{ width: `${progressPercentage}%` }}
-              />
-            </div>
-
-            <div className="p-8 md:p-12">
-              {step < 3 && (
-                <div className="mb-8">
-                  <div className="flex items-center justify-between text-sm text-muted-foreground mb-2">
-                    <span>Step {step} of 2</span>
-                    <span>{Math.round(progressPercentage)}% Complete</span>
-                  </div>
-                </div>
-              )}
-
-              {step === 1 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-6 text-foreground">Fall & Injury Details</h2>
-                    
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="heightOfFall" className="text-base font-medium">
-                          Height of Fall *
-                        </Label>
-                        <Select value={formData.heightOfFall} onValueChange={(value) => updateField('heightOfFall', value)}>
-                          <SelectTrigger id="heightOfFall" className="h-12 bg-background">
-                            <SelectValue placeholder="Select fall height" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="under-6-feet">Under 6 Feet</SelectItem>
-                            <SelectItem value="6-10-feet">6-10 Feet</SelectItem>
-                            <SelectItem value="11-20-feet">11-20 Feet</SelectItem>
-                            <SelectItem value="21-30-feet">21-30 Feet</SelectItem>
-                            <SelectItem value="over-30-feet">Over 30 Feet</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="landingSurface" className="text-base font-medium">
-                          Landing Surface *
-                        </Label>
-                        <Select value={formData.landingSurface} onValueChange={(value) => updateField('landingSurface', value)}>
-                          <SelectTrigger id="landingSurface" className="h-12 bg-background">
-                            <SelectValue placeholder="Select landing surface" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="concrete">Concrete</SelectItem>
-                            <SelectItem value="asphalt">Asphalt</SelectItem>
-                            <SelectItem value="metal">Metal/Steel</SelectItem>
-                            <SelectItem value="wood">Wood/Lumber</SelectItem>
-                            <SelectItem value="dirt-gravel">Dirt/Gravel</SelectItem>
-                            <SelectItem value="safety-net">Safety Net (Caught)</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="injurySeverity" className="text-base font-medium">
-                          Injury Severity *
-                        </Label>
-                        <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
-                          <SelectTrigger id="injurySeverity" className="h-12 bg-background">
-                            <SelectValue placeholder="Select severity" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="minor">Minor (Full Recovery Expected)</SelectItem>
-                            <SelectItem value="moderate">Moderate (Some Limitations)</SelectItem>
-                            <SelectItem value="serious">Serious (Significant Impairment)</SelectItem>
-                            <SelectItem value="severe">Severe (Major Disability)</SelectItem>
-                            <SelectItem value="catastrophic">Catastrophic (Life-Altering)</SelectItem>
-                            <SelectItem value="fatal">Fatal</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="injuryType" className="text-base font-medium">
-                          Primary Injury Type *
-                        </Label>
-                        <Select value={formData.injuryType} onValueChange={(value) => updateField('injuryType', value)}>
-                          <SelectTrigger id="injuryType" className="h-12 bg-background">
-                            <SelectValue placeholder="Select injury type" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="traumatic-brain-injury">Traumatic Brain Injury</SelectItem>
-                            <SelectItem value="spinal-cord-injury">Spinal Cord Injury</SelectItem>
-                            <SelectItem value="multiple-fractures">Multiple Fractures</SelectItem>
-                            <SelectItem value="crush-injury">Crush Injury</SelectItem>
-                            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-                            <SelectItem value="amputation">Amputation</SelectItem>
-                            <SelectItem value="paralysis">Paralysis</SelectItem>
-                            <SelectItem value="back-neck-injury">Back/Neck Injury</SelectItem>
-                            <SelectItem value="other">Other Injury</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="safetyViolations" className="text-base font-medium">
-                          Safety Violations Present *
-                        </Label>
-                        <Select value={formData.safetyViolations} onValueChange={(value) => updateField('safetyViolations', value)}>
-                          <SelectTrigger id="safetyViolations" className="h-12 bg-background">
-                            <SelectValue placeholder="Select violation type" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="willful-violations">Willful OSHA Violations</SelectItem>
-                            <SelectItem value="serious-violations">Serious OSHA Violations</SelectItem>
-                            <SelectItem value="repeat-violations">Repeat Violations</SelectItem>
-                            <SelectItem value="no-fall-protection">No Fall Protection Provided</SelectItem>
-                            <SelectItem value="improper-scaffold">Improper Scaffold Assembly</SelectItem>
-                            <SelectItem value="no-violations">No Known Violations</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {step === 2 && (
-                <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <div>
-                    <h2 className="text-2xl font-semibold mb-6 text-foreground">Safety Equipment & Economic Details</h2>
-                    
-                    <div className="space-y-6">
-                      <div className="space-y-2">
-                        <Label htmlFor="guardrailsProvided" className="text-base font-medium">
-                          Were Guardrails Provided? *
-                        </Label>
-                        <Select value={formData.guardrailsProvided} onValueChange={(value) => updateField('guardrailsProvided', value)}>
-                          <SelectTrigger id="guardrailsProvided" className="h-12 bg-background">
-                            <SelectValue placeholder="Select option" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="yes">Yes - Adequate Guardrails</SelectItem>
-                            <SelectItem value="inadequate">Yes - But Inadequate</SelectItem>
-                            <SelectItem value="no">No Guardrails Provided</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="scaffoldType" className="text-base font-medium">
-                          Type of Scaffolding *
-                        </Label>
-                        <Select value={formData.scaffoldType} onValueChange={(value) => updateField('scaffoldType', value)}>
-                          <SelectTrigger id="scaffoldType" className="h-12 bg-background">
-                            <SelectValue placeholder="Select scaffold type" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="suspended">Suspended Scaffolding</SelectItem>
-                            <SelectItem value="supported">Supported Scaffolding</SelectItem>
-                            <SelectItem value="mobile">Mobile/Rolling Scaffolding</SelectItem>
-                            <SelectItem value="aerial-lift">Aerial Lift/Boom Lift</SelectItem>
-                            <SelectItem value="other">Other Type</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="permanentDisability" className="text-base font-medium">
-                          Disability Status *
-                        </Label>
-                        <Select value={formData.permanentDisability} onValueChange={(value) => updateField('permanentDisability', value)}>
-                          <SelectTrigger id="permanentDisability" className="h-12 bg-background">
-                            <SelectValue placeholder="Select disability status" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="total-permanent">Total Permanent Disability</SelectItem>
-                            <SelectItem value="partial-permanent">Partial Permanent Disability</SelectItem>
-                            <SelectItem value="temporary-total">Temporary Total Disability</SelectItem>
-                            <SelectItem value="temporary-partial">Temporary Partial Disability</SelectItem>
-                            <SelectItem value="none">No Permanent Disability</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="age" className="text-base font-medium">
-                          Your Age at Time of Fall *
-                        </Label>
-                        <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-                          <SelectTrigger id="age" className="h-12 bg-background">
-                            <SelectValue placeholder="Select age range" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="under-30">Under 30</SelectItem>
-                            <SelectItem value="30-40">30-40</SelectItem>
-                            <SelectItem value="41-50">41-50</SelectItem>
-                            <SelectItem value="51-60">51-60</SelectItem>
-                            <SelectItem value="over-60">Over 60</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="medicalCosts" className="text-base font-medium">
-                          Past Medical Costs *
-                        </Label>
-                        <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-                          <SelectTrigger id="medicalCosts" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="25000">Under $25,000</SelectItem>
-                            <SelectItem value="75000">$25,000 - $100,000</SelectItem>
-                            <SelectItem value="150000">$100,000 - $250,000</SelectItem>
-                            <SelectItem value="350000">$250,000 - $500,000</SelectItem>
-                            <SelectItem value="750000">Over $500,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="futureCareCosts" className="text-base font-medium">
-                          Estimated Future Care Costs *
-                        </Label>
-                        <Select value={formData.futureCareCosts} onValueChange={(value) => updateField('futureCareCosts', value)}>
-                          <SelectTrigger id="futureCareCosts" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="0">None Expected</SelectItem>
-                            <SelectItem value="50000">Under $50,000</SelectItem>
-                            <SelectItem value="150000">$50,000 - $200,000</SelectItem>
-                            <SelectItem value="350000">$200,000 - $500,000</SelectItem>
-                            <SelectItem value="750000">$500,000 - $1,000,000</SelectItem>
-                            <SelectItem value="1500000">Over $1,000,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-
-                      <div className="space-y-2">
-                        <Label htmlFor="lostWages" className="text-base font-medium">
-                          Lost Wages & Future Income Loss *
-                        </Label>
-                        <Select value={formData.lostWages} onValueChange={(value) => updateField('lostWages', value)}>
-                          <SelectTrigger id="lostWages" className="h-12 bg-background">
-                            <SelectValue placeholder="Select amount" />
-                          </SelectTrigger>
-                          <SelectContent className="bg-background border-border">
-                            <SelectItem value="25000">Under $25,000</SelectItem>
-                            <SelectItem value="75000">$25,000 - $100,000</SelectItem>
-                            <SelectItem value="150000">$100,000 - $250,000</SelectItem>
-                            <SelectItem value="350000">$250,000 - $500,000</SelectItem>
-                            <SelectItem value="750000">Over $500,000</SelectItem>
-                          </SelectContent>
-                        </Select>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {step === 3 && results && (
-                <div className="animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  <ResultsDisplay
-                    min={results.min}
-                    max={results.max}
-                    title="Estimated Scaffolding Fall Compensation Range"
-                    subtitle="Based on fall height, injury severity, safety violations, and economic damages"
-                    damageCategories={[
-                      {
-                        title: "Economic Damages",
-                        description: "Medical expenses, future care, lost wages and diminished earning capacity"
-                      },
-                      {
-                        title: "Non-Economic Damages",
-                        description: "Pain and suffering, permanent disability, loss of quality of life"
-                      },
-                      {
-                        title: "Third-Party Claims",
-                        description: "Additional compensation beyond workers' comp for third-party negligence"
-                      }
-                    ]}
-                    disclaimer="This estimate is for informational purposes only. Scaffolding fall cases often involve multiple liable parties including general contractors, subcontractors, equipment manufacturers, and property owners. Actual compensation depends on fall height, landing surface, safety violations, permanent disability ratings, and third-party liability. Falls from heights often allow claims beyond workers' compensation limits when OSHA violations, lack of fall protection, or equipment failures are involved. California Labor Code Section 1720 provides additional protections for construction workers. Consult with an experienced construction accident attorney to evaluate your specific case."
-                    ctaText="Speak with a Scaffolding Fall Attorney"
-                  />
-                  
-                  <div className="mt-8 text-center">
-                    <Button 
-                      onClick={resetForm}
-                      variant="outline"
-                      size="lg"
-                      className="min-w-[200px]"
-                    >
-                      Calculate Another Case
-                    </Button>
-                  </div>
-                </div>
-              )}
-
-              {step < 3 && (
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                  nextButtonText={step === 2 ? 'Calculate Compensation' : 'Continue'}
-                />
-              )}
-            </div>
-          </div>
-
-          <div className="mt-8 bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-900 rounded-lg p-6">
-            <div className="flex items-start gap-3">
-              <AlertCircle className="w-5 h-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
-              <div className="text-sm text-blue-900 dark:text-blue-100">
-                <p className="font-semibold mb-2">Important Information About Scaffolding Fall Claims</p>
-                <p>
-                  Falls from scaffolding are among the leading causes of construction deaths and severe injuries. 
-                  OSHA requires fall protection at heights above 6 feet. Violations often involve lack of guardrails, 
-                  improper scaffolding assembly, inadequate planking, or failure to provide personal fall arrest systems. 
-                  These cases frequently involve third-party liability beyond workers' comp, allowing recovery for pain 
-                  and suffering. Time limits apply for filing claims.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
-      </main>
-    </>
+      </section>
+    </div>
   );
 };
 

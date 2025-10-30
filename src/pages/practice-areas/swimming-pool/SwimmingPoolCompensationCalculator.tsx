@@ -1,465 +1,629 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults } from '@/components/calculator/CalculatorResults';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults as Results } from '@/hooks/useCalculatorForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Calculator, AlertTriangle, DollarSign, FileText, ArrowLeft } from 'lucide-react';
+import { toast } from 'sonner';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import GoBack from '@/components/GoBack';
+import calculatorHero from '@/assets/swimming-pool-calculator-hero.jpg';
 
-interface SwimmingPoolFormData extends CalculatorFormData {
+gsap.registerPlugin(ScrollTrigger);
+
+interface CalculatorData {
   incidentType: string;
-  propertyType: string;
-  victimAge: string;
+  injuryType: string;
+  injurySeverity: string;
+  medicalTreatment: string;
+  hospitalStay: string;
+  surgeryRequired: string;
+  ongoingTreatment: string;
+  missedWork: string;
+  monthsMissed: string;
+  age: string;
+  dependents: string;
+  poolType: string;
+  poolLocation: string;
   supervisionPresent: string;
   safetyViolations: string;
-  injurySeverity: string;
-  neurologicalDamage: string;
-  medicalCosts: string;
-  permanentDisability: string;
-  fencing: string;
-  lifeguard: string;
+  priorIncidents: string;
+  alcoholInvolved: string;
 }
 
-const initialFormData: SwimmingPoolFormData = {
-  incidentType: '',
-  propertyType: '',
-  victimAge: '',
-  supervisionPresent: '',
-  safetyViolations: '',
-  injurySeverity: '',
-  neurologicalDamage: '',
-  medicalCosts: '',
-  permanentDisability: '',
-  fencing: '',
-  lifeguard: ''
-};
+const SwimmingPoolCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState<CalculatorData>({
+    incidentType: '',
+    injuryType: '',
+    injurySeverity: '',
+    medicalTreatment: '',
+    hospitalStay: '',
+    surgeryRequired: '',
+    ongoingTreatment: '',
+    missedWork: '',
+    monthsMissed: '',
+    age: '',
+    dependents: '',
+    poolType: '',
+    poolLocation: '',
+    supervisionPresent: '',
+    safetyViolations: '',
+    priorIncidents: '',
+    alcoholInvolved: ''
+  });
+  
+  const [calculationResult, setCalculationResult] = useState<any>(null);
+  const [showResult, setShowResult] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
 
-const calculateCompensation = (data: SwimmingPoolFormData): Results => {
-  let baseMin = 75000;
-  let baseMax = 200000;
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      );
 
-  const incidentMultipliers: Record<string, number> = {
-    'drowning-fatal': 5.0,
-    'near-drowning': 3.5,
-    'diving-injury': 2.5,
-    'slip-fall-deck': 1.2,
-    'chemical-injury': 1.5,
-    'entrapment': 2.0
-  };
-  const incidentMult = incidentMultipliers[data.incidentType] || 1;
+      gsap.fromTo('.calculator-card',
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.1,
+          scrollTrigger: {
+            trigger: '.calculator-form',
+            start: 'top 80%'
+          }
+        }
+      );
+    });
 
-  const propertyMultipliers: Record<string, number> = {
-    'private-residence': 1.0,
-    'apartment-complex': 1.3,
-    'hotel-resort': 1.4,
-    'public-pool': 1.2,
-    'water-park': 1.5,
-    'school-pool': 1.3
-  };
-  const propertyMult = propertyMultipliers[data.propertyType] || 1;
+    return () => ctx.revert();
+  }, []);
 
-  const ageMultipliers: Record<string, number> = {
-    'under-5': 1.8,
-    '5-12': 1.6,
-    '13-17': 1.4,
-    '18-40': 1.2,
-    '41-65': 1.0,
-    'over-65': 0.9
-  };
-  const ageMult = ageMultipliers[data.victimAge] || 1;
-
-  const supervisionMultipliers: Record<string, number> = {
-    'no-supervision': 1.5,
-    'inadequate-supervision': 1.3,
-    'supervision-distracted': 1.2,
-    'adequate-supervision': 0.9
-  };
-  const supervisionMult = supervisionMultipliers[data.supervisionPresent] || 1;
-
-  const violationsMultipliers: Record<string, number> = {
-    'none-identified': 1.0,
-    'inadequate-fencing': 1.4,
-    'no-warning-signs': 1.2,
-    'defective-drain': 1.6,
-    'chemical-imbalance': 1.3,
-    'multiple-violations': 1.8
-  };
-  const violationsMult = violationsMultipliers[data.safetyViolations] || 1;
-
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1.0,
-    'moderate': 1.5,
-    'serious': 2.5,
-    'severe': 4.0,
-    'catastrophic': 6.0,
-    'wrongful-death': 5.0
-  };
-  const severityMult = severityMultipliers[data.injurySeverity] || 1;
-
-  const neuroMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'mild-hypoxia': 1.5,
-    'moderate-brain-injury': 2.5,
-    'severe-brain-injury': 4.0,
-    'persistent-vegetative': 5.0
-  };
-  const neuroMult = neuroMultipliers[data.neurologicalDamage] || 1;
-
-  const medicalAdditions: Record<string, number> = {
-    'under-10k': 5000,
-    '10k-25k': 15000,
-    '25k-50k': 35000,
-    '50k-100k': 75000,
-    '100k-250k': 175000,
-    'over-250k': 300000,
-    'over-1m': 750000
-  };
-  const medicalAdd = medicalAdditions[data.medicalCosts] || 0;
-
-  const disabilityMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'partial-temporary': 1.3,
-    'partial-permanent': 1.8,
-    'total-permanent': 3.5,
-    'quadriplegia': 5.0
-  };
-  const disabilityMult = disabilityMultipliers[data.permanentDisability] || 1;
-
-  const fencingMult = data.fencing === 'yes' ? 1.5 : 1.0;
-  const lifeguardMult = data.lifeguard === 'yes' ? 1.4 : 1.0;
-
-  const min = Math.round(
-    (baseMin * incidentMult * propertyMult * ageMult * supervisionMult * 
-     violationsMult * severityMult * neuroMult * disabilityMult * 
-     fencingMult * lifeguardMult) + medicalAdd
-  );
-  const max = Math.round(
-    (baseMax * incidentMult * propertyMult * ageMult * supervisionMult * 
-     violationsMult * severityMult * neuroMult * disabilityMult * 
-     fencingMult * lifeguardMult) + (medicalAdd * 2.5)
-  );
-
-  return { min, max };
-};
-
-const validateStep = (data: SwimmingPoolFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.incidentType && data.propertyType && data.victimAge && 
-              data.supervisionPresent && data.safetyViolations);
-  }
-  if (step === 2) {
-    return !!(data.injurySeverity && data.neurologicalDamage && data.medicalCosts && 
-              data.permanentDisability && data.fencing && data.lifeguard);
-  }
-  return true;
-};
-
-export default function SwimmingPoolCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<SwimmingPoolFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
-
-  const renderStep1 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Incident</label>
-        <Select value={formData.incidentType} onValueChange={(value) => updateField('incidentType', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select incident type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="drowning-fatal">Drowning (Fatal)</SelectItem>
-            <SelectItem value="near-drowning">Near-Drowning</SelectItem>
-            <SelectItem value="diving-injury">Diving Injury (spinal/head)</SelectItem>
-            <SelectItem value="slip-fall-deck">Slip and Fall on Deck</SelectItem>
-            <SelectItem value="chemical-injury">Chemical Injury (chlorine/acid)</SelectItem>
-            <SelectItem value="entrapment">Drain/Suction Entrapment</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Property Type</label>
-        <Select value={formData.propertyType} onValueChange={(value) => updateField('propertyType', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select property type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="private-residence">Private Residence</SelectItem>
-            <SelectItem value="apartment-complex">Apartment/Condo Complex</SelectItem>
-            <SelectItem value="hotel-resort">Hotel/Resort</SelectItem>
-            <SelectItem value="public-pool">Public Pool</SelectItem>
-            <SelectItem value="water-park">Water Park</SelectItem>
-            <SelectItem value="school-pool">School Pool</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Victim Age</label>
-        <Select value={formData.victimAge} onValueChange={(value) => updateField('victimAge', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select age range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="under-5">Under 5</SelectItem>
-            <SelectItem value="5-12">5-12</SelectItem>
-            <SelectItem value="13-17">13-17</SelectItem>
-            <SelectItem value="18-40">18-40</SelectItem>
-            <SelectItem value="41-65">41-65</SelectItem>
-            <SelectItem value="over-65">Over 65</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Supervision Present</label>
-        <Select value={formData.supervisionPresent} onValueChange={(value) => updateField('supervisionPresent', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select supervision level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="no-supervision">No Supervision</SelectItem>
-            <SelectItem value="inadequate-supervision">Inadequate Supervision</SelectItem>
-            <SelectItem value="supervision-distracted">Supervision Present but Distracted</SelectItem>
-            <SelectItem value="adequate-supervision">Adequate Supervision</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Safety Violations Identified</label>
-        <Select value={formData.safetyViolations} onValueChange={(value) => updateField('safetyViolations', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select violations" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none-identified">None Identified</SelectItem>
-            <SelectItem value="inadequate-fencing">Inadequate Fencing/Barriers</SelectItem>
-            <SelectItem value="no-warning-signs">No Warning Signs</SelectItem>
-            <SelectItem value="defective-drain">Defective Drain/Suction</SelectItem>
-            <SelectItem value="chemical-imbalance">Chemical Imbalance</SelectItem>
-            <SelectItem value="multiple-violations">Multiple Violations</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Injury Severity</label>
-        <Select value={formData.injurySeverity} onValueChange={(value) => updateField('injurySeverity', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select severity" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="minor">Minor (no hospitalization)</SelectItem>
-            <SelectItem value="moderate">Moderate (hospitalization required)</SelectItem>
-            <SelectItem value="serious">Serious (ICU, major treatment)</SelectItem>
-            <SelectItem value="severe">Severe (long-term care needed)</SelectItem>
-            <SelectItem value="catastrophic">Catastrophic (life-altering)</SelectItem>
-            <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Neurological Damage (Hypoxia/Brain Injury)</label>
-        <Select value={formData.neurologicalDamage} onValueChange={(value) => updateField('neurologicalDamage', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select neurological damage" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">No Neurological Damage</SelectItem>
-            <SelectItem value="mild-hypoxia">Mild Hypoxia (temporary)</SelectItem>
-            <SelectItem value="moderate-brain-injury">Moderate Brain Injury</SelectItem>
-            <SelectItem value="severe-brain-injury">Severe Brain Injury</SelectItem>
-            <SelectItem value="persistent-vegetative">Persistent Vegetative State</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Total Medical Costs</label>
-        <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select cost range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="under-10k">Under $10,000</SelectItem>
-            <SelectItem value="10k-25k">$10,000 - $25,000</SelectItem>
-            <SelectItem value="25k-50k">$25,000 - $50,000</SelectItem>
-            <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-            <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-            <SelectItem value="over-250k">$250,000 - $1,000,000</SelectItem>
-            <SelectItem value="over-1m">Over $1,000,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Permanent Disability</label>
-        <Select value={formData.permanentDisability} onValueChange={(value) => updateField('permanentDisability', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select disability level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">No Permanent Disability</SelectItem>
-            <SelectItem value="partial-temporary">Partial Temporary Disability</SelectItem>
-            <SelectItem value="partial-permanent">Partial Permanent Disability</SelectItem>
-            <SelectItem value="total-permanent">Total Permanent Disability</SelectItem>
-            <SelectItem value="quadriplegia">Quadriplegia/Severe Paralysis</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Fencing/Barrier Code Violation?</label>
-        <Select value={formData.fencing} onValueChange={(value) => updateField('fencing', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select answer" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="yes">Yes - Fencing Violation</SelectItem>
-            <SelectItem value="no">No - Fencing Adequate</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Lifeguard Required but Not Present?</label>
-        <Select value={formData.lifeguard} onValueChange={(value) => updateField('lifeguard', value)}>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select answer" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="yes">Yes - Lifeguard Required, Not Present</SelectItem>
-            <SelectItem value="no">No - Lifeguard Present or Not Required</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const damageCategories = [
-    {
-      title: 'Medical Expenses',
-      description: 'Emergency resuscitation, hospitalization, rehabilitation, long-term care, and life-care planning'
-    },
-    {
-      title: 'Lost Wages',
-      description: 'Past and future income loss, reduced earning capacity, caregiver expenses'
-    },
-    {
-      title: 'Pain and Suffering',
-      description: 'Physical pain, emotional trauma, PTSD, loss of enjoyment of life, disfigurement'
-    },
-    {
-      title: 'Premises Liability',
-      description: 'Property owner duty of care, attractive nuisance doctrine, fencing requirements, supervision standards'
+  const calculateCompensation = () => {
+    if (!formData.incidentType || !formData.injuryType) {
+      toast.error('Please fill in the required fields');
+      return;
     }
-  ];
 
-  const disclaimer = "This estimate is for informational purposes only and does not constitute legal advice. Swimming pool accident claims involve complex premises liability issues including attractive nuisance doctrine (especially for children), duty of care standards, fencing requirements, supervision obligations, and safety code compliance. California Health and Safety Code sections 115920-115929 govern public pool safety. Drowning and near-drowning cases often result in catastrophic brain injuries requiring lifetime care. Actual compensation depends on specific circumstances, property type, safety violations, and comparative negligence. Consult with a premises liability attorney for evaluation of your case.";
+    let baseValue = 50000;
+    const factors = [];
+    
+    // Incident type factors
+    if (formData.incidentType === 'drowning') {
+      baseValue *= 5.0;
+      factors.push('Near-drowning or drowning incident significantly increases case value');
+    } else if (formData.incidentType === 'slip-fall') {
+      baseValue *= 2.5;
+      factors.push('Slip and fall incidents around pools often result in serious injuries');
+    } else if (formData.incidentType === 'diving') {
+      baseValue *= 4.0;
+      factors.push('Diving accidents frequently cause catastrophic spinal injuries');
+    } else if (formData.incidentType === 'chemical') {
+      baseValue *= 3.0;
+      factors.push('Chemical burns and exposure cases require specialized treatment');
+    } else if (formData.incidentType === 'equipment') {
+      baseValue *= 2.8;
+      factors.push('Equipment malfunction cases involve product liability claims');
+    }
+
+    // Injury severity multipliers
+    if (formData.injurySeverity === 'catastrophic') {
+      baseValue *= 3.5;
+      factors.push('Catastrophic injuries warrant maximum compensation');
+    } else if (formData.injurySeverity === 'severe') {
+      baseValue *= 2.5;
+      factors.push('Severe injuries require substantial compensation for ongoing care');
+    } else if (formData.injurySeverity === 'moderate') {
+      baseValue *= 1.8;
+      factors.push('Moderate injuries still impact quality of life significantly');
+    }
+
+    // Medical treatment factors
+    if (formData.surgeryRequired === 'yes') {
+      baseValue *= 2.0;
+      factors.push('Surgical procedures increase medical costs and pain/suffering');
+    }
+    
+    if (formData.hospitalStay === 'week-plus') {
+      baseValue *= 1.8;
+      factors.push('Extended hospitalization increases medical expenses');
+    } else if (formData.hospitalStay === 'few-days') {
+      baseValue *= 1.4;
+      factors.push('Hospital stay indicates serious injury requiring immediate care');
+    }
+
+    if (formData.ongoingTreatment === 'yes') {
+      baseValue *= 2.2;
+      factors.push('Ongoing treatment creates future medical expenses');
+    }
+
+    // Lost wages factors
+    if (formData.missedWork === 'yes') {
+      if (formData.monthsMissed === '6-plus') {
+        baseValue *= 2.5;
+        factors.push('Extended time off work creates significant wage loss');
+      } else if (formData.monthsMissed === '3-6') {
+        baseValue *= 1.8;
+        factors.push('Several months of missed work impacts financial stability');
+      } else if (formData.monthsMissed === '1-3') {
+        baseValue *= 1.4;
+        factors.push('Missed work time requires compensation');
+      }
+    }
+
+    // Age considerations
+    if (formData.age === 'child') {
+      baseValue *= 2.8;
+      factors.push('Child victims receive higher compensation for lifetime impact');
+    } else if (formData.age === 'young-adult') {
+      baseValue *= 2.2;
+      factors.push('Young adults have longer life expectancy affecting damages');
+    } else if (formData.age === 'middle') {
+      baseValue *= 1.8;
+      factors.push('Peak earning years lost due to injury');
+    }
+
+    // Dependents
+    if (formData.dependents === 'multiple') {
+      baseValue *= 1.6;
+      factors.push('Multiple dependents increase family impact damages');
+    } else if (formData.dependents === 'one') {
+      baseValue *= 1.3;
+      factors.push('Dependents affected by victim\'s injury');
+    }
+
+    // Pool type and safety violations
+    if (formData.poolType === 'public') {
+      baseValue *= 1.8;
+      factors.push('Public pools have higher safety obligations');
+    } else if (formData.poolType === 'hotel') {
+      baseValue *= 2.0;
+      factors.push('Commercial establishments have duty to ensure guest safety');
+    } else if (formData.poolType === 'apartment') {
+      baseValue *= 1.6;
+      factors.push('Apartment complexes must maintain safe common areas');
+    }
+
+    if (formData.safetyViolations === 'multiple') {
+      baseValue *= 2.5;
+      factors.push('Multiple safety violations indicate gross negligence');
+    } else if (formData.safetyViolations === 'some') {
+      baseValue *= 1.8;
+      factors.push('Safety violations strengthen liability case');
+    }
+
+    if (formData.supervisionPresent === 'no') {
+      baseValue *= 1.5;
+      factors.push('Lack of proper supervision increases liability');
+    }
+
+    if (formData.priorIncidents === 'yes') {
+      baseValue *= 2.0;
+      factors.push('Prior incidents show knowledge of dangerous conditions');
+    }
+
+    // Calculate ranges
+    const lowEnd = Math.round(baseValue * 0.6);
+    const highEnd = Math.round(baseValue * 1.8);
+
+    setCalculationResult({
+      lowEnd,
+      highEnd,
+      factors,
+      baseValue: Math.round(baseValue)
+    });
+    setShowResult(true);
+
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('results')?.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }, 100);
+  };
+
+  const handleInputChange = (field: keyof CalculatorData, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   return (
-    <>
-      <Helmet>
-        <title>Swimming Pool Accident Compensation Calculator | California Personal Injury</title>
-        <meta name="description" content="Calculate potential compensation for swimming pool accidents including drowning, near-drowning, and diving injuries. Premises liability applies." />
-      </Helmet>
-
-      <div className="min-h-screen bg-background py-12">
-        <div className="container max-w-4xl mx-auto px-4">
-          <Link to="/calculators" className="inline-flex items-center text-primary hover:underline mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Calculators
-          </Link>
-
-          <div className="bg-card rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4">Swimming Pool Accident Calculator</h1>
-            <p className="text-lg text-muted-foreground mb-6">
-              Estimate compensation for pool drowning and injury accidents
+    <div className="min-h-screen bg-background">
+      <GoBack fallbackPath="/practice-areas/swimming-pool-accidents" />
+      
+      {/* Hero Section */}
+      <section 
+        ref={heroRef}
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${calculatorHero})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <div className="hero-content">
+            <Calculator className="w-16 h-16 mx-auto mb-4 text-blue-400" />
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Swimming Pool Accident Compensation Calculator
+            </h1>
+            <p className="text-xl">
+              Get an estimate of your potential swimming pool accident claim value
             </p>
+          </div>
+        </div>
+      </section>
 
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">3,500+</div>
-                <div className="text-sm text-muted-foreground">Drowning Deaths/Year</div>
+      {/* Calculator Form */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <Card className="calculator-card mb-8">
+          <CardHeader>
+            <CardTitle className="flex items-center">
+              <FileText className="w-6 h-6 mr-2 text-primary" />
+              Incident Information
+            </CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="incidentType">Type of Swimming Pool Incident *</Label>
+                <Select value={formData.incidentType} onValueChange={(value) => handleInputChange('incidentType', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select incident type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="drowning">Near-Drowning/Drowning</SelectItem>
+                    <SelectItem value="slip-fall">Slip and Fall</SelectItem>
+                    <SelectItem value="diving">Diving Accident</SelectItem>
+                    <SelectItem value="chemical">Chemical Burns/Exposure</SelectItem>
+                    <SelectItem value="equipment">Equipment Malfunction</SelectItem>
+                    <SelectItem value="entrapment">Drain Entrapment</SelectItem>
+                    <SelectItem value="electrocution">Electrical Injury</SelectItem>
+                    <SelectItem value="glass">Broken Glass Injury</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Children</div>
-                <div className="text-sm text-muted-foreground">Attractive Nuisance</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Brain Injury</div>
-                <div className="text-sm text-muted-foreground">Hypoxia Risk</div>
+
+              <div>
+                <Label htmlFor="poolType">Type of Pool</Label>
+                <Select value={formData.poolType} onValueChange={(value) => handleInputChange('poolType', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select pool type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="residential">Private Residential</SelectItem>
+                    <SelectItem value="public">Public Pool</SelectItem>
+                    <SelectItem value="hotel">Hotel/Resort</SelectItem>
+                    <SelectItem value="apartment">Apartment/Condo Complex</SelectItem>
+                    <SelectItem value="school">School Pool</SelectItem>
+                    <SelectItem value="gym">Gym/Health Club</SelectItem>
+                    <SelectItem value="waterpark">Water Park</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 
-            {step < 3 && (
-              <div className="mb-6">
-                <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                  <span>Step {step} of 2</span>
-                  <span>{step === 1 ? 'Incident Details' : 'Injury & Damages'}</span>
-                </div>
-                <Progress value={(step / 2) * 100} />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="injuryType">Primary Injury Type *</Label>
+                <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select injury type" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="brain-injury">Traumatic Brain Injury</SelectItem>
+                    <SelectItem value="spinal-cord">Spinal Cord Injury</SelectItem>
+                    <SelectItem value="drowning-injury">Drowning/Near-Drowning</SelectItem>
+                    <SelectItem value="fractures">Broken Bones/Fractures</SelectItem>
+                    <SelectItem value="lacerations">Cuts/Lacerations</SelectItem>
+                    <SelectItem value="burns">Chemical/Thermal Burns</SelectItem>
+                    <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                    <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
-            )}
 
-            {step === 1 && renderStep1()}
-            {step === 2 && renderStep2()}
-            {step === 3 && results && (
-              <CalculatorResults
-                title="Estimated Swimming Pool Accident Compensation"
-                subtitle="Based on premises liability and safety code violations"
-                min={results.min}
-                max={results.max}
-                damageCategories={damageCategories}
-                disclaimer={disclaimer}
-                ctaText="Get Free Case Evaluation"
-              />
-            )}
+              <div>
+                <Label htmlFor="injurySeverity">Injury Severity</Label>
+                <Select value={formData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select severity" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="minor">Minor (Full Recovery Expected)</SelectItem>
+                    <SelectItem value="moderate">Moderate (Some Permanent Effects)</SelectItem>
+                    <SelectItem value="severe">Severe (Significant Disability)</SelectItem>
+                    <SelectItem value="catastrophic">Catastrophic (Life-Altering)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
 
-            {step < 3 ? (
-              <FormNavigation
-                currentStep={step}
-                totalSteps={3}
-                isValid={isStepValid()}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
-            ) : (
-              <div className="flex gap-4 pt-8">
-                <Button
+        {/* Medical Treatment Section */}
+        <Card className="calculator-card mb-8">
+          <CardHeader>
+            <CardTitle>Medical Treatment</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="hospitalStay">Hospital Stay</Label>
+                <Select value={formData.hospitalStay} onValueChange={(value) => handleInputChange('hospitalStay', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select hospital stay" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">No Hospitalization</SelectItem>
+                    <SelectItem value="overnight">Overnight Stay</SelectItem>
+                    <SelectItem value="few-days">Few Days</SelectItem>
+                    <SelectItem value="week-plus">Week or More</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="surgeryRequired">Surgery Required</Label>
+                <Select value={formData.surgeryRequired} onValueChange={(value) => handleInputChange('surgeryRequired', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Surgery required?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="yes">Yes</SelectItem>
+                    <SelectItem value="multiple">Multiple Surgeries</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div>
+              <Label htmlFor="ongoingTreatment">Ongoing Treatment Required</Label>
+              <Select value={formData.ongoingTreatment} onValueChange={(value) => handleInputChange('ongoingTreatment', value)}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Ongoing treatment needed?" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="no">No</SelectItem>
+                  <SelectItem value="yes">Yes - Physical Therapy</SelectItem>
+                  <SelectItem value="lifelong">Yes - Lifelong Care</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Economic Impact Section */}
+        <Card className="calculator-card mb-8">
+          <CardHeader>
+            <CardTitle>Economic Impact</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="missedWork">Missed Work Due to Injury</Label>
+                <Select value={formData.missedWork} onValueChange={(value) => handleInputChange('missedWork', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Missed work?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="yes">Yes</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              {formData.missedWork === 'yes' && (
+                <div>
+                  <Label htmlFor="monthsMissed">Duration of Missed Work</Label>
+                  <Select value={formData.monthsMissed} onValueChange={(value) => handleInputChange('monthsMissed', value)}>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select duration" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="few-days">Few Days</SelectItem>
+                      <SelectItem value="few-weeks">Few Weeks</SelectItem>
+                      <SelectItem value="1-3">1-3 Months</SelectItem>
+                      <SelectItem value="3-6">3-6 Months</SelectItem>
+                      <SelectItem value="6-plus">6+ Months</SelectItem>
+                      <SelectItem value="permanent">Permanently Disabled</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+              )}
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="age">Age at Time of Incident</Label>
+                <Select value={formData.age} onValueChange={(value) => handleInputChange('age', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select age range" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="child">Child (Under 18)</SelectItem>
+                    <SelectItem value="young-adult">Young Adult (18-30)</SelectItem>
+                    <SelectItem value="middle">Middle Age (31-50)</SelectItem>
+                    <SelectItem value="older">Older Adult (51+)</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="dependents">Number of Dependents</Label>
+                <Select value={formData.dependents} onValueChange={(value) => handleInputChange('dependents', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select dependents" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">None</SelectItem>
+                    <SelectItem value="one">One</SelectItem>
+                    <SelectItem value="multiple">Multiple</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Liability Factors Section */}
+        <Card className="calculator-card mb-8">
+          <CardHeader>
+            <CardTitle>Liability Factors</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="supervisionPresent">Proper Supervision Present</Label>
+                <Select value={formData.supervisionPresent} onValueChange={(value) => handleInputChange('supervisionPresent', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Was supervision present?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="yes">Yes - Adequate Supervision</SelectItem>
+                    <SelectItem value="no">No - No Lifeguard/Supervision</SelectItem>
+                    <SelectItem value="inadequate">Inadequate Supervision</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="safetyViolations">Safety Violations Present</Label>
+                <Select value={formData.safetyViolations} onValueChange={(value) => handleInputChange('safetyViolations', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Any safety violations?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="none">None Apparent</SelectItem>
+                    <SelectItem value="some">Some Violations</SelectItem>
+                    <SelectItem value="multiple">Multiple Violations</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="priorIncidents">Prior Similar Incidents</Label>
+                <Select value={formData.priorIncidents} onValueChange={(value) => handleInputChange('priorIncidents', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Prior incidents at location?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">No Known Prior Incidents</SelectItem>
+                    <SelectItem value="yes">Yes - Prior Incidents</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div>
+                <Label htmlFor="alcoholInvolved">Alcohol/Substances Involved</Label>
+                <Select value={formData.alcoholInvolved} onValueChange={(value) => handleInputChange('alcoholInvolved', value)}>
+                  <SelectTrigger>
+                    <SelectValue placeholder="Alcohol/substances involved?" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="no">No</SelectItem>
+                    <SelectItem value="victim">Victim Had Been Drinking</SelectItem>
+                    <SelectItem value="facility">Facility Served Alcohol</SelectItem>
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Calculate Button */}
+        <div className="text-center mb-8">
+          <Button 
+            onClick={calculateCompensation}
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-white px-12 py-4 text-lg font-semibold"
+          >
+            <Calculator className="w-5 h-5 mr-2" />
+            Calculate My Case Value
+          </Button>
+        </div>
+
+        {/* Results Section */}
+        {showResult && (
+          <Card id="results" className="calculator-card border-primary">
+            <CardHeader>
+              <CardTitle className="flex items-center text-primary">
+                <DollarSign className="w-6 h-6 mr-2" />
+                Estimated Case Value
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="text-center mb-6">
+                <div className="text-3xl font-bold text-primary mb-2">
+                  ${calculationResult?.lowEnd?.toLocaleString()} - ${calculationResult?.highEnd?.toLocaleString()}
+                </div>
+                <p className="text-muted-foreground">Estimated compensation range for your swimming pool accident case</p>
+              </div>
+
+              <div className="bg-muted p-6 rounded-lg mb-6">
+                <h4 className="font-semibold mb-3">Factors Affecting Your Case Value:</h4>
+                <ul className="space-y-2">
+                  {calculationResult?.factors?.map((factor: string, index: number) => (
+                    <li key={index} className="flex items-start">
+                      <div className="w-2 h-2 bg-primary rounded-full mt-2 mr-3 flex-shrink-0"></div>
+                      <span className="text-sm">{factor}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                <div className="flex items-start">
+                  <AlertTriangle className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
+                  <div>
+                    <h5 className="font-semibold text-yellow-800 mb-1">Important Disclaimer</h5>
+                    <p className="text-sm text-yellow-700">
+                      This calculator provides estimates based on typical case factors and should not be considered a guarantee of results. 
+                      Every case is unique, and actual compensation may vary significantly based on specific circumstances, evidence, 
+                      and California law. Consult with an experienced swimming pool accident attorney for a proper case evaluation.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="text-center">
+                <Button 
                   size="lg"
-                  onClick={resetForm}
-                  variant="outline"
-                  className="flex-1 h-14"
+                  onClick={() => window.location.href = '/practice-areas/swimming-pool/case-evaluation'}
+                  className="bg-red-600 hover:bg-red-700 text-white"
                 >
-                  Start Over
+                  Get Free Professional Case Review
                 </Button>
               </div>
-            )}
-          </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {/* Legal Disclaimer */}
+        <div className="mt-12 p-6 bg-muted rounded-lg">
+          <h3 className="text-lg font-semibold mb-3">Legal Disclaimer</h3>
+          <p className="text-sm text-muted-foreground mb-3">
+            This swimming pool accident compensation calculator is for informational purposes only and does not constitute legal advice. 
+            The estimates provided are based on general factors and historical case outcomes but cannot account for all variables that 
+            may affect your specific case.
+          </p>
+          <p className="text-sm text-muted-foreground">
+            Actual compensation depends on many factors including the strength of evidence, degree of negligence, insurance policy limits, 
+            and specific California laws. No attorney-client relationship is created by using this calculator. For accurate case evaluation, 
+            consult with a qualified California swimming pool accident attorney who can review your specific circumstances.
+          </p>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default SwimmingPoolCompensationCalculator;

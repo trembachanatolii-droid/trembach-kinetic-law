@@ -21,6 +21,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/burn-medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 const BurnMedicalGuidance: React.FC = () => {
   const [expandedSections, setExpandedSections] = useState<Record<string, boolean>>({});
@@ -39,6 +40,8 @@ const BurnMedicalGuidance: React.FC = () => {
         description="Comprehensive medical guidance for burn injury victims in California. Expert advice on treatment, recovery, and medical documentation for legal claims."
         canonical="/burn-medical-guidance"
       />
+      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

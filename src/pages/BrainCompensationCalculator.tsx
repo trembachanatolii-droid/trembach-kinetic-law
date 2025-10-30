@@ -1,367 +1,426 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Brain } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { AlertTriangle, DollarSign, Calculator, Brain, TrendingUp, CheckCircle, Clock, Phone } from 'lucide-react';
+import heroBackground from '@/assets/brain-compensation-calculator-hero.jpg';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
 
-const BrainCompensationCalculator = () => {
-  const [step, setStep] = useState(1);
+const BrainCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
-    injurySeverity: '',
-    permanentDisability: '',
-    medicalCosts: '',
-    lostWages: '',
     age: '',
-    painLevel: ''
+    income: '',
+    injurySeverity: '',
+    medicalExpenses: '',
+    timeOffWork: '',
+    permanentDisability: '',
+    painSeverity: '',
+    lifeImpact: ''
   });
-  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
-  const handleNext = () => {
-    if (step === 2) {
-      calculateCompensation();
-    } else {
-      setStep(step + 1);
-    }
+  const [calculation, setCalculation] = useState<{
+    economicDamages: number;
+    nonEconomicDamages: number;
+    totalEstimate: number;
+    lowRange: number;
+    highRange: number;
+  } | null>(null);
+
+  const handleInputChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
-
-  const handleBack = () => setStep(step - 1);
 
   const calculateCompensation = () => {
-    let baseMin = 100000;
-    let baseMax = 500000;
+    const age = parseInt(formData.age) || 25;
+    const income = parseInt(formData.income) || 0;
+    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
+    const timeOffWork = parseInt(formData.timeOffWork) || 0;
 
-    // Severity multiplier
-    const severityMultipliers: Record<string, number> = {
-      'mild': 1,
-      'moderate': 3,
-      'severe': 8,
-      'catastrophic': 15
-    };
-    const multiplier = severityMultipliers[formData.injurySeverity] || 1;
-    baseMin *= multiplier;
-    baseMax *= multiplier;
+    // Economic damages calculation
+    const lostWages = (income / 52) * timeOffWork;
+    const futureEarningsLoss = formData.permanentDisability === 'severe' 
+      ? income * 10 : formData.permanentDisability === 'moderate' 
+      ? income * 5 : income * 2;
+    
+    const economicDamages = medicalExpenses + lostWages + futureEarningsLoss;
 
-    // Add medical costs
-    const medical = parseInt(formData.medicalCosts) || 100000;
-    baseMin += medical;
-    baseMax += medical * 2;
-
-    // Add lost wages
-    const wages = parseInt(formData.lostWages) || 75000;
-    const age = parseInt(formData.age) || 45;
-    const yearsToRetirement = Math.max(65 - age, 0);
-    baseMin += wages * yearsToRetirement * 0.8;
-    baseMax += wages * yearsToRetirement * 1.5;
-
-    // Permanent disability adjustment
-    if (formData.permanentDisability === 'yes') {
-      baseMin *= 1.8;
-      baseMax *= 2.5;
+    // Non-economic damages multiplier based on injury severity
+    let multiplier = 2;
+    switch (formData.injurySeverity) {
+      case 'mild':
+        multiplier = 2;
+        break;
+      case 'moderate':
+        multiplier = 4;
+        break;
+      case 'severe':
+        multiplier = 6;
+        break;
+      case 'catastrophic':
+        multiplier = 8;
+        break;
     }
 
-    // Pain and suffering
-    const painMultipliers: Record<string, number> = {
-      'minimal': 1.1,
-      'moderate': 1.5,
-      'severe': 2.0,
-      'extreme': 3.0
-    };
-    const painMultiplier = painMultipliers[formData.painLevel] || 1;
-    baseMax *= painMultiplier;
+    // Adjust multiplier for pain severity and life impact
+    if (formData.painSeverity === 'severe') multiplier += 1;
+    if (formData.lifeImpact === 'severe') multiplier += 1;
 
-    setResults({ 
-      min: Math.round(baseMin), 
-      max: Math.round(baseMax) 
+    const nonEconomicDamages = economicDamages * multiplier;
+    const totalEstimate = economicDamages + nonEconomicDamages;
+
+    setCalculation({
+      economicDamages,
+      nonEconomicDamages,
+      totalEstimate,
+      lowRange: totalEstimate * 0.7,
+      highRange: totalEstimate * 1.3
     });
-    setStep(3);
   };
 
-  const isStepValid = () => {
-    if (step === 1) return formData.injurySeverity && formData.permanentDisability && formData.painLevel;
-    if (step === 2) return formData.medicalCosts && formData.lostWages && formData.age;
-    return false;
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Brain Injury Calculator | TBI Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate traumatic brain injury compensation for concussions and severe TBI. Free lifetime care estimates." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Brain Injury Compensation Calculator | TBI Settlement Estimator"
+        description="Calculate potential compensation for your brain injury case. Free TBI settlement estimator from experienced California attorneys."
+        canonical="/brain-compensation-calculator"
+      />
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
+      <GoBack />
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <Brain className="mx-auto mb-6" size={64} strokeWidth={1.5} />
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Brain Injury<br />Calculator
+      {/* Hero Section */}
+      <section
+        className="relative h-[50vh] bg-cover bg-center bg-no-repeat flex items-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="max-w-4xl text-white">
+            <h1 className="text-5xl md:text-6xl font-bold mb-6">
+              Brain Injury Compensation Calculator
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Traumatic brain injury compensation
+            <p className="text-xl md:text-2xl text-white/90 mb-8">
+              Estimate the potential value of your traumatic brain injury case with our comprehensive calculator.
             </p>
           </div>
-        </section>
+        </div>
+      </section>
 
-        <section className="py-20">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex gap-3">
-                  {[1, 2, 3].map((s) => (
-                    <div
-                      key={s}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        s === step ? 'bg-black' : s < step ? 'bg-slate-400' : 'bg-slate-200'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-slate-500">Step {step} of 3</span>
-              </div>
-            </div>
-
-            {step === 1 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-black mb-2">Injury Details</h2>
-                  <p className="text-slate-600">Help us understand your brain injury</p>
-                </div>
-
-                <div className="space-y-6">
+      <div className="container mx-auto px-8 py-16">
+        <div className="grid lg:grid-cols-3 gap-12">
+          {/* Calculator Form */}
+          <div className="lg:col-span-2">
+            <Card className="p-8">
+              <CardHeader className="px-0 pt-0">
+                <CardTitle className="flex items-center text-3xl mb-6">
+                  <Calculator className="w-8 h-8 mr-3 text-primary" />
+                  Calculate Your Brain Injury Compensation
+                </CardTitle>
+              </CardHeader>
+              
+              <CardContent className="px-0">
+                <div className="space-y-8">
+                  {/* Personal Information */}
                   <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Injury Severity
-                    </label>
-                    <Select value={formData.injurySeverity} onValueChange={(value) => setFormData({ ...formData, injurySeverity: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select injury severity" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="mild">Mild Concussion - Brief loss of consciousness</SelectItem>
-                        <SelectItem value="moderate">Moderate TBI - Extended recovery needed</SelectItem>
-                        <SelectItem value="severe">Severe TBI - Long-term impairments</SelectItem>
-                        <SelectItem value="catastrophic">Catastrophic - Permanent brain damage</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">Personal Information</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="age">Age</Label>
+                        <Input
+                          id="age"
+                          type="number"
+                          placeholder="Enter your age"
+                          value={formData.age}
+                          onChange={(e) => handleInputChange('age', e.target.value)}
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="income">Annual Income Before Injury</Label>
+                        <Input
+                          id="income"
+                          type="number"
+                          placeholder="$75,000"
+                          value={formData.income}
+                          onChange={(e) => handleInputChange('income', e.target.value)}
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Injury Information */}
                   <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Permanent Cognitive Disability
-                    </label>
-                    <Select value={formData.permanentDisability} onValueChange={(value) => setFormData({ ...formData, permanentDisability: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select yes or no" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="yes">Yes</SelectItem>
-                        <SelectItem value="no">No</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">Injury Details</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="injurySeverity">Brain Injury Severity</Label>
+                        <Select onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select severity" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="mild">Mild TBI/Concussion</SelectItem>
+                            <SelectItem value="moderate">Moderate TBI</SelectItem>
+                            <SelectItem value="severe">Severe TBI</SelectItem>
+                            <SelectItem value="catastrophic">Catastrophic/Vegetative</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="permanentDisability">Level of Permanent Disability</Label>
+                        <Select onValueChange={(value) => handleInputChange('permanentDisability', value)}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select disability level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="none">None/Minimal</SelectItem>
+                            <SelectItem value="mild">Mild Cognitive Issues</SelectItem>
+                            <SelectItem value="moderate">Moderate Limitations</SelectItem>
+                            <SelectItem value="severe">Severe/Complete Disability</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                   </div>
 
+                  {/* Economic Damages */}
                   <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Pain & Suffering Level
-                    </label>
-                    <Select value={formData.painLevel} onValueChange={(value) => setFormData({ ...formData, painLevel: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select pain level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="minimal">Minimal</SelectItem>
-                        <SelectItem value="moderate">Moderate</SelectItem>
-                        <SelectItem value="severe">Severe</SelectItem>
-                        <SelectItem value="extreme">Extreme</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">Economic Damages</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="medicalExpenses">Total Medical Expenses</Label>
+                        <Input
+                          id="medicalExpenses"
+                          type="number"
+                          placeholder="$50,000"
+                          value={formData.medicalExpenses}
+                          onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor="timeOffWork">Weeks Off Work</Label>
+                        <Input
+                          id="timeOffWork"
+                          type="number"
+                          placeholder="12"
+                          value={formData.timeOffWork}
+                          onChange={(e) => handleInputChange('timeOffWork', e.target.value)}
+                          className="mt-1"
+                        />
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </div>
-            )}
 
-            {step === 2 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-black mb-2">Financial Impact</h2>
-                  <p className="text-slate-600">Help us calculate your total compensation</p>
-                </div>
-
-                <div className="space-y-6">
+                  {/* Impact on Life */}
                   <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Total Medical Costs (past & future)
-                    </label>
-                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select medical cost range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="50000">Under $50,000</SelectItem>
-                        <SelectItem value="100000">$50,000 - $100,000</SelectItem>
-                        <SelectItem value="250000">$100,000 - $250,000</SelectItem>
-                        <SelectItem value="500000">$250,000 - $500,000</SelectItem>
-                        <SelectItem value="1000000">$500,000 - $1,000,000</SelectItem>
-                        <SelectItem value="2000000">Over $1,000,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-slate-500 mt-2">Include therapy, medications, assistive devices</p>
+                    <h3 className="text-xl font-semibold mb-4 text-foreground">Impact on Life</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="painSeverity">Pain & Suffering Level</Label>
+                        <Select onValueChange={(value) => handleInputChange('painSeverity', value)}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select pain level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="mild">Mild - Occasional discomfort</SelectItem>
+                            <SelectItem value="moderate">Moderate - Daily pain</SelectItem>
+                            <SelectItem value="severe">Severe - Chronic, debilitating</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Label htmlFor="lifeImpact">Impact on Daily Activities</Label>
+                        <Select onValueChange={(value) => handleInputChange('lifeImpact', value)}>
+                          <SelectTrigger className="mt-1">
+                            <SelectValue placeholder="Select impact level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="minimal">Minimal impact</SelectItem>
+                            <SelectItem value="moderate">Some limitations</SelectItem>
+                            <SelectItem value="severe">Significant limitations</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Annual Income (before injury)
-                    </label>
-                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select annual income range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="30000">Under $30,000</SelectItem>
-                        <SelectItem value="50000">$30,000 - $50,000</SelectItem>
-                        <SelectItem value="75000">$50,000 - $75,000</SelectItem>
-                        <SelectItem value="100000">$75,000 - $100,000</SelectItem>
-                        <SelectItem value="150000">$100,000 - $150,000</SelectItem>
-                        <SelectItem value="200000">Over $150,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Your Age
-                    </label>
-                    <Select value={formData.age} onValueChange={(value) => setFormData({ ...formData, age: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select your age range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="25">Under 30</SelectItem>
-                        <SelectItem value="35">30-39</SelectItem>
-                        <SelectItem value="45">40-49</SelectItem>
-                        <SelectItem value="55">50-59</SelectItem>
-                        <SelectItem value="65">60-69</SelectItem>
-                        <SelectItem value="75">70 or older</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-slate-500 mt-2">Used to calculate future lost earnings</p>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && results && (
-              <div className="space-y-8">
-                <div className="text-center">
-                  <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation</h2>
-                  <p className="text-slate-600">Based on similar brain injury cases</p>
-                </div>
-
-                <div className="bg-slate-50 rounded-2xl p-8 text-center">
-                  <div className="text-5xl font-bold text-black mb-2">
-                    ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                  </div>
-                  <p className="text-slate-600">Estimated Compensation Range</p>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Economic Damages</h4>
-                    <p className="text-sm text-slate-600">Medical bills, lost wages, future care costs, therapy</p>
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Non-Economic Damages</h4>
-                    <p className="text-sm text-slate-600">Pain, suffering, loss of quality of life, mental anguish</p>
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Future Care Costs</h4>
-                    <p className="text-sm text-slate-600">Lifetime cognitive therapy, assistive technology, home modifications</p>
-                  </div>
-                </div>
-
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
-                  <p className="text-sm text-amber-900 leading-relaxed">
-                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
-                    Brain injury cases are highly complex and actual compensation varies significantly based on medical evidence, 
-                    expert testimony, long-term prognosis, jurisdiction, jury composition, and specific case facts. Results are not 
-                    guaranteed. No attorney-client relationship is created by using this calculator. Each case must be evaluated 
-                    individually by a qualified brain injury attorney licensed in your state. Past results do not guarantee future outcomes.
-                  </p>
-                </div>
-
-                <div className="calculator-cta-section">
-                  <h3 className="text-2xl font-bold mb-4">Maximize your brain injury compensation</h3>
-                  <p className="mb-6 max-w-2xl mx-auto">
-                    Brain injury cases require specialized legal expertise and medical experts. 
-                    We'll fight for compensation that covers your lifetime needs. No fee unless we win.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link to="/free-consultation">
-                      <Button size="lg" className="text-lg px-8">
-                        Get My Free Case Evaluation
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step < 3 && (
-              <div className="flex gap-4 pt-8">
-                {step > 1 && (
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={handleBack}
-                    className="flex-1 h-14"
+                  <Button 
+                    onClick={calculateCompensation}
+                    className="w-full bg-primary hover:bg-primary/90 text-white py-4 text-lg"
+                    disabled={!formData.injurySeverity}
                   >
-                    Back
+                    <Calculator className="w-5 h-5 mr-2" />
+                    Calculate My Compensation
                   </Button>
-                )}
-                <Button
-                  size="lg"
-                  onClick={handleNext}
-                  disabled={!isStepValid()}
-                  className="flex-1 h-14"
-                >
-                  {step === 2 ? 'Calculate' : 'Continue'}
-                </Button>
-              </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Results */}
+            {calculation && (
+              <Card className="mt-8 p-8 border-2 border-primary">
+                <CardHeader className="px-0 pt-0">
+                  <CardTitle className="flex items-center text-2xl text-foreground">
+                    <TrendingUp className="w-6 h-6 mr-2 text-green-600" />
+                    Your Estimated Compensation
+                  </CardTitle>
+                </CardHeader>
+                
+                <CardContent className="px-0">
+                  <div className="grid md:grid-cols-3 gap-6 mb-6">
+                    <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Economic Damages</p>
+                      <p className="text-2xl font-bold text-blue-600">
+                        {formatCurrency(calculation.economicDamages)}
+                      </p>
+                    </div>
+                    <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Non-Economic Damages</p>
+                      <p className="text-2xl font-bold text-purple-600">
+                        {formatCurrency(calculation.nonEconomicDamages)}
+                      </p>
+                    </div>
+                    <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
+                      <p className="text-sm text-muted-foreground mb-1">Total Estimate</p>
+                      <p className="text-3xl font-bold text-green-600">
+                        {formatCurrency(calculation.totalEstimate)}
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <div className="bg-gradient-to-r from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6 rounded-lg">
+                    <h4 className="font-semibold text-lg mb-3 text-foreground">Potential Settlement Range:</h4>
+                    <p className="text-2xl font-bold text-primary">
+                      {formatCurrency(calculation.lowRange)} - {formatCurrency(calculation.highRange)}
+                    </p>
+                    <p className="text-sm text-muted-foreground mt-2">
+                      This range accounts for variables in negotiation and case-specific factors.
+                    </p>
+                  </div>
+
+                  <div className="mt-6 p-4 bg-yellow-50 dark:bg-yellow-950/20 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+                    <div className="flex items-start">
+                      <AlertTriangle className="w-5 h-5 text-yellow-600 mt-0.5 mr-3 flex-shrink-0" />
+                      <div>
+                        <h4 className="font-semibold text-yellow-800 dark:text-yellow-200 mb-1">Important Disclaimer</h4>
+                        <p className="text-sm text-yellow-800 dark:text-yellow-200 leading-relaxed">
+                          This calculator provides estimates only. Actual compensation depends on many factors including 
+                          liability strength, insurance coverage, jurisdiction, and specific case details. Contact our 
+                          experienced attorneys for a professional case evaluation.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4 mt-6">
+                    <Button 
+                      className="flex-1 bg-red-600 hover:bg-red-700"
+                      onClick={() => window.location.href = '/brain-case-evaluation'}
+                    >
+                      Get Professional Case Review
+                    </Button>
+                    <Button 
+                      variant="outline" 
+                      className="flex-1"
+                      onClick={() => window.open('tel:8181234567')}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
             )}
           </div>
-        </section>
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$6M+</div>
-                <p className="text-slate-600">Severe TBI average</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Lifetime</div>
-                <p className="text-slate-600">Cognitive care coverage</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
+          {/* Sidebar */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-8 space-y-6">
+              {/* Contact Info */}
+              <Card className="p-6 text-center bg-gradient-to-b from-red-600 to-red-700 text-white">
+                <Phone className="w-12 h-12 mx-auto mb-4" />
+                <h3 className="text-2xl font-bold mb-2">Call Now</h3>
+                <p className="text-xl mb-4">(818) 123-4567</p>
+                <p className="text-white/90">24/7 Free Consultation</p>
+              </Card>
+
+              {/* Factors Affecting Compensation */}
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4 text-foreground">
+                  Factors Affecting Your Compensation
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <Brain className="w-5 h-5 text-primary mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Severity of brain injury and long-term effects</span>
+                  </div>
+                  <div className="flex items-start">
+                    <DollarSign className="w-5 h-5 text-primary mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Lost wages and reduced earning capacity</span>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-primary mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Strength of liability evidence</span>
+                  </div>
+                  <div className="flex items-start">
+                    <AlertTriangle className="w-5 h-5 text-primary mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Available insurance coverage</span>
+                  </div>
+                </div>
+              </Card>
+
+              {/* Time Sensitive */}
+              <Card className="p-6 bg-yellow-50 dark:bg-yellow-950/20 border-yellow-200 dark:border-yellow-800">
+                <div className="flex items-center mb-3">
+                  <Clock className="w-5 h-5 text-yellow-600 mr-2" />
+                  <h3 className="font-bold text-yellow-800 dark:text-yellow-200">Time Sensitive</h3>
+                </div>
+                <p className="text-yellow-800 dark:text-yellow-200 text-sm leading-relaxed">
+                  California's statute of limitations gives you only 2 years to file your brain injury claim. 
+                  Don't wait - evidence disappears and witnesses' memories fade.
+                </p>
+              </Card>
+
+              {/* Why Choose Us */}
+              <Card className="p-6">
+                <h3 className="text-xl font-bold mb-4 text-foreground">Why Choose Our Firm?</h3>
+                <div className="space-y-3">
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Former defense attorney insight</span>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">No fees unless we win</span>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">Maximum compensation focus</span>
+                  </div>
+                  <div className="flex items-start">
+                    <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 mr-3 flex-shrink-0" />
+                    <span className="text-muted-foreground text-sm">24/7 case consultation</span>
+                  </div>
+                </div>
+              </Card>
             </div>
           </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

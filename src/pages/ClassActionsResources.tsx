@@ -22,6 +22,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/class-actions-resources-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -138,6 +139,8 @@ const ClassActionsResources: React.FC = () => {
           </p>
         </div>
       </section>
+
+      <GoBack />
 
       {/* Quick Access Tools */}
       <section className="py-12 bg-gradient-to-r from-primary/5 to-primary/10">

@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { BookOpen, Download, FileText, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/maritime-education-hero.jpg';
 
 const MaritimeEducation: React.FC = () => {
@@ -15,7 +15,7 @@ const MaritimeEducation: React.FC = () => {
         keywords="maritime education, maritime law resources, Jones Act guide, LHWCA information, maritime safety training, worker rights education"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

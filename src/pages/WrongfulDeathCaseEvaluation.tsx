@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -94,7 +94,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
 Please provide comprehensive case evaluation and next steps.
     `;
     
-    window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const nextStep = () => {
@@ -114,6 +114,7 @@ Please provide comprehensive case evaluation and next steps.
           canonical="/wrongful-death-case-evaluation"
         />
 
+        <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -182,7 +183,7 @@ Please provide comprehensive case evaluation and next steps.
         canonical="/wrongful-death-case-evaluation"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section */}
       <section 

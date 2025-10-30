@@ -3,7 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import ComprehensivePracticeAreaTemplate from '@/components/ComprehensivePracticeAreaTemplate';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/uber-lyft-insurance-claims-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -135,7 +135,7 @@ const UberLyftInsuranceClaims: React.FC = () => {
 
   return (
     <>
-      
+      <GoBack />
       <ComprehensivePracticeAreaTemplate {...pageData}>{null}</ComprehensivePracticeAreaTemplate>
     </>
   );

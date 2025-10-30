@@ -25,7 +25,7 @@ import {
   Thermometer
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/paralysis-medical-guidance-hero.jpg';
 
 const ParalysisMedicalGuidance: React.FC = () => {
@@ -223,7 +223,7 @@ const ParalysisMedicalGuidance: React.FC = () => {
         keywords="paralysis medical guidance, spinal cord injury treatment, paralysis rehabilitation, California spinal cord care, paralysis medical management"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

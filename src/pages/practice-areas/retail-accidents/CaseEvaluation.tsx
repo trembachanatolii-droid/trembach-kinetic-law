@@ -22,7 +22,7 @@ import {
   AlertTriangle
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import '../retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-case-evaluation-hero.jpg';
@@ -420,7 +420,7 @@ const CaseEvaluation: React.FC = () => {
         keywords="retail store accident evaluation, California slip fall lawyer, free case review, shopping injury attorney"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/retail-accidents" />
 
       {/* Hero Section */}
       <section 

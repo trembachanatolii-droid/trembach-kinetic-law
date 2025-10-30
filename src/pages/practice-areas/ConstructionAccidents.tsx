@@ -39,7 +39,7 @@ import provingNegligenceImage from '@/assets/practice-areas/construction-legal-p
 import compensationImage from '@/assets/practice-areas/construction-compensation-new.jpg';
 import hazardsImage from '@/assets/practice-areas/construction-hazards-new.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -340,7 +340,7 @@ const ConstructionAccidents: React.FC = () => {
         description="Expert construction accident lawyers in California. Specialized legal representation for workplace injuries, OSHA violations, and third-party liability claims. Free consultation available."
         canonical="/practice-areas/construction-accidents"
       />
-      
+      <GoBack />
       
       {/* Hero Section */}
       <section 

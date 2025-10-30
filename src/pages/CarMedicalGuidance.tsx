@@ -5,6 +5,7 @@ import { Stethoscope, Heart, AlertTriangle, Phone } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import heroImage from '@/assets/medical-guidance-hero.jpg';
 import medicalImage from '@/assets/practice-areas/car-accident-medical.jpg';
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 const CarMedicalGuidance = () => {
@@ -15,6 +16,8 @@ const CarMedicalGuidance = () => {
         description="Essential medical guidance for car accident victims in California. Learn about common injuries, treatment options, and protecting your legal rights."
         canonical="/car-medical-guidance"
       />
+
+      <GoBack />
 
       {/* Hero Section */}
       <section 

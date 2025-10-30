@@ -20,7 +20,7 @@ import {
   FileText,
   ExternalLink
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
 import heroBackground from '@/assets/birth-injuries-hero-new.jpg';
@@ -263,7 +263,7 @@ const BirthInjuriesResources: React.FC = () => {
         description="Comprehensive resource directory for birth injury families in California. Find support organizations, medical centers, educational programs, and financial assistance."
       />
 
-      
+      <GoBack />
 
       <div className="min-h-screen bg-background">
         {/* Hero Section */}

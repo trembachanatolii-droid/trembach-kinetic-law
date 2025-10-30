@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Stethoscope, Heart, Activity, Phone } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/maritime-medical-guidance-hero.jpg';
 
 const MaritimeMedicalGuidance: React.FC = () => {
@@ -15,7 +15,7 @@ const MaritimeMedicalGuidance: React.FC = () => {
         keywords="maritime medical guidance, maritime injury treatment, maintenance and cure, maritime medical care, seaman medical rights"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

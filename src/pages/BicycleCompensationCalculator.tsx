@@ -1,630 +1,432 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Bike } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { CalculatorProgress } from '@/components/calculator/CalculatorProgress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { Label } from '@/components/ui/label';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Badge } from '@/components/ui/badge';
+import { Calculator, DollarSign, TrendingUp, AlertCircle, CheckCircle2, ArrowRight } from 'lucide-react';
+import heroBackground from '@/assets/bicycle-compensation-calculator-hero.jpg';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
-interface BicycleFormData extends CalculatorFormData {
-  accidentType: string;
-  vehicleType: string;
-  vehicleSpeed: string;
-  location: string;
-  injuryType: string;
-  injurySeverity: string;
-  helmetUse: string;
-  rightOfWay: string;
-  medicalCosts: string;
-  lostWages: string;
-  age: string;
-  permanentImpairment: string;
-  comparativeFault: string;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const initialFormData: BicycleFormData = {
-  accidentType: '',
-  vehicleType: '',
-  vehicleSpeed: '',
-  location: '',
-  injuryType: '',
-  injurySeverity: '',
-  helmetUse: '',
-  rightOfWay: '',
-  medicalCosts: '',
-  lostWages: '',
-  age: '',
-  permanentImpairment: '',
-  comparativeFault: ''
-};
+const BicycleCompensationCalculator: React.FC = () => {
+  const [calculatorData, setCalculatorData] = useState({
+    age: 35,
+    injuryType: '',
+    severity: '',
+    treatmentDuration: '',
+    faultClarity: '',
+    medicalExpenses: 25000,
+    lostWages: 15000,
+    painLevel: [5]
+  });
 
-function calculateBicycleCompensation(data: BicycleFormData): CalculatorResults {
-  let baseMin = 30000;
-  let baseMax = 200000;
+  const [estimatedCompensation, setEstimatedCompensation] = useState({
+    low: 0,
+    high: 0,
+    average: 0
+  });
 
-  // Accident type multipliers
-  const accidentTypeMultipliers: Record<string, number> = {
-    'dooring': 2.2,
-    'right-hook': 2.5,
-    'left-turn': 2.8,
-    'rear-end': 2.0,
-    'head-on': 3.5,
-    'sideswipe': 1.8,
-    'hit-run': 2.4,
-    'road-defect': 2.6
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Animate content cards with staggered entrance
+      gsap.fromTo(cardsRef.current?.children || [],
+        { 
+          opacity: 0, 
+          y: 100,
+          scale: 0.8,
+          filter: 'blur(5px)'
+        },
+        {
+          opacity: 1,
+          y: 0,
+          scale: 1,
+          filter: 'blur(0px)',
+          duration: 0.8,
+          stagger: 0.15,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: 'top 85%',
+          }
+        }
+      );
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    calculateCompensation();
+  }, [calculatorData]);
+
+  const calculateCompensation = () => {
+    let baseAmount = 75000;
+    let multiplier = 1;
+
+    // Age factor (younger victims typically receive more)
+    if (calculatorData.age < 30) multiplier += 0.4;
+    else if (calculatorData.age < 50) multiplier += 0.2;
+    else if (calculatorData.age < 65) multiplier += 0.1;
+
+    // Injury type factor
+    switch (calculatorData.injuryType) {
+      case 'minor':
+        multiplier += 0.1;
+        break;
+      case 'moderate':
+        multiplier += 0.3;
+        break;
+      case 'severe':
+        multiplier += 0.6;
+        break;
+      case 'catastrophic':
+        multiplier += 1.0;
+        break;
+    }
+
+    // Severity factor
+    switch (calculatorData.severity) {
+      case 'temporary':
+        multiplier += 0.1;
+        break;
+      case 'permanent':
+        multiplier += 0.5;
+        break;
+      case 'disabling':
+        multiplier += 0.8;
+        break;
+    }
+
+    // Treatment duration factor
+    switch (calculatorData.treatmentDuration) {
+      case 'weeks':
+        multiplier += 0.1;
+        break;
+      case 'months':
+        multiplier += 0.3;
+        break;
+      case 'ongoing':
+        multiplier += 0.6;
+        break;
+    }
+
+    // Fault clarity factor
+    switch (calculatorData.faultClarity) {
+      case 'clear':
+        multiplier += 0.3;
+        break;
+      case 'mostly':
+        multiplier += 0.2;
+        break;
+      case 'shared':
+        multiplier += 0.1;
+        break;
+      case 'disputed':
+        multiplier -= 0.2;
+        break;
+    }
+
+    // Pain level factor
+    multiplier += (calculatorData.painLevel[0] / 10) * 0.3;
+
+    // Medical expenses and lost wages
+    const economicDamages = calculatorData.medicalExpenses + calculatorData.lostWages;
+    
+    const finalBase = baseAmount * multiplier + economicDamages;
+    
+    setEstimatedCompensation({
+      low: Math.round(finalBase * 0.6),
+      high: Math.round(finalBase * 1.4),
+      average: Math.round(finalBase)
+    });
   };
-  const accidentMult = accidentTypeMultipliers[data.accidentType] || 1.5;
-  baseMin *= accidentMult;
-  baseMax *= accidentMult;
 
-  // Vehicle type multipliers
-  const vehicleMultipliers: Record<string, number> = {
-    'car': 1.8,
-    'suv-truck': 2.2,
-    'commercial': 2.5,
-    'bus': 2.8,
-    'semi-truck': 3.2,
-    'motorcycle': 1.5,
-    'other': 1.6
+  const handleInputChange = (field: string, value: string | number | number[]) => {
+    setCalculatorData(prev => ({ ...prev, [field]: value }));
   };
-  const vehicleMult = vehicleMultipliers[data.vehicleType] || 1.5;
-  baseMin *= vehicleMult;
-  baseMax *= vehicleMult;
 
-  // Vehicle speed multipliers
-  const speedMultipliers: Record<string, number> = {
-    'under-15': 1.2,
-    '15-25': 1.5,
-    '26-35': 2.0,
-    '36-45': 2.5,
-    '46-55': 3.0,
-    'over-55': 3.5
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
-  const speedMult = speedMultipliers[data.vehicleSpeed] || 1.5;
-  baseMin *= speedMult;
-  baseMax *= speedMult;
-
-  // Location multipliers
-  const locationMultipliers: Record<string, number> = {
-    'bike-lane': 2.2,
-    'crosswalk': 2.5,
-    'intersection': 2.0,
-    'highway': 2.8,
-    'parking-lot': 1.6,
-    'residential': 1.8,
-    'trail': 1.5
-  };
-  const locationMult = locationMultipliers[data.location] || 1.5;
-  baseMin *= locationMult;
-  baseMax *= locationMult;
-
-  // Injury type multipliers
-  const injuryTypeMultipliers: Record<string, number> = {
-    'soft-tissue': 1.3,
-    'fractures': 2.0,
-    'head-injury': 3.0,
-    'spinal': 4.0,
-    'internal': 2.8,
-    'multiple': 3.2,
-    'amputation': 4.5,
-    'fatal': 5.0
-  };
-  const injuryMult = injuryTypeMultipliers[data.injuryType] || 1.5;
-  baseMin *= injuryMult;
-  baseMax *= injuryMult;
-
-  // Injury severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1.0,
-    'moderate': 1.8,
-    'severe': 2.5,
-    'critical': 3.5,
-    'life-threatening': 4.0
-  };
-  const severityMult = severityMultipliers[data.injurySeverity] || 1.5;
-  baseMin *= severityMult;
-  baseMax *= severityMult;
-
-  // Helmet use factor (affects perception but not liability in CA)
-  const helmetMultipliers: Record<string, number> = {
-    'yes': 1.1,
-    'no': 1.0,
-    'not-required': 1.0
-  };
-  const helmetMult = helmetMultipliers[data.helmetUse] || 1.0;
-  baseMin *= helmetMult;
-  baseMax *= helmetMult;
-
-  // Right of way multipliers
-  const rightOfWayMultipliers: Record<string, number> = {
-    'cyclist': 1.5,
-    'vehicle': 0.8,
-    'unclear': 1.0,
-    'both-violated': 0.9
-  };
-  const rightOfWayMult = rightOfWayMultipliers[data.rightOfWay] || 1.0;
-  baseMin *= rightOfWayMult;
-  baseMax *= rightOfWayMult;
-
-  // Economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-  
-  baseMin += medicalCosts + lostWages;
-  baseMax += (medicalCosts + lostWages) * 2;
-
-  // Age adjustments
-  const ageMultipliers: Record<string, number> = {
-    'under-18': 1.3,
-    '18-25': 1.4,
-    '26-40': 1.3,
-    '41-55': 1.2,
-    '56-65': 1.1,
-    'over-65': 1.0
-  };
-  const ageMult = ageMultipliers[data.age] || 1;
-  baseMin *= ageMult;
-  baseMax *= ageMult;
-
-  // Permanent impairment multipliers
-  const impairmentMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'minor': 1.3,
-    'moderate': 1.8,
-    'severe': 2.5,
-    'total-disability': 3.5
-  };
-  const impairmentMult = impairmentMultipliers[data.permanentImpairment] || 1;
-  baseMin *= impairmentMult;
-  baseMax *= impairmentMult;
-
-  // Comparative fault reduction (CA comparative negligence)
-  const faultReductions: Record<string, number> = {
-    '0': 1.0,
-    '10': 0.9,
-    '20': 0.8,
-    '30': 0.7,
-    '40': 0.6,
-    '50': 0.5
-  };
-  const faultReduction = faultReductions[data.comparativeFault] || 1.0;
-  baseMin *= faultReduction;
-  baseMax *= faultReduction;
-
-  return {
-    min: Math.max(10000, Math.round(baseMin)),
-    max: Math.round(baseMax),
-    medicalCosts,
-    lostWages
-  };
-}
-
-function validateBicycleForm(data: BicycleFormData, step: number): boolean {
-  if (step === 1) {
-    return !!(data.accidentType && data.vehicleType && data.vehicleSpeed && 
-              data.location && data.injuryType);
-  }
-  if (step === 2) {
-    return !!(data.injurySeverity && data.helmetUse && data.rightOfWay && 
-              data.medicalCosts && data.age && data.permanentImpairment);
-  }
-  return true;
-}
-
-const BicycleCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<BicycleFormData>(
-    initialFormData,
-    calculateBicycleCompensation,
-    validateBicycleForm
-  );
 
   return (
-    <>
-      <Helmet>
-        <title>Bicycle Accident Calculator | Cyclist Injury Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate bicycle accident compensation for cyclist injuries. Free estimates for road bike crashes and permanent disabilities." />
-      </Helmet>
+    <div ref={sectionRef} className="min-h-screen bg-gradient-to-br from-background via-background/95 to-primary/5">
+      <SEO 
+        title="Bicycle Accident Compensation Calculator | Trembach Law Firm"
+        description="Estimate potential compensation for your bicycle accident case. Get accurate assessments based on your specific circumstances."
+        canonical="/bicycle-compensation-calculator"
+      />
+      {/* Hero Section */}
+      <section className="relative py-32 overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/70" />
+        <div className="relative container mx-auto px-6 text-center">
+          <h1 className="text-5xl md:text-6xl font-bold text-primary-foreground mb-6 animate-fade-in">
+            Bicycle Accident Calculator
+          </h1>
+          <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-4xl mx-auto leading-relaxed animate-fade-in">
+            Get an estimate of your potential bicycle accident compensation based on your specific circumstances.
+          </p>
+        </div>
+      </section>
 
-      <main className="min-h-screen bg-background">
-        <div className="border-b">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-muted-foreground hover:text-foreground">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+      {/* Go Back (below hero to avoid overlap with logo) */}
+      <div className="container mx-auto px-6 mt-6">
+        <GoBack />
+      </div>
+
+      {/* Main Content */}
+      <section className="py-20">
+        <div className="container mx-auto px-6">
+          <div ref={cardsRef} className="grid lg:grid-cols-3 gap-8">
+            {/* Calculator Form */}
+            <div className="lg:col-span-2">
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl flex items-center gap-2">
+                    <Calculator className="w-6 h-6 text-primary" />
+                    Bicycle Accident Calculator
+                  </CardTitle>
+                  <p className="text-muted-foreground">
+                    Provide your accident details to receive a personalized compensation estimate.
+                  </p>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="age">Your Age</Label>
+                      <div className="mt-2">
+                        <Slider
+                          value={[calculatorData.age]}
+                          onValueChange={(value) => handleInputChange('age', value[0])}
+                          max={80}
+                          min={16}
+                          step={1}
+                          className="w-full"
+                        />
+                        <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                          <span>16</span>
+                          <span className="font-semibold">{calculatorData.age} years</span>
+                          <span>80</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <Label htmlFor="injuryType">Injury Type</Label>
+                      <Select onValueChange={(value) => handleInputChange('injuryType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minor">Minor (cuts, bruises)</SelectItem>
+                          <SelectItem value="moderate">Moderate (fractures)</SelectItem>
+                          <SelectItem value="severe">Severe (head injury, spine)</SelectItem>
+                          <SelectItem value="catastrophic">Catastrophic (permanent disability)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="severity">Injury Severity</Label>
+                      <Select onValueChange={(value) => handleInputChange('severity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="temporary">Temporary (heals completely)</SelectItem>
+                          <SelectItem value="permanent">Permanent (lasting effects)</SelectItem>
+                          <SelectItem value="disabling">Disabling (major life impact)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div>
+                      <Label htmlFor="treatmentDuration">Treatment Duration</Label>
+                      <Select onValueChange={(value) => handleInputChange('treatmentDuration', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select duration" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="weeks">Few weeks</SelectItem>
+                          <SelectItem value="months">Several months</SelectItem>
+                          <SelectItem value="ongoing">Ongoing treatment</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="faultClarity">Driver Fault Clarity</Label>
+                    <Select onValueChange={(value) => handleInputChange('faultClarity', value)}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select fault clarity" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="clear">Driver clearly at fault</SelectItem>
+                        <SelectItem value="mostly">Driver mostly at fault</SelectItem>
+                        <SelectItem value="shared">Shared fault</SelectItem>
+                        <SelectItem value="disputed">Fault disputed</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <Label htmlFor="painLevel">Pain and Suffering Level</Label>
+                    <div className="mt-2">
+                      <Slider
+                        value={calculatorData.painLevel}
+                        onValueChange={(value) => handleInputChange('painLevel', value)}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                        <span>1</span>
+                        <span className="font-semibold">{calculatorData.painLevel[0]}/10</span>
+                        <span>10</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <Label htmlFor="medicalExpenses">Medical Expenses</Label>
+                      <Input
+                        type="number"
+                        value={calculatorData.medicalExpenses}
+                        onChange={(e) => handleInputChange('medicalExpenses', parseInt(e.target.value) || 0)}
+                        placeholder="25000"
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="lostWages">Lost Wages</Label>
+                      <Input
+                        type="number"
+                        value={calculatorData.lostWages}
+                        onChange={(e) => handleInputChange('lostWages', parseInt(e.target.value) || 0)}
+                        placeholder="15000"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Results */}
+                  {estimatedCompensation.average > 0 && (
+                    <div className="bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg p-6 border border-primary/20">
+                      <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
+                        <TrendingUp className="w-5 h-5 text-primary" />
+                        Estimated Compensation Range
+                      </h3>
+                      <div className="grid md:grid-cols-3 gap-4">
+                        <div className="text-center">
+                          <Badge variant="outline" className="mb-2">Conservative</Badge>
+                          <p className="text-2xl font-bold text-primary">{formatCurrency(estimatedCompensation.low)}</p>
+                        </div>
+                        <div className="text-center">
+                          <Badge variant="default" className="mb-2">Average</Badge>
+                          <p className="text-3xl font-bold text-primary">{formatCurrency(estimatedCompensation.average)}</p>
+                        </div>
+                        <div className="text-center">
+                          <Badge variant="secondary" className="mb-2">Optimistic</Badge>
+                          <p className="text-2xl font-bold text-primary">{formatCurrency(estimatedCompensation.high)}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  <Button className="w-full group bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-primary-foreground shadow-lg hover:shadow-xl transition-all duration-300" onClick={() => window.location.href = '/bicycle-case-evaluation'}>
+                    Get Detailed Case Evaluation
+                    <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Information Sidebar */}
+            <div className="space-y-6">
+              <Card className="glass-card border-orange-200 bg-orange-50/50">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2 text-orange-800">
+                    <AlertCircle className="w-5 h-5" />
+                    Important Legal Disclaimer
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3">
+                  <p className="text-sm text-orange-700">
+                    This calculator provides estimates only. The compensation amounts shown are based on general factors and similar cases. Your actual compensation may be significantly different depending on the specific circumstances of your case.
+                  </p>
+                  <p className="text-sm text-orange-700">
+                     <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every bicycle accident case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
+                   </p>
+                   <p className="text-sm text-orange-700">
+                     <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified bicycle accident attorney who can review your medical records, accident details, and other relevant documentation.
+                   </p>
+                   <p className="text-sm text-orange-700">
+                     <strong>Time Limits Apply:</strong> Bicycle accident claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
+                  </p>
+                  <p className="text-sm text-orange-700">
+                    For a free, confidential case evaluation, contact our experienced bicycle accident attorneys today.
+                  </p>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card border-primary/10 bg-gradient-to-br from-card/80 to-card/60 backdrop-blur-md shadow-2xl">
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <CheckCircle2 className="w-5 h-5 text-primary" />
+                    Factors Affecting Compensation
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-2 text-sm text-muted-foreground">
+                    <li>• Injury severity and permanence</li>
+                    <li>• Medical expenses and future costs</li>
+                    <li>• Lost wages and earning capacity</li>
+                    <li>• Pain and suffering endured</li>
+                    <li>• Driver fault and negligence</li>
+                    <li>• Age and life expectancy</li>
+                    <li>• Quality of legal representation</li>
+                    <li>• Evidence and documentation</li>
+                  </ul>
+                </CardContent>
+              </Card>
+
+              <Card className="glass-card border-primary/20 bg-gradient-to-br from-primary/15 to-primary/5 backdrop-blur-md shadow-2xl">
+                <CardContent className="pt-6">
+                  <h3 className="font-semibold mb-2">No Fees Unless We Win</h3>
+                  <p className="text-sm text-muted-foreground mb-3">
+                    We work on a contingency fee basis. You pay nothing unless we secure compensation for you.
+                  </p>
+                  <Button variant="outline" size="sm" className="w-full group hover:bg-primary hover:text-primary-foreground transition-all duration-300" onClick={() => window.location.href = '/bicycle-case-evaluation'}>
+                    <DollarSign className="w-4 h-4 mr-2 group-hover:scale-110 transition-transform" />
+                    Learn More
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-
-        <section className="pt-20 pb-12 bg-gradient-to-b from-muted/50 to-background">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-blue-100 mb-6">
-              <Bike className="w-8 h-8 text-blue-600" />
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight leading-[1.1]">
-              Bicycle Accident<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground font-light">
-              Cyclist injury compensation estimates
-            </p>
-          </div>
-        </section>
-
-        <section className="py-20">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <CalculatorProgress currentStep={step} totalSteps={3} />
-
-            {step === 1 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">Accident & Injury Details</h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="accidentType" className="text-base font-semibold mb-3 block">
-                        Type of Accident *
-                      </Label>
-                      <select
-                        id="accidentType"
-                        value={formData.accidentType}
-                        onChange={(e) => updateField('accidentType', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select accident type</option>
-                        <option value="dooring">Car Door Opened (Dooring)</option>
-                        <option value="right-hook">Right Hook Turn</option>
-                        <option value="left-turn">Left Turn Collision</option>
-                        <option value="rear-end">Rear-End Collision</option>
-                        <option value="head-on">Head-On Collision</option>
-                        <option value="sideswipe">Sideswipe</option>
-                        <option value="hit-run">Hit and Run</option>
-                        <option value="road-defect">Road Defect/Hazard</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="vehicleType" className="text-base font-semibold mb-3 block">
-                        Vehicle Type Involved *
-                      </Label>
-                      <select
-                        id="vehicleType"
-                        value={formData.vehicleType}
-                        onChange={(e) => updateField('vehicleType', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select vehicle type</option>
-                        <option value="car">Passenger Car</option>
-                        <option value="suv-truck">SUV/Pickup Truck</option>
-                        <option value="commercial">Commercial Vehicle</option>
-                        <option value="bus">Bus</option>
-                        <option value="semi-truck">Semi-Truck/18-Wheeler</option>
-                        <option value="motorcycle">Motorcycle</option>
-                        <option value="other">Other/Unknown</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="vehicleSpeed" className="text-base font-semibold mb-3 block">
-                        Estimated Vehicle Speed *
-                      </Label>
-                      <select
-                        id="vehicleSpeed"
-                        value={formData.vehicleSpeed}
-                        onChange={(e) => updateField('vehicleSpeed', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select speed</option>
-                        <option value="under-15">Under 15 mph</option>
-                        <option value="15-25">15-25 mph</option>
-                        <option value="26-35">26-35 mph</option>
-                        <option value="36-45">36-45 mph</option>
-                        <option value="46-55">46-55 mph</option>
-                        <option value="over-55">Over 55 mph</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="location" className="text-base font-semibold mb-3 block">
-                        Accident Location *
-                      </Label>
-                      <select
-                        id="location"
-                        value={formData.location}
-                        onChange={(e) => updateField('location', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select location</option>
-                        <option value="bike-lane">Designated Bike Lane</option>
-                        <option value="crosswalk">Crosswalk</option>
-                        <option value="intersection">Intersection</option>
-                        <option value="highway">Highway/Freeway</option>
-                        <option value="parking-lot">Parking Lot</option>
-                        <option value="residential">Residential Street</option>
-                        <option value="trail">Bike Trail/Path</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="injuryType" className="text-base font-semibold mb-3 block">
-                        Primary Injury Type *
-                      </Label>
-                      <select
-                        id="injuryType"
-                        value={formData.injuryType}
-                        onChange={(e) => updateField('injuryType', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select injury type</option>
-                        <option value="soft-tissue">Soft Tissue (Bruises, Sprains)</option>
-                        <option value="fractures">Bone Fractures</option>
-                        <option value="head-injury">Head/Brain Injury</option>
-                        <option value="spinal">Spinal Cord Injury</option>
-                        <option value="internal">Internal Injuries</option>
-                        <option value="multiple">Multiple Injuries</option>
-                        <option value="amputation">Amputation</option>
-                        <option value="fatal">Fatal (Wrongful Death)</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                />
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold mb-6">Additional Details & Impact</h2>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <Label htmlFor="injurySeverity" className="text-base font-semibold mb-3 block">
-                        Injury Severity *
-                      </Label>
-                      <select
-                        id="injurySeverity"
-                        value={formData.injurySeverity}
-                        onChange={(e) => updateField('injurySeverity', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select severity</option>
-                        <option value="minor">Minor (Full Recovery Expected)</option>
-                        <option value="moderate">Moderate (Several Months Recovery)</option>
-                        <option value="severe">Severe (Long-Term Recovery)</option>
-                        <option value="critical">Critical (ICU/Major Surgery)</option>
-                        <option value="life-threatening">Life-Threatening</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="helmetUse" className="text-base font-semibold mb-3 block">
-                        Were You Wearing a Helmet? *
-                      </Label>
-                      <select
-                        id="helmetUse"
-                        value={formData.helmetUse}
-                        onChange={(e) => updateField('helmetUse', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select</option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No (Adult - Not Required in CA)</option>
-                        <option value="not-required">Not Applicable</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="rightOfWay" className="text-base font-semibold mb-3 block">
-                        Right-of-Way Status *
-                      </Label>
-                      <select
-                        id="rightOfWay"
-                        value={formData.rightOfWay}
-                        onChange={(e) => updateField('rightOfWay', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select</option>
-                        <option value="cyclist">Cyclist Had Right-of-Way</option>
-                        <option value="vehicle">Vehicle Had Right-of-Way</option>
-                        <option value="unclear">Unclear/Disputed</option>
-                        <option value="both-violated">Both Violated Traffic Laws</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="medicalCosts" className="text-base font-semibold mb-3 block">
-                        Medical Costs to Date *
-                      </Label>
-                      <select
-                        id="medicalCosts"
-                        value={formData.medicalCosts}
-                        onChange={(e) => updateField('medicalCosts', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select medical costs</option>
-                        <option value="5000">Under $5,000</option>
-                        <option value="15000">$5,000 - $15,000</option>
-                        <option value="35000">$15,000 - $50,000</option>
-                        <option value="75000">$50,000 - $100,000</option>
-                        <option value="150000">$100,000 - $200,000</option>
-                        <option value="300000">Over $200,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="lostWages" className="text-base font-semibold mb-3 block">
-                        Lost Wages
-                      </Label>
-                      <select
-                        id="lostWages"
-                        value={formData.lostWages}
-                        onChange={(e) => updateField('lostWages', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="0">None</option>
-                        <option value="5000">Under $5,000</option>
-                        <option value="15000">$5,000 - $15,000</option>
-                        <option value="35000">$15,000 - $50,000</option>
-                        <option value="75000">$50,000 - $100,000</option>
-                        <option value="150000">Over $100,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="age" className="text-base font-semibold mb-3 block">
-                        Your Age *
-                      </Label>
-                      <select
-                        id="age"
-                        value={formData.age}
-                        onChange={(e) => updateField('age', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select age range</option>
-                        <option value="under-18">Under 18</option>
-                        <option value="18-25">18-25</option>
-                        <option value="26-40">26-40</option>
-                        <option value="41-55">41-55</option>
-                        <option value="56-65">56-65</option>
-                        <option value="over-65">Over 65</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="permanentImpairment" className="text-base font-semibold mb-3 block">
-                        Permanent Impairment *
-                      </Label>
-                      <select
-                        id="permanentImpairment"
-                        value={formData.permanentImpairment}
-                        onChange={(e) => updateField('permanentImpairment', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="">Select impairment level</option>
-                        <option value="none">No Permanent Impairment</option>
-                        <option value="minor">Minor (Scarring, Limited Mobility)</option>
-                        <option value="moderate">Moderate (Chronic Pain, Reduced Function)</option>
-                        <option value="severe">Severe (Major Disability)</option>
-                        <option value="total-disability">Total Disability</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <Label htmlFor="comparativeFault" className="text-base font-semibold mb-3 block">
-                        Your Estimated Fault Percentage
-                      </Label>
-                      <select
-                        id="comparativeFault"
-                        value={formData.comparativeFault}
-                        onChange={(e) => updateField('comparativeFault', e.target.value)}
-                        className="w-full h-14 px-4 rounded-lg border bg-background text-foreground"
-                      >
-                        <option value="0">0% (Not at Fault)</option>
-                        <option value="10">10%</option>
-                        <option value="20">20%</option>
-                        <option value="30">30%</option>
-                        <option value="40">40%</option>
-                        <option value="50">50%</option>
-                      </select>
-                    </div>
-                  </div>
-                </div>
-
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                />
-              </div>
-            )}
-
-            {step === 3 && results && (
-              <div className="space-y-8">
-                <div className="text-center space-y-4">
-                  <h2 className="text-3xl font-bold">Your Estimated Compensation</h2>
-                  <p className="text-muted-foreground">Based on the information provided</p>
-                </div>
-
-                <div className="bg-primary/5 rounded-2xl p-8 text-center border-2 border-primary/20">
-                  <div className="text-5xl font-bold text-primary mb-2">
-                    ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                  </div>
-                  <p className="text-muted-foreground">Estimated Compensation Range</p>
-                </div>
-
-                <div className="space-y-4">
-                  <h3 className="text-xl font-semibold">Compensation Breakdown</h3>
-                  <div className="grid gap-4">
-                    <div className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                      <span>Medical Costs</span>
-                      <span className="font-semibold">${results.medicalCosts.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between p-4 bg-muted/50 rounded-lg">
-                      <span>Lost Wages</span>
-                      <span className="font-semibold">${results.lostWages.toLocaleString()}</span>
-                    </div>
-                    <div className="flex justify-between p-4 bg-primary/10 rounded-lg border border-primary/20">
-                      <span className="font-semibold">Pain & Suffering</span>
-                      <span className="font-semibold">
-                        ${(results.min - results.medicalCosts - results.lostWages).toLocaleString()} - ${(results.max - results.medicalCosts - results.lostWages).toLocaleString()}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                  <h3 className="font-semibold text-amber-900 mb-2">Important Disclaimer</h3>
-                  <p className="text-sm text-amber-800">
-                    This estimate is based on general factors and should not be considered a guarantee of compensation. 
-                    Actual settlement values depend on specific case details, evidence quality, insurance coverage, 
-                    comparative fault determination, and negotiation. California's comparative negligence law allows 
-                    recovery even if you were partially at fault. Consult with an experienced bicycle accident attorney 
-                    for a detailed case evaluation.
-                  </p>
-                </div>
-
-                <div className="calculator-cta-section">
-                  <h3 className="text-2xl font-bold mb-4">Get maximum bicycle accident compensation</h3>
-                  <p className="mb-6 max-w-2xl mx-auto">
-                    Cyclists deserve safe roads. Our attorneys will hold negligent drivers accountable and fight for 
-                    your full compensation. No fee unless we win.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link to="/free-consultation" className="flex-1">
-                      <Button size="lg" className="w-full text-lg px-8">
-                        Get My Free Case Evaluation
-                      </Button>
-                    </Link>
-                    <Button size="lg" variant="outline" className="flex-1 outline" onClick={resetForm}>
-                      Start New Calculation
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-        </section>
-      </main>
-    </>
+      </section>
+    </div>
   );
 };
 

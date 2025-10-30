@@ -11,6 +11,7 @@ import { Badge } from '@/components/ui/badge';
 import { Phone, Calendar, Heart, Users, MapPin, Clock, ArrowRight, Star, ArrowLeft } from 'lucide-react';
 import heroBackground from '@/assets/medical-guidance-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -118,6 +119,11 @@ const MedicalGuidance: React.FC = () => {
           </p>
         </div>
       </section>
+
+      {/* Go Back (below hero to avoid overlap with logo) */}
+      <div className="container mx-auto px-6 mt-6">
+        <GoBack />
+      </div>
 
       {/* Main Content */}
       <section className="py-20">

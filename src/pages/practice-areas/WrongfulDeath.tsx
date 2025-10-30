@@ -55,7 +55,7 @@ import investigationImage from '@/assets/practice-areas/wrongful-death-investiga
 import familyImage from '@/assets/practice-areas/wrongful-death-family.jpg';
 import timeLimitsImage from '@/assets/practice-areas/wrongful-death-time-limits.jpg';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import { useNavigate } from 'react-router-dom';
 gsap.registerPlugin(ScrollTrigger);
 
@@ -142,7 +142,7 @@ Relationship to Deceased: ${formData.relationship}
 Description: ${formData.description}
 Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
     `;
-    window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const toggleSection = (sectionId: string) => {
@@ -379,7 +379,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
         canonical="/practice-areas/wrongful-death"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas/wrongful-death" />
 
       {/* Hero Section - Same ratio as Medical Malpractice */}
       <section 
@@ -1321,7 +1321,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
                     onClick={() => {
                       const subject = 'Free Wrongful Death Case Evaluation';
                       const body = 'I would like to start a free wrongful death case evaluation.';
-                      window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+                      window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
                     }}
                   >
                     <Mail className="w-5 h-5 mr-2" />

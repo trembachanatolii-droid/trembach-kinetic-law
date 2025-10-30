@@ -1,572 +1,409 @@
-import React from 'react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import {
-  CalculatorLayout,
-  CalculatorProgress,
-  FormNavigation,
-  OptionButton,
-  CalculatorSEO
-} from '@/components/calculator';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
+import { 
+  Phone, 
+  Calculator,
+  DollarSign,
+  AlertTriangle,
+  Info,
+  FileText,
+  Star,
+  Shield
+} from 'lucide-react';
+import heroBackground from '@/assets/practice-areas/premises-liability-hero.jpg';
 
-interface PremisesLiabilityFormData extends CalculatorFormData {
-  accidentType: string;
-  injuryType: string;
-  injurySeverity: string;
-  medicalCosts: string;
-  futureMedical: string;
-  lostWages: string;
-  propertyType: string;
-  ownerKnowledge: string;
-  hazardType: string;
-  warnings: string;
-  permanentImpact: string;
-}
+const PremisesLiabilityCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    injuryType: '',
+    medicalCosts: '',
+    lostWages: '',
+    painSeverity: '',
+    recoveryTime: '',
+    age: '',
+    impactOnLife: ''
+  });
 
-const initialFormData: PremisesLiabilityFormData = {
-  accidentType: '',
-  injuryType: '',
-  injurySeverity: '',
-  medicalCosts: '',
-  futureMedical: '',
-  lostWages: '',
-  propertyType: '',
-  ownerKnowledge: '',
-  hazardType: '',
-  warnings: '',
-  permanentImpact: ''
-};
+  const [calculation, setCalculation] = useState<{
+    economic: number;
+    nonEconomic: number;
+    total: number;
+  } | null>(null);
 
-const accidentTypeOptions = [
-  { value: 'slip-fall', label: 'Slip and Fall', description: 'Wet or slippery surface' },
-  { value: 'trip-fall', label: 'Trip and Fall', description: 'Uneven surface or obstacle' },
-  { value: 'inadequate-security', label: 'Inadequate Security', description: 'Assault or crime on property' },
-  { value: 'swimming-pool', label: 'Swimming Pool Accident', description: 'Pool-related injury' },
-  { value: 'falling-object', label: 'Falling Object', description: 'Item fell from height' },
-  { value: 'structural-failure', label: 'Structural Failure', description: 'Building/stairs collapse' }
-];
-
-const injuryTypeOptions = [
-  { value: 'soft-tissue', label: 'Soft Tissue Injury', description: 'Sprains, strains' },
-  { value: 'fractures', label: 'Fractures/Broken Bones', description: 'Bone injuries' },
-  { value: 'head-injury', label: 'Head/Brain Injury', description: 'Concussion or TBI' },
-  { value: 'spinal-injury', label: 'Spinal Cord Injury', description: 'Back/spine damage' },
-  { value: 'internal-injuries', label: 'Internal Injuries', description: 'Organ damage' },
-  { value: 'death', label: 'Wrongful Death', description: 'Fatal accident' }
-];
-
-const injurySeverityOptions = [
-  { value: 'minor', label: 'Minor', description: 'Quick recovery' },
-  { value: 'moderate', label: 'Moderate', description: 'Extended treatment' },
-  { value: 'severe', label: 'Severe', description: 'Major medical care' },
-  { value: 'catastrophic', label: 'Catastrophic', description: 'Life-altering' }
-];
-
-const propertyTypeOptions = [
-  { value: 'retail-store', label: 'Retail Store', description: 'Shop, mall, supermarket' },
-  { value: 'restaurant', label: 'Restaurant/Bar', description: 'Food service establishment' },
-  { value: 'apartment', label: 'Apartment/Condo', description: 'Residential complex' },
-  { value: 'hotel', label: 'Hotel/Resort', description: 'Hospitality property' },
-  { value: 'office', label: 'Office Building', description: 'Commercial office' },
-  { value: 'parking-lot', label: 'Parking Lot/Garage', description: 'Parking facility' },
-  { value: 'private-property', label: 'Private Property', description: 'Someone\'s home' },
-  { value: 'public-property', label: 'Public Property', description: 'Government-owned' }
-];
-
-const ownerKnowledgeOptions = [
-  { value: 'known-hazard', label: 'Known Hazard', description: 'Owner was aware of danger' },
-  { value: 'should-have-known', label: 'Should Have Known', description: 'Reasonable inspection would reveal' },
-  { value: 'recent-occurrence', label: 'Recent Occurrence', description: 'Hazard just appeared' },
-  { value: 'unknown', label: 'Unknown', description: 'Unclear if owner knew' }
-];
-
-const hazardTypeOptions = [
-  { value: 'temporary', label: 'Temporary Hazard', description: 'Wet floor, spill, debris' },
-  { value: 'permanent', label: 'Permanent Hazard', description: 'Broken stairs, uneven floor' },
-  { value: 'poor-maintenance', label: 'Poor Maintenance', description: 'Neglected repairs' },
-  { value: 'inadequate-lighting', label: 'Inadequate Lighting', description: 'Too dark to see hazards' },
-  { value: 'security-failure', label: 'Security Failure', description: 'Lack of proper security' }
-];
-
-const warningsOptions = [
-  { value: 'no-warnings', label: 'No Warnings', description: 'No signs or barriers' },
-  { value: 'inadequate-warnings', label: 'Inadequate Warnings', description: 'Insufficient signage' },
-  { value: 'proper-warnings', label: 'Proper Warnings Present', description: 'Clear warnings posted' }
-];
-
-const permanentImpactOptions = [
-  { value: 'none', label: 'No Permanent Impact', description: 'Full recovery' },
-  { value: 'minor', label: 'Minor Permanent', description: 'Slight limitations' },
-  { value: 'significant', label: 'Significant Permanent', description: 'Major disability' },
-  { value: 'total-disability', label: 'Total Disability', description: 'Unable to work' }
-];
-
-function calculateCompensation(data: PremisesLiabilityFormData): CalculatorResults {
-  // Base amounts for premises liability
-  let baseMin = 20000;
-  let baseMax = 100000;
-
-  // Accident type multipliers
-  const accidentMultipliers: Record<string, number> = {
-    'slip-fall': 1.5,
-    'trip-fall': 1.4,
-    'inadequate-security': 3.0,
-    'swimming-pool': 3.5,
-    'falling-object': 2.5,
-    'structural-failure': 4.0
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const accidentMult = accidentMultipliers[data.accidentType] || 1;
-  baseMin *= accidentMult;
-  baseMax *= accidentMult;
-
-  // Injury type multipliers
-  const injuryMultipliers: Record<string, number> = {
-    'soft-tissue': 1.2,
-    'fractures': 2.5,
-    'head-injury': 4.0,
-    'spinal-injury': 5.0,
-    'internal-injuries': 3.5,
-    'death': 7.0
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const injuryMult = injuryMultipliers[data.injuryType] || 1;
-  baseMin *= injuryMult;
-  baseMax *= injuryMult;
-
-  // Severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1,
-    'moderate': 2,
-    'severe': 3.5,
-    'catastrophic': 5.5
+  const calculateCompensation = () => {
+    const medicalCosts = parseFloat(formData.medicalCosts) || 0;
+    const lostWages = parseFloat(formData.lostWages) || 0;
+    
+    // Economic damages (actual costs)
+    const economic = medicalCosts + lostWages;
+    
+    // Non-economic damages (pain and suffering)
+    let multiplier = 1.5; // Base multiplier
+    
+    // Adjust multiplier based on injury severity and other factors
+    if (formData.injuryType === 'severe-fracture' || formData.injuryType === 'spinal-injury') {
+      multiplier += 1;
+    }
+    if (formData.painSeverity === 'severe') {
+      multiplier += 0.5;
+    }
+    if (formData.recoveryTime === 'long-term') {
+      multiplier += 0.5;
+    }
+    if (formData.impactOnLife === 'significant') {
+      multiplier += 0.5;
+    }
+    
+    const nonEconomic = economic * multiplier;
+    const total = economic + nonEconomic;
+    
+    setCalculation({
+      economic,
+      nonEconomic,
+      total
+    });
   };
-
-  const severityMult = severityMultipliers[data.injurySeverity] || 1;
-  baseMin *= severityMult;
-  baseMax *= severityMult;
-
-  // Add economic damages
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureMedical = parseInt(data.futureMedical) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-
-  baseMin += medicalCosts * 2.5 + futureMedical + lostWages * 1.5;
-  baseMax += medicalCosts * 5 + futureMedical * 2 + lostWages * 3;
-
-  // Property type impact (commercial properties have higher duties)
-  const propertyMultipliers: Record<string, number> = {
-    'retail-store': 1.4,
-    'restaurant': 1.5,
-    'apartment': 1.2,
-    'hotel': 1.4,
-    'office': 1.3,
-    'parking-lot': 1.2,
-    'private-property': 0.9,
-    'public-property': 1.1
-  };
-
-  const propertyMult = propertyMultipliers[data.propertyType] || 1;
-  baseMin *= propertyMult;
-  baseMax *= propertyMult;
-
-  // Owner knowledge (critical for liability)
-  const knowledgeMultipliers: Record<string, number> = {
-    'known-hazard': 1.8,
-    'should-have-known': 1.4,
-    'recent-occurrence': 0.7,
-    'unknown': 1.0
-  };
-
-  const knowledgeMult = knowledgeMultipliers[data.ownerKnowledge] || 1;
-  baseMin *= knowledgeMult;
-  baseMax *= knowledgeMult;
-
-  // Hazard type
-  const hazardMultipliers: Record<string, number> = {
-    'temporary': 1.0,
-    'permanent': 1.6,
-    'poor-maintenance': 1.7,
-    'inadequate-lighting': 1.4,
-    'security-failure': 2.0
-  };
-
-  const hazardMult = hazardMultipliers[data.hazardType] || 1;
-  baseMin *= hazardMult;
-  baseMax *= hazardMult;
-
-  // Warnings present (lack of warnings increases liability)
-  const warningMultipliers: Record<string, number> = {
-    'no-warnings': 1.6,
-    'inadequate-warnings': 1.3,
-    'proper-warnings': 0.7
-  };
-
-  const warningMult = warningMultipliers[data.warnings] || 1;
-  baseMin *= warningMult;
-  baseMax *= warningMult;
-
-  // Permanent impact
-  const permanentMultipliers: Record<string, number> = {
-    'none': 1,
-    'minor': 1.4,
-    'significant': 2.3,
-    'total-disability': 3.5
-  };
-
-  const permanentMult = permanentMultipliers[data.permanentImpact] || 1;
-  baseMin *= permanentMult;
-  baseMax *= permanentMult;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax),
-    medicalExpenses: medicalCosts,
-    futureCare: futureMedical,
-    lostIncome: lostWages,
-    totalEconomic: medicalCosts + futureMedical + lostWages
-  };
-}
-
-function validateForm(data: PremisesLiabilityFormData, step: number): boolean {
-  if (step === 1) {
-    return Boolean(
-      data.accidentType &&
-      data.injuryType &&
-      data.injurySeverity &&
-      data.propertyType
-    );
-  }
-  if (step === 2) {
-    return Boolean(
-      data.medicalCosts &&
-      data.lostWages &&
-      data.ownerKnowledge &&
-      data.hazardType &&
-      data.warnings &&
-      data.permanentImpact
-    );
-  }
-  return false;
-}
-
-export default function PremisesLiabilityCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<PremisesLiabilityFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateForm
-  );
 
   return (
     <>
-      <CalculatorSEO
-        title="Premises Liability Calculator | Slip and Fall Settlement Estimate"
-        description="Calculate potential compensation for premises liability claims including slip and fall, inadequate security, and property accidents. Free estimates with California property owner duty analysis."
-        canonical="/premises-liability-calculator"
-        injuryType="premises liability"
+      <SEO 
+        title="Premises Liability Compensation Calculator | California Injury Settlement"
+        description="Calculate your potential premises liability compensation in California. Free calculator for slip and fall, property negligence, and safety violation settlements."
+        canonical="https://trembachlaw.com/premises-liability-compensation-calculator"
       />
-
-      <CalculatorLayout
-        title="Premises Liability Calculator"
-        subtitle="Estimate compensation for property accident injuries"
-        metaTitle="Premises Liability Compensation Calculator"
-        metaDescription="Free premises liability settlement calculator. Slip and fall estimates."
-        stats={[
-          { value: '$100K+', label: 'Average Settlement' },
-          { value: '8M+', label: 'Slip & Falls/Year' },
-          { value: '24/7', label: 'Free Consultation' }
-        ]}
-      >
-        <CalculatorProgress currentStep={step} totalSteps={3} />
-
-        {/* Step 1: Accident & Injury Details */}
-        {step === 1 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Accident & Injury Details</h2>
-              <p className="text-muted-foreground">Tell us about the incident</p>
+      
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section 
+          className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          
+          <GoBack />
+          
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Premises Liability Compensation Calculator
+            </h1>
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-2 text-lg">Trusted Calculation Tool</span>
             </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Accident</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {accidentTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.accidentType === option.value}
-                      onClick={() => updateField('accidentType', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Injury</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {injuryTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.injuryType === option.value}
-                      onClick={() => updateField('injuryType', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Injury Severity</Label>
-                <div className="grid grid-cols-2 gap-4">
-                  {injurySeverityOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.injurySeverity === option.value}
-                      onClick={() => updateField('injurySeverity', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Property Type</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {propertyTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.propertyType === option.value}
-                      onClick={() => updateField('propertyType', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-            />
+            <p className="text-xl">
+              Get an estimate of your potential compensation for premises liability injuries
+            </p>
           </div>
-        )}
+        </section>
 
-        {/* Step 2: Liability & Financial Details */}
-        {step === 2 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Liability & Financial Details</h2>
-              <p className="text-muted-foreground">Damages and property owner responsibility</p>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="medicalCosts" className="text-base font-medium">
-                  Medical Expenses to Date ($)
-                </Label>
-                <Input
-                  id="medicalCosts"
-                  type="number"
-                  placeholder="12000"
-                  value={formData.medicalCosts}
-                  onChange={(e) => updateField('medicalCosts', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="futureMedical" className="text-base font-medium">
-                  Future Medical Costs ($)
-                </Label>
-                <Input
-                  id="futureMedical"
-                  type="number"
-                  placeholder="8000"
-                  value={formData.futureMedical}
-                  onChange={(e) => updateField('futureMedical', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="lostWages" className="text-base font-medium">
-                  Lost Wages & Income ($)
-                </Label>
-                <Input
-                  id="lostWages"
-                  type="number"
-                  placeholder="6000"
-                  value={formData.lostWages}
-                  onChange={(e) => updateField('lostWages', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Owner's Knowledge of Hazard</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {ownerKnowledgeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.ownerKnowledge === option.value}
-                      onClick={() => updateField('ownerKnowledge', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Hazard</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {hazardTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.hazardType === option.value}
-                      onClick={() => updateField('hazardType', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Warning Signs Present?</Label>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {warningsOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.warnings === option.value}
-                      onClick={() => updateField('warnings', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Permanent Impact</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {permanentImpactOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.permanentImpact === option.value}
-                      onClick={() => updateField('permanentImpact', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-              nextButtonText="Calculate Compensation"
-            />
-          </div>
-        )}
-
-        {/* Step 3: Results */}
-        {step === 3 && results && (
-          <div className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation Range</h2>
-              <p className="text-slate-600">Based on premises liability factors</p>
-            </div>
-
-            <div className="bg-slate-50 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold text-black mb-2">
-                ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-              </div>
-              <p className="text-slate-600">Potential Settlement Range</p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Economic Damages Breakdown</h4>
-                <div className="text-sm text-slate-600 space-y-1">
-                  <p>Medical Expenses: ${results.medicalExpenses?.toLocaleString()}</p>
-                  <p>Future Medical Care: ${results.futureCare?.toLocaleString()}</p>
-                  <p>Lost Wages: ${results.lostIncome?.toLocaleString()}</p>
-                  <p className="font-semibold pt-2 border-t border-slate-200">
-                    Total Economic: ${results.totalEconomic?.toLocaleString()}
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Calculator Section */}
+            <div className="lg:col-span-2">
+              <Card className="glass-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl text-primary flex items-center">
+                    <Calculator className="w-6 h-6 mr-2" />
+                    Compensation Calculator
+                  </CardTitle>
+                  <p className="text-muted-foreground">
+                    Provide information about your premises liability case to estimate potential compensation.
                   </p>
-                </div>
-              </div>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-6">
+                    {/* Injury Information */}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4">Injury Information</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Type of Injury</label>
+                          <Select value={formData.injuryType} onValueChange={(value) => handleSelectChange('injuryType', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select injury type" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="minor-cuts">Minor Cuts/Bruises</SelectItem>
+                              <SelectItem value="soft-tissue">Soft Tissue Injury</SelectItem>
+                              <SelectItem value="simple-fracture">Simple Fracture</SelectItem>
+                              <SelectItem value="severe-fracture">Severe/Multiple Fractures</SelectItem>
+                              <SelectItem value="back-injury">Back/Neck Injury</SelectItem>
+                              <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
+                              <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
+                              <SelectItem value="burns">Burns</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Pain Level</label>
+                          <Select value={formData.painSeverity} onValueChange={(value) => handleSelectChange('painSeverity', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select pain level" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="mild">Mild (1-3)</SelectItem>
+                              <SelectItem value="moderate">Moderate (4-6)</SelectItem>
+                              <SelectItem value="severe">Severe (7-10)</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Recovery Time</label>
+                          <Select value={formData.recoveryTime} onValueChange={(value) => handleSelectChange('recoveryTime', value)}>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select recovery time" />
+                            </SelectTrigger>
+                            <SelectContent>
+                              <SelectItem value="short-term">Less than 3 months</SelectItem>
+                              <SelectItem value="medium-term">3-12 months</SelectItem>
+                              <SelectItem value="long-term">Over 1 year</SelectItem>
+                              <SelectItem value="permanent">Permanent disability</SelectItem>
+                            </SelectContent>
+                          </Select>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Age</label>
+                          <Input
+                            type="number"
+                            name="age"
+                            value={formData.age}
+                            onChange={handleInputChange}
+                            placeholder="Your age"
+                          />
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Property Owner Duty of Care</h4>
-                <p className="text-sm text-slate-600">
-                  California law requires property owners to maintain safe premises and warn of known hazards. Commercial properties have higher duties than private residences.
-                </p>
-              </div>
+                    {/* Economic Damages */}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4">Economic Damages</h3>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Medical Expenses ($)</label>
+                          <Input
+                            type="number"
+                            name="medicalCosts"
+                            value={formData.medicalCosts}
+                            onChange={handleInputChange}
+                            placeholder="Total medical costs"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Include emergency room, doctors, therapy, medications
+                          </p>
+                        </div>
+                        <div>
+                          <label className="block text-sm font-medium mb-2">Lost Wages ($)</label>
+                          <Input
+                            type="number"
+                            name="lostWages"
+                            value={formData.lostWages}
+                            onChange={handleInputChange}
+                            placeholder="Lost income amount"
+                          />
+                          <p className="text-xs text-muted-foreground mt-1">
+                            Include past and future lost earnings
+                          </p>
+                        </div>
+                      </div>
+                    </div>
 
-              <div className="bg-white border border-slate-200 rounded-xl p-6">
-                <h4 className="font-semibold text-black mb-2">Liability Factors Considered</h4>
-                <p className="text-sm text-slate-600">
-                  Owner knowledge, hazard type, warning signs, property type, and reasonableness of conditions all impact liability and compensation amounts.
-                </p>
-              </div>
+                    {/* Impact on Life */}
+                    <div>
+                      <h3 className="text-lg font-semibold mb-4">Impact on Life</h3>
+                      <div>
+                        <label className="block text-sm font-medium mb-2">How has this injury affected your daily life?</label>
+                        <Select value={formData.impactOnLife} onValueChange={(value) => handleSelectChange('impactOnLife', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select impact level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="minimal">Minimal impact</SelectItem>
+                            <SelectItem value="moderate">Moderate - some limitations</SelectItem>
+                            <SelectItem value="significant">Significant - major limitations</SelectItem>
+                            <SelectItem value="severe">Severe - life-changing</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <Button 
+                      onClick={calculateCompensation}
+                      size="lg"
+                      className="w-full bg-red-600 hover:bg-red-700"
+                    >
+                      Calculate My Compensation
+                    </Button>
+
+                    {/* Results */}
+                    {calculation && (
+                      <div className="mt-8 p-6 bg-muted rounded-lg">
+                        <h3 className="text-xl font-semibold mb-4 text-center">Estimated Compensation Range</h3>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                          <div className="bg-blue-50 p-4 rounded">
+                            <p className="text-sm text-blue-600 font-medium">Economic Damages</p>
+                            <p className="text-2xl font-bold text-blue-800">
+                              ${calculation.economic.toLocaleString()}
+                            </p>
+                            <p className="text-xs text-blue-600">Medical + Lost Wages</p>
+                          </div>
+                          <div className="bg-green-50 p-4 rounded">
+                            <p className="text-sm text-green-600 font-medium">Non-Economic Damages</p>
+                            <p className="text-2xl font-bold text-green-800">
+                              ${calculation.nonEconomic.toLocaleString()}
+                            </p>
+                            <p className="text-xs text-green-600">Pain & Suffering</p>
+                          </div>
+                          <div className="bg-red-50 p-4 rounded">
+                            <p className="text-sm text-red-600 font-medium">Total Estimate</p>
+                            <p className="text-2xl font-bold text-red-800">
+                              ${calculation.total.toLocaleString()}
+                            </p>
+                            <p className="text-xs text-red-600">Combined Damages</p>
+                          </div>
+                        </div>
+                        
+                        <div className="mt-6 p-4 bg-yellow-50 rounded border border-yellow-200">
+                          <div className="flex items-start">
+                            <Info className="w-5 h-5 text-yellow-600 mr-2 mt-0.5" />
+                            <div>
+                              <p className="text-sm text-yellow-800 font-medium">Important Disclaimer</p>
+                              <p className="text-xs text-yellow-700 mt-1">
+                                This is only an estimate. Actual compensation depends on many factors including liability, 
+                                insurance coverage, and case-specific circumstances. Consult with an attorney for an accurate assessment.
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div className="mt-4 text-center">
+                          <Button 
+                            onClick={() => window.location.href = '/premises-liability-case-evaluation'}
+                            className="bg-green-600 hover:bg-green-700"
+                          >
+                            Get Professional Case Review
+                          </Button>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
 
-            <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-              <p className="text-sm text-amber-900">
-                <strong>Important:</strong> Premises liability cases require proving the property owner knew or should have known about the hazard and failed to correct it or provide adequate warning. Documentation of the scene, witness statements, and incident reports are critical. This estimate assumes provable liability.
-              </p>
-            </div>
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                {/* Contact Card */}
+                <Card className="glass-card border-primary/20">
+                  <CardHeader>
+                    <CardTitle className="text-primary">Maximize Your Compensation</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-4">
+                      <p className="text-sm text-muted-foreground">
+                        Get a professional case evaluation to ensure you receive fair compensation for your premises liability injury.
+                      </p>
+                      <Button className="w-full" onClick={() => window.location.href = 'tel:8181234567'}>
+                        <Phone className="w-4 h-4 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                      <p className="text-xs text-center text-muted-foreground">
+                        Free consultation - No fees unless we win
+                      </p>
+                    </div>
+                  </CardContent>
+                </Card>
 
-            <div className="text-center pt-4 space-y-4">
-              <h3 className="text-xl font-semibold text-black">Prove liability and maximize your recovery</h3>
-              <Button size="lg" className="h-14 px-8 text-base">
-                Get Free Case Evaluation
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={resetForm}
-                className="h-14 px-8 text-base ml-4"
-              >
-                Calculate Another Case
-              </Button>
+                {/* Compensation Factors */}
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle>Compensation Factors</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-3 text-sm">
+                      <div>
+                        <h4 className="font-medium">Economic Damages:</h4>
+                        <ul className="text-muted-foreground">
+                          <li>• Medical expenses</li>
+                          <li>• Lost wages</li>
+                          <li>• Future medical care</li>
+                          <li>• Property damage</li>
+                        </ul>
+                      </div>
+                      <div>
+                        <h4 className="font-medium">Non-Economic Damages:</h4>
+                        <ul className="text-muted-foreground">
+                          <li>• Pain and suffering</li>
+                          <li>• Emotional distress</li>
+                          <li>• Loss of enjoyment</li>
+                          <li>• Disability/disfigurement</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Time Sensitive */}
+                <Card className="glass-card border-yellow-500/20 bg-yellow-50">
+                  <CardHeader>
+                    <CardTitle className="flex items-center text-yellow-700">
+                      <AlertTriangle className="w-5 h-5 mr-2" />
+                      Act Quickly
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-sm text-yellow-700">
+                      California's 2-year statute of limitations means you have limited time to file your premises liability claim.
+                    </p>
+                  </CardContent>
+                </Card>
+
+                {/* Why Choose Us */}
+                <Card className="glass-card">
+                  <CardHeader>
+                    <CardTitle>Why Choose Our Firm?</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2 text-sm">
+                      <div className="flex items-center">
+                        <Shield className="w-4 h-4 text-green-600 mr-2" />
+                        <span>95%+ success rate</span>
+                      </div>
+                      <div className="flex items-center">
+                        <DollarSign className="w-4 h-4 text-green-600 mr-2" />
+                        <span>Maximum compensation</span>
+                      </div>
+                      <div className="flex items-center">
+                        <FileText className="w-4 h-4 text-green-600 mr-2" />
+                        <span>No fees unless we win</span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        )}
-      </CalculatorLayout>
+        </div>
+      </div>
     </>
   );
-}
+};
+
+export default PremisesLiabilityCompensationCalculator;

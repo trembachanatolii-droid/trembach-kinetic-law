@@ -1,160 +1,161 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import ladyJusticeHero from '@/assets/lady-justice-hero.png';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import heroBackground from '@/assets/hero-background-new.jpg';
+import HeroScene from '@/components/three/HeroScene';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const headlineRef = useRef<HTMLDivElement>(null);
-  const lawyerRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
-  const chatRef = useRef<HTMLDivElement>(null);
+  const formRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Ensure hero visible immediately
+      // Ensure hero visible immediately (no fade to prevent blank screen)
       if (heroRef.current) {
         gsap.set(heroRef.current, { opacity: 1 });
       }
 
       // Staggered headline animation
-      const heroLines = heroRef.current?.querySelectorAll(".hero-line");
-      if (heroLines && heroLines.length > 0) {
-        gsap.fromTo(
-          heroLines,
-          {
-            y: 50,
-            opacity: 0,
-            filter: "blur(10px)"
-          },
-          {
-            y: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 1,
-            stagger: 0.15,
-            ease: "power3.out",
-            delay: 0.5
-          }
-        );
-      }
+      gsap.fromTo(
+        ".hero-line",
+        {
+          y: 24,
+          filter: "blur(8px)"
+        },
+        {
+          y: 0,
+          filter: "blur(0px)",
+          duration: 0.8,
+          stagger: 0.08,
+          ease: "power3.out",
+          delay: 0.2
+        }
+      );
 
-      // Button animation
-      if (buttonRef.current) {
-        gsap.fromTo(
-          buttonRef.current,
-          {
-            y: 30,
-            opacity: 0,
-            scale: 0.9
-          },
-          {
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            duration: 0.8,
-            ease: "power3.out",
-            delay: 1.2
-          }
-        );
-      }
-
-      // Lawyer image animation
-      if (lawyerRef.current) {
-        gsap.fromTo(
-          lawyerRef.current,
-          {
-            x: 100,
-            opacity: 0,
-            filter: "blur(5px)"
-          },
-          {
-            x: 0,
-            opacity: 1,
-            filter: "blur(0px)",
-            duration: 1,
-            ease: "power3.out",
-            delay: 0.8
-          }
-        );
-      }
-
-      // Chat widget animation
-      if (chatRef.current) {
-        gsap.fromTo(
-          chatRef.current,
-          {
-            scale: 0,
-            rotation: -10
-          },
-          {
-            scale: 1,
-            rotation: 0,
-            duration: 0.6,
-            ease: "back.out(1.7)",
-            delay: 2
-          }
-        );
-      }
+      // Form entrance
+      gsap.fromTo(
+        formRef.current,
+        {
+          x: 40,
+          filter: "blur(5px)"
+        },
+        {
+          opacity: 1,
+          x: 0,
+          filter: "blur(0px)",
+          duration: 0.8,
+          ease: "power3.out",
+          delay: 0.6
+        }
+      );
     }, heroRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section 
-      ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-background"
-    >
-      {/* Lady Justice Background */}
-      <img
-        src={ladyJusticeHero}
-        alt="Lady Justice statue"
-        className="absolute bottom-0 right-0 h-[75%] md:h-[80%] w-auto object-contain pointer-events-none select-none opacity-90 z-0"
-      />
-      
-      
-      <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
-        {/* Left-aligned Content - Apple Style */}
-        <div className="max-w-xl">
-          <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_2px_8px_rgba(0,0,0,0.3)]">
-              California's premier<br />
-              personal injury<br />
-              and mesothelioma<br />
-              law firm
+    <section ref={heroRef} className="relative min-h-screen flex items-center justify-between overflow-hidden pt-20 bg-[hsl(0_0%_100%)]">
+      {/* Hero Background Image */}
+
+      {/* 3D Lady Justice Statue - Disabled due to missing model */}
+      {/* <HeroScene /> */}
+
+      <div className="relative z-10 flex w-full min-h-[calc(100vh-5rem)]">
+        {/* Main Content - Left Side */}
+        <div className="flex-1 flex flex-col justify-center px-8 lg:px-16 pr-96">
+          <div ref={headlineRef} className="space-y-2">
+            <h1 className="text-display font-display leading-[0.8] tracking-tighter">
+              <span className="hero-line block">Former Insurance</span>
+              <span className="hero-line block">Defense Attorney</span>
             </h1>
-            <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
-              After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
+            <h2 className="text-headline font-display text-primary glow mt-4">
+              <span className="hero-line block">Now Using Their Tactics</span>
+              <span className="hero-line block">To Maximize</span>
+              <span className="hero-line block text-accent">YOUR Compensation</span>
+            </h2>
+          </div>
+
+          <div className="hero-line mt-8 max-w-2xl">
+            <p className="text-body text-muted-foreground">
+              Anatolii Trembach, Esq. leverages insider knowledge to fight for California injury victims.
             </p>
           </div>
+
         </div>
-      </div>
 
-      <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
-        <Button 
-          ref={buttonRef}
-          variant="outline"
-          size="lg"
-          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
-          asChild
-        >
-          <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>
-        </Button>
-      </div>
-
-      {/* Chat Widget */}
-      <div ref={chatRef} className="fixed bottom-6 right-6 z-50">
-        <div className="bg-white rounded-full p-4 shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-xl">👨‍💼</span>
-            </div>
-            <div className="bg-white rounded-2xl px-4 py-2 shadow-md">
-              <p className="text-sm text-gray-700 font-medium">How can we help you?</p>
-            </div>
+        {/* Intake Form - Right Side */}
+        <div ref={formRef} className="w-full max-w-xs lg:max-w-sm xl:max-w-md bg-transparent p-4 m-6 h-fit mt-16">
+          <div className="mb-4">
+            <h3 className="text-title font-display text-foreground mb-1">Free Case Evaluation</h3>
+            <p className="text-small text-muted-foreground">Get your consultation in under 2 minutes</p>
           </div>
+
+          <form className="space-y-3">
+            <div className="grid grid-cols-2 gap-4">
+              <div>
+                <label className="text-small font-medium text-foreground">First Name*</label>
+                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="John" />
+              </div>
+              <div>
+                <label className="text-small font-medium text-foreground">Last Name*</label>
+                <Input className="mt-1 bg-transparent border-foreground/20" placeholder="Doe" />
+              </div>
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Phone*</label>
+              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="(555) 123-4567" type="tel" />
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Email*</label>
+              <Input className="mt-1 bg-transparent border-foreground/20" placeholder="john@example.com" type="email" />
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Type of Case*</label>
+              <Select>
+                <SelectTrigger className="mt-1 bg-transparent border-foreground/20">
+                  <SelectValue placeholder="Select case type" />
+                </SelectTrigger>
+                <SelectContent className="bg-surface border-border/30">
+                  <SelectItem value="car-accident">Car Accident</SelectItem>
+                  <SelectItem value="mesothelioma">Mesothelioma</SelectItem>
+                  <SelectItem value="silicosis">Silicosis</SelectItem>
+                  <SelectItem value="talc">Talc/Talcum</SelectItem>
+                  <SelectItem value="dog-bite">Dog Bite</SelectItem>
+                  <SelectItem value="product-liability">Product Liability</SelectItem>
+                  <SelectItem value="wrongful-death">Wrongful Death</SelectItem>
+                  <SelectItem value="other">Other</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+
+            <div>
+              <label className="text-small font-medium text-foreground">Message (Optional)</label>
+              <Textarea 
+                className="mt-1 bg-transparent border-foreground/20" 
+                placeholder="Brief description of your case..."
+                rows={2}
+              />
+            </div>
+
+            <div className="flex items-start space-x-2">
+              <Checkbox id="consent" className="mt-1" />
+              <label htmlFor="consent" className="text-[8px] text-muted-foreground leading-tight">
+                I hereby expressly consent to receive communications including calls, texts, emails, and/or automated messages and confirm that the submitted information provided is mine. By submitting this form, I agree to the Terms & acknowledge the Privacy Policy.
+              </label>
+            </div>
+
+            <Button className="w-full bg-accent hover:bg-accent-glow text-accent-foreground font-semibold py-3 glow-accent group transition-all duration-300" onClick={() => window.location.href = '/case-evaluation'}>
+              Get Free Consultation
+            </Button>
+          </form>
         </div>
       </div>
     </section>

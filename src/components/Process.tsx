@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -177,10 +176,10 @@ const Process = () => {
             </p>
             <Button 
               size="lg"
-              className="magnetic bg-[#0071E3] hover:bg-[#0066CC] active:bg-[#0057A3] !text-white hover:!text-white active:!text-white px-12 py-4 text-lg font-semibold mr-4 group transition-all duration-300 shadow-lg"
-              asChild
+              className="magnetic bg-primary hover:bg-primary-glow text-primary-foreground px-12 py-4 text-lg font-semibold glow mr-4 group transition-all duration-300"
+              onClick={() => window.location.href = '/case-evaluation'}
             >
-              <Link to="/free-consultation">Start your Free Case Review</Link>
+              Start Your Case Today
             </Button>
             <Button 
               size="lg"

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -24,7 +23,7 @@ import {
   MapPin
 } from 'lucide-react';
 import useScrollRestoration from '@/hooks/useScrollRestoration';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/uber-lyft-case-evaluation-hero.jpg';
 
@@ -170,7 +169,7 @@ const CaseEvaluation: React.FC = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/80 pointer-events-none"></div>
         
-        
+        <GoBack />
         
         <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
           <div className="hero-content">
@@ -587,9 +586,9 @@ const CaseEvaluation: React.FC = () => {
               <Button
                 size="lg"
                 variant="outline"
-                asChild
+                onClick={() => window.location.href = '/contact'}
               >
-                <Link to="/free-consultation">Request Callback</Link>
+                Request Callback
               </Button>
             </div>
           </CardContent>

@@ -27,6 +27,7 @@ import {
 } from 'lucide-react';
 import heroBackground from '@/assets/construction-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -152,6 +153,8 @@ This evaluation was submitted through the Construction Accident Case Evaluation 
           description="Your construction accident case evaluation has been submitted. Our experienced attorneys will review your case and contact you within 24 hours."
         />
         
+        <GoBack fallbackPath="/practice-areas/construction-accidents" className="top-20 z-[60]" />
+
         <div className="pt-24 pb-12">
           <div className="container mx-auto px-6 max-w-4xl">
             <div className="text-center mb-12">
@@ -242,6 +245,8 @@ This evaluation was submitted through the Construction Accident Case Evaluation 
         description="Get your free construction accident case evaluation. Experienced attorneys will assess your OSHA violations, third-party liability, and compensation potential. No fees unless we win."
       />
       
+      <GoBack fallbackPath="/practice-areas/construction-accidents" className="top-20 z-[60]" />
+
       {/* Hero Section */}
       <section 
         className="relative pt-20 pb-16 bg-gradient-to-r from-primary/95 to-primary/85 text-white"

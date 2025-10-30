@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Mail } from 'lucide-react';
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/pfas-hero-bg.jpg';
 import SEO from '@/components/SEO';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
@@ -32,6 +33,8 @@ const PFASCaseEvaluation: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <GoBack fallbackPath="/practice-areas/pfas-exposure" />
+      
       {/* Hero Section */}
       <section 
         className="relative h-[400px] flex items-center justify-center bg-cover bg-center" 

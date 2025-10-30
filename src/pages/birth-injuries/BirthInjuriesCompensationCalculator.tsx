@@ -1,206 +1,469 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults } from '@/components/calculator/CalculatorResults';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults as Results } from '@/hooks/useCalculatorForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Checkbox } from '@/components/ui/checkbox';
+import { Calculator, DollarSign, Heart, Clock, Shield, Award, Brain, Baby, Activity, Star } from 'lucide-react';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
+import heroBackground from '@/assets/birth-injuries-compensation-calculator.jpg';
 
-interface BirthInjuryFormData extends CalculatorFormData {
-  injuryType: string;
-  severity: string;
-  medicalCosts: string;
-  lifetimeCare: string;
-  careNeeds: string;
-}
+gsap.registerPlugin(ScrollTrigger);
 
-const initialFormData: BirthInjuryFormData = {
-  injuryType: '',
-  severity: '',
-  medicalCosts: '',
-  lifetimeCare: '',
-  careNeeds: ''
-};
+const BirthInjuriesCompensationCalculator: React.FC = () => {
+  const [visible, setVisible] = useState(false);
+  const [estimatedCompensation, setEstimatedCompensation] = useState<number | null>(null);
+  const [formData, setFormData] = useState({
+    injuryType: '',
+    injurySeverity: '',
+    ageAtInjury: '',
+    currentAge: '',
+    medicalExpenses: '',
+    projectedLifespan: '',
+    careNeeds: [] as string[],
+    lostWages: '',
+    qualityOfLifeImpact: ''
+  });
 
-const calculateCompensation = (data: BirthInjuryFormData): Results => {
-  let baseMin = 500000;
-  let baseMax = 5000000;
+  const heroRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  useScrollRestoration();
 
-  const injuryMultipliers: Record<string, number> = {
-    'cerebral-palsy': 3.0,
-    'erbs-palsy': 2.0,
-    'brain-damage': 3.5,
-    'oxygen-deprivation': 3.2,
-    'fractures': 1.5,
-    'other': 1.0
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Hero animation
+      const heroContent = heroRef.current?.querySelector('.hero-content');
+      if (heroContent) {
+        gsap.set(heroContent, { opacity: 0, y: 100, scale: 0.8 });
+        gsap.to(heroContent, { 
+          opacity: 1, 
+          y: 0, 
+          scale: 1, 
+          duration: 0.5, 
+          ease: 'power3.out' 
+        });
+      }
+
+      // Content sections animation
+      const contentSections = contentRef.current?.querySelectorAll('.content-section');
+      if (contentSections) {
+        gsap.fromTo(contentSections,
+          { opacity: 0, y: 60, scale: 0.95 },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.1,
+            ease: 'power3.out',
+            scrollTrigger: {
+              trigger: contentRef.current,
+              start: 'top 90%',
+              toggleActions: 'play none none none'
+            }
+          }
+        );
+      }
+    });
+
+    const handleScroll = () => {
+      setVisible(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      ctx.revert();
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [field]: value
+    }));
   };
-  const injuryMult = injuryMultipliers[data.injuryType] || 1;
 
-  const severityMultipliers: Record<string, number> = {
-    'mild': 0.8,
-    'moderate': 1.5,
-    'severe': 2.5,
-    'profound': 4.0
+  const handleCareNeedsChange = (careType: string, checked: boolean) => {
+    setFormData(prev => ({
+      ...prev,
+      careNeeds: checked 
+        ? [...prev.careNeeds, careType]
+        : prev.careNeeds.filter(item => item !== careType)
+    }));
   };
-  const severityMult = severityMultipliers[data.severity] || 1;
 
-  const medicalAdd = parseInt(data.medicalCosts) || 0;
-  const lifetimeAdd = parseInt(data.lifetimeCare) || 0;
+  const calculateCompensation = () => {
+    let baseCompensation = 0;
+    
+    // Base compensation by injury type
+    const injuryMultipliers = {
+      'cerebral-palsy': 2500000,
+      'brain-injury': 3000000,
+      'erb-palsy': 800000,
+      'fractures': 400000,
+      'hie': 2800000,
+      'other': 1000000
+    };
 
-  const careMultipliers: Record<string, number> = {
-    'minimal': 1.0,
-    'moderate': 1.5,
-    'extensive': 2.5,
-    'total': 4.0
+    // Severity multipliers
+    const severityMultipliers = {
+      'mild': 0.3,
+      'moderate': 0.6,
+      'severe': 1.0,
+      'profound': 1.5
+    };
+
+    const injuryBase = injuryMultipliers[formData.injuryType as keyof typeof injuryMultipliers] || 1000000;
+    const severityMultiplier = severityMultipliers[formData.injurySeverity as keyof typeof severityMultipliers] || 1.0;
+    
+    baseCompensation = injuryBase * severityMultiplier;
+
+    // Add medical expenses
+    if (formData.medicalExpenses) {
+      baseCompensation += parseInt(formData.medicalExpenses.replace(/,/g, '')) * 10; // 10x current expenses for lifetime
+    }
+
+    // Care needs adjustment
+    if (formData.careNeeds.length > 0) {
+      baseCompensation += formData.careNeeds.length * 200000;
+    }
+
+    // Lost wages
+    if (formData.lostWages) {
+      baseCompensation += parseInt(formData.lostWages.replace(/,/g, ''));
+    }
+
+    // Quality of life impact
+    const qualityMultipliers = {
+      'minimal': 1.1,
+      'moderate': 1.3,
+      'significant': 1.6,
+      'severe': 2.0
+    };
+
+    const qualityMultiplier = qualityMultipliers[formData.qualityOfLifeImpact as keyof typeof qualityMultipliers] || 1.0;
+    baseCompensation *= qualityMultiplier;
+
+    setEstimatedCompensation(Math.round(baseCompensation));
   };
-  const careMult = careMultipliers[data.careNeeds] || 1;
 
-  const min = Math.round((baseMin * injuryMult * severityMult * careMult) + (medicalAdd * 5) + lifetimeAdd);
-  const max = Math.round((baseMax * injuryMult * severityMult * careMult) + (medicalAdd * 10) + (lifetimeAdd * 2));
-
-  return { min, max };
-};
-
-const validateStep = (data: BirthInjuryFormData, step: number): boolean => {
-  if (step === 1) return !!(data.injuryType && data.severity);
-  if (step === 2) return !!(data.medicalCosts && data.lifetimeCare && data.careNeeds);
-  return true;
-};
-
-export default function BirthInjuriesCompensationCalculator() {
-  const { step, formData, results, updateField, handleNext, handleBack, resetForm, isStepValid } = 
-    useCalculatorForm<BirthInjuryFormData>(initialFormData, calculateCompensation, validateStep);
-
-  const renderStep1 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Birth Injury</label>
-        <Select value={formData.injuryType} onValueChange={(v) => updateField('injuryType', v)}>
-          <SelectTrigger><SelectValue placeholder="Select injury type" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="cerebral-palsy">Cerebral Palsy</SelectItem>
-            <SelectItem value="erbs-palsy">Erb's Palsy (Brachial Plexus)</SelectItem>
-            <SelectItem value="brain-damage">Hypoxic Brain Damage</SelectItem>
-            <SelectItem value="oxygen-deprivation">Oxygen Deprivation</SelectItem>
-            <SelectItem value="fractures">Birth Fractures</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Severity</label>
-        <Select value={formData.severity} onValueChange={(v) => updateField('severity', v)}>
-          <SelectTrigger><SelectValue placeholder="Select severity" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="mild">Mild</SelectItem>
-            <SelectItem value="moderate">Moderate</SelectItem>
-            <SelectItem value="severe">Severe</SelectItem>
-            <SelectItem value="profound">Profound</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Medical Costs to Date</label>
-        <Select value={formData.medicalCosts} onValueChange={(v) => updateField('medicalCosts', v)}>
-          <SelectTrigger><SelectValue placeholder="Select costs" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="50000">Under $100,000</SelectItem>
-            <SelectItem value="200000">$100,000 - $300,000</SelectItem>
-            <SelectItem value="500000">$300,000 - $700,000</SelectItem>
-            <SelectItem value="1000000">Over $700,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Estimated Lifetime Care Costs</label>
-        <Select value={formData.lifetimeCare} onValueChange={(v) => updateField('lifetimeCare', v)}>
-          <SelectTrigger><SelectValue placeholder="Select lifetime costs" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1000000">$1M - $3M</SelectItem>
-            <SelectItem value="3000000">$3M - $5M</SelectItem>
-            <SelectItem value="5000000">Over $5M</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-      <div>
-        <label className="block text-sm font-medium mb-2">Care Needs</label>
-        <Select value={formData.careNeeds} onValueChange={(v) => updateField('careNeeds', v)}>
-          <SelectTrigger><SelectValue placeholder="Select care level" /></SelectTrigger>
-          <SelectContent>
-            <SelectItem value="minimal">Minimal Assistance</SelectItem>
-            <SelectItem value="moderate">Moderate Care</SelectItem>
-            <SelectItem value="extensive">Extensive Care</SelectItem>
-            <SelectItem value="total">Total Care Required</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
 
   return (
     <>
-      <Helmet>
-        <title>Birth Injury Compensation Calculator | Cerebral Palsy Claims</title>
-        <meta name="description" content="Calculate birth injury compensation for medical malpractice. Free lifetime care estimates." />
-      </Helmet>
-      <div className="min-h-screen bg-background py-12">
-        <div className="container max-w-4xl mx-auto px-4">
-          <Link to="/calculators" className="inline-flex items-center text-primary hover:underline mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />Back to Calculators
-          </Link>
-          <div className="bg-card rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4">Birth Injury Calculator</h1>
-            <p className="text-lg text-muted-foreground mb-6">Estimate lifetime care compensation</p>
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">$5M+</div>
-                <div className="text-sm text-muted-foreground">Potential Lifetime Award</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Lifetime</div>
-                <div className="text-sm text-muted-foreground">Care Costs Included</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">No Fee</div>
-                <div className="text-sm text-muted-foreground">Unless We Win</div>
-              </div>
+      <SEO
+        title="Birth Injury Compensation Calculator | Calculate Your Settlement Value"
+        description="Calculate potential compensation for birth injury cases. Free tool estimates settlement values for cerebral palsy, HIE, Erb's palsy and other birth injuries in California."
+      />
+
+      <GoBack />
+
+      <div className="min-h-screen bg-background">
+        {/* Hero Section */}
+        <section 
+          ref={heroRef}
+          className="relative bg-cover bg-center bg-no-repeat min-h-[60vh] flex items-center justify-center"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6 hero-content">
+            <div className="flex items-center justify-center mb-4">
+              <Calculator className="w-12 h-12 text-primary mr-4" />
+              <h1 className="text-4xl md:text-6xl font-bold text-white">Birth Injury Compensation Calculator</h1>
             </div>
-            {step < 3 && (
-              <div className="mb-6">
-                <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                  <span>Step {step} of 2</span>
-                  <span>{step === 1 ? 'Injury Details' : 'Care & Costs'}</span>
-                </div>
-                <Progress value={(step / 2) * 100} />
-              </div>
-            )}
-            {step === 1 && renderStep1()}
-            {step === 2 && renderStep2()}
-            {step === 3 && results && (
-              <CalculatorResults
-                title="Estimated Birth Injury Compensation"
-                subtitle="Based on lifetime care requirements"
-                min={results.min}
-                max={results.max}
-                disclaimer="Birth injury claims require expert medical testimony. Actual compensation varies based on malpractice evidence and lifetime care needs."
-                ctaText="Get Free Case Evaluation"
-              />
-            )}
-            {step < 3 ? (
-              <FormNavigation currentStep={step} totalSteps={3} isValid={isStepValid()} onBack={handleBack} onNext={handleNext} />
-            ) : (
-              <Button size="lg" onClick={resetForm} variant="outline" className="w-full h-14">Start Over</Button>
-            )}
+            <p className="text-xl mb-8 leading-relaxed text-white">
+              Calculate potential compensation for your child's birth injury case
+            </p>
+            <div className="flex items-center justify-center mb-6">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 text-yellow-400 fill-current" />
+              ))}
+              <span className="ml-2 text-lg">Trusted by thousands of families</span>
+            </div>
+          </div>
+        </section>
+
+        {/* Main Content */}
+        <div ref={contentRef} className="max-w-6xl mx-auto px-6 py-16">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Calculator Form */}
+            <div className="lg:col-span-2">
+              <Card className="content-section glass-card">
+                <CardHeader>
+                  <CardTitle className="text-2xl flex items-center">
+                    <Calculator className="w-6 h-6 text-primary mr-2" />
+                    Birth Injury Settlement Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  
+                  {/* Injury Details */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Brain className="w-5 h-5 text-primary mr-2" />
+                      Injury Information
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="injuryType">Type of Birth Injury</Label>
+                      <Select value={formData.injuryType} onValueChange={(value) => handleInputChange('injuryType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select injury type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="cerebral-palsy">Cerebral Palsy</SelectItem>
+                          <SelectItem value="brain-injury">Brain Injury/HIE</SelectItem>
+                          <SelectItem value="erb-palsy">Erb's Palsy/Brachial Plexus</SelectItem>
+                          <SelectItem value="fractures">Bone Fractures</SelectItem>
+                          <SelectItem value="hie">Hypoxic-Ischemic Encephalopathy</SelectItem>
+                          <SelectItem value="other">Other Birth Injury</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <Label htmlFor="injurySeverity">Severity of Injury</Label>
+                      <Select value={formData.injurySeverity} onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select severity" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="mild">Mild - Minimal assistance needed</SelectItem>
+                          <SelectItem value="moderate">Moderate - Some assistance required</SelectItem>
+                          <SelectItem value="severe">Severe - Significant assistance needed</SelectItem>
+                          <SelectItem value="profound">Profound - Complete care required</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div>
+                        <Label htmlFor="ageAtInjury">Age at Time of Injury</Label>
+                        <Select value={formData.ageAtInjury} onValueChange={(value) => handleInputChange('ageAtInjury', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select age" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="birth">At Birth</SelectItem>
+                            <SelectItem value="prenatal">Prenatal</SelectItem>
+                            <SelectItem value="delivery">During Delivery</SelectItem>
+                            <SelectItem value="postnatal">After Birth</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <Label htmlFor="currentAge">Child's Current Age</Label>
+                        <Input
+                          type="number"
+                          value={formData.currentAge}
+                          onChange={(e) => handleInputChange('currentAge', e.target.value)}
+                          placeholder="Enter age"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Medical Expenses */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <DollarSign className="w-5 h-5 text-primary mr-2" />
+                      Financial Information
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="medicalExpenses">Annual Medical Expenses</Label>
+                      <Input
+                        type="text"
+                        value={formData.medicalExpenses}
+                        onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                        placeholder="Enter annual medical costs"
+                      />
+                    </div>
+
+                    <div>
+                      <Label htmlFor="lostWages">Lost Wages/Income (Parent/Caregiver)</Label>
+                      <Input
+                        type="text"
+                        value={formData.lostWages}
+                        onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                        placeholder="Enter lost income amount"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Care Needs */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Heart className="w-5 h-5 text-primary mr-2" />
+                      Care Requirements
+                    </h3>
+                    
+                    <div className="space-y-3">
+                      {[
+                        'Physical Therapy',
+                        'Occupational Therapy',
+                        'Speech Therapy',
+                        'Special Education',
+                        'Medical Equipment',
+                        'Home Modifications',
+                        '24/7 Care',
+                        'Respite Care'
+                      ].map((careType) => (
+                        <div key={careType} className="flex items-center space-x-2">
+                          <Checkbox
+                            id={careType}
+                            checked={formData.careNeeds.includes(careType)}
+                            onCheckedChange={(checked) => handleCareNeedsChange(careType, checked as boolean)}
+                          />
+                          <Label htmlFor={careType}>{careType}</Label>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Quality of Life */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold flex items-center">
+                      <Activity className="w-5 h-5 text-primary mr-2" />
+                      Quality of Life Impact
+                    </h3>
+                    
+                    <div>
+                      <Label htmlFor="qualityOfLifeImpact">Impact on Quality of Life</Label>
+                      <Select value={formData.qualityOfLifeImpact} onValueChange={(value) => handleInputChange('qualityOfLifeImpact', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select impact level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="minimal">Minimal Impact</SelectItem>
+                          <SelectItem value="moderate">Moderate Impact</SelectItem>
+                          <SelectItem value="significant">Significant Impact</SelectItem>
+                          <SelectItem value="severe">Severe Impact</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={calculateCompensation} 
+                    className="w-full bg-primary hover:bg-primary/90 text-white font-bold py-3"
+                    disabled={!formData.injuryType || !formData.injurySeverity}
+                  >
+                    Calculate Compensation Estimate
+                  </Button>
+
+                  {/* Results */}
+                  {estimatedCompensation && (
+                    <Card className="mt-6 border-primary">
+                      <CardContent className="p-6">
+                        <h3 className="text-xl font-bold text-center mb-4">Estimated Compensation Range</h3>
+                        <div className="text-center">
+                          <div className="text-3xl font-bold text-primary mb-2">
+                            {formatCurrency(estimatedCompensation * 0.7)} - {formatCurrency(estimatedCompensation * 1.3)}
+                          </div>
+                          <p className="text-muted-foreground mb-4">
+                            *This is an estimate. Actual compensation may vary based on specific case details.
+                          </p>
+                          <Button 
+                            onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
+                            className="bg-primary hover:bg-primary/90 text-white"
+                          >
+                            Get Free Case Evaluation
+                          </Button>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  )}
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-6">
+              <Card className="content-section glass-card">
+                <CardHeader>
+                  <CardTitle className="text-lg">Important Notes</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-start">
+                    <Clock className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Time Limits</h4>
+                      <p className="text-sm text-muted-foreground">California gives you until your child's 8th birthday to file a claim</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Shield className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">No Win, No Fee</h4>
+                      <p className="text-sm text-muted-foreground">We only get paid if you win your case</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-start">
+                    <Award className="w-5 h-5 text-primary mt-0.5 mr-3" />
+                    <div>
+                      <h4 className="font-semibold text-sm">Free Consultation</h4>
+                      <p className="text-sm text-muted-foreground">No cost to discuss your case with our experts</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card className="content-section glass-card">
+                <CardHeader>
+                  <CardTitle className="text-lg">Take Action Now</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
+                    onClick={() => window.location.href = 'tel:8181234567'}
+                  >
+                    Call (818) 123-4567
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
+                    onClick={() => window.location.href = '/birth-injuries/case-evaluation'}
+                  >
+                    Free Case Evaluation
+                  </Button>
+
+                  <Button 
+                    variant="outline" 
+                    className="w-full text-primary border-primary hover:bg-primary hover:!text-primary-foreground"
+                    onClick={() => window.location.href = '/schedule-consultation'}
+                  >
+                    Schedule Consultation
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
+
+export default BirthInjuriesCompensationCalculator;

@@ -1,598 +1,655 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { Calculator, ArrowLeft, Package, Shield } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import GoBack from '@/components/GoBack';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { Slider } from '@/components/ui/slider';
+import { 
+  ArrowLeft,
+  Calculator,
+  DollarSign,
+  TrendingUp,
+  Users,
+  Heart,
+  Clock,
+  AlertTriangle,
+  Phone,
+  Mail,
+  Shield,
+  Star,
+  Info,
+  FileText,
+  Package
+} from 'lucide-react';
+import heroBackground from '@/assets/product-liability-compensation-calculator-hero.jpg';
+import SEO from '@/components/SEO';
 
-interface ProductLiabilityFormData extends CalculatorFormData {
-  productType: string;
-  defectType: string;
-  injurySeverity: string;
-  medicalCosts: string;
-  lostWages: string;
-  permanentDisability: string;
-  manufacturer: string;
-  recallStatus: string;
-  multipleVictims: string;
-  ageGroup: string;
+interface CalculationResults {
+  medicalExpenses: number;
+  lostWages: number;
+  painAndSuffering: number;
+  totalEstimate: number;
+  lowRange: number;
+  highRange: number;
+  futureExpenses: number;
 }
 
-const initialFormData: ProductLiabilityFormData = {
-  productType: '',
-  defectType: '',
-  injurySeverity: '',
-  medicalCosts: '',
-  lostWages: '',
-  permanentDisability: '',
-  manufacturer: '',
-  recallStatus: '',
-  multipleVictims: '',
-  ageGroup: ''
-};
+const ProductLiabilityCompensationCalculator: React.FC = () => {
+  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    age: '',
+    currentIncome: '',
+    medicalBills: '',
+    futuremedicalCosts: '',
+    timeOffWork: '',
+    recoveryTime: '',
+    painLevel: '5',
+    productType: '',
+    defectType: '',
+    injurySeverity: '',
+    permanentDisability: '',
+    liability: '8',
+    state: 'california'
+  });
 
-function calculateCompensation(data: ProductLiabilityFormData): CalculatorResults {
-  let min = 50000;
-  let max = 250000;
-  let multiplier = 1.0;
+  const [results, setResults] = useState<CalculationResults | null>(null);
+  const [showResults, setShowResults] = useState(false);
 
-  // Product type multipliers
-  const productMultipliers: Record<string, number> = {
-    'medical-device': 3.0,
-    'pharmaceutical': 2.5,
-    'motor-vehicle': 2.2,
-    'consumer-electronics': 1.5,
-    'childrens-product': 2.0,
-    'industrial-equipment': 2.5,
-    'food-beverage': 1.8,
-    'other': 1.3
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
-  multiplier *= productMultipliers[data.productType] || 1.0;
 
-  // Defect type multipliers
-  const defectMultipliers: Record<string, number> = {
-    'design-defect': 2.0,
-    'manufacturing-defect': 1.6,
-    'warning-defect': 1.8,
-    'multiple-defects': 2.5
+  const calculateCompensation = () => {
+    const age = parseInt(formData.age) || 0;
+    const income = parseInt(formData.currentIncome) || 0;
+    const medicalBills = parseInt(formData.medicalBills) || 0;
+    const futureMedical = parseInt(formData.futuremedicalCosts) || 0;
+    const timeOff = parseInt(formData.timeOffWork) || 0;
+    const recovery = parseInt(formData.recoveryTime) || 0;
+    const painScore = parseInt(formData.painLevel) || 5;
+    const liabilityScore = parseInt(formData.liability) || 8;
+
+    // Medical Expenses Calculation
+    let totalMedical = medicalBills + futureMedical;
+    
+    // If permanent disability, add lifetime medical costs
+    if (formData.permanentDisability === 'yes') {
+      const yearsRemaining = Math.max(75 - age, 10);
+      totalMedical += yearsRemaining * 5000; // Average annual medical costs
+    }
+
+    // Lost Wages Calculation
+    const dailyWage = income / 365;
+    let lostWages = dailyWage * timeOff;
+    
+    // Future lost wages if permanent disability
+    if (formData.permanentDisability === 'yes') {
+      const yearsToRetirement = Math.max(65 - age, 0);
+      lostWages += income * 0.4 * yearsToRetirement; // 40% income loss assumption
+    } else if (recovery > 0) {
+      lostWages += dailyWage * recovery;
+    }
+
+    // Pain and Suffering Calculation
+    let basePainSuffering = 75000; // Base amount
+    
+    // Injury severity multiplier
+    let severityMultiplier = 1;
+    switch (formData.injurySeverity) {
+      case 'minor':
+        severityMultiplier = 0.5;
+        break;
+      case 'moderate':
+        severityMultiplier = 1;
+        break;
+      case 'serious':
+        severityMultiplier = 2;
+        break;
+      case 'severe':
+        severityMultiplier = 3;
+        break;
+      case 'catastrophic':
+        severityMultiplier = 5;
+        break;
+    }
+
+    // Product type multiplier
+    let productMultiplier = 1;
+    switch (formData.productType) {
+      case 'medical-device':
+      case 'pharmaceutical':
+        productMultiplier = 2;
+        break;
+      case 'automotive':
+      case 'tools-machinery':
+        productMultiplier = 1.5;
+        break;
+      case 'food-beverage':
+      case 'cosmetics':
+        productMultiplier = 1.2;
+        break;
+    }
+
+    // Defect type multiplier
+    let defectMultiplier = 1;
+    switch (formData.defectType) {
+      case 'design-defect':
+        defectMultiplier = 1.5;
+        break;
+      case 'manufacturing-defect':
+        defectMultiplier = 1.2;
+        break;
+      case 'warning-defect':
+        defectMultiplier = 1;
+        break;
+    }
+
+    // Age factor (younger victims typically receive higher awards)
+    let ageFactor = 1;
+    if (age < 30) ageFactor = 1.3;
+    else if (age < 50) ageFactor = 1.1;
+    else if (age > 70) ageFactor = 0.8;
+
+    // Pain level factor
+    const painFactor = painScore / 5;
+
+    // Permanent disability adds significant value
+    if (formData.permanentDisability === 'yes') {
+      basePainSuffering *= 3;
+    }
+
+    const painAndSuffering = basePainSuffering * severityMultiplier * 
+                           productMultiplier * defectMultiplier * 
+                           ageFactor * painFactor;
+
+    // Future expenses (rehabilitation, equipment, etc.)
+    let futureExpenses = 0;
+    if (formData.permanentDisability === 'yes') {
+      futureExpenses = 50000; // Base amount for equipment, modifications
+      if (formData.injurySeverity === 'catastrophic') {
+        futureExpenses = 200000; // Higher for catastrophic injuries
+      }
+    }
+
+    const subtotal = totalMedical + lostWages + painAndSuffering + futureExpenses;
+
+    // Liability adjustment
+    const liabilityAdjustment = liabilityScore / 10;
+    const totalEstimate = subtotal * liabilityAdjustment;
+
+    // Range calculations (typically ±50% for product liability cases)
+    const lowRange = totalEstimate * 0.5;
+    const highRange = totalEstimate * 1.5;
+
+    setResults({
+      medicalExpenses: totalMedical,
+      lostWages: lostWages,
+      painAndSuffering: painAndSuffering,
+      totalEstimate: totalEstimate,
+      lowRange: lowRange,
+      highRange: highRange,
+      futureExpenses: futureExpenses
+    });
+
+    setShowResults(true);
   };
-  multiplier *= defectMultipliers[data.defectType] || 1.0;
 
-  // Injury severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1.0,
-    'moderate': 1.8,
-    'severe': 2.8,
-    'catastrophic': 4.5,
-    'death': 5.0
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
-  multiplier *= severityMultipliers[data.injurySeverity] || 1.0;
-
-  // Medical costs base
-  const medicalCostBases: Record<string, number> = {
-    'under-10k': 10000,
-    '10k-50k': 50000,
-    '50k-200k': 200000,
-    '200k-1m': 600000,
-    'over-1m': 1500000
-  };
-  const medicalBase = medicalCostBases[data.medicalCosts] || 10000;
-  min += medicalBase * 0.8;
-  max += medicalBase * 3.0;
-
-  // Lost wages addition
-  const lostWageAdditions: Record<string, number> = {
-    'none': 0,
-    'under-25k': 25000,
-    '25k-100k': 100000,
-    '100k-500k': 300000,
-    'over-500k': 750000
-  };
-  const wageAddition = lostWageAdditions[data.lostWages] || 0;
-  min += wageAddition * 0.7;
-  max += wageAddition * 1.8;
-
-  // Permanent disability
-  const disabilityMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'partial': 2.0,
-    'substantial': 3.0,
-    'total': 4.5
-  };
-  multiplier *= disabilityMultipliers[data.permanentDisability] || 1.0;
-
-  // Manufacturer size/resources
-  const manufacturerMultipliers: Record<string, number> = {
-    'major-corporation': 1.8,
-    'mid-size-company': 1.3,
-    'small-business': 1.0,
-    'unknown': 0.9
-  };
-  multiplier *= manufacturerMultipliers[data.manufacturer] || 1.0;
-
-  // Recall status (demonstrates knowledge of defect)
-  const recallMultipliers: Record<string, number> = {
-    'recalled-before': 2.5,
-    'recalled-after': 2.0,
-    'no-recall': 1.0,
-    'fda-warning': 2.2
-  };
-  multiplier *= recallMultipliers[data.recallStatus] || 1.0;
-
-  // Multiple victims (pattern of defect)
-  const victimMultipliers: Record<string, number> = {
-    'single': 1.0,
-    'few': 1.3,
-    'many': 1.8,
-    'class-action': 2.0
-  };
-  multiplier *= victimMultipliers[data.multipleVictims] || 1.0;
-
-  // Age-based future damages
-  const ageMultipliers: Record<string, number> = {
-    'child': 1.5,
-    'young-adult': 1.3,
-    'middle-age': 1.0,
-    'senior': 0.8
-  };
-  multiplier *= ageMultipliers[data.ageGroup] || 1.0;
-
-  min = Math.round(min * multiplier);
-  max = Math.round(max * multiplier);
-
-  // Higher floor for product liability
-  min = Math.max(min, 30000);
-  max = Math.max(max, 100000);
-
-  return { min, max };
-}
-
-function validateForm(data: ProductLiabilityFormData, step: number): boolean {
-  if (step === 1) {
-    return !!(
-      data.productType &&
-      data.defectType &&
-      data.injurySeverity &&
-      data.manufacturer
-    );
-  }
-  if (step === 2) {
-    return !!(
-      data.medicalCosts &&
-      data.lostWages &&
-      data.permanentDisability &&
-      data.recallStatus &&
-      data.multipleVictims &&
-      data.ageGroup
-    );
-  }
-  return true;
-}
-
-const ProductLiabilityCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<ProductLiabilityFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateForm
-  );
-
-  const renderStep1 = () => (
-    <div className="space-y-8">
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          What type of product caused your injury?
-        </label>
-        <select
-          value={formData.productType}
-          onChange={(e) => updateField('productType', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select product type</option>
-          <option value="medical-device">Medical Device</option>
-          <option value="pharmaceutical">Pharmaceutical/Drug</option>
-          <option value="motor-vehicle">Motor Vehicle/Auto Part</option>
-          <option value="consumer-electronics">Consumer Electronics</option>
-          <option value="childrens-product">Children's Product/Toy</option>
-          <option value="industrial-equipment">Industrial Equipment</option>
-          <option value="food-beverage">Food/Beverage</option>
-          <option value="other">Other Consumer Product</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          What type of defect was present?
-        </label>
-        <select
-          value={formData.defectType}
-          onChange={(e) => updateField('defectType', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select defect type</option>
-          <option value="design-defect">Design Defect (inherently unsafe)</option>
-          <option value="manufacturing-defect">Manufacturing Defect (flaw in production)</option>
-          <option value="warning-defect">Warning/Instruction Defect (inadequate warnings)</option>
-          <option value="multiple-defects">Multiple Types of Defects</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          How severe was your injury?
-        </label>
-        <select
-          value={formData.injurySeverity}
-          onChange={(e) => updateField('injurySeverity', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select injury severity</option>
-          <option value="minor">Minor (cuts, bruises, temporary)</option>
-          <option value="moderate">Moderate (fractures, burns, hospitalization)</option>
-          <option value="severe">Severe (major surgery, long recovery)</option>
-          <option value="catastrophic">Catastrophic (life-altering injury)</option>
-          <option value="death">Wrongful Death</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          Who manufactured the product?
-        </label>
-        <select
-          value={formData.manufacturer}
-          onChange={(e) => updateField('manufacturer', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select manufacturer size</option>
-          <option value="major-corporation">Major Corporation (Fortune 500)</option>
-          <option value="mid-size-company">Mid-Size Company</option>
-          <option value="small-business">Small Business</option>
-          <option value="unknown">Unknown/Foreign Manufacturer</option>
-        </select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-8">
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          What are your total medical costs?
-        </label>
-        <select
-          value={formData.medicalCosts}
-          onChange={(e) => updateField('medicalCosts', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select medical costs</option>
-          <option value="under-10k">Under $10,000</option>
-          <option value="10k-50k">$10,000 - $50,000</option>
-          <option value="50k-200k">$50,000 - $200,000</option>
-          <option value="200k-1m">$200,000 - $1,000,000</option>
-          <option value="over-1m">Over $1,000,000</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          What are your lost wages/income?
-        </label>
-        <select
-          value={formData.lostWages}
-          onChange={(e) => updateField('lostWages', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select lost wages</option>
-          <option value="none">None</option>
-          <option value="under-25k">Under $25,000</option>
-          <option value="25k-100k">$25,000 - $100,000</option>
-          <option value="100k-500k">$100,000 - $500,000</option>
-          <option value="over-500k">Over $500,000</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          Do you have permanent disability from this product?
-        </label>
-        <select
-          value={formData.permanentDisability}
-          onChange={(e) => updateField('permanentDisability', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select disability status</option>
-          <option value="none">No Permanent Disability</option>
-          <option value="partial">Partial Disability</option>
-          <option value="substantial">Substantial Disability</option>
-          <option value="total">Total Disability</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          Has the product been recalled or warned about?
-        </label>
-        <select
-          value={formData.recallStatus}
-          onChange={(e) => updateField('recallStatus', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select recall status</option>
-          <option value="recalled-before">Recalled Before My Injury</option>
-          <option value="recalled-after">Recalled After My Injury</option>
-          <option value="fda-warning">FDA/Safety Warning Issued</option>
-          <option value="no-recall">No Recall or Warning</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          Are there multiple victims of this defective product?
-        </label>
-        <select
-          value={formData.multipleVictims}
-          onChange={(e) => updateField('multipleVictims', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select victim count</option>
-          <option value="single">I'm the Only Known Victim</option>
-          <option value="few">A Few Other Victims</option>
-          <option value="many">Many Known Victims</option>
-          <option value="class-action">Part of Class Action Lawsuit</option>
-        </select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium text-slate-700 mb-3">
-          What is your age group?
-        </label>
-        <select
-          value={formData.ageGroup}
-          onChange={(e) => updateField('ageGroup', e.target.value)}
-          className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-        >
-          <option value="">Select age group</option>
-          <option value="child">Child (under 18)</option>
-          <option value="young-adult">Young Adult (18-40)</option>
-          <option value="middle-age">Middle Age (41-65)</option>
-          <option value="senior">Senior (over 65)</option>
-        </select>
-      </div>
-    </div>
-  );
-
-  const renderStep3 = () => (
-    <div className="space-y-8">
-      <div className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-2xl p-8">
-        <div className="text-center mb-8">
-          <Calculator className="w-16 h-16 mx-auto mb-4 text-slate-900" />
-          <h2 className="text-3xl font-bold text-slate-900 mb-2">
-            Estimated Compensation Range
-          </h2>
-          <p className="text-slate-600">Based on product liability claim details</p>
-        </div>
-
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
-          <div className="bg-white rounded-xl p-6 border border-slate-200">
-            <div className="text-sm font-medium text-slate-600 mb-2">Minimum Estimate</div>
-            <div className="text-4xl font-bold text-slate-900">
-              ${results?.min.toLocaleString()}
-            </div>
-          </div>
-          <div className="bg-white rounded-xl p-6 border border-slate-200">
-            <div className="text-sm font-medium text-slate-600 mb-2">Maximum Estimate</div>
-            <div className="text-4xl font-bold text-slate-900">
-              ${results?.max.toLocaleString()}
-            </div>
-          </div>
-        </div>
-
-        <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-6">
-          <h3 className="font-semibold text-amber-900 mb-3 flex items-center gap-2">
-            <Shield className="w-5 h-5" />
-            Important Product Liability Disclaimer
-          </h3>
-          <div className="text-sm text-amber-800 space-y-2">
-            <p>
-              This estimate is based on typical product liability factors. Product liability
-              cases involve <strong>strict liability</strong> - manufacturers can be held
-              liable even without negligence if their product is unreasonably dangerous.
-            </p>
-            <p>Actual compensation depends on:</p>
-            <ul className="list-disc list-inside space-y-1 ml-2">
-              <li>Ability to prove the product was defective</li>
-              <li>Whether defect existed when it left manufacturer</li>
-              <li>Product was being used as intended (or misuse was foreseeable)</li>
-              <li>Extent of manufacturer's knowledge of defect</li>
-              <li>Pattern of similar injuries to other consumers</li>
-              <li>Manufacturer's assets and insurance coverage</li>
-              <li>Availability of expert witnesses (engineering, medical)</li>
-              <li>State product liability laws and statutes of repose</li>
-            </ul>
-            <p className="font-medium mt-3">
-              Product liability cases require substantial investigation and expert testimony.
-              Consult with an attorney experienced in product defect litigation for a
-              thorough case evaluation.
-            </p>
-          </div>
-        </div>
-
-        <div className="space-y-4">
-          <h3 className="font-semibold text-slate-900">Product Liability Claims May Include:</h3>
-          <div className="grid md:grid-cols-2 gap-4">
-            <div className="bg-slate-50 rounded-lg p-4">
-              <div className="font-medium text-slate-900 mb-1">Medical Expenses</div>
-              <div className="text-sm text-slate-600">Past, current, and future treatment</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4">
-              <div className="font-medium text-slate-900 mb-1">Lost Income</div>
-              <div className="text-sm text-slate-600">Wages and earning capacity</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4">
-              <div className="font-medium text-slate-900 mb-1">Pain & Suffering</div>
-              <div className="text-sm text-slate-600">Physical and emotional trauma</div>
-            </div>
-            <div className="bg-slate-50 rounded-lg p-4">
-              <div className="font-medium text-slate-900 mb-1">Punitive Damages</div>
-              <div className="text-sm text-slate-600">If willful disregard for safety proven</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div className="calculator-cta-section">
-        <h3 className="text-2xl font-bold mb-4">Ready to Hold Manufacturers Accountable?</h3>
-        <p className="mb-6 max-w-2xl mx-auto">
-          Get a detailed case evaluation from an attorney who specializes in product liability
-          litigation. We work with engineering and medical experts to prove defects.
-          Most cases handled on contingency - no fee unless we win.
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <Link to="/free-consultation">
-            <Button size="lg" className="text-lg px-8">
-              Get My Free Case Evaluation
-            </Button>
-          </Link>
-          <Button
-            size="lg"
-            variant="outline"
-            onClick={resetForm}
-            className="text-lg px-8 outline"
-          >
-            Calculate Again
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
 
   return (
-    <>
-      <Helmet>
-        <title>Product Liability Calculator | Defective Product Compensation | Trembach Law</title>
-        <meta
-          name="description"
-          content="Calculate product liability compensation for defective products. Strict liability for medical devices, pharmaceuticals, consumer goods, and more."
-        />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Product Liability Compensation Calculator | California | Free Estimate Tool"
+        description="Calculate potential product liability compensation in California. Free estimation tool based on recent settlements and California law. Get expert legal consultation."
+        canonical="/product-liability-compensation-calculator"
+      />
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link
-              to="/calculators"
-              className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline"
-            >
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+      <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
+
+      {/* Hero Section */}
+      <section 
+        className="relative min-h-[60vh] bg-cover bg-center bg-no-repeat flex items-center justify-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        <div className="container mx-auto px-8 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-6 bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm font-medium">
+              Free Compensation Calculator
+            </Badge>
+            <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+              Product Liability Compensation Calculator
+            </h1>
+            <p className="text-xl md:text-2xl text-gray-200 mb-8 leading-relaxed">
+              Estimate your potential product liability compensation based on California law and recent settlement data. Get a personalized assessment from experienced attorneys.
+            </p>
+            <div className="flex items-center justify-center gap-6 text-white">
+              <div className="flex items-center gap-2">
+                <Calculator className="w-5 h-5" />
+                <span className="text-lg">California-Specific</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <TrendingUp className="w-5 h-5" />
+                <span className="text-lg">Recent Settlement Data</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-5 h-5" />
+                <span className="text-lg">Attorney Verified</span>
+              </div>
+            </div>
           </div>
         </div>
+      </section>
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Product Liability<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Defective product compensation estimator
-            </p>
-          </div>
-        </section>
+      <div className="container mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-3 gap-8">
+            
+            {/* Calculator Form */}
+            <div className="lg:col-span-2">
+              <Card className="shadow-xl">
+                <CardHeader>
+                  <CardTitle className="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                    <Calculator className="w-6 h-6 text-red-600" />
+                    Compensation Calculator
+                  </CardTitle>
+                  <p className="text-gray-600 text-lg">
+                    Enter the information below to estimate potential product liability compensation. All calculations are based on California law and recent settlement data.
+                  </p>
+                </CardHeader>
+                
+                <CardContent className="space-y-6">
+                  
+                  {/* Personal Information */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Personal Information</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Your Age</label>
+                        <Input
+                          type="number"
+                          value={formData.age}
+                          onChange={(e) => handleInputChange('age', e.target.value)}
+                          placeholder="Age in years"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Annual Income</label>
+                        <Input
+                          type="number"
+                          value={formData.currentIncome}
+                          onChange={(e) => handleInputChange('currentIncome', e.target.value)}
+                          placeholder="$50,000"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Strict</div>
-                <p className="text-slate-600">Liability standard</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">All Products</div>
-                <p className="text-slate-600">Medical to consumer</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
+                  {/* Product Information */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Product Details</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Product Type</label>
+                        <Select onValueChange={(value) => handleInputChange('productType', value)}>
+                          <SelectTrigger className="text-lg h-12">
+                            <SelectValue placeholder="Select product type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="automotive">Automotive Parts</SelectItem>
+                            <SelectItem value="medical-device">Medical Device</SelectItem>
+                            <SelectItem value="pharmaceutical">Pharmaceutical</SelectItem>
+                            <SelectItem value="food-beverage">Food/Beverage</SelectItem>
+                            <SelectItem value="household-appliance">Household Appliance</SelectItem>
+                            <SelectItem value="electronics">Electronics</SelectItem>
+                            <SelectItem value="toys">Toys/Children's Products</SelectItem>
+                            <SelectItem value="tools-machinery">Tools/Machinery</SelectItem>
+                            <SelectItem value="cosmetics">Cosmetics/Personal Care</SelectItem>
+                            <SelectItem value="other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Type of Defect</label>
+                        <Select onValueChange={(value) => handleInputChange('defectType', value)}>
+                          <SelectTrigger className="text-lg h-12">
+                            <SelectValue placeholder="Select defect type" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="design-defect">Design Defect</SelectItem>
+                            <SelectItem value="manufacturing-defect">Manufacturing Defect</SelectItem>
+                            <SelectItem value="warning-defect">Inadequate Warnings</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Medical Information */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Medical & Financial Impact</h3>
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Current Medical Bills</label>
+                        <Input
+                          type="number"
+                          value={formData.medicalBills}
+                          onChange={(e) => handleInputChange('medicalBills', e.target.value)}
+                          placeholder="$0"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Future Medical Costs</label>
+                        <Input
+                          type="number"
+                          value={formData.futuremedicalCosts}
+                          onChange={(e) => handleInputChange('futuremedicalCosts', e.target.value)}
+                          placeholder="$0"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="grid md:grid-cols-2 gap-4 mt-4">
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Days Off Work</label>
+                        <Input
+                          type="number"
+                          value={formData.timeOffWork}
+                          onChange={(e) => handleInputChange('timeOffWork', e.target.value)}
+                          placeholder="0"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Recovery Time (Days)</label>
+                        <Input
+                          type="number"
+                          value={formData.recoveryTime}
+                          onChange={(e) => handleInputChange('recoveryTime', e.target.value)}
+                          placeholder="0"
+                          className="text-lg h-12"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Injury Severity */}
+                  <div>
+                    <h3 className="text-xl font-semibold text-gray-900 mb-4">Injury Assessment</h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Injury Severity</label>
+                        <Select onValueChange={(value) => handleInputChange('injurySeverity', value)}>
+                          <SelectTrigger className="text-lg h-12">
+                            <SelectValue placeholder="Select injury severity" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="minor">Minor (minor cuts, bruises)</SelectItem>
+                            <SelectItem value="moderate">Moderate (fractures, stitches)</SelectItem>
+                            <SelectItem value="serious">Serious (surgery required)</SelectItem>
+                            <SelectItem value="severe">Severe (permanent impairment)</SelectItem>
+                            <SelectItem value="catastrophic">Catastrophic (life-altering)</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      
+                      <div>
+                        <label className="block text-lg font-medium text-gray-700 mb-1">Permanent Disability?</label>
+                        <Select onValueChange={(value) => handleInputChange('permanentDisability', value)}>
+                          <SelectTrigger className="text-lg h-12">
+                            <SelectValue placeholder="Select option" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="no">No permanent disability</SelectItem>
+                            <SelectItem value="partial">Partial disability</SelectItem>
+                            <SelectItem value="yes">Yes, permanent disability</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Pain Level */}
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
+                      Pain and Suffering Level
+                    </label>
+                    <div className="px-3">
+                      <Slider
+                        value={[parseInt(formData.painLevel)]}
+                        onValueChange={(value) => handleInputChange('painLevel', value[0].toString())}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-gray-500 mt-1">
+                        <span>Minimal (1)</span>
+                        <span className="font-medium text-lg">Current: {formData.painLevel}/10</span>
+                        <span>Severe (10)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Liability Strength */}
+                  <div>
+                    <label className="block text-lg font-medium text-gray-700 mb-2">
+                      Liability Strength (how clear is manufacturer fault?)
+                    </label>
+                    <div className="px-3">
+                      <Slider
+                        value={[parseInt(formData.liability)]}
+                        onValueChange={(value) => handleInputChange('liability', value[0].toString())}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-gray-500 mt-1">
+                        <span>Disputed (1)</span>
+                        <span className="font-medium text-lg">Current: {formData.liability}/10</span>
+                        <span>Clear Fault (10)</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={calculateCompensation}
+                    className="w-full bg-red-600 hover:bg-red-700 text-xl py-4"
+                  >
+                    <Calculator className="w-6 h-6 mr-2" />
+                    Calculate Compensation Estimate
+                  </Button>
+                </CardContent>
+              </Card>
+
+              {/* Results */}
+              {showResults && results && (
+                <Card className="shadow-xl mt-8">
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-bold text-green-900 flex items-center gap-2">
+                      <TrendingUp className="w-6 h-6" />
+                      Compensation Estimate Results
+                    </CardTitle>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-6">
+                    
+                    {/* Total Estimate */}
+                    <div className="text-center bg-gradient-to-r from-green-50 to-green-100 rounded-lg p-6">
+                      <h3 className="text-xl font-semibold text-green-900 mb-2">Estimated Total Compensation</h3>
+                      <div className="text-4xl font-bold text-green-600 mb-2">
+                        {formatCurrency(results.totalEstimate)}
+                      </div>
+                      <p className="text-green-700 text-lg">
+                        Range: {formatCurrency(results.lowRange)} - {formatCurrency(results.highRange)}
+                      </p>
+                    </div>
+
+                    {/* Breakdown */}
+                    <div className="grid md:grid-cols-2 gap-4">
+                      <Card className="bg-blue-50 border-blue-200">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-lg text-blue-900">Medical Expenses</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold text-blue-600">{formatCurrency(results.medicalExpenses)}</div>
+                          <p className="text-blue-700 text-lg">Current & future medical costs</p>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-purple-50 border-purple-200">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-lg text-purple-900">Lost Wages</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold text-purple-600">{formatCurrency(results.lostWages)}</div>
+                          <p className="text-purple-700 text-lg">Income loss & earning capacity</p>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-orange-50 border-orange-200">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-lg text-orange-900">Pain & Suffering</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold text-orange-600">{formatCurrency(results.painAndSuffering)}</div>
+                          <p className="text-orange-700 text-lg">Non-economic damages</p>
+                        </CardContent>
+                      </Card>
+                      
+                      <Card className="bg-teal-50 border-teal-200">
+                        <CardHeader className="pb-2">
+                          <CardTitle className="text-lg text-teal-900">Future Expenses</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="text-2xl font-bold text-teal-600">{formatCurrency(results.futureExpenses)}</div>
+                          <p className="text-teal-700 text-lg">Equipment & modifications</p>
+                        </CardContent>
+                      </Card>
+                    </div>
+
+                    {/* Important Notes */}
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+                      <h4 className="font-semibold text-yellow-900 mb-2 text-lg">Important Notes:</h4>
+                      <ul className="text-yellow-800 space-y-1 text-lg">
+                        <li>• This is an estimate based on similar California cases</li>
+                        <li>• Actual compensation depends on specific case factors</li>
+                        <li>• Product liability cases can vary significantly</li>
+                        <li>• Manufacturer resources affect settlement amounts</li>
+                        <li>• Consult with an attorney for accurate assessment</li>
+                      </ul>
+                    </div>
+
+                    {/* CTA */}
+                    <div className="text-center">
+                      <h4 className="text-xl font-semibold text-gray-900 mb-4">Ready to Pursue Your Case?</h4>
+                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Button 
+                          size="lg" 
+                          className="bg-red-600 hover:bg-red-700 text-lg"
+                          onClick={() => window.open('tel:8181234567')}
+                        >
+                          <Phone className="w-5 h-5 mr-2" />
+                          Call (818) 123-4567
+                        </Button>
+                        <Button 
+                          variant="outline" 
+                          size="lg"
+                          className="text-lg"
+                          onClick={() => navigate('/product-liability-case-evaluation')}
+                        >
+                          Start Product Liability Evaluation
+                        </Button>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                
+                {/* Contact Card */}
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold text-gray-900 flex items-center gap-2">
+                      <Phone className="w-5 h-5 text-red-600" />
+                      Need Expert Help?
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="text-center">
+                      <p className="text-lg text-gray-700 mb-4">Speak with a product liability attorney</p>
+                      <Button 
+                        size="lg" 
+                        className="w-full bg-red-600 hover:bg-red-700 text-lg"
+                        onClick={() => window.open('tel:8181234567')}
+                      >
+                        <Phone className="w-5 h-5 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                      
+                    </div>
+                  </CardContent>
+                </Card>
+
+                {/* Factors Affecting Value */}
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold text-gray-900">Factors Affecting Value</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-lg text-gray-700">
+                      <li>• Product defect severity</li>
+                      <li>• Manufacturer negligence</li>
+                      <li>• Injury permanence</li>
+                      <li>• Lost earning capacity</li>
+                      <li>• Medical expenses</li>
+                      <li>• Pain and suffering</li>
+                      <li>• Recall history</li>
+                      <li>• Similar case precedents</li>
+                    </ul>
+                  </CardContent>
+                </Card>
+
+                {/* California Law */}
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-xl font-bold text-gray-900">California Product Liability Law</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <ul className="space-y-2 text-lg text-gray-700">
+                      <li>• Strict liability for defective products</li>
+                      <li>• No need to prove negligence</li>
+                      <li>• Comparative fault may apply</li>
+                      <li>• 2-year statute of limitations</li>
+                      <li>• Discovery rule exceptions</li>
+                    </ul>
+                  </CardContent>
+                </Card>
               </div>
             </div>
           </div>
-        </section>
-
-        <section className="py-20">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex items-center gap-4">
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                      step >= 1 ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-400'
-                    }`}
-                  >
-                    1
-                  </div>
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                      step >= 2 ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-400'
-                    }`}
-                  >
-                    2
-                  </div>
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold ${
-                      step >= 3 ? 'bg-slate-900 text-white' : 'bg-slate-200 text-slate-400'
-                    }`}
-                  >
-                    3
-                  </div>
-                </div>
-                <div className="text-sm font-medium text-slate-600">
-                  Step {step} of 3
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 p-8">
-              {step === 1 && (
-                <>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-6">Product & Defect Details</h2>
-                  {renderStep1()}
-                </>
-              )}
-
-              {step === 2 && (
-                <>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-6">Damages & Evidence</h2>
-                  {renderStep2()}
-                </>
-              )}
-
-              {step === 3 && renderStep3()}
-
-              {step < 3 && (
-                <FormNavigation
-                  currentStep={step}
-                  totalSteps={3}
-                  isValid={isStepValid()}
-                  onBack={handleBack}
-                  onNext={handleNext}
-                />
-              )}
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+        </div>
+      </div>
+    </div>
   );
 };
 

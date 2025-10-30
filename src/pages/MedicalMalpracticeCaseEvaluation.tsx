@@ -14,6 +14,7 @@ import {
 import heroBackground from '@/assets/medical-malpractice-case-evaluation-hero.jpg';
 import SEO from '@/components/SEO';
 import Navigation from '@/components/Navigation';
+import GoBack from '@/components/GoBack';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
 
@@ -74,6 +75,7 @@ const MedicalMalpracticeCaseEvaluation: React.FC = () => {
       />
       
       <Navigation />
+      <GoBack />
 
       {/* Hero Section */}
       <section 

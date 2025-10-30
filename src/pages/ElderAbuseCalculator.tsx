@@ -1,435 +1,487 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, AlertCircle } from 'lucide-react';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { ArrowLeft, Calculator, DollarSign, AlertTriangle, Info } from 'lucide-react';
+import elderAbuseCalculatorHero from '@/assets/elder-abuse-calculator-hero.jpg';
 
-interface ElderAbuseFormData extends CalculatorFormData {
-  abuseType: string;
-  facilityType: string;
-  severity: string;
-  injuries: string;
-  medicalCosts: string;
-  duration: string;
-  age: string;
-  punitive: string;
-  [key: string]: string;
+interface GoBackProps {
+  onGoBack?: () => void;
+  fromSection?: string;
 }
 
-const initialFormData: ElderAbuseFormData = {
-  abuseType: '',
-  facilityType: '',
-  severity: '',
-  injuries: '',
-  medicalCosts: '',
-  duration: '',
-  age: '',
-  punitive: ''
+const GoBack: React.FC<GoBackProps> = ({ onGoBack, fromSection }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrolled = window.scrollY > 100;
+      setIsVisible(scrolled);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+  
+  const handleClick = () => {
+    if (onGoBack) {
+      onGoBack();
+    } else if (fromSection) {
+      const targetElement = document.getElementById(fromSection);
+      if (targetElement) {
+        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      window.history.back();
+    } else {
+      window.history.back();
+    }
+  };
+  
+  return (
+    <div className={`fixed top-20 left-6 z-50 transition-opacity duration-300 ${isVisible ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+      <Button 
+        variant="ghost" 
+        onClick={handleClick}
+        className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50 backdrop-blur-sm"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        Go Back
+      </Button>
+    </div>
+  );
 };
 
-function calculateElderAbuseCompensation(data: ElderAbuseFormData): CalculatorResults {
-  let baseMin = 75000;
-  let baseMax = 250000;
+const ElderAbuseCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    abuseType: '',
+    facilityType: '',
+    severity: [3],
+    age: '',
+    medicalExpenses: '',
+    ongoingCare: '',
+    financialLosses: '',
+    painSufferingLevel: [5],
+  });
 
-  // Abuse type multipliers
-  const abuseMultipliers: Record<string, number> = {
-    'physical': 3.0,
-    'sexual': 4.5,
-    'emotional': 2.0,
-    'financial': 2.5,
-    'neglect': 3.5,
-    'multiple': 4.0
+  const [estimation, setEstimation] = useState<{
+    lowEnd: number;
+    highEnd: number;
+    breakdown: any;
+  } | null>(null);
+
+  const calculateEstimation = () => {
+    let baseAmount = 50000;
+    let multiplier = 1;
+
+    // Abuse type factors
+    const abuseTypeMultipliers = {
+      'physical-abuse': 2.5,
+      'sexual-abuse': 3.0,
+      'neglect': 2.0,
+      'financial-exploitation': 1.8,
+      'emotional-abuse': 1.5,
+      'abandonment': 2.2,
+      'medication-errors': 1.7,
+      'multiple-types': 3.5
+    };
+
+    // Facility type factors
+    const facilityMultipliers = {
+      'nursing-home': 2.0,
+      'assisted-living': 1.8,
+      'memory-care': 2.2,
+      'home-care': 1.5,
+      'hospital': 2.5,
+      'private-home': 1.3
+    };
+
+    if (formData.abuseType) {
+      multiplier *= abuseTypeMultipliers[formData.abuseType as keyof typeof abuseTypeMultipliers] || 1;
+    }
+
+    if (formData.facilityType) {
+      multiplier *= facilityMultipliers[formData.facilityType as keyof typeof facilityMultipliers] || 1;
+    }
+
+    // Severity impact
+    const severityMultiplier = formData.severity[0] * 0.4;
+    multiplier *= severityMultiplier;
+
+    // Age impact (older victims often receive higher awards)
+    const age = parseInt(formData.age);
+    if (age >= 80) multiplier *= 1.3;
+    else if (age >= 70) multiplier *= 1.2;
+    else if (age >= 65) multiplier *= 1.1;
+
+    // Medical expenses
+    const medicalExpenses = parseFloat(formData.medicalExpenses) || 0;
+    
+    // Ongoing care costs
+    const ongoingCare = parseFloat(formData.ongoingCare) || 0;
+    
+    // Financial losses
+    const financialLosses = parseFloat(formData.financialLosses) || 0;
+
+    // Pain and suffering multiplier
+    const painSufferingMultiplier = formData.painSufferingLevel[0] * 0.3;
+
+    const baseCompensation = baseAmount * multiplier;
+    const economicDamages = medicalExpenses + ongoingCare + financialLosses;
+    const painSuffering = baseCompensation * painSufferingMultiplier;
+
+    // Enhanced damages under EADACPA
+    const enhancedDamagesMultiplier = 1.5; // Potential for attorney fees and punitive damages
+    
+    const totalLow = (economicDamages + painSuffering + baseCompensation) * 0.8;
+    const totalHigh = (economicDamages + painSuffering + baseCompensation) * enhancedDamagesMultiplier * 2;
+
+    setEstimation({
+      lowEnd: Math.round(totalLow),
+      highEnd: Math.round(totalHigh),
+      breakdown: {
+        economic: Math.round(economicDamages),
+        painSuffering: Math.round(painSuffering),
+        base: Math.round(baseCompensation),
+        enhanced: Math.round((totalHigh - totalLow) / 2)
+      }
+    });
   };
-  baseMin *= abuseMultipliers[data.abuseType] || 1;
-  baseMax *= abuseMultipliers[data.abuseType] || 1;
 
-  // Facility type impact (corporate entities = higher punitive)
-  const facilityMultipliers: Record<string, number> = {
-    'nursing-home': 1.4,
-    'assisted-living': 1.3,
-    'memory-care': 1.5,
-    'home-health': 1.1,
-    'hospital': 1.2
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
   };
-  baseMin *= facilityMultipliers[data.facilityType] || 1;
-  baseMax *= facilityMultipliers[data.facilityType] || 1;
-
-  // Severity of harm
-  const severityMultipliers: Record<string, number> = {
-    'minor': 1.0,
-    'moderate': 1.8,
-    'severe': 2.5,
-    'catastrophic': 3.5,
-    'death': 4.0
-  };
-  baseMin *= severityMultipliers[data.severity] || 1;
-  baseMax *= severityMultipliers[data.severity] || 1;
-
-  // Type of injuries
-  const injuryMultipliers: Record<string, number> = {
-    'bedsores': 1.5,
-    'malnutrition': 1.4,
-    'falls': 1.6,
-    'medication-errors': 1.8,
-    'infection': 1.7,
-    'broken-bones': 2.0
-  };
-  baseMin *= injuryMultipliers[data.injuries] || 1;
-  baseMax *= injuryMultipliers[data.injuries] || 1;
-
-  // Medical costs
-  const medicalCostAdds: Record<string, number> = {
-    'under-10k': 15000,
-    '10k-50k': 60000,
-    '50k-100k': 120000,
-    '100k-250k': 200000,
-    'over-250k': 350000
-  };
-  const medicalAdd = medicalCostAdds[data.medicalCosts] || 0;
-  baseMin += medicalAdd;
-  baseMax += medicalAdd * 2;
-
-  // Duration of abuse
-  const durationMultipliers: Record<string, number> = {
-    'days': 1.0,
-    'weeks': 1.3,
-    '1-3-months': 1.6,
-    '3-6-months': 2.0,
-    '6-12-months': 2.5,
-    'over-year': 3.0
-  };
-  baseMin *= durationMultipliers[data.duration] || 1;
-  baseMax *= durationMultipliers[data.duration] || 1;
-
-  // Age factor (elderly more vulnerable)
-  const ageMultipliers: Record<string, number> = {
-    '65-74': 1.1,
-    '75-84': 1.3,
-    '85-plus': 1.5
-  };
-  baseMin *= ageMultipliers[data.age] || 1;
-  baseMax *= ageMultipliers[data.age] || 1;
-
-  // Punitive damages potential
-  const punitiveAdds: Record<string, number> = {
-    'none': 0,
-    'possible': 100000,
-    'likely': 250000,
-    'strong': 500000
-  };
-  const punitiveAdd = punitiveAdds[data.punitive] || 0;
-  baseMin += punitiveAdd * 0.5;
-  baseMax += punitiveAdd * 2;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax)
-  };
-}
-
-function validateElderAbuseForm(data: ElderAbuseFormData, step: number): boolean {
-  if (step === 1) {
-    return !!(data.abuseType && data.facilityType && data.severity);
-  }
-  if (step === 2) {
-    return !!(data.injuries && data.medicalCosts && data.duration && data.age && data.punitive);
-  }
-  return true;
-}
-
-const ElderAbuseCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<ElderAbuseFormData>(
-    initialFormData,
-    calculateElderAbuseCompensation,
-    validateElderAbuseForm
-  );
 
   return (
     <>
       <Helmet>
-        <title>Elder Abuse Calculator | Nursing Home Neglect Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate elder abuse compensation for nursing home neglect and mistreatment. Free, confidential estimates for family members." />
+        <title>Elder Abuse Compensation Calculator | Trembach Law Firm</title>
+        <meta 
+          name="description" 
+          content="Calculate potential compensation for elder abuse cases in California. Free calculator estimates damages under EADACPA including enhanced remedies and punitive damages."
+        />
+        <meta name="keywords" content="elder abuse calculator, California compensation, EADACPA damages, nursing home abuse settlement" />
       </Helmet>
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
+      <div className="min-h-screen bg-background">
+        {/* Go Back Component */}
+        <GoBack />
 
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Elder Abuse<br />Calculator
+        {/* Hero Section */}
+        <section 
+          className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${elderAbuseCalculatorHero})` }}
+        >
+          <div className="absolute inset-0 bg-black/60"></div>
+          
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">
+              Elder Abuse Compensation Calculator
             </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Nursing home neglect compensation
+            <p className="text-xl text-gray-200 mb-6">
+              Get an estimate of your potential elder abuse compensation based on your specific circumstances.
             </p>
+            <div className="flex items-center justify-center gap-2 text-sm">
+              <Calculator className="w-4 h-4" />
+              <span>Free Estimation Tool</span>
+            </div>
           </div>
         </section>
 
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="flex justify-center items-center py-8 space-x-4">
-              {[1, 2, 3].map((num) => (
-                <React.Fragment key={num}>
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold ${step >= num ? 'bg-slate-900 text-white' : 'bg-slate-100 text-slate-400'}`}>
-                    {num}
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Calculator Form */}
+            <div>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <DollarSign className="w-5 h-5 text-primary" />
+                    Elder Abuse Case Calculator
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                  
+                  {/* Abuse Type */}
+                  <div className="space-y-2">
+                    <Label htmlFor="abuseType">Type of Abuse</Label>
+                    <Select value={formData.abuseType} onValueChange={(value) => setFormData(prev => ({...prev, abuseType: value}))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select abuse type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="physical-abuse">Physical Abuse</SelectItem>
+                        <SelectItem value="sexual-abuse">Sexual Abuse</SelectItem>
+                        <SelectItem value="neglect">Neglect</SelectItem>
+                        <SelectItem value="financial-exploitation">Financial Exploitation</SelectItem>
+                        <SelectItem value="emotional-abuse">Emotional Abuse</SelectItem>
+                        <SelectItem value="abandonment">Abandonment</SelectItem>
+                        <SelectItem value="medication-errors">Medication Errors</SelectItem>
+                        <SelectItem value="multiple-types">Multiple Types of Abuse</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  {num < 3 && <div className={`w-16 h-1 rounded-full ${step > num ? 'bg-slate-900' : 'bg-slate-200'}`} />}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
 
-        {step === 1 && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <h2 className="text-3xl font-bold text-black mb-8">Abuse Details</h2>
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Type of Abuse</label>
-                  <Select value={formData.abuseType} onValueChange={(value) => updateField('abuseType', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select abuse type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="physical">Physical Abuse</SelectItem>
-                      <SelectItem value="sexual">Sexual Abuse</SelectItem>
-                      <SelectItem value="emotional">Emotional/Psychological Abuse</SelectItem>
-                      <SelectItem value="financial">Financial Exploitation</SelectItem>
-                      <SelectItem value="neglect">Neglect (Food, Water, Hygiene)</SelectItem>
-                      <SelectItem value="multiple">Multiple Types of Abuse</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Facility Type</label>
-                  <Select value={formData.facilityType} onValueChange={(value) => updateField('facilityType', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select facility type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="nursing-home">Nursing Home</SelectItem>
-                      <SelectItem value="assisted-living">Assisted Living Facility</SelectItem>
-                      <SelectItem value="memory-care">Memory Care Unit</SelectItem>
-                      <SelectItem value="home-health">Home Health Care</SelectItem>
-                      <SelectItem value="hospital">Hospital/Rehabilitation Center</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Severity of Harm</label>
-                  <Select value={formData.severity} onValueChange={(value) => updateField('severity', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select severity level" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="minor">Minor (Temporary discomfort)</SelectItem>
-                      <SelectItem value="moderate">Moderate (Medical treatment required)</SelectItem>
-                      <SelectItem value="severe">Severe (Hospitalization required)</SelectItem>
-                      <SelectItem value="catastrophic">Catastrophic (Permanent disability)</SelectItem>
-                      <SelectItem value="death">Wrongful Death</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <FormNavigation
-                currentStep={step}
-                isValid={isStepValid()}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
-            </div>
-          </section>
-        )}
-
-        {step === 2 && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <h2 className="text-3xl font-bold text-black mb-8">Injury & Duration Details</h2>
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Type of Injuries</label>
-                  <Select value={formData.injuries} onValueChange={(value) => updateField('injuries', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select primary injury type" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="bedsores">Bedsores/Pressure Ulcers</SelectItem>
-                      <SelectItem value="malnutrition">Malnutrition/Dehydration</SelectItem>
-                      <SelectItem value="falls">Falls/Fractures</SelectItem>
-                      <SelectItem value="medication-errors">Medication Errors</SelectItem>
-                      <SelectItem value="infection">Infection/Sepsis</SelectItem>
-                      <SelectItem value="broken-bones">Broken Bones/Hip Fracture</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Medical Costs Incurred</label>
-                  <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select medical cost range" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="under-10k">Under $10,000</SelectItem>
-                      <SelectItem value="10k-50k">$10,000 - $50,000</SelectItem>
-                      <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
-                      <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
-                      <SelectItem value="over-250k">Over $250,000</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Duration of Abuse</label>
-                  <Select value={formData.duration} onValueChange={(value) => updateField('duration', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select abuse duration" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="days">Days</SelectItem>
-                      <SelectItem value="weeks">Weeks</SelectItem>
-                      <SelectItem value="1-3-months">1-3 Months</SelectItem>
-                      <SelectItem value="3-6-months">3-6 Months</SelectItem>
-                      <SelectItem value="6-12-months">6-12 Months</SelectItem>
-                      <SelectItem value="over-year">Over 1 Year</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Age of Victim</label>
-                  <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select age range" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="65-74">65-74 years old</SelectItem>
-                      <SelectItem value="75-84">75-84 years old</SelectItem>
-                      <SelectItem value="85-plus">85+ years old</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-slate-700 mb-2">Evidence of Punitive Conduct</label>
-                  <Select value={formData.punitive} onValueChange={(value) => updateField('punitive', value)}>
-                    <SelectTrigger className="w-full h-14 text-base">
-                      <SelectValue placeholder="Select punitive damages likelihood" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="none">No Evidence</SelectItem>
-                      <SelectItem value="possible">Possible (Single incident)</SelectItem>
-                      <SelectItem value="likely">Likely (Repeated violations)</SelectItem>
-                      <SelectItem value="strong">Strong (Systemic neglect/cover-up)</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-              </div>
-
-              <FormNavigation
-                currentStep={step}
-                isValid={isStepValid()}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
-            </div>
-          </section>
-        )}
-
-        {step === 3 && results && (
-          <section className="py-20">
-            <div className="container mx-auto px-6 max-w-2xl">
-              <div className="bg-slate-50 rounded-2xl p-8 mb-8">
-                <h2 className="text-2xl font-bold text-black mb-6">Estimated Compensation Range</h2>
-                <div className="bg-white rounded-xl p-6 mb-4">
-                  <div className="flex items-baseline justify-between mb-2">
-                    <span className="text-slate-600">Low Estimate</span>
-                    <span className="text-3xl font-bold text-slate-900">${results.min.toLocaleString()}</span>
+                  {/* Facility Type */}
+                  <div className="space-y-2">
+                    <Label htmlFor="facilityType">Where did the abuse occur?</Label>
+                    <Select value={formData.facilityType} onValueChange={(value) => setFormData(prev => ({...prev, facilityType: value}))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select location" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="nursing-home">Nursing Home</SelectItem>
+                        <SelectItem value="assisted-living">Assisted Living Facility</SelectItem>
+                        <SelectItem value="memory-care">Memory Care Facility</SelectItem>
+                        <SelectItem value="home-care">Home Care Setting</SelectItem>
+                        <SelectItem value="hospital">Hospital</SelectItem>
+                        <SelectItem value="private-home">Private Home</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
-                  <div className="h-2 bg-slate-100 rounded-full mb-4">
-                    <div className="h-full bg-slate-900 rounded-full" style={{ width: '40%' }} />
-                  </div>
-                  <div className="flex items-baseline justify-between">
-                    <span className="text-slate-600">High Estimate</span>
-                    <span className="text-3xl font-bold text-slate-900">${results.max.toLocaleString()}</span>
-                  </div>
-                </div>
 
-                <div className="bg-amber-50 border-l-4 border-amber-400 p-4 mt-6">
-                  <div className="flex items-start">
-                    <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-3 flex-shrink-0" />
-                    <div>
-                      <h3 className="text-sm font-semibold text-amber-900 mb-1">Important Disclaimer</h3>
-                      <p className="text-sm text-amber-800 leading-relaxed">
-                        This estimate is for informational purposes only and does not constitute legal advice. Actual compensation depends on specific case factors including evidence quality, facility history, punitive damages eligibility, and individual circumstances. California elder abuse law provides enhanced remedies including attorney fees. Every case is unique and requires professional evaluation.
-                      </p>
+                  {/* Severity */}
+                  <div className="space-y-2">
+                    <Label>Severity of Abuse (1 = Minor, 10 = Severe)</Label>
+                    <div className="px-2">
+                      <Slider
+                        value={formData.severity}
+                        onValueChange={(value) => setFormData(prev => ({...prev, severity: value}))}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                        <span>Minor</span>
+                        <span className="font-medium">Severity: {formData.severity[0]}</span>
+                        <span>Severe</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
 
-              <div className="space-y-4">
-                <Link
-                  to="/free-consultation"
-                  className="block w-full bg-slate-900 text-white py-4 px-6 rounded-xl font-semibold hover:bg-slate-800 transition-all text-center no-underline"
-                >
-                  Get Urgent Case Review
-                </Link>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  onClick={resetForm}
-                  className="w-full h-14"
-                >
-                  Start New Calculation
-                </Button>
-              </div>
+                  {/* Age */}
+                  <div className="space-y-2">
+                    <Label htmlFor="age">Age of Elder</Label>
+                    <Input
+                      id="age"
+                      type="number"
+                      value={formData.age}
+                      onChange={(e) => setFormData(prev => ({...prev, age: e.target.value}))}
+                      placeholder="Enter age"
+                      min="65"
+                      max="120"
+                    />
+                  </div>
+
+                  {/* Medical Expenses */}
+                  <div className="space-y-2">
+                    <Label htmlFor="medicalExpenses">Medical Expenses to Date</Label>
+                    <Input
+                      id="medicalExpenses"
+                      type="number"
+                      value={formData.medicalExpenses}
+                      onChange={(e) => setFormData(prev => ({...prev, medicalExpenses: e.target.value}))}
+                      placeholder="$0.00"
+                    />
+                  </div>
+
+                  {/* Ongoing Care Costs */}
+                  <div className="space-y-2">
+                    <Label htmlFor="ongoingCare">Estimated Future Care Costs</Label>
+                    <Input
+                      id="ongoingCare"
+                      type="number"
+                      value={formData.ongoingCare}
+                      onChange={(e) => setFormData(prev => ({...prev, ongoingCare: e.target.value}))}
+                      placeholder="$0.00"
+                    />
+                  </div>
+
+                  {/* Financial Losses */}
+                  <div className="space-y-2">
+                    <Label htmlFor="financialLosses">Financial Losses (if applicable)</Label>
+                    <Input
+                      id="financialLosses"
+                      type="number"
+                      value={formData.financialLosses}
+                      onChange={(e) => setFormData(prev => ({...prev, financialLosses: e.target.value}))}
+                      placeholder="$0.00"
+                    />
+                  </div>
+
+                  {/* Pain and Suffering Level */}
+                  <div className="space-y-2">
+                    <Label>Impact on Quality of Life (1 = Minimal, 10 = Devastating)</Label>
+                    <div className="px-2">
+                      <Slider
+                        value={formData.painSufferingLevel}
+                        onValueChange={(value) => setFormData(prev => ({...prev, painSufferingLevel: value}))}
+                        max={10}
+                        min={1}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-sm text-muted-foreground mt-1">
+                        <span>Minimal</span>
+                        <span className="font-medium">Impact: {formData.painSufferingLevel[0]}</span>
+                        <span>Devastating</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <Button 
+                    onClick={calculateEstimation} 
+                    className="w-full bg-primary hover:bg-primary/90"
+                    disabled={!formData.abuseType || !formData.age}
+                  >
+                    Calculate Potential Compensation
+                  </Button>
+                </CardContent>
+              </Card>
             </div>
-          </section>
-        )}
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$500K+</div>
-                <p className="text-slate-600">Average abuse settlement</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
-                <p className="text-slate-600">Urgent response available</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
+            {/* Results */}
+            <div>
+              {estimation ? (
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-primary">Estimated Compensation Range</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-6">
+                    <div className="text-center p-6 bg-primary/5 rounded-lg">
+                      <div className="text-3xl font-bold text-primary mb-2">
+                        {formatCurrency(estimation.lowEnd)} - {formatCurrency(estimation.highEnd)}
+                      </div>
+                      <p className="text-muted-foreground">Estimated Range</p>
+                    </div>
+
+                    <div className="space-y-4">
+                      <h3 className="font-semibold">Compensation Breakdown:</h3>
+                      
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span>Economic Damages</span>
+                          <span className="font-medium">{formatCurrency(estimation.breakdown.economic)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Pain & Suffering</span>
+                          <span className="font-medium">{formatCurrency(estimation.breakdown.painSuffering)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Base Compensation</span>
+                          <span className="font-medium">{formatCurrency(estimation.breakdown.base)}</span>
+                        </div>
+                        <div className="flex justify-between border-t pt-2">
+                          <span>Enhanced Damages Potential</span>
+                          <span className="font-medium text-primary">{formatCurrency(estimation.breakdown.enhanced)}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-blue-50 dark:bg-blue-950/20 p-4 rounded-lg">
+                      <div className="flex items-start gap-2">
+                        <Info className="w-5 h-5 text-blue-600 mt-0.5 flex-shrink-0" />
+                        <div className="text-sm">
+                          <p className="font-medium text-blue-800 dark:text-blue-200">Enhanced Damages Under EADACPA</p>
+                          <p className="text-blue-700 dark:text-blue-300">
+                            California's Elder Abuse Act allows for attorney fees, punitive damages, and enhanced remedies when we prove defendants acted with recklessness, fraud, malice, or oppression.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <p className="text-sm text-muted-foreground">
+                        • Type and severity of elder abuse
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        • Location and facility liability factors
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        • Medical expenses and ongoing care needs
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        • Financial losses and exploitation damages
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        • Pain, suffering, and emotional distress
+                      </p>
+                      <p className="text-sm text-muted-foreground">
+                        • Enhanced remedies under California law
+                      </p>
+                    </div>
+
+                    <div className="pt-4 border-t">
+                      <p className="text-sm text-center text-muted-foreground mb-4">
+                        For an accurate assessment, schedule a free consultation with our experienced elder abuse attorneys.
+                      </p>
+                      <Button 
+                        className="w-full bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => window.location.href = '/elder-abuse-case-evaluation'}
+                      >
+                        Get Free Case Evaluation
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              ) : (
+                <Card>
+                  <CardContent className="text-center py-12">
+                    <Calculator className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="text-xl font-semibold mb-2">Elder Abuse Compensation Calculator</h3>
+                    <p className="text-muted-foreground mb-6">
+                      Complete the form to calculate your potential compensation under California's Elder Abuse and Dependent Adult Civil Protection Act.
+                    </p>
+                    <div className="space-y-3 text-sm text-left max-w-md mx-auto">
+                      <p>Factors that affect compensation:</p>
+                      <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                        <li>Type and severity of elder abuse</li>
+                        <li>Location and facility liability factors</li>
+                        <li>Medical expenses and ongoing care needs</li>
+                        <li>Financial losses and exploitation damages</li>
+                        <li>Pain, suffering, and emotional distress</li>
+                        <li>Enhanced remedies under California law</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
             </div>
           </div>
-        </section>
-      </main>
+
+          {/* Legal Disclaimer */}
+          <Card className="mt-8 border-l-4 border-l-amber-500">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-3">
+                <AlertTriangle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-amber-800 dark:text-amber-200 mb-2">Important Legal Disclaimer</h3>
+                  <div className="text-sm text-amber-700 dark:text-amber-300 space-y-2">
+                    <p>
+                      This calculator provides estimates only and should not be considered legal advice. Actual compensation varies significantly based on specific case circumstances, evidence, and legal factors unique to each situation.
+                    </p>
+                    <p>
+                      California's Elder Abuse and Dependent Adult Civil Protection Act (EADACPA) provides enhanced remedies including attorney fees, punitive damages, and treble damages in certain cases. These estimates incorporate potential enhanced damages but actual awards depend on proving defendants acted with recklessness, fraud, malice, or oppression.
+                    </p>
+                    <p>
+                      For accurate case evaluation, consult with experienced elder abuse attorneys who can assess your specific circumstances and applicable law.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </>
   );
 };

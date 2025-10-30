@@ -4,16 +4,16 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 // Import practice area images
 import mesotheliomaAsbestosImg from '@/assets/practice-areas/mesothelioma-asbestos.jpg';
-import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries-bright.jpg';
-import carAccidentsImg from '@/assets/practice-areas/car-accidents-bright.jpg';
+import silicosisInjuriesImg from '@/assets/practice-areas/silicosis-injuries.jpg';
+import carAccidentsImg from '@/assets/practice-areas/car-accidents.jpg';
 import talcBabyPowderImg from '@/assets/practice-areas/talc-baby-powder.jpg';
 import truck18WheelerImg from '@/assets/practice-areas/truck-18-wheeler.jpg';
 import productLiabilityImg from '@/assets/practice-areas/product-liability.jpg';
-import amputationImg from '@/assets/practice-areas/amputation-bright.jpg';
+import amputationImg from '@/assets/practice-areas/amputation.jpg';
 import medicalDevicesImg from '@/assets/practice-areas/medical-devices.jpg';
-import campLejeuneImg from '@/assets/practice-areas/camp-lejeune-bright.jpg';
+import campLejeuneImg from '@/assets/practice-areas/camp-lejeune.jpg';
 import birthInjuriesImg from '@/assets/practice-areas/birth-injuries.jpg';
-import amusementParksImg from '@/assets/practice-areas/amusement-parks-bright.jpg';
+import amusementParksImg from '@/assets/practice-areas/amusement-parks.jpg';
 import electrocutionImg from '@/assets/practice-areas/electrocution.jpg';
 import defamationImg from '@/assets/practice-areas/defamation.jpg';
 
@@ -131,7 +131,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
           <a 
             href={`/practice-areas/${generateSlug(title)}`}
-            className="bg-white !text-black hover:!text-black active:!text-black visited:!text-black font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2 no-underline hover:no-underline visited:no-underline"
+            className="bg-white text-black font-semibold px-6 py-3 rounded-lg shadow-lg hover:bg-gray-100 transition-colors duration-200 flex items-center gap-2"
           >
             <svg width="16" height="16" fill="currentColor" viewBox="0 0 256 256">
               <path d="M240,128a15.74,15.74,0,0,1-7.6,13.51L88.32,229.65a16,16,0,0,1-16.2.3A15.86,15.86,0,0,1,64,216.13V39.87a15.86,15.86,0,0,1,8.12-13.82,16,16,0.3L232.4,114.49A15.74,15.74,0,0,1,240,128Z"></path>
@@ -170,7 +170,7 @@ const PracticeAreaCard: React.FC<PracticeAreaProps> = ({ title, description, ico
         <div className="pt-2">
           <a 
             href={`/practice-areas/${generateSlug(title)}`}
-            className="ghost-button group/btn no-underline hover:no-underline visited:no-underline"
+            className="ghost-button group/btn"
           >
             See More Information
             <svg width="14" height="14" fill="currentColor" viewBox="0 0 256 256" className="transition-transform group-hover/btn:translate-x-1">
@@ -567,7 +567,7 @@ const PracticeAreas3D = () => {
             </p>
             <a 
               href="/case-evaluation"
-              className="hero-button text-lg px-8 py-4 !text-white hover:!text-white active:!text-white visited:!text-white no-underline hover:no-underline visited:no-underline"
+              className="hero-button text-lg px-8 py-4"
             >
               Get Free Case Review
               <svg width="18" height="18" fill="currentColor" viewBox="0 0 256 256">

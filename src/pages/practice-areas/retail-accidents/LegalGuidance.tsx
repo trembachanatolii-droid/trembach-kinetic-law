@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import { Scale, Shield, FileText, AlertTriangle, Clock, DollarSign, CheckCircle, Users, Building, ChevronDown, ChevronUp, Phone, Gavel, BookOpen, Award, Target } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import '../retail-accidents.css';
 import heroBackground from '@/assets/practice-areas/retail-legal-guidance-hero.jpg';
@@ -28,7 +28,7 @@ const LegalGuidance: React.FC = () => {
       
       <SEO title="Retail Store Accident Legal Guidance | California Law | Trembach Law Firm" description="Complete guide to California retail store accident law, your rights, and legal options. Expert guidance from former defense attorney." keywords="California retail accident law, premises liability guide, shopping injury rights, store accident legal help" />
 
-      
+      <GoBack fallbackPath="/practice-areas/retail-accidents" />
 
       {/* Hero Section */}
       <section className="relative h-[500px] flex items-center justify-center bg-cover bg-center bg-no-repeat" style={{

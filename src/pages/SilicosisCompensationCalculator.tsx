@@ -1,456 +1,379 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Wind, AlertCircle } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
+import React, { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Textarea } from '@/components/ui/textarea';
+import { Calculator, DollarSign, FileText, Users } from 'lucide-react';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
+import compensationHero from '@/assets/silicosis-compensation-calculator.jpg';
 
-interface SilicosisFormData extends CalculatorFormData {
-  diagnosisType: string;
-  severity: string;
-  workplaceType: string;
-  exposureYears: string;
-  age: string;
-  medicalCosts: string;
-  futureCareCosts: string;
-  lostWages: string;
-  breathingSupport: string;
-  lungTransplant: string;
-  [key: string]: string;
-}
+const SilicosisCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    age: '',
+    exposureYears: '',
+    diagnosisDate: '',
+    severity: '',
+    workplaceType: '',
+    currentSymptoms: '',
+    medicalExpenses: '',
+    lostWages: '',
+    additionalInfo: ''
+  });
 
-const initialFormData: SilicosisFormData = {
-  diagnosisType: '',
-  severity: '',
-  workplaceType: '',
-  exposureYears: '',
-  age: '',
-  medicalCosts: '',
-  futureCareCosts: '',
-  lostWages: '',
-  breathingSupport: '',
-  lungTransplant: ''
-};
+  const [results, setResults] = useState<{
+    estimatedRange: string;
+    factorsConsidered: string[];
+    nextSteps: string[];
+  } | null>(null);
 
-const calculateCompensation = (data: SilicosisFormData): CalculatorResults => {
-  const diagnosisMultipliers: { [key: string]: number } = {
-    'simple': 1.5,
-    'accelerated': 2.5,
-    'acute': 3.5,
-    'pmf': 5.0,
-    'conglomerate': 4.5
+  const handleInputChange = (field: string, value: string) => {
+    setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const severityMultipliers: { [key: string]: number } = {
-    'mild': 1.0,
-    'moderate': 2.0,
-    'severe': 3.5,
-    'catastrophic': 5.0
+  const calculateCompensation = () => {
+    const age = parseInt(formData.age) || 0;
+    const exposureYears = parseInt(formData.exposureYears) || 0;
+    const medicalExpenses = parseInt(formData.medicalExpenses) || 0;
+    const lostWages = parseInt(formData.lostWages) || 0;
+
+    // Base compensation calculation
+    let baseAmount = medicalExpenses + lostWages;
+    
+    // Severity multiplier
+    const severityMultiplier = {
+      'simple': 1.2,
+      'complicated': 2.0,
+      'acute': 3.0,
+      'progressive': 3.5
+    }[formData.severity] || 1.0;
+
+    // Exposure years factor
+    const exposureFactor = Math.min(exposureYears * 0.1, 2.0);
+    
+    // Age factor (younger = higher future losses)
+    const ageFactor = age < 50 ? 1.3 : age < 65 ? 1.1 : 1.0;
+
+    // Workplace type factor
+    const workplaceMultiplier = {
+      'countertop': 1.4,
+      'construction': 1.2,
+      'mining': 1.3,
+      'foundry': 1.3,
+      'sandblasting': 1.5,
+      'ceramics': 1.2,
+      'other': 1.0
+    }[formData.workplaceType] || 1.0;
+
+    // Calculate total compensation range
+    const calculated = baseAmount * severityMultiplier * (1 + exposureFactor) * ageFactor * workplaceMultiplier;
+    const minAmount = Math.max(calculated * 0.7, 50000);
+    const maxAmount = calculated * 1.3;
+
+    const formatCurrency = (amount: number) => 
+      new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0 }).format(amount);
+
+    return {
+      estimatedRange: `${formatCurrency(minAmount)} - ${formatCurrency(maxAmount)}`,
+      factorsConsidered: [
+        `Silicosis severity: ${formData.severity}`,
+        `Years of exposure: ${exposureYears}`,
+        `Current age: ${age}`,
+        `Workplace type: ${formData.workplaceType}`,
+        `Medical expenses: ${formatCurrency(medicalExpenses)}`,
+        `Lost wages: ${formatCurrency(lostWages)}`
+      ].filter(factor => !factor.includes('undefined') && !factor.includes('$0')),
+      nextSteps: [
+        'Schedule a free consultation with our silicosis attorneys',
+        'Gather all medical records and documentation',
+        'Document your work history and exposure details',
+        'Consider filing your claim as soon as possible'
+      ]
+    };
   };
 
-  const workplaceMultipliers: { [key: string]: number } = {
-    'countertop': 2.8,
-    'mining': 2.5,
-    'sandblasting': 3.0,
-    'construction': 2.2,
-    'foundry': 2.4,
-    'quarry': 2.3,
-    'other': 1.8
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validate required fields
+    if (!formData.age || !formData.exposureYears || !formData.severity || !formData.workplaceType) {
+      alert('Please fill in all required fields to calculate compensation.');
+      return;
+    }
+
+    const calculationResults = calculateCompensation();
+    setResults(calculationResults);
+    
+    // Scroll to results
+    setTimeout(() => {
+      document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+    }, 100);
   };
-
-  const exposureMultipliers: { [key: string]: number } = {
-    '0-2': 1.0,
-    '3-5': 1.3,
-    '6-10': 1.6,
-    '11-15': 2.0,
-    '16-20': 2.4,
-    '20+': 2.8
-  };
-
-  let baseMin = 100000;
-  let baseMax = 400000;
-
-  const diagnosisMult = diagnosisMultipliers[data.diagnosisType] || 1;
-  const severityMult = severityMultipliers[data.severity] || 1;
-  const workplaceMult = workplaceMultipliers[data.workplaceType] || 1;
-  const exposureMult = exposureMultipliers[data.exposureYears] || 1;
-
-  baseMin *= diagnosisMult * severityMult * workplaceMult;
-  baseMax *= diagnosisMult * severityMult * workplaceMult;
-
-  baseMin *= exposureMult;
-  baseMax *= exposureMult;
-
-  const age = parseInt(data.age) || 40;
-  if (age < 40) {
-    const ageFactor = 1 + ((40 - age) * 0.02);
-    baseMin *= ageFactor;
-    baseMax *= ageFactor;
-  }
-
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-
-  baseMin += medicalCosts + futureCareCosts * 0.8 + lostWages * 0.8;
-  baseMax += medicalCosts * 1.5 + futureCareCosts * 1.5 + lostWages * 1.5;
-
-  if (data.breathingSupport === 'yes') {
-    baseMin *= 1.8;
-    baseMax *= 2.0;
-  }
-
-  if (data.lungTransplant === 'yes') {
-    baseMin *= 2.5;
-    baseMax *= 3.0;
-  }
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax)
-  };
-};
-
-const validateStep = (data: SilicosisFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.diagnosisType && data.severity && data.workplaceType && data.exposureYears);
-  }
-  if (step === 2) {
-    return !!(data.age && data.medicalCosts && data.futureCareCosts && 
-              data.lostWages && data.breathingSupport && data.lungTransplant);
-  }
-  return true;
-};
-
-const SilicosisCompensationCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<SilicosisFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
 
   return (
     <>
-      <Helmet>
-        <title>Silicosis Calculator | Countertop Worker Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate silicosis compensation for countertop workers. Free estimates for progressive massive fibrosis cases." />
-      </Helmet>
-
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
-
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Silicosis<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Occupational lung disease compensation
-            </p>
-          </div>
-        </section>
-
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$600K+</div>
-                <p className="text-slate-600">PMF case average</p>
+      <SEO 
+        title="Silicosis Compensation Calculator | Estimate Your Case Value"
+        description="Use our free silicosis compensation calculator to estimate potential compensation for your silicosis case. Get an instant evaluation based on your specific circumstances."
+      />
+      
+      <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
+        <GoBack className="container mx-auto px-4" />
+        
+        {/* Hero Section */}
+        <section className="relative py-20 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent" />
+          <div 
+            className="absolute inset-0 bg-cover bg-center opacity-10"
+            style={{ backgroundImage: `url(${compensationHero})` }}
+          />
+          
+          <div className="container mx-auto px-4 relative z-10">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <Calculator className="w-12 h-12 text-primary" />
+                <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+                  Silicosis Compensation Calculator
+                </h1>
               </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Epidemic</div>
-                <p className="text-slate-600">Countertop industry</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
+              <p className="text-xl text-muted-foreground mb-8">
+                Get a free estimate of your potential silicosis compensation based on your specific case details
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
-              <div className="bg-slate-900 px-8 py-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-white">Calculate Your Case Value</h2>
-                  <div className="flex gap-2">
-                    {[1, 2, 3].map((s) => (
-                      <div
-                        key={s}
-                        className={`w-10 h-1 rounded-full transition-colors ${
-                          step >= s ? 'bg-white' : 'bg-slate-700'
-                        }`}
-                      />
-                    ))}
-                  </div>
-                </div>
-              </div>
-
-              <div className="p-8">
-                {step === 1 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Type of Silicosis Diagnosis
-                      </label>
-                      <select
-                        value={formData.diagnosisType}
-                        onChange={(e) => updateField('diagnosisType', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select diagnosis type</option>
-                        <option value="simple">Simple Silicosis</option>
-                        <option value="accelerated">Accelerated Silicosis</option>
-                        <option value="acute">Acute Silicosis</option>
-                        <option value="pmf">Progressive Massive Fibrosis (PMF)</option>
-                        <option value="conglomerate">Conglomerate Masses</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Disease Severity
-                      </label>
-                      <select
-                        value={formData.severity}
-                        onChange={(e) => updateField('severity', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select severity</option>
-                        <option value="mild">Mild - Minor breathing difficulty</option>
-                        <option value="moderate">Moderate - Noticeable impairment</option>
-                        <option value="severe">Severe - Significant disability</option>
-                        <option value="catastrophic">Catastrophic - Life-threatening</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Workplace Type
-                      </label>
-                      <select
-                        value={formData.workplaceType}
-                        onChange={(e) => updateField('workplaceType', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select workplace</option>
-                        <option value="countertop">Countertop Fabrication/Installation</option>
-                        <option value="sandblasting">Sandblasting</option>
-                        <option value="mining">Mining Operations</option>
-                        <option value="foundry">Foundry Work</option>
-                        <option value="quarry">Quarry Operations</option>
-                        <option value="construction">Construction/Demolition</option>
-                        <option value="other">Other Industrial Setting</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Years of Silica Exposure
-                      </label>
-                      <select
-                        value={formData.exposureYears}
-                        onChange={(e) => updateField('exposureYears', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select duration</option>
-                        <option value="0-2">0-2 years</option>
-                        <option value="3-5">3-5 years</option>
-                        <option value="6-10">6-10 years</option>
-                        <option value="11-15">11-15 years</option>
-                        <option value="16-20">16-20 years</option>
-                        <option value="20+">Over 20 years</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Your Current Age
-                      </label>
-                      <select
-                        value={formData.age}
-                        onChange={(e) => updateField('age', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select age</option>
-                        <option value="20">Under 30</option>
-                        <option value="35">30-39</option>
-                        <option value="45">40-49</option>
-                        <option value="55">50-59</option>
-                        <option value="65">60+</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Medical Costs to Date
-                      </label>
-                      <select
-                        value={formData.medicalCosts}
-                        onChange={(e) => updateField('medicalCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="10000">$0 - $10,000</option>
-                        <option value="30000">$10,000 - $50,000</option>
-                        <option value="75000">$50,000 - $100,000</option>
-                        <option value="150000">$100,000 - $200,000</option>
-                        <option value="300000">Over $200,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Estimated Future Medical Care
-                      </label>
-                      <select
-                        value={formData.futureCareCosts}
-                        onChange={(e) => updateField('futureCareCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">$0 - $50,000</option>
-                        <option value="100000">$50,000 - $150,000</option>
-                        <option value="250000">$150,000 - $350,000</option>
-                        <option value="500000">$350,000 - $650,000</option>
-                        <option value="1000000">Over $650,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Lost Wages and Income
-                      </label>
-                      <select
-                        value={formData.lostWages}
-                        onChange={(e) => updateField('lostWages', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">$0 - $50,000</option>
-                        <option value="100000">$50,000 - $150,000</option>
-                        <option value="250000">$150,000 - $350,000</option>
-                        <option value="500000">$350,000 - $650,000</option>
-                        <option value="1000000">Over $650,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Do you require breathing support?
-                      </label>
-                      <select
-                        value={formData.breathingSupport}
-                        onChange={(e) => updateField('breathingSupport', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select option</option>
-                        <option value="no">No</option>
-                        <option value="yes">Yes - Oxygen or ventilator</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Lung transplant needed or received?
-                      </label>
-                      <select
-                        value={formData.lungTransplant}
-                        onChange={(e) => updateField('lungTransplant', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select option</option>
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 3 && results && (
-                  <div className="space-y-6">
-                    <div className="text-center py-8">
-                      <h3 className="text-3xl font-bold text-slate-900 mb-4">
-                        Estimated Compensation Range
-                      </h3>
-                      <div className="text-5xl font-bold text-slate-900 mb-2">
-                        ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+        {/* Calculator Form */}
+        <section className="py-20">
+          <div className="container mx-auto px-4">
+            <div className="max-w-4xl mx-auto">
+              <Card className="shadow-2xl border-0 bg-card/80 backdrop-blur">
+                <CardHeader className="text-center pb-8">
+                  <CardTitle className="text-3xl font-bold text-primary mb-4">
+                    Calculate Your Potential Compensation
+                  </CardTitle>
+                  <CardDescription className="text-lg">
+                    Provide the following information for a personalized estimate
+                  </CardDescription>
+                </CardHeader>
+                
+                <CardContent>
+                  <form onSubmit={handleSubmit} className="space-y-8">
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="age">Current Age</Label>
+                        <Input
+                          id="age"
+                          type="number"
+                          placeholder="Your age"
+                          value={formData.age}
+                          onChange={(e) => handleInputChange('age', e.target.value)}
+                        />
                       </div>
-                      <p className="text-slate-600 mt-4">
-                        Based on your diagnosis and economic damages
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="exposureYears">Years of Silica Exposure</Label>
+                        <Input
+                          id="exposureYears"
+                          type="number"
+                          placeholder="Years exposed to silica"
+                          value={formData.exposureYears}
+                          onChange={(e) => handleInputChange('exposureYears', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="diagnosisDate">Date of Diagnosis</Label>
+                        <Input
+                          id="diagnosisDate"
+                          type="date"
+                          value={formData.diagnosisDate}
+                          onChange={(e) => handleInputChange('diagnosisDate', e.target.value)}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="severity">Silicosis Severity</Label>
+                        <Select onValueChange={(value) => handleInputChange('severity', value)}>
+                          <SelectTrigger>
+                            <SelectValue placeholder="Select severity level" />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="simple">Simple Silicosis</SelectItem>
+                            <SelectItem value="complicated">Complicated Silicosis</SelectItem>
+                            <SelectItem value="acute">Acute Silicosis</SelectItem>
+                            <SelectItem value="progressive">Progressive Massive Fibrosis</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="workplaceType">Type of Workplace Exposure</Label>
+                      <Select onValueChange={(value) => handleInputChange('workplaceType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select workplace type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="countertop">Countertop/Stone Fabrication</SelectItem>
+                          <SelectItem value="construction">Construction</SelectItem>
+                          <SelectItem value="mining">Mining</SelectItem>
+                          <SelectItem value="foundry">Foundry Work</SelectItem>
+                          <SelectItem value="sandblasting">Sandblasting</SelectItem>
+                          <SelectItem value="ceramics">Ceramics/Glass Manufacturing</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div className="space-y-2">
+                        <Label htmlFor="medicalExpenses">Estimated Medical Expenses</Label>
+                        <Input
+                          id="medicalExpenses"
+                          type="number"
+                          placeholder="Total medical costs"
+                          value={formData.medicalExpenses}
+                          onChange={(e) => handleInputChange('medicalExpenses', e.target.value)}
+                        />
+                      </div>
+                      
+                      <div className="space-y-2">
+                        <Label htmlFor="lostWages">Lost Wages/Income</Label>
+                        <Input
+                          id="lostWages"
+                          type="number"
+                          placeholder="Lost income amount"
+                          value={formData.lostWages}
+                          onChange={(e) => handleInputChange('lostWages', e.target.value)}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="currentSymptoms">Current Symptoms</Label>
+                      <Textarea
+                        id="currentSymptoms"
+                        placeholder="Describe your current symptoms and how they affect your daily life"
+                        value={formData.currentSymptoms}
+                        onChange={(e) => handleInputChange('currentSymptoms', e.target.value)}
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="additionalInfo">Additional Information</Label>
+                      <Textarea
+                        id="additionalInfo"
+                        placeholder="Any other relevant information about your case"
+                        value={formData.additionalInfo}
+                        onChange={(e) => handleInputChange('additionalInfo', e.target.value)}
+                      />
+                    </div>
+
+                    <Button type="submit" className="w-full py-6 text-lg font-semibold">
+                      <DollarSign className="w-5 h-5 mr-2" />
+                      Calculate My Compensation
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+
+              {/* Results Section */}
+              {results && (
+                <Card className="mt-8 shadow-2xl border-0 bg-card/80 backdrop-blur" id="results-section">
+                  <CardHeader className="text-center pb-6">
+                    <CardTitle className="text-2xl font-bold text-primary mb-2">
+                      Your Estimated Compensation Range
+                    </CardTitle>
+                    <CardDescription className="text-lg">
+                      Based on the information you provided
+                    </CardDescription>
+                  </CardHeader>
+                  
+                  <CardContent className="space-y-8">
+                    <div className="text-center">
+                      <div className="text-4xl font-bold text-primary mb-2">
+                        {results.estimatedRange}
+                      </div>
+                      <p className="text-muted-foreground">
+                        *This is an estimate based on similar cases. Actual compensation may vary.
                       </p>
                     </div>
 
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                      <div className="flex gap-3">
-                        <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={20} />
-                        <div className="text-sm text-amber-900">
-                          <p className="font-semibold mb-2">Important Legal Disclaimer:</p>
-                          <p className="mb-2">
-                            This calculator provides a general estimate only and does not constitute legal advice or a guarantee of compensation. Actual case values depend on multiple factors including state laws, available evidence, liable parties, and case-specific circumstances.
-                          </p>
-                          <p>
-                            Silicosis cases involve complex occupational health regulations and may qualify for workers' compensation, product liability, or toxic tort claims. Consult with an experienced attorney for a proper evaluation.
-                          </p>
-                        </div>
+                    <div className="grid md:grid-cols-2 gap-6">
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <FileText className="w-5 h-5 mr-2 text-primary" />
+                          Factors Considered
+                        </h3>
+                        <ul className="space-y-2">
+                          {results.factorsConsidered.map((factor, index) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {factor}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+
+                      <div>
+                        <h3 className="text-lg font-semibold mb-4 flex items-center">
+                          <Users className="w-5 h-5 mr-2 text-primary" />
+                          Next Steps
+                        </h3>
+                        <ul className="space-y-2">
+                          {results.nextSteps.map((step, index) => (
+                            <li key={index} className="text-sm text-muted-foreground">
+                              • {step}
+                            </li>
+                          ))}
+                        </ul>
                       </div>
                     </div>
-                  </div>
-                )}
 
-                <div className="flex gap-4 mt-8">
-                  {step > 1 && step < 3 && (
-                    <button
-                      onClick={handleBack}
-                      className="px-6 py-3 border border-slate-300 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition-colors"
-                    >
-                      Back
-                    </button>
-                  )}
-                  {step < 3 && (
-                    <button
-                      onClick={handleNext}
-                      disabled={!isStepValid()}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {step === 2 ? 'Calculate' : 'Continue'}
-                    </button>
-                  )}
-                  {step === 3 && (
-                    <button
-                      onClick={resetForm}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
-                    >
-                      Start New Calculation
-                    </button>
-                  )}
-                </div>
-              </div>
+                    <div className="text-center">
+                      <Button 
+                        size="lg" 
+                        className="bg-red-600 hover:bg-red-700 text-white"
+                        onClick={() => window.location.href = '/silicosis-case-evaluation'}
+                      >
+                        Get Free Legal Consultation
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Disclaimer Section */}
+              <Card className="mt-8 bg-muted/50 border-muted">
+                <CardContent className="p-6">
+                  <h3 className="text-lg font-semibold mb-4 text-center">Important Legal Disclaimer</h3>
+                  <div className="text-sm text-muted-foreground space-y-3">
+                    <p>
+                      <strong>This calculator provides estimates only.</strong> The compensation amounts shown are based on general factors and similar cases. Your actual compensation may be significantly different depending on the specific circumstances of your case.
+                    </p>
+                    <p>
+                      <strong>Not Legal Advice:</strong> This calculator does not constitute legal advice. Every silicosis case is unique, and compensation depends on many factors including the strength of evidence, degree of negligence, jurisdiction, and individual circumstances.
+                    </p>
+                    <p>
+                      <strong>Consultation Required:</strong> To get an accurate assessment of your case value, you must speak with a qualified silicosis attorney who can review your medical records, work history, and other relevant documentation.
+                    </p>
+                    <p>
+                      <strong>Time Limits Apply:</strong> Silicosis claims are subject to statutes of limitations. Contact an attorney immediately to protect your rights.
+                    </p>
+                    <p className="text-center font-medium">
+                      For a free, confidential case evaluation, contact our experienced silicosis attorneys today.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
-      </main>
+      </div>
     </>
   );
 };

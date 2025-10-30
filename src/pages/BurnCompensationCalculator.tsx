@@ -1,372 +1,208 @@
 import React, { useState } from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Calculator, DollarSign, Phone } from 'lucide-react';
+import heroBackground from '@/assets/burn-compensation-calculator-hero.jpg';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
 
-const BurnCompensationCalculator = () => {
-  const [step, setStep] = useState(1);
+const BurnCompensationCalculator: React.FC = () => {
   const [formData, setFormData] = useState({
     burnSeverity: '',
     bodyPercentage: '',
-    medicalCosts: '',
-    futureCareCosts: '',
-    scarring: '',
-    lostWages: ''
+    medicalExpenses: '',
+    lostWages: '',
+    age: '',
+    income: ''
   });
-  const [results, setResults] = useState<{ min: number; max: number } | null>(null);
 
-  const handleNext = () => {
-    if (step === 2) {
-      calculateCompensation();
-    } else {
-      setStep(step + 1);
-    }
-  };
-
-  const handleBack = () => setStep(step - 1);
+  const [calculation, setCalculation] = useState<any>(null);
 
   const calculateCompensation = () => {
-    let baseMin = 80000;
-    let baseMax = 400000;
+    const medical = parseFloat(formData.medicalExpenses) || 0;
+    const wages = parseFloat(formData.lostWages) || 0;
+    const age = parseFloat(formData.age) || 30;
+    const income = parseFloat(formData.income) || 50000;
 
-    // Burn severity multipliers
-    const severityMultipliers: Record<string, number> = {
-      'first-degree': 1,
-      'second-degree': 4,
-      'third-degree': 10,
-      'fourth-degree': 15
-    };
-    const multiplier = severityMultipliers[formData.burnSeverity] || 1;
-    baseMin *= multiplier;
-    baseMax *= multiplier;
+    let multiplier = 2;
+    if (formData.burnSeverity === 'third-degree') multiplier = 5;
+    else if (formData.burnSeverity === 'second-degree') multiplier = 3.5;
 
-    // Body percentage affected
-    const percentage = parseInt(formData.bodyPercentage) || 10;
-    const bodyMultiplier = 1 + (percentage / 100);
-    baseMin *= bodyMultiplier;
-    baseMax *= bodyMultiplier;
+    const bodyPercent = parseFloat(formData.bodyPercentage) || 10;
+    if (bodyPercent > 20) multiplier += 1;
 
-    // Add medical costs
-    const medical = parseInt(formData.medicalCosts) || 150000;
-    baseMin += medical;
-    baseMax += medical * 1.8;
+    const economicDamages = medical + wages;
+    const nonEconomicDamages = economicDamages * multiplier;
+    const totalDamages = economicDamages + nonEconomicDamages;
 
-    // Future care (skin grafts, therapy)
-    const futureCare = parseInt(formData.futureCareCosts) || 50000;
-    baseMin += futureCare * 3;
-    baseMax += futureCare * 6;
-
-    // Lost wages
-    const wages = parseInt(formData.lostWages) || 60000;
-    baseMin += wages * 2;
-    baseMax += wages * 5;
-
-    // Scarring/disfigurement premium
-    const scarringMultipliers: Record<string, number> = {
-      'minimal': 1.1,
-      'moderate': 1.5,
-      'severe': 2.0,
-      'disfiguring': 3.0
-    };
-    const scarMultiplier = scarringMultipliers[formData.scarring] || 1;
-    baseMax *= scarMultiplier;
-
-    setResults({ 
-      min: Math.round(baseMin), 
-      max: Math.round(baseMax) 
+    setCalculation({
+      economic: economicDamages,
+      nonEconomic: nonEconomicDamages,
+      total: totalDamages,
+      range: {
+        low: totalDamages * 0.7,
+        high: totalDamages * 1.5
+      }
     });
-    setStep(3);
-  };
-
-  const isStepValid = () => {
-    if (step === 1) return formData.burnSeverity && formData.bodyPercentage && formData.scarring;
-    if (step === 2) return formData.medicalCosts && formData.futureCareCosts && formData.lostWages;
-    return false;
   };
 
   return (
-    <>
-      <Helmet>
-        <title>Burn Injury Calculator | Thermal Injury Compensation | Trembach Law</title>
-        <meta name="description" content="Calculate burn injury compensation for thermal, chemical, and electrical burns. Free scarring and disfigurement estimates." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO 
+        title="Burn Injury Compensation Calculator | California Settlement Estimator"
+        description="Calculate potential burn injury compensation in California. Free settlement estimator for thermal, chemical, electrical burns."
+        canonical="/burn-compensation-calculator"
+      />
+      
+      <GoBack />
+      
+      {/* Hero Section */}
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/70"></div>
+        <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4">
+            Burn Injury Compensation Calculator
+          </h1>
+          <p className="text-xl mb-6">
+            Estimate your potential settlement for burn injuries in California
+          </p>
+        </div>
+      </section>
 
-      <main className="min-h-screen bg-white">
-        <div className="border-b border-slate-200">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link to="/calculators" className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline">
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
+      {/* Calculator */}
+      <div className="max-w-7xl mx-auto px-6 py-12">
+        <div className="grid lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2">
+            <Card className="shadow-xl">
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Calculator className="w-6 h-6 mr-2 text-red-600" />
+                  Calculate Your Burn Injury Compensation
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Burn Severity</Label>
+                    <Select value={formData.burnSeverity} onValueChange={(value) => setFormData(prev => ({ ...prev, burnSeverity: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select burn degree" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="first-degree">First-degree</SelectItem>
+                        <SelectItem value="second-degree">Second-degree</SelectItem>
+                        <SelectItem value="third-degree">Third-degree</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div>
+                    <Label>Body Surface Affected (%)</Label>
+                    <Input
+                      type="number"
+                      value={formData.bodyPercentage}
+                      onChange={(e) => setFormData(prev => ({ ...prev, bodyPercentage: e.target.value }))}
+                      placeholder="10"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <Label>Medical Expenses ($)</Label>
+                    <Input
+                      type="number"
+                      value={formData.medicalExpenses}
+                      onChange={(e) => setFormData(prev => ({ ...prev, medicalExpenses: e.target.value }))}
+                      placeholder="50000"
+                    />
+                  </div>
+                  <div>
+                    <Label>Lost Wages ($)</Label>
+                    <Input
+                      type="number"
+                      value={formData.lostWages}
+                      onChange={(e) => setFormData(prev => ({ ...prev, lostWages: e.target.value }))}
+                      placeholder="10000"
+                    />
+                  </div>
+                </div>
+
+                <Button 
+                  onClick={calculateCompensation}
+                  className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-4"
+                >
+                  Calculate Compensation
+                </Button>
+
+                {/* Disclaimer */}
+                <div className="bg-amber-50 border border-amber-200 rounded-lg p-4 mt-4">
+                  <h4 className="font-bold text-amber-800 mb-2">Important Disclaimer</h4>
+                  <p className="text-sm text-amber-700">
+                    This calculator provides rough estimates only and should not be considered legal advice. 
+                    Actual settlement amounts depend on numerous case-specific factors including the severity 
+                    of injuries, circumstances of the incident, available insurance coverage, and California 
+                    state laws. For an accurate evaluation of your potential compensation, please consult 
+                    with a qualified burn injury attorney who can review the specific details of your case.
+                  </p>
+                </div>
+
+                {calculation && (
+                  <Card className="bg-green-50 border-green-200">
+                    <CardHeader>
+                      <CardTitle className="text-green-800">Estimated Compensation Range</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="space-y-3">
+                        <div className="flex justify-between">
+                          <span>Economic Damages:</span>
+                          <span className="font-bold">${calculation.economic.toLocaleString()}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>Non-Economic Damages:</span>
+                          <span className="font-bold">${calculation.nonEconomic.toLocaleString()}</span>
+                        </div>
+                        <div className="border-t pt-3">
+                          <div className="flex justify-between text-lg font-bold">
+                            <span>Estimated Range:</span>
+                            <span>${calculation.range.low.toLocaleString()} - ${calculation.range.high.toLocaleString()}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground mt-4">
+                        This is an estimate only. Actual compensation depends on many factors specific to your case.
+                      </p>
+                    </CardContent>
+                  </Card>
+                )}
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 space-y-6">
+              <Card>
+                <CardContent className="p-6 text-center">
+                  <h3 className="text-xl font-bold mb-4">Get Professional Case Review</h3>
+                  <p className="mb-4">For accurate compensation estimates based on your specific case details</p>
+                  <Button 
+                    className="w-full bg-red-600 hover:bg-red-700 text-white"
+                    onClick={() => window.location.href = '/burn-case-evaluation'}
+                  >
+                    Free Case Evaluation
+                  </Button>
+                </CardContent>
+              </Card>
+            </div>
           </div>
         </div>
-
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <Flame className="mx-auto mb-6" size={64} strokeWidth={1.5} />
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Burn Injury<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Thermal injury compensation
-            </p>
-          </div>
-        </section>
-
-        <section className="py-20">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="mb-12">
-              <div className="flex items-center justify-between mb-8">
-                <div className="flex gap-3">
-                  {[1, 2, 3].map((s) => (
-                    <div
-                      key={s}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        s === step ? 'bg-black' : s < step ? 'bg-slate-400' : 'bg-slate-200'
-                      }`}
-                    />
-                  ))}
-                </div>
-                <span className="text-sm text-slate-500">Step {step} of 3</span>
-              </div>
-            </div>
-
-            {step === 1 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-black mb-2">Burn Details</h2>
-                  <p className="text-slate-600">Tell us about your burn injury</p>
-                </div>
-
-                <div className="space-y-4">
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">Burn Severity</label>
-                    <Select value={formData.burnSeverity} onValueChange={(value) => setFormData({ ...formData, burnSeverity: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select burn severity" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="first-degree">First-Degree - Surface layer only</SelectItem>
-                        <SelectItem value="second-degree">Second-Degree - Blistering, dermis affected</SelectItem>
-                        <SelectItem value="third-degree">Third-Degree - Full thickness, charred</SelectItem>
-                        <SelectItem value="fourth-degree">Fourth-Degree - Muscle, bone damage</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Body Surface Area Affected (%)
-                    </label>
-                    <Select value={formData.bodyPercentage} onValueChange={(value) => setFormData({ ...formData, bodyPercentage: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select body surface area" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="5">Under 10%</SelectItem>
-                        <SelectItem value="15">10% - 20%</SelectItem>
-                        <SelectItem value="30">20% - 40%</SelectItem>
-                        <SelectItem value="55">40% - 70%</SelectItem>
-                        <SelectItem value="80">Over 70%</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-slate-500 mt-2">Percentage of body covered by burns</p>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">Scarring & Disfigurement</label>
-                    <Select value={formData.scarring} onValueChange={(value) => setFormData({ ...formData, scarring: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select scarring level" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="minimal">Minimal</SelectItem>
-                        <SelectItem value="moderate">Moderate</SelectItem>
-                        <SelectItem value="severe">Severe</SelectItem>
-                        <SelectItem value="disfiguring">Disfiguring</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step === 2 && (
-              <div className="space-y-8">
-                <div>
-                  <h2 className="text-3xl font-bold text-black mb-2">Financial Impact</h2>
-                  <p className="text-slate-600">Calculate treatment and recovery costs</p>
-                </div>
-
-                <div className="space-y-6">
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Current Medical Costs
-                    </label>
-                    <Select value={formData.medicalCosts} onValueChange={(value) => setFormData({ ...formData, medicalCosts: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select medical cost range" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="50000">Under $50,000</SelectItem>
-                        <SelectItem value="150000">$50,000 - $250,000</SelectItem>
-                        <SelectItem value="400000">$250,000 - $550,000</SelectItem>
-                        <SelectItem value="800000">$550,000 - $1,000,000</SelectItem>
-                        <SelectItem value="1500000">Over $1,000,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-slate-500 mt-2">Emergency care, hospitalization, surgery</p>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Future Care Costs (estimated total)
-                    </label>
-                    <Select value={formData.futureCareCosts} onValueChange={(value) => setFormData({ ...formData, futureCareCosts: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select future care cost" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="25000">Under $25,000</SelectItem>
-                        <SelectItem value="50000">$25,000 - $75,000</SelectItem>
-                        <SelectItem value="125000">$75,000 - $175,000</SelectItem>
-                        <SelectItem value="250000">$175,000 - $325,000</SelectItem>
-                        <SelectItem value="500000">Over $325,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    <p className="text-xs text-slate-500 mt-2">Skin grafts, reconstructive surgery, therapy</p>
-                  </div>
-
-                  <div>
-                    <label className="text-sm font-medium text-black mb-3 block">
-                      Annual Income (before injury)
-                    </label>
-                    <Select value={formData.lostWages} onValueChange={(value) => setFormData({ ...formData, lostWages: value })}>
-                      <SelectTrigger className="h-14 text-lg">
-                        <SelectValue placeholder="Select annual income" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="35000">Under $35,000</SelectItem>
-                        <SelectItem value="50000">$35,000 - $60,000</SelectItem>
-                        <SelectItem value="75000">$60,000 - $90,000</SelectItem>
-                        <SelectItem value="110000">$90,000 - $130,000</SelectItem>
-                        <SelectItem value="175000">Over $130,000</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step === 3 && results && (
-              <div className="space-y-8">
-                <div className="text-center">
-                  <h2 className="text-3xl font-bold text-black mb-2">Your Estimated Compensation</h2>
-                  <p className="text-slate-600">Based on similar burn injury cases</p>
-                </div>
-
-                <div className="bg-slate-50 rounded-2xl p-8 text-center">
-                  <div className="text-5xl font-bold text-black mb-2">
-                    ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-                  </div>
-                  <p className="text-slate-600">Total Compensation Range</p>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Medical Treatment</h4>
-                    <p className="text-sm text-slate-600">Emergency care, skin grafts, reconstructive surgery</p>
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Scarring & Disfigurement</h4>
-                    <p className="text-sm text-slate-600">Permanent scarring, loss of appearance, emotional trauma</p>
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Lost Wages</h4>
-                    <p className="text-sm text-slate-600">Income loss during recovery and rehabilitation</p>
-                  </div>
-                  <div className="bg-white border border-slate-200 rounded-xl p-6">
-                    <h4 className="font-semibold text-black mb-2">Pain & Suffering</h4>
-                    <p className="text-sm text-slate-600">Physical pain, psychological impact, reduced quality of life</p>
-                  </div>
-                </div>
-
-                <div className="bg-amber-50 border border-amber-200 rounded-xl p-6">
-                  <h3 className="font-semibold text-amber-900 mb-3">Legal Disclaimer</h3>
-                  <p className="text-sm text-amber-900 leading-relaxed">
-                    <strong>Important:</strong> This calculator provides an estimate only and does not constitute legal advice. 
-                    Burn injury compensation varies widely based on visibility of scars, location on body, and impact on daily life. 
-                    Actual compensation depends significantly on medical evidence, expert testimony, jurisdiction, jury composition, 
-                    and specific case facts. Facial burns typically receive higher compensation. Results are not guaranteed. 
-                    No attorney-client relationship is created by using this calculator. Each case must be evaluated individually 
-                    by a qualified burn injury attorney licensed in your state. Past results do not guarantee future outcomes.
-                  </p>
-                </div>
-
-                <div className="calculator-cta-section">
-                  <h3 className="text-2xl font-bold mb-4">Get maximum burn injury compensation</h3>
-                  <p className="mb-6 max-w-2xl mx-auto">
-                    Burn injuries, especially facial burns and scarring, deserve substantial compensation.
-                    Our attorneys understand the long-term physical and emotional impact. No fee unless we win.
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                    <Link to="/free-consultation">
-                      <Button size="lg" className="text-lg px-8">
-                        Get My Free Case Evaluation
-                      </Button>
-                    </Link>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {step < 3 && (
-              <div className="flex gap-4 pt-8">
-                {step > 1 && (
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    onClick={handleBack}
-                    className="flex-1 h-14"
-                  >
-                    Back
-                  </Button>
-                )}
-                <Button
-                  size="lg"
-                  onClick={handleNext}
-                  disabled={!isStepValid()}
-                  className="flex-1 h-14"
-                >
-                  {step === 2 ? 'Calculate' : 'Continue'}
-                </Button>
-              </div>
-            )}
-          </div>
-        </section>
-
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$800K+</div>
-                <p className="text-slate-600">Third-degree average</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">Scarring</div>
-                <p className="text-slate-600">Disfigurement damages</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-    </>
+      </div>
+    </div>
   );
 };
 

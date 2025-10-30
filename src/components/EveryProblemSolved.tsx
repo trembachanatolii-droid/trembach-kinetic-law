@@ -33,7 +33,7 @@ const EveryProblemSolved = () => {
     {
       number: 4,
       problem: "This will take forever",
-      solution: "Most cases settle in 3—6 months using our insider negotiation tactics.",
+      solution: "Most cases settle in 3–6 months using our insider negotiation tactics.",
       icon: Scale
     },
     {

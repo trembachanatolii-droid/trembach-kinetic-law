@@ -22,7 +22,7 @@ import {
   TrendingUp
 } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/paralysis-legal-guidance-hero.jpg';
 
 const ParalysisLegalGuidance: React.FC = () => {
@@ -147,7 +147,7 @@ const ParalysisLegalGuidance: React.FC = () => {
         keywords="paralysis legal guidance, California spinal cord injury law, paralysis attorney advice, legal rights paralysis, spinal cord injury lawsuit"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

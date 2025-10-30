@@ -6,7 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Phone, Star, CheckCircle, AlertTriangle } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroBackground from '@/assets/hearing-loss-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -82,7 +82,7 @@ const HearingLossCaseEvaluation: React.FC = () => {
       />
       
       <div className="min-h-screen bg-background">
-        
+        <GoBack fallbackPath="/practice-areas/hearing-loss" />
         
         {/* Hero Section */}
         <section 

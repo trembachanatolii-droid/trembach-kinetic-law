@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { Phone, Mail, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import SEO from '@/components/SEO';
-
+import GoBack from '@/components/GoBack';
 import heroImage from '@/assets/maritime-case-evaluation-hero.jpg';
 import ThreeDVisualEffects from '@/components/ThreeDVisualEffects';
 import '@/styles/premium-3d-effects.css';
@@ -72,7 +72,7 @@ const MaritimeCaseEvaluation: React.FC = () => {
         keywords="maritime case evaluation, free consultation, Jones Act case review, LHWCA evaluation, maritime lawyer consultation"
       />
 
-      
+      <GoBack />
 
       {/* Hero Section */}
       <section 

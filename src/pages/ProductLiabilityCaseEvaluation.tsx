@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import GoBack from '@/components/GoBack';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
@@ -106,7 +107,7 @@ Consent to Contact: ${formData.consentToContact ? 'Yes' : 'No'}
 Please provide comprehensive case evaluation and next steps.
     `;
     
-    window.open(`mailto:info@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
+    window.open(`mailto:contact@trembachlaw.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`);
   };
 
   const nextStep = () => {
@@ -125,6 +126,8 @@ Please provide comprehensive case evaluation and next steps.
           description="Your product liability case evaluation has been submitted. Our experienced attorneys will review your case and contact you within 24 hours."
           canonical="/product-liability-case-evaluation"
         />
+
+        <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
 
         <div className="container mx-auto px-4 py-16">
           <div className="max-w-2xl mx-auto text-center">
@@ -192,6 +195,8 @@ Please provide comprehensive case evaluation and next steps.
         description="Get a free comprehensive product liability case evaluation from experienced California attorneys. Former defense attorney insight. No fees unless we win your case."
         canonical="/product-liability-case-evaluation"
       />
+
+      <GoBack fallbackPath="/practice-areas/product-liability" className="top-20 z-[60]" />
 
       {/* Hero Section */}
       <section 

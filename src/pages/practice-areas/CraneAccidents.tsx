@@ -31,7 +31,7 @@ import {
   Wrench
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 import heroBackground from '@/assets/crane-accident-hero-bg.jpg';
 import sidebarImage from '@/assets/crane-sidebar.jpg';
@@ -169,7 +169,7 @@ const CraneAccidents: React.FC = () => {
         canonical="/practice-areas/crane-accidents"
       />
 
-      
+      <GoBack />
 
       {/* 3D Background Layers */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden" style={{ transformStyle: 'preserve-3d' }}>

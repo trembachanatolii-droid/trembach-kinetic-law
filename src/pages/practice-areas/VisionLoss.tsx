@@ -32,7 +32,7 @@ import {
   Calculator,
   DollarSign
 } from 'lucide-react';
-
+import GoBack from '@/components/GoBack';
 import SEO from '@/components/SEO';
 
 // Import images
@@ -350,7 +350,7 @@ const VisionLoss: React.FC = () => {
         canonical="/practice-areas/vision-loss"
       />
 
-      
+      <GoBack fallbackPath="/practice-areas" />
 
       {/* Hero Section - 600px height to match Mesothelioma */}
       <section 

@@ -1,421 +1,465 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, AlertCircle } from 'lucide-react';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
+import React, { useState, useEffect } from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Badge } from '@/components/ui/badge';
+import { Calculator, AlertTriangle, DollarSign, Star } from 'lucide-react';
+import GoBack from '@/components/GoBack';
+import SEO from '@/components/SEO';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
+import heroBackground from '@/assets/benzene-calculator-hero.jpg';
 
-interface BenzeneFormData extends CalculatorFormData {
+interface CompensationFactors {
   bloodCancerType: string;
-  exposureDuration: string;
-  exposureSource: string;
   age: string;
+  exposureDuration: string;
   medicalCosts: string;
   severity: string;
-  lostWages: string;
-  futureCareCosts: string;
-  [key: string]: string;
 }
 
-const initialFormData: BenzeneFormData = {
-  bloodCancerType: '',
-  exposureDuration: '',
-  exposureSource: '',
-  age: '',
-  medicalCosts: '',
-  severity: '',
-  lostWages: '',
-  futureCareCosts: ''
-};
+const BenzeneCalculator: React.FC = () => {
+  const [factors, setFactors] = useState<CompensationFactors>({
+    bloodCancerType: '',
+    age: '',
+    exposureDuration: '',
+    medicalCosts: '',
+    severity: ''
+  });
+  
+  const [results, setResults] = useState<{
+    range: string;
+    factors: string[];
+    confidence: string;
+  } | null>(null);
 
-const calculateCompensation = (data: BenzeneFormData): CalculatorResults => {
-  const cancerMultipliers: { [key: string]: number } = {
-    'aml': 5.0,
-    'all': 4.5,
-    'multiple-myeloma': 4.0,
-    'non-hodgkin': 3.5,
-    'cll': 3.0,
-    'cml': 2.8,
-    'mds': 2.5,
-    'aplastic-anemia': 2.0
+  // Add scroll restoration
+  useScrollRestoration();
+
+  const calculateCompensation = () => {
+    const factorsList: string[] = [];
+    let baseAmount = 50000;
+    let multiplier = 1;
+
+    // Blood cancer type impact
+    switch (factors.bloodCancerType) {
+      case 'aml':
+        baseAmount = 500000;
+        multiplier = 3.0;
+        factorsList.push('Acute Myeloid Leukemia significantly increases compensation potential');
+        break;
+      case 'all':
+        baseAmount = 450000;
+        multiplier = 2.8;
+        factorsList.push('Acute Lymphoblastic Leukemia from benzene exposure');
+        break;
+      case 'multiple-myeloma':
+        baseAmount = 400000;
+        multiplier = 2.5;
+        factorsList.push('Multiple Myeloma linked to benzene exposure');
+        break;
+      case 'non-hodgkin':
+        baseAmount = 350000;
+        multiplier = 2.2;
+        factorsList.push('Non-Hodgkin Lymphoma associated with benzene');
+        break;
+      case 'cll':
+        baseAmount = 300000;
+        multiplier = 2.0;
+        factorsList.push('Chronic Lymphocytic Leukemia from benzene');
+        break;
+      case 'cml':
+        baseAmount = 280000;
+        multiplier = 1.9;
+        factorsList.push('Chronic Myeloid Leukemia related to benzene');
+        break;
+      case 'mds':
+        baseAmount = 250000;
+        multiplier = 1.8;
+        factorsList.push('Myelodysplastic Syndromes from benzene exposure');
+        break;
+      case 'aplastic-anemia':
+        baseAmount = 200000;
+        multiplier = 1.6;
+        factorsList.push('Aplastic Anemia caused by benzene');
+        break;
+      default:
+        factorsList.push('Blood cancer type impacts compensation value');
+    }
+
+    // Age impact
+    switch (factors.age) {
+      case 'under-30':
+        multiplier += 0.8;
+        factorsList.push('Younger age increases compensation due to longer life impact');
+        break;
+      case '30-45':
+        multiplier += 0.6;
+        factorsList.push('Prime working age affects earning capacity calculations');
+        break;
+      case '45-60':
+        multiplier += 0.4;
+        factorsList.push('Peak earning years impact compensation');
+        break;
+      case '60-70':
+        multiplier += 0.2;
+        factorsList.push('Pre-retirement age considered in calculations');
+        break;
+      case 'over-70':
+        multiplier += 0.1;
+        factorsList.push('Retirement age affects future earning calculations');
+        break;
+    }
+
+    // Exposure duration impact
+    switch (factors.exposureDuration) {
+      case 'more-than-20':
+        multiplier += 0.7;
+        factorsList.push('Long-term exposure significantly strengthens your case');
+        break;
+      case '10-20':
+        multiplier += 0.5;
+        factorsList.push('Extended exposure period supports causation claims');
+        break;
+      case '5-10':
+        multiplier += 0.3;
+        factorsList.push('Moderate exposure duration builds case strength');
+        break;
+      case '1-5':
+        multiplier += 0.2;
+        factorsList.push('Short-term but significant exposure documented');
+        break;
+      case 'less-than-1':
+        multiplier += 0.1;
+        factorsList.push('Even brief exposure to benzene can cause cancer');
+        break;
+    }
+
+    // Medical costs impact
+    switch (factors.medicalCosts) {
+      case 'over-500k':
+        multiplier += 0.6;
+        factorsList.push('Extensive medical expenses significantly increase damages');
+        break;
+      case '250k-500k':
+        multiplier += 0.4;
+        factorsList.push('Substantial medical costs strengthen compensation claim');
+        break;
+      case '100k-250k':
+        multiplier += 0.3;
+        factorsList.push('Significant medical expenses included in calculations');
+        break;
+      case '50k-100k':
+        multiplier += 0.2;
+        factorsList.push('Medical costs contribute to overall compensation');
+        break;
+      case 'under-50k':
+        multiplier += 0.1;
+        factorsList.push('All medical expenses are recoverable');
+        break;
+    }
+
+    // Severity impact
+    switch (factors.severity) {
+      case 'terminal':
+        multiplier += 1.0;
+        factorsList.push('Terminal diagnosis maximizes pain and suffering damages');
+        break;
+      case 'advanced':
+        multiplier += 0.7;
+        factorsList.push('Advanced cancer stage increases compensation significantly');
+        break;
+      case 'moderate':
+        multiplier += 0.4;
+        factorsList.push('Ongoing treatment impacts quality of life');
+        break;
+      case 'early':
+        multiplier += 0.2;
+        factorsList.push('Early detection allows for comprehensive treatment planning');
+        break;
+      case 'remission':
+        multiplier += 0.3;
+        factorsList.push('Successful treatment still merits compensation for suffering endured');
+        break;
+    }
+
+    const finalAmount = baseAmount * multiplier;
+    const lowEnd = Math.floor(finalAmount * 0.7);
+    const highEnd = Math.floor(finalAmount * 1.5);
+
+    let confidence = 'Low';
+    if (factors.bloodCancerType && factors.age && factors.exposureDuration) {
+      confidence = 'Moderate';
+    }
+    if (factors.bloodCancerType && factors.age && factors.exposureDuration && factors.medicalCosts && factors.severity) {
+      confidence = 'High';
+    }
+
+    setResults({
+      range: `$${lowEnd.toLocaleString()} - $${highEnd.toLocaleString()}`,
+      factors: factorsList,
+      confidence
+    });
   };
 
-  const exposureMultipliers: { [key: string]: number } = {
-    'more-than-20': 2.2,
-    '10-20': 1.8,
-    '5-10': 1.5,
-    '1-5': 1.3,
-    'less-than-1': 1.1
+  const resetCalculator = () => {
+    setFactors({
+      bloodCancerType: '',
+      age: '',
+      exposureDuration: '',
+      medicalCosts: '',
+      severity: ''
+    });
+    setResults(null);
   };
-
-  const sourceMultipliers: { [key: string]: number } = {
-    'petroleum': 2.0,
-    'chemical-plant': 2.2,
-    'refinery': 2.1,
-    'lab-tech': 1.8,
-    'painter': 1.7,
-    'printer': 1.6,
-    'consumer-product': 2.5,
-    'other': 1.5
-  };
-
-  const severityMultipliers: { [key: string]: number } = {
-    'terminal': 4.0,
-    'severe': 2.5,
-    'moderate': 1.8,
-    'mild': 1.3
-  };
-
-  let baseMin = 120000;
-  let baseMax = 350000;
-
-  const cancerMult = cancerMultipliers[data.bloodCancerType] || 1;
-  const exposureMult = exposureMultipliers[data.exposureDuration] || 1;
-  const sourceMult = sourceMultipliers[data.exposureSource] || 1;
-  const severityMult = severityMultipliers[data.severity] || 1;
-
-  baseMin *= cancerMult * exposureMult * sourceMult * severityMult;
-  baseMax *= cancerMult * exposureMult * sourceMult * severityMult;
-
-  const age = parseInt(data.age) || 40;
-  if (age < 50) {
-    const ageFactor = 1 + ((50 - age) * 0.018);
-    baseMin *= ageFactor;
-    baseMax *= ageFactor;
-  }
-
-  const medicalCosts = parseInt(data.medicalCosts) || 0;
-  const futureCareCosts = parseInt(data.futureCareCosts) || 0;
-  const lostWages = parseInt(data.lostWages) || 0;
-
-  baseMin += medicalCosts + futureCareCosts * 0.9 + lostWages * 0.85;
-  baseMax += medicalCosts * 1.5 + futureCareCosts * 1.6 + lostWages * 1.5;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax)
-  };
-};
-
-const validateStep = (data: BenzeneFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.bloodCancerType && data.exposureDuration && data.exposureSource && data.severity);
-  }
-  if (step === 2) {
-    return !!(data.age && data.medicalCosts && data.lostWages && data.futureCareCosts);
-  }
-  return true;
-};
-
-const BenzeneCalculator = () => {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<BenzeneFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
 
   return (
     <>
-      <Helmet>
-        <title>Benzene Exposure Calculator | Blood Cancer Compensation | Trembach Law</title>
-        <meta 
-          name="description" 
-          content="Calculate potential compensation for benzene-related blood cancers. Free, confidential estimates for leukemia, lymphoma, and other benzene exposure illnesses." 
-        />
-      </Helmet>
-
-      <main className="min-h-screen bg-white">
-        {/* Breadcrumb */}
-        <div className="border-b border-slate-200 bg-white">
-          <div className="container mx-auto px-6 py-4 max-w-5xl">
-            <Link
-              to="/calculators"
-              className="inline-flex items-center text-slate-600 hover:text-slate-900 visited:text-slate-600 no-underline transition-colors"
-            >
-              <ArrowLeft size={16} className="mr-2" />
-              <span className="text-sm font-medium">Back to All Calculators</span>
-            </Link>
-          </div>
-        </div>
-
-        <section className="pt-20 pb-12 bg-gradient-to-b from-slate-50 to-white">
-          <div className="container mx-auto px-6 max-w-5xl text-center">
-            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6 tracking-tight leading-[1.1]">
-              Benzene Exposure<br />Calculator
-            </h1>
-            <p className="text-xl md:text-2xl text-slate-600 font-light">
-              Estimate compensation for benzene-related blood cancers
+      <SEO
+        title="Benzene Exposure Compensation Calculator | Estimate Your Blood Cancer Settlement"
+        description="Calculate potential compensation for benzene exposure blood cancer cases. Free settlement estimator for leukemia, lymphoma, and other benzene-related cancers."
+        canonical="/benzene-calculator"
+      />
+      
+      <div className="min-h-screen bg-background">
+        <GoBack fallbackPath="/practice-areas/benzene-exposure" />
+        
+        {/* Hero Section */}
+        <section 
+          className="relative h-[400px] flex items-center justify-center bg-cover bg-center" 
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+            <div className="flex items-center justify-center mb-4">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+              ))}
+              <span className="ml-2 text-lg">Professional Compensation Analysis</span>
+            </div>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">Benzene Compensation Calculator</h1>
+            <p className="text-xl">
+              Get an estimate of your potential benzene exposure compensation based on your specific circumstances.
             </p>
           </div>
         </section>
 
-        <section className="py-20 bg-slate-50 border-t border-slate-200">
-          <div className="container mx-auto px-6 max-w-5xl">
-            <div className="grid md:grid-cols-3 gap-8 text-center">
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">$500K+</div>
-                <p className="text-slate-600">Average benzene settlement</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">24/7</div>
-                <p className="text-slate-600">Available for urgent cases</p>
-              </div>
-              <div>
-                <div className="text-4xl font-bold text-slate-900 mb-2">No Fee</div>
-                <p className="text-slate-600">Unless we win</p>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            {/* Calculator Form */}
+            <Card className="shadow-xl">
+              <CardHeader className="bg-red-600 text-white">
+                <CardTitle className="flex items-center text-xl">
+                  <Calculator className="w-6 h-6 mr-2" />
+                  Compensation Calculator
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <div className="space-y-6">
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Blood Cancer Type</label>
+                    <Select value={factors.bloodCancerType} onValueChange={(value) => setFactors(prev => ({ ...prev, bloodCancerType: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your diagnosis..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="aml">Acute Myeloid Leukemia (AML)</SelectItem>
+                        <SelectItem value="all">Acute Lymphoblastic Leukemia (ALL)</SelectItem>
+                        <SelectItem value="multiple-myeloma">Multiple Myeloma</SelectItem>
+                        <SelectItem value="non-hodgkin">Non-Hodgkin Lymphoma</SelectItem>
+                        <SelectItem value="cll">Chronic Lymphocytic Leukemia (CLL)</SelectItem>
+                        <SelectItem value="cml">Chronic Myeloid Leukemia (CML)</SelectItem>
+                        <SelectItem value="mds">Myelodysplastic Syndromes (MDS)</SelectItem>
+                        <SelectItem value="aplastic-anemia">Aplastic Anemia</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-        <section className="py-20 bg-white">
-          <div className="container mx-auto px-6 max-w-3xl">
-            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden">
-              <div className="bg-slate-900 px-8 py-6">
-                <div className="flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-white">Calculate Your Case Value</h2>
-                  <div className="flex gap-2">
-                    {[1, 2, 3].map((s) => (
-                      <div
-                        key={s}
-                        className={`w-10 h-1 rounded-full transition-colors ${
-                          step >= s ? 'bg-white' : 'bg-slate-700'
-                        }`}
-                      />
-                    ))}
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Age at Diagnosis</label>
+                    <Select value={factors.age} onValueChange={(value) => setFactors(prev => ({ ...prev, age: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select age range..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under-30">Under 30 years old</SelectItem>
+                        <SelectItem value="30-45">30-45 years old</SelectItem>
+                        <SelectItem value="45-60">45-60 years old</SelectItem>
+                        <SelectItem value="60-70">60-70 years old</SelectItem>
+                        <SelectItem value="over-70">Over 70 years old</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Benzene Exposure Duration</label>
+                    <Select value={factors.exposureDuration} onValueChange={(value) => setFactors(prev => ({ ...prev, exposureDuration: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="How long were you exposed?" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="less-than-1">Less than 1 year</SelectItem>
+                        <SelectItem value="1-5">1-5 years</SelectItem>
+                        <SelectItem value="5-10">5-10 years</SelectItem>
+                        <SelectItem value="10-20">10-20 years</SelectItem>
+                        <SelectItem value="more-than-20">More than 20 years</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Estimated Medical Costs</label>
+                    <Select value={factors.medicalCosts} onValueChange={(value) => setFactors(prev => ({ ...prev, medicalCosts: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Total medical expenses..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="under-50k">Under $50,000</SelectItem>
+                        <SelectItem value="50k-100k">$50,000 - $100,000</SelectItem>
+                        <SelectItem value="100k-250k">$100,000 - $250,000</SelectItem>
+                        <SelectItem value="250k-500k">$250,000 - $500,000</SelectItem>
+                        <SelectItem value="over-500k">Over $500,000</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium mb-2 text-foreground">Cancer Severity/Stage</label>
+                    <Select value={factors.severity} onValueChange={(value) => setFactors(prev => ({ ...prev, severity: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Current condition..." />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="early">Early stage/Newly diagnosed</SelectItem>
+                        <SelectItem value="moderate">Moderate stage/Ongoing treatment</SelectItem>
+                        <SelectItem value="advanced">Advanced stage/Aggressive treatment</SelectItem>
+                        <SelectItem value="terminal">Terminal/End-stage</SelectItem>
+                        <SelectItem value="remission">In remission/Completed treatment</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <Button 
+                      onClick={calculateCompensation} 
+                      className="flex-1 bg-red-600 hover:bg-red-700 text-white"
+                      disabled={!factors.bloodCancerType || !factors.age}
+                    >
+                      Calculate Compensation
+                    </Button>
+                    <Button 
+                      onClick={resetCalculator} 
+                      variant="outline"
+                      className="text-foreground border-border hover:bg-muted"
+                    >
+                      Reset
+                    </Button>
                   </div>
                 </div>
-              </div>
+              </CardContent>
+            </Card>
 
-              <div className="p-8">
-                {step === 1 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Type of Blood Cancer or Illness
-                      </label>
-                      <select
-                        value={formData.bloodCancerType}
-                        onChange={(e) => updateField('bloodCancerType', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select diagnosis</option>
-                        <option value="aml">Acute Myeloid Leukemia (AML)</option>
-                        <option value="all">Acute Lymphoblastic Leukemia</option>
-                        <option value="multiple-myeloma">Multiple Myeloma</option>
-                        <option value="non-hodgkin">Non-Hodgkin's Lymphoma</option>
-                        <option value="cll">Chronic Lymphocytic Leukemia</option>
-                        <option value="cml">Chronic Myeloid Leukemia</option>
-                        <option value="mds">Myelodysplastic Syndrome</option>
-                        <option value="aplastic-anemia">Aplastic Anemia</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Duration of Benzene Exposure
-                      </label>
-                      <select
-                        value={formData.exposureDuration}
-                        onChange={(e) => updateField('exposureDuration', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select duration</option>
-                        <option value="more-than-20">More than 20 years</option>
-                        <option value="10-20">10-20 years</option>
-                        <option value="5-10">5-10 years</option>
-                        <option value="1-5">1-5 years</option>
-                        <option value="less-than-1">Less than 1 year</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Source of Benzene Exposure
-                      </label>
-                      <select
-                        value={formData.exposureSource}
-                        onChange={(e) => updateField('exposureSource', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select source</option>
-                        <option value="consumer-product">Consumer Product (Sunscreen, Hand Sanitizer)</option>
-                        <option value="chemical-plant">Chemical Plant</option>
-                        <option value="refinery">Oil Refinery</option>
-                        <option value="petroleum">Petroleum Industry</option>
-                        <option value="lab-tech">Laboratory Technician</option>
-                        <option value="painter">Painting/Coatings Industry</option>
-                        <option value="printer">Printing Industry</option>
-                        <option value="other">Other Occupational Exposure</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Severity of Condition
-                      </label>
-                      <select
-                        value={formData.severity}
-                        onChange={(e) => updateField('severity', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select severity</option>
-                        <option value="terminal">Terminal / Advanced Stage</option>
-                        <option value="severe">Severe</option>
-                        <option value="moderate">Moderate</option>
-                        <option value="mild">Early Stage / Remission</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 2 && (
-                  <div className="space-y-6">
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Your Age at Diagnosis
-                      </label>
-                      <select
-                        value={formData.age}
-                        onChange={(e) => updateField('age', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select age</option>
-                        <option value="25">Under 30</option>
-                        <option value="37">30-45</option>
-                        <option value="52">45-60</option>
-                        <option value="65">60-70</option>
-                        <option value="75">Over 70</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Total Medical Expenses to Date
-                      </label>
-                      <select
-                        value={formData.medicalCosts}
-                        onChange={(e) => updateField('medicalCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">Under $50,000</option>
-                        <option value="75000">$50,000 - $100,000</option>
-                        <option value="175000">$100,000 - $250,000</option>
-                        <option value="375000">$250,000 - $500,000</option>
-                        <option value="750000">Over $500,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Estimated Future Medical Care
-                      </label>
-                      <select
-                        value={formData.futureCareCosts}
-                        onChange={(e) => updateField('futureCareCosts', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="50000">$0 - $100,000</option>
-                        <option value="200000">$100,000 - $300,000</option>
-                        <option value="500000">$300,000 - $700,000</option>
-                        <option value="1000000">$700,000 - $1,300,000</option>
-                        <option value="2000000">Over $1,300,000</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-slate-900 mb-2">
-                        Lost Wages and Income
-                      </label>
-                      <select
-                        value={formData.lostWages}
-                        onChange={(e) => updateField('lostWages', e.target.value)}
-                        className="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-slate-900 focus:border-transparent"
-                      >
-                        <option value="">Select amount</option>
-                        <option value="25000">$0 - $50,000</option>
-                        <option value="100000">$50,000 - $150,000</option>
-                        <option value="250000">$150,000 - $350,000</option>
-                        <option value="500000">$350,000 - $650,000</option>
-                        <option value="1000000">Over $650,000</option>
-                      </select>
-                    </div>
-                  </div>
-                )}
-
-                {step === 3 && results && (
-                  <div className="space-y-6">
-                    <div className="text-center py-8">
-                      <h3 className="text-3xl font-bold text-slate-900 mb-4">
+            {/* Results */}
+            <div className="space-y-6">
+              {results ? (
+                <>
+                  <Card className="shadow-xl border-2 border-green-200">
+                    <CardHeader className="bg-green-600 text-white">
+                      <CardTitle className="flex items-center text-xl">
+                        <DollarSign className="w-6 h-6 mr-2" />
                         Estimated Compensation Range
-                      </h3>
-                      <div className="text-5xl font-bold text-slate-900 mb-2">
-                        ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent className="p-6">
+                      <div className="text-center mb-6">
+                        <div className="text-4xl font-bold text-green-600 mb-2">{results.range}</div>
+                        <Badge variant={results.confidence === 'High' ? 'default' : results.confidence === 'Moderate' ? 'secondary' : 'outline'}>
+                          {results.confidence} Confidence
+                        </Badge>
                       </div>
-                      <p className="text-slate-600 mt-4">
-                        Based on your benzene exposure and blood cancer diagnosis
+                      
+                      <div>
+                        <h4 className="font-semibold mb-3 text-foreground">Factors Affecting Your Compensation:</h4>
+                        <ul className="space-y-2">
+                          {results.factors.map((factor, index) => (
+                            <li key={index} className="flex items-start">
+                              <span className="text-green-600 mr-2">•</span>
+                              <span className="text-sm text-muted-foreground">{factor}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardContent className="p-6">
+                      <h4 className="font-semibold mb-3 text-foreground">Next Steps:</h4>
+                      <div className="space-y-3">
+                        <Button 
+                          className="w-full bg-red-600 hover:bg-red-700 text-white"
+                          onClick={() => window.location.href = '/benzene-case-evaluation'}
+                        >
+                          Get Free Case Evaluation
+                        </Button>
+                        <Button 
+                          variant="outline"
+                          className="w-full text-foreground border-border hover:bg-muted"
+                          onClick={() => window.location.href = 'tel:8181234567'}
+                        >
+                          Call (818) 123-4567
+                        </Button>
+                      </div>
+                      <p className="text-xs text-center text-muted-foreground mt-3">
+                        For an accurate assessment, schedule a free consultation with our experienced benzene attorneys.
+                      </p>
+                    </CardContent>
+                  </Card>
+                </>
+              ) : (
+                <Card>
+                  <CardContent className="p-6 text-center">
+                    <Calculator className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
+                    <h3 className="text-lg font-semibold mb-2 text-foreground">Ready to Calculate?</h3>
+                    <p className="text-muted-foreground mb-4">
+                      Fill out the form to get an estimate of your potential benzene exposure compensation.
+                    </p>
+                    <div className="bg-muted p-4 rounded-lg">
+                      <h4 className="font-medium mb-2 text-foreground">Compensation May Include:</h4>
+                      <ul className="text-sm space-y-1 text-muted-foreground">
+                        <li>• Medical expenses (past and future)</li>
+                        <li>• Lost wages and earning capacity</li>
+                        <li>• Pain and suffering</li>
+                        <li>• Loss of life enjoyment</li>
+                        <li>• Punitive damages</li>
+                      </ul>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Important Notice */}
+              <Card className="border-amber-200 bg-amber-50">
+                <CardContent className="p-6">
+                  <div className="flex items-start">
+                    <AlertTriangle className="w-6 h-6 text-amber-600 mr-3 mt-1 flex-shrink-0" />
+                    <div>
+                      <h4 className="font-semibold text-amber-800 mb-2">Important Legal Disclaimer</h4>
+                      <p className="text-sm text-amber-700">
+                        This calculator provides estimates only and is not a guarantee of compensation. Actual settlement amounts depend on many factors including case strength, available evidence, defendant assets, and negotiation outcomes. Each case is unique and requires individual evaluation by qualified attorneys. Consult with our experienced benzene lawyers for an accurate assessment of your specific situation.
                       </p>
                     </div>
-
-                    <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
-                      <div className="flex gap-3">
-                        <AlertCircle className="text-amber-600 flex-shrink-0 mt-1" size={20} />
-                        <div className="text-sm text-amber-900">
-                          <p className="font-semibold mb-2">Important Legal Disclaimer:</p>
-                          <p className="mb-2">
-                            This calculator provides a general estimate only and does not constitute legal advice or a guarantee of compensation. Actual case values depend on multiple factors including specific cancer diagnosis, duration and intensity of exposure, proof of causation, and individual circumstances.
-                          </p>
-                          <p>
-                            Benzene exposure cases have strict filing deadlines and complex causation requirements. Contact an experienced attorney immediately to evaluate your case and protect your legal rights.
-                          </p>
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                )}
-
-                <div className="flex gap-4 mt-8">
-                  {step > 1 && step < 3 && (
-                    <button
-                      onClick={handleBack}
-                      className="px-6 py-3 border border-slate-300 rounded-lg text-slate-700 font-medium hover:bg-slate-50 transition-colors"
-                    >
-                      Back
-                    </button>
-                  )}
-                  {step < 3 && (
-                    <button
-                      onClick={handleNext}
-                      disabled={!isStepValid()}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 disabled:bg-slate-300 disabled:cursor-not-allowed transition-colors"
-                    >
-                      {step === 2 ? 'Calculate' : 'Continue'}
-                    </button>
-                  )}
-                  {step === 3 && (
-                    <button
-                      onClick={resetForm}
-                      className="flex-1 px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition-colors"
-                    >
-                      Start New Calculation
-                    </button>
-                  )}
-                </div>
-              </div>
+                </CardContent>
+              </Card>
             </div>
           </div>
-        </section>
-      </main>
+        </div>
+      </div>
     </>
   );
 };

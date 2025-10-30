@@ -1,314 +1,246 @@
-import React from 'react';
-import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
-import { ArrowLeft } from 'lucide-react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Progress } from '@/components/ui/progress';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { CalculatorResults } from '@/components/calculator/CalculatorResults';
-import { useCalculatorForm, CalculatorFormData, CalculatorResults as Results } from '@/hooks/useCalculatorForm';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Checkbox } from '@/components/ui/checkbox';
+import { ArrowLeft, Calculator, DollarSign, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import heroBackground from '@/assets/amusement-park-compensation-hero.jpg';
+import SEO from '@/components/SEO';
 
-interface AmusementParkFormData extends CalculatorFormData {
-  injuryType: string;
-  rideType: string;
-  medicalCosts: string;
-  timeOffWork: string;
-  permanentDisability: string;
-  age: string;
-}
+const AmusementParkCompensationCalculator: React.FC = () => {
+  const [formData, setFormData] = useState({
+    injuryType: '',
+    medicalCosts: '',
+    timeOffWork: '',
+    permanentDisability: false,
+    ongoingTreatment: false
+  });
 
-const initialFormData: AmusementParkFormData = {
-  injuryType: '',
-  rideType: '',
-  medicalCosts: '',
-  timeOffWork: '',
-  permanentDisability: '',
-  age: ''
-};
+  const [estimatedRange, setEstimatedRange] = useState<{min: number, max: number} | null>(null);
 
-const calculateCompensation = (data: AmusementParkFormData): Results => {
-  let baseMin = 100000;
-  let baseMax = 300000;
+  const calculateCompensation = () => {
+    const medicalCosts = parseFloat(formData.medicalCosts) || 0;
+    const timeOff = parseFloat(formData.timeOffWork) || 0;
 
-  const injuryMultipliers: Record<string, number> = {
-    'head-injury': 3.0,
-    'spinal-injury': 3.5,
-    'broken-bones': 1.5,
-    'whiplash': 1.2,
-    'internal-injuries': 2.5,
-    'death': 4.0
+    // Base calculations
+    const lostWages = timeOff * 800; // Approximate weekly wage
+    
+    // Injury multipliers
+    const injuryMultipliers: Record<string, number> = {
+      'head-brain': 5.0,
+      'spinal': 4.5,
+      'broken-bones': 2.5,
+      'burns': 3.0,
+      'cuts': 1.5,
+      'soft-tissue': 1.2
+    };
+
+    const multiplier = injuryMultipliers[formData.injuryType] || 2.0;
+    const painSuffering = medicalCosts * multiplier;
+
+    // Additional factors
+    let additionalDamages = 0;
+    if (formData.permanentDisability) additionalDamages += medicalCosts;
+    if (formData.ongoingTreatment) additionalDamages += medicalCosts * 0.5;
+
+    const total = medicalCosts + lostWages + painSuffering + additionalDamages;
+
+    setEstimatedRange({
+      min: Math.round(total * 0.7),
+      max: Math.round(total * 1.3)
+    });
   };
-  const injuryMult = injuryMultipliers[data.injuryType] || 1;
 
-  const rideMultipliers: Record<string, number> = {
-    'roller-coaster': 1.5,
-    'water-slide': 1.3,
-    'ferris-wheel': 1.2,
-    'bumper-cars': 1.1,
-    'spinning-ride': 1.4,
-    'drop-tower': 1.6
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    calculateCompensation();
   };
-  const rideMult = rideMultipliers[data.rideType] || 1;
-
-  const medicalAdd = parseInt(data.medicalCosts) || 0;
-  const timeOff = parseInt(data.timeOffWork) || 0;
-
-  const disabilityMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'temporary': 1.3,
-    'partial': 1.8,
-    'total': 3.0
-  };
-  const disabilityMult = disabilityMultipliers[data.permanentDisability] || 1;
-
-  const ageMultipliers: Record<string, number> = {
-    'under-18': 1.5,
-    '18-40': 1.3,
-    '40-60': 1.0,
-    'over-60': 0.9
-  };
-  const ageMult = ageMultipliers[data.age] || 1;
-
-  const min = Math.round((baseMin * injuryMult * rideMult * disabilityMult * ageMult) + medicalAdd + (timeOff * 1000));
-  const max = Math.round((baseMax * injuryMult * rideMult * disabilityMult * ageMult) + (medicalAdd * 2) + (timeOff * 2000));
-
-  return { min, max };
-};
-
-const validateStep = (data: AmusementParkFormData, step: number): boolean => {
-  if (step === 1) {
-    return !!(data.injuryType && data.rideType && data.age);
-  }
-  if (step === 2) {
-    return !!(data.medicalCosts && data.timeOffWork && data.permanentDisability);
-  }
-  return true;
-};
-
-export default function AmusementParkCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<AmusementParkFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateStep
-  );
-
-  const renderStep1 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Injury</label>
-        <Select value={formData.injuryType} onValueChange={(value) => updateField('injuryType', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select injury type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="head-injury">Head/Brain Injury</SelectItem>
-            <SelectItem value="spinal-injury">Spinal Cord Injury</SelectItem>
-            <SelectItem value="broken-bones">Broken Bones/Fractures</SelectItem>
-            <SelectItem value="whiplash">Whiplash/Neck Injury</SelectItem>
-            <SelectItem value="internal-injuries">Internal Injuries</SelectItem>
-            <SelectItem value="death">Wrongful Death</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Type of Ride</label>
-        <Select value={formData.rideType} onValueChange={(value) => updateField('rideType', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select ride type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="roller-coaster">Roller Coaster</SelectItem>
-            <SelectItem value="water-slide">Water Slide</SelectItem>
-            <SelectItem value="ferris-wheel">Ferris Wheel</SelectItem>
-            <SelectItem value="bumper-cars">Bumper Cars</SelectItem>
-            <SelectItem value="spinning-ride">Spinning Ride</SelectItem>
-            <SelectItem value="drop-tower">Drop Tower</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Your Age</label>
-        <Select value={formData.age} onValueChange={(value) => updateField('age', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select age range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="under-18">Under 18</SelectItem>
-            <SelectItem value="18-40">18-40</SelectItem>
-            <SelectItem value="40-60">40-60</SelectItem>
-            <SelectItem value="over-60">Over 60</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const renderStep2 = () => (
-    <div className="space-y-6">
-      <div>
-        <label className="block text-sm font-medium mb-2">Total Medical Costs</label>
-        <Select value={formData.medicalCosts} onValueChange={(value) => updateField('medicalCosts', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select cost range" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="5000">Under $10,000</SelectItem>
-            <SelectItem value="20000">$10,000 - $30,000</SelectItem>
-            <SelectItem value="50000">$30,000 - $70,000</SelectItem>
-            <SelectItem value="100000">$70,000 - $130,000</SelectItem>
-            <SelectItem value="200000">Over $130,000</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Time Off Work (weeks)</label>
-        <Select value={formData.timeOffWork} onValueChange={(value) => updateField('timeOffWork', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select time off" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="2">1-2 weeks</SelectItem>
-            <SelectItem value="6">3-8 weeks</SelectItem>
-            <SelectItem value="16">2-4 months</SelectItem>
-            <SelectItem value="26">4-6 months</SelectItem>
-            <SelectItem value="52">Over 6 months</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-
-      <div>
-        <label className="block text-sm font-medium mb-2">Permanent Disability</label>
-        <Select value={formData.permanentDisability} onValueChange={(value) => updateField('permanentDisability', value)}>
-          <SelectTrigger>
-            <SelectValue placeholder="Select disability level" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="none">No Permanent Disability</SelectItem>
-            <SelectItem value="temporary">Temporary Disability</SelectItem>
-            <SelectItem value="partial">Partial Permanent Disability</SelectItem>
-            <SelectItem value="total">Total Permanent Disability</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
-    </div>
-  );
-
-  const damageCategories = [
-    {
-      title: 'Medical Expenses',
-      description: 'Emergency treatment, hospitalization, surgery, rehabilitation'
-    },
-    {
-      title: 'Lost Wages',
-      description: 'Time off work, reduced earning capacity, future income loss'
-    },
-    {
-      title: 'Pain and Suffering',
-      description: 'Physical pain, emotional distress, loss of enjoyment of life'
-    },
-    {
-      title: 'Park Negligence',
-      description: 'Ride defects, inadequate maintenance, operator error, safety violations'
-    }
-  ];
-
-  const disclaimer = "This estimate is for informational purposes only. Amusement park injury claims involve premises liability law and product liability when ride defects are involved. California law requires parks to maintain rides in safe condition and provide adequate warnings. Actual compensation depends on specific circumstances, park negligence, and comparative fault.";
 
   return (
-    <>
-      <Helmet>
-        <title>Amusement Park Accident Compensation Calculator | Theme Park Injuries</title>
-        <meta name="description" content="Calculate potential compensation for amusement park ride accidents. Free theme park injury estimates." />
-      </Helmet>
+    <div className="min-h-screen bg-background">
+      <SEO
+        title="Amusement Park Injury Compensation Calculator | Trembach Law Firm"
+        description="Calculate your potential amusement park injury compensation. Free estimation tool by experienced attorneys."
+        keywords="amusement park injury compensation, settlement calculator, theme park accident settlement"
+      />
 
-      <div className="min-h-screen bg-background py-12">
-        <div className="container max-w-4xl mx-auto px-4">
-          <Link to="/calculators" className="inline-flex items-center text-primary hover:underline mb-8">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Calculators
-          </Link>
+      {/* Hero Section */}
+      <section 
+        className="relative h-[400px] flex items-center justify-center bg-cover bg-center"
+        style={{ backgroundImage: `url(${heroBackground})` }}
+      >
+        <div className="absolute inset-0 bg-black/60"></div>
+        
+        <div className="absolute top-6 left-6">
+          <Button 
+            variant="ghost" 
+            onClick={() => window.history.back()}
+            className="flex items-center gap-2 bg-black/30 text-white hover:bg-black/50"
+          >
+            <ArrowLeft className="w-4 h-4" />
+            Go Back
+          </Button>
+        </div>
+        
+        <div className="relative z-10 text-center text-white max-w-3xl mx-auto px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Compensation Calculator
+          </h1>
+          
+          <div className="flex items-center justify-center mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400 mr-1" />
+            ))}
+            <span className="ml-2 text-white">Estimate Your Case Value</span>
+          </div>
+          
+          <p className="text-lg text-white opacity-90">
+            Get an estimate of your potential amusement park injury compensation
+          </p>
+        </div>
+      </section>
 
-          <div className="bg-card rounded-lg shadow-lg p-8 mb-8">
-            <h1 className="text-4xl font-bold mb-4">Amusement Park Accident Calculator</h1>
-            <p className="text-lg text-muted-foreground mb-6">
-              Estimate compensation for theme park ride injuries
-            </p>
+      {/* Calculator Content */}
+      <div className="max-w-4xl mx-auto px-6 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          {/* Calculator Form */}
+          <div>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Calculator className="w-5 h-5 text-primary" />
+                  Compensation Calculator
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Type of Injury</label>
+                    <Select value={formData.injuryType} onValueChange={(value) => setFormData(prev => ({ ...prev, injuryType: value }))}>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select injury type" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="head-brain">Head/Brain Injury</SelectItem>
+                        <SelectItem value="spinal">Spinal Cord Injury</SelectItem>
+                        <SelectItem value="broken-bones">Broken Bones</SelectItem>
+                        <SelectItem value="burns">Burns</SelectItem>
+                        <SelectItem value="cuts">Cuts and Lacerations</SelectItem>
+                        <SelectItem value="soft-tissue">Soft Tissue Injuries</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
 
-            <div className="grid grid-cols-3 gap-4 mb-8">
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">$300K+</div>
-                <div className="text-sm text-muted-foreground">Serious Ride Injury</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">Negligence</div>
-                <div className="text-sm text-muted-foreground">Park Liability Cases</div>
-              </div>
-              <div className="text-center p-4 bg-muted rounded-lg">
-                <div className="text-2xl font-bold text-primary">No Fee</div>
-                <div className="text-sm text-muted-foreground">Unless We Win</div>
-              </div>
-            </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Total Medical Costs ($)</label>
+                    <Input
+                      type="number"
+                      value={formData.medicalCosts}
+                      onChange={(e) => setFormData(prev => ({ ...prev, medicalCosts: e.target.value }))}
+                      placeholder="e.g., 25000"
+                    />
+                  </div>
 
-            {step < 3 && (
-              <div className="mb-6">
-                <div className="flex justify-between text-sm text-muted-foreground mb-2">
-                  <span>Step {step} of 2</span>
-                  <span>{step === 1 ? 'Accident Details' : 'Financial Impact'}</span>
-                </div>
-                <Progress value={(step / 2) * 100} />
-              </div>
+                  <div>
+                    <label className="block text-sm font-medium mb-2">Weeks Unable to Work</label>
+                    <Input
+                      type="number"
+                      value={formData.timeOffWork}
+                      onChange={(e) => setFormData(prev => ({ ...prev, timeOffWork: e.target.value }))}
+                      placeholder="e.g., 8"
+                    />
+                  </div>
+
+                  <div className="space-y-3">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="permanentDisability"
+                        checked={formData.permanentDisability}
+                        onCheckedChange={(checked) => setFormData(prev => ({ ...prev, permanentDisability: !!checked }))}
+                      />
+                      <label htmlFor="permanentDisability" className="text-sm">Permanent disability</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="ongoingTreatment"
+                        checked={formData.ongoingTreatment}
+                        onCheckedChange={(checked) => setFormData(prev => ({ ...prev, ongoingTreatment: !!checked }))}
+                      />
+                      <label htmlFor="ongoingTreatment" className="text-sm">Ongoing treatment required</label>
+                    </div>
+                  </div>
+
+                  <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+                    Calculate My Compensation
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+
+          {/* Results & Info */}
+          <div className="space-y-6">
+            
+            {/* Results */}
+            {estimatedRange && (
+              <Card className="bg-green-50 border-green-200">
+                <CardHeader>
+                  <CardTitle className="flex items-center text-green-700">
+                    <DollarSign className="w-5 h-5 mr-2" />
+                    Estimated Compensation Range
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-center">
+                    <div className="text-3xl font-bold text-green-600 mb-2">
+                      ${estimatedRange.min.toLocaleString()} - ${estimatedRange.max.toLocaleString()}
+                    </div>
+                    <p className="text-sm text-green-700">
+                      This is an estimate based on similar cases. Actual compensation may vary.
+                    </p>
+                  </div>
+                </CardContent>
+              </Card>
             )}
 
-            {step === 1 && renderStep1()}
-            {step === 2 && renderStep2()}
-            {step === 3 && results && (
-              <CalculatorResults
-                title="Estimated Amusement Park Injury Compensation"
-                subtitle="Based on premises and product liability"
-                min={results.min}
-                max={results.max}
-                damageCategories={damageCategories}
-                disclaimer={disclaimer}
-                ctaText="Get Free Case Evaluation"
-              />
-            )}
+            {/* Important Notice */}
+            <Card className="bg-blue-50 border-blue-200">
+              <CardHeader>
+                <CardTitle className="text-blue-700">Important to Know</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-2 text-sm text-blue-700">
+                <div>• This is an estimate only</div>
+                <div>• Each case is unique</div>
+                <div>• Professional evaluation recommended</div>
+                <div>• No fees unless we win</div>
+              </CardContent>
+            </Card>
 
-            {step < 3 ? (
-              <FormNavigation
-                currentStep={step}
-                totalSteps={3}
-                isValid={isStepValid()}
-                onBack={handleBack}
-                onNext={handleNext}
-              />
-            ) : (
-              <div className="flex gap-4 pt-8">
-                <Button
-                  size="lg"
-                  onClick={resetForm}
-                  variant="outline"
-                  className="flex-1 h-14"
-                >
-                  Start Over
+            {/* Contact CTA */}
+            <Card className="bg-red-50 border-red-200">
+              <CardHeader>
+                <CardTitle className="text-red-600">Get Professional Help</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <p className="text-sm text-red-700 mb-4">
+                  Get a detailed case evaluation from experienced attorneys.
+                </p>
+                <Button className="w-full bg-red-600 hover:bg-red-700" asChild>
+                  <Link to="/practice-areas/amusement-parks/case-evaluation">
+                    Free Case Evaluation
+                  </Link>
                 </Button>
-              </div>
-            )}
+              </CardContent>
+            </Card>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default AmusementParkCompensationCalculator;

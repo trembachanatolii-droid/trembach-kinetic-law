@@ -1,450 +1,618 @@
-import { useCalculatorForm, CalculatorFormData, CalculatorResults } from '@/hooks/useCalculatorForm';
-import { CalculatorLayout } from '@/components/calculator/CalculatorLayout';
-import { CalculatorProgress } from '@/components/calculator/CalculatorProgress';
-import { CalculatorSEO } from '@/components/calculator/CalculatorSEO';
-import { FormNavigation } from '@/components/calculator/FormNavigation';
-import { OptionButton } from '@/components/calculator/OptionButton';
-import { Label } from '@/components/ui/label';
-import { Input } from '@/components/ui/input';
+import React, { useState, useEffect, useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Slider } from '@/components/ui/slider';
+import { Phone, Star, Calculator, AlertTriangle, DollarSign, TrendingUp, Scale } from 'lucide-react';
+import SEO from '@/components/SEO';
+import GoBack from '@/components/GoBack';
+import heroBackground from '@/assets/hearing-loss-calculator-hero.jpg';
 
-interface HearingLossFormData extends CalculatorFormData {
+gsap.registerPlugin(ScrollTrigger);
+
+interface CalculatorData {
+  age: number;
   hearingLossType: string;
   severity: string;
-  cause: string;
-  age: string;
-  medicalCosts: string;
-  hearingAids: string;
-  lostWages: string;
-  tinnitus: string;
+  causeType: string;
+  yearsExposed: number;
   occupation: string;
+  weeklyWages: number;
+  medicalExpenses: number;
+  timeOffWork: number;
 }
 
-const initialFormData: HearingLossFormData = {
-  hearingLossType: '',
-  severity: '',
-  cause: '',
-  age: '',
-  medicalCosts: '',
-  hearingAids: '',
-  lostWages: '',
-  tinnitus: '',
-  occupation: ''
-};
-
-const hearingLossTypeOptions = [
-  { value: 'bilateral', label: 'Bilateral (Both Ears)', description: 'Complete or severe loss in both ears' },
-  { value: 'unilateral', label: 'Unilateral (One Ear)', description: 'Loss in one ear only' },
-  { value: 'partial', label: 'Partial Loss', description: 'Reduced hearing ability' },
-  { value: 'profound', label: 'Profound/Total Deafness', description: 'Complete hearing loss' }
-];
-
-const severityOptions = [
-  { value: 'mild', label: 'Mild (26-40 dB)', description: 'Difficulty with soft sounds' },
-  { value: 'moderate', label: 'Moderate (41-55 dB)', description: 'Difficulty with normal conversation' },
-  { value: 'severe', label: 'Severe (71-90 dB)', description: 'Cannot hear most speech' },
-  { value: 'profound', label: 'Profound (91+ dB)', description: 'Cannot hear any speech' }
-];
-
-const causeOptions = [
-  { value: 'workplace', label: 'Workplace Noise', description: 'Industrial, construction noise' },
-  { value: 'explosion', label: 'Explosion/Blast', description: 'Sudden loud noise trauma' },
-  { value: 'vehicle', label: 'Vehicle Accident', description: 'Crash-related trauma' },
-  { value: 'medical', label: 'Medical Malpractice', description: 'Surgical error, medication' },
-  { value: 'defect', label: 'Product Defect', description: 'Defective equipment or protection' }
-];
-
-const ageOptions = [
-  { value: 'young', label: 'Under 40', description: 'Longer lifetime impact' },
-  { value: 'middle', label: '40-60', description: 'Prime working years' },
-  { value: 'senior', label: '60+', description: 'Retirement age' }
-];
-
-const tinnitusOptions = [
-  { value: 'none', label: 'No Tinnitus', description: 'No ringing or buzzing' },
-  { value: 'mild', label: 'Mild Tinnitus', description: 'Occasional ringing' },
-  { value: 'moderate', label: 'Moderate Tinnitus', description: 'Frequent disturbance' },
-  { value: 'severe', label: 'Severe Tinnitus', description: 'Constant, debilitating' }
-];
-
-const occupationOptions = [
-  { value: 'hearing-critical', label: 'Hearing-Critical Job', description: 'Musician, teacher, customer service' },
-  { value: 'communication', label: 'Communication-Heavy', description: 'Management, sales, healthcare' },
-  { value: 'skilled', label: 'Skilled Labor', description: 'Technical, trade work' },
-  { value: 'physical', label: 'Physical Labor', description: 'Construction, manufacturing' }
-];
-
-function calculateCompensation(data: HearingLossFormData): CalculatorResults {
-  let baseMin = 75000;
-  let baseMax = 350000;
-
-  // Hearing loss type multipliers
-  const typeMultipliers: Record<string, number> = {
-    'bilateral': 5,
-    'unilateral': 2,
-    'partial': 1.5,
-    'profound': 7
-  };
-
-  // Severity multipliers
-  const severityMultipliers: Record<string, number> = {
-    'mild': 1,
-    'moderate': 2,
-    'severe': 4,
-    'profound': 6
-  };
-
-  // Cause multipliers
-  const causeMultipliers: Record<string, number> = {
-    'workplace': 1.3,
-    'explosion': 1.8,
-    'vehicle': 1.4,
-    'medical': 2.0,
-    'defect': 1.6
-  };
-
-  // Age multipliers
-  const ageMultipliers: Record<string, number> = {
-    'young': 2.0,
-    'middle': 1.5,
-    'senior': 1.0
-  };
-
-  // Tinnitus multipliers
-  const tinnitusMultipliers: Record<string, number> = {
-    'none': 1.0,
-    'mild': 1.2,
-    'moderate': 1.5,
-    'severe': 2.0
-  };
-
-  // Occupation multipliers
-  const occupationMultipliers: Record<string, number> = {
-    'hearing-critical': 2.5,
-    'communication': 1.8,
-    'skilled': 1.3,
-    'physical': 1.1
-  };
-
-  const typeMultiplier = typeMultipliers[data.hearingLossType] || 1;
-  const severityMultiplier = severityMultipliers[data.severity] || 1;
-  const causeMultiplier = causeMultipliers[data.cause] || 1;
-  const ageMultiplier = ageMultipliers[data.age] || 1;
-  const tinnitusMultiplier = tinnitusMultipliers[data.tinnitus] || 1;
-  const occupationMultiplier = occupationMultipliers[data.occupation] || 1;
-
-  baseMin *= typeMultiplier * severityMultiplier * causeMultiplier * ageMultiplier;
-  baseMax *= typeMultiplier * severityMultiplier * causeMultiplier * ageMultiplier;
-
-  baseMin *= tinnitusMultiplier * occupationMultiplier;
-  baseMax *= tinnitusMultiplier * occupationMultiplier;
-
-  // Add economic damages
-  const medicalCosts = parseFloat(data.medicalCosts) || 0;
-  const hearingAids = parseFloat(data.hearingAids) || 0;
-  const lostWages = parseFloat(data.lostWages) || 0;
-
-  const totalEconomic = medicalCosts + hearingAids + lostWages;
-
-  baseMin += totalEconomic * 0.8;
-  baseMax += totalEconomic * 2.0;
-
-  return {
-    min: Math.round(baseMin),
-    max: Math.round(baseMax),
-    medicalExpenses: medicalCosts,
-    hearingAids: hearingAids,
-    lostIncome: lostWages,
-    totalEconomic: totalEconomic
-  };
+interface CompensationEstimate {
+  low: number;
+  average: number;
+  high: number;
 }
 
-function validateForm(data: HearingLossFormData, step: number): boolean {
-  if (step === 1) {
-    return !!(data.hearingLossType && data.severity && data.cause);
-  }
-  if (step === 2) {
-    return !!(data.age && data.tinnitus && data.occupation);
-  }
-  return true;
-}
+const HearingLossCompensationCalculator: React.FC = () => {
+  const [calculatorData, setCalculatorData] = useState<CalculatorData>({
+    age: 40,
+    hearingLossType: '',
+    severity: '',
+    causeType: '',
+    yearsExposed: 0,
+    occupation: '',
+    weeklyWages: 0,
+    medicalExpenses: 0,
+    timeOffWork: 0
+  });
 
-export default function HearingLossCompensationCalculator() {
-  const {
-    step,
-    formData,
-    results,
-    updateField,
-    handleNext,
-    handleBack,
-    resetForm,
-    isStepValid
-  } = useCalculatorForm<HearingLossFormData>(
-    initialFormData,
-    calculateCompensation,
-    validateForm
-  );
+  const [estimatedCompensation, setEstimatedCompensation] = useState<CompensationEstimate | null>(null);
+  const [showResults, setShowResults] = useState(false);
+
+  const heroRef = useRef<HTMLDivElement>(null);
+  const calculatorRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.body.classList.add('hearing-loss-page');
+    return () => document.body.classList.remove('hearing-loss-page');
+  }, []);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      gsap.fromTo(heroRef.current?.querySelector('.hero-content'),
+        { opacity: 0, y: 50 },
+        { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }
+      );
+
+      gsap.fromTo(calculatorRef.current,
+        { opacity: 0, y: 30 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.6,
+          scrollTrigger: {
+            trigger: calculatorRef.current,
+            start: 'top 80%'
+          }
+        }
+      );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
+  useEffect(() => {
+    if (Object.values(calculatorData).some(value => value !== '' && value !== 0)) {
+      calculateCompensation();
+    }
+  }, [calculatorData]);
+
+  const calculateCompensation = () => {
+    let baseAmount = 50000; // Base compensation amount
+    let multiplier = 1;
+
+    // Age factor - younger victims get higher compensation due to longer impact
+    if (calculatorData.age < 30) multiplier += 0.4;
+    else if (calculatorData.age < 50) multiplier += 0.2;
+    else if (calculatorData.age > 65) multiplier -= 0.1;
+
+    // Hearing loss type factor
+    switch (calculatorData.hearingLossType) {
+      case 'sensorineural':
+        multiplier += 0.3; // Permanent damage
+        break;
+      case 'bilateral':
+        multiplier += 0.5; // Both ears affected
+        break;
+      case 'sudden':
+        multiplier += 0.4; // Sudden onset often traumatic
+        break;
+      case 'mixed':
+        multiplier += 0.35;
+        break;
+      case 'conductive':
+        multiplier += 0.2; // May be treatable
+        break;
+      case 'tinnitus':
+        multiplier += 0.25;
+        break;
+    }
+
+    // Severity factor
+    switch (calculatorData.severity) {
+      case 'profound':
+        multiplier += 0.6;
+        break;
+      case 'severe':
+        multiplier += 0.4;
+        break;
+      case 'moderate-severe':
+        multiplier += 0.3;
+        break;
+      case 'moderate':
+        multiplier += 0.2;
+        break;
+      case 'mild-moderate':
+        multiplier += 0.1;
+        break;
+    }
+
+    // Cause type factor
+    switch (calculatorData.causeType) {
+      case 'workplace':
+        multiplier += 0.3; // Employer liability
+        break;
+      case 'explosion':
+        multiplier += 0.4; // Traumatic and often preventable
+        break;
+      case 'vehicle-accident':
+        multiplier += 0.35;
+        break;
+      case 'chemical':
+        multiplier += 0.3;
+        break;
+      case 'defective-product':
+        multiplier += 0.25;
+        break;
+    }
+
+    // Years of exposure factor
+    if (calculatorData.yearsExposed > 20) multiplier += 0.3;
+    else if (calculatorData.yearsExposed > 10) multiplier += 0.2;
+    else if (calculatorData.yearsExposed > 5) multiplier += 0.1;
+
+    // High-risk occupation factor
+    const highRiskOccupations = ['construction', 'manufacturing', 'military', 'aviation', 'entertainment'];
+    if (highRiskOccupations.includes(calculatorData.occupation)) {
+      multiplier += 0.2;
+    }
+
+    // Calculate base compensation
+    const baseCompensation = baseAmount * multiplier;
+
+    // Add economic damages
+    const weeklyLoss = calculatorData.weeklyWages * 0.3; // 30% hearing-related impact
+    const yearlyLoss = weeklyLoss * 52;
+    const workingYearsRemaining = Math.max(0, 65 - calculatorData.age);
+    const lostEarnings = yearlyLoss * workingYearsRemaining * 0.5; // 50% discount for present value
+
+    const totalMedical = calculatorData.medicalExpenses + (calculatorData.timeOffWork * calculatorData.weeklyWages);
+
+    const totalCompensation = baseCompensation + lostEarnings + totalMedical;
+
+    // Calculate range (±30% of estimate)
+    const low = Math.round(totalCompensation * 0.7);
+    const average = Math.round(totalCompensation);
+    const high = Math.round(totalCompensation * 1.3);
+
+    setEstimatedCompensation({ low, average, high });
+    setShowResults(true);
+  };
+
+  const handleInputChange = (field: string, value: string | number) => {
+    setCalculatorData(prev => ({ ...prev, [field]: value }));
+  };
+
+  const formatCurrency = (amount: number): string => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD',
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 0,
+    }).format(amount);
+  };
+
+  const resetCalculator = () => {
+    setCalculatorData({
+      age: 40,
+      hearingLossType: '',
+      severity: '',
+      causeType: '',
+      yearsExposed: 0,
+      occupation: '',
+      weeklyWages: 0,
+      medicalExpenses: 0,
+      timeOffWork: 0
+    });
+    setEstimatedCompensation(null);
+    setShowResults(false);
+  };
 
   return (
     <>
-      <CalculatorSEO
-        title="Hearing Loss Compensation Calculator | Deafness Injury Settlement Estimate"
-        description="Calculate potential compensation for hearing loss and deafness injuries. Free estimates including bilateral hearing loss, tinnitus, and hearing aid costs."
-        canonical="/practice-areas/hearing-loss/calculator"
-        injuryType="hearing loss"
+      <SEO 
+        title="Hearing Loss Compensation Calculator | California Hearing Loss Attorneys | Trembach Law Firm"
+        description="Calculate potential compensation for your hearing loss case in California. Free estimation tool by experienced hearing loss attorneys. Get an estimate of your claim value."
+        keywords="hearing loss compensation calculator, hearing damage settlement, California hearing loss attorney, compensation estimate, hearing loss claim value"
+        canonical="https://www.trembachlawfirm.com/practice-areas/hearing-loss/compensation-calculator"
       />
-
-      <CalculatorLayout
-        title="Hearing Loss Calculator"
-        subtitle="Estimate compensation for hearing impairment and deafness"
-        metaTitle="Hearing Loss Compensation Calculator"
-        metaDescription="Free hearing loss settlement calculator. Instant deafness injury estimates."
-        stats={[
-          { value: '$500K+', label: 'Average Settlement' },
-          { value: '15%', label: 'Adults with Hearing Loss' },
-          { value: 'Permanent', label: 'Disability Status' }
-        ]}
-      >
-        <CalculatorProgress currentStep={step} totalSteps={3} />
-
-        {/* Step 1: Hearing Loss Details */}
-        {step === 1 && (
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-2xl font-semibold mb-2">Hearing Loss Details</h2>
-              <p className="text-muted-foreground">Tell us about the hearing impairment</p>
+      
+      <div className="min-h-screen bg-background">
+        <GoBack fallbackPath="/practice-areas/hearing-loss" />
+        
+        {/* Hero Section */}
+        <section 
+          ref={heroRef}
+          className="relative h-[500px] flex items-center justify-center bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url(${heroBackground})` }}
+        >
+          <div className="absolute inset-0 bg-black/70"></div>
+          
+          <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+            <div className="hero-content">
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                Hearing Loss Compensation Calculator
+              </h1>
+              
+              <div className="flex items-center justify-center mb-6">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400 mr-1" />
+                ))}
+                <span className="ml-2 text-lg force-white">Professional Case Evaluation</span>
+              </div>
+              
+              <p className="text-xl mb-8">
+                Get an estimate of your potential hearing loss compensation based on your specific circumstances.
+              </p>
+              
+              <Button 
+                size="lg"
+                className="bg-white text-black hover:bg-gray-100 font-bold px-8 py-4 text-lg"
+                onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth' })}
+              >
+                <Calculator className="w-5 h-5 mr-2" />
+                Start Calculator
+              </Button>
             </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label className="text-base font-medium mb-4 block">Type of Hearing Loss</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {hearingLossTypeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.hearingLossType === option.value}
-                      onClick={() => updateField('hearingLossType', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Severity Level (Decibels)</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {severityOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.severity === option.value}
-                      onClick={() => updateField('severity', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Cause of Hearing Loss</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {causeOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.cause === option.value}
-                      onClick={() => updateField('cause', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-            />
           </div>
-        )}
+        </section>
 
-        {/* Step 2: Personal & Financial Details */}
-        {step === 2 && (
-          <div className="space-y-8">
+        {/* Important Disclaimer */}
+        <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 mx-6 mt-8">
+          <div className="flex">
+            <AlertTriangle className="w-6 h-6 text-yellow-400 mr-3 mt-1" />
             <div>
-              <h2 className="text-2xl font-semibold mb-2">Personal & Financial Impact</h2>
-              <p className="text-muted-foreground">Help us understand the full impact</p>
-            </div>
-
-            <div className="space-y-6">
-              <div>
-                <Label htmlFor="medicalCosts" className="text-base font-medium">
-                  Medical Expenses to Date ($)
-                </Label>
-                <Input
-                  id="medicalCosts"
-                  type="number"
-                  placeholder="15000"
-                  value={formData.medicalCosts}
-                  onChange={(e) => updateField('medicalCosts', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="hearingAids" className="text-base font-medium">
-                  Hearing Aids & Devices (Lifetime) ($)
-                </Label>
-                <Input
-                  id="hearingAids"
-                  type="number"
-                  placeholder="45000"
-                  value={formData.hearingAids}
-                  onChange={(e) => updateField('hearingAids', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label htmlFor="lostWages" className="text-base font-medium">
-                  Lost Wages & Income ($)
-                </Label>
-                <Input
-                  id="lostWages"
-                  type="number"
-                  placeholder="30000"
-                  value={formData.lostWages}
-                  onChange={(e) => updateField('lostWages', e.target.value)}
-                  className="mt-2"
-                />
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Your Age</Label>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {ageOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.age === option.value}
-                      onClick={() => updateField('age', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Tinnitus (Ringing) Severity</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {tinnitusOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.tinnitus === option.value}
-                      onClick={() => updateField('tinnitus', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <Label className="text-base font-medium mb-4 block">Occupation Type</Label>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {occupationOptions.map((option) => (
-                    <OptionButton
-                      key={option.value}
-                      value={option.value}
-                      label={option.label}
-                      description={option.description}
-                      isSelected={formData.occupation === option.value}
-                      onClick={() => updateField('occupation', option.value)}
-                    />
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <FormNavigation
-              currentStep={step}
-              totalSteps={3}
-              isValid={isStepValid()}
-              onBack={handleBack}
-              onNext={handleNext}
-              nextButtonText="Calculate Compensation"
-            />
-          </div>
-        )}
-
-        {/* Step 3: Results */}
-        {step === 3 && results && (
-          <div className="space-y-8">
-            <div className="text-center">
-              <h2 className="text-3xl font-bold mb-2">Your Estimated Compensation Range</h2>
-              <p className="text-muted-foreground">Based on hearing loss injury cases</p>
-            </div>
-
-            <div className="bg-primary/5 rounded-2xl p-8 text-center">
-              <div className="text-5xl font-bold mb-2">
-                ${results.min.toLocaleString()} - ${results.max.toLocaleString()}
-              </div>
-              <p className="text-muted-foreground">Potential Settlement Range</p>
-            </div>
-
-            <div className="space-y-4">
-              <div className="bg-card border rounded-xl p-6">
-                <h4 className="font-semibold mb-2">Economic Damages Breakdown</h4>
-                <div className="text-sm text-muted-foreground space-y-1">
-                  <p>Medical Expenses: ${results.medicalExpenses?.toLocaleString()}</p>
-                  <p>Hearing Aids & Devices: ${results.hearingAids?.toLocaleString()}</p>
-                  <p>Lost Income: ${results.lostIncome?.toLocaleString()}</p>
-                  <p className="font-semibold pt-2 border-t">
-                    Total Economic: ${results.totalEconomic?.toLocaleString()}
-                  </p>
-                </div>
-              </div>
-
-              <div className="bg-card border rounded-xl p-6">
-                <h4 className="font-semibold mb-2">Communication & Quality of Life</h4>
-                <p className="text-sm text-muted-foreground">
-                  Hearing loss affects communication, social interaction, employment, safety, and overall quality of life. Permanent hearing damage requires lifelong accommodation.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-amber-50 dark:bg-amber-950/20 border border-amber-200 dark:border-amber-900 rounded-xl p-6">
-              <p className="text-sm text-amber-900 dark:text-amber-200">
-                <strong>Disclaimer:</strong> This calculator provides estimates only. Actual compensation depends on medical documentation, liability proof, occupational impact, and jurisdiction. Hearing loss cases require audiological testing and expert testimony. Consult with a qualified attorney for case evaluation.
+              <h3 className="text-lg font-semibold text-yellow-800 mb-2">Important Legal Disclaimer</h3>
+              <p className="text-yellow-700">
+                This calculator provides estimates based on general factors and should not be considered a guarantee of compensation. 
+                Actual settlements depend on many case-specific factors. For an accurate assessment, schedule a free consultation with our experienced hearing loss attorneys.
               </p>
             </div>
+          </div>
+        </div>
 
-            <div className="text-center pt-4 space-y-4">
-              <Button size="lg" className="h-14 px-8 text-base" asChild>
-                <Link to="/free-consultation">Get Free Case Review</Link>
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={resetForm}
-                className="h-14 px-8 text-base ml-4"
-              >
-                Calculate Another Case
-              </Button>
+        {/* Main Content */}
+        <div className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            {/* Calculator Column */}
+            <div className="lg:col-span-2" ref={calculatorRef}>
+              <Card className="shadow-lg" id="calculator">
+                <CardHeader className="bg-red-50">
+                  <CardTitle className="text-red-600 text-center text-2xl">
+                    Hearing Loss Compensation Calculator
+                  </CardTitle>
+                  <p className="text-center text-muted-foreground">
+                    Provide your information below to get a compensation estimate
+                  </p>
+                </CardHeader>
+                <CardContent className="pt-6 space-y-6">
+                  
+                  {/* Personal Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">Personal Information</h3>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Age: {calculatorData.age} years old</label>
+                      <Slider
+                        value={[calculatorData.age]}
+                        onValueChange={(value) => handleInputChange('age', value[0])}
+                        max={85}
+                        min={18}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                        <span>18</span>
+                        <span>85</span>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Occupation Type</label>
+                      <Select value={calculatorData.occupation} onValueChange={(value) => handleInputChange('occupation', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select your occupation" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="construction">Construction Worker</SelectItem>
+                          <SelectItem value="manufacturing">Manufacturing/Factory Worker</SelectItem>
+                          <SelectItem value="military">Military Personnel</SelectItem>
+                          <SelectItem value="aviation">Aviation/Airport Worker</SelectItem>
+                          <SelectItem value="entertainment">Entertainment/Music Industry</SelectItem>
+                          <SelectItem value="transportation">Transportation/Trucking</SelectItem>
+                          <SelectItem value="emergency">Emergency Services</SelectItem>
+                          <SelectItem value="office">Office/Administrative</SelectItem>
+                          <SelectItem value="healthcare">Healthcare Professional</SelectItem>
+                          <SelectItem value="education">Education/Teaching</SelectItem>
+                          <SelectItem value="retail">Retail/Service Industry</SelectItem>
+                          <SelectItem value="other">Other</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Hearing Loss Details */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">Hearing Loss Details</h3>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Type of Hearing Loss</label>
+                      <Select value={calculatorData.hearingLossType} onValueChange={(value) => handleInputChange('hearingLossType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select hearing loss type" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="sensorineural">Sensorineural (Nerve Damage)</SelectItem>
+                          <SelectItem value="conductive">Conductive (Mechanical Problem)</SelectItem>
+                          <SelectItem value="mixed">Mixed (Both Types)</SelectItem>
+                          <SelectItem value="bilateral">Bilateral (Both Ears)</SelectItem>
+                          <SelectItem value="sudden">Sudden Hearing Loss</SelectItem>
+                          <SelectItem value="tinnitus">Tinnitus Only</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Severity Level</label>
+                      <Select value={calculatorData.severity} onValueChange={(value) => handleInputChange('severity', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select severity level" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="mild">Mild (26-40 dB loss)</SelectItem>
+                          <SelectItem value="mild-moderate">Mild-Moderate (41-55 dB loss)</SelectItem>
+                          <SelectItem value="moderate">Moderate (56-70 dB loss)</SelectItem>
+                          <SelectItem value="moderate-severe">Moderate-Severe (71-90 dB loss)</SelectItem>
+                          <SelectItem value="severe">Severe (91-120 dB loss)</SelectItem>
+                          <SelectItem value="profound">Profound (121+ dB loss)</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Cause of Hearing Loss</label>
+                      <Select value={calculatorData.causeType} onValueChange={(value) => handleInputChange('causeType', value)}>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select cause" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="workplace">Workplace Noise Exposure</SelectItem>
+                          <SelectItem value="vehicle-accident">Motor Vehicle Accident</SelectItem>
+                          <SelectItem value="explosion">Explosion/Blast Injury</SelectItem>
+                          <SelectItem value="chemical">Chemical Exposure</SelectItem>
+                          <SelectItem value="defective-product">Defective Product</SelectItem>
+                          <SelectItem value="medical-malpractice">Medical Malpractice</SelectItem>
+                          <SelectItem value="other">Other Accident</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Years of Exposure: {calculatorData.yearsExposed} years</label>
+                      <Slider
+                        value={[calculatorData.yearsExposed]}
+                        onValueChange={(value) => handleInputChange('yearsExposed', value[0])}
+                        max={50}
+                        min={0}
+                        step={1}
+                        className="w-full"
+                      />
+                      <div className="flex justify-between text-xs text-muted-foreground mt-1">
+                        <span>0</span>
+                        <span>50+ years</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Financial Information */}
+                  <div className="space-y-4">
+                    <h3 className="text-lg font-semibold border-b border-gray-200 pb-2">Financial Impact</h3>
+                    
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Weekly Wages (before hearing loss)</label>
+                      <Input
+                        type="number"
+                        value={calculatorData.weeklyWages || ''}
+                        onChange={(e) => handleInputChange('weeklyWages', parseInt(e.target.value) || 0)}
+                        placeholder="Enter weekly wages"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Medical Expenses to Date</label>
+                      <Input
+                        type="number"
+                        value={calculatorData.medicalExpenses || ''}
+                        onChange={(e) => handleInputChange('medicalExpenses', parseInt(e.target.value) || 0)}
+                        placeholder="Enter medical expenses"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium mb-2">Weeks Off Work</label>
+                      <Input
+                        type="number"
+                        value={calculatorData.timeOffWork || ''}
+                        onChange={(e) => handleInputChange('timeOffWork', parseInt(e.target.value) || 0)}
+                        placeholder="Enter weeks off work"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="flex space-x-4">
+                    <Button onClick={calculateCompensation} className="bg-red-600 hover:bg-red-700 flex-1">
+                      <Calculator className="w-4 h-4 mr-2" />
+                      Calculate Compensation
+                    </Button>
+                    <Button onClick={resetCalculator} variant="outline">
+                      Reset
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Results Section */}
+              {showResults && estimatedCompensation && (
+                <Card className="shadow-lg mt-8">
+                  <CardHeader className="bg-green-50">
+                    <CardTitle className="text-green-600 text-center text-2xl">
+                      Estimated Compensation Range
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="pt-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                      <div className="text-center p-4 bg-blue-50 rounded-lg">
+                        <DollarSign className="w-8 h-8 text-blue-600 mx-auto mb-2" />
+                        <h3 className="font-semibold text-blue-600">Conservative</h3>
+                        <p className="text-2xl font-bold text-blue-800">{formatCurrency(estimatedCompensation.low)}</p>
+                      </div>
+                      <div className="text-center p-4 bg-green-50 rounded-lg">
+                        <TrendingUp className="w-8 h-8 text-green-600 mx-auto mb-2" />
+                        <h3 className="font-semibold text-green-600">Average</h3>
+                        <p className="text-2xl font-bold text-green-800">{formatCurrency(estimatedCompensation.average)}</p>
+                      </div>
+                      <div className="text-center p-4 bg-purple-50 rounded-lg">
+                        <Scale className="w-8 h-8 text-purple-600 mx-auto mb-2" />
+                        <h3 className="font-semibold text-purple-600">Optimal</h3>
+                        <p className="text-2xl font-bold text-purple-800">{formatCurrency(estimatedCompensation.high)}</p>
+                      </div>
+                    </div>
+
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                      <h4 className="font-semibold text-yellow-800 mb-2">Important Notes:</h4>
+                      <ul className="text-sm text-yellow-700 space-y-1">
+                        <li>• These estimates are based on general factors and case history</li>
+                        <li>• Actual compensation depends on specific case details and evidence</li>
+                        <li>• Medical documentation and expert testimony significantly impact value</li>
+                        <li>• California law allows full recovery without damage caps for hearing loss</li>
+                      </ul>
+                    </div>
+
+                    <div className="text-center">
+                      <Button 
+                        size="lg"
+                        className="bg-red-600 hover:bg-red-700 mr-4"
+                        onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
+                      >
+                        Get Professional Evaluation
+                      </Button>
+                      <Button 
+                        size="lg"
+                        variant="outline"
+                        onClick={() => window.location.href = 'tel:8181234567'}
+                      >
+                        <Phone className="w-4 h-4 mr-2" />
+                        Call (818) 123-4567
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
+
+              {/* Legal Disclaimer */}
+              <Card className="shadow-lg mt-8 border-gray-200">
+                <CardHeader>
+                  <CardTitle className="text-gray-600">Legal Disclaimer</CardTitle>
+                </CardHeader>
+                <CardContent className="text-sm text-gray-600 space-y-3">
+                  <p>
+                    This compensation calculator is provided for informational purposes only and does not constitute legal advice. 
+                    The estimates generated are based on general factors and historical case outcomes but cannot account for the 
+                    unique circumstances of your specific case.
+                  </p>
+                  <p>
+                    Actual compensation amounts depend on numerous factors including the strength of evidence, quality of medical 
+                    documentation, degree of negligence, available insurance coverage, and other case-specific variables. No guarantee 
+                    is made regarding the outcome of any legal matter.
+                  </p>
+                  <p>
+                    For an accurate assessment of your hearing loss claim, schedule a free consultation with our experienced 
+                    California hearing loss attorneys. We will review your specific circumstances and provide a professional 
+                    evaluation of your case's potential value.
+                  </p>
+                  <p className="font-semibold">
+                    Nothing on this calculator creates an attorney-client relationship. Consult with a qualified attorney for 
+                    legal advice specific to your situation.
+                  </p>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Sidebar */}
+            <div className="lg:col-span-1">
+              <div className="sticky top-24 space-y-6">
+                
+                {/* Next Steps */}
+                <Card className="border-red-200 shadow-lg">
+                  <CardHeader className="bg-red-50">
+                    <CardTitle className="text-red-600 text-center">Next Steps</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4 pt-6">
+                    <Button 
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold"
+                      onClick={() => window.location.href = '/practice-areas/hearing-loss/case-evaluation'}
+                    >
+                      Free Case Evaluation
+                    </Button>
+                    <Button 
+                      className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold"
+                      onClick={() => window.location.href = 'tel:8181234567'}
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call (818) 123-4567
+                    </Button>
+                  </CardContent>
+                </Card>
+
+                {/* Factors Affecting Compensation */}
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-primary">Factors Affecting Compensation</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm">
+                    <p>• Type and severity of hearing loss</p>
+                    <p>• Age at time of injury</p>
+                    <p>• Occupation and earning capacity</p>
+                    <p>• Years of exposure or trauma severity</p>
+                    <p>• Medical treatment costs</p>
+                    <p>• Future care needs</p>
+                    <p>• Impact on daily life and relationships</p>
+                    <p>• Degree of negligence involved</p>
+                    <p>• Available insurance coverage</p>
+                    <p>• Quality of medical documentation</p>
+                  </CardContent>
+                </Card>
+
+                {/* California Advantages */}
+                <Card className="shadow-lg">
+                  <CardHeader>
+                    <CardTitle className="text-primary">California Law Advantages</CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-2 text-sm">
+                    <p>✓ No damage caps on hearing loss cases</p>
+                    <p>✓ Pure comparative negligence system</p>
+                    <p>✓ Strong worker protection laws</p>
+                    <p>✓ Extended deadlines for gradual onset</p>
+                    <p>✓ Consumer protection statutes</p>
+                    <p>✓ Joint and several liability</p>
+                  </CardContent>
+                </Card>
+              </div>
             </div>
           </div>
-        )}
-      </CalculatorLayout>
+        </div>
+      </div>
     </>
   );
-}
+};
+
+export default HearingLossCompensationCalculator;

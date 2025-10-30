@@ -492,7 +492,7 @@ const PracticeCard = React.forwardRef<HTMLDivElement, PracticeCardProps>(
 
           {/* Content Below Image */}
           <div className="mt-5 flex items-center justify-between gap-4">
-            <h3 className="project-title text-[15px] md:text-[16px] font-semibold text-foreground leading-tight break-words flex-1 transition-all duration-300 group-hover:text-[20px] md:group-hover:text-[22px]">
+            <h3 className="project-title text-6xl lg:text-7xl font-bold text-foreground leading-tight break-words flex-1">
               {area.title}
             </h3>
             <span className="bg-[#0071e3] hover:bg-[#0077ed] text-white text-base font-semibold px-8 py-3 rounded-full transition-all duration-200 group-hover:scale-105 whitespace-nowrap flex-shrink-0">

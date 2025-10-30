@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import scalesJusticeHeroBg from '@/assets/scales-justice-hero-bg.png';
+import ladyJusticeHero from '@/assets/lady-justice-hero.png';
 
 const Hero = () => {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -105,27 +105,27 @@ const Hero = () => {
   return (
     <section 
       ref={heroRef} 
-      className="relative min-h-screen flex items-center overflow-hidden pt-24"
-      style={{
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.5)), url(${scalesJusticeHeroBg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat'
-      }}
+      className="relative min-h-screen flex items-center overflow-hidden pt-24 bg-background"
     >
+      {/* Lady Justice Background */}
+      <img
+        src={ladyJusticeHero}
+        alt="Lady Justice statue"
+        className="absolute bottom-0 right-0 h-[75%] md:h-[80%] w-auto object-contain pointer-events-none select-none opacity-90 z-0"
+      />
       
       
       <div className="container mx-auto px-8 flex items-start pt-32 min-h-[calc(100vh-6rem)] relative z-10">
         {/* Left-aligned Content - Apple Style */}
         <div className="max-w-xl">
           <div ref={headlineRef} className="space-y-8">
-            <h1 className="hero-line font-display text-white text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_4px_16px_rgba(0,0,0,0.8)]">
+            <h1 className="hero-line font-display text-foreground text-4xl md:text-[40px] leading-[1.3] [text-shadow:0_2px_8px_rgba(0,0,0,0.3)]">
               California's premier<br />
               personal injury<br />
               and mesothelioma<br />
-              lawyers
+              law firm
             </h1>
-            <p className="hero-line font-sans text-[#D4AF37] text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_2px_8px_rgba(0,0,0,0.7),0_0_20px_rgba(212,175,55,0.3)] font-medium">
+            <p className="hero-line font-sans text-foreground text-lg md:text-xl leading-[1.6] max-w-md [text-shadow:0_1px_4px_rgba(0,0,0,0.2)]">
               After defending insurance companies, our lead attorney switched sides. Now we use their playbook to maximize your compensation.
             </p>
           </div>
@@ -135,19 +135,9 @@ const Hero = () => {
       <div className="absolute bottom-16 left-1/2 transform -translate-x-1/2 z-20">
         <Button 
           ref={buttonRef}
+          variant="outline"
           size="lg"
-          className="hero-cta-button relative overflow-hidden text-white font-bold px-10 py-6 rounded-full text-base tracking-wide
-            bg-gradient-to-b from-[#E63946] to-[#C1272D]
-            shadow-[0_4px_14px_0_rgba(230,57,70,0.39),0_8px_20px_-4px_rgba(193,39,45,0.5),inset_0_-2px_4px_0_rgba(0,0,0,0.2),inset_0_1px_2px_0_rgba(255,255,255,0.3)]
-            hover:bg-gradient-to-b hover:from-[#2563EB] hover:to-[#1D4ED8]
-            hover:text-[#A855F7]
-            hover:shadow-[0_0_40px_8px_rgba(239,68,68,0.8),0_0_20px_4px_rgba(239,68,68,0.6),inset_0_-2px_4px_0_rgba(0,0,0,0.3),inset_0_1px_2px_0_rgba(255,255,255,0.2)]
-            active:shadow-[0_0_20px_4px_rgba(239,68,68,0.6),inset_0_2px_6px_0_rgba(0,0,0,0.4)]
-            hover:scale-[1.02] active:scale-[0.98]
-            transition-all duration-300 ease-out
-            before:absolute before:inset-0 before:rounded-full before:bg-gradient-to-b before:from-white/20 before:to-transparent before:opacity-0 hover:before:opacity-100 before:transition-opacity before:duration-300
-            after:absolute after:inset-0 after:rounded-full after:bg-[radial-gradient(circle_at_50%_0%,rgba(255,255,255,0.4),transparent_60%)] after:opacity-70
-            will-change-transform"
+          className="text-foreground font-bold px-8 py-4 rounded-md shadow-lg transform hover:scale-105 transition-all duration-200"
           asChild
         >
           <Link to="/free-consultation">START YOUR FREE CASE REVIEW</Link>

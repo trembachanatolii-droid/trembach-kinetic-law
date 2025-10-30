@@ -1,8 +1,0 @@
-{
-  "dependencies": {
-    "fast-glob": "^3.3.3",
-    "fs-extra": "^11.3.2",
-    "jsdom": "^27.0.1",
-    "prettier": "^3.6.2"
-  }
-}

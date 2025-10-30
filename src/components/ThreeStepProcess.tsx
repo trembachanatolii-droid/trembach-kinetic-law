@@ -211,7 +211,7 @@ const ThreeStepProcess = () => {
         gsap.to(timelineProgressRef.current, {
           scaleX: 1,
           scrollTrigger: {
-            trigger: sectionRef.current,
+            trigger: ".apple-steps-section",
             start: "top center",
             end: "bottom center",
             scrub: 1,
@@ -219,32 +219,27 @@ const ThreeStepProcess = () => {
         });
       }
 
-      // Background gradient animation - use ref instead of class selector
-      if (sectionRef.current) {
-        gsap.to(sectionRef.current, {
-          backgroundPosition: "50% 100%",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top bottom",
-            end: "bottom top",
-            scrub: 1,
-          }
-        });
-      }
+      // Background gradient animation
+      gsap.to(".apple-steps-section", {
+        backgroundPosition: "50% 100%",
+        scrollTrigger: {
+          trigger: ".apple-steps-section",
+          start: "top bottom",
+          end: "bottom top",
+          scrub: 1,
+        }
+      });
 
       // Dynamic color shift based on scroll
-      const gradientMesh = sectionRef.current?.querySelector(".gradient-mesh");
-      if (gradientMesh) {
-        gsap.to(gradientMesh, {
-          filter: "hue-rotate(30deg)",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top center",
-            end: "bottom center",
-            scrub: 1,
-          }
-        });
-      }
+      gsap.to(".gradient-mesh", {
+        filter: "hue-rotate(30deg)",
+        scrollTrigger: {
+          trigger: ".apple-steps-section",
+          start: "top center",
+          end: "bottom center",
+          scrub: 1,
+        }
+      });
 
     }, sectionRef);
 

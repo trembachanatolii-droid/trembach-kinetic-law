@@ -31,7 +31,7 @@ import heroBackground from '@/assets/maritime-case-evaluation-hero.jpg';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const MaritimeCaseEvaluation = () => {
+const MaritimeCaseEvaluation: React.FC = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -88,6 +88,7 @@ const MaritimeCaseEvaluation = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle form submission
+    console.log('Form submitted:', formData);
     // Redirect to thank you page or show success message
   };
 
@@ -148,6 +149,8 @@ const MaritimeCaseEvaluation = () => {
         keywords="maritime accident lawyer, admiralty attorney, Jones Act, longshore injury, California maritime law"
         canonical="/maritime/case-evaluation"
       />
+      
+      
       
       <div className="min-h-screen bg-background">
         {/* Hero Section */}
@@ -591,7 +594,5 @@ const MaritimeCaseEvaluation = () => {
     </>
   );
 };
-
-MaritimeCaseEvaluation.displayName = 'MaritimeCaseEvaluation';
 
 export default MaritimeCaseEvaluation;

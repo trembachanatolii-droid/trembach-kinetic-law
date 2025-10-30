@@ -10,7 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Hero from '../components/Hero';
 import TruthAboutCaseProfessional from '../components/TruthAboutCaseProfessional';
 import { MarqueeBand } from '../components/Marquee';
-import StepsToFileSection from '../components/StepsToFileSection';
+import CriticalStepsSection from '../components/CriticalStepsSection';
 import WhyChoose from '../components/WhyChoose';
 import EveryProblemSolved from '../components/EveryProblemSolved';
 import CapabilityStripes from '../components/CapabilityStripes';
@@ -22,7 +22,6 @@ import SEO from '../components/SEO';
 import GlobalVisibilityFix from '../components/GlobalVisibilityFix';
 import BlurFix from '../components/BlurFix';
 import ThreeStepProcess from '../components/ThreeStepProcess';
-import { AnimatedGallerySection } from '../components/AnimatedGallerySection';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -44,6 +43,7 @@ const Index = () => {
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     // Handle newsletter subscription
+    console.log('Subscribe:', email);
     setEmail('');
   };
 
@@ -61,16 +61,10 @@ const Index = () => {
       {/* Hero Section */}
       <Hero />
 
-      {/* Steps to File Section */}
-      <StepsToFileSection />
-
       {/* Why Choose Trembach Law Firm */}
       <section id="why-choose" className="relative z-20">
         <WhyChoose />
       </section>
-
-      {/* Animated Gallery Section */}
-      <AnimatedGallerySection />
 
       {/* Three Step Process Section */}
       <section id="three-step-process" className="relative z-0">
@@ -154,6 +148,10 @@ const Index = () => {
         />
       </div>
 
+      {/* Critical Steps Section */}
+      <section id="critical-steps">
+        <CriticalStepsSection />
+      </section>
 
       {/* Every Problem Solved */}
       <section id="problems">
